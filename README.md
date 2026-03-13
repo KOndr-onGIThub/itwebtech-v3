@@ -56,17 +56,34 @@ Pokud projekt vícejazyčnost nepotřebuje → použij `my-starter-simple`.
 
 ## Instalace nového projektu
 
-### 1. Zkopíruj starter
+### 1. Klonuj starter
 
-```bash
-cp -r c:/wamp64/www/my-starter c:/wamp64/www/nazev-projektu
-cd c:/wamp64/www/nazev-projektu
+```powershell
+cd c:/wamp64/www
+git clone https://github.com/KOndr-onGIThub/my-starter.git nazev-projektu
+cd nazev-projektu
 ```
+
+> **Hned poté odstraň remote** — jinak bys mohl omylem pushovat změny projektu zpět do starteru:
+
+```powershell
+git remote remove origin
+```
+### 1.1. Git — napojení na GitHub (volitelné)
+
+Pokud chceš projekt zálohovat nebo deployovat přes GitHub, nejjednodušší je GitHub CLI:
+
+```powershell
+gh repo create nazev-projektu --private --source=. --push
+```
+
+Jedním příkazem vytvoří repo, nastaví remote i pushne. Bez toho funguje git normálně lokálně.
+
+---
 
 ### 2. PHP závislosti
 
-```bash
-del composer.lock
+```powershell
 composer install
 ```
 
@@ -144,15 +161,6 @@ npm run dev
 
 Web běží na `http://nazev-projektu.local`
 
-### 9. Git
-
-```bash
-git init
-git add .
-git commit -m "Initial commit from my-starter"
-```
-
----
 
 ## Přidání nové stránky
 
