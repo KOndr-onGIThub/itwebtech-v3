@@ -2,12 +2,11 @@
     "$schema": "https://getcomposer.org/schema.json",
     "name": "your-org/your-project",
     "type": "project",
-    "description": "Laravel 12 multilingual starter (cs/en/de) with Tailwind v4, Alpine.js, Filament v5.",
+    "description": "Laravel 12 multilingual starter (cs/en/de) with Tailwind v4, Alpine.js.",
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
-        "php": "^8.2",
-        "filament/filament": "~5.0",
+        "php": "^8.4",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
         "spatie/laravel-sitemap": "^7.4"
@@ -47,8 +46,7 @@
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi",
-            "@php artisan filament:upgrade"
+            "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
