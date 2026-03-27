@@ -6,24 +6,33 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Root redirect
+| Localized routes
 |--------------------------------------------------------------------------
-| Redirects / to the default locale defined by APP_LOCALE in .env
-*/
-Route::get('/', function () {
-    return redirect('/' . config('app.locale'));
-});
-
-/*
-|--------------------------------------------------------------------------
-| Localized routes  /{locale}/...
-|--------------------------------------------------------------------------
+| The first locale in the array is the default — it gets no URL prefix.
+| All other locales keep their /{locale}/... prefix.
+|
 | Slugs are defined in config/slugs.php.
 | Route names follow the pattern: {locale}.{page}
 | e.g. cs.home, en.home, de.home
-| IMPORTANT: must be registered BEFORE the fallback /{slug} route!
 */
-foreach (['cs', 'en', 'de'] as $locale) {
+
+$locales       = ['cs', 'en', 'de'];
+$defaultLocale = $locales[0];
+
+// Default locale — no prefix
+Route::middleware(SetLocale::class)->group(function () use ($defaultLocale) {
+
+    Route::get('/', [PageController::class, 'index'])->name("{$defaultLocale}.home");
+
+    // TODO: add more routes following this pattern:
+    // $s = config('slugs.' . $defaultLocale);
+    // Route::get($s['about'],   [PageController::class, 'about'])->name("{$defaultLocale}.about");
+    // Route::get($s['contact'], [PageController::class, 'contact'])->name("{$defaultLocale}.contact");
+
+});
+
+// Non-default locales — keep /{locale}/... prefix
+foreach (array_slice($locales, 1) as $locale) {
     Route::prefix($locale)
         ->middleware(SetLocale::class)
         ->group(function () use ($locale) {
@@ -40,10 +49,21 @@ foreach (['cs', 'en', 'de'] as $locale) {
 
 /*
 |--------------------------------------------------------------------------
+| Backward-compat redirect: /{defaultLocale}/{path?} → /{path}  (301)
+|--------------------------------------------------------------------------
+| Handles old URLs that included the default-locale prefix.
+*/
+Route::get("/{$defaultLocale}/{path?}", function (string $path = '') {
+    return redirect('/' . $path, 301);
+})->where('path', '.*');
+
+/*
+|--------------------------------------------------------------------------
 | Fallback: /{slug} without locale prefix
 |--------------------------------------------------------------------------
-| Searches slug across all locales and 301 redirects to the correct URL.
-| e.g. /about-us → /en/about-us
+| Searches slug across non-default locales and 301 redirects to the
+| correct prefixed URL.  e.g. /about-us → /en/about-us
+| (Default-locale slugs are already registered above without a prefix.)
 */
 Route::get('/{slug}', function (string $slug) {
     foreach (config('slugs') as $locale => $map) {
