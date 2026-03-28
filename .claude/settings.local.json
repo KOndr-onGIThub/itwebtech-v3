@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh api:*)",
+      "Bash(find C:wamp64wwwitwebtech/resources/views -type f -name *.blade.php)",
+      "Bash(find C:wamp64wwwitwebtech/database/migrations -type f -name *.php)"
+    ]
+  }
+}
