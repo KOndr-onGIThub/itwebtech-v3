@@ -58,23 +58,34 @@ Pokud projekt vícejazyčnost nepotřebuje → použij `my-starter-simple-lang`.
 
 ### 1. Klonuj starter
 
-```powershell
-cd c:/wamp64/www
+> **Důležité:** Projekt klonuj do **WSL2 Linux filesystému**, ne na Windows disk (`C:/`).
+> Projekty na Windows disku jsou v Dockeru 5–20× pomalejší kvůli cross-OS filesystem overhead.
+
+Otevři **WSL2 terminál** (Ubuntu nebo jiná distribuce):
+
+```bash
+mkdir -p ~/projects && cd ~/projects
 git clone https://github.com/KOndr-onGIThub/my-starter.git nazev-projektu
 cd nazev-projektu
 ```
 
 > **Hned poté odstraň remote** — jinak bys mohl omylem pushovat změny projektu zpět do starteru:
 
-```powershell
+```bash
 git remote remove origin
+```
+
+Otevři projekt ve VS Code přímo z WSL terminálu:
+
+```bash
+code .
 ```
 
 ### 1.1. Git — napojení na GitHub (volitelné)
 
 Pokud chceš projekt zálohovat nebo deployovat přes GitHub, nejjednodušší je GitHub CLI:
 
-```powershell
+```bash
 gh repo create nazev-projektu --private --source=. --push
 ```
 
@@ -89,7 +100,7 @@ Jedním příkazem vytvoří repo, nastaví remote i pushne. Bez toho funguje gi
 
 ### A1. Připrav `.env`
 
-```powershell
+```bash
 cp .env.example .env
 ```
 
