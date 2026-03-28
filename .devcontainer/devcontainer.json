@@ -1,0 +1,19 @@
+{
+  "name": "Laravel Dev",
+  "image": "mcr.microsoft.com/devcontainers/php:8.4",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/devcontainers/features/mysql-server:1": {}
+  },
+  "forwardPorts": [8000, 5173],
+  "postCreateCommand": "([ -f .env ] || cp .env.example .env) && composer install && npm install && php artisan key:generate && mysqladmin --silent --wait=30 ping && mysql -u root -e \"CREATE DATABASE IF NOT EXISTS $(grep '^DB_DATABASE=' .env | cut -d'=' -f2);\" && php artisan migrate",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "bmewburn.vscode-intelephense-client",
+        "claudecode.claude-code"
+      ]
+    }
+  },
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}"
+}

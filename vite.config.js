@@ -13,6 +13,7 @@ export default defineConfig({
         imagetools(),
     ],
     server: {
+        host: true,
         watch: {
             ignored: ['**/storage/framework/views/**'],
         },

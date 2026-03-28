@@ -35,7 +35,7 @@ Starter je **připraven na cs / en / de** lokalizaci:
 - `lang/{cs,en,de}/` — překladové soubory (jeden soubor na stránku)
 - hreflang tagy v layoutu
 
-Pokud projekt vícejazyčnost nepotřebuje → použij `my-starter-simple`.
+Pokud projekt vícejazyčnost nepotřebuje → použij `my-starter-simple-lang`.
 
 ---
 
@@ -69,6 +69,7 @@ cd nazev-projektu
 ```powershell
 git remote remove origin
 ```
+
 ### 1.1. Git — napojení na GitHub (volitelné)
 
 Pokud chceš projekt zálohovat nebo deployovat přes GitHub, nejjednodušší je GitHub CLI:
@@ -81,13 +82,67 @@ Jedním příkazem vytvoří repo, nastaví remote i pushne. Bez toho funguje gi
 
 ---
 
-### 2. PHP závislosti
+## Způsob A — Dev Container (VS Code + Docker Desktop)
+
+> Izolované prostředí v Dockeru. Neinstaluje nic na hostitelský systém.
+> Vyžaduje: Docker Desktop + VS Code extension `ms-vscode-remote.remote-containers`.
+
+### A1. Připrav `.env`
+
+```powershell
+cp .env.example .env
+```
+
+Uprav `.env`:
+```
+APP_NAME="Název projektu"
+APP_URL=http://localhost:8000
+APP_LOCALE=cs
+DB_DATABASE=nazev_projektu
+```
+
+### A2. Otevři v kontejneru
+
+Ve VS Code: pravý dolní roh → **"Reopen in Container"**
+(nebo `F1` → `Dev Containers: Reopen in Container`)
+
+Container automaticky provede: `composer install`, `npm install`, `php artisan key:generate`, vytvoří databázi a spustí migrace.
+
+### A3. Spusť dev servery
+
+```bash
+composer run dev
+```
+
+Spustí zároveň: PHP server, Vite, queue worker a log tail.
+Web běží na `http://localhost:8000`.
+
+### A4. CMS (volitelné)
+
+```bash
+# Filament:
+composer require filament/filament
+php artisan filament:install --panels
+php artisan make:filament-user
+
+# Twill:
+composer require area17/twill
+php artisan twill:install
+```
+
+---
+
+## Způsob B — WampServer (lokální Apache + PHP)
+
+> Klasický lokální vývoj přes WampServer. Projekt běží přímo na hostitelském systému.
+
+### B1. PHP závislosti
 
 ```powershell
 composer install
 ```
 
-### 3. Prostředí
+### B2. Prostředí
 
 ```bash
 cp .env.example .env
@@ -102,18 +157,14 @@ APP_LOCALE=cs
 DB_DATABASE=nazev_projektu
 ```
 
-### 4. Databáze
+### B3. Databáze
 
 ```bash
-# SQLite (rychlý start):
-php artisan migrate
-
-# MySQL (produkce):
-# nejdřív vytvoř DB, uprav .env, pak:
+# Nejdřív vytvoř DB v MySQL, uprav .env, pak:
 php artisan migrate
 ```
 
-### 5. CMS (volitelné)
+### B4. CMS (volitelné)
 
 ```bash
 # Filament:
@@ -126,13 +177,13 @@ composer require area17/twill
 php artisan twill:install
 ```
 
-### 6. JS závislosti
+### B5. JS závislosti
 
 ```bash
 npm install
 ```
 
-### 7. WampServer — virtual host
+### B6. Virtual host
 
 Uprav `C:\Windows\System32\drivers\etc\hosts`:
 ```
@@ -153,13 +204,13 @@ Uprav `C:\wamp64\bin\apache\apache2.4.59\conf\extra\httpd-vhosts.conf`:
 
 Restart Apache v WampServeru.
 
-### 8. Dev server
+### B7. Dev server
 
 ```bash
 npm run dev
 ```
 
-Web běží na `http://nazev-projektu.local`
+Web běží na `http://nazev-projektu.local`.
 
 
 ## Přidání nové stránky
