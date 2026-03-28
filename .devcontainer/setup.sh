@@ -12,10 +12,6 @@ echo "==> Setting up .env..."
 [ -f .env ] || cp .env.example .env
 sed -i 's/^DB_HOST=.*/DB_HOST=mysql/' .env
 
-echo "==> Waiting for MySQL (background)..."
-until mysqladmin -h mysql -u root --ssl=0 ping --silent 2>/dev/null; do sleep 2; done &
-MYSQL_WAIT_PID=$!
-
 echo "==> Installing dependencies (parallel)..."
 composer install --no-interaction &
 npm install &
@@ -24,8 +20,8 @@ wait
 echo "==> Generating app key..."
 php artisan key:generate
 
-echo "==> Waiting for MySQL to be ready..."
-wait $MYSQL_WAIT_PID
+echo "==> Waiting for MySQL..."
+until mysqladmin -h mysql -u root --ssl=0 ping --silent 2>/dev/null; do sleep 2; done
 echo "    MySQL ready."
 
 echo "==> Creating database..."
