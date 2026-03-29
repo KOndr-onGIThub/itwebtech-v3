@@ -3,10 +3,11 @@
 return [
 
     'nav' => [
-        'home'    => 'Úvod',
-        // TODO: add your nav items:
-        // 'about'   => 'O nás',
-        // 'contact' => 'Kontakt',
+        'home'     => 'Úvod',
+        'contact'  => 'Kontakt',
+        'price'    => 'Ceník',
+        'projects' => 'Projekty',
+        'blog'     => 'Blog',
     ],
 
     'cta' => [
@@ -19,16 +20,16 @@ return [
     ],
 
     'prefooter' => [
-        'tagline'   => 'Váš spolehlivý partner pro každý projekt',
-        'cta'       => 'Kontaktujte nás',
+        'tagline'   => 'Pomáhám podnikatelům uspět v online světě',
+        'cta'       => 'Napsat zprávu',
         'nav_label' => 'Footer navigace',
     ],
 
-    'gdpr_form_note' => 'Odesláním berete na vědomí naše',
-    'gdpr_form_link' => 'Zásady ochrany osobních údajů',
+    'gdpr_form_note' => 'Odesláním souhlasíte se',
+    'gdpr_form_link' => 'zásadami ochrany osobních údajů',
 
     'meta' => [
-        'description' => 'Popis vašeho webu pro SEO.',
+        'description' => 'Tvorba webových stránek a aplikací. Pomáhám podnikatelům uspět v online světě.',
     ],
 
 ];

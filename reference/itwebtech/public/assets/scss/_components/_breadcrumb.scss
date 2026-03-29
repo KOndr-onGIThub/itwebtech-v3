@@ -1,0 +1,41 @@
+.bread-crumbs {
+    position: relative;
+    padding: 1.125rem 0;
+    background-color: $background-secondary-color;
+}
+.bread-crumbs-list {
+    position: relative;
+    display: flex;
+    font-size: 1rem;
+    overflow: hidden;
+    color: $accent-color;
+    li {
+        position: relative;
+        margin-right: 2rem;
+        white-space: nowrap;
+        &:last-child {
+            margin-right: 0;
+            i {
+                display: none;
+            }
+            a {
+                color: $accent-color;
+                text-decoration: none;
+                pointer-events: none;
+            }
+        }
+        a {
+            text-decoration: none;
+            color: $text-secondary;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+        i {
+            position: absolute;
+            top: 50%;
+            right: -1.5625rem;
+            margin-top: -0.5625rem;
+        }
+    }
+}

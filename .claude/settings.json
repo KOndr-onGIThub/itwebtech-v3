@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find . -maxdepth 2 -type f -name package.json -o -name composer.json -o -name *.lock)",
+      "Bash(find /workspace -maxdepth 2 -type f \\\\\\(-name *agent* -o -name *ai* -o -name *claude* -o -name *anthropic* \\\\\\))",
+      "Bash(grep -r \"anthropic\\\\|claude\\\\|agent\" /workspace --include=*.php --include=*.json)",
+      "Read(//mnt/c/wamp64/www/**)",
+      "Bash(find /mnt/c/wamp64/www/itwebtech -type f -name *.json -o -name *.php -o -name *.xml -o -name .htaccess)",
+      "Bash(xargs ls:*)",
+      "Read(//home/vscode/.claude/**)",
+      "Read(//mnt/c/Users/drise/.claude/**)",
+      "Bash(for f:*)",
+      "Bash(do echo:*)",
+      "Read(//workspace/**)",
+      "Bash(done)",
+      "Bash(php artisan:*)",
+      "Bash(grep -E \"\\\\.\\(jpg|jpeg|png|webp|svg\\)$\")",
+      "Bash(SRC=\"/workspace/reference/itwebtech/public/assets/img\")",
+      "Bash(__NEW_LINE_fea518e86b13a0d7__ mkdir:*)",
+      "Bash(__NEW_LINE_fea518e86b13a0d7__ echo:*)",
+      "Bash(cp \"$SRC/logo.svg\" /workspace/public/img/logo/logo_main_svg.svg)",
+      "Bash(cp \"$SRC/logo-white.svg\" /workspace/public/img/logo/logo_white.svg)",
+      "Bash(php artisan tinker --execute=\":*)",
+      "Bash(grep APP_URL pwd git -C /workspace remote -v)",
+      "Bash(find /workspace/reference/ -name *.css -o -name *.html)",
+      "Bash(npm run:*)"
+    ],
+    "additionalDirectories": [
+      "/home/vscode/.claude/agents"
+    ]
+  }
+}

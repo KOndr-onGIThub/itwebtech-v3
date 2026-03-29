@@ -1,0 +1,41 @@
+.ui-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li {
+        cursor: pointer;
+        padding: 0.625rem 1rem;
+        border-left: 2px solid transparent;
+        transition: all 0.2s;
+        &.active {
+            color: $accent-color;
+            border-left-color: $accent-color;
+            background-color: $background-secondary-color;
+        }
+        &:hover {
+            color: $accent-color;
+        }
+    }
+}
+
+
+.ui-item {
+    display: none;
+    &.active {
+        display: block;
+    }
+    .page-sections {
+        padding-top: 0;
+    }
+}
+.ui-item-icons {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -0.75rem -0.75rem 0;
+    svg {
+        fill: $text-primary;
+    }
+    > div {
+        margin: 0 0.75rem 0.75rem 0;
+    }
+}

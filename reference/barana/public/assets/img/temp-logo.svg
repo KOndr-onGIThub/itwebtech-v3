@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 48">
+  <polygon points="18,8 34,36 2,36" fill="none" stroke="#0D1510" stroke-width="2.5" stroke-linejoin="round"/>
+  <line x1="2" y1="36" x2="34" y2="36" stroke="#0D1510" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="10" y1="36" x2="10" y2="44" stroke="#0D1510" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="26" y1="36" x2="26" y2="44" stroke="#0D1510" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="46" y="40" font-family="'Arial Black', Arial, sans-serif" font-size="34" font-weight="900" letter-spacing="-1" fill="#0D1510">BARANA</text>
+</svg>

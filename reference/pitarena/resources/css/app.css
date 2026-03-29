@@ -1,0 +1,1217 @@
+@import '@fontsource/poppins/300.css';
+@import '@fontsource/poppins/400.css';
+@import '@fontsource/poppins/500.css';
+@import '@fontsource/poppins/600.css';
+@import '@fontsource/poppins/700.css';
+@import '@fontsource/poppins/800.css';
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+@import 'aos/dist/aos.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .bg-grid {
+        background-image:
+            linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+        background-size: 40px 40px;
+    }
+
+}
+
+/* ================================================================
+   PitArena Design System — Premium Dark Edition 2026
+   Brand: #ce1212 | Palette: cool blue-black | Font: Poppins
+   ================================================================ */
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        overflow-x: clip;
+    }
+
+    body {
+        @apply bg-mx-black text-mx-light font-sans antialiased;
+        line-height: 1.75;
+        overflow-x: clip;
+    }
+
+    /* Noise grain overlay — fixovaný přes celou stránku */
+    body::after {
+        content: '';
+        position: fixed;
+        inset: 0;
+        width: 100%; height: 100%;
+        pointer-events: none;
+        z-index: 5;
+        opacity: 0.14;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+        background-repeat: repeat;
+        background-size: 180px 180px;
+        mix-blend-mode: screen;
+    }
+
+    /* Globální zlepšení čitelnosti malého textu */
+    .text-sm { font-size: 0.9375rem !important; }  /* 15px místo 14px */
+    .text-xs { font-size: 0.8125rem !important; }  /* 13px místo 12px */
+
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-semibold leading-tight tracking-tight;
+    }
+
+    h1 { @apply text-4xl lg:text-6xl font-bold; }
+    h2 { @apply text-3xl lg:text-4xl; }
+    h3 { @apply text-2xl lg:text-3xl; }
+
+    a {
+        @apply transition-colors duration-200;
+    }
+
+    img {
+        @apply max-w-full;
+    }
+
+    /* Scrollbar — premium dark */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #07070a; }
+    ::-webkit-scrollbar-thumb {
+        background: #ce1212;
+        border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover { background: #a50e0e; }
+
+    /* Selection highlight */
+    ::selection {
+        background: rgba(206,18,18,0.35);
+        color: #fff;
+    }
+
+    input, textarea, select {
+        @apply bg-mx-gray border-mx-gray2 text-mx-light placeholder-mx-muted
+               focus:border-mx-orange focus:ring-mx-orange;
+    }
+}
+
+@layer components {
+
+    /* ── Kontejner ────────────────────────────────────────────── */
+    .page-container {
+        @apply container mx-auto px-4 lg:px-8;
+        max-width: 1300px;
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       TLAČÍTKA
+    ════════════════════════════════════════════════════════════ */
+
+    /* Primární — brand red, glow on hover, light sweep */
+    .btn-primary {
+        @apply inline-flex items-center justify-center gap-2
+               px-7 py-3.5 rounded-sm
+               bg-mx-orange text-white font-semibold text-sm uppercase tracking-widest
+               relative overflow-hidden cursor-pointer select-none;
+        transition: background-color 0.25s ease, box-shadow 0.3s ease, transform 0.2s ease;
+        box-shadow: 0 2px 12px rgba(206,18,18,0.2);
+    }
+    /* Sweep efekt */
+    .btn-primary::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -80%;
+        width: 55%;
+        height: 200%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.14), transparent);
+        transform: skewX(-18deg);
+        transition: left 0.55s ease;
+        pointer-events: none;
+    }
+    .btn-primary:hover {
+        background-color: #a50e0e;
+        box-shadow: 0 0 28px rgba(206,18,18,0.5), 0 4px 20px rgba(0,0,0,0.4);
+        transform: translateY(-2px);
+    }
+    .btn-primary:hover::after { left: 120%; }
+    .btn-primary:active { transform: translateY(0); box-shadow: 0 2px 8px rgba(206,18,18,0.3); }
+
+    .btn-primary-lg {
+        @apply btn-primary px-9 py-4 text-base;
+    }
+
+    /* CTA — animovaný glow pro hero sekce */
+    .btn-primary-cta {
+        @apply btn-primary;
+        animation: pulse-glow 2.5s ease-in-out infinite;
+    }
+
+    /* Outline */
+    .btn-outline {
+        @apply inline-flex items-center justify-center gap-2
+               px-7 py-3.5 rounded-sm
+               text-mx-orange font-semibold text-sm uppercase tracking-widest
+               relative overflow-hidden cursor-pointer select-none;
+        color: #ce1212; /* CTA tlačítka = brand červená, ne zlatá */
+        border: 1px solid rgba(206,18,18,0.6);
+        transition: all 0.25s ease;
+    }
+    .btn-outline:hover {
+        @apply bg-mx-orange text-white;
+        border-color: #ce1212;
+        box-shadow: 0 0 24px rgba(206,18,18,0.4);
+    }
+
+    /* Outline gold */
+    .btn-outline-gold {
+        @apply inline-flex items-center justify-center gap-2
+               px-7 py-3.5 rounded-sm
+               font-semibold text-sm uppercase tracking-widest
+               relative overflow-hidden cursor-pointer select-none;
+        color: #d4940a;
+        border: 1px solid rgba(212,148,10,0.6);
+        transition: all 0.25s ease;
+    }
+    .btn-outline-gold:hover {
+        background: #d4940a;
+        @apply text-mx-black;
+        border-color: #d4940a;
+        box-shadow: 0 0 24px rgba(212,148,10,0.4);
+    }
+
+    /* Outline white */
+    .btn-outline-white {
+        @apply inline-flex items-center justify-center gap-2
+               px-7 py-3.5 rounded-sm
+               text-white font-semibold text-sm uppercase tracking-widest
+               cursor-pointer select-none;
+        border: 1px solid rgba(255,255,255,0.3);
+        transition: all 0.25s ease;
+    }
+    .btn-outline-white:hover {
+        @apply bg-white text-mx-black;
+        border-color: white;
+    }
+
+    .btn-sm { @apply px-4 py-2 text-xs tracking-wider; }
+
+    /* ════════════════════════════════════════════════════════════
+       TYPOGRAFIE — SEKCE
+    ════════════════════════════════════════════════════════════ */
+
+    .section-title {
+        @apply text-5xl lg:text-6xl xl:text-7xl font-black text-mx-white mb-4;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        text-shadow: 0 0 80px rgba(255,255,255,0.05);
+    }
+
+    .section-title-sm {
+        @apply text-3xl lg:text-4xl font-black text-mx-white mb-3;
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+    }
+
+    /* Display-title — ultra-velká typografie pro hero sekce */
+    .display-title {
+        @apply font-black text-white;
+        font-size: clamp(2.6rem, 6.5vw, 5.5rem);
+        letter-spacing: -0.04em;
+        line-height: 1.05;
+    }
+
+    .section-subtitle {
+        @apply text-mx-orange text-xs font-semibold uppercase tracking-[0.2em] mb-3;
+    }
+
+    /* Gradient čára místo tučného bloku */
+    .section-divider {
+        @apply h-px mb-6;
+        width: 80px;
+        background: linear-gradient(90deg, #ce1212, rgba(206,18,18,0));
+    }
+
+    .section-title-center {
+        @apply section-title text-center;
+    }
+
+    .section-divider-center {
+        @apply section-divider mx-auto;
+    }
+
+    /* ── Sekce padding ─────────────────────────────────────────── */
+    .section    { @apply py-20 lg:py-28; }
+    .section-sm { @apply py-12 lg:py-20; }
+    .section-lg { @apply py-24 lg:py-36; }
+
+    /* ════════════════════════════════════════════════════════════
+       PARALLAX HERO
+    ════════════════════════════════════════════════════════════ */
+
+    .parallax-hero {
+        @apply relative flex items-center justify-center overflow-hidden;
+        background-image: var(--hero-img);
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        min-height: 340px;
+    }
+
+    @media (max-width: 768px) {
+        .parallax-hero { background-attachment: scroll; }
+    }
+
+    .parallax-hero::before {
+        @apply absolute inset-0;
+        content: '';
+        background: linear-gradient(
+            to bottom,
+            rgba(7,7,10,0.65) 0%,
+            rgba(7,7,10,0.45) 40%,
+            rgba(7,7,10,0.65) 100%
+        );
+        z-index: 1;
+    }
+
+    /* Jemná červená linka dole */
+    .parallax-hero::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #ce1212, transparent);
+        z-index: 2;
+    }
+
+    .parallax-hero-content {
+        @apply relative text-center text-white py-16 px-4;
+        z-index: 3;
+    }
+
+    /* ── Breadcrumb ─────────────────────────────────────────────── */
+    .breadcrumb-bar {
+        @apply py-3 border-b;
+        background: rgba(14,14,21,0.95);
+        border-color: rgba(255,255,255,0.05);
+    }
+
+    .breadcrumb-list {
+        @apply flex flex-wrap items-center gap-1.5 text-sm text-mx-muted;
+    }
+
+    .breadcrumb-list a {
+        @apply text-mx-muted;
+        transition: color 0.2s;
+    }
+    .breadcrumb-list a:hover { color: #ce1212; }
+
+    .breadcrumb-list .separator { @apply text-mx-gray3; }
+    .breadcrumb-list .current   { color: #ce1212; }
+
+    /* ════════════════════════════════════════════════════════════
+       KARTY — Glass morphism
+    ════════════════════════════════════════════════════════════ */
+
+    .card-dark {
+        @apply relative overflow-hidden rounded-xl;
+        background: rgba(22, 22, 36, 0.95);
+        border: 1px solid rgba(255,255,255,0.09);
+        backdrop-filter: blur(8px);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.07);
+        transition: transform 0.35s cubic-bezier(0.22,1,0.36,1),
+                    border-color 0.3s ease,
+                    box-shadow 0.35s ease;
+    }
+    .card-dark:hover {
+        transform: translateY(-4px);
+        border-color: rgba(206,18,18,0.3);
+        box-shadow: 0 16px 48px rgba(0,0,0,0.55), 0 0 0 1px rgba(206,18,18,0.1),
+                    0 0 40px rgba(206,18,18,0.08),
+                    inset 0 1px 0 rgba(255,255,255,0.07);
+    }
+
+    .card-dark-body { @apply p-6; }
+
+    /* ════════════════════════════════════════════════════════════
+       FEATURE CARD — bento styl pro přehled služeb
+    ════════════════════════════════════════════════════════════ */
+
+    .feature-card {
+        @apply relative flex flex-col items-start gap-2 p-5 rounded-xl cursor-pointer select-none;
+        background: rgba(15, 15, 26, 0.92);
+        border: 1px solid rgba(255,255,255,0.07);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+        transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
+    }
+    .feature-card i { color: #ce1212; }
+    .feature-card:hover {
+        background: rgba(22,22,36,0.97);
+        border-color: rgba(206,18,18,0.3);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 0 24px rgba(206,18,18,0.07),
+                    inset 0 1px 0 rgba(255,255,255,0.08);
+        transform: translateY(-3px);
+    }
+    .feature-card:hover i {
+        text-shadow: 0 0 16px rgba(206,18,18,0.5);
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       STATISTIKY
+    ════════════════════════════════════════════════════════════ */
+
+    .stat-number {
+        @apply font-black text-white;
+        font-size: clamp(2.4rem, 4.5vw, 3.75rem);
+        letter-spacing: -0.04em;
+        line-height: 1;
+    }
+    .stat-label {
+        @apply text-xs font-semibold uppercase tracking-[0.14em] mt-1.5;
+        color: rgba(155,155,180,0.8);
+    }
+
+    /* Glass karta */
+    .glass {
+        @apply rounded-xl relative overflow-hidden;
+        background: rgba(255,255,255,0.035);
+        border: 1px solid rgba(255,255,255,0.08);
+        backdrop-filter: blur(16px) saturate(150%);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+    .glass:hover {
+        border-color: rgba(206,18,18,0.2);
+        box-shadow: 0 12px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(206,18,18,0.1),
+                    inset 0 1px 0 rgba(255,255,255,0.07);
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       FORMULÁŘE
+    ════════════════════════════════════════════════════════════ */
+
+    .form-field { @apply flex flex-col gap-1.5; }
+
+    .form-label {
+        @apply text-sm font-semibold uppercase tracking-[0.12em] text-mx-muted;
+    }
+
+    .form-input {
+        @apply w-full px-4 py-3.5 rounded-md text-mx-light placeholder-mx-muted text-sm
+               focus:outline-none transition-all duration-200;
+        background: rgba(20,20,32,0.9);
+        border: 1px solid rgba(255,255,255,0.08);
+    }
+    .form-input:focus {
+        border-color: rgba(206,18,18,0.6);
+        box-shadow: 0 0 0 3px rgba(206,18,18,0.12);
+    }
+
+    .form-input-error { border-color: #ef4444 !important; }
+    .form-error-msg   { @apply text-xs text-mx-red mt-0.5; }
+
+    .form-textarea {
+        @apply form-input resize-y;
+        min-height: 7rem;
+    }
+
+    .form-select { @apply form-input; }
+
+    /* ════════════════════════════════════════════════════════════
+       POPUP / MODAL
+    ════════════════════════════════════════════════════════════ */
+
+    .popup-overlay {
+        @apply fixed inset-0 z-50 flex items-center justify-center;
+        background: rgba(0,0,0,0.78);
+        backdrop-filter: blur(6px);
+    }
+
+    .popup-box {
+        @apply relative rounded-2xl w-full max-w-lg mx-4;
+        background: rgba(14,14,21,0.97);
+        border: 1px solid rgba(255,255,255,0.08);
+        padding: 2.5rem;
+        box-shadow: 0 32px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(206,18,18,0.1);
+    }
+
+    .popup-close {
+        @apply absolute top-4 right-4 text-mx-muted hover:text-white cursor-pointer
+               transition-colors duration-200 w-8 h-8 flex items-center justify-center rounded-full;
+    }
+    .popup-close:hover { background: rgba(255,255,255,0.08); }
+
+    /* ════════════════════════════════════════════════════════════
+       TABULKA
+    ════════════════════════════════════════════════════════════ */
+
+    .table-mx { @apply w-full text-sm border-collapse; }
+
+    .table-mx thead tr {
+        border-bottom: 1px solid rgba(212,148,10,0.3);
+    }
+
+    .table-mx thead th {
+        @apply px-4 py-3 text-left font-semibold uppercase tracking-wider;
+        color: #d4940a;
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+    }
+
+    .table-mx tbody tr {
+        border-bottom: 1px solid rgba(255,255,255,0.04);
+        transition: background 0.15s;
+    }
+    .table-mx tbody tr:hover { background: rgba(255,255,255,0.025); }
+
+    .table-mx tbody td { @apply px-4 py-3 text-gray-300; }
+
+    /* ════════════════════════════════════════════════════════════
+       BADGE / LABEL
+    ════════════════════════════════════════════════════════════ */
+
+    .badge-orange {
+        @apply inline-block px-3 py-0.5 rounded-full text-xs font-semibold;
+        background: rgba(206,18,18,0.1);
+        color: #ce1212;
+        border: 1px solid rgba(206,18,18,0.2);
+    }
+
+    .badge-gold {
+        @apply inline-block px-3 py-0.5 rounded-full text-xs font-semibold;
+        background: rgba(212,148,10,0.12);
+        color: #d4940a;
+        border: 1px solid rgba(212,148,10,0.28);
+    }
+
+
+    /* ── Ikony ────────────────────────────────────────────────── */
+    .icon-circle-orange {
+        @apply flex items-center justify-center w-14 h-14 rounded-full text-xl;
+        background: rgba(206,18,18,0.12);
+        color: #ce1212;
+        border: 1px solid rgba(206,18,18,0.18);
+        transition: all 0.3s ease;
+    }
+    .icon-circle-orange:hover {
+        background: rgba(206,18,18,0.22);
+        box-shadow: 0 0 24px rgba(206,18,18,0.35);
+    }
+    .icon-circle-gold {
+        @apply flex items-center justify-center w-14 h-14 rounded-full text-xl;
+        background: rgba(212,148,10,0.12);
+        color: #d4940a;
+        border: 1px solid rgba(212,148,10,0.22);
+        transition: all 0.3s ease;
+    }
+    .icon-circle-gold:hover {
+        background: rgba(212,148,10,0.22);
+        box-shadow: 0 0 24px rgba(212,148,10,0.35);
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       HERO SWIPER
+    ════════════════════════════════════════════════════════════ */
+
+    .hero-swiper {
+        height: 88vh;
+        min-height: 580px;
+    }
+
+    .hero-swiper .swiper-slide {
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    /* Swiper navigace */
+    .swiper-button-next,
+    .swiper-button-prev {
+        color: #ce1212 !important;
+        --swiper-navigation-size: 22px;
+    }
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+        text-shadow: 0 0 12px rgba(206,18,18,0.6);
+    }
+
+    /* Swiper pagination — CSS variables přebijí Swiper defaults */
+    .swiper {
+        --swiper-pagination-color: #ce1212;
+        --swiper-pagination-bullet-inactive-color: rgba(255,255,255,0.55);
+        --swiper-pagination-bullet-inactive-opacity: 1;
+    }
+
+    .swiper-pagination-bullet {
+        border: 1px solid rgba(255,255,255,0.35);
+        transition: background 0.2s, width 0.3s;
+    }
+    .swiper-pagination-bullet-active {
+        width: 24px !important;
+        border-radius: 4px !important;
+        border-color: #ce1212;
+        box-shadow: 0 0 8px rgba(206,18,18,0.5);
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       NAVBAR
+    ════════════════════════════════════════════════════════════ */
+
+    .navbar-link {
+        @apply text-sm font-semibold uppercase tracking-wide
+               transition-colors duration-200 py-1;
+        color: rgba(230,230,240,0.75);
+    }
+    .navbar-link:hover {
+        color: #ce1212;
+        text-shadow: 0 0 12px rgba(206,18,18,0.4);
+    }
+
+    .navbar-link-active { color: #ce1212 !important; }
+
+    .navbar-dropdown {
+        @apply absolute top-full left-0 py-2 z-50;
+        min-width: 13rem;
+        margin-top: 0.6rem;
+        border-radius: 14px;
+        background: rgba(10,10,16,0.97);
+        border: 1px solid rgba(255,255,255,0.07);
+        backdrop-filter: blur(24px) saturate(160%);
+        box-shadow: 0 24px 64px rgba(0,0,0,0.65), 0 0 0 1px rgba(206,18,18,0.06);
+    }
+
+    .navbar-dropdown-item {
+        @apply block px-5 py-2.5 text-sm transition-colors duration-150;
+        color: rgba(180,180,200,0.85);
+    }
+    .navbar-dropdown-item:hover {
+        background: rgba(206,18,18,0.08);
+        color: #ce1212;
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       PAGE LOADER
+    ════════════════════════════════════════════════════════════ */
+
+    .page-loader {
+        @apply fixed inset-0 z-[9999] flex flex-col items-center justify-center;
+        background: #07070a;
+    }
+
+    .spinner {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 2px solid rgba(255,255,255,0.06);
+        border-top-color: #ce1212;
+        animation: spin 0.7s linear infinite;
+        box-shadow: 0 0 14px rgba(206,18,18,0.25);
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       BG SECTION HELPERS
+    ════════════════════════════════════════════════════════════ */
+
+    .bg-section-dark    { background-color: #0e0e15; }
+    .bg-section-darker  { background-color: #07070a; }
+    .bg-section-gray    { background-color: #141420; }
+
+    /* ════════════════════════════════════════════════════════════
+       ALERTS
+    ════════════════════════════════════════════════════════════ */
+
+    .alert-success {
+        @apply flex items-start gap-3 p-4 rounded-lg text-sm;
+        background: rgba(34,197,94,0.08);
+        border: 1px solid rgba(34,197,94,0.2);
+        color: #86efac;
+    }
+
+    .alert-error {
+        @apply flex items-start gap-3 p-4 rounded-lg text-sm;
+        background: rgba(239,68,68,0.08);
+        border: 1px solid rgba(239,68,68,0.2);
+        color: #fca5a5;
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       HERO EYEBROW — popisek nad hlavním nadpisem
+    ════════════════════════════════════════════════════════════ */
+
+    .hero-eyebrow {
+        @apply inline-flex items-center gap-2 text-xs font-semibold uppercase mb-5;
+        color: #ce1212;
+        letter-spacing: 0.14em;
+    }
+    .hero-eyebrow::before {
+        content: '';
+        display: inline-block;
+        width: 1.5rem;
+        height: 1.5px;
+        background: #ce1212;
+        border-radius: 1px;
+        flex-shrink: 0;
+    }
+
+    /* Gradient text pro hero nadpisy h1 */
+    .hero-title {
+        background: linear-gradient(140deg, #ffffff 0%, #ffffff 35%, #ce1212 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1.06;
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       GALLERY ITEM — premium hover (zoom + overlay)
+    ════════════════════════════════════════════════════════════ */
+
+    .gallery-item {
+        @apply relative overflow-hidden block;
+        border-radius: 0.875rem;
+        border: 1px solid rgba(255,255,255,0.06);
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .gallery-item:hover {
+        border-color: rgba(206,18,18,0.3);
+        box-shadow: 0 0 24px rgba(206,18,18,0.12);
+    }
+    .gallery-item img {
+        @apply w-full h-full object-cover;
+        transition: transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+    .gallery-item:hover img { transform: scale(1.06); }
+
+    .gallery-item__overlay {
+        position: absolute; inset: 0;
+        background: rgba(7,7,10,0);
+        display: flex; align-items: center; justify-content: center;
+        transition: background 0.3s ease;
+        pointer-events: none;
+    }
+    .gallery-item:hover .gallery-item__overlay { background: rgba(7,7,10,0.45); }
+
+    .gallery-item__icon {
+        color: white; opacity: 0;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        transform: scale(0.75);
+        font-size: 1.5rem;
+    }
+    .gallery-item:hover .gallery-item__icon { opacity: 1; transform: scale(1); }
+
+    /* ════════════════════════════════════════════════════════════
+       CARD MOUSE SPOTLIGHT — aktualizováno přes JS
+    ════════════════════════════════════════════════════════════ */
+
+    .card-dark { --mouse-x: 50%; --mouse-y: 50%; }
+    .card-dark:hover {
+        background: radial-gradient(
+            280px circle at var(--mouse-x) var(--mouse-y),
+            rgba(255,255,255,0.038) 0%,
+            transparent 60%
+        ), rgba(22, 22, 36, 0.95) !important;
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       SOCIAL PROOF TOAST — konverzní prvek (vlevo dole)
+    ════════════════════════════════════════════════════════════ */
+
+    .proof-toast {
+        position: fixed; bottom: 5.5rem; left: 1.25rem; z-index: 500;
+        max-width: min(300px, calc(100vw - 2.5rem));
+        border-radius: 0.875rem;
+        padding: 0.875rem 1rem;
+        display: flex; align-items: flex-start; gap: 0.625rem;
+        opacity: 0; transform: translateX(-16px);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+        pointer-events: none;
+        background: rgba(10,10,16,0.95);
+        border: 1px solid rgba(206,18,18,0.22);
+        backdrop-filter: blur(14px);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    .proof-toast.is-visible { opacity: 1; transform: translateX(0); pointer-events: auto; }
+    .proof-toast__icon {
+        flex-shrink: 0; width: 1.75rem; height: 1.75rem; border-radius: 50%;
+        background: rgba(206,18,18,0.12); border: 1px solid rgba(206,18,18,0.22);
+        display: flex; align-items: center; justify-content: center;
+        color: #ce1212; font-size: 0.75rem;
+    }
+    .proof-toast__text  { font-size: 0.8125rem; color: rgba(220,220,240,0.88); line-height: 1.55; flex: 1; }
+    .proof-toast__strong { color: #ffffff; font-weight: 600; }
+
+    /* ════════════════════════════════════════════════════════════
+       COOKIE BAR
+    ════════════════════════════════════════════════════════════ */
+
+    .cookie-bar {
+        @apply fixed bottom-0 left-0 right-0 z-50
+               px-4 py-4 flex flex-col sm:flex-row items-center gap-4;
+        background: rgba(10,10,16,0.97);
+        border-top: 1px solid rgba(255,255,255,0.06);
+        backdrop-filter: blur(12px);
+    }
+}
+
+@layer utilities {
+
+    /* Červený text gradient — pro výrazné nadpisy */
+    .text-gradient-red {
+        background: linear-gradient(135deg, #ce1212 0%, #ff4444 60%, #ff9090 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    /* Zachováno pro zpětnou compat */
+    .text-gradient-orange { @apply text-gradient-red; }
+
+    /* Zlatý text gradient — pro výrazné nadpisy */
+    .text-gradient-gold {
+        background: linear-gradient(135deg, #d4940a 0%, #f0b429 60%, #ffe08a 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    /* Overlay přes obrázky */
+    .overlay-dark   { @apply absolute inset-0 bg-black/55; }
+    .overlay-darker { @apply absolute inset-0 bg-black/72; }
+
+    /* Červená čára jako border-bottom */
+    .underline-red {
+        position: relative;
+    }
+    .underline-red::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, #ce1212, transparent);
+    }
+
+    /* Glow utilita */
+    .glow-red {
+        box-shadow: 0 0 28px rgba(206,18,18,0.45), 0 0 60px rgba(206,18,18,0.15);
+    }
+
+    /* Noise texture overlay pro sekce */
+    .noise-overlay {
+        position: relative;
+    }
+    .noise-overlay::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+        background-size: 200px 200px;
+        opacity: 0.06;
+        pointer-events: none;
+        mix-blend-mode: screen;
+        z-index: 0;
+    }
+
+    /* Grid background — pro map/location sekce */
+    .map-grid-bg {
+        background-color: #07070a;
+        background-image:
+            linear-gradient(to right,  rgba(206,18,18,0.07) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(206,18,18,0.07) 1px, transparent 1px),
+            linear-gradient(to right,  rgba(206,18,18,0.025) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(206,18,18,0.025) 1px, transparent 1px);
+        background-size: 60px 60px, 60px 60px, 15px 15px, 15px 15px;
+    }
+
+    /* CTA band glow — pro výrazné call-to-action sekce */
+    .cta-band {
+        position: relative;
+        background: linear-gradient(135deg, #0e0e15 0%, #130a0a 50%, #07070a 100%);
+        overflow: hidden;
+    }
+    .cta-band::before {
+        content: '';
+        position: absolute; top: -50%; left: -10%;
+        width: 70%; height: 200%;
+        background: radial-gradient(ellipse, rgba(206,18,18,0.09) 0%, transparent 60%);
+        pointer-events: none;
+    }
+
+    /* Gradient border top — pro sekce / footer */
+    .border-gradient-top {
+        position: relative;
+    }
+    .border-gradient-top::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(206,18,18,0.5), transparent);
+    }
+
+    /* Balanced text */
+    .balanced-text { text-wrap: balance; }
+
+    /* CTA sekce — červená záře zespodu jako světelný zdroj */
+    .section-cta {
+        position: relative;
+    }
+    .section-cta::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 70% 50% at 50% 100%, rgba(206,18,18,0.07) 0%, transparent 70%);
+        pointer-events: none;
+        z-index: 0;
+    }
+    .section-cta > * { position: relative; z-index: 1; }
+}
+
+/* ════════════════════════════════════════════════════════════
+   COOKIE CONSENT MODAL
+════════════════════════════════════════════════════════════ */
+
+.cookie-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.cookie-overlay--visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.cookie-modal {
+    position: relative;
+    background: #0d0d14;
+    border: 1px solid rgba(206, 18, 18, 0.2);
+    border-top: 2px solid #ce1212;
+    border-radius: 4px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.75), 0 0 50px rgba(206, 18, 18, 0.07);
+    max-width: 420px;
+    width: 100%;
+    padding: 2rem 2rem 1.75rem;
+    text-align: center;
+    transform: scale(0.94) translateY(10px);
+    transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cookie-overlay--visible .cookie-modal {
+    transform: scale(1) translateY(0);
+}
+
+.cookie-modal__close {
+    position: absolute;
+    top: 0.65rem; right: 0.65rem;
+    background: none;
+    border: none;
+    color: rgba(150, 150, 175, 0.45);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.35rem;
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+
+.cookie-modal__close:hover { color: rgba(210, 210, 230, 0.9); }
+
+.cookie-modal__icon-wrap {
+    width: 52px; height: 52px;
+    background: rgba(206, 18, 18, 0.1);
+    border: 1px solid rgba(206, 18, 18, 0.2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #ce1212;
+    font-size: 1.3rem;
+    margin: 0 auto 1.1rem;
+}
+
+.cookie-modal__title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 0.6rem;
+    line-height: 1.3;
+}
+
+.cookie-modal__text {
+    font-size: 0.8rem;
+    color: rgba(185, 185, 210, 0.7);
+    margin: 0 0 1.5rem;
+    line-height: 1.6;
+}
+
+.cookie-modal__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.cookie-modal__accept {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem;
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    background: #ce1212;
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 700;
+    font-family: inherit;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.25s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 16px rgba(206, 18, 18, 0.35);
+}
+
+.cookie-modal__accept::after {
+    content: '';
+    position: absolute; top: -50%; left: -80%;
+    width: 55%; height: 200%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.14), transparent);
+    transform: skewX(-18deg);
+    transition: left 0.55s ease;
+    pointer-events: none;
+}
+
+.cookie-modal__accept:hover {
+    background: #a50e0e;
+    box-shadow: 0 0 28px rgba(206,18,18,0.5), 0 4px 20px rgba(0,0,0,0.4);
+    transform: translateY(-1px);
+}
+
+.cookie-modal__accept:hover::after { left: 120%; }
+
+.cookie-modal__reject {
+    background: none;
+    border: none;
+    color: rgba(140, 140, 165, 0.6);
+    font-size: 0.75rem;
+    font-family: inherit;
+    cursor: pointer;
+    padding: 0.3rem 0.5rem;
+    transition: color 0.2s ease;
+}
+
+.cookie-modal__reject:hover { color: rgba(200, 200, 220, 0.85); }
+
+/* ════════════════════════════════════════════════════════════
+   SWEETALERT2 — PitArena dark theme
+════════════════════════════════════════════════════════════ */
+
+.swal2-popup {
+    background: #0e0e14;
+    border: 1px solid rgba(206,18,18,0.22);
+    border-radius: 2px;
+    font-family: 'Poppins', sans-serif;
+    color: #e8e8f0;
+    padding: 2rem 2rem 1.75rem;
+}
+
+.swal2-title {
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.swal2-html-container {
+    color: #9898b0;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    margin-top: 0.375rem;
+}
+
+/* ── Confirm button — brand red ── */
+.swal2-confirm {
+    background: #ce1212 !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 2px !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+    padding: 0.7rem 1.75rem !important;
+    box-shadow: 0 2px 12px rgba(206,18,18,0.25) !important;
+    transition: background 0.25s ease, box-shadow 0.3s ease, transform 0.2s ease !important;
+}
+.swal2-confirm:hover {
+    background: #a50e0e !important;
+    box-shadow: 0 0 28px rgba(206,18,18,0.5), 0 4px 20px rgba(0,0,0,0.4) !important;
+    transform: translateY(-1px);
+}
+.swal2-confirm:focus {
+    box-shadow: 0 0 0 3px rgba(206,18,18,0.35) !important;
+}
+
+/* ── Cancel button — ghost ── */
+.swal2-cancel {
+    background: transparent !important;
+    border: 1px solid rgba(255,255,255,0.12) !important;
+    border-radius: 2px !important;
+    color: #9898b0 !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+    padding: 0.7rem 1.75rem !important;
+    transition: background 0.2s ease, color 0.2s ease !important;
+}
+.swal2-cancel:hover {
+    background: rgba(255,255,255,0.06) !important;
+    color: #e8e8f0 !important;
+}
+
+/* ── Close (X) button ── */
+.swal2-close { color: #9898b0; transition: color 0.2s; }
+.swal2-close:hover { color: #ce1212 !important; }
+
+/* ── Success icon — brand red ── */
+.swal2-icon.swal2-success {
+    border-color: rgba(206,18,18,0.35) !important;
+}
+.swal2-icon.swal2-success .swal2-success-ring {
+    border-color: rgba(206,18,18,0.2) !important;
+}
+.swal2-icon.swal2-success [class^='swal2-success-line'] {
+    background-color: #ce1212 !important;
+}
+
+/* ── Error icon ── */
+.swal2-icon.swal2-error {
+    border-color: rgba(206,18,18,0.5) !important;
+}
+.swal2-icon.swal2-error [class^='swal2-x-mark-line'] {
+    background-color: #ce1212 !important;
+}
+
+/* ── Backdrop ── */
+.swal2-backdrop-show {
+    background: rgba(4,4,8,0.82) !important;
+    backdrop-filter: blur(4px);
+}
+
+/* ================================================================
+   YCF CUP — Registrace & Objednávka
+   ================================================================ */
+
+/* Skryje nativní radio buttony (zobrazeny přes .dot span) */
+form input[type="radio"] {
+    display: none;
+}
+
+/* Tečka u radio volby */
+form .category label .dot {
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    margin-right: 10px;
+    background: #d9d9d9;
+    border: 5px solid transparent;
+    transition: all 0.3s ease;
+}
+
+#dot-1:checked ~ .category label .one,
+#dot-2:checked ~ .category label .two,
+#dot-5:checked ~ .category label .five,
+#dot-3:checked ~ .category label .three,
+#dot-4:checked ~ .category label .four {
+    background: #ce1212;
+    border-color: #d9d9d9;
+}
+
+.required-symbol {
+    font-weight: 700;
+    color: #ce1212;
+}
+
+.big-logo-ycfcup {
+    margin-bottom: 2rem;
+}
+
+form .input-file input[type="file"] {
+    border: none;
+    color: #ce1212;
+}
+
+form .input-file input[type="file"]:valid {
+    color: #12ce1b;
+}
+
+.disablingOposite:disabled {
+    background-color: #636262;
+}
+
+/* Grid pro výběr jezdce a zadání kódu (objednavka_cup) */
+.list-registrated-riders,
+.put-your-code-here {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.list-registrated-riders div,
+.put-your-code-here div {
+    vertical-align: bottom;
+    padding: 20px;
+    min-height: 5rem;
+}
+
+.list-registrated-riders select,
+.put-your-code-here input {
+    width: 100%;
+    height: 100%;
+    border: 1px solid lightgray;
+    font-size: medium;
+    font-weight: 400;
+}
+
+.put-your-code-here input {
+    padding: 1rem;
+    font-style: italic;
+    letter-spacing: 1rem;
+}
+
+.put-your-code-here input::placeholder {
+    letter-spacing: normal;
+}
+
+@media (max-width: 584px) {
+    .user-details.splatky-detail {
+        flex-direction: column-reverse;
+    }
+    .user-details.splatky-detail .checkboxes.splatky-detail {
+        border-top: 1px dashed gray;
+    }
+}
+
+@media (max-width: 768px) {
+    .list-registrated-riders,
+    .put-your-code-here {
+        grid-template-columns: 1fr;
+    }
+}

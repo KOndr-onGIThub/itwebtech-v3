@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+echo "==> Configuring Xdebug..."
+CONF_DIR_TMP=$(php --ini 2>/dev/null | grep "Scan for additional" | awk '{print $NF}')
+[[ -z "$CONF_DIR_TMP" || "$CONF_DIR_TMP" == "(none)" ]] && CONF_DIR_TMP="/usr/local/etc/php/conf.d"
+echo "xdebug.mode=off" | sudo tee "${CONF_DIR_TMP}/zzz-xdebug-mode.ini" > /dev/null
+
 echo "==> Installing MySQL client + PHP extensions..."
 dpkg -s default-mysql-client &>/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -q default-mysql-client)
 sudo docker-php-ext-install pdo_mysql pcntl || true

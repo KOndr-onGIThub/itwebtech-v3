@@ -1,0 +1,270 @@
+.about-circular {
+    position: relative;
+    &::before {
+        content: "";
+        position: absolute;
+        left: 1.5rem;
+        top: 1.5rem;
+        width: calc(100% - 3rem);
+        height: calc(100% - 3rem);
+        border-radius: 50%;
+        border: 1px dashed $border-color;
+        pointer-events: none;
+    }
+}
+.about-circular-item {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 60%;
+    height: 60%;
+    &.active {
+        .about-circular-content {
+            opacity: 1;
+        }
+    }
+}
+.about-circular-media {
+    position: absolute;
+    left: 50%;
+    top: -21%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    margin-left: -1.5rem;
+    margin-top: -1.5rem;
+    background-color: $accent-color;
+    color: $background-color;
+    border-radius: 50%;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.about-circular-content {
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+.about-circular-heading {
+    margin-bottom: 0;
+}
+.about-circular-desc {
+    margin: 1rem 0 0 0;
+}
+.about-circular-3 {
+    .about-circular-item {
+        &:nth-child(3) {
+            .about-circular-media {
+                top: 80%;
+                left: 119%;
+            }
+        }
+        &:nth-child(4) {
+            .about-circular-media {
+                top: 80%;
+                left: -19%;
+            }
+        }
+    }
+}
+.about-circular-4 {
+    .about-circular-item {
+        &:nth-child(3) {
+            .about-circular-media {
+                top: 50%;
+                left: 125%;
+            }
+        }
+        &:nth-child(4) {
+            .about-circular-media {
+                top: 125%;
+                left: 50%;
+            }
+        }
+        &:nth-child(5) {
+            .about-circular-media {
+                top: 50%;
+                left: -25%;
+            }
+        }
+    }
+}
+.about-circular-5 {
+    .about-circular-item {
+        &:nth-child(3) {
+            .about-circular-media {
+                top: 25%;
+                left: 120.5%;
+            }
+        }
+        &:nth-child(4) {
+            .about-circular-media {
+                top: 100%;
+                left: 106%;
+            }
+        }
+        &:nth-child(5) {
+            .about-circular-media {
+                top: 100%;
+                left: -6%;
+            }
+        }
+        &:nth-child(6) {
+            .about-circular-media {
+                top: 25%;
+                left: -20.5%;
+            }
+        }
+    }
+}
+.about-circular-6 {
+    .about-circular-item {
+        &:nth-child(3) {
+            .about-circular-media {
+                top: 13%;
+                left: 115%;
+            }
+        }
+        &:nth-child(4) {
+            .about-circular-media {
+                top: 87%;
+                left: 115%;
+            }
+        }
+        &:nth-child(5) {
+            .about-circular-media {
+                top: 125%;
+                left: 50%;
+            }
+        }
+        &:nth-child(6) {
+            .about-circular-media {
+                top: 87%;
+                left: -15%;
+            }
+        }
+        &:nth-child(7) {
+            .about-circular-media {
+                top: 13%;
+                left: -15%;
+            }
+        }
+    }
+}
+
+@media (min-width: 430px) {
+    .about-circular-media {
+        top: -23%;
+    }
+}
+
+@media (min-width: 480px) {
+    .about-circular-media {
+        top: -24.5%;
+    }
+}
+
+
+@include media-breakpoint-up(xxl) {
+
+    .col-xxl-media {
+
+        .about-circular-media {
+            top: -27%;
+        }
+    
+        .about-circular-3 {
+            .about-circular-item {
+                &:nth-child(3) {
+                    .about-circular-media {
+                        left: 121%;
+                    }
+                }
+                &:nth-child(4) {
+                    .about-circular-media {
+                        left: -21%;
+                    }
+                }
+            }
+        }
+        .about-circular-4 {
+            .about-circular-item {
+                &:nth-child(3) {
+                    .about-circular-media {
+                        left: 127%;
+                    }
+                }
+                &:nth-child(4) {
+                    .about-circular-media {
+                        top: 127%;
+                    }
+                }
+                &:nth-child(5) {
+                    .about-circular-media {
+                        left: -27%;
+                    }
+                }
+            }
+        }
+        .about-circular-5 {
+            .about-circular-item {
+                &:nth-child(3) {
+                    .about-circular-media {
+                        left: 122.5%;
+                    }
+                }
+                &:nth-child(4) {
+                    .about-circular-media {
+                        left: 108%;
+                    }
+                }
+                &:nth-child(5) {
+                    .about-circular-media {
+                        left: -8%;
+                    }
+                }
+                &:nth-child(6) {
+                    .about-circular-media {
+                        left: -22.5%;
+                    }
+                }
+            }
+        }
+        .about-circular-6 {
+            .about-circular-item {
+                &:nth-child(3) {
+                    .about-circular-media {
+                        left: 117%;
+                    }
+                }
+                &:nth-child(4) {
+                    .about-circular-media {
+                        left: 117%;
+                    }
+                }
+                &:nth-child(5) {
+                    .about-circular-media {
+                        top: 127%;
+                    }
+                }
+                &:nth-child(6) {
+                    .about-circular-media {
+                        left: -17%;
+                    }
+                }
+                &:nth-child(7) {
+                    .about-circular-media {
+                        left: -17%;
+                    }
+                }
+            }
+        }
+
+    }
+
+}

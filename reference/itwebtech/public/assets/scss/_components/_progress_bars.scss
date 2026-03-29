@@ -1,0 +1,148 @@
+.progressbars {
+    margin-bottom: -2.5rem;
+}
+.progressbars-clear {
+    margin: 0;
+    .progressbar-col {
+        &:last-child {
+            margin-bottom: 0;
+        }
+        margin-bottom: 3.5rem;
+    }
+}
+
+.progressbar-col {
+    --thickness: 10px;
+    margin: calc( var(--thickness) + 1.25rem ) 0 2.5rem;
+    &:first-child {
+        margin-top: 0;
+        padding-top: calc( var(--thickness) + 1.5rem );
+    }
+}
+
+.progressbar-item {
+    position: relative;
+}
+
+.progressbar-label {
+    position: absolute;
+    left: 0;
+    bottom: calc( var(--thickness) + 0.75rem );
+    font-family: $heading-font-family;
+    font-weight: $heading-font-weight;
+    line-height: 1;
+}
+
+.progressbar {
+    position: relative;
+    height: var(--thickness);
+    width: 100%;
+}
+
+.progressbar,
+.progressbar-current {
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: $el-border-radius-min;
+        overflow: hidden;
+        background-color: $background-secondary-color;
+    }
+}
+
+.progressbar-current {
+    --progressbar-value: 0px;
+    position: relative;
+    height: 100%;
+    width: var(--progressbar-value);
+    &::before {
+        background-color: $accent-color;
+    }
+}
+
+.progressbar-percentage {
+    position: absolute;
+    right: 0;
+    bottom: calc( var(--thickness) + 0.75rem );
+    line-height: 1;
+    opacity: 0;
+    transition: opacity 0.1s;
+    &.visible {
+        opacity: 1;
+    }
+}
+
+.circle-progressbars {
+    &.animated {
+        .cpbi-circle {
+            &:before {
+                opacity: 0;
+            }
+        }
+    }
+}
+
+.cpb-item {
+    --thickness: 10px;
+    .item-heading {
+        margin-top: 1.25rem;
+        text-align: center;
+    }
+}
+.cpbi-circle {
+    position: relative;
+    width: 100%;
+    max-width: 180px;
+    margin: 0 auto;
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        border: var(--thickness) solid $background-secondary-color;
+        border-radius: 50%;
+        opacity: 1;
+        transition: opacity 1s;
+    }
+    canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100% !important;
+        height: 100% !important;
+        z-index: 1;
+    }
+}
+.cpbi-percentage {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-family: $heading-font-family;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    font-weight: $heading-font-weight;
+    z-index: 2;
+    &::after {
+        content: '%';
+    }
+}
+  
+
+.section-bgc {
+    .progressbar {
+        &::before {
+            background-color: $background-color;
+        }
+    }
+    .cpbi-circle {
+        &::before {
+            border-color: $background-color;
+        }    
+    }
+}

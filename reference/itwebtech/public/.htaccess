@@ -1,0 +1,70 @@
+<IfModule mod_expires.c>
+    ExpiresActive On
+    # výchozí TTL = 1 měsíc
+    ExpiresDefault "access plus 1 month"
+
+    # konkrétní MIME‐typeny
+    ExpiresByType text/css                "access plus 1 year"
+    ExpiresByType application/javascript  "access plus 1 year"
+    ExpiresByType application/json        "access plus 0 seconds"
+    ExpiresByType image/webp              "access plus 1 year"
+    ExpiresByType image/avif              "access plus 1 year"
+    ExpiresByType image/svg+xml           "access plus 1 year"
+    ExpiresByType image/png               "access plus 1 year"
+    ExpiresByType image/jpeg              "access plus 1 year"
+    ExpiresByType text/javascript         "access plus 1 year"
+    ExpiresByType font/woff               "access plus 1 year"
+    ExpiresByType application/font-woff2  "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+    # nechceme cacheovat JSON apod., proto výjimky níže
+    <FilesMatch "\.(?:css|js|woff2?|webp|avif|svg)$">
+        Header always set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    <FilesMatch "\.(?:json)$">
+        Header always set Cache-Control "no-cache, no-store, must-revalidate"
+    </FilesMatch>
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # rewrite www
+    RewriteCond %{HTTP_HOST} ^www.(.*)$ [NC]
+    RewriteRule ^(.*)$ https://%1/$1 [R=301,L]    
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+
+    #permanent redirect
+    Redirect 301 /reference https://itwebtech.cz/projects
+    Redirect 301 /reference/elektro-srnak https://itwebtech.cz/projects/elektro-srnak
+    Redirect 301 /reference/hcms https://itwebtech.cz/projects/hcms
+    Redirect 301 /reference/strechyzajic https://itwebtech.cz/projects/strechyzajic
+    Redirect 301 /reference/FRLcreator https://itwebtech.cz/projects/FRLcreator
+    Redirect 301 /reference/picker https://itwebtech.cz/projects/picker
+    Redirect 301 /reference/excel-tools https://itwebtech.cz/projects/excel-tools
+    Redirect 301 /about https://itwebtech.cz
+    Redirect 301 /jak-na-to/co-je-soe-a-proc-je-tak-dulezite https://itwebtech.cz/jak-na-to/co-je-seo-a-proc-je-tak-dulezite
+
+    #temporary redirect
+    Redirect 302 /dotazy https://itwebtech.cz/contact
+    Redirect 302 /servis https://itwebtech.cz/price
+    
+</IfModule>

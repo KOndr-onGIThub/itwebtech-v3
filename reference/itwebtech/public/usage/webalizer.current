@@ -1,0 +1,188 @@
+# Webalizer V2.23-08 Incremental Data - 08/01/2023 06:26:55
+2023 8 1 6 26 55
+6787 5239 8 3 1 9 41955303 6319 6 0 8 8
+8 479 1057 1 1
+6787 5239 41955303 8 6319 6 8 8
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+1053 811 6485635 980 4 4
+1051 810 6473697 979 4 4
+1043 813 6514456 973 0 0
+1049 809 6477765 978 0 0
+1057 815 6547413 984 0 0
+1055 813 6500118 981 0 0
+479 368 2956219 444 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+3
+0
+0
+5239
+0
+0
+0
+0
+0
+0
+0
+1
+0
+0
+0
+0
+0
+0
+0
+0
+0
+1466
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+78
+0
+0
+0
+0
+0
+# -urls- 
+/favicon-16x16.png
+1 155 2 81375 0 0 0 0
+/
+0 4853 13 35915677 5 1 0 0
+/robots.txt
+0 231 1 10164 0 0 0 0
+# End Of Table - urls
+# -sites- (monthly)
+customer.clientshostname.com
+0 2 1 39605 1 1690864860 0 0
+/
+fwdproxy-pnb-006.fbsv.net
+0 1 1 39443 1 1690856519 0 0
+/
+crawl-66-249-66-195.googlebot.com
+0 1 0 4968 0 0 0 0
+-
+static.52.13.69.159.clients.your-server.de
+0 8 7 54901 2 1690865667 0 0
+-
+46.101.5.124
+0 4917 3455 28623443 1 1690871215 4 4
+-
+fulltextrobot-77-75-78-167.seznam.cz
+0 2 0 5631 0 0 0 0
+-
+msnbot-52-167-144-173.search.msn.com
+0 3 0 16368 0 0 0 0
+-
+nat.wikidi.net
+0 1853 1775 13170944 1 1690871212 4 4
+/
+# End Of Table - sites (monthly)
+# -sites- (daily)
+customer.clientshostname.com
+0 2 1 39605 1 1690864860 0 0
+/
+fwdproxy-pnb-006.fbsv.net
+0 1 1 39443 1 1690856519 0 0
+/
+crawl-66-249-66-195.googlebot.com
+0 1 0 4968 0 0 0 0
+-
+static.52.13.69.159.clients.your-server.de
+0 8 7 54901 2 1690865667 0 0
+-
+46.101.5.124
+0 4917 3455 28623443 1 1690871215 4 4
+-
+fulltextrobot-77-75-78-167.seznam.cz
+0 2 0 5631 0 0 0 0
+-
+msnbot-52-167-144-173.search.msn.com
+0 3 0 16368 0 0 0 0
+-
+nat.wikidi.net
+0 1853 1775 13170944 1 1690871212 4 4
+/
+# End Of Table - sites (daily)
+# -referrers- 
+- (Direct Request)
+0 6787
+# End Of Table - referrers
+# -agents- 
+Testomatobot/1.0 (Linux x86_64 +https://www.testomato.com/testomatobot) minicrawler/5.2.2 uptimebot@gb/2.0
+0 3070
+Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)
+0 1
+Mozilla/5.0 (compatible; SeznamBot/4.0; +http://napoveda.seznam.cz/seznambot-intro/)
+0 2
+Mozilla/5.0 (Windows NT 6.1; rv:80.0) Gecko/20100101 Firefox/80.0,gzip(gfe)
+0 2
+Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/103.0.50
+0 3
+Testomatobot/1.0 (Linux x86_64; +https://www.testomato.com/testomatobot) minicrawler/5.2.2
+0 2156
+facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)
+0 1
+Testomatobot/1.0 (Linux x86_64 +https://www.testomato.com/testomatobot) minicrawler/5.2.2 uptimebot@eu/2.0
+0 1545
+Testomatobot/1.0 (Linux x86_64 +https://www.testomato.com/testomatobot) minicrawler/5.2.2 uptimebot@de/2.0
+0 7
+# End Of Table - agents
+# -search strings- 
+# End Of Table - search strings
+# -usernames- 
+# End Of Table - usernames
