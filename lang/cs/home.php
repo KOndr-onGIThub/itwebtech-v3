@@ -8,14 +8,13 @@ return [
     ],
 
     'hero' => [
-        'subheading'       => 'Webový specialista pro české podnikatele',
-        'heading'          => 'Web, který <em>skutečně vydělává</em>',
+        'subheading'       => 'Pro podnikatele s ambicí',
+        'heading'          => '<em>Kompletní web</em> od člověka, kterému na výsledku záleží.',
         'bio'              => [
-            'Vytvořím vám web nebo aplikaci,',
-            'která přivádí zákazníky, šetří čas',
-            'a pracuje za vás — bez starostí o údržbu.',
+            '18 let v Toyotě mě naučilo jedno: dodávat perfektní výsledky.',
             'Ondřej Kriška',
         ],
+        'chips'            => ['Strategie', 'Design', 'Kód', 'Texty'],
         'cta_contact'      => 'Konzultace zdarma',
         'cta_consultation' => 'Napsat zprávu',
     ],
@@ -75,14 +74,14 @@ return [
     ],
 
     'commitment' => [
-        'heading' => 'PŘÍSTUP, KTERÝ PŘINÁŠÍ VÝSLEDKY',
-        'text'    => 'Za každým projektem hledám skutečnou hodnotu — ne jen hezkou grafiku, ale nástroj, který vám pomáhá vydělávat.
+        'heading' => 'RYCHLE, LEVNĚ, KVALITNĚ — VYBERTE SI DVĚ',
+        'text'    => 'Někdo vám slíbí web rychle, levně a perfektně zároveň. Vyberte si dvě — třetí je vždy obchodní trik, který poznáte až na faktuře.
 
-Programuji bez WordPressu a omezujících CMS. Žádné pluginy třetích stran, žádné bezpečnostní díry a nulové náklady na pravidelné aktualizace. Ušetříte i na tom, co nemusíte platit.
+18 let v Toyotě na projektovém plánování a řízení kvality mě naučilo jedno: chyby jsou drahé a zkratky je jenom odkládají. Tyto principy teď aplikuji na tvorbu webů.
 
-18 let v Toyotě mě naučilo jednu věc: na detailech záleží a chyby jsou drahé. Každý projekt proto procházím systémem, který vylučuje nedorozumění — od první konzultace po finální spuštění.
+Každý projekt začíná hodinovou konzultací. Bez formuláře, bez šablony. Vyslechnu váš byznys, vaše zákazníky a vaše cíle — teprve pak navrhuji řešení. Pokud spolupráce dává smysl, připravím přesnou specifikaci a cenovou nabídku. To je práce, která trvá celý den — proto má svou cenu. Pokud se rozhodnete projekt realizovat, tato částka se odečítá z výsledné ceny.
 
-Pracuji osobně. Nekomunikujete s obchodníkem, projektovým manažerem a vývojářem zvlášť. Jedno místo kontaktu, jedno místo zodpovědnosti.',
+Neprogramuji na WordPressu. Žádné pluginy třetích stran, žádné bezpečnostní díry, nulové náklady na pravidelné aktualizace. Ušetříte i na tom, co nemusíte platit.',
         'steps' => [
             ['title' => 'Porozumění',      'description' => 'Nejdřív pochopím váš byznys, vaše zákazníky a jejich potřeby. Bez tohoto kroku by jakékoli řešení bylo jen náhodným střílením.'],
             ['title' => 'Řešení na míru',  'description' => 'Navrhnu přesně to, co potřebujete — ne šablonu pro každého, ale řešení přizpůsobené vašemu trhu a cílové skupině.'],
@@ -92,7 +91,7 @@ Pracuji osobně. Nekomunikujete s obchodníkem, projektovým manažerem a vývoj
 
     'about' => [
         'subheading'     => 'Představení',
-        'heading'        => 'Pomůžu vašemu byznysu uspět online',
+        'heading'        => 'Pracujete přímo se mnou — ne přes koordinátory',
         'description'    => 'Zarezervujte si bezplatnou konzultaci — nezávazně, bez registrace, bez zbytečných formalit',
         'content_title'  => 'Co udělám jako první',
         'content'        => [
@@ -123,7 +122,7 @@ Pracuji osobně. Nekomunikujete s obchodníkem, projektovým manažerem a vývoj
         'heading'    => 'Jednoduchý proces bez zbytečných komplikací',
         'items'      => [
             ['heading' => 'Bezplatná konzultace',          'text' => 'Řekněte mi o svém projektu. Nezávazně, bez registrace. Zjistíme společně, jestli a jak vám mohu pomoci — a já vám řeknu upřímný názor, i kdyby spolupráce nedávala smysl.'],
-            ['heading' => 'Nabídka bez překvapení',        'text' => 'Připravím nabídku s přesně definovaným rozsahem, cenou a harmonogramem. Co je v nabídce, to je i na faktuře. Žádné vícenáklady bez vašeho vědomí.'],
+            ['heading' => 'Specifikace na míru',            'text' => 'Pokud spolupráce dává smysl, připravím přesný plán projektu — co bude na webu, kolik stránek, jakou technologii, kolik to bude stát a kdy to dodám. Specifikace je placená práce. Pokud se rozhodnete jít do realizace, tato částka se odečítá z výsledné ceny projektu.'],
             ['heading' => 'Tvorba s vaší zpětnou vazbou', 'text' => 'Průběžně vás informuji o postupu a zapojuji vás do klíčových rozhodnutí. Váš pohled je součástí procesu — výsledek odpovídá tomu, co jste si přáli.'],
             ['heading' => 'Podpora i po spuštění',         'text' => 'Jsem k dispozici i po spuštění. Drobné úpravy, technická pomoc nebo rozvoj projektu — ozvěte se, vždy se ozvu zpět do druhého dne.'],
         ],

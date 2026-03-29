@@ -24,11 +24,22 @@
         <h1 class="section-hero__heading">
             {!! __('home.hero.heading') !!}
         </h1>
-        <div class="section-hero__bio">
-            @foreach (__('home.hero.bio') as $line)
-                <span>{!! $line !!}</span>
+        <div class="hero-chips" aria-hidden="true">
+            @foreach (__('home.hero.chips') as $i => $chip)
+                <span class="hero-chip" style="--i:{{ $i }}">{{ $chip }}</span>
             @endforeach
         </div>
+        <blockquote class="hero-quote">
+            <div class="hero-quote__text">
+                @foreach (array_slice(__('home.hero.bio'), 0, -1) as $line)
+                    <span>{!! $line !!}</span>
+                @endforeach
+            </div>
+            <footer class="hero-quote__author">
+                <span class="hero-quote__dash"></span>
+                <cite>{!! last(__('home.hero.bio')) !!}</cite>
+            </footer>
+        </blockquote>
         <div class="section-hero__actions">
             <a href="{{ lroute('contact') }}" class="btn btn-primary">
                 {{ __('home.hero.cta_contact') }}
@@ -37,6 +48,31 @@
             <a href="{{ lroute('contact') }}" class="btn btn-secondary">
                 {{ __('home.hero.cta_consultation') }}
             </a>
+        </div>
+    </div>
+</section>
+
+{{-- ===================================================
+     BRAND LOGOS (klienti)
+     =================================================== --}}
+<section class="section-wrapper section-alt" data-reveal aria-label="Klienti">
+    <div class="container-site">
+        <div class="brands-grid">
+            @foreach ([
+                ['src' => 'brands/upstyle.png',           'alt' => 'Upstyle systems'],
+                ['src' => 'brands/toyota.png',             'alt' => 'Toyota'],
+                ['src' => 'brands/yolk_studio.png',        'alt' => 'Yolk studio'],
+            ] as $brand)
+            <div class="brand-item">
+                <img
+                    src="{{ asset('img/' . $brand['src']) }}"
+                    alt="{{ $brand['alt'] }}"
+                    loading="lazy"
+                    width="120"
+                    height="48"
+                >
+            </div>
+            @endforeach
         </div>
     </div>
 </section>
@@ -280,35 +316,6 @@
                 {{ __('home.projects.cta') }}
                 <x-icon.arrow-right class="w-4 h-4 shrink-0" />
             </a>
-        </div>
-    </div>
-</section>
-
-{{-- ===================================================
-     BRAND LOGOS (klienti)
-     =================================================== --}}
-<section class="section-wrapper section-alt" data-reveal aria-label="Klienti">
-    <div class="container-site">
-        <div class="brands-grid">
-            @foreach ([
-                ['src' => 'brands/upstyle.png',           'alt' => 'Upstyle systems'],
-                ['src' => 'brands/elektro-srnak.png',      'alt' => 'Elektro Srnák'],
-                ['src' => 'brands/toyota.png',             'alt' => 'Toyota'],
-                ['src' => 'brands/pitarena.png',           'alt' => 'Pitbike Aréna'],
-                ['src' => 'brands/strechyzajic.png',       'alt' => 'Střechy Zajíc'],
-                ['src' => 'brands/realitackyvakci_new.png','alt' => 'Realiťačky v akci'],
-                ['src' => 'brands/yolk_studio.png',        'alt' => 'Yolk studio'],
-            ] as $brand)
-            <div class="brand-item">
-                <img
-                    src="{{ asset('img/' . $brand['src']) }}"
-                    alt="{{ $brand['alt'] }}"
-                    loading="lazy"
-                    width="120"
-                    height="48"
-                >
-            </div>
-            @endforeach
         </div>
     </div>
 </section>
