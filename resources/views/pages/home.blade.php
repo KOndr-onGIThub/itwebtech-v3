@@ -42,6 +42,27 @@
 </section>
 
 {{-- ===================================================
+     PAIN — rozpoznání problémů zákazníka
+     =================================================== --}}
+<section class="section-wrapper section-alt" data-reveal>
+    <div class="container-site">
+        <header class="section-header">
+            <p class="section-subheading">{{ __('home.pain.subheading') }}</p>
+            <h2>{{ __('home.pain.heading') }}</h2>
+        </header>
+
+        <div class="pain-grid" data-reveal-group>
+            @foreach (__('home.pain.items') as $item)
+            <div class="pain-card">
+                <h3>{{ $item['heading'] }}</h3>
+                <p>{{ $item['text'] }}</p>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+{{-- ===================================================
      SERVICES — primary (websites, webapps, eshop)
      =================================================== --}}
 <section class="section-wrapper" data-reveal>
@@ -392,6 +413,27 @@
                     <x-icon.arrow-right class="w-4 h-4 shrink-0" />
                 </a>
             </div>
+        </div>
+    </div>
+</section>
+
+{{-- ===================================================
+     FAQ — časté otázky
+     =================================================== --}}
+<section class="section-wrapper" data-reveal>
+    <div class="container-site">
+        <header class="section-header">
+            <p class="section-subheading">{{ __('home.faq.subheading') }}</p>
+            <h2>{{ __('home.faq.heading') }}</h2>
+        </header>
+
+        <div class="faq-list" data-reveal-group>
+            @foreach (__('home.faq.items') as $item)
+            <details class="faq-item">
+                <summary>{{ $item['q'] }}</summary>
+                <p class="faq-answer">{{ $item['a'] }}</p>
+            </details>
+            @endforeach
         </div>
     </div>
 </section>

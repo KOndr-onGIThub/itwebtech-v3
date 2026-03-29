@@ -3,55 +3,166 @@
 return [
 
     'meta' => [
-        'title'       => 'Price list — Ondřej Kriška',
-        'description' => 'Indicative price list for websites, applications, SEO and social media. Invest in a professional solution.',
+        'title'       => 'Pricing — Ondřej Kriška',
+        'description' => 'Indicative pricing for websites, e-shops and web applications. Get a clear picture of your investment before the first consultation.',
     ],
 
-    'subheading'       => 'Transparent pricing',
-    'heading'          => 'Price list',
-    'blockquote'       => 'Invest in a professional solution and your investment will return.',
-    'cta_calculation'  => 'Write about the calculation',
-    'intro'            => 'I always create solutions exactly tailored to your business so that the project meets your needs and expectations. However, this price list can already give you a clear idea of the necessary budget.',
-    'pricelist_info'   => 'These are indicative prices — I will adapt everything to your needs.',
-    'sales_info'       => 'For more information, please contact me.',
-    'quotation'        => 'Offer',
-    'monthly'          => 'Month',
-    'annual'           => 'Annual plan',
-    'month_gratis'     => '1 month free',
-    'popular'          => 'Popular',
-    'bestseller'       => 'Bestseller',
-    'vip'              => 'VIP',
+    'subheading' => 'Indicative pricing',
+    'heading'    => 'Clear pricing for every project',
+    'intro'      => 'Every project is different — the final price comes after a free consultation. This overview gives you a clear picture of the investment before our first meeting.',
 
-    'one_off' => [
-        'heading' => 'Price list of all services',
+    'popular'   => 'Most popular',
+    'quotation' => 'Get a quote',
+
+    'price_note' => 'indicative price',
+
+    'tiers' => [
+        [
+            'name'    => 'Presentation',
+            'desc'    => 'For freelancers and small businesses that need a credible online presence.',
+            'price'   => 'from €800',
+            'popular' => false,
+            'features' => [
+                'Up to 5 custom pages',
+                'Modern responsive design',
+                'Contact form',
+                'Technical SEO',
+                'Page speed optimisation',
+                '14 days of post-launch support',
+            ],
+            'cta' => 'Request a project',
+        ],
+        [
+            'name'    => 'Professional',
+            'desc'    => 'For businesses that want their website to be their best sales tool.',
+            'price'   => 'from €1,800',
+            'popular' => true,
+            'features' => [
+                'Up to 12 custom pages',
+                'Conversion-focused design',
+                'Blog or gallery with content editing',
+                'Multilingual website',
+                'Analytics and conversion tracking',
+                'Hosting and domain for 1 year free',
+                '1 month of post-launch support',
+            ],
+            'cta' => 'Choose this plan',
+        ],
+        [
+            'name'    => 'Complex',
+            'desc'    => 'For demanding projects without compromise — e-shop, booking system or web application.',
+            'price'   => 'from €3,400',
+            'popular' => false,
+            'features' => [
+                'Unlimited project scope',
+                'E-shop or booking system',
+                'Custom administration interface',
+                'Advanced SEO strategy with reporting',
+                'External system integrations',
+                '3 months of post-launch support',
+            ],
+            'cta' => 'Free consultation',
+        ],
+    ],
+
+    'note' => 'Indicative prices, VAT not applicable.',
+
+    'guarantees' => [
+        'heading' => 'What is included in every project',
         'items'   => [
-            ['name' => 'Website Development and Design',      'short' => 'WebSite',     'cost' => '<small>from</small> € 1,000', 'items' => ['Complete Website', 'Not only modern and beautiful, but mainly functional for your business', 'With emphasis on return on costs', 'Optimized for search engines', 'Perfectly adapted for computers, mobiles and tablets', 'Prices may vary depending on the complexity and size of the site.']],
-            ['name' => 'Web App Development and Management',  'short' => 'Application', 'cost' => '<small>from</small> € 4,400', 'items' => ['Planning and organization of warehouse operations', 'Internal Transport System Monitoring and Control', 'Real-time tracking of stock movements', 'Management of receipt and output of goods and others ...', 'Prices vary based on the complexity and size of the project.', '']],
-            ['name' => 'Engaging content',                    'short' => 'Content',     'cost' => '<small>from</small> € 220',   'items' => ['Articles that inform and entertain your customers', 'Optimized for search engines', 'Prices may vary depending on the length and complexity of the content.', '', '', '']],
-            ['name' => 'Promotion of your brand',             'short' => 'Design',      'cost' => '<small>from</small> € 200',   'items' => ['Logos', 'Animations and Images', 'Banners and Advertising Signs', 'Prices may vary depending on complexity and scope.', '', '']],
-            ['name' => 'Creation of e-shops',                 'short' => 'Eshop',       'cost' => '<small>from</small> € 1,900', 'items' => ['Complete solution for e-shop', 'Including integration with payment systems', 'Prices may vary depending on the complexity and size of the e-shop.', '', '', '']],
+            [
+                'title' => 'Maintenance-free websites',
+                'text'  => 'No WordPress, no third-party plugins. Save up to €800 per year on regular updates and security patches.',
+            ],
+            [
+                'title' => 'Fixed price, no surprises',
+                'text'  => 'You receive an exact quote before work begins. What is in the quote is on the invoice — no extra costs without your consent.',
+            ],
+            [
+                'title' => 'Direct communication',
+                'text'  => 'You talk directly to me — no account managers, no project coordinators. One point of contact, one point of responsibility.',
+            ],
+            [
+                'title' => 'Support after launch',
+                'text'  => 'I respond within 24 hours, even weeks and months after project delivery. Minor adjustments and technical questions are always welcome.',
+            ],
         ],
     ],
 
-    'longer' => [
-        'group_name' => 'Long-term cooperation for lasting success',
-        'heading'    => 'For constant growth in the online environment',
-        'items'      => [
-            ['name' => 'Save on advertising, bet on content', 'short' => 'SEO',            'cost_month' => '€ 300 <small>/month</small>', 'cost_year' => '€ 275 <small>/month</small>', 'items' => ['Keyword analysis', 'Content Strategy', 'Linkbuilding', 'Performance monitoring in the Collabim tool', 'Prices may vary depending on competition in your industry.', '']],
-            ['name' => 'Stay in touch with your customers',   'short' => 'Social Networks','cost_month' => '€ 550 <small>/month</small>', 'cost_year' => '€ 500 <small>/month</small>', 'items' => ['Social Network Management', 'Content creation included', 'I can teach you how to use AI to create content', 'I will tell you how to be successful in social networks', 'Prices may vary depending on the number of posts and social networks.', '']],
+    'addons' => [
+        'heading' => 'Additional services',
+        'desc'    => 'Comprehensive digital support even after your project launches.',
+        'items'   => [
+            [
+                'name'  => 'SEO & content marketing',
+                'price' => 'from €180 / mo.',
+                'desc'  => 'Keyword analysis, content strategy, performance monitoring. Organic visibility that works even without an advertising budget.',
+            ],
+            [
+                'name'  => 'Social media management',
+                'price' => 'from €400 / mo.',
+                'desc'  => 'Content creation, scheduling and publishing. Consistent presence that builds customer trust.',
+            ],
+            [
+                'name'  => 'Custom web application',
+                'price' => 'custom quote',
+                'desc'  => 'Inventory systems, internal tools, customer portals. Price reflects the complexity and scope of the project.',
+            ],
+            [
+                'name'  => 'Graphic design & branding',
+                'price' => 'from €190',
+                'desc'  => 'Logo, visual identity, banners. Everything you need for a consistent and memorable brand presentation.',
+            ],
         ],
     ],
 
-    'package' => [
-        'group_name'       => 'Choose a website tailored to your needs',
-        'heading'          => 'Current website price list',
-        'maintenance_free' => 'All sites are maintenance-free. You don\'t pay anything for regular updates or backups (automatic). This saves you up to € 1,000 per year.',
-        'items'            => [
-            ['name' => 'Basic',       'cost' => '€ 700–1,100',          'items' => ['Individuals or small local businesses who need a basic online presence.', 'For a simple online presentation of the company, services and products', 'Basic but effective design', 'Contact form', 'Technical SEO', 'Perfect even on mobiles']],
-            ['name' => 'Standard',    'cost' => '€ 1,100–2,200',        'items' => ['Small businesses and start-ups who want to have a professional presentation.', 'Target audience to increase engagement and conversions', 'Blog or gallery integration for convenient editing', 'Reservation system integration', 'Second language version', 'Establishment of up to 5 email boxes']],
-            ['name' => 'Professional','cost' => '€ 2,200–4,000',        'items' => ['Medium-sized businesses and advanced entrepreneurs who need an effective online presence.', 'Performance monitoring analytics and reports', 'High level of customization and special features', 'Suitable for selling several products/services', 'SEO analysis of keywords with suggestions for inclusion in long-term strategy', 'Hosting and domain for one year free']],
-            ['name' => 'Premium',     'cost' => '<small>from</small> € 4,000', 'items' => ['For larger companies and those looking to maximize growth.', 'Monthly reporting of website performance results for 1 year', 'Revision of the website and its tuning after half a year of data collection', 'Creating articles optimized for search engines', 'Animations, images and banners to promote your brand', 'Semi-annual support and updates']],
+    'compare' => [
+        'heading' => 'What exactly you get',
+        'tiers'   => ['Presentation', 'Professional', 'Complex'],
+        'groups'  => [
+            [
+                'label' => 'Project scope',
+                'rows'  => [
+                    ['label' => 'Number of pages', 'values' => ['up to 5', 'up to 12', 'unlimited']],
+                    ['label' => 'Responsive design', 'values' => [true, true, true]],
+                    ['label' => 'Contact form', 'values' => [true, true, true]],
+                ],
+            ],
+            [
+                'label' => 'Website features',
+                'rows'  => [
+                    ['label' => 'Blog or gallery with editing', 'values' => [false, true, true]],
+                    ['label' => 'Multilingual website', 'values' => [false, true, true]],
+                    ['label' => 'Booking system', 'values' => [false, 'optional', true]],
+                    ['label' => 'E-shop', 'values' => [false, false, true]],
+                    ['label' => 'Custom administration', 'values' => [false, false, true]],
+                    ['label' => 'External system integrations', 'values' => [false, false, true]],
+                ],
+            ],
+            [
+                'label' => 'Marketing & performance',
+                'rows'  => [
+                    ['label' => 'Technical SEO', 'values' => [true, true, true]],
+                    ['label' => 'Page speed optimisation', 'values' => [true, true, true]],
+                    ['label' => 'Analytics & conversion tracking', 'values' => [false, true, true]],
+                    ['label' => 'Advanced SEO strategy', 'values' => [false, false, true]],
+                ],
+            ],
+            [
+                'label' => 'Service & support',
+                'rows'  => [
+                    ['label' => 'Free hosting and domain', 'values' => [false, '1 year', '1 year']],
+                    ['label' => 'Post-launch support', 'values' => ['14 days', '1 month', '3 months']],
+                    ['label' => 'Maintenance-free operation', 'values' => [true, true, true]],
+                ],
+            ],
         ],
+    ],
+
+    'cta' => [
+        'heading' => 'Not sure what you need?',
+        'desc'    => 'The consultation is free and non-binding. In 30 minutes I will tell you what makes sense for your business — honestly, even if that means we should not work together.',
+        'btn'     => 'Book a free consultation',
     ],
 
 ];

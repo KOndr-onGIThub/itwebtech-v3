@@ -3,55 +3,166 @@
 return [
 
     'meta' => [
-        'title'       => 'Ceník služeb — Ondřej Kriška',
-        'description' => 'Orientační ceník webových stránek, aplikací, SEO a sociálních sítí. Investujte do profesionálního řešení.',
+        'title'       => 'Ceník — Ondřej Kriška',
+        'description' => 'Orientační ceník webových stránek, e-shopů a webových aplikací. Jasná představa o investici ještě před první konzultací.',
     ],
 
-    'subheading'       => 'Transparentní ceny',
-    'heading'          => 'Ceník',
-    'blockquote'       => 'Investujte do profesionálního řešení a investice se vám vrátí.',
-    'cta_calculation'  => 'Napište si o kalkulaci',
-    'intro'            => 'Tvořím vždy řešení přesně na míru vašemu podnikání tak, aby projekt splnil vaše potřeby a očekávání. Proto přesnou cenu nemohu znát bez důkladné analýzy. Tento ceník vám ale již nyní může dát jasnou představu o potřebném rozpočtu pro kvalitní služby.',
-    'pricelist_info'   => 'Jde o orientační ceny — vše přizpůsobím vašim potřebám.',
-    'sales_info'       => 'Pro více informací mi zavolejte nebo napište.',
-    'quotation'        => 'Nabídka',
-    'monthly'          => 'Měsíc',
-    'annual'           => 'Roční plán',
-    'month_gratis'     => '1 měsíc zdarma',
-    'popular'          => 'Oblíbené',
-    'bestseller'       => 'Bestseller',
-    'vip'              => 'VIP',
+    'subheading' => 'Orientační ceny',
+    'heading'    => 'Jasné ceny pro každý projekt',
+    'intro'      => 'Každý projekt je jiný — finální cenu znáte po bezplatné konzultaci. Tento přehled vám dá jasnou představu o investici ještě před naší první schůzkou.',
 
-    'one_off' => [
-        'heading' => 'Základní ceník všech služeb',
+    'popular'   => 'Nejoblíbenější',
+    'quotation' => 'Nezávazná poptávka',
+
+    'price_note' => 'orientační cena',
+
+    'tiers' => [
+        [
+            'name'    => 'Prezentace',
+            'desc'    => 'Pro živnostníky a malé firmy, kteří potřebují důvěryhodnou online prezentaci.',
+            'price'   => 'od 20 000 Kč',
+            'popular' => false,
+            'features' => [
+                'Do 5 stránek na míru',
+                'Moderní responzivní design',
+                'Kontaktní formulář',
+                'Technické SEO',
+                'Optimalizace rychlosti načítání',
+                '14 dní podpory po spuštění',
+            ],
+            'cta' => 'Poptejte projekt',
+        ],
+        [
+            'name'    => 'Profesionál',
+            'desc'    => 'Pro firmy, které chtějí web jako svůj nejlepší obchodní nástroj.',
+            'price'   => 'od 45 000 Kč',
+            'popular' => true,
+            'features' => [
+                'Do 12 stránek na míru',
+                'Konverzní design zaměřený na výsledky',
+                'Blog nebo galerie s editací obsahu',
+                'Vícejazyčný web',
+                'Analytika a měření konverzí',
+                'Hosting a doména na 1 rok zdarma',
+                '1 měsíc podpory po spuštění',
+            ],
+            'cta' => 'Vybrat tento plán',
+        ],
+        [
+            'name'    => 'Komplex',
+            'desc'    => 'Pro náročné projekty bez kompromisů — e-shop, rezervace nebo webová aplikace.',
+            'price'   => 'od 85 000 Kč',
+            'popular' => false,
+            'features' => [
+                'Neomezený rozsah projektu',
+                'E-shop nebo rezervační systém',
+                'Vlastní administrační rozhraní',
+                'Pokročilá SEO strategie s reportingem',
+                'Integrace externích systémů',
+                '3 měsíce podpory po spuštění',
+            ],
+            'cta' => 'Konzultace zdarma',
+        ],
+    ],
+
+    'note' => 'Orientační ceny bez DPH. Nejsem plátce DPH.',
+
+    'guarantees' => [
+        'heading' => 'Co je součástí každého projektu',
         'items'   => [
-            ['name' => 'Vývoj a design webových stránek', 'short' => 'Weby',       'cost' => '<small>od</small> 22 000 Kč', 'items' => ['Webové stránky od A do Z', 'Nejen moderní a krásné, ale hlavně funkční pro váš byznys', 'S důrazem na návratnost vynaložených nákladů', 'Optimalizováno pro vyhledávače', 'Dokonale přizpůsobené pro počítače, mobily i tablety', 'Ceny se mohou lišit v závislosti na složitosti a velikosti webu.']],
-            ['name' => 'Efektivní aplikace pro váš byznys', 'short' => 'Aplikace', 'cost' => '<small>od</small> 85 000 Kč', 'items' => ['Optimalizujte svůj sklad s námi', 'Sledování a řízení interního přepravního systému', 'Mějte vždy přehled o svých zásobách', 'Řízení příjmu a výstupu zboží a další ...', 'Ceny se liší na základě složitosti a velikosti projektu.', '']],
-            ['name' => 'Poutavý obsah, co zaujme vaše zákazníky', 'short' => 'Obsah', 'cost' => '<small>od</small> 3 800 Kč', 'items' => ['Články, které vaše zákazníky informují a baví', 'Optimalizováno pro vyhledávače', 'Ceny se mohou lišit v závislosti na délce a složitosti obsahu.', '', '', '']],
-            ['name' => 'Zviditelněte svou značku', 'short' => 'Design',            'cost' => '<small>od</small> 4 800 Kč', 'items' => ['Logo, které vás odliší od konkurence', 'Animace a Obrázky', 'Bannery a Reklamní cedule', 'Ceny se mohou lišit v závislosti na složitosti a rozsahu.', '', '']],
-            ['name' => 'Eshop, který prodává', 'short' => 'Eshop',                 'cost' => '<small>od</small> 44 000 Kč', 'items' => ['Eshop připravený pro vaše zákazníky', 'Včetně integrace s platebními systémy', 'Ceny se mohou lišit v závislosti na složitosti a velikosti eshopu.', '', '', '']],
+            [
+                'title' => 'Bezúdržbové weby',
+                'text'  => 'Žádný WordPress, žádné pluginy třetích stran. Ušetříte až 20 000 Kč ročně za pravidelné aktualizace a záplaty.',
+            ],
+            [
+                'title' => 'Cena předem bez překvapení',
+                'text'  => 'Přesná nabídka ještě před zahájením práce. Co je v nabídce, to je i na faktuře — žádné vícenáklady bez vašeho vědomí.',
+            ],
+            [
+                'title' => 'Přímá komunikace',
+                'text'  => 'Mluvíte přímo se mnou — bez obchodníků, projektových manažerů a koordinátorů. Jedno místo kontaktu, jedno místo zodpovědnosti.',
+            ],
+            [
+                'title' => 'Podpora i po spuštění',
+                'text'  => 'Odpovím do 24 hodin, i týdny a měsíce po předání projektu. Drobné úpravy a technické dotazy jsou samozřejmostí.',
+            ],
         ],
     ],
 
-    'longer' => [
-        'group_name' => 'Dlouhodobá spolupráce pro trvalý úspěch',
-        'heading'    => 'Pro stálý růst v online prostředí',
-        'items'      => [
-            ['name' => 'Ušetřete za reklamu, vsaďte na obsah', 'short' => 'SEO',             'cost_month' => '5 500 Kč <small>/měsíc</small>', 'cost_year' => '5 000 Kč <small>/měsíc</small>', 'items' => ['Analýza klíčových slov', 'Obsahová strategie', 'Linkbuilding', 'Sledování výkonu v Collabim nástroji', 'Ceny se mohou lišit v závislosti na konkurenci ve vašem oboru.', '']],
-            ['name' => 'Buďte v kontaktu se svými zákazníky', 'short' => 'Sociální sítě',   'cost_month' => '12 000 Kč <small>/měsíc</small>', 'cost_year' => '11 000 Kč <small>/měsíc</small>', 'items' => ['Správa sociálních sítí', 'Včetně tvorby obsahu', 'Mohu vás naučit využívat AI k tvorbě obsahu', 'Prozradím vám jak na to, abyste měli na sítích úspěch', 'Ceny se mohou lišit v závislosti na počtu příspěvků a sociálních sítí.', '']],
+    'addons' => [
+        'heading' => 'Doplňkové služby',
+        'desc'    => 'Komplexní digitální podpora i po spuštění projektu.',
+        'items'   => [
+            [
+                'name'  => 'SEO a obsahový marketing',
+                'price' => 'od 4 500 Kč / měs.',
+                'desc'  => 'Analýza klíčových slov, obsahová strategie, sledování výkonu. Organická viditelnost, která pracuje i bez reklamního rozpočtu.',
+            ],
+            [
+                'name'  => 'Správa sociálních sítí',
+                'price' => 'od 9 900 Kč / měs.',
+                'desc'  => 'Tvorba obsahu, plánování a publikování. Konzistentní přítomnost, která buduje důvěru zákazníků.',
+            ],
+            [
+                'name'  => 'Webová aplikace na míru',
+                'price' => 'individuální nabídka',
+                'desc'  => 'Evidence skladu, interní systémy, zákaznické portály. Cena odpovídá složitosti a rozsahu projektu.',
+            ],
+            [
+                'name'  => 'Grafický design a branding',
+                'price' => 'od 4 800 Kč',
+                'desc'  => 'Logo, vizuální identita, bannery. Vše co potřebujete pro konzistentní a zapamatovatelnou prezentaci značky.',
+            ],
         ],
     ],
 
-    'package' => [
-        'group_name'        => 'Vyberte si web na míru vašim potřebám',
-        'heading'           => 'Aktuální ceník webových stránek',
-        'maintenance_free'  => 'Veškeré weby jsou bezúdržbové. Neplatíte nic za pravidelné aktualizace ani zálohování (probíhá automaticky). Tím šetříte až 20 000 Kč ročně.',
-        'items'             => [
-            ['name' => 'Základ',     'cost' => '15–24 000 Kč',         'items' => ['Jednotlivci nebo malé lokální podniky, kteří potřebují základní online prezentaci.', 'Pro jednoduchou online prezentaci firmy, služeb a produktů', 'Základní, ale efektivní design', 'Kontaktní formulář', 'Technické SEO', 'Perfektní i na mobilech']],
-            ['name' => 'Standard',   'cost' => '25–49 000 Kč',         'items' => ['Malé firmy a začínající podnikatelé, kteří chtějí mít profesionální prezentaci.', 'Zaměření na cílové publikum pro zvýšení angažovanosti a konverzí', 'Integrace blogu nebo galerie pro pohodlnou editaci', 'Integrace rezervačního systému', 'Druhá jazyková verze', 'Zřízení až 5 emailových schránek']],
-            ['name' => 'Profesionál','cost' => '50–89 000 Kč',         'items' => ['Střední firmy a pokročilí podnikatelé, kteří potřebují efektivní online prezentaci.', 'Analytika a reporty pro sledování výkonu', 'Vysoká míra přizpůsobení a speciální funkce', 'Vhodné pro prodej několika produktů/služeb', 'SEO analýza klíčových slov s návrhy na začlenění do dlouhodobé strategie', 'Hosting i doména na rok zdarma']],
-            ['name' => 'Premium',    'cost' => '<small>od</small> 90 000 Kč', 'items' => ['Pro větší firmy a ty, kteří chtějí maximalizovat růst.', 'Měsíční reportování výsledků výkonu webu 1 rok', 'Revize webu a jeho vyladění po půl roce sběru dat', 'Tvorba článků optimalizovaných pro vyhledávače', 'Animace, obrázky a bannery pro propagaci vaší značky', 'Půlroční podpora a aktualizace']],
+    'compare' => [
+        'heading' => 'Co přesně dostanete',
+        'tiers'   => ['Prezentace', 'Profesionál', 'Komplex'],
+        'groups'  => [
+            [
+                'label' => 'Rozsah projektu',
+                'rows'  => [
+                    ['label' => 'Počet stránek', 'values' => ['do 5', 'do 12', 'bez omezení']],
+                    ['label' => 'Responzivní design', 'values' => [true, true, true]],
+                    ['label' => 'Kontaktní formulář', 'values' => [true, true, true]],
+                ],
+            ],
+            [
+                'label' => 'Funkce webu',
+                'rows'  => [
+                    ['label' => 'Blog nebo galerie s editací', 'values' => [false, true, true]],
+                    ['label' => 'Vícejazyčný web', 'values' => [false, true, true]],
+                    ['label' => 'Rezervační systém', 'values' => [false, 'volitelně', true]],
+                    ['label' => 'E-shop', 'values' => [false, false, true]],
+                    ['label' => 'Vlastní administrace', 'values' => [false, false, true]],
+                    ['label' => 'Integrace externích systémů', 'values' => [false, false, true]],
+                ],
+            ],
+            [
+                'label' => 'Marketing a výkon',
+                'rows'  => [
+                    ['label' => 'Technické SEO', 'values' => [true, true, true]],
+                    ['label' => 'Optimalizace rychlosti', 'values' => [true, true, true]],
+                    ['label' => 'Analytika a měření konverzí', 'values' => [false, true, true]],
+                    ['label' => 'Pokročilá SEO strategie', 'values' => [false, false, true]],
+                ],
+            ],
+            [
+                'label' => 'Servis a podpora',
+                'rows'  => [
+                    ['label' => 'Hosting a doména zdarma', 'values' => [false, '1 rok', '1 rok']],
+                    ['label' => 'Podpora po spuštění', 'values' => ['14 dní', '1 měsíc', '3 měsíce']],
+                    ['label' => 'Bezúdržbový provoz', 'values' => [true, true, true]],
+                ],
+            ],
         ],
+    ],
+
+    'cta' => [
+        'heading' => 'Nejste si jistí, co přesně potřebujete?',
+        'desc'    => 'Konzultace je zdarma a nezávazná. Během 30 minut zjistím, co dává pro váš byznys smysl — a upřímně vám řeknu i to, jestli spolupráce smysl nemá.',
+        'btn'     => 'Domluvit konzultaci zdarma',
     ],
 
 ];

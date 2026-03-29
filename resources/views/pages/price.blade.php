@@ -8,130 +8,207 @@
 {{-- Page hero --}}
 <div class="page-hero">
     <div class="container-site">
-        <p class="section-subheading">{{ __('price.subheading') ?? __('price.heading') }}</p>
+        <p class="section-subheading">{{ __('price.subheading') }}</p>
         <h1>{{ __('price.heading') }}</h1>
-        <p>{!! __('price.intro') !!}</p>
+        <p>{{ __('price.intro') }}</p>
     </div>
 </div>
 
-{{-- One-off services --}}
+{{-- Pricing tiers --}}
 <section class="section-wrapper" data-reveal>
     <div class="container-site">
-        <header class="section-header">
-            <h2>{{ __('price.one_off.heading') }}</h2>
-        </header>
 
-        <div class="price-grid" data-reveal-group>
-            @foreach (__('price.one_off.items') as $item)
-            <article class="price-card">
-                <header class="price-card__header">
-                    <span class="price-card__label">{{ $item['short'] }}</span>
-                    <h3>{{ $item['name'] }}</h3>
-                    <p class="price-card__cost">{!! $item['cost'] !!}</p>
+        <div class="pricing-tiers" data-reveal-group>
+            @foreach (__('price.tiers') as $tier)
+            <article class="pricing-tier {{ $tier['popular'] ? 'pricing-tier--featured' : '' }}">
+
+                @if ($tier['popular'])
+                <span class="pricing-tier__badge">{{ __('price.popular') }}</span>
+                @endif
+
+                <header class="pricing-tier__header">
+                    <h2 class="pricing-tier__name">{{ $tier['name'] }}</h2>
+                    <p class="pricing-tier__desc">{{ $tier['desc'] }}</p>
+                    <div class="pricing-tier__price">{{ $tier['price'] }}</div>
+                    <p class="pricing-tier__price-note">{{ __('price.price_note') }}</p>
                 </header>
-                <ul class="price-card__features">
-                    @foreach ($item['items'] as $feature)
-                        @if ($feature)
-                        <li>{{ $feature }}</li>
-                        @endif
+
+                <ul class="pricing-tier__features">
+                    @foreach ($tier['features'] as $feature)
+                    <li>
+                        <x-icon.circle-check-big class="w-4 h-4 shrink-0" />
+                        <span>{{ $feature }}</span>
+                    </li>
                     @endforeach
                 </ul>
-                <a href="{{ lroute('contact') }}" class="btn btn-secondary">
-                    {{ __('price.quotation') }}
+
+                <a href="{{ lroute('contact') }}" class="btn {{ $tier['popular'] ? 'btn-primary' : 'btn-secondary' }} pricing-tier__cta">
+                    {{ $tier['cta'] }}
+                    <x-icon.arrow-right class="w-4 h-4 shrink-0" />
                 </a>
+
             </article>
             @endforeach
         </div>
+
+        <p class="pricing-note">{{ __('price.note') }}</p>
+
     </div>
 </section>
 
-{{-- Long-term packages --}}
+{{-- Feature comparison table --}}
+@php
+    $compareTiers  = __('price.compare.tiers');
+    $compareGroups = __('price.compare.groups');
+    $tierPrices    = array_column(__('price.tiers'), 'price');
+@endphp
 <section class="section-wrapper section-alt" data-reveal>
     <div class="container-site">
         <header class="section-header">
-            <p class="section-subheading">{{ __('price.longer.group_name') }}</p>
-            <h2>{{ __('price.longer.heading') }}</h2>
+            <h2>{{ __('price.compare.heading') }}</h2>
         </header>
 
-        <div class="price-grid" data-reveal-group>
-            @foreach (__('price.longer.items') as $item)
-            <article class="price-card">
-                <header class="price-card__header">
-                    <span class="price-card__label">{{ $item['short'] }}</span>
-                    <h3>{{ $item['name'] }}</h3>
-                    <div class="price-card__cost-duo">
-                        <div>
-                            <small>{{ __('price.monthly') }}</small>
-                            <span>{!! $item['cost_month'] !!}</span>
-                        </div>
-                        <div>
-                            <small>{{ __('price.annual') }} — {{ __('price.month_gratis') }}</small>
-                            <span>{!! $item['cost_year'] !!}</span>
-                        </div>
-                    </div>
-                </header>
-                <ul class="price-card__features">
-                    @foreach ($item['items'] as $feature)
-                        @if ($feature)
-                        <li>{{ $feature }}</li>
-                        @endif
+        {{-- DESKTOP: full 3-column table --}}
+        <div class="pricing-compare pricing-compare--desktop">
+            <table class="pricing-compare__table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        @foreach ($compareTiers as $i => $tier)
+                        <th class="{{ $i === 1 ? 'is-featured' : '' }}">{{ $tier }}</th>
+                        @endforeach
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($compareGroups as $group)
+                    <tr class="pricing-compare__group-row">
+                        <td colspan="4">{{ $group['label'] }}</td>
+                    </tr>
+                    @foreach ($group['rows'] as $row)
+                    <tr>
+                        <td class="pricing-compare__feature">{{ $row['label'] }}</td>
+                        @foreach ($row['values'] as $vi => $val)
+                        <td class="{{ $vi === 1 ? 'is-featured' : '' }}">
+                            @if ($val === true)
+                                <span class="pricing-compare__yes"><x-icon.circle-check-big class="w-4 h-4" /></span>
+                            @elseif ($val === false)
+                                <span class="pricing-compare__no">—</span>
+                            @else
+                                <span class="pricing-compare__val">{{ $val }}</span>
+                            @endif
+                        </td>
+                        @endforeach
+                    </tr>
                     @endforeach
-                </ul>
-                <a href="{{ lroute('contact') }}" class="btn btn-secondary">
-                    {{ __('price.quotation') }}
-                </a>
-            </article>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+        {{-- MOBILE: tab switcher + single column --}}
+        <div class="pricing-compare pricing-compare--mobile"
+             x-data="{ active: 0, prices: {{ json_encode($tierPrices) }} }"
+             x-cloak>
+
+            {{-- Tab header --}}
+            <div class="pcm-header">
+                <div class="pcm-tabs" role="tablist">
+                    @foreach ($compareTiers as $i => $tier)
+                    <button class="pcm-tab"
+                            :class="{ 'is-active': active === {{ $i }} }"
+                            @click="active = {{ $i }}"
+                            role="tab"
+                            :aria-selected="active === {{ $i }}">
+                        {{ $tier }}
+                    </button>
+                    @endforeach
+                </div>
+                <div class="pcm-price" x-text="prices[active]"></div>
+            </div>
+
+            {{-- Feature rows --}}
+            @foreach ($compareGroups as $group)
+            <div class="pcm-group">{{ $group['label'] }}</div>
+            @foreach ($group['rows'] as $row)
+            <div class="pcm-row">
+                <span class="pcm-feature">{{ $row['label'] }}</span>
+                <span class="pcm-value-wrap">
+                    @foreach ($row['values'] as $vi => $val)
+                    <span x-show="active === {{ $vi }}">
+                        @if ($val === true)
+                            <span class="pricing-compare__yes"><x-icon.circle-check-big class="w-4 h-4" /></span>
+                        @elseif ($val === false)
+                            <span class="pricing-compare__no">—</span>
+                        @else
+                            <span class="pricing-compare__val">{{ $val }}</span>
+                        @endif
+                    </span>
+                    @endforeach
+                </span>
+            </div>
+            @endforeach
+            @endforeach
+
+        </div>
+
+    </div>
+</section>
+
+{{-- What's included --}}
+<section class="section-wrapper section-alt" data-reveal>
+    <div class="container-site">
+        <header class="section-header">
+            <h2>{{ __('price.guarantees.heading') }}</h2>
+        </header>
+
+        <div class="pricing-guarantees" data-reveal-group>
+            @foreach (__('price.guarantees.items') as $g)
+            <div class="pricing-guarantee">
+                <h3>{{ $g['title'] }}</h3>
+                <p>{{ $g['text'] }}</p>
+            </div>
             @endforeach
         </div>
     </div>
 </section>
 
-{{-- Website packages --}}
+{{-- Addons --}}
 <section class="section-wrapper" data-reveal>
     <div class="container-site">
         <header class="section-header">
-            <p class="section-subheading">{{ __('price.package.group_name') }}</p>
-            <h2>{{ __('price.package.heading') }}</h2>
-            <p class="section-header__desc">{!! __('price.package.maintenance_free') !!}</p>
+            <h2>{{ __('price.addons.heading') }}</h2>
+            <p class="section-header__desc">{{ __('price.addons.desc') }}</p>
         </header>
 
-        <div class="price-grid price-grid--packages" data-reveal-group>
-            @foreach (__('price.package.items') as $i => $item)
-            <article class="price-card {{ $i === 1 ? 'price-card--popular' : '' }}">
-                @if ($i === 1)
-                <span class="price-card__badge">{{ __('price.bestseller') }}</span>
-                @elseif ($i === 2)
-                <span class="price-card__badge">{{ __('price.popular') }}</span>
-                @elseif ($i === 3)
-                <span class="price-card__badge">{{ __('price.vip') }}</span>
-                @endif
-                <header class="price-card__header">
-                    <h3>{{ $item['name'] }}</h3>
-                    <p class="price-card__cost">{!! $item['cost'] !!}</p>
-                </header>
-                <ul class="price-card__features">
-                    @foreach ($item['items'] as $feature)
-                    <li>{{ $feature }}</li>
-                    @endforeach
-                </ul>
-                <a href="{{ lroute('contact') }}" class="btn btn-primary" style="justify-content:center;margin-top:auto;">
+        <div class="pricing-addons" data-reveal-group>
+            @foreach (__('price.addons.items') as $addon)
+            <div class="pricing-addon">
+                <div class="pricing-addon__info">
+                    <h3>{{ $addon['name'] }}</h3>
+                    <p>{{ $addon['desc'] }}</p>
+                </div>
+                <div class="pricing-addon__price">{{ $addon['price'] }}</div>
+                <a href="{{ lroute('contact') }}" class="btn btn-secondary pricing-addon__cta">
                     {{ __('price.quotation') }}
                     <x-icon.arrow-right class="w-4 h-4 shrink-0" />
                 </a>
-            </article>
+            </div>
             @endforeach
         </div>
     </div>
 </section>
 
-{{-- Sales info CTA --}}
+{{-- CTA --}}
 <section class="section-wrapper section-cta" data-reveal>
     <div class="container-site" style="flex-direction:column;gap:1.25rem;">
-        <p style="max-width:560px;text-align:center;color:rgba(241,245,249,.8);font-size:1.0625rem;line-height:1.7;">
-            {{ __('price.sales_info') }}
+        <h2 style="font-size:clamp(1.75rem,3.5vw,2.5rem);letter-spacing:-0.025em;margin-bottom:0.5rem;width:100%;text-align:center;">
+            {{ __('price.cta.heading') }}
+        </h2>
+        <p style="max-width:540px;text-align:center;color:rgba(241,245,249,.8);font-size:1.0625rem;line-height:1.7;">
+            {{ __('price.cta.desc') }}
         </p>
         <a href="{{ lroute('contact') }}" class="btn btn-primary">
-            {{ __('price.cta_calculation') }}
+            {{ __('price.cta.btn') }}
             <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
         </a>
     </div>
