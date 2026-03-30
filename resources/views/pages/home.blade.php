@@ -101,7 +101,7 @@
 {{-- ===================================================
      SERVICES — primary (websites, webapps, eshop)
      =================================================== --}}
-<section class="section-wrapper" data-reveal>
+<section class="section-wrapper section-wrapper--glow" data-reveal>
     <div class="container-site">
         <header class="section-header">
             <p class="section-subheading">{{ __('home.services.subheading') }}</p>
@@ -137,7 +137,7 @@
         <header class="section-header">
             <h2>{{ __('home.commitment.heading') }}</h2>
         </header>
-        <p style="max-width:800px;margin-inline:auto;color:var(--color-ink-500);line-height:1.75;font-size:1rem;">{!! nl2br(e(__('home.commitment.text'))) !!}</p>
+        <p class="section-prose-text">{!! nl2br(e(__('home.commitment.text'))) !!}</p>
 
         <ol class="commitment-steps" data-reveal-group>
             @foreach (__('home.commitment.steps') as $step)
@@ -323,7 +323,7 @@
 {{-- ===================================================
      TESTIMONIALS
      =================================================== --}}
-<section class="section-wrapper" data-reveal>
+<section class="section-wrapper section-wrapper--glow" data-reveal>
     <div class="container-site">
         <header class="section-header">
             <p class="section-subheading">{{ __('home.testimonials.subheading') }}</p>
@@ -331,7 +331,7 @@
             <div class="testimonials-rating">
                 <span class="testimonials-stars" aria-hidden="true">★★★★★</span>
                 <strong>{{ __('testimonials.meta.rating') }}</strong>
-                <span style="color:var(--color-ink-500);font-size:.9375rem;">({{ __('testimonials.meta.total') }} {{ __('home.testimonials.reviews_label') }})</span>
+                <span class="text-muted" style="font-size:.9375rem;">({{ __('testimonials.meta.total') }} {{ __('home.testimonials.reviews_label') }})</span>
             </div>
         </header>
 
