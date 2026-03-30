@@ -1,0 +1,21 @@
+{
+    "name": "ITWebTech",
+    "short_name": "ITWebTech",
+    "description": "Tvorba webových stránek a aplikací — Ondřej Kriška",
+    "start_url": "/",
+    "display": "browser",
+    "theme_color": "#F59E0B",
+    "background_color": "#0F172A",
+    "icons": [
+        {
+            "src": "/img/logo/logo_icon.png",
+            "sizes": "any",
+            "type": "image/png"
+        },
+        {
+            "src": "/img/logo/logo_square.png",
+            "sizes": "any",
+            "type": "image/png"
+        }
+    ]
+}
