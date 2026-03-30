@@ -13,8 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{!! $metaTitle !!}</title>
     <meta name="description" content="{!! $metaDesc !!}">
-    {{-- prevent dark mode --}}
-    <meta name="color-scheme" content="only light">
+    <meta name="color-scheme" content="only dark">
     <!-- Open Graph -->
     <meta property="og:type"         content="website">
     <meta property="og:url"          content="{{ url()->current() }}">
@@ -67,7 +66,7 @@
     @stack('preloads')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="min-h-screen bg-white flex flex-col">
+<body class="min-h-screen flex flex-col">
 
     <x-layout.navbar />
 
