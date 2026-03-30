@@ -944,7 +944,8 @@
     }
     @media (max-width: 1023px) {
         .about-video {
-            max-height: 100vh;
+            max-height: 90vh;
+            min-height: 500px;
             margin-inline: auto;
         }
     }
