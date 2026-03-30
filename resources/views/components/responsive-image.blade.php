@@ -15,7 +15,14 @@
     'lightboxGallery' => null,   // Gallery name
 ])
 
-
+{{-- Anchor tag for lightbox, if title or gallery is provided --}}
+@if ($lightboxTitle || $lightboxGallery)
+    <a
+        href="" {{-- href will be set by Alpine --}}
+        {!! $lightboxTitle ? "data-glightbox=\"title: {$lightboxTitle}\"" : '' !!}
+        {!! $lightboxGallery ? "data-gallery=\"{$lightboxGallery}\"" : '' !!}
+    >
+@endif
 
 <picture
     {!! $classPicture ? "class=\"$classPicture\"" : '' !!}
@@ -45,7 +52,7 @@
         $el.querySelector('img').src = formatMap.webp[0]?.split(' ')[0];
         $el.querySelector('img').srcset = formatMap.webp.join(', ');
 
-        const aTag = $el.querySelector('a, a img')?.closest('a');
+        const aTag = $el.parentElement?.tagName === 'A' ? $el.parentElement : null;
         if (aTag && !aTag.getAttribute('href')) {
             const biggest = formatMap.webp.at(-1)?.split(' ')[0];
             if (biggest) aTag.setAttribute('href', biggest);
@@ -57,15 +64,6 @@
 
     {{-- WebP --}}
     <source type="image/webp">
-
-    {{-- Anchor tag for lightbox, if title or gallery is provided --}}
-    @if ($lightboxTitle || $lightboxGallery)
-        <a
-            href="" {{-- href will be set by Alpine --}}
-            {!! $lightboxTitle ? "data-glightbox=\"title: {$lightboxTitle}\"" : '' !!}
-            {!! $lightboxGallery ? "data-gallery=\"{$lightboxGallery}\"" : '' !!}
-        >
-    @endif
 
     {{-- Image --}}
     <img
@@ -80,9 +78,9 @@
         {!! $decoding ? "decoding=\"$decoding\"" : '' !!}
         {!! $fetchpriority ? "fetchpriority=\"$fetchpriority\"" : '' !!}
     >
-
-    {{-- Close anchor tag --}}
-    @if ($lightboxTitle || $lightboxGallery)
-        </a>
-    @endif
 </picture>
+
+{{-- Close anchor tag --}}
+@if ($lightboxTitle || $lightboxGallery)
+    </a>
+@endif

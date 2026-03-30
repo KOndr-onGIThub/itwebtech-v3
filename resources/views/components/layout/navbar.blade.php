@@ -2,10 +2,11 @@
     $locale      = app()->getLocale();
     $currentPage = current_page();
     $navItems = [
-        ['route' => 'home', 'label' => __('layout.nav.home')],
-        // TODO: add your nav items here, e.g.:
-        // ['route' => 'about',   'label' => __('layout.nav.about')],
-        // ['route' => 'contact', 'label' => __('layout.nav.contact')],
+        ['route' => 'home',     'label' => __('layout.nav.home')],
+        ['route' => 'projects', 'label' => __('layout.nav.projects')],
+        ['route' => 'price',    'label' => __('layout.nav.price')],
+        ['route' => 'blog',     'label' => __('layout.nav.blog')],
+        ['route' => 'contact',  'label' => __('layout.nav.contact')],
     ];
     $langLabels = ['cs' => 'CZ', 'en' => 'EN', 'de' => 'DE'];
 @endphp
@@ -16,12 +17,11 @@
     <header class="navbar">
         <div class="container-site navbar__inner">
 
-            {{-- Logo — TODO: replace with your logo --}}
             <a href="{{ lroute('home') }}" class="navbar__logo">
                 <img src="{{ asset('img/logo/logo_main_svg.svg') }}" alt="{{ config('app.name') }}" class="navbar__logo-img" width="274" height="58">
             </a>
 
-            {{-- Desktop nav (centered via CSS grid) --}}
+            {{-- Desktop nav --}}
             <nav class="navbar__nav" aria-label="Main navigation">
                 @foreach ($navItems as $item)
                     @php
@@ -38,7 +38,6 @@
             {{-- Right side: lang switcher + CTA + hamburger --}}
             <div class="navbar__right">
 
-                {{-- Language switcher --}}
                 <div class="navbar__lang">
                     @foreach ($langLabels as $code => $label)
                         <a href="{{ lroute($currentPage, $code) }}"
@@ -48,12 +47,10 @@
                     @endforeach
                 </div>
 
-                {{-- CTA (hidden on mobile) — TODO: update CTA route --}}
-                <a href="{{ lroute('home') }}" class="btn btn-primary navbar__cta">
+                <a href="{{ lroute('contact') }}" class="btn btn-primary navbar__cta">
                     {{ __('layout.cta.contact') }}
                 </a>
 
-                {{-- Hamburger --}}
                 <button class="navbar__hamburger"
                         @click="open = true"
                         aria-label="Open menu">
@@ -79,7 +76,7 @@
          x-cloak>
     </div>
 
-    {{-- Mobile drawer panel (slides from right) --}}
+    {{-- Mobile drawer panel --}}
     <div class="drawer"
          x-show="open"
          x-transition:enter="transition ease-out duration-250"
@@ -90,7 +87,6 @@
          x-transition:leave-end="translate-x-full"
          x-cloak>
 
-        {{-- Drawer header --}}
         <div class="drawer__header">
             <a href="{{ lroute('home') }}" class="navbar__logo" @click="open = false">
                 <img src="{{ asset('img/logo/logo_main_svg.svg') }}" alt="{{ config('app.name') }}" class="navbar__logo-img" width="274" height="58">
@@ -102,7 +98,16 @@
             </button>
         </div>
 
-        {{-- Nav links + CTA --}}
+        {{-- Language switcher in drawer --}}
+        <div class="drawer__lang">
+            @foreach ($langLabels as $code => $label)
+                <a href="{{ lroute($currentPage, $code) }}"
+                   class="navbar__lang-item {{ $locale === $code ? 'navbar__lang-item--active' : '' }}">
+                    {{ $label }}
+                </a>
+            @endforeach
+        </div>
+
         <nav class="drawer__nav">
             @foreach ($navItems as $item)
                 @php
@@ -117,8 +122,7 @@
             @endforeach
 
             <div class="drawer__cta">
-                {{-- TODO: update CTA route --}}
-                <a href="{{ lroute('home') }}"
+                <a href="{{ lroute('contact') }}"
                    class="btn btn-primary"
                    style="justify-content: center;"
                    @click="open = false">

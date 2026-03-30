@@ -1,0 +1,233 @@
+.footer {
+    position: relative;
+    background-color: $text-primary;
+    width: 100%;
+    color: $background-color;
+    font-size: 1rem;
+    p, i {
+        opacity: 0.8;
+    }
+    a {
+        opacity: 0.8;
+        color: $background-color;
+        text-decoration: none;
+        &:hover {
+            color: $background-color;
+            opacity: 1;
+        }
+        &::after {
+            color: $background-color;
+        }
+    }
+    form {
+        input {
+            color: $background-color;
+        }
+        .wpcf7-checkbox .wpcf7-list-item-label,
+        .form-field-label {
+            color: $background-color;
+            opacity: 0.8;
+        }
+        .wpcf7-spinner {
+            &::before, &::after {
+                background-color: $background-color;
+            }
+        }
+        *::-webkit-input-placeholder, 
+        *::placeholder {
+            color: $background-color;
+        }
+    }
+    .menu {
+        > li {
+            &.active {
+                > a {
+                    opacity: 1;
+                    span {
+                        transform: translateY(100%);
+                    }
+                    &::after {
+                        transform: translateY(0);
+                    }
+                }
+            }
+        }
+    }
+    .widget-socials {
+        > li {
+            > a {
+                fill: $background-color;
+            }
+        }
+        &.widget-socials-bordered-hover-bg {
+            > li {
+                > a {
+                    fill: $background-color;
+                    border-color: $background-color;
+                    &:hover {
+                        background-color: $background-color;
+                        border-color: $background-color;
+                        fill: $text-primary;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.mobile, .tablet {
+    .footer {
+        z-index: 1!important;
+        position: relative!important;
+    }
+    .main-inner {
+        margin-bottom: 0!important;
+    }
+}
+
+.footer-company-info,
+.footer-company-top {
+    line-height: 1;
+}
+
+.footer-minimal {
+    .footer-main {
+        padding: 2.5rem 0;
+    }
+    .footer-company-info {
+        .logo {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.footer-center {
+    text-align: center;
+    .widget-socials {
+        justify-content: center;
+    }
+    .widget-brand-info-main {
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+.footer-main {
+    position: relative;
+    padding: 4rem 0;
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 1px;
+        background-color: $background-color;
+        opacity: 0.1;
+    }
+    > .container {
+        > .items {
+            margin-bottom: -2.5rem;
+        }
+    }
+    .footer-widget {
+        margin-bottom: 2.5rem;
+    }
+}
+
+.footer-item {
+    margin-bottom: 2rem;
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.footer-mnu {
+    li {
+        margin-bottom: 1rem;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+.footer-mnu-line {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin-left: -2rem;
+    margin-bottom: -1rem;
+    li {
+        margin-left: 2rem;
+        margin-bottom: 1rem;
+    }
+}
+
+.footer-subscribe {
+    display: flex;
+    .form-field {
+        margin-right: 1rem;
+        margin-bottom: 0;
+        width: 100%;
+        input {
+            background-color: transparent;
+            color: $background-color;
+            &::-webkit-input-placeholder, 
+            &::placeholder {
+                color: $background-color;
+                opacity: 1;
+            }
+        }
+        .form-field-label {
+            color: $background-color;
+        }
+    }
+}
+
+.footer-bottom {
+    position: relative;
+    padding: 1.625rem 0 1.5rem;
+    font-size: 0.875rem;
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 1px;
+        background-color: $background-color;
+        opacity: 0.1;
+    }
+    .copyright {
+        opacity: 0.8;
+    }
+    .items {
+        margin-bottom: -1.5rem;
+    }
+    .item {
+        margin-bottom: 1.5rem;
+    }
+}
+
+.footer-links {
+    ul {
+        display: flex;
+        margin-bottom: -1rem;
+        margin-left: -1.25rem;
+        li {
+            margin-bottom: 1rem;
+            margin-left: 1.25rem;
+            a {
+                display: block;
+                text-decoration: none;
+                border-bottom: 1px dashed $background-color;
+                &:hover {
+                    border-bottom-style: solid;
+                }
+            }
+        }
+    }
+}

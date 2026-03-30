@@ -229,24 +229,157 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Smart navbar: hide on scroll down, show on scroll up
+// ---------------------------------------------------------------------------
+// Video player — autoplay on scroll + full controls
+// ---------------------------------------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('[data-video-player]').forEach(wrapper => {
+        const video    = wrapper.querySelector('[data-video]');
+        const overlay  = wrapper.querySelector('[data-vp-overlay]');
+        const progress = wrapper.querySelector('[data-vp-progress]');
+        const fill     = wrapper.querySelector('[data-vp-fill]');
+        const thumb    = wrapper.querySelector('.vp-progress__thumb');
+        const playBtn  = wrapper.querySelector('[data-vp-play]');
+        const muteBtn  = wrapper.querySelector('[data-vp-mute]');
+        const volSlider = wrapper.querySelector('[data-vp-vol]');
+        const timeEl   = wrapper.querySelector('[data-vp-time]');
+        if (!video) return;
+
+        let userPaused = false;
+        let hideTimer;
+
+        // ── Helpers ────────────────────────────────────────────
+        const fmt = s => {
+            if (!isFinite(s)) return '0:00';
+            const m = Math.floor(s / 60);
+            return m + ':' + String(Math.floor(s % 60)).padStart(2, '0');
+        };
+
+        const setVolUI = () => {
+            const pct = video.muted ? 0 : Math.round(video.volume * 100);
+            volSlider.value = pct;
+            volSlider.style.setProperty('--vol', pct + '%');
+            muteBtn.classList.toggle('is-muted', video.muted || video.volume === 0);
+        };
+
+        const showControls = () => {
+            overlay.classList.add('is-visible');
+            clearTimeout(hideTimer);
+            if (!video.paused) {
+                hideTimer = setTimeout(() => overlay.classList.remove('is-visible'), 3000);
+            }
+        };
+
+        const updateProgress = () => {
+            if (!video.duration) return;
+            const pct = video.currentTime / video.duration;
+            fill.style.width = (pct * 100) + '%';
+            // thumb position = offset from left edge of progress bar
+            const barW = progress.clientWidth - 24; // minus padding 2×12px
+            thumb.style.left = (12 + pct * barW) + 'px';
+            timeEl.textContent = fmt(video.currentTime) + ' / ' + fmt(video.duration);
+        };
+
+        // ── Autoplay on scroll ──────────────────────────────────
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting && !userPaused) {
+                    video.play().catch(() => {});
+                } else if (!e.isIntersecting) {
+                    video.pause();
+                }
+            });
+        }, { threshold: 0.25 });
+        io.observe(video);
+
+        // ── Play / Pause ────────────────────────────────────────
+        const togglePlay = () => {
+            if (video.paused) { video.play(); userPaused = false; }
+            else              { video.pause(); userPaused = true; }
+        };
+        wrapper.addEventListener('click', e => {
+            if (!e.target.closest('.vp-bar') && !e.target.closest('.vp-progress')) togglePlay();
+        });
+        playBtn.addEventListener('click', e => { e.stopPropagation(); togglePlay(); });
+
+        video.addEventListener('play',  () => { playBtn.classList.add('is-playing'); showControls(); });
+        video.addEventListener('pause', () => { playBtn.classList.remove('is-playing'); showControls(); });
+
+        // ── Progress / Seek ─────────────────────────────────────
+        video.addEventListener('timeupdate', updateProgress);
+        video.addEventListener('loadedmetadata', updateProgress);
+
+        let seeking = false;
+        const seekTo = clientX => {
+            const rect = progress.getBoundingClientRect();
+            const pct  = Math.max(0, Math.min(1, (clientX - rect.left - 12) / (rect.width - 24)));
+            video.currentTime = pct * video.duration;
+        };
+        progress.addEventListener('mousedown', e => { seeking = true; seekTo(e.clientX); showControls(); });
+        progress.addEventListener('touchstart', e => { seeking = true; seekTo(e.touches[0].clientX); showControls(); }, { passive: true });
+        document.addEventListener('mousemove',  e => { if (seeking) seekTo(e.clientX); });
+        document.addEventListener('touchmove',  e => { if (seeking) seekTo(e.touches[0].clientX); }, { passive: true });
+        document.addEventListener('mouseup',  () => { seeking = false; });
+        document.addEventListener('touchend', () => { seeking = false; });
+
+        // ── Volume ──────────────────────────────────────────────
+        muteBtn.addEventListener('click', () => {
+            video.muted = !video.muted;
+            if (!video.muted && video.volume === 0) video.volume = 0.5;
+            setVolUI();
+        });
+        volSlider.addEventListener('input', () => {
+            video.volume = volSlider.value / 100;
+            video.muted  = video.volume === 0;
+            setVolUI();
+        });
+        setVolUI();
+
+        // ── Show controls on interaction ────────────────────────
+        wrapper.addEventListener('mousemove',  showControls);
+        wrapper.addEventListener('touchstart', showControls, { passive: true });
+    });
+});
+
+// Floating contact FAB — zobrazí se po 300px scrollu
+document.addEventListener('DOMContentLoaded', () => {
+    const fab = document.getElementById('contact-fab');
+    if (!fab) return;
+
+    const toggle = () => fab.classList.toggle('is-visible', window.scrollY > 300);
+    toggle();
+    window.addEventListener('scroll', toggle, { passive: true });
+});
+
+// Smart navbar: hide on scroll down, show on scroll up + glass effect after scroll
 document.addEventListener('DOMContentLoaded', () => {
     const navbar = document.querySelector('.navbar');
     if (!navbar) return;
 
-    navbar.style.transition = 'transform 0.3s ease';
-
     let lastScrollY = window.scrollY;
 
-    window.addEventListener('scroll', () => {
+    const update = () => {
         const currentScrollY = window.scrollY;
 
-        if (currentScrollY > lastScrollY) {
-            navbar.style.transform = 'translateY(-100%)';
+        // Glass/border effect after 20px scroll
+        navbar.classList.toggle('is-scrolled', currentScrollY > 20);
+
+        // Hide on scroll down, show on scroll up (only after passing navbar height)
+        if (currentScrollY > 80) {
+            if (currentScrollY > lastScrollY) {
+                navbar.style.transform = 'translateY(-100%)';
+            } else {
+                navbar.style.transform = '';
+            }
         } else {
             navbar.style.transform = '';
         }
 
         lastScrollY = currentScrollY;
-    }, { passive: true });
+    };
+
+    // Initial state
+    update();
+
+    window.addEventListener('scroll', update, { passive: true });
 });

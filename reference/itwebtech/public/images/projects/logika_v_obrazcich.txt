@@ -1,0 +1,4 @@
+kazdy obrazek musi mit 
+1] *.jpg pro velky cca do 200KB
+2] *_preview.png max do 50KB - 300x300px a bacgroung pruhledny
+

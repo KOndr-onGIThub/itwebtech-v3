@@ -1,0 +1,30 @@
+@import "vars";
+
+//@import "../libs/bootstrap/scss/bootstrap-reboot.scss";
+//@import "../libs/bootstrap/scss/bootstrap-grid.scss";
+
+@import "../libs/bootstrap/scss/functions";
+@import "../libs/bootstrap/scss/variables";
+
+@import "../libs/bootstrap/scss/mixins/lists";
+@import "../libs/bootstrap/scss/mixins/breakpoints";
+@import "../libs/bootstrap/scss/mixins/container";
+@import "../libs/bootstrap/scss/mixins/grid";
+@import "../libs/bootstrap/scss/mixins/utilities";
+
+@import "../libs/bootstrap/scss/vendor/rfs";
+
+@import "../libs/bootstrap/scss/containers";
+@import "../libs/bootstrap/scss/grid";
+
+@import "../libs/bootstrap/scss/utilities";
+$utilities: map-get-multiple(
+  $utilities,
+  (
+    "display",
+    "order",
+    "justify-content",
+    "align-items",
+  )
+);
+@import "../libs/bootstrap/scss/utilities/api";

@@ -1,0 +1,88 @@
+* {
+	box-sizing: border-box;
+	&:before, &:after {
+		box-sizing: border-box;
+	}	
+}
+
+html {
+	font-size: $font-size;
+}
+
+html, body {
+	min-height: 100%;
+}
+
+body {
+	//position: relative;
+	font-size: 1rem;
+	width: 100%;
+	min-width: 320px;
+	line-height: $line-height;
+	font-family: $font-family;
+	font-weight: $font-weight;
+	font-style: $font-style;
+	overflow-x: hidden;
+	color: $text-primary;
+	margin: 0;
+	padding: 0;
+	opacity: 1;
+	background-color: $background-color;
+	&.overflow-hidden {
+		overflow: hidden;
+	}
+}
+	
+.main {
+	position: relative;
+	margin: 0;
+	padding: 0;
+	min-height: 100vh;
+	height: 100%;
+	width: 100%;
+	max-width: 1920px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	opacity: 1;
+	box-shadow: $el-box-shadow;
+	visibility: hidden;
+	opacity: 0;
+	&.main-visible {
+		visibility: visible;
+		opacity: 1;
+	}
+}
+
+.main-inner {
+	flex: 1 0 auto;
+	overflow: hidden;
+}
+	
+.footer {
+	flex: 0 0 auto;
+}
+	
+header, footer, aside, nav {
+	ul, ol {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+}
+	
+a {
+	color: $accent-color;
+	text-decoration: underline;
+	transition: all 0.2s;
+	&:hover {
+		text-decoration: none;
+		color: $accent-color;
+	}	
+}
+
+code {
+    font-size: 87.5%;
+    color: #e83e8c;
+    word-break: break-word;
+}

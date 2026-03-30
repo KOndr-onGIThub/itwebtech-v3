@@ -1,0 +1,50 @@
+.widget-contacts {
+    list-style: 0;
+    margin: 0;
+    padding: 0;
+    li {
+        display: flex;
+        margin-bottom: 1rem;
+        &:last-child {
+            margin-bottom: 0;
+        }
+        i {
+            margin-right: 0.5rem;
+        }
+    }
+    i {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 2px;
+        &.footer-contact-tel {
+            font-size: 1.25rem;
+        }
+        &.footer-contact-email {
+            font-size: 1.125rem;
+        }
+    }
+}
+
+.widget-contacts-info {
+    a {
+        opacity: 1;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    p {
+        margin: 0;
+    }
+}
+
+.content {
+    .widget-contacts {
+        li {
+            padding: 0;
+            &::before {
+                content: none;
+            }
+        }
+    }
+}

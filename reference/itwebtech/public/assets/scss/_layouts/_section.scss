@@ -1,0 +1,262 @@
+.section {
+	position: relative;
+	padding: 4.5rem 0;
+	background-color: $background-color;
+	color: $text-primary;
+	&.section-without-padding {
+		padding: 0;
+	}
+	&.section-without-padding-top {
+		padding-top: 0;
+	}
+	&.section-without-padding-bottom {
+		padding-bottom: 0;
+	}
+	&.section-minimal-padding {
+		padding: $grid-gutter-width 0;
+	}
+	&.section-container-fluid-without-padding {
+		.container-fluid {
+			padding: 0;
+		}
+	}
+}
+
+.section-bg-overlay {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: var(--section-bg-overlay);
+}
+
+.page-sections {
+	padding-top: 3.5rem;
+	.section {
+		padding: 0;
+		margin-bottom: 3.5rem;
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.section-overflow-hidden {
+	overflow: hidden;
+}
+
+.section-bg,
+.section-background-image {
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.section-bg,
+.section-bgc {
+	background-color: $background-secondary-color;
+}
+
+.section-dark {
+	background-color: #000;
+	color: #fff;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	a {
+		color: #fff;
+	}
+}
+
+.section-header-margin-none {
+	.section-heading {
+		margin: 0;
+	}
+}
+.section-heading {
+	margin-bottom: 3.25rem;
+	max-width: 850px;
+	h1, h2, h3 {
+		position: relative;
+		font-size: 2.5rem;
+		margin: 0;
+	}
+	&.shm-none {
+		margin-bottom: 0;
+	}
+	.btn-group {
+		margin-top: 2rem;
+	}
+}
+.heading-center {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	.section-desc {
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+.heading-right {
+	text-align: right;
+	margin-left: auto;
+	.section-desc {
+		margin-left: auto;
+	}
+}
+
+.section-subheading {
+	margin-bottom: 0.3125rem;
+	text-transform: uppercase;
+	color: $accent-color;
+}
+.section-desc {
+	margin: 1.25rem 0;
+	max-width: 30rem;
+	color: $text-secondary;
+}
+
+.section-footer {
+	margin-top: 1rem;
+	.content {
+		margin-bottom: 1.25rem;
+		max-width: 30rem;
+		&.text-center {
+			margin-left: auto;
+			margin-right: auto;
+		}
+		&.text-right {
+			margin-left: auto;
+		}
+		&.content-no-margin {
+			margin-bottom: 0;
+		}
+	}
+	&.section-footer-mt-1 {
+		margin-top: -0.75rem;
+	}
+}
+
+
+.section-nav {
+    position: relative;
+    margin-bottom: 2rem;
+    margin-top: -0.3125rem;
+}
+
+.section-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0.3125rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    text-transform: uppercase;
+    width: 100%;
+    overflow-x: auto;
+    li {
+        cursor: pointer;
+        padding: 0 0.3125rem;
+        margin-right: 1.5rem;
+        white-space: nowrap;
+        transition: all 0.2s;
+        &:last-child {
+            margin-right: 0;
+        }
+        &:hover, &.active {
+            color: $accent-color;
+        }
+    }
+}
+
+.section-row {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.section-path {
+	width: 100%;
+	padding: 0 var(--bs-gutter-x, 15px);
+}
+
+
+.main-content {
+	.container {
+		.container {
+			padding: 0;
+		}
+	}
+}
+
+@include media-breakpoint-up(sm) {
+
+	.section-path {
+        max-width: 540px;
+    }
+
+}
+
+@include media-breakpoint-up(md) {
+
+	.section-path {
+        max-width: 720px;
+    }
+
+}
+
+@include media-breakpoint-up(lg) {
+
+	.section-row {
+		justify-content: flex-start;
+	}
+
+	.section-item {
+		width: 50%;
+		max-height: 100%;
+	}
+
+	.section-path {
+        max-width: calc(960px / 2);
+    }
+
+	.section-path-left {
+		margin-left: auto;
+	}
+	.section-path-right {
+		margin-right: auto;
+	}
+
+	.section-right-picture {
+		display: block;
+		width: 100%;
+		height: 100%;
+		padding-left: 2rem;
+		img {
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			border-top-left-radius: $el-border-radius;
+			border-bottom-left-radius: $el-border-radius;
+		}
+	}
+
+}
+
+@include media-breakpoint-up(xl) {
+
+	.section-path {
+        max-width: calc(1140px / 2);
+    }
+
+}
+
+@include media-breakpoint-up(xxl) {
+
+	.section-path {
+        max-width: calc(1320px / 2);
+    }
+
+}

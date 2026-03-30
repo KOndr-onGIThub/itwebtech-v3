@@ -1,0 +1,201 @@
+.iitem {
+    display: block;
+    text-align: center;
+    padding: 1.5rem;
+    text-decoration: none;
+    transition: box-shadow 0.2s, background-color 0.2s, color 0.2s;
+    &:hover {
+        color: $text-primary;
+    }
+    &.iitem-hover {
+        &:hover {
+            background-color: $accent-color;
+            color: $background-color;
+            .iitem-icon {
+                background: $background-color;
+                color: $accent-color;
+                fill: $accent-color;
+                &.iii-stroke {
+                    fill: transparent;
+                    stroke: $accent-color;
+                }
+                &.iii-fill-stroke {
+                    stroke: $accent-color;
+                }
+            }
+            .iitem-icon-bg {
+                opacity: 0.14;
+            }
+            .iitem-desc {
+                color: $background-color;
+            }
+        }
+    }
+    &.iitem-modern {
+        padding-top: 6.25rem;
+        padding-bottom: 3rem;
+        .iitem-icon {
+            position: absolute;
+            left: -1.5rem;
+            top: -1.5rem;
+            padding-top: 1rem;
+            padding-left: 1rem;
+            margin: 0;
+            z-index: 11;
+        }
+        &::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0.625rem;
+            height: 0.625rem;
+            background-color: transparent;
+            z-index: 1;
+            transition: background-color 0.2s 0.1s;
+        }
+        &.iitem-hover {
+            &:hover {
+                &::before {
+                    background-color: $background-color;
+                }
+            }
+        }
+    }
+    &.iitem-row {
+        display: flex;
+        align-items: flex-start;
+        text-align: left;
+        .iitem-icon {
+            width: 5.5rem;
+            height: 5.5rem;
+            min-width: 5.5rem;
+            margin: 0;
+            margin-right: 1.25rem;
+        }
+        .iitem-desc {
+            font-size: 1rem;
+        }
+        .iitem-heading {
+            font-size: 1.375rem;
+        }
+        .iitem-icon-bg {
+            top: -3rem;
+        }
+    }
+}
+
+.iitem-min {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: $text-primary;
+    .iitem-icon {
+        min-width: 4.75rem;
+        width: 4.75rem;
+        height: 4.75rem;
+        margin: 0 1.25rem 0 0;
+        > svg, img {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+    }
+    .iitem-heading {
+        font-size: 1.125rem;
+        margin: 0;
+    }
+    .iitem-desc {
+        font-size: 0.875rem;
+        margin-top: 0.5rem;
+    }
+}
+
+.main-visible {
+    .iitem-icon {
+        transition: background-color 0.2s, color 0.2s, fill 0.2s;
+    } 
+}
+.iitem-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 6rem;
+    height: 6rem;
+    min-width: 6rem;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: $accent-color;
+	background: linear-gradient(to right, $el-gradient-start 0%, $el-gradient-end 100%);
+    margin: 0 auto 1.25rem;
+    color: $background-color;
+    fill: $background-color;
+    stroke: transparent;
+    > svg, img {
+        display: block;
+        width: 3rem;
+        height: 3rem;
+    }
+    > img {
+        object-fit: contain;
+    }
+    &.iii-stroke {
+        fill: transparent;
+        stroke: $background-color;
+    }
+    &.iii-fill-stroke {
+        fill: $background-color;
+        stroke: $background-color;
+    }
+}
+
+.iitem-icon-bg {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 2rem;
+    z-index: 1;
+    opacity: 0;
+    color: $background-color;
+    fill: $background-color;
+    stroke: transparent;
+    transition: opacity 0.2s 0.1s;
+    &.iii-stroke {
+        fill: transparent;
+        stroke: $background-color;
+    }
+    &.iii-fill-stroke {
+        fill: $background-color;
+        stroke: $background-color;
+    }
+    i {
+        font-size: 31.25rem;
+    }
+    i, svg {
+		width: 31.25rem;
+		height: 31.25rem;
+    }
+}
+
+.iitem-heading {
+    margin-bottom: 1rem;
+}
+.iitem-desc {
+    color: $text-secondary;
+    transition: color 0.2s;
+}
+
+.iitem-icon,
+.iitem-heading,
+.iitem-desc {
+    position: relative;
+    z-index: 2;
+}
+
+@media (max-width: 1199.98px) {
+
+    .iitem {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+}

@@ -1,0 +1,73 @@
+/* allerts */    
+    .alert_wrap{
+        
+        display: flex;
+        justify-content: center;
+    }
+    .alert{
+        position: absolute;
+        top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center; 
+        width: 70vw;
+        min-height: 50px;
+        height: auto;
+        font-size: 15px;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+    .alert_success{
+        border: 2px solid green;
+        background-color: rgba(0, 255, 0, 0.199);
+    }
+    #btn_close_alert, #btn_close_alert_recaptcha{
+        z-index: 10000;
+        padding: 5px;
+        cursor: pointer;
+    }
+    .alert_error{
+        border: 2px solid red;
+        background-color: rgba(255, 0, 0, 0.37); 
+    }
+
+/* reservanto */
+.reservanto-button-margin-top{
+    margin-top: 2rem;
+}
+
+/* testimonial */
+.gold_font{
+    color: gold;
+}
+
+/* services */
+.text-to-left{
+    text-align: left;
+}
+
+/* barva textu pro situace, kdy tmavy rezim změni napriklad tmave sedou na temer bilou, ale pokud je to na svetlem obrazku tak sem v ... */
+.text-color-extra{
+    padding: 0 1rem;
+    background-color: #ffcc00;
+}
+
+.white-space-top-5{
+    padding-top: 5rem;
+}
+
+/* articles */
+
+.news-post-article h2{
+    margin-top: 5rem;
+}
+
+.compare-image-caption-before {
+    background-color: var(--error-color);
+    color: white;
+}
+
+.compare-image-caption-after {
+    background-color: var(--alert-success);
+    color: white;
+}

@@ -1,0 +1,236 @@
+.about-imgs {
+    position: relative;
+    &.about-imgs-reverse {
+        .about-media-item {
+            margin-left: auto;
+        }
+    }
+}
+
+.about-imgs-2,
+.about-imgs-3 {
+    padding-bottom: 30%;
+    .about-media-item {
+        width: 65%;
+    }
+    &.about-imgs-reverse {
+        .about-media-item {
+            &:nth-child(2) {
+                right: inherit;
+                left: 0;
+            }
+        }
+    }
+}
+.about-imgs-2 {
+    .about-media-item {
+        &:nth-child(2) {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+    }
+}
+.about-imgs-3 {
+    padding-top: 30%;
+    .about-media-item {
+        &:nth-child(2) {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 50%;
+        }
+        &:nth-child(3) {
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 60%;
+        }
+    }
+}
+
+.about-media-item {
+    position: relative;
+    cursor: pointer;
+}
+
+.aii-item {
+    display: flex;
+    margin-bottom: 1.25rem;
+    &:last-child {
+        margin-bottom: 0;
+    }
+    .material-icons {
+        color: $accent-color;
+    }
+}
+
+.aii-item-details {
+    padding-left: 1.5rem;
+    .item-heading {
+        margin-bottom: 0.25rem;
+    }
+    p {
+        color: $text-secondary;
+        margin: 0;
+    }
+}
+
+.about-content {
+    max-width: 32.5rem;
+    font-size: var(--font-size);
+    h1, h2 {
+        font-size: var(--heading-font-size);
+    }
+}
+.about-item {
+    margin-bottom: 2.25rem;
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.about-footer-btns {
+    margin-top: 2.25rem;
+    &.afbmtl {
+        margin-top: 3.5rem;
+    }
+}
+
+.about-container {
+    .content {
+        text-align: center;
+        ul, ol {
+            li {
+                justify-content: center;
+            }
+        }
+    }
+}
+.acpb {
+    padding-bottom: 4.5rem;
+    &:last-child {
+        padding-bottom: 0;
+    }
+}
+
+.about-process-item {
+    position: relative;
+    display: flex;
+    &::after {
+        content: "";
+        position: absolute;
+        left: 1.75rem;
+        top: 0;
+        width: 1px;
+        height: calc(100% + var(--bs-gutter-x));
+        background-color: $border-color;
+    }
+    &:last-child {
+        &::after {
+            content: none;
+        }
+    }
+}
+.about-process-item-counter {
+    position: relative;
+    font-family: $heading-font-family;
+    font-weight: $heading-font-weight;
+    line-height: $heading-line-height;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    min-width: 3.5rem;
+    margin-right: 1.25rem;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: $accent-color;
+	background: linear-gradient(to right, $el-gradient-start 0%, $el-gradient-end 100%);
+    color: $background-color;
+    z-index: 1;
+}
+.about-process-item-heading {
+    margin-bottom: 0;
+}
+.about-process-item-desc {
+    margin: 0.375rem 0 0 0;
+    color: $text-secondary;
+}
+
+
+
+@include media-breakpoint-up(md) {
+
+    .about-container {
+        max-width: 34rem;
+        margin: 0 auto;
+    }
+
+}
+
+@include media-breakpoint-up(lg) {
+
+    .about-container {
+        max-width: 100%;
+        margin: 0;
+        .content {
+            text-align: left;
+            ul, ol {
+                li {
+                    justify-content: flex-start;
+                }
+            }
+        }
+    }
+    
+}
+
+@include media-breakpoint-up(xl) {
+
+    .about-imgs {
+        padding-right: 1.25rem;
+        &.about-imgs-reverse {
+            padding-left: 1.25rem;
+            padding-right: 0;
+        }
+    }
+    .content-col-reverse {
+        > * {
+            padding-left: 1.25rem;
+        }
+    }
+
+}
+
+@include media-breakpoint-up(xxl) {
+
+    .about-imgs {
+        padding-right: 0;
+        &.about-imgs-reverse {
+            padding-left: 0;
+        }
+    }
+    .content-col-reverse {
+        > * {
+            padding-left: 0;
+        }
+    }
+
+}
+
+@media 
+    only screen and (max-width: 767.98px), 
+    only screen and (min-width: 567px) and (max-width: 900px) and (orientation: landscape) {
+
+        .about-content {
+            --font-size: 1rem!important;
+            h1, h2 {
+                --heading-font-size: 2.25rem!important;
+            }
+        }
+
+}

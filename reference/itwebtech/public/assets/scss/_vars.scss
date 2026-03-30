@@ -1,0 +1,40 @@
+
+$font-family: var(--font-family);
+$font-size: var(--font-size);
+$font-weight: var(--font-weight);
+$font-style: var(--font-style);
+$line-height: var(--line-height);
+
+$heading-font-family: var(--heading-font-family);
+$heading-line-height: var(--heading-line-height);
+$heading-font-weight: var(--heading-font-weight);
+
+$accent-color: var(--accent-color);
+$el-gradient-start: var(--el-gradient-start);
+$el-gradient-end: var(--el-gradient-end);
+
+$background-color: var(--background-color);
+$background-secondary-color: var(--background-secondary-color);
+
+$text-primary: var(--text-primary);
+$text-secondary: var(--text-secondary);
+
+$border-color: var(--border-color);
+$placeholder-color: var(--placeholder-color);
+
+$error-color: var(--error-color);
+
+$el-border-radius: var(--el-border-radius);
+$el-border-radius-min: var(--el-border-radius-min);
+$el-box-shadow: var(--el-box-shadow);
+
+$header-box-shadow: var(--header-box-shadow);
+
+$alert-primary: var(--alert-primary);
+$alert-success: var(--alert-success);
+$alert-danger: var(--alert-danger);
+$alert-warning: var(--alert-warning);
+
+$grid-gutter-width: 30px;
+$gutter: $grid-gutter-width;
+
