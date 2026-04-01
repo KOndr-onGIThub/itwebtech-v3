@@ -24,4 +24,28 @@ return [
         'cta_contact'=> 'Contact',
     ],
 
+    'now' => [
+        'subheading' => 'Content in progress',
+        'heading'    => 'Do not wait for the next article, start now',
+        'desc'       => 'Instead of generic tips, focus on actions with the highest impact on inquiries.',
+        'items'      => [
+            'Summarize your main offer in one sentence every new visitor understands.',
+            'Give each key page one clear conversion action.',
+            'Remove dead-end sections without a path to contact or order.',
+            'Add trust proof: testimonials, process, and guarantees.',
+        ],
+    ],
+
+    'audit' => [
+        'subheading'    => 'Quick CRO move',
+        'heading'       => 'Get a concise audit of your website',
+        'items'         => [
+            'Top 3 conversion blockers currently losing inquiries.',
+            'Specific recommendations on what to fix first.',
+            'Priority roadmap without “nice-to-have” cosmetics.',
+        ],
+        'cta_primary'   => 'I want a mini audit',
+        'cta_secondary' => 'See pricing first',
+    ],
+
 ];

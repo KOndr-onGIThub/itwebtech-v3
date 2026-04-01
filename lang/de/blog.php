@@ -24,4 +24,28 @@ return [
         'cta_contact'=> 'Kontakt',
     ],
 
+    'now' => [
+        'subheading' => 'Inhalt in Vorbereitung',
+        'heading'    => 'Warten Sie nicht auf den nächsten Artikel, starten Sie jetzt',
+        'desc'       => 'Statt allgemeiner Tipps konzentrieren Sie sich auf Schritte mit dem größten Einfluss auf Anfragen.',
+        'items'      => [
+            'Fassen Sie Ihr Hauptangebot in einem Satz zusammen, den neue Besucher sofort verstehen.',
+            'Geben Sie jeder zentralen Seite eine klare Conversion-Aktion.',
+            'Entfernen Sie Sackgassen ohne Weg zu Kontakt oder Bestellung.',
+            'Zeigen Sie Vertrauensbeweise: Referenzen, Prozess und Garantien.',
+        ],
+    ],
+
+    'audit' => [
+        'subheading'    => 'Schneller CRO-Schritt',
+        'heading'       => 'Erhalten Sie einen kompakten Audit Ihrer Webseite',
+        'items'         => [
+            'Die 3 größten Conversion-Bremsen, die aktuell Anfragen kosten.',
+            'Konkrete Empfehlungen, was zuerst angepasst werden soll.',
+            'Prioritätenplan ohne reine “nice-to-have”-Kosmetik.',
+        ],
+        'cta_primary'   => 'Ich will einen Mini-Audit',
+        'cta_secondary' => 'Zuerst Preise ansehen',
+    ],
+
 ];
