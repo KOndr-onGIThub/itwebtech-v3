@@ -351,6 +351,37 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', toggle, { passive: true });
 });
 
+// Localized anchor fallback: normalize hash aliases to the locale-specific anchor id
+document.addEventListener('DOMContentLoaded', () => {
+    const anchorSections = Array.from(document.querySelectorAll('[data-anchor-primary]'));
+    if (!anchorSections.length) return;
+
+    const normalizeHash = () => {
+        const hash = window.location.hash.slice(1).trim().toLowerCase();
+        if (!hash) return;
+
+        for (const section of anchorSections) {
+            const primary = (section.dataset.anchorPrimary || '').trim().toLowerCase();
+            if (!primary) continue;
+
+            const aliases = (section.dataset.anchorAliases || '')
+                .split(',')
+                .map(item => item.trim().toLowerCase())
+                .filter(Boolean);
+
+            if (!aliases.includes(hash) || hash === primary) continue;
+
+            const canonicalHash = '#' + primary;
+            const canonicalUrl = `${window.location.pathname}${window.location.search}${canonicalHash}`;
+            window.history.replaceState(null, '', canonicalUrl);
+            break;
+        }
+    };
+
+    normalizeHash();
+    window.addEventListener('hashchange', normalizeHash);
+});
+
 // Smart navbar: hide on scroll down, show on scroll up + glass effect after scroll
 document.addEventListener('DOMContentLoaded', () => {
     const navbar = document.querySelector('.navbar');

@@ -5,6 +5,15 @@
 
 @section('content')
 
+@php
+    $servicesAnchor = (string) __('home.anchors.services.primary');
+    $servicesAnchorAliases = __('home.anchors.services.aliases');
+    $servicesAnchorAliases = is_array($servicesAnchorAliases) ? $servicesAnchorAliases : [];
+    $allServicesAnchors = array_values(array_unique(array_filter(array_map(function ($anchor) {
+        return is_string($anchor) ? trim($anchor) : '';
+    }, array_merge([$servicesAnchor], $servicesAnchorAliases)))));
+@endphp
+
 {{-- ===================================================
      HERO
      =================================================== --}}
@@ -45,7 +54,7 @@
                 {{ __('home.hero.cta_contact') }}
                 <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
             </a>
-            <a href="#sluzby" class="btn btn-secondary">
+            <a href="#{{ $servicesAnchor }}" class="btn btn-secondary">
                 {{ __('home.hero.cta_consultation') }}
             </a>
         </div>
@@ -101,7 +110,18 @@
 {{-- ===================================================
      SERVICES — primary (websites, webapps, eshop)
      =================================================== --}}
-<section id="sluzby" class="section-wrapper section-wrapper--glow" data-reveal>
+<section
+    id="{{ $servicesAnchor }}"
+    class="section-wrapper section-wrapper--glow"
+    data-reveal
+    data-anchor-primary="{{ $servicesAnchor }}"
+    data-anchor-aliases="{{ implode(',', $allServicesAnchors) }}"
+>
+    @foreach ($allServicesAnchors as $anchorAlias)
+        @if ($anchorAlias !== $servicesAnchor)
+            <span id="{{ $anchorAlias }}" data-anchor-alias-for="{{ $servicesAnchor }}" aria-hidden="true"></span>
+        @endif
+    @endforeach
     <div class="container-site">
         <header class="section-header">
             <p class="section-subheading">{{ __('home.services.subheading') }}</p>

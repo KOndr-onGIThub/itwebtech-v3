@@ -19,6 +19,13 @@ return [
         'cta_consultation' => 'Zobrazit služby',
     ],
 
+    'anchors' => [
+        'services' => [
+            'primary' => 'sluzby',
+            'aliases' => ['services', 'leistungen'],
+        ],
+    ],
+
     'pain' => [
         'subheading' => 'Poznáváte se?',
         'heading'    => 'Nejčastější problémy, které pomáhám řešit',
