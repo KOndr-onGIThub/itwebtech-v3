@@ -223,6 +223,24 @@ npm run dev
 
 Web běží na `http://nazev-projektu.local`.
 
+## Testy (`php` není v PATH)
+
+Pokud v host shellu nemáš dostupné `php` (chyba `php: command not found`), použij wrapper:
+
+```bash
+./scripts/artisan-test.sh
+```
+
+Skript:
+- použije lokální `php`, pokud je v `PATH`
+- jinak automaticky použije `.devcontainer/docker-compose.yml` a spustí testy v kontejneru
+
+Pro běh konkrétního testu můžeš předat argumenty dál:
+
+```bash
+./scripts/artisan-test.sh --filter=ExampleTest
+```
+
 
 ## Přidání nové stránky
 
