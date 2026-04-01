@@ -16,7 +16,11 @@ return [
         ],
         'chips'            => ['Strategie', 'Design', 'Code', 'Texte'],
         'cta_contact'      => 'Kostenlose Beratung',
-        'cta_consultation' => 'Nachricht senden',
+        'cta_consultation' => 'Leistungen ansehen',
+    ],
+
+    'anchors' => [
+        'services' => 'leistungen',
     ],
 
     'pain' => [

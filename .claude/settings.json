@@ -23,7 +23,9 @@
       "Bash(php artisan tinker --execute=\":*)",
       "Bash(grep APP_URL pwd git -C /workspace remote -v)",
       "Bash(find /workspace/reference/ -name *.css -o -name *.html)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Read(//home/vscode/**)",
+      "Bash(npx paperclipai:*)"
     ],
     "additionalDirectories": [
       "/home/vscode/.claude/agents"

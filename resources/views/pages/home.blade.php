@@ -45,7 +45,7 @@
                 {{ __('home.hero.cta_contact') }}
                 <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
             </a>
-            <a href="{{ lroute('contact') }}" class="btn btn-secondary">
+            <a href="#{{ __('home.anchors.services') }}" class="btn btn-secondary">
                 {{ __('home.hero.cta_consultation') }}
             </a>
         </div>
@@ -101,7 +101,7 @@
 {{-- ===================================================
      SERVICES — primary (websites, webapps, eshop)
      =================================================== --}}
-<section class="section-wrapper" data-reveal>
+<section id="{{ __('home.anchors.services') }}" class="section-wrapper section-wrapper--glow" data-reveal>
     <div class="container-site">
         <header class="section-header">
             <p class="section-subheading">{{ __('home.services.subheading') }}</p>
@@ -137,7 +137,7 @@
         <header class="section-header">
             <h2>{{ __('home.commitment.heading') }}</h2>
         </header>
-        <p style="max-width:800px;margin-inline:auto;color:var(--color-ink-500);line-height:1.75;font-size:1rem;">{!! nl2br(e(__('home.commitment.text'))) !!}</p>
+        <p class="section-prose-text">{!! nl2br(e(__('home.commitment.text'))) !!}</p>
 
         <ol class="commitment-steps" data-reveal-group>
             @foreach (__('home.commitment.steps') as $step)
@@ -174,40 +174,40 @@
                 </ul>
             </div>
 
-            <aside class="about-stats">
-                <div class="about-video" data-video-player>
-                    <video
-                        class="about-video__player"
-                        src="{{ asset('videos/001_titulky_fs.mp4') }}"
-                        muted
-                        loop
-                        playsinline
-                        preload="metadata"
-                        data-video
-                    ></video>
+            <div class="about-video" data-video-player>
+                <video
+                    class="about-video__player"
+                    src="{{ asset('videos/001_titulky_fs.mp4') }}"
+                    muted
+                    loop
+                    playsinline
+                    preload="metadata"
+                    data-video
+                ></video>
 
-                    <div class="vp-overlay" data-vp-overlay>
-                        <div class="vp-progress" data-vp-progress role="slider" aria-label="Pozice videa" tabindex="0">
-                            <div class="vp-progress__fill" data-vp-fill></div>
-                            <div class="vp-progress__thumb"></div>
-                        </div>
-                        <div class="vp-bar">
-                            <button class="vp-btn" data-vp-play aria-label="Přehrát">
-                                <svg class="vp-icon vp-icon--play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 3l14 9-14 9V3z"/></svg>
-                                <svg class="vp-icon vp-icon--pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                <div class="vp-overlay" data-vp-overlay>
+                    <div class="vp-progress" data-vp-progress role="slider" aria-label="Pozice videa" tabindex="0">
+                        <div class="vp-progress__fill" data-vp-fill></div>
+                        <div class="vp-progress__thumb"></div>
+                    </div>
+                    <div class="vp-bar">
+                        <button class="vp-btn" data-vp-play aria-label="Přehrát">
+                            <svg class="vp-icon vp-icon--play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 3l14 9-14 9V3z"/></svg>
+                            <svg class="vp-icon vp-icon--pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                        </button>
+                        <span class="vp-time" data-vp-time>0:00 / 0:00</span>
+                        <div class="vp-bar__right">
+                            <button class="vp-btn" data-vp-mute aria-label="Ztlumit">
+                                <svg class="vp-icon vp-icon--vol-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                                <svg class="vp-icon vp-icon--vol-on"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
                             </button>
-                            <span class="vp-time" data-vp-time>0:00 / 0:00</span>
-                            <div class="vp-bar__right">
-                                <button class="vp-btn" data-vp-mute aria-label="Ztlumit">
-                                    <svg class="vp-icon vp-icon--vol-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
-                                    <svg class="vp-icon vp-icon--vol-on"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-                                </button>
-                                <input class="vp-volume" data-vp-vol type="range" min="0" max="100" step="1" value="100" aria-label="Hlasitost">
-                            </div>
+                            <input class="vp-volume" data-vp-vol type="range" min="0" max="100" step="1" value="100" aria-label="Hlasitost">
                         </div>
                     </div>
                 </div>
+            </div>
 
+            <div class="about-extras">
                 <div class="stat-block">
                     <span class="stat-number" data-counter>18</span>
                     <span class="stat-label">{{ __('home.about.years_label') }}</span>
@@ -216,7 +216,7 @@
                     <strong>{{ __('home.about.guarantee_h') }}</strong>
                     <p>{{ __('home.about.guarantee_text') }}</p>
                 </blockquote>
-            </aside>
+            </div>
         </div>
     </div>
 </section>
@@ -323,7 +323,7 @@
 {{-- ===================================================
      TESTIMONIALS
      =================================================== --}}
-<section class="section-wrapper" data-reveal>
+<section class="section-wrapper section-wrapper--glow" data-reveal>
     <div class="container-site">
         <header class="section-header">
             <p class="section-subheading">{{ __('home.testimonials.subheading') }}</p>
@@ -331,7 +331,7 @@
             <div class="testimonials-rating">
                 <span class="testimonials-stars" aria-hidden="true">★★★★★</span>
                 <strong>{{ __('testimonials.meta.rating') }}</strong>
-                <span style="color:var(--color-ink-500);font-size:.9375rem;">({{ __('testimonials.meta.total') }} {{ __('home.testimonials.reviews_label') }})</span>
+                <span class="text-muted" style="font-size:.9375rem;">({{ __('testimonials.meta.total') }} {{ __('home.testimonials.reviews_label') }})</span>
             </div>
         </header>
 
