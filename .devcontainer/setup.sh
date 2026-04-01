@@ -6,12 +6,13 @@ CONF_DIR_TMP=$(php --ini 2>/dev/null | grep "Scan for additional" | awk '{print 
 [[ -z "$CONF_DIR_TMP" || "$CONF_DIR_TMP" == "(none)" ]] && CONF_DIR_TMP="/usr/local/etc/php/conf.d"
 echo "xdebug.mode=off" | sudo tee "${CONF_DIR_TMP}/zzz-xdebug-mode.ini" > /dev/null
 
-echo "==> Installing MySQL client + PHP extensions..."
-dpkg -s default-mysql-client &>/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -q default-mysql-client)
-sudo docker-php-ext-install pdo_mysql pcntl || true
+echo "==> Installing DB clients + PHP extensions..."
+dpkg -s default-mysql-client &>/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -q default-mysql-client sqlite3 libsqlite3-dev)
+sudo docker-php-ext-install pdo_mysql pdo_sqlite pcntl || true
 CONF_DIR=$(php --ini 2>/dev/null | grep "Scan for additional" | awk '{print $NF}')
 [[ -z "$CONF_DIR" || "$CONF_DIR" == "(none)" ]] && CONF_DIR="/usr/local/etc/php/conf.d"
 [ -f "${CONF_DIR}/docker-php-ext-pdo_mysql.ini" ] || echo "extension=pdo_mysql.so" | sudo tee "${CONF_DIR}/docker-php-ext-pdo_mysql.ini" > /dev/null
+[ -f "${CONF_DIR}/docker-php-ext-pdo_sqlite.ini" ] || echo "extension=pdo_sqlite.so" | sudo tee "${CONF_DIR}/docker-php-ext-pdo_sqlite.ini" > /dev/null
 
 echo "==> Setting up .env..."
 [ -f .env ] || cp .env.example .env
