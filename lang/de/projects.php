@@ -36,6 +36,62 @@ return [
 
     'cta_all' => 'Weitere Projekte ansehen',
 
+    'snapshots' => [
+        'subheading' => 'Was bereits funktioniert',
+        'heading'    => 'Ergebnis-Snapshots aus ähnlichen Projekten',
+        'desc'       => 'Reale Szenarien, in denen wir Conversion-Hürden entfernt und den Weg zur Anfrage vereinfacht haben.',
+        'items'      => [
+            [
+                'type'     => 'Unternehmenswebseite',
+                'timeline' => '4 Wochen',
+                'title'    => 'Neue Webseite statt veralteter Präsentation',
+                'summary'  => 'Die alte Seite wirkte veraltet, war langsam und hatte kein klares CTA. Die neue Struktur führte Besucher direkt zur Anfrage.',
+                'outcomes' => [
+                    'Klares Leistungsangebot direkt im ersten Sichtbereich.',
+                    'Direkter Weg zum Kontakt ohne unnötige Umwege.',
+                    'Mehr Vertrauen durch konsistente Inhalte.',
+                ],
+            ],
+            [
+                'type'     => 'Webanwendung',
+                'timeline' => '7 Wochen',
+                'title'    => 'Kundenprozess ohne manuelle Administration',
+                'summary'  => 'Abläufe wurden durch E-Mails und Tabellen ausgebremst. Der Wechsel in eine App reduzierte Fehler und beschleunigte Reaktionen.',
+                'outcomes' => [
+                    'Schnellere Reaktionszeiten dank zentraler Daten.',
+                    'Weniger manuelle Schritte und geringere Betriebslast.',
+                    'Bessere Echtzeitkontrolle über Projektstatus.',
+                ],
+            ],
+            [
+                'type'     => 'Individueller E-Shop',
+                'timeline' => '6 Wochen',
+                'title'    => 'E-Shop ohne Vendor-Lock-in',
+                'summary'  => 'Die frühere Lösung war von Plugins und häufigen Reparaturen abhängig. Der neue E-Shop brachte Stabilität und planbare Kosten.',
+                'outcomes' => [
+                    'Wiederkehrende Ausfälle nach Updates entfernt.',
+                    'Klarer Checkout ohne störende Elemente.',
+                    'Technisches SEO von Anfang an integriert.',
+                ],
+            ],
+        ],
+    ],
+
+    'fit' => [
+        'subheading'    => 'Schnelle Einordnung',
+        'heading'       => 'Lohnt sich die Umsetzung jetzt?',
+        'items'         => [
+            'Ihre Webseite hat Traffic, aber Anfragen kommen unregelmäßig.',
+            'Ihr Angebot ist unklar oder im Inhalt versteckt.',
+            'Es fehlt ein klarer Ablauf nach dem Absenden einer Anfrage.',
+            'Sie wollen keine weitere “schöne Webseite”, sondern ein Business-Tool.',
+        ],
+        'cta_heading'   => 'Wenn 2+ Punkte passen, lohnt sich die Umsetzung jetzt.',
+        'cta_text'      => 'Im Erstgespräch definieren wir den kürzesten Weg zu einer funktionierenden Lösung ohne unnötige Extras.',
+        'cta_primary'   => 'Beratung buchen',
+        'cta_secondary' => 'Zuerst Preise ansehen',
+    ],
+
     'empty' => 'Derzeit sind keine Projekte verfügbar.',
 
 ];
