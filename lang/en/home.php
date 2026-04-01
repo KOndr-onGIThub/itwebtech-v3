@@ -16,7 +16,7 @@ return [
         ],
         'chips'            => ['Strategy', 'Design', 'Code', 'Copy'],
         'cta_contact'      => 'Free consultation',
-        'cta_consultation' => 'Send a message',
+        'cta_consultation' => 'View services',
     ],
 
     'pain' => [

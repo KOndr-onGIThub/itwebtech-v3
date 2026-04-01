@@ -16,7 +16,7 @@ return [
         ],
         'chips'            => ['Strategie', 'Design', 'Kód', 'Texty'],
         'cta_contact'      => 'Konzultace zdarma',
-        'cta_consultation' => 'Napsat zprávu',
+        'cta_consultation' => 'Zobrazit služby',
     ],
 
     'pain' => [
