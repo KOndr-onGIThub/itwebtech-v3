@@ -45,7 +45,7 @@
                 {{ __('home.hero.cta_contact') }}
                 <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
             </a>
-            <a href="#sluzby" class="btn btn-secondary">
+            <a href="#{{ __('home.anchors.services') }}" class="btn btn-secondary">
                 {{ __('home.hero.cta_consultation') }}
             </a>
         </div>
@@ -101,7 +101,7 @@
 {{-- ===================================================
      SERVICES — primary (websites, webapps, eshop)
      =================================================== --}}
-<section id="sluzby" class="section-wrapper section-wrapper--glow" data-reveal>
+<section id="{{ __('home.anchors.services') }}" class="section-wrapper section-wrapper--glow" data-reveal>
     <div class="container-site">
         <header class="section-header">
             <p class="section-subheading">{{ __('home.services.subheading') }}</p>

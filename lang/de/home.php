@@ -19,6 +19,10 @@ return [
         'cta_consultation' => 'Leistungen ansehen',
     ],
 
+    'anchors' => [
+        'services' => 'leistungen',
+    ],
+
     'pain' => [
         'subheading' => 'Kommt Ihnen das bekannt vor?',
         'heading'    => 'Die häufigsten Probleme, bei denen ich helfe',

@@ -19,6 +19,10 @@ return [
         'cta_consultation' => 'View services',
     ],
 
+    'anchors' => [
+        'services' => 'services',
+    ],
+
     'pain' => [
         'subheading' => 'Does this sound familiar?',
         'heading'    => 'The most common problems I help solve',
