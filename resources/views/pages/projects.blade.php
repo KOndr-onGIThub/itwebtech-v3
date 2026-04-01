@@ -14,30 +14,69 @@
     </div>
 </div>
 
-{{-- Filter tabs + Projects grid --}}
+{{-- Conversion snapshots --}}
 <section class="section-wrapper" data-reveal>
     <div class="container-site">
-        <nav class="filter-tabs" aria-label="Project filter">
-            <button class="filter-tab filter-tab--active" data-filter="all">
-                {{ __('projects.filter_all') }}
-            </button>
-            <button class="filter-tab" data-filter="web-site">
-                {{ __('projects.filter_websites') }}
-            </button>
-            <button class="filter-tab" data-filter="web-app">
-                {{ __('projects.filter_webapps') }}
-            </button>
-            <button class="filter-tab" data-filter="other">
-                {{ __('projects.filter_other') }}
-            </button>
-        </nav>
+        <header class="section-header">
+            <p class="section-subheading">{{ __('projects.snapshots.subheading') }}</p>
+            <h2>{{ __('projects.snapshots.heading') }}</h2>
+            <p class="section-header__desc">{{ __('projects.snapshots.desc') }}</p>
+        </header>
 
-        <div class="projects-grid" data-reveal-group>
-            {{-- TODO: loop $projects from DB (Fáze 3) --}}
-            <div class="projects-preview-placeholder" style="grid-column:1/-1;">
-                <x-icon.layers class="w-10 h-10 mx-auto mb-3 opacity-30" />
-                <p>{{ __('projects.empty') }}</p>
-            </div>
+        <div class="project-snapshots" data-reveal-group>
+            @foreach (__('projects.snapshots.items') as $snapshot)
+            <article class="project-snapshot">
+                <div class="project-snapshot__meta">
+                    <span>{{ $snapshot['type'] }}</span>
+                    <span>{{ $snapshot['timeline'] }}</span>
+                </div>
+                <h3>{{ $snapshot['title'] }}</h3>
+                <p>{{ $snapshot['summary'] }}</p>
+                <ul>
+                    @foreach ($snapshot['outcomes'] as $outcome)
+                    <li>
+                        <x-icon.circle-check-big class="w-4 h-4 shrink-0" />
+                        <span>{{ $outcome }}</span>
+                    </li>
+                    @endforeach
+                </ul>
+            </article>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+{{-- Project fit --}}
+<section class="section-wrapper" data-reveal>
+    <div class="container-site">
+        <header class="section-header">
+            <p class="section-subheading">{{ __('projects.fit.subheading') }}</p>
+            <h2>{{ __('projects.fit.heading') }}</h2>
+        </header>
+
+        <div class="project-fit" data-reveal-group>
+            <ul class="project-fit__list">
+                @foreach (__('projects.fit.items') as $item)
+                <li>
+                    <x-icon.circle-check-big class="w-4 h-4 shrink-0" />
+                    <span>{{ $item }}</span>
+                </li>
+                @endforeach
+            </ul>
+
+            <aside class="project-fit__cta">
+                <h3>{{ __('projects.fit.cta_heading') }}</h3>
+                <p>{{ __('projects.fit.cta_text') }}</p>
+                <div class="project-fit__actions">
+                    <a href="{{ lroute('contact') }}" class="btn btn-primary">
+                        {{ __('projects.fit.cta_primary') }}
+                        <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
+                    </a>
+                    <a href="{{ lroute('price') }}" class="btn btn-secondary">
+                        {{ __('projects.fit.cta_secondary') }}
+                    </a>
+                </div>
+            </aside>
         </div>
     </div>
 </section>

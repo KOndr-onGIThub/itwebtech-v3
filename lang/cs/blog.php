@@ -24,4 +24,28 @@ return [
         'cta_contact'=> 'Kontakt',
     ],
 
+    'now' => [
+        'subheading' => 'Obsah v přípravě',
+        'heading'    => 'Nečekejte na další článek, začněte teď',
+        'desc'       => 'Místo obecných rad se zaměřte na kroky, které mají největší dopad na poptávky z webu.',
+        'items'      => [
+            'Sjednoťte hlavní nabídku do jedné věty, které rozumí i nový návštěvník.',
+            'Každé hlavní stránce dejte jeden jasný konverzní krok.',
+            'Odstraňte slepé sekce bez návaznosti na kontakt nebo objednávku.',
+            'Uveďte důkaz důvěryhodnosti: reference, proces spolupráce, garance.',
+        ],
+    ],
+
+    'audit' => [
+        'subheading'    => 'Rychlý CRO tah',
+        'heading'       => 'Získejte stručný audit vašeho webu',
+        'items'         => [
+            '3 největší konverzní brzdy, které teď zbytečně ztrácí poptávky.',
+            'Konkrétní doporučení, co upravit jako první.',
+            'Návrh priorit bez “nice-to-have” kosmetiky.',
+        ],
+        'cta_primary'   => 'Chci mini audit',
+        'cta_secondary' => 'Nejdřív ceník',
+    ],
+
 ];

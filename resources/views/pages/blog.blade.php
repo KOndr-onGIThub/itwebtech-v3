@@ -17,13 +17,43 @@
     <div class="container-site">
         <div class="blog-layout">
 
-            {{-- Articles list --}}
+            {{-- Conversion-first blog fallback --}}
             <main class="blog-articles">
-                {{-- TODO: loop $articles from DB (Fáze 3) --}}
-                <div class="projects-preview-placeholder">
-                    <x-icon.file-text class="w-10 h-10 mx-auto mb-3 opacity-30" />
-                    <p>{{ __('blog.empty') }}</p>
-                </div>
+                <article class="blog-conversion-card" data-reveal>
+                    <p class="section-subheading">{{ __('blog.now.subheading') }}</p>
+                    <h2>{{ __('blog.now.heading') }}</h2>
+                    <p>{{ __('blog.now.desc') }}</p>
+                    <ul class="blog-conversion-list">
+                        @foreach (__('blog.now.items') as $item)
+                        <li>
+                            <x-icon.circle-check-big class="w-4 h-4 shrink-0" />
+                            <span>{{ $item }}</span>
+                        </li>
+                        @endforeach
+                    </ul>
+                </article>
+
+                <article class="blog-conversion-card blog-conversion-card--highlight" data-reveal>
+                    <p class="section-subheading">{{ __('blog.audit.subheading') }}</p>
+                    <h2>{{ __('blog.audit.heading') }}</h2>
+                    <ul class="blog-conversion-list">
+                        @foreach (__('blog.audit.items') as $item)
+                        <li>
+                            <x-icon.circle-check-big class="w-4 h-4 shrink-0" />
+                            <span>{{ $item }}</span>
+                        </li>
+                        @endforeach
+                    </ul>
+                    <div class="blog-conversion-actions">
+                        <a href="{{ lroute('contact') }}" class="btn btn-primary">
+                            {{ __('blog.audit.cta_primary') }}
+                            <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
+                        </a>
+                        <a href="{{ lroute('price') }}" class="btn btn-secondary">
+                            {{ __('blog.audit.cta_secondary') }}
+                        </a>
+                    </div>
+                </article>
             </main>
 
             {{-- Sidebar --}}
