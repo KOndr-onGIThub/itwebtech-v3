@@ -192,6 +192,7 @@ return [
         'title' => 'Řekněte mi stručně, co potřebujete. Ozvu se zpět do 24 hodin.',
         'description' => 'Napište mi pár vět o vašem podnikání a současné situaci. Odesláním formuláře nezačíná žádný závazek. Jen první smysluplná konverzace.',
         'success' => 'Děkuji, zpráva dorazila. Ozvu se co nejdřív s dalším krokem.',
+        'error' => 'Poptávku se teď nepodařilo uložit. Zkuste to prosím znovu.',
         'name' => 'Jméno a příjmení',
         'company' => 'Firma / značka',
         'email' => 'E-mail',
