@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Landing;
 
 use App\Http\Controllers\Controller;
+use App\Models\LandingLead;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Throwable;
 
 class LandingLeadController extends Controller
 {
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
+        $data = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'nullable|string|max:50',
@@ -20,7 +22,27 @@ class LandingLeadController extends Controller
             'gdpr' => 'required|accepted',
         ]);
 
-        // TODO: Hand off to mail/CRM integration once lead-processing flow exists.
+        try {
+            LandingLead::create([
+                'name' => $data['name'],
+                'company' => $data['company'] ?? null,
+                'email' => $data['email'],
+                'phone' => $data['phone'] ?? null,
+                'budget' => $data['budget'] ?? null,
+                'message' => $data['message'],
+                'source' => 'landing.website-service',
+                'ip_address' => $request->ip(),
+                'user_agent' => $request->userAgent(),
+            ]);
+        } catch (Throwable $exception) {
+            report($exception);
+
+            return back()
+                ->withInput()
+                ->withErrors([
+                    'lead' => __('landing.form.error'),
+                ]);
+        }
 
         return back()
             ->with('landing_lead_success', true);
