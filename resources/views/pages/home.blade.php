@@ -128,20 +128,28 @@
             <h2>{{ __('home.problems.heading') }}</h2>
         </header>
 
-        <div class="pain-grid" data-reveal-group>
-            @foreach (__('home.problems.items') as $item)
-            <div class="pain-card">
-                <h3>{{ $item['heading'] }}</h3>
-                <p>{{ $item['text'] }}</p>
-                @if (!empty($item['quote_text']))
-                <blockquote class="inline-quote">
-                    <p>{{ $item['quote_text'] }}</p>
-                    <footer>— {{ $item['quote_author'] }}</footer>
-                </blockquote>
-                @endif
-            </div>
+        <ol class="pain-list">
+            @foreach (__('home.problems.items') as $i => $item)
+            <li class="pain-item" data-reveal style="transition-delay: {{ $i * 90 }}ms">
+                <span class="pain-item__num" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                <div class="pain-item__body">
+                    <h3>{{ $item['heading'] }}</h3>
+                    <p>{{ $item['text'] }}</p>
+                    @if (!empty($item['quote_text']))
+                    <blockquote class="citation-inline">
+                        <p class="citation-inline__text">{{ $item['quote_text'] }}</p>
+                        <footer class="citation-inline__footer">
+                            <span class="citation-inline__avatar" aria-hidden="true">{{ mb_substr($item['quote_author'], 0, 1) }}</span>
+                            <cite class="citation-inline__author">
+                                <strong>{{ $item['quote_author'] }}</strong>
+                            </cite>
+                        </footer>
+                    </blockquote>
+                    @endif
+                </div>
+            </li>
             @endforeach
-        </div>
+        </ol>
 
         <div class="problems-transition" data-reveal>
             <strong>{{ __('home.problems.transition_heading') }}</strong>
@@ -266,6 +274,86 @@
                 {{ __('home.portfolio.cta') }}
                 <x-icon.arrow-right class="w-4 h-4 shrink-0" />
             </a>
+        </div>
+    </div>
+</section>
+
+{{-- ===================================================
+     AI COMPARISON — Laik + AI vs. Odborník + AI
+     =================================================== --}}
+<section class="section-wrapper section-alt section-wrapper--glow" data-reveal>
+    <div class="container-site">
+        <header class="section-header">
+            <p class="section-subheading">{{ __('home.ai.subheading') }}</p>
+            <h2>{{ __('home.ai.heading') }}</h2>
+            <p class="section-header__desc">{{ __('home.ai.intro') }}</p>
+        </header>
+
+        <div class="ai-compare">
+            {{-- Laik + AI --}}
+            <div class="ai-compare__col ai-compare__col--muted" data-reveal style="transition-delay: 60ms">
+                <div class="ai-compare__header">
+                    <span class="ai-compare__label">{{ __('home.ai.laik.label') }}</span>
+                    <p class="ai-compare__outcome">{{ __('home.ai.laik.outcome') }}</p>
+                </div>
+                <ul class="ai-compare__list">
+                    @foreach (__('home.ai.laik.items') as $item)
+                    <li>
+                        <svg class="ai-compare__icon ai-compare__icon--no" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd"/></svg>
+                        {{ $item }}
+                    </li>
+                    @endforeach
+                </ul>
+                <p class="ai-compare__note">{{ __('home.ai.laik.note') }}</p>
+            </div>
+
+            {{-- Odborník + AI --}}
+            <div class="ai-compare__col ai-compare__col--featured" data-reveal style="transition-delay: 160ms">
+                <div class="ai-compare__header">
+                    <span class="ai-compare__label">{{ __('home.ai.expert.label') }}</span>
+                    <p class="ai-compare__outcome">{{ __('home.ai.expert.outcome') }}</p>
+                </div>
+                <ul class="ai-compare__list">
+                    @foreach (__('home.ai.expert.items') as $item)
+                    <li>
+                        <svg class="ai-compare__icon ai-compare__icon--yes" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
+                        {{ $item }}
+                    </li>
+                    @endforeach
+                </ul>
+                <p class="ai-compare__note">{{ __('home.ai.expert.note') }}</p>
+            </div>
+        </div>
+
+        <p class="ai-compare__closing" data-reveal style="transition-delay: 240ms">{{ __('home.ai.closing') }}</p>
+    </div>
+</section>
+
+{{-- ===================================================
+     SERVICES — secondary (seo, design, social)
+     =================================================== --}}
+<section class="section-wrapper section-alt" data-reveal>
+    <div class="container-site">
+        <header class="section-header">
+            <h2>{{ __('home.services.heading_other') }}</h2>
+        </header>
+
+        @php
+        $serviceIcons2 = [
+            'seo'    => 'search',
+            'design' => 'palette',
+            'social' => 'thumb-up',
+        ];
+        @endphp
+
+        <div class="services-grid" data-reveal-group>
+            @foreach (['seo','design','social'] as $key)
+            <article class="service-card">
+                <x-dynamic-component :component="'icon.' . $serviceIcons2[$key]" class="w-8 h-8 service-card__icon" />
+                <h3>{{ __("home.services.{$key}.title") }}</h3>
+                <p>{{ __("home.services.{$key}.description") }}</p>
+            </article>
+            @endforeach
         </div>
     </div>
 </section>
