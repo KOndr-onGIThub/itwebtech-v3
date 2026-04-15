@@ -126,5 +126,8 @@
     </footer>
 
     @stack('scripts')
+
+    {{-- Consultation modal — video + Calendly CTA --}}
+    <x-consultation-modal />
 </body>
 </html>

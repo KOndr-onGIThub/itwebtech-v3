@@ -15,8 +15,16 @@ return [
             'Ondřej Kriška',
         ],
         'chips'            => ['Strategy', 'Design', 'Code', 'Copy'],
-        'cta_contact'      => 'Free consultation',
-        'cta_consultation' => 'View services',
+        'cta_primary'   => 'Book a consultation',
+        'cta_secondary' => 'View services',
+    ],
+
+    'modal' => [
+        'title'             => 'Let\'s talk',
+        'subtitle'          => 'Free consultation — no commitment, no registration.',
+        'video_placeholder' => '[Video coming soon]',
+        'calendly_btn'      => 'Pick a consultation slot',
+        'cta_note'          => 'Free. No commitment.',
     ],
 
     'anchors' => [
@@ -183,9 +191,9 @@ I don\'t build on WordPress. No third-party plugins, no security holes, no month
     ],
 
     'cta' => [
-        'heading'   => 'Ready to start? The consultation is free.',
-        'quotation' => 'Get a quote',
-        'message'   => 'Or send a message',
+        'heading'      => 'Ready to start? The consultation is free.',
+        'consultation' => 'Book a consultation',
+        'message'      => 'Or send a message',
     ],
 
 ];

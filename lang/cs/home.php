@@ -8,15 +8,23 @@ return [
     ],
 
     'hero' => [
-        'subheading'       => 'Pro podnikatele s ambicí',
-        'heading'          => '<em>Kompletní web</em> od člověka, kterému na výsledku záleží.',
-        'bio'              => [
+        'subheading'  => 'Pro podnikatele s ambicí',
+        'heading'     => '<em>Kompletní web</em> od člověka, kterému na výsledku záleží.',
+        'bio'         => [
             '18 let v Toyotě mě naučilo jedno: dodávat perfektní výsledky.',
             'Ondřej Kriška',
         ],
-        'chips'            => ['Strategie', 'Design', 'Kód', 'Texty'],
-        'cta_contact'      => 'Konzultace zdarma',
-        'cta_consultation' => 'Zobrazit služby',
+        'chips'       => ['Strategie', 'Design', 'Kód', 'Texty'],
+        'cta_primary'   => 'Domluvit konzultaci',
+        'cta_secondary' => 'Zobrazit služby',
+    ],
+
+    'modal' => [
+        'title'              => 'Domluvme se',
+        'subtitle'           => 'Bezplatná konzultace — nezávazně, bez registrace.',
+        'video_placeholder'  => '[Video bude doplněno]',
+        'calendly_btn'       => 'Vybrat termín konzultace',
+        'cta_note'           => 'Bezplatně. Bez závazku.',
     ],
 
     'anchors' => [
@@ -183,9 +191,9 @@ Neprogramuji na WordPressu. Žádné pluginy třetích stran, žádné bezpečno
     ],
 
     'cta' => [
-        'heading'   => 'Připraveni začít? Konzultace je zdarma.',
-        'quotation' => 'Získat nabídku',
-        'message'   => 'Nebo napsat zprávu',
+        'heading'      => 'Připraveni začít? Konzultace je zdarma.',
+        'consultation' => 'Domluvit konzultaci',
+        'message'      => 'Nebo napsat zprávu',
     ],
 
 ];

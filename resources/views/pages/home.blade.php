@@ -41,12 +41,12 @@
             </footer>
         </blockquote>
         <div class="section-hero__actions">
-            <a href="{{ lroute('contact') }}" class="btn btn-primary">
-                {{ __('home.hero.cta_contact') }}
+            <button type="button" class="btn btn-primary" onclick="window.dispatchEvent(new CustomEvent('open-consultation-modal'))">
+                {{ __('home.hero.cta_primary') }}
                 <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-            </a>
+            </button>
             <a href="#{{ __('home.anchors.services') }}" class="btn btn-secondary">
-                {{ __('home.hero.cta_consultation') }}
+                {{ __('home.hero.cta_secondary') }}
             </a>
         </div>
     </div>
@@ -453,10 +453,10 @@
         <h2 style="font-size:clamp(1.75rem,3.5vw,2.5rem);letter-spacing:-0.025em;margin-bottom:1.5rem;width:100%;text-align:center;">
             {!! __('home.cta.heading') ?? __('layout.prefooter.tagline') !!}
         </h2>
-        <a href="{{ lroute('contact') }}" class="btn btn-primary">
-            {{ __('home.cta.quotation') }}
+        <button type="button" class="btn btn-primary" onclick="window.dispatchEvent(new CustomEvent('open-consultation-modal'))">
+            {{ __('home.cta.consultation') }}
             <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-        </a>
+        </button>
         <a href="{{ lroute('contact') }}" class="btn btn-secondary">
             {{ __('home.cta.message') }}
         </a>
