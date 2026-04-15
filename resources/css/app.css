@@ -3354,6 +3354,428 @@
     }
 
     /* ============================================================
+       CONSULTATION MODAL
+       ============================================================ */
+    .consultation-modal-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(4px);
+        z-index: 9000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+    }
+    .consultation-modal {
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        border-radius: 1.25rem;
+        width: 100%;
+        max-width: 540px;
+        position: relative;
+        overflow: hidden;
+    }
+    .consultation-modal__close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: rgba(148, 163, 184, 0.1);
+        border: none;
+        border-radius: 9999px;
+        width: 2rem;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-muted);
+        cursor: pointer;
+        z-index: 1;
+        transition: background 0.2s, color 0.2s;
+    }
+    .consultation-modal__close:hover {
+        background: rgba(148, 163, 184, 0.2);
+        color: var(--color-heading);
+    }
+    .consultation-modal__video-placeholder {
+        aspect-ratio: 16 / 9;
+        background: rgba(15, 23, 42, 0.9);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        border-bottom: 1px solid var(--border-subtle);
+    }
+    .consultation-modal__video-icon {
+        width: 4rem;
+        height: 4rem;
+        border-radius: 9999px;
+        background: rgba(245, 158, 11, 0.15);
+        border: 1px solid var(--border-gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-gold-500);
+    }
+    .consultation-modal__video-placeholder p {
+        font-size: 0.875rem;
+        color: var(--color-muted);
+        font-style: italic;
+        margin: 0;
+    }
+    .consultation-modal__body {
+        padding: 2rem;
+        text-align: center;
+    }
+    .consultation-modal__body h2 {
+        font-size: 1.375rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: var(--color-heading);
+    }
+    .consultation-modal__body p {
+        font-size: 0.9375rem;
+        color: var(--color-muted);
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
+
+    /* ============================================================
+       HERO — subline (replaces hero-quote)
+       ============================================================ */
+    .section-hero__subline {
+        font-size: clamp(1rem, 2vw, 1.125rem);
+        color: rgba(203, 213, 225, 0.85);
+        line-height: 1.7;
+        max-width: 520px;
+        margin-block: 0 2rem;
+    }
+
+    /* ============================================================
+       SOCIAL PROOF BAR
+       ============================================================ */
+    .section-social-proof {
+        padding-block: clamp(1.25rem, 3vw, 2rem);
+    }
+    .brand-item__name {
+        font-size: 0.875rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        color: var(--color-muted);
+        text-transform: uppercase;
+        opacity: 0.65;
+        white-space: nowrap;
+    }
+
+    /* ============================================================
+       INLINE QUOTES (within sections)
+       ============================================================ */
+    .inline-quote {
+        margin: 1.25rem 0 0 0;
+        padding: 1rem 1.25rem;
+        border-left: 3px solid var(--color-gold-500);
+        background: rgba(245, 158, 11, 0.05);
+        border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .inline-quote p {
+        font-style: italic;
+        color: rgba(203, 213, 225, 0.9);
+        font-size: 0.9375rem;
+        line-height: 1.65;
+        margin: 0 0 0.5rem 0;
+    }
+    .inline-quote footer {
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: var(--color-gold-400, #fbbf24);
+        letter-spacing: 0.02em;
+    }
+
+    /* ============================================================
+       PROBLEMS TRANSITION
+       ============================================================ */
+    .problems-transition {
+        margin-top: 3rem;
+        padding: 2rem;
+        border: 1px solid var(--border-gold);
+        border-radius: 1rem;
+        background: rgba(245, 158, 11, 0.04);
+    }
+    .problems-transition strong {
+        display: block;
+        font-size: 1.0625rem;
+        color: var(--color-gold-500);
+        margin-bottom: 0.625rem;
+    }
+    .problems-transition p {
+        color: var(--color-body);
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    /* ============================================================
+       STEP CONTENT (extended)
+       ============================================================ */
+    .step-content {
+        flex: 1;
+    }
+    .step-note {
+        margin-top: 1rem;
+        font-size: 0.875rem;
+        color: var(--color-muted);
+        font-style: italic;
+        line-height: 1.6;
+        padding: 0.75rem 1rem;
+        border-radius: 0.5rem;
+        background: var(--bg-card);
+    }
+
+    /* ============================================================
+       AI SECTION
+       ============================================================ */
+    .ai-intro {
+        max-width: 720px;
+        margin: 0 auto 2.5rem;
+    }
+    .ai-intro .section-prose-text {
+        text-align: left;
+        margin-inline: 0;
+    }
+    .ai-comparison {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        gap: 0;
+        align-items: stretch;
+        border: 1px solid var(--border-subtle);
+        border-radius: 1rem;
+        overflow: hidden;
+        margin-block: 2rem;
+        max-width: 720px;
+        margin-inline: auto;
+    }
+    .ai-comparison__col {
+        padding: 2rem 1.75rem;
+    }
+    .ai-comparison__col--laik {
+        background: var(--bg-card);
+    }
+    .ai-comparison__col--expert {
+        background: rgba(245, 158, 11, 0.06);
+        border-left: 1px solid var(--border-gold);
+    }
+    .ai-comparison__col h3 {
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+        color: var(--color-heading);
+    }
+    .ai-comparison__col--expert h3 {
+        color: var(--color-gold-500);
+    }
+    .ai-comparison__col p {
+        font-size: 0.9375rem;
+        color: var(--color-body);
+        line-height: 1.65;
+        margin: 0;
+    }
+    .ai-comparison__divider {
+        display: none;
+    }
+    .ai-note {
+        font-style: italic;
+        font-size: 0.9375rem;
+        color: var(--color-muted);
+        text-align: center;
+        margin-block: 0 2rem;
+        max-width: 600px;
+        margin-inline: auto;
+    }
+    .ai-outro {
+        max-width: 720px;
+        margin-inline: auto;
+        text-align: left;
+    }
+    @media (max-width: 640px) {
+        .ai-comparison {
+            grid-template-columns: 1fr;
+        }
+        .ai-comparison__col--expert {
+            border-left: none;
+            border-top: 1px solid var(--border-gold);
+        }
+    }
+
+    /* ============================================================
+       TOYOTA SECTION
+       ============================================================ */
+    .toyota-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: start;
+    }
+    @media (max-width: 768px) {
+        .toyota-layout {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+    }
+    .section-header--left {
+        text-align: left;
+    }
+    .section-header--left h2 {
+        margin-inline: 0;
+    }
+    .featured-quote {
+        background: var(--bg-card);
+        border: 1px solid var(--border-gold);
+        border-radius: 1rem;
+        padding: 2rem;
+        margin: 0;
+    }
+    .featured-quote p {
+        font-style: italic;
+        font-size: 1rem;
+        color: rgba(203, 213, 225, 0.92);
+        line-height: 1.7;
+        margin: 0 0 1rem 0;
+    }
+    .featured-quote p::before {
+        content: "\201C";
+        font-family: Georgia, serif;
+        font-size: 2rem;
+        color: var(--color-gold-500);
+        line-height: 0;
+        vertical-align: -0.5rem;
+        margin-right: 0.25rem;
+        opacity: 0.6;
+    }
+    .featured-quote footer {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--color-gold-400, #fbbf24);
+        line-height: 1.5;
+    }
+
+    /* ============================================================
+       PORTFOLIO PLACEHOLDER GRID
+       ============================================================ */
+    .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+        gap: 1.25rem;
+    }
+    .portfolio-card--placeholder {
+        border: 1px solid var(--border-subtle);
+        border-radius: 1rem;
+        overflow: hidden;
+        background: var(--bg-card);
+    }
+    .portfolio-card__visual {
+        aspect-ratio: 16 / 9;
+        background: rgba(148, 163, 184, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid var(--border-subtle);
+    }
+    .portfolio-card__placeholder-text {
+        font-size: 0.75rem;
+        color: var(--color-muted);
+        font-style: italic;
+        opacity: 0.6;
+    }
+    .portfolio-card__body {
+        padding: 1rem 1.25rem;
+    }
+    .portfolio-card__placeholder-line {
+        height: 0.75rem;
+        background: rgba(148, 163, 184, 0.12);
+        border-radius: 9999px;
+        margin-bottom: 0.5rem;
+    }
+    .portfolio-card__placeholder-line--short {
+        width: 60%;
+        margin-bottom: 0;
+    }
+
+    /* ============================================================
+       GUARANTEE SECTION
+       ============================================================ */
+    .guarantee-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+        gap: 1.25rem;
+    }
+    .guarantee-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        border-radius: 1rem;
+        padding: 2rem;
+        transition:
+            box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+            border-color 0.25s ease;
+    }
+    .guarantee-card:hover {
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--border-gold);
+        border-color: var(--border-gold);
+    }
+    .guarantee-card h3 {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: var(--color-gold-500);
+        margin-bottom: 0.75rem;
+    }
+    .guarantee-card p {
+        font-size: 0.9375rem;
+        color: var(--color-body);
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    /* ============================================================
+       FINAL CTA
+       ============================================================ */
+    .final-cta-quote {
+        margin: 0 auto 2.5rem;
+        padding: 0;
+        max-width: 600px;
+        text-align: center;
+    }
+    .final-cta-quote p {
+        font-style: italic;
+        font-size: clamp(1.0625rem, 2vw, 1.25rem);
+        color: rgba(203, 213, 225, 0.9);
+        line-height: 1.65;
+        margin: 0 0 0.75rem 0;
+    }
+    .final-cta-quote footer {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--color-gold-400, #fbbf24);
+    }
+    .final-cta-heading {
+        font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+        letter-spacing: -0.025em;
+        margin-bottom: 0.75rem;
+        width: 100%;
+        text-align: center;
+    }
+    .final-cta-subtext {
+        font-size: 1rem;
+        color: var(--color-muted);
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+    .final-cta-note {
+        margin-top: 0.75rem;
+        font-size: 0.875rem;
+        color: var(--color-muted);
+        text-align: center;
+    }
+
+    /* ============================================================
        GOLD DIVIDER
        ============================================================ */
     .section-divider {
