@@ -25,6 +25,10 @@ return [
         'nav_label' => 'Footer navigation',
     ],
 
+    'modal' => [
+        'close' => 'Close',
+    ],
+
     'gdpr_form_note' => 'By submitting you agree to our',
     'gdpr_form_link' => 'Privacy Policy',
 

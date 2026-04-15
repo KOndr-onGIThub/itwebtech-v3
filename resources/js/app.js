@@ -149,6 +149,34 @@ Alpine.data('contactForm', () => ({
     },
 }));
 
+// ---------------------------------------------------------------------------
+// Consultation modal — video + Calendly CTA
+// ---------------------------------------------------------------------------
+Alpine.data('consultationModal', () => ({
+    open: false,
+    videoReady: false,
+
+    openModal() {
+        this.open = true;
+        this.videoReady = true;
+        // Prevent body scroll
+        document.body.style.overflow = 'hidden';
+        // Focus the dialog on next tick
+        this.$nextTick(() => {
+            const dialog = this.$el.querySelector('[role="dialog"]');
+            if (dialog) dialog.focus({ preventScroll: true });
+        });
+    },
+
+    closeModal() {
+        this.open = false;
+        document.body.style.overflow = '';
+        // Pause & reset video if present
+        const video = this.$el.querySelector('video');
+        if (video) { video.pause(); video.currentTime = 0; }
+    },
+}));
+
 Alpine.start();
 
 // ---------------------------------------------------------------------------
