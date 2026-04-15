@@ -3,189 +3,140 @@
 return [
 
     'meta' => [
-        'title'       => 'Ondřej Kriška — Webové stránky a aplikace pro podnikatele',
-        'description' => 'Tvorba webových stránek a aplikací, které přivádějí zákazníky. Bezúdržbová řešení bez WordPressu. 18 let praxe. Konzultace zdarma.',
+        'title'       => 'Ondřej Kriška — Weby na míru | Žádné šablony, žádný WordPress',
+        'description' => 'Weby na míru pro podnikatele, kteří poznají rozdíl. Vlastní kód, přesná cena předem, přímý kontakt. Bez šablon, bez WordPressu, bez prostředníků.',
     ],
 
     'hero' => [
-        'subheading'       => 'Pro podnikatele s ambicí',
-        'heading'          => '<em>Kompletní web</em> od člověka, kterému na výsledku záleží.',
-        'bio'              => [
-            '18 let v Toyotě mě naučilo jedno: dodávat perfektní výsledky.',
-            'Ondřej Kriška',
-        ],
-        'chips'            => ['Strategie', 'Design', 'Kód', 'Texty'],
-        'cta_contact'      => 'Konzultace zdarma',
-        'cta_consultation' => 'Zobrazit služby',
+        'heading'       => 'Weby na míru pro lidi, kteří poznají rozdíl.',
+        'subline'       => 'Žádné šablony. Žádný WordPress. Každý projekt začíná pochopením vašeho byznysu — a končí řešením, které nikdo jiný nemá.',
+        'chips'         => ['Strategie', 'Design', 'Kód', 'Texty'],
+        'cta_primary'   => 'Domluvit konzultaci',
+        'cta_secondary' => 'Jak pracuji →',
     ],
 
     'anchors' => [
-        'services' => 'sluzby',
+        'how_i_work' => 'jak-pracuji',
     ],
 
-    'pain' => [
-        'subheading' => 'Poznáváte se?',
-        'heading'    => 'Nejčastější problémy, které pomáhám řešit',
-        'items'      => [
+    'social_proof' => [
+        'brands' => [
+            ['name' => 'Toyota',                'image' => 'toyota.png'],
+            ['name' => 'MAKOplast',             'image' => null],
+            ['name' => 'Yolk Studio',           'image' => 'yolk_studio.png'],
+            ['name' => 'BARANA s.r.o.',         'image' => null],
+            ['name' => 'Nové Interiéry s.r.o.', 'image' => null],
+            ['name' => 'Zubní Provázek',        'image' => null],
+            ['name' => 'Autokemp Veselka',      'image' => null],
+            ['name' => 'PitAréna',              'image' => 'pitarena.png'],
+        ],
+    ],
+
+    'problems' => [
+        'heading'             => 'Co se opakuje u většiny webových projektů.',
+        'transition_heading'  => 'Jak to dělám jinak:',
+        'transition_text'     => 'Každý projekt začínám pochopením vašeho byznysu. Píšu vlastní kód — bez šablon, bez WordPressu, bez prostředníků. Mluvíte přímo se mnou od první schůzky po spuštění i dál.',
+        'items' => [
             [
-                'heading' => '„Máme web, ale zákazníci z něj nepřicházejí"',
-                'text'    => 'Web samotný zákazníky nepřivede. Potřebujete stránky optimalizované pro vyhledávače, s přesvědčivým textem a rychlým načítáním. Přesně to je základ každého mého projektu.',
+                'heading'      => 'Šablona vydávaná za řešení',
+                'text'         => 'Agentura použije rozvržení, které použila pětkrát. Doplní vaše texty a logo. Výsledek vypadá profesionálně — dokud se nepodíváte na web konkurence. Stejné sekce, stejná slova, jiné barvy a logo.',
+                'quote_text'   => 'Není to případ, kdy ostatní rádoby tvůrci webů pouze plní daty šablony za nehorázné částky.',
+                'quote_author' => 'Petr Kroulík, Nové Interiéry s.r.o.',
             ],
             [
-                'heading' => '„Nevím, kolik mě to celkem bude stát"',
-                'text'    => 'Přesná cena předem — žádné překvapení na faktuře, žádné vícenáklady bez vašeho vědomí. Transparentnost je pro mě základ, ne bonusová funkce.',
+                'heading' => 'Závislost na agentuře, za kterou platíte měsíčně',
+                'text'    => 'WordPress vyžaduje pravidelnou správu, aktualizace a bezpečnostní záplaty. Tím agentury vydělávají roky po předání webu. Je to jejich byznys model — ne vaše výhoda.',
             ],
             [
-                'heading' => '„Vývojář přestal reagovat na e-maily"',
-                'text'    => 'Odpovídám do 24 hodin, i po dokončení projektu. Jedno místo kontaktu, jedno místo zodpovědnosti — mluvíte přímo se mnou, ne s koordinátorem.',
+                'heading' => 'AI web za odpoledne: hezký, generický, zaměnitelný',
+                'text'    => 'Nástroje dnes vygenerují web rychle. Ale bez výzkumu, bez strategie, bez pochopení vašeho byznysu vznikne něco, co vypadá jako web — a funguje jako web každého jiného. Navíc vás platforma drží na svém předplatném navždy.',
             ],
             [
-                'heading' => '„Web se pořád rozbíjí a platíme za údržbu"',
-                'text'    => 'Mé weby jsou bezúdržbové. Žádný WordPress, žádné pluginy třetích stran. Nulové náklady na pravidelné aktualizace a podstatně vyšší bezpečnost.',
+                'heading' => 'Nikdy nemluvíte s člověkem, který web dělá',
+                'text'    => 'Ten, kdo vám prodává web, ho nestaví. Ti, kdo ho staví, s vámi nemluví. Uprostřed se ztrácí kontext a záměr — a výsledek neodpovídá tomu, co jste chtěli.',
             ],
         ],
     ],
 
-    'services' => [
-        'subheading'    => 'Vždy na míru vašim podnikatelským cílům',
-        'heading'       => 'Nastartuji vaše online podnikání',
-        'heading_other' => 'Posílím vaši online viditelnost',
-        'description'   => 'Kompletní portfolio digitálních služeb — od webových stránek přes aplikace až po marketing.',
-        'websites' => [
-            'title'       => 'Webové stránky, které prodávají',
-            'description' => 'Váš web je váš nejtvrdší pracovník — prodává 24/7 bez přestávky. Navrhnu ho tak, aby zákazníky nepřiváděl na rozcestník, ale rovnou k objednávce nebo kontaktu. Rychlý, bezpečný, optimalizovaný pro Google.',
-        ],
-        'webapps' => [
-            'title'       => 'Aplikace, které šetří váš čas',
-            'description' => 'Vedení skladu v Excelu, ruční evidence objednávek, zdlouhavé reporty — jsou to hodiny a peníze vyhazované oknem. Navrhnu aplikaci přesně pro vaše procesy a vrátím vám čas na to, co vás baví.',
-        ],
-        'eshop' => [
-            'title'       => 'E-shop, který vlastníte vy',
-            'description' => 'Nechcete platit měsíčně za pronájem platformy ani se bát, že aktualizace pluginu rozbije váš obchod. Postavím vám e-shop na míru — bez skrytých poplatků, bez vendor lock-inu, s přímou podporou.',
-        ],
-        'seo' => [
-            'title'       => 'Zákazníci z Googlu — bez platby za každý klik',
-            'description' => 'Placená reklama funguje jen dokud platíte. SEO pracuje za vás dlouhodobě. Pomohu vám vybudovat organickou viditelnost ve vyhledávačích, která přivede zákazníky i bez reklamního rozpočtu.',
-        ],
-        'design' => [
-            'title'       => 'Vizuální identita, které si zákazníci všimnou',
-            'description' => 'Logo nebo grafika, které zákazníci poznají na první pohled. Navrhnu vizuální identitu odpovídající vašemu oboru — takovou, která vás odliší od generické konkurence a zanechá dojem.',
-        ],
-        'social' => [
-            'title'       => 'Sociální sítě, které posilují důvěru',
-            'description' => 'Zákazníci před objednávkou kontrolují vaše sociální sítě. Aktivní a konzistentní přítomnost buduje důvěru. Připravím obsah i strategii, která vás dostane blíž k vaší cílové skupině.',
+    'how_i_work' => [
+        'heading' => 'Jednoduchý proces bez zbytečných komplikací.',
+        'steps'   => [
+            [
+                'heading'      => 'Porozumění',
+                'text'         => 'Začínám konzultací, ne formulářem. Potřebuji pochopit váš byznys, vaše zákazníky a co má web skutečně udělat — přivést kontakty, prodat produkt nebo vybudovat důvěru.',
+                'quote_text'   => 'Pan Kriška opravdu naslouchal mým potřebám a následně tyto informace zpracoval až do mé úplné spokojenosti.',
+                'quote_author' => 'Magda Pernicová, Realiťačky v akci',
+            ],
+            [
+                'heading'      => 'Přesná specifikace',
+                'text'         => 'Než začnu pracovat, dostanete písemnou specifikaci: co bude na webu, kolik stránek, jaká technologie a kolik to bude stát. Žádné překvapení na faktuře. Termín dodání odhadnu realisticky — a vždy předem, ne zpětně.',
+                'quote_text'   => 'Důsledně analyzuje stav a chce poznat současné procesy. Shromažďuje požadavky od zákazníků a zjišťuje vize pro budoucnost.',
+                'quote_author' => 'Jan Stybor, vedoucí projektového oddělení, Toyota',
+                'note'         => 'Poznámka k termínům: web nevzniká jen na mé straně. Schvalování, podklady od klienta a zpětná vazba jsou součástí procesu. Termín je proto vždy odhad, ne závazek — a říkám to otevřeně od začátku.',
+            ],
+            [
+                'heading' => 'Tvorba s vaší zpětnou vazbou',
+                'text'    => 'Průběžně vás informuji o postupu a zapojuji vás do klíčových rozhodnutí. Výsledek odpovídá tomu, co jste si přáli — protože nečekám na konec projektu, abych to zjistil.',
+            ],
+            [
+                'heading' => 'Přímý kontakt',
+                'text'    => 'Zavolejte mi kdykoliv — v drtivé většině případů zvednu hned. Pokud ne, domluvíme se na termínu ještě ten den. Žádný tiket, žádné čekání na odpověď koordinátora. Mluvíte přímo se mnou — před projektem, v průběhu i po spuštění.',
+            ],
         ],
     ],
 
-    'commitment' => [
-        'heading' => 'RYCHLE, LEVNĚ, KVALITNĚ — VYBERTE SI DVĚ',
-        'text'    => 'Někdo vám slíbí web rychle, levně a perfektně zároveň. Vyberte si dvě — třetí je vždy obchodní trik, který poznáte až na faktuře.
-
-18 let v Toyotě na projektovém plánování a řízení kvality mě naučilo jedno: chyby jsou drahé a zkratky je jenom odkládají. Tyto principy teď aplikuji na tvorbu webů.
-
-Každý projekt začíná hodinovou konzultací. Bez formuláře, bez šablony. Vyslechnu váš byznys, vaše zákazníky a vaše cíle — teprve pak navrhuji řešení. Pokud spolupráce dává smysl, připravím přesnou specifikaci a cenovou nabídku. To je práce, která trvá celý den — proto má svou cenu. Pokud se rozhodnete projekt realizovat, tato částka se odečítá z výsledné ceny.
-
-Neprogramuji na WordPressu. Žádné pluginy třetích stran, žádné bezpečnostní díry, nulové náklady na pravidelné aktualizace. Ušetříte i na tom, co nemusíte platit.',
-        'steps' => [
-            ['title' => 'Porozumění',      'description' => 'Nejdřív pochopím váš byznys, vaše zákazníky a jejich potřeby. Bez tohoto kroku by jakékoli řešení bylo jen náhodným střílením.'],
-            ['title' => 'Řešení na míru',  'description' => 'Navrhnu přesně to, co potřebujete — ne šablonu pro každého, ale řešení přizpůsobené vašemu trhu a cílové skupině.'],
-            ['title' => 'Výsledky a růst', 'description' => 'Po spuštění sledujeme data a ladíme. Web není jednorázový projekt — je to živý nástroj vašeho byznysu.'],
-        ],
+    'ai' => [
+        'heading'        => 'Web za odpoledne. Ale který web?',
+        'intro'          => 'Technicky to jde. Nástroj vygeneruje stránky, texty, obrázky. Problém není rychlost.',
+        'problem'        => 'Problém je, co musí vzniknout předtím — a co žádný nástroj za vás neudělá. Kdo jsou vaši zákazníci a co skutečně hledají? Jak se lišíte od konkurence? Co má web říkat a v jakém pořadí, aby člověk zůstal a kontaktoval vás?',
+        'conclusion'     => 'Bez těchto odpovědí vygeneruje AI generický web. Hezky vypadající — a zaměnitelný s desítkami dalších. A výzkum, který tyto odpovědi přinese, nezabere odpoledne. Zabere dny.',
+        'laik_heading'   => 'Laik + AI',
+        'laik_text'      => 'Rychlý výsledek. Generický, neověřený, zaměnitelný.',
+        'expert_heading' => 'Odborník + AI',
+        'expert_text'    => 'Stejná rychlost na rutině. Strategie, kontrola a výsledek, za který někdo ručí.',
+        'note'           => 'AI web dává smysl, když zkoušíte nápad bez závazku. Pokud provozujete byznys, je to sázka na špatného koně.',
+        'outro'          => 'AI používám jako nástroj — zkracuje čas na rutinní práci. Ale strategii, výzkum a rozhodnutí o tom, co web musí dělat, nelze přeskočit. To jsou hodiny práce, které předcházejí prvnímu řádku kódu. Celý proces řídím, koordinuji a kontroluji já — od první analýzy přes ladění textů a designu až po testování výsledku. AI mi v tom pomáhá. Nahradit mě v tom nedokáže.',
     ],
 
-    'about' => [
-        'subheading'     => 'Představení',
-        'heading'        => 'Pracujete přímo se mnou — ne přes koordinátory',
-        'description'    => 'Zarezervujte si bezplatnou konzultaci — nezávazně, bez registrace, bez zbytečných formalit',
-        'content_title'  => 'Co udělám jako první',
-        'content'        => [
-            'Zjistím, co vaši zákazníci skutečně hledají — a co je přesvědčí ke kontaktu nebo objednávce.',
-            'Analyzuji konkurenci, abychom věděli, kde máte prostor vyniknout a co musí váš web říkat.',
-            'Připravím přesnou nabídku s jasně definovaným rozsahem a cenou — žádné překvapení na faktuře.',
-            'Navrhnu strukturu a obsah webu tak, aby uživatele přirozeně vedl od prvního dojmu k akci.',
-            'Nastavím technické SEO od prvního dne — ne jako doplněk, ale jako základ celého projektu.',
-        ],
-        'years_label'    => 'Let zkušeností',
-        'guarantee_h'    => 'Jedno místo zodpovědnosti.',
-        'guarantee_text' => 'Nekomunikujete s obchodníkem, projektákem a vývojářem zvlášť. Mluvíte přímo se mnou — od první schůzky po spuštění i dál.',
+    'toyota' => [
+        'heading'      => '18 let v Toyotě. Pak jsem odešel.',
+        'text'         => 'Automobilový průmysl mě naučil jedno: za špičkovým výsledkem stojí vždy stejné kroky. Analýza, návrh, testování, ověřování — a pak znovu. Ne zkratky, ne odhady. Principy, které fungují bez ohledu na obor.',
+        'text_2'       => 'Tyto principy teď aplikuji na každý webový projekt. Poznáte to při první konzultaci, ve specifikaci, kterou dostanete před zahájením práce — a na výsledku.',
+        'quote_text'   => 'Jednou z nejsilnějších stránek Ondry je velká chuť rozvíjet se — nejen uspokojení potřeb zákazníků, ale překonání jejich očekávání.',
+        'quote_author' => 'Pavel Baudyš, ředitel řízení výroby, montáže a logistiky, Toyota Motor Manufacturing Czech Republic (2024)',
     ],
 
-    'advantages' => [
-        'subheading' => 'Proč se mnou',
-        'heading'    => 'Co dostanete navíc oproti konkurenci',
-        'items'      => [
-            ['heading' => 'Transparentní cena předem',           'text' => 'Dostanete přesnou nabídku ještě před zahájením práce. Co je v nabídce, to je i na faktuře. Žádné vícenáklady v průběhu, žádné skryté poplatky.'],
-            ['heading' => 'Bezúdržbové weby bez plateb navíc',   'text' => 'Mé weby nejsou postavené na WordPressu ani jiném systému závislém na pluginech. Žádné pravidelné aktualizace, žádné bezpečnostní záplaty. Ušetříte až 20 000 Kč ročně.'],
-            ['heading' => 'Odpovím do 24 hodin',                 'text' => 'Neposíláte e-mail do neznáma. Komunikujete přímo se mnou a dostanete odpověď do druhého dne — i na technické dotazy, i měsíce po spuštění projektu.'],
-            ['heading' => 'Partner i po spuštění',               'text' => 'Spuštění webu je začátek, ne konec spolupráce. Jsem tu pro drobné úpravy, technické otázky nebo rozvoj projektu v souladu s tím, jak roste váš byznys.'],
-        ],
-    ],
-
-    'steps' => [
-        'subheading' => 'Jak probíhá spolupráce',
-        'heading'    => 'Jednoduchý proces bez zbytečných komplikací',
-        'items'      => [
-            ['heading' => 'Bezplatná konzultace',          'text' => 'Řekněte mi o svém projektu. Nezávazně, bez registrace. Zjistíme společně, jestli a jak vám mohu pomoci — a já vám řeknu upřímný názor, i kdyby spolupráce nedávala smysl.'],
-            ['heading' => 'Specifikace na míru',            'text' => 'Pokud spolupráce dává smysl, připravím přesný plán projektu — co bude na webu, kolik stránek, jakou technologii, kolik to bude stát a kdy to dodám. Specifikace je placená práce. Pokud se rozhodnete jít do realizace, tato částka se odečítá z výsledné ceny projektu.'],
-            ['heading' => 'Tvorba s vaší zpětnou vazbou', 'text' => 'Průběžně vás informuji o postupu a zapojuji vás do klíčových rozhodnutí. Váš pohled je součástí procesu — výsledek odpovídá tomu, co jste si přáli.'],
-            ['heading' => 'Podpora i po spuštění',         'text' => 'Jsem k dispozici i po spuštění. Drobné úpravy, technická pomoc nebo rozvoj projektu — ozvěte se, vždy se ozvu zpět do druhého dne.'],
-        ],
-    ],
-
-    'projects' => [
-        'subheading' => 'Realizované projekty',
-        'heading'    => 'Ukázky práce v praxi',
-        'cta'        => 'Všechny projekty',
+    'portfolio' => [
+        'heading'     => 'Portfolio',
+        'placeholder' => '[Vizuál projektu]',
+        'cta'         => 'Všechny projekty →',
     ],
 
     'testimonials' => [
-        'subheading'    => 'Reference klientů',
-        'heading'       => 'Co říkají ti, pro které jsem pracoval',
-        'reviews_label' => 'hodnocení',
+        'heading' => 'Co říkají ti, pro které jsem pracoval.',
     ],
 
-    'faq' => [
-        'subheading' => 'Časté otázky',
-        'heading'    => 'Odpovědi bez marketingového žargonu',
-        'items'      => [
+    'guarantee' => [
+        'heading' => 'Dvě věci, na které se můžete spolehnout.',
+        'items'   => [
             [
-                'q' => 'Kolik bude stát můj web?',
-                'a' => 'Záleží na rozsahu. Základní webová prezentace začíná od 20 000 Kč, pokročilejší projekty se pohybují v desítkách tisíc. Konkrétní cenu vám řeknu až po bezplatné konzultaci, kdy pochopím vaše potřeby. Na stránce Ceník najdete přehled orientačních cen pro jednotlivé typy projektů.',
+                'heading' => 'Cena dopředu',
+                'text'    => 'Dostanete specifikaci s přesnou cenou ještě před zahájením práce. Co je ve specifikaci, to je na faktuře. Bez vícenákladů, bez překvapení.',
             ],
             [
-                'q' => 'Jak dlouho trvá tvorba webu?',
-                'a' => 'Jednoduchý web zvládneme za 3–4 týdny od schválení zadání. Složitější projekty trvají 6–10 týdnů. Závisí také na tom, jak rychle dodáte podklady (texty, fotografie). Vždy vám řeknu realistický termín předem — ne takový, který vás potěší, ale takový, který dodržím.',
-            ],
-            [
-                'q' => 'Proč si nevybrat agenturu místo freelancera?',
-                'a' => 'V agentuře za váš projekt zodpovídá několik lidí — obchodník, projektový manažer, grafik, vývojář. Informace se ztrácejí, odpovědnost se rozřeďuje. U mě komunikujete přímo s člověkem, který web skutečně tvoří. Jedno místo kontaktu, jedno místo zodpovědnosti — a mnohem kratší cesta od nápadu k výsledku.',
-            ],
-            [
-                'q' => 'Budu moct web sám upravovat?',
-                'a' => 'Záleží na dohodě. Pro projekty s blogem nebo galerií integruji jednoduché administrační rozhraní. Pokud potřebujete jen drobné úpravy textu nebo obrázků, postarám se o ně v rámci podpory bez dalších nákladů. Nemusíte se učit žádný složitý systém.',
-            ],
-            [
-                'q' => 'Co jsou vlastně „bezúdržbové weby"?',
-                'a' => 'Většina webů běží na WordPressu a vyžaduje pravidelné aktualizace pluginů — jinak jsou zranitelné nebo přestávají fungovat. Moje weby jsou psané vlastním kódem bez závislosti na pluginech třetích stran. Výsledek: žádné náklady na pravidelnou údržbu, podstatně vyšší bezpečnost a rychlejší načítání. Ušetříte až 20 000 Kč ročně.',
-            ],
-            [
-                'q' => 'Co když s výsledkem nebudu spokojený?',
-                'a' => 'Pracuji průběžně s vaší zpětnou vazbou — nečekám na konec projektu, abych pak doufal, že se vám výsledek líbí. Jasné zadání, pravidelná komunikace a průběžné ukázky zaručí, že výsledek odpovídá vašim očekáváním. Spokojení klienti jsou základ mého podnikání — a důkaz toho najdete v recenzích na Google.',
+                'heading' => 'Přímý kontakt vždy',
+                'text'    => 'Komunikujete přímo se mnou — ne s obchodníkem nebo koordinátorem. Zavolejte kdykoliv. V drtivé většině případů zvednu hned.',
             ],
         ],
     ],
 
-    'price' => [
-        'subheading'  => 'Transparentní ceny',
-        'heading'     => 'Přesně víte, do čeho jdete',
-        'description' => 'Férové ceny bez skrytých poplatků. Orientační ceník vám dá jasnou představu o potřebné investici ještě před naší první schůzkou.',
-        'cta'         => 'Zobrazit ceník',
-    ],
-
-    'cta' => [
-        'heading'   => 'Připraveni začít? Konzultace je zdarma.',
-        'quotation' => 'Získat nabídku',
-        'message'   => 'Nebo napsat zprávu',
+    'final_cta' => [
+        'quote_text'   => 'Díky individuálnímu přístupu, flexibilitě a profesionalitě odpovídá výsledek našim představám.',
+        'quote_author' => 'Hana Jaskmanická, výkonná ředitelka, VP Industry',
+        'heading'      => 'Řeknu vám upřímný názor na váš projekt.',
+        'subtext'      => 'I kdyby spolupráce nedávala smysl — řeknu vám to rovnou.',
+        'cta_label'    => 'Domluvit konzultaci',
+        'cta_note'     => 'Bezplatně. Bez závazku.',
     ],
 
 ];

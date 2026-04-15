@@ -20,57 +20,46 @@
     />
 
     <div class="container-site">
-        <p class="section-subheading">{{ __('home.hero.subheading') }}</p>
         <h1 class="section-hero__heading">
-            {!! __('home.hero.heading') !!}
+            {{ __('home.hero.heading') }}
         </h1>
         <div class="hero-chips" aria-hidden="true">
             @foreach (__('home.hero.chips') as $i => $chip)
                 <span class="hero-chip" style="--i:{{ $i }}">{{ $chip }}</span>
             @endforeach
         </div>
-        <blockquote class="hero-quote">
-            <div class="hero-quote__text">
-                @foreach (array_slice(__('home.hero.bio'), 0, -1) as $line)
-                    <span>{!! $line !!}</span>
-                @endforeach
-            </div>
-            <footer class="hero-quote__author">
-                <span class="hero-quote__dash"></span>
-                <cite>{!! last(__('home.hero.bio')) !!}</cite>
-            </footer>
-        </blockquote>
+        <p class="section-hero__subline">{{ __('home.hero.subline') }}</p>
         <div class="section-hero__actions">
-            <a href="{{ lroute('contact') }}" class="btn btn-primary">
-                {{ __('home.hero.cta_contact') }}
+            <a href="{{ lroute('contact') }}" class="btn btn-primary" data-consultation-cta>
+                {{ __('home.hero.cta_primary') }}
                 <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
             </a>
-            <a href="#{{ __('home.anchors.services') }}" class="btn btn-secondary">
-                {{ __('home.hero.cta_consultation') }}
+            <a href="#{{ __('home.anchors.how_i_work') }}" class="btn btn-secondary">
+                {{ __('home.hero.cta_secondary') }}
             </a>
         </div>
     </div>
 </section>
 
 {{-- ===================================================
-     BRAND LOGOS (klienti)
+     SOCIAL PROOF BAR
      =================================================== --}}
-<section class="section-wrapper section-alt" data-reveal aria-label="Klienti">
+<section class="section-wrapper section-alt section-social-proof" aria-label="Klienti">
     <div class="container-site">
         <div class="brands-grid">
-            @foreach ([
-                ['src' => 'brands/upstyle.png',           'alt' => 'Upstyle systems'],
-                ['src' => 'brands/toyota.png',             'alt' => 'Toyota'],
-                ['src' => 'brands/yolk_studio.png',        'alt' => 'Yolk studio'],
-            ] as $brand)
+            @foreach (__('home.social_proof.brands') as $brand)
             <div class="brand-item">
-                <img
-                    src="{{ asset('img/' . $brand['src']) }}"
-                    alt="{{ $brand['alt'] }}"
-                    loading="lazy"
-                    width="120"
-                    height="48"
-                >
+                @if ($brand['image'])
+                    <img
+                        src="{{ asset('img/brands/' . $brand['image']) }}"
+                        alt="{{ $brand['name'] }}"
+                        loading="lazy"
+                        width="120"
+                        height="48"
+                    >
+                @else
+                    <span class="brand-item__name">{{ $brand['name'] }}</span>
+                @endif
             </div>
             @endforeach
         </div>
@@ -78,72 +67,62 @@
 </section>
 
 {{-- ===================================================
-     PAIN — rozpoznání problémů zákazníka
+     PROBLÉMY NA TRHU
      =================================================== --}}
-<section class="section-wrapper section-alt" data-reveal>
+<section class="section-wrapper" data-reveal>
     <div class="container-site">
         <header class="section-header">
-            <p class="section-subheading">{{ __('home.pain.subheading') }}</p>
-            <h2>{{ __('home.pain.heading') }}</h2>
+            <h2>{{ __('home.problems.heading') }}</h2>
         </header>
 
         <div class="pain-grid" data-reveal-group>
-            @foreach (__('home.pain.items') as $item)
+            @foreach (__('home.problems.items') as $item)
             <div class="pain-card">
                 <h3>{{ $item['heading'] }}</h3>
                 <p>{{ $item['text'] }}</p>
+                @if (!empty($item['quote_text']))
+                <blockquote class="inline-quote">
+                    <p>{{ $item['quote_text'] }}</p>
+                    <footer>— {{ $item['quote_author'] }}</footer>
+                </blockquote>
+                @endif
             </div>
             @endforeach
         </div>
-    </div>
-</section>
 
-{{-- ===================================================
-     SERVICES — primary (websites, webapps, eshop)
-     =================================================== --}}
-<section id="{{ __('home.anchors.services') }}" class="section-wrapper section-wrapper--glow" data-reveal>
-    <div class="container-site">
-        <header class="section-header">
-            <p class="section-subheading">{{ __('home.services.subheading') }}</p>
-            <h2>{{ __('home.services.heading') }}</h2>
-            <p class="section-header__desc">{{ __('home.services.description') }}</p>
-        </header>
-
-        @php
-        $serviceIcons = [
-            'websites' => 'layers',
-            'webapps'  => 'boxes',
-            'eshop'    => 'store',
-        ];
-        @endphp
-
-        <div class="services-grid" data-reveal-group>
-            @foreach (['websites','webapps','eshop'] as $key)
-            <article class="service-card">
-                <x-dynamic-component :component="'icon.' . $serviceIcons[$key]" class="w-8 h-8 service-card__icon" />
-                <h3>{{ __("home.services.{$key}.title") }}</h3>
-                <p>{{ __("home.services.{$key}.description") }}</p>
-            </article>
-            @endforeach
+        <div class="problems-transition" data-reveal>
+            <strong>{{ __('home.problems.transition_heading') }}</strong>
+            <p>{{ __('home.problems.transition_text') }}</p>
         </div>
     </div>
 </section>
 
 {{-- ===================================================
-     COMMITMENT
+     JAK PRACUJI
      =================================================== --}}
-<section class="section-wrapper section-alt" data-reveal>
+<section id="{{ __('home.anchors.how_i_work') }}" class="section-wrapper section-alt" data-reveal>
     <div class="container-site">
         <header class="section-header">
-            <h2>{{ __('home.commitment.heading') }}</h2>
+            <h2>{{ __('home.how_i_work.heading') }}</h2>
         </header>
-        <p class="section-prose-text">{!! nl2br(e(__('home.commitment.text'))) !!}</p>
 
-        <ol class="commitment-steps" data-reveal-group>
-            @foreach (__('home.commitment.steps') as $step)
-            <li>
-                <strong>{{ $step['title'] }}</strong>
-                <p>{{ $step['description'] }}</p>
+        <ol class="steps-list" data-reveal-group>
+            @foreach (__('home.how_i_work.steps') as $i => $step)
+            <li class="step-item">
+                <span class="step-number">{{ $i + 1 }}</span>
+                <div class="step-content">
+                    <h3>{{ $step['heading'] }}</h3>
+                    <p>{{ $step['text'] }}</p>
+                    @if (!empty($step['quote_text']))
+                    <blockquote class="inline-quote">
+                        <p>{{ $step['quote_text'] }}</p>
+                        <footer>— {{ $step['quote_author'] }}</footer>
+                    </blockquote>
+                    @endif
+                    @if (!empty($step['note']))
+                    <p class="step-note">{{ $step['note'] }}</p>
+                    @endif
+                </div>
             </li>
             @endforeach
         </ol>
@@ -151,70 +130,55 @@
 </section>
 
 {{-- ===================================================
-     ABOUT — presentation + checklist
+     AI — ROVNOU K VĚCI
      =================================================== --}}
-<section class="section-wrapper" data-reveal>
+<section class="section-wrapper section-wrapper--glow" data-reveal>
     <div class="container-site">
         <header class="section-header">
-            <p class="section-subheading">{{ __('home.about.subheading') }}</p>
-            <h2>{{ __('home.about.heading') }}</h2>
-            <p class="section-header__desc">{{ __('home.about.description') }}</p>
+            <h2>{{ __('home.ai.heading') }}</h2>
         </header>
 
-        <div class="about-layout">
-            <div class="about-content">
-                <h3>{{ __('home.about.content_title') }}</h3>
-                <ul>
-                    @foreach (__('home.about.content') as $item)
-                    <li>
-                        <x-icon.circle-check-big class="w-5 h-5 shrink-0" />
-                        <span>{{ $item }}</span>
-                    </li>
-                    @endforeach
-                </ul>
+        <div class="ai-intro" data-reveal>
+            <p class="section-prose-text">{{ __('home.ai.intro') }}</p>
+            <p class="section-prose-text">{{ __('home.ai.problem') }}</p>
+            <p class="section-prose-text">{{ __('home.ai.conclusion') }}</p>
+        </div>
+
+        <div class="ai-comparison" data-reveal>
+            <div class="ai-comparison__col ai-comparison__col--laik">
+                <h3>{{ __('home.ai.laik_heading') }}</h3>
+                <p>{{ __('home.ai.laik_text') }}</p>
             </div>
-
-            <div class="about-video" data-video-player>
-                <video
-                    class="about-video__player"
-                    src="{{ asset('videos/001_titulky_fs.mp4') }}"
-                    muted
-                    loop
-                    playsinline
-                    preload="metadata"
-                    data-video
-                ></video>
-
-                <div class="vp-overlay" data-vp-overlay>
-                    <div class="vp-progress" data-vp-progress role="slider" aria-label="Pozice videa" tabindex="0">
-                        <div class="vp-progress__fill" data-vp-fill></div>
-                        <div class="vp-progress__thumb"></div>
-                    </div>
-                    <div class="vp-bar">
-                        <button class="vp-btn" data-vp-play aria-label="Přehrát">
-                            <svg class="vp-icon vp-icon--play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 3l14 9-14 9V3z"/></svg>
-                            <svg class="vp-icon vp-icon--pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-                        </button>
-                        <span class="vp-time" data-vp-time>0:00 / 0:00</span>
-                        <div class="vp-bar__right">
-                            <button class="vp-btn" data-vp-mute aria-label="Ztlumit">
-                                <svg class="vp-icon vp-icon--vol-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
-                                <svg class="vp-icon vp-icon--vol-on"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-                            </button>
-                            <input class="vp-volume" data-vp-vol type="range" min="0" max="100" step="1" value="100" aria-label="Hlasitost">
-                        </div>
-                    </div>
-                </div>
+            <div class="ai-comparison__divider" aria-hidden="true"></div>
+            <div class="ai-comparison__col ai-comparison__col--expert">
+                <h3>{{ __('home.ai.expert_heading') }}</h3>
+                <p>{{ __('home.ai.expert_text') }}</p>
             </div>
+        </div>
 
-            <div class="about-extras">
-                <div class="stat-block">
-                    <span class="stat-number" data-counter>18</span>
-                    <span class="stat-label">{{ __('home.about.years_label') }}</span>
-                </div>
-                <blockquote>
-                    <strong>{{ __('home.about.guarantee_h') }}</strong>
-                    <p>{{ __('home.about.guarantee_text') }}</p>
+        <p class="ai-note">{{ __('home.ai.note') }}</p>
+
+        <p class="section-prose-text ai-outro" data-reveal>{{ __('home.ai.outro') }}</p>
+    </div>
+</section>
+
+{{-- ===================================================
+     TOYOTA — ODKUD POCHÁZEJÍ MÉ PRINCIPY
+     =================================================== --}}
+<section class="section-wrapper section-alt" data-reveal>
+    <div class="container-site">
+        <div class="toyota-layout">
+            <div class="toyota-content">
+                <header class="section-header section-header--left">
+                    <h2>{{ __('home.toyota.heading') }}</h2>
+                </header>
+                <p class="section-prose-text">{{ __('home.toyota.text') }}</p>
+                <p class="section-prose-text">{{ __('home.toyota.text_2') }}</p>
+            </div>
+            <div class="toyota-quote" data-reveal>
+                <blockquote class="featured-quote">
+                    <p>{{ __('home.toyota.quote_text') }}</p>
+                    <footer>— {{ __('home.toyota.quote_author') }}</footer>
                 </blockquote>
             </div>
         </div>
@@ -222,98 +186,31 @@
 </section>
 
 {{-- ===================================================
-     ADVANTAGES
-     =================================================== --}}
-<section class="section-wrapper section-alt" data-reveal>
-    <div class="container-site">
-        <header class="section-header">
-            <p class="section-subheading">{{ __('home.advantages.subheading') }}</p>
-            <h2>{{ __('home.advantages.heading') }}</h2>
-        </header>
-
-        <div class="advantages-grid" data-reveal-group>
-            @foreach (__('home.advantages.items') as $adv)
-            <div class="advantage-card">
-                <h3>{{ $adv['heading'] }}</h3>
-                <p>{!! $adv['text'] !!}</p>
-            </div>
-            @endforeach
-        </div>
-    </div>
-</section>
-
-{{-- ===================================================
-     STEPS — how we work
+     PORTFOLIO — PLACEHOLDER
      =================================================== --}}
 <section class="section-wrapper" data-reveal>
     <div class="container-site">
         <header class="section-header">
-            <p class="section-subheading">{{ __('home.steps.subheading') }}</p>
-            <h2>{{ __('home.steps.heading') }}</h2>
+            <h2>{{ __('home.portfolio.heading') }}</h2>
         </header>
 
-        <ol class="steps-list" data-reveal-group>
-            @foreach (__('home.steps.items') as $i => $step)
-            <li class="step-item">
-                <span class="step-number">{{ $i + 1 }}</span>
-                <div>
-                    <h3>{{ $step['heading'] }}</h3>
-                    <p>{!! $step['text'] !!}</p>
+        <div class="portfolio-grid" data-reveal-group>
+            @foreach (range(1, 5) as $i)
+            <article class="portfolio-card portfolio-card--placeholder">
+                <div class="portfolio-card__visual" aria-hidden="true">
+                    <span class="portfolio-card__placeholder-text">{{ __('home.portfolio.placeholder') }}</span>
                 </div>
-            </li>
-            @endforeach
-        </ol>
-    </div>
-</section>
-
-{{-- ===================================================
-     SERVICES — secondary (seo, design, social)
-     =================================================== --}}
-<section class="section-wrapper section-alt" data-reveal>
-    <div class="container-site">
-        <header class="section-header">
-            <h2>{{ __('home.services.heading_other') }}</h2>
-        </header>
-
-        @php
-        $serviceIcons2 = [
-            'seo'    => 'search',
-            'design' => 'palette',
-            'social' => 'thumb-up',
-        ];
-        @endphp
-
-        <div class="services-grid" data-reveal-group>
-            @foreach (['seo','design','social'] as $key)
-            <article class="service-card">
-                <x-dynamic-component :component="'icon.' . $serviceIcons2[$key]" class="w-8 h-8 service-card__icon" />
-                <h3>{{ __("home.services.{$key}.title") }}</h3>
-                <p>{{ __("home.services.{$key}.description") }}</p>
+                <div class="portfolio-card__body">
+                    <p class="portfolio-card__placeholder-line"></p>
+                    <p class="portfolio-card__placeholder-line portfolio-card__placeholder-line--short"></p>
+                </div>
             </article>
             @endforeach
-        </div>
-    </div>
-</section>
-
-{{-- ===================================================
-     PROJECTS PREVIEW
-     =================================================== --}}
-<section class="section-wrapper" data-reveal>
-    <div class="container-site">
-        <header class="section-header">
-            <p class="section-subheading">{{ __('home.projects.subheading') }}</p>
-            <h2>{{ __('home.projects.heading') }}</h2>
-        </header>
-
-        {{-- TODO: render latest projects from DB (Fáze 3) --}}
-        <div class="projects-preview-placeholder">
-            <x-icon.layers class="w-10 h-10 mx-auto mb-3 opacity-30" />
-            <p>{{ __('projects.empty') }}</p>
         </div>
 
         <div class="section-footer-cta">
             <a href="{{ lroute('projects') }}" class="btn btn-secondary">
-                {{ __('home.projects.cta') }}
+                {{ __('home.portfolio.cta') }}
                 <x-icon.arrow-right class="w-4 h-4 shrink-0" />
             </a>
         </div>
@@ -321,18 +218,12 @@
 </section>
 
 {{-- ===================================================
-     TESTIMONIALS
+     REFERENCE KLIENTŮ
      =================================================== --}}
-<section class="section-wrapper section-wrapper--glow" data-reveal>
+<section class="section-wrapper section-alt section-wrapper--glow" data-reveal>
     <div class="container-site">
         <header class="section-header">
-            <p class="section-subheading">{{ __('home.testimonials.subheading') }}</p>
             <h2>{{ __('home.testimonials.heading') }}</h2>
-            <div class="testimonials-rating">
-                <span class="testimonials-stars" aria-hidden="true">★★★★★</span>
-                <strong>{{ __('testimonials.meta.rating') }}</strong>
-                <span class="text-muted" style="font-size:.9375rem;">({{ __('testimonials.meta.total') }} {{ __('home.testimonials.reviews_label') }})</span>
-            </div>
         </header>
 
         <div class="testimonials-grid" data-reveal-group>
@@ -404,62 +295,43 @@
 </section>
 
 {{-- ===================================================
-     PRICE TEASER
-     =================================================== --}}
-<section class="section-wrapper section-alt" data-reveal>
-    <div class="container-site">
-        <div class="price-teaser">
-            <div class="price-teaser__content">
-                <p class="section-subheading">{{ __('home.price.subheading') ?? 'Transparentní ceník' }}</p>
-                <h2>{{ __('home.price.heading') }}</h2>
-                <p class="section-header__desc" style="text-align:left;margin-inline:0;">{{ __('home.price.description') ?? '' }}</p>
-            </div>
-            <div class="price-teaser__action">
-                <a href="{{ lroute('price') }}" class="btn btn-primary">
-                    {{ __('home.price.cta') }}
-                    <x-icon.arrow-right class="w-4 h-4 shrink-0" />
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
-{{-- ===================================================
-     FAQ — časté otázky
+     GARANCE
      =================================================== --}}
 <section class="section-wrapper" data-reveal>
     <div class="container-site">
         <header class="section-header">
-            <p class="section-subheading">{{ __('home.faq.subheading') }}</p>
-            <h2>{{ __('home.faq.heading') }}</h2>
+            <h2>{{ __('home.guarantee.heading') }}</h2>
         </header>
 
-        <div class="faq-list" data-reveal-group>
-            @foreach (__('home.faq.items') as $item)
-            <details class="faq-item">
-                <summary>{{ $item['q'] }}</summary>
-                <p class="faq-answer">{{ $item['a'] }}</p>
-            </details>
+        <div class="guarantee-grid" data-reveal-group>
+            @foreach (__('home.guarantee.items') as $item)
+            <div class="guarantee-card">
+                <h3>{{ $item['heading'] }}</h3>
+                <p>{{ $item['text'] }}</p>
+            </div>
             @endforeach
         </div>
     </div>
 </section>
 
 {{-- ===================================================
-     CTA — final
+     ZÁVĚREČNÉ CTA
      =================================================== --}}
 <section class="section-wrapper section-cta" data-reveal>
     <div class="container-site">
-        <h2 style="font-size:clamp(1.75rem,3.5vw,2.5rem);letter-spacing:-0.025em;margin-bottom:1.5rem;width:100%;text-align:center;">
-            {!! __('home.cta.heading') ?? __('layout.prefooter.tagline') !!}
-        </h2>
-        <a href="{{ lroute('contact') }}" class="btn btn-primary">
-            {{ __('home.cta.quotation') }}
+        <blockquote class="final-cta-quote">
+            <p>{{ __('home.final_cta.quote_text') }}</p>
+            <footer>— {{ __('home.final_cta.quote_author') }}</footer>
+        </blockquote>
+
+        <h2 class="final-cta-heading">{{ __('home.final_cta.heading') }}</h2>
+        <p class="final-cta-subtext">{{ __('home.final_cta.subtext') }}</p>
+
+        <a href="{{ lroute('contact') }}" class="btn btn-primary" data-consultation-cta>
+            {{ __('home.final_cta.cta_label') }}
             <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
         </a>
-        <a href="{{ lroute('contact') }}" class="btn btn-secondary">
-            {{ __('home.cta.message') }}
-        </a>
+        <p class="final-cta-note">{{ __('home.final_cta.cta_note') }}</p>
     </div>
 </section>
 
