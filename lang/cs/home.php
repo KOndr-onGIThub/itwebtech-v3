@@ -86,16 +86,32 @@ return [
     ],
 
     'ai' => [
-        'heading'        => 'Web za odpoledne. Ale který web?',
-        'intro'          => 'Technicky to jde. Nástroj vygeneruje stránky, texty, obrázky. Problém není rychlost.',
-        'problem'        => 'Problém je, co musí vzniknout předtím — a co žádný nástroj za vás neudělá. Kdo jsou vaši zákazníci a co skutečně hledají? Jak se lišíte od konkurence? Co má web říkat a v jakém pořadí, aby člověk zůstal a kontaktoval vás?',
-        'conclusion'     => 'Bez těchto odpovědí vygeneruje AI generický web. Hezky vypadající — a zaměnitelný s desítkami dalších. A výzkum, který tyto odpovědi přinese, nezabere odpoledne. Zabere dny.',
-        'laik_heading'   => 'Laik + AI',
-        'laik_text'      => 'Rychlý výsledek. Generický, neověřený, zaměnitelný.',
-        'expert_heading' => 'Odborník + AI',
-        'expert_text'    => 'Stejná rychlost na rutině. Strategie, kontrola a výsledek, za který někdo ručí.',
-        'note'           => 'AI web dává smysl, když zkoušíte nápad bez závazku. Pokud provozujete byznys, je to sázka na špatného koně.',
-        'outro'          => 'AI používám jako nástroj — zkracuje čas na rutinní práci. Ale strategii, výzkum a rozhodnutí o tom, co web musí dělat, nelze přeskočit. To jsou hodiny práce, které předcházejí prvnímu řádku kódu. Celý proces řídím, koordinuji a kontroluji já — od první analýzy přes ladění textů a designu až po testování výsledku. AI mi v tom pomáhá. Nahradit mě v tom nedokáže.',
+        'subheading' => 'AI a webdesign',
+        'heading'    => 'Web za odpoledne. Ale který web?',
+        'intro'      => 'Technicky to jde. Nástroj vygeneruje stránky, texty, obrázky. Problém není rychlost.',
+        'laik' => [
+            'label'   => 'Laik + AI',
+            'outcome' => 'Rychlý výsledek.',
+            'items'   => [
+                'Generický, neověřený, zaměnitelný',
+                'Bez výzkumu zákazníků a konkurence',
+                'Bez strategie, co má web říkat a v jakém pořadí',
+                'Hezky vypadající — identický s desítkami dalších',
+            ],
+            'note' => 'AI web dává smysl, když zkoušíte nápad bez závazku.',
+        ],
+        'expert' => [
+            'label'   => 'Odborník + AI',
+            'outcome' => 'Stejná rychlost na rutině.',
+            'items'   => [
+                'Strategie, výzkum a pochopení vašeho byznysu',
+                'Kontrola a výsledek, za který někdo ručí',
+                'Obsah navržený tak, aby člověk zůstal a kontaktoval vás',
+                'Web, který se liší od konkurence — záměrně',
+            ],
+            'note' => 'Pokud provozujete byznys, je to rozdíl, který zákazníci poznají.',
+        ],
+        'closing' => 'AI používám jako nástroj — zkracuje čas na rutinní práci. Strategii, výzkum a rozhodnutí o tom, co web musí dělat, nelze přeskočit. To jsou hodiny práce, které předcházejí prvnímu řádku kódu.',
     ],
 
     'toyota' => [
@@ -128,6 +144,20 @@ return [
                 'text'    => 'Komunikujete přímo se mnou — ne s obchodníkem nebo koordinátorem. Zavolejte kdykoliv. V drtivé většině případů zvednu hned.',
             ],
         ],
+    ],
+
+    'price' => [
+        'subheading'  => 'Transparentní ceny',
+        'heading'     => 'Přesně víte, do čeho jdete',
+        'description' => 'Férové ceny bez skrytých poplatků. Orientační ceník vám dá jasnou představu o potřebné investici ještě před naší první schůzkou.',
+        'cta'         => 'Zobrazit ceník',
+    ],
+
+    'cta' => [
+        'heading'      => 'Připraveni začít? Konzultace je zdarma.',
+        'quotation'    => 'Získat nabídku',
+        'consultation' => 'Domluvit konzultaci',
+        'message'      => 'Nebo napsat zprávu',
     ],
 
     'final_cta' => [
