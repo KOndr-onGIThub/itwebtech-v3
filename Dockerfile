@@ -14,7 +14,7 @@ WORKDIR /var/www/html
 
 # Composer deps
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader
+RUN composer install --no-dev --prefer-dist --no-interaction --no-scripts
 
 # Node deps
 COPY package.json package-lock.json* ./
@@ -22,6 +22,9 @@ RUN npm install
 
 # Zbytek appky
 COPY . .
+
+# Dokončení composeru po zkopírování app souborů
+RUN composer dump-autoload --optimize
 
 # Build assetů
 RUN npm run build
