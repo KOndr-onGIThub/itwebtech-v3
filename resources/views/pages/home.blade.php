@@ -6,6 +6,55 @@
 @section('content')
 
 {{-- ===================================================
+     CONSULTATION MODAL (Alpine.js — placeholder for FÁZE 2)
+     =================================================== --}}
+<div
+    x-data="{ open: false }"
+    @keydown.escape.window="open = false"
+    @open-consultation-modal.window="open = true"
+>
+    {{-- Backdrop + dialog --}}
+    <div
+        x-show="open"
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-150"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="consultation-modal-backdrop"
+        @click.self="open = false"
+        style="display:none;"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Domluvit konzultaci"
+    >
+        <div class="consultation-modal">
+            <button class="consultation-modal__close" @click="open = false" aria-label="Zavřít">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+
+            {{-- Video placeholder (FÁZE 2: nahradit skutečným videem) --}}
+            <div class="consultation-modal__video-placeholder">
+                <div class="consultation-modal__video-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3l14 9-14 9V3z"/></svg>
+                </div>
+                <p>[Video bude doplněno]</p>
+            </div>
+
+            <div class="consultation-modal__body">
+                <h2>Domluvit konzultaci</h2>
+                <p>Bezplatně. Bez závazku. Řeknu vám upřímný názor na váš projekt.</p>
+                <a href="{{ lroute('contact') }}" class="btn btn-primary">
+                    Napsat zprávu
+                    <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- ===================================================
      HERO
      =================================================== --}}
 <section class="section-hero">
@@ -30,10 +79,14 @@
         </div>
         <p class="section-hero__subline">{{ __('home.hero.subline') }}</p>
         <div class="section-hero__actions">
-            <a href="{{ lroute('contact') }}" class="btn btn-primary" data-consultation-cta>
+            <button
+                class="btn btn-primary"
+                @click="$dispatch('open-consultation-modal')"
+                type="button"
+            >
                 {{ __('home.hero.cta_primary') }}
                 <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-            </a>
+            </button>
             <a href="#{{ __('home.anchors.how_i_work') }}" class="btn btn-secondary">
                 {{ __('home.hero.cta_secondary') }}
             </a>
@@ -327,10 +380,14 @@
         <h2 class="final-cta-heading">{{ __('home.final_cta.heading') }}</h2>
         <p class="final-cta-subtext">{{ __('home.final_cta.subtext') }}</p>
 
-        <a href="{{ lroute('contact') }}" class="btn btn-primary" data-consultation-cta>
+        <button
+            class="btn btn-primary"
+            @click="$dispatch('open-consultation-modal')"
+            type="button"
+        >
             {{ __('home.final_cta.cta_label') }}
             <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-        </a>
+        </button>
         <p class="final-cta-note">{{ __('home.final_cta.cta_note') }}</p>
     </div>
 </section>
