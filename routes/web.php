@@ -5,6 +5,8 @@ use App\Http\Controllers\PageController;
 use App\Http\Middleware\SetLocale;
 use Illuminate\Support\Facades\Route;
 
+require __DIR__.'/landing.php';
+
 /*
 |--------------------------------------------------------------------------
 | Localized routes
