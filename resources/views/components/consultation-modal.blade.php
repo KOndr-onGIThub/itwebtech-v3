@@ -79,8 +79,23 @@
                     preload="none"
                     controls
                     playsinline
-                    x-init="$watch('open', val => { if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; } })"
+                    @play="playing = true"
+                    @pause="playing = false"
+                    @ended="playing = false; $refs.video.currentTime = 0;"
+                    x-init="$watch('open', val => { if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
                 ></video>
+                {{-- Play button overlay — visible when video is not playing --}}
+                <button
+                    type="button"
+                    class="consult-modal-video__play-btn"
+                    x-show="!playing"
+                    @click="$refs.video.play()"
+                    aria-label="{{ __('home.modal.play_btn') }}"
+                >
+                    <span class="consult-modal-video__play-btn-inner" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3l14 9-14 9V3z"/></svg>
+                    </span>
+                </button>
             @else
                 <div class="consult-modal-video__placeholder" aria-label="{{ __('home.modal.video_placeholder') }}">
                     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.4" aria-hidden="true">

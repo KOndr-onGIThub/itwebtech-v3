@@ -3569,94 +3569,6 @@
     }
 
     /* ============================================================
-       CONSULTATION MODAL
-       ============================================================ */
-    .consultation-modal-backdrop {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.75);
-        backdrop-filter: blur(4px);
-        z-index: 9000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 1rem;
-    }
-    .consultation-modal {
-        background: var(--bg-card);
-        border: 1px solid var(--border-subtle);
-        border-radius: 1.25rem;
-        width: 100%;
-        max-width: 540px;
-        position: relative;
-        overflow: hidden;
-    }
-    .consultation-modal__close {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        background: rgba(148, 163, 184, 0.1);
-        border: none;
-        border-radius: 9999px;
-        width: 2rem;
-        height: 2rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--color-muted);
-        cursor: pointer;
-        z-index: 1;
-        transition: background 0.2s, color 0.2s;
-    }
-    .consultation-modal__close:hover {
-        background: rgba(148, 163, 184, 0.2);
-        color: var(--color-heading);
-    }
-    .consultation-modal__video-placeholder {
-        aspect-ratio: 16 / 9;
-        background: rgba(15, 23, 42, 0.9);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 1rem;
-        border-bottom: 1px solid var(--border-subtle);
-    }
-    .consultation-modal__video-icon {
-        width: 4rem;
-        height: 4rem;
-        border-radius: 9999px;
-        background: rgba(245, 158, 11, 0.15);
-        border: 1px solid var(--border-gold);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--color-gold-500);
-    }
-    .consultation-modal__video-placeholder p {
-        font-size: 0.875rem;
-        color: var(--color-muted);
-        font-style: italic;
-        margin: 0;
-    }
-    .consultation-modal__body {
-        padding: 2rem;
-        text-align: center;
-    }
-    .consultation-modal__body h2 {
-        font-size: 1.375rem;
-        font-weight: 700;
-        margin-bottom: 0.5rem;
-        color: var(--color-heading);
-    }
-    .consultation-modal__body p {
-        font-size: 0.9375rem;
-        color: var(--color-muted);
-        margin-bottom: 1.5rem;
-        line-height: 1.6;
-    }
-
-    /* ============================================================
        HERO — subline (replaces hero-quote)
        ============================================================ */
     .section-hero__subline {
@@ -4033,8 +3945,8 @@
         display: flex;
         flex-direction: column;
         margin: auto;
-        width: min(92vw, 680px);
-        max-height: min(92dvh, 780px);
+        width: min(92vw, 460px);
+        max-height: min(92dvh, 820px);
         overflow-y: auto;
         background: var(--bg-elevated);
         border: 1px solid var(--border-subtle);
@@ -4095,8 +4007,9 @@
 
     /* Video area */
     .consult-modal-video {
+        position: relative;
         width: 100%;
-        aspect-ratio: 16 / 9;
+        aspect-ratio: 3 / 4;
         background: var(--bg-card);
         border: 1px solid var(--border-subtle);
         border-radius: 0.75rem;
@@ -4105,6 +4018,40 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    /* Play button overlay */
+    .consult-modal-video__play-btn {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+    }
+    .consult-modal-video__play-btn-inner {
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.65);
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        transition: background 0.18s ease, transform 0.18s ease;
+    }
+    .consult-modal-video__play-btn:hover .consult-modal-video__play-btn-inner {
+        background: rgba(0, 0, 0, 0.85);
+        transform: scale(1.08);
+    }
+    .consult-modal-video__play-btn svg {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-left: 3px; /* optical centering of triangle */
     }
 
     .consult-modal-video__player {
@@ -4148,17 +4095,11 @@
         color: var(--color-muted);
     }
 
-    /* Mobile adjustments */
+    /* Mobile adjustments — vertically centered, not bottom-sheet */
     @media (max-width: 480px) {
         .consult-modal-dialog {
-            width: 100%;
-            max-height: 100dvh;
-            border-radius: 1.25rem 1.25rem 0 0;
-            top: auto;
-            bottom: 0;
-            left: 0;
-            transform: none;
-            border-bottom: none;
+            width: 92vw;
+            max-height: 92dvh;
         }
     }
 

@@ -25,6 +25,7 @@ return [
         'video_placeholder' => '[Video folgt in Kürze]',
         'calendly_btn'      => 'Beratungstermin auswählen',
         'cta_note'          => 'Kostenlos. Unverbindlich.',
+        'play_btn'          => 'Video abspielen',
     ],
 
     'anchors' => [
