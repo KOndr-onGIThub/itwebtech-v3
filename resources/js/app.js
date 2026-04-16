@@ -155,7 +155,7 @@ Alpine.data('contactForm', () => ({
 Alpine.data('consultationModal', () => ({
     open: false,
     videoReady: false,
-    videoStarted: false,
+    playing: false,
 
     openModal() {
         this.open = true;
@@ -171,19 +171,11 @@ Alpine.data('consultationModal', () => ({
 
     closeModal() {
         this.open = false;
-        this.videoStarted = false;
+        this.playing = false;
         document.body.style.overflow = '';
         // Pause & reset video if present
         const video = this.$el.querySelector('video');
         if (video) { video.pause(); video.currentTime = 0; }
-    },
-
-    startVideo() {
-        this.videoStarted = true;
-        this.$nextTick(() => {
-            const video = this.$el.querySelector('video');
-            if (video) video.play().catch(() => {});
-        });
     },
 }));
 

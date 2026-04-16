@@ -77,15 +77,20 @@
                     class="consult-modal-video__player"
                     :src="videoReady ? '{{ $videoSrc }}' : ''"
                     preload="none"
-                    :controls="videoStarted"
+                    :controls="playing"
                     playsinline
+                    @play="playing = true"
+                    @pause="playing = false"
+                    @ended="playing = false; $refs.video.currentTime = 0;"
+                    x-init="$watch('open', val => { if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
                 ></video>
+                {{-- Play button overlay — visible when video is not playing --}}
                 <button
-                    x-show="!videoStarted"
-                    @click="startVideo()"
-                    class="consult-modal-video__play-btn"
-                    aria-label="{{ __('home.modal.play_video', [], app()->getLocale()) ?? 'Přehrát video' }}"
                     type="button"
+                    class="consult-modal-video__play-btn"
+                    x-show="!playing"
+                    @click="$refs.video.play()"
+                    aria-label="{{ __('home.modal.play_btn') }}"
                 >
                     <span class="consult-modal-video__play-btn-inner" aria-hidden="true">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
