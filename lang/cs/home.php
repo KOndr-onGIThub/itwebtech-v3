@@ -15,6 +15,15 @@ return [
         'cta_secondary' => 'Jak pracuji →',
     ],
 
+    'modal' => [
+        'title'              => 'Domluvme se',
+        'subtitle'           => 'Bezplatná konzultace — nezávazně, bez registrace.',
+        'video_placeholder'  => '[Video bude doplněno]',
+        'calendly_btn'       => 'Vybrat termín konzultace',
+        'cta_note'           => 'Bezplatně. Bez závazku.',
+        'play_btn'           => 'Přehrát video',
+    ],
+
     'anchors' => [
         'how_i_work' => 'jak-pracuji',
     ],

@@ -155,6 +155,7 @@ Alpine.data('contactForm', () => ({
 Alpine.data('consultationModal', () => ({
     open: false,
     videoReady: false,
+    playing: false,
 
     openModal() {
         this.open = true;
@@ -170,6 +171,7 @@ Alpine.data('consultationModal', () => ({
 
     closeModal() {
         this.open = false;
+        this.playing = false;
         document.body.style.overflow = '';
         // Pause & reset video if present
         const video = this.$el.querySelector('video');
