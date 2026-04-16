@@ -4095,6 +4095,7 @@
 
     /* Video area */
     .consult-modal-video {
+        position: relative;
         width: 100%;
         aspect-ratio: 16 / 9;
         background: var(--bg-card);
@@ -4112,6 +4113,82 @@
         height: 100%;
         display: block;
         background: #000;
+    }
+
+    /* ── Custom play button overlay ── */
+    .consult-modal-video__play-btn {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 2;
+    }
+
+    .consult-modal-video__play-btn-inner {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: rgba(10, 10, 15, 0.82);
+        border: 2px solid var(--color-gold-500, #F59E0B);
+        box-shadow:
+            0 0 18px var(--glow-gold, rgba(245, 158, 11, 0.22)),
+            0 4px 20px rgba(0, 0, 0, 0.55);
+        color: var(--color-gold-500, #F59E0B);
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .consult-modal-video__play-btn:hover .consult-modal-video__play-btn-inner,
+    .consult-modal-video__play-btn:focus-visible .consult-modal-video__play-btn-inner {
+        transform: scale(1.09);
+        border-color: var(--color-gold-200, #FDE68A);
+        box-shadow:
+            0 0 32px rgba(245, 158, 11, 0.45),
+            0 4px 24px rgba(0, 0, 0, 0.65);
+    }
+
+    .consult-modal-video__play-btn:focus-visible {
+        outline: none;
+    }
+
+    .consult-modal-video__play-btn:focus-visible .consult-modal-video__play-btn-inner {
+        outline: 2px solid var(--color-gold-500, #F59E0B);
+        outline-offset: 5px;
+    }
+
+    /* Pulse rings */
+    .consult-modal-video__play-btn-inner::before,
+    .consult-modal-video__play-btn-inner::after {
+        content: '';
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+    }
+
+    .consult-modal-video__play-btn-inner::before {
+        inset: -10px;
+        border: 2px solid var(--color-gold-500, #F59E0B);
+        animation: consult-pulse 2s ease-out infinite;
+    }
+
+    .consult-modal-video__play-btn-inner::after {
+        inset: -18px;
+        border: 1.5px solid var(--color-gold-200, #FDE68A);
+        animation: consult-pulse 2s ease-out infinite 0.5s;
+    }
+
+    @keyframes consult-pulse {
+        0%   { opacity: 0.75; transform: scale(1); }
+        70%  { opacity: 0;    transform: scale(1.45); }
+        100% { opacity: 0;    transform: scale(1.45); }
     }
 
     .consult-modal-video__placeholder {
