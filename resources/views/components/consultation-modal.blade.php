@@ -77,7 +77,7 @@
                     class="consult-modal-video__player"
                     :src="videoReady ? '{{ $videoSrc }}' : ''"
                     preload="none"
-                    controls
+                    :controls="playing"
                     playsinline
                     @play="playing = true"
                     @pause="playing = false"
@@ -93,7 +93,9 @@
                     aria-label="{{ __('home.modal.play_btn') }}"
                 >
                     <span class="consult-modal-video__play-btn-inner" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3l14 9-14 9V3z"/></svg>
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <polygon points="6 4 20 12 6 20 6 4"/>
+                        </svg>
                     </span>
                 </button>
             @else
