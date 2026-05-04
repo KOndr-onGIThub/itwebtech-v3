@@ -74,7 +74,7 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
-    <x-layout.navbar />
+    <x-layout.navbar :hreflangs="$hreflangs ?? []" />
 
     {{-- Floating Contact FAB — zobrazí se po scrollu --}}
     <a href="{{ lroute('contact') }}" class="contact-fab" id="contact-fab" aria-label="{{ __('layout.cta.contact') }}">
