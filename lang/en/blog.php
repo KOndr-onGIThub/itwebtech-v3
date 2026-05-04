@@ -36,6 +36,14 @@ return [
         ],
     ],
 
+    'back_to_blog' => '← Back to blog',
+
+    'cta' => [
+        'heading' => 'Need help with your website?',
+        'text'    => 'Let\'s talk about how your website can bring more inquiries.',
+        'primary' => 'Book a consultation',
+    ],
+
     'audit' => [
         'subheading'    => 'Quick CRO move',
         'heading'       => 'Get a concise audit of your website',

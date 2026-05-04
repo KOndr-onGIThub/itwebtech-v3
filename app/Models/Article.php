@@ -2,42 +2,49 @@
 
 namespace App\Models;
 
-use A17\Twill\Models\Behaviors\HasBlocks;
-use A17\Twill\Models\Behaviors\HasTranslation;
-use A17\Twill\Models\Behaviors\HasSlug;
-use A17\Twill\Models\Behaviors\HasMedias;
-use A17\Twill\Models\Behaviors\HasRevisions;
-use A17\Twill\Models\Behaviors\HasPosition;
-use A17\Twill\Models\Behaviors\HasNesting;
-use A17\Twill\Models\Behaviors\Sortable;
-use A17\Twill\Models\Model;
+use App\Models\Slugs\ArticleSlug;
+use App\Models\Translations\ArticleTranslation;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Article extends Model implements Sortable
+class Article extends Model
 {
-    use HasBlocks, HasTranslation, HasSlug, HasMedias, HasRevisions, HasPosition, HasNesting;
+    use SoftDeletes;
 
     protected $fillable = [
         'published',
         'position',
+        'publish_start_date',
+        'publish_end_date',
     ];
 
-    public $translatedAttributes = [
-        'active',
-        'title',
-        'description',
-        'perex',
-        'content_1',
-        'content_mid',
-        'content_2',
-        'bonus',
-        'extra',
-        'img_preview',
-        'img_main',
-        'img_mid',
-        'img_end',
+    protected $casts = [
+        'published' => 'boolean',
     ];
 
-    public $slugAttributes = [
-        'title',
-    ];
+    public function translations(): HasMany
+    {
+        return $this->hasMany(ArticleTranslation::class);
+    }
+
+    public function slugs(): HasMany
+    {
+        return $this->hasMany(ArticleSlug::class);
+    }
+
+    public function translation(string $locale = null): ?ArticleTranslation
+    {
+        $locale ??= app()->getLocale();
+        return $this->translations->where('locale', $locale)->first()
+            ?? $this->translations->where('locale', 'cs')->first();
+    }
+
+    public function slug(string $locale = null): ?string
+    {
+        $locale ??= app()->getLocale();
+        $record = $this->slugs->where('locale', $locale)->where('active', true)->first()
+            ?? $this->slugs->where('locale', 'cs')->where('active', true)->first();
+        return $record?->slug;
+    }
 }
