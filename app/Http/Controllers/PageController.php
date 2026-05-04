@@ -64,7 +64,15 @@ class PageController extends Controller
 
         $translation = $project->translation($locale);
 
-        return view('pages.project', compact('project', 'translation', 'locale'));
+        $hreflangs = [];
+        foreach (['cs', 'en', 'de'] as $lang) {
+            $localeSlug = $project->slug($lang);
+            if ($localeSlug) {
+                $hreflangs[$lang] = route("{$lang}.project", ['url' => $localeSlug]);
+            }
+        }
+
+        return view('pages.project', compact('project', 'translation', 'locale', 'hreflangs'));
     }
 
     public function blog()
@@ -101,6 +109,14 @@ class PageController extends Controller
 
         $translation = $article->translation($locale);
 
-        return view('pages.article', compact('article', 'translation', 'locale'));
+        $hreflangs = [];
+        foreach (['cs', 'en', 'de'] as $lang) {
+            $localeSlug = $article->slug($lang);
+            if ($localeSlug) {
+                $hreflangs[$lang] = route("{$lang}.article", ['slug' => $localeSlug]);
+            }
+        }
+
+        return view('pages.article', compact('article', 'translation', 'locale', 'hreflangs'));
     }
 }
