@@ -26,7 +26,13 @@
                     <article class="blog-card" data-reveal>
                         @if ($t->img_preview)
                         <a href="{{ lroute('blog') }}/{{ $dbArticle->slug($locale) }}" class="blog-card__img-link">
-                            <img src="/img/articles/{{ $t->img_preview }}" alt="{{ $t->title }}" loading="lazy" class="blog-card__img">
+                            <x-responsive-image
+                                path="articles/{{ $t->img_preview }}"
+                                alt="{{ $t->title }}"
+                                loading="lazy"
+                                class-img="blog-card__img"
+                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
+                            />
                         </a>
                         @endif
                         <div class="blog-card__body">
