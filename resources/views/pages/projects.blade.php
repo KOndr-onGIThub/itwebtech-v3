@@ -14,6 +14,49 @@
     </div>
 </div>
 
+{{-- DB Projects listing --}}
+@if (!empty($projects) && $projects->count())
+<section class="section-wrapper" data-reveal>
+    <div class="container-site">
+        <header class="section-header">
+            <p class="section-subheading">{{ __('projects.subheading') }}</p>
+            <h2>{{ __('projects.heading') }}</h2>
+        </header>
+
+        <div class="projects-grid" data-reveal-group>
+            @foreach ($projects as $dbProject)
+                @php $t = $dbProject->translation($locale); @endphp
+                @if ($t && $t->title)
+                <article class="project-card">
+                    <a href="{{ lroute('projects') }}/{{ $dbProject->slug($locale) }}" class="project-card__link">
+                        <div class="project-card__meta">
+                            @if ($dbProject->customer)
+                            <span class="project-card__customer">{{ $dbProject->customer }}</span>
+                            @endif
+                            @if ($dbProject->kind)
+                            <span class="project-card__kind">{{ $dbProject->kind }}</span>
+                            @endif
+                        </div>
+                        <h3 class="project-card__title">{{ $t->title }}</h3>
+                        @if ($t->description)
+                        <p class="project-card__desc">{{ Str::limit(strip_tags($t->description), 120) }}</p>
+                        @endif
+                        @if ($dbProject->price_czk)
+                        <div class="project-card__price">{{ $dbProject->price_czk }}</div>
+                        @endif
+                        <span class="btn btn-secondary btn-sm project-card__cta">
+                            {{ __('projects.view_project') }}
+                            <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
+                        </span>
+                    </a>
+                </article>
+                @endif
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
+
 {{-- Conversion snapshots --}}
 <section class="section-wrapper" data-reveal>
     <div class="container-site">

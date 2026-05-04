@@ -92,6 +92,18 @@ return [
         'cta_secondary' => 'Zuerst Preise ansehen',
     ],
 
-    'empty' => 'Derzeit sind keine Projekte verfügbar.',
+    'empty'            => 'Derzeit sind keine Projekte verfügbar.',
+    'view_project'     => 'Projekt anzeigen',
+    'back_to_projects' => '← Zurück zu Projekten',
+
+    'before_after' => 'Vorher-Nachher-Vergleich',
+    'before'       => 'Vorher',
+    'after'        => 'Nachher',
+    'screenshots'  => 'Projektscreenshots',
+
+    'cta' => [
+        'heading' => 'Möchten Sie ein ähnliches Ergebnis?',
+        'primary' => 'Beratung buchen',
+    ],
 
 ];

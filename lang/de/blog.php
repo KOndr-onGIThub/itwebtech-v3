@@ -36,6 +36,14 @@ return [
         ],
     ],
 
+    'back_to_blog' => '← Zurück zum Blog',
+
+    'cta' => [
+        'heading' => 'Brauchen Sie Hilfe mit Ihrer Website?',
+        'text'    => 'Lassen Sie uns besprechen, wie Ihre Website mehr Anfragen generieren kann.',
+        'primary' => 'Beratung buchen',
+    ],
+
     'audit' => [
         'subheading'    => 'Schneller CRO-Schritt',
         'heading'       => 'Erhalten Sie einen kompakten Audit Ihrer Webseite',

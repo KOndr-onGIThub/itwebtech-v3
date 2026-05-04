@@ -2,10 +2,13 @@
 
 namespace App\Models\Translations;
 
-use A17\Twill\Models\Model;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProjectTranslation extends Model
 {
+    use SoftDeletes;
+
     public $timestamps = true;
 
     protected $fillable = [

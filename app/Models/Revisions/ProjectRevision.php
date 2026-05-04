@@ -2,7 +2,7 @@
 
 namespace App\Models\Revisions;
 
-use A17\Twill\Models\Model;
+use Illuminate\Database\Eloquent\Model;
 
 class ProjectRevision extends Model
 {
