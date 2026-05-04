@@ -23,7 +23,12 @@
 
         @if ($translation?->img_main)
         <figure class="article-figure">
-            <img src="/storage/{{ $translation->img_main }}" alt="{{ $translation->title }}" loading="lazy">
+            <x-responsive-image
+                path="articles/{{ $translation->img_main }}"
+                alt="{{ $translation->title }}"
+                loading="lazy"
+                sizes="(max-width: 768px) 100vw, 760px"
+            />
         </figure>
         @endif
 
@@ -41,7 +46,12 @@
 
         @if ($translation?->img_mid)
         <figure class="article-figure">
-            <img src="/storage/{{ $translation->img_mid }}" alt="" loading="lazy">
+            <x-responsive-image
+                path="articles/{{ $translation->img_mid }}"
+                alt=""
+                loading="lazy"
+                sizes="(max-width: 768px) 100vw, 760px"
+            />
         </figure>
         @endif
 
@@ -59,7 +69,12 @@
 
         @if ($translation?->img_end)
         <figure class="article-figure">
-            <img src="/storage/{{ $translation->img_end }}" alt="" loading="lazy">
+            <x-responsive-image
+                path="articles/{{ $translation->img_end }}"
+                alt=""
+                loading="lazy"
+                sizes="(max-width: 768px) 100vw, 760px"
+            />
         </figure>
         @endif
 
