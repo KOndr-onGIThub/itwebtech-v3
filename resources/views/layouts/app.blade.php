@@ -34,10 +34,16 @@
     <meta name="twitter:image"       content="{{ $ogImage }}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{{ url()->current() }}">
-    <link rel="alternate" hreflang="cs" href="{{ lroute($currentPage, 'cs') }}">
-    <link rel="alternate" hreflang="en" href="{{ lroute($currentPage, 'en') }}">
-    <link rel="alternate" hreflang="de" href="{{ lroute($currentPage, 'de') }}">
-    <link rel="alternate" hreflang="x-default" href="{{ lroute($currentPage, 'cs') }}">
+    @php
+        $hreflangs = $hreflangs ?? [];
+        $hreflangCs = $hreflangs['cs'] ?? lroute($currentPage, 'cs');
+        $hreflangEn = $hreflangs['en'] ?? lroute($currentPage, 'en');
+        $hreflangDe = $hreflangs['de'] ?? lroute($currentPage, 'de');
+    @endphp
+    <link rel="alternate" hreflang="cs" href="{{ $hreflangCs }}">
+    <link rel="alternate" hreflang="en" href="{{ $hreflangEn }}">
+    <link rel="alternate" hreflang="de" href="{{ $hreflangDe }}">
+    <link rel="alternate" hreflang="x-default" href="{{ $hreflangCs }}">
 
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -68,7 +74,7 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
-    <x-layout.navbar />
+    <x-layout.navbar :hreflangs="$hreflangs ?? []" />
 
     {{-- Floating Contact FAB — zobrazí se po scrollu --}}
     <a href="{{ lroute('contact') }}" class="contact-fab" id="contact-fab" aria-label="{{ __('layout.cta.contact') }}">
