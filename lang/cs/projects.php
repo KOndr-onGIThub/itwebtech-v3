@@ -92,6 +92,18 @@ return [
         'cta_secondary' => 'Nejdřív ceník',
     ],
 
-    'empty' => 'Momentálně nejsou k dispozici žádné projekty.',
+    'empty'            => 'Momentálně nejsou k dispozici žádné projekty.',
+    'view_project'     => 'Zobrazit projekt',
+    'back_to_projects' => '← Zpět na projekty',
+
+    'before_after' => 'Porovnání před a po',
+    'before'       => 'Před',
+    'after'        => 'Po',
+    'screenshots'  => 'Ukázky z projektu',
+
+    'cta' => [
+        'heading' => 'Chcete podobný výsledek?',
+        'primary' => 'Domluvit konzultaci',
+    ],
 
 ];

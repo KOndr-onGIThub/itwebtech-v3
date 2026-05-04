@@ -15,8 +15,17 @@ return [
             'Ondřej Kriška',
         ],
         'chips'            => ['Strategie', 'Design', 'Code', 'Texte'],
-        'cta_contact'      => 'Kostenlose Beratung',
-        'cta_consultation' => 'Leistungen ansehen',
+        'cta_primary'   => 'Beratung vereinbaren',
+        'cta_secondary' => 'Leistungen ansehen',
+    ],
+
+    'modal' => [
+        'title'             => 'Lassen Sie uns sprechen',
+        'subtitle'          => 'Kostenlose Beratung — unverbindlich, ohne Registrierung.',
+        'video_placeholder' => '[Video folgt in Kürze]',
+        'calendly_btn'      => 'Beratungstermin auswählen',
+        'cta_note'          => 'Kostenlos. Unverbindlich.',
+        'play_btn'          => 'Video abspielen',
     ],
 
     'anchors' => [
@@ -183,9 +192,9 @@ Ich programmiere nicht mit WordPress. Keine Drittanbieter-Plugins, keine Sicherh
     ],
 
     'cta' => [
-        'heading'   => 'Bereit anzufangen? Die Beratung ist kostenlos.',
-        'quotation' => 'Angebot anfordern',
-        'message'   => 'Oder Nachricht senden',
+        'heading'      => 'Bereit anzufangen? Die Beratung ist kostenlos.',
+        'consultation' => 'Beratung vereinbaren',
+        'message'      => 'Oder Nachricht senden',
     ],
 
 ];

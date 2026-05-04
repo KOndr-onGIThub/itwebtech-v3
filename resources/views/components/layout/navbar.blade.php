@@ -1,3 +1,4 @@
+@props(['hreflangs' => []])
 @php
     $locale      = app()->getLocale();
     $currentPage = current_page();
@@ -40,7 +41,7 @@
 
                 <div class="navbar__lang">
                     @foreach ($langLabels as $code => $label)
-                        <a href="{{ lroute($currentPage, $code) }}"
+                        <a href="{{ $hreflangs[$code] ?? lroute($currentPage, $code) }}"
                            class="navbar__lang-item {{ $locale === $code ? 'navbar__lang-item--active' : '' }}">
                             {{ $label }}
                         </a>
@@ -101,7 +102,7 @@
         {{-- Language switcher in drawer --}}
         <div class="drawer__lang">
             @foreach ($langLabels as $code => $label)
-                <a href="{{ lroute($currentPage, $code) }}"
+                <a href="{{ $hreflangs[$code] ?? lroute($currentPage, $code) }}"
                    class="navbar__lang-item {{ $locale === $code ? 'navbar__lang-item--active' : '' }}">
                     {{ $label }}
                 </a>

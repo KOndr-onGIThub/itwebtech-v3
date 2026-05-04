@@ -36,6 +36,14 @@ return [
         ],
     ],
 
+    'back_to_blog' => '← Zpět na blog',
+
+    'cta' => [
+        'heading' => 'Potřebujete pomoc s vaším webem?',
+        'text'    => 'Pojďme se pobavit o tom, jak váš web může přinést více poptávek.',
+        'primary' => 'Domluvit konzultaci',
+    ],
+
     'audit' => [
         'subheading'    => 'Rychlý CRO tah',
         'heading'       => 'Získejte stručný audit vašeho webu',

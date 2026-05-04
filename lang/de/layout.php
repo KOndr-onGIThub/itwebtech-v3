@@ -25,6 +25,10 @@ return [
         'nav_label' => 'Footer-Navigation',
     ],
 
+    'modal' => [
+        'close' => 'Schließen',
+    ],
+
     'gdpr_form_note' => 'Mit dem Absenden stimmen Sie unserer',
     'gdpr_form_link' => 'Datenschutzerklärung',
 

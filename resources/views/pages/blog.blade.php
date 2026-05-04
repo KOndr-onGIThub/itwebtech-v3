@@ -17,8 +17,35 @@
     <div class="container-site">
         <div class="blog-layout">
 
-            {{-- Conversion-first blog fallback --}}
             <main class="blog-articles">
+
+                {{-- DB articles --}}
+                @foreach ($articles ?? [] as $dbArticle)
+                    @php $t = $dbArticle->translation($locale); @endphp
+                    @if ($t && $t->title)
+                    <article class="blog-card" data-reveal>
+                        @if ($t->img_preview)
+                        <a href="{{ lroute('blog') }}/{{ $dbArticle->slug($locale) }}" class="blog-card__img-link">
+                            <img src="/storage/{{ $t->img_preview }}" alt="{{ $t->title }}" loading="lazy" class="blog-card__img">
+                        </a>
+                        @endif
+                        <div class="blog-card__body">
+                            <h2 class="blog-card__title">
+                                <a href="{{ lroute('blog') }}/{{ $dbArticle->slug($locale) }}">{{ $t->title }}</a>
+                            </h2>
+                            @if ($t->description)
+                            <p class="blog-card__desc">{{ $t->description }}</p>
+                            @endif
+                            <a href="{{ lroute('blog') }}/{{ $dbArticle->slug($locale) }}" class="btn btn-secondary btn-sm">
+                                {{ __('blog.read_more') }}
+                                <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
+                            </a>
+                        </div>
+                    </article>
+                    @endif
+                @endforeach
+
+                {{-- Conversion-first blog fallback --}}
                 <article class="blog-conversion-card" data-reveal>
                     <p class="section-subheading">{{ __('blog.now.subheading') }}</p>
                     <h2>{{ __('blog.now.heading') }}</h2>
@@ -54,6 +81,7 @@
                         </a>
                     </div>
                 </article>
+
             </main>
 
             {{-- Sidebar --}}

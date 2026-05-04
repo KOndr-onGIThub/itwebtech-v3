@@ -25,6 +25,10 @@ return [
         'nav_label' => 'Footer navigace',
     ],
 
+    'modal' => [
+        'close' => 'Zavřít',
+    ],
+
     'gdpr_form_note' => 'Odesláním souhlasíte se',
     'gdpr_form_link' => 'zásadami ochrany osobních údajů',
 

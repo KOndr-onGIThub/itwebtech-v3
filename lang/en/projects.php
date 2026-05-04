@@ -92,6 +92,18 @@ return [
         'cta_secondary' => 'See pricing first',
     ],
 
-    'empty' => 'No projects are currently available.',
+    'empty'            => 'No projects are currently available.',
+    'view_project'     => 'View project',
+    'back_to_projects' => '← Back to projects',
+
+    'before_after' => 'Before & After comparison',
+    'before'       => 'Before',
+    'after'        => 'After',
+    'screenshots'  => 'Project screenshots',
+
+    'cta' => [
+        'heading' => 'Want a similar result?',
+        'primary' => 'Book a consultation',
+    ],
 
 ];
