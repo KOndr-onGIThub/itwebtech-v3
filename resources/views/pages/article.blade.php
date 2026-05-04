@@ -23,7 +23,7 @@
 
         @if ($translation?->img_main)
         <figure class="article-figure">
-            <img src="/storage/{{ $translation->img_main }}" alt="{{ $translation->title }}" loading="lazy">
+            <img src="/img/articles/{{ $translation->img_main }}" alt="{{ $translation->title }}" loading="lazy">
         </figure>
         @endif
 
@@ -41,7 +41,7 @@
 
         @if ($translation?->img_mid)
         <figure class="article-figure">
-            <img src="/storage/{{ $translation->img_mid }}" alt="" loading="lazy">
+            <img src="/img/articles/{{ $translation->img_mid }}" alt="" loading="lazy">
         </figure>
         @endif
 
@@ -59,7 +59,7 @@
 
         @if ($translation?->img_end)
         <figure class="article-figure">
-            <img src="/storage/{{ $translation->img_end }}" alt="" loading="lazy">
+            <img src="/img/articles/{{ $translation->img_end }}" alt="" loading="lazy">
         </figure>
         @endif
 

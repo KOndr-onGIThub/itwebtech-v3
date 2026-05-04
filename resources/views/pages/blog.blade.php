@@ -26,7 +26,7 @@
                     <article class="blog-card" data-reveal>
                         @if ($t->img_preview)
                         <a href="{{ lroute('blog') }}/{{ $dbArticle->slug($locale) }}" class="blog-card__img-link">
-                            <img src="/storage/{{ $t->img_preview }}" alt="{{ $t->title }}" loading="lazy" class="blog-card__img">
+                            <img src="/img/articles/{{ $t->img_preview }}" alt="{{ $t->title }}" loading="lazy" class="blog-card__img">
                         </a>
                         @endif
                         <div class="blog-card__body">
