@@ -12,8 +12,12 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->boolean('published')->default(false);
             $table->integer('position')->unsigned()->nullable();
-            // Nested set (Twill HasNesting)
-            $table->nestedSet();
+            $table->timestamp('publish_start_date')->nullable();
+            $table->timestamp('publish_end_date')->nullable();
+            // Nested set columns (compatible with kalnoy/nestedset via Twill HasNesting)
+            $table->unsignedInteger('_lft')->default(0)->index();
+            $table->unsignedInteger('_rgt')->default(0)->index();
+            $table->unsignedBigInteger('parent_id')->nullable()->index();
             $table->softDeletes();
             $table->timestamps();
         });
