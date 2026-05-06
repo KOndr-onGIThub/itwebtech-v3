@@ -15,6 +15,8 @@ return [
     'filter_websites'  => 'Websites',
     'filter_webapps'   => 'Web apps',
     'filter_other'     => 'Others',
+    'filter_aria'      => 'Filter projects by category',
+    'count_label'      => 'projects shown',
 
     'info_client'      => 'Client',
     'info_date'        => 'Date',
@@ -100,6 +102,28 @@ return [
     'before'       => 'Before',
     'after'        => 'After',
     'screenshots'  => 'Project screenshots',
+
+    'detail' => [
+        'challenge'       => 'Challenge',
+        'solution'        => 'Solution',
+        'result'          => 'Result',
+        'no_content'      => 'A detailed write-up for this project is not available yet.',
+        'related_heading' => 'More projects',
+        'visit_live'      => 'Visit live site',
+        'meta'            => [
+            'client'   => 'Client',
+            'year'     => 'Year',
+            'duration' => 'Duration',
+            'category' => 'Category',
+            'live_url' => 'Live site',
+            'tags'     => 'Tech stack',
+        ],
+        'category_label'  => [
+            'website'     => 'Website',
+            'application' => 'Web application',
+            'other'       => 'Other',
+        ],
+    ],
 
     'cta' => [
         'heading' => 'Want a similar result for your business?',

@@ -18,12 +18,13 @@ return new class extends Migration
 
             $table->timestamps();
 
-            $table->foreign('screenshot_id')
+            // Krátké názvy kvůli MySQL limitu 64 znaků na identifikátor.
+            $table->foreign('screenshot_id', 'pf_screen_tr_screen_id_fk')
                 ->references('id')->on('portfolio_project_screenshots')
                 ->cascadeOnDelete();
 
-            $table->unique(['screenshot_id', 'locale']);
-            $table->index('locale');
+            $table->unique(['screenshot_id', 'locale'], 'pf_screen_tr_screen_locale_uniq');
+            $table->index('locale', 'pf_screen_tr_locale_idx');
         });
     }
 

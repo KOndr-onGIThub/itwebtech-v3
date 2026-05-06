@@ -15,6 +15,8 @@ return [
     'filter_websites'  => 'Webseiten',
     'filter_webapps'   => 'Anwendungen',
     'filter_other'     => 'Sonstiges',
+    'filter_aria'      => 'Projekte nach Kategorie filtern',
+    'count_label'      => 'Projekte angezeigt',
 
     'info_client'      => 'Kunde',
     'info_date'        => 'Datum',
@@ -100,6 +102,28 @@ return [
     'before'       => 'Vorher',
     'after'        => 'Nachher',
     'screenshots'  => 'Projektscreenshots',
+
+    'detail' => [
+        'challenge'       => 'Herausforderung',
+        'solution'        => 'Lösung',
+        'result'          => 'Ergebnis',
+        'no_content'      => 'Eine ausführliche Beschreibung zu diesem Projekt ist noch nicht verfügbar.',
+        'related_heading' => 'Weitere Projekte',
+        'visit_live'      => 'Live-Seite besuchen',
+        'meta'            => [
+            'client'   => 'Kunde',
+            'year'     => 'Jahr',
+            'duration' => 'Dauer',
+            'category' => 'Kategorie',
+            'live_url' => 'Live-Seite',
+            'tags'     => 'Technologien',
+        ],
+        'category_label'  => [
+            'website'     => 'Webseite',
+            'application' => 'Webanwendung',
+            'other'       => 'Sonstiges',
+        ],
+    ],
 
     'cta' => [
         'heading' => 'Möchten Sie ein ähnliches Ergebnis für Ihr Unternehmen?',

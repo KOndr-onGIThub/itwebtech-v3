@@ -1,162 +1,51 @@
 @extends('layouts.app')
 
-@section('title', $translation?->title ?? config('app.name'))
-@section('description', $translation?->description ?? '')
+@section('title', $translation?->meta_title ?? $translation?->title ?? config('app.name'))
+@section('description', $translation?->meta_description ?? $translation?->summary ?? '')
 
 @section('content')
 
-<div class="page-hero page-hero--project">
-    <div class="container-site">
-        <a href="{{ lroute('projects') }}" class="back-link">
-            <x-icon.arrow-right class="w-4 h-4 shrink-0 rotate-180" />
-            {{ __('projects.back_to_projects') }}
-        </a>
-        <div class="project-hero__meta">
-            @if ($project->customer)
-            <span class="project-hero__customer">{{ $project->customer }}</span>
-            @endif
-            @if ($project->kind)
-            <span class="project-hero__kind">{{ $project->kind }}</span>
-            @endif
-        </div>
-        <h1>{{ $translation?->title }}</h1>
-        @if ($translation?->description)
-        <p class="page-hero__desc">{{ $translation->description }}</p>
-        @endif
-        @if ($project->price_czk || $project->price_eur)
-        <div class="project-hero__price">
-            @if ($project->price_czk)
-            <span>{{ $project->price_czk }}</span>
-            @endif
-            @if ($project->price_eur)
-            <span class="price-eur">{{ $project->price_eur }}</span>
-            @endif
-        </div>
-        @endif
-    </div>
-</div>
+{{-- 1. Detail hero --}}
+<x-portfolio.detail-hero :project="$project" :translation="$translation" />
 
-{{-- Hlavní obsah --}}
-@if ($translation?->content)
-<section class="section-wrapper">
-    <div class="container-site container-site--narrow">
-        <div class="project-content">
-            {!! $translation->content !!}
+{{-- 2. Detail gallery --}}
+<x-portfolio.detail-gallery :screenshots="$project->screenshots" />
+
+{{-- 3+4. Body + meta --}}
+<section class="section-wrapper portfolio-detail-body-wrapper" data-reveal>
+    <div class="container-site">
+        <div class="portfolio-detail-body-wrapper__grid">
+            <div class="portfolio-detail-body-wrapper__main">
+                <x-portfolio.detail-body :translation="$translation" />
+            </div>
+            <div class="portfolio-detail-body-wrapper__side">
+                <x-portfolio.detail-meta :project="$project" />
+            </div>
         </div>
     </div>
 </section>
-@endif
 
-{{-- Porovnání před/po --}}
-@if ($project->comparison && ($project->img_before || $project->img_after))
-<section class="section-wrapper section-alt" data-reveal>
+{{-- 5. Related projects --}}
+@if ($relatedProjects && $relatedProjects->count())
+<section class="section-wrapper section-alt portfolio-related" data-reveal>
     <div class="container-site">
-        <header class="section-header">
-            <h2>{{ __('projects.before_after') }}</h2>
+        <header class="section-header section-header--left">
+            <h2>{{ __('projects.detail.related_heading') }}</h2>
         </header>
-        <div class="before-after-grid">
-            @if ($project->img_before)
-            <figure class="before-after-item">
-                @if (Str::endsWith($project->img_before, '.gif'))
-                    <img src="/{{ $project->img_before }}" alt="{{ __('projects.before') }}" loading="lazy">
-                @else
-                    <x-responsive-image
-                        path="{{ $project->img_before }}"
-                        alt="{{ __('projects.before') }}"
-                        loading="lazy"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                @endif
-                <figcaption>{{ __('projects.before') }}</figcaption>
-            </figure>
-            @endif
-            @if ($project->img_after)
-            <figure class="before-after-item">
-                @if (Str::endsWith($project->img_after, '.gif'))
-                    <img src="/{{ $project->img_after }}" alt="{{ __('projects.after') }}" loading="lazy">
-                @else
-                    <x-responsive-image
-                        path="{{ $project->img_after }}"
-                        alt="{{ __('projects.after') }}"
-                        loading="lazy"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                @endif
-                <figcaption>{{ __('projects.after') }}</figcaption>
-            </figure>
-            @endif
-        </div>
-    </div>
-</section>
-@endif
-
-{{-- Screenshoty --}}
-@if ($project->screens && $project->screens->count())
-<section class="section-wrapper" data-reveal>
-    <div class="container-site">
-        <header class="section-header">
-            <h2>{{ __('projects.screenshots') }}</h2>
-        </header>
-        <div class="screenshots-grid" data-reveal-group>
-            @foreach ($project->screens as $screen)
-            <figure class="screenshot-item">
-                @if ($screen->is_video && $screen->video_url)
-                    <iframe src="{{ $screen->video_url }}" loading="lazy" allowfullscreen class="screenshot-item__video"></iframe>
-                @elseif ($screen->screen_shot)
-                    <x-responsive-image
-                        path="{{ $screen->screen_shot }}"
-                        alt="{{ $screen->title ?? '' }}"
-                        loading="lazy"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        :lightbox-title="$screen->title ?? null"
-                        lightbox-gallery="project-screenshots"
-                    />
-                @endif
-                @if ($screen->title)
-                <figcaption>{{ $screen->title }}</figcaption>
-                @endif
-            </figure>
+        <div class="portfolio-grid" data-reveal-group>
+            @foreach ($relatedProjects as $portfolioProject)
+                <x-portfolio.card :project="$portfolioProject" :locale="$locale" />
             @endforeach
         </div>
     </div>
 </section>
 @endif
 
-{{-- Reference klienta --}}
-@if ($translation?->client_says && $project->client_name)
-<section class="section-wrapper section-alt" data-reveal>
-    <div class="container-site">
-        <blockquote class="testimonial">
-            <div class="testimonial__text">
-                {!! $translation->client_says !!}
-            </div>
-            <footer class="testimonial__author">
-                @if ($project->client_photo)
-                <x-responsive-image
-                    path="images/clients/{{ $project->client_photo }}"
-                    alt="{{ $project->client_name }}"
-                    class-img="testimonial__photo"
-                    loading="lazy"
-                    sizes="80px"
-                />
-                @endif
-                <div>
-                    <strong>{{ $project->client_name }}</strong>
-                    @if ($project->client_role)
-                    <span>{{ $project->client_role }}</span>
-                    @endif
-                </div>
-            </footer>
-        </blockquote>
-    </div>
-</section>
-@endif
-
-{{-- CTA --}}
+{{-- 6. Final CTA --}}
 <section class="section-wrapper" data-reveal>
     <div class="container-site">
         <div class="cta-block">
-            <h2>{{ $translation?->cta ?? __('projects.cta.heading') }}</h2>
+            <h2>{{ __('projects.cta.heading') }}</h2>
             <div class="cta-block__actions">
                 <a href="{{ lroute('contact') }}" class="btn btn-primary">
                     {{ __('projects.cta.primary') }}
