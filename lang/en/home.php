@@ -18,7 +18,6 @@ return [
     'modal' => [
         'title'             => 'Let\'s talk',
         'subtitle'          => 'Free consultation — no commitment, no registration.',
-        'video_placeholder' => '[Video coming soon]',
         'calendly_btn'      => 'Pick a consultation slot',
         'cta_note'          => 'Free. No commitment.',
         'play_btn'          => 'Play video',

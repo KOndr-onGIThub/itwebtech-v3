@@ -45,12 +45,12 @@ return [
     ],
 
     'audit' => [
-        'subheading'    => 'Quick CRO move',
+        'subheading'    => 'Quick conversion fix',
         'heading'       => 'Get a concise audit of your website',
         'items'         => [
-            'Top 3 conversion blockers currently losing inquiries.',
+            'Top 3 issues that are currently losing you inquiries.',
             'Specific recommendations on what to fix first.',
-            'Priority roadmap without “nice-to-have” cosmetics.',
+            'Priority roadmap without cosmetic extras.',
         ],
         'cta_primary'   => 'I want a free mini audit',
         'cta_secondary' => 'See pricing first',

@@ -45,12 +45,12 @@ return [
     ],
 
     'audit' => [
-        'subheading'    => 'Rychlý CRO tah',
+        'subheading'    => 'Rychlá konverzní úprava',
         'heading'       => 'Získejte stručný audit vašeho webu',
         'items'         => [
             '3 největší konverzní brzdy, které teď zbytečně ztrácí poptávky.',
             'Konkrétní doporučení, co upravit jako první.',
-            'Návrh priorit bez “nice-to-have” kosmetiky.',
+            'Návrh priorit bez kosmetických vylepšení.',
         ],
         'cta_primary'   => 'Chci stručný audit zdarma',
         'cta_secondary' => 'Nejdřív ceník',

@@ -45,12 +45,12 @@ return [
     ],
 
     'audit' => [
-        'subheading'    => 'Schneller CRO-Schritt',
+        'subheading'    => 'Schnelle Konversionsverbesserung',
         'heading'       => 'Erhalten Sie einen kompakten Audit Ihrer Webseite',
         'items'         => [
             'Die 3 größten Conversion-Bremsen, die aktuell Anfragen kosten.',
             'Konkrete Empfehlungen, was zuerst angepasst werden soll.',
-            'Prioritätenplan ohne reine “nice-to-have”-Kosmetik.',
+            'Prioritätenplan ohne kosmetische Extras.',
         ],
         'cta_primary'   => 'Ich will einen kostenlosen Mini-Audit',
         'cta_secondary' => 'Zuerst Preise ansehen',

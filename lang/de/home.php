@@ -18,7 +18,6 @@ return [
     'modal' => [
         'title'             => 'Lassen Sie uns sprechen',
         'subtitle'          => 'Kostenlose Beratung — unverbindlich, ohne Registrierung.',
-        'video_placeholder' => '[Video folgt in Kürze]',
         'calendly_btn'      => 'Beratungstermin auswählen',
         'cta_note'          => 'Kostenlos. Unverbindlich.',
         'play_btn'          => 'Video abspielen',
