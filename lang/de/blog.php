@@ -52,7 +52,7 @@ return [
             'Konkrete Empfehlungen, was zuerst angepasst werden soll.',
             'Prioritätenplan ohne kosmetische Extras.',
         ],
-        'cta_primary'   => 'Ich will einen kostenlosen Mini-Audit',
+        'cta_primary'   => 'Ich will einen kostenlosen Kurz-Audit',
         'cta_secondary' => 'Zuerst Preise ansehen',
     ],
 

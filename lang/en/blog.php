@@ -52,7 +52,7 @@ return [
             'Specific recommendations on what to fix first.',
             'Priority roadmap without cosmetic extras.',
         ],
-        'cta_primary'   => 'I want a free mini audit',
+        'cta_primary'   => 'I want a free quick audit',
         'cta_secondary' => 'See pricing first',
     ],
 
