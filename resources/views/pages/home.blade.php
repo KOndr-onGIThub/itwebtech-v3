@@ -142,39 +142,6 @@
 </section>
 
 {{-- ===================================================
-     AI — ROVNOU K VĚCI
-     =================================================== --}}
-<section class="section-wrapper section-wrapper--glow" data-reveal>
-    <div class="container-site">
-        <header class="section-header">
-            <h2>{{ __('home.ai.heading') }}</h2>
-        </header>
-
-        <div class="ai-intro" data-reveal>
-            <p class="section-prose-text">{{ __('home.ai.intro') }}</p>
-            <p class="section-prose-text">{{ __('home.ai.problem') }}</p>
-            <p class="section-prose-text">{{ __('home.ai.conclusion') }}</p>
-        </div>
-
-        <div class="ai-comparison" data-reveal>
-            <div class="ai-comparison__col ai-comparison__col--laik">
-                <h3>{{ __('home.ai.laik_heading') }}</h3>
-                <p>{{ __('home.ai.laik_text') }}</p>
-            </div>
-            <div class="ai-comparison__divider" aria-hidden="true"></div>
-            <div class="ai-comparison__col ai-comparison__col--expert">
-                <h3>{{ __('home.ai.expert_heading') }}</h3>
-                <p>{{ __('home.ai.expert_text') }}</p>
-            </div>
-        </div>
-
-        <p class="ai-note">{{ __('home.ai.note') }}</p>
-
-        <p class="section-prose-text ai-outro" data-reveal>{{ __('home.ai.outro') }}</p>
-    </div>
-</section>
-
-{{-- ===================================================
      TOYOTA — ODKUD POCHÁZEJÍ MÉ PRINCIPY
      =================================================== --}}
 <section class="section-wrapper section-alt" data-reveal>
@@ -314,7 +281,7 @@
 {{-- ===================================================
      SERVICES — secondary (seo, design, social)
      =================================================== --}}
-<section class="section-wrapper section-alt" data-reveal>
+<section class="section-wrapper" data-reveal>
     <div class="container-site">
         <header class="section-header">
             <h2>{{ __('home.services.heading_other') }}</h2>
@@ -442,33 +409,39 @@
      =================================================== --}}
 <section class="section-wrapper section-cta" data-reveal>
     <div class="container-site">
-        <h2 style="font-size:clamp(1.75rem,3.5vw,2.5rem);letter-spacing:-0.025em;margin-bottom:1.5rem;width:100%;text-align:center;">
-            {!! __('home.cta.heading') ?? __('layout.prefooter.tagline') !!}
-        </h2>
-        <button type="button" class="btn btn-primary" onclick="window.dispatchEvent(new CustomEvent('open-consultation-modal'))">
-            {{ __('home.cta.consultation') }}
-            <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-        </button>
-        <a href="{{ lroute('contact') }}" class="btn btn-secondary">
-            {{ __('home.cta.message') }}
-        </a>
-        <blockquote class="final-cta-quote">
-            <p>{{ __('home.final_cta.quote_text') }}</p>
-            <footer>— {{ __('home.final_cta.quote_author') }}</footer>
-        </blockquote>
+        <div class="final-cta__intro">
+            <h2 class="final-cta-heading">
+                {!! __('home.cta.heading') ?? __('layout.prefooter.tagline') !!}
+            </h2>
+            <div class="final-cta__actions">
+                <button type="button" class="btn btn-primary" onclick="window.dispatchEvent(new CustomEvent('open-consultation-modal'))">
+                    {{ __('home.cta.consultation') }}
+                    <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
+                </button>
+                <a href="{{ lroute('contact') }}" class="btn btn-secondary">
+                    {{ __('home.cta.message') }}
+                </a>
+            </div>
+            <blockquote class="final-cta-quote">
+                <p>{{ __('home.final_cta.quote_text') }}</p>
+                <footer>— {{ __('home.final_cta.quote_author') }}</footer>
+            </blockquote>
+        </div>
 
-        <h2 class="final-cta-heading">{{ __('home.final_cta.heading') }}</h2>
-        <p class="final-cta-subtext">{{ __('home.final_cta.subtext') }}</p>
+        <div class="final-cta__closing">
+            <h2 class="final-cta-heading">{{ __('home.final_cta.heading') }}</h2>
+            <p class="final-cta-subtext">{{ __('home.final_cta.subtext') }}</p>
 
-        <button
-            class="btn btn-primary"
-            @click="$dispatch('open-consultation-modal')"
-            type="button"
-        >
-            {{ __('home.final_cta.cta_label') }}
-            <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-        </button>
-        <p class="final-cta-note">{{ __('home.final_cta.cta_note') }}</p>
+            <button
+                class="btn btn-primary"
+                @click="$dispatch('open-consultation-modal')"
+                type="button"
+            >
+                {{ __('home.final_cta.cta_label') }}
+                <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
+            </button>
+            <p class="final-cta-note">{{ __('home.final_cta.cta_note') }}</p>
+        </div>
     </div>
 </section>
 

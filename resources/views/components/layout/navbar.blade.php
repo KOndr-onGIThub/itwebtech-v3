@@ -54,6 +54,7 @@
 
                 <button class="navbar__hamburger"
                         @click="open = true"
+                        :aria-expanded="open.toString()"
                         aria-label="Open menu">
                     <span class="navbar__hamburger-line"></span>
                     <span class="navbar__hamburger-line"></span>
@@ -125,7 +126,6 @@
             <div class="drawer__cta">
                 <a href="{{ lroute('contact') }}"
                    class="btn btn-primary"
-                   style="justify-content: center;"
                    @click="open = false">
                     {{ __('layout.cta.contact') }}
                 </a>

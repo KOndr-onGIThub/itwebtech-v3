@@ -155,7 +155,7 @@
 </section>
 
 {{-- What's included --}}
-<section class="section-wrapper section-alt" data-reveal>
+<section class="section-wrapper" data-reveal>
     <div class="container-site">
         <header class="section-header">
             <h2>{{ __('price.guarantees.heading') }}</h2>
@@ -199,18 +199,16 @@
 </section>
 
 {{-- CTA --}}
-<section class="section-wrapper section-cta" data-reveal>
-    <div class="container-site" style="flex-direction:column;gap:1.25rem;">
-        <h2 style="font-size:clamp(1.75rem,3.5vw,2.5rem);letter-spacing:-0.025em;margin-bottom:0.5rem;width:100%;text-align:center;">
-            {{ __('price.cta.heading') }}
-        </h2>
-        <p style="max-width:540px;text-align:center;color:rgba(241,245,249,.8);font-size:1.0625rem;line-height:1.7;">
-            {{ __('price.cta.desc') }}
-        </p>
-        <a href="{{ lroute('contact') }}" class="btn btn-primary">
-            {{ __('price.cta.btn') }}
-            <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-        </a>
+<section class="section-wrapper section-cta price-cta" data-reveal>
+    <div class="container-site">
+        <div class="price-cta__inner">
+            <h2 class="final-cta-heading">{{ __('price.cta.heading') }}</h2>
+            <p class="price-cta__desc">{{ __('price.cta.desc') }}</p>
+            <a href="{{ lroute('contact') }}" class="btn btn-primary">
+                {{ __('price.cta.btn') }}
+                <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
+            </a>
+        </div>
     </div>
 </section>
 

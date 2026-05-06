@@ -55,7 +55,7 @@
                 />
 
                 <div class="landing-panel">
-                    <h2>{{ __('landing.hero.trust.title') }}</h2>
+                    <h3>{{ __('landing.hero.trust.title') }}</h3>
                     <ul class="landing-checklist">
                         @foreach (__('landing.hero.trust.items') as $item)
                             <li>
@@ -327,11 +327,11 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary landing-form__submit" :disabled="submitting">
-                        <span x-show="!submitting" style="display:flex;align-items:center;gap:.5rem;">
+                        <span class="btn__inner" x-show="!submitting">
                             {{ __('landing.form.submit') }}
                             <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
                         </span>
-                        <span x-show="submitting" x-cloak>{{ __('landing.form.submitting') }}</span>
+                        <span class="btn__inner" x-show="submitting" x-cloak>{{ __('landing.form.submitting') }}</span>
                     </button>
                 </form>
             </div>

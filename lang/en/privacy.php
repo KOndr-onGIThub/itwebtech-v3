@@ -9,7 +9,7 @@ return [
 
     'heading' => 'Privacy Policy',
 
-    'content' => '<p>Effective date: July 28, 2023</p>
+    'content' => '<p>Effective date: May 6, 2026</p>
 <p>The website (hereinafter "the Service") is operated by entrepreneur Ondřej Kriška (hereinafter "the operator" or "itwebtech").</p>
 <p>This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service.</p>
 

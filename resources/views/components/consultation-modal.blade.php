@@ -69,9 +69,9 @@
         </h2>
         <p class="consult-modal-subtitle">{{ __('home.modal.subtitle') }}</p>
 
-        {{-- Video area --}}
-        <div class="consult-modal-video">
-            @if ($videoSrc)
+        {{-- Video area — render only when CONSULTATION_VIDEO_URL is set --}}
+        @if ($videoSrc)
+            <div class="consult-modal-video">
                 <video
                     x-ref="video"
                     class="consult-modal-video__player"
@@ -98,16 +98,8 @@
                         </svg>
                     </span>
                 </button>
-            @else
-                <div class="consult-modal-video__placeholder" aria-label="{{ __('home.modal.video_placeholder') }}">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.4" aria-hidden="true">
-                        <rect x="2" y="2" width="20" height="20" rx="3"/>
-                        <polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none" opacity="0.6"/>
-                    </svg>
-                    <span>{{ __('home.modal.video_placeholder') }}</span>
-                </div>
-            @endif
-        </div>
+            </div>
+        @endif
 
         {{-- Calendly CTA --}}
         <div class="consult-modal-cta">

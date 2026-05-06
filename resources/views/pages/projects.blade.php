@@ -18,11 +18,6 @@
 @if (!empty($projects) && $projects->count())
 <section class="section-wrapper" data-reveal>
     <div class="container-site">
-        <header class="section-header">
-            <p class="section-subheading">{{ __('projects.subheading') }}</p>
-            <h2>{{ __('projects.heading') }}</h2>
-        </header>
-
         <div class="projects-grid" data-reveal-group>
             @foreach ($projects as $dbProject)
                 @php $t = $dbProject->translation($locale); @endphp
@@ -90,7 +85,7 @@
 </section>
 
 {{-- Project fit --}}
-<section class="section-wrapper" data-reveal>
+<section class="section-wrapper section-alt" data-reveal>
     <div class="container-site">
         <header class="section-header">
             <p class="section-subheading">{{ __('projects.fit.subheading') }}</p>
@@ -125,7 +120,7 @@
 </section>
 
 {{-- Why me --}}
-<section class="section-wrapper section-alt" data-reveal>
+<section class="section-wrapper" data-reveal>
     <div class="container-site">
         <header class="section-header">
             <p class="section-subheading">{{ __('projects.why_me.subheading') }}</p>

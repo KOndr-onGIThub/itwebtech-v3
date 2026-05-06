@@ -18,8 +18,8 @@ return [
 
     'sidebar_ad' => [
         'subheading' => 'Kämpfen Sie nicht allein mit Ihrer Webseite',
-        'heading'    => 'Bekommen Sie eine erstklassige Webseite',
-        'text'       => 'Nutzen Sie professionelle Dienstleistungen und erhalten Sie eine professionelle Webseite',
+        'heading'    => 'Bringen Sie Ihre Webseite dorthin, wo sie hingehört',
+        'text'       => 'Statt zu experimentieren, lassen Sie Ihre Webseite gleich beim ersten Mal richtig bauen.',
         'cta_price'  => 'Preisliste',
         'cta_contact'=> 'Kontakt',
     ],
@@ -45,14 +45,14 @@ return [
     ],
 
     'audit' => [
-        'subheading'    => 'Schneller CRO-Schritt',
+        'subheading'    => 'Schnelle Konversionsverbesserung',
         'heading'       => 'Erhalten Sie einen kompakten Audit Ihrer Webseite',
         'items'         => [
             'Die 3 größten Conversion-Bremsen, die aktuell Anfragen kosten.',
             'Konkrete Empfehlungen, was zuerst angepasst werden soll.',
-            'Prioritätenplan ohne reine “nice-to-have”-Kosmetik.',
+            'Prioritätenplan ohne kosmetische Extras.',
         ],
-        'cta_primary'   => 'Ich will einen Mini-Audit',
+        'cta_primary'   => 'Ich will einen kostenlosen Kurz-Audit',
         'cta_secondary' => 'Zuerst Preise ansehen',
     ],
 

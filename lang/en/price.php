@@ -8,8 +8,8 @@ return [
     ],
 
     'subheading' => 'Indicative pricing',
-    'heading'    => 'Clear pricing for every project',
-    'intro'      => 'Every project is different — the final price comes after a free consultation. This overview gives you a clear picture of the investment before our first meeting.',
+    'heading'    => 'You know what you\'re getting into before our first meeting.',
+    'intro'      => 'Every project is different — you\'ll get the final price after a free consultation. This overview gives you a clear idea of how much it will cost before we even meet.',
 
     'popular'   => 'Most popular',
     'quotation' => 'Get a quote',
@@ -30,7 +30,7 @@ return [
                 'Page speed optimisation',
                 '14 days of post-launch support',
             ],
-            'cta' => 'Request a project',
+            'cta' => 'Interested — book a consultation',
         ],
         [
             'name'    => 'Professional',
@@ -46,7 +46,7 @@ return [
                 'Hosting and domain for 1 year free',
                 '1 month of post-launch support',
             ],
-            'cta' => 'Choose this plan',
+            'cta' => 'I want this plan — free consultation',
         ],
         [
             'name'    => 'Complex',
@@ -65,7 +65,7 @@ return [
         ],
     ],
 
-    'note' => 'Indicative prices, VAT not applicable.',
+    'note' => 'Not VAT-registered — these prices are final, nothing is added.',
 
     'guarantees' => [
         'heading' => 'What is included in every project',

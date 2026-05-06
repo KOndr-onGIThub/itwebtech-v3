@@ -133,7 +133,7 @@ return [
             ],
             [
                 'type' => 'E-shop na míru',
-                'title' => 'Stabilnější provoz bez vendor lock-inu',
+                'title' => 'Stabilnější provoz bez závislosti na cizí platformě',
                 'summary' => 'Méně výpadků po aktualizacích a lépe řízená cesta k objednávce.',
             ],
         ],
@@ -176,7 +176,7 @@ return [
                 'answer' => 'Jednodušší web lze zvládnout přibližně za 3 až 4 týdny od schválení zadání. U větších projektů záleží na rozsahu, funkcích a rychlosti dodání podkladů.',
             ],
             [
-                'question' => 'Proč není WordPress výhoda pro tento typ projektu?',
+                'question' => 'Proč nestavíte na WordPressu?',
                 'answer' => 'U běžných WordPress webů často vzniká závislost na pluginech, aktualizacích a průběžné údržbě. Web na míru je stabilnější, rychlejší a dlouhodobě předvídatelnější z hlediska provozu i nákladů.',
             ],
             [
