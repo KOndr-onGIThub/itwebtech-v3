@@ -57,13 +57,31 @@
         <div class="before-after-grid">
             @if ($project->img_before)
             <figure class="before-after-item">
-                <img src="/{{ $project->img_before }}" alt="{{ __('projects.before') }}" loading="lazy">
+                @if (Str::endsWith($project->img_before, '.gif'))
+                    <img src="/{{ $project->img_before }}" alt="{{ __('projects.before') }}" loading="lazy">
+                @else
+                    <x-responsive-image
+                        path="{{ $project->img_before }}"
+                        alt="{{ __('projects.before') }}"
+                        loading="lazy"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                @endif
                 <figcaption>{{ __('projects.before') }}</figcaption>
             </figure>
             @endif
             @if ($project->img_after)
             <figure class="before-after-item">
-                <img src="/{{ $project->img_after }}" alt="{{ __('projects.after') }}" loading="lazy">
+                @if (Str::endsWith($project->img_after, '.gif'))
+                    <img src="/{{ $project->img_after }}" alt="{{ __('projects.after') }}" loading="lazy">
+                @else
+                    <x-responsive-image
+                        path="{{ $project->img_after }}"
+                        alt="{{ __('projects.after') }}"
+                        loading="lazy"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                @endif
                 <figcaption>{{ __('projects.after') }}</figcaption>
             </figure>
             @endif
@@ -85,7 +103,14 @@
                 @if ($screen->is_video && $screen->video_url)
                     <iframe src="{{ $screen->video_url }}" loading="lazy" allowfullscreen class="screenshot-item__video"></iframe>
                 @elseif ($screen->screen_shot)
-                    <img src="/{{ $screen->screen_shot }}" alt="{{ $screen->title }}" loading="lazy">
+                    <x-responsive-image
+                        path="{{ $screen->screen_shot }}"
+                        alt="{{ $screen->title ?? '' }}"
+                        loading="lazy"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        :lightbox-title="$screen->title ?? null"
+                        lightbox-gallery="project-screenshots"
+                    />
                 @endif
                 @if ($screen->title)
                 <figcaption>{{ $screen->title }}</figcaption>
@@ -107,7 +132,13 @@
             </div>
             <footer class="testimonial__author">
                 @if ($project->client_photo)
-                <img src="/{{ $project->client_photo }}" alt="{{ $project->client_name }}" class="testimonial__photo" loading="lazy">
+                <x-responsive-image
+                    path="images/clients/{{ $project->client_photo }}"
+                    alt="{{ $project->client_name }}"
+                    class-img="testimonial__photo"
+                    loading="lazy"
+                    sizes="80px"
+                />
                 @endif
                 <div>
                     <strong>{{ $project->client_name }}</strong>
