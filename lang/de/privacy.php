@@ -9,7 +9,7 @@ return [
 
     'heading' => 'Datenschutzerklärung',
 
-    'content' => '<p>Datum des Inkrafttretens: 28. Juli 2023</p>
+    'content' => '<p>Datum des Inkrafttretens: 6. Mai 2026</p>
 <p>Die Website (nachfolgend „Dienst") wird vom Unternehmer Ondřej Kriška (nachfolgend „Betreiber" oder „itwebtech") betrieben.</p>
 <p>Diese Seite informiert Sie über unsere Richtlinien bezüglich der Erhebung, Verwendung und Weitergabe personenbezogener Daten bei der Nutzung unseres Dienstes.</p>
 

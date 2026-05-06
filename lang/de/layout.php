@@ -11,7 +11,7 @@ return [
     ],
 
     'cta' => [
-        'contact' => 'Kontakt',
+        'contact' => 'Beratung vereinbaren',
     ],
 
     'footer' => [
@@ -21,7 +21,7 @@ return [
 
     'prefooter' => [
         'tagline'   => 'Ich helfe Unternehmern, in der Online-Welt erfolgreich zu sein',
-        'cta'       => 'Nachricht senden',
+        'cta'       => 'Kostenlose Beratung vereinbaren',
         'nav_label' => 'Footer-Navigation',
     ],
 

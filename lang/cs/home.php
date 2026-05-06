@@ -9,7 +9,7 @@ return [
 
     'hero' => [
         'heading'       => 'Weby na míru pro lidi, kteří poznají rozdíl.',
-        'subline'       => 'Žádné šablony. Žádný WordPress. Každý projekt začíná pochopením vašeho byznysu — a končí řešením, které nikdo jiný nemá.',
+        'subline'       => 'Žádné předpřipravené šablony, žádné měsíční poplatky za údržbu. Web stavíme od pochopení toho, co potřebujete prodat — ne z hotových dílů.',
         'chips'         => ['Strategie', 'Design', 'Kód', 'Texty'],
         'cta_primary'   => 'Domluvit konzultaci',
         'cta_secondary' => 'Jak pracuji →',
@@ -54,7 +54,7 @@ return [
             ],
             [
                 'heading' => 'Závislost na agentuře, za kterou platíte měsíčně',
-                'text'    => 'WordPress vyžaduje pravidelnou správu, aktualizace a bezpečnostní záplaty. Tím agentury vydělávají roky po předání webu. Je to jejich byznys model — ne vaše výhoda.',
+                'text'    => 'WordPress je potřeba každý měsíc aktualizovat a pravidelně opravovat bezpečnostní díry. Tím agentury vydělávají roky po předání webu. Je to jejich byznys model — ne vaše výhoda.',
             ],
             [
                 'heading' => 'AI web za odpoledne: hezký, generický, zaměnitelný',
@@ -111,7 +111,7 @@ return [
         ],
         'expert' => [
             'label'   => 'Odborník + AI',
-            'outcome' => 'Stejná rychlost na rutině.',
+            'outcome' => 'Stejně rychlé tam, kde to dává smysl. A bez generického výsledku.',
             'items'   => [
                 'Strategie, výzkum a pochopení vašeho byznysu',
                 'Kontrola a výsledek, za který někdo ručí',
@@ -120,7 +120,7 @@ return [
             ],
             'note' => 'Pokud provozujete byznys, je to rozdíl, který zákazníci poznají.',
         ],
-        'closing' => 'AI používám jako nástroj — zkracuje čas na rutinní práci. Strategii, výzkum a rozhodnutí o tom, co web musí dělat, nelze přeskočit. To jsou hodiny práce, které předcházejí prvnímu řádku kódu.',
+        'closing' => 'AI používám jako nástroj — zkracuje čas na rutinní práci. Strategii, výzkum a rozhodnutí o tom, co web musí dělat, nelze přeskočit. To je práce, která musí být hotová dřív, než se začne web vůbec stavět.',
     ],
 
     'toyota' => [
@@ -132,16 +132,15 @@ return [
     ],
 
     'portfolio' => [
-        'heading'     => 'Portfolio',
-        'placeholder' => '[Vizuál projektu]',
-        'cta'         => 'Všechny projekty →',
+        'heading' => 'Portfolio',
+        'cta'     => 'Všechny projekty →',
     ],
 
     'services' => [
         'heading_other' => 'Posílím vaši online viditelnost',
         'seo' => [
             'title'       => 'Zákazníci z Googlu — bez platby za klik',
-            'description' => 'Placená reklama funguje jen dokud platíte. SEO pracuje pro vás dlouhodobě. Pomůžu vám vybudovat organickou viditelnost ve vyhledávačích, která přivádí zákazníky i bez reklamního rozpočtu.',
+            'description' => 'Placená reklama funguje jen dokud platíte. SEO pracuje pro vás dlouhodobě. Pomůžu vám tak, aby vás zákazníci našli v Googlu zdarma — i když zrovna nemáte rozpočet na reklamu.',
         ],
         'design' => [
             'title'       => 'Vizuální identita, kterou zákazníci zaznamenají',
@@ -171,18 +170,10 @@ return [
         ],
     ],
 
-    'price' => [
-        'subheading'  => 'Transparentní ceny',
-        'heading'     => 'Přesně víte, do čeho jdete',
-        'description' => 'Férové ceny bez skrytých poplatků. Orientační ceník vám dá jasnou představu o potřebné investici ještě před naší první schůzkou.',
-        'cta'         => 'Zobrazit ceník',
-    ],
-
     'cta' => [
         'heading'      => 'Připraveni začít? Konzultace je zdarma.',
-        'quotation'    => 'Získat nabídku',
         'consultation' => 'Domluvit konzultaci',
-        'message'      => 'Nebo napsat zprávu',
+        'message'      => 'Nebo mi napište — ozvu se do 24 hodin',
     ],
 
     'final_cta' => [

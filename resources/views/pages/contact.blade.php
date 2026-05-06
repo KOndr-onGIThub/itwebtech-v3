@@ -57,15 +57,15 @@
                     </div>
                 </dl>
 
-                <a href="#kontaktni-formular" class="btn btn-primary" style="margin-top:2rem;display:inline-flex;">
+                <a href="#kontaktni-formular" class="btn btn-primary contact-info__cta">
                     {{ __('contact.cta_consultation') }}
                 </a>
             </aside>
 
             {{-- Contact form --}}
-            <div id="kontaktni-formular" x-data="contactForm">
-                <h2 style="margin-bottom:.5rem;">{{ __('contact.form_heading') }}</h2>
-                <p style="color:var(--color-ink-500);font-size:.9375rem;margin-bottom:1.75rem;line-height:1.65;">{{ __('contact.form_subheading') }}</p>
+            <div id="kontaktni-formular" class="contact-form" x-data="contactForm">
+                <h2 class="contact-form__title">{{ __('contact.form_heading') }}</h2>
+                <p class="contact-form__subtitle">{{ __('contact.form_subheading') }}</p>
 
                 <form @submit.prevent="submit" novalidate>
                     @csrf
@@ -76,19 +76,18 @@
                                placeholder="{{ __('contact.name') }}">
                     </div>
 
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-                        <div class="form-group" style="margin-bottom:0;">
+                    <div class="form-row-2col">
+                        <div class="form-group form-group--inline">
                             <label for="email">{{ __('contact.email') }} <span aria-hidden="true">*</span></label>
                             <input type="email" id="email" name="email" required autocomplete="email"
                                    placeholder="vas@email.cz">
                         </div>
-                        <div class="form-group" style="margin-bottom:0;">
+                        <div class="form-group form-group--inline">
                             <label for="tel">{{ __('contact.tel') }} <span aria-hidden="true">*</span></label>
                             <input type="tel" id="tel" name="tel" required autocomplete="tel"
                                    placeholder="+420 000 000 000">
                         </div>
                     </div>
-                    <div style="margin-bottom:1.125rem;"></div>
 
                     <div class="form-group">
                         <label for="subject">{{ __('contact.subject') }}</label>
@@ -112,16 +111,14 @@
                         </label>
                     </div>
 
-                    <div class="form-group" style="margin-bottom:0;">
-                        <button type="submit" class="btn btn-primary" :disabled="loading" style="width:100%;justify-content:center;">
-                            <span x-show="!loading" style="display:flex;align-items:center;">
+                    <div class="form-group form-group--inline">
+                        <button type="submit" class="btn btn-primary btn-block" :disabled="loading">
+                            <span class="btn__inner" x-show="!loading">
                                 {{ __('contact.send') }}
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-left:.375rem;">
-                                    <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-                                </svg>
+                                <x-icon.arrow-right class="w-4 h-4 shrink-0" />
                             </span>
-                            <span x-show="loading" x-cloak style="display:flex;align-items:center;gap:.5rem;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite;">
+                            <span class="btn__inner" x-show="loading" x-cloak>
+                                <svg class="btn__spinner" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                     <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
                                 </svg>
                                 {{ __('contact.sending') ?? '...' }}
@@ -133,11 +130,5 @@
         </div>
     </div>
 </section>
-
-@push('scripts')
-<style>
-@keyframes spin { to { transform: rotate(360deg); } }
-</style>
-@endpush
 
 @endsection

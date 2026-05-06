@@ -18,9 +18,9 @@ return [
 
     'sidebar_ad' => [
         'subheading' => 'Don\'t struggle with your website alone',
-        'heading'    => 'Get a top-class website',
-        'text'       => 'Use professional services and get a professional website and applications',
-        'cta_price'  => 'Price list',
+        'heading'    => 'Move your website where it belongs',
+        'text'       => 'Instead of experimenting, have your website built right the first time.',
+        'cta_price'  => 'Pricing',
         'cta_contact'=> 'Contact',
     ],
 
@@ -52,7 +52,7 @@ return [
             'Specific recommendations on what to fix first.',
             'Priority roadmap without “nice-to-have” cosmetics.',
         ],
-        'cta_primary'   => 'I want a mini audit',
+        'cta_primary'   => 'I want a free mini audit',
         'cta_secondary' => 'See pricing first',
     ],
 

@@ -11,7 +11,7 @@ return [
     ],
 
     'cta' => [
-        'contact' => 'Kontakt',
+        'contact' => 'Domluvit konzultaci',
     ],
 
     'footer' => [
@@ -21,7 +21,7 @@ return [
 
     'prefooter' => [
         'tagline'   => 'Pomáhám podnikatelům uspět v online světě',
-        'cta'       => 'Napsat zprávu',
+        'cta'       => 'Domluvit konzultaci zdarma',
         'nav_label' => 'Footer navigace',
     ],
 

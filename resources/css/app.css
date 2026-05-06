@@ -900,11 +900,27 @@
         position: relative;
         z-index: 1;
     }
-    @media (min-width: 640px) {
-        .section-cta .container-site {
-            flex-direction: row;
-            justify-content: center;
-        }
+    /* Final CTA sekce na home — dva logické bloky (úvod + závěr).
+       Záměrně nepřepínáme na flex-row na widescreen, protože každý
+       blok obsahuje vlastní heading + actions + text a měl by působit
+       jako samostatná jednotka. */
+    .final-cta__intro,
+    .final-cta__closing {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+        max-width: 720px;
+    }
+    .final-cta__closing {
+        margin-top: clamp(2rem, 5vw, 3.5rem);
+    }
+    .final-cta__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .75rem;
+        justify-content: center;
     }
 
     /* ============================================================
@@ -2179,6 +2195,21 @@
         color: var(--color-gold-500);
     }
 
+    .contact-info__cta {
+        margin-top: 2rem;
+        display: inline-flex;
+    }
+
+    .contact-form__title {
+        margin-bottom: .5rem;
+    }
+    .contact-form__subtitle {
+        color: var(--color-ink-500);
+        font-size: .9375rem;
+        margin-bottom: 1.75rem;
+        line-height: 1.65;
+    }
+
     /* ============================================================
        FORMULÁŘE
        ============================================================ */
@@ -2260,6 +2291,40 @@
         color: var(--color-gold-500);
         text-decoration: underline;
         text-underline-offset: 2px;
+    }
+
+    /* Inline form-group bez bottom marginu (pro skupiny v gridu nebo poslední button) */
+    .form-group--inline {
+        margin-bottom: 0;
+    }
+
+    /* Dvousloupcový řádek formuláře — přizpůsobí se úzkým viewportům */
+    .form-row-2col {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
+        gap: 1rem;
+        margin-bottom: 1.125rem;
+    }
+
+    /* Tlačítko přes celou šířku (např. submit ve formuláři) */
+    .btn-block {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Wrapper obsahu uvnitř tlačítka — udržuje ikonu a text v zarovnání */
+    .btn__inner {
+        display: inline-flex;
+        align-items: center;
+        gap: .5rem;
+    }
+
+    /* Spinner ikona — rotace pro loading stavy */
+    .btn__spinner {
+        animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+        to { transform: rotate(360deg); }
     }
 
     /* ============================================================
@@ -2505,6 +2570,22 @@
         letter-spacing: 0.01em;
         margin-inline: auto;
         max-width: 100%;
+    }
+
+    /* Price page CTA */
+    .price-cta__inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.25rem;
+        width: 100%;
+    }
+    .price-cta__desc {
+        max-width: 540px;
+        text-align: center;
+        color: rgba(241, 245, 249, .8);
+        font-size: 1.0625rem;
+        line-height: 1.7;
     }
 
     /* Guarantees */
@@ -3747,81 +3828,6 @@
         padding: 0.75rem 1rem;
         border-radius: 0.5rem;
         background: var(--bg-card);
-    }
-
-    /* ============================================================
-       AI SECTION
-       ============================================================ */
-    .ai-intro {
-        max-width: 720px;
-        margin: 0 auto 2.5rem;
-    }
-    .ai-intro .section-prose-text {
-        text-align: left;
-        margin-inline: 0;
-    }
-    .ai-comparison {
-        display: grid;
-        grid-template-columns: 1fr auto 1fr;
-        gap: 0;
-        align-items: stretch;
-        border: 1px solid var(--border-subtle);
-        border-radius: 1rem;
-        overflow: hidden;
-        margin-block: 2rem;
-        max-width: 720px;
-        margin-inline: auto;
-    }
-    .ai-comparison__col {
-        padding: 2rem 1.75rem;
-    }
-    .ai-comparison__col--laik {
-        background: var(--bg-card);
-    }
-    .ai-comparison__col--expert {
-        background: rgba(245, 158, 11, 0.06);
-        border-left: 1px solid var(--border-gold);
-    }
-    .ai-comparison__col h3 {
-        font-size: 1rem;
-        font-weight: 700;
-        margin-bottom: 0.75rem;
-        color: var(--color-heading);
-    }
-    .ai-comparison__col--expert h3 {
-        color: var(--color-gold-500);
-    }
-    .ai-comparison__col p {
-        font-size: 0.9375rem;
-        color: var(--color-body);
-        line-height: 1.65;
-        margin: 0;
-    }
-    .ai-comparison__divider {
-        display: none;
-    }
-    .ai-note {
-        font-style: italic;
-        font-size: 0.9375rem;
-        color: var(--color-muted);
-        text-align: center;
-        margin-block: 0 2rem;
-        max-width: 600px;
-        margin-inline: auto;
-    }
-    .ai-outro {
-        max-width: 720px;
-        margin-inline: auto;
-        text-align: left;
-    }
-    @media (max-width: 640px) {
-        .ai-comparison {
-            grid-template-columns: 1fr;
-        }
-        .ai-comparison__col--expert {
-            border-left: none;
-            border-top: 1px solid var(--border-gold);
-        }
     }
 
     /* ============================================================

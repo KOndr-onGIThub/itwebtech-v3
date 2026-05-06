@@ -8,8 +8,8 @@ return [
     ],
 
     'subheading' => 'Unverbindliche Preise',
-    'heading'    => 'Klare Preise für jedes Projekt',
-    'intro'      => 'Jedes Projekt ist einzigartig — den genauen Preis erhalten Sie nach einer kostenlosen Beratung. Diese Übersicht gibt Ihnen vor unserem ersten Gespräch eine klare Vorstellung von der Investition.',
+    'heading'    => 'Sie wissen, worauf Sie sich einlassen — schon vor unserem ersten Gespräch.',
+    'intro'      => 'Jedes Projekt ist einzigartig — den genauen Preis erfahren Sie nach einer kostenlosen Beratung. Diese Übersicht gibt Ihnen schon vor dem ersten Gespräch eine klare Vorstellung, was es kosten wird.',
 
     'popular'   => 'Beliebteste Wahl',
     'quotation' => 'Angebot anfragen',
@@ -30,7 +30,7 @@ return [
                 'Seitengeschwindigkeits-Optimierung',
                 '14 Tage Support nach dem Launch',
             ],
-            'cta' => 'Projekt anfragen',
+            'cta' => 'Interesse — Beratung vereinbaren',
         ],
         [
             'name'    => 'Professionell',
@@ -46,7 +46,7 @@ return [
                 'Hosting und Domain für 1 Jahr kostenlos',
                 '1 Monat Support nach dem Launch',
             ],
-            'cta' => 'Diesen Plan wählen',
+            'cta' => 'Diesen Plan möchte ich — kostenlose Beratung',
         ],
         [
             'name'    => 'Komplex',
@@ -65,7 +65,7 @@ return [
         ],
     ],
 
-    'note' => 'Unverbindliche Preise, keine Mehrwertsteuer.',
+    'note' => 'Kein Umsatzsteuerpflichtiger — die genannten Preise sind endgültig, es kommt nichts hinzu.',
 
     'guarantees' => [
         'heading' => 'Was in jedem Projekt enthalten ist',

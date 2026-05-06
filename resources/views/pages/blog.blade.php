@@ -13,7 +13,7 @@
     </div>
 </div>
 
-<section class="section-wrapper">
+<section class="section-wrapper" data-reveal>
     <div class="container-site">
         <div class="blog-layout">
 
@@ -97,11 +97,11 @@
                     <h2>{{ __('blog.sidebar_ad.heading') }}</h2>
                     <p>{{ __('blog.sidebar_ad.text') }}</p>
                     <div class="sidebar-ad__actions">
-                        <a href="{{ lroute('price') }}" class="btn btn-secondary">
-                            {{ __('blog.sidebar_ad.cta_price') }}
-                        </a>
                         <a href="{{ lroute('contact') }}" class="btn btn-primary">
                             {{ __('blog.sidebar_ad.cta_contact') }}
+                        </a>
+                        <a href="{{ lroute('price') }}" class="btn btn-secondary">
+                            {{ __('blog.sidebar_ad.cta_price') }}
                         </a>
                     </div>
                 </div>

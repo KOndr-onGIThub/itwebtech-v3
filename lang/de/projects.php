@@ -9,7 +9,7 @@ return [
 
     'subheading'       => 'Realisierte',
     'heading'          => 'PROJEKTE',
-    'intro'            => 'Lassen Sie sich von Beispielen meiner Arbeit inspirieren. Ich arbeite immer so, dass Kunden gerne zu mir zurückkommen.',
+    'intro'            => 'Lassen Sie sich von Beispielen meiner Arbeit inspirieren. Ich arbeite so, dass Kunden gerne zurückkommen.',
 
     'filter_all'       => 'Alle',
     'filter_websites'  => 'Webseiten',
@@ -26,7 +26,7 @@ return [
         'heading'    => 'Das stecke ich in Projekte',
         'items'      => [
             ['title' => 'Expertise und Praxis',      'description' => 'Dank 18 Jahren Erfahrung bei Toyota habe ich einzigartige Erfahrung in der Prozessoptimierung und Webanwendungsentwicklung.'],
-            ['title' => 'Stabilität und Robustheit', 'description' => 'Ich verwende keine Drittanbieter-Plugins einschränkender CMS-Systeme. Ich programmiere robusten Code.'],
+            ['title' => 'Stabilität und Robustheit', 'description' => 'Ich baue keine Webseiten aus fremden Add-ons, die beim ersten Update kaputtgehen. Ich schreibe eigenen Code, der hält.'],
             ['title' => 'Gründliches Testen',        'description' => 'Ich überlasse nichts dem Zufall. Ich teste Apps und Webseiten während der Entwicklung und danach.'],
             ['title' => 'Geschwindigkeit und Design','description' => 'Priorität hat schnelles Laden und modernes Design für einen positiven ersten Eindruck.'],
             ['title' => 'Maßgeschneiderte Lösungen', 'description' => 'Jedes Projekt ist für mich einzigartig und ich suche immer die beste Lösung für jeden Kunden.'],
@@ -66,8 +66,8 @@ return [
             [
                 'type'     => 'Individueller E-Shop',
                 'timeline' => '6 Wochen',
-                'title'    => 'E-Shop ohne Vendor-Lock-in',
-                'summary'  => 'Die frühere Lösung war von Plugins und häufigen Reparaturen abhängig. Der neue E-Shop brachte Stabilität und planbare Kosten.',
+                'title'    => 'Ein E-Shop, der wirklich Ihnen gehört',
+                'summary'  => 'Der frühere E-Shop hing von einer fremden Plattform ab und benötigte ständige Plugin-Reparaturen. Der neue E-Shop bringt Stabilität und planbare Kosten.',
                 'outcomes' => [
                     'Wiederkehrende Ausfälle nach Updates entfernt.',
                     'Klarer Checkout ohne störende Elemente.',
@@ -102,7 +102,7 @@ return [
     'screenshots'  => 'Projektscreenshots',
 
     'cta' => [
-        'heading' => 'Möchten Sie ein ähnliches Ergebnis?',
+        'heading' => 'Möchten Sie ein ähnliches Ergebnis für Ihr Unternehmen?',
         'primary' => 'Beratung buchen',
     ],
 
