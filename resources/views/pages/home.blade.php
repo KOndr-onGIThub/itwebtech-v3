@@ -198,7 +198,7 @@
 </section>
 
 {{-- ===================================================
-     PORTFOLIO — PLACEHOLDER
+     PORTFOLIO — PROJEKTY
      =================================================== --}}
 <section class="section-wrapper" data-reveal>
     <div class="container-site">
@@ -206,15 +206,46 @@
             <h2>{{ __('home.portfolio.heading') }}</h2>
         </header>
 
+        @php
+        $homeProjects = [
+            [
+                'img'  => 'projects/strechyzajic_preview.jpg',
+                'name' => 'Střechy Zajíc',
+                'type' => 'Webové stránky',
+            ],
+            [
+                'img'  => 'projects/realitackyvakci_web_01.webp',
+                'name' => 'Realita Čky v Akci',
+                'type' => 'Webové stránky',
+            ],
+            [
+                'img'  => 'projects/pitarena_preview.jpg',
+                'name' => 'Pitarena',
+                'type' => 'Webové stránky',
+            ],
+            [
+                'img'  => 'projects/elektro_srnak_preview.jpg',
+                'name' => 'Elektro Srnak',
+                'type' => 'Webové stránky',
+            ],
+        ];
+        @endphp
+
         <div class="portfolio-grid" data-reveal-group>
-            @foreach (range(1, 5) as $i)
-            <article class="portfolio-card portfolio-card--placeholder">
-                <div class="portfolio-card__visual" aria-hidden="true">
-                    <span class="portfolio-card__placeholder-text">{{ __('home.portfolio.placeholder') }}</span>
+            @foreach ($homeProjects as $proj)
+            <article class="portfolio-card">
+                <div class="portfolio-card__visual">
+                    <img
+                        src="{{ asset('img/' . $proj['img']) }}"
+                        alt="{{ $proj['name'] }}"
+                        loading="lazy"
+                        width="480"
+                        height="270"
+                    >
                 </div>
                 <div class="portfolio-card__body">
-                    <p class="portfolio-card__placeholder-line"></p>
-                    <p class="portfolio-card__placeholder-line portfolio-card__placeholder-line--short"></p>
+                    <h3 class="portfolio-card__name">{{ $proj['name'] }}</h3>
+                    <span class="portfolio-card__type">{{ $proj['type'] }}</span>
                 </div>
             </article>
             @endforeach
