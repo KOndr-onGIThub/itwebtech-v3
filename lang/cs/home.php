@@ -137,6 +137,22 @@ return [
         'cta'         => 'Všechny projekty →',
     ],
 
+    'services' => [
+        'heading_other' => 'Posílím vaši online viditelnost',
+        'seo' => [
+            'title'       => 'Zákazníci z Googlu — bez platby za klik',
+            'description' => 'Placená reklama funguje jen dokud platíte. SEO pracuje pro vás dlouhodobě. Pomůžu vám vybudovat organickou viditelnost ve vyhledávačích, která přivádí zákazníky i bez reklamního rozpočtu.',
+        ],
+        'design' => [
+            'title'       => 'Vizuální identita, kterou zákazníci zaznamenají',
+            'description' => 'Logo a firemní identita, kterou vaši zákazníci poznají na první pohled. Navrhnu vizuální identitu, která sedí vašemu oboru — a odliší vás od generické konkurence.',
+        ],
+        'social' => [
+            'title'       => 'Sociální sítě, které budují důvěru',
+            'description' => 'Zákazníci si vaše sociální sítě prověří dřív, než objednají. Aktivní, konzistentní přítomnost buduje důvěru. Připravím obsah a strategii, která vás přiblíží vaší cílové skupině.',
+        ],
+    ],
+
     'testimonials' => [
         'heading' => 'Co říkají ti, pro které jsem pracoval.',
     ],
