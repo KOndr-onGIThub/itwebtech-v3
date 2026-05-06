@@ -20,6 +20,21 @@
 
             {{-- Contact info --}}
             <aside class="contact-info">
+
+                <div class="contact-info__photo-wrap">
+                    <picture>
+                        <source srcset="{{ asset('img/about/ondrej_kriska_preview.webp') }}" type="image/webp">
+                        <img
+                            src="{{ asset('img/about/ondrej_kriska.jpg') }}"
+                            alt="Ondřej Kriška"
+                            class="contact-info__photo"
+                            loading="lazy"
+                            width="260"
+                            height="300"
+                        >
+                    </picture>
+                </div>
+
                 <dl>
                     <div>
                         <dt>{{ __('contact.address_label') }}</dt>
