@@ -6,11 +6,14 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PortfolioProject extends Model
 {
-    use SoftDeletes;
+    // Záměrně bez SoftDeletes: smazání projektu musí kaskádovat do
+    // překladů, screenshotů, outcomes a pivot tabulky tagů přes DB FK
+    // cascade (viz migrace). Soft-delete by FK cascade nespustil
+    // a v adminu by zůstávaly osiřelé řádky (OND-73). `deleted_at`
+    // sloupec v DB ponecháme nepoužitý — model ho ignoruje.
 
     protected $table = 'portfolio_projects';
 
@@ -27,9 +30,9 @@ class PortfolioProject extends Model
     ];
 
     protected $casts = [
-        'featured'     => 'boolean',
-        'sort_order'   => 'integer',
-        'year'         => 'integer',
+        'featured' => 'boolean',
+        'sort_order' => 'integer',
+        'year' => 'integer',
         'published_at' => 'datetime',
     ];
 
