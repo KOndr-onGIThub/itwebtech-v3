@@ -30,6 +30,18 @@ class PortfolioSeeder extends Seeder
 
     public function run(): void
     {
+        // Ochrana proti omylu: pokud už v DB existují portfolio projekty
+        // (typicky upravené ručně přes Filament admin), nikdy nepřepisuj data
+        // bez explicitního souhlasu. Re-seed je možný přes
+        // PORTFOLIO_SEEDER_FORCE_OVERWRITE=1.
+        if (PortfolioProject::query()->exists() && ! env('PORTFOLIO_SEEDER_FORCE_OVERWRITE')) {
+            $this->command?->warn(
+                'PortfolioSeeder: portfolio už existuje — přeskakuji, aby se nepřepsala '
+                .'ručně upravená data. Pro re-seed nastav PORTFOLIO_SEEDER_FORCE_OVERWRITE=1.'
+            );
+            return;
+        }
+
         $sourcePath = base_path('docs/portfolio-data.yaml');
         if (! is_file($sourcePath)) {
             $this->command?->error("YAML not found: {$sourcePath}");

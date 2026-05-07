@@ -33,6 +33,11 @@ RUN npm run build
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
+# Deploy hook: serversideup/php image spouští skripty z /etc/entrypoint.d/
+# před hlavním procesem. Tady běží `migrate --force` + AdminUserSeeder.
+# Detaily a bezpečnostní pravidla viz docker/entrypoint.d/50-laravel-deploy.sh.
+COPY --chmod=755 docker/entrypoint.d/ /etc/entrypoint.d/
+
 USER www-data
 
 EXPOSE 8080
