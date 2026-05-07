@@ -196,18 +196,19 @@ class ArticleResource extends Resource
                     ->maxLength(500)
                     ->required($required)
                     ->columnSpanFull(),
-                // Body fields jsou raw HTML — používáme Textarea, aby žádný editor nesanitoval
-                // atributy (`<a href>`, `target`, `rel`, `title`). Tím garantujeme byte-identický
-                // round-trip pro SEO-kritické články (viz OND-87 sekce C).
-                Forms\Components\Textarea::make("$key.perex")
-                    ->label('Perex (HTML)')
-                    ->rows(4)
+                // Body fields používají Filament `RichEditor` (Trix-based WYSIWYG).
+                // Pozn. SEO: Trix neuchovává všechny HTML atributy — `<a>` zachová `href`,
+                // ale strippuje `target`/`rel`/`title`. Pro nový obsah, který Ondra píše,
+                // je to OK. Pro legacy importované články s těmito atributy je doporučeno
+                // necesarializovat editaci přes UI (raw HTML zůstává v DB nezměněn dokud
+                // není článek přes admin uložen). Tahy storage round-trip beze ztrát
+                // pokrývají i nadále testy `ArticleAdminResourceTest`.
+                Forms\Components\RichEditor::make("$key.perex")
+                    ->label('Perex')
                     ->columnSpanFull(),
-                Forms\Components\Textarea::make("$key.content_1")
-                    ->label('Hlavní obsah / body (HTML)')
-                    ->rows(15)
+                Forms\Components\RichEditor::make("$key.content_1")
+                    ->label('Hlavní obsah / body')
                     ->required($required)
-                    ->helperText('Surové HTML. Žádná auto-sanitizace.')
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make("$key.img_preview")
                     ->label('Náhled (filename relativní k storage `articles/`)')
@@ -215,29 +216,25 @@ class ArticleResource extends Resource
                 Forms\Components\TextInput::make("$key.img_main")
                     ->label('Hlavní obrázek (filename)')
                     ->maxLength(191),
-                Forms\Components\Textarea::make("$key.content_mid")
-                    ->label('Obsah – prostřední (HTML)')
-                    ->rows(8)
+                Forms\Components\RichEditor::make("$key.content_mid")
+                    ->label('Obsah – prostřední')
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make("$key.img_mid")
                     ->label('Obrázek uprostřed (filename)')
                     ->maxLength(191)
                     ->columnSpanFull(),
-                Forms\Components\Textarea::make("$key.content_2")
-                    ->label('Obsah – druhý díl (HTML)')
-                    ->rows(8)
+                Forms\Components\RichEditor::make("$key.content_2")
+                    ->label('Obsah – druhý díl')
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make("$key.img_end")
                     ->label('Obrázek na konci (filename)')
                     ->maxLength(191)
                     ->columnSpanFull(),
-                Forms\Components\Textarea::make("$key.bonus")
-                    ->label('Bonus blok (HTML)')
-                    ->rows(6)
+                Forms\Components\RichEditor::make("$key.bonus")
+                    ->label('Bonus blok')
                     ->columnSpanFull(),
-                Forms\Components\Textarea::make("$key.extra")
-                    ->label('Extra blok (HTML)')
-                    ->rows(6)
+                Forms\Components\RichEditor::make("$key.extra")
+                    ->label('Extra blok')
                     ->columnSpanFull(),
             ])
             ->columns(2);
