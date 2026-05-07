@@ -17,9 +17,9 @@
     <div class="container-site">
         @if ($hero)
             <figure class="portfolio-detail-gallery__hero">
-                <x-responsive-image
-                    path="{{ $hero->path }}"
-                    alt="{{ $hero->translation()?->alt ?? '' }}"
+                <x-portfolio.screenshot
+                    :path="$hero->path"
+                    :alt="$hero->translation()?->alt ?? ''"
                     sizes="(max-width: 1024px) 100vw, 1100px"
                     loading="eager"
                     fetchpriority="high"
@@ -35,9 +35,9 @@
             <div class="portfolio-detail-gallery__grid" data-reveal-group>
                 @foreach ($gallery as $shot)
                     <figure class="portfolio-detail-gallery__item">
-                        <x-responsive-image
-                            path="{{ $shot->path }}"
-                            alt="{{ $shot->translation()?->alt ?? '' }}"
+                        <x-portfolio.screenshot
+                            :path="$shot->path"
+                            :alt="$shot->translation()?->alt ?? ''"
                             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 540px"
                             loading="lazy"
                             :lightbox-gallery="'portfolio-screenshots'"

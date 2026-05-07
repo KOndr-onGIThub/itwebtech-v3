@@ -128,6 +128,17 @@ composer run dev
 Spustí zároveň: PHP server, Vite, queue worker a log tail.
 Web běží na `http://localhost:8000`.
 
+### A3b. Storage symlink (pro Filament admin uploady)
+
+Portfolio admin nahrává screenshoty do `storage/app/public/portfolio/{slug}/` a
+přístup k nim potřebuje veřejný symlink `public/storage`. Stačí jednou:
+
+```bash
+php artisan storage:link
+```
+
+Idempotentní — lze přidat do deploy skriptu. Bez toho vrátí `/storage/portfolio/...` 404.
+
 ### A4. CMS (volitelné)
 
 ```bash
