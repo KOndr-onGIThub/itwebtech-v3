@@ -2,10 +2,18 @@
 
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\SitemapController;
 use App\Http\Middleware\SetLocale;
 use Illuminate\Support\Facades\Route;
 
 require __DIR__.'/landing.php';
+
+/*
+|--------------------------------------------------------------------------
+| Sitemap (musí být před fallback /{slug} routou)
+|--------------------------------------------------------------------------
+*/
+Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 
 /*
 |--------------------------------------------------------------------------
