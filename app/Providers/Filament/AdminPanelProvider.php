@@ -26,7 +26,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
-            ->path('admin')
+            ->path(env('FILAMENT_ADMIN_PATH', 'admin-cms'))
             ->brandName('itwebtech.cz admin')
             ->login()
             ->profile()

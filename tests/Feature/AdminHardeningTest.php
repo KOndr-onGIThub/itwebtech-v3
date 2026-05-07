@@ -2,16 +2,21 @@
 
 namespace Tests\Feature;
 
+use App\Listeners\LogAdminLoginToAuditTrail;
 use App\Listeners\NotifyOnFailedAdminLogins;
+use App\Listeners\ResetTwoFactorChallengeOnLogin;
 use App\Mail\AdminFailedLoginAlert;
+use App\Models\AdminLoginLog;
 use App\Models\User;
 use App\Services\TwoFactorAuthenticationService;
 use Illuminate\Auth\Events\Failed;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
+use PragmaRX\Google2FA\Google2FA;
 use Tests\TestCase;
 
 class AdminHardeningTest extends TestCase
@@ -27,7 +32,7 @@ class AdminHardeningTest extends TestCase
         $this->assertNotEmpty($secret);
 
         // verify s vygenerovaným validním kódem prochází.
-        $google2fa = new \PragmaRX\Google2FA\Google2FA;
+        $google2fa = new Google2FA;
         $code = $google2fa->getCurrentOtp($secret);
         $this->assertTrue($service->verify($secret, $code));
 
@@ -98,15 +103,28 @@ class AdminHardeningTest extends TestCase
 
     public function test_login_event_clears_two_factor_passed_flag(): void
     {
-        Event::fake([\Illuminate\Auth\Events\Login::class]);
+        Event::fake([Login::class]);
 
         // Listener je registrovaný v AppServiceProvider — ověř pomocí přímého volání.
         session()->put('auth.two_factor.passed', true);
-        $listener = new \App\Listeners\ResetTwoFactorChallengeOnLogin;
+        $listener = new ResetTwoFactorChallengeOnLogin;
         $user = User::factory()->create();
-        $listener->handle(new \Illuminate\Auth\Events\Login('web', $user, false));
+        $listener->handle(new Login('web', $user, false));
 
         $this->assertNull(session()->get('auth.two_factor.passed'));
+    }
+
+    public function test_login_event_writes_audit_log_entry(): void
+    {
+        $user = User::factory()->create();
+        $listener = new LogAdminLoginToAuditTrail;
+
+        $listener->handle(new Login('web', $user, false));
+
+        $log = AdminLoginLog::where('user_id', $user->getKey())->first();
+        $this->assertNotNull($log, 'Audit log záznam musí vzniknout pro každý úspěšný login.');
+        $this->assertSame($user->getKey(), $log->user_id);
+        $this->assertNotNull($log->created_at);
     }
 
     public function test_secure_headers_middleware_emits_expected_headers(): void

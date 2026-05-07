@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Listeners\LogAdminLoginToAuditTrail;
 use App\Listeners\NotifyOnFailedAdminLogins;
 use App\Listeners\ResetTwoFactorChallengeOnLogin;
 use Illuminate\Auth\Events\Failed;
@@ -25,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Event::listen(Login::class, ResetTwoFactorChallengeOnLogin::class);
+        Event::listen(Login::class, LogAdminLoginToAuditTrail::class);
         Event::listen(Failed::class, NotifyOnFailedAdminLogins::class);
     }
 }

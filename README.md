@@ -352,8 +352,9 @@ Obojí je idempotentní:
   `ADMIN_EMAIL` / `ADMIN_PASSWORD` — opakovaný deploy aktualizuje heslo
   podle aktuální env hodnoty.
 
-Vlastník po deployi nemusí dělat nic ručně — admin se nalogguje na `/admin`
-podle `ADMIN_EMAIL` / `ADMIN_PASSWORD` z Coolify env.
+Vlastník po deployi nemusí dělat nic ručně — admin se nalogguje na
+`/{FILAMENT_ADMIN_PATH}` (default `/admin-cms`) podle `ADMIN_EMAIL` /
+`ADMIN_PASSWORD` z Coolify env.
 
 ### ⚠️ NIKDY nespouštěj `db:seed` bez `--class`
 
@@ -387,13 +388,26 @@ a `[laravel-deploy] Seeding admin user...`.
 
 ---
 
-## Bezpečnost admin panelu (Filament `/admin`)
+## Bezpečnost admin panelu (Filament)
+
+### Vlastní URL panelu
+
+Admin panel **není** na default `/admin`. Cesta se přebírá z env proměnné
+`FILAMENT_ADMIN_PATH` (default: `admin-cms`). Skrývá Filament před plošnými
+URL scannery a snižuje hluk failed-login pokusů.
+
+```env
+FILAMENT_ADMIN_PATH=admin-cms
+```
+
+Bez úvodního lomítka. Po změně env proměnné spusť `php artisan config:clear`
+(v produkci postačí redeploy — entrypoint cache regeneruje sám).
 
 ### 2FA (TOTP)
 
 Admin panel vynucuje dvoufaktorové ověření. Při prvním přihlášení nového
 admina ho middleware `EnsureTwoFactorAuthenticated` přesměruje na
-`/admin/two-factor`, kde:
+`/{FILAMENT_ADMIN_PATH}/two-factor`, kde:
 
 1. Klikne **Vygenerovat QR kód**.
 2. Naskenuje QR kód autentikační aplikací (Google Authenticator, 1Password,
@@ -406,8 +420,8 @@ admina ho middleware `EnsureTwoFactorAuthenticated` přesměruje na
 Při každém dalším loginu se po heslu zobrazí challenge stránka pro 6-místný
 kód (nebo jednorázový recovery kód).
 
-Přegenerování recovery kódů a vypnutí 2FA jsou dostupné na `/admin/two-factor`
-po přihlášení.
+Přegenerování recovery kódů a vypnutí 2FA jsou dostupné na
+`/{FILAMENT_ADMIN_PATH}/two-factor` po přihlášení.
 
 > 🛈 Single-admin režim — žádný uživatel nemá výjimku. Pokud admin ztratí
 > autentikační aplikaci i recovery kódy, jediná cesta zpět je přímo v DB
@@ -442,6 +456,23 @@ Cílová známka v <https://securityheaders.com>: minimálně **B**.
 
 `SESSION_SECURE_COOKIE` se v `config/session.php` přepne na `true`
 automaticky při `APP_ENV=production`. Lokálně/staging na http nech prázdné.
+
+### Audit log úspěšných loginů
+
+Tabulka `admin_login_log` (`user_id`, `ip`, `user_agent`, `created_at`) se
+naplňuje listenerem `LogAdminLoginToAuditTrail` na každý `Auth\Events\Login`.
+Slouží jako jednoduchý forenzní přehled "kdo se kdy přihlásil odkud" —
+záznamy se nepřepisují ani neagregují, takže jdou v případě incidentu
+přímo dotazovat:
+
+```sql
+SELECT u.email, l.ip, l.user_agent, l.created_at
+FROM admin_login_log l JOIN users u ON u.id = l.user_id
+ORDER BY l.created_at DESC LIMIT 50;
+```
+
+Mazání staré historie je na vlastníkovi (zatím není scheduled task —
+tabulka je low-volume).
 
 ### Reset 2FA pro již existujícího admina
 
