@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\RobotsController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Middleware\SetLocale;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +15,7 @@ require __DIR__.'/landing.php';
 |--------------------------------------------------------------------------
 */
 Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
+Route::get('/robots.txt', RobotsController::class)->name('robots');
 
 /*
 |--------------------------------------------------------------------------
