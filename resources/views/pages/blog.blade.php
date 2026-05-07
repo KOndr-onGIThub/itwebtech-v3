@@ -13,7 +13,7 @@
     </div>
 </div>
 
-<section class="section-wrapper">
+<section class="section-wrapper" data-reveal>
     <div class="container-site">
         <div class="blog-layout">
 
@@ -26,7 +26,13 @@
                     <article class="blog-card" data-reveal>
                         @if ($t->img_preview)
                         <a href="{{ lroute('blog') }}/{{ $dbArticle->slug($locale) }}" class="blog-card__img-link">
-                            <img src="/storage/{{ $t->img_preview }}" alt="{{ $t->title }}" loading="lazy" class="blog-card__img">
+                            <x-responsive-image
+                                path="articles/{{ $t->img_preview }}"
+                                alt="{{ $t->title }}"
+                                loading="lazy"
+                                class-img="blog-card__img"
+                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
+                            />
                         </a>
                         @endif
                         <div class="blog-card__body">
@@ -91,11 +97,11 @@
                     <h2>{{ __('blog.sidebar_ad.heading') }}</h2>
                     <p>{{ __('blog.sidebar_ad.text') }}</p>
                     <div class="sidebar-ad__actions">
-                        <a href="{{ lroute('price') }}" class="btn btn-secondary">
-                            {{ __('blog.sidebar_ad.cta_price') }}
-                        </a>
                         <a href="{{ lroute('contact') }}" class="btn btn-primary">
                             {{ __('blog.sidebar_ad.cta_contact') }}
+                        </a>
+                        <a href="{{ lroute('price') }}" class="btn btn-secondary">
+                            {{ __('blog.sidebar_ad.cta_price') }}
                         </a>
                     </div>
                 </div>

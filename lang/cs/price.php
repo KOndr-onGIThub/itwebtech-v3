@@ -8,8 +8,8 @@ return [
     ],
 
     'subheading' => 'Orientační ceny',
-    'heading'    => 'Jasné ceny pro každý projekt',
-    'intro'      => 'Každý projekt je jiný — finální cenu znáte po bezplatné konzultaci. Tento přehled vám dá jasnou představu o investici ještě před naší první schůzkou.',
+    'heading'    => 'Víte, do čeho jdete, ještě před první schůzkou.',
+    'intro'      => 'Každý projekt je jiný — finální cenu znáte po bezplatné konzultaci. Tento přehled vám dá jasnou představu, kolik to bude stát, ještě před naší první schůzkou.',
 
     'popular'   => 'Nejoblíbenější',
     'quotation' => 'Nezávazná poptávka',
@@ -30,7 +30,7 @@ return [
                 'Optimalizace rychlosti načítání',
                 '14 dní podpory po spuštění',
             ],
-            'cta' => 'Poptejte projekt',
+            'cta' => 'Mám zájem — domluvit konzultaci',
         ],
         [
             'name'    => 'Profesionál',
@@ -46,7 +46,7 @@ return [
                 'Hosting a doména na 1 rok zdarma',
                 '1 měsíc podpory po spuštění',
             ],
-            'cta' => 'Vybrat tento plán',
+            'cta' => 'Chci tento plán — konzultace zdarma',
         ],
         [
             'name'    => 'Komplex',
@@ -65,7 +65,7 @@ return [
         ],
     ],
 
-    'note' => 'Orientační ceny bez DPH. Nejsem plátce DPH.',
+    'note' => 'Nejsem plátce DPH — uvedené ceny jsou konečné, nic se k nim nepřičítá.',
 
     'guarantees' => [
         'heading' => 'Co je součástí každého projektu',

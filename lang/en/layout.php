@@ -5,13 +5,13 @@ return [
     'nav' => [
         'home'     => 'Home',
         'contact'  => 'Contact',
-        'price'    => 'Price',
+        'price'    => 'Pricing',
         'projects' => 'Projects',
         'blog'     => 'Blog',
     ],
 
     'cta' => [
-        'contact' => 'Contact',
+        'contact' => 'Book a consultation',
     ],
 
     'footer' => [
@@ -21,7 +21,7 @@ return [
 
     'prefooter' => [
         'tagline'   => 'I help entrepreneurs succeed in the online world',
-        'cta'       => 'Send a message',
+        'cta'       => 'Book a free consultation',
         'nav_label' => 'Footer navigation',
     ],
 
