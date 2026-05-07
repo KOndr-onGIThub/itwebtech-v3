@@ -7,9 +7,12 @@
     "license": "MIT",
     "require": {
         "php": "^8.4",
+        "bacon/bacon-qr-code": "^3.0",
+        "bepsvpt/secure-headers": "^7.5",
         "filament/filament": "^3",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
+        "pragmarx/google2fa-qrcode": "^3.0",
         "spatie/laravel-sitemap": "^7.4",
         "symfony/yaml": "^7.0"
     },
