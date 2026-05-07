@@ -10,6 +10,8 @@
 #   Tento skript smí volat výhradně:
 #     - php artisan migrate --force
 #     - php artisan db:seed --class=Database\\Seeders\\AdminUserSeeder --force
+#     - php artisan db:seed --class=Database\\Seeders\\EnsureArticlesSeededSeeder --force
+#       (idempotentní — jen pokud `articles` table je prázdná, viz OND-77)
 #
 #   NIKDY nevolat:
 #     - php artisan db:seed (bez --class) → spustí PortfolioSeeder a přepíše
@@ -54,6 +56,13 @@ fi
 echo "[laravel-deploy] Seeding admin user..."
 if ! php artisan db:seed --class="Database\\Seeders\\AdminUserSeeder" --force --no-interaction; then
     echo "[laravel-deploy] WARN: AdminUserSeeder failed, continuing boot anyway." >&2
+fi
+
+# OND-77: idempotentní guard — pokud je tabulka `articles` prázdná, naimportuje
+# články ze SQL dumpů v `database/sql/`. Jakmile data existují, je to no-op.
+echo "[laravel-deploy] Ensuring articles are seeded..."
+if ! php artisan db:seed --class="Database\\Seeders\\EnsureArticlesSeededSeeder" --force --no-interaction; then
+    echo "[laravel-deploy] WARN: EnsureArticlesSeededSeeder failed, continuing boot anyway." >&2
 fi
 
 echo "[laravel-deploy] Done."
