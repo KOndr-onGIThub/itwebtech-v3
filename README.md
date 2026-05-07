@@ -387,6 +387,69 @@ a `[laravel-deploy] Seeding admin user...`.
 
 ---
 
+## Bezpečnost admin panelu (Filament `/admin`)
+
+### 2FA (TOTP)
+
+Admin panel vynucuje dvoufaktorové ověření. Při prvním přihlášení nového
+admina ho middleware `EnsureTwoFactorAuthenticated` přesměruje na
+`/admin/two-factor`, kde:
+
+1. Klikne **Vygenerovat QR kód**.
+2. Naskenuje QR kód autentikační aplikací (Google Authenticator, 1Password,
+   Authy, Bitwarden, …).
+3. Zadá 6-místný kód z aplikace pro potvrzení.
+4. Aplikace zobrazí **8 recovery kódů** — uložit mimo aplikaci (password
+   manager, vytištěné). Každý kód lze použít jen jednou pro přihlášení bez
+   přístupu k autentikační aplikaci.
+
+Při každém dalším loginu se po heslu zobrazí challenge stránka pro 6-místný
+kód (nebo jednorázový recovery kód).
+
+Přegenerování recovery kódů a vypnutí 2FA jsou dostupné na `/admin/two-factor`
+po přihlášení.
+
+> 🛈 Single-admin režim — žádný uživatel nemá výjimku. Pokud admin ztratí
+> autentikační aplikaci i recovery kódy, jediná cesta zpět je přímo v DB
+> vynulovat sloupce `two_factor_secret`, `two_factor_recovery_codes`,
+> `two_factor_confirmed_at` na řádku admina.
+
+### Failed-login alerty
+
+Listener `NotifyOnFailedAdminLogins` počítá neúspěšné pokusy per IP v cache.
+Po **10 pokusech za 1 hodinu** odešle e-mail na `ADMIN_EMAIL` s IP,
+user-agentem a počtem pokusů. Po odeslání se okno restartuje (žádný spam).
+
+Cache klíč: `admin_failed_login:<sha1(ip)>`. Pro testování stačí 10× zadat
+špatné heslo z jedné IP a zkontrolovat poštu.
+
+### Security headers
+
+Globálně přes `bepsvpt/secure-headers`. Konfigurace:
+[`config/secure-headers.php`](config/secure-headers.php).
+
+- **HSTS** se aktivuje automaticky při `APP_ENV=production` (max-age 1 rok,
+  `includeSubDomains`). Přepínač `SECURE_HEADERS_HSTS=true|false` v `.env`.
+- **X-Frame-Options:** `sameorigin` (clickjacking).
+- **X-Content-Type-Options:** `nosniff`.
+- **Referrer-Policy:** `strict-origin-when-cross-origin`.
+- **Permissions-Policy:** kamera/mikrofon/geolokace/USB/… vypnuto.
+- **CSP:** zatím vypnuto (vyžaduje samostatné ladění proti Vite/Livewire/Alpine).
+
+Cílová známka v <https://securityheaders.com>: minimálně **B**.
+
+### HTTPS-only cookies
+
+`SESSION_SECURE_COOKIE` se v `config/session.php` přepne na `true`
+automaticky při `APP_ENV=production`. Lokálně/staging na http nech prázdné.
+
+### Reset 2FA pro již existujícího admina
+
+Při migraci na hardenovanou verzi se admin při příštím loginu rovnou ocitne
+v setup flow — středu žádných ručních kroků není.
+
+---
+
 ## Údržba starteru
 
 Pokud v starteru něco změníš (nová ikona, CSS komponenta, JS utilita...), poznamenej to sem:
