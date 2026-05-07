@@ -1,3 +1,4 @@
+@props(['hreflangs' => []])
 @php
     $locale      = app()->getLocale();
     $currentPage = current_page();
@@ -40,7 +41,7 @@
 
                 <div class="navbar__lang">
                     @foreach ($langLabels as $code => $label)
-                        <a href="{{ lroute($currentPage, $code) }}"
+                        <a href="{{ $hreflangs[$code] ?? lroute($currentPage, $code) }}"
                            class="navbar__lang-item {{ $locale === $code ? 'navbar__lang-item--active' : '' }}">
                             {{ $label }}
                         </a>
@@ -53,6 +54,7 @@
 
                 <button class="navbar__hamburger"
                         @click="open = true"
+                        :aria-expanded="open.toString()"
                         aria-label="Open menu">
                     <span class="navbar__hamburger-line"></span>
                     <span class="navbar__hamburger-line"></span>
@@ -101,7 +103,7 @@
         {{-- Language switcher in drawer --}}
         <div class="drawer__lang">
             @foreach ($langLabels as $code => $label)
-                <a href="{{ lroute($currentPage, $code) }}"
+                <a href="{{ $hreflangs[$code] ?? lroute($currentPage, $code) }}"
                    class="navbar__lang-item {{ $locale === $code ? 'navbar__lang-item--active' : '' }}">
                     {{ $label }}
                 </a>
@@ -124,7 +126,6 @@
             <div class="drawer__cta">
                 <a href="{{ lroute('contact') }}"
                    class="btn btn-primary"
-                   style="justify-content: center;"
                    @click="open = false">
                     {{ __('layout.cta.contact') }}
                 </a>

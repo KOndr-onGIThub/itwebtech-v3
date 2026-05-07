@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
+use App\Models\Portfolio\PortfolioProject;
+use App\Models\Slugs\ArticleSlug;
+use Illuminate\Support\Facades\App;
+
 class PageController extends Controller
 {
     public function home()
@@ -26,25 +31,131 @@ class PageController extends Controller
 
     public function projects()
     {
-        // TODO: load projects from DB
-        return view('pages.projects');
+        $locale = App::getLocale();
+
+        $portfolioProjects = PortfolioProject::published()
+            ->with(['translations', 'screenshots', 'tags.translations'])
+            ->orderBy('sort_order')
+            ->orderByDesc('year')
+            ->get();
+
+        // Počty pro filtry kategorií
+        $counts = [
+            'all'         => $portfolioProjects->count(),
+            'website'     => $portfolioProjects->where('category', 'website')->count(),
+            'application' => $portfolioProjects->where('category', 'application')->count(),
+            'other'       => $portfolioProjects->where('category', 'other')->count(),
+        ];
+
+        return view('pages.projects', compact('portfolioProjects', 'locale', 'counts'));
     }
 
     public function project(string $url)
     {
-        // TODO: load project by $url from DB
-        abort(404);
+        $locale = App::getLocale();
+
+        $project = PortfolioProject::published()
+            ->where('slug', $url)
+            ->with([
+                'translations',
+                'screenshots.translations',
+                'tags.translations',
+                'outcomes.translations',
+            ])
+            ->first();
+
+        if (! $project) {
+            abort(404);
+        }
+
+        $translation = $project->translation($locale);
+
+        // Hreflang — slug je jazyk-neutrální, takže pro každý jazyk
+        // vygenerujeme stejný slug v příslušné jazykové routě.
+        $hreflangs = [];
+        foreach (['cs', 'en', 'de'] as $lang) {
+            $hreflangs[$lang] = route("{$lang}.project", ['url' => $project->slug]);
+        }
+
+        // Související projekty: 3 kusy, stejná kategorie, vyloučit aktuální.
+        // Pokud je < 3 v kategorii, doplníme z ostatních (featured první).
+        $sameCategory = PortfolioProject::published()
+            ->where('category', $project->category)
+            ->where('id', '!=', $project->id)
+            ->with(['translations', 'screenshots'])
+            ->orderByDesc('featured')
+            ->orderBy('sort_order')
+            ->orderByDesc('year')
+            ->limit(3)
+            ->get();
+
+        if ($sameCategory->count() < 3) {
+            $needed  = 3 - $sameCategory->count();
+            $excluded = $sameCategory->pluck('id')->push($project->id);
+            $extras  = PortfolioProject::published()
+                ->whereNotIn('id', $excluded)
+                ->with(['translations', 'screenshots'])
+                ->orderByDesc('featured')
+                ->orderBy('sort_order')
+                ->orderByDesc('year')
+                ->limit($needed)
+                ->get();
+            $relatedProjects = $sameCategory->concat($extras);
+        } else {
+            $relatedProjects = $sameCategory;
+        }
+
+        return view('pages.project', compact(
+            'project',
+            'translation',
+            'locale',
+            'hreflangs',
+            'relatedProjects'
+        ));
     }
 
     public function blog()
     {
-        // TODO: load articles from DB
-        return view('pages.blog');
+        $locale   = App::getLocale();
+        $articles = Article::where('published', true)
+            ->orderBy('position')
+            ->with(['translations', 'slugs'])
+            ->get();
+
+        return view('pages.blog', compact('articles', 'locale'));
     }
 
     public function article(string $slug)
     {
-        // TODO: load article by $slug from DB
-        abort(404);
+        $locale = App::getLocale();
+
+        $slugRecord = ArticleSlug::where('slug', $slug)
+            ->where('active', true)
+            ->first();
+
+        if (! $slugRecord) {
+            abort(404);
+        }
+
+        $article = Article::where('id', $slugRecord->article_id)
+            ->where('published', true)
+            ->with(['translations', 'slugs'])
+            ->first();
+
+        if (! $article) {
+            abort(404);
+        }
+
+        $translation = $article->translation($locale);
+
+        $hreflangs = [];
+        foreach (['cs', 'en', 'de'] as $lang) {
+            $localeSlug = $article->slug($lang);
+            if ($localeSlug) {
+                $hreflangs[$lang] = route("{$lang}.article", ['slug' => $localeSlug]);
+            }
+        }
+
+        return view('pages.article', compact('article', 'translation', 'locale', 'hreflangs'));
     }
 }

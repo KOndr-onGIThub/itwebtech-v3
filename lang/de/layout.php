@@ -11,7 +11,7 @@ return [
     ],
 
     'cta' => [
-        'contact' => 'Kontakt',
+        'contact' => 'Beratung vereinbaren',
     ],
 
     'footer' => [
@@ -21,8 +21,12 @@ return [
 
     'prefooter' => [
         'tagline'   => 'Ich helfe Unternehmern, in der Online-Welt erfolgreich zu sein',
-        'cta'       => 'Nachricht senden',
+        'cta'       => 'Kostenlose Beratung vereinbaren',
         'nav_label' => 'Footer-Navigation',
+    ],
+
+    'modal' => [
+        'close' => 'Schließen',
     ],
 
     'gdpr_form_note' => 'Mit dem Absenden stimmen Sie unserer',

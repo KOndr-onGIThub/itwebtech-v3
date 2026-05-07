@@ -149,6 +149,69 @@ Alpine.data('contactForm', () => ({
     },
 }));
 
+// ---------------------------------------------------------------------------
+// Consultation modal — video + Calendly CTA
+// ---------------------------------------------------------------------------
+Alpine.data('consultationModal', () => ({
+    open: false,
+    videoReady: false,
+    playing: false,
+
+    openModal() {
+        this.open = true;
+        this.videoReady = true;
+        // Prevent body scroll
+        document.body.style.overflow = 'hidden';
+        // Focus the dialog on next tick
+        this.$nextTick(() => {
+            const dialog = this.$el.querySelector('[role="dialog"]');
+            if (dialog) dialog.focus({ preventScroll: true });
+        });
+    },
+
+    closeModal() {
+        this.open = false;
+        this.playing = false;
+        document.body.style.overflow = '';
+        // Pause & reset video if present
+        const video = this.$el.querySelector('video');
+        if (video) { video.pause(); video.currentTime = 0; }
+    },
+}));
+
+// ---------------------------------------------------------------------------
+// Portfolio filter — client-side filter pro listing /projekty
+// ---------------------------------------------------------------------------
+Alpine.data('portfolioFilter', ({ target = 'portfolio-grid', categories = [], counts = {} } = {}) => ({
+    active: 'all',
+    target,
+    categories,
+    counts,
+    visibleCount: counts.all ?? 0,
+
+    init() {
+        this.applyFilter();
+    },
+
+    setActive(category) {
+        this.active = category;
+        this.visibleCount = this.counts[category] ?? 0;
+        this.applyFilter();
+    },
+
+    applyFilter() {
+        const grid = document.getElementById(this.target);
+        if (!grid) return;
+
+        const cards = grid.querySelectorAll('[data-category]');
+        cards.forEach(card => {
+            const cat = card.dataset.category;
+            const visible = this.active === 'all' || cat === this.active;
+            card.dataset.filterHidden = visible ? 'false' : 'true';
+        });
+    },
+}));
+
 Alpine.start();
 
 // ---------------------------------------------------------------------------

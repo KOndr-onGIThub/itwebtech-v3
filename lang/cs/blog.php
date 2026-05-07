@@ -18,8 +18,8 @@ return [
 
     'sidebar_ad' => [
         'subheading' => 'Netrapte se s webem sami',
-        'heading'    => 'Mějte špičkový web',
-        'text'       => 'Využijte profesionální služby a získejte profi webové stránky a aplikace',
+        'heading'    => 'Posuňte web tam, kam patří',
+        'text'       => 'Místo experimentování si nechte web udělat napoprvé správně.',
         'cta_price'  => 'Ceník',
         'cta_contact'=> 'Kontakt',
     ],
@@ -36,15 +36,23 @@ return [
         ],
     ],
 
+    'back_to_blog' => '← Zpět na blog',
+
+    'cta' => [
+        'heading' => 'Potřebujete pomoc s vaším webem?',
+        'text'    => 'Pojďme se pobavit o tom, jak váš web může přinést více poptávek.',
+        'primary' => 'Domluvit konzultaci',
+    ],
+
     'audit' => [
-        'subheading'    => 'Rychlý CRO tah',
+        'subheading'    => 'Rychlá konverzní úprava',
         'heading'       => 'Získejte stručný audit vašeho webu',
         'items'         => [
             '3 největší konverzní brzdy, které teď zbytečně ztrácí poptávky.',
             'Konkrétní doporučení, co upravit jako první.',
-            'Návrh priorit bez “nice-to-have” kosmetiky.',
+            'Návrh priorit bez kosmetických vylepšení.',
         ],
-        'cta_primary'   => 'Chci mini audit',
+        'cta_primary'   => 'Chci stručný audit zdarma',
         'cta_secondary' => 'Nejdřív ceník',
     ],
 

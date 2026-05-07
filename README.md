@@ -128,6 +128,17 @@ composer run dev
 Spustí zároveň: PHP server, Vite, queue worker a log tail.
 Web běží na `http://localhost:8000`.
 
+### A3b. Storage symlink (pro Filament admin uploady)
+
+Portfolio admin nahrává screenshoty do `storage/app/public/portfolio/{slug}/` a
+přístup k nim potřebuje veřejný symlink `public/storage`. Stačí jednou:
+
+```bash
+php artisan storage:link
+```
+
+Idempotentní — lze přidat do deploy skriptu. Bez toho vrátí `/storage/portfolio/...` 404.
+
 ### A4. CMS (volitelné)
 
 ```bash
@@ -318,6 +329,61 @@ Použití VS Code snippetu `x-responsive-lightbox` (přidá lightbox parametry):
 Lightbox se aktivuje přítomností parametru `lightboxTitle`. Parametr `sizes` nastavuj podle skutečné zobrazené šířky v různých breakpointech — má vliv na výběr správné velikosti obrázku prohlížečem.
 
 > **Pozor:** Lightbox nefunguje v `npm run dev` (Vite virtual URLs). Pro otestování lightboxu lokálně spusť `npm run build`.
+
+---
+
+## Deploy
+
+Aplikace běží na Coolify (Docker image z `Dockerfile` postavený na `serversideup/php:8.4-fpm-nginx`).
+
+### Automatický post-deploy
+
+Při startu kontejneru se z `docker/entrypoint.d/50-laravel-deploy.sh`
+automaticky spustí přesně dva příkazy:
+
+```bash
+php artisan migrate --force --no-interaction
+php artisan db:seed --class=Database\\Seeders\\AdminUserSeeder --force --no-interaction
+```
+
+Obojí je idempotentní:
+- `migrate --force` aplikuje jen pending migrace, neexistující data nemaže.
+- `AdminUserSeeder` dělá `updateOrCreate` na jednom `users` řádku podle
+  `ADMIN_EMAIL` / `ADMIN_PASSWORD` — opakovaný deploy aktualizuje heslo
+  podle aktuální env hodnoty.
+
+Vlastník po deployi nemusí dělat nic ručně — admin se nalogguje na `/admin`
+podle `ADMIN_EMAIL` / `ADMIN_PASSWORD` z Coolify env.
+
+### ⚠️ NIKDY nespouštěj `db:seed` bez `--class`
+
+Bare `php artisan db:seed` spustí celý `DatabaseSeeder`, který volá
+`PortfolioSeeder`. Ten v transakci pro každý projekt **smaže a znovu vytvoří**
+všechny překlady, screenshoty, outcomes a tagové vazby z
+`docs/portfolio-data.yaml` → tím přepíše ruční úpravy z Filament adminu.
+
+Stejně tak nikdy nespouštěj `migrate:fresh` ani `migrate:refresh`.
+
+Ochrana je dvojitá:
+1. Entrypoint skript volá pouze whitelistované příkazy (viz výše).
+2. `PortfolioSeeder::run()` má guard: pokud v DB existují portfolio
+   projekty, seed se přeskočí. Re-seed dat z YAMLu jde vynutit jen
+   přes env proměnnou `PORTFOLIO_SEEDER_FORCE_OVERWRITE=1`.
+
+### Lokální test entrypointu
+
+```bash
+docker build -t my-starter:deploy-test .
+docker run --rm \
+    -e APP_ENV=production \
+    -e DB_CONNECTION=mysql \
+    -e DB_HOST=... -e DB_DATABASE=... -e DB_USERNAME=... -e DB_PASSWORD=... \
+    -e ADMIN_EMAIL=admin@example.com -e ADMIN_PASSWORD=secret \
+    my-starter:deploy-test
+```
+
+V logu hledej řádky `[laravel-deploy] Running database migrations...`
+a `[laravel-deploy] Seeding admin user...`.
 
 ---
 

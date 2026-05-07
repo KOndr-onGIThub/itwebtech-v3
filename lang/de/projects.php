@@ -9,12 +9,14 @@ return [
 
     'subheading'       => 'Realisierte',
     'heading'          => 'PROJEKTE',
-    'intro'            => 'Lassen Sie sich von Beispielen meiner Arbeit inspirieren. Ich arbeite immer so, dass Kunden gerne zu mir zurückkommen.',
+    'intro'            => 'Lassen Sie sich von Beispielen meiner Arbeit inspirieren. Ich arbeite so, dass Kunden gerne zurückkommen.',
 
     'filter_all'       => 'Alle',
     'filter_websites'  => 'Webseiten',
     'filter_webapps'   => 'Anwendungen',
     'filter_other'     => 'Sonstiges',
+    'filter_aria'      => 'Projekte nach Kategorie filtern',
+    'count_label'      => 'Projekte angezeigt',
 
     'info_client'      => 'Kunde',
     'info_date'        => 'Datum',
@@ -26,7 +28,7 @@ return [
         'heading'    => 'Das stecke ich in Projekte',
         'items'      => [
             ['title' => 'Expertise und Praxis',      'description' => 'Dank 18 Jahren Erfahrung bei Toyota habe ich einzigartige Erfahrung in der Prozessoptimierung und Webanwendungsentwicklung.'],
-            ['title' => 'Stabilität und Robustheit', 'description' => 'Ich verwende keine Drittanbieter-Plugins einschränkender CMS-Systeme. Ich programmiere robusten Code.'],
+            ['title' => 'Stabilität und Robustheit', 'description' => 'Ich baue keine Webseiten aus fremden Add-ons, die beim ersten Update kaputtgehen. Ich schreibe eigenen Code, der hält.'],
             ['title' => 'Gründliches Testen',        'description' => 'Ich überlasse nichts dem Zufall. Ich teste Apps und Webseiten während der Entwicklung und danach.'],
             ['title' => 'Geschwindigkeit und Design','description' => 'Priorität hat schnelles Laden und modernes Design für einen positiven ersten Eindruck.'],
             ['title' => 'Maßgeschneiderte Lösungen', 'description' => 'Jedes Projekt ist für mich einzigartig und ich suche immer die beste Lösung für jeden Kunden.'],
@@ -66,8 +68,8 @@ return [
             [
                 'type'     => 'Individueller E-Shop',
                 'timeline' => '6 Wochen',
-                'title'    => 'E-Shop ohne Vendor-Lock-in',
-                'summary'  => 'Die frühere Lösung war von Plugins und häufigen Reparaturen abhängig. Der neue E-Shop brachte Stabilität und planbare Kosten.',
+                'title'    => 'Ein E-Shop, der wirklich Ihnen gehört',
+                'summary'  => 'Der frühere E-Shop hing von einer fremden Plattform ab und benötigte ständige Plugin-Reparaturen. Der neue E-Shop bringt Stabilität und planbare Kosten.',
                 'outcomes' => [
                     'Wiederkehrende Ausfälle nach Updates entfernt.',
                     'Klarer Checkout ohne störende Elemente.',
@@ -92,6 +94,40 @@ return [
         'cta_secondary' => 'Zuerst Preise ansehen',
     ],
 
-    'empty' => 'Derzeit sind keine Projekte verfügbar.',
+    'empty'            => 'Derzeit sind keine Projekte verfügbar.',
+    'view_project'     => 'Projekt anzeigen',
+    'back_to_projects' => '← Zurück zu Projekten',
+
+    'before_after' => 'Vorher-Nachher-Vergleich',
+    'before'       => 'Vorher',
+    'after'        => 'Nachher',
+    'screenshots'  => 'Projektscreenshots',
+
+    'detail' => [
+        'challenge'       => 'Herausforderung',
+        'solution'        => 'Lösung',
+        'result'          => 'Ergebnis',
+        'no_content'      => 'Eine ausführliche Beschreibung zu diesem Projekt ist noch nicht verfügbar.',
+        'related_heading' => 'Weitere Projekte',
+        'visit_live'      => 'Live-Seite besuchen',
+        'meta'            => [
+            'client'   => 'Kunde',
+            'year'     => 'Jahr',
+            'duration' => 'Dauer',
+            'category' => 'Kategorie',
+            'live_url' => 'Live-Seite',
+            'tags'     => 'Technologien',
+        ],
+        'category_label'  => [
+            'website'     => 'Webseite',
+            'application' => 'Webanwendung',
+            'other'       => 'Sonstiges',
+        ],
+    ],
+
+    'cta' => [
+        'heading' => 'Möchten Sie ein ähnliches Ergebnis für Ihr Unternehmen?',
+        'primary' => 'Beratung buchen',
+    ],
 
 ];

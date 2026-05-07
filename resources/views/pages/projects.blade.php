@@ -14,7 +14,21 @@
     </div>
 </div>
 
-{{-- Conversion snapshots --}}
+{{-- 1. Portfolio filter --}}
+<x-portfolio.filter
+    :categories="['all', 'website', 'application', 'other']"
+    :counts="$counts"
+    target="portfolio-grid"
+/>
+
+{{-- 2. Portfolio grid --}}
+<section class="section-wrapper section-wrapper--tight" data-reveal>
+    <div class="container-site">
+        <x-portfolio.grid :projects="$portfolioProjects" :locale="$locale" />
+    </div>
+</section>
+
+{{-- 3. Conversion snapshots (existující) --}}
 <section class="section-wrapper" data-reveal>
     <div class="container-site">
         <header class="section-header">
@@ -46,8 +60,8 @@
     </div>
 </section>
 
-{{-- Project fit --}}
-<section class="section-wrapper" data-reveal>
+{{-- 4. Project fit (existující) --}}
+<section class="section-wrapper section-alt" data-reveal>
     <div class="container-site">
         <header class="section-header">
             <p class="section-subheading">{{ __('projects.fit.subheading') }}</p>
@@ -81,8 +95,8 @@
     </div>
 </section>
 
-{{-- Why me --}}
-<section class="section-wrapper section-alt" data-reveal>
+{{-- 5. Why me (existující) --}}
+<section class="section-wrapper" data-reveal>
     <div class="container-site">
         <header class="section-header">
             <p class="section-subheading">{{ __('projects.why_me.subheading') }}</p>
@@ -96,6 +110,21 @@
                 <p>{!! $item['description'] !!}</p>
             </div>
             @endforeach
+        </div>
+    </div>
+</section>
+
+{{-- 6. Final CTA --}}
+<section class="section-wrapper" data-reveal>
+    <div class="container-site">
+        <div class="cta-block">
+            <h2>{{ __('projects.cta.heading') }}</h2>
+            <div class="cta-block__actions">
+                <a href="{{ lroute('contact') }}" class="btn btn-primary">
+                    {{ __('projects.cta.primary') }}
+                    <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
+                </a>
+            </div>
         </div>
     </div>
 </section>
