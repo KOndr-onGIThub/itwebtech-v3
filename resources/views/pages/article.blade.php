@@ -21,7 +21,16 @@
 <article class="article-body">
     <div class="container-site container-site--narrow">
 
-        @if ($translation?->img_main)
+        @php
+            // Master image_url (Filament upload, storage public disk) má přednost.
+            // Při fallbacku použije legacy `img_main` přes Vite-built `responsive-image` pipeline.
+            $heroImage = $article?->hero_image_url;
+        @endphp
+        @if ($heroImage)
+        <figure class="article-figure">
+            <img src="{{ $heroImage }}" alt="{{ $translation?->title }}" loading="lazy" />
+        </figure>
+        @elseif ($translation?->img_main)
         <figure class="article-figure">
             <x-responsive-image
                 path="articles/{{ $translation->img_main }}"
