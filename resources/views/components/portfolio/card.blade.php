@@ -36,8 +36,8 @@
     <a href="{{ $detailHref }}" class="portfolio-card__link" aria-label="{{ $ariaLabel }}">
         <div class="portfolio-card__thumbnail">
             @if ($hero)
-                <x-responsive-image
-                    path="{{ $hero->path }}"
+                <x-portfolio.screenshot
+                    :path="$hero->path"
                     alt=""
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     loading="{{ $eager ? 'eager' : 'lazy' }}"
