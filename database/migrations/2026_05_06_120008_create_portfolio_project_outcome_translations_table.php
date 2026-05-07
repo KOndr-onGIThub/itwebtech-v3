@@ -19,12 +19,13 @@ return new class extends Migration
 
             $table->timestamps();
 
-            $table->foreign('outcome_id')
+            // Krátké názvy kvůli MySQL limitu 64 znaků na identifikátor.
+            $table->foreign('outcome_id', 'pf_outcome_tr_outcome_id_fk')
                 ->references('id')->on('portfolio_project_outcomes')
                 ->cascadeOnDelete();
 
-            $table->unique(['outcome_id', 'locale']);
-            $table->index('locale');
+            $table->unique(['outcome_id', 'locale'], 'pf_outcome_tr_outcome_locale_uniq');
+            $table->index('locale', 'pf_outcome_tr_locale_idx');
         });
     }
 

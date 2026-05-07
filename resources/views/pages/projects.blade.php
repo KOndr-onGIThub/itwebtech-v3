@@ -14,45 +14,21 @@
     </div>
 </div>
 
-{{-- DB Projects listing --}}
-@if (!empty($projects) && $projects->count())
-<section class="section-wrapper" data-reveal>
+{{-- 1. Portfolio filter --}}
+<x-portfolio.filter
+    :categories="['all', 'website', 'application', 'other']"
+    :counts="$counts"
+    target="portfolio-grid"
+/>
+
+{{-- 2. Portfolio grid --}}
+<section class="section-wrapper section-wrapper--tight" data-reveal>
     <div class="container-site">
-        <div class="projects-grid" data-reveal-group>
-            @foreach ($projects as $dbProject)
-                @php $t = $dbProject->translation($locale); @endphp
-                @if ($t && $t->title)
-                <article class="project-card">
-                    <a href="{{ lroute('projects') }}/{{ $dbProject->slug($locale) }}" class="project-card__link">
-                        <div class="project-card__meta">
-                            @if ($dbProject->customer)
-                            <span class="project-card__customer">{{ $dbProject->customer }}</span>
-                            @endif
-                            @if ($dbProject->kind)
-                            <span class="project-card__kind">{{ $dbProject->kind }}</span>
-                            @endif
-                        </div>
-                        <h3 class="project-card__title">{{ $t->title }}</h3>
-                        @if ($t->description)
-                        <p class="project-card__desc">{{ Str::limit(strip_tags($t->description), 120) }}</p>
-                        @endif
-                        @if ($dbProject->price_czk)
-                        <div class="project-card__price">{{ $dbProject->price_czk }}</div>
-                        @endif
-                        <span class="btn btn-secondary btn-sm project-card__cta">
-                            {{ __('projects.view_project') }}
-                            <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-                        </span>
-                    </a>
-                </article>
-                @endif
-            @endforeach
-        </div>
+        <x-portfolio.grid :projects="$portfolioProjects" :locale="$locale" />
     </div>
 </section>
-@endif
 
-{{-- Conversion snapshots --}}
+{{-- 3. Conversion snapshots (existující) --}}
 <section class="section-wrapper" data-reveal>
     <div class="container-site">
         <header class="section-header">
@@ -84,7 +60,7 @@
     </div>
 </section>
 
-{{-- Project fit --}}
+{{-- 4. Project fit (existující) --}}
 <section class="section-wrapper section-alt" data-reveal>
     <div class="container-site">
         <header class="section-header">
@@ -119,7 +95,7 @@
     </div>
 </section>
 
-{{-- Why me --}}
+{{-- 5. Why me (existující) --}}
 <section class="section-wrapper" data-reveal>
     <div class="container-site">
         <header class="section-header">
@@ -134,6 +110,21 @@
                 <p>{!! $item['description'] !!}</p>
             </div>
             @endforeach
+        </div>
+    </div>
+</section>
+
+{{-- 6. Final CTA --}}
+<section class="section-wrapper" data-reveal>
+    <div class="container-site">
+        <div class="cta-block">
+            <h2>{{ __('projects.cta.heading') }}</h2>
+            <div class="cta-block__actions">
+                <a href="{{ lroute('contact') }}" class="btn btn-primary">
+                    {{ __('projects.cta.primary') }}
+                    <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
+                </a>
+            </div>
         </div>
     </div>
 </section>

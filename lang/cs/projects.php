@@ -15,6 +15,8 @@ return [
     'filter_websites'  => 'Stránky',
     'filter_webapps'   => 'Aplikace',
     'filter_other'     => 'Ostatní',
+    'filter_aria'      => 'Filtr projektů podle kategorie',
+    'count_label'      => 'projektů zobrazeno',
 
     'info_client'      => 'Klient',
     'info_date'        => 'Kdy',
@@ -100,6 +102,28 @@ return [
     'before'       => 'Před',
     'after'        => 'Po',
     'screenshots'  => 'Ukázky z projektu',
+
+    'detail' => [
+        'challenge'       => 'Výzva',
+        'solution'        => 'Řešení',
+        'result'          => 'Výsledek',
+        'no_content'      => 'K tomuto projektu zatím není dostupný podrobný popis.',
+        'related_heading' => 'Další projekty',
+        'visit_live'      => 'Navštívit web',
+        'meta'            => [
+            'client'   => 'Klient',
+            'year'     => 'Rok',
+            'duration' => 'Doba realizace',
+            'category' => 'Kategorie',
+            'live_url' => 'Web',
+            'tags'     => 'Technologie',
+        ],
+        'category_label'  => [
+            'website'     => 'Webová stránka',
+            'application' => 'Webová aplikace',
+            'other'       => 'Ostatní',
+        ],
+    ],
 
     'cta' => [
         'heading' => 'Chcete podobný výsledek pro váš byznys?',

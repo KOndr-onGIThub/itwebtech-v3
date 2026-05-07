@@ -179,6 +179,39 @@ Alpine.data('consultationModal', () => ({
     },
 }));
 
+// ---------------------------------------------------------------------------
+// Portfolio filter — client-side filter pro listing /projekty
+// ---------------------------------------------------------------------------
+Alpine.data('portfolioFilter', ({ target = 'portfolio-grid', categories = [], counts = {} } = {}) => ({
+    active: 'all',
+    target,
+    categories,
+    counts,
+    visibleCount: counts.all ?? 0,
+
+    init() {
+        this.applyFilter();
+    },
+
+    setActive(category) {
+        this.active = category;
+        this.visibleCount = this.counts[category] ?? 0;
+        this.applyFilter();
+    },
+
+    applyFilter() {
+        const grid = document.getElementById(this.target);
+        if (!grid) return;
+
+        const cards = grid.querySelectorAll('[data-category]');
+        cards.forEach(card => {
+            const cat = card.dataset.category;
+            const visible = this.active === 'all' || cat === this.active;
+            card.dataset.filterHidden = visible ? 'false' : 'true';
+        });
+    },
+}));
+
 Alpine.start();
 
 // ---------------------------------------------------------------------------
