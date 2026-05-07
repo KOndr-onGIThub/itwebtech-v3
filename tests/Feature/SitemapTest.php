@@ -6,6 +6,7 @@ use App\Models\Portfolio\PortfolioProject;
 use Database\Seeders\PortfolioSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\URL;
 use Tests\TestCase;
 
 class SitemapTest extends TestCase
@@ -68,6 +69,22 @@ class SitemapTest extends TestCase
         $this->get('/sitemap.xml')->assertOk();
 
         $this->assertNotNull(Cache::get(config('sitemap.cache_key')));
+    }
+
+    public function test_sitemap_uses_https_scheme_when_forced(): void
+    {
+        URL::forceScheme('https');
+        Cache::forget(config('sitemap.cache_key'));
+
+        $response = $this->get('/sitemap.xml');
+
+        $response->assertOk();
+        $body = $response->getContent();
+
+        // Žádný <loc> ani hreflang odkaz nesmí použít http:// (OND-84).
+        $this->assertMatchesRegularExpression('#<loc>https://#', $body);
+        $this->assertDoesNotMatchRegularExpression('#<loc>http://[^/]#', $body);
+        $this->assertDoesNotMatchRegularExpression('#xhtml:link[^>]+href="http://[^/]#', $body);
     }
 
     public function test_artisan_command_invalidates_cache(): void
