@@ -6,6 +6,7 @@ use App\Models\Portfolio\PortfolioProject;
 use App\Models\Portfolio\PortfolioProjectOutcome;
 use App\Models\Portfolio\PortfolioProjectOutcomeTranslation;
 use App\Models\Portfolio\PortfolioProjectScreenshot;
+use App\Models\Portfolio\PortfolioProjectScreenshotTranslation;
 use App\Models\Portfolio\PortfolioProjectTranslation;
 use App\Models\Portfolio\PortfolioTag;
 use App\Models\Portfolio\PortfolioTagTranslation;
@@ -143,12 +144,36 @@ class PortfolioSeeder extends Seeder
                 continue;
             }
 
-            PortfolioProjectScreenshot::create([
+            $screenshot = PortfolioProjectScreenshot::create([
                 'project_id' => $project->id,
                 'path'       => $relativePath,
                 'type'       => $type,
                 'sort_order' => $idx,
             ]);
+
+            // Překlady screenshotu (alt/caption) — alt MUST být neprázdný (a11y).
+            // Hero má v YAMLu specifické popisy; gallery šablonu z titulku projektu.
+            $altSource = is_array($shot['alt'] ?? null) ? $shot['alt'] : [];
+            $captionSource = is_array($shot['caption'] ?? null) ? $shot['caption'] : [];
+            foreach (self::SUPPORTED_LOCALES as $locale) {
+                $alt = trim((string) ($altSource[$locale] ?? ''));
+                if ($alt === '') {
+                    // Fallback z titulku projektu, aby alt nikdy nebyl prázdný.
+                    $title = $row['translations'][$locale]['title']
+                        ?? $row['translations']['cs']['title']
+                        ?? $slug;
+                    $label = self::sectionLabel($locale);
+                    $alt = $type === 'hero'
+                        ? $title
+                        : sprintf('%s – %s %d', $title, $label, $n);
+                }
+                PortfolioProjectScreenshotTranslation::create([
+                    'screenshot_id' => $screenshot->id,
+                    'locale'        => $locale,
+                    'alt'           => $alt,
+                    'caption'       => $captionSource[$locale] ?? null,
+                ]);
+            }
         }
 
         // Tagy — sync přes pivot
@@ -182,5 +207,14 @@ class PortfolioSeeder extends Seeder
     private function humanizeSlug(string $slug): string
     {
         return ucfirst(str_replace('-', ' ', $slug));
+    }
+
+    private static function sectionLabel(string $locale): string
+    {
+        return match ($locale) {
+            'en' => 'section',
+            'de' => 'Abschnitt',
+            default => 'sekce',
+        };
     }
 }

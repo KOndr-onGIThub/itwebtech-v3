@@ -33,12 +33,42 @@ projects:
     sort_order: 10
     tags: [web, branding, rezervace, platby, seo, dlouhodoba-spoluprace]
     screenshots_source:
-      - { url: "https://framerusercontent.com/images/KWIFWfMByiBt1N9mAyrw4mUqfCU.webp", type: hero }
-      - { url: "https://framerusercontent.com/images/RBkB5cxQ9WnS7RR25rxOgbJC8E.webp", type: gallery }
-      - { url: "https://framerusercontent.com/images/shozc3Fh6ERJw0dPya5OD7luAQ.webp", type: gallery }
-      - { url: "https://framerusercontent.com/images/UAF6rzjpcuPpEAJJ8xE9j5WbbE.webp", type: gallery }
-      - { url: "https://framerusercontent.com/images/vWyBycAWsF5xnPMISL8YV2o4xuI.webp", type: gallery }
-      - { url: "https://framerusercontent.com/images/WTQuGwSGDKApZeU4CcSBO1lKBQ.webp", type: gallery }
+      - url: "https://framerusercontent.com/images/KWIFWfMByiBt1N9mAyrw4mUqfCU.webp"
+        type: hero
+        alt:
+          cs: "PitArena – domovská stránka motokrosového centra s online rezervací tréninku"
+          en: "PitArena – homepage of the motocross centre with online training booking"
+          de: "PitArena – Startseite des Motocross-Zentrums mit Online-Trainingsbuchung"
+      - url: "https://framerusercontent.com/images/RBkB5cxQ9WnS7RR25rxOgbJC8E.webp"
+        type: gallery
+        alt:
+          cs: "PitArena – sekce 1"
+          en: "PitArena – section 1"
+          de: "PitArena – Abschnitt 1"
+      - url: "https://framerusercontent.com/images/shozc3Fh6ERJw0dPya5OD7luAQ.webp"
+        type: gallery
+        alt:
+          cs: "PitArena – sekce 2"
+          en: "PitArena – section 2"
+          de: "PitArena – Abschnitt 2"
+      - url: "https://framerusercontent.com/images/UAF6rzjpcuPpEAJJ8xE9j5WbbE.webp"
+        type: gallery
+        alt:
+          cs: "PitArena – sekce 3"
+          en: "PitArena – section 3"
+          de: "PitArena – Abschnitt 3"
+      - url: "https://framerusercontent.com/images/vWyBycAWsF5xnPMISL8YV2o4xuI.webp"
+        type: gallery
+        alt:
+          cs: "PitArena – sekce 4"
+          en: "PitArena – section 4"
+          de: "PitArena – Abschnitt 4"
+      - url: "https://framerusercontent.com/images/WTQuGwSGDKApZeU4CcSBO1lKBQ.webp"
+        type: gallery
+        alt:
+          cs: "PitArena – sekce 5"
+          en: "PitArena – section 5"
+          de: "PitArena – Abschnitt 5"
     translations:
       cs:
         title: PitArena
@@ -156,13 +186,48 @@ projects:
     sort_order: 20
     tags: [aplikace, logistika, vyroba, web-app, tablet]
     screenshots_source:
-      - { url: "https://itwebtech.cz/images/projects/HCMS/hcms_preview.jpg", type: hero }
-      - { url: "https://itwebtech.cz/images/projects/HCMS/HCMS__main_page_full.jpg", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/HCMS/hcms_tablet_screen.jpg", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/HCMS/HCMS_domain_model.jpg", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/HCMS/HCMS_functions_model.jpg", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/HCMS/HCMS_usecases.jpg", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/HCMS/HCMS_history.jpg", type: gallery }
+      - url: "https://itwebtech.cz/images/projects/HCMS/hcms_preview.jpg"
+        type: hero
+        alt:
+          cs: "HCMS – přehledová obrazovka informačního systému pro výrobu"
+          en: "HCMS – overview screen of the production information system"
+          de: "HCMS – Übersichtsbildschirm des Produktions-Informationssystems"
+      - url: "https://itwebtech.cz/images/projects/HCMS/HCMS__main_page_full.jpg"
+        type: gallery
+        alt:
+          cs: "HCMS — informační systém pro výrobu – sekce 1"
+          en: "HCMS — production information system – section 1"
+          de: "HCMS — Produktions-Informationssystem – Abschnitt 1"
+      - url: "https://itwebtech.cz/images/projects/HCMS/hcms_tablet_screen.jpg"
+        type: gallery
+        alt:
+          cs: "HCMS — informační systém pro výrobu – sekce 2"
+          en: "HCMS — production information system – section 2"
+          de: "HCMS — Produktions-Informationssystem – Abschnitt 2"
+      - url: "https://itwebtech.cz/images/projects/HCMS/HCMS_domain_model.jpg"
+        type: gallery
+        alt:
+          cs: "HCMS — informační systém pro výrobu – sekce 3"
+          en: "HCMS — production information system – section 3"
+          de: "HCMS — Produktions-Informationssystem – Abschnitt 3"
+      - url: "https://itwebtech.cz/images/projects/HCMS/HCMS_functions_model.jpg"
+        type: gallery
+        alt:
+          cs: "HCMS — informační systém pro výrobu – sekce 4"
+          en: "HCMS — production information system – section 4"
+          de: "HCMS — Produktions-Informationssystem – Abschnitt 4"
+      - url: "https://itwebtech.cz/images/projects/HCMS/HCMS_usecases.jpg"
+        type: gallery
+        alt:
+          cs: "HCMS — informační systém pro výrobu – sekce 5"
+          en: "HCMS — production information system – section 5"
+          de: "HCMS — Produktions-Informationssystem – Abschnitt 5"
+      - url: "https://itwebtech.cz/images/projects/HCMS/HCMS_history.jpg"
+        type: gallery
+        alt:
+          cs: "HCMS — informační systém pro výrobu – sekce 6"
+          en: "HCMS — production information system – section 6"
+          de: "HCMS — Produktions-Informationssystem – Abschnitt 6"
     translations:
       cs:
         title: "HCMS — informační systém pro výrobu"
@@ -298,12 +363,42 @@ projects:
     sort_order: 30
     tags: [web, landing-page, premium, kampane, mobilni-prvni]
     screenshots_source:
-      - { url: "https://framerusercontent.com/images/aj1KidaHv51bBNzgqqBeZEHtsY.png", type: hero }
-      - { url: "https://framerusercontent.com/images/cFjCfGwq2nMKnt8Ma2AWgCy5rnA.png", type: gallery }
-      - { url: "https://framerusercontent.com/images/NYFvjXFPGw2QYFN3McEz9aRbTZ8.png", type: gallery }
-      - { url: "https://framerusercontent.com/images/pxO0Q19XQZWGhpZ4LWrAYydm74.png", type: gallery }
-      - { url: "https://framerusercontent.com/images/tSKIEJxOiU9YGVWZtr2AqCQbs.png", type: gallery }
-      - { url: "https://framerusercontent.com/images/UVCIy5SkNPcK0K8VyP211HGHBo.png", type: gallery }
+      - url: "https://framerusercontent.com/images/aj1KidaHv51bBNzgqqBeZEHtsY.png"
+        type: hero
+        alt:
+          cs: "BARANA – domovská stránka prémiového webu pro bioklimatické pergoly"
+          en: "BARANA – homepage of the premium website for bioclimatic pergolas"
+          de: "BARANA – Startseite der Premium-Website für bioklimatische Pergolen"
+      - url: "https://framerusercontent.com/images/cFjCfGwq2nMKnt8Ma2AWgCy5rnA.png"
+        type: gallery
+        alt:
+          cs: "BARANA – sekce 1"
+          en: "BARANA – section 1"
+          de: "BARANA – Abschnitt 1"
+      - url: "https://framerusercontent.com/images/NYFvjXFPGw2QYFN3McEz9aRbTZ8.png"
+        type: gallery
+        alt:
+          cs: "BARANA – sekce 2"
+          en: "BARANA – section 2"
+          de: "BARANA – Abschnitt 2"
+      - url: "https://framerusercontent.com/images/pxO0Q19XQZWGhpZ4LWrAYydm74.png"
+        type: gallery
+        alt:
+          cs: "BARANA – sekce 3"
+          en: "BARANA – section 3"
+          de: "BARANA – Abschnitt 3"
+      - url: "https://framerusercontent.com/images/tSKIEJxOiU9YGVWZtr2AqCQbs.png"
+        type: gallery
+        alt:
+          cs: "BARANA – sekce 4"
+          en: "BARANA – section 4"
+          de: "BARANA – Abschnitt 4"
+      - url: "https://framerusercontent.com/images/UVCIy5SkNPcK0K8VyP211HGHBo.png"
+        type: gallery
+        alt:
+          cs: "BARANA – sekce 5"
+          en: "BARANA – section 5"
+          de: "BARANA – Abschnitt 5"
     translations:
       cs:
         title: BARANA
@@ -428,12 +523,42 @@ projects:
     sort_order: 40
     tags: [web, redesign, copywriting, ux, showroom]
     screenshots_source:
-      - { url: "https://framerusercontent.com/images/0A5PSf5OncL74SnxKreoCKCPQTs.png", type: hero }
-      - { url: "https://framerusercontent.com/images/2pBiAKuDMshrj3oh8kBR3DAwBg.png", type: gallery }
-      - { url: "https://framerusercontent.com/images/9M3iZE7IZ2HnwvoR14cmVjDn1k.png", type: gallery }
-      - { url: "https://framerusercontent.com/images/C28aneeyI7wdyOLfxpN8VEE2wM.png", type: gallery }
-      - { url: "https://framerusercontent.com/images/E8KTFdQxsC4zPigZb2BCF6xZ1g.png", type: gallery }
-      - { url: "https://framerusercontent.com/images/p0LgiOAOHK7xGX1MFL5EV1l9yUo.png", type: gallery }
+      - url: "https://framerusercontent.com/images/0A5PSf5OncL74SnxKreoCKCPQTs.png"
+        type: hero
+        alt:
+          cs: "Nové interiéry – domovská stránka studia interiérového designu"
+          en: "Nové interiéry – homepage of the interior design studio"
+          de: "Nové interiéry – Startseite des Innenarchitektur-Studios"
+      - url: "https://framerusercontent.com/images/2pBiAKuDMshrj3oh8kBR3DAwBg.png"
+        type: gallery
+        alt:
+          cs: "Nové interiéry – sekce 1"
+          en: "Nové interiéry – section 1"
+          de: "Nové interiéry – Abschnitt 1"
+      - url: "https://framerusercontent.com/images/9M3iZE7IZ2HnwvoR14cmVjDn1k.png"
+        type: gallery
+        alt:
+          cs: "Nové interiéry – sekce 2"
+          en: "Nové interiéry – section 2"
+          de: "Nové interiéry – Abschnitt 2"
+      - url: "https://framerusercontent.com/images/C28aneeyI7wdyOLfxpN8VEE2wM.png"
+        type: gallery
+        alt:
+          cs: "Nové interiéry – sekce 3"
+          en: "Nové interiéry – section 3"
+          de: "Nové interiéry – Abschnitt 3"
+      - url: "https://framerusercontent.com/images/E8KTFdQxsC4zPigZb2BCF6xZ1g.png"
+        type: gallery
+        alt:
+          cs: "Nové interiéry – sekce 4"
+          en: "Nové interiéry – section 4"
+          de: "Nové interiéry – Abschnitt 4"
+      - url: "https://framerusercontent.com/images/p0LgiOAOHK7xGX1MFL5EV1l9yUo.png"
+        type: gallery
+        alt:
+          cs: "Nové interiéry – sekce 5"
+          en: "Nové interiéry – section 5"
+          de: "Nové interiéry – Abschnitt 5"
     translations:
       cs:
         title: "Nové interiéry"
@@ -567,12 +692,42 @@ projects:
     sort_order: 50
     tags: [web, copywriting, seo, sprava-produktu, ux]
     screenshots_source:
-      - { url: "https://framerusercontent.com/images/4Tc64GOHwjeVASDQMyWxjk0qd0.png", type: hero }
-      - { url: "https://framerusercontent.com/images/mdhkU4BB2eFV0bKpPwpLEjaBdSk.png", type: gallery }
-      - { url: "https://framerusercontent.com/images/q33eBpkdy6UjBsgRFe1XNR5L4.png", type: gallery }
-      - { url: "https://framerusercontent.com/images/S3eyrA6b49qVwlh7vBsz987c.png", type: gallery }
-      - { url: "https://framerusercontent.com/images/ts7VthxqIAmrSZgLfGLUxjliw.png", type: gallery }
-      - { url: "https://framerusercontent.com/images/YiOQN9VFcYx3ZtU82crjfRB2lw.webp", type: gallery }
+      - url: "https://framerusercontent.com/images/4Tc64GOHwjeVASDQMyWxjk0qd0.png"
+        type: hero
+        alt:
+          cs: "Cyklo Centrum – domovská stránka cyklistického obchodu a servisu"
+          en: "Cyklo Centrum – homepage of the bicycle shop and service"
+          de: "Cyklo Centrum – Startseite des Fahrradgeschäfts und Service"
+      - url: "https://framerusercontent.com/images/mdhkU4BB2eFV0bKpPwpLEjaBdSk.png"
+        type: gallery
+        alt:
+          cs: "Cyklo Centrum – sekce 1"
+          en: "Cyklo Centrum – section 1"
+          de: "Cyklo Centrum – Abschnitt 1"
+      - url: "https://framerusercontent.com/images/q33eBpkdy6UjBsgRFe1XNR5L4.png"
+        type: gallery
+        alt:
+          cs: "Cyklo Centrum – sekce 2"
+          en: "Cyklo Centrum – section 2"
+          de: "Cyklo Centrum – Abschnitt 2"
+      - url: "https://framerusercontent.com/images/S3eyrA6b49qVwlh7vBsz987c.png"
+        type: gallery
+        alt:
+          cs: "Cyklo Centrum – sekce 3"
+          en: "Cyklo Centrum – section 3"
+          de: "Cyklo Centrum – Abschnitt 3"
+      - url: "https://framerusercontent.com/images/ts7VthxqIAmrSZgLfGLUxjliw.png"
+        type: gallery
+        alt:
+          cs: "Cyklo Centrum – sekce 4"
+          en: "Cyklo Centrum – section 4"
+          de: "Cyklo Centrum – Abschnitt 4"
+      - url: "https://framerusercontent.com/images/YiOQN9VFcYx3ZtU82crjfRB2lw.webp"
+        type: gallery
+        alt:
+          cs: "Cyklo Centrum – sekce 5"
+          en: "Cyklo Centrum – section 5"
+          de: "Cyklo Centrum – Abschnitt 5"
     translations:
       cs:
         title: "Cyklo Centrum"
@@ -702,13 +857,48 @@ projects:
     sort_order: 60
     tags: [web, rezervace, admin, blog, branding, copywriting, seo]
     screenshots_source:
-      - { url: "https://itwebtech.cz/images/projects/realitackyvakci/realitackyvakci_web_01.webp", type: hero }
-      - { url: "https://itwebtech.cz/images/projects/realitackyvakci/realitackyvakci_00.webp", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/realitackyvakci/realitackyvakci_02.webp", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/realitackyvakci/realitackyvakci_03.webp", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/realitackyvakci/realitackyvakci_04.webp", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/realitackyvakci/realitackyvakci_05.webp", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/realitackyvakci/realitackyvakci_06.webp", type: gallery }
+      - url: "https://itwebtech.cz/images/projects/realitackyvakci/realitackyvakci_web_01.webp"
+        type: hero
+        alt:
+          cs: "Realiťačky v Akci – domovská stránka realitního webu se samosprávou nabídek"
+          en: "Realiťačky v Akci – homepage of the self-managed real-estate website"
+          de: "Realiťačky v Akci – Startseite der selbstverwalteten Immobilien-Website"
+      - url: "https://itwebtech.cz/images/projects/realitackyvakci/realitackyvakci_00.webp"
+        type: gallery
+        alt:
+          cs: "Realiťačky v Akci – sekce 1"
+          en: "Realiťačky v Akci – section 1"
+          de: "Realiťačky v Akci – Abschnitt 1"
+      - url: "https://itwebtech.cz/images/projects/realitackyvakci/realitackyvakci_02.webp"
+        type: gallery
+        alt:
+          cs: "Realiťačky v Akci – sekce 2"
+          en: "Realiťačky v Akci – section 2"
+          de: "Realiťačky v Akci – Abschnitt 2"
+      - url: "https://itwebtech.cz/images/projects/realitackyvakci/realitackyvakci_03.webp"
+        type: gallery
+        alt:
+          cs: "Realiťačky v Akci – sekce 3"
+          en: "Realiťačky v Akci – section 3"
+          de: "Realiťačky v Akci – Abschnitt 3"
+      - url: "https://itwebtech.cz/images/projects/realitackyvakci/realitackyvakci_04.webp"
+        type: gallery
+        alt:
+          cs: "Realiťačky v Akci – sekce 4"
+          en: "Realiťačky v Akci – section 4"
+          de: "Realiťačky v Akci – Abschnitt 4"
+      - url: "https://itwebtech.cz/images/projects/realitackyvakci/realitackyvakci_05.webp"
+        type: gallery
+        alt:
+          cs: "Realiťačky v Akci – sekce 5"
+          en: "Realiťačky v Akci – section 5"
+          de: "Realiťačky v Akci – Abschnitt 5"
+      - url: "https://itwebtech.cz/images/projects/realitackyvakci/realitackyvakci_06.webp"
+        type: gallery
+        alt:
+          cs: "Realiťačky v Akci – sekce 6"
+          en: "Realiťačky v Akci – section 6"
+          de: "Realiťačky v Akci – Abschnitt 6"
     translations:
       cs:
         title: "Realiťačky v Akci"
@@ -836,12 +1026,42 @@ projects:
     sort_order: 70
     tags: [web, redesign, copywriting, lokalni-seo, blog, zdravotnictvi]
     screenshots_source:
-      - { url: "https://framerusercontent.com/images/04979nLksOVVZT5HBjnMKNzg0.png", type: hero }
-      - { url: "https://framerusercontent.com/images/oHRxCrCbgpiR3s5r1s9OScGjmgE.png", type: gallery }
-      - { url: "https://framerusercontent.com/images/Qz1O7nzK3WGd5dLTcedMU3Ihok.png", type: gallery }
-      - { url: "https://framerusercontent.com/images/WyrWv7O1Lhq9i3sbk9NAq0ZD0WM.png", type: gallery }
-      - { url: "https://framerusercontent.com/images/Z93ZKiajg8sH7vlh2jyFmvjvhnY.png", type: gallery }
-      - { url: "https://framerusercontent.com/images/zPHkujYnsVFlKP76UKAVcCXo.png", type: gallery }
+      - url: "https://framerusercontent.com/images/04979nLksOVVZT5HBjnMKNzg0.png"
+        type: hero
+        alt:
+          cs: "Zubní Provázek – domovská stránka zubní ordinace s lokálním SEO"
+          en: "Zubní Provázek – homepage of the dental practice with local SEO"
+          de: "Zubní Provázek – Startseite der Zahnarztpraxis mit lokalem SEO"
+      - url: "https://framerusercontent.com/images/oHRxCrCbgpiR3s5r1s9OScGjmgE.png"
+        type: gallery
+        alt:
+          cs: "Zubní Provázek – sekce 1"
+          en: "Zubní Provázek – section 1"
+          de: "Zubní Provázek – Abschnitt 1"
+      - url: "https://framerusercontent.com/images/Qz1O7nzK3WGd5dLTcedMU3Ihok.png"
+        type: gallery
+        alt:
+          cs: "Zubní Provázek – sekce 2"
+          en: "Zubní Provázek – section 2"
+          de: "Zubní Provázek – Abschnitt 2"
+      - url: "https://framerusercontent.com/images/WyrWv7O1Lhq9i3sbk9NAq0ZD0WM.png"
+        type: gallery
+        alt:
+          cs: "Zubní Provázek – sekce 3"
+          en: "Zubní Provázek – section 3"
+          de: "Zubní Provázek – Abschnitt 3"
+      - url: "https://framerusercontent.com/images/Z93ZKiajg8sH7vlh2jyFmvjvhnY.png"
+        type: gallery
+        alt:
+          cs: "Zubní Provázek – sekce 4"
+          en: "Zubní Provázek – section 4"
+          de: "Zubní Provázek – Abschnitt 4"
+      - url: "https://framerusercontent.com/images/zPHkujYnsVFlKP76UKAVcCXo.png"
+        type: gallery
+        alt:
+          cs: "Zubní Provázek – sekce 5"
+          en: "Zubní Provázek – section 5"
+          de: "Zubní Provázek – Abschnitt 5"
     translations:
       cs:
         title: "Zubní Provázek"
@@ -964,12 +1184,42 @@ projects:
     sort_order: 80
     tags: [web, redesign, seo, prumysl, copywriting, b2b]
     screenshots_source:
-      - { url: "https://framerusercontent.com/images/BIf60XsCyeCTbYOiX9rKTeuU0.webp", type: hero }
-      - { url: "https://framerusercontent.com/images/kCezUd7rLRv3PzcbPrUQK600N6Y.webp", type: gallery }
-      - { url: "https://framerusercontent.com/images/uiQvFy0kAI9J0CCdhXPs0PLfEr8.webp", type: gallery }
-      - { url: "https://framerusercontent.com/images/w4E0n0ywwDBuq9z8QyDwJTVH9To.webp", type: gallery }
-      - { url: "https://framerusercontent.com/images/X5kDFut5iwyTM7bCs67ea9hMPg.webp", type: gallery }
-      - { url: "https://framerusercontent.com/images/YIv52DqTXQ6ZNAMJ1A84kZ6lYQ.webp", type: gallery }
+      - url: "https://framerusercontent.com/images/BIf60XsCyeCTbYOiX9rKTeuU0.webp"
+        type: hero
+        alt:
+          cs: "VP Industry – domovská stránka průmyslového webu"
+          en: "VP Industry – homepage of the industrial website"
+          de: "VP Industry – Startseite der Industrie-Website"
+      - url: "https://framerusercontent.com/images/kCezUd7rLRv3PzcbPrUQK600N6Y.webp"
+        type: gallery
+        alt:
+          cs: "VP Industry – sekce 1"
+          en: "VP Industry – section 1"
+          de: "VP Industry – Abschnitt 1"
+      - url: "https://framerusercontent.com/images/uiQvFy0kAI9J0CCdhXPs0PLfEr8.webp"
+        type: gallery
+        alt:
+          cs: "VP Industry – sekce 2"
+          en: "VP Industry – section 2"
+          de: "VP Industry – Abschnitt 2"
+      - url: "https://framerusercontent.com/images/w4E0n0ywwDBuq9z8QyDwJTVH9To.webp"
+        type: gallery
+        alt:
+          cs: "VP Industry – sekce 3"
+          en: "VP Industry – section 3"
+          de: "VP Industry – Abschnitt 3"
+      - url: "https://framerusercontent.com/images/X5kDFut5iwyTM7bCs67ea9hMPg.webp"
+        type: gallery
+        alt:
+          cs: "VP Industry – sekce 4"
+          en: "VP Industry – section 4"
+          de: "VP Industry – Abschnitt 4"
+      - url: "https://framerusercontent.com/images/YIv52DqTXQ6ZNAMJ1A84kZ6lYQ.webp"
+        type: gallery
+        alt:
+          cs: "VP Industry – sekce 5"
+          en: "VP Industry – section 5"
+          de: "VP Industry – Abschnitt 5"
     translations:
       cs:
         title: "VP Industry"
@@ -1095,12 +1345,42 @@ projects:
     sort_order: 90
     tags: [web, redesign, branding, logo, single-page, ubytovani]
     screenshots_source:
-      - { url: "https://framerusercontent.com/images/4adYIrfXEvx1jjDbX0e2CcO4s.webp", type: hero }
-      - { url: "https://framerusercontent.com/images/HX7eHrGeGNOQLblSexKV8110Lpw.webp", type: gallery }
-      - { url: "https://framerusercontent.com/images/licMpHRA5lOwApvNAf5C9N0GYQ.webp", type: gallery }
-      - { url: "https://framerusercontent.com/images/miPgKdHrF7MzOPs4wFTFSBQtsNc.webp", type: gallery }
-      - { url: "https://framerusercontent.com/images/RzJeHMMwnyKGAIpMg5xXvTgvbc.webp", type: gallery }
-      - { url: "https://framerusercontent.com/images/ZhbP3lZ1vLywzZANqLtvBGrEb8.webp", type: gallery }
+      - url: "https://framerusercontent.com/images/4adYIrfXEvx1jjDbX0e2CcO4s.webp"
+        type: hero
+        alt:
+          cs: "Autokemp Veselka – domovská stránka webu autokempu"
+          en: "Autokemp Veselka – homepage of the campsite website"
+          de: "Autokemp Veselka – Startseite der Campingplatz-Website"
+      - url: "https://framerusercontent.com/images/HX7eHrGeGNOQLblSexKV8110Lpw.webp"
+        type: gallery
+        alt:
+          cs: "Autokemp Veselka – sekce 1"
+          en: "Autokemp Veselka – section 1"
+          de: "Autokemp Veselka – Abschnitt 1"
+      - url: "https://framerusercontent.com/images/licMpHRA5lOwApvNAf5C9N0GYQ.webp"
+        type: gallery
+        alt:
+          cs: "Autokemp Veselka – sekce 2"
+          en: "Autokemp Veselka – section 2"
+          de: "Autokemp Veselka – Abschnitt 2"
+      - url: "https://framerusercontent.com/images/miPgKdHrF7MzOPs4wFTFSBQtsNc.webp"
+        type: gallery
+        alt:
+          cs: "Autokemp Veselka – sekce 3"
+          en: "Autokemp Veselka – section 3"
+          de: "Autokemp Veselka – Abschnitt 3"
+      - url: "https://framerusercontent.com/images/RzJeHMMwnyKGAIpMg5xXvTgvbc.webp"
+        type: gallery
+        alt:
+          cs: "Autokemp Veselka – sekce 4"
+          en: "Autokemp Veselka – section 4"
+          de: "Autokemp Veselka – Abschnitt 4"
+      - url: "https://framerusercontent.com/images/ZhbP3lZ1vLywzZANqLtvBGrEb8.webp"
+        type: gallery
+        alt:
+          cs: "Autokemp Veselka – sekce 5"
+          en: "Autokemp Veselka – section 5"
+          de: "Autokemp Veselka – Abschnitt 5"
     translations:
       cs:
         title: "Autokemp Veselka"
@@ -1222,12 +1502,42 @@ projects:
     sort_order: 100
     tags: [web, branding, logo, copywriting, remeslo, galerie]
     screenshots_source:
-      - { url: "https://framerusercontent.com/images/aYOLcErnUau3muILOFFJviW9TE.webp", type: hero }
-      - { url: "https://framerusercontent.com/images/IyP6TlmsJS21SS9k51L9Rx2dAGs.webp", type: gallery }
-      - { url: "https://framerusercontent.com/images/KURxNjQWSRv4K7UsLhbtcE8nk.webp", type: gallery }
-      - { url: "https://framerusercontent.com/images/luhYs8Jq3wX9juKJcAQG0mcfuJE.webp", type: gallery }
-      - { url: "https://framerusercontent.com/images/OOtI1oobFBrbwWLlyQcgeOunsA.webp", type: gallery }
-      - { url: "https://framerusercontent.com/images/ySZlYsgLbDnZKE9FVrY6B9caLaQ.webp", type: gallery }
+      - url: "https://framerusercontent.com/images/aYOLcErnUau3muILOFFJviW9TE.webp"
+        type: hero
+        alt:
+          cs: "Střechy Zajíc – domovská stránka webu tesařství, pokrývačství a zednictví"
+          en: "Střechy Zajíc – homepage of the carpentry, roofing and masonry website"
+          de: "Střechy Zajíc – Startseite der Website für Zimmerei, Bedachung und Maurerei"
+      - url: "https://framerusercontent.com/images/IyP6TlmsJS21SS9k51L9Rx2dAGs.webp"
+        type: gallery
+        alt:
+          cs: "Střechy Zajíc – sekce 1"
+          en: "Střechy Zajíc – section 1"
+          de: "Střechy Zajíc – Abschnitt 1"
+      - url: "https://framerusercontent.com/images/KURxNjQWSRv4K7UsLhbtcE8nk.webp"
+        type: gallery
+        alt:
+          cs: "Střechy Zajíc – sekce 2"
+          en: "Střechy Zajíc – section 2"
+          de: "Střechy Zajíc – Abschnitt 2"
+      - url: "https://framerusercontent.com/images/luhYs8Jq3wX9juKJcAQG0mcfuJE.webp"
+        type: gallery
+        alt:
+          cs: "Střechy Zajíc – sekce 3"
+          en: "Střechy Zajíc – section 3"
+          de: "Střechy Zajíc – Abschnitt 3"
+      - url: "https://framerusercontent.com/images/OOtI1oobFBrbwWLlyQcgeOunsA.webp"
+        type: gallery
+        alt:
+          cs: "Střechy Zajíc – sekce 4"
+          en: "Střechy Zajíc – section 4"
+          de: "Střechy Zajíc – Abschnitt 4"
+      - url: "https://framerusercontent.com/images/ySZlYsgLbDnZKE9FVrY6B9caLaQ.webp"
+        type: gallery
+        alt:
+          cs: "Střechy Zajíc – sekce 5"
+          en: "Střechy Zajíc – section 5"
+          de: "Střechy Zajíc – Abschnitt 5"
     translations:
       cs:
         title: "Střechy Zajíc"
@@ -1349,11 +1659,36 @@ projects:
     sort_order: 110
     tags: [web, vicejazycny, branding, logo, e-mail, vizitky, stavebnictvi]
     screenshots_source:
-      - { url: "https://itwebtech.cz/images/projects/josefopa/josefopa.jpg", type: hero }
-      - { url: "https://itwebtech.cz/images/projects/josefopa/josefopa_web_01.webp", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/josefopa/josefopa_00.webp", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/josefopa/josefopa_01.webp", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/josefopa/josefopa_02.webp", type: gallery }
+      - url: "https://itwebtech.cz/images/projects/josefopa/josefopa.jpg"
+        type: hero
+        alt:
+          cs: "Josef Opa – domovská stránka vícejazyčného webu stavební firmy"
+          en: "Josef Opa – homepage of the multilingual construction company website"
+          de: "Josef Opa – Startseite der mehrsprachigen Website des Bauunternehmens"
+      - url: "https://itwebtech.cz/images/projects/josefopa/josefopa_web_01.webp"
+        type: gallery
+        alt:
+          cs: "Josef Opa – sekce 1"
+          en: "Josef Opa – section 1"
+          de: "Josef Opa – Abschnitt 1"
+      - url: "https://itwebtech.cz/images/projects/josefopa/josefopa_00.webp"
+        type: gallery
+        alt:
+          cs: "Josef Opa – sekce 2"
+          en: "Josef Opa – section 2"
+          de: "Josef Opa – Abschnitt 2"
+      - url: "https://itwebtech.cz/images/projects/josefopa/josefopa_01.webp"
+        type: gallery
+        alt:
+          cs: "Josef Opa – sekce 3"
+          en: "Josef Opa – section 3"
+          de: "Josef Opa – Abschnitt 3"
+      - url: "https://itwebtech.cz/images/projects/josefopa/josefopa_02.webp"
+        type: gallery
+        alt:
+          cs: "Josef Opa – sekce 4"
+          en: "Josef Opa – section 4"
+          de: "Josef Opa – Abschnitt 4"
     translations:
       cs:
         title: "Josef Opa"
@@ -1479,9 +1814,24 @@ projects:
     sort_order: 120
     tags: [web, mikroweb, logistika, b2b]
     screenshots_source:
-      - { url: "https://itwebtech.cz/images/projects/vanspedition/vanspedition_preview.webp", type: hero }
-      - { url: "https://itwebtech.cz/images/projects/vanspedition/vanspedition_introduction.webp", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/vanspedition/before.webp", type: gallery }
+      - url: "https://itwebtech.cz/images/projects/vanspedition/vanspedition_preview.webp"
+        type: hero
+        alt:
+          cs: "VAN spedition – domovská stránka mikrowebu logistické firmy"
+          en: "VAN spedition – homepage of the logistics company micro-site"
+          de: "VAN spedition – Startseite der Logistikunternehmens-Microsite"
+      - url: "https://itwebtech.cz/images/projects/vanspedition/vanspedition_introduction.webp"
+        type: gallery
+        alt:
+          cs: "VAN spedition – sekce 1"
+          en: "VAN spedition – section 1"
+          de: "VAN spedition – Abschnitt 1"
+      - url: "https://itwebtech.cz/images/projects/vanspedition/before.webp"
+        type: gallery
+        alt:
+          cs: "VAN spedition – sekce 2"
+          en: "VAN spedition – section 2"
+          de: "VAN spedition – Abschnitt 2"
     translations:
       cs:
         title: "VAN spedition"
@@ -1597,9 +1947,24 @@ projects:
     sort_order: 130
     tags: [web, wordpress, agenturni-spoluprace, vyvoj, udrzba]
     screenshots_source:
-      - { url: "https://itwebtech.cz/images/projects/yolk/yolk_preview.jpg", type: hero }
-      - { url: "https://itwebtech.cz/images/projects/yolk/unica_introduction.webp", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/yolk/reproclinic_introduction.webp", type: gallery }
+      - url: "https://itwebtech.cz/images/projects/yolk/yolk_preview.jpg"
+        type: hero
+        alt:
+          cs: "YOLK – ukázka klinikového portálu spravovaného agenturou"
+          en: "YOLK – preview of an agency-managed clinic portal"
+          de: "YOLK – Vorschau eines agenturbetreuten Klinikportals"
+      - url: "https://itwebtech.cz/images/projects/yolk/unica_introduction.webp"
+        type: gallery
+        alt:
+          cs: "YOLK — vývoj na klinikových portálech – sekce 1"
+          en: "YOLK — agency development on clinic portals – section 1"
+          de: "YOLK — Agentur-Entwicklung auf Klinikportalen – Abschnitt 1"
+      - url: "https://itwebtech.cz/images/projects/yolk/reproclinic_introduction.webp"
+        type: gallery
+        alt:
+          cs: "YOLK — vývoj na klinikových portálech – sekce 2"
+          en: "YOLK — agency development on clinic portals – section 2"
+          de: "YOLK — Agentur-Entwicklung auf Klinikportalen – Abschnitt 2"
     translations:
       cs:
         title: "YOLK — vývoj na klinikových portálech"
@@ -1720,8 +2085,18 @@ projects:
     sort_order: 140
     tags: [web, mikroweb, vizitka, seo, lokalni-podnikani]
     screenshots_source:
-      - { url: "https://itwebtech.cz/images/projects/elektro-srnak/elektro_srnak_preview.jpg", type: hero }
-      - { url: "https://itwebtech.cz/images/projects/elektro-srnak/elektro_srnak_introduction.jpg", type: gallery }
+      - url: "https://itwebtech.cz/images/projects/elektro-srnak/elektro_srnak_preview.jpg"
+        type: hero
+        alt:
+          cs: "Elektro Srnák – domovská stránka webu elektrikářské firmy"
+          en: "Elektro Srnák – homepage of the electrician's website"
+          de: "Elektro Srnák – Startseite der Website der Elektrikerfirma"
+      - url: "https://itwebtech.cz/images/projects/elektro-srnak/elektro_srnak_introduction.jpg"
+        type: gallery
+        alt:
+          cs: "Elektro Srnák – sekce 1"
+          en: "Elektro Srnák – section 1"
+          de: "Elektro Srnák – Abschnitt 1"
     translations:
       cs:
         title: "Elektro Srnák"
@@ -1847,12 +2222,42 @@ projects:
     sort_order: 200
     tags: [aplikace, logistika, vychystavani, sklad, web-app, barcode]
     screenshots_source:
-      - { url: "https://itwebtech.cz/images/projects/picker/picker_preview.jpg", type: hero }
-      - { url: "https://itwebtech.cz/images/projects/picker/picker_introduction.jpg", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/picker/picker_main_page_h.jpg", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/picker/picker_TLscreen.jpg", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/picker/picker_call_abn.jpg", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/picker/picker_processMaster.jpg", type: gallery }
+      - url: "https://itwebtech.cz/images/projects/picker/picker_preview.jpg"
+        type: hero
+        alt:
+          cs: "Picker – obrazovka řídicího logistického systému pro vychystávání dílů"
+          en: "Picker – screen of the logistics control system for parts picking"
+          de: "Picker – Bildschirm des Logistik-Steuerungssystems für die Kommissionierung"
+      - url: "https://itwebtech.cz/images/projects/picker/picker_introduction.jpg"
+        type: gallery
+        alt:
+          cs: "Picker — řídicí logistický systém – sekce 1"
+          en: "Picker — logistics control system – section 1"
+          de: "Picker — Logistik-Steuerungssystem – Abschnitt 1"
+      - url: "https://itwebtech.cz/images/projects/picker/picker_main_page_h.jpg"
+        type: gallery
+        alt:
+          cs: "Picker — řídicí logistický systém – sekce 2"
+          en: "Picker — logistics control system – section 2"
+          de: "Picker — Logistik-Steuerungssystem – Abschnitt 2"
+      - url: "https://itwebtech.cz/images/projects/picker/picker_TLscreen.jpg"
+        type: gallery
+        alt:
+          cs: "Picker — řídicí logistický systém – sekce 3"
+          en: "Picker — logistics control system – section 3"
+          de: "Picker — Logistik-Steuerungssystem – Abschnitt 3"
+      - url: "https://itwebtech.cz/images/projects/picker/picker_call_abn.jpg"
+        type: gallery
+        alt:
+          cs: "Picker — řídicí logistický systém – sekce 4"
+          en: "Picker — logistics control system – section 4"
+          de: "Picker — Logistik-Steuerungssystem – Abschnitt 4"
+      - url: "https://itwebtech.cz/images/projects/picker/picker_processMaster.jpg"
+        type: gallery
+        alt:
+          cs: "Picker — řídicí logistický systém – sekce 5"
+          en: "Picker — logistics control system – section 5"
+          de: "Picker — Logistik-Steuerungssystem – Abschnitt 5"
     translations:
       cs:
         title: "Picker — řídicí logistický systém"
@@ -1980,10 +2385,30 @@ projects:
     sort_order: 210
     tags: [aplikace, dashboard, bi, kpi, manazerske-rozhodovani, web-app]
     screenshots_source:
-      - { url: "https://itwebtech.cz/images/projects/choccoboard/choccoboard_00.webp", type: hero }
-      - { url: "https://itwebtech.cz/images/projects/choccoboard/choccoboard_01.webp", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/choccoboard/choccoboard_02.webp", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/choccoboard/choccoboard_03.webp", type: gallery }
+      - url: "https://itwebtech.cz/images/projects/choccoboard/choccoboard_00.webp"
+        type: hero
+        alt:
+          cs: "Choccoboard – BI dashboard se strategickými výrobními metrikami"
+          en: "Choccoboard – BI dashboard with strategic production metrics"
+          de: "Choccoboard – BI-Dashboard mit strategischen Produktionsmetriken"
+      - url: "https://itwebtech.cz/images/projects/choccoboard/choccoboard_01.webp"
+        type: gallery
+        alt:
+          cs: "Choccoboard — strategický dashboard – sekce 1"
+          en: "Choccoboard — strategic dashboard – section 1"
+          de: "Choccoboard — strategisches Dashboard – Abschnitt 1"
+      - url: "https://itwebtech.cz/images/projects/choccoboard/choccoboard_02.webp"
+        type: gallery
+        alt:
+          cs: "Choccoboard — strategický dashboard – sekce 2"
+          en: "Choccoboard — strategic dashboard – section 2"
+          de: "Choccoboard — strategisches Dashboard – Abschnitt 2"
+      - url: "https://itwebtech.cz/images/projects/choccoboard/choccoboard_03.webp"
+        type: gallery
+        alt:
+          cs: "Choccoboard — strategický dashboard – sekce 3"
+          en: "Choccoboard — strategic dashboard – section 3"
+          de: "Choccoboard — strategisches Dashboard – Abschnitt 3"
     translations:
       cs:
         title: "Choccoboard — strategický dashboard"
@@ -2101,9 +2526,24 @@ projects:
     sort_order: 220
     tags: [aplikace, pdf, generator, vyroba, web-app]
     screenshots_source:
-      - { url: "https://itwebtech.cz/images/projects/FLR/FRLcreator_main_page.jpg", type: hero }
-      - { url: "https://itwebtech.cz/images/projects/FLR/flowrack_list_screen.jpg", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/FLR/FRLcreator_pdf_list.jpg", type: gallery }
+      - url: "https://itwebtech.cz/images/projects/FLR/FRLcreator_main_page.jpg"
+        type: hero
+        alt:
+          cs: "FRL Creator – obrazovka generátoru regálových PDF štítků"
+          en: "FRL Creator – screen of the shelf-label PDF generator"
+          de: "FRL Creator – Bildschirm des PDF-Generators für Regaletiketten"
+      - url: "https://itwebtech.cz/images/projects/FLR/flowrack_list_screen.jpg"
+        type: gallery
+        alt:
+          cs: "FRL Creator – sekce 1"
+          en: "FRL Creator – section 1"
+          de: "FRL Creator – Abschnitt 1"
+      - url: "https://itwebtech.cz/images/projects/FLR/FRLcreator_pdf_list.jpg"
+        type: gallery
+        alt:
+          cs: "FRL Creator – sekce 2"
+          en: "FRL Creator – section 2"
+          de: "FRL Creator – Abschnitt 2"
     translations:
       cs:
         title: "FRL Creator"
@@ -2222,12 +2662,42 @@ projects:
     sort_order: 230
     tags: [aplikace, vba, excel, automatizace, vyroba]
     screenshots_source:
-      - { url: "https://itwebtech.cz/images/projects/excel/FLR_backup_case1.jpg", type: hero }
-      - { url: "https://itwebtech.cz/images/projects/excel/FLR_backup_case2.jpg", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/excel/address_data.jpg", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/excel/pdf_kanban.jpg", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/excel/process_combinations.jpg", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/excel/report.jpg", type: gallery }
+      - url: "https://itwebtech.cz/images/projects/excel/FLR_backup_case1.jpg"
+        type: hero
+        alt:
+          cs: "Excel Tools – ukázka VBA nástroje pro výrobní data"
+          en: "Excel Tools – preview of a VBA tool for production data"
+          de: "Excel Tools – Vorschau eines VBA-Tools für Produktionsdaten"
+      - url: "https://itwebtech.cz/images/projects/excel/FLR_backup_case2.jpg"
+        type: gallery
+        alt:
+          cs: "Excel Tools (VBA) – sekce 1"
+          en: "Excel Tools (VBA) – section 1"
+          de: "Excel Tools (VBA) – Abschnitt 1"
+      - url: "https://itwebtech.cz/images/projects/excel/address_data.jpg"
+        type: gallery
+        alt:
+          cs: "Excel Tools (VBA) – sekce 2"
+          en: "Excel Tools (VBA) – section 2"
+          de: "Excel Tools (VBA) – Abschnitt 2"
+      - url: "https://itwebtech.cz/images/projects/excel/pdf_kanban.jpg"
+        type: gallery
+        alt:
+          cs: "Excel Tools (VBA) – sekce 3"
+          en: "Excel Tools (VBA) – section 3"
+          de: "Excel Tools (VBA) – Abschnitt 3"
+      - url: "https://itwebtech.cz/images/projects/excel/process_combinations.jpg"
+        type: gallery
+        alt:
+          cs: "Excel Tools (VBA) – sekce 4"
+          en: "Excel Tools (VBA) – section 4"
+          de: "Excel Tools (VBA) – Abschnitt 4"
+      - url: "https://itwebtech.cz/images/projects/excel/report.jpg"
+        type: gallery
+        alt:
+          cs: "Excel Tools (VBA) – sekce 5"
+          en: "Excel Tools (VBA) – section 5"
+          de: "Excel Tools (VBA) – Abschnitt 5"
     translations:
       cs:
         title: "Excel Tools (VBA)"
@@ -2352,9 +2822,24 @@ projects:
     sort_order: 300
     tags: [obsah, content-marketing, copywriting, pr, motocykly]
     screenshots_source:
-      - { url: "https://itwebtech.cz/images/projects/pitarena/clanek_motorkari_cz.jpg", type: hero }
-      - { url: "https://itwebtech.cz/images/projects/pitarena/clanek_motorkari_cz_mobile.jpg", type: gallery }
-      - { url: "https://itwebtech.cz/images/projects/pitarena/original_clanku_pro_standu.jpg", type: gallery }
+      - url: "https://itwebtech.cz/images/projects/pitarena/clanek_motorkari_cz.jpg"
+        type: hero
+        alt:
+          cs: "Článek na Motorkáři.cz – náhled publikovaného článku na motoportálu"
+          en: "Article on Motorkáři.cz – preview of the article published on the moto portal"
+          de: "Artikel auf Motorkáři.cz – Vorschau des Artikels auf dem Motorrad-Portal"
+      - url: "https://itwebtech.cz/images/projects/pitarena/clanek_motorkari_cz_mobile.jpg"
+        type: gallery
+        alt:
+          cs: "Článek na Motorkáři.cz – sekce 1"
+          en: "Article on Motorkáři.cz – section 1"
+          de: "Artikel auf Motorkáři.cz – Abschnitt 1"
+      - url: "https://itwebtech.cz/images/projects/pitarena/original_clanku_pro_standu.jpg"
+        type: gallery
+        alt:
+          cs: "Článek na Motorkáři.cz – sekce 2"
+          en: "Article on Motorkáři.cz – section 2"
+          de: "Artikel auf Motorkáři.cz – Abschnitt 2"
     translations:
       cs:
         title: "Článek na Motorkáři.cz"
@@ -2470,7 +2955,12 @@ projects:
     sort_order: 310
     tags: [logo, branding, identita, vektor]
     screenshots_source:
-      - { url: "https://itwebtech.cz/images/projects/realitacky/logo_realitacky_v_akci.png", type: hero }
+      - url: "https://itwebtech.cz/images/projects/realitacky/logo_realitacky_v_akci.png"
+        type: hero
+        alt:
+          cs: "Logo Realiťačky v Akci – návrh značky realitního webu"
+          en: "Realiťačky v Akci logo – brand mark design for the real-estate website"
+          de: "Logo Realiťačky v Akci – Markendesign für die Immobilien-Website"
     translations:
       cs:
         title: "Logo — Realiťačky v Akci"
@@ -2584,7 +3074,12 @@ projects:
     sort_order: 320
     tags: [video, animace, social-media, propagace]
     screenshots_source:
-      - { url: "https://itwebtech.cz/images/projects/pitarena/video-pitbike-akademie.jpg", type: hero }
+      - url: "https://itwebtech.cz/images/projects/pitarena/video-pitbike-akademie.jpg"
+        type: hero
+        alt:
+          cs: "Video Pitbike Akademie – náhled promo animace pro sociální sítě"
+          en: "Video Pitbike Akademie – preview of the social media promo animation"
+          de: "Video Pitbike Akademie – Vorschau der Promo-Animation für Social Media"
     translations:
       cs:
         title: "Video — Pitbike Akademie"
@@ -2695,7 +3190,12 @@ projects:
     sort_order: 330
     tags: [tisk, signage, design, velkoformat]
     screenshots_source:
-      - { url: "https://itwebtech.cz/images/projects/pitarena/pitarena_cedule.jpg", type: hero }
+      - url: "https://itwebtech.cz/images/projects/pitarena/pitarena_cedule.jpg"
+        type: hero
+        alt:
+          cs: "Reklamní cedule PitArena – tiskový návrh velkoformátové venkovní cedule"
+          en: "PitArena outdoor sign – print design of the large-format exterior sign"
+          de: "PitArena Werbeschild – Druckdesign des Großformat-Außenschildes"
     translations:
       cs:
         title: "Reklamní cedule PitArena"
@@ -2805,7 +3305,12 @@ projects:
     sort_order: 340
     tags: [video, animace, social-media, ukazka, vlastni-projekt]
     screenshots_source:
-      - { url: "https://itwebtech.cz/images/projects/itwebtech/video_delejme_animace.jpg", type: hero }
+      - url: "https://itwebtech.cz/images/projects/itwebtech/video_delejme_animace.jpg"
+        type: hero
+        alt:
+          cs: "Animace upoutání pozornosti – ukázka social-media animace"
+          en: "Attention-grabbing animation – social media animation preview"
+          de: "Aufmerksamkeits-Animation – Vorschau einer Social-Media-Animation"
     translations:
       cs:
         title: "Animace upoutání pozornosti"
