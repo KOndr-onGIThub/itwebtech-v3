@@ -36,14 +36,9 @@
                 {{ __('home.hero.cta_primary') }}
                 <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
             </a>
-            <button
-                class="btn btn-secondary"
-                @click="$dispatch('open-consultation-modal')"
-                data-analytics="hero_cta_secondary_click"
-                type="button"
-            >
-                {{ __('home.hero.cta_secondary') }}
-            </button>
+            {{-- Sekundární CTA „Domluvit konzultaci" — Reservanto widget (OND-116/T15).
+                 Text widgetu řízen z config/site.php (default „15 min. konzultace ZDARMA"). --}}
+            <x-booking.reservanto-widget />
         </div>
     </div>
 </section>
@@ -498,9 +493,8 @@
                     {{ __('home.cta.consultation') }}
                     <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
                 </a>
-                <button type="button" class="btn btn-secondary" data-analytics="final_cta_secondary_click" onclick="window.dispatchEvent(new CustomEvent('open-consultation-modal'))">
-                    {{ __('home.cta.message') }}
-                </button>
+                {{-- Sekundární CTA — Reservanto widget (OND-116/T15) --}}
+                <x-booking.reservanto-widget />
             </div>
             <blockquote class="final-cta-quote">
                 <p>{{ __('home.final_cta.quote_text') }}</p>
@@ -521,14 +515,8 @@
                     {{ __('home.final_cta.cta_label') }}
                     <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
                 </a>
-                <button
-                    class="btn btn-secondary"
-                    @click="$dispatch('open-consultation-modal')"
-                    data-analytics="final_cta_closing_secondary_click"
-                    type="button"
-                >
-                    {{ __('home.final_cta.cta_secondary') }}
-                </button>
+                {{-- Sekundární CTA — Reservanto widget (OND-116/T15) --}}
+                <x-booking.reservanto-widget />
             </div>
             <p class="final-cta-note">{{ __('home.final_cta.cta_note') }}</p>
         </div>

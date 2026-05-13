@@ -143,5 +143,11 @@
 
     {{-- Consultation modal — video + Calendly CTA --}}
     <x-consultation-modal />
+
+    {{-- Booking widget (Reservanto) — sekundární CTA, OND-116 (T15) --}}
+    @if (config('site.booking.enabled'))
+        <script defer id="reservanto-widget-script" type="text/javascript"
+                src="{{ config('site.booking.script_url') }}"></script>
+    @endif
 </body>
 </html>

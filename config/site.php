@@ -29,4 +29,21 @@ return [
         'show_toyota_testimonial' => env('SHOW_TOYOTA_TESTIMONIAL', false),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Booking widget (Reservanto)
+    |--------------------------------------------------------------------------
+    | Per OND-102 (A3) / OND-116 (T15): sekundární CTA „Domluvit konzultaci"
+    | používá Reservanto widget napojený na existující CEO účet (15-min ZDARMA
+    | slot). Vypnutí: nastavit SITE_BOOKING_ENABLED=false.
+    */
+    'booking' => [
+        'enabled'     => env('SITE_BOOKING_ENABLED', true),
+        'provider'    => env('SITE_BOOKING_PROVIDER', 'reservanto'),
+        'widget_id'   => env('SITE_BOOKING_WIDGET_ID', '20854'),
+        'resource_id' => env('SITE_BOOKING_RESOURCE_ID', '32112'),
+        'cta_text'    => env('SITE_BOOKING_CTA_TEXT', '15 min. konzultace ZDARMA'),
+        'script_url'  => 'https://booking.reservanto.cz/Script/reservanto-script.js?id=20854',
+    ],
+
 ];
