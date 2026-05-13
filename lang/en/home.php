@@ -59,10 +59,6 @@ return [
                 'quote_author' => 'Petr Kroulík, Nové Interiéry s.r.o.',
             ],
             [
-                'heading' => 'Agency dependency you pay for every month',
-                'text'    => 'WordPress needs monthly updates and regular security patches. That\'s how agencies earn revenue years after handing over the site. It\'s their business model — not your benefit.',
-            ],
-            [
                 'heading' => 'An AI website in an afternoon: nice-looking, generic, interchangeable',
                 'text'    => 'Tools can generate a website quickly these days. But without research, without strategy, without understanding your business, what emerges looks like a website — and functions like everyone else\'s. Plus the platform locks you into a subscription forever.',
             ],
@@ -144,8 +140,11 @@ return [
     ],
 
     'services' => [
-        'heading_primary' => 'What I build — custom websites, apps and e-shops',
-        'heading_other'   => 'Additional services',
+        'heading_primary'  => 'What I build — custom websites, apps and e-shops',
+        'heading_other'    => 'Additional services',
+        'secondary_inline' => 'I also handle SEO, graphic design and social media management — :pricing_link or :contact_link.',
+        'secondary_inline_pricing' => 'see the pricing',
+        'secondary_inline_contact' => 'get in touch',
         'primary' => [
             'weby' => [
                 'title'       => 'Custom websites',
@@ -189,6 +188,53 @@ return [
         'social' => [
             'title'       => 'Social media that builds trust',
             'description' => 'Customers check your social media before they order. An active, consistent presence builds trust. I\'ll prepare content and a strategy that brings you closer to your target audience.',
+        ],
+    ],
+
+    'price_anchor' => [
+        'heading' => 'What will it cost?',
+        'intro'   => 'Indicative entry prices for the main project types. You receive an exact written quote after a short consultation.',
+        'items'   => [
+            [
+                'title' => 'Custom website',
+                'price' => 'from CZK 20,000',
+                'desc'  => 'Static presentation, single or multilingual.',
+            ],
+            [
+                'title' => 'Web application',
+                'price' => 'from CZK 60,000',
+                'desc'  => 'Internal systems, customer portals and custom record-keeping tools.',
+            ],
+            [
+                'title' => 'E-shop',
+                'price' => 'from CZK 80,000',
+                'desc'  => 'Custom solution without monthly platform fees.',
+            ],
+        ],
+        'cta' => 'Detailed pricing →',
+    ],
+
+    'why_me' => [
+        'heading'   => 'Why work with me',
+        'photo_alt' => 'Ondřej Kriška — web developer',
+        'bio'       => 'For 18 years I ran projects at Toyota where the production line was not allowed to stop. I now apply those same principles — exact specification, analysis, verification — to web projects. I work solo: you talk directly to me from the first consultation through launch and beyond.',
+        'advantages' => [
+            [
+                'heading' => 'Custom code, no templates',
+                'text'    => 'I build to your business — not from a template your competitors have already used.',
+            ],
+            [
+                'heading' => 'Price upfront',
+                'text'    => 'You receive a specification with an exact price before work begins. What\'s in the specification is on the invoice.',
+            ],
+            [
+                'heading' => 'Direct contact',
+                'text'    => 'You communicate with me directly — no salesperson, no coordinator, no ticket system.',
+            ],
+            [
+                'heading' => 'Built to last',
+                'text'    => 'Maintenance-free operation without WordPress updates and plugins — no monthly security patching.',
+            ],
         ],
     ],
 

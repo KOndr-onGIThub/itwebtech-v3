@@ -59,10 +59,6 @@ return [
                 'quote_author' => 'Petr Kroulík, Nové Interiéry s.r.o.',
             ],
             [
-                'heading' => 'Agenturabhängigkeit, für die Sie monatlich zahlen',
-                'text'    => 'WordPress muss jeden Monat aktualisiert werden und braucht regelmäßige Sicherheits-Patches. So verdienen Agenturen Jahre nach der Website-Übergabe. Das ist ihr Geschäftsmodell — nicht Ihr Vorteil.',
-            ],
-            [
                 'heading' => 'Eine KI-Website in einem Nachmittag: hübsch, generisch, austauschbar',
                 'text'    => 'Werkzeuge können heute schnell eine Website generieren. Aber ohne Recherche, ohne Strategie, ohne Verständnis Ihres Unternehmens entsteht etwas, das wie eine Website aussieht — und wie die Website aller anderen funktioniert. Zusätzlich hält Sie die Plattform für immer in ihrem Abonnement.',
             ],
@@ -144,8 +140,11 @@ return [
     ],
 
     'services' => [
-        'heading_primary' => 'Was ich baue — Websites, Anwendungen und Online-Shops auf Maß',
-        'heading_other'   => 'Weitere Services',
+        'heading_primary'  => 'Was ich baue — Websites, Anwendungen und Online-Shops auf Maß',
+        'heading_other'    => 'Weitere Services',
+        'secondary_inline' => 'Ich biete auch SEO, Grafikdesign und Social-Media-Betreuung — :pricing_link oder :contact_link.',
+        'secondary_inline_pricing' => 'mehr in der Preisliste',
+        'secondary_inline_contact' => 'schreiben Sie mir',
         'primary' => [
             'weby' => [
                 'title'       => 'Maßgeschneiderte Websites',
@@ -189,6 +188,53 @@ return [
         'social' => [
             'title'       => 'Social Media, die Vertrauen aufbauen',
             'description' => 'Kunden prüfen Ihre Social-Media-Präsenz, bevor sie bestellen. Eine aktive, konsistente Präsenz schafft Vertrauen. Ich bereite Inhalte und eine Strategie vor, die Sie Ihrer Zielgruppe näherbringt.',
+        ],
+    ],
+
+    'price_anchor' => [
+        'heading' => 'Was kostet es?',
+        'intro'   => 'Orientierende Einstiegspreise für die wichtigsten Projekttypen. Ein verbindliches Angebot erhalten Sie schriftlich nach einer kurzen Beratung.',
+        'items'   => [
+            [
+                'title' => 'Website auf Maß',
+                'price' => 'ab 20 000 CZK',
+                'desc'  => 'Statische Präsentation, einsprachig oder mehrsprachig.',
+            ],
+            [
+                'title' => 'Webanwendung',
+                'price' => 'ab 60 000 CZK',
+                'desc'  => 'Interne Systeme, Kundenportale und maßgeschneiderte Verwaltung.',
+            ],
+            [
+                'title' => 'Online-Shop',
+                'price' => 'ab 80 000 CZK',
+                'desc'  => 'Maßgeschneiderte Lösung ohne monatliche Plattformgebühren.',
+            ],
+        ],
+        'cta' => 'Detaillierte Preisliste →',
+    ],
+
+    'why_me' => [
+        'heading'   => 'Warum mit mir',
+        'photo_alt' => 'Ondřej Kriška — Webentwickler',
+        'bio'       => '18 Jahre lang habe ich bei Toyota Projekte geleitet, bei denen das Band nicht stehen durfte. Dieselben Prinzipien — präzise Spezifikation, Analyse, Verifikation — wende ich heute auf Web-Projekte an. Ich arbeite allein: Sie sprechen direkt mit mir, von der ersten Beratung über den Launch hinaus.',
+        'advantages' => [
+            [
+                'heading' => 'Eigener Code, keine Vorlagen',
+                'text'    => 'Ich baue passend zu Ihrem Unternehmen — nicht aus einer Vorlage, die Ihre Konkurrenz bereits verwendet.',
+            ],
+            [
+                'heading' => 'Preis im Voraus',
+                'text'    => 'Sie erhalten eine Spezifikation mit genauem Preis, bevor die Arbeit beginnt. Was in der Spezifikation steht, steht auf der Rechnung.',
+            ],
+            [
+                'heading' => 'Direkter Kontakt',
+                'text'    => 'Sie kommunizieren direkt mit mir — ohne Verkäufer, Koordinator und Ticket-System.',
+            ],
+            [
+                'heading' => 'Gebaut, damit es hält',
+                'text'    => 'Wartungsfreier Betrieb ohne WordPress-Updates und Plugins — keine monatlichen Sicherheits-Patches.',
+            ],
         ],
     ],
 

@@ -1454,6 +1454,156 @@
         letter-spacing: 0.01em;
     }
 
+    /* Inline doplňkové služby (T14 — OND-118) */
+    .services-secondary-inline {
+        margin: 1.75rem 0 0;
+        text-align: center;
+        color: var(--color-body);
+        font-size: 0.9375rem;
+        line-height: 1.6;
+    }
+    .services-secondary-inline a {
+        color: var(--color-heading);
+        text-decoration: underline;
+        text-underline-offset: 0.2em;
+        text-decoration-thickness: 1px;
+        font-weight: 500;
+        transition: color 0.2s ease;
+    }
+    .services-secondary-inline a:hover {
+        color: var(--color-gold-500);
+    }
+
+    /* ============================================================
+       T08 — CENOVÁ KOTVA (OND-118)
+       ============================================================ */
+    .price-anchor-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+        gap: 1.25rem;
+        margin-top: 2.25rem;
+    }
+    .price-anchor-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        border-radius: 1rem;
+        padding: 1.75rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        transition:
+            border-color 0.25s ease,
+            background-color 0.25s ease,
+            transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .price-anchor-card:hover {
+        background: var(--bg-card-hover);
+        border-color: var(--border-gold);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+    }
+    .price-anchor-card__title {
+        margin: 0;
+        font-size: 1.0625rem;
+        font-weight: 600;
+        color: var(--color-heading);
+    }
+    .price-anchor-card__price {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--color-gold-500);
+        letter-spacing: -0.01em;
+    }
+    .price-anchor-card__desc {
+        margin: 0;
+        color: var(--color-body);
+        font-size: 0.9375rem;
+        line-height: 1.55;
+    }
+
+    /* ============================================================
+       T09 — PROČ JÁ (OND-118)
+       Sjednoceno z původních About + Advantages sekcí. Foto + bio | 2×2 grid.
+       ============================================================ */
+    .why-me-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        align-items: start;
+        margin-top: 2.25rem;
+    }
+    @media (min-width: 880px) {
+        .why-me-layout {
+            grid-template-columns: minmax(280px, 360px) 1fr;
+            gap: 3.5rem;
+        }
+    }
+
+    .why-me-bio {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+    .why-me-photo {
+        border-radius: 1.25rem;
+        overflow: hidden;
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        aspect-ratio: 4 / 5;
+        max-width: 360px;
+    }
+    .why-me-photo__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    .why-me-bio__text {
+        margin: 0;
+        color: var(--color-body);
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .why-me-advantages {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    @media (min-width: 560px) {
+        .why-me-advantages {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+    }
+    .why-me-advantage {
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        border-radius: 1rem;
+        padding: 1.5rem 1.25rem;
+        transition:
+            border-color 0.25s ease,
+            background-color 0.25s ease;
+    }
+    .why-me-advantage:hover {
+        background: var(--bg-card-hover);
+        border-color: var(--border-gold);
+    }
+    .why-me-advantage__heading {
+        margin: 0 0 0.5rem;
+        color: var(--color-heading);
+        font-size: 1rem;
+        font-weight: 600;
+    }
+    .why-me-advantage__text {
+        margin: 0;
+        color: var(--color-body);
+        font-size: 0.9375rem;
+        line-height: 1.6;
+    }
+
     /* ============================================================
        COMMITMENT STEPS
        ============================================================ */
