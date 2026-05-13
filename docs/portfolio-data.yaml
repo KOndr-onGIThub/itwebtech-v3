@@ -680,11 +680,13 @@ projects:
         meta_description: "Case Study: Redesign der Website Nové interiéry. Eine Site, die wie ein erstes Geschäftstreffen wirkt und ernste Anfragen filtert."
 
   # ----------------------------------------------------------------------
-  # 5) Cyklo Centrum — záchrana po neúspěšném dodavateli
+  # 5) Cyklocentrum Březí — záchrana po neúspěšném dodavateli
   # ----------------------------------------------------------------------
+  # Spolumajitelé: Michal Cvrček + Petr Kňourek (jedna firma, dva majitelé).
+  # Testimonial Michala Cvrčka v lang/*/testimonials.php používá stejný název.
   - slug: cyklocentrum
     category: website
-    client_name: "Cyklo Centrum — Petr Kňourek"
+    client_name: "Cyklocentrum Březí — Michal Cvrček & Petr Kňourek"
     live_url: https://cykloservispujcovna.cz/
     year: 2025
     duration: "několik týdnů"
@@ -695,46 +697,46 @@ projects:
       - url: "https://framerusercontent.com/images/4Tc64GOHwjeVASDQMyWxjk0qd0.png"
         type: hero
         alt:
-          cs: "Cyklo Centrum – domovská stránka cyklistického obchodu a servisu"
-          en: "Cyklo Centrum – homepage of the bicycle shop and service"
-          de: "Cyklo Centrum – Startseite des Fahrradgeschäfts und Service"
+          cs: "Cyklocentrum Březí – domovská stránka cyklistického obchodu a servisu"
+          en: "Cyklocentrum Březí – homepage of the bicycle shop and service"
+          de: "Cyklocentrum Březí – Startseite des Fahrradgeschäfts und Service"
       - url: "https://framerusercontent.com/images/mdhkU4BB2eFV0bKpPwpLEjaBdSk.png"
         type: gallery
         alt:
-          cs: "Cyklo Centrum – sekce 1"
-          en: "Cyklo Centrum – section 1"
-          de: "Cyklo Centrum – Abschnitt 1"
+          cs: "Cyklocentrum Březí – sekce 1"
+          en: "Cyklocentrum Březí – section 1"
+          de: "Cyklocentrum Březí – Abschnitt 1"
       - url: "https://framerusercontent.com/images/q33eBpkdy6UjBsgRFe1XNR5L4.png"
         type: gallery
         alt:
-          cs: "Cyklo Centrum – sekce 2"
-          en: "Cyklo Centrum – section 2"
-          de: "Cyklo Centrum – Abschnitt 2"
+          cs: "Cyklocentrum Březí – sekce 2"
+          en: "Cyklocentrum Březí – section 2"
+          de: "Cyklocentrum Březí – Abschnitt 2"
       - url: "https://framerusercontent.com/images/S3eyrA6b49qVwlh7vBsz987c.png"
         type: gallery
         alt:
-          cs: "Cyklo Centrum – sekce 3"
-          en: "Cyklo Centrum – section 3"
-          de: "Cyklo Centrum – Abschnitt 3"
+          cs: "Cyklocentrum Březí – sekce 3"
+          en: "Cyklocentrum Březí – section 3"
+          de: "Cyklocentrum Březí – Abschnitt 3"
       - url: "https://framerusercontent.com/images/ts7VthxqIAmrSZgLfGLUxjliw.png"
         type: gallery
         alt:
-          cs: "Cyklo Centrum – sekce 4"
-          en: "Cyklo Centrum – section 4"
-          de: "Cyklo Centrum – Abschnitt 4"
+          cs: "Cyklocentrum Březí – sekce 4"
+          en: "Cyklocentrum Březí – section 4"
+          de: "Cyklocentrum Březí – Abschnitt 4"
       - url: "https://framerusercontent.com/images/YiOQN9VFcYx3ZtU82crjfRB2lw.webp"
         type: gallery
         alt:
-          cs: "Cyklo Centrum – sekce 5"
-          en: "Cyklo Centrum – section 5"
-          de: "Cyklo Centrum – Abschnitt 5"
+          cs: "Cyklocentrum Březí – sekce 5"
+          en: "Cyklocentrum Březí – section 5"
+          de: "Cyklocentrum Březí – Abschnitt 5"
     translations:
       cs:
-        title: "Cyklo Centrum"
+        title: "Cyklocentrum Březí"
         subtitle: "Záchrana po neúspěšném webaři, postaveno znovu od nuly"
         summary: "Web cykloservisu a půjčovny, který klient potřeboval znovu — předchozí dodavatel rok pracoval a zanechal po sobě polotovar. Nové zákazníky web přivedl během pár dní."
         description: >-
-          Cyklo Centrum nabízí servis kol, půjčovnu a prodej. Po roce
+          Cyklocentrum Březí nabízí servis kol, půjčovnu a prodej. Po roce
           práce s předchozím dodavatelem skončili s rozjetým, ale
           nepoužitelným webem, který lidi spíš odpuzoval. Postavil
           jsem náhradu znovu od nuly — analýza, struktura, copy, SEO,
@@ -765,14 +767,14 @@ projects:
           - "Doplněný Google Maps profil + článek na Kudy z nudy"
           - "Ručně kódovaný web — rychlý a robustní"
           - "Záchranná operace po roce zmařené práce s jiným webařem"
-        meta_title: "Cyklo Centrum — záchrana webu cykloservisu od nuly"
+        meta_title: "Cyklocentrum Březí — záchrana webu cykloservisu od nuly"
         meta_description: "Případová studie: po roce neúspěšné práce s jiným webařem nový web přivedl zákazníky během pár dní od spuštění."
       en:
-        title: "Cyklo Centrum"
+        title: "Cyklocentrum Březí"
         subtitle: "A rescue project — rebuilt from scratch after a year wasted with another vendor"
         summary: "Bike service and rental website the client needed redone — the previous vendor left them with an unfinished mess. New customers started arriving within days."
         description: >-
-          Cyklo Centrum offers bike service, rentals and sales. After a
+          Cyklocentrum Březí offers bike service, rentals and sales. After a
           year with another vendor, they were stuck with a half-built
           site that was actively pushing visitors away. I rebuilt the
           replacement from scratch — analysis, structure, copy, SEO,
@@ -803,14 +805,14 @@ projects:
           - "Google Maps profile and promo article on Kudy z nudy added"
           - "Hand-coded site — fast and robust"
           - "Rescue operation after a wasted year with another vendor"
-        meta_title: "Cyklo Centrum — bike service website rescued from scratch"
+        meta_title: "Cyklocentrum Březí — bike service website rescued from scratch"
         meta_description: "Case study: after a year wasted with another vendor, the new site brought new customers within days of launch."
       de:
-        title: "Cyklo Centrum"
+        title: "Cyklocentrum Březí"
         subtitle: "Rettungsprojekt — von Grund auf neu nach einem verlorenen Jahr"
         summary: "Website für Fahrradservice und Verleih, die der Kunde neu brauchte — der vorherige Anbieter hinterließ ein halbfertiges Chaos. Neue Kunden kamen innerhalb weniger Tage."
         description: >-
-          Cyklo Centrum bietet Fahrradservice, Verleih und Verkauf. Nach
+          Cyklocentrum Březí bietet Fahrradservice, Verleih und Verkauf. Nach
           einem Jahr beim vorherigen Anbieter steckten sie mit einer
           halb gebauten Site fest, die Besucher aktiv vertrieb. Ich
           habe den Ersatz komplett neu gebaut — Analyse, Struktur,
@@ -841,7 +843,7 @@ projects:
           - "Google-Maps-Profil und Promo-Artikel auf Kudy z nudy"
           - "Handgecodete Site — schnell und robust"
           - "Rettungsprojekt nach einem verlorenen Jahr beim Vorgänger"
-        meta_title: "Cyklo Centrum — Fahrradservice-Website neu aufgebaut"
+        meta_title: "Cyklocentrum Březí — Fahrradservice-Website neu aufgebaut"
         meta_description: "Case Study: Nach einem verlorenen Jahr beim Vorgänger brachte die neue Site innerhalb weniger Tage neue Kunden."
 
   # ----------------------------------------------------------------------
