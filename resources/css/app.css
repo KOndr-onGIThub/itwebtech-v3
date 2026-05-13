@@ -987,6 +987,12 @@
         border-bottom-color: var(--border-subtle);
         background-color: rgba(12, 14, 20, 0.95);
     }
+    /* OND-123 follow-up: class-based hide místo inline `style.transform`. JS
+       v scroll handleru se vyhne čtení/zápisu computed style (forced reflow
+       audit 1,2 s před touto změnou). */
+    .navbar.is-hidden {
+        transform: translateY(-100%);
+    }
 
     .navbar__inner {
         display: flex;
@@ -2316,7 +2322,9 @@
         gap: 0.375rem;
         text-align: center;
         font-size: 0.8125rem;
-        color: var(--color-muted);
+        /* OND-123: --color-muted (#5A6480) na #161A24 ≈ 3.3:1 → WCAG AA fail.
+           --color-body (#94A3B8) ≈ 5.8:1 → PASS pro normální text. */
+        color: var(--color-body);
     }
     @media (min-width: 640px) {
         .footer-bar__inner {
@@ -2326,11 +2334,16 @@
     }
 
     .footer-bar__gdpr-link {
-        color: var(--color-muted);
-        transition: color 0.15s;
+        /* OND-123: per matching .footer-bar__inner — viz výše. */
+        color: var(--color-body);
+        text-decoration: underline;
+        text-decoration-color: rgba(148, 163, 184, 0.4);
+        text-underline-offset: 2px;
+        transition: color 0.15s, text-decoration-color 0.15s;
     }
     .footer-bar__gdpr-link:hover {
         color: var(--color-heading);
+        text-decoration-color: var(--color-heading);
     }
 
     /* ============================================================
