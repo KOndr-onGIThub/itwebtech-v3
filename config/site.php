@@ -44,6 +44,10 @@ return [
         'resource_id' => env('SITE_BOOKING_RESOURCE_ID', '32112'),
         'cta_text'    => env('SITE_BOOKING_CTA_TEXT', '15 min. konzultace ZDARMA'),
         'script_url'  => 'https://booking.reservanto.cz/Script/reservanto-script.js?id=20854',
+        // OND-123: crawler-readable direct URL. Vendor skript injektuje <a> bez
+        // href → PSI SEO „Odkazy nelze procházet" → cíl ≥ 95 fail. JS patchne
+        // vendor anchor touhle URL (vendor click handler i tak otevře modal).
+        'direct_url'  => env('SITE_BOOKING_DIRECT_URL', 'https://booking.reservanto.cz/?Widget=20854'),
     ],
 
     /*

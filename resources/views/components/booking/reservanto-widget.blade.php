@@ -28,6 +28,8 @@
         data-text="{{ $ctaText ?? $booking['cta_text'] }}"
         data-id="{{ $booking['widget_id'] }}"
         data-resourceid="{{ $booking['resource_id'] }}"
+        {{-- OND-123: direct booking URL pro patchování vendor-injektovaného <a> --}}
+        data-direct-url="{{ $booking['direct_url'] ?? '' }}"
         data-color-text="#313131"
         data-color-text-shadow="transparent"
         data-color-bg="#ffcc00"

@@ -81,13 +81,18 @@
             @foreach (__('home.social_proof.brands') as $brand)
             <div class="brand-item">
                 @if ($brand['image'])
-                    <img
-                        src="{{ asset('img/brands/' . $brand['image']) }}"
-                        alt="{{ $brand['name'] }}"
+                    {{-- OND-123: brand loga přes <x-responsive-image> → AVIF/WebP varianty.
+                         Předtím se servíroval ~278×100 PNG jen pro 105×38 displej (PSI image audit).
+                         Sizes hint je úzký (do 120 CSS px), takže browser vezme nejmenší AVIF variantu. --}}
+                    <x-responsive-image
+                        :path="'brands/' . $brand['image']"
+                        :alt="$brand['name']"
+                        sizes="120px"
                         loading="lazy"
+                        decoding="async"
                         width="120"
                         height="48"
-                    >
+                    />
                 @else
                     <span class="brand-item__name">{{ $brand['name'] }}</span>
                 @endif

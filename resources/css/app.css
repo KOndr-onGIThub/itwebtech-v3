@@ -2077,6 +2077,17 @@
         width: auto;
         object-fit: contain;
     }
+    /* OND-123: text-only brand variants (.brand-item__name) by neměly dědit
+       parent opacity 0.45 a brightness filter — text by spadl pod WCAG AA.
+       Použijeme :has() — Safari 15.4+ / Chrome 105+, fallback výše udržuje
+       čitelnost (color: --color-body + opacity 0.9). */
+    .brand-item:has(.brand-item__name) {
+        opacity: 1;
+        filter: none;
+    }
+    .brand-item:has(.brand-item__name) .brand-item__name {
+        opacity: 0.9;
+    }
 
     /* ============================================================
        PROJEKTY — home page preview cards
@@ -3952,9 +3963,11 @@
         font-size: 0.875rem;
         font-weight: 600;
         letter-spacing: 0.04em;
-        color: var(--color-muted);
+        /* OND-123: bumped from --color-muted (#5A6480) + 0.65 opacity → --color-body
+           (#94A3B8) + 0.9 opacity. WCAG AA na #101318 background: ~5.4:1 (bylo ~2.3:1). */
+        color: var(--color-body);
         text-transform: uppercase;
-        opacity: 0.65;
+        opacity: 0.9;
         white-space: nowrap;
     }
 
@@ -4949,7 +4962,9 @@
         color: var(--color-heading);
     }
     .social-proof-bar__meta {
-        color: var(--color-muted, var(--color-ink-400));
+        /* OND-123: --color-muted (#5A6480) na #101318 dává jen ~3.5:1 → WCAG AA fail.
+           --color-body (#94A3B8) ≈ 5.9:1 → PASS pro normální text. */
+        color: var(--color-body);
     }
 
     /* Toyota badge inside testimonial (T01) */

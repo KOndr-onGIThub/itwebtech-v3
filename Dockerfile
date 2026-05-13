@@ -38,6 +38,11 @@ RUN chown -R www-data:www-data /var/www/html \
 # Detaily a bezpečnostní pravidla viz docker/entrypoint.d/50-laravel-deploy.sh.
 COPY --chmod=755 docker/entrypoint.d/ /etc/entrypoint.d/
 
+# OND-123: long-cache headers pro Vite hash-suffixované assety v /build/.
+# serversideup/php-fpm-nginx auto-includuje *.conf z server-opts.d do default
+# server kontextu. Detail viz docker/nginx/server-opts.d/cache-build-assets.conf.
+COPY docker/nginx/server-opts.d/ /etc/nginx/server-opts.d/
+
 USER www-data
 
 EXPOSE 8080
