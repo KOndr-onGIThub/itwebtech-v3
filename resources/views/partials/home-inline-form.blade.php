@@ -34,7 +34,6 @@
                 novalidate
                 x-data="{ submitting: false }"
                 @submit="submitting = true; window.dispatchEvent(new CustomEvent('inline-form-submit-attempt'))"
-                data-analytics="inline_form_submit_attempt"
             >
                 @csrf
 
@@ -97,7 +96,7 @@
                     type="submit"
                     class="btn btn-primary inline-form__submit"
                     :disabled="submitting"
-                    data-analytics="inline_form_submit_click"
+                    data-analytics="inline_form_submit_attempt"
                 >
                     <span class="btn__inner" x-show="!submitting">
                         {{ __('home.inline_form.submit') }}

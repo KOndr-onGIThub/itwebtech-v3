@@ -71,6 +71,10 @@
 
     @stack('preloads')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    {{-- Analytics (OND-122) — Plausible / GA4 / Clarity, řízeno přes
+         config/site.php (ANALYTICS_ENABLED + provider envs). --}}
+    @include('partials.analytics')
 </head>
 <body class="min-h-screen flex flex-col">
 

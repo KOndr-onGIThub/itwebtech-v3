@@ -46,4 +46,39 @@ return [
         'script_url'  => 'https://booking.reservanto.cz/Script/reservanto-script.js?id=20854',
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Analytics (OND-122)
+    |--------------------------------------------------------------------------
+    | Měřicí stack pro homepage (per plán §9): Plausible (preferované, GDPR-OK)
+    | a/nebo GA4 + Microsoft Clarity (heatmapy / session recordings).
+    |
+    | Master vypínač `enabled` slouží k tomu, aby se na stagingu neměřilo
+    | dohromady s produkcí — nech `ANALYTICS_ENABLED=false` všude mimo prod.
+    |
+    | 11 mikrokonverzí se posílá z JS na základě `data-analytics` atributů —
+    | viz resources/js/analytics.js a docs/analytics.md.
+    */
+    'analytics' => [
+        'enabled' => env('ANALYTICS_ENABLED', false),
+
+        'plausible' => [
+            'domain'     => env('PLAUSIBLE_DOMAIN'),
+            // `tagged-events` umí číst `data-plausible-*` z HTML a navíc
+            // umožňuje `plausible(name, {props})` z vlastního JS.
+            'script_url' => env('PLAUSIBLE_SCRIPT_URL', 'https://plausible.io/js/script.tagged-events.js'),
+        ],
+
+        'ga4' => [
+            // Měření přes gtag. Pokud je vyplněna Plausible doména i GA4 id,
+            // odešle se event do obou nástrojů (duplicitní měření).
+            'measurement_id' => env('GA4_MEASUREMENT_ID', env('GOOGLE_ANALYTICS_ID')),
+        ],
+
+        'clarity' => [
+            // Microsoft Clarity — zdarma, heatmapy + session recordings.
+            'project_id' => env('CLARITY_PROJECT_ID'),
+        ],
+    ],
+
 ];

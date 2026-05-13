@@ -38,8 +38,9 @@
                     <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
                 </a>
                 {{-- Sekundární CTA „Domluvit konzultaci" — Reservanto widget (OND-116/T15).
-                     Text widgetu řízen z config/site.php (default „15 min. konzultace ZDARMA"). --}}
-                <x-booking.reservanto-widget />
+                     Text widgetu řízen z config/site.php (default „15 min. konzultace ZDARMA").
+                     OND-122: analyticsEvent prop přidá data-analytics na wrapping div, klik z renderovaného buttonu bubble-uje. --}}
+                <x-booking.reservanto-widget analyticsEvent="hero_cta_secondary_click" />
             </div>
         </div>
 
@@ -184,7 +185,7 @@
      T08 — CENOVÁ KOTVA
      Plán §4.7 / §3 (OND-118). Mezi Primary services a Proč já.
      =================================================== --}}
-<section class="section-wrapper" data-reveal>
+<section id="section-price" class="section-wrapper" data-reveal data-analytics-view="price_anchor_view">
     <div class="container-site">
         <header class="section-header">
             <h2>{{ __('home.price_anchor.heading') }}</h2>
@@ -305,7 +306,7 @@
         ->values();
 @endphp
 
-<section class="section-wrapper section-alt section-wrapper--glow" data-reveal>
+<section id="section-testimonials" class="section-wrapper section-alt section-wrapper--glow" data-reveal data-analytics-view="testimonial_view">
     <div class="container-site">
         <header class="section-header">
             <h2>{{ __('home.testimonials.heading') }}</h2>
@@ -494,7 +495,13 @@
                 @endphp
 
                 <article class="home-projects-card" data-reveal>
-                    <a href="{{ $detailHref }}" class="home-projects-card__visual" aria-label="{{ $clientLabel }} — {{ __('projects.view_project') }}">
+                    <a
+                        href="{{ $detailHref }}"
+                        class="home-projects-card__visual"
+                        aria-label="{{ $clientLabel }} — {{ __('projects.view_project') }}"
+                        data-analytics="project_card_click"
+                        data-analytics-props='{"slug":"{{ $project->slug }}"}'
+                    >
                         @if ($hero)
                             <x-portfolio.screenshot
                                 :path="$hero->path"
@@ -524,7 +531,12 @@
                             <p class="home-projects-card__outcome">{{ $outcome }}</p>
                         @endif
 
-                        <a href="{{ $detailHref }}" class="home-projects-card__cta">
+                        <a
+                            href="{{ $detailHref }}"
+                            class="home-projects-card__cta"
+                            data-analytics="project_card_click"
+                            data-analytics-props='{"slug":"{{ $project->slug }}"}'
+                        >
                             {{ __('home.portfolio.detail_cta') }}
                             <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
                         </a>
@@ -578,6 +590,7 @@
             <details
                 class="faq-item"
                 data-reveal
+                data-q-id="{{ $i }}"
                 style="transition-delay: {{ $i * 60 }}ms"
             >
                 <summary class="faq-item__question">
@@ -618,7 +631,6 @@
                 novalidate
                 x-data="{ submitting: false }"
                 @submit="submitting = true"
-                data-analytics="faq_form_submit_attempt"
                 class="faq-form__form"
             >
                 @csrf
@@ -667,7 +679,7 @@
                     type="submit"
                     class="btn btn-primary faq-form__submit"
                     :disabled="submitting"
-                    data-analytics="faq_form_submit_click"
+                    data-analytics="faq_form_submit_attempt"
                 >
                     <span class="btn__inner" x-show="!submitting">
                         {{ __('home.faq_form.submit') }}
@@ -744,6 +756,10 @@
 
         @if (session('home_lead_success'))
         window.dispatchEvent(new CustomEvent('inline-form-submit-success'));
+        @endif
+
+        @if (session('faq_lead_success'))
+        window.dispatchEvent(new CustomEvent('faq-form-submit-success'));
         @endif
     });
 </script>
