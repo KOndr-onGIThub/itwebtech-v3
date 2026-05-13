@@ -69,27 +69,33 @@ return [
     ],
 
     'how_i_work' => [
-        'heading' => 'Jednoduchý proces bez zbytečných komplikací.',
+        'heading'  => 'Od první zprávy ke spuštěnému webu — 4 jasné kroky.',
+        'cta_intro' => 'Pojďme rovnou ke kroku 1.',
+        'cta_label' => 'Domluvit konzultaci',
         'steps'   => [
             [
-                'heading'      => 'Porozumění',
+                'heading'      => 'Konzultace',
+                'time'         => '60 min, do týdne',
                 'text'         => 'Začínám konzultací, ne formulářem. Potřebuji pochopit váš byznys, vaše zákazníky a co má web skutečně udělat — přivést kontakty, prodat produkt nebo vybudovat důvěru.',
                 'quote_text'   => 'Pan Kriška opravdu naslouchal mým potřebám a následně tyto informace zpracoval až do mé úplné spokojenosti.',
                 'quote_author' => 'Magda Pernicová, Realiťačky v akci',
             ],
             [
-                'heading'      => 'Přesná specifikace',
+                'heading'      => 'Specifikace',
+                'time'         => '2–5 dní',
                 'text'         => 'Než začnu pracovat, dostanete písemnou specifikaci: co bude na webu, kolik stránek, jaká technologie a kolik to bude stát. Žádné překvapení na faktuře. Termín dodání odhadnu realisticky — a vždy předem, ne zpětně.',
                 'quote_text'   => 'Důsledně analyzuje stav a chce poznat současné procesy. Shromažďuje požadavky od zákazníků a zjišťuje vize pro budoucnost.',
                 'quote_author' => 'Jan Stybor, vedoucí projektového oddělení, Toyota',
                 'note'         => 'Poznámka k termínům: web nevzniká jen na mé straně. Schvalování, podklady od klienta a zpětná vazba jsou součástí procesu. Termín je proto vždy odhad, ne závazek — a říkám to otevřeně od začátku.',
             ],
             [
-                'heading' => 'Tvorba s vaší zpětnou vazbou',
+                'heading' => 'Tvorba',
+                'time'    => '3–10 týdnů',
                 'text'    => 'Průběžně vás informuji o postupu a zapojuji vás do klíčových rozhodnutí. Výsledek odpovídá tomu, co jste si přáli — protože nečekám na konec projektu, abych to zjistil.',
             ],
             [
                 'heading' => 'Spuštění a podpora',
+                'time'    => 'do druhého dne',
                 'text'    => 'Po schválení nasazení spouštím web obvykle do jednoho pracovního dne. Po spuštění zůstávám k dispozici — drobné úpravy, technické dotazy i pomoc s analytikou řeším přímo, bez ticketu a bez čekání.',
                 'note'    => 'Start do 1 pracovního dne od schválení.',
             ],
@@ -284,6 +290,46 @@ return [
         'cta_label'    => 'Získat cenovou nabídku',
         'cta_secondary' => 'Domluvit 30min konzultaci',
         'cta_note'     => 'Bezplatně. Bez závazku.',
+    ],
+
+    'faq' => [
+        'heading' => 'Časté otázky',
+        'items'   => [
+            [
+                'question' => 'Kolik to bude stát?',
+                'answer'   => 'Orientační vstupní ceny najdete v cenové kotvě výše — web od 20 000 Kč, aplikace od 60 000 Kč, e-shop od 80 000 Kč. Přesnou cenu dostanete písemně po krátké konzultaci, na faktuře je pak přesně to, co je ve specifikaci.',
+            ],
+            [
+                'question' => 'Jak dlouho to trvá?',
+                'answer'   => 'Od první zprávy ke spuštěnému webu typicky 3–10 týdnů — 60 minut konzultace, 2–5 dní na specifikaci, 3–10 týdnů na tvorbu a spuštění do druhého dne po schválení. Detailní timing pro váš projekt sepíšu do specifikace.',
+            ],
+            [
+                'question' => 'Co když nebudu spokojený?',
+                'answer'   => 'Pracuji v krátkých iteracích a posílám průběžné náhledy — nečekám na konec projektu, abych zjistil, jestli to sedí. Pokud něco nesedí, řešíme to hned, ne až po faktuře. Co je ve specifikaci, to dodám.',
+            ],
+            [
+                'question' => 'Co jsou „bezúdržbové weby"?',
+                'answer'   => 'Žádný WordPress, žádné pluginy, žádné měsíční bezpečnostní aktualizace. Web stojí na vlastním kódu — běží sám, nevyžaduje pravidelné opravy a nepadá kvůli kolizi šablon. Drobné změny obsahu řešíme přímo, bez ticketu.',
+            ],
+            // Archiv: další FAQ otázky se přesouvají mimo homepage (na /faq nebo /sluzby — mimo scope OND-121).
+        ],
+    ],
+
+    'faq_form' => [
+        'eyebrow'     => 'Máte jinou otázku?',
+        'heading'     => 'Napište ji rovnou.',
+        'description' => 'Zachytím to, odpovím do druhého pracovního dne. Bez obchodního tlaku.',
+        'name'        => 'Jméno',
+        'email'       => 'E-mail',
+        'message'     => 'Vaše otázka',
+        'placeholders' => [
+            'name'    => 'Jan Novák',
+            'email'   => 'jan@firma.cz',
+            'message' => 'Např. Stíháte to do konce kvartálu?',
+        ],
+        'submit'      => 'Odeslat otázku',
+        'submitting'  => 'Odesílám…',
+        'success'     => 'Děkuji, otázka dorazila. Ozvu se co nejdříve.',
     ],
 
     'inline_form' => [

@@ -16,7 +16,13 @@ class HomeLeadController extends Controller
             'email'   => 'required|email|max:255',
             'phone'   => 'nullable|string|max:50',
             'message' => 'required|string|max:5000',
+            // OND-121 T18 — FAQ mikro-formulář se hlásí jako home.faq.
+            // Ostatní zdroje se mapují na home.inline (default).
+            'source'  => 'nullable|string|in:home.inline,home.faq',
         ]);
+
+        $source = $data['source'] ?? 'home.inline';
+        $isFaq  = $source === 'home.faq';
 
         try {
             LandingLead::create([
@@ -24,7 +30,7 @@ class HomeLeadController extends Controller
                 'email'      => $data['email'],
                 'phone'      => $data['phone'] ?? null,
                 'message'    => $data['message'],
-                'source'     => 'home.inline',
+                'source'     => $source,
                 'ip_address' => $request->ip(),
                 'user_agent' => $request->userAgent(),
             ]);
@@ -36,11 +42,11 @@ class HomeLeadController extends Controller
                 ->withErrors([
                     'lead' => __('home.inline_form.error'),
                 ])
-                ->with('home_lead_target', 'poptavka');
+                ->with('home_lead_target', $isFaq ? 'faq' : 'poptavka');
         }
 
         return back()
-            ->with('home_lead_success', true)
-            ->with('home_lead_target', 'poptavka');
+            ->with($isFaq ? 'faq_lead_success' : 'home_lead_success', true)
+            ->with('home_lead_target', $isFaq ? 'faq' : 'poptavka');
     }
 }
