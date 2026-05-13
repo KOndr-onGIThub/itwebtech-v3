@@ -58,10 +58,6 @@ return [
                 'quote_author' => 'Petr Kroulík, Nové Interiéry s.r.o.',
             ],
             [
-                'heading' => 'Závislost na agentuře, za kterou platíte měsíčně',
-                'text'    => 'WordPress je potřeba každý měsíc aktualizovat a pravidelně opravovat bezpečnostní díry. Tím agentury vydělávají roky po předání webu. Je to jejich byznys model — ne vaše výhoda.',
-            ],
-            [
                 'heading' => 'AI web za odpoledne: hezký, generický, zaměnitelný',
                 'text'    => 'Nástroje dnes vygenerují web rychle. Ale bez výzkumu, bez strategie, bez pochopení vašeho byznysu vznikne něco, co vypadá jako web — a funguje jako web každého jiného. Navíc vás platforma drží na svém předplatném navždy.',
             ],
@@ -143,8 +139,11 @@ return [
     ],
 
     'services' => [
-        'heading_primary' => 'Co stavím — weby, aplikace a e-shopy na míru',
-        'heading_other'   => 'Další služby k webu',
+        'heading_primary'  => 'Co stavím — weby, aplikace a e-shopy na míru',
+        'heading_other'    => 'Další služby k webu',
+        'secondary_inline' => 'Také zajišťuji SEO, grafický design a správu sociálních sítí — :pricing_link nebo :contact_link.',
+        'secondary_inline_pricing' => 'více v ceníku',
+        'secondary_inline_contact' => 'napište mi',
         'primary' => [
             'weby' => [
                 'title'       => 'Webové stránky na míru',
@@ -188,6 +187,53 @@ return [
         'social' => [
             'title'       => 'Sociální sítě, které budují důvěru',
             'description' => 'Zákazníci si vaše sociální sítě prověří dřív, než objednají. Aktivní, konzistentní přítomnost buduje důvěru. Připravím obsah a strategii, která vás přiblíží vaší cílové skupině.',
+        ],
+    ],
+
+    'price_anchor' => [
+        'heading' => 'Kolik to bude stát?',
+        'intro'   => 'Orientační vstupní ceny pro hlavní typy projektů. Přesnou nabídku dostanete písemně po krátké konzultaci.',
+        'items'   => [
+            [
+                'title' => 'Web na míru',
+                'price' => 'od 20 000 Kč',
+                'desc'  => 'Statická prezentace, jednoduchá i dvojjazyčná.',
+            ],
+            [
+                'title' => 'Webová aplikace',
+                'price' => 'od 60 000 Kč',
+                'desc'  => 'Interní systémy, portály a evidence na míru.',
+            ],
+            [
+                'title' => 'E-shop',
+                'price' => 'od 80 000 Kč',
+                'desc'  => 'Vlastní řešení bez měsíčních poplatků za platformu.',
+            ],
+        ],
+        'cta' => 'Detailní ceník →',
+    ],
+
+    'why_me' => [
+        'heading'   => 'Proč já',
+        'photo_alt' => 'Ondřej Kriška — webový vývojář',
+        'bio'       => '18 let jsem v Toyotě řídil projekty, ve kterých nesměla padnout linka. Dnes ty samé principy — přesná specifikace, analýza, ověřování — používám pro webové projekty. Pracuji sám, mluvíte přímo se mnou od první konzultace po spuštění i dál.',
+        'advantages' => [
+            [
+                'heading' => 'Vlastní kód, žádné šablony',
+                'text'    => 'Píšu na míru — web vychází z vašeho byznysu, ne ze šablony, kterou už použila konkurence.',
+            ],
+            [
+                'heading' => 'Cena dopředu',
+                'text'    => 'Specifikaci s přesnou cenou dostanete před zahájením práce. Co je ve specifikaci, to je na faktuře.',
+            ],
+            [
+                'heading' => 'Přímý kontakt',
+                'text'    => 'Komunikujete přímo se mnou — bez obchodníka, koordinátora a ticketovacího systému.',
+            ],
+            [
+                'heading' => 'Vyrobím to tak, aby to drželo',
+                'text'    => 'Bezúdržbový provoz bez WordPress aktualizací a pluginů — žádné měsíční opravy bezpečnostních děr.',
+            ],
         ],
     ],
 
