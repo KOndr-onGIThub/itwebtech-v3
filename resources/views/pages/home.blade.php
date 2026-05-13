@@ -432,59 +432,78 @@
 </section>
 
 {{-- ===================================================
-     PORTFOLIO — PROJEKTY
-     Sekce je skrytá, dokud nebudou připravené reálné screenshoty (T23, CEO).
+     PORTFOLIO — REALIZOVANÉ PROJEKTY (OND-120)
+     3 reference s písemným souhlasem klienta (PitArena, BARANA, Nové interiéry).
      Zapnout přes env SHOW_PORTFOLIO_SECTION=true (config/site.php).
+     Data tečou z DB (PortfolioProject), 1-věty výsledku z lang/*/home.php
+     (klíč `home.portfolio.cards.{slug}`). Loga v public/images/portfolio/logos/.
      =================================================== --}}
-@if (config('site.features.show_portfolio_section'))
+@if (config('site.features.show_portfolio_section') && ($featuredHomeProjects ?? collect())->isNotEmpty())
 <section class="section-wrapper" data-reveal>
     <div class="container-site">
         <header class="section-header">
             <h2>{{ __('home.portfolio.heading') }}</h2>
         </header>
 
-        @php
-        $homeProjects = [
-            [
-                'img'  => 'projects/strechyzajic_preview.jpg',
-                'name' => 'Střechy Zajíc',
-                'type' => 'Webové stránky',
-            ],
-            [
-                'img'  => 'projects/realitackyvakci_web_01.webp',
-                'name' => 'Realita Čky v Akci',
-                'type' => 'Webové stránky',
-            ],
-            [
-                'img'  => 'projects/pitarena_preview.jpg',
-                'name' => 'Pitarena',
-                'type' => 'Webové stránky',
-            ],
-            [
-                'img'  => 'projects/elektro_srnak_preview.jpg',
-                'name' => 'Elektro Srnak',
-                'type' => 'Webové stránky',
-            ],
-        ];
-        @endphp
+        <div class="home-projects-grid" data-reveal-group>
+            @foreach ($featuredHomeProjects as $project)
+                @php
+                    $t = $project->translation();
+                    $cardCopy = __('home.portfolio.cards.' . $project->slug);
+                    $clientLabel = is_array($cardCopy) && !empty($cardCopy['client'])
+                        ? $cardCopy['client']
+                        : ($project->client_name ?: ($t?->title ?? $project->slug));
+                    $outcome = is_array($cardCopy) && !empty($cardCopy['outcome'])
+                        ? $cardCopy['outcome']
+                        : ($t?->subtitle ?? '');
 
-        <div class="portfolio-grid" data-reveal-group>
-            @foreach ($homeProjects as $proj)
-            <article class="portfolio-card">
-                <div class="portfolio-card__visual">
-                    <img
-                        src="{{ asset('img/' . $proj['img']) }}"
-                        alt="{{ $proj['name'] }}"
-                        loading="lazy"
-                        width="480"
-                        height="270"
-                    >
-                </div>
-                <div class="portfolio-card__body">
-                    <h3 class="portfolio-card__name">{{ $proj['name'] }}</h3>
-                    <span class="portfolio-card__type">{{ $proj['type'] }}</span>
-                </div>
-            </article>
+                    $screens = $project->screenshots ?? collect();
+                    $hero = $screens->firstWhere('type', 'hero')
+                        ?? $screens->firstWhere('type', 'thumbnail')
+                        ?? $screens->first();
+
+                    $detailHref = lroute('projects') . '/' . $project->slug;
+                    // Karty mají tmavé pozadí (--bg-card), používáme bílé varianty log.
+                    $logoSrc = asset('images/portfolio/logos/' . $project->slug . '-white.svg');
+                @endphp
+
+                <article class="home-projects-card" data-reveal>
+                    <a href="{{ $detailHref }}" class="home-projects-card__visual" aria-label="{{ $clientLabel }} — {{ __('projects.view_project') }}">
+                        @if ($hero)
+                            <x-portfolio.screenshot
+                                :path="$hero->path"
+                                :alt="$clientLabel"
+                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                loading="lazy"
+                            />
+                        @else
+                            <div class="home-projects-card__visual-placeholder" aria-hidden="true"></div>
+                        @endif
+                    </a>
+
+                    <div class="home-projects-card__body">
+                        <header class="home-projects-card__head">
+                            <img
+                                src="{{ $logoSrc }}"
+                                alt="{{ $clientLabel }}"
+                                class="home-projects-card__logo"
+                                loading="lazy"
+                                width="160"
+                                height="40"
+                            >
+                            <span class="home-projects-card__client">{{ $clientLabel }}</span>
+                        </header>
+
+                        @if ($outcome)
+                            <p class="home-projects-card__outcome">{{ $outcome }}</p>
+                        @endif
+
+                        <a href="{{ $detailHref }}" class="home-projects-card__cta">
+                            {{ __('home.portfolio.detail_cta') }}
+                            <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
+                        </a>
+                    </div>
+                </article>
             @endforeach
         </div>
 

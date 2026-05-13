@@ -135,8 +135,23 @@ return [
     ],
 
     'portfolio' => [
-        'heading' => 'Portfolio',
-        'cta'     => 'Alle Projekte →',
+        'heading'    => 'Umgesetzte Projekte',
+        'cta'        => 'Alle Projekte →',
+        'detail_cta' => 'Projekt ansehen',
+        'cards' => [
+            'pitarena' => [
+                'client'  => 'PitArena',
+                'outcome' => 'Trainingsplätze sind Monate im Voraus ausgebucht — Buchungen, Gutscheine und Event-Anmeldungen laufen ohne manuellen Eingriff über das Web.',
+            ],
+            'barana' => [
+                'client'  => 'BARANA',
+                'outcome' => 'Premium-Präsentation direkt für bezahlte Meta- und Google-Ads-Kampagnen — Besucher verstehen das Angebot ohne Anruf.',
+            ],
+            'nove-interiery' => [
+                'client'  => 'Nové interiéry',
+                'outcome' => 'Die Website filtert irrelevante Anfragen vorab und wirkt wie das erste Verkaufsgespräch — der Kunde bestätigt eine deutlich höhere Markenglaubwürdigkeit.',
+            ],
+        ],
     ],
 
     'services' => [
