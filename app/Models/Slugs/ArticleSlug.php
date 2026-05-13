@@ -17,4 +17,8 @@ class ArticleSlug extends Model
         'locale',
         'active',
     ];
+
+    protected $casts = [
+        'active' => 'boolean',
+    ];
 }

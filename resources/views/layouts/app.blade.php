@@ -71,20 +71,32 @@
 
     @stack('preloads')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    {{-- Analytics (OND-122) — Plausible / GA4 / Clarity, řízeno přes
+         config/site.php (ANALYTICS_ENABLED + provider envs). --}}
+    @include('partials.analytics')
 </head>
 <body class="min-h-screen flex flex-col">
 
     <x-layout.navbar :hreflangs="$hreflangs ?? []" />
 
-    {{-- Floating Contact FAB — zobrazí se po scrollu --}}
-    <a href="{{ lroute('contact') }}" class="contact-fab" id="contact-fab" aria-label="{{ __('layout.cta.contact') }}">
-        <span class="contact-fab__btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6.29 6.29l1.62-1.62a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-            </svg>
-            {{ __('layout.cta.contact') }}
-        </span>
-    </a>
+    {{-- Mobile bottom bar (OND-100, T06) — viditelná akce na mobilu --}}
+    @php
+        $stickyPoptavkaHref = current_page() === 'home'
+            ? '#' . __('home.anchors.poptavka')
+            : lroute('home') . '#' . __('home.anchors.poptavka');
+    @endphp
+    <div class="mobile-bottom-bar" role="region" aria-label="{{ __('home.sticky.cta') }}">
+        <a
+            href="{{ $stickyPoptavkaHref }}"
+            class="mobile-bottom-bar__primary"
+            data-analytics="sticky_cta_click"
+        >
+            <span aria-hidden="true" class="mobile-bottom-bar__icon">💬</span>
+            <span>{{ __('home.sticky.mobile') }}</span>
+        </a>
+        <x-phone-cta class="mobile-bottom-bar__phone" />
+    </div>
 
     <main class="site-main">
         @yield('content')
@@ -135,5 +147,11 @@
 
     {{-- Consultation modal — video + Calendly CTA --}}
     <x-consultation-modal />
+
+    {{-- Booking widget (Reservanto) — sekundární CTA, OND-116 (T15) --}}
+    @if (config('site.booking.enabled'))
+        <script defer id="reservanto-widget-script" type="text/javascript"
+                src="{{ config('site.booking.script_url') }}"></script>
+    @endif
 </body>
 </html>

@@ -7,12 +7,13 @@ return [
         'description' => 'Custom websites and web applications built for results. Maintenance-free, no WordPress, no hidden fees. 18 years of experience. Free consultation.',
     ],
 
+    // TODO: review pro EN — copy podle CS varianty A (OND-100)
     'hero' => [
-        'heading'       => 'Custom websites for people who can tell the difference.',
-        'subline'       => 'No off-the-shelf templates, no monthly maintenance fees. We build the website starting from understanding what you need to sell — not from prefabricated parts.',
-        'chips'         => ['Strategy', 'Design', 'Code', 'Copy'],
-        'cta_primary'   => 'Book a consultation',
-        'cta_secondary' => 'How I work →',
+        'eyebrow'       => 'Custom websites & web applications',
+        'heading'       => 'A website that finally earns its keep. No WordPress, no maintenance, no compromises.',
+        'subline'       => 'For business owners who want a website that brings in customers — not another line on the invoice. 18 years at Toyota taught me to deliver exactly what we agreed on.',
+        'cta_primary'   => 'Get a price quote',
+        'cta_secondary' => 'Book a 30-min consultation',
     ],
 
     'modal' => [
@@ -25,11 +26,17 @@ return [
 
     'anchors' => [
         'how_i_work' => 'how-i-work',
+        'poptavka'   => 'poptavka',
     ],
 
     'social_proof' => [
+        'rating_aria'  => '5 out of 5 rating',
+        'rating_value' => '5.0',
+        'reviews'      => '(21 reviews on Google + Firmy.cz)',
+        'projects'     => '23+ delivered projects',
+        'experience'   => '18 years of experience',
+        'response'     => 'Reply within 24 hours',
         'brands' => [
-            ['name' => 'Toyota',                'image' => 'toyota.png'],
             ['name' => 'MAKOplast',             'image' => null],
             ['name' => 'Yolk Studio',           'image' => 'yolk_studio.png'],
             ['name' => 'BARANA s.r.o.',         'image' => null],
@@ -52,10 +59,6 @@ return [
                 'quote_author' => 'Petr Kroulík, Nové Interiéry s.r.o.',
             ],
             [
-                'heading' => 'Agency dependency you pay for every month',
-                'text'    => 'WordPress needs monthly updates and regular security patches. That\'s how agencies earn revenue years after handing over the site. It\'s their business model — not your benefit.',
-            ],
-            [
                 'heading' => 'An AI website in an afternoon: nice-looking, generic, interchangeable',
                 'text'    => 'Tools can generate a website quickly these days. But without research, without strategy, without understanding your business, what emerges looks like a website — and functions like everyone else\'s. Plus the platform locks you into a subscription forever.',
             ],
@@ -67,28 +70,35 @@ return [
     ],
 
     'how_i_work' => [
-        'heading' => 'A simple process without unnecessary complications.',
+        'heading'   => 'From first message to a launched website — 4 clear steps.',
+        'cta_intro' => 'Let\'s jump straight to step 1.',
+        'cta_label' => 'Book a consultation',
         'steps'   => [
             [
-                'heading'      => 'Understanding',
+                'heading'      => 'Consultation',
+                'time'         => '60 min, within a week',
                 'text'         => 'I start with a consultation, not a form. I need to understand your business, your customers and what the website should actually do — bring contacts, sell a product or build trust.',
                 'quote_text'   => 'He truly listened to my needs and then turned them into something I was completely satisfied with.',
                 'quote_author' => 'Magda Pernicová, Realiťačky v akci',
             ],
             [
-                'heading'      => 'Exact specification',
+                'heading'      => 'Specification',
+                'time'         => '2–5 days',
                 'text'         => 'Before I start working, you\'ll receive a written specification: what will be on the website, how many pages, what technology and how much it will cost. No surprises on the invoice. I\'ll estimate the delivery date realistically — always upfront, never retrospectively.',
                 'quote_text'   => 'He rigorously analyses the situation and wants to understand current processes. He collects requirements from clients and explores visions for the future.',
                 'quote_author' => 'Jan Stybor, Head of Project Department, Toyota',
                 'note'         => 'Note on timelines: a website doesn\'t only depend on my side. Approvals, materials from the client and feedback are part of the process. The timeline is always an estimate, not a binding commitment — and I say that openly from the start.',
             ],
             [
-                'heading' => 'Build with your feedback',
+                'heading' => 'Build',
+                'time'    => '3–10 weeks',
                 'text'    => 'I keep you informed about progress and involve you in key decisions. The result reflects what you wanted — because I don\'t wait until the end of the project to find out.',
             ],
             [
-                'heading' => 'Direct contact',
-                'text'    => 'Call me any time — in the vast majority of cases I\'ll pick up immediately. If not, we\'ll arrange a time the same day. No ticket, no waiting for a coordinator\'s reply. You speak directly with me — before the project, during and after launch.',
+                'heading' => 'Launch and support',
+                'time'    => 'by the next business day',
+                'text'    => 'Once you approve deployment, the site usually goes live within one business day. After launch I stay available — small tweaks, technical questions and analytics help go through me directly, with no ticket and no waiting.',
+                'note'    => 'Launch within 1 business day of approval.',
             ],
         ],
     ],
@@ -131,12 +141,63 @@ return [
     ],
 
     'portfolio' => [
-        'heading' => 'Portfolio',
-        'cta'     => 'All projects →',
+        'heading'    => 'Selected projects',
+        'cta'        => 'All projects →',
+        'detail_cta' => 'See the project',
+        'cards' => [
+            'pitarena' => [
+                'client'  => 'PitArena',
+                'outcome' => 'Training slots are booked months ahead — bookings, vouchers and event sign-ups all run through the web without manual handling.',
+            ],
+            'barana' => [
+                'client'  => 'BARANA',
+                'outcome' => 'A premium presentation built directly for Meta Ads and Google Ads campaigns — visitors grasp the offer without picking up the phone.',
+            ],
+            'nove-interiery' => [
+                'client'  => 'Nové interiéry',
+                'outcome' => 'The site pre-filters irrelevant enquiries and acts as the first sales meeting — the client reports a noticeably stronger brand credibility.',
+            ],
+        ],
     ],
 
     'services' => [
-        'heading_other' => 'I\'ll strengthen your online visibility',
+        'heading_primary'  => 'What I build — custom websites, apps and e-shops',
+        'heading_other'    => 'Additional services',
+        'secondary_inline' => 'I also handle SEO, graphic design and social media management — :pricing_link or :contact_link.',
+        'secondary_inline_pricing' => 'see the pricing',
+        'secondary_inline_contact' => 'get in touch',
+        'primary' => [
+            'weby' => [
+                'title'       => 'Custom websites',
+                'description' => 'A presentation website that sets you apart from template-driven competition and starts bringing in customers.',
+                'bullets'     => [
+                    'Custom code — no WordPress, no templates',
+                    'Conversion-focused structure built around your business',
+                    'Maintenance-free with fast load times',
+                ],
+                'price'       => 'from CZK 20,000',
+            ],
+            'aplikace' => [
+                'title'       => 'Web applications',
+                'description' => 'Internal systems, customer portals and tracking tools that save you both time and headcount.',
+                'bullets'     => [
+                    'Process design before a single line of code',
+                    'Integrations with your existing tools',
+                    'Custom admin without monthly licence fees',
+                ],
+                'price'       => 'from CZK 20,000',
+            ],
+            'eshop' => [
+                'title'       => 'E-shops',
+                'description' => 'An e-shop built around your product — without paying for plugins and themes every month.',
+                'bullets'     => [
+                    'Checkout and catalogue designed for your range',
+                    'Integrations with accounting, couriers and payment gateways',
+                    'No monthly platform fees',
+                ],
+                'price'       => 'from CZK 20,000',
+            ],
+        ],
         'seo' => [
             'title'       => 'Customers from Google — without paying per click',
             'description' => 'Paid ads only work while you\'re paying. SEO works for you long-term. I\'ll help so customers find you in Google for free — even when you don\'t have a budget for ads.',
@@ -151,8 +212,55 @@ return [
         ],
     ],
 
+    'price_anchor' => [
+        'heading' => 'What will it cost?',
+        'intro'   => 'Indicative entry prices for the main project types. You receive an exact written quote after a short consultation.',
+        'items'   => [
+            [
+                'title' => 'Custom website',
+                'price' => 'from CZK 20,000',
+                'desc'  => 'Static presentation, single or multilingual.',
+            ],
+            [
+                'title' => 'Web application',
+                'price' => 'from CZK 60,000',
+                'desc'  => 'Internal systems, customer portals and custom record-keeping tools.',
+            ],
+            [
+                'title' => 'E-shop',
+                'price' => 'from CZK 80,000',
+                'desc'  => 'Custom solution without monthly platform fees.',
+            ],
+        ],
+        'cta' => 'Detailed pricing →',
+    ],
+
+    'why_me' => [
+        'heading'   => 'Why work with me',
+        'photo_alt' => 'Ondřej Kriška — web developer',
+        'bio'       => 'For 18 years I ran projects at Toyota where the production line was not allowed to stop. I now apply those same principles — exact specification, analysis, verification — to web projects. I work solo: you talk directly to me from the first consultation through launch and beyond.',
+        'advantages' => [
+            [
+                'heading' => 'Custom code, no templates',
+                'text'    => 'I build to your business — not from a template your competitors have already used.',
+            ],
+            [
+                'heading' => 'Price upfront',
+                'text'    => 'You receive a specification with an exact price before work begins. What\'s in the specification is on the invoice.',
+            ],
+            [
+                'heading' => 'Direct contact',
+                'text'    => 'You communicate with me directly — no salesperson, no coordinator, no ticket system.',
+            ],
+            [
+                'heading' => 'Built to last',
+                'text'    => 'Maintenance-free operation without WordPress updates and plugins — no monthly security patching.',
+            ],
+        ],
+    ],
+
     'testimonials' => [
-        'heading' => 'What those I\'ve worked with say.',
+        'heading' => 'What my clients say about working together.',
     ],
 
     'guarantee' => [
@@ -169,19 +277,96 @@ return [
         ],
     ],
 
+    // TODO: review pro EN — copy podle CS varianty A (OND-100)
     'cta' => [
         'heading'      => 'Ready to start? The consultation is free.',
-        'consultation' => 'Book a consultation',
-        'message'      => 'Or send me a message — I\'ll reply within 24 hours',
+        'consultation' => 'Get a price quote',
+        'message'      => 'Book a 30-min consultation',
     ],
 
     'final_cta' => [
         'quote_text'   => 'Thanks to the individual approach, flexibility and professionalism, the result matches our expectations.',
         'quote_author' => 'Hana Jaskmanická, Executive Director, VP Industry',
         'heading'      => 'I\'ll give you an honest opinion on your project.',
-        'subtext'      => 'Even if working together doesn\'t make sense — I\'ll tell you straight.',
-        'cta_label'    => 'Book a consultation',
+        'subtext'      => 'I reply by the next business day. If working together doesn\'t make sense, I\'ll tell you straight — no sales pressure, no follow-up emails.',
+        'cta_label'    => 'Get a price quote',
+        'cta_secondary' => 'Book a 30-min consultation',
         'cta_note'     => 'Free. No commitment.',
+    ],
+
+    'faq' => [
+        'heading' => 'Frequently asked questions',
+        // `key` is a stable slug for analytics (data-faq-key) and JSON-LD; do not localize.
+        'items'   => [
+            [
+                'key'      => 'price',
+                'question' => 'What will it cost?',
+                'answer'   => 'See indicative entry prices in the pricing anchor above — websites from CZK 20,000, web apps from CZK 60,000, e-shops from CZK 80,000. You get an exact written quote after a short consultation, and the invoice matches the specification.',
+            ],
+            [
+                'key'      => 'duration',
+                'question' => 'How long does it take?',
+                'answer'   => 'From first message to a launched site typically 3–10 weeks — 60 minutes of consultation, 2–5 days for the specification, 3–10 weeks for the build and launch by the next business day after approval. The detailed timeline for your project goes into the specification.',
+            ],
+            [
+                'key'      => 'satisfaction',
+                'question' => 'What if I\'m not happy with the result?',
+                'answer'   => 'I work in short iterations and send progress previews — I don\'t wait until the end of the project to find out whether it fits. If something is off, we fix it right away, not after the invoice. What\'s in the specification, I deliver.',
+            ],
+            [
+                'key'      => 'maintenance-free',
+                'question' => 'What does "maintenance-free" mean?',
+                'answer'   => 'No WordPress, no plugins, no monthly security updates. The site runs on custom code — it just works, doesn\'t need regular patching and doesn\'t break from template collisions. Small content changes go through me directly, with no ticket.',
+            ],
+            // Archive: additional FAQ items move off the homepage (to /faq or /sluzby — out of OND-121 scope).
+        ],
+    ],
+
+    'faq_form' => [
+        'eyebrow'     => 'Got a different question?',
+        'heading'     => 'Send it over.',
+        'description' => 'I pick it up and reply by the next business day. No sales pressure.',
+        'name'        => 'Name',
+        'email'       => 'Email',
+        'message'     => 'Your question',
+        'placeholders' => [
+            'name'    => 'John Smith',
+            'email'   => 'john@company.com',
+            'message' => 'E.g. Can you deliver before the end of the quarter?',
+        ],
+        'submit'      => 'Send question',
+        'submitting'  => 'Sending…',
+        'success'     => 'Thanks, the question has arrived. I\'ll get back to you as soon as possible.',
+    ],
+
+    // TODO: review pro EN — copy podle CS varianty A (OND-100)
+    'inline_form' => [
+        'eyebrow'         => 'Enquiry',
+        'heading'         => 'Send me a few lines about your project. I\'ll reply within 24 hours.',
+        'description'     => 'No salesperson, no ten-field form. A short description is enough — I\'ll reply personally and we\'ll see if working together makes sense.',
+        'name'            => 'Full name',
+        'email'           => 'Email',
+        'phone'           => 'Phone (optional)',
+        'message'         => 'What do you need solved?',
+        'placeholders'    => [
+            'name'    => 'John Smith',
+            'email'   => 'john@company.com',
+            'phone'   => '+420 000 000 000',
+            'message' => 'E.g. a new website for a manufacturing company, 5–10 pages',
+        ],
+        'submit'          => 'Send enquiry',
+        'submitting'      => 'Sending…',
+        'privacy_prefix'  => 'By submitting you agree to processing of personal data in line with the ',
+        'privacy_link'    => 'privacy policy',
+        'success'         => 'Thanks, the enquiry has arrived. I\'ll get back to you as soon as possible.',
+        'error'           => 'The enquiry could not be saved right now. Please try again.',
+    ],
+
+    // TODO: review pro EN — copy podle CS varianty A (OND-100)
+    'sticky' => [
+        'cta'    => 'Book a consultation',
+        'mobile' => 'Enquiry',
+        'phone'  => 'Call',
     ],
 
 ];

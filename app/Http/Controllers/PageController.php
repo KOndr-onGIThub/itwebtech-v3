@@ -11,7 +11,22 @@ class PageController extends Controller
 {
     public function home()
     {
-        return view('pages.home');
+        // OND-120: 3 favority do sekce „Realizované projekty" (PitArena, BARANA, Nové interiéry).
+        // Pořadí drženo whitelistem slugů — sort_order v DB by mohl být jiný.
+        $featuredHomeProjects = collect();
+
+        if (config('site.features.show_portfolio_section')) {
+            $slugs = ['pitarena', 'barana', 'nove-interiery'];
+
+            $featuredHomeProjects = PortfolioProject::published()
+                ->whereIn('slug', $slugs)
+                ->with(['translations', 'screenshots'])
+                ->get()
+                ->sortBy(fn ($p) => array_search($p->slug, $slugs, true))
+                ->values();
+        }
+
+        return view('pages.home', compact('featuredHomeProjects'));
     }
 
     public function contact()

@@ -1413,6 +1413,197 @@
         margin: 0;
     }
 
+    /* Primary services — s cenovou kotvou (OND-103 §4.4) */
+    .service-card--primary {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    .service-card__bullets {
+        list-style: none;
+        padding: 0;
+        margin: 0.25rem 0 0.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+    .service-card__bullets li {
+        position: relative;
+        padding-left: 1.25rem;
+        color: var(--color-body);
+        font-size: 0.9375rem;
+        line-height: 1.55;
+    }
+    .service-card__bullets li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.55em;
+        width: 0.4rem;
+        height: 0.4rem;
+        border-radius: 999px;
+        background: var(--border-gold, currentColor);
+        opacity: 0.85;
+    }
+    .service-card__price {
+        margin-top: auto;
+        padding-top: 0.5rem;
+        font-weight: 600;
+        color: var(--color-heading);
+        font-size: 1rem;
+        letter-spacing: 0.01em;
+    }
+
+    /* Inline doplňkové služby (T14 — OND-118) */
+    .services-secondary-inline {
+        margin: 1.75rem 0 0;
+        text-align: center;
+        color: var(--color-body);
+        font-size: 0.9375rem;
+        line-height: 1.6;
+    }
+    .services-secondary-inline a {
+        color: var(--color-heading);
+        text-decoration: underline;
+        text-underline-offset: 0.2em;
+        text-decoration-thickness: 1px;
+        font-weight: 500;
+        transition: color 0.2s ease;
+    }
+    .services-secondary-inline a:hover {
+        color: var(--color-gold-500);
+    }
+
+    /* ============================================================
+       T08 — CENOVÁ KOTVA (OND-118)
+       ============================================================ */
+    .price-anchor-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+        gap: 1.25rem;
+        margin-top: 2.25rem;
+    }
+    .price-anchor-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        border-radius: 1rem;
+        padding: 1.75rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        transition:
+            border-color 0.25s ease,
+            background-color 0.25s ease,
+            transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .price-anchor-card:hover {
+        background: var(--bg-card-hover);
+        border-color: var(--border-gold);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+    }
+    .price-anchor-card__title {
+        margin: 0;
+        font-size: 1.0625rem;
+        font-weight: 600;
+        color: var(--color-heading);
+    }
+    .price-anchor-card__price {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--color-gold-500);
+        letter-spacing: -0.01em;
+    }
+    .price-anchor-card__desc {
+        margin: 0;
+        color: var(--color-body);
+        font-size: 0.9375rem;
+        line-height: 1.55;
+    }
+
+    /* ============================================================
+       T09 — PROČ JÁ (OND-118)
+       Sjednoceno z původních About + Advantages sekcí. Foto + bio | 2×2 grid.
+       ============================================================ */
+    .why-me-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        align-items: start;
+        margin-top: 2.25rem;
+    }
+    @media (min-width: 880px) {
+        .why-me-layout {
+            grid-template-columns: minmax(280px, 360px) 1fr;
+            gap: 3.5rem;
+        }
+    }
+
+    .why-me-bio {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+    .why-me-photo {
+        border-radius: 1.25rem;
+        overflow: hidden;
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        aspect-ratio: 4 / 5;
+        max-width: 360px;
+    }
+    .why-me-photo__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    .why-me-bio__text {
+        margin: 0;
+        color: var(--color-body);
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .why-me-advantages {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    @media (min-width: 560px) {
+        .why-me-advantages {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+    }
+    .why-me-advantage {
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        border-radius: 1rem;
+        padding: 1.5rem 1.25rem;
+        transition:
+            border-color 0.25s ease,
+            background-color 0.25s ease;
+    }
+    .why-me-advantage:hover {
+        background: var(--bg-card-hover);
+        border-color: var(--border-gold);
+    }
+    .why-me-advantage__heading {
+        margin: 0 0 0.5rem;
+        color: var(--color-heading);
+        font-size: 1rem;
+        font-weight: 600;
+    }
+    .why-me-advantage__text {
+        margin: 0;
+        color: var(--color-body);
+        font-size: 0.9375rem;
+        line-height: 1.6;
+    }
+
     /* ============================================================
        COMMITMENT STEPS
        ============================================================ */
@@ -1885,6 +2076,17 @@
         height: 38px;
         width: auto;
         object-fit: contain;
+    }
+    /* OND-123: text-only brand variants (.brand-item__name) by neměly dědit
+       parent opacity 0.45 a brightness filter — text by spadl pod WCAG AA.
+       Použijeme :has() — Safari 15.4+ / Chrome 105+, fallback výše udržuje
+       čitelnost (color: --color-body + opacity 0.9). */
+    .brand-item:has(.brand-item__name) {
+        opacity: 1;
+        filter: none;
+    }
+    .brand-item:has(.brand-item__name) .brand-item__name {
+        opacity: 0.9;
     }
 
     /* ============================================================
@@ -3761,9 +3963,11 @@
         font-size: 0.875rem;
         font-weight: 600;
         letter-spacing: 0.04em;
-        color: var(--color-muted);
+        /* OND-123: bumped from --color-muted (#5A6480) + 0.65 opacity → --color-body
+           (#94A3B8) + 0.9 opacity. WCAG AA na #101318 background: ~5.4:1 (bylo ~2.3:1). */
+        color: var(--color-body);
         text-transform: uppercase;
-        opacity: 0.65;
+        opacity: 0.9;
         white-space: nowrap;
     }
 
@@ -3883,57 +4087,109 @@
     }
 
     /* ============================================================
-       PORTFOLIO GRID
+       HOME — REALIZOVANÉ PROJEKTY (OND-120)
+       3 reference s logem, screenshotem, 1-větou výsledku a CTA.
        ============================================================ */
-    .portfolio-grid {
+    .home-projects-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
-        gap: 1.25rem;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
-    .portfolio-card {
-        border: 1.5px solid var(--border-subtle);
+    @media (min-width: 768px) {
+        .home-projects-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.75rem;
+        }
+    }
+    .home-projects-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
         border-radius: 1rem;
         overflow: hidden;
-        background: var(--bg-card);
-        transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+        display: flex;
+        flex-direction: column;
+        transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
     }
-    .portfolio-card:hover {
-        border-color: var(--border-emphasis);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.32);
-        transform: translateY(-2px);
+    .home-projects-card:hover {
+        border-color: var(--border-gold);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
     }
-    .portfolio-card__visual {
-        aspect-ratio: 16 / 9;
-        background: rgba(148, 163, 184, 0.08);
+    .home-projects-card__visual {
+        display: block;
+        aspect-ratio: 16 / 10;
         overflow: hidden;
+        background: var(--bg-card-hover);
         border-bottom: 1px solid var(--border-subtle);
+        outline: none;
     }
-    .portfolio-card__visual img {
+    .home-projects-card__visual:focus-visible {
+        outline: 2px solid var(--color-gold-500);
+        outline-offset: 4px;
+    }
+    .home-projects-card__visual picture,
+    .home-projects-card__visual picture img,
+    .home-projects-card__visual > img,
+    .home-projects-card__visual-placeholder {
         width: 100%;
         height: 100%;
         object-fit: cover;
         display: block;
-        transition: transform 0.35s ease;
+        transition: transform 0.4s ease;
     }
-    .portfolio-card:hover .portfolio-card__visual img {
+    .home-projects-card:hover .home-projects-card__visual picture img,
+    .home-projects-card:hover .home-projects-card__visual > img {
         transform: scale(1.04);
     }
-    .portfolio-card__body {
-        padding: 0.875rem 1.125rem;
+    .home-projects-card__body {
+        padding: 1.25rem 1.25rem 1.5rem;
         display: flex;
         flex-direction: column;
-        gap: 0.125rem;
+        gap: 0.75rem;
+        flex: 1;
     }
-    .portfolio-card__name {
-        font-size: 0.9375rem;
-        font-weight: 600;
-        color: var(--color-heading);
-        margin: 0;
-        line-height: 1.3;
+    .home-projects-card__head {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        min-height: 2.25rem;
     }
-    .portfolio-card__type {
+    .home-projects-card__logo {
+        max-height: 1.75rem;
+        max-width: 9rem;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        flex: 0 0 auto;
+    }
+    .home-projects-card__client {
         font-size: 0.8125rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
         color: var(--color-muted);
+        font-weight: 500;
+    }
+    .home-projects-card__outcome {
+        margin: 0;
+        font-size: 0.9375rem;
+        line-height: 1.55;
+        color: var(--color-body);
+        flex: 1;
+    }
+    .home-projects-card__cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.9375rem;
+        font-weight: 500;
+        color: var(--color-gold-500);
+        text-decoration: none;
+        transition: color 0.2s, gap 0.2s;
+    }
+    .home-projects-card__cta:hover {
+        color: var(--color-gold-400, #fbbf24);
+        text-decoration: underline;
+        gap: 0.55rem;
     }
 
     /* ============================================================
@@ -4658,6 +4914,400 @@
         .portfolio-card:hover .portfolio-card__thumbnail-placeholder {
             transform: none;
         }
+    }
+
+    /* ============================================================
+       OND-100 — Sprint 1 (P0)
+       Hero eyebrow, social proof bar, testimonial Toyota badge,
+       inline poptávka form, sticky phone CTA + mobile bottom bar.
+       ============================================================ */
+
+    .section-hero__eyebrow {
+        margin-bottom: 0.75rem;
+        color: var(--color-gold-200);
+    }
+
+    /* Social proof bar (T07) */
+    .social-proof-bar {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem 1.5rem;
+        margin: 0 0 1.5rem;
+        padding: 0;
+        list-style: none;
+        color: var(--color-body);
+        font-size: 0.9375rem;
+        font-weight: 500;
+    }
+    .social-proof-bar__item {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        position: relative;
+    }
+    .social-proof-bar__item + .social-proof-bar__item::before {
+        content: '•';
+        margin-right: 0.75rem;
+        color: var(--color-muted, var(--color-ink-400));
+        opacity: 0.6;
+    }
+    .social-proof-bar__stars {
+        letter-spacing: 0.05em;
+        color: var(--color-gold-500);
+    }
+    .social-proof-bar__value {
+        font-weight: 700;
+        color: var(--color-heading);
+    }
+    .social-proof-bar__meta {
+        /* OND-123: --color-muted (#5A6480) na #101318 dává jen ~3.5:1 → WCAG AA fail.
+           --color-body (#94A3B8) ≈ 5.9:1 → PASS pro normální text. */
+        color: var(--color-body);
+    }
+
+    /* Toyota badge inside testimonial (T01) */
+    .testimonial-card__badge {
+        display: inline-flex;
+        align-items: center;
+        align-self: flex-start;
+        padding: 0.25rem 0.625rem;
+        margin: 0.5rem 0 0.75rem;
+        border-radius: 999px;
+        background: rgba(245, 158, 11, 0.14);
+        border: 1px solid rgba(245, 158, 11, 0.32);
+        color: var(--color-gold-200);
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+    }
+
+    /* Inline poptávkový formulář (T05) — reusuje vizuální tokeny landing-form */
+    .section-inline-form {
+        background:
+            radial-gradient(circle at top center, rgba(245, 158, 11, 0.08), transparent 42%),
+            linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+    }
+    .inline-form-shell {
+        display: grid;
+        gap: 1.5rem;
+        align-items: start;
+    }
+    @media (min-width: 960px) {
+        .inline-form-shell {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+            gap: 2.5rem;
+        }
+    }
+    .inline-form-intro h2 {
+        margin-top: 0.5rem;
+    }
+    .inline-form-panel {
+        border-radius: 1.5rem;
+        padding: 1.5rem;
+        background: var(--bg-card, rgba(255, 255, 255, 0.04));
+        border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
+    }
+    .inline-form-grid {
+        display: grid;
+        gap: 1rem;
+    }
+    @media (min-width: 640px) {
+        .inline-form-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+    .inline-form__submit {
+        width: 100%;
+        justify-content: center;
+        margin-top: 0.5rem;
+    }
+    .inline-form__privacy {
+        margin-top: 0.875rem;
+        font-size: 0.8125rem;
+        color: var(--color-muted, var(--color-ink-400));
+        line-height: 1.5;
+    }
+    .inline-form__privacy a {
+        color: var(--color-gold-200);
+        text-decoration: underline;
+    }
+
+    /* Phone CTA (T06) */
+    .phone-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.375rem 0.75rem;
+        border-radius: 999px;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: var(--color-heading);
+        background: transparent;
+        border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.12));
+        transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .phone-cta:hover {
+        color: var(--color-gold-500);
+        border-color: rgba(245, 158, 11, 0.6);
+    }
+    .navbar__phone {
+        display: none;
+    }
+    @media (min-width: 768px) {
+        .navbar__phone {
+            display: inline-flex;
+        }
+    }
+    .drawer__phone {
+        margin-top: 0.75rem;
+    }
+
+    /* Mobile bottom bar (T06) */
+    .mobile-bottom-bar {
+        position: fixed;
+        inset-inline: 0;
+        bottom: 0;
+        z-index: 45;
+        display: none;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.625rem max(0.75rem, env(safe-area-inset-left)) calc(0.625rem + env(safe-area-inset-bottom)) max(0.75rem, env(safe-area-inset-right));
+        background: rgba(12, 14, 20, 0.94);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border-top: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
+    }
+    @media (max-width: 767px) {
+        .mobile-bottom-bar {
+            display: flex;
+        }
+        body {
+            padding-bottom: 68px; /* uvolnit prostor pro bottom bar */
+        }
+    }
+    .mobile-bottom-bar__primary {
+        flex: 1 1 auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+        border-radius: 999px;
+        background: var(--color-gold-500);
+        color: #0F172A;
+        font-weight: 700;
+        font-size: 0.9375rem;
+    }
+    .mobile-bottom-bar__primary:hover {
+        background: var(--color-gold-600);
+        color: #0F172A;
+    }
+    .mobile-bottom-bar__icon {
+        font-size: 1.1rem;
+        line-height: 1;
+    }
+    .mobile-bottom-bar__phone {
+        flex: 0 0 auto;
+        padding: 0.625rem 0.875rem;
+    }
+
+    /* ============================================================
+       OND-121 T17 — STEP TIME BADGE
+       Kurzívou pod step heading, ladí s aktuálním step layoutem.
+       ============================================================ */
+    .step-time {
+        margin: 0;
+        margin-top: -0.25rem;
+        font-size: 0.8125rem;
+        font-style: italic;
+        font-weight: 600;
+        color: var(--color-gold-500);
+        letter-spacing: 0.01em;
+    }
+
+    .steps-footer-cta {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.875rem;
+        margin-top: 2.5rem;
+    }
+    .steps-footer-cta__intro {
+        margin: 0;
+        font-size: 1rem;
+        color: var(--color-body);
+        font-weight: 600;
+    }
+
+    /* ============================================================
+       OND-121 T20 — HERO PORTRAIT (Ondřej)
+       Polo-portrét vpravo na desktopu, skryto na mobilu (compact hero).
+       ============================================================ */
+    .section-hero__inner {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+    @media (min-width: 1024px) {
+        .section-hero__inner {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+        }
+    }
+    .section-hero__content {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+    .section-hero__portrait {
+        display: none;
+    }
+    @media (min-width: 1024px) {
+        .section-hero__portrait {
+            display: block;
+            flex: 0 0 auto;
+            width: 360px;
+            max-width: 32vw;
+            position: relative;
+        }
+        .section-hero__portrait-picture {
+            display: block;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            overflow: hidden;
+            border-radius: 1.25rem;
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(245, 158, 11, 0.15);
+        }
+        .section-hero__portrait-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 20%;
+        }
+    }
+
+    /* ============================================================
+       OND-121 T19 — FAQ SEKCE (4 otázky, accordion)
+       ============================================================ */
+    .faq-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        max-width: 760px;
+        margin-inline: auto;
+    }
+    .faq-item {
+        border: 1px solid var(--bg-card);
+        border-radius: 0.75rem;
+        background: var(--bg-card);
+        overflow: hidden;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .faq-item[open] {
+        border-color: rgba(245, 158, 11, 0.35);
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.18);
+    }
+    .faq-item__question {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1rem 1.25rem;
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 1rem;
+        color: var(--color-heading);
+        list-style: none;
+    }
+    .faq-item__question::-webkit-details-marker {
+        display: none;
+    }
+    .faq-item__icon {
+        flex: 0 0 auto;
+        width: 1rem;
+        height: 1rem;
+        position: relative;
+    }
+    .faq-item__icon::before,
+    .faq-item__icon::after {
+        content: '';
+        position: absolute;
+        background: var(--color-gold-500);
+        transition: transform 0.2s ease;
+    }
+    .faq-item__icon::before {
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        transform: translateY(-50%);
+    }
+    .faq-item__icon::after {
+        top: 0;
+        left: 50%;
+        width: 2px;
+        height: 100%;
+        transform: translateX(-50%);
+    }
+    .faq-item[open] .faq-item__icon::after {
+        transform: translateX(-50%) scaleY(0);
+    }
+    .faq-item__answer {
+        padding: 0 1.25rem 1.125rem;
+    }
+    .faq-item__answer p {
+        margin: 0;
+        font-size: 0.9375rem;
+        color: var(--color-body);
+        line-height: 1.7;
+    }
+
+    /* ============================================================
+       OND-121 T18 — FAQ MIKRO-FORMULÁŘ
+       ============================================================ */
+    .faq-form {
+        max-width: 760px;
+        margin: 2.5rem auto 0;
+        padding: 1.5rem;
+        background: var(--bg-card);
+        border-radius: 0.875rem;
+        border: 1px solid rgba(245, 158, 11, 0.18);
+    }
+    .faq-form__intro {
+        margin-bottom: 1rem;
+    }
+    .faq-form__heading {
+        margin: 0.25rem 0 0.5rem;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--color-heading);
+    }
+    .faq-form__desc {
+        margin: 0;
+        font-size: 0.9375rem;
+        color: var(--color-body);
+    }
+    .faq-form__grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.875rem 1rem;
+        margin-bottom: 1rem;
+    }
+    @media (max-width: 640px) {
+        .faq-form__grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    .faq-form__grid .form-group--full {
+        grid-column: 1 / -1;
+    }
+    .faq-form__submit {
+        width: fit-content;
     }
 
 }
