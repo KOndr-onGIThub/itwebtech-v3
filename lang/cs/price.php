@@ -72,7 +72,7 @@ return [
         'items'   => [
             [
                 'title' => 'Bezúdržbové weby',
-                'text'  => 'Žádný WordPress, žádné pluginy třetích stran. Ušetříte až 20 000 Kč ročně za pravidelné aktualizace a záplaty.',
+                'text'  => 'Žádný WordPress, žádné pluginy třetích stran. Ušetříte tisíce ročně oproti WordPressu — bez měsíčních aktualizací a bezpečnostních záplat.',
             ],
             [
                 'title' => 'Cena předem bez překvapení',

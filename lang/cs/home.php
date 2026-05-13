@@ -93,8 +93,9 @@ return [
                 'text'    => 'Průběžně vás informuji o postupu a zapojuji vás do klíčových rozhodnutí. Výsledek odpovídá tomu, co jste si přáli — protože nečekám na konec projektu, abych to zjistil.',
             ],
             [
-                'heading' => 'Přímý kontakt',
-                'text'    => 'Zavolejte mi kdykoliv — v drtivé většině případů zvednu hned. Pokud ne, domluvíme se na termínu ještě ten den. Žádný tiket, žádné čekání na odpověď koordinátora. Mluvíte přímo se mnou — před projektem, v průběhu i po spuštění.',
+                'heading' => 'Spuštění a podpora',
+                'text'    => 'Po schválení nasazení spouštím web obvykle do jednoho pracovního dne. Po spuštění zůstávám k dispozici — drobné úpravy, technické dotazy i pomoc s analytikou řeším přímo, bez ticketu a bez čekání.',
+                'note'    => 'Start do 1 pracovního dne od schválení.',
             ],
         ],
     ],
@@ -142,7 +143,40 @@ return [
     ],
 
     'services' => [
-        'heading_other' => 'Posílím vaši online viditelnost',
+        'heading_primary' => 'Co stavím — weby, aplikace a e-shopy na míru',
+        'heading_other'   => 'Další služby k webu',
+        'primary' => [
+            'weby' => [
+                'title'       => 'Webové stránky na míru',
+                'description' => 'Prezentační web, který vás odliší od šablon konkurence a začne přivádět zákazníky.',
+                'bullets'     => [
+                    'Vlastní kód — bez WordPressu a šablon',
+                    'Konverzní struktura postavená na vašem byznysu',
+                    'Bezúdržbový provoz a rychlé načítání',
+                ],
+                'price'       => 'od 20 000 Kč',
+            ],
+            'aplikace' => [
+                'title'       => 'Webové aplikace',
+                'description' => 'Interní systémy, zákaznické portály a evidenční nástroje, které vám šetří čas i lidi.',
+                'bullets'     => [
+                    'Návrh procesu před prvním řádkem kódu',
+                    'Integrace na vaše stávající nástroje',
+                    'Vlastní administrace bez měsíčních licencí',
+                ],
+                'price'       => 'od 20 000 Kč',
+            ],
+            'eshop' => [
+                'title'       => 'E-shopy',
+                'description' => 'E-shop postavený na míru produktu — bez nutnosti platit za pluginy a šablony každý měsíc.',
+                'bullets'     => [
+                    'Pokladna a katalog navržené pro váš sortiment',
+                    'Napojení na účetnictví, dopravce a platební bránu',
+                    'Bez měsíčních poplatků za platformu',
+                ],
+                'price'       => 'od 20 000 Kč',
+            ],
+        ],
         'seo' => [
             'title'       => 'Zákazníci z Googlu — bez platby za klik',
             'description' => 'Placená reklama funguje jen dokud platíte. SEO pracuje pro vás dlouhodobě. Pomůžu vám tak, aby vás zákazníci našli v Googlu zdarma — i když zrovna nemáte rozpočet na reklamu.',

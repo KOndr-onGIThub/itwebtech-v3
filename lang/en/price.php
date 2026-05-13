@@ -72,7 +72,7 @@ return [
         'items'   => [
             [
                 'title' => 'Maintenance-free websites',
-                'text'  => 'No WordPress, no third-party plugins. Save up to €800 per year on regular updates and security patches.',
+                'text'  => 'No WordPress, no third-party plugins. Save thousands per year compared to WordPress — no monthly updates and no security patching costs.',
             ],
             [
                 'title' => 'Fixed price, no surprises',

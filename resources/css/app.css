@@ -1413,6 +1413,47 @@
         margin: 0;
     }
 
+    /* Primary services — s cenovou kotvou (OND-103 §4.4) */
+    .service-card--primary {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    .service-card__bullets {
+        list-style: none;
+        padding: 0;
+        margin: 0.25rem 0 0.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+    .service-card__bullets li {
+        position: relative;
+        padding-left: 1.25rem;
+        color: var(--color-body);
+        font-size: 0.9375rem;
+        line-height: 1.55;
+    }
+    .service-card__bullets li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.55em;
+        width: 0.4rem;
+        height: 0.4rem;
+        border-radius: 999px;
+        background: var(--border-gold, currentColor);
+        opacity: 0.85;
+    }
+    .service-card__price {
+        margin-top: auto;
+        padding-top: 0.5rem;
+        font-weight: 600;
+        color: var(--color-heading);
+        font-size: 1rem;
+        letter-spacing: 0.01em;
+    }
+
     /* ============================================================
        COMMITMENT STEPS
        ============================================================ */

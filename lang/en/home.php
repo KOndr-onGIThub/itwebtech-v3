@@ -94,8 +94,9 @@ return [
                 'text'    => 'I keep you informed about progress and involve you in key decisions. The result reflects what you wanted — because I don\'t wait until the end of the project to find out.',
             ],
             [
-                'heading' => 'Direct contact',
-                'text'    => 'Call me any time — in the vast majority of cases I\'ll pick up immediately. If not, we\'ll arrange a time the same day. No ticket, no waiting for a coordinator\'s reply. You speak directly with me — before the project, during and after launch.',
+                'heading' => 'Launch and support',
+                'text'    => 'Once you approve deployment, the site usually goes live within one business day. After launch I stay available — small tweaks, technical questions and analytics help go through me directly, with no ticket and no waiting.',
+                'note'    => 'Launch within 1 business day of approval.',
             ],
         ],
     ],
@@ -143,7 +144,40 @@ return [
     ],
 
     'services' => [
-        'heading_other' => 'I\'ll strengthen your online visibility',
+        'heading_primary' => 'What I build — custom websites, apps and e-shops',
+        'heading_other'   => 'Additional services',
+        'primary' => [
+            'weby' => [
+                'title'       => 'Custom websites',
+                'description' => 'A presentation website that sets you apart from template-driven competition and starts bringing in customers.',
+                'bullets'     => [
+                    'Custom code — no WordPress, no templates',
+                    'Conversion-focused structure built around your business',
+                    'Maintenance-free with fast load times',
+                ],
+                'price'       => 'from CZK 20,000',
+            ],
+            'aplikace' => [
+                'title'       => 'Web applications',
+                'description' => 'Internal systems, customer portals and tracking tools that save you both time and headcount.',
+                'bullets'     => [
+                    'Process design before a single line of code',
+                    'Integrations with your existing tools',
+                    'Custom admin without monthly licence fees',
+                ],
+                'price'       => 'from CZK 20,000',
+            ],
+            'eshop' => [
+                'title'       => 'E-shops',
+                'description' => 'An e-shop built around your product — without paying for plugins and themes every month.',
+                'bullets'     => [
+                    'Checkout and catalogue designed for your range',
+                    'Integrations with accounting, couriers and payment gateways',
+                    'No monthly platform fees',
+                ],
+                'price'       => 'from CZK 20,000',
+            ],
+        ],
         'seo' => [
             'title'       => 'Customers from Google — without paying per click',
             'description' => 'Paid ads only work while you\'re paying. SEO works for you long-term. I\'ll help so customers find you in Google for free — even when you don\'t have a budget for ads.',
