@@ -31,7 +31,7 @@ return [
     'social_proof' => [
         'rating_aria'  => 'Hodnocení 5 z 5',
         'rating_value' => '5,0',
-        'reviews'      => '(21 recenzí)',
+        'reviews'      => '(21 recenzí Google + Firmy.cz)',
         'projects'     => '23+ realizací',
         'experience'   => '18 let praxe',
         'response'     => 'Odpověď do 24 hodin',

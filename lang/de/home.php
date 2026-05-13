@@ -32,7 +32,7 @@ return [
     'social_proof' => [
         'rating_aria'  => 'Bewertung 5 von 5',
         'rating_value' => '5,0',
-        'reviews'      => '(21 Bewertungen)',
+        'reviews'      => '(21 Bewertungen auf Google + Firmy.cz)',
         'projects'     => '23+ realisierte Projekte',
         'experience'   => '18 Jahre Erfahrung',
         'response'     => 'Antwort innerhalb von 24 Std.',
