@@ -140,6 +140,7 @@
         <div class="container-site footer-bar__inner">
             <span>&copy; {{ date('Y') }} {{ config('app.name') }} — {{ __('layout.footer.rights') }}</span>
             <a href="{{ lroute('privacy') }}" class="footer-bar__gdpr-link">{{ __('layout.gdpr_form_link') }}</a>
+            <a href="/cookies" class="footer-bar__gdpr-link">Cookies</a>
         </div>
     </footer>
 
@@ -153,5 +154,10 @@
         <script defer id="reservanto-widget-script" type="text/javascript"
                 src="{{ config('site.booking.script_url') }}"></script>
     @endif
+
+    {{-- Cookie consent modal (OND-125) — gating pro GA4 + Microsoft Clarity.
+         Renderuje se jen pokud je ANALYTICS_ENABLED=true a aspoň jeden
+         z GA4/Clarity providerů má vyplněnou konfiguraci. --}}
+    @include('partials.cookies-modal')
 </body>
 </html>

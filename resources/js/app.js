@@ -1,4 +1,5 @@
 import './bootstrap';
+import './cookies';
 import './analytics';
 import Alpine from 'alpinejs';
 
