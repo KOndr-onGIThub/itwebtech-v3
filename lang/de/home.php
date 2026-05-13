@@ -70,27 +70,33 @@ return [
     ],
 
     'how_i_work' => [
-        'heading' => 'Ein einfacher Prozess ohne unnötige Komplikationen.',
+        'heading'   => 'Von der ersten Nachricht zur veröffentlichten Website — 4 klare Schritte.',
+        'cta_intro' => 'Gleich zu Schritt 1.',
+        'cta_label' => 'Beratung vereinbaren',
         'steps'   => [
             [
-                'heading'      => 'Verständnis',
+                'heading'      => 'Beratung',
+                'time'         => '60 Min., binnen einer Woche',
                 'text'         => 'Ich beginne mit einem Gespräch, nicht mit einem Formular. Ich muss Ihr Unternehmen, Ihre Kunden und verstehen, was die Website wirklich tun soll — Kontakte bringen, ein Produkt verkaufen oder Vertrauen aufbauen.',
                 'quote_text'   => 'Er hörte wirklich meinen Bedürfnissen zu und verarbeitete diese Informationen bis zu meiner vollständigen Zufriedenheit.',
                 'quote_author' => 'Magda Pernicová, Realiťačky v akci',
             ],
             [
-                'heading'      => 'Genaue Spezifikation',
+                'heading'      => 'Spezifikation',
+                'time'         => '2–5 Tage',
                 'text'         => 'Bevor ich mit der Arbeit beginne, erhalten Sie eine schriftliche Spezifikation: was auf der Website sein wird, wie viele Seiten, welche Technologie und was es kostet. Keine Überraschungen auf der Rechnung. Den Liefertermin schätze ich realistisch ein — immer im Voraus, nie rückwirkend.',
                 'quote_text'   => 'Er analysiert gründlich den Zustand und möchte die aktuellen Prozesse kennenlernen. Er sammelt Anforderungen von Kunden und erkundigt sich nach Zukunftsvisionen.',
                 'quote_author' => 'Jan Stybor, Leiter der Projektabteilung, Toyota',
                 'note'         => 'Hinweis zu Terminen: Eine Website entsteht nicht nur auf meiner Seite. Genehmigungen, Unterlagen vom Kunden und Feedback sind Teil des Prozesses. Der Termin ist daher immer eine Schätzung, keine Verpflichtung — und ich sage das offen von Anfang an.',
             ],
             [
-                'heading' => 'Entwicklung mit Ihrem Feedback',
+                'heading' => 'Umsetzung',
+                'time'    => '3–10 Wochen',
                 'text'    => 'Ich halte Sie über den Fortschritt informiert und beziehe Sie in wichtige Entscheidungen ein. Das Ergebnis entspricht dem, was Sie sich gewünscht haben — weil ich nicht bis zum Ende des Projekts warte, um das herauszufinden.',
             ],
             [
                 'heading' => 'Launch und Support',
+                'time'    => 'bis zum nächsten Werktag',
                 'text'    => 'Nach Ihrer Freigabe geht die Website in der Regel innerhalb eines Arbeitstages live. Nach dem Launch bleibe ich für Sie erreichbar — kleine Anpassungen, technische Fragen und Analytics-Hilfe laufen direkt über mich, ohne Ticket und ohne Warten.',
                 'note'    => 'Launch innerhalb von 1 Arbeitstag nach Freigabe.',
             ],
@@ -286,6 +292,46 @@ return [
         'cta_label'    => 'Preisangebot anfordern',
         'cta_secondary' => '30-Min-Beratung vereinbaren',
         'cta_note'     => 'Kostenlos. Unverbindlich.',
+    ],
+
+    'faq' => [
+        'heading' => 'Häufige Fragen',
+        'items'   => [
+            [
+                'question' => 'Was kostet es?',
+                'answer'   => 'Orientierende Einstiegspreise finden Sie oben im Preisanker — Websites ab 20 000 CZK, Anwendungen ab 60 000 CZK, Online-Shops ab 80 000 CZK. Ein verbindliches Angebot erhalten Sie schriftlich nach einer kurzen Beratung, auf der Rechnung steht genau das, was in der Spezifikation steht.',
+            ],
+            [
+                'question' => 'Wie lange dauert es?',
+                'answer'   => 'Von der ersten Nachricht bis zum Launch typischerweise 3–10 Wochen — 60 Minuten Beratung, 2–5 Tage für die Spezifikation, 3–10 Wochen Umsetzung und Launch bis zum nächsten Werktag nach Freigabe. Den detaillierten Zeitplan für Ihr Projekt halte ich in der Spezifikation fest.',
+            ],
+            [
+                'question' => 'Was, wenn ich nicht zufrieden bin?',
+                'answer'   => 'Ich arbeite in kurzen Iterationen und schicke laufend Zwischenstände — ich warte nicht bis zum Projektende, um zu prüfen, ob es passt. Wenn etwas nicht stimmt, lösen wir es sofort, nicht erst nach der Rechnung. Was in der Spezifikation steht, liefere ich.',
+            ],
+            [
+                'question' => 'Was bedeutet „wartungsfreie Website"?',
+                'answer'   => 'Kein WordPress, keine Plugins, keine monatlichen Sicherheitsupdates. Die Website läuft auf eigenem Code — sie funktioniert von selbst, benötigt keine regelmäßigen Patches und fällt nicht durch Template-Konflikte aus. Kleine Inhaltsänderungen laufen direkt über mich, ohne Ticket.',
+            ],
+            // Archiv: weitere FAQ-Einträge wandern von der Homepage weg (nach /faq oder /sluzby — außerhalb des OND-121-Umfangs).
+        ],
+    ],
+
+    'faq_form' => [
+        'eyebrow'     => 'Andere Frage?',
+        'heading'     => 'Schreiben Sie sie direkt.',
+        'description' => 'Ich greife sie auf und antworte bis zum nächsten Werktag. Kein Verkaufsdruck.',
+        'name'        => 'Name',
+        'email'       => 'E-Mail',
+        'message'     => 'Ihre Frage',
+        'placeholders' => [
+            'name'    => 'Max Mustermann',
+            'email'   => 'max@firma.de',
+            'message' => 'Z. B. Schaffen Sie es bis zum Quartalsende?',
+        ],
+        'submit'      => 'Frage senden',
+        'submitting'  => 'Wird gesendet…',
+        'success'     => 'Danke, die Frage ist eingegangen. Ich melde mich so schnell wie möglich.',
     ],
 
     // TODO: review pro DE — copy podle CS varianty A (OND-100)
