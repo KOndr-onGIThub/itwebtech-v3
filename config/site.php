@@ -81,6 +81,11 @@ return [
 
         'clarity' => [
             // Microsoft Clarity — zdarma, heatmapy + session recordings.
+            // OND-123 iter3: killswitch — Clarity injektuje YouTube preconnect
+            // a tracking pixely, které PSI započítává do kritické cesty. Pokud
+            // mobile Performance < target, vypnout přes `CLARITY_ENABLED=false`
+            // i když je `project_id` vyplněné.
+            'enabled'    => env('CLARITY_ENABLED', true),
             'project_id' => env('CLARITY_PROJECT_ID'),
         ],
     ],

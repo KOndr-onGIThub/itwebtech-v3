@@ -977,15 +977,30 @@
         inset-inline: 0;
         top: 0;
         z-index: 50;
-        background-color: rgba(12, 14, 20, 0.75);
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
+        /* OND-123 iter3: vyšší opacity (0.92 vs 0.75) na mobilu, abychom mohli
+           backdrop-filter pustit jen na hover-capable zařízeních. Blur(18px) přes
+           celou šířku viewportu byl PSI mobile Style&Layout suspect (~1,7 s). */
+        background-color: rgba(12, 14, 20, 0.92);
         border-bottom: 1px solid transparent;
         transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+        /* Desktop only — blur vrací glassmorphism efekt tam, kde má GPU rezervu. */
+        .navbar {
+            background-color: rgba(12, 14, 20, 0.75);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
     }
     .navbar.is-scrolled {
         border-bottom-color: var(--border-subtle);
         background-color: rgba(12, 14, 20, 0.95);
+    }
+    /* OND-123 follow-up: class-based hide místo inline `style.transform`. JS
+       v scroll handleru se vyhne čtení/zápisu computed style (forced reflow
+       audit 1,2 s před touto změnou). */
+    .navbar.is-hidden {
+        transform: translateY(-100%);
     }
 
     .navbar__inner {
@@ -2316,7 +2331,9 @@
         gap: 0.375rem;
         text-align: center;
         font-size: 0.8125rem;
-        color: var(--color-muted);
+        /* OND-123: --color-muted (#5A6480) na #161A24 ≈ 3.3:1 → WCAG AA fail.
+           --color-body (#94A3B8) ≈ 5.8:1 → PASS pro normální text. */
+        color: var(--color-body);
     }
     @media (min-width: 640px) {
         .footer-bar__inner {
@@ -2326,11 +2343,16 @@
     }
 
     .footer-bar__gdpr-link {
-        color: var(--color-muted);
-        transition: color 0.15s;
+        /* OND-123: per matching .footer-bar__inner — viz výše. */
+        color: var(--color-body);
+        text-decoration: underline;
+        text-decoration-color: rgba(148, 163, 184, 0.4);
+        text-underline-offset: 2px;
+        transition: color 0.15s, text-decoration-color 0.15s;
     }
     .footer-bar__gdpr-link:hover {
         color: var(--color-heading);
+        text-decoration-color: var(--color-heading);
     }
 
     /* ============================================================
@@ -5074,9 +5096,10 @@
         align-items: center;
         gap: 0.5rem;
         padding: 0.625rem max(0.75rem, env(safe-area-inset-left)) calc(0.625rem + env(safe-area-inset-bottom)) max(0.75rem, env(safe-area-inset-right));
-        background: rgba(12, 14, 20, 0.94);
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
+        /* OND-123 iter3: bottom bar je vždy viditelný na mobilu, blur(18px) přes
+           full-width fixed element platí PSI mobile vysokou Style&Layout daň.
+           Solid (0.97 opacity) vypadá v dark UI prakticky identicky. */
+        background: rgba(12, 14, 20, 0.97);
         border-top: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
     }
     @media (max-width: 767px) {

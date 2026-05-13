@@ -15,70 +15,105 @@
     'lightboxGallery' => null,   // Gallery name
 ])
 
+{{--
+    OND-123 iter3:
+    Pokud existují buildem vygenerované varianty (`public/build/assets/{basename}-*.avif|webp`),
+    vyrenderujeme `<source srcset>` server-side. Tím se vyřeší LCP block na hero obrázku,
+    protože preload skener prohlížeče vidí srcset hned v HTML streamu a nemusí čekat,
+    až Alpine `x-init` doběhne.
+
+    Fallback (dev bez `npm run build`): původní Alpine flow s `window.sharedImages`.
+--}}
+@php
+    $srcsets = responsive_image_srcsets($path);
+@endphp
+
 {{-- Anchor tag for lightbox, if title or gallery is provided --}}
 @if ($lightboxTitle || $lightboxGallery)
     <a
-        href="" {{-- href will be set by Alpine --}}
+        href="{{ $srcsets ? $srcsets['fallback'] : '' }}"
         {!! $lightboxTitle ? "data-glightbox=\"title: {$lightboxTitle}\"" : '' !!}
         {!! $lightboxGallery ? "data-gallery=\"{$lightboxGallery}\"" : '' !!}
     >
 @endif
 
-<picture
-    {!! $classPicture ? "class=\"$classPicture\"" : '' !!}
-    x-data
-    x-init="
-        const variants = window.sharedImages['{{ $path }}'];
-        if (!variants || !Array.isArray(variants)) {
-            console.error('Image {{ $path }} not found or has invalid structure');
-            return;
-        }
+@if ($srcsets)
+    {{-- Server-rendered picture — žádné Alpine, žádné x-init, žádné JS závislosti. --}}
+    <picture {!! $classPicture ? "class=\"$classPicture\"" : '' !!}>
+        @if ($srcsets['avif'] !== '')
+            <source type="image/avif" srcset="{{ $srcsets['avif'] }}" sizes="{{ $sizes }}">
+        @endif
+        @if ($srcsets['webp'] !== '')
+            <source type="image/webp" srcset="{{ $srcsets['webp'] }}" sizes="{{ $sizes }}">
+        @endif
+        <img
+            {!! $classImg ? "class=\"$classImg\"" : '' !!}
+            src="{{ $srcsets['fallback'] }}"
+            srcset="{{ $srcsets['webp'] !== '' ? $srcsets['webp'] : $srcsets['avif'] }}"
+            alt="{{ $alt }}"
+            sizes="{{ $sizes }}"
+            @if ($width) width="{{ $width }}" @endif
+            @if ($height) height="{{ $height }}" @endif
+            {!! $loading ? "loading=\"$loading\"" : '' !!}
+            {!! $style ? "style=\"$style\"" : '' !!}
+            {!! $dataCue ? "data-cue=\"$dataCue\"" : '' !!}
+            {!! $decoding ? "decoding=\"$decoding\"" : '' !!}
+            {!! $fetchpriority ? "fetchpriority=\"$fetchpriority\"" : '' !!}
+        >
+    </picture>
+@else
+    {{-- Dev fallback: Alpine x-init z window.sharedImages (původní chování). --}}
+    <picture
+        {!! $classPicture ? "class=\"$classPicture\"" : '' !!}
+        x-data
+        x-init="
+            const variants = window.sharedImages['{{ $path }}'];
+            if (!variants || !Array.isArray(variants)) {
+                console.error('Image {{ $path }} not found or has invalid structure');
+                return;
+            }
 
-        const formatOrder = ['avif', 'webp'];
-        const numFormats = formatOrder.length;
-        const formatMap = { avif: [], webp: [] };
-        const widthList = ['320', '480', '640', '768', '960', '1280', '1536'];
+            const formatOrder = ['avif', 'webp'];
+            const numFormats = formatOrder.length;
+            const formatMap = { avif: [], webp: [] };
+            const widthList = ['320', '480', '640', '768', '960', '1280', '1536'];
 
-        for (let i = 0; i < variants.length; i++) {
-            const formatIndex = i % numFormats;
-            const widthIndex = Math.floor(i / numFormats);
-            const width = widthList[widthIndex] ?? '1000';
-            const format = formatOrder[formatIndex];
-            formatMap[format].push(`${variants[i]} ${width}w`);
-        }
+            for (let i = 0; i < variants.length; i++) {
+                const formatIndex = i % numFormats;
+                const widthIndex = Math.floor(i / numFormats);
+                const width = widthList[widthIndex] ?? '1000';
+                const format = formatOrder[formatIndex];
+                formatMap[format].push(`${variants[i]} ${width}w`);
+            }
 
-        $el.querySelector('source[type=\'image/avif\']').srcset = formatMap.avif.join(', ');
-        $el.querySelector('source[type=\'image/webp\']').srcset = formatMap.webp.join(', ');
-        $el.querySelector('img').src = formatMap.webp[0]?.split(' ')[0];
-        $el.querySelector('img').srcset = formatMap.webp.join(', ');
+            $el.querySelector('source[type=\'image/avif\']').srcset = formatMap.avif.join(', ');
+            $el.querySelector('source[type=\'image/webp\']').srcset = formatMap.webp.join(', ');
+            $el.querySelector('img').src = formatMap.webp[0]?.split(' ')[0];
+            $el.querySelector('img').srcset = formatMap.webp.join(', ');
 
-        const aTag = $el.parentElement?.tagName === 'A' ? $el.parentElement : null;
-        if (aTag && !aTag.getAttribute('href')) {
-            const biggest = formatMap.webp.at(-1)?.split(' ')[0];
-            if (biggest) aTag.setAttribute('href', biggest);
-        }
-    "
->
-    {{-- AVIF --}}
-    <source type="image/avif">
-
-    {{-- WebP --}}
-    <source type="image/webp">
-
-    {{-- Image --}}
-    <img
-        {!! $classImg ? "class=\"$classImg\"" : '' !!}
-        alt="{{ $alt }}"
-        sizes="{{ $sizes }}"
-        width="{{ $width }}"
-        height="{{ $height }}"
-        {!! $loading ? "loading=\"$loading\"" : '' !!}
-        {!! $style ? "style=\"$style\"" : '' !!}
-        {!! $dataCue ? "data-cue=\"$dataCue\"" : '' !!}
-        {!! $decoding ? "decoding=\"$decoding\"" : '' !!}
-        {!! $fetchpriority ? "fetchpriority=\"$fetchpriority\"" : '' !!}
+            const aTag = $el.parentElement?.tagName === 'A' ? $el.parentElement : null;
+            if (aTag && !aTag.getAttribute('href')) {
+                const biggest = formatMap.webp.at(-1)?.split(' ')[0];
+                if (biggest) aTag.setAttribute('href', biggest);
+            }
+        "
     >
-</picture>
+        <source type="image/avif">
+        <source type="image/webp">
+        <img
+            {!! $classImg ? "class=\"$classImg\"" : '' !!}
+            alt="{{ $alt }}"
+            sizes="{{ $sizes }}"
+            @if ($width) width="{{ $width }}" @endif
+            @if ($height) height="{{ $height }}" @endif
+            {!! $loading ? "loading=\"$loading\"" : '' !!}
+            {!! $style ? "style=\"$style\"" : '' !!}
+            {!! $dataCue ? "data-cue=\"$dataCue\"" : '' !!}
+            {!! $decoding ? "decoding=\"$decoding\"" : '' !!}
+            {!! $fetchpriority ? "fetchpriority=\"$fetchpriority\"" : '' !!}
+        >
+    </picture>
+@endif
 
 {{-- Close anchor tag --}}
 @if ($lightboxTitle || $lightboxGallery)
