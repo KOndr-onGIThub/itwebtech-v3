@@ -576,9 +576,12 @@
 </section>
 
 {{-- ===================================================
-     FAQ — 4 otázky (OND-121, T19)
+     FAQ — 4 otázky (OND-121 T19 + OND-119 JSON-LD/analytics)
      Plán §4.10 / §3 (pozice 9). 4 otázky v cs/en/de.
      =================================================== --}}
+@php
+    $faqItems = __('home.faq.items');
+@endphp
 <section id="faq" class="section-wrapper section-faq" data-reveal>
     <div class="container-site">
         <header class="section-header">
@@ -586,14 +589,18 @@
         </header>
 
         <div class="faq-list" data-reveal-group>
-            @foreach (__('home.faq.items') as $i => $item)
+            @foreach ($faqItems as $i => $item)
             <details
                 class="faq-item"
                 data-reveal
                 data-q-id="{{ $i }}"
                 style="transition-delay: {{ $i * 60 }}ms"
             >
-                <summary class="faq-item__question">
+                <summary
+                    class="faq-item__question"
+                    data-analytics="faq_item_open"
+                    data-faq-key="{{ $item['key'] ?? 'item-' . $i }}"
+                >
                     <span>{{ $item['question'] }}</span>
                     <span class="faq-item__icon" aria-hidden="true"></span>
                 </summary>
@@ -603,6 +610,29 @@
             </details>
             @endforeach
         </div>
+
+        {{-- OND-119 — JSON-LD FAQPage pro rich snippets v Google SERP.
+             Generováno ze stejných lang klíčů jako accordion (single source of truth).
+             Validace: https://search.google.com/test/rich-results --}}
+        <script type="application/ld+json">
+        @php
+            $faqLd = [
+                '@context'   => 'https://schema.org',
+                '@type'      => 'FAQPage',
+                'mainEntity' => array_map(static function (array $item): array {
+                    return [
+                        '@type'          => 'Question',
+                        'name'           => $item['question'],
+                        'acceptedAnswer' => [
+                            '@type' => 'Answer',
+                            'text'  => $item['answer'],
+                        ],
+                    ];
+                }, $faqItems),
+            ];
+        @endphp
+        {!! json_encode($faqLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+        </script>
 
         {{-- T18 — Mikro-formulář po FAQ: zachytí lead, který nenašel odpověď v FAQ.
              Posílá na stejný endpoint /poptavka (home.lead.store), source = home.faq. --}}

@@ -296,20 +296,25 @@ return [
 
     'faq' => [
         'heading' => 'Häufige Fragen',
+        // `key` ist ein stabiler Slug für Analytics (data-faq-key) und JSON-LD; nicht lokalisieren.
         'items'   => [
             [
+                'key'      => 'price',
                 'question' => 'Was kostet es?',
                 'answer'   => 'Orientierende Einstiegspreise finden Sie oben im Preisanker — Websites ab 20 000 CZK, Anwendungen ab 60 000 CZK, Online-Shops ab 80 000 CZK. Ein verbindliches Angebot erhalten Sie schriftlich nach einer kurzen Beratung, auf der Rechnung steht genau das, was in der Spezifikation steht.',
             ],
             [
+                'key'      => 'duration',
                 'question' => 'Wie lange dauert es?',
                 'answer'   => 'Von der ersten Nachricht bis zum Launch typischerweise 3–10 Wochen — 60 Minuten Beratung, 2–5 Tage für die Spezifikation, 3–10 Wochen Umsetzung und Launch bis zum nächsten Werktag nach Freigabe. Den detaillierten Zeitplan für Ihr Projekt halte ich in der Spezifikation fest.',
             ],
             [
+                'key'      => 'satisfaction',
                 'question' => 'Was, wenn ich nicht zufrieden bin?',
                 'answer'   => 'Ich arbeite in kurzen Iterationen und schicke laufend Zwischenstände — ich warte nicht bis zum Projektende, um zu prüfen, ob es passt. Wenn etwas nicht stimmt, lösen wir es sofort, nicht erst nach der Rechnung. Was in der Spezifikation steht, liefere ich.',
             ],
             [
+                'key'      => 'maintenance-free',
                 'question' => 'Was bedeutet „wartungsfreie Website"?',
                 'answer'   => 'Kein WordPress, keine Plugins, keine monatlichen Sicherheitsupdates. Die Website läuft auf eigenem Code — sie funktioniert von selbst, benötigt keine regelmäßigen Patches und fällt nicht durch Template-Konflikte aus. Kleine Inhaltsänderungen laufen direkt über mich, ohne Ticket.',
             ],
