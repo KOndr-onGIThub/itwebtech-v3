@@ -20,6 +20,18 @@ Route::get('/robots.txt', RobotsController::class)->name('robots');
 
 /*
 |--------------------------------------------------------------------------
+| Cookie policy (OND-125) — společná napříč jazyky.
+|--------------------------------------------------------------------------
+| Banner v cookies.js linkuje na `/cookies` (bez locale prefixu).
+| Text na stránce zatím česky; pokud přibyde lokalizace, přidat slug
+| do config/slugs.php a přesunout pod localized routes group.
+*/
+Route::get('/cookies', [PageController::class, 'cookies'])
+    ->middleware(SetLocale::class)
+    ->name('cookies');
+
+/*
+|--------------------------------------------------------------------------
 | Localized routes
 |--------------------------------------------------------------------------
 | Default locale (cs) has no URL prefix.

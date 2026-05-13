@@ -1,7 +1,11 @@
 {{--
-    Analytics scripts (OND-122 / plán §9)
-    ─────────────────────────────────────
-    Vykreslí Plausible, GA4 a Microsoft Clarity tracking podle config/site.php.
+    Analytics scripts (OND-122, gated v OND-125)
+    ─────────────────────────────────────────────
+    Vykreslí Plausible tracking (cookieless, GDPR-OK → načítá se rovnou)
+    a pre-flush queue pro GA4 / Microsoft Clarity. Aktuální boot GA4/Clarity
+    řídí `resources/js/cookies.js` na základě souhlasu (Consent Mode v2 +
+    aktivní kill-switch v případě „Odmítnout").
+
     Master vypínač: ANALYTICS_ENABLED (default false). Na stagingu vždy false.
 
     Eventy se odesílají z resources/js/analytics.js přes `data-analytics`
@@ -20,8 +24,7 @@
 @endphp
 
 @if ($enabled)
-    {{-- Plausible (preferované, GDPR-friendly). Tagged-events varianta umí
-         číst data-atributy z HTML i `plausible(event, {props})` z JS. --}}
+    {{-- Plausible (preferované, GDPR-friendly, cookieless → bez consent banneru). --}}
     @if ($plausibleDomain && $plausibleSrc)
         <script defer
                 data-domain="{{ $plausibleDomain }}"
@@ -34,56 +37,43 @@
         </script>
     @endif
 
-    {{-- GA4 + Microsoft Clarity — OND-123 follow-up:
-         PSI mobile audit hlásil 54 KiB nepoužitého JS (GTM/gtag) + 25 KiB
-         Clarity + 3,4 s main-thread práce. Odkládáme jejich init do
-         `requestIdleCallback` (fallback `setTimeout`) — měření tím získá idle
-         pool po LCP/TTI, ale eventy se stále zachytí. dataLayer/gtag fronta
-         je k dispozici synchronně, takže `data-analytics` z UI nic neztratí. --}}
+    {{-- GA4 + Microsoft Clarity — OND-125:
+         Konfigurace pro `cookies.js` (boot až po consentu) + pre-flush fronty
+         pro `analytics.js`, aby eventy zachycené před consentem nezmizely.
+
+         Skripty `gtag/js` a `clarity.ms/tag` se NEINJEKTUJÍ z tohoto partialu
+         — to dělá `resources/js/cookies.js` v `bootGA4()` / `bootClarity()`
+         po kliknutí na „Přijmout vše".
+
+         Kill-switch `window['ga-disable-...']` se aktivuje v `cookies.js` při
+         „Odmítnout" / před prvním zobrazením modalu (defense in depth). --}}
     @if ($ga4Id || $clarityId)
         <script>
-            (function () {
-                // Pre-flush fronta — Analytics modul může pushovat eventy ještě
-                // před tím, než reálné skripty doběhnou.
-                window.dataLayer = window.dataLayer || [];
-                window.gtag = window.gtag || function () { dataLayer.push(arguments); };
-                window.clarity = window.clarity || function () {
-                    (window.clarity.q = window.clarity.q || []).push(arguments);
-                };
+            // Config pro cookies.js (consent gating). Validace ID je v JS.
+            window.itwebtechAnalyticsConfig = {
+                measurementId: @json($ga4Id),
+                clarityId: @json($clarityId)
+            };
 
-                var ga4Id = @json($ga4Id);
-                var clarityId = @json($clarityId);
+            // Pre-flush fronta — `analytics.js` event tracker push-uje eventy
+            // ještě před tím, než boot skripty doběhnou (nebo bez consentu
+            // tichý swallow).
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+            window.clarity = window.clarity || function () {
+                (window.clarity.q = window.clarity.q || []).push(arguments);
+            };
 
-                function loadAnalytics() {
-                    if (ga4Id) {
-                        var s = document.createElement('script');
-                        s.async = true;
-                        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(ga4Id);
-                        document.head.appendChild(s);
-                        gtag('js', new Date());
-                        gtag('config', ga4Id, { 'anonymize_ip': true });
-                    }
-                    if (clarityId) {
-                        var c = document.createElement('script');
-                        c.async = true;
-                        c.src = 'https://www.clarity.ms/tag/' + encodeURIComponent(clarityId);
-                        document.head.appendChild(c);
-                    }
-                }
-
-                if (typeof requestIdleCallback === 'function') {
-                    requestIdleCallback(loadAnalytics, { timeout: 4000 });
-                } else {
-                    // Safari: po `load` eventu + malý jitter, aby se nepřebíjelo s LCP.
-                    if (document.readyState === 'complete') {
-                        setTimeout(loadAnalytics, 2500);
-                    } else {
-                        window.addEventListener('load', function () {
-                            setTimeout(loadAnalytics, 2500);
-                        }, { once: true });
-                    }
-                }
-            })();
+            // Default consent state (Consent Mode v2) — GA4 ví, že do
+            // `bootGA4()` updatu má všechno denied. Pro analytics_storage to
+            // bootGA4() přepne na „granted".
+            window.gtag('consent', 'default', {
+                analytics_storage: 'denied',
+                ad_storage: 'denied',
+                ad_user_data: 'denied',
+                ad_personalization: 'denied',
+                wait_for_update: 500
+            });
         </script>
     @endif
 
