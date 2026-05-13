@@ -94,8 +94,9 @@ return [
                 'text'    => 'Ich halte Sie über den Fortschritt informiert und beziehe Sie in wichtige Entscheidungen ein. Das Ergebnis entspricht dem, was Sie sich gewünscht haben — weil ich nicht bis zum Ende des Projekts warte, um das herauszufinden.',
             ],
             [
-                'heading' => 'Direkter Kontakt',
-                'text'    => 'Rufen Sie mich jederzeit an — in den allermeisten Fällen nehme ich sofort ab. Falls nicht, vereinbaren wir noch am selben Tag einen Termin. Kein Ticket, kein Warten auf die Antwort eines Koordinators. Sie sprechen direkt mit mir — vor dem Projekt, während und nach dem Launch.',
+                'heading' => 'Launch und Support',
+                'text'    => 'Nach Ihrer Freigabe geht die Website in der Regel innerhalb eines Arbeitstages live. Nach dem Launch bleibe ich für Sie erreichbar — kleine Anpassungen, technische Fragen und Analytics-Hilfe laufen direkt über mich, ohne Ticket und ohne Warten.',
+                'note'    => 'Launch innerhalb von 1 Arbeitstag nach Freigabe.',
             ],
         ],
     ],
@@ -143,7 +144,40 @@ return [
     ],
 
     'services' => [
-        'heading_other' => 'Ich stärke Ihre Online-Sichtbarkeit',
+        'heading_primary' => 'Was ich baue — Websites, Anwendungen und Online-Shops auf Maß',
+        'heading_other'   => 'Weitere Services',
+        'primary' => [
+            'weby' => [
+                'title'       => 'Maßgeschneiderte Websites',
+                'description' => 'Eine Präsentations-Website, die sich von schablonenhaften Wettbewerbern abhebt und Kunden bringt.',
+                'bullets'     => [
+                    'Eigener Code — kein WordPress, keine Vorlagen',
+                    'Konversionsorientierte Struktur passend zu Ihrem Geschäft',
+                    'Wartungsfreier Betrieb und schnelle Ladezeiten',
+                ],
+                'price'       => 'ab 20 000 CZK',
+            ],
+            'aplikace' => [
+                'title'       => 'Webanwendungen',
+                'description' => 'Interne Systeme, Kundenportale und Verwaltungstools, die Zeit und Personal sparen.',
+                'bullets'     => [
+                    'Prozessdesign vor der ersten Codezeile',
+                    'Integration in Ihre bestehenden Werkzeuge',
+                    'Eigene Administration ohne monatliche Lizenzgebühren',
+                ],
+                'price'       => 'ab 20 000 CZK',
+            ],
+            'eshop' => [
+                'title'       => 'Online-Shops',
+                'description' => 'Ein Online-Shop, der zu Ihrem Produkt passt — ohne monatliche Gebühren für Plugins und Vorlagen.',
+                'bullets'     => [
+                    'Kasse und Katalog passend zu Ihrem Sortiment',
+                    'Anbindung an Buchhaltung, Spediteure und Zahlungsanbieter',
+                    'Keine monatlichen Plattform-Gebühren',
+                ],
+                'price'       => 'ab 20 000 CZK',
+            ],
+        ],
         'seo' => [
             'title'       => 'Kunden aus Google — ohne Bezahlung pro Klick',
             'description' => 'Bezahlte Werbung funktioniert nur, solange Sie zahlen. SEO arbeitet langfristig für Sie. Ich helfe Ihnen so, dass Kunden Sie kostenlos in Google finden — auch wenn Sie gerade kein Werbebudget haben.',

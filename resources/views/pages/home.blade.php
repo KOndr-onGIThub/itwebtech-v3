@@ -297,6 +297,42 @@
 </section>
 
 {{-- ===================================================
+     SERVICES — primary (weby, aplikace, e-shopy) s cenovou kotvou
+     OND-103 §4.4 — primární služby s kotvou „od 20 000 Kč"
+     =================================================== --}}
+<section class="section-wrapper" data-reveal>
+    <div class="container-site">
+        <header class="section-header">
+            <h2>{{ __('home.services.heading_primary') }}</h2>
+        </header>
+
+        @php
+        $primaryServiceIcons = [
+            'weby'     => 'layers',
+            'aplikace' => 'boxes',
+            'eshop'    => 'store',
+        ];
+        @endphp
+
+        <div class="services-grid services-grid--primary" data-reveal-group>
+            @foreach (['weby','aplikace','eshop'] as $key)
+            <article class="service-card service-card--primary">
+                <x-dynamic-component :component="'icon.' . $primaryServiceIcons[$key]" class="w-8 h-8 service-card__icon" />
+                <h3>{{ __("home.services.primary.{$key}.title") }}</h3>
+                <p>{{ __("home.services.primary.{$key}.description") }}</p>
+                <ul class="service-card__bullets">
+                    @foreach (__("home.services.primary.{$key}.bullets") as $bullet)
+                    <li>{{ $bullet }}</li>
+                    @endforeach
+                </ul>
+                <p class="service-card__price">{{ __("home.services.primary.{$key}.price") }}</p>
+            </article>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+{{-- ===================================================
      SERVICES — secondary (seo, design, social)
      =================================================== --}}
 <section class="section-wrapper" data-reveal>

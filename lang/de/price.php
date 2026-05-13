@@ -72,7 +72,7 @@ return [
         'items'   => [
             [
                 'title' => 'Wartungsfreie Webseiten',
-                'text'  => 'Kein WordPress, keine Drittanbieter-Plugins. Sparen Sie bis zu €800 pro Jahr für regelmäßige Updates und Sicherheits-Patches.',
+                'text'  => 'Kein WordPress, keine Drittanbieter-Plugins. Sparen Sie jährlich Tausende gegenüber WordPress — keine monatlichen Updates und keine Kosten für Sicherheits-Patches.',
             ],
             [
                 'title' => 'Festpreis ohne Überraschungen',
