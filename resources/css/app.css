@@ -977,11 +977,20 @@
         inset-inline: 0;
         top: 0;
         z-index: 50;
-        background-color: rgba(12, 14, 20, 0.75);
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
+        /* OND-123 iter3: vyšší opacity (0.92 vs 0.75) na mobilu, abychom mohli
+           backdrop-filter pustit jen na hover-capable zařízeních. Blur(18px) přes
+           celou šířku viewportu byl PSI mobile Style&Layout suspect (~1,7 s). */
+        background-color: rgba(12, 14, 20, 0.92);
         border-bottom: 1px solid transparent;
         transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+        /* Desktop only — blur vrací glassmorphism efekt tam, kde má GPU rezervu. */
+        .navbar {
+            background-color: rgba(12, 14, 20, 0.75);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
     }
     .navbar.is-scrolled {
         border-bottom-color: var(--border-subtle);
@@ -5087,9 +5096,10 @@
         align-items: center;
         gap: 0.5rem;
         padding: 0.625rem max(0.75rem, env(safe-area-inset-left)) calc(0.625rem + env(safe-area-inset-bottom)) max(0.75rem, env(safe-area-inset-right));
-        background: rgba(12, 14, 20, 0.94);
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
+        /* OND-123 iter3: bottom bar je vždy viditelný na mobilu, blur(18px) přes
+           full-width fixed element platí PSI mobile vysokou Style&Layout daň.
+           Solid (0.97 opacity) vypadá v dark UI prakticky identicky. */
+        background: rgba(12, 14, 20, 0.97);
         border-top: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
     }
     @media (max-width: 767px) {

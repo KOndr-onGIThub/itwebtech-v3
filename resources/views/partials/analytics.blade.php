@@ -13,7 +13,10 @@
     $plausibleDomain = $analytics['plausible']['domain'] ?? null;
     $plausibleSrc    = $analytics['plausible']['script_url'] ?? null;
     $ga4Id           = $analytics['ga4']['measurement_id'] ?? null;
-    $clarityId       = $analytics['clarity']['project_id'] ?? null;
+    // OND-123 iter3: explicit killswitch — i když je `project_id` nastavené,
+    // můžeme Clarity vypnout přes env (kvůli PSI mobile perf, YouTube preconnect).
+    $clarityEnabled  = (bool) ($analytics['clarity']['enabled'] ?? true);
+    $clarityId       = $clarityEnabled ? ($analytics['clarity']['project_id'] ?? null) : null;
 @endphp
 
 @if ($enabled)
