@@ -9,8 +9,8 @@ return [
 
     'hero' => [
         'eyebrow'       => 'Webové stránky a aplikace na míru',
-        'heading'       => 'Web, který vám konečně vydělá. Bez WordPressu, bez údržby, bez výmluv.',
-        'subline'       => '18 let v Toyotě mě naučilo, že kvalita není náhoda — je to proces. Stejný přístup teď dávám do každého webu: vlastní kód, jasná cena předem, přímý kontakt se mnou od první schůzky po spuštění.',
+        'heading'       => 'Web, který vám konečně vydělá. Bez WordPressu, bez údržby, bez kompromisů.',
+        'subline'       => 'Pro majitele firem, kteří chtějí stránky, které přivádějí zákazníky — ne další položku v účetnictví. 18 let v Toyotě mě naučilo dodávat to, na čem jsme se domluvili.',
         'cta_primary'   => 'Získat cenovou nabídku',
         'cta_secondary' => 'Domluvit 30min konzultaci',
     ],
@@ -32,9 +32,9 @@ return [
         'rating_aria'  => 'Hodnocení 5 z 5',
         'rating_value' => '5,0',
         'reviews'      => '(21 recenzí)',
-        'projects'     => '40+ projektů',
+        'projects'     => '23+ realizací',
         'experience'   => '18 let praxe',
-        'response'     => '24h odpověď',
+        'response'     => 'Odpověď do 24 hodin',
         'brands' => [
             ['name' => 'MAKOplast',             'image' => null],
             ['name' => 'Yolk Studio',           'image' => 'yolk_studio.png'],
@@ -158,7 +158,7 @@ return [
     ],
 
     'testimonials' => [
-        'heading' => 'Co říkají ti, pro které jsem pracoval.',
+        'heading' => 'Co o spolupráci říkají moji klienti.',
     ],
 
     'guarantee' => [
@@ -185,7 +185,7 @@ return [
         'quote_text'   => 'Díky individuálnímu přístupu, flexibilitě a profesionalitě odpovídá výsledek našim představám.',
         'quote_author' => 'Hana Jaskmanická, výkonná ředitelka, VP Industry',
         'heading'      => 'Řeknu vám upřímný názor na váš projekt.',
-        'subtext'      => 'I kdyby spolupráce nedávala smysl — řeknu vám to rovnou.',
+        'subtext'      => 'Odpovídám do druhého pracovního dne. Pokud spolupráce nedává smysl, řeknu vám to rovnou — žádný obchodní tlak, žádné dotěrné e-maily.',
         'cta_label'    => 'Získat cenovou nabídku',
         'cta_secondary' => 'Domluvit 30min konzultaci',
         'cta_note'     => 'Bezplatně. Bez závazku.',

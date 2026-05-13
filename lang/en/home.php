@@ -10,8 +10,8 @@ return [
     // TODO: review pro EN — copy podle CS varianty A (OND-100)
     'hero' => [
         'eyebrow'       => 'Custom websites & web applications',
-        'heading'       => 'A website that finally earns its keep. No WordPress, no maintenance, no excuses.',
-        'subline'       => '18 years at Toyota taught me that quality isn\'t an accident — it\'s a process. I apply the same approach to every website: custom code, a clear price up front and direct contact with me from the first meeting through launch.',
+        'heading'       => 'A website that finally earns its keep. No WordPress, no maintenance, no compromises.',
+        'subline'       => 'For business owners who want a website that brings in customers — not another line on the invoice. 18 years at Toyota taught me to deliver exactly what we agreed on.',
         'cta_primary'   => 'Get a price quote',
         'cta_secondary' => 'Book a 30-min consultation',
     ],
@@ -33,9 +33,9 @@ return [
         'rating_aria'  => '5 out of 5 rating',
         'rating_value' => '5.0',
         'reviews'      => '(21 reviews)',
-        'projects'     => '40+ projects',
+        'projects'     => '23+ delivered projects',
         'experience'   => '18 years of experience',
-        'response'     => '24h response',
+        'response'     => 'Reply within 24 hours',
         'brands' => [
             ['name' => 'MAKOplast',             'image' => null],
             ['name' => 'Yolk Studio',           'image' => 'yolk_studio.png'],
@@ -159,7 +159,7 @@ return [
     ],
 
     'testimonials' => [
-        'heading' => 'What those I\'ve worked with say.',
+        'heading' => 'What my clients say about working together.',
     ],
 
     'guarantee' => [
@@ -187,7 +187,7 @@ return [
         'quote_text'   => 'Thanks to the individual approach, flexibility and professionalism, the result matches our expectations.',
         'quote_author' => 'Hana Jaskmanická, Executive Director, VP Industry',
         'heading'      => 'I\'ll give you an honest opinion on your project.',
-        'subtext'      => 'Even if working together doesn\'t make sense — I\'ll tell you straight.',
+        'subtext'      => 'I reply by the next business day. If working together doesn\'t make sense, I\'ll tell you straight — no sales pressure, no follow-up emails.',
         'cta_label'    => 'Get a price quote',
         'cta_secondary' => 'Book a 30-min consultation',
         'cta_note'     => 'Free. No commitment.',

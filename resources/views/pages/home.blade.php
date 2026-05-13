@@ -327,7 +327,24 @@
 
 {{-- ===================================================
      REFERENCE KLIENTŮ
+     Curated 6 nejsilnějších testimonialů (per OND-101 §2.2).
+     Pořadí: Baudyš (Toyota) → Toman → Holcmann → Jaskmanická → Štěpánek → Pešice.
+     Toyota slot (Baudyš) zůstává za feature flagem, dokud klient nepotvrdí
+     souhlas s publikací (config/site.php features.show_toyota_testimonial).
      =================================================== --}}
+@php
+    $allTestimonials = collect(__('testimonials.items'));
+
+    $homeTestimonialOrder = config('site.features.show_toyota_testimonial')
+        ? ['Pavel Baudyš', 'Rostislav Toman', 'Stanislav Holcmann', 'Hana Jaskmanická', 'Ing. Ivo Štěpánek', 'Václav Pešice']
+        : ['Rostislav Toman', 'Stanislav Holcmann', 'Hana Jaskmanická', 'Ing. Ivo Štěpánek', 'Václav Pešice'];
+
+    $homeTestimonials = collect($homeTestimonialOrder)
+        ->map(fn ($name) => $allTestimonials->firstWhere('name', $name))
+        ->filter()
+        ->values();
+@endphp
+
 <section class="section-wrapper section-alt section-wrapper--glow" data-reveal>
     <div class="container-site">
         <header class="section-header">
@@ -335,7 +352,7 @@
         </header>
 
         <div class="testimonials-grid" data-reveal-group>
-            @foreach (__('testimonials.items') as $review)
+            @foreach ($homeTestimonials as $review)
             <article class="testimonial-card">
                 <header class="testimonial-card__header">
 

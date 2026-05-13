@@ -10,8 +10,8 @@ return [
     // TODO: review pro DE — copy podle CS varianty A (OND-100)
     'hero' => [
         'eyebrow'       => 'Maßgeschneiderte Websites & Webanwendungen',
-        'heading'       => 'Eine Website, die sich endlich auszahlt. Ohne WordPress, ohne Wartung, ohne Ausreden.',
-        'subline'       => '18 Jahre bei Toyota haben mich gelehrt, dass Qualität kein Zufall ist — sie ist ein Prozess. Den gleichen Ansatz wende ich bei jeder Website an: eigener Code, klarer Preis vorab und direkter Kontakt mit mir vom ersten Treffen bis zum Launch.',
+        'heading'       => 'Eine Website, die sich endlich auszahlt. Ohne WordPress, ohne Wartung, ohne Kompromisse.',
+        'subline'       => 'Für Unternehmer, die eine Website wollen, die Kunden bringt — nicht nur einen weiteren Posten in der Buchhaltung. 18 Jahre bei Toyota haben mich gelehrt, genau das zu liefern, worauf wir uns geeinigt haben.',
         'cta_primary'   => 'Preisangebot anfordern',
         'cta_secondary' => '30-Min-Beratung vereinbaren',
     ],
@@ -33,7 +33,7 @@ return [
         'rating_aria'  => 'Bewertung 5 von 5',
         'rating_value' => '5,0',
         'reviews'      => '(21 Bewertungen)',
-        'projects'     => '40+ Projekte',
+        'projects'     => '23+ realisierte Projekte',
         'experience'   => '18 Jahre Erfahrung',
         'response'     => 'Antwort innerhalb von 24 Std.',
         'brands' => [
@@ -159,7 +159,7 @@ return [
     ],
 
     'testimonials' => [
-        'heading' => 'Was die sagen, für die ich gearbeitet habe.',
+        'heading' => 'Was meine Kunden über die Zusammenarbeit sagen.',
     ],
 
     'guarantee' => [
@@ -187,7 +187,7 @@ return [
         'quote_text'   => 'Dank des individuellen Ansatzes, der Flexibilität und der Professionalität entspricht das Ergebnis unseren Vorstellungen.',
         'quote_author' => 'Hana Jaskmanická, Geschäftsführerin, VP Industry',
         'heading'      => 'Ich gebe Ihnen eine ehrliche Meinung zu Ihrem Projekt.',
-        'subtext'      => 'Auch wenn eine Zusammenarbeit keinen Sinn ergibt — ich sage es Ihnen geradeheraus.',
+        'subtext'      => 'Ich antworte bis zum nächsten Werktag. Wenn eine Zusammenarbeit keinen Sinn ergibt, sage ich es Ihnen geradeheraus — kein Verkaufsdruck, keine lästigen Folge-E-Mails.',
         'cta_label'    => 'Preisangebot anfordern',
         'cta_secondary' => '30-Min-Beratung vereinbaren',
         'cta_note'     => 'Kostenlos. Unverbindlich.',
