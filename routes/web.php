@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\HomeLeadController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RobotsController;
 use App\Http\Controllers\SitemapController;
@@ -68,6 +69,13 @@ foreach (array_slice($locales, 1) as $locale) {
 | Posts to /contact regardless of locale. CSRF protected.
 */
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
+
+/*
+|--------------------------------------------------------------------------
+| Homepage inline lead POST — persists do `landing_leads` (source=home.inline)
+|--------------------------------------------------------------------------
+*/
+Route::post('/poptavka', [HomeLeadController::class, 'store'])->name('home.lead.store');
 
 /*
 |--------------------------------------------------------------------------

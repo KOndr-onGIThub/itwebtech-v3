@@ -48,9 +48,16 @@
                     @endforeach
                 </div>
 
-                <a href="{{ lroute('contact') }}" class="btn btn-primary navbar__cta">
-                    {{ __('layout.cta.contact') }}
-                </a>
+                <x-phone-cta class="navbar__phone" />
+
+                <button
+                    type="button"
+                    class="btn btn-primary navbar__cta"
+                    @click="$dispatch('open-consultation-modal')"
+                    data-analytics="sticky_cta_click"
+                >
+                    {{ __('home.sticky.cta') }}
+                </button>
 
                 <button class="navbar__hamburger"
                         @click="open = true"
@@ -124,11 +131,15 @@
             @endforeach
 
             <div class="drawer__cta">
-                <a href="{{ lroute('contact') }}"
-                   class="btn btn-primary"
-                   @click="open = false">
-                    {{ __('layout.cta.contact') }}
-                </a>
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    @click="open = false; $dispatch('open-consultation-modal')"
+                    data-analytics="sticky_cta_click"
+                >
+                    {{ __('home.sticky.cta') }}
+                </button>
+                <x-phone-cta class="drawer__phone" />
             </div>
         </nav>
 

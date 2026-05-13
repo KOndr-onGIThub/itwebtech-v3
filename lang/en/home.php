@@ -7,12 +7,13 @@ return [
         'description' => 'Custom websites and web applications built for results. Maintenance-free, no WordPress, no hidden fees. 18 years of experience. Free consultation.',
     ],
 
+    // TODO: review pro EN — copy podle CS varianty A (OND-100)
     'hero' => [
-        'heading'       => 'Custom websites for people who can tell the difference.',
-        'subline'       => 'No off-the-shelf templates, no monthly maintenance fees. We build the website starting from understanding what you need to sell — not from prefabricated parts.',
-        'chips'         => ['Strategy', 'Design', 'Code', 'Copy'],
-        'cta_primary'   => 'Book a consultation',
-        'cta_secondary' => 'How I work →',
+        'eyebrow'       => 'Custom websites & web applications',
+        'heading'       => 'A website that finally earns its keep. No WordPress, no maintenance, no excuses.',
+        'subline'       => '18 years at Toyota taught me that quality isn\'t an accident — it\'s a process. I apply the same approach to every website: custom code, a clear price up front and direct contact with me from the first meeting through launch.',
+        'cta_primary'   => 'Get a price quote',
+        'cta_secondary' => 'Book a 30-min consultation',
     ],
 
     'modal' => [
@@ -25,11 +26,17 @@ return [
 
     'anchors' => [
         'how_i_work' => 'how-i-work',
+        'poptavka'   => 'poptavka',
     ],
 
     'social_proof' => [
+        'rating_aria'  => '5 out of 5 rating',
+        'rating_value' => '5.0',
+        'reviews'      => '(21 reviews)',
+        'projects'     => '40+ projects',
+        'experience'   => '18 years of experience',
+        'response'     => '24h response',
         'brands' => [
-            ['name' => 'Toyota',                'image' => 'toyota.png'],
             ['name' => 'MAKOplast',             'image' => null],
             ['name' => 'Yolk Studio',           'image' => 'yolk_studio.png'],
             ['name' => 'BARANA s.r.o.',         'image' => null],
@@ -169,10 +176,11 @@ return [
         ],
     ],
 
+    // TODO: review pro EN — copy podle CS varianty A (OND-100)
     'cta' => [
         'heading'      => 'Ready to start? The consultation is free.',
-        'consultation' => 'Book a consultation',
-        'message'      => 'Or send me a message — I\'ll reply within 24 hours',
+        'consultation' => 'Get a price quote',
+        'message'      => 'Book a 30-min consultation',
     ],
 
     'final_cta' => [
@@ -180,8 +188,39 @@ return [
         'quote_author' => 'Hana Jaskmanická, Executive Director, VP Industry',
         'heading'      => 'I\'ll give you an honest opinion on your project.',
         'subtext'      => 'Even if working together doesn\'t make sense — I\'ll tell you straight.',
-        'cta_label'    => 'Book a consultation',
+        'cta_label'    => 'Get a price quote',
+        'cta_secondary' => 'Book a 30-min consultation',
         'cta_note'     => 'Free. No commitment.',
+    ],
+
+    // TODO: review pro EN — copy podle CS varianty A (OND-100)
+    'inline_form' => [
+        'eyebrow'         => 'Enquiry',
+        'heading'         => 'Send me a few lines about your project. I\'ll reply within 24 hours.',
+        'description'     => 'No salesperson, no ten-field form. A short description is enough — I\'ll reply personally and we\'ll see if working together makes sense.',
+        'name'            => 'Full name',
+        'email'           => 'Email',
+        'phone'           => 'Phone (optional)',
+        'message'         => 'What do you need solved?',
+        'placeholders'    => [
+            'name'    => 'John Smith',
+            'email'   => 'john@company.com',
+            'phone'   => '+420 000 000 000',
+            'message' => 'E.g. a new website for a manufacturing company, 5–10 pages',
+        ],
+        'submit'          => 'Send enquiry',
+        'submitting'      => 'Sending…',
+        'privacy_prefix'  => 'By submitting you agree to processing of personal data in line with the ',
+        'privacy_link'    => 'privacy policy',
+        'success'         => 'Thanks, the enquiry has arrived. I\'ll get back to you as soon as possible.',
+        'error'           => 'The enquiry could not be saved right now. Please try again.',
+    ],
+
+    // TODO: review pro EN — copy podle CS varianty A (OND-100)
+    'sticky' => [
+        'cta'    => 'Book a consultation',
+        'mobile' => 'Enquiry',
+        'phone'  => 'Call',
     ],
 
 ];
