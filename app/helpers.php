@@ -101,19 +101,31 @@ if (!function_exists('responsive_image_srcsets')) {
         // Konfigurace odpovídá `import.meta.glob` query v resources/js/app.js
         $widthList = [320, 480, 640, 768, 960, 1280, 1536];
 
+        $maxWidths = count($widthList);
+
         $variants = ['avif' => [], 'webp' => []];
         foreach (['avif', 'webp'] as $format) {
             // Realpath kvůli ochraně před symlinky / traverzal; basename už je
             // pathinfo()-očištěný, takže do glob patternu jde bezpečně.
             $matches = glob($assetsDir . '/' . $basename . '-*.' . $format) ?: [];
-            // Třídění podle velikosti — Vite imagetools generuje výstupy
-            // v pořadí query.w; menší šířka = menší soubor.
-            usort($matches, fn ($a, $b) => filesize($a) <=> filesize($b));
 
             $count = count($matches);
             if ($count === 0) {
                 continue;
             }
+
+            // Hotfix 500: pokud je víc variantů než widthList (např. `yolk_preview.jpg`
+            // i `yolk_preview.webp` v resources/img/.../yolk/ — oba zdroje vygenerují
+            // 7 šířek se stejným basename → glob vrátí 14), je nemožné z file system
+            // pouze přiřadit šířky správně. Bail-out na Alpine fallback je bezpečnější
+            // než vyrenderovat zkažený srcset (nebo dříve undefined-offset → 500).
+            if ($count > $maxWidths) {
+                return $cache[$path] = null;
+            }
+
+            // Třídění podle velikosti — Vite imagetools generuje výstupy
+            // v pořadí query.w; menší šířka = menší soubor.
+            usort($matches, fn ($a, $b) => filesize($a) <=> filesize($b));
 
             // Pokud je variantů míň než widthList (source byl menší než 1536px),
             // vezmeme jen prvních N šířek od nejmenší.
