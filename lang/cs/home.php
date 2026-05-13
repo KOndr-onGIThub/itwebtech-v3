@@ -294,20 +294,25 @@ return [
 
     'faq' => [
         'heading' => 'Časté otázky',
+        // `key` je stabilní slug pro analytics (data-faq-key) a JSON-LD; ne lokalizovat.
         'items'   => [
             [
+                'key'      => 'price',
                 'question' => 'Kolik to bude stát?',
                 'answer'   => 'Orientační vstupní ceny najdete v cenové kotvě výše — web od 20 000 Kč, aplikace od 60 000 Kč, e-shop od 80 000 Kč. Přesnou cenu dostanete písemně po krátké konzultaci, na faktuře je pak přesně to, co je ve specifikaci.',
             ],
             [
+                'key'      => 'duration',
                 'question' => 'Jak dlouho to trvá?',
                 'answer'   => 'Od první zprávy ke spuštěnému webu typicky 3–10 týdnů — 60 minut konzultace, 2–5 dní na specifikaci, 3–10 týdnů na tvorbu a spuštění do druhého dne po schválení. Detailní timing pro váš projekt sepíšu do specifikace.',
             ],
             [
+                'key'      => 'satisfaction',
                 'question' => 'Co když nebudu spokojený?',
                 'answer'   => 'Pracuji v krátkých iteracích a posílám průběžné náhledy — nečekám na konec projektu, abych zjistil, jestli to sedí. Pokud něco nesedí, řešíme to hned, ne až po faktuře. Co je ve specifikaci, to dodám.',
             ],
             [
+                'key'      => 'maintenance-free',
                 'question' => 'Co jsou „bezúdržbové weby"?',
                 'answer'   => 'Žádný WordPress, žádné pluginy, žádné měsíční bezpečnostní aktualizace. Web stojí na vlastním kódu — běží sám, nevyžaduje pravidelné opravy a nepadá kvůli kolizi šablon. Drobné změny obsahu řešíme přímo, bez ticketu.',
             ],

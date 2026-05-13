@@ -296,20 +296,25 @@ return [
 
     'faq' => [
         'heading' => 'Frequently asked questions',
+        // `key` is a stable slug for analytics (data-faq-key) and JSON-LD; do not localize.
         'items'   => [
             [
+                'key'      => 'price',
                 'question' => 'What will it cost?',
                 'answer'   => 'See indicative entry prices in the pricing anchor above — websites from CZK 20,000, web apps from CZK 60,000, e-shops from CZK 80,000. You get an exact written quote after a short consultation, and the invoice matches the specification.',
             ],
             [
+                'key'      => 'duration',
                 'question' => 'How long does it take?',
                 'answer'   => 'From first message to a launched site typically 3–10 weeks — 60 minutes of consultation, 2–5 days for the specification, 3–10 weeks for the build and launch by the next business day after approval. The detailed timeline for your project goes into the specification.',
             ],
             [
+                'key'      => 'satisfaction',
                 'question' => 'What if I\'m not happy with the result?',
                 'answer'   => 'I work in short iterations and send progress previews — I don\'t wait until the end of the project to find out whether it fits. If something is off, we fix it right away, not after the invoice. What\'s in the specification, I deliver.',
             ],
             [
+                'key'      => 'maintenance-free',
                 'question' => 'What does "maintenance-free" mean?',
                 'answer'   => 'No WordPress, no plugins, no monthly security updates. The site runs on custom code — it just works, doesn\'t need regular patching and doesn\'t break from template collisions. Small content changes go through me directly, with no ticket.',
             ],
