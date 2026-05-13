@@ -70,27 +70,33 @@ return [
     ],
 
     'how_i_work' => [
-        'heading' => 'A simple process without unnecessary complications.',
+        'heading'   => 'From first message to a launched website — 4 clear steps.',
+        'cta_intro' => 'Let\'s jump straight to step 1.',
+        'cta_label' => 'Book a consultation',
         'steps'   => [
             [
-                'heading'      => 'Understanding',
+                'heading'      => 'Consultation',
+                'time'         => '60 min, within a week',
                 'text'         => 'I start with a consultation, not a form. I need to understand your business, your customers and what the website should actually do — bring contacts, sell a product or build trust.',
                 'quote_text'   => 'He truly listened to my needs and then turned them into something I was completely satisfied with.',
                 'quote_author' => 'Magda Pernicová, Realiťačky v akci',
             ],
             [
-                'heading'      => 'Exact specification',
+                'heading'      => 'Specification',
+                'time'         => '2–5 days',
                 'text'         => 'Before I start working, you\'ll receive a written specification: what will be on the website, how many pages, what technology and how much it will cost. No surprises on the invoice. I\'ll estimate the delivery date realistically — always upfront, never retrospectively.',
                 'quote_text'   => 'He rigorously analyses the situation and wants to understand current processes. He collects requirements from clients and explores visions for the future.',
                 'quote_author' => 'Jan Stybor, Head of Project Department, Toyota',
                 'note'         => 'Note on timelines: a website doesn\'t only depend on my side. Approvals, materials from the client and feedback are part of the process. The timeline is always an estimate, not a binding commitment — and I say that openly from the start.',
             ],
             [
-                'heading' => 'Build with your feedback',
+                'heading' => 'Build',
+                'time'    => '3–10 weeks',
                 'text'    => 'I keep you informed about progress and involve you in key decisions. The result reflects what you wanted — because I don\'t wait until the end of the project to find out.',
             ],
             [
                 'heading' => 'Launch and support',
+                'time'    => 'by the next business day',
                 'text'    => 'Once you approve deployment, the site usually goes live within one business day. After launch I stay available — small tweaks, technical questions and analytics help go through me directly, with no ticket and no waiting.',
                 'note'    => 'Launch within 1 business day of approval.',
             ],
@@ -286,6 +292,46 @@ return [
         'cta_label'    => 'Get a price quote',
         'cta_secondary' => 'Book a 30-min consultation',
         'cta_note'     => 'Free. No commitment.',
+    ],
+
+    'faq' => [
+        'heading' => 'Frequently asked questions',
+        'items'   => [
+            [
+                'question' => 'What will it cost?',
+                'answer'   => 'See indicative entry prices in the pricing anchor above — websites from CZK 20,000, web apps from CZK 60,000, e-shops from CZK 80,000. You get an exact written quote after a short consultation, and the invoice matches the specification.',
+            ],
+            [
+                'question' => 'How long does it take?',
+                'answer'   => 'From first message to a launched site typically 3–10 weeks — 60 minutes of consultation, 2–5 days for the specification, 3–10 weeks for the build and launch by the next business day after approval. The detailed timeline for your project goes into the specification.',
+            ],
+            [
+                'question' => 'What if I\'m not happy with the result?',
+                'answer'   => 'I work in short iterations and send progress previews — I don\'t wait until the end of the project to find out whether it fits. If something is off, we fix it right away, not after the invoice. What\'s in the specification, I deliver.',
+            ],
+            [
+                'question' => 'What does "maintenance-free" mean?',
+                'answer'   => 'No WordPress, no plugins, no monthly security updates. The site runs on custom code — it just works, doesn\'t need regular patching and doesn\'t break from template collisions. Small content changes go through me directly, with no ticket.',
+            ],
+            // Archive: additional FAQ items move off the homepage (to /faq or /sluzby — out of OND-121 scope).
+        ],
+    ],
+
+    'faq_form' => [
+        'eyebrow'     => 'Got a different question?',
+        'heading'     => 'Send it over.',
+        'description' => 'I pick it up and reply by the next business day. No sales pressure.',
+        'name'        => 'Name',
+        'email'       => 'Email',
+        'message'     => 'Your question',
+        'placeholders' => [
+            'name'    => 'John Smith',
+            'email'   => 'john@company.com',
+            'message' => 'E.g. Can you deliver before the end of the quarter?',
+        ],
+        'submit'      => 'Send question',
+        'submitting'  => 'Sending…',
+        'success'     => 'Thanks, the question has arrived. I\'ll get back to you as soon as possible.',
     ],
 
     // TODO: review pro EN — copy podle CS varianty A (OND-100)

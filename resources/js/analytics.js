@@ -116,6 +116,10 @@ function bindFormSuccess() {
     window.addEventListener('inline-form-submit-success', () => {
         dispatch('inline_form_submit_success');
     });
+    // FAQ mikro-formulář (OND-121 T18) — server-side success.
+    window.addEventListener('faq-form-submit-success', () => {
+        dispatch('faq_form_submit_success');
+    });
     // Záloha kromě click delegate na submit tlačítku — Enter v textovém poli
     // může v některých prohlížečích vyvolat submit bez synthesized click.
     window.addEventListener('inline-form-submit-attempt', () => {

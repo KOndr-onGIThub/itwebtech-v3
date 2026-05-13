@@ -19,26 +19,44 @@
         classImg="section-hero__bg-img"
     />
 
-    <div class="container-site">
-        @if (trim((string) __('home.hero.eyebrow')) !== '')
-            <p class="section-subheading section-hero__eyebrow">{{ __('home.hero.eyebrow') }}</p>
-        @endif
-        <h1 class="section-hero__heading">
-            {{ __('home.hero.heading') }}
-        </h1>
-        <p class="section-hero__subline">{{ __('home.hero.subline') }}</p>
-        <div class="section-hero__actions">
-            <a
-                href="#{{ __('home.anchors.poptavka') }}"
-                class="btn btn-primary"
-                data-analytics="hero_cta_primary_click"
-            >
-                {{ __('home.hero.cta_primary') }}
-                <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-            </a>
-            {{-- Sekundární CTA „Domluvit konzultaci" — Reservanto widget (OND-116/T15).
-                 Text widgetu řízen z config/site.php (default „15 min. konzultace ZDARMA"). --}}
-            <x-booking.reservanto-widget analyticsEvent="hero_cta_secondary_click" />
+    <div class="container-site section-hero__inner">
+        <div class="section-hero__content">
+            @if (trim((string) __('home.hero.eyebrow')) !== '')
+                <p class="section-subheading section-hero__eyebrow">{{ __('home.hero.eyebrow') }}</p>
+            @endif
+            <h1 class="section-hero__heading">
+                {{ __('home.hero.heading') }}
+            </h1>
+            <p class="section-hero__subline">{{ __('home.hero.subline') }}</p>
+            <div class="section-hero__actions">
+                <a
+                    href="#{{ __('home.anchors.poptavka') }}"
+                    class="btn btn-primary"
+                    data-analytics="hero_cta_primary_click"
+                >
+                    {{ __('home.hero.cta_primary') }}
+                    <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
+                </a>
+                {{-- Sekundární CTA „Domluvit konzultaci" — Reservanto widget (OND-116/T15).
+                     Text widgetu řízen z config/site.php (default „15 min. konzultace ZDARMA").
+                     OND-122: analyticsEvent prop přidá data-analytics na wrapping div, klik z renderovaného buttonu bubble-uje. --}}
+                <x-booking.reservanto-widget analyticsEvent="hero_cta_secondary_click" />
+            </div>
+        </div>
+
+        {{-- T20 — Foto Ondřeje v hero (polo-portrét vpravo, desktop only).
+             Decision A1 (OND-102): používáme existující ondrej_kriska.jpg.
+             Mobile: skryto (preferujeme compact hero nad foldem). --}}
+        <div class="section-hero__portrait" aria-hidden="true">
+            <x-responsive-image
+                path="about/ondrej_kriska.jpg"
+                alt="{{ __('home.why_me.photo_alt') }}"
+                sizes="(min-width: 1024px) 360px, 0px"
+                loading="eager"
+                fetchpriority="high"
+                classPicture="section-hero__portrait-picture"
+                classImg="section-hero__portrait-img"
+            />
         </div>
     </div>
 </section>
@@ -243,6 +261,9 @@
                 <span class="step-number">{{ $i + 1 }}</span>
                 <div class="step-content">
                     <h3>{{ $step['heading'] }}</h3>
+                    @if (!empty($step['time']))
+                    <p class="step-time">{{ $step['time'] }}</p>
+                    @endif
                     <p>{{ $step['text'] }}</p>
                     @if (!empty($step['quote_text']))
                     <blockquote class="inline-quote">
@@ -257,6 +278,12 @@
             </li>
             @endforeach
         </ol>
+
+        {{-- T17 — CTA pod sekcí: vede rovnou ke kroku 1 (Reservanto). --}}
+        <div class="section-footer-cta steps-footer-cta" data-reveal>
+            <p class="steps-footer-cta__intro">{{ __('home.how_i_work.cta_intro') }}</p>
+            <x-booking.reservanto-widget :ctaText="__('home.how_i_work.cta_label')" />
+        </div>
     </div>
 </section>
 
@@ -549,6 +576,123 @@
 </section>
 
 {{-- ===================================================
+     FAQ — 4 otázky (OND-121, T19)
+     Plán §4.10 / §3 (pozice 9). 4 otázky v cs/en/de.
+     =================================================== --}}
+<section id="faq" class="section-wrapper section-faq" data-reveal>
+    <div class="container-site">
+        <header class="section-header">
+            <h2>{{ __('home.faq.heading') }}</h2>
+        </header>
+
+        <div class="faq-list" data-reveal-group>
+            @foreach (__('home.faq.items') as $i => $item)
+            <details
+                class="faq-item"
+                data-reveal
+                data-q-id="{{ $i }}"
+                style="transition-delay: {{ $i * 60 }}ms"
+            >
+                <summary class="faq-item__question">
+                    <span>{{ $item['question'] }}</span>
+                    <span class="faq-item__icon" aria-hidden="true"></span>
+                </summary>
+                <div class="faq-item__answer">
+                    <p>{{ $item['answer'] }}</p>
+                </div>
+            </details>
+            @endforeach
+        </div>
+
+        {{-- T18 — Mikro-formulář po FAQ: zachytí lead, který nenašel odpověď v FAQ.
+             Posílá na stejný endpoint /poptavka (home.lead.store), source = home.faq. --}}
+        <div class="faq-form" data-reveal>
+            <div class="faq-form__intro">
+                <p class="section-subheading">{{ __('home.faq_form.eyebrow') }}</p>
+                <h3 class="faq-form__heading">{{ __('home.faq_form.heading') }}</h3>
+                <p class="faq-form__desc">{{ __('home.faq_form.description') }}</p>
+            </div>
+
+            @if (session('faq_lead_success'))
+                <div class="landing-alert landing-alert--success" role="status">
+                    {{ __('home.faq_form.success') }}
+                </div>
+            @endif
+
+            @if ($errors->any() && session('home_lead_target') === 'faq')
+                <div class="landing-alert landing-alert--error" role="alert">
+                    {{ $errors->first() }}
+                </div>
+            @endif
+
+            <form
+                method="POST"
+                action="{{ route('home.lead.store') }}"
+                novalidate
+                x-data="{ submitting: false }"
+                @submit="submitting = true"
+                class="faq-form__form"
+            >
+                @csrf
+                <input type="hidden" name="source" value="home.faq">
+
+                <div class="faq-form__grid">
+                    <div class="form-group">
+                        <label for="faq-lead-name">{{ __('home.faq_form.name') }} <span aria-hidden="true">*</span></label>
+                        <input
+                            type="text"
+                            id="faq-lead-name"
+                            name="name"
+                            value="{{ session('home_lead_target') === 'faq' ? old('name') : '' }}"
+                            required
+                            placeholder="{{ __('home.faq_form.placeholders.name') }}"
+                            autocomplete="name"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="faq-lead-email">{{ __('home.faq_form.email') }} <span aria-hidden="true">*</span></label>
+                        <input
+                            type="email"
+                            id="faq-lead-email"
+                            name="email"
+                            value="{{ session('home_lead_target') === 'faq' ? old('email') : '' }}"
+                            required
+                            placeholder="{{ __('home.faq_form.placeholders.email') }}"
+                            autocomplete="email"
+                        >
+                    </div>
+
+                    <div class="form-group form-group--full">
+                        <label for="faq-lead-message">{{ __('home.faq_form.message') }} <span aria-hidden="true">*</span></label>
+                        <textarea
+                            id="faq-lead-message"
+                            name="message"
+                            rows="3"
+                            required
+                            placeholder="{{ __('home.faq_form.placeholders.message') }}"
+                        >{{ session('home_lead_target') === 'faq' ? old('message') : '' }}</textarea>
+                    </div>
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary faq-form__submit"
+                    :disabled="submitting"
+                    data-analytics="faq_form_submit_attempt"
+                >
+                    <span class="btn__inner" x-show="!submitting">
+                        {{ __('home.faq_form.submit') }}
+                        <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
+                    </span>
+                    <span class="btn__inner" x-show="submitting" x-cloak>{{ __('home.faq_form.submitting') }}</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+{{-- ===================================================
      INLINE POPTÁVKA (OND-100, T05)
      =================================================== --}}
 @include('partials.home-inline-form')
@@ -602,12 +746,20 @@
 @push('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        @if ($errors->any() || session('home_lead_success'))
-        document.getElementById('{{ __('home.anchors.poptavka') }}')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        @php
+            $leadTarget = session('home_lead_target');
+            $scrollAnchor = $leadTarget === 'faq' ? 'faq' : __('home.anchors.poptavka');
+        @endphp
+        @if ($errors->any() || session('home_lead_success') || session('faq_lead_success'))
+        document.getElementById('{{ $scrollAnchor }}')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         @endif
 
         @if (session('home_lead_success'))
         window.dispatchEvent(new CustomEvent('inline-form-submit-success'));
+        @endif
+
+        @if (session('faq_lead_success'))
+        window.dispatchEvent(new CustomEvent('faq-form-submit-success'));
         @endif
     });
 </script>

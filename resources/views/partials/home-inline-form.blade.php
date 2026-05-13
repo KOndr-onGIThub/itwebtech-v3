@@ -17,11 +17,16 @@
                 </div>
             @endif
 
-            @if ($errors->any())
+            {{-- Zobrazujeme chybu jen pokud cíl je tento formulář (T18 přidal druhý formulář na FAQ). --}}
+            @if ($errors->any() && session('home_lead_target') !== 'faq')
                 <div class="landing-alert landing-alert--error" role="alert">
                     {{ $errors->first() }}
                 </div>
             @endif
+
+            {{-- Po neúspěšném submitu FAQ formuláře (T18) nechceme předvyplnit inline formulář
+                 FAQ daty ani zobrazit FAQ chyby zde — proto guard přes home_lead_target. --}}
+            @php($isInlineTarget = session('home_lead_target') !== 'faq')
 
             <form
                 method="POST"
@@ -39,12 +44,12 @@
                             type="text"
                             id="home-lead-name"
                             name="name"
-                            value="{{ old('name') }}"
+                            value="{{ $isInlineTarget ? old('name') : '' }}"
                             required
                             placeholder="{{ __('home.inline_form.placeholders.name') }}"
                             autocomplete="name"
                         >
-                        @error('name') <p class="landing-field-error">{{ $message }}</p> @enderror
+                        @if ($isInlineTarget) @error('name') <p class="landing-field-error">{{ $message }}</p> @enderror @endif
                     </div>
 
                     <div class="form-group">
@@ -53,12 +58,12 @@
                             type="email"
                             id="home-lead-email"
                             name="email"
-                            value="{{ old('email') }}"
+                            value="{{ $isInlineTarget ? old('email') : '' }}"
                             required
                             placeholder="{{ __('home.inline_form.placeholders.email') }}"
                             autocomplete="email"
                         >
-                        @error('email') <p class="landing-field-error">{{ $message }}</p> @enderror
+                        @if ($isInlineTarget) @error('email') <p class="landing-field-error">{{ $message }}</p> @enderror @endif
                     </div>
 
                     <div class="form-group form-group--full">
@@ -67,11 +72,11 @@
                             type="tel"
                             id="home-lead-phone"
                             name="phone"
-                            value="{{ old('phone') }}"
+                            value="{{ $isInlineTarget ? old('phone') : '' }}"
                             placeholder="{{ __('home.inline_form.placeholders.phone') }}"
                             autocomplete="tel"
                         >
-                        @error('phone') <p class="landing-field-error">{{ $message }}</p> @enderror
+                        @if ($isInlineTarget) @error('phone') <p class="landing-field-error">{{ $message }}</p> @enderror @endif
                     </div>
 
                     <div class="form-group form-group--full">
@@ -82,8 +87,8 @@
                             rows="5"
                             required
                             placeholder="{{ __('home.inline_form.placeholders.message') }}"
-                        >{{ old('message') }}</textarea>
-                        @error('message') <p class="landing-field-error">{{ $message }}</p> @enderror
+                        >{{ $isInlineTarget ? old('message') : '' }}</textarea>
+                        @if ($isInlineTarget) @error('message') <p class="landing-field-error">{{ $message }}</p> @enderror @endif
                     </div>
                 </div>
 
