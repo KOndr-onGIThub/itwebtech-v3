@@ -134,8 +134,23 @@ return [
     ],
 
     'portfolio' => [
-        'heading' => 'Portfolio',
-        'cta'     => 'Všechny projekty →',
+        'heading'    => 'Realizované projekty',
+        'cta'        => 'Všechny projekty →',
+        'detail_cta' => 'Více o projektu',
+        'cards' => [
+            'pitarena' => [
+                'client'  => 'PitArena',
+                'outcome' => 'Tréninky bývají obsazené měsíce dopředu — rezervace, vouchery i registrace běží přes web bez ručního zásahu.',
+            ],
+            'barana' => [
+                'client'  => 'BARANA',
+                'outcome' => 'Premium prezentace připravená přímo pro placené kampaně Meta Ads / Google Ads — návštěvník chápe nabídku bez nutnosti volat.',
+            ],
+            'nove-interiery' => [
+                'client'  => 'Nové interiéry',
+                'outcome' => 'Web předem odfiltruje irelevantní poptávky a vystupuje jako první obchodní schůzka — klient zpětně potvrzuje vyšší věrohodnost značky.',
+            ],
+        ],
     ],
 
     'services' => [

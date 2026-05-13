@@ -135,8 +135,23 @@ return [
     ],
 
     'portfolio' => [
-        'heading' => 'Portfolio',
-        'cta'     => 'All projects →',
+        'heading'    => 'Selected projects',
+        'cta'        => 'All projects →',
+        'detail_cta' => 'See the project',
+        'cards' => [
+            'pitarena' => [
+                'client'  => 'PitArena',
+                'outcome' => 'Training slots are booked months ahead — bookings, vouchers and event sign-ups all run through the web without manual handling.',
+            ],
+            'barana' => [
+                'client'  => 'BARANA',
+                'outcome' => 'A premium presentation built directly for Meta Ads and Google Ads campaigns — visitors grasp the offer without picking up the phone.',
+            ],
+            'nove-interiery' => [
+                'client'  => 'Nové interiéry',
+                'outcome' => 'The site pre-filters irrelevant enquiries and acts as the first sales meeting — the client reports a noticeably stronger brand credibility.',
+            ],
+        ],
     ],
 
     'services' => [
