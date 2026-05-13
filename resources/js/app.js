@@ -444,19 +444,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const apply = () => {
         const currentScrollY = window.scrollY;
 
-        // Glass/border effect after 20px scroll
+        // OND-123 follow-up: výhradně classList.toggle (žádné inline style writes
+        // ani reads). PSI forced reflow 1,2 s předtím — atribuce neukázala viník,
+        // tohle uzavírá nejtypičtější write path během scroll/rAF cyklu.
         navbar.classList.toggle('is-scrolled', currentScrollY > 20);
-
-        // Hide on scroll down, show on scroll up (only after passing navbar height)
-        if (currentScrollY > 80) {
-            if (currentScrollY > lastScrollY) {
-                navbar.style.transform = 'translateY(-100%)';
-            } else {
-                navbar.style.transform = '';
-            }
-        } else {
-            navbar.style.transform = '';
-        }
+        navbar.classList.toggle(
+            'is-hidden',
+            currentScrollY > 80 && currentScrollY > lastScrollY,
+        );
 
         lastScrollY = currentScrollY;
         navTicking = false;

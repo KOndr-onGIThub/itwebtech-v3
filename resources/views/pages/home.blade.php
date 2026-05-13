@@ -228,11 +228,16 @@
         <div class="why-me-layout">
             <div class="why-me-bio" data-reveal>
                 <div class="why-me-photo">
+                    {{-- OND-123 follow-up: tighter sizes (320 CSS px max na mobile)
+                         — PSI servoval 768×1152 pro displej 358×537 (úspora 16 KiB). --}}
                     <x-responsive-image
                         path="about/ondrej_kriska.jpg"
                         alt="{{ __('home.why_me.photo_alt') }}"
-                        sizes="(min-width: 768px) 360px, 80vw"
+                        sizes="(min-width: 768px) 360px, 320px"
                         loading="lazy"
+                        decoding="async"
+                        width="360"
+                        height="540"
                         classImg="why-me-photo__img"
                     />
                 </div>

@@ -31,25 +31,56 @@
         </script>
     @endif
 
-    {{-- GA4 (volitelný paralelní tool). --}}
-    @if ($ga4Id)
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $ga4Id }}"></script>
+    {{-- GA4 + Microsoft Clarity — OND-123 follow-up:
+         PSI mobile audit hlásil 54 KiB nepoužitého JS (GTM/gtag) + 25 KiB
+         Clarity + 3,4 s main-thread práce. Odkládáme jejich init do
+         `requestIdleCallback` (fallback `setTimeout`) — měření tím získá idle
+         pool po LCP/TTI, ale eventy se stále zachytí. dataLayer/gtag fronta
+         je k dispozici synchronně, takže `data-analytics` z UI nic neztratí. --}}
+    @if ($ga4Id || $clarityId)
         <script>
-            window.dataLayer = window.dataLayer || [];
-            window.gtag = window.gtag || function () { dataLayer.push(arguments); };
-            gtag('js', new Date());
-            gtag('config', @json($ga4Id), { 'anonymize_ip': true });
-        </script>
-    @endif
+            (function () {
+                // Pre-flush fronta — Analytics modul může pushovat eventy ještě
+                // před tím, než reálné skripty doběhnou.
+                window.dataLayer = window.dataLayer || [];
+                window.gtag = window.gtag || function () { dataLayer.push(arguments); };
+                window.clarity = window.clarity || function () {
+                    (window.clarity.q = window.clarity.q || []).push(arguments);
+                };
 
-    {{-- Microsoft Clarity — heatmapy + session recordings. --}}
-    @if ($clarityId)
-        <script>
-            (function(c,l,a,r,i,t,y){
-                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-            })(window, document, "clarity", "script", @json($clarityId));
+                var ga4Id = @json($ga4Id);
+                var clarityId = @json($clarityId);
+
+                function loadAnalytics() {
+                    if (ga4Id) {
+                        var s = document.createElement('script');
+                        s.async = true;
+                        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(ga4Id);
+                        document.head.appendChild(s);
+                        gtag('js', new Date());
+                        gtag('config', ga4Id, { 'anonymize_ip': true });
+                    }
+                    if (clarityId) {
+                        var c = document.createElement('script');
+                        c.async = true;
+                        c.src = 'https://www.clarity.ms/tag/' + encodeURIComponent(clarityId);
+                        document.head.appendChild(c);
+                    }
+                }
+
+                if (typeof requestIdleCallback === 'function') {
+                    requestIdleCallback(loadAnalytics, { timeout: 4000 });
+                } else {
+                    // Safari: po `load` eventu + malý jitter, aby se nepřebíjelo s LCP.
+                    if (document.readyState === 'complete') {
+                        setTimeout(loadAnalytics, 2500);
+                    } else {
+                        window.addEventListener('load', function () {
+                            setTimeout(loadAnalytics, 2500);
+                        }, { once: true });
+                    }
+                }
+            })();
         </script>
     @endif
 
