@@ -12,16 +12,25 @@
         <x-booking.reservanto-widget />
         <x-booking.reservanto-widget ctaText="Domluvit konzultaci" />
 --}}
-@props(['ctaText' => null])
+@props([
+    'ctaText' => null,
+    // Analytics event jméno (OND-122). Per kontextu volajícího:
+    //   hero      → 'hero_cta_secondary_click'
+    //   final_cta → 'final_cta_secondary_click'
+    // Atribut se přidá na wrapping div; klik na vykreslený button bubble-uje.
+    'analyticsEvent' => null,
+])
 @php($booking = config('site.booking'))
 @if ($booking['enabled'] ?? false)
-    <div class="reservanto-widget"
-         data-text="{{ $ctaText ?? $booking['cta_text'] }}"
-         data-id="{{ $booking['widget_id'] }}"
-         data-resourceid="{{ $booking['resource_id'] }}"
-         data-color-text="#313131"
-         data-color-text-shadow="transparent"
-         data-color-bg="#ffcc00"
-         data-color-bg-hover="#ffdf00"
-         data-color-boxshadow="#c29b00"></div>
+    <div
+        @if ($analyticsEvent) data-analytics="{{ $analyticsEvent }}" @endif
+        class="reservanto-widget"
+        data-text="{{ $ctaText ?? $booking['cta_text'] }}"
+        data-id="{{ $booking['widget_id'] }}"
+        data-resourceid="{{ $booking['resource_id'] }}"
+        data-color-text="#313131"
+        data-color-text-shadow="transparent"
+        data-color-bg="#ffcc00"
+        data-color-bg-hover="#ffdf00"
+        data-color-boxshadow="#c29b00"></div>
 @endif

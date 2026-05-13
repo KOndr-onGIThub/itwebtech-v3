@@ -38,7 +38,7 @@
             </a>
             {{-- Sekundární CTA „Domluvit konzultaci" — Reservanto widget (OND-116/T15).
                  Text widgetu řízen z config/site.php (default „15 min. konzultace ZDARMA"). --}}
-            <x-booking.reservanto-widget />
+            <x-booking.reservanto-widget analyticsEvent="hero_cta_secondary_click" />
         </div>
     </div>
 </section>
@@ -167,7 +167,7 @@
      T08 — CENOVÁ KOTVA
      Plán §4.7 / §3 (OND-118). Mezi Primary services a Proč já.
      =================================================== --}}
-<section class="section-wrapper" data-reveal>
+<section id="section-price" class="section-wrapper" data-reveal data-analytics-view="price_anchor_view">
     <div class="container-site">
         <header class="section-header">
             <h2>{{ __('home.price_anchor.heading') }}</h2>
@@ -279,7 +279,7 @@
         ->values();
 @endphp
 
-<section class="section-wrapper section-alt section-wrapper--glow" data-reveal>
+<section id="section-testimonials" class="section-wrapper section-alt section-wrapper--glow" data-reveal data-analytics-view="testimonial_view">
     <div class="container-site">
         <header class="section-header">
             <h2>{{ __('home.testimonials.heading') }}</h2>
@@ -468,7 +468,13 @@
                 @endphp
 
                 <article class="home-projects-card" data-reveal>
-                    <a href="{{ $detailHref }}" class="home-projects-card__visual" aria-label="{{ $clientLabel }} — {{ __('projects.view_project') }}">
+                    <a
+                        href="{{ $detailHref }}"
+                        class="home-projects-card__visual"
+                        aria-label="{{ $clientLabel }} — {{ __('projects.view_project') }}"
+                        data-analytics="project_card_click"
+                        data-analytics-props='{"slug":"{{ $project->slug }}"}'
+                    >
                         @if ($hero)
                             <x-portfolio.screenshot
                                 :path="$hero->path"
@@ -498,7 +504,12 @@
                             <p class="home-projects-card__outcome">{{ $outcome }}</p>
                         @endif
 
-                        <a href="{{ $detailHref }}" class="home-projects-card__cta">
+                        <a
+                            href="{{ $detailHref }}"
+                            class="home-projects-card__cta"
+                            data-analytics="project_card_click"
+                            data-analytics-props='{"slug":"{{ $project->slug }}"}'
+                        >
                             {{ __('home.portfolio.detail_cta') }}
                             <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
                         </a>
