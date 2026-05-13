@@ -8,11 +8,11 @@ return [
     ],
 
     'hero' => [
-        'heading'       => 'Weby na míru pro lidi, kteří poznají rozdíl.',
-        'subline'       => 'Žádné předpřipravené šablony, žádné měsíční poplatky za údržbu. Web stavíme od pochopení toho, co potřebujete prodat — ne z hotových dílů.',
-        'chips'         => ['Strategie', 'Design', 'Kód', 'Texty'],
-        'cta_primary'   => 'Domluvit konzultaci',
-        'cta_secondary' => 'Jak pracuji →',
+        'eyebrow'       => 'Webové stránky a aplikace na míru',
+        'heading'       => 'Web, který vám konečně vydělá. Bez WordPressu, bez údržby, bez kompromisů.',
+        'subline'       => 'Pro majitele firem, kteří chtějí stránky, které přivádějí zákazníky — ne další položku v účetnictví. 18 let v Toyotě mě naučilo dodávat to, na čem jsme se domluvili.',
+        'cta_primary'   => 'Získat cenovou nabídku',
+        'cta_secondary' => 'Domluvit 30min konzultaci',
     ],
 
     'modal' => [
@@ -25,11 +25,17 @@ return [
 
     'anchors' => [
         'how_i_work' => 'jak-pracuji',
+        'poptavka'   => 'poptavka',
     ],
 
     'social_proof' => [
+        'rating_aria'  => 'Hodnocení 5 z 5',
+        'rating_value' => '5,0',
+        'reviews'      => '(21 recenzí Google + Firmy.cz)',
+        'projects'     => '23+ realizací',
+        'experience'   => '18 let praxe',
+        'response'     => 'Odpověď do 24 hodin',
         'brands' => [
-            ['name' => 'Toyota',                'image' => 'toyota.png'],
             ['name' => 'MAKOplast',             'image' => null],
             ['name' => 'Yolk Studio',           'image' => 'yolk_studio.png'],
             ['name' => 'BARANA s.r.o.',         'image' => null],
@@ -152,7 +158,7 @@ return [
     ],
 
     'testimonials' => [
-        'heading' => 'Co říkají ti, pro které jsem pracoval.',
+        'heading' => 'Co o spolupráci říkají moji klienti.',
     ],
 
     'guarantee' => [
@@ -171,17 +177,46 @@ return [
 
     'cta' => [
         'heading'      => 'Připraveni začít? Konzultace je zdarma.',
-        'consultation' => 'Domluvit konzultaci',
-        'message'      => 'Nebo mi napište — ozvu se do 24 hodin',
+        'consultation' => 'Získat cenovou nabídku',
+        'message'      => 'Domluvit 30min konzultaci',
     ],
 
     'final_cta' => [
         'quote_text'   => 'Díky individuálnímu přístupu, flexibilitě a profesionalitě odpovídá výsledek našim představám.',
         'quote_author' => 'Hana Jaskmanická, výkonná ředitelka, VP Industry',
         'heading'      => 'Řeknu vám upřímný názor na váš projekt.',
-        'subtext'      => 'I kdyby spolupráce nedávala smysl — řeknu vám to rovnou.',
-        'cta_label'    => 'Domluvit konzultaci',
+        'subtext'      => 'Odpovídám do druhého pracovního dne. Pokud spolupráce nedává smysl, řeknu vám to rovnou — žádný obchodní tlak, žádné dotěrné e-maily.',
+        'cta_label'    => 'Získat cenovou nabídku',
+        'cta_secondary' => 'Domluvit 30min konzultaci',
         'cta_note'     => 'Bezplatně. Bez závazku.',
+    ],
+
+    'inline_form' => [
+        'eyebrow'         => 'Poptávka',
+        'heading'         => 'Pošlete mi pár vět o projektu. Ozvu se do 24 hodin.',
+        'description'     => 'Žádný obchodník, žádný formulář na deset polí. Stačí krátký popis — odpovím vám osobně a probereme, jestli má spolupráce smysl.',
+        'name'            => 'Jméno a příjmení',
+        'email'           => 'E-mail',
+        'phone'           => 'Telefon (nepovinný)',
+        'message'         => 'Co potřebujete vyřešit?',
+        'placeholders'    => [
+            'name'    => 'Jan Novák',
+            'email'   => 'jan@firma.cz',
+            'phone'   => '+420 000 000 000',
+            'message' => 'Např. nový web pro výrobní firmu, 5–10 stran',
+        ],
+        'submit'          => 'Odeslat poptávku',
+        'submitting'      => 'Odesílám…',
+        'privacy_prefix'  => 'Odesláním souhlasíte se zpracováním osobních údajů v souladu se ',
+        'privacy_link'    => 'zásadami ochrany osobních údajů',
+        'success'         => 'Děkuji, poptávka dorazila. Ozvu se co nejdříve.',
+        'error'           => 'Poptávku se teď nepodařilo uložit. Zkuste to prosím znovu.',
+    ],
+
+    'sticky' => [
+        'cta'     => 'Domluvit konzultaci',
+        'mobile'  => 'Poptávka',
+        'phone'   => 'Zavolat',
     ],
 
 ];

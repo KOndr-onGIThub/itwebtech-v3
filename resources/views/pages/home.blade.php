@@ -20,27 +20,30 @@
     />
 
     <div class="container-site">
+        @if (trim((string) __('home.hero.eyebrow')) !== '')
+            <p class="section-subheading section-hero__eyebrow">{{ __('home.hero.eyebrow') }}</p>
+        @endif
         <h1 class="section-hero__heading">
             {{ __('home.hero.heading') }}
         </h1>
-        <div class="hero-chips" aria-hidden="true">
-            @foreach (__('home.hero.chips') as $i => $chip)
-                <span class="hero-chip" style="--i:{{ $i }}">{{ $chip }}</span>
-            @endforeach
-        </div>
         <p class="section-hero__subline">{{ __('home.hero.subline') }}</p>
         <div class="section-hero__actions">
-            <button
+            <a
+                href="#{{ __('home.anchors.poptavka') }}"
                 class="btn btn-primary"
-                @click="$dispatch('open-consultation-modal')"
-                type="button"
+                data-analytics="hero_cta_primary_click"
             >
                 {{ __('home.hero.cta_primary') }}
                 <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-            </button>
-            <a href="#{{ __('home.anchors.how_i_work') }}" class="btn btn-secondary">
-                {{ __('home.hero.cta_secondary') }}
             </a>
+            <button
+                class="btn btn-secondary"
+                @click="$dispatch('open-consultation-modal')"
+                data-analytics="hero_cta_secondary_click"
+                type="button"
+            >
+                {{ __('home.hero.cta_secondary') }}
+            </button>
         </div>
     </div>
 </section>
@@ -50,6 +53,17 @@
      =================================================== --}}
 <section class="section-wrapper section-alt section-social-proof" aria-label="Klienti">
     <div class="container-site">
+        <ul class="social-proof-bar" aria-label="{{ __('home.social_proof.rating_aria') }}">
+            <li class="social-proof-bar__item">
+                <span class="social-proof-bar__stars" aria-hidden="true">★★★★★</span>
+                <span class="social-proof-bar__value">{{ __('home.social_proof.rating_value') }}</span>
+                <span class="social-proof-bar__meta">{{ __('home.social_proof.reviews') }}</span>
+            </li>
+            <li class="social-proof-bar__item">{{ __('home.social_proof.projects') }}</li>
+            <li class="social-proof-bar__item">{{ __('home.social_proof.experience') }}</li>
+            <li class="social-proof-bar__item">{{ __('home.social_proof.response') }}</li>
+        </ul>
+
         <div class="brands-grid">
             @foreach (__('home.social_proof.brands') as $brand)
             <div class="brand-item">
@@ -166,7 +180,10 @@
 
 {{-- ===================================================
      PORTFOLIO — PROJEKTY
+     Sekce je skrytá, dokud nebudou připravené reálné screenshoty (T23, CEO).
+     Zapnout přes env SHOW_PORTFOLIO_SECTION=true (config/site.php).
      =================================================== --}}
+@if (config('site.features.show_portfolio_section'))
 <section class="section-wrapper" data-reveal>
     <div class="container-site">
         <header class="section-header">
@@ -226,6 +243,7 @@
         </div>
     </div>
 </section>
+@endif
 
 {{-- ===================================================
      AI COMPARISON — Laik + AI vs. Odborník + AI
@@ -309,7 +327,24 @@
 
 {{-- ===================================================
      REFERENCE KLIENTŮ
+     Curated 6 nejsilnějších testimonialů (per OND-101 §2.2).
+     Pořadí: Baudyš (Toyota) → Toman → Holcmann → Jaskmanická → Štěpánek → Pešice.
+     Toyota slot (Baudyš) zůstává za feature flagem, dokud klient nepotvrdí
+     souhlas s publikací (config/site.php features.show_toyota_testimonial).
      =================================================== --}}
+@php
+    $allTestimonials = collect(__('testimonials.items'));
+
+    $homeTestimonialOrder = config('site.features.show_toyota_testimonial')
+        ? ['Pavel Baudyš', 'Rostislav Toman', 'Stanislav Holcmann', 'Hana Jaskmanická', 'Ing. Ivo Štěpánek', 'Václav Pešice']
+        : ['Rostislav Toman', 'Stanislav Holcmann', 'Hana Jaskmanická', 'Ing. Ivo Štěpánek', 'Václav Pešice'];
+
+    $homeTestimonials = collect($homeTestimonialOrder)
+        ->map(fn ($name) => $allTestimonials->firstWhere('name', $name))
+        ->filter()
+        ->values();
+@endphp
+
 <section class="section-wrapper section-alt section-wrapper--glow" data-reveal>
     <div class="container-site">
         <header class="section-header">
@@ -317,7 +352,7 @@
         </header>
 
         <div class="testimonials-grid" data-reveal-group>
-            @foreach (__('testimonials.items') as $review)
+            @foreach ($homeTestimonials as $review)
             <article class="testimonial-card">
                 <header class="testimonial-card__header">
 
@@ -355,6 +390,10 @@
                         </p>
                     </div>
                 </header>
+
+                @if (!empty($review['badge']))
+                <p class="testimonial-card__badge">{{ $review['badge'] }}</p>
+                @endif
 
                 <p class="testimonial-card__text">{{ $review['text'] }}</p>
 
@@ -405,6 +444,11 @@
 </section>
 
 {{-- ===================================================
+     INLINE POPTÁVKA (OND-100, T05)
+     =================================================== --}}
+@include('partials.home-inline-form')
+
+{{-- ===================================================
      ZÁVĚREČNÉ CTA
      =================================================== --}}
 <section class="section-wrapper section-cta" data-reveal>
@@ -414,13 +458,13 @@
                 {!! __('home.cta.heading') ?? __('layout.prefooter.tagline') !!}
             </h2>
             <div class="final-cta__actions">
-                <button type="button" class="btn btn-primary" onclick="window.dispatchEvent(new CustomEvent('open-consultation-modal'))">
+                <a href="#{{ __('home.anchors.poptavka') }}" class="btn btn-primary" data-analytics="final_cta_primary_click">
                     {{ __('home.cta.consultation') }}
                     <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-                </button>
-                <a href="{{ lroute('contact') }}" class="btn btn-secondary">
-                    {{ __('home.cta.message') }}
                 </a>
+                <button type="button" class="btn btn-secondary" data-analytics="final_cta_secondary_click" onclick="window.dispatchEvent(new CustomEvent('open-consultation-modal'))">
+                    {{ __('home.cta.message') }}
+                </button>
             </div>
             <blockquote class="final-cta-quote">
                 <p>{{ __('home.final_cta.quote_text') }}</p>
@@ -432,17 +476,41 @@
             <h2 class="final-cta-heading">{{ __('home.final_cta.heading') }}</h2>
             <p class="final-cta-subtext">{{ __('home.final_cta.subtext') }}</p>
 
-            <button
-                class="btn btn-primary"
-                @click="$dispatch('open-consultation-modal')"
-                type="button"
-            >
-                {{ __('home.final_cta.cta_label') }}
-                <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-            </button>
+            <div class="final-cta__actions">
+                <a
+                    href="#{{ __('home.anchors.poptavka') }}"
+                    class="btn btn-primary"
+                    data-analytics="final_cta_closing_primary_click"
+                >
+                    {{ __('home.final_cta.cta_label') }}
+                    <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
+                </a>
+                <button
+                    class="btn btn-secondary"
+                    @click="$dispatch('open-consultation-modal')"
+                    data-analytics="final_cta_closing_secondary_click"
+                    type="button"
+                >
+                    {{ __('home.final_cta.cta_secondary') }}
+                </button>
+            </div>
             <p class="final-cta-note">{{ __('home.final_cta.cta_note') }}</p>
         </div>
     </div>
 </section>
 
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        @if ($errors->any() || session('home_lead_success'))
+        document.getElementById('{{ __('home.anchors.poptavka') }}')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        @endif
+
+        @if (session('home_lead_success'))
+        window.dispatchEvent(new CustomEvent('inline-form-submit-success'));
+        @endif
+    });
+</script>
+@endpush

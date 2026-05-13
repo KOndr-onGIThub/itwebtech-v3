@@ -105,6 +105,7 @@ return [
             'role'    => 'ředitel řízení výroby, montáže a logistiky',
             'image'   => 'Pavel_Baudys.jpg',
             'source'  => 'google',
+            'badge'   => 'Z mého působení v Toyotě',
             'text'    => 'S potěšením mohu poskytnout tuto referenci pro Ondřeje Krišku, který pracoval v naší společnosti Toyota 18 let. Jednou z nejsilnějších stránek Ondry je velká chuť rozvíjet se, což je viditelné na jeho výsledcích.',
         ],
         [
@@ -137,6 +138,7 @@ return [
             'role'    => 'vedoucí projektového oddělení',
             'image'   => 'Jan-Stybor.jpg',
             'source'  => 'google',
+            'badge'   => 'Z mého působení v Toyotě',
             'text'    => 'Oceňuji profesionální přístup k práci. Při vývoji aplikace důsledně analyzuje stav a chce poznat současné procesy. Shromažďuje požadavky od zákazníků a zjišťuje vize pro budoucnost. Připraví plán, na základě kterého se zákazníkem dohodne na klíčových milnících.',
         ],
     ],

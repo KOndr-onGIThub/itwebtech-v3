@@ -7,12 +7,13 @@ return [
         'description' => 'Maßgeschneiderte Webseiten und Webanwendungen, die Ergebnisse liefern. Wartungsfrei, kein WordPress, keine versteckten Kosten. 18 Jahre Erfahrung. Kostenlose Beratung.',
     ],
 
+    // TODO: review pro DE — copy podle CS varianty A (OND-100)
     'hero' => [
-        'heading'       => 'Maßgeschneiderte Websites für Menschen, die den Unterschied erkennen.',
-        'subline'       => 'Keine vorgefertigten Vorlagen, keine monatlichen Wartungsgebühren. Die Website entsteht aus dem Verständnis, was Sie verkaufen müssen — nicht aus fertigen Bausteinen.',
-        'chips'         => ['Strategie', 'Design', 'Code', 'Texte'],
-        'cta_primary'   => 'Beratung vereinbaren',
-        'cta_secondary' => 'Wie ich arbeite →',
+        'eyebrow'       => 'Maßgeschneiderte Websites & Webanwendungen',
+        'heading'       => 'Eine Website, die sich endlich auszahlt. Ohne WordPress, ohne Wartung, ohne Kompromisse.',
+        'subline'       => 'Für Unternehmer, die eine Website wollen, die Kunden bringt — nicht nur einen weiteren Posten in der Buchhaltung. 18 Jahre bei Toyota haben mich gelehrt, genau das zu liefern, worauf wir uns geeinigt haben.',
+        'cta_primary'   => 'Preisangebot anfordern',
+        'cta_secondary' => '30-Min-Beratung vereinbaren',
     ],
 
     'modal' => [
@@ -25,11 +26,17 @@ return [
 
     'anchors' => [
         'how_i_work' => 'wie-ich-arbeite',
+        'poptavka'   => 'poptavka',
     ],
 
     'social_proof' => [
+        'rating_aria'  => 'Bewertung 5 von 5',
+        'rating_value' => '5,0',
+        'reviews'      => '(21 Bewertungen auf Google + Firmy.cz)',
+        'projects'     => '23+ realisierte Projekte',
+        'experience'   => '18 Jahre Erfahrung',
+        'response'     => 'Antwort innerhalb von 24 Std.',
         'brands' => [
-            ['name' => 'Toyota',                'image' => 'toyota.png'],
             ['name' => 'MAKOplast',             'image' => null],
             ['name' => 'Yolk Studio',           'image' => 'yolk_studio.png'],
             ['name' => 'BARANA s.r.o.',         'image' => null],
@@ -152,7 +159,7 @@ return [
     ],
 
     'testimonials' => [
-        'heading' => 'Was die sagen, für die ich gearbeitet habe.',
+        'heading' => 'Was meine Kunden über die Zusammenarbeit sagen.',
     ],
 
     'guarantee' => [
@@ -169,19 +176,51 @@ return [
         ],
     ],
 
+    // TODO: review pro DE — copy podle CS varianty A (OND-100)
     'cta' => [
         'heading'      => 'Bereit anzufangen? Die Beratung ist kostenlos.',
-        'consultation' => 'Beratung vereinbaren',
-        'message'      => 'Oder schreiben Sie mir — ich melde mich innerhalb von 24 Stunden',
+        'consultation' => 'Preisangebot anfordern',
+        'message'      => '30-Min-Beratung vereinbaren',
     ],
 
     'final_cta' => [
         'quote_text'   => 'Dank des individuellen Ansatzes, der Flexibilität und der Professionalität entspricht das Ergebnis unseren Vorstellungen.',
         'quote_author' => 'Hana Jaskmanická, Geschäftsführerin, VP Industry',
         'heading'      => 'Ich gebe Ihnen eine ehrliche Meinung zu Ihrem Projekt.',
-        'subtext'      => 'Auch wenn eine Zusammenarbeit keinen Sinn ergibt — ich sage es Ihnen geradeheraus.',
-        'cta_label'    => 'Beratung vereinbaren',
+        'subtext'      => 'Ich antworte bis zum nächsten Werktag. Wenn eine Zusammenarbeit keinen Sinn ergibt, sage ich es Ihnen geradeheraus — kein Verkaufsdruck, keine lästigen Folge-E-Mails.',
+        'cta_label'    => 'Preisangebot anfordern',
+        'cta_secondary' => '30-Min-Beratung vereinbaren',
         'cta_note'     => 'Kostenlos. Unverbindlich.',
+    ],
+
+    // TODO: review pro DE — copy podle CS varianty A (OND-100)
+    'inline_form' => [
+        'eyebrow'         => 'Anfrage',
+        'heading'         => 'Schicken Sie mir ein paar Zeilen zum Projekt. Ich melde mich innerhalb von 24 Stunden.',
+        'description'     => 'Kein Verkäufer, kein Formular mit zehn Feldern. Eine kurze Beschreibung reicht — ich antworte persönlich und wir prüfen, ob eine Zusammenarbeit Sinn ergibt.',
+        'name'            => 'Vor- und Nachname',
+        'email'           => 'E-Mail',
+        'phone'           => 'Telefon (optional)',
+        'message'         => 'Was möchten Sie lösen?',
+        'placeholders'    => [
+            'name'    => 'Max Mustermann',
+            'email'   => 'max@firma.de',
+            'phone'   => '+420 000 000 000',
+            'message' => 'Z. B. neue Website für ein produzierendes Unternehmen, 5–10 Seiten',
+        ],
+        'submit'          => 'Anfrage senden',
+        'submitting'      => 'Wird gesendet…',
+        'privacy_prefix'  => 'Mit dem Absenden stimmen Sie der Verarbeitung personenbezogener Daten gemäß den ',
+        'privacy_link'    => 'Datenschutzrichtlinien zu',
+        'success'         => 'Danke, die Anfrage ist eingegangen. Ich melde mich so schnell wie möglich.',
+        'error'           => 'Die Anfrage konnte gerade nicht gespeichert werden. Bitte versuchen Sie es erneut.',
+    ],
+
+    // TODO: review pro DE — copy podle CS varianty A (OND-100)
+    'sticky' => [
+        'cta'    => 'Beratung vereinbaren',
+        'mobile' => 'Anfrage',
+        'phone'  => 'Anrufen',
     ],
 
 ];
