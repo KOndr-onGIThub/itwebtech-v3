@@ -5,12 +5,20 @@
 
 @section('content')
 
-{{-- Page hero --}}
-<div class="page-hero">
+{{-- Page hero — OND-135 iter 6: plán §3.1 design DNA (page-mark + display + amber accent) --}}
+<div class="page-hero page-hero--projects">
     <div class="container-site">
-        <p class="section-subheading">{{ __('projects.subheading') }}</p>
-        <h1>{{ __('projects.heading') }}</h1>
-        <p>{{ __('projects.intro') }}</p>
+        {{-- OND-135 cleanup (2026-05-14): page_mark_index span odebrán jako
+             agency-portfolio artefakt (itwebtech nemá „pages" hierarchii) —
+             aplikováno per CEO PR #78/#80/#82 precedent (home/kontakt/cenik). --}}
+        <p class="page-hero__page-mark">
+            <span class="page-hero__page-mark-label">{{ __('projects.hero.page_mark_label') }}</span>
+        </p>
+        <p class="page-hero__upline">{{ __('projects.hero.upline') }}</p>
+        <h1 class="page-hero__heading">
+            {!! __('projects.hero.heading_html') !!}
+        </h1>
+        <p class="page-hero__subline">{{ __('projects.hero.subline') }}</p>
     </div>
 </div>
 
