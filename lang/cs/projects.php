@@ -11,6 +11,15 @@ return [
     'heading'          => 'PROJEKTY',
     'intro'            => 'Nechte se inspirovat ukázkami mé práce a představte si, jak bude vypadat váš úspěšný projekt. Pracuji tak, aby se ke mně klienti rádi vraceli.',
 
+    // OND-135 P2 iter 6 — plán §3.1 hero (page-mark + Fraunces italic + amber accent).
+    'hero' => [
+        'page_mark_label' => 'REALIZACE',
+        'page_mark_index' => '04 / 09',
+        'upline'          => 'Hotové projekty, hotová čísla.',
+        'heading_html'    => 'Případy, ne<br><em>portfolio galerie</em>.',
+        'subline'         => 'Každý projekt s konkrétním výsledkem — termín, rozsah, dopad. Žádný screenshot bez čísla.',
+    ],
+
     'filter_all'       => 'Vše',
     'filter_websites'  => 'Stránky',
     'filter_webapps'   => 'Aplikace',

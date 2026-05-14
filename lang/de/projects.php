@@ -11,6 +11,15 @@ return [
     'heading'          => 'PROJEKTE',
     'intro'            => 'Lassen Sie sich von Beispielen meiner Arbeit inspirieren. Ich arbeite so, dass Kunden gerne zurückkommen.',
 
+    // OND-135 P2 iter 6 — Plan §3.1 Hero (Page-Mark + Fraunces kursiv + Amber-Akzent).
+    'hero' => [
+        'page_mark_label' => 'PROJEKTE',
+        'page_mark_index' => '04 / 09',
+        'upline'          => 'Fertige Projekte, harte Zahlen.',
+        'heading_html'    => 'Cases, keine<br><em>Portfolio-Galerie</em>.',
+        'subline'         => 'Jedes Projekt mit konkretem Ergebnis — Termin, Umfang, Wirkung. Kein Screenshot ohne Zahl.',
+    ],
+
     'filter_all'       => 'Alle',
     'filter_websites'  => 'Webseiten',
     'filter_webapps'   => 'Anwendungen',
