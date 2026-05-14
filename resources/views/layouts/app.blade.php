@@ -33,13 +33,31 @@
     <meta name="twitter:description" content="{!! $metaDesc !!}">
     <meta name="twitter:image"       content="{{ $ogImage }}">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="{{ url()->current() }}">
     @php
+        // OND-162 F4: canonical pro home musí mít trailing slash (web serveruje
+        // `/` a `/en/`), aby seděla s hreflang URL z lroute('home', ...).
+        $canonicalUrl = $currentPage === 'home' ? lroute('home') : url()->current();
+
+        // OND-162 F3: `/cookies` je sdílená CS-only stránka bez locale variant.
+        // current_page() pro ni vrací 'home' (route name 'cookies' nemá tečku),
+        // což by hreflang odkázalo na /, /en, /de — Google by to interpretoval
+        // jako alternate translations homepage. Místo toho explicitně hlásíme,
+        // že /cookies = /cookies pro všechny tři lokály.
+        $isSharedCookiesPage = request()->route()?->getName() === 'cookies';
+
         $hreflangs = $hreflangs ?? [];
-        $hreflangCs = $hreflangs['cs'] ?? lroute($currentPage, 'cs');
-        $hreflangEn = $hreflangs['en'] ?? lroute($currentPage, 'en');
-        $hreflangDe = $hreflangs['de'] ?? lroute($currentPage, 'de');
+        if ($isSharedCookiesPage) {
+            $sharedCookiesUrl = url('/cookies');
+            $hreflangCs = $sharedCookiesUrl;
+            $hreflangEn = $sharedCookiesUrl;
+            $hreflangDe = $sharedCookiesUrl;
+        } else {
+            $hreflangCs = $hreflangs['cs'] ?? lroute($currentPage, 'cs');
+            $hreflangEn = $hreflangs['en'] ?? lroute($currentPage, 'en');
+            $hreflangDe = $hreflangs['de'] ?? lroute($currentPage, 'de');
+        }
     @endphp
+    <link rel="canonical" href="{{ $canonicalUrl }}">
     <link rel="alternate" hreflang="cs" href="{{ $hreflangCs }}">
     <link rel="alternate" hreflang="en" href="{{ $hreflangEn }}">
     <link rel="alternate" hreflang="de" href="{{ $hreflangDe }}">

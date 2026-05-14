@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('title', $translation?->title ?? config('app.name'))
-@section('description', $translation?->description ?? '')
+{{-- OND-162 F5: article description z DB je často 237-268 znaků (perex-style),
+     ale Google ořezává <meta description> kolem 155-160. Trimneme na 155
+     s ellipsis (= 156 total), aby SERP snippet byl celý a ne useknutý
+     uprostřed věty. JSON-LD Article description (níž v article.blade.php
+     a v @push('jsonld')) zůstává plný, schema.org limit nemá. --}}
+@section('description', \Illuminate\Support\Str::limit($translation?->description ?? '', 155, '…'))
 
 {{-- OND-137 P4 §SEO: Article + BreadcrumbList JSON-LD pro detail článku.
      Pozn.: viz price.blade.php — schema-context klíč řešíme přes PHP blok,
