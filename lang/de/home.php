@@ -12,8 +12,11 @@ return [
         'eyebrow'       => 'Maßgeschneiderte Websites & Webanwendungen',
         'heading'       => 'Eine Website, die sich endlich auszahlt. Ohne WordPress, ohne Wartung, ohne Kompromisse.',
         'subline'       => 'Für Unternehmer, die eine Website wollen, die Kunden bringt — nicht nur einen weiteren Posten in der Buchhaltung. 18 Jahre bei Toyota haben mich gelehrt, genau das zu liefern, worauf wir uns geeinigt haben.',
-        'cta_primary'   => 'Preisangebot anfordern',
+        // OND-130: single primary CTA in hero. cta_secondary kept for backwards
+        // compatibility (consultation modal) but no longer shown in hero.
+        'cta_primary'   => 'Unverbindliches Angebot anfordern',
         'cta_secondary' => '30-Min-Beratung vereinbaren',
+        'phone_label'   => 'oder anrufen:',
     ],
 
     'modal' => [

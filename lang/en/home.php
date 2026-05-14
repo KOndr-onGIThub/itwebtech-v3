@@ -12,8 +12,11 @@ return [
         'eyebrow'       => 'Custom websites & web applications',
         'heading'       => 'A website that finally earns its keep. No WordPress, no maintenance, no compromises.',
         'subline'       => 'For business owners who want a website that brings in customers — not another line on the invoice. 18 years at Toyota taught me to deliver exactly what we agreed on.',
-        'cta_primary'   => 'Get a price quote',
+        // OND-130: single primary CTA in hero. cta_secondary kept for backwards
+        // compatibility (consultation modal) but no longer shown in hero.
+        'cta_primary'   => 'Get a no-strings quote',
         'cta_secondary' => 'Book a 30-min consultation',
+        'phone_label'   => 'or call:',
     ],
 
     'modal' => [

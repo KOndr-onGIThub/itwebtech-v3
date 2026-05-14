@@ -11,8 +11,12 @@ return [
         'eyebrow'       => 'Webové stránky a aplikace na míru',
         'heading'       => 'Web, který vám konečně vydělá. Bez WordPressu, bez údržby, bez kompromisů.',
         'subline'       => 'Pro majitele firem, kteří chtějí stránky, které přivádějí zákazníky — ne další položku v účetnictví. 18 let v Toyotě mě naučilo dodávat to, na čem jsme se domluvili.',
-        'cta_primary'   => 'Získat cenovou nabídku',
+        // OND-130: jediný primary CTA „Chci nezávaznou nabídku" (plán §3.1).
+        // cta_secondary ponecháno pro zpětnou kompatibilitu (consultation modal),
+        // ale není použito v hero — viz home.blade.php section-hero__actions.
+        'cta_primary'   => 'Chci nezávaznou nabídku',
         'cta_secondary' => 'Domluvit 30min konzultaci',
+        'phone_label'   => 'nebo zavolat:',
     ],
 
     'modal' => [
@@ -166,6 +170,10 @@ return [
         'secondary_inline_pricing' => 'více v ceníku',
         'secondary_inline_contact' => 'napište mi',
         'primary' => [
+            // OND-130 (B2 §1, klíčová direktiva 2): cenová taxonomie 25/55/95
+            // sjednocena napříč webem (services 3-card, price_anchor, /cenik tiers).
+            // Service-typové karty (web/aplikace/e-shop) ukazují minimální vstupní
+            // cenu z odpovídajícího tieru — viz price_anchor / price.tiers níže.
             'weby' => [
                 'title'       => 'Webové stránky na míru',
                 'description' => 'Prezentační web, který vás odliší od šablon konkurence a začne přivádět zákazníky.',
@@ -174,7 +182,7 @@ return [
                     'Konverzní struktura postavená na vašem byznysu',
                     'Bezúdržbový provoz a rychlé načítání',
                 ],
-                'price'       => 'od 20 000 Kč',
+                'price'       => 'od 25 000 Kč',
             ],
             'aplikace' => [
                 'title'       => 'Webové aplikace',
@@ -184,7 +192,7 @@ return [
                     'Integrace na vaše stávající nástroje',
                     'Vlastní administrace bez měsíčních licencí',
                 ],
-                'price'       => 'od 20 000 Kč',
+                'price'       => 'od 55 000 Kč',
             ],
             'eshop' => [
                 'title'       => 'E-shopy',
@@ -194,7 +202,7 @@ return [
                     'Napojení na účetnictví, dopravce a platební bránu',
                     'Bez měsíčních poplatků za platformu',
                 ],
-                'price'       => 'od 20 000 Kč',
+                'price'       => 'od 95 000 Kč',
             ],
         ],
         'seo' => [
@@ -213,22 +221,25 @@ return [
 
     'price_anchor' => [
         'heading' => 'Kolik to bude stát?',
-        'intro'   => 'Orientační vstupní ceny pro hlavní typy projektů. Přesnou nabídku dostanete písemně po krátké konzultaci.',
+        'intro'   => 'Orientační vstupní ceny pro tři tiery projektu. Přesnou nabídku dostanete písemně po krátké konzultaci.',
+        // OND-130 (B2 §1, klíčová direktiva 2 + plán §3.6): pricing teaser
+        // sjednocen s /cenik — Startovní 25 / Standard 55 / Custom od 95 tis. Kč.
+        // Service-typový rozklad (web vs. aplikace vs. e-shop) je v sekci „services".
         'items'   => [
             [
-                'title' => 'Web na míru',
-                'price' => 'od 20 000 Kč',
-                'desc'  => 'Statická prezentace, jednoduchá i dvojjazyčná.',
+                'title' => 'Startovní',
+                'price' => '25 000 Kč',
+                'desc'  => 'Prezentační web do 5 stránek pro živnostníky a malé firmy.',
             ],
             [
-                'title' => 'Webová aplikace',
-                'price' => 'od 60 000 Kč',
-                'desc'  => 'Interní systémy, portály a evidence na míru.',
+                'title' => 'Standard',
+                'price' => '55 000 Kč',
+                'desc'  => 'Vícejazyčný web s blogem, měřením konverzí a rezervačním systémem.',
             ],
             [
-                'title' => 'E-shop',
-                'price' => 'od 80 000 Kč',
-                'desc'  => 'Vlastní řešení bez měsíčních poplatků za platformu.',
+                'title' => 'Custom',
+                'price' => 'od 95 000 Kč',
+                'desc'  => 'E-shop, webová aplikace nebo komplexní portál na míru.',
             ],
         ],
         'cta' => 'Detailní ceník →',
@@ -299,7 +310,7 @@ return [
             [
                 'key'      => 'price',
                 'question' => 'Kolik to bude stát?',
-                'answer'   => 'Orientační vstupní ceny najdete v cenové kotvě výše — web od 20 000 Kč, aplikace od 60 000 Kč, e-shop od 80 000 Kč. Přesnou cenu dostanete písemně po krátké konzultaci, na faktuře je pak přesně to, co je ve specifikaci.',
+                'answer'   => 'Orientační vstupní ceny najdete v cenové kotvě výše — Startovní 25 000 Kč, Standard 55 000 Kč, Custom od 95 000 Kč. Přesnou cenu dostanete písemně po krátké konzultaci, na faktuře je pak přesně to, co je ve specifikaci.',
             ],
             [
                 'key'      => 'duration',

@@ -117,7 +117,15 @@ Route::get('/price',          fn() => redirect('/cenik', 301));
 Route::get('/privacy-policy', fn() => redirect('/zasady-ochrany-osobnich-udaju', 301));
 Route::get('/projects',       fn() => redirect('/projekty', 301));
 Route::get('/projects/{any}', fn(string $any) => redirect('/projekty/' . $any, 301))->where('any', '.*');
-// NOTE: /jak-na-to slug is preserved as-is — no redirect needed
+
+// OND-130 (B2 §1, klíčová direktiva 4): CS routing fix.
+// `/blog` musí 301 → `/jak-na-to` (default CS slug), aby byla CS landing
+// stránka konzistentní s ostatními CS slugy. Bez explicitního redirectu
+// by fallback `/{slug}` níže prohledal non-default mapy a poslal uživatele
+// na `/en/blog` (první match v dict order) — to je SEO + UX regrese.
+// EN i DE mají vlastní /{locale}/blog prefix, takže není konflikt.
+Route::get('/blog',           fn() => redirect('/jak-na-to', 301));
+Route::get('/blog/{any}',     fn(string $any) => redirect('/jak-na-to/' . $any, 301))->where('any', '.*');
 
 /*
 |--------------------------------------------------------------------------

@@ -29,6 +29,12 @@
             </h1>
             <p class="section-hero__subline">{{ __('home.hero.subline') }}</p>
             <div class="section-hero__actions">
+                {{-- OND-130 (B2 §1, klíčová direktiva 3 + plán §3.1):
+                     V hero **jediný** primary CTA „Chci nezávaznou nabídku".
+                     Reservanto (Calendly-style booking) zůstává jako sekundární CTA
+                     v sekci „Jak pracuji" a v final CTA — v hero by soutěžil
+                     o pozornost a rozmělnil primary message. Telefon ponechán
+                     jako lehký text-link (ne button). --}}
                 <a
                     href="#{{ __('home.anchors.poptavka') }}"
                     class="btn btn-primary"
@@ -37,10 +43,7 @@
                     {{ __('home.hero.cta_primary') }}
                     <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
                 </a>
-                {{-- Sekundární CTA „Domluvit konzultaci" — Reservanto widget (OND-116/T15).
-                     Text widgetu řízen z config/site.php (default „15 min. konzultace ZDARMA").
-                     OND-122: analyticsEvent prop přidá data-analytics na wrapping div, klik z renderovaného buttonu bubble-uje. --}}
-                <x-booking.reservanto-widget analyticsEvent="hero_cta_secondary_click" />
+                <x-phone-cta class="section-hero__phone-link" :label="__('home.hero.phone_label')" />
             </div>
         </div>
 
