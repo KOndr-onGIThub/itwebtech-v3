@@ -11,6 +11,21 @@ return [
     'heading'    => 'You know what you\'re getting into before our first meeting.',
     'intro'      => 'Every project is different — you\'ll get the final price after a free consultation. This overview gives you a clear idea of how much it will cost before we even meet.',
 
+    // OND-135 P2 iter 5 — plan §3.1 hero (page-mark + Fraunces italic + amber accent).
+    'hero' => [
+        'page_mark_label' => 'PRICING',
+        'page_mark_index' => '03 / 09',
+        'upline'          => 'No "request a quote" mystery.',
+        'heading_html'    => 'Three tiers,<br>one <em>clear price</em>.',
+        'subline'         => 'Starter €1,000, Standard €2,200, Custom from €3,800. The invoice matches the spec.',
+    ],
+
+    // Sticky CTA — always-visible while scrolling, "price never disappears".
+    'sticky_cta' => [
+        'label' => 'Pick a tier',
+        'cta'   => 'Get a free quote',
+    ],
+
     'popular'   => 'Most popular',
     'quotation' => 'Get a quote',
 

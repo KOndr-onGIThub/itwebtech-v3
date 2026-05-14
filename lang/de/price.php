@@ -11,6 +11,21 @@ return [
     'heading'    => 'Sie wissen, worauf Sie sich einlassen — schon vor unserem ersten Gespräch.',
     'intro'      => 'Jedes Projekt ist einzigartig — den genauen Preis erfahren Sie nach einer kostenlosen Beratung. Diese Übersicht gibt Ihnen schon vor dem ersten Gespräch eine klare Vorstellung, was es kosten wird.',
 
+    // OND-135 P2 iter 5 — Plan §3.1 Hero (Page-Mark + Fraunces kursiv + Amber-Akzent).
+    'hero' => [
+        'page_mark_label' => 'PREISE',
+        'page_mark_index' => '03 / 09',
+        'upline'          => 'Kein „Auf Anfrage"-Versteckspiel.',
+        'heading_html'    => 'Drei Stufen,<br>ein <em>klarer Preis</em>.',
+        'subline'         => 'Starter €1.000, Standard €2.200, Custom ab €3.800. Die Rechnung entspricht dem Angebot.',
+    ],
+
+    // Sticky CTA — durchgehend sichtbar, „der Preis verschwindet nie".
+    'sticky_cta' => [
+        'label' => 'Stufe wählen',
+        'cta'   => 'Unverbindliches Angebot anfordern',
+    ],
+
     'popular'   => 'Beliebteste Wahl',
     'quotation' => 'Angebot anfragen',
 
