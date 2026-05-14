@@ -5,12 +5,20 @@
 
 @section('content')
 
-{{-- Page hero --}}
-<div class="page-hero">
+{{-- Page hero — OND-135 iter 5: plán §3.1 design DNA (page-mark + display + amber accent) --}}
+<div class="page-hero page-hero--price">
     <div class="container-site">
-        <p class="section-subheading">{{ __('price.subheading') }}</p>
-        <h1>{{ __('price.heading') }}</h1>
-        <p>{{ __('price.intro') }}</p>
+        {{-- OND-135 cleanup (2026-05-14): page_mark_index span odebrán jako
+             agency-portfolio artefakt (itwebtech nemá „pages" hierarchii) —
+             aplikováno per CEO PR #78 precedent (home) + PR #80 (kontakt). --}}
+        <p class="page-hero__page-mark">
+            <span class="page-hero__page-mark-label">{{ __('price.hero.page_mark_label') }}</span>
+        </p>
+        <p class="page-hero__upline">{{ __('price.hero.upline') }}</p>
+        <h1 class="page-hero__heading">
+            {!! __('price.hero.heading_html') !!}
+        </h1>
+        <p class="page-hero__subline">{{ __('price.hero.subline') }}</p>
     </div>
 </div>
 
@@ -197,6 +205,26 @@
         </div>
     </div>
 </section>
+
+{{-- Sticky CTA — plán „cena nikdy nezmizí" (OND-135 iter 5).
+     Zobrazí se po prvním scroll-passu hero, skryje se v final CTA sekci. --}}
+<aside class="price-sticky-cta"
+       x-data="{ visible: false }"
+       x-init="
+         const trigger = () => { visible = window.scrollY > 480 && window.scrollY < (document.body.scrollHeight - window.innerHeight - 320); };
+         trigger();
+         window.addEventListener('scroll', trigger, { passive: true });
+         window.addEventListener('resize', trigger, { passive: true });
+       "
+       x-show="visible"
+       x-transition.opacity.duration.300ms
+       x-cloak
+       aria-label="{{ __('price.sticky_cta.label') }}">
+    <a href="{{ lroute('contact') }}" class="price-sticky-cta__btn">
+        <span class="price-sticky-cta__label">{{ __('price.sticky_cta.cta') }}</span>
+        <x-icon.arrow-right class="w-4 h-4 shrink-0" />
+    </a>
+</aside>
 
 {{-- CTA --}}
 <section class="section-wrapper section-cta price-cta" data-reveal>
