@@ -3,6 +3,26 @@
 @section('title', __('contact.meta.title'))
 @section('description', __('contact.meta.description'))
 
+{{-- OND-137 P4 §SEO: BreadcrumbList JSON-LD pro /kontakt.
+     Pozn.: viz price.blade.php — schema-context klíč řešíme přes PHP blok,
+     aby ho nesežrala Blade direktiva (Laravel 12 CompilesContexts). --}}
+@push('jsonld')
+@php
+    $breadcrumbLd = [
+        '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            ['@type' => 'ListItem', 'position' => 1, 'name' => __('layout.nav.home'),    'item' => lroute('home')],
+            ['@type' => 'ListItem', 'position' => 2, 'name' => __('layout.nav.contact'), 'item' => lroute('contact')],
+        ],
+    ];
+    $breadcrumbJson = json_encode($breadcrumbLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+@endphp
+<script type="application/ld+json">
+{!! $breadcrumbJson !!}
+</script>
+@endpush
+
 @section('content')
 
 {{-- Page hero — OND-135 iter 4: plán §3.1 design DNA (page-mark + display italic + amber accent) --}}

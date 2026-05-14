@@ -91,6 +91,26 @@
     }
     </script>
 
+    {{-- OND-137 P4: Organization JSON-LD vedle LocalBusiness — Google
+         doporučuje obě, LocalBusiness pro lokál + Organization pro brand. --}}
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "Organization",
+        "name": "{{ config('app.name') }}",
+        "url": "{!! url('/') !!}",
+        "email": "ok@itwebtech.cz",
+        "logo": "{{ asset('img/logo/logo_main_svg.svg') }}",
+        "founder": {
+            "@@type": "Person",
+            "name": "Ondřej Kriška"
+        }
+    }
+    </script>
+
+    {{-- OND-137 P4: per-page JSON-LD slot (Service / Article / BreadcrumbList). --}}
+    @stack('jsonld')
+
     @stack('preloads')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -134,6 +154,8 @@
                 alt="{{ config('app.name') }}"
                 class="footer-prefooter__logo"
                 width="274" height="58"
+                loading="lazy"
+                decoding="async"
             >
 
             <p class="footer-prefooter__tagline">

@@ -79,12 +79,16 @@
 
     {{-- Globální flag pro analytics.js — zda existuje aspoň jeden provider.
          Bez něj analytics.js nestaví listenery, takže neflushne fronty
-         v prostředí, kde nikoho nezajímají. --}}
+         v prostředí, kde nikoho nezajímají.
+
+         OND-137 P4 §6: pageLang exposujeme do JS, analytics.js ji přidává
+         ke každému eventu jako custom dimension `page_lang` (cs/en/de). --}}
     <script>
         window.__analyticsConfig = {
             plausible: @json((bool) ($plausibleDomain && $plausibleSrc)),
             ga4:       @json((bool) $ga4Id),
             enabled:   true,
+            pageLang:  @json(app()->getLocale()),
         };
     </script>
 @endif

@@ -3,6 +3,26 @@
 @section('title', __('blog.meta.title'))
 @section('description', __('blog.meta.description'))
 
+{{-- OND-137 P4 §SEO: BreadcrumbList JSON-LD pro blog listing.
+     Pozn.: viz price.blade.php — schema-context klíč řešíme přes PHP blok,
+     aby ho nesežrala Blade direktiva (Laravel 12 CompilesContexts). --}}
+@push('jsonld')
+@php
+    $breadcrumbLd = [
+        '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            ['@type' => 'ListItem', 'position' => 1, 'name' => __('layout.nav.home'), 'item' => lroute('home')],
+            ['@type' => 'ListItem', 'position' => 2, 'name' => __('layout.nav.blog'), 'item' => lroute('blog')],
+        ],
+    ];
+    $breadcrumbJson = json_encode($breadcrumbLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+@endphp
+<script type="application/ld+json">
+{!! $breadcrumbJson !!}
+</script>
+@endpush
+
 @section('content')
 
 {{-- Page hero — OND-130 iter 8: plán §3.1 page-mark + Plex Sans display (post OND-145 swap). --}}
