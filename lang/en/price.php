@@ -16,11 +16,14 @@ return [
 
     'price_note' => 'indicative price',
 
+    // OND-136: tier names and prices aligned with CS taxonomy
+    // Startovní/Standard/Custom = 25/55/95 thousand CZK → EUR conversion.
+    // Proposed EUR values awaiting Ondřej/CEO confirmation.
     'tiers' => [
         [
-            'name'    => 'Presentation',
-            'desc'    => 'For freelancers and small businesses that need a credible online presence.',
-            'price'   => 'from €800',
+            'name'    => 'Starter',
+            'desc'    => 'For sole traders and small businesses that need a credible online presence.',
+            'price'   => '€1,000',
             'popular' => false,
             'features' => [
                 'Up to 5 custom pages',
@@ -30,12 +33,12 @@ return [
                 'Page speed optimisation',
                 '14 days of post-launch support',
             ],
-            'cta' => 'Interested — book a consultation',
+            'cta' => 'Get a free quote',
         ],
         [
-            'name'    => 'Professional',
+            'name'    => 'Standard',
             'desc'    => 'For businesses that want their website to be their best sales tool.',
-            'price'   => 'from €1,800',
+            'price'   => '€2,200',
             'popular' => true,
             'features' => [
                 'Up to 12 custom pages',
@@ -46,12 +49,12 @@ return [
                 'Hosting and domain for 1 year free',
                 '1 month of post-launch support',
             ],
-            'cta' => 'I want this plan — free consultation',
+            'cta' => 'Get a free quote',
         ],
         [
-            'name'    => 'Complex',
+            'name'    => 'Custom',
             'desc'    => 'For demanding projects without compromise — e-shop, booking system or web application.',
-            'price'   => 'from €3,400',
+            'price'   => 'from €3,800',
             'popular' => false,
             'features' => [
                 'Unlimited project scope',
@@ -61,7 +64,7 @@ return [
                 'External system integrations',
                 '3 months of post-launch support',
             ],
-            'cta' => 'Free consultation',
+            'cta' => 'Get a free quote',
         ],
     ],
 
@@ -118,7 +121,7 @@ return [
 
     'compare' => [
         'heading' => 'What exactly you get',
-        'tiers'   => ['Presentation', 'Professional', 'Complex'],
+        'tiers'   => ['Starter', 'Standard', 'Custom'],
         'groups'  => [
             [
                 'label' => 'Project scope',

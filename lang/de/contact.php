@@ -32,4 +32,55 @@ return [
     'message_success'     => 'Danke für Ihre Nachricht.',
     'message_error'       => 'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut — oder schreiben Sie mir direkt an ok@itwebtech.cz.',
 
+    // OND-136: Net-new Copy-Blöcke für /contact-Redesign (Plan §1).
+    // Engineer (B2) verdrahtet diese Schlüssel in `resources/views/pages/contact.blade.php`.
+
+    // Trust-Signal-Hero — „es-ist-ein-echter-Mensch".
+    'hero' => [
+        'eyebrow'      => 'Sie schreiben direkt an mich',
+        'heading'      => 'Sie schreiben direkt an mich, Ondřej.',
+        'subline'      => 'Kein CRM, kein Callcenter, kein Formular-Dispatcher. Ich lese Ihre Nachricht persönlich und antworte in der Regel bis zum nächsten Werktag.',
+        'photo_alt'    => 'Ondřej Kriška — Autor und Ansprechpartner',
+        'role_label'   => 'Entwickler, Autor dieser Seite, einziger Ansprechpartner',
+    ],
+
+    // 3-Schritt „Was als Nächstes passiert" — reduziert die Hemmschwelle, das Formular abzuschicken.
+    'next_steps' => [
+        'eyebrow' => 'Was als Nächstes passiert',
+        'heading' => 'Drei Schritte — kein Marketing-Trichter.',
+        'steps'   => [
+            [
+                'title' => 'Antwort innerhalb von 24 Stunden',
+                'text'  => 'Sie erhalten eine E-Mail von mir persönlich, keine automatische Bestätigung. Wenn ich unterwegs bin, melde ich mich spätestens am nächsten Werktag.',
+            ],
+            [
+                'title' => '30-minütiges Gespräch vereinbaren',
+                'text'  => 'Ein kurzes Telefonat oder Videocall — wir prüfen gemeinsam, ob die Zusammenarbeit Sinn ergibt. Keine Präsentation, keine Folien, kein Verkaufsdruck.',
+            ],
+            [
+                'title' => 'Sie erhalten ein schriftliches Angebot',
+                'text'  => 'Innerhalb einer Woche schicke ich eine Spezifikation mit Umfang, Termin und genauem Preis. Was in der Spezifikation steht, steht auf der Rechnung.',
+            ],
+        ],
+    ],
+
+    // Thank-you-State — ersetzt das Formular nach erfolgreichem Absenden.
+    'thank_you' => [
+        'heading'  => 'Erledigt — Ihre Nachricht ist da.',
+        'subline'  => 'Vielen Dank. Ich lese sie persönlich und antworte spätestens bis zum nächsten Werktag.',
+        'next'     => 'In der Zwischenzeit können Sie sich umgesetzte Projekte oder die Preisliste ansehen.',
+        'cta_projects' => 'Umgesetzte Projekte',
+        'cta_price'    => 'Preisliste',
+    ],
+
+    // Optionales Budget-Feld (angeglichen an home.inline_form und Landing-Budgets).
+    'budget_label'   => 'Orientierendes Budget (optional)',
+    'budget_options' => [
+        'Bis 1.000 €',
+        '1.000 € – 2.200 €',
+        '2.200 € – 3.800 €',
+        '3.800 € und mehr',
+        'Noch unsicher — bitte beraten',
+    ],
+
 ];

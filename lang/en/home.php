@@ -12,9 +12,9 @@ return [
         'eyebrow'       => 'Custom websites & web applications',
         'heading'       => 'A website that finally earns its keep. No WordPress, no maintenance, no compromises.',
         'subline'       => 'For business owners who want a website that brings in customers — not another line on the invoice. 18 years at Toyota taught me to deliver exactly what we agreed on.',
-        // OND-130: single primary CTA in hero. cta_secondary kept for backwards
-        // compatibility (consultation modal) but no longer shown in hero.
-        'cta_primary'   => 'Get a no-strings quote',
+        // OND-130 + OND-136: single primary CTA in hero, exact wording per spec.
+        // cta_secondary kept for backwards compat (consultation modal) — not shown in hero.
+        'cta_primary'   => 'Get a free quote',
         'cta_secondary' => 'Book a 30-min consultation',
         'phone_label'   => 'or call:',
     ],
@@ -169,6 +169,8 @@ return [
         'secondary_inline' => 'I also handle SEO, graphic design and social media management — :pricing_link or :contact_link.',
         'secondary_inline_pricing' => 'see the pricing',
         'secondary_inline_contact' => 'get in touch',
+        // OND-136: aligned with CS taxonomy 25/55/95 thousand CZK → EUR conversion.
+        // Proposed EUR values awaiting Ondřej/CEO confirmation (see OND-136 rules).
         'primary' => [
             'weby' => [
                 'title'       => 'Custom websites',
@@ -178,7 +180,7 @@ return [
                     'Conversion-focused structure built around your business',
                     'Maintenance-free with fast load times',
                 ],
-                'price'       => 'from CZK 20,000',
+                'price'       => 'from €1,000',
             ],
             'aplikace' => [
                 'title'       => 'Web applications',
@@ -188,7 +190,7 @@ return [
                     'Integrations with your existing tools',
                     'Custom admin without monthly licence fees',
                 ],
-                'price'       => 'from CZK 20,000',
+                'price'       => 'from €2,200',
             ],
             'eshop' => [
                 'title'       => 'E-shops',
@@ -198,7 +200,7 @@ return [
                     'Integrations with accounting, couriers and payment gateways',
                     'No monthly platform fees',
                 ],
-                'price'       => 'from CZK 20,000',
+                'price'       => 'from €3,800',
             ],
         ],
         'seo' => [
@@ -217,22 +219,24 @@ return [
 
     'price_anchor' => [
         'heading' => 'What will it cost?',
-        'intro'   => 'Indicative entry prices for the main project types. You receive an exact written quote after a short consultation.',
+        'intro'   => 'Indicative entry prices for the three project tiers. You receive an exact written quote after a short consultation.',
+        // OND-136: 25 / 55 / 95 thousand CZK → EUR conversion (proposed defaults
+        // pending Ondřej/CEO confirmation). One source of truth across the site.
         'items'   => [
             [
-                'title' => 'Custom website',
-                'price' => 'from CZK 20,000',
-                'desc'  => 'Static presentation, single or multilingual.',
+                'title' => 'Starter',
+                'price' => '€1,000',
+                'desc'  => 'Up to 5-page presentation site for sole traders and small businesses.',
             ],
             [
-                'title' => 'Web application',
-                'price' => 'from CZK 60,000',
-                'desc'  => 'Internal systems, customer portals and custom record-keeping tools.',
+                'title' => 'Standard',
+                'price' => '€2,200',
+                'desc'  => 'Multilingual site with blog, conversion tracking and a booking system.',
             ],
             [
-                'title' => 'E-shop',
-                'price' => 'from CZK 80,000',
-                'desc'  => 'Custom solution without monthly platform fees.',
+                'title' => 'Custom',
+                'price' => 'from €3,800',
+                'desc'  => 'E-shop, web application or a complex custom portal.',
             ],
         ],
         'cta' => 'Detailed pricing →',
@@ -304,7 +308,7 @@ return [
             [
                 'key'      => 'price',
                 'question' => 'What will it cost?',
-                'answer'   => 'See indicative entry prices in the pricing anchor above — websites from CZK 20,000, web apps from CZK 60,000, e-shops from CZK 80,000. You get an exact written quote after a short consultation, and the invoice matches the specification.',
+                'answer'   => 'See the pricing anchor above for indicative entry prices — Starter €1,000, Standard €2,200, Custom from €3,800. You get an exact written quote after a short consultation, and the invoice matches the specification line by line.',
             ],
             [
                 'key'      => 'duration',

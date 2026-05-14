@@ -32,4 +32,55 @@ return [
     'message_success'     => 'Thanks for your message.',
     'message_error'       => 'Something went wrong. Please try again — or write to me directly at ok@itwebtech.cz.',
 
+    // OND-136: net-new copy blocks for /contact redesign (plan §1).
+    // Engineer (B2) wires these keys into `resources/views/pages/contact.blade.php`.
+
+    // Trust signal hero — "it's-an-actual-person".
+    'hero' => [
+        'eyebrow'      => 'You\'re writing to me',
+        'heading'      => 'You\'re writing directly to me, Ondřej.',
+        'subline'      => 'No CRM, no call centre, no form dispatcher. I read your message personally and reply usually by the next business day.',
+        'photo_alt'    => 'Ondřej Kriška — author and contact person',
+        'role_label'   => 'Developer, author of this site, your only point of contact',
+    ],
+
+    // 3-step "what happens next" — lowers form-submit anxiety.
+    'next_steps' => [
+        'eyebrow' => 'What happens next',
+        'heading' => 'Three steps — no marketing funnel.',
+        'steps'   => [
+            [
+                'title' => 'I reply within 24 hours',
+                'text'  => 'You get an email from me personally, not an automated confirmation. If I\'m travelling, I\'ll be back to you by the next business day at the latest.',
+            ],
+            [
+                'title' => 'We schedule a 30-minute call',
+                'text'  => 'A short phone or video call — we work out whether it makes sense to work together. No deck, no slides, no sales pressure.',
+            ],
+            [
+                'title' => 'You receive a written quote',
+                'text'  => 'Within a week I send a specification with scope, timeline and the exact price. What\'s in the specification is what\'s on the invoice.',
+            ],
+        ],
+    ],
+
+    // Thank-you state — replaces the form once the message has been sent.
+    'thank_you' => [
+        'heading'  => 'Done — your message is in.',
+        'subline'  => 'Thank you. I\'ll read it personally and reply by the next business day at the latest.',
+        'next'     => 'In the meantime, take a look at past projects or check the pricing.',
+        'cta_projects' => 'Past projects',
+        'cta_price'    => 'Pricing',
+    ],
+
+    // Optional budget field (aligned with home.inline_form and landing budgets).
+    'budget_label'   => 'Indicative budget (optional)',
+    'budget_options' => [
+        'Up to €1,000',
+        '€1,000 – €2,200',
+        '€2,200 – €3,800',
+        '€3,800 and more',
+        'Not sure yet — please advise',
+    ],
+
 ];

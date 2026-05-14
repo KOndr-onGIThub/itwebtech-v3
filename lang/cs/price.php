@@ -35,7 +35,7 @@ return [
                 'Optimalizace rychlosti načítání',
                 '14 dní podpory po spuštění',
             ],
-            'cta' => 'Mám zájem — chci nezávaznou nabídku',
+            'cta' => 'Chci nezávaznou nabídku',
         ],
         [
             'name'    => 'Standard',
@@ -51,7 +51,7 @@ return [
                 'Hosting a doména na 1 rok zdarma',
                 '1 měsíc podpory po spuštění',
             ],
-            'cta' => 'Chci tento plán — nezávazná nabídka',
+            'cta' => 'Chci nezávaznou nabídku',
         ],
         [
             'name'    => 'Custom',
