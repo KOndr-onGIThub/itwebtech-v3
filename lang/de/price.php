@@ -121,6 +121,9 @@ return [
     'compare' => [
         'heading' => 'Was Sie genau bekommen',
         'tiers'   => ['Starter', 'Standard', 'Custom'],
+        'tabs_aria'     => 'Preisstufe auswählen',
+        'included'      => 'Enthalten',
+        'not_included'  => 'Nicht enthalten',
         'groups'  => [
             [
                 'label' => 'Projektumfang',

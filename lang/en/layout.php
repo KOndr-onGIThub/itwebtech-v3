@@ -8,6 +8,7 @@ return [
         'price'    => 'Pricing',
         'projects' => 'Projects',
         'blog'     => 'Blog',
+        'lang_switcher' => 'Language switcher',
     ],
 
     'cta' => [
