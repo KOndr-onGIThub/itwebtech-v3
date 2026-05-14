@@ -69,6 +69,28 @@
     }
     </script>
 
+    {{-- OND-130 iter 8 — JSON-LD Person sitewide pro E-E-A-T + author rich
+         results. Komplementární k LocalBusiness (organization) + per-page
+         Article (article entity). sameAs odkazuje na ověřitelný LinkedIn. --}}
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "Person",
+        "name": "Ondřej Kriška",
+        "url": "{!! url('/') !!}",
+        "email": "ok@itwebtech.cz",
+        "jobTitle": "Web developer",
+        "worksFor": {
+            "@@type": "Organization",
+            "name": "{{ config('app.name') }}"
+        },
+        "knowsAbout": ["Web Development", "Custom Web Applications", "SEO", "B2B Websites"],
+        "sameAs": [
+            "https://www.linkedin.com/in/ondrejkriska/"
+        ]
+    }
+    </script>
+
     @stack('preloads')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 

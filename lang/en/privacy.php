@@ -9,7 +9,27 @@ return [
 
     'heading' => 'Privacy Policy',
 
-    'content' => '<p>Effective date: May 6, 2026</p>
+    // OND-130 P2 iter 8 — plán §3.1 page-mark hero + TL;DR.
+    // OND-135 cleanup (2026-05-14): page_mark_index removed per sitewide
+    // precedent (PR #78/#80/#82/#83).
+    'hero' => [
+        'page_mark_label' => 'PRIVACY POLICY',
+        'upline'          => 'Plain English, GDPR-grade.',
+        'heading_html'    => 'Your data is <em>yours</em>.',
+        'subline'         => 'What I collect, why I collect it, and how I protect it. No legalese.',
+    ],
+
+    'tldr' => [
+        'eyebrow' => 'In short',
+        'items'   => [
+            'I only collect data you send me (form, email, phone).',
+            'I never share it with third parties for marketing — it is used only to reply to your inquiry.',
+            'Web analytics is anonymous (GA4 without ad cookies, Clarity).',
+            'You can request deletion any time: ok@itwebtech.cz.',
+        ],
+    ],
+
+    'content' =>'<p>Effective date: May 6, 2026</p>
 <p>The website (hereinafter "the Service") is operated by entrepreneur Ondřej Kriška (hereinafter "the operator" or "itwebtech").</p>
 <p>This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service.</p>
 
