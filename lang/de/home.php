@@ -169,6 +169,8 @@ return [
         'secondary_inline' => 'Ich biete auch SEO, Grafikdesign und Social-Media-Betreuung — :pricing_link oder :contact_link.',
         'secondary_inline_pricing' => 'mehr in der Preisliste',
         'secondary_inline_contact' => 'schreiben Sie mir',
+        // OND-136: angeglichen an die CS-Taxonomie 25/55/95 Tausend CZK → EUR-Umrechnung.
+        // Vorgeschlagene EUR-Werte vorbehaltlich Bestätigung durch Ondřej/CEO.
         'primary' => [
             'weby' => [
                 'title'       => 'Maßgeschneiderte Websites',
@@ -178,7 +180,7 @@ return [
                     'Konversionsorientierte Struktur passend zu Ihrem Geschäft',
                     'Wartungsfreier Betrieb und schnelle Ladezeiten',
                 ],
-                'price'       => 'ab 20 000 CZK',
+                'price'       => 'ab 1.000 €',
             ],
             'aplikace' => [
                 'title'       => 'Webanwendungen',
@@ -188,7 +190,7 @@ return [
                     'Integration in Ihre bestehenden Werkzeuge',
                     'Eigene Administration ohne monatliche Lizenzgebühren',
                 ],
-                'price'       => 'ab 20 000 CZK',
+                'price'       => 'ab 2.200 €',
             ],
             'eshop' => [
                 'title'       => 'Online-Shops',
@@ -198,7 +200,7 @@ return [
                     'Anbindung an Buchhaltung, Spediteure und Zahlungsanbieter',
                     'Keine monatlichen Plattform-Gebühren',
                 ],
-                'price'       => 'ab 20 000 CZK',
+                'price'       => 'ab 3.800 €',
             ],
         ],
         'seo' => [
@@ -217,22 +219,24 @@ return [
 
     'price_anchor' => [
         'heading' => 'Was kostet es?',
-        'intro'   => 'Orientierende Einstiegspreise für die wichtigsten Projekttypen. Ein verbindliches Angebot erhalten Sie schriftlich nach einer kurzen Beratung.',
+        'intro'   => 'Orientierende Einstiegspreise für die drei Projekt-Tiers. Ein verbindliches Angebot erhalten Sie schriftlich nach einer kurzen Beratung.',
+        // OND-136: 25 / 55 / 95 Tausend CZK → EUR-Umrechnung (vorgeschlagene
+        // Standardwerte vorbehaltlich Bestätigung). Eine Quelle der Wahrheit.
         'items'   => [
             [
-                'title' => 'Website auf Maß',
-                'price' => 'ab 20 000 CZK',
-                'desc'  => 'Statische Präsentation, einsprachig oder mehrsprachig.',
+                'title' => 'Starter',
+                'price' => '1.000 €',
+                'desc'  => 'Präsentations-Website bis 5 Seiten für Selbstständige und kleine Unternehmen.',
             ],
             [
-                'title' => 'Webanwendung',
-                'price' => 'ab 60 000 CZK',
-                'desc'  => 'Interne Systeme, Kundenportale und maßgeschneiderte Verwaltung.',
+                'title' => 'Standard',
+                'price' => '2.200 €',
+                'desc'  => 'Mehrsprachige Website mit Blog, Konversions-Tracking und Reservierungssystem.',
             ],
             [
-                'title' => 'Online-Shop',
-                'price' => 'ab 80 000 CZK',
-                'desc'  => 'Maßgeschneiderte Lösung ohne monatliche Plattformgebühren.',
+                'title' => 'Custom',
+                'price' => 'ab 3.800 €',
+                'desc'  => 'Online-Shop, Webanwendung oder ein komplexes Portal auf Maß.',
             ],
         ],
         'cta' => 'Detaillierte Preisliste →',
@@ -304,7 +308,7 @@ return [
             [
                 'key'      => 'price',
                 'question' => 'Was kostet es?',
-                'answer'   => 'Orientierende Einstiegspreise finden Sie oben im Preisanker — Websites ab 20 000 CZK, Anwendungen ab 60 000 CZK, Online-Shops ab 80 000 CZK. Ein verbindliches Angebot erhalten Sie schriftlich nach einer kurzen Beratung, auf der Rechnung steht genau das, was in der Spezifikation steht.',
+                'answer'   => 'Orientierende Einstiegspreise finden Sie oben im Preisanker — Starter 1.000 €, Standard 2.200 €, Custom ab 3.800 €. Ein verbindliches Angebot erhalten Sie schriftlich nach einer kurzen Beratung. Auf der Rechnung steht genau das, was in der Spezifikation steht — Punkt für Punkt.',
             ],
             [
                 'key'      => 'duration',
