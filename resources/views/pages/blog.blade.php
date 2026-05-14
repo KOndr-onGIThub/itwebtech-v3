@@ -5,11 +5,19 @@
 
 @section('content')
 
-{{-- Page hero --}}
-<div class="page-hero">
+{{-- Page hero — OND-130 iter 8: plán §3.1 page-mark + Plex Sans display (post OND-145 swap). --}}
+<div class="page-hero page-hero--blog">
     <div class="container-site">
-        <p class="section-subheading">{{ __('blog.subheading') }}</p>
-        <h1>{{ __('blog.heading') }}</h1>
+        {{-- OND-135 cleanup (2026-05-14): page_mark_index span odebrán jako
+             agency-portfolio artefakt per CEO PR #78/#80/#82/#83 precedent. --}}
+        <p class="page-hero__page-mark">
+            <span class="page-hero__page-mark-label">{{ __('blog.hero.page_mark_label') }}</span>
+        </p>
+        <p class="page-hero__upline">{{ __('blog.hero.upline') }}</p>
+        <h1 class="page-hero__heading">
+            {!! __('blog.hero.heading_html') !!}
+        </h1>
+        <p class="page-hero__subline">{{ __('blog.hero.subline') }}</p>
     </div>
 </div>
 
