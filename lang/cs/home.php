@@ -8,14 +8,17 @@ return [
     ],
 
     'hero' => [
-        // OND-135 P2 (plán §3.1) — page-mark eyebrow + upline + display heading
-        // s italic key-word amber emphasis. Provizorní copy dle §3.1 reference;
-        // finální tone v CS/EN/DE doladí Content Writer v OND-136 P3.
-        'page_mark_label' => 'AI A WEB',
+        // OND-127 P0 incident hotfix (2026-05-14) — plagiátorské stringy
+        // (page_mark_label, upline, subline + "Ale jaký..." heading)
+        // odebrány z produkce. Placeholder copy vychází z meta description
+        // = pre-redesign Ondřejova safe copy (B2B IT, weby na míru).
+        // FINAL COPY: Content Writer dodá v OND-136 P3 (SLA 2h od 11:10 UTC).
+        // Žádný fragment z reference screenshotu (governance: design ref = DNA only).
+        'page_mark_label' => 'WEB NA MÍRU',
         'page_mark_index' => '01 / 01',
-        'upline'          => 'AI udělá web za odpoledne.',
-        'heading_html'    => 'Ale jaký web?<br>Ten, který <em>prodává</em>.',
-        'subline'         => 'Strategie, výzkum a řemeslo zkratku nemají.',
+        'upline'          => 'Pro firmy, které poznají rozdíl.',
+        'heading_html'    => 'Web, který vám konečně <em>vydělá</em>.',
+        'subline'         => 'Vlastní kód, přesná cena předem, přímý kontakt.',
 
         // Backwards compat — staré klíče zachované pro non-hero spotřebitele
         // (consultation modal, fallback render). cta_secondary není v hero.
