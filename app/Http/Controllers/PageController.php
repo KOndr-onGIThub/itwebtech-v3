@@ -153,6 +153,11 @@ class PageController extends Controller
     {
         $locale = App::getLocale();
 
+        // OND-160: validate slug per locale (cross-slug duplicate content fix).
+        // Slug musí patřit článku v aktuální locale. Pokud slug existuje,
+        // ale patří jiné locale, 301 → kanonický slug pro current locale.
+        // Bez tohoto check byl každý článek dostupný pod ~3 slug variantami
+        // × 3 locale prefixy se self-canonical → duplicate content v Google.
         $slugRecord = ArticleSlug::where('slug', $slug)
             ->where('active', true)
             ->first();
@@ -168,6 +173,22 @@ class PageController extends Controller
 
         if (! $article) {
             abort(404);
+        }
+
+        // Aktivní slug pro aktuální locale — bez fallbacku na cs, protože
+        // pokud článek nemá svou jazykovou variantu, nesmí být dostupný pod
+        // cizí locale prefix (jinak by /en/blog/cs-slug renderoval cs obsah).
+        $canonical = $article->slugs
+            ->where('locale', $locale)
+            ->where('active', true)
+            ->first();
+
+        if (! $canonical) {
+            abort(404);
+        }
+
+        if ($canonical->slug !== $slug) {
+            return redirect()->route("{$locale}.article", ['slug' => $canonical->slug], 301);
         }
 
         $translation = $article->translation($locale);
