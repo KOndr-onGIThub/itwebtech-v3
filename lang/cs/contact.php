@@ -37,9 +37,14 @@ return [
 
     // Trust signal hero — „he-it's-a-person".
     'hero' => [
+        // Plán §3.1 hero — page-mark, upline, italic display heading, subline.
+        'page_mark_label' => 'KONTAKT',
+        'page_mark_index' => '02 / 09',
+        'upline'          => 'Píšete přímo mně.',
+        'heading_html'    => 'Žádné CRM,<br>žádné call centrum — <em>jen Ondřej</em>.',
         'eyebrow'      => 'Píšete přímo mně',
         'heading'      => 'Píšete přímo mně, Ondřejovi.',
-        'subline'      => 'Žádné CRM, žádné call centrum, žádný formulářový dispatcher. Vaši zprávu si přečtu osobně a odepíšu obvykle do druhého pracovního dne.',
+        'subline'      => 'Vaši zprávu si přečtu osobně a odepíšu obvykle do druhého pracovního dne.',
         'photo_alt'    => 'Ondřej Kriška — autor a kontaktní osoba',
         'role_label'   => 'Vývojář, autor webu, jediný kontakt',
     ],

@@ -37,9 +37,14 @@ return [
 
     // Trust-Signal-Hero — „es-ist-ein-echter-Mensch".
     'hero' => [
+        // Plan §3.1 Hero — Page-Mark, Upline, kursive Display-Headline, Subline.
+        'page_mark_label' => 'KONTAKT',
+        'page_mark_index' => '02 / 09',
+        'upline'          => 'Sie schreiben direkt an mich.',
+        'heading_html'    => 'Kein CRM,<br>kein Callcenter — <em>nur Ondřej</em>.',
         'eyebrow'      => 'Sie schreiben direkt an mich',
         'heading'      => 'Sie schreiben direkt an mich, Ondřej.',
-        'subline'      => 'Kein CRM, kein Callcenter, kein Formular-Dispatcher. Ich lese Ihre Nachricht persönlich und antworte in der Regel bis zum nächsten Werktag.',
+        'subline'      => 'Ich lese Ihre Nachricht persönlich und antworte in der Regel bis zum nächsten Werktag.',
         'photo_alt'    => 'Ondřej Kriška — Autor und Ansprechpartner',
         'role_label'   => 'Entwickler, Autor dieser Seite, einziger Ansprechpartner',
     ],

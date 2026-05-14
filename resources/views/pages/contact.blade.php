@@ -5,12 +5,18 @@
 
 @section('content')
 
-{{-- Page hero — OND-136: trust-signal "he-it's-a-person" --}}
+{{-- Page hero — OND-135 iter 4: plán §3.1 design DNA (page-mark + Fraunces italic + amber accent) --}}
 <div class="page-hero page-hero--contact">
     <div class="container-site">
-        <p class="section-subheading">{{ __('contact.hero.eyebrow') }}</p>
-        <h1>{{ __('contact.hero.heading') }}</h1>
-        <p class="page-hero__lead">{{ __('contact.hero.subline') }}</p>
+        <p class="page-hero__page-mark">
+            <span class="page-hero__page-mark-label">{{ __('contact.hero.page_mark_label') }}</span>
+            <span class="page-hero__page-mark-index" aria-hidden="true">{{ __('contact.hero.page_mark_index') }}</span>
+        </p>
+        <p class="page-hero__upline">{{ __('contact.hero.upline') }}</p>
+        <h1 class="page-hero__heading">
+            {!! __('contact.hero.heading_html') !!}
+        </h1>
+        <p class="page-hero__subline">{{ __('contact.hero.subline') }}</p>
     </div>
 </div>
 
