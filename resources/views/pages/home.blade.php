@@ -3,6 +3,19 @@
 @section('title', __('home.meta.title'))
 @section('description', __('home.meta.description'))
 
+{{-- OND-145 P2 corrective — preload display fontu (IBM Plex Sans Variable wght axis)
+     pro hero LCP. Variable woff2 obsahuje weights 100–700 v jednom souboru,
+     takže preload pokrývá 400 i 700 najednou. OND-147 (Jack §2.0 rule #10):
+     hero je upright wght 700, preloadujeme upright (normal) variantu, ne italic.
+     latin + latin-ext kvůli CS diacriticám (ě š č ř ž ý). EN/DE umlauty
+     (ä ö ü ß) jsou v latin subsetu. Každý soubor < 60KB (acceptance OND-145). --}}
+@push('preloads')
+    <link rel="preload" as="font" type="font/woff2" crossorigin
+          href="{{ Vite::asset('node_modules/@fontsource-variable/ibm-plex-sans/files/ibm-plex-sans-latin-wght-normal.woff2') }}">
+    <link rel="preload" as="font" type="font/woff2" crossorigin
+          href="{{ Vite::asset('node_modules/@fontsource-variable/ibm-plex-sans/files/ibm-plex-sans-latin-ext-wght-normal.woff2') }}">
+@endpush
+
 @section('content')
 
 {{-- ===================================================
@@ -22,14 +35,15 @@
     <div class="container-site section-hero__inner">
         <div class="section-hero__content">
             {{-- OND-135 P2 (plán §3.1) — page-mark eyebrow s indexem.
-                 Nahrazuje T08 eyebrow „Webové stránky a aplikace na míru"
-                 (přesunut do meta/intro v dolních sekcích). --}}
+                 OND-145 P0.3 corrective (2026-05-14): pagination index span
+                 odebrán jako agency-portfolio artefakt — itwebtech nemá více
+                 „pages", tj. counter byl visual noise (CEO 13:48).
+                 Zachován label + horizontální linka z ::before. --}}
             <p class="section-hero__page-mark">
                 <span class="section-hero__page-mark-label">{{ __('home.hero.page_mark_label') }}</span>
-                <span class="section-hero__page-mark-index" aria-hidden="true">{{ __('home.hero.page_mark_index') }}</span>
             </p>
 
-            {{-- §3.1 upline (Fraunces muted, 40 px) — kontext před display headingem --}}
+            {{-- §3.1 upline (display muted, 40 px) — kontext před display headingem --}}
             <p class="section-hero__upline">{{ __('home.hero.upline') }}</p>
 
             <h1 class="section-hero__heading">

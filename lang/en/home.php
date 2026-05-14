@@ -13,7 +13,8 @@ return [
         // Placeholder copy derived from meta description = pre-redesign safe copy.
         // FINAL COPY: Content Writer delivers in OND-136 P3 (SLA 2h from 11:10 UTC).
         'page_mark_label' => 'CUSTOM WEB',
-        'page_mark_index' => '01 / 01',
+        // OND-145 P0.3: page_mark_index removed — agency-portfolio pagination
+        // artefact, itwebtech has no „pages" hierarchy in hero context.
         'upline'          => 'For businesses that know the difference.',
         'heading_html'    => 'A website that finally <em>earns its keep</em>.',
         'subline'         => 'Custom code, fixed price up front, direct contact.',

@@ -15,7 +15,8 @@ return [
         // FINAL COPY: Content Writer dodá v OND-136 P3 (SLA 2h od 11:10 UTC).
         // Žádný fragment z reference screenshotu (governance: design ref = DNA only).
         'page_mark_label' => 'WEB NA MÍRU',
-        'page_mark_index' => '01 / 01',
+        // OND-145 P0.3: page_mark_index odebrán — agency-portfolio pagination
+        // artefakt, itwebtech nemá „pages" hierarchy v hero kontextu (CEO 13:48).
         'upline'          => 'Pro firmy, které poznají rozdíl.',
         'heading_html'    => 'Web, který vám konečně <em>vydělá</em>.',
         'subline'         => 'Vlastní kód, přesná cena předem, přímý kontakt.',
