@@ -7,13 +7,18 @@ return [
         'description' => 'Maßgeschneiderte Webseiten und Webanwendungen, die Ergebnisse liefern. Wartungsfrei, kein WordPress, keine versteckten Kosten. 18 Jahre Erfahrung. Kostenlose Beratung.',
     ],
 
-    // TODO: review pro DE — copy podle CS varianty A (OND-100)
+    // TODO (OND-136 P3): final DE tone polish — Content Writer scope.
     'hero' => [
+        // OND-135 P2 (plán §3.1) — page-mark + upline + display heading.
+        'page_mark_label' => 'KI & WEB',
+        'page_mark_index' => '01 / 01',
+        'upline'          => 'KI baut eine Website an einem Nachmittag.',
+        'heading_html'    => 'Aber was für eine Website?<br>Eine, die <em>verkauft</em>.',
+        'subline'         => 'Strategie, Recherche und Handwerk kennen keine Abkürzung.',
+
+        // Backwards compat (consultation modal, fallback render).
         'eyebrow'       => 'Maßgeschneiderte Websites & Webanwendungen',
         'heading'       => 'Eine Website, die sich endlich auszahlt. Ohne WordPress, ohne Wartung, ohne Kompromisse.',
-        'subline'       => 'Für Unternehmer, die eine Website wollen, die Kunden bringt — nicht nur einen weiteren Posten in der Buchhaltung. 18 Jahre bei Toyota haben mich gelehrt, genau das zu liefern, worauf wir uns geeinigt haben.',
-        // OND-130: single primary CTA in hero. cta_secondary kept for backwards
-        // compatibility (consultation modal) but no longer shown in hero.
         'cta_primary'   => 'Unverbindliches Angebot anfordern',
         'cta_secondary' => '30-Min-Beratung vereinbaren',
         'phone_label'   => 'oder anrufen:',

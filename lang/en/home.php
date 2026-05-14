@@ -7,11 +7,18 @@ return [
         'description' => 'Custom websites and web applications built for results. Maintenance-free, no WordPress, no hidden fees. 18 years of experience. Free consultation.',
     ],
 
-    // TODO: review pro EN — copy podle CS varianty A (OND-100)
+    // TODO (OND-136 P3): final EN tone polish — Content Writer scope.
     'hero' => [
+        // OND-135 P2 (plán §3.1) — page-mark + upline + display heading.
+        'page_mark_label' => 'AI & WEB',
+        'page_mark_index' => '01 / 01',
+        'upline'          => 'AI builds a website in an afternoon.',
+        'heading_html'    => 'But what kind of website?<br>One that <em>sells</em>.',
+        'subline'         => 'Strategy, research, and craft have no shortcuts.',
+
+        // Backwards compat (consultation modal, fallback render).
         'eyebrow'       => 'Custom websites & web applications',
         'heading'       => 'A website that finally earns its keep. No WordPress, no maintenance, no compromises.',
-        'subline'       => 'For business owners who want a website that brings in customers — not another line on the invoice. 18 years at Toyota taught me to deliver exactly what we agreed on.',
         // OND-130 + OND-136: single primary CTA in hero, exact wording per spec.
         // cta_secondary kept for backwards compat (consultation modal) — not shown in hero.
         'cta_primary'   => 'Get a free quote',
