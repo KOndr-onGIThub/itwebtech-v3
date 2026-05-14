@@ -154,6 +154,8 @@
                 alt="{{ config('app.name') }}"
                 class="footer-prefooter__logo"
                 width="274" height="58"
+                loading="lazy"
+                decoding="async"
             >
 
             <p class="footer-prefooter__tagline">

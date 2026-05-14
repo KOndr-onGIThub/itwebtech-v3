@@ -15,7 +15,13 @@
 --}}
 
 @if (screenshot_is_storage($path))
-    @php($url = screenshot_url($path))
+    @php
+        $url  = screenshot_url($path);
+        $dims = screenshot_dimensions($path);
+        // OND-137 P4: default loading="lazy" pro storage screenshoty — caller
+        // může přepsat eager (např. hero/above-the-fold) přes explicit prop.
+        $effectiveLoading = $loading ?? 'lazy';
+    @endphp
     @if ($lightboxGallery)
         <a href="{{ $url }}" data-glightbox data-gallery="{{ $lightboxGallery }}">
     @endif
@@ -23,7 +29,8 @@
             src="{{ $url }}"
             alt="{{ $alt }}"
             sizes="{{ $sizes }}"
-            @if ($loading) loading="{{ $loading }}" @endif
+            @if ($dims) width="{{ $dims['width'] }}" height="{{ $dims['height'] }}" @endif
+            loading="{{ $effectiveLoading }}"
             @if ($fetchpriority) fetchpriority="{{ $fetchpriority }}" @endif
             decoding="async"
         >
