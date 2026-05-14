@@ -9,12 +9,14 @@ return [
 
     // TODO (OND-136 P3): final EN tone polish — Content Writer scope.
     'hero' => [
-        // OND-135 P2 (plán §3.1) — page-mark + upline + display heading.
-        'page_mark_label' => 'AI & WEB',
+        // OND-127 P0 incident hotfix (2026-05-14) — plagiátor strings removed.
+        // Placeholder copy derived from meta description = pre-redesign safe copy.
+        // FINAL COPY: Content Writer delivers in OND-136 P3 (SLA 2h from 11:10 UTC).
+        'page_mark_label' => 'CUSTOM WEB',
         'page_mark_index' => '01 / 01',
-        'upline'          => 'AI builds a website in an afternoon.',
-        'heading_html'    => 'But what kind of website?<br>One that <em>sells</em>.',
-        'subline'         => 'Strategy, research, and craft have no shortcuts.',
+        'upline'          => 'For businesses that know the difference.',
+        'heading_html'    => 'A website that finally <em>earns its keep</em>.',
+        'subline'         => 'Custom code, fixed price up front, direct contact.',
 
         // Backwards compat (consultation modal, fallback render).
         'eyebrow'       => 'Custom websites & web applications',

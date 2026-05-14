@@ -9,12 +9,14 @@ return [
 
     // TODO (OND-136 P3): final DE tone polish — Content Writer scope.
     'hero' => [
-        // OND-135 P2 (plán §3.1) — page-mark + upline + display heading.
-        'page_mark_label' => 'KI & WEB',
+        // OND-127 P0 incident hotfix (2026-05-14) — Plagiat-Strings entfernt.
+        // Placeholder copy aus meta description = pre-redesign safe copy.
+        // FINAL COPY: Content Writer liefert in OND-136 P3 (SLA 2h von 11:10 UTC).
+        'page_mark_label' => 'MASSGESCHNEIDERT',
         'page_mark_index' => '01 / 01',
-        'upline'          => 'KI baut eine Website an einem Nachmittag.',
-        'heading_html'    => 'Aber was für eine Website?<br>Eine, die <em>verkauft</em>.',
-        'subline'         => 'Strategie, Recherche und Handwerk kennen keine Abkürzung.',
+        'upline'          => 'Für Unternehmen, die den Unterschied erkennen.',
+        'heading_html'    => 'Eine Website, die sich endlich <em>auszahlt</em>.',
+        'subline'         => 'Eigener Code, fester Preis im Voraus, direkter Kontakt.',
 
         // Backwards compat (consultation modal, fallback render).
         'eyebrow'       => 'Maßgeschneiderte Websites & Webanwendungen',
