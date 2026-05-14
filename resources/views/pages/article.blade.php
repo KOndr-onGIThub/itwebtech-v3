@@ -3,6 +3,45 @@
 @section('title', $translation?->title ?? config('app.name'))
 @section('description', $translation?->description ?? '')
 
+{{-- OND-137 P4 §SEO: Article + BreadcrumbList JSON-LD pro detail článku. --}}
+@push('jsonld')
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'BreadcrumbList',
+    'itemListElement' => [
+        ['@type' => 'ListItem', 'position' => 1, 'name' => __('layout.nav.home'), 'item' => lroute('home')],
+        ['@type' => 'ListItem', 'position' => 2, 'name' => __('layout.nav.blog'), 'item' => lroute('blog')],
+        ['@type' => 'ListItem', 'position' => 3, 'name' => $translation?->title ?? ($article?->slug ?? ''), 'item' => url()->current()],
+    ],
+], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
+</script>
+<script type="application/ld+json">
+{!! json_encode(array_filter([
+    '@context' => 'https://schema.org',
+    '@type' => 'Article',
+    'headline' => $translation?->title,
+    'description' => $translation?->description,
+    'image' => $article?->hero_image_url ?: null,
+    'datePublished' => optional($article?->published_at)->toAtomString(),
+    'inLanguage' => app()->getLocale(),
+    'mainEntityOfPage' => [
+        '@type' => 'WebPage',
+        '@id' => url()->current(),
+    ],
+    'author' => [
+        '@type' => 'Person',
+        'name'  => $article?->author ?: 'Ondřej Kriška',
+    ],
+    'publisher' => [
+        '@type' => 'Organization',
+        'name'  => config('app.name'),
+        'url'   => url('/'),
+    ],
+]), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
+</script>
+@endpush
+
 @section('content')
 
 {{-- Page hero — OND-130 iter 8: plán §3.1 page-mark eyebrow + Plex Sans title (post OND-145 swap).

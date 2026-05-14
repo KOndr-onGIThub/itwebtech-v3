@@ -3,10 +3,29 @@
 @section('title', $translation?->meta_title ?? $translation?->title ?? config('app.name'))
 @section('description', $translation?->meta_description ?? $translation?->summary ?? '')
 
+{{-- OND-137 P4 §SEO: BreadcrumbList JSON-LD pro detail projektu. --}}
+@push('jsonld')
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'BreadcrumbList',
+    'itemListElement' => [
+        ['@type' => 'ListItem', 'position' => 1, 'name' => __('layout.nav.home'),     'item' => lroute('home')],
+        ['@type' => 'ListItem', 'position' => 2, 'name' => __('layout.nav.projects'), 'item' => lroute('projects')],
+        ['@type' => 'ListItem', 'position' => 3, 'name' => $translation?->title ?? $project->slug, 'item' => url()->current()],
+    ],
+], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
+</script>
+@endpush
+
 @section('content')
 
-{{-- 1. Detail hero --}}
-<x-portfolio.detail-hero :project="$project" :translation="$translation" />
+{{-- 1. Detail hero — OND-137 P4 §6: case_study_view event (Jack §6) na
+     hero sekci přes IntersectionObserver (data-analytics-view). --}}
+<div data-analytics-view="case_study_view"
+     data-analytics-props='{"slug":"{{ $project->slug }}"}'>
+    <x-portfolio.detail-hero :project="$project" :translation="$translation" />
+</div>
 
 {{-- 2. Detail gallery --}}
 <x-portfolio.detail-gallery :screenshots="$project->screenshots" />
