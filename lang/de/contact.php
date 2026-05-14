@@ -38,8 +38,9 @@ return [
     // Trust-Signal-Hero — „es-ist-ein-echter-Mensch".
     'hero' => [
         // Plan §3.1 Hero — Page-Mark, Upline, kursive Display-Headline, Subline.
+        // OND-135 Bereinigung (2026-05-14): page_mark_index entfernt — Agency-
+        // Portfolio-Artefakt per CEO PR #78 Präzedenzfall (Home).
         'page_mark_label' => 'KONTAKT',
-        'page_mark_index' => '02 / 09',
         'upline'          => 'Sie schreiben direkt an mich.',
         'heading_html'    => 'Kein CRM,<br>kein Callcenter — <em>nur Ondřej</em>.',
         'eyebrow'      => 'Sie schreiben direkt an mich',

@@ -8,9 +8,11 @@
 {{-- Page hero — OND-135 iter 4: plán §3.1 design DNA (page-mark + display italic + amber accent) --}}
 <div class="page-hero page-hero--contact">
     <div class="container-site">
+        {{-- OND-135 cleanup (2026-05-14): page_mark_index span odebrán jako
+             agency-portfolio artefakt (itwebtech nemá „pages" hierarchii) —
+             aplikováno per CEO PR #78 precedent na home. Label zachován. --}}
         <p class="page-hero__page-mark">
             <span class="page-hero__page-mark-label">{{ __('contact.hero.page_mark_label') }}</span>
-            <span class="page-hero__page-mark-index" aria-hidden="true">{{ __('contact.hero.page_mark_index') }}</span>
         </p>
         <p class="page-hero__upline">{{ __('contact.hero.upline') }}</p>
         <h1 class="page-hero__heading">

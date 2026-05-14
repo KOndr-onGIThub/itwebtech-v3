@@ -38,8 +38,9 @@ return [
     // Trust signal hero — „he-it's-a-person".
     'hero' => [
         // Plán §3.1 hero — page-mark, upline, italic display heading, subline.
+        // OND-135 cleanup (2026-05-14): page_mark_index odebrán — agency-
+        // portfolio artefakt per CEO PR #78 precedent (home).
         'page_mark_label' => 'KONTAKT',
-        'page_mark_index' => '02 / 09',
         'upline'          => 'Píšete přímo mně.',
         'heading_html'    => 'Žádné CRM,<br>žádné call centrum — <em>jen Ondřej</em>.',
         'eyebrow'      => 'Píšete přímo mně',
