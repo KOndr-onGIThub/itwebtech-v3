@@ -141,6 +141,9 @@ return [
         'heading' => 'Co přesně dostanete',
         // OND-130 sjednocená taxonomie — viz `tiers` výše.
         'tiers'   => ['Startovní', 'Standard', 'Custom'],
+        'tabs_aria'     => 'Výběr cenové úrovně',
+        'included'      => 'Zahrnuto',
+        'not_included'  => 'Nezahrnuto',
         'groups'  => [
             [
                 'label' => 'Rozsah projektu',

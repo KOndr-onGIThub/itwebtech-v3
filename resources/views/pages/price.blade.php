@@ -149,9 +149,13 @@
                         @foreach ($row['values'] as $vi => $val)
                         <td class="{{ $vi === 1 ? 'is-featured' : '' }}">
                             @if ($val === true)
-                                <span class="pricing-compare__yes"><x-icon.circle-check-big class="w-4 h-4" /></span>
+                                <span class="pricing-compare__yes">
+                                    <x-icon.circle-check-big class="w-4 h-4" />
+                                    <span class="sr-only">{{ __('price.compare.included') }}</span>
+                                </span>
                             @elseif ($val === false)
-                                <span class="pricing-compare__no">—</span>
+                                <span class="pricing-compare__no" aria-hidden="true">—</span>
+                                <span class="sr-only">{{ __('price.compare.not_included') }}</span>
                             @else
                                 <span class="pricing-compare__val">{{ $val }}</span>
                             @endif
@@ -171,13 +175,17 @@
 
             {{-- Tab header --}}
             <div class="pcm-header">
-                <div class="pcm-tabs" role="tablist">
+                <div class="pcm-tabs" role="tablist" aria-label="{{ __('price.compare.tabs_aria') }}">
                     @foreach ($compareTiers as $i => $tier)
                     <button class="pcm-tab"
+                            id="pcm-tab-{{ $i }}"
                             :class="{ 'is-active': active === {{ $i }} }"
                             @click="active = {{ $i }}"
+                            type="button"
                             role="tab"
-                            :aria-selected="active === {{ $i }}">
+                            aria-controls="pcm-panel"
+                            :aria-selected="(active === {{ $i }}).toString()"
+                            :tabindex="active === {{ $i }} ? 0 : -1">
                         {{ $tier }}
                     </button>
                     @endforeach
@@ -185,28 +193,37 @@
                 <div class="pcm-price" x-text="prices[active]"></div>
             </div>
 
-            {{-- Feature rows --}}
-            @foreach ($compareGroups as $group)
-            <div class="pcm-group">{{ $group['label'] }}</div>
-            @foreach ($group['rows'] as $row)
-            <div class="pcm-row">
-                <span class="pcm-feature">{{ $row['label'] }}</span>
-                <span class="pcm-value-wrap">
-                    @foreach ($row['values'] as $vi => $val)
-                    <span x-show="active === {{ $vi }}">
-                        @if ($val === true)
-                            <span class="pricing-compare__yes"><x-icon.circle-check-big class="w-4 h-4" /></span>
-                        @elseif ($val === false)
-                            <span class="pricing-compare__no">—</span>
-                        @else
-                            <span class="pricing-compare__val">{{ $val }}</span>
-                        @endif
+            {{-- Feature rows (single dynamic tabpanel labelled by the active tab). --}}
+            <div id="pcm-panel"
+                 role="tabpanel"
+                 :aria-labelledby="'pcm-tab-' + active"
+                 aria-live="polite">
+                @foreach ($compareGroups as $group)
+                <div class="pcm-group">{{ $group['label'] }}</div>
+                @foreach ($group['rows'] as $row)
+                <div class="pcm-row">
+                    <span class="pcm-feature">{{ $row['label'] }}</span>
+                    <span class="pcm-value-wrap">
+                        @foreach ($row['values'] as $vi => $val)
+                        <span x-show="active === {{ $vi }}">
+                            @if ($val === true)
+                                <span class="pricing-compare__yes">
+                                    <x-icon.circle-check-big class="w-4 h-4" aria-hidden="true" focusable="false" />
+                                    <span class="sr-only">{{ __('price.compare.included') }}</span>
+                                </span>
+                            @elseif ($val === false)
+                                <span class="pricing-compare__no" aria-hidden="true">—</span>
+                                <span class="sr-only">{{ __('price.compare.not_included') }}</span>
+                            @else
+                                <span class="pricing-compare__val">{{ $val }}</span>
+                            @endif
+                        </span>
+                        @endforeach
                     </span>
-                    @endforeach
-                </span>
+                </div>
+                @endforeach
+                @endforeach
             </div>
-            @endforeach
-            @endforeach
 
         </div>
 
