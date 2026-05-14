@@ -3,18 +3,24 @@
 @section('title', $translation?->meta_title ?? $translation?->title ?? config('app.name'))
 @section('description', $translation?->meta_description ?? $translation?->summary ?? '')
 
-{{-- OND-137 P4 §SEO: BreadcrumbList JSON-LD pro detail projektu. --}}
+{{-- OND-137 P4 §SEO: BreadcrumbList JSON-LD pro detail projektu.
+     Pozn.: viz price.blade.php — schema-context klíč řešíme přes PHP blok,
+     aby ho nesežrala Blade direktiva (Laravel 12 CompilesContexts). --}}
 @push('jsonld')
+@php
+    $breadcrumbLd = [
+        '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            ['@type' => 'ListItem', 'position' => 1, 'name' => __('layout.nav.home'),     'item' => lroute('home')],
+            ['@type' => 'ListItem', 'position' => 2, 'name' => __('layout.nav.projects'), 'item' => lroute('projects')],
+            ['@type' => 'ListItem', 'position' => 3, 'name' => $translation?->title ?? $project->slug, 'item' => url()->current()],
+        ],
+    ];
+    $breadcrumbJson = json_encode($breadcrumbLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+@endphp
 <script type="application/ld+json">
-{!! json_encode([
-    '@context' => 'https://schema.org',
-    '@type' => 'BreadcrumbList',
-    'itemListElement' => [
-        ['@type' => 'ListItem', 'position' => 1, 'name' => __('layout.nav.home'),     'item' => lroute('home')],
-        ['@type' => 'ListItem', 'position' => 2, 'name' => __('layout.nav.projects'), 'item' => lroute('projects')],
-        ['@type' => 'ListItem', 'position' => 3, 'name' => $translation?->title ?? $project->slug, 'item' => url()->current()],
-    ],
-], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
+{!! $breadcrumbJson !!}
 </script>
 @endpush
 

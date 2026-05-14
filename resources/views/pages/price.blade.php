@@ -3,42 +3,59 @@
 @section('title', __('price.meta.title'))
 @section('description', __('price.meta.description'))
 
-{{-- OND-137 P4 §SEO: Service JSON-LD per tier + BreadcrumbList. --}}
+{{-- OND-137 P4 §SEO: Service JSON-LD per tier + BreadcrumbList.
+     JSON-LD pole se sestavují v PHP bloku a echují přes
+     předvypočtenou stringovou proměnnou. Inline schema-context klíč
+     uvnitř json_encode echo bloku naráží na Blade direktivu
+     (Laravel 12 CompilesContexts) — token by se přepsal na PHP kód
+     a JSON klíč by byl zničený. PHP blok Blade neparsuje na direktivy. --}}
 @push('jsonld')
-<script type="application/ld+json">
-{!! json_encode([
-    '@context' => 'https://schema.org',
-    '@type' => 'BreadcrumbList',
-    'itemListElement' => [
-        ['@type' => 'ListItem', 'position' => 1, 'name' => __('layout.nav.home'),  'item' => lroute('home')],
-        ['@type' => 'ListItem', 'position' => 2, 'name' => __('layout.nav.price'), 'item' => lroute('price')],
-    ],
-], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
-</script>
-@foreach (__('price.tiers') as $tier)
 @php
-    $tierPriceNum = (int) preg_replace('/[^0-9]/', '', $tier['price']);
+    // OND-137 P4 §SEO bug-fix: locale → priceCurrency mapping, ať Service
+    // JSON-LD pro EN/DE nehlásí EUR magnitudu s priceCurrency=CZK.
+    $priceCurrency = ['cs' => 'CZK', 'en' => 'EUR', 'de' => 'EUR'][app()->getLocale()] ?? 'CZK';
+
+    $breadcrumbLd = [
+        '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            ['@type' => 'ListItem', 'position' => 1, 'name' => __('layout.nav.home'),  'item' => lroute('home')],
+            ['@type' => 'ListItem', 'position' => 2, 'name' => __('layout.nav.price'), 'item' => lroute('price')],
+        ],
+    ];
+    $breadcrumbJson = json_encode($breadcrumbLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+    $serviceJsons = [];
+    foreach (__('price.tiers') as $tier) {
+        $tierPriceNum = (int) preg_replace('/[^0-9]/', '', $tier['price']);
+        $serviceLd = [
+            '@context' => 'https://schema.org',
+            '@type' => 'Service',
+            'serviceType' => 'Web development',
+            'name' => $tier['name'],
+            'description' => $tier['desc'],
+            'provider' => [
+                '@type' => 'Organization',
+                'name' => config('app.name'),
+                'url'  => url('/'),
+            ],
+            'areaServed' => ['CZ', 'SK', 'DE', 'AT'],
+            'offers' => [
+                '@type' => 'Offer',
+                'price' => $tierPriceNum,
+                'priceCurrency' => $priceCurrency,
+                'url' => lroute('price'),
+            ],
+        ];
+        $serviceJsons[] = json_encode($serviceLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    }
 @endphp
 <script type="application/ld+json">
-{!! json_encode([
-    '@context' => 'https://schema.org',
-    '@type' => 'Service',
-    'serviceType' => 'Web development',
-    'name' => $tier['name'],
-    'description' => $tier['desc'],
-    'provider' => [
-        '@type' => 'Organization',
-        'name' => config('app.name'),
-        'url'  => url('/'),
-    ],
-    'areaServed' => ['CZ', 'SK', 'DE', 'AT'],
-    'offers' => [
-        '@type' => 'Offer',
-        'price' => $tierPriceNum,
-        'priceCurrency' => 'CZK',
-        'url' => lroute('price'),
-    ],
-], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
+{!! $breadcrumbJson !!}
+</script>
+@foreach ($serviceJsons as $serviceJson)
+<script type="application/ld+json">
+{!! $serviceJson !!}
 </script>
 @endforeach
 @endpush
