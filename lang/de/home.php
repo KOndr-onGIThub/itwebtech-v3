@@ -13,7 +13,8 @@ return [
         // Placeholder copy aus meta description = pre-redesign safe copy.
         // FINAL COPY: Content Writer liefert in OND-136 P3 (SLA 2h von 11:10 UTC).
         'page_mark_label' => 'MASSGESCHNEIDERT',
-        'page_mark_index' => '01 / 01',
+        // OND-145 P0.3: page_mark_index entfernt — Agency-Portfolio-Pagination-
+        // Artefakt, itwebtech hat im Hero-Kontext keine „pages" Hierarchie.
         'upline'          => 'Für Unternehmen, die den Unterschied erkennen.',
         'heading_html'    => 'Eine Website, die sich endlich <em>auszahlt</em>.',
         'subline'         => 'Eigener Code, fester Preis im Voraus, direkter Kontakt.',

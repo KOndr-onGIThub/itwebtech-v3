@@ -35,11 +35,12 @@
     <div class="container-site section-hero__inner">
         <div class="section-hero__content">
             {{-- OND-135 P2 (plán §3.1) — page-mark eyebrow s indexem.
-                 Nahrazuje T08 eyebrow „Webové stránky a aplikace na míru"
-                 (přesunut do meta/intro v dolních sekcích). --}}
+                 OND-145 P0.3 corrective (2026-05-14): pagination index span
+                 odebrán jako agency-portfolio artefakt — itwebtech nemá více
+                 „pages", tj. counter byl visual noise (CEO 13:48).
+                 Zachován label + horizontální linka z ::before. --}}
             <p class="section-hero__page-mark">
                 <span class="section-hero__page-mark-label">{{ __('home.hero.page_mark_label') }}</span>
-                <span class="section-hero__page-mark-index" aria-hidden="true">{{ __('home.hero.page_mark_index') }}</span>
             </p>
 
             {{-- §3.1 upline (display muted, 40 px) — kontext před display headingem --}}
