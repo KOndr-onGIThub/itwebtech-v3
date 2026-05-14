@@ -3,6 +3,20 @@
 @section('title', __('blog.meta.title'))
 @section('description', __('blog.meta.description'))
 
+{{-- OND-137 P4 §SEO: BreadcrumbList JSON-LD pro blog listing. --}}
+@push('jsonld')
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'BreadcrumbList',
+    'itemListElement' => [
+        ['@type' => 'ListItem', 'position' => 1, 'name' => __('layout.nav.home'), 'item' => lroute('home')],
+        ['@type' => 'ListItem', 'position' => 2, 'name' => __('layout.nav.blog'), 'item' => lroute('blog')],
+    ],
+], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
+</script>
+@endpush
+
 @section('content')
 
 {{-- Page hero --}}

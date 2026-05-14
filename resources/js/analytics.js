@@ -29,6 +29,57 @@ function isEnabled() {
     return typeof window !== 'undefined' && !!window.__analyticsConfig?.enabled;
 }
 
+// ─── OND-137 P4 §6: 5 canonical GA4 events (Jack §6) ─────────────────────────
+// Specific event taxonomy (hero_cta_primary_click, project_card_click, …) je
+// produktově bohatší, ale pro GA4 goal-setting potřebujeme stabilní množinu
+// 5 normalizovaných eventů. `canonicalize()` zařazuje specific → category;
+// `dispatch()` pak vedle specific eventu pošle i canonical alias (s tagem
+// `specific_event` v props, aby šlo dohledat zdroj).
+//
+//   cta_primary_click   ← *_cta_primary_click, *_cta_*_primary_click, final_cta_*primary_click
+//   cta_secondary_click ← phone_click, sticky_cta_click, *_cta_secondary_click, price_anchor_cta_click
+//   form_submit         ← inline_form_submit_success, contact_form_submit_success, faq_form_submit_success
+//   pricing_tier_view   ← pricing_tier_view, price_anchor_view (homepage proxy)
+//   case_study_view     ← project_card_click, case_study_view
+function canonicalize(eventName) {
+    if (!eventName) return null;
+    if (eventName === 'pricing_tier_view' || eventName === 'price_anchor_view') return 'pricing_tier_view';
+    if (eventName === 'case_study_view'   || eventName === 'project_card_click') return 'case_study_view';
+    if (eventName === 'phone_click' || eventName === 'sticky_cta_click') return 'cta_secondary_click';
+    if (/_cta_(primary|.*_primary)_click$/.test(eventName)) return 'cta_primary_click';
+    if (/_cta_(secondary|.*_secondary)_click$/.test(eventName)) return 'cta_secondary_click';
+    if (/^(.*_)?form_submit_success$/.test(eventName) || eventName === 'form_submit') return 'form_submit';
+    return null;
+}
+
+// Globální dimenze (Jack §6 custom dimensions). Přidávané ke každému eventu.
+function globalDims() {
+    const cfg = window.__analyticsConfig || {};
+    const dims = {};
+    if (cfg.pageLang) dims.page_lang = cfg.pageLang;
+    return dims;
+}
+
+function sendOne(name, props) {
+    const cfg = window.__analyticsConfig || {};
+    const merged = { ...globalDims(), ...props };
+    const plausiblePayload = Object.keys(merged).length ? { props: merged } : undefined;
+
+    try {
+        if (cfg.plausible && typeof window.plausible === 'function') {
+            window.plausible(name, plausiblePayload);
+        }
+    } catch (e) { /* swallow */ }
+
+    try {
+        if (cfg.ga4 && typeof window.gtag === 'function') {
+            window.gtag('event', name, merged);
+        }
+    } catch (e) { /* swallow */ }
+
+    if (DEBUG) console.log('[analytics]', name, merged); // eslint-disable-line no-console
+}
+
 function dispatch(eventName, props = {}) {
     if (!eventName) return;
     const now = Date.now();
@@ -36,23 +87,18 @@ function dispatch(eventName, props = {}) {
     if (last && now - last < DEDUPE_MS) return;
     recentDispatches.set(eventName, now);
 
-    const cfg = window.__analyticsConfig || {};
-    const name = eventName;
-    const payload = Object.keys(props).length ? { props } : undefined;
+    // Specific event (existing taxonomy)
+    sendOne(eventName, props);
 
-    try {
-        if (cfg.plausible && typeof window.plausible === 'function') {
-            window.plausible(name, payload);
+    // Canonical category alias (P4 §6) — jen pokud existuje a liší se od specific.
+    const canonical = canonicalize(eventName);
+    if (canonical && canonical !== eventName) {
+        const lastCanon = recentDispatches.get(canonical);
+        if (!lastCanon || now - lastCanon >= DEDUPE_MS) {
+            recentDispatches.set(canonical, now);
+            sendOne(canonical, { ...props, specific_event: eventName });
         }
-    } catch (e) { /* swallow */ }
-
-    try {
-        if (cfg.ga4 && typeof window.gtag === 'function') {
-            window.gtag('event', name, props);
-        }
-    } catch (e) { /* swallow */ }
-
-    if (DEBUG) console.log('[analytics]', name, props); // eslint-disable-line no-console
+    }
 }
 
 function parseProps(el) {
@@ -119,6 +165,10 @@ function bindFormSuccess() {
     // FAQ mikro-formulář (OND-121 T18) — server-side success.
     window.addEventListener('faq-form-submit-success', () => {
         dispatch('faq_form_submit_success');
+    });
+    // OND-137 P4 §6: kontaktní formulář — JS dispatchne po úspěšném axios POST.
+    window.addEventListener('contact-form-submit-success', () => {
+        dispatch('contact_form_submit_success');
     });
     // Záloha kromě click delegate na submit tlačítku — Enter v textovém poli
     // může v některých prohlížečích vyvolat submit bez synthesized click.

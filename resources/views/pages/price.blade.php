@@ -3,6 +3,46 @@
 @section('title', __('price.meta.title'))
 @section('description', __('price.meta.description'))
 
+{{-- OND-137 P4 §SEO: Service JSON-LD per tier + BreadcrumbList. --}}
+@push('jsonld')
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'BreadcrumbList',
+    'itemListElement' => [
+        ['@type' => 'ListItem', 'position' => 1, 'name' => __('layout.nav.home'),  'item' => lroute('home')],
+        ['@type' => 'ListItem', 'position' => 2, 'name' => __('layout.nav.price'), 'item' => lroute('price')],
+    ],
+], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
+</script>
+@foreach (__('price.tiers') as $tier)
+@php
+    $tierPriceNum = (int) preg_replace('/[^0-9]/', '', $tier['price']);
+@endphp
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'Service',
+    'serviceType' => 'Web development',
+    'name' => $tier['name'],
+    'description' => $tier['desc'],
+    'provider' => [
+        '@type' => 'Organization',
+        'name' => config('app.name'),
+        'url'  => url('/'),
+    ],
+    'areaServed' => ['CZ', 'SK', 'DE', 'AT'],
+    'offers' => [
+        '@type' => 'Offer',
+        'price' => $tierPriceNum,
+        'priceCurrency' => 'CZK',
+        'url' => lroute('price'),
+    ],
+], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
+</script>
+@endforeach
+@endpush
+
 @section('content')
 
 {{-- Page hero --}}
@@ -20,7 +60,15 @@
 
         <div class="pricing-tiers" data-reveal-group>
             @foreach (__('price.tiers') as $tier)
-            <article class="pricing-tier {{ $tier['popular'] ? 'pricing-tier--featured' : '' }}">
+            @php
+                // OND-137 P4 §6: pricing_tier_shown custom dimension (25/55/95) —
+                // extrahované z tier['price'] (např. "25 000 Kč" → "25").
+                $tierShown = (int) preg_replace('/[^0-9]/', '', $tier['price']);
+                $tierShown = (string) (int) ($tierShown / 1000); // 25000 → "25"
+            @endphp
+            <article class="pricing-tier {{ $tier['popular'] ? 'pricing-tier--featured' : '' }}"
+                     data-analytics-view="pricing_tier_view"
+                     data-analytics-props='{"pricing_tier_shown":"{{ $tierShown }}"}'>
 
                 @if ($tier['popular'])
                 <span class="pricing-tier__badge">{{ __('price.popular') }}</span>
@@ -42,7 +90,10 @@
                     @endforeach
                 </ul>
 
-                <a href="{{ lroute('contact') }}" class="btn {{ $tier['popular'] ? 'btn-primary' : 'btn-secondary' }} pricing-tier__cta">
+                <a href="{{ lroute('contact') }}"
+                   class="btn {{ $tier['popular'] ? 'btn-primary' : 'btn-secondary' }} pricing-tier__cta"
+                   data-analytics="pricing_tier_cta_primary_click"
+                   data-analytics-props='{"pricing_tier_shown":"{{ $tierShown }}"}'>
                     {{ $tier['cta'] }}
                     <x-icon.arrow-right class="w-4 h-4 shrink-0" />
                 </a>

@@ -166,10 +166,84 @@ window.ItwebtechAnalytics = {
 3. Klik „Přijmout vše“ → modal fade-out, v Network tab requesty na GA4 + Clarity, do 30 s nový user v GA4 Realtime.
 4. Inkognito (čistá session) → klik „Odmítnout“ → modal zmizí, `document.cookie` neobsahuje `_ga*`/`_clck`/`MUID`, reload → modal se neukáže.
 
+## Canonical eventy (OND-137 P4 §6 — Jack §6)
+
+P2/P3/P4 redesign zavedl 5 normalizovaných eventů, které jsou stabilním
+základem pro GA4 goals + CR reporty. Specific event taxonomy (z OND-122
+výše) zůstává — `analytics.js` posílá VEDLE specific eventu i canonical
+alias, pokud match-uje. V GA4 si Ondřej staví goals na canonical:
+
+| Canonical event | Spec | Zdrojové specific eventy |
+|---|---|---|
+| `cta_primary_click` | hlavní CTA klik | `hero_cta_primary_click`, `final_cta_primary_click`, `final_cta_closing_primary_click`, `pricing_tier_cta_primary_click`, jakékoli `*_cta_*_primary_click` |
+| `cta_secondary_click` | sekundární akce | `phone_click`, `sticky_cta_click`, `price_anchor_cta_click` *(matches `*_cta_*_secondary_click` patterns)* |
+| `form_submit` | lead form success | `inline_form_submit_success`, `contact_form_submit_success`, `faq_form_submit_success`, jakékoli `*_form_submit_success` |
+| `pricing_tier_view` | tier visible ≥40 % viewport | `pricing_tier_view` (na /cenik), `price_anchor_view` (homepage proxy) |
+| `case_study_view` | otevření case study | `project_card_click` (intent), `case_study_view` (skutečné otevření hero na /projekty/{slug}) |
+
+Mapování řeší `canonicalize()` v `resources/js/analytics.js`. Při změně
+specific event jména stačí přidat regex/match tam — pages nemusí dvojitě
+emit-ovat.
+
+### Custom dimensions
+
+Posílají se s **každým** eventem (GA4 event params + Plausible props):
+
+| Dimension | Hodnota | Zdroj |
+|---|---|---|
+| `page_lang` | `cs` / `en` / `de` | `window.__analyticsConfig.pageLang` (set v `partials/analytics.blade.php` ze `app()->getLocale()`) |
+| `pricing_tier_shown` | `25` / `55` / `95` | `data-analytics-props='{"pricing_tier_shown":"…"}'` na pricing-tier elementech (/cenik) |
+| `specific_event` | původní specific event jméno | automaticky doplněno do canonical aliasu (debug + drill-down) |
+
+V GA4 admin: Reports → Custom Definitions → Create custom dimension:
+- `page_lang` — event-scoped, parameter `page_lang`
+- `pricing_tier_shown` — event-scoped, parameter `pricing_tier_shown`
+
+### Conversion goal
+
+V GA4 admin → Configure → Events → `form_submit` → toggle „Mark as
+conversion". Sekundární conversion: `cta_primary_click` pro mid-funnel
+měření.
+
+### Baseline (CR pre-launch)
+
+Pre-launch CR baseline + post-launch comparison framework je v separátním
+souboru: [`docs/analytics-baseline.md`](./analytics-baseline.md). Před
+deployem P4 na produkci vyplnit pre-launch hodnoty z GA4 (last 30d).
+
+## SEO infrastruktura (OND-137 P4 §SEO)
+
+### Structured data (JSON-LD)
+
+| Schema type | Kde | Soubor |
+|---|---|---|
+| `LocalBusiness` | každá stránka | `resources/views/layouts/app.blade.php` |
+| `Organization` | každá stránka | `resources/views/layouts/app.blade.php` |
+| `Service` (per tier) | /cenik | `resources/views/pages/price.blade.php` (`@push('jsonld')`) |
+| `Article` | /jak-na-to/{slug} | `resources/views/pages/article.blade.php` |
+| `BreadcrumbList` | /cenik, /kontakt, /projekty, /projekty/{slug}, /jak-na-to, /jak-na-to/{slug} | příslušné `pages/*.blade.php` |
+
+Per-page JSON-LD se vkládá přes `@push('jsonld')` → `@stack('jsonld')` v
+layout `<head>`. Pro validaci:
+- <https://search.google.com/test/rich-results> (Google)
+- <https://validator.schema.org> (Schema.org)
+
+### Sitemap + robots
+
+- `routes/web.php` → `GET /sitemap.xml` (`SitemapController` + `App\Services\SitemapGenerator`, cached 10 min).
+- `routes/web.php` → `GET /robots.txt` (`RobotsController`, dynamicky odkazuje na sitemap na aktuální doméně — viz proč v komentáři controlleru).
+
+### Hreflang + canonical
+
+Hreflang tagy (`cs` / `en` / `de` / `x-default`) + `<link rel="canonical">`
+jsou v `resources/views/layouts/app.blade.php`. Per-page override přes
+section `hreflangs` proměnnou (např. pro article slug-history mapping).
+
 ## Reference
 
 - Spec: [OND-122](/OND/issues/OND-122), plán [OND-99 §9](/OND/issues/OND-99#document-plan)
-- Parent: [OND-98](/OND/issues/OND-98)
+- P4 (canonical events + SEO + a11y + perf): [OND-137](/OND/issues/OND-137)
+- Parent: [OND-98](/OND/issues/OND-98) (sprint 1), [OND-127](/OND/issues/OND-127) (sitewide redesign)
 - Cookie consent: [OND-125](/OND/issues/OND-125)
 - GA Consent Mode v2: <https://developers.google.com/tag-platform/security/concepts/consent-mode>
 - Microsoft Clarity consent API: <https://learn.microsoft.com/en-us/clarity/setup-and-installation/cookie-consent>
