@@ -17,8 +17,7 @@ return [
     'price_note' => 'unverbindlicher Preis',
 
     // OND-136: Tier-Namen und Preise angeglichen an die CS-Taxonomie
-    // Startovní/Standard/Custom = 25/55/95 Tausend CZK → EUR-Umrechnung.
-    // Vorgeschlagene EUR-Werte vorbehaltlich Bestätigung durch Ondřej/CEO.
+    // Startovní/Standard/Custom = 25/55/95 Tausend CZK → EUR-Umrechnung (CEO-bestätigter 1:25-Anker).
     'tiers' => [
         [
             'name'    => 'Starter',

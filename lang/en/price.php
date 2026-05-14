@@ -17,8 +17,7 @@ return [
     'price_note' => 'indicative price',
 
     // OND-136: tier names and prices aligned with CS taxonomy
-    // Startovní/Standard/Custom = 25/55/95 thousand CZK → EUR conversion.
-    // Proposed EUR values awaiting Ondřej/CEO confirmation.
+    // Startovní/Standard/Custom = 25/55/95 thousand CZK → EUR conversion (CEO-confirmed 1:25 anchor).
     'tiers' => [
         [
             'name'    => 'Starter',

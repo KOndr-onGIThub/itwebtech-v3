@@ -174,8 +174,7 @@ return [
         'secondary_inline' => 'Ich biete auch SEO, Grafikdesign und Social-Media-Betreuung — :pricing_link oder :contact_link.',
         'secondary_inline_pricing' => 'mehr in der Preisliste',
         'secondary_inline_contact' => 'schreiben Sie mir',
-        // OND-136: angeglichen an die CS-Taxonomie 25/55/95 Tausend CZK → EUR-Umrechnung.
-        // Vorgeschlagene EUR-Werte vorbehaltlich Bestätigung durch Ondřej/CEO.
+        // OND-136: angeglichen an die CS-Taxonomie 25/55/95 Tausend CZK → EUR-Umrechnung (CEO-bestätigter 1:25-Anker).
         'primary' => [
             'weby' => [
                 'title'       => 'Maßgeschneiderte Websites',
@@ -225,8 +224,7 @@ return [
     'price_anchor' => [
         'heading' => 'Was kostet es?',
         'intro'   => 'Orientierende Einstiegspreise für die drei Projekt-Tiers. Ein verbindliches Angebot erhalten Sie schriftlich nach einer kurzen Beratung.',
-        // OND-136: 25 / 55 / 95 Tausend CZK → EUR-Umrechnung (vorgeschlagene
-        // Standardwerte vorbehaltlich Bestätigung). Eine Quelle der Wahrheit.
+        // OND-136: 25 / 55 / 95 Tausend CZK → EUR-Umrechnung (CEO-bestätigter 1:25-Anker). Eine Quelle der Wahrheit.
         'items'   => [
             [
                 'title' => 'Starter',

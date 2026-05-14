@@ -176,8 +176,7 @@ return [
         'secondary_inline' => 'I also handle SEO, graphic design and social media management — :pricing_link or :contact_link.',
         'secondary_inline_pricing' => 'see the pricing',
         'secondary_inline_contact' => 'get in touch',
-        // OND-136: aligned with CS taxonomy 25/55/95 thousand CZK → EUR conversion.
-        // Proposed EUR values awaiting Ondřej/CEO confirmation (see OND-136 rules).
+        // OND-136: aligned with CS taxonomy 25/55/95 thousand CZK → EUR conversion (CEO-confirmed 1:25 anchor).
         'primary' => [
             'weby' => [
                 'title'       => 'Custom websites',
@@ -227,8 +226,7 @@ return [
     'price_anchor' => [
         'heading' => 'What will it cost?',
         'intro'   => 'Indicative entry prices for the three project tiers. You receive an exact written quote after a short consultation.',
-        // OND-136: 25 / 55 / 95 thousand CZK → EUR conversion (proposed defaults
-        // pending Ondřej/CEO confirmation). One source of truth across the site.
+        // OND-136: 25 / 55 / 95 thousand CZK → EUR conversion (CEO-confirmed 1:25 anchor). One source of truth across the site.
         'items'   => [
             [
                 'title' => 'Starter',
