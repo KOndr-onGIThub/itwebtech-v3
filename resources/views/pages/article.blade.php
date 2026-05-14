@@ -5,7 +5,7 @@
 
 @section('content')
 
-{{-- Page hero — OND-130 iter 8: plán §3.1 page-mark eyebrow + Fraunces title.
+{{-- Page hero — OND-130 iter 8: plán §3.1 page-mark eyebrow + Plex Sans title (post OND-145 swap).
      Title je dynamický (DB), proto heading_html nedává smysl; jen statická
      page-mark eyebrow + článek title. --}}
 <div class="page-hero page-hero--article">

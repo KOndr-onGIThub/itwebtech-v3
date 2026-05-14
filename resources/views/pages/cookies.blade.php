@@ -7,7 +7,7 @@
 
 @section('content')
 
-{{-- Page hero — OND-130 iter 8: plán §3.1 page-mark + Fraunces italic display.
+{{-- Page hero — OND-130 iter 8: plán §3.1 page-mark + Plex Sans display (post OND-145 swap).
      CS-only legal page → strings inline.
      OND-135 cleanup (2026-05-14): page_mark_index span odebrán jako
      agency-portfolio artefakt per CEO PR #78/#80/#82/#83 precedent. --}}
