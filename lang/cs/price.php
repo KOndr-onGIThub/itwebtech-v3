@@ -11,6 +11,22 @@ return [
     'heading'    => 'Víte, do čeho jdete, ještě před první schůzkou.',
     'intro'      => 'Každý projekt je jiný — finální cenu znáte po bezplatné konzultaci. Tento přehled vám dá jasnou představu, kolik to bude stát, ještě před naší první schůzkou.',
 
+    // OND-135 P2 iter 5 — plán §3.1 hero (page-mark + amber accent).
+    // OND-135 cleanup (2026-05-14): page_mark_index odebrán — agency-
+    // portfolio artefakt per CEO PR #78 precedent (home / kontakt).
+    'hero' => [
+        'page_mark_label' => 'CENÍK',
+        'upline'          => 'Žádné nabídky na vyžádání.',
+        'heading_html'    => 'Tři pásma,<br>jedna <em>jasná cena</em>.',
+        'subline'         => 'Startovní 25, Standard 55, Custom od 95 tis. Kč. Cena na faktuře = cena ve specifikaci.',
+    ],
+
+    // Sticky CTA — viditelné napříč scrollem, „cena nikdy nezmizí".
+    'sticky_cta' => [
+        'label' => 'Vyberte si pásmo',
+        'cta'   => 'Chci nezávaznou nabídku',
+    ],
+
     'popular'   => 'Nejoblíbenější',
     'quotation' => 'Nezávazná poptávka',
 
