@@ -23,7 +23,11 @@
 @theme {
     --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif,
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-    --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+    /* OND-145 P2 corrective: display swap z Fraunces → IBM Plex Sans Variable
+       (P0 incident response, CEO 2026-05-14). Hodnota musí zrcadlit
+       :root --font-display ve foundation/design-system.css. */
+    --font-display: 'IBM Plex Sans Variable', 'IBM Plex Sans',
+        ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
 
     /* — Primární tmavá paleta — */
     --color-ink-950:  #0F172A;
@@ -1243,7 +1247,7 @@
 
     /* ============================================================
        HERO SEKCE — OND-135 P2 reskin (plán §3.1)
-       Editorial dark base, Fraunces display, italic key-word
+       Editorial dark base, IBM Plex Sans display, italic key-word
        emphasis ve warm amber. Asymetrický left-anchor s
        editorial breath (--space-9 = 96 px) na desktopu.
        ============================================================ */
@@ -1340,7 +1344,7 @@
         color: var(--color-fg-faint);
     }
 
-    /* Upline — menší muted Fraunces (§3.1 „AI udělá web za odpoledne.") */
+    /* Upline — menší muted display (§3.1 „AI udělá web za odpoledne.") */
     .section-hero__upline {
         font-family: var(--font-display);
         font-weight: 400;
@@ -1351,7 +1355,7 @@
         letter-spacing: var(--tracking-tight);
     }
 
-    /* Display heading — Fraunces italic, key word v amber */
+    /* Display heading — italic, key word v amber */
     .section-hero__heading {
         font-family: var(--font-display);
         font-style: italic;
@@ -1362,8 +1366,10 @@
         color: var(--color-fg-primary);
         margin-block: 0 var(--space-5);
         max-width: 18ch;
-        /* Fraunces optical sizing — větší display velikost */
-        font-variation-settings: 'opsz' 144, 'SOFT' 50, 'wght' 500;
+        /* OND-145: opsz/SOFT axes neexistují na IBM Plex Sans, wght 500
+           je v range Plex Variable (100–700). Browser non-existing axes
+           tiše ignoruje, takže žádný runtime warning. */
+        font-variation-settings: 'wght' 500;
     }
     .section-hero__heading em,
     .section-hero__heading .text-accent {
@@ -5455,7 +5461,7 @@
 
     /* ============================================================
        OND-135 P2 iter 4 — Contact page reskin (plán §3.1 + §1 dir 5)
-       Page-mark eyebrow, Fraunces italic display heading, amber accent,
+       Page-mark eyebrow, IBM Plex Sans italic display heading, amber accent,
        3-step "Co se stane potom" listing, in-DOM thank-you state.
        ============================================================ */
 

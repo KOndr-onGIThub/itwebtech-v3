@@ -5,7 +5,7 @@
 
 @section('content')
 
-{{-- Page hero — OND-135 iter 4: plán §3.1 design DNA (page-mark + Fraunces italic + amber accent) --}}
+{{-- Page hero — OND-135 iter 4: plán §3.1 design DNA (page-mark + display italic + amber accent) --}}
 <div class="page-hero page-hero--contact">
     <div class="container-site">
         <p class="page-hero__page-mark">

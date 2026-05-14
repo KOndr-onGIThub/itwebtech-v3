@@ -15,21 +15,24 @@
    ============================================================ */
 
 /* ------------------------------------------------------------
-   Self-hosted variable fonts — Fraunces (display)
-   - Inter (body) je importován samostatně v app.css (existující
-     stav, neměním aby B1 zůstal foundation-only).
+   Self-hosted variable fonts — IBM Plex Sans (display)
+   - OND-145 P2 corrective: swap z Fraunces (P0 incident OND-127,
+     CEO 2026-05-14: současný display font „rozbitý"). IBM Plex
+     Sans Variable splňuje §2.0 #10 font-by-cílovka (B2B IT
+     decision-makers, kompetentní IT partner, CS/EN/DE diacritics).
+   - Inter (body) je importován samostatně v app.css (Inter Variable,
+     beze změny v tomto PR).
    - Subset latin + latin-ext pokrývá CS + EN + DE diakritiku
      (browser stáhne jen subsety potřebné pro daný unicode-range).
    - `font-display: swap` — fonts blokují render maximum 100ms,
      pak fallback, swap při dorazu.
-   - `full.css` poskytuje všechny axes: wght + opsz (optical
-     sizing) + SOFT + WONK — pro hero italic emphasis (§2.2).
-   - Žádný `<link rel="preload">` zatím (přidá B2 až bude
-     Fraunces reálně použit v hero → jinak by Lighthouse hlásil
-     "unused preload" a sjelo by skóre).
+   - `wght.css` / `wght-italic.css` poskytují wght variable axis
+     (range 100–700, woff2 only).
+   - Preload pro hero (display 400+700) je v resources/views/pages/
+     home.blade.php přes @push('preloads', …).
    ------------------------------------------------------------ */
-@import '@fontsource-variable/fraunces/full.css';
-@import '@fontsource-variable/fraunces/full-italic.css';
+@import '@fontsource-variable/ibm-plex-sans/wght.css';
+@import '@fontsource-variable/ibm-plex-sans/wght-italic.css';
 
 /* ------------------------------------------------------------
    Tokens — :root scope (ne @theme, aby Tailwind nevygeneroval
@@ -68,7 +71,12 @@
 
     /* === §2.2 Typografie ====================================== */
 
-    --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+    /* OND-145 P2 corrective: display = IBM Plex Sans Variable
+       (swap z Fraunces, P0 incident response 2026-05-14).
+       Fallback chain → ui-sans-serif → system-ui pro FOIT-free
+       render dokud variable woff2 nedorazí (font-display: swap). */
+    --font-display: 'IBM Plex Sans Variable', 'IBM Plex Sans',
+                    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
     --font-body:    'Inter Variable', ui-sans-serif, system-ui, -apple-system,
                     'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
