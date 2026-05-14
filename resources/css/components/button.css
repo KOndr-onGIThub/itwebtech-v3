@@ -1,0 +1,76 @@
+/* ============================================================
+   B1 demo component — Button (OND-134 DoD)
+   ------------------------------------------------------------
+   Cíl: prokázat, že tokens z foundation/design-system.css jsou
+   reálně spotřebované v komponentu (per DoD OND-134:
+   „Tokens ... používané v jednom prokázaném komponentu — např. button").
+
+   Třídy jsou opt-in (žádný element je zatím nepoužívá v live HTML),
+   takže B1 zůstává bez vizuální regrese. B2 (OND-135) je natáhne
+   do hero CTA / form submit.
+
+   Naming je BEM-ish, izolovaný namespace `btn-ds-*` aby nekolidoval
+   se stávajícími Tailwind utility / starými třídami.
+   ============================================================ */
+.btn-ds {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-5);
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    font-weight: 600;
+    line-height: var(--leading-snug);
+    letter-spacing: var(--tracking-normal);
+    border: 1px solid transparent;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color var(--duration-micro) var(--ease-out),
+                color var(--duration-micro) var(--ease-out),
+                border-color var(--duration-micro) var(--ease-out),
+                transform var(--duration-micro) var(--ease-out);
+    user-select: none;
+}
+
+.btn-ds:focus-visible {
+    outline: var(--focus-ring-width) var(--focus-ring-style) var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+}
+
+.btn-ds:disabled,
+.btn-ds[aria-disabled='true'] {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Primary — amber CTA, rezervovaná barva per §2.0 (1 primary per view) */
+.btn-ds--primary {
+    background-color: var(--color-accent);
+    color: var(--color-accent-on);
+}
+.btn-ds--primary:hover {
+    background-color: var(--color-accent-hover);
+}
+.btn-ds--primary:active {
+    background-color: var(--color-accent-press);
+}
+
+/* Secondary — outline na dark base, neutralni alternativa k amber CTA */
+.btn-ds--secondary {
+    background-color: transparent;
+    color: var(--color-fg-primary);
+    border-color: var(--color-border-mid);
+}
+.btn-ds--secondary:hover {
+    border-color: var(--color-fg-primary);
+    background-color: var(--color-bg-elev-1);
+}
+
+/* Velikostní varianta — large pro hero / above-the-fold */
+.btn-ds--lg {
+    padding: var(--space-4) var(--space-6);
+    font-size: var(--text-body-lg);
+}
