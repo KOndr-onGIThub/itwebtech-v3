@@ -32,7 +32,10 @@ Klíčové vlastnosti:
 - **Samostatná DB schema**, seedovaná z fixtures (`PortfolioSeeder` +
   `EnsureArticlesSeededSeeder`). Nikdy nesdílet prod / staging DB —
   preview app je read-write a může zápisy z Filamentu rozbít data v reviewu.
-- Subdoména **per branch** nebo **rotující single-slot** — viz § Subdoména.
+- **Subdoména: `preview-{ticket}.itwebtech.cz`** — fixed per review track
+  (rozhodnuto v OND-141). Pro tenhle track: `preview-sitewide-redesign.itwebtech.cz`.
+  Wildcard DNS varianta je nepoužitá (DNS u itwebtech.cz nemá Coolify plugin
+  pro DNS-01 challenge); každá další preview app potřebuje vlastní A-záznam.
 - Robots: `noindex` + `Disallow: /` (preview nesmí do indexu Googlu).
 
 ## Kdy spustit preview
@@ -48,48 +51,78 @@ Pro QA-only / interní smoke checky stačí `staging` po merge.
 
 ## Předpoklady (jednorázové)
 
-- Coolify root account (drží CEO). Engineer **nedostává** Coolify credentials —
-  CEO sám nakonfiguruje aplikaci, Engineer dodá tento doc + env hodnoty.
-- Wildcard DNS `*.itwebtech.cz` → Coolify server IP, certifikát Let's Encrypt
-  s wildcard SAN (DNS-01 challenge přes Coolify-supported DNS plugin).
-  Bez wildcard DNS musí každá nová preview subdoména dostat A-record
-  ručně před prvním deployem.
+- Coolify root account (drží Ondřej / CEO). Engineer **nedostává** Coolify
+  credentials — CEO sám nakonfiguruje aplikaci, Engineer dodá tento doc +
+  env hodnoty.
+- Přístup do DNS panelu domény `itwebtech.cz` (drží Ondřej) — potřeba pro
+  přidání A-záznamu pro každou novou preview subdoménu (viz § 1. DNS).
 - MariaDB / MySQL service v Coolify s volnou kapacitou na další schema.
+
+> **Proč ne wildcard DNS:** Zvažovali jsme `*.itwebtech.cz` s DNS-01 challenge
+> pro auto-issuance wildcard certu. DNS provider domény Coolify plugin nemá,
+> takže DNS-01 by vyžadoval ruční TXT-record dance při každém renewalu.
+> Místo toho používáme **jednoduchý A-záznam per preview track** + standardní
+> HTTP-01 Let's Encrypt cert. Trade-off: každý nový track = 1× ruční A-záznam
+> v DNS panelu (~5 min). Pokud jednou bude víc paralelních preview tracků,
+> přeladíme na wildcard (viz § Migrace na wildcard v budoucnu).
 
 ## Postup: vytvoření nové preview aplikace
 
-Provádí CEO v Coolify dashboardu. Engineer dodá hodnoty.
+Provádí Ondřej / CEO. Engineer dodá hodnoty + tento doc. Příklad
+v krocích níže používá branch `feature/sitewide-redesign` a tedy track
+`sitewide-redesign` (= subdoména `preview-sitewide-redesign.itwebtech.cz`).
+Pro jiný track jen nahraď `sitewide-redesign` názvem nového tracku.
 
-### 1. Resources → New Resource → Application
+### 1. DNS A-záznam (vlastní DNS panel itwebtech.cz)
+
+**Owner: Ondřej.** V DNS panelu domény `itwebtech.cz` (mimo Coolify) přidat:
+
+| Type | Name | Value | TTL |
+|---|---|---|---|
+| `A` | `preview-sitewide-redesign` | `<IP Coolify serveru>` | 300 |
+
+IP Coolify serveru = ta samá, na kterou ukazují `staging.itwebtech.cz` /
+`itwebtech.cz` v Coolify dashboardu (`Servers → <node> → IP Address`).
+
+Po propagaci (typicky < 5 min):
+
+```bash
+dig +short preview-sitewide-redesign.itwebtech.cz
+# musí vrátit Coolify IP
+```
+
+### 2. Resources → New Resource → Application (Coolify)
 
 - **Source**: GitHub App (existující, ten samý jako prod/staging).
 - **Repository**: `KOndr-onGIThub/itwebtech-v3`.
-- **Branch**: konkrétní feature branch, např. `feature/sitewide-redesign`.
-  > Pokud chceme parametrizovatelnost, klonujeme tuhle Coolify aplikaci a v
-  > klonu jen přepneme branch. Coolify (v aktuální verzi) **nemá nativní
-  > "Preview Deployments per PR"** — fallback je tedy **manuální
-  > app-per-branch**.
+- **Branch**: `feature/sitewide-redesign` (pro nový track odpovídající feature branch).
+  > Coolify (v aktuální verzi) **nemá nativní "Preview Deployments per PR"** —
+  > používáme **manuální app-per-branch** (zvolený fallback).
 - **Build pack**: Dockerfile (root `Dockerfile`, nic nepřepisovat).
 - **Port exposed**: `8080` (stejně jako prod — `serversideup/php` default).
-- **Domain**: viz § Subdoména.
+- **Domain**: `https://preview-sitewide-redesign.itwebtech.cz`
+  - Coolify si automaticky vystaví Let's Encrypt cert (HTTP-01 challenge přes
+    port 80 — funguje jen pokud DNS A-záznam z kroku 1 už propaguje).
+- **Application Name**: `itwebtech-preview-sitewide-redesign` (viditelné jen
+  v Coolify, pro snadnou identifikaci v seznamu apps).
 
-### 2. Auto-deploy
+### 3. Auto-deploy
 
 - Zapnout **Deploy on push** pro vybranou branch.
 - Webhook se nastaví automaticky GitHub Appem; ověřit, že
   `Settings → Webhooks` v GitHubu obsahuje URL od Coolify a pushe se dostávají.
 
-### 3. Databáze
+### 4. Databáze
 
 - **Resources → New Resource → MariaDB** (samostatná instance) nebo
   **schema** ve sdíleném MariaDB containeru. Doporučeno: schema ve sdíleném,
   šetří RAM.
-- Schema name konvence: `itwebtech_preview_{ticket}` (např.
-  `itwebtech_preview_ond141`) — viditelné v Coolify pro snadný cleanup.
+- Schema name konvence: `itwebtech_preview_{track}` — pro tenhle track
+  `itwebtech_preview_sitewide_redesign`. Viditelné v Coolify pro snadný cleanup.
 - User: vlastní user na tu schemu, jen `ALL PRIVILEGES` na ten jeden schema,
   ne global.
 
-### 4. Environment variables
+### 5. Environment variables
 
 Naplnit v `Configuration → Environment Variables`. **Tučně** jsou ty, které se
 liší od prod hodnot:
@@ -99,7 +132,7 @@ APP_NAME="ITWebTech (preview)"
 APP_ENV=staging              # POZOR: ne 'local' (vyžaduje seed admin uživatele)
 APP_KEY=                     # vygenerovat nový: `php artisan key:generate --show`
 APP_DEBUG=false              # i v preview držet false, jinak Whoops leakne paths
-APP_URL=https://preview-{branch}.itwebtech.cz   # MUSÍ být https + bez koncového lomítka
+APP_URL=https://preview-sitewide-redesign.itwebtech.cz   # MUSÍ být https + bez koncového lomítka
 
 APP_LOCALE=cs
 APP_FALLBACK_LOCALE=en
@@ -108,7 +141,7 @@ APP_FALLBACK_LOCALE=en
 DB_CONNECTION=mysql
 DB_HOST=<coolify-mariadb-host>
 DB_PORT=3306
-DB_DATABASE=itwebtech_preview_{ticket}
+DB_DATABASE=itwebtech_preview_sitewide_redesign
 DB_USERNAME=<preview-user>
 DB_PASSWORD=<preview-password>
 
@@ -131,7 +164,7 @@ SESSION_SECURE_COOKIE=true
 APP_PREVIEW_NOINDEX=true
 ```
 
-### 5. Indexace (noindex)
+### 6. Indexace (noindex)
 
 Preview URL **nesmí** skončit v Googlu. Dva nezávislé guardy:
 
@@ -151,7 +184,7 @@ zůstává v procesu).
 > `add_header X-Robots-Tag "noindex, nofollow" always;`. To je dostatečné
 > pro krátkodobé review windowy.
 
-### 6. První deploy + seed portfolia
+### 7. První deploy + seed portfolia
 
 Po prvním úspěšném deployi DB obsahuje:
 
@@ -174,20 +207,6 @@ Tím se z `docs/portfolio-data.yaml` napumpuje 3+ portfolio projektů.
 > Pokud následně chceš re-seedovat (yaml se změnil), použij
 > `PORTFOLIO_SEEDER_FORCE_OVERWRITE=1` env a redeploy, nebo manuální
 > `--force` s tím samým env setnutým inline.
-
-### 7. Subdoména
-
-Tři varianty, vyber podle aktuálního review tracku (rozhodnutí leží na CEO,
-default je **per-branch**):
-
-| Pattern | Použití | Pros | Cons |
-|---|---|---|---|
-| `preview-{branch-slug}.itwebtech.cz` | default, multi-branch review | paralelní preview pro víc branchí | wildcard DNS + wildcard cert |
-| `preview.itwebtech.cz` | single-slot, jeden aktivní review v čase | jednoduchý DNS / cert | jen jedna branch současně |
-| `preview-{ticket}.itwebtech.cz` | fixed pro konkrétní track (např. `preview-ond141`) | predikovatelná URL pro stakeholdery | každý nový track = nová subdoména |
-
-`branch-slug` = lower-case, `/` a `_` nahrazeno `-`, max 40 znaků (limit DNS
-labelu). Příklad: `feature/sitewide-redesign` → `feature-sitewide-redesign`.
 
 ### 8. Sdělit URL Jackovi
 
@@ -212,16 +231,55 @@ git push origin feature/sitewide-redesign
 Pokud build padne, Coolify pošle notifikaci (Discord/email per Coolify global
 config). Engineer kouká do build logu v Coolify `Deployments` tabu.
 
+## Další preview track (nová feature branch)
+
+Když potřebuješ rozjet preview pro **jinou** feature branch (např.
+`feature/homepage-hero-v3`), použij **Clone & retarget** workflow — kopíruje
+existující preview app, ušetří 90 % konfigurace.
+
+1. **DNS** (Ondřej): přidej A-záznam `preview-{nový-track}` →
+   `<IP Coolify serveru>` (ten samý A-record postup jako v § 1).
+2. **Coolify**: u stávající `itwebtech-preview-sitewide-redesign` app klikni
+   `... → Clone`. V klonu změň:
+   - **Application Name**: `itwebtech-preview-{nový-track}`
+   - **Branch**: `feature/{nový-track}`
+   - **Domain**: `https://preview-{nový-track}.itwebtech.cz`
+3. **DB schema**: vytvoř novou schemu `itwebtech_preview_{nový_track}` ve sdíleném MariaDB
+   containeru + nového usera s `ALL PRIVILEGES` na tu schemu.
+4. **Env**: v klonu přepiš `APP_URL`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`,
+   `ADMIN_PASSWORD` (nový unikátní). Vygeneruj nový `APP_KEY`.
+5. **Deploy** → po prvním úspěšném runu spustit `PortfolioSeeder` (viz § 7).
+6. **Postnout URL** do issue, která preview požaduje.
+
+> Když počet paralelních preview tracků překročí ~3, přejdi na wildcard
+> DNS (viz § Migrace na wildcard) — manual A-record na track přestává být
+> efektivní.
+
 ## Decommission (po merge / po review)
 
 Po merge feature branch do `staging`, preview app už nemá smysl. Postup:
 
-1. Coolify: `itwebtech-preview-{branch}` → **Stop** → **Delete**.
-2. MariaDB schema: `DROP DATABASE itwebtech_preview_{ticket};` + odebrat
+1. Coolify: `itwebtech-preview-{track}` → **Stop** → **Delete**.
+2. MariaDB schema: `DROP DATABASE itwebtech_preview_{track};` + odebrat
    schema-scoped DB usera.
-3. DNS: pokud jsi přidal A-record ručně (ne wildcard), odebrat.
+3. DNS: odebrat A-záznam `preview-{track}` z DNS panelu itwebtech.cz.
 4. Komentář do OND-141 (nebo navazujícího tasku) s informací, že preview je
    downed a důvod (merged / superseded / abandoned).
+
+## Migrace na wildcard (jen pokud bude paralelních tracků 3+)
+
+Aktuálně nepoužito (rozhodnuto v OND-141). Když jednou bude víc paralelních
+preview tracků a manuální A-záznamy začnou být otravné:
+
+1. Přejít s DNS itwebtech.cz na providera s Coolify DNS plugin (Cloudflare,
+   DigitalOcean, atd.) — předpokládá migraci DNS records, mimo scope této doc.
+2. V DNS panelu nového providera přidat wildcard A-záznam `*.itwebtech.cz`
+   → IP Coolify serveru.
+3. V Coolify nakonfigurovat DNS plugin pro nového providera (`Settings → DNS`).
+4. Existující `preview-{track}` A-záznamy zůstávají funkční jako specifická
+   override; nová preview apps už nepotřebují manuální DNS step — stačí
+   v Coolify nastavit domain `preview-{track}.itwebtech.cz` a wildcard cert
+   se vystaví automaticky.
 
 ## Pitfally a riziko
 
@@ -240,9 +298,9 @@ Po merge feature branch do `staging`, preview app už nemá smysl. Postup:
 - **Stale review URL**: pokud preview žije moc dlouho po merge feature branch,
   recenzent může reviewovat zastaralý kód. Po merge **smaž preview app
   okamžitě** (viz Decommission).
-- **Wildcard cert renewal**: Let's Encrypt wildcard expiruje co 90 dní;
+- **Let's Encrypt cert renewal**: standardní HTTP-01 cert expiruje co 90 dní;
   Coolify renewal job musí běžet. Pokud preview vrátí cert warning, zkontroluj
-  `Coolify → Server → Logs → certbot`.
+  `Coolify → Server → Logs → certbot`. (Wildcard nepoužíváme — viz § Architektura.)
 
 ## Známé gapy / TODO follow-up
 
