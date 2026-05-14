@@ -1355,25 +1355,27 @@
         letter-spacing: var(--tracking-tight);
     }
 
-    /* Display heading — italic, key word v amber */
+    /* Display heading — upright Plex Sans wght 700, key word v amber.
+       OND-147 (Jack §2.0 rule #10): display = vždy upright, italic povolen
+       jen v body roli (Inter slnt). Editorial italic display = agency tone,
+       nevhodný pro B2B IT enterprise audience. */
     .section-hero__heading {
         font-family: var(--font-display);
-        font-style: italic;
-        font-weight: 500;
+        font-style: normal;
+        font-weight: 700;
         font-size: var(--text-display-lg);
         line-height: var(--leading-tight);
         letter-spacing: var(--tracking-tight);
         color: var(--color-fg-primary);
         margin-block: 0 var(--space-5);
         max-width: 18ch;
-        /* OND-145: opsz/SOFT axes neexistují na IBM Plex Sans, wght 500
-           je v range Plex Variable (100–700). Browser non-existing axes
-           tiše ignoruje, takže žádný runtime warning. */
-        font-variation-settings: 'wght' 500;
+        /* Plex Variable range 100–700; wght 700 je horní enterprise-confident
+           tone. opsz/SOFT axes na Plex neexistují (Fraunces-only). */
+        font-variation-settings: 'wght' 700;
     }
     .section-hero__heading em,
     .section-hero__heading .text-accent {
-        font-style: italic;
+        font-style: normal;
         color: var(--color-accent);
         background: none;
         -webkit-background-clip: initial;
@@ -5495,7 +5497,7 @@
         align-items: center;
         gap: 1rem;
         font-family: var(--font-display);
-        font-style: italic;
+        font-style: normal;
         font-weight: 400;
         font-size: 0.875rem;
         letter-spacing: 0.18em;
@@ -5518,14 +5520,14 @@
     }
     .page-hero__page-mark-index {
         margin-left: auto;
-        font-style: italic;
+        font-style: normal;
         color: var(--color-fg-faint);
         letter-spacing: 0.14em;
     }
 
     .page-hero__upline {
         font-family: var(--font-display);
-        font-style: italic;
+        font-style: normal;
         font-weight: 400;
         font-size: clamp(1.25rem, 2vw, 1.75rem);
         line-height: 1.35;
@@ -5535,9 +5537,10 @@
 
     .page-hero--contact .page-hero__heading {
         font-family: var(--font-display);
-        font-style: italic;
-        font-weight: 500;
-        font-variation-settings: 'opsz' 144, 'SOFT' 50, 'wght' 500;
+        font-style: normal;
+        font-weight: 700;
+        /* OND-147: opsz/SOFT (Fraunces-only) odstraněno, Plex wght 700 = enterprise. */
+        font-variation-settings: 'wght' 700;
         font-size: clamp(2.25rem, 5.5vw, 4.25rem);
         line-height: 1.02;
         letter-spacing: -0.015em;
@@ -5547,7 +5550,7 @@
     }
     .page-hero--contact .page-hero__heading em {
         color: var(--color-accent);
-        font-style: italic;
+        font-style: normal;
     }
 
     .page-hero__subline {
@@ -5604,16 +5607,16 @@
         background: var(--color-bg-elev-1);
         padding-right: 0.75rem;
         font-family: var(--font-display);
-        font-style: italic;
-        font-weight: 500;
+        font-style: normal;
+        font-weight: 600;
         font-size: 1rem;
         letter-spacing: 0.12em;
         color: var(--color-accent);
     }
     .next-steps__title {
         font-family: var(--font-display);
-        font-style: italic;
-        font-weight: 500;
+        font-style: normal;
+        font-weight: 600;
         font-size: clamp(1.25rem, 2vw, 1.625rem);
         line-height: 1.25;
         color: var(--color-fg-primary);
@@ -5638,8 +5641,8 @@
     }
     .contact-form__thanks .contact-form__title {
         font-family: var(--font-display);
-        font-style: italic;
-        font-weight: 500;
+        font-style: normal;
+        font-weight: 600;
         font-size: clamp(1.5rem, 2.5vw, 2rem);
         line-height: 1.15;
         color: var(--color-fg-primary);
@@ -5700,9 +5703,10 @@
     }
     .error-page__heading {
         font-family: var(--font-display);
-        font-style: italic;
-        font-weight: 500;
-        font-variation-settings: 'opsz' 144, 'SOFT' 50, 'wght' 500;
+        font-style: normal;
+        font-weight: 700;
+        /* OND-147: opsz/SOFT (Fraunces-only) odstraněno, Plex wght 700. */
+        font-variation-settings: 'wght' 700;
         font-size: clamp(2rem, 5vw, 3.25rem);
         line-height: 1.1;
         letter-spacing: -0.02em;

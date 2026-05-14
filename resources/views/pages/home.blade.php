@@ -5,15 +5,15 @@
 
 {{-- OND-145 P2 corrective — preload display fontu (IBM Plex Sans Variable wght axis)
      pro hero LCP. Variable woff2 obsahuje weights 100–700 v jednom souboru,
-     takže preload pokrývá 400 i 700 najednou. Hero heading je italic →
-     preloadujeme italic variantu. latin + latin-ext kvůli CS diacriticám
-     (ě š č ř ž ý). EN/DE umlauty (ä ö ü ß) jsou v latin subsetu. Každý
-     soubor < 60KB (acceptance criterion OND-145). --}}
+     takže preload pokrývá 400 i 700 najednou. OND-147 (Jack §2.0 rule #10):
+     hero je upright wght 700, preloadujeme upright (normal) variantu, ne italic.
+     latin + latin-ext kvůli CS diacriticám (ě š č ř ž ý). EN/DE umlauty
+     (ä ö ü ß) jsou v latin subsetu. Každý soubor < 60KB (acceptance OND-145). --}}
 @push('preloads')
     <link rel="preload" as="font" type="font/woff2" crossorigin
-          href="{{ Vite::asset('node_modules/@fontsource-variable/ibm-plex-sans/files/ibm-plex-sans-latin-wght-italic.woff2') }}">
+          href="{{ Vite::asset('node_modules/@fontsource-variable/ibm-plex-sans/files/ibm-plex-sans-latin-wght-normal.woff2') }}">
     <link rel="preload" as="font" type="font/woff2" crossorigin
-          href="{{ Vite::asset('node_modules/@fontsource-variable/ibm-plex-sans/files/ibm-plex-sans-latin-ext-wght-italic.woff2') }}">
+          href="{{ Vite::asset('node_modules/@fontsource-variable/ibm-plex-sans/files/ibm-plex-sans-latin-ext-wght-normal.woff2') }}">
 @endpush
 
 @section('content')
