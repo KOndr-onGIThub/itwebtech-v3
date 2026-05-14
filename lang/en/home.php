@@ -72,8 +72,8 @@ return [
                 'quote_author' => 'Petr Kroulík, Nové Interiéry s.r.o.',
             ],
             [
-                'heading' => 'An AI website in an afternoon: nice-looking, generic, interchangeable',
-                'text'    => 'Tools can generate a website quickly these days. But without research, without strategy, without understanding your business, what emerges looks like a website — and functions like everyone else\'s. Plus the platform locks you into a subscription forever.',
+                'heading' => 'The template looks fine. It looks like everyone else\'s, too.',
+                'text'    => 'Three companies in your industry launched the same template last week. The agency drops in your text and logo — the result is interchangeable, and the platform keeps you on a monthly subscription you can\'t take with you.',
             ],
             [
                 'heading' => 'You never speak with the person who builds the site',
@@ -117,9 +117,9 @@ return [
     ],
 
     'ai' => [
-        'subheading' => 'AI & web design',
-        'heading'    => 'A website in an afternoon. But which website?',
-        'intro'      => 'Technically, it\'s possible. A tool can generate pages, text, images. The problem isn\'t speed.',
+        'subheading' => 'A template is quick to build. Leads aren\'t.',
+        'heading'    => 'Generator versus your business',
+        'intro'      => 'Today\'s generators can click a layout together and drop in text and images. What they can\'t do: work out who you sell to, why a customer should choose you, or where prospects drop off. A website built to sell starts with the second part.',
         'laik' => [
             'label'   => 'Non-expert + AI',
             'outcome' => 'Quick result.',
@@ -135,14 +135,14 @@ return [
             'label'   => 'Expert + AI',
             'outcome' => 'Just as fast where it makes sense. And without a generic result.',
             'items'   => [
-                'Strategy, research and understanding of your business',
+                'Built on strategy, data and your customers',
                 'Control and a result someone is accountable for',
                 'Content designed so people stay and contact you',
                 'A website that differs from competitors — intentionally',
             ],
             'note' => 'If you run a business, this is a difference your customers will notice.',
         ],
-        'closing' => 'I use AI as a tool — it shortens time on routine work. Strategy, research and decisions about what the site must do cannot be skipped. That work has to be done before a single line of the website itself is written.',
+        'closing' => 'I use AI as a tool — it cuts down on routine work. Decisions about what the site should say, to whom, and in what order are not something it can make for you. That work has to be done before the website is built.',
     ],
 
     'toyota' => [
