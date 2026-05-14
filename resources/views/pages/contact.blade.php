@@ -5,11 +5,18 @@
 
 @section('content')
 
-{{-- Page hero --}}
-<div class="page-hero">
+{{-- Page hero — OND-135 iter 4: plán §3.1 design DNA (page-mark + Fraunces italic + amber accent) --}}
+<div class="page-hero page-hero--contact">
     <div class="container-site">
-        <p class="section-subheading">{{ __('contact.subheading') }}</p>
-        <h1>{{ __('contact.heading') }}</h1>
+        <p class="page-hero__page-mark">
+            <span class="page-hero__page-mark-label">{{ __('contact.hero.page_mark_label') }}</span>
+            <span class="page-hero__page-mark-index" aria-hidden="true">{{ __('contact.hero.page_mark_index') }}</span>
+        </p>
+        <p class="page-hero__upline">{{ __('contact.hero.upline') }}</p>
+        <h1 class="page-hero__heading">
+            {!! __('contact.hero.heading_html') !!}
+        </h1>
+        <p class="page-hero__subline">{{ __('contact.hero.subline') }}</p>
     </div>
 </div>
 
@@ -26,13 +33,14 @@
                         <source srcset="{{ asset('img/about/ondrej_kriska_preview.webp') }}" type="image/webp">
                         <img
                             src="{{ asset('img/about/ondrej_kriska.jpg') }}"
-                            alt="Ondřej Kriška"
+                            alt="{{ __('contact.hero.photo_alt') }}"
                             class="contact-info__photo"
                             loading="lazy"
                             width="260"
                             height="300"
                         >
                     </picture>
+                    <p class="contact-info__role">{{ __('contact.hero.role_label') }}</p>
                 </div>
 
                 <dl>
@@ -64,10 +72,26 @@
 
             {{-- Contact form --}}
             <div id="kontaktni-formular" class="contact-form" x-data="contactForm">
-                <h2 class="contact-form__title">{{ __('contact.form_heading') }}</h2>
-                <p class="contact-form__subtitle">{{ __('contact.form_subheading') }}</p>
 
-                <form @submit.prevent="submit" novalidate>
+                {{-- Thank-you state — replaces the form on success (OND-136). --}}
+                <div class="contact-form__thanks" x-show="submitted" x-cloak>
+                    <h2 class="contact-form__title">{{ __('contact.thank_you.heading') }}</h2>
+                    <p class="contact-form__subtitle">{{ __('contact.thank_you.subline') }}</p>
+                    <p class="contact-form__thanks-next">{{ __('contact.thank_you.next') }}</p>
+                    <div class="contact-form__thanks-ctas">
+                        <a href="{{ lroute('projects') }}" class="btn btn-secondary">
+                            {{ __('contact.thank_you.cta_projects') }}
+                        </a>
+                        <a href="{{ lroute('price') }}" class="btn btn-secondary">
+                            {{ __('contact.thank_you.cta_price') }}
+                        </a>
+                    </div>
+                </div>
+
+                <h2 class="contact-form__title" x-show="!submitted">{{ __('contact.form_heading') }}</h2>
+                <p class="contact-form__subtitle" x-show="!submitted">{{ __('contact.form_subheading') }}</p>
+
+                <form @submit.prevent="submit" novalidate x-show="!submitted">
                     @csrf
 
                     <div class="form-group">
@@ -128,6 +152,24 @@
                 </form>
             </div>
         </div>
+    </div>
+</section>
+
+{{-- 3-step „Co se stane potom" — OND-136 next_steps --}}
+<section class="section-wrapper section-wrapper--alt next-steps">
+    <div class="container-site">
+        <p class="section-subheading">{{ __('contact.next_steps.eyebrow') }}</p>
+        <h2 class="section-heading">{{ __('contact.next_steps.heading') }}</h2>
+
+        <ol class="next-steps__list">
+            @foreach (__('contact.next_steps.steps') as $i => $step)
+                <li class="next-steps__item">
+                    <span class="next-steps__index" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                    <h3 class="next-steps__title">{{ $step['title'] }}</h3>
+                    <p class="next-steps__text">{{ $step['text'] }}</p>
+                </li>
+            @endforeach
+        </ol>
     </div>
 </section>
 

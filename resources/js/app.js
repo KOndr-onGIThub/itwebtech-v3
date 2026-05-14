@@ -1,4 +1,5 @@
 import './bootstrap';
+import './cookies';
 import './analytics';
 import Alpine from 'alpinejs';
 
@@ -102,33 +103,31 @@ Alpine.data('fileDropZone', () => ({
 // ---------------------------------------------------------------------------
 Alpine.data('contactForm', () => ({
     loading: false,
+    submitted: false,
 
     async submit() {
         const form = this.$el;
         const data = new FormData(form);
         this.loading = true;
 
-        // Dynamic import — Swal is loaded only on first form submission
-        const { default: Swal } = await import('sweetalert2');
-
         try {
             await window.axios.post('/contact', data);
 
-            await Swal.fire({
-                icon: 'success',
-                title: 'Sent!',
-                text: 'Your message has been received. We will get back to you within 24 business hours.',
-                confirmButtonColor: '#1B2E5A',
-                confirmButtonText: 'Close',
-            });
-
+            // OND-136: in-DOM thank-you state replaces the form on success.
+            this.submitted = true;
             form.reset();
             // Notify all file drop zones to reset their state
             form.querySelectorAll('[x-data]').forEach(el => {
                 el.dispatchEvent(new CustomEvent('file-drop:reset'));
             });
+            // Scroll the thanks block into view for visibility.
+            this.$nextTick(() => {
+                this.$root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
 
         } catch (err) {
+            // Lazy-load SweetAlert only for the error path.
+            const { default: Swal } = await import('sweetalert2');
             const errors = err.response?.data?.errors;
             let msg = 'The form could not be submitted. Please try again.';
             if (errors) {

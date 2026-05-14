@@ -44,6 +44,15 @@ class PageController extends Controller
         return view('pages.privacy');
     }
 
+    /**
+     * OND-125: cookie policy stránka. Statický text v češtině, link na
+     * revokaci souhlasu (volá window.ItwebtechAnalytics.revokeConsent()).
+     */
+    public function cookies()
+    {
+        return view('pages.cookies');
+    }
+
     public function projects()
     {
         $locale = App::getLocale();

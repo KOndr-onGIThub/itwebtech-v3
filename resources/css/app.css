@@ -1,5 +1,8 @@
 @import 'tailwindcss';
 @import '@fontsource-variable/inter';
+@import './foundation/design-system.css';
+@import './components/button.css';
+@import './components/cookies.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -9,10 +12,18 @@
 /* ============================================================
    DESIGN TOKENS — Tailwind v4 @theme
    Dark + Gold / Luxusní tmavý styl
+   ============================================================
+   OND-135 P2 iter 2: Aditivní expozice B1 design system tokenů
+   (z foundation/design-system.css) do Tailwind @theme jako
+   utility classes — bg-base, fg-primary, accent atd. Existující
+   --color-ink-* / --color-gold-* nejsou měněny (žádná regrese
+   napříč 5300+ řádky stylů). B2 reskin per-page nahrazuje
+   legacy tokeny novými on opt-in basis.
    ============================================================ */
 @theme {
     --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif,
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
 
     /* — Primární tmavá paleta — */
     --color-ink-950:  #0F172A;
@@ -32,6 +43,20 @@
     /* — Stav — */
     --color-ok:    #10B981;
     --color-fail:  #EF4444;
+
+    /* === B1 Design DNA (plán §2.1) — opt-in přes utility ====== */
+    --color-bg-base:     #0A0A0B;
+    --color-bg-elev-1:   #131316;
+    --color-bg-elev-2:   #1B1B20;
+    --color-bg-inverse:  #F4EFE6;
+
+    --color-fg-primary:  #F2F0EA;
+    --color-fg-muted:    #9B9AA0;
+    --color-fg-faint:    #5C5C63;
+
+    --color-accent:        #E8A64A;
+    --color-accent-hover:  #F0B665;
+    --color-accent-press:  #C98E3A;
 }
 
 @layer components {
@@ -1217,26 +1242,20 @@
     }
 
     /* ============================================================
-       HERO SEKCE
+       HERO SEKCE — OND-135 P2 reskin (plán §3.1)
+       Editorial dark base, Fraunces display, italic key-word
+       emphasis ve warm amber. Asymetrický left-anchor s
+       editorial breath (--space-9 = 96 px) na desktopu.
        ============================================================ */
     .section-hero {
         position: relative;
-        background-color: var(--color-ink-950);
+        background-color: var(--color-bg-base);
         min-height: 100svh;
         display: flex;
         align-items: center;
         padding-top: calc(68px + clamp(3rem, 7vw, 5.5rem));
         padding-bottom: clamp(3.5rem, 7vw, 5rem);
         overflow: hidden;
-    }
-
-    .section-hero__heading em,
-    .section-hero__heading .text-gold {
-        font-style: normal;
-        background: linear-gradient(135deg, #F59E0B 0%, #FDE68A 52%, #D97706 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
     }
 
     .section-hero__bg-picture {
@@ -1247,6 +1266,7 @@
         pointer-events: none;
         -webkit-mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
         mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+        opacity: 0.32;
     }
     .section-hero__bg-img {
         width: 100%;
@@ -1259,16 +1279,16 @@
         content: '';
         position: absolute;
         inset: 0;
-        background: rgba(15, 23, 42, 0.75);
+        background: rgba(10, 10, 11, 0.82);
         z-index: 1;
     }
     @media (min-width: 1024px) {
         .section-hero::before {
             background: linear-gradient(
                 105deg,
-                var(--color-ink-950) 30%,
-                rgba(15, 23, 42, 0.88) 55%,
-                rgba(15, 23, 42, 0.35) 100%
+                var(--color-bg-base) 38%,
+                rgba(10, 10, 11, 0.92) 62%,
+                rgba(10, 10, 11, 0.55) 100%
             );
         }
     }
@@ -1276,11 +1296,11 @@
     .section-hero::after {
         content: '';
         position: absolute;
-        top: -120px;
-        right: -80px;
-        width: 500px;
-        height: 500px;
-        background: radial-gradient(circle, rgba(245, 158, 11, 0.12) 0%, transparent 70%);
+        top: -160px;
+        right: -120px;
+        width: 560px;
+        height: 560px;
+        background: radial-gradient(circle, rgba(232, 166, 74, 0.12) 0%, transparent 70%);
         pointer-events: none;
         z-index: 1;
     }
@@ -1290,23 +1310,123 @@
         z-index: 2;
     }
 
-    .section-hero .section-subheading {
-        color: var(--color-gold-500);
+    /* Page-mark eyebrow s horizontální linkou (§3.1 „── AI A WEB    01 / 01") */
+    .section-hero__page-mark {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-5);
+        font-family: var(--font-body);
+        font-size: var(--text-eyebrow);
+        font-weight: 500;
+        letter-spacing: var(--tracking-eyebrow);
+        text-transform: uppercase;
+        color: var(--color-fg-muted);
+        margin-bottom: var(--space-6);
+        max-width: 720px;
+    }
+    .section-hero__page-mark::before {
+        content: '';
+        width: 32px;
+        height: 1px;
+        background: var(--color-fg-muted);
+        flex: 0 0 32px;
+    }
+    .section-hero__page-mark-label {
+        flex: 1 1 auto;
+    }
+    .section-hero__page-mark-index {
+        font-variant-numeric: tabular-nums;
+        color: var(--color-fg-faint);
     }
 
+    /* Upline — menší muted Fraunces (§3.1 „AI udělá web za odpoledne.") */
+    .section-hero__upline {
+        font-family: var(--font-display);
+        font-weight: 400;
+        font-size: clamp(1.5rem, 2.4vw, 2.25rem);
+        line-height: var(--leading-snug);
+        color: var(--color-fg-muted);
+        margin-block: 0 var(--space-3);
+        letter-spacing: var(--tracking-tight);
+    }
+
+    /* Display heading — Fraunces italic, key word v amber */
     .section-hero__heading {
-        color: #f1f5f9;
-        font-size: clamp(2.375rem, 6vw, 4rem);
-        font-weight: 800;
-        letter-spacing: -0.03em;
-        line-height: 1.1;
-        margin-block: 0.5rem 1.25rem;
-        max-width: 620px;
+        font-family: var(--font-display);
+        font-style: italic;
+        font-weight: 500;
+        font-size: var(--text-display-lg);
+        line-height: var(--leading-tight);
+        letter-spacing: var(--tracking-tight);
+        color: var(--color-fg-primary);
+        margin-block: 0 var(--space-5);
+        max-width: 18ch;
+        /* Fraunces optical sizing — větší display velikost */
+        font-variation-settings: 'opsz' 144, 'SOFT' 50, 'wght' 500;
     }
     .section-hero__heading em,
-    .section-hero__heading .text-gold {
-        font-style: normal;
-        color: var(--color-gold-500);
+    .section-hero__heading .text-accent {
+        font-style: italic;
+        color: var(--color-accent);
+        background: none;
+        -webkit-background-clip: initial;
+        -webkit-text-fill-color: initial;
+        background-clip: initial;
+    }
+
+    /* Subtitle — rule + body subline (§3.1 „── Strategie, výzkum…") */
+    .section-hero__subline {
+        position: relative;
+        font-family: var(--font-body);
+        font-size: var(--text-body-lg);
+        line-height: var(--leading-body);
+        color: var(--color-fg-muted);
+        margin-block: 0 var(--space-6);
+        padding-left: calc(32px + var(--space-3));
+        max-width: 48ch;
+    }
+    .section-hero__subline::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0.7em;
+        width: 32px;
+        height: 1px;
+        background: var(--color-fg-muted);
+    }
+
+    /* Phone link — ghost text-link, ne button (§3.1 conversion note) */
+    .section-hero__phone-link {
+        font-family: var(--font-body);
+        font-size: var(--text-body);
+        color: var(--color-fg-muted);
+        text-decoration: none;
+        transition: color var(--duration-micro) var(--ease-out);
+    }
+    .section-hero__phone-link:hover,
+    .section-hero__phone-link:focus-visible {
+        color: var(--color-fg-primary);
+    }
+    .section-hero__phone-link .phone-cta__label {
+        color: var(--color-fg-muted);
+        font-weight: 400;
+    }
+    .section-hero__phone-link .phone-cta__link {
+        color: var(--color-fg-primary);
+        font-weight: 500;
+        text-decoration: none;
+    }
+    .section-hero__phone-link .phone-cta__link:hover {
+        color: var(--color-accent);
+    }
+
+    /* Editorial breath — desktop left-anchor (§2 white-space-as-feature) */
+    @media (min-width: 1024px) {
+        .section-hero__content {
+            padding-left: var(--space-9);  /* 96px */
+            max-width: 880px;
+        }
     }
 
     .hero-quote {
@@ -5331,6 +5451,280 @@
     }
     .faq-form__submit {
         width: fit-content;
+    }
+
+    /* ============================================================
+       OND-135 P2 iter 4 — Contact page reskin (plán §3.1 + §1 dir 5)
+       Page-mark eyebrow, Fraunces italic display heading, amber accent,
+       3-step "Co se stane potom" listing, in-DOM thank-you state.
+       ============================================================ */
+
+    /* Page hero — Contact variant overrides .page-hero (centered/gold-glow)
+       with editorial left-aligned design DNA. */
+    .page-hero--contact {
+        background: var(--color-bg-base);
+        text-align: left;
+        padding-top: calc(68px + 4rem);
+        padding-bottom: 4rem;
+        border-bottom: 1px solid rgba(232, 166, 74, 0.08);
+    }
+    .page-hero--contact::after {
+        /* Replace the centered gold-glow halo with a soft top-right amber bleed. */
+        background: radial-gradient(ellipse 600px 300px at 90% 0%,
+                                    rgba(232, 166, 74, 0.10) 0%,
+                                    transparent 65%);
+        top: 0;
+        left: auto;
+        right: 0;
+        transform: none;
+        width: 100%;
+        height: 100%;
+    }
+    .page-hero--contact .container-site {
+        max-width: 920px;
+    }
+
+    .page-hero__page-mark {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-family: var(--font-display);
+        font-style: italic;
+        font-weight: 400;
+        font-size: 0.875rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--color-fg-muted);
+        margin: 0 0 2.5rem;
+    }
+    .page-hero__page-mark::before {
+        content: '';
+        flex-shrink: 0;
+        width: 32px;
+        height: 1px;
+        background: var(--color-accent);
+    }
+    .page-hero__page-mark-label {
+        color: var(--color-accent);
+        font-style: normal;
+        font-weight: 600;
+        letter-spacing: 0.24em;
+    }
+    .page-hero__page-mark-index {
+        margin-left: auto;
+        font-style: italic;
+        color: var(--color-fg-faint);
+        letter-spacing: 0.14em;
+    }
+
+    .page-hero__upline {
+        font-family: var(--font-display);
+        font-style: italic;
+        font-weight: 400;
+        font-size: clamp(1.25rem, 2vw, 1.75rem);
+        line-height: 1.35;
+        color: var(--color-fg-muted);
+        margin: 0 0 0.75rem;
+    }
+
+    .page-hero--contact .page-hero__heading {
+        font-family: var(--font-display);
+        font-style: italic;
+        font-weight: 500;
+        font-variation-settings: 'opsz' 144, 'SOFT' 50, 'wght' 500;
+        font-size: clamp(2.25rem, 5.5vw, 4.25rem);
+        line-height: 1.02;
+        letter-spacing: -0.015em;
+        color: var(--color-fg-primary);
+        margin: 0 0 1.75rem;
+        max-width: 18ch;
+    }
+    .page-hero--contact .page-hero__heading em {
+        color: var(--color-accent);
+        font-style: italic;
+    }
+
+    .page-hero__subline {
+        position: relative;
+        padding-left: calc(32px + 1rem);
+        font-family: 'Inter Variable', system-ui, sans-serif;
+        font-size: 1.0625rem;
+        line-height: 1.6;
+        color: var(--color-fg-muted);
+        max-width: 56ch;
+        margin: 0;
+    }
+    .page-hero__subline::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0.85em;
+        width: 32px;
+        height: 1px;
+        background: var(--color-fg-faint);
+    }
+
+    /* ============================================================
+       3-step "Co se stane potom" (next-steps)
+       ============================================================ */
+    .next-steps {
+        background: var(--color-bg-elev-1);
+    }
+    .next-steps__list {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin: 2.5rem 0 0;
+        padding: 0;
+        list-style: none;
+        counter-reset: none;
+    }
+    @media (min-width: 768px) {
+        .next-steps__list {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+    }
+    .next-steps__item {
+        position: relative;
+        padding-top: 3.25rem;
+        padding-left: 0;
+        border-top: 1px solid rgba(232, 166, 74, 0.18);
+    }
+    .next-steps__index {
+        position: absolute;
+        top: -0.55rem;
+        left: 0;
+        background: var(--color-bg-elev-1);
+        padding-right: 0.75rem;
+        font-family: var(--font-display);
+        font-style: italic;
+        font-weight: 500;
+        font-size: 1rem;
+        letter-spacing: 0.12em;
+        color: var(--color-accent);
+    }
+    .next-steps__title {
+        font-family: var(--font-display);
+        font-style: italic;
+        font-weight: 500;
+        font-size: clamp(1.25rem, 2vw, 1.625rem);
+        line-height: 1.25;
+        color: var(--color-fg-primary);
+        margin: 0 0 0.75rem;
+    }
+    .next-steps__text {
+        font-size: 0.9375rem;
+        line-height: 1.7;
+        color: var(--color-fg-muted);
+        margin: 0;
+    }
+
+    /* ============================================================
+       Contact form — Thank-you state (replaces form on success)
+       ============================================================ */
+    .contact-form__thanks {
+        padding: 2.5rem 2rem;
+        background: var(--color-bg-elev-2);
+        border: 1px solid rgba(232, 166, 74, 0.22);
+        border-radius: 16px;
+        text-align: left;
+    }
+    .contact-form__thanks .contact-form__title {
+        font-family: var(--font-display);
+        font-style: italic;
+        font-weight: 500;
+        font-size: clamp(1.5rem, 2.5vw, 2rem);
+        line-height: 1.15;
+        color: var(--color-fg-primary);
+        margin: 0 0 0.5rem;
+    }
+    .contact-form__thanks .contact-form__subtitle {
+        color: var(--color-fg-muted);
+        font-size: 1rem;
+        line-height: 1.6;
+        margin: 0 0 1.25rem;
+    }
+    .contact-form__thanks-next {
+        font-size: 0.9375rem;
+        line-height: 1.65;
+        color: var(--color-fg-muted);
+        margin: 0 0 1.5rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid rgba(232, 166, 74, 0.18);
+    }
+    .contact-form__thanks-ctas {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    /* ============================================================
+       Error pages (404 / 500 / 503) — minimum-viable layout
+       ============================================================ */
+    .error-page {
+        background: var(--color-bg-base);
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+        padding: 5rem 1.5rem;
+        position: relative;
+        overflow: hidden;
+    }
+    .error-page::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 700px 360px at 50% 0%,
+                                    rgba(232, 166, 74, 0.08) 0%,
+                                    transparent 65%);
+        pointer-events: none;
+        z-index: 0;
+    }
+    .error-page .container-site {
+        position: relative;
+        z-index: 1;
+        max-width: 720px;
+        text-align: center;
+    }
+    .error-page .section-subheading {
+        color: var(--color-accent);
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+    .error-page__heading {
+        font-family: var(--font-display);
+        font-style: italic;
+        font-weight: 500;
+        font-variation-settings: 'opsz' 144, 'SOFT' 50, 'wght' 500;
+        font-size: clamp(2rem, 5vw, 3.25rem);
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        color: var(--color-fg-primary);
+        margin: 0 0 1rem;
+    }
+    .error-page__lead {
+        font-size: 1.0625rem;
+        line-height: 1.65;
+        color: var(--color-fg-muted);
+        max-width: 52ch;
+        margin: 0 auto 1.25rem;
+    }
+    .error-page__help {
+        font-size: 0.9375rem;
+        color: var(--color-fg-muted);
+        margin: 0 0 2rem;
+    }
+    .error-page__help a {
+        color: var(--color-accent);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+    .error-page__ctas {
+        display: inline-flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.875rem;
     }
 
 }

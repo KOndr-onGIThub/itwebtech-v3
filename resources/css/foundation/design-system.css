@@ -1,0 +1,155 @@
+/* ============================================================
+   B1: DESIGN SYSTEM FOUNDATION (OND-129)
+   Plán §2 (Design DNA) — itwebtech.cz sitewide redesign
+
+   Tato vrstva definuje pouze tokens + @font-face deklarace.
+   Nikde v HTML/CSS se zatím nepoužívá — to dělá B2 (page-by-page
+   reskin). Cíl B1: žádná vizuální regrese, žádný Lighthouse hit.
+
+   Naming dle plánu §2.1–§2.5:
+   - --color-bg-*, --color-fg-*, --color-border-*, --color-accent-*
+   - --text-* (modular scale, 1.25 ratio)
+   - --space-1..--space-11 (8pt grid varianta s 4px base step)
+   - --ease-*, --duration-*
+   - --focus-ring-* (a11y baseline)
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   Self-hosted variable fonts — Fraunces (display)
+   - Inter (body) je importován samostatně v app.css (existující
+     stav, neměním aby B1 zůstal foundation-only).
+   - Subset latin + latin-ext pokrývá CS + EN + DE diakritiku
+     (browser stáhne jen subsety potřebné pro daný unicode-range).
+   - `font-display: swap` — fonts blokují render maximum 100ms,
+     pak fallback, swap při dorazu.
+   - `full.css` poskytuje všechny axes: wght + opsz (optical
+     sizing) + SOFT + WONK — pro hero italic emphasis (§2.2).
+   - Žádný `<link rel="preload">` zatím (přidá B2 až bude
+     Fraunces reálně použit v hero → jinak by Lighthouse hlásil
+     "unused preload" a sjelo by skóre).
+   ------------------------------------------------------------ */
+@import '@fontsource-variable/fraunces/full.css';
+@import '@fontsource-variable/fraunces/full-italic.css';
+
+/* ------------------------------------------------------------
+   Tokens — :root scope (ne @theme, aby Tailwind nevygeneroval
+   utility classes a nezvětšil JIT output. B2 si je natáhne
+   přes var(--token-name) v komponentách / Tailwind arbitrary).
+   ------------------------------------------------------------ */
+:root {
+    /* === §2.1 Paleta (14+ semantic tokens) ===================== */
+
+    /* Backgrounds (dark editorial base) */
+    --color-bg-base:     #0A0A0B;  /* hlavní pozadí */
+    --color-bg-elev-1:   #131316;  /* karty, panely */
+    --color-bg-elev-2:   #1B1B20;  /* hover karty, vyšší hierarchie */
+    --color-bg-inverse:  #F4EFE6;  /* warm cream — form sekce, proof sekce */
+
+    /* Foregrounds */
+    --color-fg-primary:  #F2F0EA;  /* warm white (sníží halaci na dark) */
+    --color-fg-muted:    #9B9AA0;
+    --color-fg-faint:    #5C5C63;
+    --color-fg-on-cream: #15151A;  /* text na cream backgroundu */
+
+    /* Borders */
+    --color-border-soft:     #26262B;
+    --color-border-mid:      #3A3A41;
+    --color-border-on-cream: #D8D2C5;
+
+    /* Accent (warm amber CTA + headline emphasis) */
+    --color-accent:       #E8A64A;
+    --color-accent-hover: #F0B665;
+    --color-accent-press: #C98E3A;
+    --color-accent-on:    #15151A;  /* text na amber tlačítku */
+
+    /* Stavové (form feedback) */
+    --color-success: #5BB97F;
+    --color-error:   #E26464;
+
+    /* === §2.2 Typografie ====================================== */
+
+    --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+    --font-body:    'Inter Variable', ui-sans-serif, system-ui, -apple-system,
+                    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+    /* Type scale (modular, 1.250 ratio; fluid clamp pro display) */
+    --text-display-xl: clamp(64px, 9vw, 144px);    /* hero word emphasis */
+    --text-display-lg: clamp(40px, 5.5vw, 80px);
+    --text-h1:         clamp(32px, 4vw, 56px);
+    --text-h2:         clamp(24px, 3vw, 40px);
+    --text-h3:         24px;
+    --text-h4:         20px;
+    --text-body-lg:    18px;
+    --text-body:       16px;
+    --text-body-sm:    14px;
+    --text-caption:    12px;
+    --text-eyebrow:    11px;
+
+    /* Line-height tokens (oddělené od size kvůli kombinacím) */
+    --leading-tight:   1.05;   /* display */
+    --leading-snug:    1.2;    /* h1–h2 */
+    --leading-normal:  1.4;    /* eyebrow, caption */
+    --leading-relaxed: 1.5;    /* body-sm */
+    --leading-body:    1.6;    /* body, body-lg */
+
+    /* Letter-spacing */
+    --tracking-eyebrow: 0.18em;  /* uppercase eyebrow per §2.2 */
+    --tracking-tight:  -0.02em;  /* display */
+    --tracking-normal: 0;
+
+    /* === §2.3 Spacing scale (11-step, dle issue body) ========= */
+    --space-1:  4px;
+    --space-2:  8px;
+    --space-3:  12px;
+    --space-4:  16px;
+    --space-5:  24px;
+    --space-6:  32px;
+    --space-7:  48px;
+    --space-8:  64px;
+    --space-9:  96px;
+    --space-10: 128px;
+    --space-11: 192px;
+
+    /* === §2.4 Grid =========================================== */
+    --container-max:   1320px;
+    --container-pad:   var(--space-5);  /* default gutter */
+    --grid-columns:    12;
+    --grid-gutter:     var(--space-5);
+
+    /* === §2.5 Motion ========================================= */
+
+    /* Easing — primary --ease-out per issue body */
+    --ease-out:    cubic-bezier(0.2, 0.8, 0.2, 1);
+    /* Doplňkové easingy z plánu §2.5 pro variantní použití v B2 */
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);   /* hover */
+    --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1); /* vstupy */
+
+    /* Durations */
+    --duration-micro: 120ms;
+    --duration-macro: 320ms;
+
+    /* === §2.6 A11y baseline ================================== */
+    --focus-ring-color:  var(--color-accent);
+    --focus-ring-width:  2px;
+    --focus-ring-offset: 2px;
+    --focus-ring-style:  solid;
+
+    /* Radius (drobný scale — plán §3 karty mají rounded corners) */
+    --radius-sm:  6px;
+    --radius-md:  10px;
+    --radius-lg:  16px;
+    --radius-pill: 9999px;
+}
+
+/* ------------------------------------------------------------
+   §2.6 A11y — reduced motion baseline.
+   Vypneme všechny non-essential animace; opacity fade ≤80ms
+   povolen (per plán). Zatím nemáme nic, co by se shodovalo,
+   ale baseline pravidlo necháme aktivní pro budoucí B2 animace.
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --duration-micro: 0ms;
+        --duration-macro: 80ms;  /* povolené fade-only ≤80ms */
+    }
+}

@@ -7,13 +7,23 @@ return [
         'description' => 'Custom websites and web applications built for results. Maintenance-free, no WordPress, no hidden fees. 18 years of experience. Free consultation.',
     ],
 
-    // TODO: review pro EN — copy podle CS varianty A (OND-100)
+    // TODO (OND-136 P3): final EN tone polish — Content Writer scope.
     'hero' => [
+        // OND-135 P2 (plán §3.1) — page-mark + upline + display heading.
+        'page_mark_label' => 'AI & WEB',
+        'page_mark_index' => '01 / 01',
+        'upline'          => 'AI builds a website in an afternoon.',
+        'heading_html'    => 'But what kind of website?<br>One that <em>sells</em>.',
+        'subline'         => 'Strategy, research, and craft have no shortcuts.',
+
+        // Backwards compat (consultation modal, fallback render).
         'eyebrow'       => 'Custom websites & web applications',
         'heading'       => 'A website that finally earns its keep. No WordPress, no maintenance, no compromises.',
-        'subline'       => 'For business owners who want a website that brings in customers — not another line on the invoice. 18 years at Toyota taught me to deliver exactly what we agreed on.',
-        'cta_primary'   => 'Get a price quote',
+        // OND-130 + OND-136: single primary CTA in hero, exact wording per spec.
+        // cta_secondary kept for backwards compat (consultation modal) — not shown in hero.
+        'cta_primary'   => 'Get a free quote',
         'cta_secondary' => 'Book a 30-min consultation',
+        'phone_label'   => 'or call:',
     ],
 
     'modal' => [
@@ -166,6 +176,7 @@ return [
         'secondary_inline' => 'I also handle SEO, graphic design and social media management — :pricing_link or :contact_link.',
         'secondary_inline_pricing' => 'see the pricing',
         'secondary_inline_contact' => 'get in touch',
+        // OND-136: aligned with CS taxonomy 25/55/95 thousand CZK → EUR conversion (CEO-confirmed 1:25 anchor).
         'primary' => [
             'weby' => [
                 'title'       => 'Custom websites',
@@ -175,7 +186,7 @@ return [
                     'Conversion-focused structure built around your business',
                     'Maintenance-free with fast load times',
                 ],
-                'price'       => 'from CZK 20,000',
+                'price'       => 'from €1,000',
             ],
             'aplikace' => [
                 'title'       => 'Web applications',
@@ -185,7 +196,7 @@ return [
                     'Integrations with your existing tools',
                     'Custom admin without monthly licence fees',
                 ],
-                'price'       => 'from CZK 20,000',
+                'price'       => 'from €2,200',
             ],
             'eshop' => [
                 'title'       => 'E-shops',
@@ -195,7 +206,7 @@ return [
                     'Integrations with accounting, couriers and payment gateways',
                     'No monthly platform fees',
                 ],
-                'price'       => 'from CZK 20,000',
+                'price'       => 'from €3,800',
             ],
         ],
         'seo' => [
@@ -214,22 +225,23 @@ return [
 
     'price_anchor' => [
         'heading' => 'What will it cost?',
-        'intro'   => 'Indicative entry prices for the main project types. You receive an exact written quote after a short consultation.',
+        'intro'   => 'Indicative entry prices for the three project tiers. You receive an exact written quote after a short consultation.',
+        // OND-136: 25 / 55 / 95 thousand CZK → EUR conversion (CEO-confirmed 1:25 anchor). One source of truth across the site.
         'items'   => [
             [
-                'title' => 'Custom website',
-                'price' => 'from CZK 20,000',
-                'desc'  => 'Static presentation, single or multilingual.',
+                'title' => 'Starter',
+                'price' => '€1,000',
+                'desc'  => 'Up to 5-page presentation site for sole traders and small businesses.',
             ],
             [
-                'title' => 'Web application',
-                'price' => 'from CZK 60,000',
-                'desc'  => 'Internal systems, customer portals and custom record-keeping tools.',
+                'title' => 'Standard',
+                'price' => '€2,200',
+                'desc'  => 'Multilingual site with blog, conversion tracking and a booking system.',
             ],
             [
-                'title' => 'E-shop',
-                'price' => 'from CZK 80,000',
-                'desc'  => 'Custom solution without monthly platform fees.',
+                'title' => 'Custom',
+                'price' => 'from €3,800',
+                'desc'  => 'E-shop, web application or a complex custom portal.',
             ],
         ],
         'cta' => 'Detailed pricing →',
@@ -301,12 +313,12 @@ return [
             [
                 'key'      => 'price',
                 'question' => 'What will it cost?',
-                'answer'   => 'See indicative entry prices in the pricing anchor above — websites from CZK 20,000, web apps from CZK 60,000, e-shops from CZK 80,000. You get an exact written quote after a short consultation, and the invoice matches the specification.',
+                'answer'   => 'See the pricing anchor above for indicative entry prices — Starter €1,000, Standard €2,200, Custom from €3,800. You get an exact written quote after a short consultation, and the invoice matches the specification line by line.',
             ],
             [
                 'key'      => 'duration',
                 'question' => 'How long does it take?',
-                'answer'   => 'From first message to a launched site typically 3–10 weeks — 60 minutes of consultation, 2–5 days for the specification, 3–10 weeks for the build and launch by the next business day after approval. The detailed timeline for your project goes into the specification.',
+                'answer'   => 'From first message to a launched site typically 4–12 weeks — a week for consultation, 2–5 days for the specification, 3–10 weeks for the build, and launch by the next business day after approval. The detailed timeline for your project goes into the specification.',
             ],
             [
                 'key'      => 'satisfaction',

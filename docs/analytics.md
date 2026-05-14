@@ -108,7 +108,68 @@ CLARITY_PROJECT_ID=
 
 V devtools console uvidíš `[analytics] event_name {...}` u každého kliknutí — bez odesílání nikam (žádný provider není nastaven, dispatcher to ticho swallowne).
 
+## Cookie consent (OND-125)
+
+GA4 a Microsoft Clarity jsou od OND-125 **gated cookie consent bannerem** —
+bez explicitního souhlasu se jejich skripty nenahrají (požadavek ePrivacy /
+GDPR v EU). Plausible je cookieless, banner se ho netýká.
+
+### Architektura
+
+| Vrstva | Soubor | Co dělá |
+|---|---|---|
+| Config (server → window) | `resources/views/partials/analytics.blade.php` | Vykresluje `window.itwebtechAnalyticsConfig = { measurementId, clarityId }`, pre-flush queue (`dataLayer`, `gtag`, `clarity`) a `gtag('consent','default', …)` se vším `denied`. **NEinjektuje** `gtag/js` ani `clarity.ms/tag`. |
+| Modal markup | `resources/views/partials/cookies-modal.blade.php` | Statický HTML modal, includuje se z `layouts/app.blade.php` na konci body. |
+| CSS | `resources/css/components/cookies.css` | Centrovaný modal, overlay s backdrop-blur, fade/scale animace. |
+| Logika | `resources/js/cookies.js` | IIFE, čte config, načítá/píše `localStorage`, řídí viditelnost modalu, boot GA4/Clarity po souhlasu, kill-switch + cookie purge při odmítnutí. |
+| Cookie policy | `resources/views/pages/cookies.blade.php` + route `/cookies` | Text v češtině, tlačítko „Odvolat souhlas“ volá `window.ItwebtechAnalytics.revokeConsent()`. |
+
+### Flow
+
+1. **Žádný uložený consent** → ~0,8 s po `DOMContentLoaded` vyskočí modal s overlay + backdrop blur. Tlačítka jsou ve sloupci („Přijmout vše“ primární, „Odmítnout“ jako subtilní textový link).
+2. **„Přijmout vše“** → `localStorage` (`itwebtech_cookies`, TTL 365 d), `bootGA4()` (Consent Mode v2: `analytics_storage` přepne na `granted`, reklamní storage zůstává `denied`), `bootClarity()` (`clarity('consent', true)`). Skripty se vloží dynamicky.
+3. **„Odmítnout“** → `localStorage` (TTL 180 d), `window['ga-disable-G-XXX'] = true`, vyprázdnění `dataLayer`, aktivní vymazání cookies `_ga*`, `_gid`, `_gat*`, `_clck`, `_clsk`, `CLID`, `MUID`, `ANONCHK` napříč doménami/subdoménami (host + root domain + `.host` + `.root`).
+4. **Křížek / klik mimo modal / Esc** → jen schová, **žádný consent se neukládá**. Při příští návštěvě se modal znovu objeví.
+
+### Public API
+
+```js
+window.ItwebtechAnalytics = {
+    acceptConsent(),   // udělí souhlas + boot GA4/Clarity
+    rejectConsent(),   // odmítnutí + cookie purge + kill switch
+    revokeConsent(),   // smaže localStorage + cookies (modal vyskočí po reloadu)
+    hasConsent(),      // → null | 'accepted' | 'rejected'
+    measurementId,     // validovaný (regex ^G-[A-Z0-9]+$), jinak null
+    clarityId,
+};
+```
+
+### Stavový model
+
+`localStorage.itwebtech_cookies` JSON:
+
+```json
+{ "status": "accepted" | "rejected", "timestamp": 1731494400000, "expiresAt": 1763030400000, "version": 1 }
+```
+
+`version` umožňuje invalidaci starých souhlasů (zvyš `STORAGE_VERSION` v `cookies.js`).
+
+### Jak revokovat
+
+- Na `/cookies` kliknout „Odvolat souhlas a smazat cookies“ → JS smaže `localStorage` + cookies + reload → banner se znovu objeví.
+- Z DevTools: `window.ItwebtechAnalytics.revokeConsent()` + reload.
+
+### Smoke test (po deployi)
+
+1. Inkognito → otevři homepage → po ~0,8 s se objeví modal.
+2. Network tab: bez consentu žádný request na `googletagmanager.com/gtag/js` ani `clarity.ms/tag`. Plausible (pokud nakonfigurované) jede normálně.
+3. Klik „Přijmout vše“ → modal fade-out, v Network tab requesty na GA4 + Clarity, do 30 s nový user v GA4 Realtime.
+4. Inkognito (čistá session) → klik „Odmítnout“ → modal zmizí, `document.cookie` neobsahuje `_ga*`/`_clck`/`MUID`, reload → modal se neukáže.
+
 ## Reference
 
 - Spec: [OND-122](/OND/issues/OND-122), plán [OND-99 §9](/OND/issues/OND-99#document-plan)
 - Parent: [OND-98](/OND/issues/OND-98)
+- Cookie consent: [OND-125](/OND/issues/OND-125)
+- GA Consent Mode v2: <https://developers.google.com/tag-platform/security/concepts/consent-mode>
+- Microsoft Clarity consent API: <https://learn.microsoft.com/en-us/clarity/setup-and-installation/cookie-consent>
