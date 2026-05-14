@@ -1,0 +1,18 @@
+## B4 verification page set (OND-132)
+## ─────────────────────────────────────
+## 9 URL templates × 3 locales (cs/en/de). První řádek = relativní path pro
+## default locale (cs, bez prefixu), další = override pro en / de. Dynamické
+## stránky (project, article) potřebují placeholder slug — viz README v
+## scripts/b4-verify.sh, ten dosadí z prvního aktivního záznamu v DB během
+## běhu lighthouse, nebo defaultní fixture z .env.example.
+##
+## Format: cs_path | en_path | de_path | label
+/ | /en/ | /de/ | home
+/kontakt | /en/contact | /de/kontakt | contact
+/cenik | /en/price | /de/preisliste | price
+/zasady-ochrany-osobnich-udaju | /en/privacy-policy | /de/datenschutz | privacy
+/projekty | /en/projects | /de/projekte | projects
+/projekty/{project} | /en/projects/{project} | /de/projekte/{project} | project
+/jak-na-to | /en/blog | /de/blog | blog
+/jak-na-to/{article} | /en/blog/{article} | /de/blog/{article} | article
+/cookies | /cookies | /cookies | cookies
