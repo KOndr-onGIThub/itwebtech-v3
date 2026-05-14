@@ -57,6 +57,55 @@ if (!function_exists('screenshot_is_storage')) {
     }
 }
 
+if (!function_exists('screenshot_dimensions')) {
+    /**
+     * Resolve intrinsic width/height for a storage-served portfolio screenshot
+     * (OND-137 P4 — CLS reduction).
+     *
+     * Build-time Vite assets (`img/projects/...`) už `<x-responsive-image>` řeší
+     * sám (preset šířky + height z imagetools metadata). Tady řešíme jen
+     * uploady přes Filament admin do `storage/app/public/portfolio/...`, kde
+     * žádná migrace s width/height column zatím neexistuje.
+     *
+     * Strategy:
+     *  - getimagesize() na disk file (fast — čte jen image header, ne celý obsah).
+     *  - cache::rememberForever s mtime-based key → re-upload souboru se stejným
+     *    path invaliduje cache automaticky.
+     *  - Pokud soubor chybí nebo není image, vrátí null a šablona dimensions
+     *    prostě nevypíše (graceful degradation).
+     *
+     * @return array{width:int,height:int}|null
+     */
+    function screenshot_dimensions(?string $path): ?array
+    {
+        if ($path === null || $path === '' || !screenshot_is_storage($path)) {
+            return null;
+        }
+
+        $disk = \Illuminate\Support\Facades\Storage::disk('public');
+
+        try {
+            if (!$disk->exists($path)) {
+                return null;
+            }
+            $mtime = $disk->lastModified($path);
+            $absPath = $disk->path($path);
+        } catch (\Throwable $e) {
+            return null;
+        }
+
+        $cacheKey = 'screenshot_dims:' . md5($path) . ':' . $mtime;
+
+        return \Illuminate\Support\Facades\Cache::rememberForever($cacheKey, function () use ($absPath) {
+            $info = @getimagesize($absPath);
+            if ($info === false || !isset($info[0], $info[1])) {
+                return null;
+            }
+            return ['width' => (int) $info[0], 'height' => (int) $info[1]];
+        });
+    }
+}
+
 if (!function_exists('responsive_image_srcsets')) {
     /**
      * Server-side resolver pro `<x-responsive-image>` (OND-123 iter3).
