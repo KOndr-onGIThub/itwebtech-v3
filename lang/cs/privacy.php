@@ -9,7 +9,27 @@ return [
 
     'heading' => 'Zásady ochrany osobních údajů',
 
-    'content' => '<p>Datum účinnosti: 6. května 2026</p>
+    // OND-130 P2 iter 8 — plán §3.1 page-mark hero + TL;DR (plain-language summary).
+    // Privacy index 09/09 v sitewide schématu.
+    'hero' => [
+        'page_mark_label' => 'OCHRANA OSOBNÍCH ÚDAJŮ',
+        'page_mark_index' => '09 / 09',
+        'upline'          => 'Stručně, srozumitelně, GDPR.',
+        'heading_html'    => 'Vaše data jsou <em>vaše</em>.',
+        'subline'         => 'Co sbíráme, proč to sbíráme a jak to ochráním. Bez právničtiny.',
+    ],
+
+    'tldr' => [
+        'eyebrow' => 'V kostce',
+        'items'   => [
+            'Sbírám jen údaje, které mi sami pošlete (formulář, e-mail, telefon).',
+            'Nepředávám je třetím stranám pro marketing — slouží jen k odpovědi na poptávku.',
+            'Webová analytika je anonymní (GA4 bez reklamních cookies, Clarity).',
+            'Kdykoli můžete požádat o výmaz: ok@itwebtech.cz.',
+        ],
+    ],
+
+    'content' =>'<p>Datum účinnosti: 6. května 2026</p>
 <p>Webové stránky (dále jen „služba") provozuje podnikatel Ondřej Kriška (dále jen „provozovatel" nebo „itwebtech").</p>
 <p>Tato stránka vás informuje o zásadách týkajících se shromažďování, používání a zpřístupňování osobních údajů, když používáte naši službu.</p>
 

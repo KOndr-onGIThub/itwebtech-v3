@@ -9,6 +9,16 @@ return [
 
     'subheading'    => 'Wie geht das',
     'heading'       => 'Tipps für bessere Webseiten und Anwendungen.',
+
+    // OND-130 P2 iter 8 — plán §3.1 page-mark hero (Fraunces italic + amber accent).
+    'hero' => [
+        'page_mark_label' => 'WIE GEHT DAS',
+        'page_mark_index' => '06 / 09',
+        'upline'          => 'Praktische Tipps, keine Theorie.',
+        'heading_html'    => 'Was auf Ihrer Website<br>wirklich <em>funktioniert</em>.',
+        'subline'         => 'Conversion, SEO, UX — ohne Marketing-Floskeln. Echte Schritte, die Anfragen bringen.',
+    ],
+
     'read_more'     => 'Ich möchte wissen wie',
     'updated'       => 'aktualisiert',
     'share'         => 'Bitte teilen Sie den Artikel',
@@ -37,6 +47,22 @@ return [
     ],
 
     'back_to_blog' => '← Zurück zum Blog',
+
+    // OND-130 P2 iter 8 — Article page-mark eyebrow + Autor-Box.
+    'article' => [
+        'page_mark_label' => 'WIE GEHT DAS',
+        'page_mark_index' => '07 / 09',
+        'author' => [
+            'eyebrow'  => 'Über den Autor',
+            'name'     => 'Ondřej Kriška',
+            'role'     => 'Web Developer · maßgeschneiderte Webseiten für B2B-Dienstleistungen',
+            'bio'      => 'Ich baue Webseiten, die geschäftliche Gespräche eröffnen. Eigener Code, Festpreis vorab, direkter Kontakt.',
+            'linkedin_label' => 'LinkedIn',
+            'linkedin_url'   => 'https://www.linkedin.com/in/ondrejkriska/',
+            'contact_cta'    => 'Unverbindliches Angebot anfordern',
+        ],
+    ],
+
 
     'cta' => [
         'heading' => 'Brauchen Sie Hilfe mit Ihrer Website?',

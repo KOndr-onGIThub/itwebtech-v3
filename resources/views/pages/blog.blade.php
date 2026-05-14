@@ -5,11 +5,18 @@
 
 @section('content')
 
-{{-- Page hero --}}
-<div class="page-hero">
+{{-- Page hero — OND-130 iter 8: plán §3.1 page-mark + Fraunces italic display --}}
+<div class="page-hero page-hero--blog">
     <div class="container-site">
-        <p class="section-subheading">{{ __('blog.subheading') }}</p>
-        <h1>{{ __('blog.heading') }}</h1>
+        <p class="page-hero__page-mark">
+            <span class="page-hero__page-mark-label">{{ __('blog.hero.page_mark_label') }}</span>
+            <span class="page-hero__page-mark-index" aria-hidden="true">{{ __('blog.hero.page_mark_index') }}</span>
+        </p>
+        <p class="page-hero__upline">{{ __('blog.hero.upline') }}</p>
+        <h1 class="page-hero__heading">
+            {!! __('blog.hero.heading_html') !!}
+        </h1>
+        <p class="page-hero__subline">{{ __('blog.hero.subline') }}</p>
     </div>
 </div>
 

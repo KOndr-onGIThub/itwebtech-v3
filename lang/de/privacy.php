@@ -9,7 +9,26 @@ return [
 
     'heading' => 'Datenschutzerklärung',
 
-    'content' => '<p>Datum des Inkrafttretens: 6. Mai 2026</p>
+    // OND-130 P2 iter 8 — plán §3.1 page-mark hero + TL;DR.
+    'hero' => [
+        'page_mark_label' => 'DATENSCHUTZ',
+        'page_mark_index' => '09 / 09',
+        'upline'          => 'Klar, verständlich, DSGVO-konform.',
+        'heading_html'    => 'Ihre Daten gehören <em>Ihnen</em>.',
+        'subline'         => 'Was ich erhebe, warum ich es erhebe und wie ich es schütze. Ohne Juristensprache.',
+    ],
+
+    'tldr' => [
+        'eyebrow' => 'Kurz gesagt',
+        'items'   => [
+            'Ich erhebe nur Daten, die Sie mir selbst übermitteln (Formular, E-Mail, Telefon).',
+            'Ich gebe sie nicht an Dritte für Marketing weiter — sie dienen nur zur Antwort auf Ihre Anfrage.',
+            'Webanalyse ist anonym (GA4 ohne Werbe-Cookies, Clarity).',
+            'Sie können jederzeit Löschung beantragen: ok@itwebtech.cz.',
+        ],
+    ],
+
+    'content' =>'<p>Datum des Inkrafttretens: 6. Mai 2026</p>
 <p>Die Website (nachfolgend „Dienst") wird vom Unternehmer Ondřej Kriška (nachfolgend „Betreiber" oder „itwebtech") betrieben.</p>
 <p>Diese Seite informiert Sie über unsere Richtlinien bezüglich der Erhebung, Verwendung und Weitergabe personenbezogener Daten bei der Nutzung unseres Dienstes.</p>
 
