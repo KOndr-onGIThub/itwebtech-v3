@@ -8,19 +8,14 @@ return [
     ],
 
     'hero' => [
-        // OND-135 P2 (plán §3.1) — page-mark eyebrow + upline + display heading
-        // s italic key-word amber emphasis. Provizorní copy dle §3.1 reference;
-        // finální tone v CS/EN/DE doladí Content Writer v OND-136 P3.
-        'page_mark_label' => 'AI A WEB',
-        'page_mark_index' => '01 / 01',
-        'upline'          => 'AI udělá web za odpoledne.',
-        'heading_html'    => 'Ale jaký web?<br>Ten, který <em>prodává</em>.',
-        'subline'         => 'Strategie, výzkum a řemeslo zkratku nemají.',
-
-        // Backwards compat — staré klíče zachované pro non-hero spotřebitele
-        // (consultation modal, fallback render). cta_secondary není v hero.
+        // OND-127 P0 ROLLBACK (2026-05-14): iter-2 plagiarized copy odstraněn.
+        // Klíče page_mark_label/page_mark_index/upline/heading_html vypuštěny;
+        // hero blade revertován na pre-redesign pattern (eyebrow + heading + subline).
+        // Content Writer (OND-136) napíše novou hero copy na cílovku Ondřejova webu
+        // (B2B IT) po §2.0 review s povinným plagiátorským checkem.
         'eyebrow'       => 'Webové stránky a aplikace na míru',
         'heading'       => 'Web, který vám konečně vydělá. Bez WordPressu, bez údržby, bez kompromisů.',
+        'subline'       => 'Pro majitele firem, kteří chtějí stránky, které přivádějí zákazníky — ne další položku v účetnictví. 18 let v Toyotě mě naučilo dodávat to, na čem jsme se domluvili.',
         'cta_primary'   => 'Chci nezávaznou nabídku',
         'cta_secondary' => 'Domluvit 30min konzultaci',
         'phone_label'   => 'nebo zavolat:',

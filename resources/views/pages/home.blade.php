@@ -21,22 +21,18 @@
 
     <div class="container-site section-hero__inner">
         <div class="section-hero__content">
-            {{-- OND-135 P2 (plán §3.1) — page-mark eyebrow s indexem.
-                 Nahrazuje T08 eyebrow „Webové stránky a aplikace na míru"
-                 (přesunut do meta/intro v dolních sekcích). --}}
-            <p class="section-hero__page-mark">
-                <span class="section-hero__page-mark-label">{{ __('home.hero.page_mark_label') }}</span>
-                <span class="section-hero__page-mark-index" aria-hidden="true">{{ __('home.hero.page_mark_index') }}</span>
-            </p>
-
-            {{-- §3.1 upline (Fraunces muted, 40 px) — kontext před display headingem --}}
-            <p class="section-hero__upline">{{ __('home.hero.upline') }}</p>
+            {{-- OND-127 P0 ROLLBACK (2026-05-14): iter-2 page-mark/upline/heading_html
+                 markup odstraněn — copy byl plagiátem ze screenshotu (agency portfolio
+                 vzor, ne B2B IT klient). Vrácena pre-redesign struktura (eyebrow +
+                 <h1> + subline). Vizuální DNA (Fraunces display, amber CTA, dark
+                 elev tokens) zůstává v CSS — re-implementace přijde s novým copy
+                 od Content Writera (OND-136). --}}
+            @if (trim((string) __('home.hero.eyebrow')) !== '')
+                <p class="section-subheading section-hero__eyebrow">{{ __('home.hero.eyebrow') }}</p>
+            @endif
 
             <h1 class="section-hero__heading">
-                {{-- heading_html obsahuje <br> a <em> pro key-word amber emphasis.
-                     Copy je owned by Content Writer (OND-136 P3) — provizorně
-                     plněno per plán §3.1, P3 ladí finální tone v CS/EN/DE. --}}
-                {!! __('home.hero.heading_html') !!}
+                {{ __('home.hero.heading') }}
             </h1>
 
             <p class="section-hero__subline">{{ __('home.hero.subline') }}</p>

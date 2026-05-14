@@ -9,18 +9,14 @@ return [
 
     // TODO (OND-136 P3): final EN tone polish — Content Writer scope.
     'hero' => [
-        // OND-135 P2 (plán §3.1) — page-mark + upline + display heading.
-        'page_mark_label' => 'AI & WEB',
-        'page_mark_index' => '01 / 01',
-        'upline'          => 'AI builds a website in an afternoon.',
-        'heading_html'    => 'But what kind of website?<br>One that <em>sells</em>.',
-        'subline'         => 'Strategy, research, and craft have no shortcuts.',
-
-        // Backwards compat (consultation modal, fallback render).
+        // OND-127 P0 ROLLBACK (2026-05-14): iter-2 plagiarized copy removed.
+        // Keys page_mark_label/page_mark_index/upline/heading_html dropped;
+        // hero blade reverted to pre-redesign pattern (eyebrow + heading + subline).
+        // Content Writer (OND-136) writes new hero copy for Ondřej's B2B IT target
+        // after §2.0 review with mandatory plagiarism check.
         'eyebrow'       => 'Custom websites & web applications',
         'heading'       => 'A website that finally earns its keep. No WordPress, no maintenance, no compromises.',
-        // OND-130 + OND-136: single primary CTA in hero, exact wording per spec.
-        // cta_secondary kept for backwards compat (consultation modal) — not shown in hero.
+        'subline'       => 'For business owners who want a website that brings in customers — not another line on the invoice. 18 years at Toyota taught me to deliver exactly what we agreed on.',
         'cta_primary'   => 'Get a free quote',
         'cta_secondary' => 'Book a 30-min consultation',
         'phone_label'   => 'or call:',
