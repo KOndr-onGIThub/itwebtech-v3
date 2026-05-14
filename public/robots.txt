@@ -1,0 +1,15 @@
+# Robots.txt — itwebtech.cz
+# OND-137 P4 — explicit static robots.txt vedle Spatie sitemap (route).
+
+User-agent: *
+Allow: /
+
+# Block admin / Filament panel z indexace (citlivé login URL).
+Disallow: /admin
+Disallow: /admin/
+
+# Build assets a storage symlink necháváme indexovatelné (obrázky, OG karty
+# → Open Graph crawlers je potřebují).
+
+# Sitemap (Spatie laravel-sitemap, cache 600s — viz SitemapController).
+Sitemap: https://itwebtech.cz/sitemap.xml
