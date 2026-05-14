@@ -983,6 +983,21 @@
         flex-shrink: 0;
     }
 
+    /* AI sekce-specifický lead slot (OND-153).
+       Sdílený .section-subheading je uppercase eyebrow s gold dash glyfem
+       a 2-věta CW lock copy v něm vizuálně neunese. Tato třída je opt-in
+       pro AI sekci — žádný impact na ostatní eyebrow sloty. */
+    .section-header__lead {
+        display: block;
+        font-size: clamp(1rem, 1.5vw, 1.125rem);
+        font-weight: 400;
+        line-height: 1.5;
+        letter-spacing: normal;
+        text-transform: none;
+        color: var(--color-body);
+        margin-bottom: 0.5rem;
+    }
+
     .section-header__desc {
         margin-top: 0.875rem;
         font-size: 1.0625rem;

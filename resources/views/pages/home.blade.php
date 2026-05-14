@@ -453,7 +453,7 @@
 <section class="section-wrapper section-alt section-wrapper--glow" data-reveal>
     <div class="container-site">
         <header class="section-header">
-            <p class="section-subheading">{{ __('home.ai.subheading') }}</p>
+            <p class="section-header__lead">{{ __('home.ai.subheading') }}</p>
             <h2>{{ __('home.ai.heading') }}</h2>
             <p class="section-header__desc">{{ __('home.ai.intro') }}</p>
         </header>
