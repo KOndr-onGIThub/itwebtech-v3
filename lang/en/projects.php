@@ -11,6 +11,16 @@ return [
     'heading'          => 'PROJECTS',
     'intro'            => 'Let yourself be inspired by samples of my work and imagine how your successful project will look. I work in a way that makes clients want to come back.',
 
+    // OND-135 P2 iter 6 — plan §3.1 hero (page-mark + amber accent).
+    // OND-135 cleanup (2026-05-14): page_mark_index removed — agency-
+    // portfolio artefact per CEO PR #78/#80/#82 precedent (home/contact/pricing).
+    'hero' => [
+        'page_mark_label' => 'PROJECTS',
+        'upline'          => 'Shipped projects, shipped numbers.',
+        'heading_html'    => 'Cases, not<br><em>a portfolio gallery</em>.',
+        'subline'         => 'Every project with a concrete outcome — deadline, scope, impact. No screenshots without numbers.',
+    ],
+
     'filter_all'       => 'All',
     'filter_websites'  => 'Websites',
     'filter_webapps'   => 'Web apps',

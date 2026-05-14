@@ -11,6 +11,16 @@ return [
     'heading'          => 'PROJEKTY',
     'intro'            => 'Nechte se inspirovat ukázkami mé práce a představte si, jak bude vypadat váš úspěšný projekt. Pracuji tak, aby se ke mně klienti rádi vraceli.',
 
+    // OND-135 P2 iter 6 — plán §3.1 hero (page-mark + amber accent).
+    // OND-135 cleanup (2026-05-14): page_mark_index odebrán — agency-
+    // portfolio artefakt per CEO PR #78/#80/#82 precedent (home/kontakt/cenik).
+    'hero' => [
+        'page_mark_label' => 'REALIZACE',
+        'upline'          => 'Hotové projekty, hotová čísla.',
+        'heading_html'    => 'Případy, ne<br><em>portfolio galerie</em>.',
+        'subline'         => 'Každý projekt s konkrétním výsledkem — termín, rozsah, dopad. Žádný screenshot bez čísla.',
+    ],
+
     'filter_all'       => 'Vše',
     'filter_websites'  => 'Stránky',
     'filter_webapps'   => 'Aplikace',
