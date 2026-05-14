@@ -21,14 +21,33 @@
 
     <div class="container-site section-hero__inner">
         <div class="section-hero__content">
-            @if (trim((string) __('home.hero.eyebrow')) !== '')
-                <p class="section-subheading section-hero__eyebrow">{{ __('home.hero.eyebrow') }}</p>
-            @endif
+            {{-- OND-135 P2 (plán §3.1) — page-mark eyebrow s indexem.
+                 Nahrazuje T08 eyebrow „Webové stránky a aplikace na míru"
+                 (přesunut do meta/intro v dolních sekcích). --}}
+            <p class="section-hero__page-mark">
+                <span class="section-hero__page-mark-label">{{ __('home.hero.page_mark_label') }}</span>
+                <span class="section-hero__page-mark-index" aria-hidden="true">{{ __('home.hero.page_mark_index') }}</span>
+            </p>
+
+            {{-- §3.1 upline (Fraunces muted, 40 px) — kontext před display headingem --}}
+            <p class="section-hero__upline">{{ __('home.hero.upline') }}</p>
+
             <h1 class="section-hero__heading">
-                {{ __('home.hero.heading') }}
+                {{-- heading_html obsahuje <br> a <em> pro key-word amber emphasis.
+                     Copy je owned by Content Writer (OND-136 P3) — provizorně
+                     plněno per plán §3.1, P3 ladí finální tone v CS/EN/DE. --}}
+                {!! __('home.hero.heading_html') !!}
             </h1>
+
             <p class="section-hero__subline">{{ __('home.hero.subline') }}</p>
+
             <div class="section-hero__actions">
+                {{-- OND-130 (B2 §1, klíčová direktiva 3 + plán §3.1):
+                     V hero **jediný** primary CTA „Chci nezávaznou nabídku".
+                     Reservanto (Calendly-style booking) zůstává jako sekundární CTA
+                     v sekci „Jak pracuji" a v final CTA — v hero by soutěžil
+                     o pozornost a rozmělnil primary message. Telefon ponechán
+                     jako lehký text-link (ne button). --}}
                 <a
                     href="#{{ __('home.anchors.poptavka') }}"
                     class="btn btn-primary"
@@ -37,10 +56,7 @@
                     {{ __('home.hero.cta_primary') }}
                     <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
                 </a>
-                {{-- Sekundární CTA „Domluvit konzultaci" — Reservanto widget (OND-116/T15).
-                     Text widgetu řízen z config/site.php (default „15 min. konzultace ZDARMA").
-                     OND-122: analyticsEvent prop přidá data-analytics na wrapping div, klik z renderovaného buttonu bubble-uje. --}}
-                <x-booking.reservanto-widget analyticsEvent="hero_cta_secondary_click" />
+                <x-phone-cta class="section-hero__phone-link" :label="__('home.hero.phone_label')" />
             </div>
         </div>
 

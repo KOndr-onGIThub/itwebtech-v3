@@ -16,11 +16,13 @@ return [
 
     'price_note' => 'unverbindlicher Preis',
 
+    // OND-136: Tier-Namen und Preise angeglichen an die CS-Taxonomie
+    // Startovní/Standard/Custom = 25/55/95 Tausend CZK → EUR-Umrechnung (CEO-bestätigter 1:25-Anker).
     'tiers' => [
         [
-            'name'    => 'Präsentation',
-            'desc'    => 'Für Freiberufler und kleine Unternehmen, die eine glaubwürdige Online-Präsenz benötigen.',
-            'price'   => 'ab €800',
+            'name'    => 'Starter',
+            'desc'    => 'Für Selbstständige und kleine Unternehmen, die eine glaubwürdige Online-Präsenz benötigen.',
+            'price'   => '1.000 €',
             'popular' => false,
             'features' => [
                 'Bis zu 5 individuelle Seiten',
@@ -30,12 +32,12 @@ return [
                 'Seitengeschwindigkeits-Optimierung',
                 '14 Tage Support nach dem Launch',
             ],
-            'cta' => 'Interesse — Beratung vereinbaren',
+            'cta' => 'Unverbindliches Angebot anfordern',
         ],
         [
-            'name'    => 'Professionell',
+            'name'    => 'Standard',
             'desc'    => 'Für Unternehmen, die ihre Webseite als bestes Verkaufswerkzeug nutzen möchten.',
-            'price'   => 'ab €1.800',
+            'price'   => '2.200 €',
             'popular' => true,
             'features' => [
                 'Bis zu 12 individuelle Seiten',
@@ -46,12 +48,12 @@ return [
                 'Hosting und Domain für 1 Jahr kostenlos',
                 '1 Monat Support nach dem Launch',
             ],
-            'cta' => 'Diesen Plan möchte ich — kostenlose Beratung',
+            'cta' => 'Unverbindliches Angebot anfordern',
         ],
         [
-            'name'    => 'Komplex',
+            'name'    => 'Custom',
             'desc'    => 'Für anspruchsvolle Projekte ohne Kompromisse — Online-Shop, Buchungssystem oder Webanwendung.',
-            'price'   => 'ab €3.400',
+            'price'   => 'ab 3.800 €',
             'popular' => false,
             'features' => [
                 'Unbegrenzter Projektumfang',
@@ -61,7 +63,7 @@ return [
                 'Integration externer Systeme',
                 '3 Monate Support nach dem Launch',
             ],
-            'cta' => 'Kostenlose Beratung',
+            'cta' => 'Unverbindliches Angebot anfordern',
         ],
     ],
 
@@ -118,7 +120,7 @@ return [
 
     'compare' => [
         'heading' => 'Was Sie genau bekommen',
-        'tiers'   => ['Präsentation', 'Professionell', 'Komplex'],
+        'tiers'   => ['Starter', 'Standard', 'Custom'],
         'groups'  => [
             [
                 'label' => 'Projektumfang',

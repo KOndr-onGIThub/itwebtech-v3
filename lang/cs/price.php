@@ -16,11 +16,16 @@ return [
 
     'price_note' => 'orientační cena',
 
+    // OND-130 (B2 §1, klíčová direktiva 2 + plán §3.6): sjednocená taxonomie
+    // Startovní / Standard / Custom — 25 / 55 / od 95 tis. Kč. Stejné
+    // ceny v homepage cenové kotvě (`home.price_anchor.items`) i v service
+    // 3-card kotvě (`home.services.primary.*`). Featurelisty zachovány,
+    // doladění obsahu řeší B3 (Content Writer) v rámci stejného PR.
     'tiers' => [
         [
-            'name'    => 'Prezentace',
+            'name'    => 'Startovní',
             'desc'    => 'Pro živnostníky a malé firmy, kteří potřebují důvěryhodnou online prezentaci.',
-            'price'   => 'od 20 000 Kč',
+            'price'   => '25 000 Kč',
             'popular' => false,
             'features' => [
                 'Do 5 stránek na míru',
@@ -30,12 +35,12 @@ return [
                 'Optimalizace rychlosti načítání',
                 '14 dní podpory po spuštění',
             ],
-            'cta' => 'Mám zájem — domluvit konzultaci',
+            'cta' => 'Chci nezávaznou nabídku',
         ],
         [
-            'name'    => 'Profesionál',
+            'name'    => 'Standard',
             'desc'    => 'Pro firmy, které chtějí web jako svůj nejlepší obchodní nástroj.',
-            'price'   => 'od 45 000 Kč',
+            'price'   => '55 000 Kč',
             'popular' => true,
             'features' => [
                 'Do 12 stránek na míru',
@@ -46,12 +51,12 @@ return [
                 'Hosting a doména na 1 rok zdarma',
                 '1 měsíc podpory po spuštění',
             ],
-            'cta' => 'Chci tento plán — konzultace zdarma',
+            'cta' => 'Chci nezávaznou nabídku',
         ],
         [
-            'name'    => 'Komplex',
+            'name'    => 'Custom',
             'desc'    => 'Pro náročné projekty bez kompromisů — e-shop, rezervace nebo webová aplikace.',
-            'price'   => 'od 85 000 Kč',
+            'price'   => 'od 95 000 Kč',
             'popular' => false,
             'features' => [
                 'Neomezený rozsah projektu',
@@ -61,7 +66,7 @@ return [
                 'Integrace externích systémů',
                 '3 měsíce podpory po spuštění',
             ],
-            'cta' => 'Konzultace zdarma',
+            'cta' => 'Chci nezávaznou nabídku',
         ],
     ],
 
@@ -118,7 +123,8 @@ return [
 
     'compare' => [
         'heading' => 'Co přesně dostanete',
-        'tiers'   => ['Prezentace', 'Profesionál', 'Komplex'],
+        // OND-130 sjednocená taxonomie — viz `tiers` výše.
+        'tiers'   => ['Startovní', 'Standard', 'Custom'],
         'groups'  => [
             [
                 'label' => 'Rozsah projektu',
