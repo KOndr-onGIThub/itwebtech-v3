@@ -3,6 +3,20 @@
 @section('title', __('contact.meta.title'))
 @section('description', __('contact.meta.description'))
 
+{{-- OND-137 P4 §SEO: BreadcrumbList JSON-LD pro /kontakt. --}}
+@push('jsonld')
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'BreadcrumbList',
+    'itemListElement' => [
+        ['@type' => 'ListItem', 'position' => 1, 'name' => __('layout.nav.home'),    'item' => lroute('home')],
+        ['@type' => 'ListItem', 'position' => 2, 'name' => __('layout.nav.contact'), 'item' => lroute('contact')],
+    ],
+], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
+</script>
+@endpush
+
 @section('content')
 
 {{-- Page hero — OND-135 iter 4: plán §3.1 design DNA (page-mark + Fraunces italic + amber accent) --}}

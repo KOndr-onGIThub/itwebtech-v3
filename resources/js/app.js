@@ -113,6 +113,10 @@ Alpine.data('contactForm', () => ({
         try {
             await window.axios.post('/contact', data);
 
+            // OND-137 P4 §6: analytics form_submit event (Jack §6) — dispatch
+            // CustomEvent který analytics.js přemapuje na canonical `form_submit`.
+            window.dispatchEvent(new CustomEvent('contact-form-submit-success'));
+
             // OND-136: in-DOM thank-you state replaces the form on success.
             this.submitted = true;
             form.reset();
