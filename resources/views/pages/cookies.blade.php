@@ -7,15 +7,45 @@
 
 @section('content')
 
-{{-- Page hero --}}
-<div class="page-hero">
+{{-- Page hero — OND-130 iter 8: plán §3.1 page-mark + Fraunces italic display.
+     CS-only legal page → strings inline.
+     OND-135 cleanup (2026-05-14): page_mark_index span odebrán jako
+     agency-portfolio artefakt per CEO PR #78/#80/#82/#83 precedent. --}}
+<div class="page-hero page-hero--cookies">
     <div class="container-site">
-        <h1>Cookies a souhlas se zpracováním</h1>
+        <p class="page-hero__page-mark">
+            <span class="page-hero__page-mark-label">COOKIES A MĚŘENÍ</span>
+        </p>
+        <p class="page-hero__upline">Bez reklamních cookies. Bez prodeje dat.</p>
+        <h1 class="page-hero__heading">
+            Co měřím a <em>proč</em> to dělám.
+        </h1>
+        <p class="page-hero__subline">Anonymní statistika návštěvnosti — abych věděl, co funguje. Žádné cílení reklam, žádní prostředníci.</p>
     </div>
 </div>
 
 <section class="section-wrapper">
     <div class="container-site">
+
+        {{-- TL;DR card — OND-130 iter 8: plain-language summary nad detailem. --}}
+        <aside class="legal-tldr" data-reveal>
+            <p class="legal-tldr__eyebrow">V kostce</p>
+            <ul class="legal-tldr__list">
+                <li>
+                    <x-icon.circle-check-big class="w-4 h-4 shrink-0" />
+                    <span>Měřím jen anonymní návštěvnost (GA4) a anonymizované heatmapy (Clarity).</span>
+                </li>
+                <li>
+                    <x-icon.circle-check-big class="w-4 h-4 shrink-0" />
+                    <span>Žádné reklamní cookies ani cílení reklam — <code>ad_storage</code> je trvale <code>denied</code>.</span>
+                </li>
+                <li>
+                    <x-icon.circle-check-big class="w-4 h-4 shrink-0" />
+                    <span>Svůj souhlas můžete kdykoli odvolat tlačítkem dole nebo smazáním cookies v prohlížeči.</span>
+                </li>
+            </ul>
+        </aside>
+
         <article class="prose-content">
 
             <p>Tato stránka shrnuje, jaké cookies a měřicí nástroje na webu <strong>itwebtech.cz</strong> používáme, k čemu slouží a jak souhlas s jejich používáním kdykoli odvoláte.</p>
