@@ -69,8 +69,8 @@ return [
                 'quote_author' => 'Petr Kroulík, Nové Interiéry s.r.o.',
             ],
             [
-                'heading' => 'Eine KI-Website in einem Nachmittag: hübsch, generisch, austauschbar',
-                'text'    => 'Werkzeuge können heute schnell eine Website generieren. Aber ohne Recherche, ohne Strategie, ohne Verständnis Ihres Unternehmens entsteht etwas, das wie eine Website aussieht — und wie die Website aller anderen funktioniert. Zusätzlich hält Sie die Plattform für immer in ihrem Abonnement.',
+                'heading' => 'Die Vorlage sieht gut aus. Sie sieht aus wie bei allen anderen.',
+                'text'    => 'Drei Firmen aus Ihrer Branche haben letzte Woche dieselbe Vorlage gestartet. Die Agentur fügt Ihren Text und Ihr Logo hinzu — das Ergebnis ist austauschbar, und die Plattform hält Sie in einem monatlichen Abonnement, das Sie nicht mitnehmen können.',
             ],
             [
                 'heading' => 'Sie sprechen nie mit der Person, die die Website erstellt',
@@ -114,9 +114,9 @@ return [
     ],
 
     'ai' => [
-        'subheading' => 'KI & Webdesign',
-        'heading'    => 'Eine Website an einem Nachmittag. Aber welche Website?',
-        'intro'      => 'Technisch ist es möglich. Ein Werkzeug kann Seiten, Texte, Bilder generieren. Das Problem ist nicht die Geschwindigkeit.',
+        'subheading' => 'Eine Vorlage ist schnell aufgebaut. Anfragen kommen davon nicht schneller.',
+        'heading'    => 'Generator gegen Ihr Geschäft',
+        'intro'      => 'Heutige Generatoren können ein Layout zusammenklicken und Texte und Bilder einfügen. Was sie nicht können: herausfinden, an wen Sie verkaufen, warum ein Kunde Sie wählen sollte oder wo Interessenten abspringen. Eine Website, die verkaufen soll, beginnt beim zweiten Teil.',
         'laik' => [
             'label'   => 'Laie + KI',
             'outcome' => 'Schnelles Ergebnis.',
@@ -132,14 +132,14 @@ return [
             'label'   => 'Experte + KI',
             'outcome' => 'Genauso schnell, wo es sinnvoll ist. Und ohne generisches Ergebnis.',
             'items'   => [
-                'Strategie, Recherche und Verständnis Ihres Unternehmens',
+                'Gebaut auf Strategie, Daten und Ihren Kunden',
                 'Kontrolle und ein Ergebnis, für das jemand verantwortlich ist',
                 'Inhalte, die so gestaltet sind, dass Nutzer bleiben und Sie kontaktieren',
                 'Eine Website, die sich bewusst von der Konkurrenz unterscheidet',
             ],
             'note' => 'Wenn Sie ein Unternehmen führen, ist das ein Unterschied, den Ihre Kunden bemerken werden.',
         ],
-        'closing' => 'Ich nutze KI als Werkzeug — es verkürzt die Zeit bei Routinearbeiten. Strategie, Recherche und Entscheidungen darüber, was die Website tun muss, können nicht übersprungen werden. Diese Arbeit muss erledigt sein, bevor die eigentliche Website überhaupt entsteht.',
+        'closing' => 'Ich nutze KI als Werkzeug — sie verkürzt die Routinearbeit. Entscheidungen darüber, was die Website sagen soll, an wen und in welcher Reihenfolge, kann sie nicht für Sie treffen. Diese Arbeit muss erledigt sein, bevor die Website gebaut wird.',
     ],
 
     'toyota' => [

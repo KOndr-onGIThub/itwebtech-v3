@@ -72,8 +72,8 @@ return [
                 'quote_author' => 'Petr Kroulík, Nové Interiéry s.r.o.',
             ],
             [
-                'heading' => 'AI web za odpoledne: hezký, generický, zaměnitelný',
-                'text'    => 'Nástroje dnes vygenerují web rychle. Ale bez výzkumu, bez strategie, bez pochopení vašeho byznysu vznikne něco, co vypadá jako web — a funguje jako web každého jiného. Navíc vás platforma drží na svém předplatném navždy.',
+                'heading' => 'Šablona vypadá pěkně. Vypadá jako u všech ostatních.',
+                'text'    => 'Tři firmy ve vašem oboru spustily minulý týden stejnou šablonu. Agentura k ní dosadí vaše texty a logo — výsledek je zaměnitelný a platforma vás drží v měsíčním předplatném, ze kterého si web nevezmete s sebou.',
             ],
             [
                 'heading' => 'Nikdy nemluvíte s člověkem, který web dělá',
@@ -117,9 +117,9 @@ return [
     ],
 
     'ai' => [
-        'subheading' => 'AI a webdesign',
-        'heading'    => 'Web za odpoledne. Ale který web?',
-        'intro'      => 'Technicky to jde. Nástroj vygeneruje stránky, texty, obrázky. Problém není rychlost.',
+        'subheading' => 'Šablona je hotová rychle. Poptávky tím rychle nepřijdou.',
+        'heading'    => 'Generátor versus váš byznys',
+        'intro'      => 'Generátory dneška umí naklikat layout, doplnit texty i obrázky. Co neumí: zjistit, komu prodáváte, proč si vás vybrat a kde se vám zákazník ztrácí. Web, který má prodávat, začíná u toho druhého.',
         'laik' => [
             'label'   => 'Laik + AI',
             'outcome' => 'Rychlý výsledek.',
@@ -135,14 +135,14 @@ return [
             'label'   => 'Odborník + AI',
             'outcome' => 'Stejně rychlé tam, kde to dává smysl. A bez generického výsledku.',
             'items'   => [
-                'Strategie, výzkum a pochopení vašeho byznysu',
+                'Postavené na strategii, datech a vašich zákaznících',
                 'Kontrola a výsledek, za který někdo ručí',
                 'Obsah navržený tak, aby člověk zůstal a kontaktoval vás',
                 'Web, který se liší od konkurence — záměrně',
             ],
             'note' => 'Pokud provozujete byznys, je to rozdíl, který zákazníci poznají.',
         ],
-        'closing' => 'AI používám jako nástroj — zkracuje čas na rutinní práci. Strategii, výzkum a rozhodnutí o tom, co web musí dělat, nelze přeskočit. To je práce, která musí být hotová dřív, než se začne web vůbec stavět.',
+        'closing' => 'AI používám jako nástroj — zkracuje rutinní práci. Rozhodnutí o tom, co má web říkat, komu a v jakém pořadí, ale za vás neudělá. Ta práce musí být hotová dřív, než se začne web stavět.',
     ],
 
     'toyota' => [
