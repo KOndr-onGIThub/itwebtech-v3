@@ -322,7 +322,7 @@ return [
             [
                 'key'      => 'duration',
                 'question' => 'Jak dlouho to trvá?',
-                'answer'   => 'Od první zprávy ke spuštěnému webu typicky 3–10 týdnů — 60 minut konzultace, 2–5 dní na specifikaci, 3–10 týdnů na tvorbu a spuštění do druhého dne po schválení. Detailní timing pro váš projekt sepíšu do specifikace.',
+                'answer'   => 'Od první zprávy ke spuštěnému webu typicky 4–12 týdnů — týden na konzultaci, 2–5 dní na specifikaci, 3–10 týdnů na tvorbu a spuštění do druhého dne po schválení. Detailní timing pro váš projekt sepíšu do specifikace.',
             ],
             [
                 'key'      => 'satisfaction',

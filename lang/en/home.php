@@ -318,7 +318,7 @@ return [
             [
                 'key'      => 'duration',
                 'question' => 'How long does it take?',
-                'answer'   => 'From first message to a launched site typically 3–10 weeks — 60 minutes of consultation, 2–5 days for the specification, 3–10 weeks for the build and launch by the next business day after approval. The detailed timeline for your project goes into the specification.',
+                'answer'   => 'From first message to a launched site typically 4–12 weeks — a week for consultation, 2–5 days for the specification, 3–10 weeks for the build, and launch by the next business day after approval. The detailed timeline for your project goes into the specification.',
             ],
             [
                 'key'      => 'satisfaction',

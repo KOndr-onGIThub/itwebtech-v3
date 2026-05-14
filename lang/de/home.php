@@ -316,7 +316,7 @@ return [
             [
                 'key'      => 'duration',
                 'question' => 'Wie lange dauert es?',
-                'answer'   => 'Von der ersten Nachricht bis zum Launch typischerweise 3–10 Wochen — 60 Minuten Beratung, 2–5 Tage für die Spezifikation, 3–10 Wochen Umsetzung und Launch bis zum nächsten Werktag nach Freigabe. Den detaillierten Zeitplan für Ihr Projekt halte ich in der Spezifikation fest.',
+                'answer'   => 'Von der ersten Nachricht bis zum Launch typischerweise 4–12 Wochen — eine Woche Beratung, 2–5 Tage für die Spezifikation, 3–10 Wochen Umsetzung und Launch bis zum nächsten Werktag nach Freigabe. Den detaillierten Zeitplan für Ihr Projekt halte ich in der Spezifikation fest.',
             ],
             [
                 'key'      => 'satisfaction',

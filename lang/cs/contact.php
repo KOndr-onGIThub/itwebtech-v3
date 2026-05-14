@@ -52,11 +52,11 @@ return [
     // 3-step „Co se stane potom" — snižuje obavu z odeslání formuláře.
     'next_steps' => [
         'eyebrow' => 'Co se stane potom',
-        'heading' => 'Tři kroky — žádný marketingový lievak.',
+        'heading' => 'Tři kroky — žádný marketingový trychtýř.',
         'steps'   => [
             [
                 'title' => 'Odpovím do 24 hodin',
-                'text'  => 'Dorazí vám e-mail ode mě osobně, ne automatický potvrzovací zprávovník. Pokud budu na cestách, ozvu se nejpozději druhý pracovní den.',
+                'text'  => 'Dorazí vám e-mail ode mě osobně, ne automatická potvrzovací zpráva. Pokud budu na cestách, ozvu se nejpozději druhý pracovní den.',
             ],
             [
                 'title' => 'Dohodneme 30 minut hovoru',
