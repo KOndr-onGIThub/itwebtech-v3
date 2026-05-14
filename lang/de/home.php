@@ -7,14 +7,16 @@ return [
         'description' => 'Maßgeschneiderte Webseiten und Webanwendungen, die Ergebnisse liefern. Wartungsfrei, kein WordPress, keine versteckten Kosten. 18 Jahre Erfahrung. Kostenlose Beratung.',
     ],
 
-    // TODO (OND-136 P3): final DE tone polish — Content Writer scope.
     'hero' => [
-        // OND-135 P2 (plán §3.1) — page-mark + upline + display heading.
-        'page_mark_label' => 'KI & WEB',
+        // OND-144 P2 iter-7 — Var A hero copy (CEO-pick, Jack §2.0 APPROVED).
+        // No-lift confirmed proti life/projects/OND-128/design-reference.png.
+        // Amber accent obaluje <em> v heading_html (key-word: Verkaufsgespräch).
+        // Subline mirroruje CS/EN rytmus (Festpreis ↔ pevná cena) pro cross-lang konzistenci.
+        'page_mark_label' => 'B2B-WEB & ANWENDUNGEN',
         'page_mark_index' => '01 / 01',
-        'upline'          => 'KI baut eine Website an einem Nachmittag.',
-        'heading_html'    => 'Aber was für eine Website?<br>Eine, die <em>verkauft</em>.',
-        'subline'         => 'Strategie, Recherche und Handwerk kennen keine Abkürzung.',
+        'upline'          => 'Eine schöne Seite ohne Anfragen ist eine teure Visitenkarte.',
+        'heading_html'    => 'Ich baue die Seite, die das <em>Verkaufsgespräch</em> eröffnet.',
+        'subline'         => 'Fester Umfang, Festpreis, ein Partner vom Brief bis zum Launch.',
 
         // Backwards compat (consultation modal, fallback render).
         'eyebrow'       => 'Maßgeschneiderte Websites & Webanwendungen',

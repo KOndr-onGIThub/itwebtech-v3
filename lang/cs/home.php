@@ -8,14 +8,15 @@ return [
     ],
 
     'hero' => [
-        // OND-135 P2 (plán §3.1) — page-mark eyebrow + upline + display heading
-        // s italic key-word amber emphasis. Provizorní copy dle §3.1 reference;
-        // finální tone v CS/EN/DE doladí Content Writer v OND-136 P3.
-        'page_mark_label' => 'AI A WEB',
+        // OND-144 P2 iter-7 — Var A hero copy (CEO-pick, Jack §2.0 APPROVED).
+        // No-lift confirmed proti life/projects/OND-128/design-reference.png:
+        // eyebrow/upline/headline/caption mají zero concept overlap s referencí.
+        // Amber accent obaluje <em> v heading_html (key-word: obchodní).
+        'page_mark_label' => 'WEB PRO B2B SLUŽBY',
         'page_mark_index' => '01 / 01',
-        'upline'          => 'AI udělá web za odpoledne.',
-        'heading_html'    => 'Ale jaký web?<br>Ten, který <em>prodává</em>.',
-        'subline'         => 'Strategie, výzkum a řemeslo zkratku nemají.',
+        'upline'          => 'Hezký web bez poptávek je drahá vizitka.',
+        'heading_html'    => 'Postavím vám stránku, která otevírá <em>obchodní</em> hovor.',
+        'subline'         => 'Pevný rozsah, pevná cena, jeden partner od briefu po launch.',
 
         // Backwards compat — staré klíče zachované pro non-hero spotřebitele
         // (consultation modal, fallback render). cta_secondary není v hero.

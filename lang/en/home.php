@@ -7,14 +7,15 @@ return [
         'description' => 'Custom websites and web applications built for results. Maintenance-free, no WordPress, no hidden fees. 18 years of experience. Free consultation.',
     ],
 
-    // TODO (OND-136 P3): final EN tone polish — Content Writer scope.
     'hero' => [
-        // OND-135 P2 (plán §3.1) — page-mark + upline + display heading.
-        'page_mark_label' => 'AI & WEB',
+        // OND-144 P2 iter-7 — Var A hero copy (CEO-pick, Jack §2.0 APPROVED).
+        // No-lift confirmed proti life/projects/OND-128/design-reference.png.
+        // Amber accent obaluje <em> v heading_html (key-word: sales).
+        'page_mark_label' => 'B2B WEB & APPLICATIONS',
         'page_mark_index' => '01 / 01',
-        'upline'          => 'AI builds a website in an afternoon.',
-        'heading_html'    => 'But what kind of website?<br>One that <em>sells</em>.',
-        'subline'         => 'Strategy, research, and craft have no shortcuts.',
+        'upline'          => 'A polished site without leads is an expensive business card.',
+        'heading_html'    => 'I build the page that opens the <em>sales</em> conversation.',
+        'subline'         => 'Fixed scope, fixed price, one partner from brief to launch.',
 
         // Backwards compat (consultation modal, fallback render).
         'eyebrow'       => 'Custom websites & web applications',
