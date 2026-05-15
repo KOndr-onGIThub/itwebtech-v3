@@ -10,6 +10,7 @@ return [
     'subheading'          => 'Pomůžu vám',
     'heading'             => 'Napište mi a do 24 hodin se ozvu',
     'address_label'       => 'Adresa',
+    'address_country'     => 'Česká republika',
     'hours_label'         => 'Dostupnost',
     'open_hours'          => 'Po–Pá: 9:00–19:00<br>So–Ne: 12:00–17:00',
     'cta_consultation'    => 'Naplánovat online schůzku',

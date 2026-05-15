@@ -10,6 +10,7 @@ return [
     'subheading'          => 'I\'ll help you',
     'heading'             => 'Send me a message and I\'ll reply within 24 hours',
     'address_label'       => 'Address',
+    'address_country'     => 'Czech Republic',
     'hours_label'         => 'Availability',
     'open_hours'          => 'Mon–Fri: 9:00–19:00<br>Sat–Sun: 12:00–17:00',
     'cta_consultation'    => 'Schedule an online meeting',

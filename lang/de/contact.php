@@ -10,6 +10,7 @@ return [
     'subheading'          => 'Ich helfe Ihnen',
     'heading'             => 'Schreiben Sie mir und ich melde mich innerhalb von 24 Stunden',
     'address_label'       => 'Adresse',
+    'address_country'     => 'Tschechische Republik',
     'hours_label'         => 'Verfügbarkeit',
     'open_hours'          => 'Mo–Fr: 9:00–19:00<br>Sa–So: 12:00–17:00',
     'cta_consultation'    => 'Online-Termin vereinbaren',
