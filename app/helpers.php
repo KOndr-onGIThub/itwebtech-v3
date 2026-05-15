@@ -5,13 +5,23 @@ if (!function_exists('lroute')) {
      * Generate a URL for a locale-aware named route.
      *
      * Route names follow the pattern: {locale}.{page}
-     * Example: lroute('home')       → /cs/
+     * Example: lroute('home')       → /
      *          lroute('home', 'en') → /en/
+     *
+     * OND-162 F4: home routes mají trailing slash konzistentně s tím, jak je
+     * web serveruje (`/`, `/en/`, `/de/`). Bez toho hreflang URL bez slashe
+     * neodpovídala canonical s lomítkem a Google to hlásil jako mismatch.
      */
     function lroute(string $name, ?string $locale = null): string
     {
         $locale ??= app()->getLocale();
-        return route("{$locale}.{$name}");
+        $url = route("{$locale}.{$name}");
+
+        if ($name === 'home') {
+            return rtrim($url, '/') . '/';
+        }
+
+        return $url;
     }
 }
 
