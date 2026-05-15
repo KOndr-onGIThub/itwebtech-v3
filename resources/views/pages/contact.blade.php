@@ -70,7 +70,7 @@
                         <dt>{{ __('contact.address_label') }}</dt>
                         <dd>
                             Ondřej Kriška<br>
-                            Česká republika
+                            {{ __('contact.address_country') }}
                         </dd>
                     </div>
 
