@@ -35,7 +35,10 @@ PAGES = [
     ("privacy", "cs", f"{BASE}/zasady-ochrany-osobnich-udaju", "cs"),
     ("privacy", "en", f"{BASE}/en/privacy-policy", "en"),
     ("privacy", "de", f"{BASE}/de/datenschutz", "de"),
-    ("cookies", "shared", f"{BASE}/cookies", "cs"),
+    # OND-168: /cookies je nově lokalizovaný (cs/en/de) — předtím sdílený CS-only per OND-125.
+    ("cookies", "cs", f"{BASE}/cookies", "cs"),
+    ("cookies", "en", f"{BASE}/en/cookies", "en"),
+    ("cookies", "de", f"{BASE}/de/cookies", "de"),
 ]
 
 def fetch(url):

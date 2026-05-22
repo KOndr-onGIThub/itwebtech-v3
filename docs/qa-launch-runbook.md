@@ -36,7 +36,7 @@ Všech 25 URL = HTTP 200, `<html lang>` matchuje očekávané locale.
 | blog index | ✅ `/jak-na-to` | ✅ `/en/blog` | ✅ `/de/blog` |
 | article | ✅ `/jak-na-to/kolik-stoji-webove-stranky` | ✅ `/en/blog/how-much-does-a-website-cost` | ✅ `/de/blog/kolik-stoji-webove-stranky` |
 | privacy | ✅ `/zasady-ochrany-osobnich-udaju` | ✅ `/en/privacy-policy` | ✅ `/de/datenschutz` |
-| cookies | ✅ `/cookies` (lang=cs, shared per [OND-125](/OND/issues/OND-125)) | n/a | n/a |
+| cookies | ✅ `/cookies` (lang=cs) | ✅ `/en/cookies` (lang=en, [OND-168](/OND/issues/OND-168)) | ✅ `/de/cookies` (lang=de, [OND-168](/OND/issues/OND-168)) |
 
 ### Sub-checks (per OND-138 funkční matrix)
 
@@ -121,13 +121,11 @@ Tento blok je delegovaný na `scripts/b4-verify.sh` z [OND-132](/OND/issues/OND-
 
 > **Žádný critical/high finding.** 4 medium/low findings níže nejsou launch blokátory — všechny mají workaround nebo jsou by-design deviations s minor SEO impact. CEO + Jack design lead se rozhodují zda kterýkoli zařadit do hotfix sprintu post-launch.
 
-### F1 — `/cookies` page má `<html lang="cs">` pod /en/ a /de/ kontextem (low, by-design)
+### F1 — `/cookies` page má `<html lang="cs">` pod /en/ a /de/ kontextem (low, by-design) — **RESOLVED v [OND-168](/OND/issues/OND-168)**
 
-**Pozadí:** Route `/cookies` v `routes/web.php` je explicitně shared napříč locale ([OND-125](/OND/issues/OND-125) decision). Cookie banner v `cookies.js` linkuje na `/cookies` bez locale prefixu. Text na stránce je zatím česky.
+**Pozadí:** Route `/cookies` v `routes/web.php` byla původně shared napříč locale ([OND-125](/OND/issues/OND-125) decision). Cookie banner v `cookies.js` linkoval na `/cookies` bez locale prefixu. Text na stránce byl jen česky.
 
-**Impact:** b4-static-check 2/27 failure. Zero user impact (banner přes JS linkuje vždy stejnou URL). Mild SEO: EN/DE crawler může označit page jako CS-only — což je správně.
-
-**Recommended fix (post-launch):** Buď přidat `cs/en/de` locale variants pro /cookies, nebo přidat `noindex` meta když request claims `/en/` referrer (low priority).
+**Resolution (2026-05-22, OND-168):** Cookies page přesunuta pod localized routes group (`cs.cookies` / `en.cookies` / `de.cookies`) → URLs `/cookies`, `/en/cookies`, `/de/cookies`. Obsah lokalizován do `lang/{cs,en,de}/cookies.php`. Cookie banner nyní linkuje přes `lroute('cookies')`. `<html lang>` matchuje per-locale URL.
 
 ### F2 — Article cross-slug duplicate content (medium, SEO)
 
@@ -142,13 +140,13 @@ Tento blok je delegovaný na `scripts/b4-verify.sh` z [OND-132](/OND/issues/OND-
 
 **Recommended fix (post-launch):** PageController@article validate že `{slug}` matchuje article's slug pro aktuální locale → jinak 301 redirect na lokalizovaný slug, nebo 404. Toto je 1 controller change + test. Viz follow-up issue.
 
-### F3 — `/cookies` hreflang points to homepages, not /cookies (medium, SEO)
+### F3 — `/cookies` hreflang points to homepages, not /cookies (medium, SEO) — **RESOLVED v [OND-162](/OND/issues/OND-162) → re-architected v [OND-168](/OND/issues/OND-168)**
 
-**Pozadí:** `/cookies` hreflang v HTML říká `cs→home, en→/en, de→/de` místo `cs→/cookies, en→/cookies, de→/cookies` (nebo úplně bez hreflang pro shared page).
+**Pozadí:** `/cookies` hreflang v HTML říkal `cs→home, en→/en, de→/de` místo `cs→/cookies, en→/cookies, de→/cookies`.
 
-**Impact:** Google může considrovat /cookies za alternate translation pro home, což je misleading.
+**Resolution v OND-162:** Special-case v `layouts/app.blade.php` nastavoval všechny tři hreflang na `url('/cookies')` (jediný URL napříč jazyky).
 
-**Recommended fix (post-launch):** Buď odstranit hreflang z /cookies (= správné pro page bez locale variants), nebo nastavit všechny tři hreflang na `/cookies` sám (= signalizuje že je to jediný URL napříč jazyky).
+**Re-architected v OND-168:** Po lokalizaci stránky (cs/en/de variants) je hreflang nyní per-locale: `cs→/cookies`, `en→/en/cookies`, `de→/de/cookies` — sleduje standardní pattern lokalizovaných stránek. Special-case z OND-162 byl odebrán.
 
 ### F4 — Home hreflang trailing-slash inconsistency (low, cosmetic)
 
