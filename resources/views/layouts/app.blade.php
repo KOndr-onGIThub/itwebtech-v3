@@ -38,24 +38,14 @@
         // `/` a `/en/`), aby seděla s hreflang URL z lroute('home', ...).
         $canonicalUrl = $currentPage === 'home' ? lroute('home') : url()->current();
 
-        // OND-162 F3: `/cookies` je sdílená CS-only stránka bez locale variant.
-        // current_page() pro ni vrací 'home' (route name 'cookies' nemá tečku),
-        // což by hreflang odkázalo na /, /en, /de — Google by to interpretoval
-        // jako alternate translations homepage. Místo toho explicitně hlásíme,
-        // že /cookies = /cookies pro všechny tři lokály.
-        $isSharedCookiesPage = request()->route()?->getName() === 'cookies';
-
+        // OND-168 (2026-05-22): /cookies je nově lokalizovaný (cs.cookies /
+        // en.cookies / de.cookies), takže sdílí standardní lroute() hreflang
+        // chain s ostatními stránkami. Předchozí $isSharedCookiesPage special
+        // case z OND-162 odebrán — už není potřeba.
         $hreflangs = $hreflangs ?? [];
-        if ($isSharedCookiesPage) {
-            $sharedCookiesUrl = url('/cookies');
-            $hreflangCs = $sharedCookiesUrl;
-            $hreflangEn = $sharedCookiesUrl;
-            $hreflangDe = $sharedCookiesUrl;
-        } else {
-            $hreflangCs = $hreflangs['cs'] ?? lroute($currentPage, 'cs');
-            $hreflangEn = $hreflangs['en'] ?? lroute($currentPage, 'en');
-            $hreflangDe = $hreflangs['de'] ?? lroute($currentPage, 'de');
-        }
+        $hreflangCs = $hreflangs['cs'] ?? lroute($currentPage, 'cs');
+        $hreflangEn = $hreflangs['en'] ?? lroute($currentPage, 'en');
+        $hreflangDe = $hreflangs['de'] ?? lroute($currentPage, 'de');
     @endphp
     <link rel="canonical" href="{{ $canonicalUrl }}">
     <link rel="alternate" hreflang="cs" href="{{ $hreflangCs }}">
@@ -202,7 +192,7 @@
         <div class="container-site footer-bar__inner">
             <span>&copy; {{ date('Y') }} {{ config('app.name') }} — {{ __('layout.footer.rights') }}</span>
             <a href="{{ lroute('privacy') }}" class="footer-bar__gdpr-link">{{ __('layout.gdpr_form_link') }}</a>
-            <a href="/cookies" class="footer-bar__gdpr-link">Cookies</a>
+            <a href="{{ lroute('cookies') }}" class="footer-bar__gdpr-link">{{ __('layout.cookies_link') }}</a>
         </div>
     </footer>
 

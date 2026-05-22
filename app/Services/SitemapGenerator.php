@@ -22,7 +22,7 @@ class SitemapGenerator
      *
      * @var array<int, string>
      */
-    protected array $staticPages = ['home', 'contact', 'price', 'privacy', 'projects', 'blog'];
+    protected array $staticPages = ['home', 'contact', 'price', 'privacy', 'cookies', 'projects', 'blog'];
 
     /**
      * Vygeneruje sitemap XML jako string.

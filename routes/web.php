@@ -20,18 +20,6 @@ Route::get('/robots.txt', RobotsController::class)->name('robots');
 
 /*
 |--------------------------------------------------------------------------
-| Cookie policy (OND-125) — společná napříč jazyky.
-|--------------------------------------------------------------------------
-| Banner v cookies.js linkuje na `/cookies` (bez locale prefixu).
-| Text na stránce zatím česky; pokud přibyde lokalizace, přidat slug
-| do config/slugs.php a přesunout pod localized routes group.
-*/
-Route::get('/cookies', [PageController::class, 'cookies'])
-    ->middleware(SetLocale::class)
-    ->name('cookies');
-
-/*
-|--------------------------------------------------------------------------
 | Localized routes
 |--------------------------------------------------------------------------
 | Default locale (cs) has no URL prefix.
@@ -50,6 +38,7 @@ Route::middleware(SetLocale::class)->group(function () use ($defaultLocale) {
     Route::get($s['contact'],  [PageController::class, 'contact'])->name("{$defaultLocale}.contact");
     Route::get($s['price'],    [PageController::class, 'price'])->name("{$defaultLocale}.price");
     Route::get($s['privacy'],  [PageController::class, 'privacy'])->name("{$defaultLocale}.privacy");
+    Route::get($s['cookies'],  [PageController::class, 'cookies'])->name("{$defaultLocale}.cookies");
     Route::get($s['projects'], [PageController::class, 'projects'])->name("{$defaultLocale}.projects");
     Route::get($s['projects'] . '/{url}', [PageController::class, 'project'])->name("{$defaultLocale}.project");
     Route::get($s['blog'],     [PageController::class, 'blog'])->name("{$defaultLocale}.blog");
@@ -67,6 +56,7 @@ foreach (array_slice($locales, 1) as $locale) {
             Route::get($s['contact'],  [PageController::class, 'contact'])->name("{$locale}.contact");
             Route::get($s['price'],    [PageController::class, 'price'])->name("{$locale}.price");
             Route::get($s['privacy'],  [PageController::class, 'privacy'])->name("{$locale}.privacy");
+            Route::get($s['cookies'],  [PageController::class, 'cookies'])->name("{$locale}.cookies");
             Route::get($s['projects'], [PageController::class, 'projects'])->name("{$locale}.projects");
             Route::get($s['projects'] . '/{url}', [PageController::class, 'project'])->name("{$locale}.project");
             Route::get($s['blog'],     [PageController::class, 'blog'])->name("{$locale}.blog");

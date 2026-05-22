@@ -42,6 +42,7 @@ return [
 
     'gdpr_form_note' => 'By submitting you agree to our',
     'gdpr_form_link' => 'Privacy Policy',
+    'cookies_link'   => 'Cookies',
 
     'meta' => [
         'description' => 'Website and web application development. I help entrepreneurs succeed in the online world.',

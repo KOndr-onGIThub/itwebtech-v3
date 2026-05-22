@@ -17,7 +17,9 @@
     $clarityId  = $clarityOn ? ($analytics['clarity']['project_id'] ?? null) : null;
     // OND-167 Fix 1 — Modal nesmí přebíjet detail cookie-policy stránky.
     // Defense in depth: server-side suppress + JS guard v cookies.js (window-name match).
-    $onCookiePolicy = request()->routeIs('cookies');
+    // OND-168 (2026-05-22): route names jsou nově per-locale ({cs,en,de}.cookies),
+    // takže matchujeme wildcard `*.cookies` místo původního exact `cookies`.
+    $onCookiePolicy = request()->routeIs('*.cookies');
 @endphp
 
 @if ($enabled && ($ga4Id || $clarityId) && ! $onCookiePolicy)
@@ -36,7 +38,7 @@
         <p id="cookie-title" class="cookie-modal__title">{{ __('layout.cookies.title') }}</p>
         <p id="cookie-text" class="cookie-modal__text">
             {{ __('layout.cookies.body') }}
-            <a href="/cookies" class="cookie-modal__policy-link">{{ __('layout.cookies.policy_link') }}</a>.
+            <a href="{{ lroute('cookies') }}" class="cookie-modal__policy-link">{{ __('layout.cookies.policy_link') }}</a>.
         </p>
         <div class="cookie-modal__actions">
             <button id="cookie-accept" class="cookie-modal__accept" type="button">{{ __('layout.cookies.accept') }}</button>

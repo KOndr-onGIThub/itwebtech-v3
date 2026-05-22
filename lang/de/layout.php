@@ -42,6 +42,7 @@ return [
 
     'gdpr_form_note' => 'Mit dem Absenden stimmen Sie unserer',
     'gdpr_form_link' => 'Datenschutzerklärung',
+    'cookies_link'   => 'Cookies',
 
     'meta' => [
         'description' => 'Entwicklung von Websites und Webanwendungen. Ich helfe Unternehmern, in der Online-Welt erfolgreich zu sein.',

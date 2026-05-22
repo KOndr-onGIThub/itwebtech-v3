@@ -14,7 +14,15 @@ class SeoPolishTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** F3 — /cookies hreflang nesmí ukazovat na homepage variants. */
+    /**
+     * F3 — /cookies hreflang nesmí ukazovat na homepage variants.
+     *
+     * OND-168 (2026-05-22): /cookies je nově lokalizovaný (cs/en/de variant),
+     * takže hreflang nyní směřuje na per-locale URL místo sdíleného /cookies.
+     * Původní OND-162 F3 vyžadoval všechny tři hreflangy === /cookies, což byl
+     * workaround kvůli CS-only stránce. Po lokalizaci je správné chování
+     * hreflang per locale, stejně jako u ostatních lokalizovaných stránek.
+     */
     public function test_cookies_hreflang_points_to_self_not_homepage(): void
     {
         $response = $this->get('/cookies');
@@ -23,17 +31,18 @@ class SeoPolishTest extends TestCase
 
         $body = $response->getContent();
 
-        // hreflang block musí všechny tři lokály mapovat na /cookies.
+        // hreflang block musí všechny tři lokály mapovat na svou per-locale
+        // /cookies variantu — nikoli na homepage.
         $this->assertStringContainsString(
             '<link rel="alternate" hreflang="cs" href="'.url('/cookies').'">',
             $body,
         );
         $this->assertStringContainsString(
-            '<link rel="alternate" hreflang="en" href="'.url('/cookies').'">',
+            '<link rel="alternate" hreflang="en" href="'.url('/en/cookies').'">',
             $body,
         );
         $this->assertStringContainsString(
-            '<link rel="alternate" hreflang="de" href="'.url('/cookies').'">',
+            '<link rel="alternate" hreflang="de" href="'.url('/de/cookies').'">',
             $body,
         );
 
@@ -41,6 +50,37 @@ class SeoPolishTest extends TestCase
         $this->assertStringNotContainsString('hreflang="cs" href="'.url('/').'"', $body);
         $this->assertStringNotContainsString('hreflang="en" href="'.url('/en').'"', $body);
         $this->assertStringNotContainsString('hreflang="de" href="'.url('/de').'"', $body);
+    }
+
+    /**
+     * OND-168 — /cookies localized variants render the correct language.
+     *
+     * Smoke: page must NOT contain Czech-only strings when fetched in EN/DE.
+     */
+    public function test_cookies_en_page_renders_english(): void
+    {
+        $response = $this->get('/en/cookies');
+
+        $response->assertOk();
+
+        $body = $response->getContent();
+
+        $this->assertStringContainsString('What I measure', $body);
+        $this->assertStringNotContainsString('Co měřím', $body);
+        $this->assertStringNotContainsString('Doba uchování', $body);
+    }
+
+    public function test_cookies_de_page_renders_german(): void
+    {
+        $response = $this->get('/de/cookies');
+
+        $response->assertOk();
+
+        $body = $response->getContent();
+
+        $this->assertStringContainsString('Was ich messe', $body);
+        $this->assertStringNotContainsString('Co měřím', $body);
+        $this->assertStringNotContainsString('Doba uchování', $body);
     }
 
     /** F4 — home hreflang má trailing slash konzistentně s canonical. */

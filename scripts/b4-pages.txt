@@ -15,4 +15,4 @@
 /projekty/{project} | /en/projects/{project} | /de/projekte/{project} | project
 /jak-na-to | /en/blog | /de/blog | blog
 /jak-na-to/{article} | /en/blog/{article} | /de/blog/{article} | article
-/cookies | /cookies | /cookies | cookies
+/cookies | /en/cookies | /de/cookies | cookies

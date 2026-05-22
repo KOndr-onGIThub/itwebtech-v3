@@ -42,6 +42,7 @@ return [
 
     'gdpr_form_note' => 'Odesláním souhlasíte se',
     'gdpr_form_link' => 'zásadami ochrany osobních údajů',
+    'cookies_link'   => 'Cookies',
 
     'meta' => [
         'description' => 'Tvorba webových stránek a aplikací. Pomáhám podnikatelům uspět v online světě.',
