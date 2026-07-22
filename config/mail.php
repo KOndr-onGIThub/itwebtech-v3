@@ -115,4 +115,17 @@ return [
         'name' => env('MAIL_FROM_NAME', env('APP_NAME', 'Laravel')),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Contact Form Recipient (OND-173)
+    |--------------------------------------------------------------------------
+    |
+    | Adresa, na kterou chodí notifikace z kontaktního formuláře (/kontakt).
+    | Přepiš přes `CONTACT_TO` env. Default odpovídá `ok@itwebtech.cz`
+    | uvedenému v chybové hlášce formuláře (lang/*/contact.php → message_error).
+    |
+    */
+
+    'contact_to' => env('CONTACT_TO', 'ok@itwebtech.cz'),
+
 ];
