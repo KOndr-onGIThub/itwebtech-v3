@@ -122,7 +122,7 @@ return [
     |
     | Adresa, na kterou chodí notifikace z kontaktního formuláře (/kontakt).
     | Přepiš přes `CONTACT_TO` env. Default odpovídá `ok@itwebtech.cz`
-    | uvedenému v chybové hlášce formuláře (lang/*/contact.php → message_error).
+    | uvedenému v chybové hlášce formuláře (lang/{locale}/contact.php -> message_error).
     |
     */
 
