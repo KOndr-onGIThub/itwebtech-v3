@@ -4,12 +4,12 @@ return [
 
     'meta' => [
         'title'       => 'Ceník — Ondřej Kriška',
-        'description' => 'Orientační ceník webových stránek, e-shopů a webových aplikací. Jasná představa o investici ještě před první konzultací.',
+        'description' => 'Orientační cenová pásma webových stránek, e-shopů a webových aplikací na míru.',
     ],
 
     'subheading' => 'Orientační ceny',
     'heading'    => 'Jasné ceny pro každý projekt',
-    'intro'      => 'Každý projekt je jiný — finální cenu znáte po bezplatné konzultaci. Tento přehled vám dá jasnou představu o investici ještě před naší první schůzkou.',
+    'intro'      => 'Každý projekt je jiný, finální cenu domluvíme dopředu. Tento přehled vám dá představu o cenových pásmech. Nejlevnější nejsem a nechci být. Když hledáte web do dvaceti tisíc, rovnou řeknu, že pro vás nejsem ten pravý.',
 
     'popular'   => 'Nejoblíbenější',
     'quotation' => 'Nezávazná poptávka',
@@ -18,61 +18,62 @@ return [
 
     'tiers' => [
         [
-            'name'    => 'Prezentace',
-            'desc'    => 'Pro živnostníky a malé firmy, kteří potřebují důvěryhodnou online prezentaci.',
-            'price'   => 'od 20 000 Kč',
+            'name'    => 'Firemní web',
+            'desc'    => 'Pro živnostníky a menší firmy, které potřebují důvěryhodnou prezentaci na internetu.',
+            'price'   => '50 000–90 000 Kč',
             'popular' => false,
             'features' => [
-                'Do 5 stránek na míru',
-                'Moderní responzivní design',
+                'Web na míru, obvykle do 5 stránek',
+                'Design přizpůsobený vaší firmě',
+                'Dobře vypadá na mobilu i na počítači',
                 'Kontaktní formulář',
-                'Technické SEO',
-                'Optimalizace rychlosti načítání',
+                'Technické základy pro vyhledávače',
+                'Rychlé načítání',
                 '14 dní podpory po spuštění',
             ],
             'cta' => 'Poptejte projekt',
         ],
         [
-            'name'    => 'Profesionál',
-            'desc'    => 'Pro firmy, které chtějí web jako svůj nejlepší obchodní nástroj.',
-            'price'   => 'od 45 000 Kč',
+            'name'    => 'Web s administrací',
+            'desc'    => 'Pro firmy, které chtějí obsah spravovat samy nebo potřebují web ve více jazycích.',
+            'price'   => '90 000–150 000 Kč',
             'popular' => true,
             'features' => [
-                'Do 12 stránek na míru',
-                'Konverzní design zaměřený na výsledky',
-                'Blog nebo galerie s editací obsahu',
+                'Rozsáhlejší web na míru',
+                'Jednoduchá správa obsahu (texty, fotky, produkty)',
+                'Blog nebo galerie',
                 'Vícejazyčný web',
-                'Analytika a měření konverzí',
+                'Napojení na měření návštěvnosti',
                 'Hosting a doména na 1 rok zdarma',
                 '1 měsíc podpory po spuštění',
             ],
             'cta' => 'Vybrat tento plán',
         ],
         [
-            'name'    => 'Komplex',
-            'desc'    => 'Pro náročné projekty bez kompromisů — e-shop, rezervace nebo webová aplikace.',
-            'price'   => 'od 85 000 Kč',
+            'name'    => 'E-shop / aplikace',
+            'desc'    => 'Pro náročnější projekty — e-shop, rezervace nebo interní aplikace na míru.',
+            'price'   => 'od 150 000 Kč',
             'popular' => false,
             'features' => [
-                'Neomezený rozsah projektu',
+                'Rozsah podle potřeb projektu',
                 'E-shop nebo rezervační systém',
                 'Vlastní administrační rozhraní',
-                'Pokročilá SEO strategie s reportingem',
-                'Integrace externích systémů',
+                'Interní aplikace na míru vašemu provozu',
+                'Napojení na další systémy, které používáte',
                 '3 měsíce podpory po spuštění',
             ],
-            'cta' => 'Konzultace zdarma',
+            'cta' => 'Poptejte projekt',
         ],
     ],
 
-    'note' => 'Orientační ceny bez DPH. Nejsem plátce DPH.',
+    'note' => 'Nejsem plátce DPH, ceny jsou konečné.',
 
     'guarantees' => [
         'heading' => 'Co je součástí každého projektu',
         'items'   => [
             [
                 'title' => 'Bezúdržbové weby',
-                'text'  => 'Žádný WordPress, žádné pluginy třetích stran. Ušetříte až 20 000 Kč ročně za pravidelné aktualizace a záplaty.',
+                'text'  => 'Žádný WordPress, žádné pluginy třetích stran. Odpadají náklady na pravidelné aktualizace a bezpečnostní záplaty.',
             ],
             [
                 'title' => 'Cena předem bez překvapení',
@@ -84,68 +85,67 @@ return [
             ],
             [
                 'title' => 'Podpora i po spuštění',
-                'text'  => 'Odpovím do 24 hodin, i týdny a měsíce po předání projektu. Drobné úpravy a technické dotazy jsou samozřejmostí.',
+                'text'  => 'Odpovídám v pracovní dny, obvykle do dvou pracovních dnů, i týdny a měsíce po předání projektu. Drobné úpravy a technické dotazy jsou samozřejmostí.',
             ],
         ],
     ],
 
     'addons' => [
         'heading' => 'Doplňkové služby',
-        'desc'    => 'Komplexní digitální podpora i po spuštění projektu.',
+        'desc'    => 'Digitální podpora i po spuštění projektu.',
         'items'   => [
             [
-                'name'  => 'SEO a obsahový marketing',
+                'name'  => 'SEO a obsah',
                 'price' => 'od 4 500 Kč / měs.',
-                'desc'  => 'Analýza klíčových slov, obsahová strategie, sledování výkonu. Organická viditelnost, která pracuje i bez reklamního rozpočtu.',
+                'desc'  => 'Péče o to, aby web dobře fungoval ve vyhledávačích, a pravidelný obsah.',
             ],
             [
                 'name'  => 'Správa sociálních sítí',
                 'price' => 'od 9 900 Kč / měs.',
-                'desc'  => 'Tvorba obsahu, plánování a publikování. Konzistentní přítomnost, která buduje důvěru zákazníků.',
+                'desc'  => 'Tvorba obsahu, plánování a publikování, aby na sebe firma navazovala i mimo web.',
             ],
             [
                 'name'  => 'Webová aplikace na míru',
                 'price' => 'individuální nabídka',
-                'desc'  => 'Evidence skladu, interní systémy, zákaznické portály. Cena odpovídá složitosti a rozsahu projektu.',
+                'desc'  => 'Evidence skladu, interní systémy, zákaznické portály. Cena odpovídá rozsahu projektu.',
             ],
             [
-                'name'  => 'Grafický design a branding',
+                'name'  => 'Grafika a branding',
                 'price' => 'od 4 800 Kč',
-                'desc'  => 'Logo, vizuální identita, bannery. Vše co potřebujete pro konzistentní a zapamatovatelnou prezentaci značky.',
+                'desc'  => 'Logo, vizuální identita, bannery. Pro ucelenou a zapamatovatelnou prezentaci firmy.',
             ],
         ],
     ],
 
     'compare' => [
         'heading' => 'Co přesně dostanete',
-        'tiers'   => ['Prezentace', 'Profesionál', 'Komplex'],
+        'tiers'   => ['Firemní web', 'Web s administrací', 'E-shop / aplikace'],
         'groups'  => [
             [
                 'label' => 'Rozsah projektu',
                 'rows'  => [
-                    ['label' => 'Počet stránek', 'values' => ['do 5', 'do 12', 'bez omezení']],
-                    ['label' => 'Responzivní design', 'values' => [true, true, true]],
+                    ['label' => 'Počet stránek', 'values' => ['do 5', 'více', 'bez omezení']],
+                    ['label' => 'Design na míru', 'values' => [true, true, true]],
                     ['label' => 'Kontaktní formulář', 'values' => [true, true, true]],
                 ],
             ],
             [
                 'label' => 'Funkce webu',
                 'rows'  => [
-                    ['label' => 'Blog nebo galerie s editací', 'values' => [false, true, true]],
+                    ['label' => 'Správa obsahu (blog, galerie)', 'values' => [false, true, true]],
                     ['label' => 'Vícejazyčný web', 'values' => [false, true, true]],
                     ['label' => 'Rezervační systém', 'values' => [false, 'volitelně', true]],
                     ['label' => 'E-shop', 'values' => [false, false, true]],
                     ['label' => 'Vlastní administrace', 'values' => [false, false, true]],
-                    ['label' => 'Integrace externích systémů', 'values' => [false, false, true]],
+                    ['label' => 'Napojení na další systémy', 'values' => [false, false, true]],
                 ],
             ],
             [
-                'label' => 'Marketing a výkon',
+                'label' => 'Vyhledávače a výkon',
                 'rows'  => [
-                    ['label' => 'Technické SEO', 'values' => [true, true, true]],
-                    ['label' => 'Optimalizace rychlosti', 'values' => [true, true, true]],
-                    ['label' => 'Analytika a měření konverzí', 'values' => [false, true, true]],
-                    ['label' => 'Pokročilá SEO strategie', 'values' => [false, false, true]],
+                    ['label' => 'Technické základy pro vyhledávače', 'values' => [true, true, true]],
+                    ['label' => 'Rychlé načítání', 'values' => [true, true, true]],
+                    ['label' => 'Měření návštěvnosti', 'values' => [false, true, true]],
                 ],
             ],
             [
@@ -161,8 +161,8 @@ return [
 
     'cta' => [
         'heading' => 'Nejste si jistí, co přesně potřebujete?',
-        'desc'    => 'Konzultace je zdarma a nezávazná. Během 30 minut zjistím, co dává pro váš byznys smysl — a upřímně vám řeknu i to, jestli spolupráce smysl nemá.',
-        'btn'     => 'Domluvit konzultaci zdarma',
+        'desc'    => 'Napište mi, co řešíte. Ozvu se zpět a upřímně vám řeknu, co dává pro vaši firmu smysl — i to, jestli spolupráce smysl nemá.',
+        'btn'     => 'Napsat zprávu',
     ],
 
 ];

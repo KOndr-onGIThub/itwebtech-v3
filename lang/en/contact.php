@@ -11,8 +11,8 @@ return [
     'heading'             => 'Call or text and I will get back to you',
     'address_label'       => 'Address',
     'hours_label'         => 'Availability',
-    'open_hours'          => 'Mon–Fri: 9:00–19:00<br>Sat–Sun: 12:00–17:00',
-    'cta_consultation'    => 'Schedule a consultation',
+    'open_hours'          => 'I reply on business days, usually within two working days.',
+    'cta_consultation'    => 'Write to me',
 
     'form_heading'        => 'Contact form',
     'form_subheading'     => 'Get a free, non-binding quote or send a query',

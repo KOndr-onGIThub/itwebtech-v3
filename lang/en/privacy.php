@@ -4,13 +4,13 @@ return [
 
     'meta' => [
         'title'       => 'Privacy Policy — Ondřej Kriška',
-        'description' => 'Information about the processing of personal data on itwebtech.cz.',
+        'description' => 'Information about the processing of personal data on ondraweb.cz.',
     ],
 
     'heading' => 'Privacy Policy',
 
     'content' => '<p>Effective date: July 28, 2023</p>
-<p>The website (hereinafter "the Service") is operated by entrepreneur Ondřej Kriška (hereinafter "the operator" or "itwebtech").</p>
+<p>The website (hereinafter "the Service") is operated by entrepreneur Ondřej Kriška (hereinafter "the operator" or "ONDRAWEB").</p>
 <p>This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service.</p>
 
 <h2>Collection and use of information</h2>
@@ -34,7 +34,7 @@ return [
 <p>We use cookies and similar tracking technologies to track activity on our Service. Cookies are files with a small amount of data. Cookies are sent to your browser from a website and stored on your device.</p>
 
 <h2>Use of data</h2>
-<p>itwebtech uses the collected data for various purposes:</p>
+<p>ONDRAWEB uses the collected data for various purposes:</p>
 <ul>
 <li>To provide and maintain the Service</li>
 <li>To notify you about changes to our Service</li>
@@ -59,7 +59,7 @@ return [
 
 <h2>Contact us</h2>
 <ul>
-<li>By email: ok@itwebtech.cz</li>
+<li>By email: ok@ondraweb.cz</li>
 </ul>',
 
 ];

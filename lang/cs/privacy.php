@@ -4,13 +4,13 @@ return [
 
     'meta' => [
         'title'       => 'Zásady ochrany osobních údajů — Ondřej Kriška',
-        'description' => 'Informace o zpracování osobních údajů na webu itwebtech.cz.',
+        'description' => 'Informace o zpracování osobních údajů na webu ondraweb.cz.',
     ],
 
     'heading' => 'Zásady ochrany osobních údajů',
 
     'content' => '<p>Datum účinnosti: 28. července 2023</p>
-<p>Webové stránky (dále jen „služba") provozuje podnikatel Ondřej Kriška (dále jen „provozovatel" nebo „itwebtech").</p>
+<p>Webové stránky (dále jen „služba") provozuje podnikatel Ondřej Kriška (dále jen „provozovatel" nebo „ONDRAWEB").</p>
 <p>Tato stránka vás informuje o zásadách týkajících se shromažďování, používání a zpřístupňování osobních údajů, když používáte naši službu.</p>
 
 <h2>Shromažďování a používání informací</h2>
@@ -34,7 +34,7 @@ return [
 <p>Používáme soubory cookie a podobné technologie, abychom mohli sledovat aktivitu v naší Službě. Cookies jsou soubory s malým množstvím dat. Soubory cookie jsou odesílány do vašeho prohlížeče z webové stránky a uloženy ve vašem zařízení.</p>
 
 <h2>Použití dat</h2>
-<p>itwebtech používá shromážděná data k různým účelům:</p>
+<p>ONDRAWEB používá shromážděná data k různým účelům:</p>
 <ul>
 <li>Poskytovat a udržovat Službu</li>
 <li>Abychom vás informovali o změnách naší služby</li>
@@ -59,7 +59,7 @@ return [
 
 <h2>Kontaktujte nás</h2>
 <ul>
-<li>E-mailem: ok@itwebtech.cz</li>
+<li>E-mailem: ok@ondraweb.cz</li>
 </ul>',
 
 ];

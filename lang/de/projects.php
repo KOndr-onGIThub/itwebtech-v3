@@ -4,12 +4,13 @@ return [
 
     'meta' => [
         'title'       => 'Projekte — Ondřej Kriška',
-        'description' => 'Beispiele realisierter Projekte — Webseiten, Webanwendungen. Lassen Sie sich inspirieren und stellen Sie sich Ihr erfolgreiches Projekt vor.',
+        'description' => 'Webseiten und Anwendungen, die ich gebaut habe und die heute laufen. Jedes Projekt lässt sich anklicken und live ansehen.',
     ],
 
     'subheading'       => 'Realisierte',
     'heading'          => 'PROJEKTE',
-    'intro'            => 'Lassen Sie sich von Beispielen meiner Arbeit inspirieren. Ich arbeite immer so, dass Kunden gerne zu mir zurückkommen.',
+    'intro'            => 'Das sind Webseiten, die ich gebaut habe und die heute laufen. Jedes Projekt lässt sich anklicken und live ansehen.',
+    'intro_cta'        => 'Ich möchte ein ähnliches Projekt',
 
     'filter_all'       => 'Alle',
     'filter_websites'  => 'Webseiten',
@@ -19,63 +20,41 @@ return [
     'info_client'      => 'Kunde',
     'info_date'        => 'Datum',
     'info_categories'  => 'Kategorien',
-    'info_price'       => 'Ungefährer Preis',
+
+    // Projektliste
+    'list' => [
+        'subheading' => 'Läuft live',
+        'heading'    => 'Ausgewählte Arbeiten',
+        'field'      => 'Branche',
+        'live'       => 'Live ansehen',
+        'detail'     => 'Projektdetail',
+    ],
+
+    // Projektdetail
+    'detail' => [
+        'brief'    => 'Aufgabe',
+        'built'    => 'Was ich gebaut habe',
+        'features' => 'Was die Seite kann',
+        'result'   => 'Ergebnis',
+        'live'     => 'Live ansehen',
+        'internal' => 'Internes Projekt, nicht öffentlich verfügbar.',
+        'back'     => 'Zurück zu den Projekten',
+    ],
 
     'why_me' => [
         'subheading' => 'So arbeite ich',
         'heading'    => 'Das stecke ich in Projekte',
         'items'      => [
             ['title' => 'Expertise und Praxis',      'description' => 'Dank 18 Jahren Erfahrung bei Toyota habe ich einzigartige Erfahrung in der Prozessoptimierung und Webanwendungsentwicklung.'],
-            ['title' => 'Stabilität und Robustheit', 'description' => 'Ich verwende keine Drittanbieter-Plugins einschränkender CMS-Systeme. Ich programmiere robusten Code.'],
+            ['title' => 'Stabilität und Robustheit', 'description' => 'Ich baue nicht aus Baukästen und fremden Add-ons, die ständig kaputtgehen. Ich programmiere robusten Code, der Ihrer Anwendung Stabilität bringt.'],
             ['title' => 'Gründliches Testen',        'description' => 'Ich überlasse nichts dem Zufall. Ich teste Apps und Webseiten während der Entwicklung und danach.'],
             ['title' => 'Geschwindigkeit und Design','description' => 'Priorität hat schnelles Laden und modernes Design für einen positiven ersten Eindruck.'],
-            ['title' => 'Maßgeschneiderte Lösungen', 'description' => 'Jedes Projekt ist für mich einzigartig und ich suche immer die beste Lösung für jeden Kunden.'],
-            ['title' => 'Liebe zum Detail',          'description' => 'Ich achte immer sehr auf Details, die für den Erfolg Ihres Projekts entscheidend sein können.'],
+            ['title' => 'Maßgeschneiderte Lösungen', 'description' => 'Ich behandle jedes Projekt als einzigartig und suche die beste Lösung für die Ziele des Kunden.'],
+            ['title' => 'Liebe zum Detail',          'description' => 'Ich achte immer auf die Details, auf die es ankommt.'],
         ],
     ],
 
     'cta_all' => 'Weitere Projekte ansehen',
-
-    'snapshots' => [
-        'subheading' => 'Was bereits funktioniert',
-        'heading'    => 'Ergebnis-Snapshots aus ähnlichen Projekten',
-        'desc'       => 'Reale Szenarien, in denen wir Conversion-Hürden entfernt und den Weg zur Anfrage vereinfacht haben.',
-        'items'      => [
-            [
-                'type'     => 'Unternehmenswebseite',
-                'timeline' => '4 Wochen',
-                'title'    => 'Neue Webseite statt veralteter Präsentation',
-                'summary'  => 'Die alte Seite wirkte veraltet, war langsam und hatte kein klares CTA. Die neue Struktur führte Besucher direkt zur Anfrage.',
-                'outcomes' => [
-                    'Klares Leistungsangebot direkt im ersten Sichtbereich.',
-                    'Direkter Weg zum Kontakt ohne unnötige Umwege.',
-                    'Mehr Vertrauen durch konsistente Inhalte.',
-                ],
-            ],
-            [
-                'type'     => 'Webanwendung',
-                'timeline' => '7 Wochen',
-                'title'    => 'Kundenprozess ohne manuelle Administration',
-                'summary'  => 'Abläufe wurden durch E-Mails und Tabellen ausgebremst. Der Wechsel in eine App reduzierte Fehler und beschleunigte Reaktionen.',
-                'outcomes' => [
-                    'Schnellere Reaktionszeiten dank zentraler Daten.',
-                    'Weniger manuelle Schritte und geringere Betriebslast.',
-                    'Bessere Echtzeitkontrolle über Projektstatus.',
-                ],
-            ],
-            [
-                'type'     => 'Individueller E-Shop',
-                'timeline' => '6 Wochen',
-                'title'    => 'E-Shop ohne Vendor-Lock-in',
-                'summary'  => 'Die frühere Lösung war von Plugins und häufigen Reparaturen abhängig. Der neue E-Shop brachte Stabilität und planbare Kosten.',
-                'outcomes' => [
-                    'Wiederkehrende Ausfälle nach Updates entfernt.',
-                    'Klarer Checkout ohne störende Elemente.',
-                    'Technisches SEO von Anfang an integriert.',
-                ],
-            ],
-        ],
-    ],
 
     'fit' => [
         'subheading'    => 'Schnelle Einordnung',

@@ -5,13 +5,14 @@ if (!function_exists('lroute')) {
      * Generate a URL for a locale-aware named route.
      *
      * Route names follow the pattern: {locale}.{page}
-     * Example: lroute('home')       → /cs/
-     *          lroute('home', 'en') → /en/
+     * Example: lroute('home')                          → /cs/
+     *          lroute('home', 'en')                    → /en/
+     *          lroute('project', null, ['url' => $s])  → /projekty/{s}
      */
-    function lroute(string $name, ?string $locale = null): string
+    function lroute(string $name, ?string $locale = null, array $params = []): string
     {
         $locale ??= app()->getLocale();
-        return route("{$locale}.{$name}");
+        return route("{$locale}.{$name}", $params);
     }
 }
 

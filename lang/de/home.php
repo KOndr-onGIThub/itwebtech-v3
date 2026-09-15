@@ -3,19 +3,19 @@
 return [
 
     'meta' => [
-        'title'       => 'Ondřej Kriška — Webseiten & Webanwendungen für Unternehmen',
-        'description' => 'Maßgeschneiderte Webseiten und Webanwendungen, die Ergebnisse liefern. Wartungsfrei, kein WordPress, keine versteckten Kosten. 18 Jahre Erfahrung. Kostenlose Beratung.',
+        'title'       => 'Ondřej Kriška — Maßgeschneiderte Websites & Anwendungen in eigenem Code',
+        'description' => 'Maßgeschneiderte Websites, interne Anwendungen und Online-Shops in eigenem Code ohne WordPress. Arbeiten Sie direkt mit Entwickler Ondřej Kriška.',
     ],
 
     'hero' => [
-        'subheading'       => 'Für Unternehmer mit Ambitionen',
-        'heading'          => '<em>Ihre komplette Website</em> von jemandem, dem das Ergebnis wichtig ist.',
+        'subheading'       => 'Für kleine und mittlere Unternehmen',
+        'heading'          => 'Maßgeschneiderte Websites und Anwendungen. Ich baue sie selbst, in eigenem Code.',
         'bio'              => [
-            '18 Jahre bei Toyota haben mich eines gelehrt: perfekte Ergebnisse liefern.',
+            'Ich bin Ondřej Kriška, ein erfahrener Entwickler. Ich arbeite direkt mit Ihnen, ohne Agentur und ohne Zwischenhändler.',
             'Ondřej Kriška',
         ],
-        'chips'            => ['Strategie', 'Design', 'Code', 'Texte'],
-        'cta_contact'      => 'Kostenlose Beratung',
+        'chips'            => ['Websites', 'Anwendungen', 'Online-Shops', 'Eigener Code'],
+        'cta_contact'      => 'Sagen Sie mir, was Sie brauchen',
         'cta_consultation' => 'Leistungen ansehen',
     ],
 
@@ -29,51 +29,51 @@ return [
         'items'      => [
             [
                 'heading' => '„Wir haben eine Website, aber Kunden kommen nicht"',
-                'text'    => 'Eine Website allein bringt keine Kunden. Sie brauchen Seiten, die für Suchmaschinen optimiert sind, mit überzeugenden Texten und schneller Ladezeit. Das ist die Grundlage jedes meiner Projekte.',
+                'text'    => 'Oft liegt es daran, dass die Website nicht klar sagt, was das Unternehmen tut und worin es anders ist. Ich baue sie verständlich, schnell und so, dass sie auf Mobilgeräten und Desktops gut funktioniert.',
             ],
             [
                 'heading' => '„Ich weiß nicht, was es insgesamt kosten wird"',
-                'text'    => 'Exakter Preis im Voraus — keine Überraschungen auf der Rechnung, keine Mehrkosten ohne Ihr Wissen. Transparenz ist für mich selbstverständlich, keine Bonusfunktion.',
+                'text'    => 'Den Preis vereinbaren wir vorab — keine Überraschungen auf der Rechnung, keine Mehrkosten ohne Ihr Wissen. Das ist für mich selbstverständlich, keine Bonusfunktion.',
             ],
             [
                 'heading' => '„Der Entwickler hat aufgehört, auf E-Mails zu antworten"',
-                'text'    => 'Ich antworte innerhalb von 24 Stunden, auch nach Projektabschluss. Ein Ansprechpartner, eine Verantwortung — Sie sprechen direkt mit mir, nicht mit einem Koordinator.',
+                'text'    => 'Ich antworte an Werktagen, in der Regel innerhalb von zwei Arbeitstagen, auch nach Projektabschluss. Ein Ansprechpartner, eine Verantwortung — Sie sprechen direkt mit mir.',
             ],
             [
                 'heading' => '„Die Website geht ständig kaputt und wir zahlen für Wartung"',
-                'text'    => 'Meine Webseiten sind wartungsfrei. Kein WordPress, keine Drittanbieter-Plugins. Null Kosten für regelmäßige Updates und deutlich höhere Sicherheit.',
+                'text'    => 'Meine Websites sind wartungsfrei. Kein WordPress, keine Drittanbieter-Plugins. Keine Kosten für regelmäßige Updates und eine deutlich sicherere Website.',
             ],
         ],
     ],
 
     'services' => [
-        'subheading'    => 'Immer auf Ihre Unternehmensziele zugeschnitten',
-        'heading'       => 'Ich starte Ihr Online-Business',
-        'heading_other' => 'Ich stärke Ihre Online-Sichtbarkeit',
-        'description'   => 'Ein komplettes Portfolio digitaler Dienstleistungen — von Webseiten und Webanwendungen bis hin zu Marketing.',
+        'subheading'    => 'Was ich baue',
+        'heading'       => 'Was ich für Sie bauen werde',
+        'heading_other' => 'Womit ich sonst noch helfe',
+        'description'   => 'Drei Dinge, jedes von Grund auf und auf Ihr Unternehmen zugeschnitten.',
         'websites' => [
-            'title'       => 'Webseiten, die verkaufen',
-            'description' => 'Ihre Website ist Ihr fleißigster Mitarbeiter — verkauft 24/7 ohne Unterbrechung. Ich gestalte sie so, dass Kunden direkt zur Anfrage oder Bestellung gelangen, nicht zu einer Sackgasse. Schnell, sicher, für Google optimiert.',
+            'title'       => 'Maßgeschneiderte Websites',
+            'description' => 'Unternehmenswebsites, die klar erklären, was Sie tun und worin Sie sich unterscheiden. Ich baue sie so, dass sie schnell laden und auf Mobilgeräten und Desktops gut aussehen.',
         ],
         'webapps' => [
-            'title'       => 'Anwendungen, die Ihre Zeit sparen',
-            'description' => 'Lagerverwaltung in Excel, manuelle Auftragserfassung, aufwändige Berichte — das sind Stunden und Geld, die zum Fenster hinausgehen. Ich entwickle eine Anwendung genau für Ihre Prozesse und gebe Ihnen Zeit für das zurück, was Sie mögen.',
+            'title'       => 'Interne Anwendungen',
+            'description' => 'Software, die auf Ihren Betrieb zugeschnitten ist. Lagerverwaltung, Bestellungen, Planung — alles, was Sie heute in Tabellen und auf Papier erledigen.',
         ],
         'eshop' => [
-            'title'       => 'Ein Online-Shop, der Ihnen gehört',
-            'description' => 'Keine monatliche Plattformmiete, keine Angst, dass ein Plugin-Update Ihren Shop zerstört. Ich baue Ihnen einen maßgeschneiderten Online-Shop — ohne versteckte Gebühren, ohne Vendor-Lock-in, mit direktem Support.',
+            'title'       => 'Online-Shops',
+            'description' => 'Online-Verkauf, der damit verbunden ist, wie Sie Bestellungen tatsächlich abwickeln. Ohne unnötige Funktionen, die Sie nie verwenden werden.',
         ],
         'seo' => [
-            'title'       => 'Kunden aus Google — ohne Bezahlung pro Klick',
-            'description' => 'Bezahlte Werbung funktioniert nur, solange Sie zahlen. SEO arbeitet langfristig für Sie. Ich helfe Ihnen, organische Sichtbarkeit in Suchmaschinen aufzubauen, die auch ohne Werbebudget Kunden bringt.',
+            'title'       => 'SEO und Suchmaschinen',
+            'description' => 'Ich kümmere mich um die technischen Grundlagen, damit die Website in Suchmaschinen gut funktioniert. Ohne Versprechen auf den ersten Platz, aber mit solider, ehrlicher Arbeit.',
         ],
         'design' => [
-            'title'       => 'Visuelle Identität, die Kunden bemerken',
-            'description' => 'Ein Logo und eine Markenidentität, die Ihre Kunden auf den ersten Blick erkennen. Ich entwerfe eine visuelle Identität, die zu Ihrer Branche passt — eine, die Sie von der generischen Konkurrenz abhebt.',
+            'title'       => 'Grafik und visuelle Identität',
+            'description' => 'Ein Logo und ein einheitlicher visueller Stil, damit die Website kohärent wirkt und widerspiegelt, womit sich das Unternehmen befasst.',
         ],
         'social' => [
-            'title'       => 'Social Media, die Vertrauen aufbauen',
-            'description' => 'Kunden prüfen Ihre Social-Media-Präsenz, bevor sie bestellen. Eine aktive, konsistente Präsenz schafft Vertrauen. Ich bereite Inhalte und eine Strategie vor, die Sie Ihrer Zielgruppe näherbringt.',
+            'title'       => 'Social Media',
+            'description' => 'Ich helfe bei Inhalten und der grundlegenden Einrichtung von Profilen, damit das Unternehmen auch außerhalb der Website konsistent auftritt.',
         ],
     ],
 
@@ -83,41 +83,42 @@ return [
 
 18 Jahre bei Toyota in der Projektplanung und Qualitätssicherung haben mich eines gelehrt: Fehler sind teuer und Abkürzungen verschieben sie nur. Diese Prinzipien wende ich jetzt auf die Webentwicklung an.
 
-Jedes Projekt beginnt mit einem einstündigen Gespräch. Kein Formular, keine Vorlage. Ich höre Ihrem Business, Ihren Kunden und Ihren Zielen zu — erst dann schlage ich eine Lösung vor. Wenn eine Zusammenarbeit sinnvoll ist, erstelle ich eine detaillierte Spezifikation und ein Preisangebot. Das ist ein ganzer Tag Arbeit — und wird entsprechend berechnet. Wenn Sie sich für die Projektumsetzung entscheiden, wird dieser Betrag vom Endpreis abgezogen.
+Jedes Projekt beginnt damit, dass ich Ihnen zuhöre. Kein Formular, keine Vorlage. Ich höre Ihrem Business, Ihren Kunden und Ihren Zielen zu — erst dann schlage ich eine Lösung vor. Wenn eine Zusammenarbeit sinnvoll ist, erstelle ich eine detaillierte Spezifikation und ein Preisangebot.
 
-Ich programmiere nicht mit WordPress. Keine Drittanbieter-Plugins, keine Sicherheitslücken, keine monatlichen Wartungsgebühren. Sie sparen auch an dem, was Sie nicht zahlen müssen.',
+Ich programmiere nicht mit WordPress. Keine Drittanbieter-Plugins, keine Sicherheitslücken, keine Kosten für regelmäßige Updates. Sie sparen auch an dem, was Sie nicht zahlen müssen.',
         'steps' => [
-            ['title' => 'Verständnis',       'description' => 'Zuerst verstehe ich Ihr Unternehmen, Ihre Kunden und deren Bedürfnisse. Ohne diesen Schritt wäre jede Lösung nur Raten.'],
-            ['title' => 'Maßlösung',         'description' => 'Ich entwerfe genau das, was Sie brauchen — keine Einheitsvorlage, sondern eine Lösung, die auf Ihren Markt und Ihre Zielgruppe zugeschnitten ist.'],
-            ['title' => 'Ergebnisse & Wachstum', 'description' => 'Nach dem Start verfolgen wir Daten und optimieren. Eine Website ist kein einmaliges Projekt — sie ist ein lebendiges Werkzeug für Ihr Business.'],
+            ['title' => 'Verständnis',        'description' => 'Zuerst verstehe ich Ihr Unternehmen, Ihre Kunden und deren Bedürfnisse. Ohne diesen Schritt wäre jede Lösung nur Raten.'],
+            ['title' => 'Maßlösung',          'description' => 'Ich entwerfe genau das, was Sie brauchen — keine Einheitsvorlage, sondern eine Lösung, die auf Ihr Unternehmen zugeschnitten ist.'],
+            ['title' => 'Übergabe & Support', 'description' => 'Der Code gehört Ihnen von Anfang an. Nach dem Launch stehe ich für Anpassungen und Weiterentwicklung zur Verfügung, während Ihr Unternehmen wächst.'],
         ],
     ],
 
     'about' => [
         'subheading'     => 'Über mich',
-        'heading'        => 'Sie arbeiten direkt mit mir — nicht über Koordinatoren',
-        'description'    => 'Buchen Sie eine kostenlose Beratung — unverbindlich, ohne Registrierung, ohne unnötige Formalitäten',
-        'content_title'  => 'Was ich als Erstes tun werde',
+        'heading'        => 'Achtzehn Jahre Prozessdisziplin aus Toyota',
+        'description'    => 'Wie sich achtzehn Jahre bei Toyota auf die Art auswirken, wie ich Websites baue.',
+        'content_title'  => 'Wie ich arbeite',
         'content'        => [
-            'Ich finde heraus, wonach Ihre Kunden wirklich suchen — und was sie überzeugt, Kontakt aufzunehmen oder zu bestellen.',
-            'Ich analysiere den Wettbewerb, damit wir wissen, wo Sie Raum haben, sich abzuheben und was Ihre Website sagen muss.',
-            'Ich erstelle ein genaues Angebot mit klar definiertem Umfang und Preis — keine Überraschungen auf der Rechnung.',
-            'Ich entwerfe die Websitestruktur und Inhalte so, dass Nutzer natürlich vom ersten Eindruck zur Handlung geführt werden.',
-            'Ich richte technisches SEO vom ersten Tag an ein — nicht als Nachgedanke, sondern als Grundlage des gesamten Projekts.',
+            'Ich habe achtzehn Jahre bei Toyota gearbeitet.',
+            'Ich begann als Lagerarbeiter, wurde Teamleiter und dann Senior-Spezialist im Logistik-Projektteam.',
+            'Bei Toyota habe ich eine Webanwendung programmiert, die dem Unternehmen Einsparungen in Millionenhöhe (CZK) einbrachte.',
+            'Toyota ist für eines bekannt. Dort wird nichts nach Gefühl gemacht.',
+            'Jeder Schritt hat einen Grund und wird gemessen, ob er Sinn ergibt.',
+            'Diese Arbeitsweise übertrage ich auf jedes Projekt.',
         ],
-        'years_label'    => 'Jahre Erfahrung',
+        'years_label'    => 'Jahre bei Toyota',
         'guarantee_h'    => 'Ein Ansprechpartner.',
-        'guarantee_text' => 'Sie sprechen nicht getrennt mit einem Verkäufer, Projektmanager und Entwickler. Sie sprechen direkt mit mir — vom ersten Treffen über den Launch und darüber hinaus.',
+        'guarantee_text' => 'Sie kommunizieren nicht getrennt mit einem Verkäufer, Projektmanager und Entwickler. Sie sprechen direkt mit mir — vom ersten Gespräch über den Launch und darüber hinaus.',
     ],
 
     'advantages' => [
         'subheading' => 'Warum mit mir',
         'heading'    => 'Was Sie mehr bekommen als bei der Konkurrenz',
         'items'      => [
-            ['heading' => 'Transparenter Preis im Voraus',         'text' => 'Sie erhalten ein genaues Angebot, bevor die Arbeit beginnt. Was im Angebot steht, steht auf der Rechnung. Keine Mehrkosten unterwegs, keine versteckten Gebühren.'],
-            ['heading' => 'Wartungsfrei — keine Extrakosten',      'text' => 'Meine Webseiten basieren nicht auf WordPress oder einem Plugin-abhängigen System. Keine regelmäßigen Updates, keine Sicherheits-Patches. Sie sparen bis zu 800 € im Jahr.'],
-            ['heading' => 'Ich antworte innerhalb von 24 Stunden', 'text' => 'Sie schreiben nicht ins Leere. Sie kommunizieren direkt mit mir und erhalten eine Antwort bis zum nächsten Tag — auch bei technischen Fragen, auch Monate nach dem Launch.'],
-            ['heading' => 'Partner auch nach dem Launch',          'text' => 'Der Launch ist der Anfang, nicht das Ende. Ich bin für kleine Anpassungen, technische Fragen oder die Weiterentwicklung des Projekts im Einklang mit Ihrem Wachstum da.'],
+            ['heading' => 'Transparenter Preis im Voraus',        'text' => 'Sie erhalten ein genaues Angebot, bevor die Arbeit beginnt. Was im Angebot steht, steht auf der Rechnung. Keine Mehrkosten unterwegs, keine versteckten Gebühren.'],
+            ['heading' => 'Wartungsfrei — keine Extrakosten',     'text' => 'Meine Websites basieren nicht auf WordPress oder einem Plugin-abhängigen System. Keine regelmäßigen Updates, keine Sicherheits-Patches. Keine Kosten für laufende Wartung.'],
+            ['heading' => 'Ich antworte direkt',                  'text' => 'Sie schreiben nicht ins Leere. Sie kommunizieren direkt mit mir und erhalten eine Antwort an Werktagen, in der Regel innerhalb von zwei Arbeitstagen — auch bei technischen Fragen, auch Monate nach dem Launch.'],
+            ['heading' => 'Partner auch nach dem Launch',         'text' => 'Der Launch ist der Anfang, nicht das Ende. Ich bin für kleine Anpassungen, technische Fragen oder die Weiterentwicklung des Projekts im Einklang mit Ihrem Wachstum da.'],
         ],
     ],
 
@@ -125,10 +126,10 @@ Ich programmiere nicht mit WordPress. Keine Drittanbieter-Plugins, keine Sicherh
         'subheading' => 'Wie wir zusammenarbeiten',
         'heading'    => 'Ein einfacher Prozess ohne unnötige Komplikationen',
         'items'      => [
-            ['heading' => 'Kostenlose Beratung',       'text' => 'Erzählen Sie mir von Ihrem Projekt. Unverbindlich, ohne Registrierung. Wir finden gemeinsam heraus, ob und wie ich helfen kann — und ich gebe Ihnen eine ehrliche Meinung, auch wenn eine Zusammenarbeit keinen Sinn ergibt.'],
-            ['heading' => 'Spezifikation & Angebot',   'text' => 'Wenn eine Zusammenarbeit sinnvoll ist, erstelle ich einen detaillierten Projektplan — was auf der Website sein wird, wie viele Seiten, welche Technologie, was es kostet und wann es fertig ist. Dies ist eine bezahlte Leistung. Entscheiden Sie sich für die Umsetzung, wird dieser Betrag vom Projektpreis abgezogen.'],
-            ['heading' => 'Entwicklung mit Ihrem Feedback', 'text' => 'Ich halte Sie über den Fortschritt informiert und beziehe Sie in wichtige Entscheidungen ein. Ihre Perspektive ist Teil des Prozesses — das Ergebnis entspricht dem, was Sie sich gewünscht haben.'],
-            ['heading' => 'Support auch nach dem Launch', 'text' => 'Ich bin auch nach dem Launch für Sie da. Kleine Anpassungen, technische Hilfe oder Projektweiterentwicklung — melden Sie sich, ich antworte immer bis zum nächsten Tag.'],
+            ['heading' => 'Erstkontakt',                      'text' => 'Erzählen Sie mir von Ihrem Projekt. Unverbindlich. Wir finden gemeinsam heraus, ob und wie ich helfen kann — und ich gebe Ihnen eine ehrliche Meinung, auch wenn eine Zusammenarbeit keinen Sinn ergibt.'],
+            ['heading' => 'Maßgeschneiderte Spezifikation',   'text' => 'Wenn eine Zusammenarbeit sinnvoll ist, erstelle ich einen detaillierten Projektplan — was auf der Website sein wird, wie viele Seiten, welche Technologie, was es kostet und wann es fertig ist. Den Preis vereinbaren wir vorab.'],
+            ['heading' => 'Entwicklung mit Ihrem Feedback',   'text' => 'Ich halte Sie über den Fortschritt informiert und beziehe Sie in wichtige Entscheidungen ein. Ihre Perspektive ist Teil des Prozesses — das Ergebnis entspricht dem, was Sie sich gewünscht haben.'],
+            ['heading' => 'Support auch nach dem Launch',     'text' => 'Ich stehe auch nach dem Launch zur Verfügung. Kleine Anpassungen, technische Hilfe oder Projektweiterentwicklung — melden Sie sich, ich antworte an Werktagen.'],
         ],
     ],
 
@@ -149,28 +150,20 @@ Ich programmiere nicht mit WordPress. Keine Drittanbieter-Plugins, keine Sicherh
         'heading'    => 'Antworten ohne Marketing-Jargon',
         'items'      => [
             [
-                'q' => 'Was wird meine Website kosten?',
-                'a' => 'Das hängt vom Umfang ab. Eine einfache Webpräsentation beginnt ab ca. 800 €, anspruchsvollere Projekte bewegen sich im Bereich mehrerer Tausend Euro. Den genauen Preis nenne ich Ihnen nach einer kostenlosen Beratung, wenn ich Ihre Bedürfnisse verstanden habe. Auf der Preisseite finden Sie eine Übersicht der Richtwerte für verschiedene Projekttypen.',
+                'q' => 'Sie sind eine einzelne Person. Was passiert, wenn Sie krank werden oder aufhören?',
+                'a' => 'Der Code gehört Ihnen von Anfang an und liegt bei Ihnen. Er ist nicht bei mir oder einer Agentur gesperrt. Sollte etwas passieren, kann jeder Entwickler, der Laravel beherrscht, die Arbeit an der Website fortsetzen. Ich bereite die Übergabe so vor, dass die Website nie von einer einzelnen Person abhängt.',
             ],
             [
-                'q' => 'Wie lange dauert die Erstellung einer Website?',
-                'a' => 'Eine einfache Website schaffen wir in 3–4 Wochen nach Genehmigung des Briefings. Komplexere Projekte dauern 6–10 Wochen. Es hängt auch davon ab, wie schnell Sie Unterlagen (Texte, Fotos) liefern können. Ich nenne Ihnen immer einen realistischen Termin im Voraus — nicht einen, der gut klingt, sondern einen, den ich auch einhalte.',
+                'q' => 'Kann die Website ohne Fachmann aktualisiert werden?',
+                'a' => 'Ja. Wo es sinnvoll ist, dass Sie Inhalte selbst verwalten, füge ich eine einfache Inhaltsverwaltung hinzu. Sie können Texte, Fotos oder Produkte selbst bearbeiten. Bei der Übergabe zeige ich Ihnen, wie es geht.',
             ],
             [
-                'q' => 'Warum einen Freelancer statt einer Agentur wählen?',
-                'a' => 'Bei einer Agentur sind mehrere Personen für Ihr Projekt verantwortlich — Vertrieb, Projektmanager, Designer, Entwickler. Informationen gehen verloren, Verantwortung verwässert sich. Bei mir kommunizieren Sie direkt mit der Person, die die Website tatsächlich erstellt. Ein Ansprechpartner, eine Verantwortung — und ein viel kürzerer Weg von der Idee zum Ergebnis.',
+                'q' => 'Was wird es realistischerweise kosten? Was, wenn es teurer wird?',
+                'a' => 'Bevor ich beginne, erhalten Sie eine Spezifikation, in der steht, was ich baue und für wie viel. Den Preis vereinbaren wir vorab. Wenn Sie etwas Zusätzliches möchten, nenne ich Ihnen den Preis im Voraus und Sie entscheiden. Keine Überraschungen auf der Rechnung.',
             ],
             [
-                'q' => 'Kann ich die Website selbst bearbeiten?',
-                'a' => 'Das hängt von unserer Vereinbarung ab. Für Projekte mit Blog oder Galerie integriere ich eine einfache Admin-Oberfläche. Wenn Sie nur kleinere Text- oder Bildänderungen benötigen, kümmere ich mich im Rahmen des Supports ohne Zusatzkosten darum. Sie müssen kein kompliziertes System erlernen.',
-            ],
-            [
-                'q' => 'Was genau sind „wartungsfreie Webseiten"?',
-                'a' => 'Die meisten Webseiten laufen auf WordPress und benötigen regelmäßige Plugin-Updates — sonst werden sie anfällig oder funktionieren nicht mehr. Meine Webseiten sind in eigenem Code geschrieben, ohne Abhängigkeit von Drittanbieter-Plugins. Ergebnis: keine Wartungskosten, deutlich höhere Sicherheit und schnelleres Laden. Sie sparen bis zu 800 € im Jahr.',
-            ],
-            [
-                'q' => 'Was, wenn ich mit dem Ergebnis nicht zufrieden bin?',
-                'a' => 'Ich arbeite während des gesamten Prozesses mit Ihrem Feedback — ich warte nicht bis zum Ende und hoffe dann, dass es Ihnen gefällt. Ein klares Briefing, regelmäßige Kommunikation und laufende Vorschauen stellen sicher, dass das Ergebnis Ihren Erwartungen entspricht. Zufriedene Kunden sind die Grundlage meines Geschäfts — den Beweis dafür finden Sie in den Google-Bewertungen.',
+                'q' => 'Warum mehr bezahlen, wenn ein Bekannter eine Website aus einer Vorlage für viel weniger baut?',
+                'a' => 'Eine Vorlage-Website für wenig Geld ergibt Sinn, wenn Sie nur eine Visitenkarte im Internet brauchen. Ich baue Websites in eigenem Code, genau angepasst an die Funktionsweise Ihres Unternehmens. Ich verwende kein WordPress und keine fertigen Add-ons von Dritten, durch die Websites mit der Zeit kaputt gehen und ständig repariert werden müssen. Meine Website ist wartungsfrei und sicherer.',
             ],
         ],
     ],
@@ -178,12 +171,12 @@ Ich programmiere nicht mit WordPress. Keine Drittanbieter-Plugins, keine Sicherh
     'price' => [
         'subheading'  => 'Transparente Preise',
         'heading'     => 'Sie wissen genau, worauf Sie sich einlassen',
-        'description' => 'Faire Preise ohne versteckte Gebühren. Die Richtwerte geben Ihnen vor unserem ersten Gespräch ein klares Bild der erforderlichen Investition.',
+        'description' => 'Meine Preise sind in Bänder nach Projekttyp eingeteilt. Eine Übersicht der Richtwerte finden Sie in der Preisliste.',
         'cta'         => 'Preisliste anzeigen',
     ],
 
     'cta' => [
-        'heading'   => 'Bereit anzufangen? Die Beratung ist kostenlos.',
+        'heading'   => 'Lassen Sie uns besprechen, was Sie brauchen.',
         'quotation' => 'Angebot anfordern',
         'message'   => 'Oder Nachricht senden',
     ],

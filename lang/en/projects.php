@@ -4,12 +4,13 @@ return [
 
     'meta' => [
         'title'       => 'Projects — Ondřej Kriška',
-        'description' => 'Examples of implemented projects — websites, web applications. Get inspired and imagine your successful project.',
+        'description' => 'Websites and apps I have built and that are running today. You can click any of them and see how it works live.',
     ],
 
     'subheading'       => 'Implemented',
     'heading'          => 'PROJECTS',
-    'intro'            => 'Let yourself be inspired by samples of my work and imagine what your successful project will look like. I always work so that clients like to come back to me.',
+    'intro'            => 'These are websites I have built and that are running today. You can click any of them and see how it works live.',
+    'intro_cta'        => 'I want a similar project',
 
     'filter_all'       => 'All',
     'filter_websites'  => 'Websites',
@@ -19,63 +20,41 @@ return [
     'info_client'      => 'Client',
     'info_date'        => 'Date',
     'info_categories'  => 'Categories',
-    'info_price'       => 'Indicative Price',
+
+    // Projects list
+    'list' => [
+        'subheading' => 'Running live',
+        'heading'    => 'Selected work',
+        'field'      => 'Field',
+        'live'       => 'View live',
+        'detail'     => 'Project detail',
+    ],
+
+    // Project detail
+    'detail' => [
+        'brief'    => 'Brief',
+        'built'    => 'What I built',
+        'features' => 'What the site does',
+        'result'   => 'Result',
+        'live'     => 'View live',
+        'internal' => 'Internal project, not publicly available.',
+        'back'     => 'Back to projects',
+    ],
 
     'why_me' => [
         'subheading' => 'This is how I do it',
         'heading'    => 'I put the following into projects',
         'items'      => [
             ['title' => 'Expertise and Practice',  'description' => 'Thanks to 18 years of experience at Toyota, I have unique expertise in process optimization and web application development.'],
-            ['title' => 'Stability and Robustness','description' => 'I do not stick third-party plugins of limited CMS. I write robust code, which brings stability to your application.'],
+            ['title' => 'Stability and Robustness','description' => 'I do not build from kits and third-party add-ons that keep breaking. I write robust code that brings stability to your application.'],
             ['title' => 'Thorough Testing',        'description' => 'I leave nothing to chance. I test apps and websites during development and after its completion.'],
             ['title' => 'Speed and Design',        'description' => 'Priority is given to fast loading and modern design, which ensures a positive first impression and a pleasant user experience.'],
-            ['title' => 'Customized Solutions',    'description' => 'Each project is unique to me and I always look for the best solution adapted to the specific needs and goals of each client.'],
-            ['title' => 'Emphasis on Detail',      'description' => 'I always pay close attention to details that can be decisive for the success of your project.'],
+            ['title' => 'Customized Solutions',    'description' => 'I treat each project as unique and look for the best solution adapted to the specific needs and goals of the client.'],
+            ['title' => 'Emphasis on Detail',      'description' => 'I always pay close attention to the details that matter.'],
         ],
     ],
 
     'cta_all' => 'Check out my other projects',
-
-    'snapshots' => [
-        'subheading' => 'What already works',
-        'heading'    => 'Result snapshots from similar projects',
-        'desc'       => 'Real scenarios where we removed conversion friction and made the path to contact simpler.',
-        'items'      => [
-            [
-                'type'     => 'Company website',
-                'timeline' => '4 weeks',
-                'title'    => 'New website instead of an outdated presentation',
-                'summary'  => 'The old site looked outdated, loaded slowly and had no clear CTA. The new structure directed visitors straight to inquiry.',
-                'outcomes' => [
-                    'Clear service offer in the first screen.',
-                    'Direct flow to contact without unnecessary detours.',
-                    'Higher credibility through consistent messaging.',
-                ],
-            ],
-            [
-                'type'     => 'Web application',
-                'timeline' => '7 weeks',
-                'title'    => 'Client workflow without manual admin work',
-                'summary'  => 'Operations were slowed by emails and spreadsheets. Moving workflow into an app reduced errors and improved response speed.',
-                'outcomes' => [
-                    'Faster response times with centralized data.',
-                    'Fewer manual steps and lower operating load.',
-                    'Better real-time control over project status.',
-                ],
-            ],
-            [
-                'type'     => 'Custom e-shop',
-                'timeline' => '6 weeks',
-                'title'    => 'E-shop without vendor lock-in',
-                'summary'  => 'The previous setup depended on plugins and frequent fixes. The new e-shop brought stability and predictable costs.',
-                'outcomes' => [
-                    'Removed recurring update-related outages.',
-                    'Clear checkout flow without distracting elements.',
-                    'Technical SEO prepared from day one.',
-                ],
-            ],
-        ],
-    ],
 
     'fit' => [
         'subheading'    => 'Quick qualification',

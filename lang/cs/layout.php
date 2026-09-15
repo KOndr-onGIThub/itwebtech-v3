@@ -8,6 +8,7 @@ return [
         'price'    => 'Ceník',
         'projects' => 'Projekty',
         'blog'     => 'Blog',
+        'about'    => 'O mně',
     ],
 
     'cta' => [

@@ -25,16 +25,29 @@
                         <dt>{{ __('contact.address_label') }}</dt>
                         <dd>
                             Ondřej Kriška<br>
-                            Česká republika
+                            Dunajovská 116<br>
+                            691 81 Březí<br>
+                            IČO: 19231407<br>
+                            Nejsem plátce DPH.
                         </dd>
                     </div>
 
                     <div>
                         <dt>E-mail</dt>
                         <dd>
-                            <a href="mailto:ok@itwebtech.cz">ok@itwebtech.cz</a>
+                            <a href="mailto:ok@ondraweb.cz">ok@ondraweb.cz</a>
                         </dd>
                     </div>
+
+                    {{-- TODO ONDRA: telefonní číslo — zobrazí se automaticky, jakmile je CONTACT_PHONE vyplněné --}}
+                    @if(config('contact.phone'))
+                    <div>
+                        <dt>{{ __('contact.tel') }}</dt>
+                        <dd>
+                            <a href="tel:{{ preg_replace('/\s+/', '', config('contact.phone')) }}">{{ config('contact.phone') }}</a>
+                        </dd>
+                    </div>
+                    @endif
 
                     <div>
                         <dt>{{ __('contact.hours_label') }}</dt>

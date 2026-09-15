@@ -8,7 +8,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | When configured, the landing page is mounted on the root of this domain.
-    | Example: weby.itwebtech.cz
+    | Example: weby.ondraweb.cz
     |
     */
 

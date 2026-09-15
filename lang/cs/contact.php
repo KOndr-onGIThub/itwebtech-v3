@@ -11,8 +11,8 @@ return [
     'heading'             => 'Zavolejte nebo napište a já se ozvu zpět',
     'address_label'       => 'Adresa',
     'hours_label'         => 'Dostupnost',
-    'open_hours'          => 'Po–Pá: 9:00–19:00<br>So–Ne: 12:00–17:00',
-    'cta_consultation'    => 'Naplánovat online schůzku',
+    'open_hours'          => 'Na zprávy odpovídám v pracovní dny, obvykle do dvou pracovních dnů.',
+    'cta_consultation'    => 'Napište mi',
 
     'form_heading'        => 'Kontaktní formulář',
     'form_subheading'     => 'Získejte zdarma a nezávazně nabídku nebo zašlete dotaz',

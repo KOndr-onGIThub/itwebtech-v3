@@ -8,6 +8,7 @@ return [
         'price'    => 'Price',
         'projects' => 'Projects',
         'blog'     => 'Blog',
+        'about'    => 'About',
     ],
 
     'cta' => [

@@ -45,7 +45,7 @@
 
             <aside class="landing-hero__aside" data-reveal>
                 <x-responsive-image
-                    path="hero/itwebtech_3.webp"
+                    path="hero/hero-uvod.webp"
                     alt="Ondřej Kriška"
                     sizes="(min-width: 1024px) 420px, 100vw"
                     loading="eager"

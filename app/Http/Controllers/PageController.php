@@ -9,6 +9,11 @@ class PageController extends Controller
         return view('pages.home');
     }
 
+    public function about()
+    {
+        return view('pages.about');
+    }
+
     public function contact()
     {
         return view('pages.contact');
@@ -26,25 +31,39 @@ class PageController extends Controller
 
     public function projects()
     {
-        // TODO: load projects from DB
-        return view('pages.projects');
+        return view('pages.projects', [
+            'projects' => config('projects.items', []),
+        ]);
     }
 
     public function project(string $url)
     {
-        // TODO: load project by $url from DB
-        abort(404);
+        $projects = config('projects.items', []);
+
+        abort_unless(isset($projects[$url]), 404);
+
+        return view('pages.project', [
+            'slug'    => $url,
+            'project' => $projects[$url],
+        ]);
     }
 
     public function blog()
     {
-        // TODO: load articles from DB
-        return view('pages.blog');
+        return view('pages.blog', [
+            'articles' => config('blog.items', []),
+        ]);
     }
 
     public function article(string $slug)
     {
-        // TODO: load article by $slug from DB
-        abort(404);
+        $article = config('blog.items.' . $slug);
+
+        abort_unless($article !== null, 404);
+
+        return view('pages.article', [
+            'slug'    => $slug,
+            'article' => $article,
+        ]);
     }
 }

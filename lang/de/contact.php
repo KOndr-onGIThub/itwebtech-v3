@@ -11,8 +11,8 @@ return [
     'heading'             => 'Rufen Sie an oder schreiben Sie und ich melde mich zurück',
     'address_label'       => 'Adresse',
     'hours_label'         => 'Verfügbarkeit',
-    'open_hours'          => 'Mo–Fr: 9:00–19:00<br>Sa–So: 12:00–17:00',
-    'cta_consultation'    => 'Beratungsgespräch vereinbaren',
+    'open_hours'          => 'Ich antworte an Werktagen, in der Regel innerhalb von zwei Arbeitstagen.',
+    'cta_consultation'    => 'Schreiben Sie mir',
 
     'form_heading'        => 'Kontaktformular',
     'form_subheading'     => 'Erhalten Sie ein kostenloses, unverbindliches Angebot oder senden Sie eine Anfrage',
