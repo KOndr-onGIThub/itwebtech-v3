@@ -26,10 +26,10 @@
                         {{ \Carbon\Carbon::parse($article['published_at'])->translatedFormat('j. F Y') }}
                     </time>
                     <h2 class="blog-article-title">
-                        <a href="{{ lroute('article', ['slug' => $slug]) }}">{{ $article['title'] }}</a>
+                        <a href="{{ lroute('article', null, ['slug' => $slug]) }}">{{ $article['title'] }}</a>
                     </h2>
                     <p class="blog-article-perex">{{ $article['meta_description'] }}</p>
-                    <a href="{{ lroute('article', ['slug' => $slug]) }}" class="blog-article-link">
+                    <a href="{{ lroute('article', null, ['slug' => $slug]) }}" class="blog-article-link">
                         Číst článek
                         <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
                     </a>
