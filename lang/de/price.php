@@ -4,76 +4,93 @@ return [
 
     'meta' => [
         'title'       => 'Preise — Ondřej Kriška',
-        'description' => 'Unverbindliche Preisbänder für Websites, Online-Shops und maßgeschneiderte Webanwendungen.',
+        'description' => 'Unverbindliche Preise für Webseiten, Online-Shops und Webanwendungen. Klare Vorstellung Ihrer Investition vor dem ersten Gespräch.',
     ],
 
     'subheading' => 'Unverbindliche Preise',
-    'heading'    => 'Klare Preise für jedes Projekt',
-    'intro'      => 'Jedes Projekt ist anders — den endgültigen Preis vereinbaren wir vorab. Diese Übersicht gibt Ihnen eine Vorstellung von den Preisbändern. Ich bin nicht der Günstigste und strebe das auch nicht an. Wenn Sie eine Website unter einem bestimmten Budget suchen, sage ich Ihnen direkt, dass ich wahrscheinlich nicht der Richtige bin.',
+    'heading'    => 'Sie wissen, worauf Sie sich einlassen — schon vor unserem ersten Gespräch.',
+    'intro'      => 'Jedes Projekt ist einzigartig — den genauen Preis erfahren Sie nach einer kostenlosen Beratung. Diese Übersicht gibt Ihnen schon vor dem ersten Gespräch eine klare Vorstellung, was es kosten wird.',
+
+    // OND-135 P2 iter 5 — Plan §3.1 Hero (Page-Mark + Amber-Akzent).
+    // OND-135 Bereinigung (2026-05-14): page_mark_index entfernt — Agency-
+    // Portfolio-Artefakt per CEO PR #78 Präzedenzfall (Home / Kontakt).
+    'hero' => [
+        'page_mark_label' => 'PREISE',
+        'upline'          => 'Kein „Auf Anfrage"-Versteckspiel.',
+        'heading_html'    => 'Drei Stufen,<br>ein <em>klarer Preis</em>.',
+        'subline'         => 'Starter €1.000, Standard €2.200, Custom ab €3.800. Die Rechnung entspricht dem Angebot.',
+    ],
+
+    // Sticky CTA — durchgehend sichtbar, „der Preis verschwindet nie".
+    'sticky_cta' => [
+        'label' => 'Stufe wählen',
+        'cta'   => 'Unverbindliches Angebot anfordern',
+    ],
 
     'popular'   => 'Beliebteste Wahl',
-    'quotation' => 'Unverbindliche Anfrage',
+    'quotation' => 'Angebot anfragen',
 
     'price_note' => 'unverbindlicher Preis',
 
+    // OND-136: Tier-Namen und Preise angeglichen an die CS-Taxonomie
+    // Startovní/Standard/Custom = 25/55/95 Tausend CZK → EUR-Umrechnung (CEO-bestätigter 1:25-Anker).
     'tiers' => [
         [
-            'name'    => 'Unternehmenswebsite',
-            'desc'    => 'Für Einzelunternehmer und kleine Unternehmen, die eine glaubwürdige Online-Präsenz benötigen.',
-            'price'   => '50.000–90.000 CZK',
+            'name'    => 'Starter',
+            'desc'    => 'Für Selbstständige und kleine Unternehmen, die eine glaubwürdige Online-Präsenz benötigen.',
+            'price'   => '1.000 €',
             'popular' => false,
             'features' => [
-                'Maßgeschneiderte Website, in der Regel bis zu 5 Seiten',
-                'Design, das auf Ihr Unternehmen abgestimmt ist',
-                'Sieht auf Mobilgeräten und Desktops gut aus',
+                'Bis zu 5 individuelle Seiten',
+                'Modernes responsives Design',
                 'Kontaktformular',
-                'Technische SEO-Grundlagen',
-                'Schnelles Laden',
+                'Technische SEO',
+                'Seitengeschwindigkeits-Optimierung',
                 '14 Tage Support nach dem Launch',
             ],
-            'cta' => 'Projekt anfragen',
+            'cta' => 'Unverbindliches Angebot anfordern',
         ],
         [
-            'name'    => 'Website mit CMS',
-            'desc'    => 'Für Unternehmen, die Inhalte selbst verwalten möchten oder eine mehrsprachige Website benötigen.',
-            'price'   => '90.000–150.000 CZK',
+            'name'    => 'Standard',
+            'desc'    => 'Für Unternehmen, die ihre Webseite als bestes Verkaufswerkzeug nutzen möchten.',
+            'price'   => '2.200 €',
             'popular' => true,
             'features' => [
-                'Umfangreichere maßgeschneiderte Website',
-                'Einfache Inhaltsverwaltung (Texte, Fotos, Produkte)',
-                'Blog oder Galerie',
+                'Bis zu 12 individuelle Seiten',
+                'Konversionsorientiertes Design',
+                'Blog oder Galerie mit Inhaltsverwaltung',
                 'Mehrsprachige Website',
-                'Analytics-Integration',
+                'Analytics und Konversionsmessung',
                 'Hosting und Domain für 1 Jahr kostenlos',
                 '1 Monat Support nach dem Launch',
             ],
-            'cta' => 'Diesen Plan wählen',
+            'cta' => 'Unverbindliches Angebot anfordern',
         ],
         [
-            'name'    => 'Online-Shop / Anwendung',
-            'desc'    => 'Für anspruchsvollere Projekte — Online-Shop, Buchungssystem oder maßgeschneiderte interne Anwendung.',
-            'price'   => 'ab 150.000 CZK',
+            'name'    => 'Custom',
+            'desc'    => 'Für anspruchsvolle Projekte ohne Kompromisse — Online-Shop, Buchungssystem oder Webanwendung.',
+            'price'   => 'ab 3.800 €',
             'popular' => false,
             'features' => [
-                'Umfang je nach Projektanforderungen',
+                'Unbegrenzter Projektumfang',
                 'Online-Shop oder Buchungssystem',
                 'Eigenes Verwaltungsinterface',
-                'Maßgeschneiderte interne Anwendung für Ihren Betrieb',
-                'Integration mit anderen Systemen, die Sie nutzen',
+                'Erweiterte SEO-Strategie mit Reporting',
+                'Integration externer Systeme',
                 '3 Monate Support nach dem Launch',
             ],
-            'cta' => 'Projekt anfragen',
+            'cta' => 'Unverbindliches Angebot anfordern',
         ],
     ],
 
-    'note' => 'Nicht umsatzsteuerpflichtig. Preise sind Endpreise.',
+    'note' => 'Kein Umsatzsteuerpflichtiger — die genannten Preise sind endgültig, es kommt nichts hinzu.',
 
     'guarantees' => [
         'heading' => 'Was in jedem Projekt enthalten ist',
         'items'   => [
             [
-                'title' => 'Wartungsfreie Websites',
-                'text'  => 'Kein WordPress, keine Drittanbieter-Plugins. Keine Kosten für regelmäßige Updates und Sicherheits-Patches.',
+                'title' => 'Wartungsfreie Webseiten',
+                'text'  => 'Kein WordPress, keine Drittanbieter-Plugins. Sparen Sie jährlich Tausende gegenüber WordPress — keine monatlichen Updates und keine Kosten für Sicherheits-Patches.',
             ],
             [
                 'title' => 'Festpreis ohne Überraschungen',
@@ -81,71 +98,75 @@ return [
             ],
             [
                 'title' => 'Direkte Kommunikation',
-                'text'  => 'Sie sprechen direkt mit mir — keine Verkäufer, keine Projektmanager, keine Koordinatoren. Ein Ansprechpartner, eine Verantwortung.',
+                'text'  => 'Sie sprechen direkt mit mir — keine Account-Manager, keine Projektkoordinatoren. Ein Ansprechpartner, eine Verantwortung.',
             ],
             [
                 'title' => 'Support nach dem Launch',
-                'text'  => 'Ich antworte an Werktagen, in der Regel innerhalb von zwei Arbeitstagen, auch noch Wochen und Monate nach der Projektübergabe. Kleine Anpassungen und technische Fragen sind immer willkommen.',
+                'text'  => 'Ich antworte innerhalb von 24 Stunden, auch noch Wochen und Monate nach der Projektübergabe. Kleine Anpassungen und technische Fragen sind immer willkommen.',
             ],
         ],
     ],
 
     'addons' => [
         'heading' => 'Zusätzliche Dienstleistungen',
-        'desc'    => 'Digitale Unterstützung auch nach dem Projektstart.',
+        'desc'    => 'Umfassende digitale Unterstützung auch nach dem Projektstart.',
         'items'   => [
             [
-                'name'  => 'SEO & Inhalte',
-                'price' => 'ab 4.500 CZK / Mo.',
-                'desc'  => 'Pflege der Website-Performance in Suchmaschinen und regelmäßige Inhalte.',
+                'name'  => 'SEO & Content-Marketing',
+                'price' => 'ab €180 / Mo.',
+                'desc'  => 'Keyword-Analyse, Content-Strategie, Leistungsüberwachung. Organische Sichtbarkeit, die auch ohne Werbebudget funktioniert.',
             ],
             [
                 'name'  => 'Social-Media-Management',
-                'price' => 'ab 9.900 CZK / Mo.',
-                'desc'  => 'Content-Erstellung, Planung und Veröffentlichung, damit das Unternehmen auch außerhalb der Website konsistent auftritt.',
+                'price' => 'ab €400 / Mo.',
+                'desc'  => 'Content-Erstellung, Planung und Veröffentlichung. Konsistente Präsenz, die das Vertrauen der Kunden aufbaut.',
             ],
             [
                 'name'  => 'Individuelle Webanwendung',
                 'price' => 'individuelles Angebot',
-                'desc'  => 'Lagerverwaltung, interne Systeme, Kundenportale. Der Preis richtet sich nach dem Projektumfang.',
+                'desc'  => 'Lagersysteme, interne Tools, Kundenportale. Der Preis richtet sich nach Komplexität und Umfang des Projekts.',
             ],
             [
-                'name'  => 'Grafik & Branding',
-                'price' => 'ab 4.800 CZK',
-                'desc'  => 'Logo, visuelle Identität, Banner. Für eine kohärente und einprägsame Markenpräsentation.',
+                'name'  => 'Grafikdesign & Branding',
+                'price' => 'ab €190',
+                'desc'  => 'Logo, visuelle Identität, Banner. Alles, was Sie für eine konsistente und einprägsame Markenpräsentation benötigen.',
             ],
         ],
     ],
 
     'compare' => [
         'heading' => 'Was Sie genau bekommen',
-        'tiers'   => ['Unternehmenswebsite', 'Website mit CMS', 'Online-Shop / Anwendung'],
+        'tiers'   => ['Starter', 'Standard', 'Custom'],
+        'tabs_aria'     => 'Preisstufe auswählen',
+        'included'      => 'Enthalten',
+        'not_included'  => 'Nicht enthalten',
         'groups'  => [
             [
                 'label' => 'Projektumfang',
                 'rows'  => [
-                    ['label' => 'Anzahl der Seiten', 'values' => ['bis 5', 'mehr', 'unbegrenzt']],
-                    ['label' => 'Maßgeschneidertes Design', 'values' => [true, true, true]],
+                    ['label' => 'Anzahl der Seiten', 'values' => ['bis zu 5', 'bis zu 12', 'unbegrenzt']],
+                    ['label' => 'Responsives Design', 'values' => [true, true, true]],
                     ['label' => 'Kontaktformular', 'values' => [true, true, true]],
                 ],
             ],
             [
-                'label' => 'Website-Funktionen',
+                'label' => 'Webseiten-Funktionen',
                 'rows'  => [
-                    ['label' => 'Inhaltsverwaltung (Blog, Galerie)', 'values' => [false, true, true]],
+                    ['label' => 'Blog oder Galerie mit Bearbeitung', 'values' => [false, true, true]],
                     ['label' => 'Mehrsprachige Website', 'values' => [false, true, true]],
                     ['label' => 'Buchungssystem', 'values' => [false, 'optional', true]],
                     ['label' => 'Online-Shop', 'values' => [false, false, true]],
                     ['label' => 'Eigene Verwaltung', 'values' => [false, false, true]],
-                    ['label' => 'Integration anderer Systeme', 'values' => [false, false, true]],
+                    ['label' => 'Integration externer Systeme', 'values' => [false, false, true]],
                 ],
             ],
             [
-                'label' => 'Suchmaschinen & Performance',
+                'label' => 'Marketing & Leistung',
                 'rows'  => [
-                    ['label' => 'Technische SEO-Grundlagen', 'values' => [true, true, true]],
-                    ['label' => 'Schnelles Laden', 'values' => [true, true, true]],
-                    ['label' => 'Besuchermessung', 'values' => [false, true, true]],
+                    ['label' => 'Technische SEO', 'values' => [true, true, true]],
+                    ['label' => 'Seitengeschwindigkeits-Optimierung', 'values' => [true, true, true]],
+                    ['label' => 'Analytics & Konversionsmessung', 'values' => [false, true, true]],
+                    ['label' => 'Erweiterte SEO-Strategie', 'values' => [false, false, true]],
                 ],
             ],
             [
@@ -160,9 +181,9 @@ return [
     ],
 
     'cta' => [
-        'heading' => 'Nicht sicher, was Sie genau brauchen?',
-        'desc'    => 'Schreiben Sie mir und schildern Sie Ihr Anliegen. Ich melde mich zurück und sage Ihnen ehrlich, was für Ihr Unternehmen sinnvoll ist — auch ob eine Zusammenarbeit überhaupt Sinn ergibt.',
-        'btn'     => 'Nachricht senden',
+        'heading' => 'Nicht sicher, was Sie brauchen?',
+        'desc'    => 'Die Beratung ist kostenlos und unverbindlich. In 30 Minuten sage ich Ihnen, was für Ihr Unternehmen sinnvoll ist — ehrlich, auch wenn das bedeutet, dass wir nicht zusammenarbeiten sollten.',
+        'btn'     => 'Kostenlose Beratung buchen',
     ],
 
 ];

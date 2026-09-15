@@ -1,3 +1,4 @@
+@props(['hreflangs' => []])
 @php
     $locale      = app()->getLocale();
     $currentPage = current_page();
@@ -39,21 +40,32 @@
             {{-- Right side: lang switcher + CTA + hamburger --}}
             <div class="navbar__right">
 
-                <div class="navbar__lang">
+                <div class="navbar__lang" role="group" aria-label="{{ __('layout.nav.lang_switcher') }}">
                     @foreach ($langLabels as $code => $label)
-                        <a href="{{ lroute($currentPage, $code) }}"
+                        <a href="{{ $hreflangs[$code] ?? lroute($currentPage, $code) }}"
+                           hreflang="{{ $code }}"
+                           lang="{{ $code }}"
+                           @if($locale === $code) aria-current="true" @endif
                            class="navbar__lang-item {{ $locale === $code ? 'navbar__lang-item--active' : '' }}">
                             {{ $label }}
                         </a>
                     @endforeach
                 </div>
 
-                <a href="{{ lroute('contact') }}" class="btn btn-primary navbar__cta">
-                    {{ __('layout.cta.contact') }}
-                </a>
+                <x-phone-cta class="navbar__phone" />
+
+                <button
+                    type="button"
+                    class="btn btn-primary navbar__cta"
+                    @click="$dispatch('open-consultation-modal')"
+                    data-analytics="sticky_cta_click"
+                >
+                    {{ __('home.sticky.cta') }}
+                </button>
 
                 <button class="navbar__hamburger"
                         @click="open = true"
+                        :aria-expanded="open.toString()"
                         aria-label="Open menu">
                     <span class="navbar__hamburger-line"></span>
                     <span class="navbar__hamburger-line"></span>
@@ -93,16 +105,19 @@
                 <img src="{{ asset('img/logo/logo_main_svg.svg') }}" alt="{{ config('app.name') }}" class="navbar__logo-img" width="274" height="58">
             </a>
             <button class="drawer__close" @click="open = false" aria-label="Close menu">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                     <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
             </button>
         </div>
 
         {{-- Language switcher in drawer --}}
-        <div class="drawer__lang">
+        <div class="drawer__lang" role="group" aria-label="{{ __('layout.nav.lang_switcher') }}">
             @foreach ($langLabels as $code => $label)
-                <a href="{{ lroute($currentPage, $code) }}"
+                <a href="{{ $hreflangs[$code] ?? lroute($currentPage, $code) }}"
+                   hreflang="{{ $code }}"
+                   lang="{{ $code }}"
+                   @if($locale === $code) aria-current="true" @endif
                    class="navbar__lang-item {{ $locale === $code ? 'navbar__lang-item--active' : '' }}">
                     {{ $label }}
                 </a>
@@ -123,12 +138,15 @@
             @endforeach
 
             <div class="drawer__cta">
-                <a href="{{ lroute('contact') }}"
-                   class="btn btn-primary"
-                   style="justify-content: center;"
-                   @click="open = false">
-                    {{ __('layout.cta.contact') }}
-                </a>
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    @click="open = false; $dispatch('open-consultation-modal')"
+                    data-analytics="sticky_cta_click"
+                >
+                    {{ __('home.sticky.cta') }}
+                </button>
+                <x-phone-cta class="drawer__phone" />
             </div>
         </nav>
 

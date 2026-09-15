@@ -3,14 +3,79 @@
 @section('title', __('price.meta.title'))
 @section('description', __('price.meta.description'))
 
+{{-- OND-137 P4 §SEO: Service JSON-LD per tier + BreadcrumbList.
+     JSON-LD pole se sestavují v PHP bloku a echují přes
+     předvypočtenou stringovou proměnnou. Inline schema-context klíč
+     uvnitř json_encode echo bloku naráží na Blade direktivu
+     (Laravel 12 CompilesContexts) — token by se přepsal na PHP kód
+     a JSON klíč by byl zničený. PHP blok Blade neparsuje na direktivy. --}}
+@push('jsonld')
+@php
+    // OND-137 P4 §SEO bug-fix: locale → priceCurrency mapping, ať Service
+    // JSON-LD pro EN/DE nehlásí EUR magnitudu s priceCurrency=CZK.
+    $priceCurrency = ['cs' => 'CZK', 'en' => 'EUR', 'de' => 'EUR'][app()->getLocale()] ?? 'CZK';
+
+    $breadcrumbLd = [
+        '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            ['@type' => 'ListItem', 'position' => 1, 'name' => __('layout.nav.home'),  'item' => lroute('home')],
+            ['@type' => 'ListItem', 'position' => 2, 'name' => __('layout.nav.price'), 'item' => lroute('price')],
+        ],
+    ];
+    $breadcrumbJson = json_encode($breadcrumbLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+    $serviceJsons = [];
+    foreach (__('price.tiers') as $tier) {
+        $tierPriceNum = (int) preg_replace('/[^0-9]/', '', $tier['price']);
+        $serviceLd = [
+            '@context' => 'https://schema.org',
+            '@type' => 'Service',
+            'serviceType' => 'Web development',
+            'name' => $tier['name'],
+            'description' => $tier['desc'],
+            'provider' => [
+                '@type' => 'Organization',
+                'name' => config('app.name'),
+                'url'  => url('/'),
+            ],
+            'areaServed' => ['CZ', 'SK', 'DE', 'AT'],
+            'offers' => [
+                '@type' => 'Offer',
+                'price' => $tierPriceNum,
+                'priceCurrency' => $priceCurrency,
+                'url' => lroute('price'),
+            ],
+        ];
+        $serviceJsons[] = json_encode($serviceLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    }
+@endphp
+<script type="application/ld+json">
+{!! $breadcrumbJson !!}
+</script>
+@foreach ($serviceJsons as $serviceJson)
+<script type="application/ld+json">
+{!! $serviceJson !!}
+</script>
+@endforeach
+@endpush
+
 @section('content')
 
-{{-- Page hero --}}
-<div class="page-hero">
+{{-- Page hero — OND-135 iter 5: plán §3.1 design DNA (page-mark + display + amber accent) --}}
+<div class="page-hero page-hero--price">
     <div class="container-site">
-        <p class="section-subheading">{{ __('price.subheading') }}</p>
-        <h1>{{ __('price.heading') }}</h1>
-        <p>{{ __('price.intro') }}</p>
+        {{-- OND-135 cleanup (2026-05-14): page_mark_index span odebrán jako
+             agency-portfolio artefakt (itwebtech nemá „pages" hierarchii) —
+             aplikováno per CEO PR #78 precedent (home) + PR #80 (kontakt). --}}
+        <p class="page-hero__page-mark">
+            <span class="page-hero__page-mark-label">{{ __('price.hero.page_mark_label') }}</span>
+        </p>
+        <p class="page-hero__upline">{{ __('price.hero.upline') }}</p>
+        <h1 class="page-hero__heading">
+            {!! __('price.hero.heading_html') !!}
+        </h1>
+        <p class="page-hero__subline">{{ __('price.hero.subline') }}</p>
     </div>
 </div>
 
@@ -20,7 +85,15 @@
 
         <div class="pricing-tiers" data-reveal-group>
             @foreach (__('price.tiers') as $tier)
-            <article class="pricing-tier {{ $tier['popular'] ? 'pricing-tier--featured' : '' }}">
+            @php
+                // OND-137 P4 §6: pricing_tier_shown custom dimension (25/55/95) —
+                // extrahované z tier['price'] (např. "25 000 Kč" → "25").
+                $tierShown = (int) preg_replace('/[^0-9]/', '', $tier['price']);
+                $tierShown = (string) (int) ($tierShown / 1000); // 25000 → "25"
+            @endphp
+            <article class="pricing-tier {{ $tier['popular'] ? 'pricing-tier--featured' : '' }}"
+                     data-analytics-view="pricing_tier_view"
+                     data-analytics-props='{"pricing_tier_shown":"{{ $tierShown }}"}'>
 
                 @if ($tier['popular'])
                 <span class="pricing-tier__badge">{{ __('price.popular') }}</span>
@@ -42,7 +115,10 @@
                     @endforeach
                 </ul>
 
-                <a href="{{ lroute('contact') }}" class="btn {{ $tier['popular'] ? 'btn-primary' : 'btn-secondary' }} pricing-tier__cta">
+                <a href="{{ lroute('contact') }}"
+                   class="btn {{ $tier['popular'] ? 'btn-primary' : 'btn-secondary' }} pricing-tier__cta"
+                   data-analytics="pricing_tier_cta_primary_click"
+                   data-analytics-props='{"pricing_tier_shown":"{{ $tierShown }}"}'>
                     {{ $tier['cta'] }}
                     <x-icon.arrow-right class="w-4 h-4 shrink-0" />
                 </a>
@@ -90,9 +166,13 @@
                         @foreach ($row['values'] as $vi => $val)
                         <td class="{{ $vi === 1 ? 'is-featured' : '' }}">
                             @if ($val === true)
-                                <span class="pricing-compare__yes"><x-icon.circle-check-big class="w-4 h-4" /></span>
+                                <span class="pricing-compare__yes">
+                                    <x-icon.circle-check-big class="w-4 h-4" />
+                                    <span class="sr-only">{{ __('price.compare.included') }}</span>
+                                </span>
                             @elseif ($val === false)
-                                <span class="pricing-compare__no">—</span>
+                                <span class="pricing-compare__no" aria-hidden="true">—</span>
+                                <span class="sr-only">{{ __('price.compare.not_included') }}</span>
                             @else
                                 <span class="pricing-compare__val">{{ $val }}</span>
                             @endif
@@ -112,13 +192,17 @@
 
             {{-- Tab header --}}
             <div class="pcm-header">
-                <div class="pcm-tabs" role="tablist">
+                <div class="pcm-tabs" role="tablist" aria-label="{{ __('price.compare.tabs_aria') }}">
                     @foreach ($compareTiers as $i => $tier)
                     <button class="pcm-tab"
+                            id="pcm-tab-{{ $i }}"
                             :class="{ 'is-active': active === {{ $i }} }"
                             @click="active = {{ $i }}"
+                            type="button"
                             role="tab"
-                            :aria-selected="active === {{ $i }}">
+                            aria-controls="pcm-panel"
+                            :aria-selected="(active === {{ $i }}).toString()"
+                            :tabindex="active === {{ $i }} ? 0 : -1">
                         {{ $tier }}
                     </button>
                     @endforeach
@@ -126,28 +210,37 @@
                 <div class="pcm-price" x-text="prices[active]"></div>
             </div>
 
-            {{-- Feature rows --}}
-            @foreach ($compareGroups as $group)
-            <div class="pcm-group">{{ $group['label'] }}</div>
-            @foreach ($group['rows'] as $row)
-            <div class="pcm-row">
-                <span class="pcm-feature">{{ $row['label'] }}</span>
-                <span class="pcm-value-wrap">
-                    @foreach ($row['values'] as $vi => $val)
-                    <span x-show="active === {{ $vi }}">
-                        @if ($val === true)
-                            <span class="pricing-compare__yes"><x-icon.circle-check-big class="w-4 h-4" /></span>
-                        @elseif ($val === false)
-                            <span class="pricing-compare__no">—</span>
-                        @else
-                            <span class="pricing-compare__val">{{ $val }}</span>
-                        @endif
+            {{-- Feature rows (single dynamic tabpanel labelled by the active tab). --}}
+            <div id="pcm-panel"
+                 role="tabpanel"
+                 :aria-labelledby="'pcm-tab-' + active"
+                 aria-live="polite">
+                @foreach ($compareGroups as $group)
+                <div class="pcm-group">{{ $group['label'] }}</div>
+                @foreach ($group['rows'] as $row)
+                <div class="pcm-row">
+                    <span class="pcm-feature">{{ $row['label'] }}</span>
+                    <span class="pcm-value-wrap">
+                        @foreach ($row['values'] as $vi => $val)
+                        <span x-show="active === {{ $vi }}">
+                            @if ($val === true)
+                                <span class="pricing-compare__yes">
+                                    <x-icon.circle-check-big class="w-4 h-4" aria-hidden="true" focusable="false" />
+                                    <span class="sr-only">{{ __('price.compare.included') }}</span>
+                                </span>
+                            @elseif ($val === false)
+                                <span class="pricing-compare__no" aria-hidden="true">—</span>
+                                <span class="sr-only">{{ __('price.compare.not_included') }}</span>
+                            @else
+                                <span class="pricing-compare__val">{{ $val }}</span>
+                            @endif
+                        </span>
+                        @endforeach
                     </span>
-                    @endforeach
-                </span>
+                </div>
+                @endforeach
+                @endforeach
             </div>
-            @endforeach
-            @endforeach
 
         </div>
 
@@ -155,7 +248,7 @@
 </section>
 
 {{-- What's included --}}
-<section class="section-wrapper section-alt" data-reveal>
+<section class="section-wrapper" data-reveal>
     <div class="container-site">
         <header class="section-header">
             <h2>{{ __('price.guarantees.heading') }}</h2>
@@ -198,19 +291,37 @@
     </div>
 </section>
 
+{{-- Sticky CTA — plán „cena nikdy nezmizí" (OND-135 iter 5).
+     Zobrazí se po prvním scroll-passu hero, skryje se v final CTA sekci. --}}
+<aside class="price-sticky-cta"
+       x-data="{ visible: false }"
+       x-init="
+         const trigger = () => { visible = window.scrollY > 480 && window.scrollY < (document.body.scrollHeight - window.innerHeight - 320); };
+         trigger();
+         window.addEventListener('scroll', trigger, { passive: true });
+         window.addEventListener('resize', trigger, { passive: true });
+       "
+       x-show="visible"
+       x-transition.opacity.duration.300ms
+       x-cloak
+       aria-label="{{ __('price.sticky_cta.label') }}">
+    <a href="{{ lroute('contact') }}" class="price-sticky-cta__btn">
+        <span class="price-sticky-cta__label">{{ __('price.sticky_cta.cta') }}</span>
+        <x-icon.arrow-right class="w-4 h-4 shrink-0" />
+    </a>
+</aside>
+
 {{-- CTA --}}
-<section class="section-wrapper section-cta" data-reveal>
-    <div class="container-site" style="flex-direction:column;gap:1.25rem;">
-        <h2 style="font-size:clamp(1.75rem,3.5vw,2.5rem);letter-spacing:-0.025em;margin-bottom:0.5rem;width:100%;text-align:center;">
-            {{ __('price.cta.heading') }}
-        </h2>
-        <p style="max-width:540px;text-align:center;color:rgba(241,245,249,.8);font-size:1.0625rem;line-height:1.7;">
-            {{ __('price.cta.desc') }}
-        </p>
-        <a href="{{ lroute('contact') }}" class="btn btn-primary">
-            {{ __('price.cta.btn') }}
-            <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-        </a>
+<section class="section-wrapper section-cta price-cta" data-reveal>
+    <div class="container-site">
+        <div class="price-cta__inner">
+            <h2 class="final-cta-heading">{{ __('price.cta.heading') }}</h2>
+            <p class="price-cta__desc">{{ __('price.cta.desc') }}</p>
+            <a href="{{ lroute('contact') }}" class="btn btn-primary">
+                {{ __('price.cta.btn') }}
+                <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
+            </a>
+        </div>
     </div>
 </section>
 

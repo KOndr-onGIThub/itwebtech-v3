@@ -115,4 +115,17 @@ return [
         'name' => env('MAIL_FROM_NAME', env('APP_NAME', 'Laravel')),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Contact Form Recipient (OND-173)
+    |--------------------------------------------------------------------------
+    |
+    | Adresa, na kterou chodí notifikace z kontaktního formuláře (/kontakt).
+    | Přepiš přes `CONTACT_TO` env. Default odpovídá `ok@ondraweb.cz`
+    | uvedenému v chybové hlášce formuláře (klíč message_error v lang/<locale>/contact.php).
+    |
+    */
+
+    'contact_to' => env('CONTACT_TO', 'ok@ondraweb.cz'),
+
 ];

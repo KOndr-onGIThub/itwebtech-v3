@@ -1,4 +1,6 @@
 import './bootstrap';
+import './cookies';
+import './analytics';
 import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;
@@ -101,33 +103,35 @@ Alpine.data('fileDropZone', () => ({
 // ---------------------------------------------------------------------------
 Alpine.data('contactForm', () => ({
     loading: false,
+    submitted: false,
 
     async submit() {
         const form = this.$el;
         const data = new FormData(form);
         this.loading = true;
 
-        // Dynamic import — Swal is loaded only on first form submission
-        const { default: Swal } = await import('sweetalert2');
-
         try {
             await window.axios.post('/contact', data);
 
-            await Swal.fire({
-                icon: 'success',
-                title: 'Sent!',
-                text: 'Your message has been received. We will get back to you within 24 business hours.',
-                confirmButtonColor: '#1B2E5A',
-                confirmButtonText: 'Close',
-            });
+            // OND-137 P4 §6: analytics form_submit event (Jack §6) — dispatch
+            // CustomEvent který analytics.js přemapuje na canonical `form_submit`.
+            window.dispatchEvent(new CustomEvent('contact-form-submit-success'));
 
+            // OND-136: in-DOM thank-you state replaces the form on success.
+            this.submitted = true;
             form.reset();
             // Notify all file drop zones to reset their state
             form.querySelectorAll('[x-data]').forEach(el => {
                 el.dispatchEvent(new CustomEvent('file-drop:reset'));
             });
+            // Scroll the thanks block into view for visibility.
+            this.$nextTick(() => {
+                this.$root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
 
         } catch (err) {
+            // Lazy-load SweetAlert only for the error path.
+            const { default: Swal } = await import('sweetalert2');
             const errors = err.response?.data?.errors;
             let msg = 'The form could not be submitted. Please try again.';
             if (errors) {
@@ -146,6 +150,69 @@ Alpine.data('contactForm', () => ({
         } finally {
             this.loading = false;
         }
+    },
+}));
+
+// ---------------------------------------------------------------------------
+// Consultation modal — video + Calendly CTA
+// ---------------------------------------------------------------------------
+Alpine.data('consultationModal', () => ({
+    open: false,
+    videoReady: false,
+    playing: false,
+
+    openModal() {
+        this.open = true;
+        this.videoReady = true;
+        // Prevent body scroll
+        document.body.style.overflow = 'hidden';
+        // Focus the dialog on next tick
+        this.$nextTick(() => {
+            const dialog = this.$el.querySelector('[role="dialog"]');
+            if (dialog) dialog.focus({ preventScroll: true });
+        });
+    },
+
+    closeModal() {
+        this.open = false;
+        this.playing = false;
+        document.body.style.overflow = '';
+        // Pause & reset video if present
+        const video = this.$el.querySelector('video');
+        if (video) { video.pause(); video.currentTime = 0; }
+    },
+}));
+
+// ---------------------------------------------------------------------------
+// Portfolio filter — client-side filter pro listing /projekty
+// ---------------------------------------------------------------------------
+Alpine.data('portfolioFilter', ({ target = 'portfolio-grid', categories = [], counts = {} } = {}) => ({
+    active: 'all',
+    target,
+    categories,
+    counts,
+    visibleCount: counts.all ?? 0,
+
+    init() {
+        this.applyFilter();
+    },
+
+    setActive(category) {
+        this.active = category;
+        this.visibleCount = this.counts[category] ?? 0;
+        this.applyFilter();
+    },
+
+    applyFilter() {
+        const grid = document.getElementById(this.target);
+        if (!grid) return;
+
+        const cards = grid.querySelectorAll('[data-category]');
+        cards.forEach(card => {
+            const cat = card.dataset.category;
+            const visible = this.active === 'all' || cat === this.active;
+            card.dataset.filterHidden = visible ? 'false' : 'true';
+        });
     },
 }));
 
@@ -270,13 +337,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
+        // OND-123: cache progress bar šířku — bez cache každý timeupdate (≥4×/s)
+        // četl progress.clientWidth, což trigovalo forced reflow uvnitř playbacku.
+        let cachedBarW = progress.clientWidth - 24;
+        const recomputeBarW = () => { cachedBarW = progress.clientWidth - 24; };
+        window.addEventListener('resize', recomputeBarW, { passive: true });
+
         const updateProgress = () => {
             if (!video.duration) return;
             const pct = video.currentTime / video.duration;
             fill.style.width = (pct * 100) + '%';
-            // thumb position = offset from left edge of progress bar
-            const barW = progress.clientWidth - 24; // minus padding 2×12px
-            thumb.style.left = (12 + pct * barW) + 'px';
+            // thumb position = offset from left edge of progress bar (cached)
+            thumb.style.left = (12 + pct * cachedBarW) + 'px';
             timeEl.textContent = fmt(video.currentTime) + ' / ' + fmt(video.duration);
         };
 
@@ -341,45 +413,95 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Floating contact FAB — zobrazí se po 300px scrollu
+// Floating contact FAB — zobrazí se po 300px scrollu.
+// OND-123: scroll handler wrapped in rAF — odděluje read scrollY od zápisu
+// třídy, aby browser nebatchoval reflow uvnitř scroll eventu.
 document.addEventListener('DOMContentLoaded', () => {
     const fab = document.getElementById('contact-fab');
     if (!fab) return;
 
-    const toggle = () => fab.classList.toggle('is-visible', window.scrollY > 300);
-    toggle();
-    window.addEventListener('scroll', toggle, { passive: true });
+    let fabTicking = false;
+    const apply = () => {
+        fab.classList.toggle('is-visible', window.scrollY > 300);
+        fabTicking = false;
+    };
+    apply();
+    window.addEventListener('scroll', () => {
+        if (fabTicking) return;
+        fabTicking = true;
+        requestAnimationFrame(apply);
+    }, { passive: true });
 });
 
-// Smart navbar: hide on scroll down, show on scroll up + glass effect after scroll
+// Smart navbar: hide on scroll down, show on scroll up + glass effect after scroll.
+// OND-123: scroll handler je rAF-throttled — read scrollY zůstává v handleru,
+// ale class/style writes proběhnou v rAF tick. Eliminuje forced reflow
+// při rychlém scrollování (PSI mobile audit, plán OND-99 §9.1).
 document.addEventListener('DOMContentLoaded', () => {
     const navbar = document.querySelector('.navbar');
     if (!navbar) return;
 
     let lastScrollY = window.scrollY;
+    let navTicking = false;
 
-    const update = () => {
+    const apply = () => {
         const currentScrollY = window.scrollY;
 
-        // Glass/border effect after 20px scroll
+        // OND-123 follow-up: výhradně classList.toggle (žádné inline style writes
+        // ani reads). PSI forced reflow 1,2 s předtím — atribuce neukázala viník,
+        // tohle uzavírá nejtypičtější write path během scroll/rAF cyklu.
         navbar.classList.toggle('is-scrolled', currentScrollY > 20);
-
-        // Hide on scroll down, show on scroll up (only after passing navbar height)
-        if (currentScrollY > 80) {
-            if (currentScrollY > lastScrollY) {
-                navbar.style.transform = 'translateY(-100%)';
-            } else {
-                navbar.style.transform = '';
-            }
-        } else {
-            navbar.style.transform = '';
-        }
+        navbar.classList.toggle(
+            'is-hidden',
+            currentScrollY > 80 && currentScrollY > lastScrollY,
+        );
 
         lastScrollY = currentScrollY;
+        navTicking = false;
     };
 
     // Initial state
-    update();
+    apply();
 
-    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('scroll', () => {
+        if (navTicking) return;
+        navTicking = true;
+        requestAnimationFrame(apply);
+    }, { passive: true });
+});
+
+// ---------------------------------------------------------------------------
+// Reservanto widget — patch missing href on vendor-injected <a> (OND-123)
+// ---------------------------------------------------------------------------
+// Reservanto vendor skript injektuje <a class="reservanto-button …"> bez href,
+// PSI „Odkazy nelze procházet" → SEO score 92 → fail (cíl ≥ 95).
+//
+// Vendor skript přidá vlastní click handler s preventDefault → uživatelský
+// klik otevře modal, ne href. Cíl: dodat crawler-readable href + no-JS fallback.
+// Direct URL přichází z data-direct-url na wrapperu (config/site.booking).
+document.addEventListener('DOMContentLoaded', () => {
+    const widgets = document.querySelectorAll('.reservanto-widget');
+    if (!widgets.length) return;
+
+    const patchAnchors = () => {
+        widgets.forEach(widget => {
+            const href = widget.dataset.directUrl;
+            if (!href) return;
+            widget.querySelectorAll('a:not([href])').forEach(a => {
+                a.setAttribute('href', href);
+                a.setAttribute('rel', 'noopener');
+                a.setAttribute('target', '_blank');
+            });
+        });
+    };
+
+    // Vendor skript je `defer`, takže může injektovat <a> až po DOMContentLoaded.
+    // MutationObserver na každém widget kontejneru zachytí přidání <a> i pozdější
+    // re-rendery (např. když Reservanto resize-uje).
+    const observer = new MutationObserver(patchAnchors);
+    widgets.forEach(widget => {
+        observer.observe(widget, { childList: true, subtree: true });
+    });
+    // První pass — kdyby už byly injektnuté (race po defer scriptu)
+    patchAnchors();
 });

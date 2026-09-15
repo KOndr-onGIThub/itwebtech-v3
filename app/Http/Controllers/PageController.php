@@ -2,16 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
+use App\Models\Portfolio\PortfolioProject;
+use App\Models\Slugs\ArticleSlug;
+use Illuminate\Support\Facades\App;
+
 class PageController extends Controller
 {
     public function home()
     {
-        return view('pages.home');
-    }
+        // OND-120: 3 favority do sekce „Realizované projekty" (PitArena, BARANA, Nové interiéry).
+        // Pořadí drženo whitelistem slugů — sort_order v DB by mohl být jiný.
+        $featuredHomeProjects = collect();
 
-    public function about()
-    {
-        return view('pages.about');
+        if (config('site.features.show_portfolio_section')) {
+            $slugs = ['pitarena', 'barana', 'nove-interiery'];
+
+            $featuredHomeProjects = PortfolioProject::published()
+                ->whereIn('slug', $slugs)
+                ->with(['translations', 'screenshots'])
+                ->get()
+                ->sortBy(fn ($p) => array_search($p->slug, $slugs, true))
+                ->values();
+        }
+
+        return view('pages.home', compact('featuredHomeProjects'));
     }
 
     public function contact()
@@ -29,41 +44,163 @@ class PageController extends Controller
         return view('pages.privacy');
     }
 
+    /**
+     * OND-125: cookie policy stránka. Statický text v češtině, link na
+     * revokaci souhlasu (volá window.ItwebtechAnalytics.revokeConsent()).
+     */
+    public function cookies()
+    {
+        return view('pages.cookies');
+    }
+
     public function projects()
     {
-        return view('pages.projects', [
-            'projects' => config('projects.items', []),
-        ]);
+        $locale = App::getLocale();
+
+        $portfolioProjects = PortfolioProject::published()
+            ->with(['translations', 'screenshots', 'tags.translations'])
+            ->orderBy('sort_order')
+            ->orderByDesc('year')
+            ->get();
+
+        // Počty pro filtry kategorií
+        $counts = [
+            'all'         => $portfolioProjects->count(),
+            'website'     => $portfolioProjects->where('category', 'website')->count(),
+            'application' => $portfolioProjects->where('category', 'application')->count(),
+            'other'       => $portfolioProjects->where('category', 'other')->count(),
+        ];
+
+        return view('pages.projects', compact('portfolioProjects', 'locale', 'counts'));
     }
 
     public function project(string $url)
     {
-        $projects = config('projects.items', []);
+        $locale = App::getLocale();
 
-        abort_unless(isset($projects[$url]), 404);
+        $project = PortfolioProject::published()
+            ->where('slug', $url)
+            ->with([
+                'translations',
+                'screenshots.translations',
+                'tags.translations',
+                'outcomes.translations',
+            ])
+            ->first();
 
-        return view('pages.project', [
-            'slug'    => $url,
-            'project' => $projects[$url],
-        ]);
+        if (! $project) {
+            abort(404);
+        }
+
+        $translation = $project->translation($locale);
+
+        // Hreflang — slug je jazyk-neutrální, takže pro každý jazyk
+        // vygenerujeme stejný slug v příslušné jazykové routě.
+        $hreflangs = [];
+        foreach (['cs', 'en', 'de'] as $lang) {
+            $hreflangs[$lang] = route("{$lang}.project", ['url' => $project->slug]);
+        }
+
+        // Související projekty: 3 kusy, stejná kategorie, vyloučit aktuální.
+        // Pokud je < 3 v kategorii, doplníme z ostatních (featured první).
+        $sameCategory = PortfolioProject::published()
+            ->where('category', $project->category)
+            ->where('id', '!=', $project->id)
+            ->with(['translations', 'screenshots'])
+            ->orderByDesc('featured')
+            ->orderBy('sort_order')
+            ->orderByDesc('year')
+            ->limit(3)
+            ->get();
+
+        if ($sameCategory->count() < 3) {
+            $needed  = 3 - $sameCategory->count();
+            $excluded = $sameCategory->pluck('id')->push($project->id);
+            $extras  = PortfolioProject::published()
+                ->whereNotIn('id', $excluded)
+                ->with(['translations', 'screenshots'])
+                ->orderByDesc('featured')
+                ->orderBy('sort_order')
+                ->orderByDesc('year')
+                ->limit($needed)
+                ->get();
+            $relatedProjects = $sameCategory->concat($extras);
+        } else {
+            $relatedProjects = $sameCategory;
+        }
+
+        return view('pages.project', compact(
+            'project',
+            'translation',
+            'locale',
+            'hreflangs',
+            'relatedProjects'
+        ));
     }
 
     public function blog()
     {
-        return view('pages.blog', [
-            'articles' => config('blog.items', []),
-        ]);
+        $locale   = App::getLocale();
+        $articles = Article::where('published', true)
+            ->orderBy('position')
+            ->with(['translations', 'slugs'])
+            ->get();
+
+        return view('pages.blog', compact('articles', 'locale'));
     }
 
     public function article(string $slug)
     {
-        $article = config('blog.items.' . $slug);
+        $locale = App::getLocale();
 
-        abort_unless($article !== null, 404);
+        // OND-160: validate slug per locale (cross-slug duplicate content fix).
+        // Slug musí patřit článku v aktuální locale. Pokud slug existuje,
+        // ale patří jiné locale, 301 → kanonický slug pro current locale.
+        // Bez tohoto check byl každý článek dostupný pod ~3 slug variantami
+        // × 3 locale prefixy se self-canonical → duplicate content v Google.
+        $slugRecord = ArticleSlug::where('slug', $slug)
+            ->where('active', true)
+            ->first();
 
-        return view('pages.article', [
-            'slug'    => $slug,
-            'article' => $article,
-        ]);
+        if (! $slugRecord) {
+            abort(404);
+        }
+
+        $article = Article::where('id', $slugRecord->article_id)
+            ->where('published', true)
+            ->with(['translations', 'slugs'])
+            ->first();
+
+        if (! $article) {
+            abort(404);
+        }
+
+        // Aktivní slug pro aktuální locale — bez fallbacku na cs, protože
+        // pokud článek nemá svou jazykovou variantu, nesmí být dostupný pod
+        // cizí locale prefix (jinak by /en/blog/cs-slug renderoval cs obsah).
+        $canonical = $article->slugs
+            ->where('locale', $locale)
+            ->where('active', true)
+            ->first();
+
+        if (! $canonical) {
+            abort(404);
+        }
+
+        if ($canonical->slug !== $slug) {
+            return redirect()->route("{$locale}.article", ['slug' => $canonical->slug], 301);
+        }
+
+        $translation = $article->translation($locale);
+
+        $hreflangs = [];
+        foreach (['cs', 'en', 'de'] as $lang) {
+            $localeSlug = $article->slug($lang);
+            if ($localeSlug) {
+                $hreflangs[$lang] = route("{$lang}.article", ['slug' => $localeSlug]);
+            }
+        }
+
+        return view('pages.article', compact('article', 'translation', 'locale', 'hreflangs'));
     }
 }

@@ -27,3 +27,37 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+# ─────────────────────────────────────────────────────────────────────────────
+# OND-123 iter3: Cache TTL pro statické assety (PSI „Efficient cache lifetime").
+# Produkce běží na nginx (`docker/nginx/server-opts.d/cache-build-assets.conf`
+# řídí reálné Cache-Control hlavičky pro `/build/*`), ale tyto pravidla zde
+# slouží jako:
+#   1) odpověď na dotaz „není to o .htaccess?" — Apache fallback je hotov,
+#   2) portabilita kdyby projekt někdy běžel na sdíleném Apache hostingu,
+#   3) lokální `php artisan serve` přes Apache (např. XAMPP) ho začne respektovat.
+# ─────────────────────────────────────────────────────────────────────────────
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # Vite hash-suffixed assety (immutable — hash se mění při změně obsahu)
+    <FilesMatch "^.*-[A-Za-z0-9_-]{8,}\.(js|css|woff2?|avif|webp|jpg|jpeg|png|svg|ico)$">
+        ExpiresDefault "access plus 1 year"
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+
+    # Klasické statické soubory (favicon, og images, manifest) — 30 dní
+    <FilesMatch "\.(ico|svg|png|jpg|jpeg|webp|avif|woff2?)$">
+        ExpiresDefault "access plus 30 days"
+    </FilesMatch>
+
+    # HTML stránky — kratší cache, ať se změny obsahu propíší rychle
+    <FilesMatch "\.(html|htm)$">
+        ExpiresDefault "access plus 1 hour"
+    </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+    # gzip pro textové typy — sniží transfer u CSS/JS/HTML/SVG
+    AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>

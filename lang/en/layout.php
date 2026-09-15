@@ -5,14 +5,15 @@ return [
     'nav' => [
         'home'     => 'Home',
         'contact'  => 'Contact',
-        'price'    => 'Price',
+        'price'    => 'Pricing',
         'projects' => 'Projects',
         'blog'     => 'Blog',
         'about'    => 'About',
+        'lang_switcher' => 'Language switcher',
     ],
 
     'cta' => [
-        'contact' => 'Contact',
+        'contact' => 'Book a consultation',
     ],
 
     'footer' => [
@@ -22,12 +23,27 @@ return [
 
     'prefooter' => [
         'tagline'   => 'I help entrepreneurs succeed in the online world',
-        'cta'       => 'Send a message',
+        'cta'       => 'Book a free consultation',
         'nav_label' => 'Footer navigation',
+    ],
+
+    'modal' => [
+        'close' => 'Close',
+    ],
+
+    // OND-167 — Cookie consent modal.
+    'cookies' => [
+        'title'       => 'Mind a few cookies?',
+        'body'        => 'They help me see what works on the site and what doesn\'t. No data selling, no tracking nonsense — just a few numbers so I know whether to keep improving things.',
+        'policy_link' => 'See the cookie policy',
+        'accept'      => 'Accept all',
+        'reject'      => 'Decline',
+        'close'       => 'Close',
     ],
 
     'gdpr_form_note' => 'By submitting you agree to our',
     'gdpr_form_link' => 'Privacy Policy',
+    'cookies_link'   => 'Cookies',
 
     'meta' => [
         'description' => 'Website and web application development. I help entrepreneurs succeed in the online world.',

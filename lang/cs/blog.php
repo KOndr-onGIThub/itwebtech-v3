@@ -9,6 +9,17 @@ return [
 
     'subheading'    => 'Jak na to',
     'heading'       => 'Tipy pro lepší webové stránky a aplikace.',
+
+    // OND-130 P2 iter 8 — plán §3.1 page-mark hero (Plex Sans display + amber accent).
+    // OND-135 cleanup (2026-05-14): page_mark_index odebrán — agency-portfolio
+    // artefakt per CEO PR #78/#80/#82/#83 precedent (home/kontakt/cenik/realizace).
+    'hero' => [
+        'page_mark_label' => 'JAK NA TO',
+        'upline'          => 'Praktické rady, ne teorie.',
+        'heading_html'    => 'Co opravdu <em>funguje</em><br>na vašem webu.',
+        'subline'         => 'Konverze, SEO, UX — bez marketingových frází. Reálné kroky, které přinášejí poptávky.',
+    ],
+
     'read_more'     => 'Chci vědět jak na to',
     'updated'       => 'aktualizováno',
     'share'         => 'Sdílejte prosím článek',
@@ -18,8 +29,8 @@ return [
 
     'sidebar_ad' => [
         'subheading' => 'Netrapte se s webem sami',
-        'heading'    => 'Mějte špičkový web',
-        'text'       => 'Využijte profesionální služby a získejte profi webové stránky a aplikace',
+        'heading'    => 'Posuňte web tam, kam patří',
+        'text'       => 'Místo experimentování si nechte web udělat napoprvé správně.',
         'cta_price'  => 'Ceník',
         'cta_contact'=> 'Kontakt',
     ],
@@ -36,15 +47,40 @@ return [
         ],
     ],
 
+    'back_to_blog' => '← Zpět na blog',
+
+    // OND-130 P2 iter 8 — Article page-mark eyebrow + autor box.
+    // OND-135 cleanup (2026-05-14): page_mark_index odebrán per sitewide
+    // precedent (PR #78/#80/#82/#83).
+    'article' => [
+        'page_mark_label' => 'JAK NA TO',
+        'author' => [
+            'eyebrow'  => 'O autorovi',
+            'name'     => 'Ondřej Kriška',
+            'role'     => 'Web developer · weby na míru pro B2B služby',
+            'bio'      => 'Stavím weby, které firmám otevírají obchodní hovor. Vlastní kód, přesná cena předem, přímý kontakt.',
+            'linkedin_label' => 'LinkedIn',
+            'linkedin_url'   => 'https://www.linkedin.com/in/ondrejkriska/',
+            'contact_cta'    => 'Chci nezávaznou nabídku',
+        ],
+    ],
+
+
+    'cta' => [
+        'heading' => 'Potřebujete pomoc s vaším webem?',
+        'text'    => 'Pojďme se pobavit o tom, jak váš web může přinést více poptávek.',
+        'primary' => 'Domluvit konzultaci',
+    ],
+
     'audit' => [
-        'subheading'    => 'Rychlý CRO tah',
+        'subheading'    => 'Rychlá konverzní úprava',
         'heading'       => 'Získejte stručný audit vašeho webu',
         'items'         => [
             '3 největší konverzní brzdy, které teď zbytečně ztrácí poptávky.',
             'Konkrétní doporučení, co upravit jako první.',
-            'Návrh priorit bez “nice-to-have” kosmetiky.',
+            'Návrh priorit bez kosmetických vylepšení.',
         ],
-        'cta_primary'   => 'Chci mini audit',
+        'cta_primary'   => 'Chci stručný audit zdarma',
         'cta_secondary' => 'Nejdřív ceník',
     ],
 

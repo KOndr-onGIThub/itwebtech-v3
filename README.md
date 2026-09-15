@@ -128,6 +128,17 @@ composer run dev
 Spustí zároveň: PHP server, Vite, queue worker a log tail.
 Web běží na `http://localhost:8000`.
 
+### A3b. Storage symlink (pro Filament admin uploady)
+
+Portfolio admin nahrává screenshoty do `storage/app/public/portfolio/{slug}/` a
+přístup k nim potřebuje veřejný symlink `public/storage`. Stačí jednou:
+
+```bash
+php artisan storage:link
+```
+
+Idempotentní — lze přidat do deploy skriptu. Bez toho vrátí `/storage/portfolio/...` 404.
+
 ### A4. CMS (volitelné)
 
 ```bash
@@ -318,6 +329,155 @@ Použití VS Code snippetu `x-responsive-lightbox` (přidá lightbox parametry):
 Lightbox se aktivuje přítomností parametru `lightboxTitle`. Parametr `sizes` nastavuj podle skutečné zobrazené šířky v různých breakpointech — má vliv na výběr správné velikosti obrázku prohlížečem.
 
 > **Pozor:** Lightbox nefunguje v `npm run dev` (Vite virtual URLs). Pro otestování lightboxu lokálně spusť `npm run build`.
+
+---
+
+## Deploy
+
+Aplikace běží na Coolify (Docker image z `Dockerfile` postavený na `serversideup/php:8.4-fpm-nginx`).
+
+### Automatický post-deploy
+
+Při startu kontejneru se z `docker/entrypoint.d/50-laravel-deploy.sh`
+automaticky spustí přesně dva příkazy:
+
+```bash
+php artisan migrate --force --no-interaction
+php artisan db:seed --class=Database\\Seeders\\AdminUserSeeder --force --no-interaction
+```
+
+Obojí je idempotentní:
+- `migrate --force` aplikuje jen pending migrace, neexistující data nemaže.
+- `AdminUserSeeder` dělá `updateOrCreate` na jednom `users` řádku podle
+  `ADMIN_EMAIL` / `ADMIN_PASSWORD` — opakovaný deploy aktualizuje heslo
+  podle aktuální env hodnoty.
+
+Vlastník po deployi nemusí dělat nic ručně — admin se nalogguje na
+`/{FILAMENT_ADMIN_PATH}` (default `/admin-cms`) podle `ADMIN_EMAIL` /
+`ADMIN_PASSWORD` z Coolify env.
+
+### ⚠️ NIKDY nespouštěj `db:seed` bez `--class`
+
+Bare `php artisan db:seed` spustí celý `DatabaseSeeder`, který volá
+`PortfolioSeeder`. Ten v transakci pro každý projekt **smaže a znovu vytvoří**
+všechny překlady, screenshoty, outcomes a tagové vazby z
+`docs/portfolio-data.yaml` → tím přepíše ruční úpravy z Filament adminu.
+
+Stejně tak nikdy nespouštěj `migrate:fresh` ani `migrate:refresh`.
+
+Ochrana je dvojitá:
+1. Entrypoint skript volá pouze whitelistované příkazy (viz výše).
+2. `PortfolioSeeder::run()` má guard: pokud v DB existují portfolio
+   projekty, seed se přeskočí. Re-seed dat z YAMLu jde vynutit jen
+   přes env proměnnou `PORTFOLIO_SEEDER_FORCE_OVERWRITE=1`.
+
+### Lokální test entrypointu
+
+```bash
+docker build -t my-starter:deploy-test .
+docker run --rm \
+    -e APP_ENV=production \
+    -e DB_CONNECTION=mysql \
+    -e DB_HOST=... -e DB_DATABASE=... -e DB_USERNAME=... -e DB_PASSWORD=... \
+    -e ADMIN_EMAIL=admin@example.com -e ADMIN_PASSWORD=secret \
+    my-starter:deploy-test
+```
+
+V logu hledej řádky `[laravel-deploy] Running database migrations...`
+a `[laravel-deploy] Seeding admin user...`.
+
+---
+
+## Bezpečnost admin panelu (Filament)
+
+### Vlastní URL panelu
+
+Admin panel **není** na default `/admin`. Cesta se přebírá z env proměnné
+`FILAMENT_ADMIN_PATH` (default: `admin-cms`). Skrývá Filament před plošnými
+URL scannery a snižuje hluk failed-login pokusů.
+
+```env
+FILAMENT_ADMIN_PATH=admin-cms
+```
+
+Bez úvodního lomítka. Po změně env proměnné spusť `php artisan config:clear`
+(v produkci postačí redeploy — entrypoint cache regeneruje sám).
+
+### 2FA (TOTP)
+
+Admin panel vynucuje dvoufaktorové ověření. Při prvním přihlášení nového
+admina ho middleware `EnsureTwoFactorAuthenticated` přesměruje na
+`/{FILAMENT_ADMIN_PATH}/two-factor`, kde:
+
+1. Klikne **Vygenerovat QR kód**.
+2. Naskenuje QR kód autentikační aplikací (Google Authenticator, 1Password,
+   Authy, Bitwarden, …).
+3. Zadá 6-místný kód z aplikace pro potvrzení.
+4. Aplikace zobrazí **8 recovery kódů** — uložit mimo aplikaci (password
+   manager, vytištěné). Každý kód lze použít jen jednou pro přihlášení bez
+   přístupu k autentikační aplikaci.
+
+Při každém dalším loginu se po heslu zobrazí challenge stránka pro 6-místný
+kód (nebo jednorázový recovery kód).
+
+Přegenerování recovery kódů a vypnutí 2FA jsou dostupné na
+`/{FILAMENT_ADMIN_PATH}/two-factor` po přihlášení.
+
+> 🛈 Single-admin režim — žádný uživatel nemá výjimku. Pokud admin ztratí
+> autentikační aplikaci i recovery kódy, jediná cesta zpět je přímo v DB
+> vynulovat sloupce `two_factor_secret`, `two_factor_recovery_codes`,
+> `two_factor_confirmed_at` na řádku admina.
+
+### Failed-login alerty
+
+Listener `NotifyOnFailedAdminLogins` počítá neúspěšné pokusy per IP v cache.
+Po **10 pokusech za 1 hodinu** odešle e-mail na `ADMIN_EMAIL` s IP,
+user-agentem a počtem pokusů. Po odeslání se okno restartuje (žádný spam).
+
+Cache klíč: `admin_failed_login:<sha1(ip)>`. Pro testování stačí 10× zadat
+špatné heslo z jedné IP a zkontrolovat poštu.
+
+### Security headers
+
+Globálně přes `bepsvpt/secure-headers`. Konfigurace:
+[`config/secure-headers.php`](config/secure-headers.php).
+
+- **HSTS** se aktivuje automaticky při `APP_ENV=production` (max-age 1 rok,
+  `includeSubDomains`). Přepínač `SECURE_HEADERS_HSTS=true|false` v `.env`.
+- **X-Frame-Options:** `sameorigin` (clickjacking).
+- **X-Content-Type-Options:** `nosniff`.
+- **Referrer-Policy:** `strict-origin-when-cross-origin`.
+- **Permissions-Policy:** kamera/mikrofon/geolokace/USB/… vypnuto.
+- **CSP:** zatím vypnuto (vyžaduje samostatné ladění proti Vite/Livewire/Alpine).
+
+Cílová známka v <https://securityheaders.com>: minimálně **B**.
+
+### HTTPS-only cookies
+
+`SESSION_SECURE_COOKIE` se v `config/session.php` přepne na `true`
+automaticky při `APP_ENV=production`. Lokálně/staging na http nech prázdné.
+
+### Audit log úspěšných loginů
+
+Tabulka `admin_login_log` (`user_id`, `ip`, `user_agent`, `created_at`) se
+naplňuje listenerem `LogAdminLoginToAuditTrail` na každý `Auth\Events\Login`.
+Slouží jako jednoduchý forenzní přehled "kdo se kdy přihlásil odkud" —
+záznamy se nepřepisují ani neagregují, takže jdou v případě incidentu
+přímo dotazovat:
+
+```sql
+SELECT u.email, l.ip, l.user_agent, l.created_at
+FROM admin_login_log l JOIN users u ON u.id = l.user_id
+ORDER BY l.created_at DESC LIMIT 50;
+```
+
+Mazání staré historie je na vlastníkovi (zatím není scheduled task —
+tabulka je low-volume).
+
+### Reset 2FA pro již existujícího admina
+
+Při migraci na hardenovanou verzi se admin při příštím loginu rovnou ocitne
+v setup flow — středu žádných ručních kroků není.
 
 ---
 

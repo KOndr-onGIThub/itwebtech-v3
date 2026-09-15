@@ -4,76 +4,93 @@ return [
 
     'meta' => [
         'title'       => 'Pricing — Ondřej Kriška',
-        'description' => 'Indicative price bands for websites, e-shops and custom web applications.',
+        'description' => 'Indicative pricing for websites, e-shops and web applications. Get a clear picture of your investment before the first consultation.',
     ],
 
     'subheading' => 'Indicative pricing',
-    'heading'    => 'Clear pricing for every project',
-    'intro'      => 'Every project is different — the final price is agreed upfront. This overview gives you an idea of price bands. I am not the cheapest and do not aim to be. If you are looking for a website under a certain budget, I will tell you straight away that I am probably not the right fit.',
+    'heading'    => 'You know what you\'re getting into before our first meeting.',
+    'intro'      => 'Every project is different — you\'ll get the final price after a free consultation. This overview gives you a clear idea of how much it will cost before we even meet.',
+
+    // OND-135 P2 iter 5 — plan §3.1 hero (page-mark + amber accent).
+    // OND-135 cleanup (2026-05-14): page_mark_index removed — agency-
+    // portfolio artefact per CEO PR #78 precedent (home / contact).
+    'hero' => [
+        'page_mark_label' => 'PRICING',
+        'upline'          => 'No "request a quote" mystery.',
+        'heading_html'    => 'Three tiers,<br>one <em>clear price</em>.',
+        'subline'         => 'Starter €1,000, Standard €2,200, Custom from €3,800. The invoice matches the spec.',
+    ],
+
+    // Sticky CTA — always-visible while scrolling, "price never disappears".
+    'sticky_cta' => [
+        'label' => 'Pick a tier',
+        'cta'   => 'Get a free quote',
+    ],
 
     'popular'   => 'Most popular',
-    'quotation' => 'Non-binding enquiry',
+    'quotation' => 'Get a quote',
 
     'price_note' => 'indicative price',
 
+    // OND-136: tier names and prices aligned with CS taxonomy
+    // Startovní/Standard/Custom = 25/55/95 thousand CZK → EUR conversion (CEO-confirmed 1:25 anchor).
     'tiers' => [
         [
-            'name'    => 'Business website',
+            'name'    => 'Starter',
             'desc'    => 'For sole traders and small businesses that need a credible online presence.',
-            'price'   => '50,000–90,000 CZK',
+            'price'   => '€1,000',
             'popular' => false,
             'features' => [
-                'Custom website, usually up to 5 pages',
-                'Design tailored to your business',
-                'Looks great on mobile and desktop',
+                'Up to 5 custom pages',
+                'Modern responsive design',
                 'Contact form',
-                'Technical SEO foundations',
-                'Fast loading',
+                'Technical SEO',
+                'Page speed optimisation',
                 '14 days of post-launch support',
             ],
-            'cta' => 'Request a project',
+            'cta' => 'Get a free quote',
         ],
         [
-            'name'    => 'Website with CMS',
-            'desc'    => 'For businesses that want to manage content themselves or need a multilingual website.',
-            'price'   => '90,000–150,000 CZK',
+            'name'    => 'Standard',
+            'desc'    => 'For businesses that want their website to be their best sales tool.',
+            'price'   => '€2,200',
             'popular' => true,
             'features' => [
-                'Larger custom website',
-                'Simple content management (texts, photos, products)',
-                'Blog or gallery',
+                'Up to 12 custom pages',
+                'Conversion-focused design',
+                'Blog or gallery with content editing',
                 'Multilingual website',
-                'Analytics integration',
+                'Analytics and conversion tracking',
                 'Hosting and domain for 1 year free',
                 '1 month of post-launch support',
             ],
-            'cta' => 'Choose this plan',
+            'cta' => 'Get a free quote',
         ],
         [
-            'name'    => 'E-shop / application',
-            'desc'    => 'For more demanding projects — e-shop, booking system or custom internal application.',
-            'price'   => 'from 150,000 CZK',
+            'name'    => 'Custom',
+            'desc'    => 'For demanding projects without compromise — e-shop, booking system or web application.',
+            'price'   => 'from €3,800',
             'popular' => false,
             'features' => [
-                'Scope according to project requirements',
+                'Unlimited project scope',
                 'E-shop or booking system',
                 'Custom administration interface',
-                'Custom internal application tailored to your operations',
-                'Integration with other systems you use',
+                'Advanced SEO strategy with reporting',
+                'External system integrations',
                 '3 months of post-launch support',
             ],
-            'cta' => 'Request a project',
+            'cta' => 'Get a free quote',
         ],
     ],
 
-    'note' => 'Not VAT registered. Prices are final.',
+    'note' => 'Not VAT-registered — these prices are final, nothing is added.',
 
     'guarantees' => [
         'heading' => 'What is included in every project',
         'items'   => [
             [
                 'title' => 'Maintenance-free websites',
-                'text'  => 'No WordPress, no third-party plugins. No costs for regular updates and security patches.',
+                'text'  => 'No WordPress, no third-party plugins. Save thousands per year compared to WordPress — no monthly updates and no security patching costs.',
             ],
             [
                 'title' => 'Fixed price, no surprises',
@@ -81,71 +98,75 @@ return [
             ],
             [
                 'title' => 'Direct communication',
-                'text'  => 'You talk directly to me — no salespeople, no project managers, no coordinators. One point of contact, one point of responsibility.',
+                'text'  => 'You talk directly to me — no account managers, no project coordinators. One point of contact, one point of responsibility.',
             ],
             [
                 'title' => 'Support after launch',
-                'text'  => 'I respond on business days, usually within two working days, even weeks and months after project delivery. Minor adjustments and technical questions are always welcome.',
+                'text'  => 'I respond within 24 hours, even weeks and months after project delivery. Minor adjustments and technical questions are always welcome.',
             ],
         ],
     ],
 
     'addons' => [
         'heading' => 'Additional services',
-        'desc'    => 'Digital support even after your project launches.',
+        'desc'    => 'Comprehensive digital support even after your project launches.',
         'items'   => [
             [
-                'name'  => 'SEO & content',
-                'price' => 'from 4,500 CZK / mo.',
-                'desc'  => 'Keeping the website performing well in search engines, and regular content.',
+                'name'  => 'SEO & content marketing',
+                'price' => 'from €180 / mo.',
+                'desc'  => 'Keyword analysis, content strategy, performance monitoring. Organic visibility that works even without an advertising budget.',
             ],
             [
                 'name'  => 'Social media management',
-                'price' => 'from 9,900 CZK / mo.',
-                'desc'  => 'Content creation, scheduling and publishing so the company presents itself consistently beyond the website.',
+                'price' => 'from €400 / mo.',
+                'desc'  => 'Content creation, scheduling and publishing. Consistent presence that builds customer trust.',
             ],
             [
                 'name'  => 'Custom web application',
-                'price' => 'individual quote',
-                'desc'  => 'Inventory management, internal systems, customer portals. Price reflects the scope of the project.',
+                'price' => 'custom quote',
+                'desc'  => 'Inventory systems, internal tools, customer portals. Price reflects the complexity and scope of the project.',
             ],
             [
-                'name'  => 'Graphics & branding',
-                'price' => 'from 4,800 CZK',
-                'desc'  => 'Logo, visual identity, banners. For a cohesive and memorable brand presentation.',
+                'name'  => 'Graphic design & branding',
+                'price' => 'from €190',
+                'desc'  => 'Logo, visual identity, banners. Everything you need for a consistent and memorable brand presentation.',
             ],
         ],
     ],
 
     'compare' => [
         'heading' => 'What exactly you get',
-        'tiers'   => ['Business website', 'Website with CMS', 'E-shop / application'],
+        'tiers'   => ['Starter', 'Standard', 'Custom'],
+        'tabs_aria'     => 'Select pricing tier',
+        'included'      => 'Included',
+        'not_included'  => 'Not included',
         'groups'  => [
             [
                 'label' => 'Project scope',
                 'rows'  => [
-                    ['label' => 'Number of pages', 'values' => ['up to 5', 'more', 'unlimited']],
-                    ['label' => 'Custom design', 'values' => [true, true, true]],
+                    ['label' => 'Number of pages', 'values' => ['up to 5', 'up to 12', 'unlimited']],
+                    ['label' => 'Responsive design', 'values' => [true, true, true]],
                     ['label' => 'Contact form', 'values' => [true, true, true]],
                 ],
             ],
             [
                 'label' => 'Website features',
                 'rows'  => [
-                    ['label' => 'Content management (blog, gallery)', 'values' => [false, true, true]],
+                    ['label' => 'Blog or gallery with editing', 'values' => [false, true, true]],
                     ['label' => 'Multilingual website', 'values' => [false, true, true]],
                     ['label' => 'Booking system', 'values' => [false, 'optional', true]],
                     ['label' => 'E-shop', 'values' => [false, false, true]],
                     ['label' => 'Custom administration', 'values' => [false, false, true]],
-                    ['label' => 'Integration with other systems', 'values' => [false, false, true]],
+                    ['label' => 'External system integrations', 'values' => [false, false, true]],
                 ],
             ],
             [
-                'label' => 'Search engines & performance',
+                'label' => 'Marketing & performance',
                 'rows'  => [
-                    ['label' => 'Technical SEO foundations', 'values' => [true, true, true]],
-                    ['label' => 'Fast loading', 'values' => [true, true, true]],
-                    ['label' => 'Analytics tracking', 'values' => [false, true, true]],
+                    ['label' => 'Technical SEO', 'values' => [true, true, true]],
+                    ['label' => 'Page speed optimisation', 'values' => [true, true, true]],
+                    ['label' => 'Analytics & conversion tracking', 'values' => [false, true, true]],
+                    ['label' => 'Advanced SEO strategy', 'values' => [false, false, true]],
                 ],
             ],
             [
@@ -160,9 +181,9 @@ return [
     ],
 
     'cta' => [
-        'heading' => 'Not sure exactly what you need?',
-        'desc'    => 'Write to me and tell me what you are dealing with. I will get back to you and tell you honestly what makes sense for your business — including whether working together makes sense at all.',
-        'btn'     => 'Send a message',
+        'heading' => 'Not sure what you need?',
+        'desc'    => 'The consultation is free and non-binding. In 30 minutes I will tell you what makes sense for your business — honestly, even if that means we should not work together.',
+        'btn'     => 'Book a free consultation',
     ],
 
 ];

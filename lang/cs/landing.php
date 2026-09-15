@@ -4,7 +4,7 @@ return [
 
     'meta' => [
         'title' => 'Webové stránky na míru pro podnikatele a firmy | Ondřej Kriška',
-        'description' => 'Tvorba webových stránek na míru bez WordPressu a zbytečné údržby. Jasná struktura, přímá spolupráce, orientační ceny od 20 000 Kč a odpověď do 24 hodin.',
+        'description' => 'Tvorba webových stránek na míru bez WordPressu a zbytečné údržby. Jasná struktura, přímá spolupráce, orientační ceny od 25 000 Kč a odpověď do 24 hodin.',
         'schema_name' => 'Tvorba webových stránek na míru',
     ],
 
@@ -23,7 +23,7 @@ return [
             '18 let zkušeností',
             'Přímá spolupráce',
             'Bez WordPressu',
-            'Orientačně od 20 000 Kč',
+            'Orientačně od 25 000 Kč',
         ],
         'trust' => [
             'title' => 'Rychlé ověřitelné body',
@@ -82,7 +82,7 @@ return [
         'items' => [
             '18 let zkušeností v Toyotě mi dalo silný důraz na kvalitu, proces a detail.',
             'Odpovídám do 24 hodin i po spuštění projektu.',
-            'Orientační ceny máte předem. Základní prezentace začíná od 20 000 Kč.',
+            'Orientační ceny máte předem. Startovní web začíná od 25 000 Kč.',
             'Weby stavím bez WordPressu a bez pluginové závislosti.',
         ],
     ],
@@ -133,7 +133,7 @@ return [
             ],
             [
                 'type' => 'E-shop na míru',
-                'title' => 'Stabilnější provoz bez vendor lock-inu',
+                'title' => 'Stabilnější provoz bez závislosti na cizí platformě',
                 'summary' => 'Méně výpadků po aktualizacích a lépe řízená cesta k objednávce.',
             ],
         ],
@@ -169,14 +169,14 @@ return [
         'items' => [
             [
                 'question' => 'Kolik stojí web na míru?',
-                'answer' => 'Záleží na rozsahu. Základní webová prezentace začíná orientačně od 20 000 Kč. Přesnější cenu dává až krátká konzultace, kde si ujasníme rozsah, cíle a potřebné funkce.',
+                'answer' => 'Záleží na rozsahu. Startovní web začíná orientačně od 25 000 Kč, vícejazyčný Standard od 55 000 Kč, Custom (e-shop, aplikace, rezervace) od 95 000 Kč. Přesnější cenu dává až krátká konzultace, kde si ujasníme rozsah, cíle a potřebné funkce.',
             ],
             [
                 'question' => 'Jak dlouho trvá realizace?',
                 'answer' => 'Jednodušší web lze zvládnout přibližně za 3 až 4 týdny od schválení zadání. U větších projektů záleží na rozsahu, funkcích a rychlosti dodání podkladů.',
             ],
             [
-                'question' => 'Proč není WordPress výhoda pro tento typ projektu?',
+                'question' => 'Proč nestavíte na WordPressu?',
                 'answer' => 'U běžných WordPress webů často vzniká závislost na pluginech, aktualizacích a průběžné údržbě. Web na míru je stabilnější, rychlejší a dlouhodobě předvídatelnější z hlediska provozu i nákladů.',
             ],
             [
@@ -211,10 +211,11 @@ return [
             'message' => 'Například: potřebujeme nový firemní web, který jasně představí služby a přivede více poptávek.',
         ],
         'budget_options' => [
-            'Do 20 000 Kč',
-            '20 000 až 40 000 Kč',
-            '40 000 až 80 000 Kč',
-            '80 000 Kč a více',
+            // OND-136: budget pásma sjednocená s cenovou taxonomií 25/55/95.
+            'Do 25 000 Kč',
+            '25 000 až 55 000 Kč',
+            '55 000 až 95 000 Kč',
+            '95 000 Kč a více',
             'Potřebuji doporučit vhodný rozsah',
         ],
         'trust_title' => 'Nezávazná konzultace',
