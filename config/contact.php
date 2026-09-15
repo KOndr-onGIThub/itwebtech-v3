@@ -14,7 +14,6 @@ return [
     'to' => env('CONTACT_TO', 'ok@ondraweb.cz'),
 
     // Public phone number. Rendered as a clickable tel: link only when set.
-    // TODO ONDRA: telefonní číslo
-    'phone' => env('CONTACT_PHONE'),
+    'phone' => env('CONTACT_PHONE', '+420 728 697 712'),
 
 ];
