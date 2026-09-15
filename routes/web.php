@@ -35,6 +35,7 @@ Route::middleware(SetLocale::class)->group(function () use ($defaultLocale) {
     $s = config('slugs.' . $defaultLocale);
 
     Route::get('/',            [PageController::class, 'home'])->name("{$defaultLocale}.home");
+    Route::get($s['about'],    [PageController::class, 'about'])->name("{$defaultLocale}.about");
     Route::get($s['contact'],  [PageController::class, 'contact'])->name("{$defaultLocale}.contact");
     Route::get($s['price'],    [PageController::class, 'price'])->name("{$defaultLocale}.price");
     Route::get($s['privacy'],  [PageController::class, 'privacy'])->name("{$defaultLocale}.privacy");
@@ -53,6 +54,7 @@ foreach (array_slice($locales, 1) as $locale) {
             $s = config('slugs.' . $locale);
 
             Route::get('/',            [PageController::class, 'home'])->name("{$locale}.home");
+            Route::get($s['about'],    [PageController::class, 'about'])->name("{$locale}.about");
             Route::get($s['contact'],  [PageController::class, 'contact'])->name("{$locale}.contact");
             Route::get($s['price'],    [PageController::class, 'price'])->name("{$locale}.price");
             Route::get($s['privacy'],  [PageController::class, 'privacy'])->name("{$locale}.privacy");

@@ -3,8 +3,8 @@
 return [
 
     'meta' => [
-        'title'       => 'Cookies a souhlas se zpracováním — itwebtech.cz',
-        'description' => 'Informace o cookies a měřicích nástrojích, které používáme na itwebtech.cz, a jak svůj souhlas kdykoli odvolat.',
+        'title'       => 'Cookies a souhlas se zpracováním — ondraweb.cz',
+        'description' => 'Informace o cookies a měřicích nástrojích, které používáme na ondraweb.cz, a jak svůj souhlas kdykoli odvolat.',
     ],
 
     'hero' => [
@@ -23,7 +23,7 @@ return [
         ],
     ],
 
-    'intro' => 'Tato stránka shrnuje, jaké cookies a měřicí nástroje na webu <strong>itwebtech.cz</strong> používáme, k čemu slouží a jak souhlas s jejich používáním kdykoli odvoláte.',
+    'intro' => 'Tato stránka shrnuje, jaké cookies a měřicí nástroje na webu <strong>ondraweb.cz</strong> používáme, k čemu slouží a jak souhlas s jejich používáním kdykoli odvoláte.',
 
     'what_we_use' => [
         'heading' => 'Co používáme',
@@ -57,12 +57,12 @@ return [
         'heading'      => 'Jak souhlas odvolat',
         'description'  => 'Pokud chcete svůj souhlas odvolat, klikněte na následující tlačítko. Smaže se uložený souhlas i případné GA / Clarity cookies a po obnovení stránky se znovu zobrazí banner.',
         'button'       => 'Odvolat souhlas a smazat cookies',
-        'manual'       => 'Alternativně můžete cookies pro doménu <code>itwebtech.cz</code> smazat ručně v nastavení vašeho prohlížeče.',
+        'manual'       => 'Alternativně můžete cookies pro doménu <code>ondraweb.cz</code> smazat ručně v nastavení vašeho prohlížeče.',
     ],
 
     'controller' => [
         'heading' => 'Správce dat',
-        'name'    => 'Ondřej Kriška – itwebtech',
+        'name'    => 'Ondřej Kriška – ONDRAWEB',
         'email_label' => 'E-mail',
         'see_privacy_html' => 'Pro detailnější informace o zpracování osobních údajů viz :link.',
         'see_privacy_link' => 'zásady ochrany osobních údajů',

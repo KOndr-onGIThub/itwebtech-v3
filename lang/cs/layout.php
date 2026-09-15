@@ -8,6 +8,7 @@ return [
         'price'    => 'Ceník',
         'projects' => 'Projekty',
         'blog'     => 'Blog',
+        'about'    => 'O mně',
         'lang_switcher' => 'Přepínač jazyků',
     ],
 

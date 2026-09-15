@@ -4,7 +4,7 @@ return [
 
     'meta' => [
         'title'       => 'Datenschutzerklärung — Ondřej Kriška',
-        'description' => 'Informationen zur Verarbeitung personenbezogener Daten auf itwebtech.cz.',
+        'description' => 'Informationen zur Verarbeitung personenbezogener Daten auf ondraweb.cz.',
     ],
 
     'heading' => 'Datenschutzerklärung',
@@ -25,12 +25,12 @@ return [
             'Ich erhebe nur Daten, die Sie mir selbst übermitteln (Formular, E-Mail, Telefon).',
             'Ich gebe sie nicht an Dritte für Marketing weiter — sie dienen nur zur Antwort auf Ihre Anfrage.',
             'Webanalyse ist anonym (GA4 ohne Werbe-Cookies, Clarity).',
-            'Sie können jederzeit Löschung beantragen: ok@itwebtech.cz.',
+            'Sie können jederzeit Löschung beantragen: ok@ondraweb.cz.',
         ],
     ],
 
     'content' =>'<p>Datum des Inkrafttretens: 6. Mai 2026</p>
-<p>Die Website (nachfolgend „Dienst") wird vom Unternehmer Ondřej Kriška (nachfolgend „Betreiber" oder „itwebtech") betrieben.</p>
+<p>Die Website (nachfolgend „Dienst") wird vom Unternehmer Ondřej Kriška (nachfolgend „Betreiber" oder „ONDRAWEB") betrieben.</p>
 <p>Diese Seite informiert Sie über unsere Richtlinien bezüglich der Erhebung, Verwendung und Weitergabe personenbezogener Daten bei der Nutzung unseres Dienstes.</p>
 
 <h2>Erhebung und Verwendung von Informationen</h2>
@@ -54,7 +54,7 @@ return [
 <p>Wir verwenden Cookies und ähnliche Tracking-Technologien, um die Aktivität in unserem Dienst zu verfolgen. Cookies sind Dateien mit einer kleinen Datenmenge. Cookies werden von einer Website an Ihren Browser gesendet und auf Ihrem Gerät gespeichert.</p>
 
 <h2>Verwendung der Daten</h2>
-<p>itwebtech verwendet die erhobenen Daten für verschiedene Zwecke:</p>
+<p>ONDRAWEB verwendet die erhobenen Daten für verschiedene Zwecke:</p>
 <ul>
 <li>Zur Bereitstellung und Aufrechterhaltung des Dienstes</li>
 <li>Um Sie über Änderungen unseres Dienstes zu informieren</li>
@@ -79,7 +79,7 @@ return [
 
 <h2>Kontakt</h2>
 <ul>
-<li>Per E-Mail: ok@itwebtech.cz</li>
+<li>Per E-Mail: ok@ondraweb.cz</li>
 </ul>',
 
 ];

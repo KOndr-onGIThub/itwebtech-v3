@@ -8,6 +8,7 @@ return [
         'price'    => 'Preisliste',
         'projects' => 'Projekte',
         'blog'     => 'Blog',
+        'about'    => 'Über mich',
         'lang_switcher' => 'Sprachumschalter',
     ],
 

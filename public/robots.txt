@@ -1,4 +1,4 @@
-# Robots.txt — itwebtech.cz
+# Robots.txt — ondraweb.cz
 # OND-137 P4 — explicit static robots.txt vedle Spatie sitemap (route).
 
 User-agent: *
@@ -12,4 +12,4 @@ Disallow: /admin/
 # → Open Graph crawlers je potřebují).
 
 # Sitemap (Spatie laravel-sitemap, cache 600s — viz SitemapController).
-Sitemap: https://itwebtech.cz/sitemap.xml
+Sitemap: https://ondraweb.cz/sitemap.xml

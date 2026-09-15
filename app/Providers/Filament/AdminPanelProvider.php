@@ -27,7 +27,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path(env('FILAMENT_ADMIN_PATH', 'admin-cms'))
-            ->brandName('itwebtech.cz admin')
+            ->brandName('ONDRAWEB admin')
             ->login()
             ->profile()
             ->colors([

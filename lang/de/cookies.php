@@ -3,8 +3,8 @@
 return [
 
     'meta' => [
-        'title'       => 'Cookies und Einwilligung — itwebtech.cz',
-        'description' => 'Informationen zu den Cookies und Analysetools, die wir auf itwebtech.cz verwenden, und wie Sie Ihre Einwilligung jederzeit widerrufen können.',
+        'title'       => 'Cookies und Einwilligung — ondraweb.cz',
+        'description' => 'Informationen zu den Cookies und Analysetools, die wir auf ondraweb.cz verwenden, und wie Sie Ihre Einwilligung jederzeit widerrufen können.',
     ],
 
     'hero' => [
@@ -23,7 +23,7 @@ return [
         ],
     ],
 
-    'intro' => 'Diese Seite fasst zusammen, welche Cookies und Analysetools auf der Website <strong>itwebtech.cz</strong> eingesetzt werden, wozu sie dienen und wie Sie Ihre Einwilligung jederzeit widerrufen können.',
+    'intro' => 'Diese Seite fasst zusammen, welche Cookies und Analysetools auf der Website <strong>ondraweb.cz</strong> eingesetzt werden, wozu sie dienen und wie Sie Ihre Einwilligung jederzeit widerrufen können.',
 
     'what_we_use' => [
         'heading' => 'Was wir verwenden',
@@ -57,12 +57,12 @@ return [
         'heading'      => 'Einwilligung widerrufen',
         'description'  => 'Wenn Sie Ihre Einwilligung widerrufen möchten, klicken Sie auf die folgende Schaltfläche. Die gespeicherte Einwilligung sowie etwaige GA-/Clarity-Cookies werden gelöscht und der Banner erscheint nach dem Neuladen der Seite erneut.',
         'button'       => 'Einwilligung widerrufen und Cookies löschen',
-        'manual'       => 'Alternativ können Sie die Cookies für die Domain <code>itwebtech.cz</code> manuell in den Browsereinstellungen löschen.',
+        'manual'       => 'Alternativ können Sie die Cookies für die Domain <code>ondraweb.cz</code> manuell in den Browsereinstellungen löschen.',
     ],
 
     'controller' => [
         'heading' => 'Datenverantwortlicher',
-        'name'    => 'Ondřej Kriška – itwebtech',
+        'name'    => 'Ondřej Kriška – ONDRAWEB',
         'email_label' => 'E-Mail',
         'see_privacy_html' => 'Weitere Informationen zur Verarbeitung personenbezogener Daten finden Sie in der :link.',
         'see_privacy_link' => 'Datenschutzerklärung',

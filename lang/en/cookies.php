@@ -3,8 +3,8 @@
 return [
 
     'meta' => [
-        'title'       => 'Cookies and consent — itwebtech.cz',
-        'description' => 'Information about the cookies and analytics tools we use on itwebtech.cz, and how to revoke your consent at any time.',
+        'title'       => 'Cookies and consent — ondraweb.cz',
+        'description' => 'Information about the cookies and analytics tools we use on ondraweb.cz, and how to revoke your consent at any time.',
     ],
 
     'hero' => [
@@ -23,7 +23,7 @@ return [
         ],
     ],
 
-    'intro' => 'This page summarises the cookies and analytics tools used on <strong>itwebtech.cz</strong>, what they are for, and how to revoke your consent to their use at any time.',
+    'intro' => 'This page summarises the cookies and analytics tools used on <strong>ondraweb.cz</strong>, what they are for, and how to revoke your consent to their use at any time.',
 
     'what_we_use' => [
         'heading' => 'What we use',
@@ -57,12 +57,12 @@ return [
         'heading'      => 'How to revoke consent',
         'description'  => 'If you want to revoke your consent, click the button below. It clears the stored consent and any GA / Clarity cookies, and after reloading the page the banner will reappear.',
         'button'       => 'Revoke consent and clear cookies',
-        'manual'       => 'Alternatively, you can clear cookies for the <code>itwebtech.cz</code> domain manually in your browser settings.',
+        'manual'       => 'Alternatively, you can clear cookies for the <code>ondraweb.cz</code> domain manually in your browser settings.',
     ],
 
     'controller' => [
         'heading' => 'Data controller',
-        'name'    => 'Ondřej Kriška – itwebtech',
+        'name'    => 'Ondřej Kriška – ONDRAWEB',
         'email_label' => 'Email',
         'see_privacy_html' => 'For more detailed information about personal-data processing, see the :link.',
         'see_privacy_link' => 'privacy policy',

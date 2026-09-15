@@ -66,7 +66,7 @@
         "@@type": "LocalBusiness",
         "name": "{{ config('app.name') }}",
         "url": "{!! url('/') !!}",
-        "email": "ok@itwebtech.cz",
+        "email": "ok@ondraweb.cz",
         "description": "{{ __('layout.meta.description') }}",
         "founder": {
             "@@type": "Person",
@@ -86,7 +86,7 @@
         "@@type": "Person",
         "name": "Ondřej Kriška",
         "url": "{!! url('/') !!}",
-        "email": "ok@itwebtech.cz",
+        "email": "ok@ondraweb.cz",
         "jobTitle": "Web developer",
         "worksFor": {
             "@@type": "Organization",
@@ -107,7 +107,7 @@
         "@@type": "Organization",
         "name": "{{ config('app.name') }}",
         "url": "{!! url('/') !!}",
-        "email": "ok@itwebtech.cz",
+        "email": "ok@ondraweb.cz",
         "logo": "{{ asset('img/logo/logo_main_svg.svg') }}",
         "founder": {
             "@@type": "Person",
@@ -180,6 +180,7 @@
                 <a href="{{ lroute('projects') }}" class="footer-prefooter__link">{{ __('layout.nav.projects') }}</a>
                 <a href="{{ lroute('price') }}"    class="footer-prefooter__link">{{ __('layout.nav.price') }}</a>
                 <a href="{{ lroute('blog') }}"     class="footer-prefooter__link">{{ __('layout.nav.blog') }}</a>
+                <a href="{{ lroute('about') }}"    class="footer-prefooter__link">{{ __('layout.nav.about') }}</a>
                 <a href="{{ lroute('contact') }}"  class="footer-prefooter__link">{{ __('layout.nav.contact') }}</a>
             </nav>
 
@@ -191,6 +192,10 @@
     <footer class="footer-bar">
         <div class="container-site footer-bar__inner">
             <span>&copy; {{ date('Y') }} {{ config('app.name') }} — {{ __('layout.footer.rights') }}</span>
+            {{-- Telefon má default v config/contact.php; přebije ho env CONTACT_PHONE. --}}
+            @if(config('contact.phone'))
+            <a href="tel:{{ preg_replace('/\s+/', '', config('contact.phone')) }}" class="footer-bar__phone">{{ config('contact.phone') }}</a>
+            @endif
             <a href="{{ lroute('privacy') }}" class="footer-bar__gdpr-link">{{ __('layout.gdpr_form_link') }}</a>
             <a href="{{ lroute('cookies') }}" class="footer-bar__gdpr-link">{{ __('layout.cookies_link') }}</a>
         </div>

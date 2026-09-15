@@ -6,7 +6,7 @@
 return [
 
     'meta' => [
-        'total'  => 21,
+        'total'  => 16,
         'rating' => '5 z 5',
     ],
 
@@ -49,7 +49,7 @@ return [
             'role'    => 'provozovatelka kempu',
             'image'   => 'jana_vesela.jpg',
             'source'  => 'facebook',
-            'text'    => '100% spokojenost s vytvořením našich webových stránek. Krásný a funkční web za minimální náklady. Můžeme vřele doporučit.',
+            'text'    => '100% spokojenost s vytvořením našich webových stránek. Krásný a funkční web. Můžeme vřele doporučit.',
         ],
         [
             'name'    => 'Peter Vidlička',
@@ -97,7 +97,7 @@ return [
             'role'    => 'software developer',
             'image'   => 'Vaclav-Pesice.png',
             'source'  => 'google',
-            'text'    => 'S Ondrou je skvělá spolupráce. Vždy se snaží udělat pro klienty maximum. Za velmi nízkou cenu odvedl perfektní práci. Rozhodně má moje doporučení.',
+            'text'    => 'S Ondrou je skvělá spolupráce. Vždy se snaží udělat pro klienty maximum. Odvedl perfektní práci. Rozhodně má moje doporučení.',
         ],
         [
             'name'    => 'Pavel Baudyš',
@@ -122,7 +122,7 @@ return [
             'role'    => 'podnikatel',
             'image'   => 'Lukas-Srnak.jpg',
             'source'  => 'google',
-            'text'    => 'Rychlost, Ochota, Cena. Naprosto perfektní přístup a jednání. Mohu vřele doporučit.',
+            'text'    => 'Rychlost, ochota, vstřícnost. Naprosto perfektní přístup a jednání. Mohu vřele doporučit.',
         ],
         [
             'name'    => 'Jaroslav Zajíc',

@@ -121,11 +121,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | Adresa, na kterou chodí notifikace z kontaktního formuláře (/kontakt).
-    | Přepiš přes `CONTACT_TO` env. Default odpovídá `ok@itwebtech.cz`
-    | uvedenému v chybové hlášce formuláře (lang/*/contact.php → message_error).
+    | Přepiš přes `CONTACT_TO` env. Default odpovídá `ok@ondraweb.cz`
+    | uvedenému v chybové hlášce formuláře (klíč message_error v lang/<locale>/contact.php).
     |
     */
 
-    'contact_to' => env('CONTACT_TO', 'ok@itwebtech.cz'),
+    'contact_to' => env('CONTACT_TO', 'ok@ondraweb.cz'),
 
 ];

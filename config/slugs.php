@@ -20,6 +20,7 @@ return [
 
     'cs' => [
         'home'     => '/',
+        'about'    => 'o-mne',
         'contact'  => 'kontakt',
         'price'    => 'cenik',
         'privacy'  => 'zasady-ochrany-osobnich-udaju',
@@ -30,6 +31,7 @@ return [
 
     'en' => [
         'home'     => '/',
+        'about'    => 'about',
         'contact'  => 'contact',
         'price'    => 'price',
         'privacy'  => 'privacy-policy',
@@ -40,6 +42,7 @@ return [
 
     'de' => [
         'home'     => '/',
+        'about'    => 'ueber-mich',
         'contact'  => 'kontakt',
         'price'    => 'preisliste',
         'privacy'  => 'datenschutz',

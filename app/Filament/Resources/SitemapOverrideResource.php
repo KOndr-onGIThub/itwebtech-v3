@@ -37,7 +37,7 @@ class SitemapOverrideResource extends Resource
                 ->maxLength(2048)
                 ->unique(ignoreRecord: true)
                 ->url()
-                ->helperText('Absolutní URL, např. https://itwebtech.cz/projekty'),
+                ->helperText('Absolutní URL, např. https://ondraweb.cz/projekty'),
 
             Forms\Components\TextInput::make('priority')
                 ->label('Priorita')

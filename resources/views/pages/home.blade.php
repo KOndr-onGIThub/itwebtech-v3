@@ -23,7 +23,7 @@
      =================================================== --}}
 <section class="section-hero">
     <x-responsive-image
-        path="hero/itwebtech_3.webp"
+        path="hero/hero-uvod.webp"
         alt="Ondřej Kriška — webové stránky a aplikace"
         sizes="100vw"
         loading="eager"

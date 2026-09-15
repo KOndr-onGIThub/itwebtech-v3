@@ -65,7 +65,7 @@
             </a>
 
             <div class="landing-topbar__meta">
-                <a href="mailto:ok@itwebtech.cz" class="landing-topbar__link">ok@itwebtech.cz</a>
+                <a href="mailto:ok@ondraweb.cz" class="landing-topbar__link">ok@ondraweb.cz</a>
                 <a href="#lead-form" class="btn btn-primary">{{ __('landing.topbar.cta') }}</a>
             </div>
         </div>
@@ -79,7 +79,7 @@
         <div class="container-site landing-footer__inner">
             <p>{{ __('landing.footer.copy') }}</p>
             <div class="landing-footer__links">
-                <a href="mailto:ok@itwebtech.cz">ok@itwebtech.cz</a>
+                <a href="mailto:ok@ondraweb.cz">ok@ondraweb.cz</a>
                 <a href="{{ lroute('privacy') }}">{{ __('landing.footer.privacy') }}</a>
             </div>
         </div>

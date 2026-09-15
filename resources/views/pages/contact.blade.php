@@ -77,7 +77,7 @@
                     <div>
                         <dt>E-mail</dt>
                         <dd>
-                            <a href="mailto:ok@itwebtech.cz">ok@itwebtech.cz</a>
+                            <a href="mailto:ok@ondraweb.cz">ok@ondraweb.cz</a>
                         </dd>
                     </div>
 

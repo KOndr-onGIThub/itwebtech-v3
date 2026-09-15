@@ -7,6 +7,7 @@
         ['route' => 'projects', 'label' => __('layout.nav.projects')],
         ['route' => 'price',    'label' => __('layout.nav.price')],
         ['route' => 'blog',     'label' => __('layout.nav.blog')],
+        ['route' => 'about',    'label' => __('layout.nav.about')],
         ['route' => 'contact',  'label' => __('layout.nav.contact')],
     ];
     $langLabels = ['cs' => 'CZ', 'en' => 'EN', 'de' => 'DE'];

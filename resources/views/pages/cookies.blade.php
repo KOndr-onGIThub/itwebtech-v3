@@ -80,7 +80,7 @@
             <h2>{{ __('cookies.controller.heading') }}</h2>
             <p>
                 {{ __('cookies.controller.name') }}<br>
-                {{ __('cookies.controller.email_label') }}: <a href="mailto:ok@itwebtech.cz">ok@itwebtech.cz</a>
+                {{ __('cookies.controller.email_label') }}: <a href="mailto:ok@ondraweb.cz">ok@ondraweb.cz</a>
             </p>
             <p>{!! __('cookies.controller.see_privacy_html', [
                 'link' => '<a href="' . lroute('privacy') . '">' . __('cookies.controller.see_privacy_link') . '</a>',
