@@ -11,9 +11,12 @@
     - Soubor žije na stabilní cestě `public/video/ondra-uvod.mp4` MIMO Vite
       pipeline — novou verzi videa nasadíš prostým přepsáním souboru.
       Cache-buster `?v=filemtime` se o invalidaci postará sám.
-    - Titulky (OND-203, Content Writer): nahraj WebVTT jako
+    - Titulky (OND-207, Content Writer): nahraj WebVTT jako
       `public/video/ondra-uvod.cs.vtt` — <track> se objeví automaticky,
       žádná změna kódu. Stejně tak `ondra-uvod.en.vtt` / `ondra-uvod.de.vtt`.
+    - Žádný <track> nesmí mít `default`: aktuální nahrávka má titulky
+      vypálené přímo v obraze, zapnuté <track> by běžely přes ně dvojitě.
+      CC jsou volitelné (přístupnost, překlady) — uživatel si je zapne sám.
     - Poster `public/video/ondra-uvod-poster.webp` = klidný frame z videa;
       při výměně videa vyměň i poster.
     - NIKDY nepřidávej autoplay se zvukem (explicitní zadání boardu).
@@ -37,7 +40,6 @@
             ];
         }
     }
-    $currentLocale = app()->getLocale();
 @endphp
 
 <video
@@ -57,7 +59,6 @@
         src="{{ $track['src'] }}"
         srclang="{{ $track['srclang'] }}"
         label="{{ $track['label'] }}"
-        @if ($track['srclang'] === $currentLocale) default @endif
     >
     @endforeach
 </video>
