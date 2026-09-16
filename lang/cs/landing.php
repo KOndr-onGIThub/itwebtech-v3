@@ -38,7 +38,8 @@ return [
 
     'problem' => [
         'title' => 'Možná už víte, že současný web nestačí. Jen nechcete udělat další drahý omyl.',
-        'intro' => 'Landing page má rychle potvrdit, že návštěvník řeší reálný problém a že tady najde srozumitelné řešení.',
+        // OND-198 (nález 5.5): „landing page" → řeč klienta.
+        'intro' => 'Samostatná stránka pro reklamu má rychle potvrdit, že návštěvník řeší reálný problém a že tady najde srozumitelné řešení.',
         'items' => [
             'Máte web, ale nepřivádí stabilně nové poptávky.',
             'Vaše nabídka není na první pohled jasná a lidé odcházejí bez kontaktu.',

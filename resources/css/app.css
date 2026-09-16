@@ -1377,12 +1377,15 @@
         font-family: var(--font-display);
         font-style: normal;
         font-weight: 700;
-        font-size: var(--text-display-lg);
+        /* OND-198 (nález 5.1): schválený titulek je dvouvětý a výrazně delší
+           než původní „Web, který vám konečně vydělá." — bez zmenšení stupně
+           a rozšíření míry se lámal do pěti řádků a přetlačil CTA pod fold. */
+        font-size: clamp(32px, 4vw, 56px);
         line-height: var(--leading-tight);
         letter-spacing: var(--tracking-tight);
         color: var(--color-fg-primary);
         margin-block: 0 var(--space-5);
-        max-width: 18ch;
+        max-width: 26ch;
         /* Plex Variable range 100–700; wght 700 je horní enterprise-confident
            tone. opsz/SOFT axes na Plex neexistují (Fraunces-only). */
         font-variation-settings: 'wght' 700;
@@ -1506,6 +1509,16 @@
         align-items: center;
     }
 
+    /* OND-198 — věta pod hero tlačítkem (nález 5.1, dokument homepage-texty) */
+    .section-hero__note {
+        margin: 0.875rem 0 0;
+        font-family: var(--font-body);
+        font-size: var(--text-body-sm);
+        line-height: 1.55;
+        color: var(--color-fg-muted);
+        max-width: 48ch;
+    }
+
     .hero-chips {
         display: flex;
         flex-wrap: wrap;
@@ -1602,14 +1615,8 @@
         background: var(--border-gold, currentColor);
         opacity: 0.85;
     }
-    .service-card__price {
-        margin-top: auto;
-        padding-top: 0.5rem;
-        font-weight: 600;
-        color: var(--color-heading);
-        font-size: 1rem;
-        letter-spacing: 0.01em;
-    }
+    /* OND-198 (nález 5.4): .service-card__price odebrán spolu s cenovým
+       štítkem na service kartách — cenu nese až sekce „Kolik to bude stát?". */
 
     /* Inline doplňkové služby (T14 — OND-118) */
     .services-secondary-inline {
@@ -1659,6 +1666,28 @@
         border-color: var(--border-gold);
         transform: translateY(-3px);
         box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+    }
+    /* OND-198 (nález 5.4) — zvýrazněné prostřední pásmo (Standard).
+       Stejná vizuální logika jako .pricing-tier--featured na /cenik. */
+    .price-anchor-card--featured {
+        position: relative;
+        border-color: var(--border-gold);
+        background: var(--bg-card-hover);
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+    }
+    .price-anchor-card__badge {
+        position: absolute;
+        top: -0.75rem;
+        left: 1.5rem;
+        background: var(--color-gold-500);
+        color: var(--color-ink-950);
+        font-size: 0.6875rem;
+        font-weight: 800;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        padding: 0.25rem 1rem;
+        border-radius: 999px;
+        white-space: nowrap;
     }
     .price-anchor-card__title {
         margin: 0;
@@ -2948,6 +2977,16 @@
         background: rgba(255, 255, 255, 0.13);
         border-color: rgba(255, 255, 255, 0.4);
         color: var(--color-heading);
+    }
+
+    /* OND-198 (nález 5.4) — očekávací věta nad pásmy, dřív než první číslo. */
+    .pricing-expectation {
+        max-width: 62ch;
+        margin: 0 auto 2.25rem;
+        text-align: center;
+        font-size: 1.0625rem;
+        line-height: 1.6;
+        color: var(--color-body);
     }
 
     .pricing-note {

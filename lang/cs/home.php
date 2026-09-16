@@ -17,15 +17,19 @@ return [
         'page_mark_label' => 'WEB NA MÍRU',
         // OND-145 P0.3: page_mark_index odebrán — agency-portfolio pagination
         // artefakt, itwebtech nemá „pages" hierarchy v hero kontextu (CEO 13:48).
+        // OND-198 (nález 5.1): původní titulek „Web, který vám konečně vydělá."
+        // sliboval výsledek za klienta. Nahrazen schválenou hero sekcí
+        // z dokumentu homepage-texty (OND-186).
         'upline'          => 'Pro firmy, které poznají rozdíl.',
-        'heading_html'    => 'Web, který vám konečně <em>vydělá</em>.',
-        'subline'         => 'Vlastní kód, přesná cena předem, přímý kontakt.',
+        'heading_html'    => 'Weby a aplikace <em>na míru</em>.<br>Postavím vám je sám, na vlastním kódu.',
+        'subline'         => 'Jsem Ondřej Kriška, zkušený vývojář. Pracuju s vámi napřímo, bez agentury a bez prostředníků. Weby stavím tak, aby fungovaly roky a nezdržovaly vás údržbou.',
+        'note'            => 'Ozvu se do dvou pracovních dnů. Nezávazně proberu, co dává smysl.',
 
         // Backwards compat — staré klíče zachované pro non-hero spotřebitele
         // (consultation modal, fallback render). cta_secondary není v hero.
         'eyebrow'       => 'Webové stránky a aplikace na míru',
-        'heading'       => 'Web, který vám konečně vydělá. Bez WordPressu, bez údržby, bez kompromisů.',
-        'cta_primary'   => 'Chci nezávaznou nabídku',
+        'heading'       => 'Weby a aplikace na míru. Postavím vám je sám, na vlastním kódu.',
+        'cta_primary'   => 'Napište mi, co potřebujete',
         'cta_secondary' => 'Domluvit 30min konzultaci',
         'phone_label'   => 'nebo zavolat:',
     ],
@@ -165,7 +169,9 @@ return [
             ],
             'barana' => [
                 'client'  => 'BARANA',
-                'outcome' => 'Premium prezentace připravená přímo pro placené kampaně Meta Ads / Google Ads — návštěvník chápe nabídku bez nutnosti volat.',
+                // OND-198 (nález 5.5): „landing page" / „Meta Ads / Google Ads"
+                // přepsáno do řeči klienta.
+                'outcome' => 'Samostatná stránka pro placenou reklamu — návštěvník chápe nabídku bez nutnosti volat.',
             ],
             'nove-interiery' => [
                 'client'  => 'Nové interiéry',
@@ -187,23 +193,23 @@ return [
             // cenu z odpovídajícího tieru — viz price_anchor / price.tiers níže.
             'weby' => [
                 'title'       => 'Webové stránky na míru',
-                'description' => 'Prezentační web, který vás odliší od šablon konkurence a začne přivádět zákazníky.',
+                // OND-198 (nález 5.1): „a začne přivádět zákazníky" byl slib
+                // výsledku za klienta — nahrazeno tím, za co ručím já.
+                'description' => 'Prezentační web, který vás odliší od šablon konkurence a srozumitelně vysvětlí, co děláte a v čem jste jiní.',
                 'bullets'     => [
                     'Vlastní kód — bez WordPressu a šablon',
                     'Konverzní struktura postavená na vašem byznysu',
                     'Bezúdržbový provoz a rychlé načítání',
                 ],
-                'price'       => 'od 25 000 Kč',
             ],
             'aplikace' => [
                 'title'       => 'Webové aplikace',
-                'description' => 'Interní systémy, zákaznické portály a evidenční nástroje, které vám šetří čas i lidi.',
+                'description' => 'Interní systémy, zákaznické portály a evidenční nástroje postavené na tom, jak váš provoz reálně funguje.',
                 'bullets'     => [
                     'Návrh procesu před prvním řádkem kódu',
                     'Integrace na vaše stávající nástroje',
                     'Vlastní administrace bez měsíčních licencí',
                 ],
-                'price'       => 'od 55 000 Kč',
             ],
             'eshop' => [
                 'title'       => 'E-shopy',
@@ -213,7 +219,6 @@ return [
                     'Napojení na účetnictví, dopravce a platební bránu',
                     'Bez měsíčních poplatků za platformu',
                 ],
-                'price'       => 'od 95 000 Kč',
             ],
         ],
         'seo' => [
@@ -232,25 +237,34 @@ return [
 
     'price_anchor' => [
         'heading' => 'Kolik to bude stát?',
-        'intro'   => 'Orientační vstupní ceny pro tři tiery projektu. Přesnou nabídku dostanete písemně po krátké konzultaci.',
+        // OND-198 (nález 5.4): očekávací věta musí padnout dřív než první číslo,
+        // aby normou bylo pásmo 55–150 tis. Kč, ne nejlevnější vstup.
+        // OND-198 (nález 5.5): „tiery" → „tři úrovně".
+        'intro'   => 'Většina projektů, které stavím, vychází mezi 55 a 150 tisíci korunami. Pokud hledáte web do dvaceti tisíc, nebudu pro vás ten správný dodavatel a řeknu vám to rovnou. Níž jsou orientační vstupní ceny tří úrovní — přesnou nabídku dostanete písemně po krátké konzultaci.',
         // OND-130 (B2 §1, klíčová direktiva 2 + plán §3.6): pricing teaser
-        // sjednocen s /cenik — Startovní 25 / Standard 55 / Custom od 95 tis. Kč.
+        // sjednocen s /cenik — Standard 55 / Custom od 95 / Startovní 25 tis. Kč.
+        // OND-198 (nález 5.4): pořadí Standard → Custom → Startovní, nejlevnější
+        // pásmo je poslední a rámované jako výjimka. Standard je zvýrazněný.
         // Service-typový rozklad (web vs. aplikace vs. e-shop) je v sekci „services".
+        'featured_label' => 'Nejčastější volba',
         'items'   => [
             [
-                'title' => 'Startovní',
-                'price' => '25 000 Kč',
-                'desc'  => 'Prezentační web do 5 stránek pro živnostníky a malé firmy.',
+                'title'    => 'Standard',
+                'price'    => '55 000 Kč',
+                'desc'     => 'Vícejazyčný web s blogem, měřením konverzí a rezervačním systémem.',
+                'featured' => true,
             ],
             [
-                'title' => 'Standard',
-                'price' => '55 000 Kč',
-                'desc'  => 'Vícejazyčný web s blogem, měřením konverzí a rezervačním systémem.',
+                'title'    => 'Custom',
+                'price'    => 'od 95 000 Kč',
+                'desc'     => 'E-shop, webová aplikace nebo komplexní portál na míru.',
+                'featured' => false,
             ],
             [
-                'title' => 'Custom',
-                'price' => 'od 95 000 Kč',
-                'desc'  => 'E-shop, webová aplikace nebo komplexní portál na míru.',
+                'title'    => 'Startovní',
+                'price'    => '25 000 Kč',
+                'desc'     => 'Výjimka, ne standardní vstup: prezentační web do 5 stránek pro živnostníky. Beru ho jen tam, kde větší rozsah nedává smysl.',
+                'featured' => false,
             ],
         ],
         'cta' => 'Detailní ceník →',
@@ -321,7 +335,10 @@ return [
             [
                 'key'      => 'price',
                 'question' => 'Kolik to bude stát?',
-                'answer'   => 'Orientační vstupní ceny najdete v cenové kotvě výše — Startovní 25 000 Kč, Standard 55 000 Kč, Custom od 95 000 Kč. Přesnou cenu dostanete písemně po krátké konzultaci, na faktuře je pak přesně to, co je ve specifikaci.',
+                // OND-198 (nález 5.5): „cenová kotva výše" byl žargon; odkaz teď
+                // míří na skutečnou sekci. OND-198 (nález 5.4): vede Standard,
+                // nejlevnější pásmo je uvedené jako výjimka.
+                'answer'   => 'Většina projektů vychází mezi 55 a 150 tisíci korunami. Ceny najdete výš na této stránce v sekci „Kolik to bude stát?" a podrobně v ceníku — Standard 55 000 Kč, Custom od 95 000 Kč. Startovní pásmo za 25 000 Kč je výjimka pro živnostníky, ne standardní vstup. Přesnou cenu dostanete písemně po krátké konzultaci, na faktuře je pak přesně to, co je ve specifikaci.',
             ],
             [
                 'key'      => 'duration',

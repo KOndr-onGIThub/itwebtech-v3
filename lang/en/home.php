@@ -15,16 +15,19 @@ return [
         'page_mark_label' => 'CUSTOM WEB',
         // OND-145 P0.3: page_mark_index removed — agency-portfolio pagination
         // artefact, itwebtech has no „pages" hierarchy in hero context.
+        // OND-198 (finding 5.1): the previous headline promised the client's
+        // business result. Replaced with the approved hero copy (CS source of truth).
         'upline'          => 'For businesses that know the difference.',
-        'heading_html'    => 'A website that finally <em>earns its keep</em>.',
-        'subline'         => 'Custom code, fixed price up front, direct contact.',
+        'heading_html'    => 'Websites and applications <em>built to fit</em>.<br>I build them myself, on my own code.',
+        'subline'         => 'I am Ondřej Kriška, an experienced developer. You work with me directly — no agency, no middlemen. I build websites to run for years without tying you up in maintenance.',
+        'note'            => 'I reply within two working days. No commitment, we just go through what makes sense.',
 
         // Backwards compat (consultation modal, fallback render).
         'eyebrow'       => 'Custom websites & web applications',
-        'heading'       => 'A website that finally earns its keep. No WordPress, no maintenance, no compromises.',
+        'heading'       => 'Websites and applications built to fit. I build them myself, on my own code.',
         // OND-130 + OND-136: single primary CTA in hero, exact wording per spec.
         // cta_secondary kept for backwards compat (consultation modal) — not shown in hero.
-        'cta_primary'   => 'Get a free quote',
+        'cta_primary'   => 'Tell me what you need',
         'cta_secondary' => 'Book a 30-min consultation',
         'phone_label'   => 'or call:',
     ],
@@ -164,7 +167,8 @@ return [
             ],
             'barana' => [
                 'client'  => 'BARANA',
-                'outcome' => 'A premium presentation built directly for Meta Ads and Google Ads campaigns — visitors grasp the offer without picking up the phone.',
+                // OND-198 (finding 5.5): ad-platform jargon rewritten in client language.
+                'outcome' => 'A standalone page built for paid advertising — visitors grasp the offer without picking up the phone.',
             ],
             'nove-interiery' => [
                 'client'  => 'Nové interiéry',
@@ -183,23 +187,23 @@ return [
         'primary' => [
             'weby' => [
                 'title'       => 'Custom websites',
-                'description' => 'A presentation website that sets you apart from template-driven competition and starts bringing in customers.',
+                // OND-198 (finding 5.1): "starts bringing in customers" promised
+                // the client's business result — replaced with what I deliver.
+                'description' => 'A presentation website that sets you apart from template-driven competition and clearly explains what you do and how you differ.',
                 'bullets'     => [
                     'Custom code — no WordPress, no templates',
                     'Conversion-focused structure built around your business',
                     'Maintenance-free with fast load times',
                 ],
-                'price'       => 'from €1,000',
             ],
             'aplikace' => [
                 'title'       => 'Web applications',
-                'description' => 'Internal systems, customer portals and tracking tools that save you both time and headcount.',
+                'description' => 'Internal systems, customer portals and tracking tools built around how your operation actually runs.',
                 'bullets'     => [
                     'Process design before a single line of code',
                     'Integrations with your existing tools',
                     'Custom admin without monthly licence fees',
                 ],
-                'price'       => 'from €2,200',
             ],
             'eshop' => [
                 'title'       => 'E-shops',
@@ -209,7 +213,6 @@ return [
                     'Integrations with accounting, couriers and payment gateways',
                     'No monthly platform fees',
                 ],
-                'price'       => 'from €3,800',
             ],
         ],
         'seo' => [
@@ -228,23 +231,31 @@ return [
 
     'price_anchor' => [
         'heading' => 'What will it cost?',
-        'intro'   => 'Indicative entry prices for the three project tiers. You receive an exact written quote after a short consultation.',
+        // OND-198 (finding 5.4): expectation sentence before the first number.
+        // OND-198 (finding 5.5): "tiers" → "three levels".
+        'intro'   => 'Most projects I build land between €2,200 and €6,000. If you are looking for a website under €800, I am not the right supplier for you and I will tell you so straight away. Below are indicative entry prices for three levels — you receive an exact written quote after a short consultation.',
         // OND-136: 25 / 55 / 95 thousand CZK → EUR conversion (CEO-confirmed 1:25 anchor). One source of truth across the site.
+        // OND-198 (finding 5.4): order Standard → Custom → Starter; the cheapest
+        // band is last and framed as an exception. Standard is highlighted.
+        'featured_label' => 'Most common choice',
         'items'   => [
             [
-                'title' => 'Starter',
-                'price' => '€1,000',
-                'desc'  => 'Up to 5-page presentation site for sole traders and small businesses.',
+                'title'    => 'Standard',
+                'price'    => '€2,200',
+                'desc'     => 'Multilingual site with blog, conversion tracking and a booking system.',
+                'featured' => true,
             ],
             [
-                'title' => 'Standard',
-                'price' => '€2,200',
-                'desc'  => 'Multilingual site with blog, conversion tracking and a booking system.',
+                'title'    => 'Custom',
+                'price'    => 'from €3,800',
+                'desc'     => 'E-shop, web application or a complex custom portal.',
+                'featured' => false,
             ],
             [
-                'title' => 'Custom',
-                'price' => 'from €3,800',
-                'desc'  => 'E-shop, web application or a complex custom portal.',
+                'title'    => 'Starter',
+                'price'    => '€1,000',
+                'desc'     => 'An exception, not the standard entry point: up to 5-page presentation site for sole traders. I take it on only where a larger scope makes no sense.',
+                'featured' => false,
             ],
         ],
         'cta' => 'Detailed pricing →',

@@ -83,6 +83,11 @@
 <section class="section-wrapper" data-reveal>
     <div class="container-site">
 
+        {{-- OND-198 (nález 5.4): očekávací věta musí padnout dřív, než čtenář
+             uvidí první číslo. Pásma jsou v lang souboru seřazená
+             Standard → Custom → Startovní, nejlevnější je poslední. --}}
+        <p class="pricing-expectation">{{ __('price.intro') }}</p>
+
         <div class="pricing-tiers" data-reveal-group>
             @foreach (__('price.tiers') as $tier)
             @php
@@ -137,6 +142,10 @@
     $compareTiers  = __('price.compare.tiers');
     $compareGroups = __('price.compare.groups');
     $tierPrices    = array_column(__('price.tiers'), 'price');
+    // OND-198 (nález 5.4): zvýrazněný sloupec se odvozuje z příznaku `popular`,
+    // ne z pevného indexu 1 — pořadí pásem se změnilo (Standard je první).
+    $featuredIdx   = array_search(true, array_column(__('price.tiers'), 'popular'), true);
+    $featuredIdx   = $featuredIdx === false ? -1 : $featuredIdx;
 @endphp
 <section class="section-wrapper section-alt" data-reveal>
     <div class="container-site">
@@ -151,7 +160,7 @@
                     <tr>
                         <th></th>
                         @foreach ($compareTiers as $i => $tier)
-                        <th class="{{ $i === 1 ? 'is-featured' : '' }}">{{ $tier }}</th>
+                        <th class="{{ $i === $featuredIdx ? 'is-featured' : '' }}">{{ $tier }}</th>
                         @endforeach
                     </tr>
                 </thead>
@@ -164,7 +173,7 @@
                     <tr>
                         <td class="pricing-compare__feature">{{ $row['label'] }}</td>
                         @foreach ($row['values'] as $vi => $val)
-                        <td class="{{ $vi === 1 ? 'is-featured' : '' }}">
+                        <td class="{{ $vi === $featuredIdx ? 'is-featured' : '' }}">
                             @if ($val === true)
                                 <span class="pricing-compare__yes">
                                     <x-icon.circle-check-big class="w-4 h-4" />

@@ -15,14 +15,17 @@ return [
         'page_mark_label' => 'MASSGESCHNEIDERT',
         // OND-145 P0.3: page_mark_index entfernt — Agency-Portfolio-Pagination-
         // Artefakt, itwebtech hat im Hero-Kontext keine „pages" Hierarchie.
+        // OND-198 (Befund 5.1): die alte Überschrift versprach das Geschäfts-
+        // ergebnis des Kunden. Ersetzt durch den freigegebenen Hero-Text (CS = Quelle).
         'upline'          => 'Für Unternehmen, die den Unterschied erkennen.',
-        'heading_html'    => 'Eine Website, die sich endlich <em>auszahlt</em>.',
-        'subline'         => 'Eigener Code, fester Preis im Voraus, direkter Kontakt.',
+        'heading_html'    => 'Websites und Anwendungen <em>nach Maß</em>.<br>Ich baue sie selbst, mit eigenem Code.',
+        'subline'         => 'Ich bin Ondřej Kriška, erfahrener Entwickler. Sie arbeiten direkt mit mir — ohne Agentur, ohne Zwischenhändler. Ich baue Websites so, dass sie jahrelang laufen und Sie nicht mit Wartung aufhalten.',
+        'note'            => 'Ich melde mich innerhalb von zwei Arbeitstagen. Unverbindlich besprechen wir, was sinnvoll ist.',
 
         // Backwards compat (consultation modal, fallback render).
         'eyebrow'       => 'Maßgeschneiderte Websites & Webanwendungen',
-        'heading'       => 'Eine Website, die sich endlich auszahlt. Ohne WordPress, ohne Wartung, ohne Kompromisse.',
-        'cta_primary'   => 'Unverbindliches Angebot anfordern',
+        'heading'       => 'Websites und Anwendungen nach Maß. Ich baue sie selbst, mit eigenem Code.',
+        'cta_primary'   => 'Schreiben Sie mir, was Sie brauchen',
         'cta_secondary' => '30-Min-Beratung vereinbaren',
         'phone_label'   => 'oder anrufen:',
     ],
@@ -162,7 +165,8 @@ return [
             ],
             'barana' => [
                 'client'  => 'BARANA',
-                'outcome' => 'Premium-Präsentation direkt für bezahlte Meta- und Google-Ads-Kampagnen — Besucher verstehen das Angebot ohne Anruf.',
+                // OND-198 (Befund 5.5): Werbeplattform-Jargon in Kundensprache umgeschrieben.
+                'outcome' => 'Eine eigenständige Seite für bezahlte Werbung — Besucher verstehen das Angebot ohne Anruf.',
             ],
             'nove-interiery' => [
                 'client'  => 'Nové interiéry',
@@ -181,23 +185,23 @@ return [
         'primary' => [
             'weby' => [
                 'title'       => 'Maßgeschneiderte Websites',
-                'description' => 'Eine Präsentations-Website, die sich von schablonenhaften Wettbewerbern abhebt und Kunden bringt.',
+                // OND-198 (Befund 5.1): „und Kunden bringt" war ein Versprechen
+                // des Kundenergebnisses — ersetzt durch das, wofür ich einstehe.
+                'description' => 'Eine Präsentations-Website, die sich von schablonenhaften Wettbewerbern abhebt und verständlich erklärt, was Sie tun und worin Sie sich unterscheiden.',
                 'bullets'     => [
                     'Eigener Code — kein WordPress, keine Vorlagen',
                     'Konversionsorientierte Struktur passend zu Ihrem Geschäft',
                     'Wartungsfreier Betrieb und schnelle Ladezeiten',
                 ],
-                'price'       => 'ab 1.000 €',
             ],
             'aplikace' => [
                 'title'       => 'Webanwendungen',
-                'description' => 'Interne Systeme, Kundenportale und Verwaltungstools, die Zeit und Personal sparen.',
+                'description' => 'Interne Systeme, Kundenportale und Verwaltungstools, gebaut auf der Art, wie Ihr Betrieb tatsächlich funktioniert.',
                 'bullets'     => [
                     'Prozessdesign vor der ersten Codezeile',
                     'Integration in Ihre bestehenden Werkzeuge',
                     'Eigene Administration ohne monatliche Lizenzgebühren',
                 ],
-                'price'       => 'ab 2.200 €',
             ],
             'eshop' => [
                 'title'       => 'Online-Shops',
@@ -207,7 +211,6 @@ return [
                     'Anbindung an Buchhaltung, Spediteure und Zahlungsanbieter',
                     'Keine monatlichen Plattform-Gebühren',
                 ],
-                'price'       => 'ab 3.800 €',
             ],
         ],
         'seo' => [
@@ -226,23 +229,31 @@ return [
 
     'price_anchor' => [
         'heading' => 'Was kostet es?',
-        'intro'   => 'Orientierende Einstiegspreise für die drei Projekt-Tiers. Ein verbindliches Angebot erhalten Sie schriftlich nach einer kurzen Beratung.',
+        // OND-198 (Befund 5.4): Erwartungssatz vor der ersten Zahl.
+        // OND-198 (Befund 5.5): „Tiers" → „drei Stufen".
+        'intro'   => 'Die meisten Projekte, die ich baue, liegen zwischen 2.200 und 6.000 €. Wenn Sie eine Website unter 800 € suchen, bin ich nicht der richtige Anbieter für Sie — und das sage ich Ihnen gleich. Unten finden Sie orientierende Einstiegspreise für drei Stufen — ein verbindliches Angebot erhalten Sie schriftlich nach einer kurzen Beratung.',
         // OND-136: 25 / 55 / 95 Tausend CZK → EUR-Umrechnung (CEO-bestätigter 1:25-Anker). Eine Quelle der Wahrheit.
+        // OND-198 (Befund 5.4): Reihenfolge Standard → Custom → Starter; die
+        // günstigste Stufe steht zuletzt und wird als Ausnahme gerahmt.
+        'featured_label' => 'Häufigste Wahl',
         'items'   => [
             [
-                'title' => 'Starter',
-                'price' => '1.000 €',
-                'desc'  => 'Präsentations-Website bis 5 Seiten für Selbstständige und kleine Unternehmen.',
+                'title'    => 'Standard',
+                'price'    => '2.200 €',
+                'desc'     => 'Mehrsprachige Website mit Blog, Konversions-Tracking und Reservierungssystem.',
+                'featured' => true,
             ],
             [
-                'title' => 'Standard',
-                'price' => '2.200 €',
-                'desc'  => 'Mehrsprachige Website mit Blog, Konversions-Tracking und Reservierungssystem.',
+                'title'    => 'Custom',
+                'price'    => 'ab 3.800 €',
+                'desc'     => 'Online-Shop, Webanwendung oder ein komplexes Portal auf Maß.',
+                'featured' => false,
             ],
             [
-                'title' => 'Custom',
-                'price' => 'ab 3.800 €',
-                'desc'  => 'Online-Shop, Webanwendung oder ein komplexes Portal auf Maß.',
+                'title'    => 'Starter',
+                'price'    => '1.000 €',
+                'desc'     => 'Eine Ausnahme, kein Standard-Einstieg: Präsentations-Website bis 5 Seiten für Selbstständige. Ich nehme sie nur an, wo ein größerer Umfang keinen Sinn ergibt.',
+                'featured' => false,
             ],
         ],
         'cta' => 'Detaillierte Preisliste →',

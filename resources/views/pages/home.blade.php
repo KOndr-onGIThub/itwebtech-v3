@@ -72,6 +72,11 @@
                 </a>
                 <x-phone-cta class="section-hero__phone-link" :label="__('home.hero.phone_label')" />
             </div>
+
+            {{-- OND-198 (nález 5.1): věta pod tlačítkem ze schválené hero sekce
+                 (dokument homepage-texty) — nastavuje očekávání reakční doby
+                 bez slibu výsledku za klienta. --}}
+            <p class="section-hero__note">{{ __('home.hero.note') }}</p>
         </div>
 
         {{-- T20 — Foto Ondřeje v hero (polo-portrét vpravo, desktop only).
@@ -201,7 +206,10 @@
                     <li>{{ $bullet }}</li>
                     @endforeach
                 </ul>
-                <p class="service-card__price">{{ __("home.services.primary.{$key}.price") }}</p>
+                {{-- OND-198 (nález 5.4): cenový štítek „od 25 000 Kč" odebrán —
+                     byl to první a nejvýraznější číslo na homepage a táhl
+                     očekávání dolů. Ceny nese až sekce „Kolik to bude stát?"
+                     hned pod službami, kde jim předchází očekávací věta. --}}
             </article>
             @endforeach
         </div>
@@ -227,9 +235,16 @@
             <p class="section-header__desc">{{ __('home.price_anchor.intro') }}</p>
         </header>
 
+        {{-- OND-198 (nález 5.4): pořadí pásem je dané lang souborem
+             (Standard → Custom → Startovní) a zvýrazněné pásmo se řídí
+             klíčem `featured`, ne pozicí v poli. --}}
         <div class="price-anchor-grid" data-reveal-group>
             @foreach (__('home.price_anchor.items') as $i => $item)
-            <article class="price-anchor-card" data-reveal style="transition-delay: {{ $i * 80 }}ms">
+            <article class="price-anchor-card {{ ($item['featured'] ?? false) ? 'price-anchor-card--featured' : '' }}"
+                     data-reveal style="transition-delay: {{ $i * 80 }}ms">
+                @if ($item['featured'] ?? false)
+                <span class="price-anchor-card__badge">{{ __('home.price_anchor.featured_label') }}</span>
+                @endif
                 <h3 class="price-anchor-card__title">{{ $item['title'] }}</h3>
                 <p class="price-anchor-card__price">{{ $item['price'] }}</p>
                 <p class="price-anchor-card__desc">{{ $item['desc'] }}</p>
