@@ -163,8 +163,11 @@ class PageController extends Controller
         // ale patří jiné locale, 301 → kanonický slug pro current locale.
         // Bez tohoto check byl každý článek dostupný pod ~3 slug variantami
         // × 3 locale prefixy se self-canonical → duplicate content v Google.
+        // OND-204: neaktivní slugy se dohledávají taky — jsou to staré adresy
+        // článků, které dostaly nový slug. Aktivní má přednost, pak se níž
+        // 301 přesměruje na kanonickou adresu. Bez toho by starý slug 404oval.
         $slugRecord = ArticleSlug::where('slug', $slug)
-            ->where('active', true)
+            ->orderByDesc('active')
             ->first();
 
         if (! $slugRecord) {
@@ -177,7 +180,7 @@ class PageController extends Controller
             ->first();
 
         if (! $article) {
-            abort(404);
+            return $this->redirectRemovedArticle($slugRecord->article_id, $locale);
         }
 
         // Aktivní slug pro aktuální locale — bez fallbacku na cs, protože
@@ -207,5 +210,44 @@ class PageController extends Controller
         }
 
         return view('pages.article', compact('article', 'translation', 'locale', 'hreflangs'));
+    }
+
+    /**
+     * OND-204: mapa přesměrování pro články stažené z blogu (published = 0).
+     *
+     * Klíč = id staženého článku, hodnota = id článku, na který má stará
+     * adresa vést. Co v mapě není, jde na výpis blogu. Mapuje se na id,
+     * ne na slug, aby přesměrování sedělo i v EN/DE verzi webu.
+     *
+     * Zdroj: dokument `blog-texty` (OND-203), tabulka „Mapa přesměrování".
+     * 4 = „Co si připravit, než oslovíte vývojáře webu".
+     */
+    private const REMOVED_ARTICLE_REDIRECTS = [
+        7  => 4,  // Design nebo obsah?
+        8  => 4,  // Web, který převádí návštěvníky na zákazníky
+        11 => 4,  // Jak vytvořit úspěšnou webovou stránku
+    ];
+
+    /**
+     * Stažený článek: adresa zůstává funkční a 301 vede na nejbližší
+     * relevantní stránku. Nikdy 404 — staré adresy mají odkazy zvenčí.
+     */
+    private function redirectRemovedArticle(int $articleId, string $locale)
+    {
+        $targetId = self::REMOVED_ARTICLE_REDIRECTS[$articleId] ?? null;
+
+        if ($targetId) {
+            $targetSlug = Article::where('id', $targetId)
+                ->where('published', true)
+                ->with('slugs')
+                ->first()
+                ?->slug($locale);
+
+            if ($targetSlug) {
+                return redirect()->route("{$locale}.article", ['slug' => $targetSlug], 301);
+            }
+        }
+
+        return redirect()->to(lroute('blog', $locale), 301);
     }
 }

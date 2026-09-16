@@ -66,11 +66,17 @@
                 </div>
 
                 <dl>
+                    {{-- OND-201 (nález 5.9): dřív „Ondřej Kriška / Česká
+                         republika" — signál anonymního dodavatele. Nově plná
+                         fakturační adresa a IČO z lang souboru (OSVČ, jde
+                         o veřejné údaje). --}}
                     <div>
                         <dt>{{ __('contact.address_label') }}</dt>
                         <dd>
-                            Ondřej Kriška<br>
-                            {{ __('contact.address_country') }}
+                            {{ __('contact.address_name') }}<br>
+                            {{ __('contact.address_street') }}<br>
+                            {{ __('contact.address_city') }}<br>
+                            {{ __('contact.address_registration') }}
                         </dd>
                     </div>
 

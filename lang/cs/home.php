@@ -2,9 +2,13 @@
 
 return [
 
+    // OND-201 (nález 5.7): titulek se definoval negací konkurence („Žádné
+    // šablony, žádný WordPress"). Zákazník s rozpočtem 150 tisíc nehledá,
+    // kdo nadává na konkurenci, a „WordPress" navíc neříká nic člověku,
+    // který netuší, co to je (princip 0).
     'meta' => [
-        'title'       => 'Ondřej Kriška — Weby na míru | Žádné šablony, žádný WordPress',
-        'description' => 'Weby na míru pro podnikatele, kteří poznají rozdíl. Vlastní kód, přesná cena předem, přímý kontakt. Bez šablon, bez WordPressu, bez prostředníků.',
+        'title'       => 'Weby a aplikace na míru | ONDRAWEB',
+        'description' => 'Weby, e-shopy a webové aplikace na míru pro menší a střední firmy. Vlastní kód, přesná cena předem a jednáte přímo se mnou. Jsem Ondřej Kriška.',
     ],
 
     'hero' => [
@@ -54,6 +58,10 @@ return [
         'projects'     => '23+ realizací',
         'experience'   => '18 let praxe',
         'response'     => 'Odpověď do 24 hodin',
+        // OND-201 (nález 5.11): ocenění TOP firma 2025 z Firmy.cz je ověřitelný
+        // důkaz třetí strany, byl na obou starých webech a na stagingu chyběl.
+        // Formulace podle sekce 2 dokumentu homepage-texty (OND-186).
+        'award'        => 'TOP firma 2025 na Firmy.cz',
         'brands' => [
             ['name' => 'MAKOplast',             'image' => null],
             ['name' => 'Yolk Studio',           'image' => 'yolk_studio.png'],
@@ -95,20 +103,22 @@ return [
         ],
     ],
 
+    // OND-201 (nález 5.7): první velká sekce homepage se definovala negací
+    // konkurence („Co se opakuje u většiny webových projektů") a dva ze tří
+    // bodů říkaly totéž (šablona vypadá jako u konkurence). Nově vede to, co
+    // dělám já (`lead`), vymezení je krátké a duplicitní body jsou slité
+    // do jednoho. Pořadí bloků v `home.blade.php` je tomu přizpůsobené.
     'problems' => [
-        'heading'             => 'Co se opakuje u většiny webových projektů.',
-        'transition_heading'  => 'Jak to dělám jinak:',
-        'transition_text'     => 'Každý projekt začínám pochopením vašeho byznysu. Píšu vlastní kód — bez šablon, bez WordPressu, bez prostředníků. Mluvíte přímo se mnou od první schůzky po spuštění i dál.',
+        'heading'             => 'Jak weby stavím',
+        'lead'                => 'Každý projekt začínám pochopením vašeho byznysu. Píšu vlastní kód od základu, takže web vychází z toho, jak vaše firma reálně funguje. Mluvíte přímo se mnou od první zprávy po spuštění i dál.',
+        'transition_heading'  => 'Čemu se tím vyhnete',
+        'transition_text'     => 'Dvě věci, které u webových projektů vídám nejčastěji.',
         'items' => [
             [
-                'heading'      => 'Šablona vydávaná za řešení',
-                'text'         => 'Agentura použije rozvržení, které použila pětkrát. Doplní vaše texty a logo. Výsledek vypadá profesionálně — dokud se nepodíváte na web konkurence. Stejné sekce, stejná slova, jiné barvy a logo.',
+                'heading'      => 'Šablona vydávaná za řešení na míru',
+                'text'         => 'Dodavatel použije rozvržení, které použil už pětkrát, a doplní vaše texty a logo. Výsledek vypadá profesionálně — dokud neotevřete web konkurence a nenajdete stejné sekce i stejná slova. Platforma vás navíc drží v měsíčním předplatném, ze kterého si web nevezmete s sebou.',
                 'quote_text'   => 'Není to případ, kdy ostatní rádoby tvůrci webů pouze plní daty šablony za nehorázné částky.',
                 'quote_author' => 'Petr Kroulík, Nové Interiéry s.r.o.',
-            ],
-            [
-                'heading' => 'Šablona vypadá pěkně. Vypadá jako u všech ostatních.',
-                'text'    => 'Tři firmy ve vašem oboru spustily minulý týden stejnou šablonu. Agentura k ní dosadí vaše texty a logo — výsledek je zaměnitelný a platforma vás drží v měsíčním předplatném, ze kterého si web nevezmete s sebou.',
             ],
             [
                 'heading' => 'Nikdy nemluvíte s člověkem, který web dělá',
@@ -343,26 +353,27 @@ return [
         ],
     ],
 
-    'cta' => [
-        'heading'      => 'Připraveni začít? Konzultace je zdarma.',
-        'consultation' => 'Získat cenovou nabídku',
-        'message'      => 'Domluvit 30min konzultaci',
-    ],
-
-    'final_cta' => [
-        'quote_text'   => 'Díky individuálnímu přístupu, flexibilitě a profesionalitě odpovídá výsledek našim představám.',
-        'quote_author' => 'Hana Jaskmanická, výkonná ředitelka, VP Industry',
-        'heading'      => 'Řeknu vám upřímný názor na váš projekt.',
-        'subtext'      => 'Odpovídám do druhého pracovního dne. Pokud spolupráce nedává smysl, řeknu vám to rovnou — žádný obchodní tlak, žádné dotěrné e-maily.',
-        'cta_label'    => 'Získat cenovou nabídku',
-        'cta_secondary' => 'Domluvit 30min konzultaci',
-        'cta_note'     => 'Bezplatně. Bez závazku.',
-    ],
+    // OND-201 (nález 5.8): konec homepage byl tři výzvy za sebou —
+    // „Pošlete mi pár vět o projektu" (inline_form), „Připraveni začít?
+    // Konzultace je zdarma." (home.cta) a „Řeknu vám upřímný názor na váš
+    // projekt." (home.final_cta). Bloky `cta` a `final_cta` jsou zrušené;
+    // zůstala jedna výzva s jedním formulářem v `inline_form` níž.
+    // Klientská citace z `final_cta` se přesunula k té jedné výzvě.
 
     'faq' => [
         'heading' => 'Časté otázky',
         // `key` je stabilní slug pro analytics (data-faq-key) a JSON-LD; ne lokalizovat.
         'items'   => [
+            // OND-201 (kap. 6.3 bod 1): nejzávažnější námitka u zakázky za
+            // 150 tisíc — dosud ji web neřešil vůbec. Odpověď stojí na faktech
+            // z dokumentů homepage-texty a texty-podstranky (OND-186): kód
+            // i data patří klientovi, web není vázaný na platformu, může ho
+            // převzít jiný vývojář. Záměrně bez slibu nepřetržité pohotovosti.
+            [
+                'key'      => 'single-person',
+                'question' => 'Jste jeden člověk. Co když onemocníte nebo skončíte?',
+                'answer'   => 'Rozumím obavě — u zakázky za víc než sto tisíc je to ta nejdůležitější otázka. Kód i data jsou od začátku vaše a máte je u sebe: nejsou zamčené u mě ani u platformy, ze které byste nemohli odejít. Web stojí na Laravelu, tedy na běžné a rozšířené technologii, takže na něm může pokračovat kterýkoli vývojář, který ji zná. Nepřetržitou pohotovost nedržím a nebudu tvrdit, že ano. Ručím za to, že vám u mě nic nezůstane zamčené.',
+            ],
             [
                 'key'      => 'price',
                 'question' => 'Kolik to bude stát?',
@@ -407,10 +418,14 @@ return [
         'success'     => 'Děkuji, otázka dorazila. Ozvu se co nejdříve.',
     ],
 
+    // OND-201 (nález 5.8): jediná závěrečná výzva homepage. Text ze schválené
+    // sekce 9 dokumentu homepage-texty (OND-186).
     'inline_form' => [
         'eyebrow'         => 'Poptávka',
-        'heading'         => 'Pošlete mi pár vět o projektu. Ozvu se do 24 hodin.',
-        'description'     => 'Žádný obchodník, žádný formulář na deset polí. Stačí krátký popis — odpovím vám osobně a probereme, jestli má spolupráce smysl.',
+        'heading'         => 'Napište mi, co potřebujete',
+        'description'     => 'Popište mi ve zkratce, co řešíte. Ozvu se do dvou pracovních dnů a nezávazně probereme, jestli si sedneme a co dává smysl. Když zjistíme, že na sebe nepasujeme, řeknu vám to rovnou.',
+        'quote_text'      => 'Díky individuálnímu přístupu, flexibilitě a profesionalitě odpovídá výsledek našim představám.',
+        'quote_author'    => 'Hana Jaskmanická, výkonná ředitelka, VP Industry',
         'name'            => 'Jméno a příjmení',
         'email'           => 'E-mail',
         'phone'           => 'Telefon (nepovinný)',
@@ -421,8 +436,9 @@ return [
             'phone'   => '+420 000 000 000',
             'message' => 'Např. nový web pro výrobní firmu, 5–10 stran',
         ],
-        'submit'          => 'Odeslat poptávku',
+        'submit'          => 'Poslat poptávku',
         'submitting'      => 'Odesílám…',
+        'note'            => 'Nebo mi napište na ok@ondraweb.cz. Ozvu se osobně, ne přes formulářového robota.',
         'privacy_prefix'  => 'Odesláním souhlasíte se zpracováním osobních údajů v souladu se ',
         'privacy_link'    => 'zásadami ochrany osobních údajů',
         'success'         => 'Děkuji, poptávka dorazila. Ozvu se co nejdříve.',

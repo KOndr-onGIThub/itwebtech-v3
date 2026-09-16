@@ -2,50 +2,37 @@
 
 return [
 
+    // OND-204 (OND-197 Punkt 11b): Blog in Ondřejs eigener Stimme neu geschrieben.
+    // Die alte Rubrik „Wie geht das" versprach allgemeine Anleitungen — genau
+    // der Inhalt, der verschwinden soll. URL-Slug bleibt unverändert (SEO).
     'meta' => [
-        'title'       => 'Blog — Wie geht das | Ondřej Kriška',
-        'description' => 'Tipps für bessere Webseiten und Anwendungen. Praktische Ratschläge für Unternehmer in der Online-Welt.',
+        'title'       => 'Notizen — Ondřej Kriška',
+        'description' => 'Ich schreibe darüber, womit ich beim Bau von Webseiten und Anwendungen wirklich zu tun habe. Preise, Briefings, Redesign, Anwendungen nach Maß.',
     ],
 
-    'subheading'    => 'Wie geht das',
-    'heading'       => 'Tipps für bessere Webseiten und Anwendungen.',
+    'subheading'    => 'Notizen',
+    'heading'       => 'Ich schreibe über das, was ich selbst mache.',
 
     // OND-130 P2 iter 8 — Plan §3.1 Page-Mark Hero (Plex Sans Display + Amber-Akzent).
     // OND-135 Bereinigung (2026-05-14): page_mark_index entfernt — Agency-
     // Portfolio-Artefakt per CEO PR #78/#80/#82/#83 (Home/Kontakt/Preise/Projekte).
     'hero' => [
-        'page_mark_label' => 'WIE GEHT DAS',
-        'upline'          => 'Praktische Tipps, keine Theorie.',
-        'heading_html'    => 'Was auf Ihrer Website<br>wirklich <em>funktioniert</em>.',
-        'subline'         => 'Conversion, SEO, UX — ohne Marketing-Floskeln. Echte Schritte, die Anfragen bringen.',
+        'page_mark_label' => 'NOTIZEN',
+        'upline'          => 'Womit ich bei der Arbeit wirklich zu tun habe.',
+        'heading_html'    => 'Ich schreibe über das,<br>was ich <em>selbst</em> mache.',
+        'subline'         => 'Keine allgemeinen Ratschläge. Nur Dinge aus echten Aufträgen: was es kostet, wie ein Briefing entsteht, wann ein Redesign Sinn ergibt.',
     ],
 
-    'read_more'     => 'Ich möchte wissen wie',
+    'read_more'     => 'Lesen',
     'updated'       => 'aktualisiert',
-    'share'         => 'Bitte teilen Sie den Artikel',
+    'share'         => 'Artikel weitergeben',
     'more_articles' => 'Weitere Artikel',
-    'empty'         => 'Derzeit sind keine veröffentlichten Artikel vorhanden.',
-    'not_published' => 'Entschuldigung, dieser Artikel ist derzeit nicht veröffentlicht.',
+    'empty'         => 'Hier gibt es noch nichts Neues.',
+    'not_published' => 'Dieser Artikel ist derzeit nicht veröffentlicht.',
 
-    'sidebar_ad' => [
-        'subheading' => 'Kämpfen Sie nicht allein mit Ihrer Webseite',
-        'heading'    => 'Bringen Sie Ihre Webseite dorthin, wo sie hingehört',
-        'text'       => 'Statt zu experimentieren, lassen Sie Ihre Webseite gleich beim ersten Mal richtig bauen.',
-        'cta_price'  => 'Preisliste',
-        'cta_contact'=> 'Kontakt',
-    ],
-
-    'now' => [
-        'subheading' => 'Inhalt in Vorbereitung',
-        'heading'    => 'Warten Sie nicht auf den nächsten Artikel, starten Sie jetzt',
-        'desc'       => 'Statt allgemeiner Tipps konzentrieren Sie sich auf Schritte mit dem größten Einfluss auf Anfragen.',
-        'items'      => [
-            'Fassen Sie Ihr Hauptangebot in einem Satz zusammen, den neue Besucher sofort verstehen.',
-            'Geben Sie jeder zentralen Seite eine klare Conversion-Aktion.',
-            'Entfernen Sie Sackgassen ohne Weg zu Kontakt oder Bestellung.',
-            'Zeigen Sie Vertrauensbeweise: Referenzen, Prozess und Garantien.',
-        ],
-    ],
+    // OND-204: Blöcke `now` (Inhalt in Vorbereitung), `audit` (kostenloser
+    // Website-Audit) und `sidebar_ad` entfernt — das Audit-Angebot versprach
+    // Ergebnisse anstelle des Kunden und die Seite hatte drei CTAs nebeneinander.
 
     'back_to_blog' => '← Zurück zum Blog',
 
@@ -53,35 +40,23 @@ return [
     // OND-135 Bereinigung (2026-05-14): page_mark_index entfernt per
     // Sitewide-Präzedenzfall (PR #78/#80/#82/#83).
     'article' => [
-        'page_mark_label' => 'WIE GEHT DAS',
+        'page_mark_label' => 'NOTIZEN',
         'author' => [
             'eyebrow'  => 'Über den Autor',
             'name'     => 'Ondřej Kriška',
-            'role'     => 'Web Developer · maßgeschneiderte Webseiten für B2B-Dienstleistungen',
-            'bio'      => 'Ich baue Webseiten, die geschäftliche Gespräche eröffnen. Eigener Code, Festpreis vorab, direkter Kontakt.',
+            'role'     => 'Ich baue Webseiten und Anwendungen nach Maß. Allein, mit eigenem Code.',
+            'bio'      => 'Achtzehn Jahre habe ich in der Logistik von Toyota gearbeitet. Heute baue ich Webseiten, Onlineshops und Anwendungen nach Maß für kleine und mittlere Firmen. Den Preis nenne ich vorab und Sie sprechen direkt mit mir.',
             'linkedin_label' => 'LinkedIn',
             'linkedin_url'   => 'https://www.linkedin.com/in/ondrejkriska/',
-            'contact_cta'    => 'Unverbindliches Angebot anfordern',
+            'contact_cta'    => 'Ondřej schreiben',
         ],
     ],
 
 
     'cta' => [
-        'heading' => 'Brauchen Sie Hilfe mit Ihrer Website?',
-        'text'    => 'Lassen Sie uns besprechen, wie Ihre Website mehr Anfragen generieren kann.',
-        'primary' => 'Beratung buchen',
-    ],
-
-    'audit' => [
-        'subheading'    => 'Schnelle Konversionsverbesserung',
-        'heading'       => 'Erhalten Sie einen kompakten Audit Ihrer Webseite',
-        'items'         => [
-            'Die 3 größten Conversion-Bremsen, die aktuell Anfragen kosten.',
-            'Konkrete Empfehlungen, was zuerst angepasst werden soll.',
-            'Prioritätenplan ohne kosmetische Extras.',
-        ],
-        'cta_primary'   => 'Ich will einen kostenlosen Kurz-Audit',
-        'cta_secondary' => 'Zuerst Preise ansehen',
+        'heading' => 'Geht es um eine Webseite oder eine Anwendung?',
+        'text'    => 'Schreiben Sie mir, was Sie brauchen. Ich melde mich innerhalb von zwei Werktagen und sage Ihnen, ob ich helfen kann.',
+        'primary' => 'Ondřej schreiben',
     ],
 
 ];
