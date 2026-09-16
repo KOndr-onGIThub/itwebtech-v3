@@ -88,6 +88,39 @@ class BlogListingLocaleTest extends TestCase
         }
     }
 
+    /**
+     * OND-219: jakmile článek dostane slug i v DE, musí se objevit ve všech
+     * třech výpisech a odkaz musí odpovědět 200. Protějšek testu výš, který
+     * hlídá, že se bez DE slugu neobjeví.
+     */
+    public function test_listing_shows_article_with_slug_in_all_three_locales(): void
+    {
+        $article = Article::firstWhere('slug', 'how-much-does-a-website-cost');
+
+        $article->translations()->create([
+            'locale'      => 'de',
+            'active'      => true,
+            'title'       => 'Was kostet eine Website',
+            'description' => 'Desc de',
+            'perex'       => 'Perex de',
+        ]);
+
+        ArticleSlug::create([
+            'article_id' => $article->id,
+            'locale'     => 'de',
+            'slug'       => 'was-kostet-eine-website',
+            'active'     => true,
+        ]);
+
+        foreach (['/jak-na-to' => '/jak-na-to/kolik-stoji-webove-stranky', '/en/blog' => '/en/blog/how-much-does-a-website-cost', '/de/blog' => '/de/blog/was-kostet-eine-website'] as $listing => $detail) {
+            $this->get($listing)
+                ->assertOk()
+                ->assertSee($detail, false);
+
+            $this->get($detail)->assertOk();
+        }
+    }
+
     public function test_inactive_slug_does_not_put_article_in_listing(): void
     {
         $deOnlyInactive = Article::create([
