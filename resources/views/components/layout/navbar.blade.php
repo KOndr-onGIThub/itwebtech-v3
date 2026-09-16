@@ -42,7 +42,7 @@
 
                 <div class="navbar__lang" role="group" aria-label="{{ __('layout.nav.lang_switcher') }}">
                     @foreach ($langLabels as $code => $label)
-                        <a href="{{ $hreflangs[$code] ?? lroute($currentPage, $code) }}"
+                        <a href="{{ $hreflangs[$code] ?? lroute_safe($currentPage, $code) }}"
                            hreflang="{{ $code }}"
                            lang="{{ $code }}"
                            @if($locale === $code) aria-current="true" @endif
@@ -114,7 +114,7 @@
         {{-- Language switcher in drawer --}}
         <div class="drawer__lang" role="group" aria-label="{{ __('layout.nav.lang_switcher') }}">
             @foreach ($langLabels as $code => $label)
-                <a href="{{ $hreflangs[$code] ?? lroute($currentPage, $code) }}"
+                <a href="{{ $hreflangs[$code] ?? lroute_safe($currentPage, $code) }}"
                    hreflang="{{ $code }}"
                    lang="{{ $code }}"
                    @if($locale === $code) aria-current="true" @endif

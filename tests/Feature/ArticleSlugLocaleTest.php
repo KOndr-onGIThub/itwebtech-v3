@@ -117,7 +117,33 @@ class ArticleSlugLocaleTest extends TestCase
         $this->get('/de/blog/pouze-cs')->assertNotFound();
     }
 
-    public function test_returns_404_when_slug_inactive(): void
+    /**
+     * OND-212: 404 z article routy musí vyrenderovat naši chybovou stránku.
+     *
+     * Status 404 sedel i před fixem — layout spadl na UrlGenerationException
+     * (přepínač jazyků volá lroute('article', ...) bez povinného {slug}) a
+     * Laravel místo naší šablony vrátil holou Symfony stránku „An Error
+     * Occurred" se stejným statusem. Proto se tu kontroluje obsah, ne kód.
+     */
+    public function test_404_on_article_route_renders_branded_error_page(): void
+    {
+        $this->get('/jak-na-to/neexistuje')
+            ->assertNotFound()
+            ->assertSee(__('errors.404.heading'), false)
+            ->assertDontSee('An Error Occurred');
+
+        $this->get('/en/blog/non-existent-slug')
+            ->assertNotFound()
+            ->assertDontSee('An Error Occurred');
+    }
+
+    /**
+     * OND-204 změnilo chování: neaktivní slug je stará adresa přejmenovaného
+     * článku, takže se 301 přesměruje na kanonickou, ne 404. Test tu zůstal
+     * s původním očekáváním (404) a od PR #105 byl červený — narovnáno.
+     * 404 zůstává pro slug, který v DB není vůbec (test výše).
+     */
+    public function test_returns_301_when_slug_inactive(): void
     {
         ArticleSlug::create([
             'article_id' => $this->article->id,
@@ -126,6 +152,7 @@ class ArticleSlugLocaleTest extends TestCase
             'active'     => false,
         ]);
 
-        $this->get('/en/blog/old-en-slug')->assertNotFound();
+        $this->get('/en/blog/old-en-slug')
+            ->assertRedirect('/en/blog/how-much-does-a-website-cost');
     }
 }

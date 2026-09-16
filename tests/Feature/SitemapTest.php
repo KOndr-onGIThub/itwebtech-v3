@@ -2,7 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Models\Article;
 use App\Models\Portfolio\PortfolioProject;
+use App\Models\Slugs\ArticleSlug;
 use Database\Seeders\PortfolioSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
@@ -62,6 +64,53 @@ class SitemapTest extends TestCase
         $this->assertStringContainsString(route('cs.project', ['url' => $project->slug]), $body);
         $this->assertStringContainsString(route('en.project', ['url' => $project->slug]), $body);
         $this->assertStringContainsString(route('de.project', ['url' => $project->slug]), $body);
+    }
+
+    /**
+     * OND-215: články v sitemapě chyběly úplně — byl tam jen výpis blogu.
+     */
+    public function test_sitemap_includes_published_articles_and_skips_unpublished(): void
+    {
+        $published = Article::create(['slug' => 'v-sitemap', 'published' => true]);
+        foreach (['cs' => 'clanek-v-sitemap', 'en' => 'article-in-sitemap'] as $locale => $slug) {
+            ArticleSlug::create([
+                'article_id' => $published->id,
+                'locale'     => $locale,
+                'slug'       => $slug,
+                'active'     => true,
+            ]);
+        }
+
+        // Stažený článek (301 na jinou adresu) do sitemapy nepatří.
+        $unpublished = Article::create(['slug' => 'stazeny', 'published' => false]);
+        ArticleSlug::create([
+            'article_id' => $unpublished->id,
+            'locale'     => 'cs',
+            'slug'       => 'stazeny-clanek',
+            'active'     => true,
+        ]);
+
+        // Neaktivní slug je stará adresa s 301 — taky ne.
+        ArticleSlug::create([
+            'article_id' => $published->id,
+            'locale'     => 'cs',
+            'slug'       => 'stary-slug',
+            'active'     => false,
+        ]);
+
+        Cache::forget(config('sitemap.cache_key'));
+
+        $body = $this->get('/sitemap.xml')->assertOk()->getContent();
+
+        $this->assertStringContainsString(route('cs.article', ['slug' => 'clanek-v-sitemap']), $body);
+        $this->assertStringContainsString(route('en.article', ['slug' => 'article-in-sitemap']), $body);
+
+        $this->assertStringNotContainsString('stazeny-clanek', $body);
+        $this->assertStringNotContainsString('stary-slug', $body);
+
+        // Článek bez DE slugu nesmí do sitemapy protéct pod /de/blog/{cs-slug}
+        // — na tu adresu vrací PageController 404 (kontrola locale slugu).
+        $this->assertStringNotContainsString(route('de.article', ['slug' => 'clanek-v-sitemap']), $body);
     }
 
     public function test_sitemap_response_is_cached(): void
