@@ -38,5 +38,10 @@ class EnsureArticlesSeededSeeder extends Seeder
 
         $after = DB::table('articles')->count();
         $this->command->info("[ensure-articles] articles count po importu: {$after}");
+
+        // OND-204: dumpy v database/sql/ jsou stará data z itwebtech.cz.
+        // Na čerstvé DB je hned po importu přepíšeme aktuálním zněním blogu —
+        // na existující DB dělá totéž migrace 2026_09_16_110000_rewrite_blog_content.
+        $this->call(BlogContentSeeder::class);
     }
 }

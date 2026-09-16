@@ -48,7 +48,7 @@
             <main class="blog-articles">
 
                 {{-- DB articles --}}
-                @foreach ($articles ?? [] as $dbArticle)
+                @forelse ($articles ?? [] as $dbArticle)
                     @php $t = $dbArticle->translation($locale); @endphp
                     @if ($t && $t->title)
                     <article class="blog-card" data-reveal>
@@ -77,63 +77,16 @@
                         </div>
                     </article>
                     @endif
-                @endforeach
+                @empty
+                    <p class="blog-empty">{{ __('blog.empty') }}</p>
+                @endforelse
 
-                {{-- Conversion-first blog fallback --}}
-                <article class="blog-conversion-card" data-reveal>
-                    <p class="section-subheading">{{ __('blog.now.subheading') }}</p>
-                    <h2>{{ __('blog.now.heading') }}</h2>
-                    <p>{{ __('blog.now.desc') }}</p>
-                    <ul class="blog-conversion-list">
-                        @foreach (__('blog.now.items') as $item)
-                        <li>
-                            <x-icon.circle-check-big class="w-4 h-4 shrink-0" />
-                            <span>{{ $item }}</span>
-                        </li>
-                        @endforeach
-                    </ul>
-                </article>
-
-                <article class="blog-conversion-card blog-conversion-card--highlight" data-reveal>
-                    <p class="section-subheading">{{ __('blog.audit.subheading') }}</p>
-                    <h2>{{ __('blog.audit.heading') }}</h2>
-                    <ul class="blog-conversion-list">
-                        @foreach (__('blog.audit.items') as $item)
-                        <li>
-                            <x-icon.circle-check-big class="w-4 h-4 shrink-0" />
-                            <span>{{ $item }}</span>
-                        </li>
-                        @endforeach
-                    </ul>
-                    <div class="blog-conversion-actions">
-                        <a href="{{ lroute('contact') }}" class="btn btn-primary">
-                            {{ __('blog.audit.cta_primary') }}
-                            <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-                        </a>
-                        <a href="{{ lroute('price') }}" class="btn btn-secondary">
-                            {{ __('blog.audit.cta_secondary') }}
-                        </a>
-                    </div>
-                </article>
+                {{-- OND-204 (OND-197 bod 11b): odebrány karty „Obsah v přípravě"
+                     a „audit webu zdarma" + postranní nabídka. Audit sliboval
+                     výsledek za klienta a stránka měla tři výzvy k akci vedle
+                     sebe. Zůstává jedna CTA na konci článku (blog.cta.*). --}}
 
             </main>
-
-            {{-- Sidebar --}}
-            <aside class="blog-sidebar">
-                <div class="sidebar-ad">
-                    <p class="section-subheading">{{ __('blog.sidebar_ad.subheading') }}</p>
-                    <h2>{{ __('blog.sidebar_ad.heading') }}</h2>
-                    <p>{{ __('blog.sidebar_ad.text') }}</p>
-                    <div class="sidebar-ad__actions">
-                        <a href="{{ lroute('contact') }}" class="btn btn-primary">
-                            {{ __('blog.sidebar_ad.cta_contact') }}
-                        </a>
-                        <a href="{{ lroute('price') }}" class="btn btn-secondary">
-                            {{ __('blog.sidebar_ad.cta_price') }}
-                        </a>
-                    </div>
-                </div>
-            </aside>
 
         </div>
     </div>
