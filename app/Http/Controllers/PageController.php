@@ -145,8 +145,18 @@ class PageController extends Controller
 
     public function blog()
     {
-        $locale   = App::getLocale();
+        $locale = App::getLocale();
+
+        // OND-217: jen články s aktivním slugem v aktuální locale. Bez filtru
+        // sáhne `Article::slug()` po cs fallbacku a výpis odkáže na
+        // /de/blog/{cs-slug}, kde article() od OND-160 vrací 404 (kontrola
+        // kanonického slugu pro locale). Stejná logika jako
+        // SitemapGenerator::collectArticleUrls() — locale bez vlastních slugů
+        // vyjde prázdná a zobrazí se `blog.empty` místo mrtvých odkazů.
         $articles = Article::where('published', true)
+            ->whereHas('slugs', fn ($query) => $query
+                ->where('locale', $locale)
+                ->where('active', true))
             ->orderBy('position')
             ->with(['translations', 'slugs'])
             ->get();
