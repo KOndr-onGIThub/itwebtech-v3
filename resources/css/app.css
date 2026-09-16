@@ -5259,22 +5259,26 @@
         font-size: 0.8125rem;
         color: var(--color-muted);
     }
+    /* OND-202 (zamítnutí karty boardem): galerie má snímky se smíšenými
+       poměry stran (16:9, 4:5, 1:1). Řádkový grid natahoval buňky na výšku
+       nejvyššího souseda → karta s 16:9 obrázkem měla pod obrázkem prázdnou
+       plochu. Masonry tok přes CSS columns: karta vždy obepne svůj obrázek,
+       nic se neořezává (plný snímek je v lightboxu). */
     .portfolio-detail-gallery__grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1rem;
+        columns: 1;
+        column-gap: 1.25rem;
     }
     @media (min-width: 641px) {
         .portfolio-detail-gallery__grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.25rem;
+            columns: 2;
         }
     }
     .portfolio-detail-gallery__item {
-        margin: 0;
+        margin: 0 0 1.25rem;
         border-radius: 0.75rem;
         overflow: hidden;
         background: var(--bg-card-hover);
+        break-inside: avoid;
     }
     .portfolio-detail-gallery__item picture,
     .portfolio-detail-gallery__item picture img {
