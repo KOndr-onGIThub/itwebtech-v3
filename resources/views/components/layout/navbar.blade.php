@@ -20,7 +20,7 @@
         <div class="container-site navbar__inner">
 
             <a href="{{ lroute('home') }}" class="navbar__logo">
-                <img src="{{ asset('img/logo/logo_main_svg.svg') }}" alt="{{ config('app.name') }}" class="navbar__logo-img" width="274" height="58">
+                <img src="{{ asset('img/logo/logo_main_svg.svg') }}" alt="{{ config('app.name') }}" class="navbar__logo-img" width="220" height="26">
             </a>
 
             {{-- Desktop nav --}}
@@ -102,7 +102,7 @@
 
         <div class="drawer__header">
             <a href="{{ lroute('home') }}" class="navbar__logo" @click="open = false">
-                <img src="{{ asset('img/logo/logo_main_svg.svg') }}" alt="{{ config('app.name') }}" class="navbar__logo-img" width="274" height="58">
+                <img src="{{ asset('img/logo/logo_main_svg.svg') }}" alt="{{ config('app.name') }}" class="navbar__logo-img" width="220" height="26">
             </a>
             <button class="drawer__close" @click="open = false" aria-label="Close menu">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">

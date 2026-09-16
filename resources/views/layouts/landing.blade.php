@@ -58,8 +58,8 @@
                 <img
                     src="{{ asset('img/logo/logo_main_svg.svg') }}"
                     alt="{{ config('app.name') }}"
-                    width="274"
-                    height="58"
+                    width="220"
+                    height="26"
                     class="landing-topbar__logo"
                 >
             </a>
