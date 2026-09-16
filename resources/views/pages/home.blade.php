@@ -97,6 +97,84 @@
 </section>
 
 {{-- ===================================================
+     ŽIVÉ WEBY — „Weby, které běží v praxi" (OND-202)
+     Kap. 9 bod 2 master promptu: ukázky práce jako hlavní
+     obrazový materiál, hned po hero (sekce 2 dokumentu
+     homepage-texty — „důkaz hned"). Snímky živých webů
+     v jednotném browser + phone rámování, ne prosté
+     screenshoty. Zdroje: resources/img/showcase/.
+     =================================================== --}}
+<section class="section-wrapper section-showcase" data-reveal>
+    <div class="container-site">
+        <header class="section-header">
+            <h2>{{ __('home.showcase.heading') }}</h2>
+            <p class="section-header__desc">{{ __('home.showcase.intro') }}</p>
+        </header>
+
+        <div class="showcase-grid" data-reveal-group>
+            @foreach (__('home.showcase.sites') as $i => $site)
+            <article class="showcase-card" data-reveal style="transition-delay: {{ $i * 90 }}ms">
+                <a
+                    href="{{ $site['url'] }}"
+                    target="_blank"
+                    rel="noopener"
+                    class="showcase-device"
+                    aria-label="{{ __('home.showcase.aria', ['domain' => $site['domain']]) }}"
+                    data-analytics="showcase_site_click"
+                    data-analytics-props='{"site":"{{ $site['slug'] }}"}'
+                >
+                    <span class="showcase-browser">
+                        <span class="showcase-browser__bar" aria-hidden="true">
+                            <span class="showcase-browser__dots"><i></i><i></i><i></i></span>
+                            <span class="showcase-browser__url">{{ $site['domain'] }}</span>
+                        </span>
+                        <x-responsive-image
+                            path="showcase/{{ $site['slug'] }}-desktop.webp"
+                            alt="{{ $site['domain'] }} — {{ $site['desc'] }}"
+                            sizes="(max-width: 767px) 100vw, 33vw"
+                            loading="lazy"
+                            decoding="async"
+                            width="1600"
+                            height="1000"
+                            classImg="showcase-browser__img"
+                        />
+                    </span>
+                    <span class="showcase-phone" aria-hidden="true">
+                        <x-responsive-image
+                            path="showcase/{{ $site['slug'] }}-mobile.webp"
+                            alt=""
+                            sizes="140px"
+                            loading="lazy"
+                            decoding="async"
+                            width="780"
+                            height="1688"
+                            classImg="showcase-phone__img"
+                        />
+                    </span>
+                </a>
+
+                <div class="showcase-card__body">
+                    <h3 class="showcase-card__domain">{{ $site['domain'] }}</h3>
+                    <p class="showcase-card__desc">{{ $site['desc'] }}</p>
+                    <a
+                        href="{{ $site['url'] }}"
+                        target="_blank"
+                        rel="noopener"
+                        class="showcase-card__cta"
+                        data-analytics="showcase_site_click"
+                        data-analytics-props='{"site":"{{ $site['slug'] }}"}'
+                    >
+                        {{ __('home.showcase.visit') }}
+                        <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
+                    </a>
+                </div>
+            </article>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+{{-- ===================================================
      SOCIAL PROOF BAR
      =================================================== --}}
 <section class="section-wrapper section-alt section-social-proof" aria-label="Klienti">

@@ -61,6 +61,34 @@ return [
         ],
     ],
 
+    // OND-202: Arbeitsproben als primäres Bildmaterial (live Kunden-Websites).
+    'showcase' => [
+        'heading' => 'Websites, die in der Praxis laufen',
+        'intro'   => 'Das sind live Projekte, die Sie sich sofort ansehen können. Klicken Sie sich durch.',
+        'visit'   => 'Live-Website öffnen',
+        'aria'    => ':domain in neuem Fenster öffnen',
+        'sites'   => [
+            [
+                'slug'   => 'barana',
+                'domain' => 'barana.cz',
+                'url'    => 'https://www.barana.cz/',
+                'desc'   => 'Bioklimatische Pergolen, Tore und Zäune',
+            ],
+            [
+                'slug'   => 'zubniprovazek',
+                'domain' => 'zubniprovazek.cz',
+                'url'    => 'https://www.zubniprovazek.cz/',
+                'desc'   => 'Zahnarztpraxis für Kinder und Erwachsene',
+            ],
+            [
+                'slug'   => 'pitarena',
+                'domain' => 'shop.pitarena.cz',
+                'url'    => 'https://shop.pitarena.cz/',
+                'desc'   => 'E-Shop mit Pit-Bikes und Ersatzteilen',
+            ],
+        ],
+    ],
+
     'problems' => [
         'heading'            => 'Was bei den meisten Web-Projekten immer wieder passiert.',
         'transition_heading' => 'Wie ich es anders mache:',

@@ -63,6 +63,34 @@ return [
         ],
     ],
 
+    // OND-202: work samples as the primary visual material (live client sites).
+    'showcase' => [
+        'heading' => 'Websites running in the real world',
+        'intro'   => 'These are live projects you can open right now. Click through and explore them.',
+        'visit'   => 'Open the live site',
+        'aria'    => 'Open :domain in a new window',
+        'sites'   => [
+            [
+                'slug'   => 'barana',
+                'domain' => 'barana.cz',
+                'url'    => 'https://www.barana.cz/',
+                'desc'   => 'Bioclimatic pergolas, gates and fences',
+            ],
+            [
+                'slug'   => 'zubniprovazek',
+                'domain' => 'zubniprovazek.cz',
+                'url'    => 'https://www.zubniprovazek.cz/',
+                'desc'   => 'Dental practice for children and adults',
+            ],
+            [
+                'slug'   => 'pitarena',
+                'domain' => 'shop.pitarena.cz',
+                'url'    => 'https://shop.pitarena.cz/',
+                'desc'   => 'E-shop with pit bikes and spare parts',
+            ],
+        ],
+    ],
+
     'problems' => [
         'heading'            => 'What keeps happening on most web projects.',
         'transition_heading' => 'How I do it differently:',

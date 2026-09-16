@@ -65,6 +65,36 @@ return [
         ],
     ],
 
+    // OND-202 (kap. 9 bod 2 master promptu): ukázky práce jako hlavní obrazový
+    // materiál. Texty ze schválené sekce 2 dokumentu homepage-texty (OND-186).
+    // Popisky = fakta z živých webů (obor firmy), žádná vymyšlená čísla.
+    'showcase' => [
+        'heading' => 'Weby, které běží v praxi',
+        'intro'   => 'Tohle jsou živé projekty, na které se můžete podívat hned teď. Klikněte a projděte si je.',
+        'visit'   => 'Otevřít živý web',
+        'aria'    => 'Otevřít web :domain v novém okně',
+        'sites'   => [
+            [
+                'slug'   => 'barana',
+                'domain' => 'barana.cz',
+                'url'    => 'https://www.barana.cz/',
+                'desc'   => 'Bioklimatické pergoly, brány a ploty',
+            ],
+            [
+                'slug'   => 'zubniprovazek',
+                'domain' => 'zubniprovazek.cz',
+                'url'    => 'https://www.zubniprovazek.cz/',
+                'desc'   => 'Zubní ordinace pro děti i dospělé',
+            ],
+            [
+                'slug'   => 'pitarena',
+                'domain' => 'shop.pitarena.cz',
+                'url'    => 'https://shop.pitarena.cz/',
+                'desc'   => 'E-shop s motorkami a náhradními díly',
+            ],
+        ],
+    ],
+
     'problems' => [
         'heading'             => 'Co se opakuje u většiny webových projektů.',
         'transition_heading'  => 'Jak to dělám jinak:',

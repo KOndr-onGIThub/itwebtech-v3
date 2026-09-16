@@ -4592,6 +4592,147 @@
     }
 
     /* ============================================================
+       SHOWCASE — Weby, které běží v praxi (OND-202)
+       Živé weby klientů hned po hero (kap. 9 bod 2). Jednotné
+       rámování: browser frame (lišta + doména) a phone frame
+       s přesahem — místo prostých screenshotů. Hover idiom
+       převzat z .home-projects-card (border-gold + lift).
+       ============================================================ */
+    .showcase-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    @media (min-width: 768px) {
+        .showcase-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.75rem;
+        }
+    }
+    .showcase-card {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .showcase-device {
+        position: relative;
+        display: block;
+        /* prostor pro spodní přesah phone framu */
+        padding-bottom: 2.75rem;
+        outline: none;
+    }
+    .showcase-device:focus-visible .showcase-browser {
+        outline: 2px solid var(--color-gold-500);
+        outline-offset: 4px;
+    }
+    .showcase-browser {
+        display: block;
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-md);
+        background: var(--bg-card);
+        overflow: hidden;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+        transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+    .showcase-device:hover .showcase-browser {
+        border-color: var(--border-gold);
+        transform: translateY(-3px);
+        box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45);
+    }
+    .showcase-browser__bar {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 0.75rem;
+        background: var(--bg-card-hover);
+        border-bottom: 1px solid var(--border-subtle);
+    }
+    .showcase-browser__dots {
+        display: inline-flex;
+        gap: 0.3rem;
+        flex: 1 0 auto;
+    }
+    .showcase-browser__dots i {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background: var(--border-emphasis);
+    }
+    .showcase-browser__url {
+        flex: 0 1 auto;
+        margin-right: auto;
+        padding: 0.125rem 0.75rem;
+        border-radius: var(--radius-pill);
+        background: rgba(255, 255, 255, 0.05);
+        font-size: 0.6875rem;
+        letter-spacing: 0.04em;
+        line-height: 1.5;
+        color: var(--color-body);
+        white-space: nowrap;
+    }
+    .showcase-browser picture,
+    .showcase-browser__img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
+        object-position: top;
+    }
+    .showcase-phone {
+        position: absolute;
+        right: 0.875rem;
+        bottom: 0;
+        width: clamp(5.25rem, 24%, 6.5rem);
+        border: 1px solid var(--border-emphasis);
+        border-radius: 0.875rem;
+        overflow: hidden;
+        background: var(--bg-card-hover);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55);
+    }
+    .showcase-phone picture,
+    .showcase-phone__img {
+        display: block;
+        width: 100%;
+        /* výřez horní části mobilního snímku (390×844 viewport) */
+        aspect-ratio: 39 / 68;
+        object-fit: cover;
+        object-position: top;
+    }
+    .showcase-card__body {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        padding-inline: 0.25rem;
+    }
+    .showcase-card__domain {
+        margin: 0;
+        font-size: 1.0625rem;
+        font-weight: 600;
+        color: var(--color-heading);
+    }
+    .showcase-card__desc {
+        margin: 0;
+        font-size: 0.9375rem;
+        line-height: 1.55;
+        color: var(--color-body);
+    }
+    .showcase-card__cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        margin-top: 0.35rem;
+        font-size: 0.9375rem;
+        font-weight: 500;
+        color: var(--color-gold-500);
+        text-decoration: none;
+        transition: color 0.2s, gap 0.2s;
+    }
+    .showcase-card__cta:hover {
+        color: var(--color-gold-400, #fbbf24);
+        text-decoration: underline;
+        gap: 0.55rem;
+    }
+
+    /* ============================================================
        GUARANTEE SECTION
        ============================================================ */
     .guarantee-grid {
