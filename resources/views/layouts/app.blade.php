@@ -161,7 +161,7 @@
                 src="{{ asset('img/logo/logo_main_svg.svg') }}"
                 alt="{{ config('app.name') }}"
                 class="footer-prefooter__logo"
-                width="274" height="58"
+                width="220" height="26"
                 loading="lazy"
                 decoding="async"
             >
