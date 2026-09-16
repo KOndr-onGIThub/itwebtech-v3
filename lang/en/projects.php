@@ -3,22 +3,28 @@
 return [
 
     'meta' => [
-        'title'       => 'Projects — Ondřej Kriška',
-        'description' => 'Examples of implemented projects — websites, web applications. Get inspired and imagine your successful project.',
+        'title'       => 'What I have built | ONDRAWEB',
+        'description' => 'Websites, online shops and web applications I have built and that are running today. Each one links to the live version, so you can check it yourself.',
     ],
 
     'subheading'       => 'Implemented',
     'heading'          => 'PROJECTS',
-    'intro'            => 'Let yourself be inspired by samples of my work and imagine how your successful project will look. I work in a way that makes clients want to come back.',
+    // OND-201 (item 5): intro per section 4 of the texty-podstranky document (OND-186).
+    'intro'            => 'Here are the websites I have built and that are running today. They are not pictures in a gallery — you can click each one and see how it works live. I would rather show finished work than promises.',
 
     // OND-135 P2 iter 6 — plan §3.1 hero (page-mark + amber accent).
     // OND-135 cleanup (2026-05-14): page_mark_index removed — agency-
     // portfolio artefact per CEO PR #78/#80/#82 precedent (home/contact/pricing).
+    // OND-201 (finding 5.2, CRITICAL): the hero promised "shipped numbers"
+    // and "no screenshots without numbers" — a promise the page broke two
+    // paragraphs below, because hard numbers are not available for every
+    // project. Reworded to proof that can actually be shown: what the site
+    // does, a live link, the scope. No invented numbers.
     'hero' => [
         'page_mark_label' => 'PROJECTS',
-        'upline'          => 'Shipped projects, shipped numbers.',
-        'heading_html'    => 'Cases, not<br><em>a portfolio gallery</em>.',
-        'subline'         => 'Every project with a concrete outcome — deadline, scope, impact. No screenshots without numbers.',
+        'upline'          => 'Live websites, not pictures in a gallery.',
+        'heading_html'    => 'What I have<br><em>built</em>.',
+        'subline'         => 'For every project you can read what the site does and the scope I built it in. The link goes to the live version — check it yourself.',
     ],
 
     'filter_all'       => 'All',
@@ -48,42 +54,70 @@ return [
 
     'cta_all' => 'Check out my other projects',
 
+    // OND-201 (finding 5.2, CRITICAL): this section used to show three
+    // anonymous "result snapshots" with invented timelines (4/6/7 weeks)
+    // and undocumented impact. Replaced with the real case studies from
+    // the `pripadovky` document (OND-186) — verified on the live sites,
+    // no invented numbers. Ondra confirmed consent for the Toyota TSM saving.
     'snapshots' => [
-        'subheading' => 'What already works',
-        'heading'    => 'Result snapshots from similar projects',
-        'desc'       => 'Real scenarios where we removed conversion friction and made the path to contact simpler.',
+        'subheading' => 'Case studies',
+        'heading'    => 'Four projects up close',
+        'desc'       => 'For each one you can read what the client came with, what I built and what the site does. Where the site is public, the link goes to the live version.',
+        'live_label' => 'Live site',
         'items'      => [
             [
-                'type'     => 'Company website',
-                'timeline' => '4 weeks',
-                'title'    => 'New website instead of an outdated presentation',
-                'summary'  => 'The old site looked outdated, loaded slowly and had no clear CTA. The new structure directed visitors straight to inquiry.',
+                'type'     => 'Online shop — motorbikes and spare parts',
+                'domain'   => 'shop.pitarena.cz',
+                'url'      => 'https://shop.pitarena.cz',
+                'title'    => 'PitArena',
+                'summary'  => 'The client sells YCF pit bikes and spare parts. They needed to sell online — and with parts, getting the right piece for a given model and year is what matters. I built an online shop with a catalogue of both bikes and parts, sorted by model and part group.',
                 'outcomes' => [
-                    'Clear service offer in the first screen.',
-                    'Direct flow to contact without unnecessary detours.',
-                    'Higher credibility through consistent messaging.',
+                    'Cart and customer account.',
+                    'Categories by model (LITE 125, PILOT 125, Factory 190) and by part group — brakes, engines, suspension, electrics.',
+                    'Filtering by model and year.',
+                    'Favourites and product comparison.',
+                    'Clear navigation across a large range.',
                 ],
             ],
             [
-                'type'     => 'Web application',
-                'timeline' => '7 weeks',
-                'title'    => 'Client workflow without manual admin work',
-                'summary'  => 'Operations were slowed by emails and spreadsheets. Moving workflow into an app reduced errors and improved response speed.',
+                'type'     => 'Brochure site — aluminium structures',
+                'domain'   => 'barana.cz',
+                'url'      => 'https://barana.cz',
+                'title'    => 'BARANA',
+                'summary'  => 'The client makes custom aluminium pergolas, gates and fences. They needed a site that explains clearly what they do and makes it easy to get in touch. I built a brochure site with services, a gallery of finished work and an enquiry form.',
                 'outcomes' => [
-                    'Faster response times with centralized data.',
-                    'Fewer manual steps and lower operating load.',
-                    'Better real-time control over project status.',
+                    'Services split out — bioclimatic pergolas, gates and fences, custom design.',
+                    'Gallery of finished installations.',
+                    'Enquiry form and contact details.',
+                    'A "How it works" section.',
+                    'Clean, uncluttered design.',
                 ],
             ],
             [
-                'type'     => 'Custom e-shop',
-                'timeline' => '6 weeks',
-                'title'    => 'An e-shop you actually own',
-                'summary'  => 'The previous e-shop was tied to a third-party platform and depended on plugin fixes. The new e-shop brought stability and predictable costs.',
+                'type'     => 'Brochure site with online booking — dentistry',
+                'domain'   => 'zubniprovazek.cz',
+                'url'      => 'https://zubniprovazek.cz',
+                'title'    => 'Provázek dental practice',
+                'summary'  => 'The client runs a dental practice for adults and children. They needed a site with practice information and, above all, easy online booking. I built a brochure site with online booking.',
                 'outcomes' => [
-                    'Removed recurring update-related outages.',
-                    'Clear checkout flow without distracting elements.',
-                    'Technical SEO prepared from day one.',
+                    'Online booking.',
+                    'Overview of treatments — prevention, dental hygiene, whitening, restorative care, prosthetics and implants, paediatric dentistry.',
+                    'Price list.',
+                    'About, contact, opening hours and location.',
+                    'Clear, friendly design.',
+                ],
+            ],
+            [
+                'type'     => 'Internal application — logistics',
+                'domain'   => null,
+                'url'      => null,
+                'title'    => 'Toyota — the TSM application',
+                'summary'  => 'A web application built around real logistics processes, which I programmed during my eighteen years at Toyota. It replaced lengthy manual work and saved the company an amount in the order of millions of Czech koruna.',
+                'outcomes' => [
+                    'Built around the real logistics process, not a generic tool.',
+                    'Replaced lengthy manual work.',
+                    'Savings in the order of millions of Czech koruna.',
+                    'An internal system — not publicly available, hence no link.',
                 ],
             ],
         ],
@@ -96,7 +130,9 @@ return [
             'Your website has traffic but inquiries are inconsistent.',
             'Your service offer is unclear or buried in content.',
             'There is no clear next step after inquiry submission.',
-            'You do not want another “nice website” but a business tool.',
+            // OND-201 (finding 5.1): "a business tool" implied a result I
+            // cannot deliver on the client's behalf.
+            'You do not want another "nice website" but something built around how your company actually works.',
         ],
         'cta_heading'   => 'If 2+ points match, this is worth solving now.',
         'cta_text'      => 'In the intro call, we define the shortest path to a working solution without unnecessary extras.',

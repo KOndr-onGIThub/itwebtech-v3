@@ -2,9 +2,13 @@
 
 return [
 
+    // OND-201 (bod 11, stejná pravidla jako OND-198): z meta description
+    // pryč cenová kotva „od 25 000 Kč" (nález 5.4 — táhla očekávání dolů)
+    // a žargon „bez WordPressu" (nález 5.5/5.7 — člověku, který netuší,
+    // co WordPress je, to neříká nic; princip 0).
     'meta' => [
-        'title' => 'Webové stránky na míru pro podnikatele a firmy | Ondřej Kriška',
-        'description' => 'Tvorba webových stránek na míru bez WordPressu a zbytečné údržby. Jasná struktura, přímá spolupráce, orientační ceny od 25 000 Kč a odpověď do 24 hodin.',
+        'title' => 'Webové stránky na míru pro podnikatele a firmy | ONDRAWEB',
+        'description' => 'Tvorba webových stránek na míru na vlastním kódu, bez pravidelné údržby. Jasná struktura, přímá spolupráce s vývojářem a odpověď do 24 hodin.',
         'schema_name' => 'Tvorba webových stránek na míru',
     ],
 
@@ -12,24 +16,27 @@ return [
         'cta' => 'Chci nezávaznou konzultaci',
     ],
 
+    // OND-201 (bod 11): titulek sliboval výsledek za klienta (nález 5.1 —
+    // „dělá poptávky" neovlivním sám), štítky opakovaly žargon „Bez
+    // WordPressu" a kotvily cenu na 25 tisících (nález 5.4).
     'hero' => [
-        'eyebrow' => 'Webové stránky na míru pro firmy, které chtějí víc poptávek',
-        'title' => 'Web na míru, který z návštěvníků dělá poptávky.',
-        'description' => 'Vytvořím vám web, který rychle vysvětlí, co nabízíte, proč si vybrat právě vás a jak udělat další krok. Bez WordPressu, bez zbytečných komplikací a bez přehazování mezi obchodníkem, grafikem a vývojářem.',
+        'eyebrow' => 'Webové stránky na míru pro menší a střední firmy',
+        'title' => 'Web na míru, postavený na vlastním kódu.',
+        'description' => 'Vytvořím vám web, který rychle vysvětlí, co nabízíte, proč si vybrat právě vás a jak udělat další krok. Bez hotových stavebnic, bez zbytečných komplikací a bez přehazování mezi obchodníkem, grafikem a vývojářem.',
         'primary_cta' => 'Chci nezávaznou konzultaci',
         'secondary_cta' => 'Zobrazit orientační ceny',
         'microcopy' => 'Ozvu se do 24 hodin. Bez tlaku, bez obchodníka, přímo s člověkem, který bude web řešit.',
         'chips' => [
             '18 let zkušeností',
             'Přímá spolupráce',
-            'Bez WordPressu',
-            'Orientačně od 25 000 Kč',
+            'Vlastní kód bez údržby',
+            'Většina projektů 55–150 tis. Kč',
         ],
         'trust' => [
             'title' => 'Rychlé ověřitelné body',
             'items' => [
                 'Odpověď do 24 hodin',
-                'Bez WordPressu',
+                'Vlastní kód, ne stavebnice',
                 'Řešení na míru',
                 '21 recenzí, 5 z 5',
             ],
@@ -64,8 +71,10 @@ return [
                 'icon' => 'palette',
             ],
             [
+                // OND-201 (nález 5.5): „WordPress" a „pluginy třetích stran"
+                // přepsané do řeči klienta.
                 'title' => 'Bezúdržbový provoz',
-                'text' => 'Žádný WordPress a žádné pluginy třetích stran. Méně starostí, vyšší bezpečnost a méně pravidelných nákladů.',
+                'text' => 'Web nestojí na hotových doplňcích od cizích firem, které se musí pořád aktualizovat. Méně starostí, vyšší bezpečnost a méně pravidelných nákladů.',
                 'icon' => 'shield',
             ],
             [
@@ -83,8 +92,10 @@ return [
         'items' => [
             '18 let zkušeností v Toyotě mi dalo silný důraz na kvalitu, proces a detail.',
             'Odpovídám do 24 hodin i po spuštění projektu.',
-            'Orientační ceny máte předem. Startovní web začíná od 25 000 Kč.',
-            'Weby stavím bez WordPressu a bez pluginové závislosti.',
+            // OND-201 (nález 5.4): normou je pásmo 55–150 tisíc, ne nejlevnější vstup.
+            'Orientační ceny máte předem. Většina projektů vychází mezi 55 a 150 tisíci korunami.',
+            // OND-201 (nález 5.5): žargon přepsaný do řeči klienta.
+            'Weby stavím na vlastním kódu, bez hotových doplňků od cizích firem.',
         ],
     ],
 
@@ -169,16 +180,21 @@ return [
         'title' => 'Odpovědi na nejčastější otázky',
         'items' => [
             [
+                // OND-201 (nález 5.4): očekávací věta padne dřív než první
+                // číslo, nejlevnější pásmo je poslední a rámované jako výjimka.
                 'question' => 'Kolik stojí web na míru?',
-                'answer' => 'Záleží na rozsahu. Startovní web začíná orientačně od 25 000 Kč, vícejazyčný Standard od 55 000 Kč, Custom (e-shop, aplikace, rezervace) od 95 000 Kč. Přesnější cenu dává až krátká konzultace, kde si ujasníme rozsah, cíle a potřebné funkce.',
+                'answer' => 'Většina projektů, které stavím, vychází mezi 55 a 150 tisíci korunami. Vícejazyčný Standard začíná na 55 000 Kč, Custom (e-shop, aplikace, rezervace) od 95 000 Kč. Startovní web za 25 000 Kč beru jako výjimku pro živnostníky, ne jako standardní vstup. Přesnější cenu dává až krátká konzultace, kde si ujasníme rozsah, cíle a potřebné funkce.',
             ],
             [
                 'question' => 'Jak dlouho trvá realizace?',
                 'answer' => 'Jednodušší web lze zvládnout přibližně za 3 až 4 týdny od schválení zadání. U větších projektů záleží na rozsahu, funkcích a rychlosti dodání podkladů.',
             ],
             [
-                'question' => 'Proč nestavíte na WordPressu?',
-                'answer' => 'U běžných WordPress webů často vzniká závislost na pluginech, aktualizacích a průběžné údržbě. Web na míru je stabilnější, rychlejší a dlouhodobě předvídatelnější z hlediska provozu i nákladů.',
+                // OND-201 (nález 5.7): otázka se dřív jmenovala „Proč
+                // nestavíte na WordPressu?", tedy vymezení proti konkurenci
+                // v žargonu. Nově vede to, na čem web stavím.
+                'question' => 'Na čem web stavíte?',
+                'answer' => 'Na vlastním kódu, který píšu od základu. Nepoužívám hotové stavebnice skládané z doplňků od různých autorů — u nich vzniká závislost na pravidelných aktualizacích a průběžné údržbě. Web na míru je stabilnější, rychlejší a dlouhodobě předvídatelnější z hlediska provozu i nákladů.',
             ],
             [
                 'question' => 'Co když ještě nemám připravené texty nebo zadání?',
@@ -228,7 +244,8 @@ return [
     ],
 
     'footer' => [
-        'copy' => 'Tvorba webových stránek na míru bez WordPressu a zbytečné údržby. Přímá spolupráce, jasný proces a důraz na poptávky.',
+        // OND-201 (nález 5.5): žargon „bez WordPressu" pryč.
+        'copy' => 'Tvorba webových stránek na míru na vlastním kódu, bez zbytečné údržby. Přímá spolupráce, jasný proces a důraz na poptávky.',
         'privacy' => 'Ochrana osobních údajů',
     ],
 

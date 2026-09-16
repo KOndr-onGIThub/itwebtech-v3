@@ -2,9 +2,12 @@
 
 return [
 
+    // OND-201 (Befund 5.7): Der Seitentitel darf sich nicht über die Negation
+    // der Konkurrenz definieren, und „kein WordPress" sagt jemandem nichts,
+    // der nicht weiß, was WordPress ist (Prinzip 0).
     'meta' => [
-        'title'       => 'Ondřej Kriška — Webseiten & Webanwendungen für Unternehmen',
-        'description' => 'Maßgeschneiderte Webseiten und Webanwendungen, die Ergebnisse liefern. Wartungsfrei, kein WordPress, keine versteckten Kosten. 18 Jahre Erfahrung. Kostenlose Beratung.',
+        'title'       => 'Webseiten und Webanwendungen nach Maß | ONDRAWEB',
+        'description' => 'Webseiten, Onlineshops und Webanwendungen nach Maß für kleine und mittlere Unternehmen. Eigener Code, genauer Preis im Voraus, und Sie sprechen direkt mit mir. Ich bin Ondřej Kriška.',
     ],
 
     // TODO (OND-136 P3): final DE tone polish — Content Writer scope.
@@ -50,6 +53,9 @@ return [
         'projects'     => '23+ realisierte Projekte',
         'experience'   => '18 Jahre Erfahrung',
         'response'     => 'Antwort innerhalb von 24 Std.',
+        // OND-201 (Befund 5.11): Auszeichnung TOP firma 2025 von Firmy.cz —
+        // überprüfbarer Nachweis Dritter, der auf Staging fehlte.
+        'award'        => 'TOP firma 2025 auf Firmy.cz',
         'brands' => [
             ['name' => 'MAKOplast',             'image' => null],
             ['name' => 'Yolk Studio',           'image' => 'yolk_studio.png'],
@@ -61,20 +67,21 @@ return [
         ],
     ],
 
+    // OND-201 (Befund 5.7): Der Abschnitt definierte sich über die Negation
+    // der Konkurrenz und zwei von drei Punkten sagten dasselbe. Jetzt führt,
+    // was ich tue (`lead`), die Abgrenzung ist kurz und die doppelten
+    // Punkte sind zu einem zusammengeführt.
     'problems' => [
-        'heading'            => 'Was bei den meisten Web-Projekten immer wieder passiert.',
-        'transition_heading' => 'Wie ich es anders mache:',
-        'transition_text'    => 'Jedes Projekt beginnt mit dem Verständnis Ihres Unternehmens. Ich schreibe eigenen Code — keine Vorlagen, kein WordPress, keine Vermittler. Sie sprechen direkt mit mir vom ersten Treffen über den Launch und darüber hinaus.',
+        'heading'            => 'Wie ich Webseiten baue',
+        'lead'               => 'Jedes Projekt beginnt mit dem Verständnis Ihres Unternehmens. Ich schreibe eigenen Code von Grund auf, damit die Website dem folgt, wie Ihre Firma tatsächlich arbeitet. Sie sprechen direkt mit mir — von der ersten Nachricht über den Launch und darüber hinaus.',
+        'transition_heading' => 'Was Sie sich damit ersparen',
+        'transition_text'    => 'Die zwei Dinge, die ich bei Web-Projekten am häufigsten sehe.',
         'items' => [
             [
                 'heading'      => 'Eine Vorlage als individuelle Lösung verkauft',
-                'text'         => 'Eine Agentur verwendet ein Layout, das sie fünfmal zuvor genutzt hat. Sie fügen Ihren Text und Ihr Logo hinzu. Das Ergebnis wirkt professionell — bis Sie die Website der Konkurrenz betrachten. Gleiche Abschnitte, gleiche Worte, andere Farben und Logo.',
+                'text'         => 'Ein Anbieter verwendet ein Layout, das er schon fünfmal genutzt hat, und fügt Ihren Text und Ihr Logo ein. Das Ergebnis wirkt professionell — bis Sie die Website der Konkurrenz öffnen und dieselben Abschnitte und dieselben Worte finden. Dazu hält die Plattform Sie in einem monatlichen Abonnement, das Sie nicht mitnehmen können.',
                 'quote_text'   => 'Das ist nicht der Fall, in dem andere Hobbyentwickler einfach Vorlagen mit Daten für überhöhte Preise füllen.',
                 'quote_author' => 'Petr Kroulík, Nové Interiéry s.r.o.',
-            ],
-            [
-                'heading' => 'Die Vorlage sieht gut aus. Sie sieht aus wie bei allen anderen.',
-                'text'    => 'Drei Firmen aus Ihrer Branche haben letzte Woche dieselbe Vorlage gestartet. Die Agentur fügt Ihren Text und Ihr Logo hinzu — das Ergebnis ist austauschbar, und die Plattform hält Sie in einem monatlichen Abonnement, das Sie nicht mitnehmen können.',
             ],
             [
                 'heading' => 'Sie sprechen nie mit der Person, die die Website erstellt',
@@ -301,27 +308,25 @@ return [
         ],
     ],
 
-    // TODO: review pro DE — copy podle CS varianty A (OND-100)
-    'cta' => [
-        'heading'      => 'Bereit anzufangen? Die Beratung ist kostenlos.',
-        'consultation' => 'Preisangebot anfordern',
-        'message'      => '30-Min-Beratung vereinbaren',
-    ],
-
-    'final_cta' => [
-        'quote_text'   => 'Dank des individuellen Ansatzes, der Flexibilität und der Professionalität entspricht das Ergebnis unseren Vorstellungen.',
-        'quote_author' => 'Hana Jaskmanická, Geschäftsführerin, VP Industry',
-        'heading'      => 'Ich gebe Ihnen eine ehrliche Meinung zu Ihrem Projekt.',
-        'subtext'      => 'Ich antworte bis zum nächsten Werktag. Wenn eine Zusammenarbeit keinen Sinn ergibt, sage ich es Ihnen geradeheraus — kein Verkaufsdruck, keine lästigen Folge-E-Mails.',
-        'cta_label'    => 'Preisangebot anfordern',
-        'cta_secondary' => '30-Min-Beratung vereinbaren',
-        'cta_note'     => 'Kostenlos. Unverbindlich.',
-    ],
+    // OND-201 (Befund 5.8): Das Ende der Homepage waren drei Handlungs-
+    // aufforderungen hintereinander. Die Blöcke `cta` und `final_cta` sind
+    // entfernt; es bleibt eine Aufforderung mit einem Formular in
+    // `inline_form` unten, das Kundenzitat ist dorthin umgezogen.
 
     'faq' => [
         'heading' => 'Häufige Fragen',
         // `key` ist ein stabiler Slug für Analytics (data-faq-key) und JSON-LD; nicht lokalisieren.
         'items'   => [
+            // OND-201 (Kapitel 6.3, Einwand 1): der schwerwiegendste Einwand
+            // bei einem sechsstelligen Projekt — die Website behandelte ihn
+            // gar nicht. Nur Fakten: Code und Daten gehören dem Kunden, die
+            // Website ist nicht an eine Plattform gebunden, ein anderer
+            // Entwickler kann übernehmen.
+            [
+                'key'      => 'single-person',
+                'question' => 'Sie sind eine Person. Was, wenn Sie krank werden oder aufhören?',
+                'answer'   => 'Ein berechtigtes Bedenken — bei einem Auftrag über hunderttausend ist das die wichtigste Frage. Code und Daten sind von Anfang an Ihre und liegen bei Ihnen: nichts ist bei mir oder auf einer Plattform eingeschlossen, die Sie nicht verlassen könnten. Die Website läuft auf Laravel, einer verbreiteten und gängigen Technologie, also kann jeder Entwickler weitermachen, der sie kennt. Eine Rund-um-die-Uhr-Bereitschaft halte ich nicht und werde das auch nicht behaupten. Wofür ich einstehe: Bei mir bleibt nichts eingeschlossen.',
+            ],
             [
                 'key'      => 'price',
                 'question' => 'Was kostet es?',
@@ -363,11 +368,13 @@ return [
         'success'     => 'Danke, die Frage ist eingegangen. Ich melde mich so schnell wie möglich.',
     ],
 
-    // TODO: review pro DE — copy podle CS varianty A (OND-100)
+    // OND-201 (Befund 5.8): die einzige abschließende Aufforderung der Homepage.
     'inline_form' => [
         'eyebrow'         => 'Anfrage',
-        'heading'         => 'Schicken Sie mir ein paar Zeilen zum Projekt. Ich melde mich innerhalb von 24 Stunden.',
-        'description'     => 'Kein Verkäufer, kein Formular mit zehn Feldern. Eine kurze Beschreibung reicht — ich antworte persönlich und wir prüfen, ob eine Zusammenarbeit Sinn ergibt.',
+        'heading'         => 'Schreiben Sie mir, was Sie brauchen',
+        'description'     => 'Beschreiben Sie kurz, worum es geht. Ich melde mich innerhalb von zwei Werktagen und wir gehen unverbindlich durch, was Sinn ergibt. Wenn wir nicht zusammenpassen, sage ich es Ihnen geradeheraus.',
+        'quote_text'      => 'Dank des individuellen Ansatzes, der Flexibilität und der Professionalität entspricht das Ergebnis unseren Vorstellungen.',
+        'quote_author'    => 'Hana Jaskmanická, Geschäftsführerin, VP Industry',
         'name'            => 'Vor- und Nachname',
         'email'           => 'E-Mail',
         'phone'           => 'Telefon (optional)',
@@ -380,6 +387,7 @@ return [
         ],
         'submit'          => 'Anfrage senden',
         'submitting'      => 'Wird gesendet…',
+        'note'            => 'Oder schreiben Sie mir an ok@ondraweb.cz. Ich antworte persönlich, nicht über einen Formular-Roboter.',
         'privacy_prefix'  => 'Mit dem Absenden stimmen Sie der Verarbeitung personenbezogener Daten gemäß den ',
         'privacy_link'    => 'Datenschutzrichtlinien zu',
         'success'         => 'Danke, die Anfrage ist eingegangen. Ich melde mich so schnell wie möglich.',

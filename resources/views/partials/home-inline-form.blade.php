@@ -1,6 +1,10 @@
 {{-- ===================================================
      Inline poptávkový formulář (OND-100, T05)
      Persistuje do landing_leads se source = home.inline.
+
+     OND-201 (nález 5.8): tohle je jediná závěrečná výzva homepage.
+     Dvě další CTA sekce za tímhle formulářem byly zrušené; klientská
+     citace z nich je přesunutá sem, aby důkaz stál vedle výzvy.
      =================================================== --}}
 <section id="{{ __('home.anchors.poptavka') }}" class="section-wrapper section-alt section-inline-form" data-reveal>
     <div class="container-site inline-form-shell">
@@ -8,6 +12,11 @@
             <p class="section-subheading">{{ __('home.inline_form.eyebrow') }}</p>
             <h2>{{ __('home.inline_form.heading') }}</h2>
             <p class="section-header__desc">{{ __('home.inline_form.description') }}</p>
+
+            <blockquote class="final-cta-quote">
+                <p>{{ __('home.inline_form.quote_text') }}</p>
+                <footer>— {{ __('home.inline_form.quote_author') }}</footer>
+            </blockquote>
         </div>
 
         <div class="inline-form-panel">
@@ -104,6 +113,11 @@
                     </span>
                     <span class="btn__inner" x-show="submitting" x-cloak>{{ __('home.inline_form.submitting') }}</span>
                 </button>
+
+                {{-- OND-201 (nález 5.8 / 5.9): věta pod tlačítkem ze schválené
+                     sekce 9 dokumentu homepage-texty — nabízí druhou cestu
+                     (e-mail na ondraweb.cz) bez druhé CTA sekce. --}}
+                <p class="inline-form__note">{{ __('home.inline_form.note') }}</p>
 
                 <p class="inline-form__privacy">
                     {{ __('home.inline_form.privacy_prefix') }}<a href="{{ lroute('privacy') }}">{{ __('home.inline_form.privacy_link') }}</a>.

@@ -56,7 +56,11 @@
     </div>
 </section>
 
-{{-- 3. Conversion snapshots (existující) --}}
+{{-- 3. Případovky
+     OND-201 (nález 5.2): dřív anonymní „snapshots" s vymyšlenými termíny.
+     Nově skutečné případovky z dokumentu `pripadovky` (OND-186). Druhý
+     meta slot nese odkaz na živý web místo vymyšlené doby realizace —
+     u interních aplikací (Toyota TSM) je `url` null a odkaz se nevykreslí. --}}
 <section class="section-wrapper" data-reveal>
     <div class="container-site">
         <header class="section-header">
@@ -70,7 +74,13 @@
             <article class="project-snapshot">
                 <div class="project-snapshot__meta">
                     <span>{{ $snapshot['type'] }}</span>
-                    <span>{{ $snapshot['timeline'] }}</span>
+                    @if (!empty($snapshot['url']))
+                    <a href="{{ $snapshot['url'] }}" target="_blank" rel="noopener"
+                       data-analytics="case_study_live_click"
+                       data-analytics-props='{"domain":"{{ $snapshot['domain'] }}"}'>
+                        {{ $snapshot['domain'] }}
+                    </a>
+                    @endif
                 </div>
                 <h3>{{ $snapshot['title'] }}</h3>
                 <p>{{ $snapshot['summary'] }}</p>

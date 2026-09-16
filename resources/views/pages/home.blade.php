@@ -110,6 +110,9 @@
             <li class="social-proof-bar__item">{{ __('home.social_proof.projects') }}</li>
             <li class="social-proof-bar__item">{{ __('home.social_proof.experience') }}</li>
             <li class="social-proof-bar__item">{{ __('home.social_proof.response') }}</li>
+            {{-- OND-201 (nález 5.11): ocenění TOP firma 2025 z Firmy.cz —
+                 ověřitelný důkaz třetí strany, na stagingu dosud chyběl. --}}
+            <li class="social-proof-bar__item">{{ __('home.social_proof.award') }}</li>
         </ul>
 
         <div class="brands-grid">
@@ -138,13 +141,22 @@
 </section>
 
 {{-- ===================================================
-     PROBLÉMY NA TRHU (T16 — 3 karty po Sprint 2 P1)
+     JAK WEBY STAVÍM + krátké vymezení (T16)
+     OND-201 (nález 5.7): dřív „Co se opakuje u většiny webových projektů"
+     se třemi body o konkurenci. Nově vede to, co Ondra dělá (heading +
+     lead), teprve pak krátké vymezení (transition blok) a dva body.
      =================================================== --}}
 <section class="section-wrapper" data-reveal>
     <div class="container-site">
         <header class="section-header">
             <h2>{{ __('home.problems.heading') }}</h2>
+            <p class="section-header__desc">{{ __('home.problems.lead') }}</p>
         </header>
+
+        <div class="problems-transition" data-reveal>
+            <strong>{{ __('home.problems.transition_heading') }}</strong>
+            <p>{{ __('home.problems.transition_text') }}</p>
+        </div>
 
         <ol class="pain-list">
             @foreach (__('home.problems.items') as $i => $item)
@@ -168,11 +180,6 @@
             </li>
             @endforeach
         </ol>
-
-        <div class="problems-transition" data-reveal>
-            <strong>{{ __('home.problems.transition_heading') }}</strong>
-            <p>{{ __('home.problems.transition_text') }}</p>
-        </div>
     </div>
 </section>
 
@@ -778,53 +785,14 @@
 </section>
 
 {{-- ===================================================
-     INLINE POPTÁVKA (OND-100, T05)
+     JEDNA ZÁVĚREČNÁ VÝZVA S JEDNÍM FORMULÁŘEM (OND-100, T05)
+     OND-201 (nález 5.8): za tímto formulářem stály ještě dvě další výzvy
+     („Připraveni začít? Konzultace je zdarma." a „Řeknu vám upřímný názor
+     na váš projekt."), tj. tři CTA bezprostředně po sobě. Obě jsou
+     zrušené; klientská citace z nich se přesunula do partialu
+     k této jedné výzvě.
      =================================================== --}}
 @include('partials.home-inline-form')
-
-{{-- ===================================================
-     ZÁVĚREČNÉ CTA
-     =================================================== --}}
-<section class="section-wrapper section-cta" data-reveal>
-    <div class="container-site">
-        <div class="final-cta__intro">
-            <h2 class="final-cta-heading">
-                {!! __('home.cta.heading') ?? __('layout.prefooter.tagline') !!}
-            </h2>
-            <div class="final-cta__actions">
-                <a href="#{{ __('home.anchors.poptavka') }}" class="btn btn-primary" data-analytics="final_cta_primary_click">
-                    {{ __('home.cta.consultation') }}
-                    <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-                </a>
-                {{-- Sekundární CTA — Reservanto widget (OND-116/T15) --}}
-                <x-booking.reservanto-widget />
-            </div>
-            <blockquote class="final-cta-quote">
-                <p>{{ __('home.final_cta.quote_text') }}</p>
-                <footer>— {{ __('home.final_cta.quote_author') }}</footer>
-            </blockquote>
-        </div>
-
-        <div class="final-cta__closing">
-            <h2 class="final-cta-heading">{{ __('home.final_cta.heading') }}</h2>
-            <p class="final-cta-subtext">{{ __('home.final_cta.subtext') }}</p>
-
-            <div class="final-cta__actions">
-                <a
-                    href="#{{ __('home.anchors.poptavka') }}"
-                    class="btn btn-primary"
-                    data-analytics="final_cta_closing_primary_click"
-                >
-                    {{ __('home.final_cta.cta_label') }}
-                    <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-                </a>
-                {{-- Sekundární CTA — Reservanto widget (OND-116/T15) --}}
-                <x-booking.reservanto-widget />
-            </div>
-            <p class="final-cta-note">{{ __('home.final_cta.cta_note') }}</p>
-        </div>
-    </div>
-</section>
 
 @endsection
 
