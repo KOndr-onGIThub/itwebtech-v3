@@ -2,7 +2,8 @@
 
 namespace Tests\Feature;
 
-use Database\Seeders\EnsureArticlesSeededSeeder;
+use App\Models\Article;
+use App\Models\Slugs\ArticleSlug;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -113,23 +114,47 @@ class SeoPolishTest extends TestCase
         );
     }
 
-    /** F5 — article <meta description> je trimnutá pod ~160 znaků. */
+    /**
+     * F5 — article <meta description> je trimnutá pod ~160 znaků.
+     *
+     * OND-216: test si článek zakládá sám místo `EnsureArticlesSeededSeeder`.
+     * Ten na prázdné DB volá `ImportOldDataSeeder`, který je psaný výhradně pro
+     * MySQL (mysqlovské escapování apostrofů v dumpech, `INSERT IGNORE`) a pod
+     * testovacím sqlite spadne. Vlastní fixture je navíc silnější pokrytí:
+     * description je záměrně delší než 160 znaků, takže trim v article.blade.php
+     * se opravdu vykoná — na seedovaných datech by assert prošel i bez něj.
+     */
     public function test_article_meta_description_under_160_chars(): void
     {
-        $this->seed(EnsureArticlesSeededSeeder::class);
+        // Perex-style description, jaké reálně chodí z DB (237-268 znaků).
+        $longDescription = 'Weby dělám na míru a bez šablon, takže cena vychází z rozsahu, '
+            .'ne z ceníku hotového řešení. V článku rozepisuju tři cenová pásma, co v nich '
+            .'je obsažené, co cenu posouvá nahoru a kdy se vám naopak vyplatí zvolit někoho '
+            .'jiného než mě.';
 
-        // Najdeme libovolný publikovaný CS článek s aktivním slugem (CS = /jak-na-to/{slug}).
-        $article = \App\Models\Article::query()
-            ->where('published', true)
-            ->with('slugs')
-            ->get()
-            ->first(fn ($a) => $a->slug('cs') !== null);
+        $this->assertGreaterThan(160, mb_strlen($longDescription), 'Fixture musí být delší než limit, jinak test nic netestuje.');
 
-        if ($article === null) {
-            $this->markTestSkipped('Žádný publikovaný CS článek se seedovaným slugem – test neaplikovatelný.');
-        }
+        $article = Article::create([
+            'slug'      => 'kolik-stoji-webove-stranky',
+            'published' => true,
+        ]);
 
-        $response = $this->get('/jak-na-to/'.$article->slug('cs'));
+        $article->translations()->create([
+            'locale'      => 'cs',
+            'active'      => true,
+            'title'       => 'Kolik stojí web na míru',
+            'description' => $longDescription,
+            'perex'       => '<p>Perex.</p>',
+        ]);
+
+        ArticleSlug::create([
+            'article_id' => $article->id,
+            'locale'     => 'cs',
+            'slug'       => 'kolik-stoji-webove-stranky',
+            'active'     => true,
+        ]);
+
+        $response = $this->get('/jak-na-to/kolik-stoji-webove-stranky');
 
         $response->assertOk();
 
