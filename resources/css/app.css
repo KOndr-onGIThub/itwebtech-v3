@@ -4733,6 +4733,34 @@
     }
 
     /* ============================================================
+       VIDEO INTRO — Ondrovo video (OND-202, kap. 9 bod 1)
+       Vertikální 9:16 přehrávač; poster + native controls, žádný
+       autoplay. Sloty: .why-me-video (homepage), .about-intro__video.
+       ============================================================ */
+    .video-intro {
+        display: block;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 9 / 16;
+        object-fit: cover;
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-lg);
+        background: var(--bg-card);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    }
+    .why-me-video {
+        max-width: 320px;
+    }
+    @media (min-width: 768px) {
+        .why-me-video {
+            max-width: 360px;
+        }
+    }
+    .about-intro__video .video-intro {
+        max-width: 340px;
+    }
+
+    /* ============================================================
        GUARANTEE SECTION
        ============================================================ */
     .guarantee-grid {

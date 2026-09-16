@@ -290,6 +290,7 @@ return [
     ],
 
     'why_me' => [
+        'video_aria' => 'Video: Ondřej Kriška — who I am and how I build websites',
         'heading'   => 'Why work with me',
         'photo_alt' => 'Ondřej Kriška — web developer',
         'bio'       => 'For 18 years I ran projects at Toyota where the production line was not allowed to stop. I now apply those same principles — exact specification, analysis, verification — to web projects. I work solo: you talk directly to me from the first consultation through launch and beyond.',

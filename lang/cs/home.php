@@ -301,6 +301,7 @@ return [
     ],
 
     'why_me' => [
+        'video_aria' => 'Video: Ondřej Kriška — kdo jsem a jak stavím weby',
         'heading'   => 'Proč já',
         'photo_alt' => 'Ondřej Kriška — webový vývojář',
         'bio'       => '18 let jsem v Toyotě řídil projekty, ve kterých nesměla padnout linka. Dnes ty samé principy — přesná specifikace, analýza, ověřování — používám pro webové projekty. Pracuji sám, mluvíte přímo se mnou od první konzultace po spuštění i dál.',

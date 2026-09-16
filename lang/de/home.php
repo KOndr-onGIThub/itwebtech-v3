@@ -288,6 +288,7 @@ return [
     ],
 
     'why_me' => [
+        'video_aria' => 'Video: Ondřej Kriška — wer ich bin und wie ich Websites baue',
         'heading'   => 'Warum mit mir',
         'photo_alt' => 'Ondřej Kriška — Webentwickler',
         'bio'       => '18 Jahre lang habe ich bei Toyota Projekte geleitet, bei denen das Band nicht stehen durfte. Dieselben Prinzipien — präzise Spezifikation, Analyse, Verifikation — wende ich heute auf Web-Projekte an. Ich arbeite allein: Sie sprechen direkt mit mir, von der ersten Beratung über den Launch hinaus.',
