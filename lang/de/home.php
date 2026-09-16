@@ -67,6 +67,34 @@ return [
         ],
     ],
 
+    // OND-202: Arbeitsproben als primäres Bildmaterial (live Kunden-Websites).
+    'showcase' => [
+        'heading' => 'Websites, die in der Praxis laufen',
+        'intro'   => 'Das sind live Projekte, die Sie sich sofort ansehen können. Klicken Sie sich durch.',
+        'visit'   => 'Live-Website öffnen',
+        'aria'    => ':domain in neuem Fenster öffnen',
+        'sites'   => [
+            [
+                'slug'   => 'barana',
+                'domain' => 'barana.cz',
+                'url'    => 'https://www.barana.cz/',
+                'desc'   => 'Bioklimatische Pergolen, Tore und Zäune',
+            ],
+            [
+                'slug'   => 'zubniprovazek',
+                'domain' => 'zubniprovazek.cz',
+                'url'    => 'https://www.zubniprovazek.cz/',
+                'desc'   => 'Zahnarztpraxis für Kinder und Erwachsene',
+            ],
+            [
+                'slug'   => 'pitarena',
+                'domain' => 'shop.pitarena.cz',
+                'url'    => 'https://shop.pitarena.cz/',
+                'desc'   => 'E-Shop mit Pit-Bikes und Ersatzteilen',
+            ],
+        ],
+    ],
+
     // OND-201 (Befund 5.7): Der Abschnitt definierte sich über die Negation
     // der Konkurrenz und zwei von drei Punkten sagten dasselbe. Jetzt führt,
     // was ich tue (`lead`), die Abgrenzung ist kurz und die doppelten
@@ -267,6 +295,7 @@ return [
     ],
 
     'why_me' => [
+        'video_aria' => 'Video: Ondřej Kriška — wer ich bin und wie ich Websites baue',
         'heading'   => 'Warum mit mir',
         'photo_alt' => 'Ondřej Kriška — Webentwickler',
         'bio'       => '18 Jahre lang habe ich bei Toyota Projekte geleitet, bei denen das Band nicht stehen durfte. Dieselben Prinzipien — präzise Spezifikation, Analyse, Verifikation — wende ich heute auf Web-Projekte an. Ich arbeite allein: Sie sprechen direkt mit mir, von der ersten Beratung über den Launch hinaus.',

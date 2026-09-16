@@ -21,14 +21,10 @@
                 <p class="section-prose-text">{{ __('about.intro') }}</p>
             </div>
 
-            <div class="about-intro__photo">
-                <x-responsive-image
-                    path="about/ondrej_kriska.jpg"
-                    alt="{{ __('about.portrait_alt') }}"
-                    sizes="(max-width: 1023px) 100vw, 340px"
-                    loading="lazy"
-                    classImg="about-photo"
-                />
+            {{-- OND-202: Ondrovo intro video místo statického portrétu
+                 (kap. 9 bod 1 — umístění homepage + O mně). --}}
+            <div class="about-intro__photo about-intro__video">
+                <x-video-intro :ariaLabel="__('about.video_aria')" />
             </div>
         </div>
     </div>

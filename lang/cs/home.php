@@ -73,6 +73,36 @@ return [
         ],
     ],
 
+    // OND-202 (kap. 9 bod 2 master promptu): ukázky práce jako hlavní obrazový
+    // materiál. Texty ze schválené sekce 2 dokumentu homepage-texty (OND-186).
+    // Popisky = fakta z živých webů (obor firmy), žádná vymyšlená čísla.
+    'showcase' => [
+        'heading' => 'Weby, které běží v praxi',
+        'intro'   => 'Tohle jsou živé projekty, na které se můžete podívat hned teď. Klikněte a projděte si je.',
+        'visit'   => 'Otevřít živý web',
+        'aria'    => 'Otevřít web :domain v novém okně',
+        'sites'   => [
+            [
+                'slug'   => 'barana',
+                'domain' => 'barana.cz',
+                'url'    => 'https://www.barana.cz/',
+                'desc'   => 'Bioklimatické pergoly, brány a ploty',
+            ],
+            [
+                'slug'   => 'zubniprovazek',
+                'domain' => 'zubniprovazek.cz',
+                'url'    => 'https://www.zubniprovazek.cz/',
+                'desc'   => 'Zubní ordinace pro děti i dospělé',
+            ],
+            [
+                'slug'   => 'pitarena',
+                'domain' => 'shop.pitarena.cz',
+                'url'    => 'https://shop.pitarena.cz/',
+                'desc'   => 'E-shop s motorkami a náhradními díly',
+            ],
+        ],
+    ],
+
     // OND-201 (nález 5.7): první velká sekce homepage se definovala negací
     // konkurence („Co se opakuje u většiny webových projektů") a dva ze tří
     // bodů říkaly totéž (šablona vypadá jako u konkurence). Nově vede to, co
@@ -281,6 +311,7 @@ return [
     ],
 
     'why_me' => [
+        'video_aria' => 'Video: Ondřej Kriška — kdo jsem a jak stavím weby',
         'heading'   => 'Proč já',
         'photo_alt' => 'Ondřej Kriška — webový vývojář',
         'bio'       => '18 let jsem v Toyotě řídil projekty, ve kterých nesměla padnout linka. Dnes ty samé principy — přesná specifikace, analýza, ověřování — používám pro webové projekty. Pracuji sám, mluvíte přímo se mnou od první konzultace po spuštění i dál.',

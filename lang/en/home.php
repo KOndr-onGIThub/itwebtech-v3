@@ -69,6 +69,34 @@ return [
         ],
     ],
 
+    // OND-202: work samples as the primary visual material (live client sites).
+    'showcase' => [
+        'heading' => 'Websites running in the real world',
+        'intro'   => 'These are live projects you can open right now. Click through and explore them.',
+        'visit'   => 'Open the live site',
+        'aria'    => 'Open :domain in a new window',
+        'sites'   => [
+            [
+                'slug'   => 'barana',
+                'domain' => 'barana.cz',
+                'url'    => 'https://www.barana.cz/',
+                'desc'   => 'Bioclimatic pergolas, gates and fences',
+            ],
+            [
+                'slug'   => 'zubniprovazek',
+                'domain' => 'zubniprovazek.cz',
+                'url'    => 'https://www.zubniprovazek.cz/',
+                'desc'   => 'Dental practice for children and adults',
+            ],
+            [
+                'slug'   => 'pitarena',
+                'domain' => 'shop.pitarena.cz',
+                'url'    => 'https://shop.pitarena.cz/',
+                'desc'   => 'E-shop with pit bikes and spare parts',
+            ],
+        ],
+    ],
+
     // OND-201 (finding 5.7): the section used to define the business by
     // negating competitors and two of three items said the same thing.
     // What I do now leads (`lead`), the delimitation is short, and the
@@ -269,6 +297,7 @@ return [
     ],
 
     'why_me' => [
+        'video_aria' => 'Video: Ondřej Kriška — who I am and how I build websites',
         'heading'   => 'Why work with me',
         'photo_alt' => 'Ondřej Kriška — web developer',
         'bio'       => 'For 18 years I ran projects at Toyota where the production line was not allowed to stop. I now apply those same principles — exact specification, analysis, verification — to web projects. I work solo: you talk directly to me from the first consultation through launch and beyond.',
