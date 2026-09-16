@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Article;
 use App\Models\Portfolio\PortfolioProject;
 use Illuminate\Support\Facades\Schema;
 use Spatie\Sitemap\Sitemap;
@@ -39,6 +40,10 @@ class SitemapGenerator
         }
 
         foreach ($this->collectProjectUrls() as $entry) {
+            $this->addUrl($sitemap, $entry, $overrides, $excluded);
+        }
+
+        foreach ($this->collectArticleUrls() as $entry) {
             $this->addUrl($sitemap, $entry, $overrides, $excluded);
         }
 
@@ -121,6 +126,67 @@ class SitemapGenerator
                 $entries[] = [
                     'url'        => $alternates[$locale],
                     'page'       => 'project',
+                    'lastmod'    => $lastmod,
+                    'alternates' => $alternates,
+                ];
+            }
+        }
+
+        return $entries;
+    }
+
+    /**
+     * Detaily blogových článků × locale, kde článek má aktivní slug.
+     *
+     * OND-215: články v sitemapě chyběly úplně — byl tam jen výpis blogu.
+     * Záměrně se nepoužívá `Article::slug()`, ten padá zpátky na cs slug, když
+     * locale variantu nemá. Do sitemapy by tím přitekla `/de/blog/{cs-slug}`,
+     * na kterou PageController::article() vrací 404 (kontrola kanonického slugu
+     * pro danou locale). Bereme tedy jen slugy, které v dané locale reálně jsou.
+     *
+     * Stažené články (`published = 0`) se nepřidávají — mají 301 na jinou adresu.
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    protected function collectArticleUrls(): array
+    {
+        $entries = [];
+
+        if (! Schema::hasTable('articles') || ! Schema::hasTable('article_slugs')) {
+            return $entries;
+        }
+
+        try {
+            $articles = Article::where('published', true)->with('slugs')->get();
+        } catch (Throwable $e) {
+            return $entries;
+        }
+
+        foreach ($articles as $article) {
+            $alternates = [];
+            foreach ($this->locales as $locale) {
+                $slug = $article->slugs
+                    ->where('locale', $locale)
+                    ->where('active', true)
+                    ->first()?->slug;
+
+                if ($slug === null || $slug === '') {
+                    continue;
+                }
+
+                $alternates[$locale] = route("{$locale}.article", ['slug' => $slug]);
+            }
+
+            if (empty($alternates)) {
+                continue;
+            }
+
+            $lastmod = $article->updated_at ?? $article->published_at ?? null;
+
+            foreach ($alternates as $url) {
+                $entries[] = [
+                    'url'        => $url,
+                    'page'       => 'article',
                     'lastmod'    => $lastmod,
                     'alternates' => $alternates,
                 ];

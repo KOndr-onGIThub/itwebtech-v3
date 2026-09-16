@@ -25,6 +25,30 @@ if (!function_exists('lroute')) {
     }
 }
 
+if (!function_exists('lroute_safe')) {
+    /**
+     * Jako lroute(), ale pro routes s povinnými parametry vrátí homepage.
+     *
+     * OND-212: chybové stránky se renderují pod routou, která chybu vyvolala.
+     * Na `/jak-na-to/{slug}` je to `cs.article`, na `/projekty/{url}` `cs.project`
+     * — obě mají povinný parametr. Layout i navbar staví přepínač jazyků přes
+     * `lroute(current_page(), $locale)` a bez parametru z toho spadne
+     * UrlGenerationException. Laravel pak místo naší 404 vrátí holou Symfony
+     * stránku „An Error Occurred".
+     *
+     * Na běžných stránkách k výjimce nedojde: detail článku i projektu si
+     * hreflang URL předává explicitně přes $hreflangs, sem to nikdy nedojde.
+     */
+    function lroute_safe(string $name, ?string $locale = null): string
+    {
+        try {
+            return lroute($name, $locale);
+        } catch (\Illuminate\Routing\Exceptions\UrlGenerationException) {
+            return lroute('home', $locale);
+        }
+    }
+}
+
 if (!function_exists('screenshot_url')) {
     /**
      * Resolve a portfolio screenshot path to a public URL.

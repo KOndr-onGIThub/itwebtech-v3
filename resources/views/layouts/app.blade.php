@@ -42,10 +42,12 @@
         // en.cookies / de.cookies), takže sdílí standardní lroute() hreflang
         // chain s ostatními stránkami. Předchozí $isSharedCookiesPage special
         // case z OND-162 odebrán — už není potřeba.
+        // OND-212: lroute_safe() kvůli chybovým stránkám — 404 z `cs.article`
+        // se renderuje pod routou s povinným parametrem {slug}, který tu není.
         $hreflangs = $hreflangs ?? [];
-        $hreflangCs = $hreflangs['cs'] ?? lroute($currentPage, 'cs');
-        $hreflangEn = $hreflangs['en'] ?? lroute($currentPage, 'en');
-        $hreflangDe = $hreflangs['de'] ?? lroute($currentPage, 'de');
+        $hreflangCs = $hreflangs['cs'] ?? lroute_safe($currentPage, 'cs');
+        $hreflangEn = $hreflangs['en'] ?? lroute_safe($currentPage, 'en');
+        $hreflangDe = $hreflangs['de'] ?? lroute_safe($currentPage, 'de');
     @endphp
     <link rel="canonical" href="{{ $canonicalUrl }}">
     <link rel="alternate" hreflang="cs" href="{{ $hreflangCs }}">
