@@ -5237,54 +5237,68 @@
         margin-top: 1.5rem;
     }
 
-    /* — Detail galerie — */
-    .portfolio-detail-gallery__hero {
+    /* — Detail galerie (OND-202: kurátorské role dle poměru stran) —
+       `band` = hlavní wide vizuál (mockupy, bannery) na celou šířku
+       v přirozeném poměru, bez ořezu. `item` = podpůrná karta v párové
+       mřížce s jednotným čtvercovým výřezem — dominantní zdroje jsou
+       čtverce 1800×1800 (nulový ořez), plný snímek je v lightboxu. */
+    .portfolio-detail-gallery--lead {
+        padding-block: 0 clamp(1.5rem, 3vw, 2.5rem);
+    }
+    .portfolio-detail-gallery__band {
         margin: 0 0 1.5rem;
         border-radius: 1rem;
         overflow: hidden;
-        aspect-ratio: 16 / 9;
         background: var(--bg-card-hover);
     }
-    .portfolio-detail-gallery__hero picture,
-    .portfolio-detail-gallery__hero picture img {
+    .portfolio-detail-gallery__band:last-child {
+        margin-bottom: 0;
+    }
+    .portfolio-detail-gallery__band picture,
+    .portfolio-detail-gallery__band picture img,
+    .portfolio-detail-gallery__band > a > img,
+    .portfolio-detail-gallery__band > img {
         display: block;
         width: 100%;
-        height: 100%;
-        object-fit: cover;
+        height: auto;
     }
-    .portfolio-detail-gallery__hero figcaption,
+    .portfolio-detail-gallery__band figcaption,
     .portfolio-detail-gallery__item figcaption {
         margin-top: 0.5rem;
         padding: 0 0.25rem;
         font-size: 0.8125rem;
         color: var(--color-muted);
     }
-    /* OND-202 (zamítnutí karty boardem): galerie má snímky se smíšenými
-       poměry stran (16:9, 4:5, 1:1). Řádkový grid natahoval buňky na výšku
-       nejvyššího souseda → karta s 16:9 obrázkem měla pod obrázkem prázdnou
-       plochu. Masonry tok přes CSS columns: karta vždy obepne svůj obrázek,
-       nic se neořezává (plný snímek je v lightboxu). */
     .portfolio-detail-gallery__grid {
-        columns: 1;
-        column-gap: 1.25rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin: 0 0 1.5rem;
+    }
+    .portfolio-detail-gallery__grid:last-child {
+        margin-bottom: 0;
     }
     @media (min-width: 641px) {
         .portfolio-detail-gallery__grid {
-            columns: 2;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
         }
     }
     .portfolio-detail-gallery__item {
-        margin: 0 0 1.25rem;
+        margin: 0;
         border-radius: 0.75rem;
         overflow: hidden;
         background: var(--bg-card-hover);
-        break-inside: avoid;
     }
     .portfolio-detail-gallery__item picture,
-    .portfolio-detail-gallery__item picture img {
+    .portfolio-detail-gallery__item picture img,
+    .portfolio-detail-gallery__item > a > img,
+    .portfolio-detail-gallery__item > img {
         display: block;
         width: 100%;
-        height: auto;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        object-position: top;
     }
 
     /* — Detail body + meta layout — */

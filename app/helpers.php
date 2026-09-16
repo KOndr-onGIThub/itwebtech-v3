@@ -140,6 +140,84 @@ if (!function_exists('screenshot_dimensions')) {
     }
 }
 
+if (!function_exists('screenshot_dimensions_any')) {
+    /**
+     * OND-202: intrinsic rozměry screenshotu pro OBĚ rodiny cest —
+     * storage uploady (`portfolio/...`, deleguje na screenshot_dimensions)
+     * i build-time zdroje (`projects/...` v resources/img). Render-time
+     * getimagesize čte jen hlavičku; cache klíč nese mtime, takže výměna
+     * souboru invaliduje sama.
+     *
+     * @return array{width:int,height:int}|null
+     */
+    function screenshot_dimensions_any(?string $path): ?array
+    {
+        if ($path === null || $path === '') {
+            return null;
+        }
+        if (screenshot_is_storage($path)) {
+            return screenshot_dimensions($path);
+        }
+        $absPath = resource_path('img/' . ltrim($path, '/'));
+        if (!is_file($absPath)) {
+            return null;
+        }
+        $cacheKey = 'shot-dims:' . $path . ':' . (string) @filemtime($absPath);
+        return \Illuminate\Support\Facades\Cache::rememberForever($cacheKey, static function () use ($absPath): ?array {
+            $info = @getimagesize($absPath);
+            if ($info === false || !isset($info[0], $info[1]) || (int) $info[1] === 0) {
+                return null;
+            }
+            return ['width' => (int) $info[0], 'height' => (int) $info[1]];
+        });
+    }
+}
+
+if (!function_exists('screenshot_gallery_role')) {
+    /**
+     * OND-202 (zamítnutí karty boardem 2×): role snímku v galerii detailu
+     * projektu, určená z poměru stran — přesně dle zadání boardu („jde
+     * jednoduše vidět z rozměrů"):
+     *
+     *  - `wide` (poměr >= 1.5): hlavní vizuály — 3-device studio mockupy
+     *    (2048×1152) a widescreen bannery (1500×750). Zobrazují se VÝHRADNĚ
+     *    na celou šířku v přirozeném poměru, nikdy v malé kartě.
+     *  - `card` (poměr < 1.5): podpůrné snímky — čtvercové detailní záběry
+     *    (1800×1800), portréty stránek. Zobrazují se v párové mřížce
+     *    v jednotném čtvercovém výřezu (dominantní čtverce = nulový ořez;
+     *    plný snímek je vždy v lightboxu).
+     *
+     * Neznámé rozměry (např. absolutní URL) → `wide` (bez ořezu = bezpečné).
+     */
+    function screenshot_gallery_role(?string $path): string
+    {
+        $dims = screenshot_dimensions_any($path);
+        if ($dims === null) {
+            return 'wide';
+        }
+        return ($dims['width'] / $dims['height']) >= 1.5 ? 'wide' : 'card';
+    }
+}
+
+if (!function_exists('portfolio_card_thumbnail')) {
+    /**
+     * OND-202: výběr náhledovky do malé karty (výpis projektů, homepage).
+     * Wide 3-device mockup je v malé kartě nečitelný (zadání boardu) —
+     * preferujeme explicitní `thumbnail`, pak první čtvercový/`card` snímek
+     * (detailní záběr jednoho zařízení), teprve pak hero/první.
+     *
+     * @param \Illuminate\Support\Collection $screens
+     */
+    function portfolio_card_thumbnail($screens)
+    {
+        $screens = collect($screens ?? []);
+        return $screens->firstWhere('type', 'thumbnail')
+            ?? $screens->first(static fn ($s) => screenshot_gallery_role($s->path) === 'card')
+            ?? $screens->firstWhere('type', 'hero')
+            ?? $screens->first();
+    }
+}
+
 if (!function_exists('responsive_image_srcsets')) {
     /**
      * Server-side resolver pro `<x-responsive-image>` (OND-123 iter3).
