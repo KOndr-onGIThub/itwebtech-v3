@@ -9,7 +9,8 @@ return [
 
     'subheading' => 'Unverbindliche Preise',
     'heading'    => 'Sie wissen, worauf Sie sich einlassen — schon vor unserem ersten Gespräch.',
-    'intro'      => 'Jedes Projekt ist einzigartig — den genauen Preis erfahren Sie nach einer kostenlosen Beratung. Diese Übersicht gibt Ihnen schon vor dem ersten Gespräch eine klare Vorstellung, was es kosten wird.',
+    // OND-198 (Befund 5.4): der Erwartungssatz muss vor der ersten Zahl stehen.
+    'intro'      => 'Die meisten Projekte, die ich baue, liegen zwischen 2.200 und 6.000 €. Wenn Sie eine Website unter 800 € suchen, bin ich nicht der richtige Anbieter für Sie — und das sage ich Ihnen gleich. Jedes Projekt ist einzigartig — den genauen Preis erfahren Sie nach einer kostenlosen Beratung.',
 
     // OND-135 P2 iter 5 — Plan §3.1 Hero (Page-Mark + Amber-Akzent).
     // OND-135 Bereinigung (2026-05-14): page_mark_index entfernt — Agency-
@@ -17,8 +18,9 @@ return [
     'hero' => [
         'page_mark_label' => 'PREISE',
         'upline'          => 'Kein „Auf Anfrage"-Versteckspiel.',
+        // OND-198 (Befund 5.4): Standard führt die Subline an, nicht die günstigste Stufe.
         'heading_html'    => 'Drei Stufen,<br>ein <em>klarer Preis</em>.',
-        'subline'         => 'Starter €1.000, Standard €2.200, Custom ab €3.800. Die Rechnung entspricht dem Angebot.',
+        'subline'         => 'Die Rechnung entspricht dem Angebot. Keine Mehrkosten ohne Ihr Wissen.',
     ],
 
     // Sticky CTA — durchgehend sichtbar, „der Preis verschwindet nie".
@@ -35,21 +37,6 @@ return [
     // OND-136: Tier-Namen und Preise angeglichen an die CS-Taxonomie
     // Startovní/Standard/Custom = 25/55/95 Tausend CZK → EUR-Umrechnung (CEO-bestätigter 1:25-Anker).
     'tiers' => [
-        [
-            'name'    => 'Starter',
-            'desc'    => 'Für Selbstständige und kleine Unternehmen, die eine glaubwürdige Online-Präsenz benötigen.',
-            'price'   => '1.000 €',
-            'popular' => false,
-            'features' => [
-                'Bis zu 5 individuelle Seiten',
-                'Modernes responsives Design',
-                'Kontaktformular',
-                'Technische SEO',
-                'Seitengeschwindigkeits-Optimierung',
-                '14 Tage Support nach dem Launch',
-            ],
-            'cta' => 'Unverbindliches Angebot anfordern',
-        ],
         [
             'name'    => 'Standard',
             'desc'    => 'Für Unternehmen, die ihre Webseite als bestes Verkaufswerkzeug nutzen möchten.',
@@ -78,6 +65,22 @@ return [
                 'Erweiterte SEO-Strategie mit Reporting',
                 'Integration externer Systeme',
                 '3 Monate Support nach dem Launch',
+            ],
+            'cta' => 'Unverbindliches Angebot anfordern',
+        ],
+        [
+            'name'    => 'Starter',
+            // OND-198 (Befund 5.4): günstigste Stufe steht zuletzt, gerahmt als Ausnahme.
+            'desc'    => 'Eine Ausnahme, kein Standard-Einstieg. Für Selbstständige, bei denen ein größerer Umfang keinen Sinn ergibt — glaubwürdige Online-Präsenz bis 5 Seiten.',
+            'price'   => '1.000 €',
+            'popular' => false,
+            'features' => [
+                'Bis zu 5 individuelle Seiten',
+                'Modernes responsives Design',
+                'Kontaktformular',
+                'Technische SEO',
+                'Seitengeschwindigkeits-Optimierung',
+                '14 Tage Support nach dem Launch',
             ],
             'cta' => 'Unverbindliches Angebot anfordern',
         ],
@@ -136,7 +139,7 @@ return [
 
     'compare' => [
         'heading' => 'Was Sie genau bekommen',
-        'tiers'   => ['Starter', 'Standard', 'Custom'],
+        'tiers'   => ['Standard', 'Custom', 'Starter'],
         'tabs_aria'     => 'Preisstufe auswählen',
         'included'      => 'Enthalten',
         'not_included'  => 'Nicht enthalten',
@@ -144,7 +147,7 @@ return [
             [
                 'label' => 'Projektumfang',
                 'rows'  => [
-                    ['label' => 'Anzahl der Seiten', 'values' => ['bis zu 5', 'bis zu 12', 'unbegrenzt']],
+                    ['label' => 'Anzahl der Seiten', 'values' => ['bis zu 12', 'unbegrenzt', 'bis zu 5']],
                     ['label' => 'Responsives Design', 'values' => [true, true, true]],
                     ['label' => 'Kontaktformular', 'values' => [true, true, true]],
                 ],
@@ -152,12 +155,12 @@ return [
             [
                 'label' => 'Webseiten-Funktionen',
                 'rows'  => [
-                    ['label' => 'Blog oder Galerie mit Bearbeitung', 'values' => [false, true, true]],
-                    ['label' => 'Mehrsprachige Website', 'values' => [false, true, true]],
-                    ['label' => 'Buchungssystem', 'values' => [false, 'optional', true]],
-                    ['label' => 'Online-Shop', 'values' => [false, false, true]],
-                    ['label' => 'Eigene Verwaltung', 'values' => [false, false, true]],
-                    ['label' => 'Integration externer Systeme', 'values' => [false, false, true]],
+                    ['label' => 'Blog oder Galerie mit Bearbeitung', 'values' => [true, true, false]],
+                    ['label' => 'Mehrsprachige Website', 'values' => [true, true, false]],
+                    ['label' => 'Buchungssystem', 'values' => ['optional', true, false]],
+                    ['label' => 'Online-Shop', 'values' => [false, true, false]],
+                    ['label' => 'Eigene Verwaltung', 'values' => [false, true, false]],
+                    ['label' => 'Integration externer Systeme', 'values' => [false, true, false]],
                 ],
             ],
             [
@@ -165,15 +168,15 @@ return [
                 'rows'  => [
                     ['label' => 'Technische SEO', 'values' => [true, true, true]],
                     ['label' => 'Seitengeschwindigkeits-Optimierung', 'values' => [true, true, true]],
-                    ['label' => 'Analytics & Konversionsmessung', 'values' => [false, true, true]],
-                    ['label' => 'Erweiterte SEO-Strategie', 'values' => [false, false, true]],
+                    ['label' => 'Analytics & Konversionsmessung', 'values' => [true, true, false]],
+                    ['label' => 'Erweiterte SEO-Strategie', 'values' => [false, true, false]],
                 ],
             ],
             [
                 'label' => 'Service & Support',
                 'rows'  => [
-                    ['label' => 'Kostenloses Hosting und Domain', 'values' => [false, '1 Jahr', '1 Jahr']],
-                    ['label' => 'Support nach dem Launch', 'values' => ['14 Tage', '1 Monat', '3 Monate']],
+                    ['label' => 'Kostenloses Hosting und Domain', 'values' => ['1 Jahr', '1 Jahr', false]],
+                    ['label' => 'Support nach dem Launch', 'values' => ['1 Monat', '3 Monate', '14 Tage']],
                     ['label' => 'Wartungsfreier Betrieb', 'values' => [true, true, true]],
                 ],
             ],
