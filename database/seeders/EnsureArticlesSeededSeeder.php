@@ -43,5 +43,10 @@ class EnsureArticlesSeededSeeder extends Seeder
         // Na čerstvé DB je hned po importu přepíšeme aktuálním zněním blogu —
         // na existující DB dělá totéž migrace 2026_09_16_110000_rewrite_blog_content.
         $this->call(BlogContentSeeder::class);
+
+        // OND-219: dumpy DE překlady ani DE slugy vůbec neobsahují, takže
+        // /de/blog by bez tohohle zůstal prázdný (filtr z OND-217).
+        // Na existující DB dělá totéž migrace 2026_09_16_120000_seed_de_blog_content.
+        $this->call(BlogContentDeSeeder::class);
     }
 }
