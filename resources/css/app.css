@@ -5422,6 +5422,15 @@
         justify-content: center;
         margin-top: 0.5rem;
     }
+    /* OND-201 (nález 5.8): věta pod tlačítkem jediné závěrečné výzvy
+       („Nebo mi napište na ok@ondraweb.cz…"). Je nad privacy notem
+       a o stupeň výraznější, aby fungovala jako alternativní cesta. */
+    .inline-form__note {
+        margin-top: 0.875rem;
+        font-size: 0.875rem;
+        color: var(--color-ink-200, var(--color-muted));
+        line-height: 1.55;
+    }
     .inline-form__privacy {
         margin-top: 0.875rem;
         font-size: 0.8125rem;
@@ -6153,5 +6162,18 @@
         font-variation-settings: 'wght' 600;
         color: var(--color-accent);
         letter-spacing: -0.005em;
+    }
+
+    /* OND-201 (nález 5.2): druhý meta slot případovky je odkaz na živý web
+       (dřív tam stála vymyšlená doba realizace). Zvýrazněný, protože je
+       to hlavní ověřitelný důkaz celé sekce. */
+    .project-snapshot__meta a {
+        color: var(--color-accent);
+        text-decoration: underline;
+        text-underline-offset: 0.2em;
+    }
+    .project-snapshot__meta a:hover,
+    .project-snapshot__meta a:focus-visible {
+        text-decoration-thickness: 2px;
     }
 }

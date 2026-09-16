@@ -2,9 +2,12 @@
 
 return [
 
+    // OND-201 (finding 5.7): the page title must not define the business by
+    // negating competitors, and "no WordPress" says nothing to someone who
+    // does not know what WordPress is (principle 0).
     'meta' => [
-        'title'       => 'Ondřej Kriška — Websites & Web Applications for Businesses',
-        'description' => 'Custom websites and web applications built for results. Maintenance-free, no WordPress, no hidden fees. 18 years of experience. Free consultation.',
+        'title'       => 'Custom websites and web applications | ONDRAWEB',
+        'description' => 'Custom websites, online shops and web applications for small and mid-sized companies. Custom code, an exact price up front, and you deal with me directly. I am Ondřej Kriška.',
     ],
 
     // TODO (OND-136 P3): final EN tone polish — Content Writer scope.
@@ -52,6 +55,9 @@ return [
         'projects'     => '23+ delivered projects',
         'experience'   => '18 years of experience',
         'response'     => 'Reply within 24 hours',
+        // OND-201 (finding 5.11): TOP firma 2025 award from Firmy.cz —
+        // verifiable third-party proof that was missing on staging.
+        'award'        => 'TOP firma 2025 on Firmy.cz',
         'brands' => [
             ['name' => 'MAKOplast',             'image' => null],
             ['name' => 'Yolk Studio',           'image' => 'yolk_studio.png'],
@@ -63,20 +69,21 @@ return [
         ],
     ],
 
+    // OND-201 (finding 5.7): the section used to define the business by
+    // negating competitors and two of three items said the same thing.
+    // What I do now leads (`lead`), the delimitation is short, and the
+    // duplicate items are merged into one.
     'problems' => [
-        'heading'            => 'What keeps happening on most web projects.',
-        'transition_heading' => 'How I do it differently:',
-        'transition_text'    => 'Every project starts with understanding your business. I write custom code — no templates, no WordPress, no intermediaries. You speak directly with me from the first meeting through launch and beyond.',
+        'heading'            => 'How I build websites',
+        'lead'               => 'Every project starts with understanding your business. I write custom code from the ground up, so the site follows how your company actually works. You speak directly with me from the first message through launch and beyond.',
+        'transition_heading' => 'What that spares you',
+        'transition_text'    => 'The two things I see most often on web projects.',
         'items' => [
             [
                 'heading'      => 'A template sold as a custom solution',
-                'text'         => 'An agency uses a layout they\'ve used five times before. They add your text and logo. The result looks professional — until you look at your competitor\'s website. Same sections, same words, different colours and logo.',
+                'text'         => 'A supplier reuses a layout they have already used five times and drops in your text and logo. The result looks professional — until you open a competitor\'s website and find the same sections and the same words. On top of that, the platform keeps you on a monthly subscription you cannot take with you.',
                 'quote_text'   => 'This is not the case where other would-be web designers just fill templates with data for outrageous fees.',
                 'quote_author' => 'Petr Kroulík, Nové Interiéry s.r.o.',
-            ],
-            [
-                'heading' => 'The template looks fine. It looks like everyone else\'s, too.',
-                'text'    => 'Three companies in your industry launched the same template last week. The agency drops in your text and logo — the result is interchangeable, and the platform keeps you on a monthly subscription you can\'t take with you.',
             ],
             [
                 'heading' => 'You never speak with the person who builds the site',
@@ -303,27 +310,24 @@ return [
         ],
     ],
 
-    // TODO: review pro EN — copy podle CS varianty A (OND-100)
-    'cta' => [
-        'heading'      => 'Ready to start? The consultation is free.',
-        'consultation' => 'Get a price quote',
-        'message'      => 'Book a 30-min consultation',
-    ],
-
-    'final_cta' => [
-        'quote_text'   => 'Thanks to the individual approach, flexibility and professionalism, the result matches our expectations.',
-        'quote_author' => 'Hana Jaskmanická, Executive Director, VP Industry',
-        'heading'      => 'I\'ll give you an honest opinion on your project.',
-        'subtext'      => 'I reply by the next business day. If working together doesn\'t make sense, I\'ll tell you straight — no sales pressure, no follow-up emails.',
-        'cta_label'    => 'Get a price quote',
-        'cta_secondary' => 'Book a 30-min consultation',
-        'cta_note'     => 'Free. No commitment.',
-    ],
+    // OND-201 (finding 5.8): the end of the homepage was three calls to
+    // action in a row. The `cta` and `final_cta` blocks are removed; one
+    // call with one form remains in `inline_form` below, and the client
+    // quote moved next to it.
 
     'faq' => [
         'heading' => 'Frequently asked questions',
         // `key` is a stable slug for analytics (data-faq-key) and JSON-LD; do not localize.
         'items'   => [
+            // OND-201 (chapter 6.3, objection 1): the most serious objection
+            // on a six-figure project — the site did not address it at all.
+            // Built on facts only: the client owns the code and the data, the
+            // site is not tied to a platform, another developer can take over.
+            [
+                'key'      => 'single-person',
+                'question' => 'You are one person. What if you get ill or quit?',
+                'answer'   => 'A fair concern — on a six-figure project it is the most important question. The code and the data are yours from day one and you hold them: nothing is locked at my end or on a platform you could not leave. The site runs on Laravel, a common and widely used technology, so any developer who knows it can carry on. I do not keep round-the-clock availability and I will not claim otherwise. What I do guarantee is that nothing stays locked up with me.',
+            ],
             [
                 'key'      => 'price',
                 'question' => 'What will it cost?',
@@ -365,11 +369,13 @@ return [
         'success'     => 'Thanks, the question has arrived. I\'ll get back to you as soon as possible.',
     ],
 
-    // TODO: review pro EN — copy podle CS varianty A (OND-100)
+    // OND-201 (finding 5.8): the single closing call to action of the homepage.
     'inline_form' => [
         'eyebrow'         => 'Enquiry',
-        'heading'         => 'Send me a few lines about your project. I\'ll reply within 24 hours.',
-        'description'     => 'No salesperson, no ten-field form. A short description is enough — I\'ll reply personally and we\'ll see if working together makes sense.',
+        'heading'         => 'Tell me what you need',
+        'description'     => 'Describe briefly what you are dealing with. I reply within two business days and we will go through what makes sense, with no obligation. If we turn out not to be a fit, I will tell you straight.',
+        'quote_text'      => 'Thanks to the individual approach, flexibility and professionalism, the result matches our expectations.',
+        'quote_author'    => 'Hana Jaskmanická, Executive Director, VP Industry',
         'name'            => 'Full name',
         'email'           => 'Email',
         'phone'           => 'Phone (optional)',
@@ -382,6 +388,7 @@ return [
         ],
         'submit'          => 'Send enquiry',
         'submitting'      => 'Sending…',
+        'note'            => 'Or email me at ok@ondraweb.cz. I reply personally, not through a form robot.',
         'privacy_prefix'  => 'By submitting you agree to processing of personal data in line with the ',
         'privacy_link'    => 'privacy policy',
         'success'         => 'Thanks, the enquiry has arrived. I\'ll get back to you as soon as possible.',
