@@ -189,7 +189,7 @@ projects:
     category: website
     client_name: PitArena
     live_url: https://shop.pitarena.cz
-    year: null  # rok spuštění e-shopu není doložený
+    year: 2026  # spuštěno 1. 7. 2026 (OND-224, potvrdil Ondra)
     duration: null
     featured: true
     sort_order: 15
@@ -223,13 +223,16 @@ projects:
           dílů rozpadnutý podle 19 modelů motocyklů YCF — zákazník klikne na svůj
           model a vidí jen díly, které na něj sedí. I s tímhle rozsahem drží na
           desktopu 99/100 v Lighthouse Performance a hlavní obsah se vykreslí do 0,9
-          s (měřeno lokálním Lighthouse 13.4.1, 16. 9. 2026).
+          s (měřeno lokálním Lighthouse 13.4.1, 16. 9. 2026). Za první dva a půl
+          měsíce provozu (1. 7. – 17. 9. 2026) jím prošlo 116 objednávek za 468 202
+          Kč, průměrná objednávka 4 036 Kč (údaje z administrace e-shopu).
         outcomes:
           - "4 551 produktů v 695 kategoriích"
           - "Katalog náhradních dílů podle 19 modelů motocyklů YCF"
           - "Filtrování podle modelu a ročníku"
           - "Košík, zákaznický účet, oblíbené položky a porovnání produktů"
           - "99/100 v Lighthouse Performance na desktopu (měřeno 16. 9. 2026)"
+          - "116 objednávek za 468 202 Kč za první dva a půl měsíce provozu (1. 7. – 17. 9. 2026)"
         meta_title: "PitAréna — e-shop s motorkami YCF a náhradními díly"
         meta_description: "Případová studie: e-shop se 4 551 produkty v 695 kategoriích. Náhradní díly roztříděné podle 19 modelů YCF, filtrování podle modelu a ročníku."
       en:
@@ -258,13 +261,16 @@ projects:
           clicks their model and sees only parts that fit. Even at that scale it
           holds 99/100 in Lighthouse Performance on desktop, with the main content
           rendering in under 0.9 s (measured with local Lighthouse 13.4.1 on 16
-          September 2026).
+          September 2026). In its first two and a half months (1 July – 17 September
+          2026) it handled 116 orders worth CZK 468,202 in total, averaging CZK
+          4,036 per order (figures from the shop administration).
         outcomes:
           - "4,551 products in 695 categories"
           - "Spare-parts catalogue split across 19 YCF motorcycle models"
           - "Filtering by model and year"
           - "Cart, customer account, favourites and product comparison"
           - "99/100 in Lighthouse Performance on desktop (measured 16 September 2026)"
+          - "116 orders worth CZK 468,202 in the first two and a half months (1 July – 17 September 2026)"
         meta_title: "PitArena — online shop for YCF pitbikes and spare parts"
         meta_description: "Case study: an online shop with 4,551 products in 695 categories. Spare parts split across 19 YCF models, filtering by model and year."
       de:
@@ -293,13 +299,16 @@ projects:
           klicken ihr Modell an und sehen nur passende Teile. Auch in dieser Größe
           hält er auf dem Desktop 99/100 in Lighthouse Performance, der Hauptinhalt
           erscheint in unter 0,9 s (gemessen mit lokalem Lighthouse 13.4.1 am
-          16.09.2026).
+          16.09.2026). In den ersten zweieinhalb Monaten (1.7. – 17.9.2026) wickelte
+          er 116 Bestellungen im Gesamtwert von 468.202 CZK ab, im Schnitt 4.036 CZK
+          pro Bestellung (Daten aus der Shop-Administration).
         outcomes:
           - "4.551 Produkte in 695 Kategorien"
           - "Ersatzteilkatalog nach 19 YCF-Motorradmodellen aufgeteilt"
           - "Filter nach Modell und Baujahr"
           - "Warenkorb, Kundenkonto, Favoriten und Produktvergleich"
           - "99/100 in Lighthouse Performance auf dem Desktop (gemessen 16.09.2026)"
+          - "116 Bestellungen im Wert von 468.202 CZK in den ersten zweieinhalb Monaten (1.7. – 17.9.2026)"
         meta_title: "PitArena — Onlineshop für YCF-Pitbikes und Ersatzteile"
         meta_description: "Case Study: Onlineshop mit 4.551 Produkten in 695 Kategorien. Ersatzteile nach 19 YCF-Modellen aufgeteilt, Filter nach Modell und Baujahr."
   # ----------------------------------------------------------------------
