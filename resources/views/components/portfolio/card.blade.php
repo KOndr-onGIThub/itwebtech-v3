@@ -12,11 +12,10 @@
     // Tagline: subtitle → fallback summary (zkrácený)
     $tagline = $t?->subtitle ?: ($t?->summary ? \Illuminate\Support\Str::limit($t->summary, 110) : null);
 
-    // Thumbnail: hero → první gallery → null (placeholder)
+    // Thumbnail (OND-202): wide 3-device mockup je v malé kartě nečitelný —
+    // preferuj explicitní thumbnail, pak čtvercový detailní záběr, pak hero.
     $screens = $project->screenshots ?? collect();
-    $hero    = $screens->firstWhere('type', 'hero')
-            ?? $screens->firstWhere('type', 'thumbnail')
-            ?? $screens->first();
+    $hero    = portfolio_card_thumbnail($screens);
 
     $categoryLabel = __('projects.detail.category_label.' . $project->category);
     if (str_starts_with($categoryLabel, 'projects.detail.category_label.')) {

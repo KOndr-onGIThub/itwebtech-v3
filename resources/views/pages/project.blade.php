@@ -33,8 +33,10 @@
     <x-portfolio.detail-hero :project="$project" :translation="$translation" />
 </div>
 
-{{-- 2. Detail gallery --}}
-<x-portfolio.detail-gallery :screenshots="$project->screenshots" />
+{{-- 2. Hlavní vizuál (OND-202: kurátorské role — první wide snímek
+     na celou šířku; podpůrné karty až POD textem případovky, aby se
+     text střídal s obrázky místo dvou oddělených bloků). --}}
+<x-portfolio.detail-gallery :screenshots="$project->screenshots" part="lead" />
 
 {{-- 3+4. Body + meta --}}
 <section class="section-wrapper portfolio-detail-body-wrapper" data-reveal>
@@ -49,6 +51,10 @@
         </div>
     </div>
 </section>
+
+{{-- 4b. Podpůrná galerie (OND-202: zbylé snímky — wide bandy + páry
+     čtvercových karet v jednotném výřezu). --}}
+<x-portfolio.detail-gallery :screenshots="$project->screenshots" part="rest" />
 
 {{-- 5. Related projects --}}
 @if ($relatedProjects && $relatedProjects->count())

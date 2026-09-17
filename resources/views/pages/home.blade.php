@@ -616,10 +616,10 @@
                         ? $cardCopy['outcome']
                         : ($t?->subtitle ?? '');
 
+                    // OND-202: jednotný výběr náhledovky (čitelný detail
+                    // místo wide mockupu) — viz portfolio_card_thumbnail().
                     $screens = $project->screenshots ?? collect();
-                    $hero = $screens->firstWhere('type', 'hero')
-                        ?? $screens->firstWhere('type', 'thumbnail')
-                        ?? $screens->first();
+                    $hero = portfolio_card_thumbnail($screens);
 
                     $detailHref = lroute('projects') . '/' . $project->slug;
                     // Karty mají tmavé pozadí (--bg-card), používáme bílé varianty log.
