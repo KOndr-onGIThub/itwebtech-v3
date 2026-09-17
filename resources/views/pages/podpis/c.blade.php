@@ -24,8 +24,12 @@
 {{-- Hero foto: Ondrův pokyn 2026-09-17 — hero-uvod.webp „tak jak je"
      přes velkou část hero sekce, bez filtrů a bez overlaye přes obličej;
      dlouhovlasý portrét (about/ondrej_kriska.jpg) se nepoužívá nikde. --}}
-<section class="pc-hero">
-    <div class="pc-hero__photo">
+<section class="pc-hero" id="pc-hero-tilt">
+    {{-- Zrnitá textura (SVG feTurbulence, CSS-only) — hmatový, "drahý" povrch
+         přes tmavé plochy. Statická, žádná animace, nulové riziko pro FCP. --}}
+    <div class="pc-grain" aria-hidden="true"></div>
+
+    <div class="pc-hero__photo" data-tilt>
         <x-responsive-image
             path="hero/hero-uvod.webp"
             alt="Ondřej Kriška"
@@ -42,8 +46,17 @@
 
             <p class="pc-sub">{{ __('home.hero.subline') }}</p>
 
-            {{-- Podpis autora — jméno ze schválené copy, kurzíva v body roli --}}
-            <p class="pc-sign">&mdash; Ondřej Kriška</p>
+            {{-- Podpis autora — jméno ze schválené copy + kreslený autogram
+                 jako grafická značka. Doslovné naplnění zadání "vizuální
+                 podpis": ne metafora, ale skutečný rukopisný tah vedle jména.
+                 Statický SVG, žádná animace vázaná na viditelnost obsahu. --}}
+            <p class="pc-sign">
+                &mdash; Ondřej Kriška
+                <svg class="pc-sign__mark" viewBox="0 0 220 60" fill="none" aria-hidden="true">
+                    <path d="M4 40C16 12 28 8 34 26C40 44 46 20 54 18C62 16 60 38 70 38C82 38 84 10 96 10C110 10 104 44 118 44C136 44 132 14 150 14C166 14 158 34 172 30C182 27 184 16 194 16C202 16 200 26 210 24"
+                          stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </p>
 
             <div class="pc-actions">
                 <a href="#{{ __('home.anchors.poptavka') }}" class="pc-cta" data-analytics="hero_cta_primary_click">
@@ -184,3 +197,31 @@
 </section>
 
 @endsection
+
+@push('scripts')
+<script>
+    // Ondra 2026-09-17: "chybí wow, co mají jen nejlepší weby světa" — jemný
+    // paralax náklon portrétu podle kurzoru. Vanilla JS, ~15 řádků, žádná
+    // knihovna. No-op na dotykových zařízeních a při prefers-reduced-motion
+    // (fotka zůstává v klidu, nic se neskrývá ani nestartuje neviditelné).
+    (function () {
+        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var hasHover = window.matchMedia('(hover: hover)').matches;
+        if (reduceMotion || !hasHover) return;
+
+        var section = document.getElementById('pc-hero-tilt');
+        var photo = section && section.querySelector('[data-tilt]');
+        if (!photo) return;
+
+        section.addEventListener('mousemove', function (e) {
+            var rect = section.getBoundingClientRect();
+            var px = (e.clientX - rect.left) / rect.width - 0.5;
+            var py = (e.clientY - rect.top) / rect.height - 0.5;
+            photo.style.transform = 'scale(1.02) rotate(' + (px * -0.6) + 'deg) translate(' + (px * -8) + 'px, ' + (py * -6) + 'px)';
+        });
+        section.addEventListener('mouseleave', function () {
+            photo.style.transform = '';
+        });
+    })();
+</script>
+@endpush
