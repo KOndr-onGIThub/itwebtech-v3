@@ -63,20 +63,136 @@ class PortfolioTest extends TestCase
 
     public function test_project_detail_emits_hreflang_for_each_locale(): void
     {
-        $project = PortfolioProject::published()->first();
-        $slug = $project->slug;
+        // `pitarena` je značka → slug zůstává jazyk-neutrální ve všech locale.
+        $slug = 'pitarena';
 
         $response = $this->get('/projekty/'.$slug);
 
         $response->assertOk();
 
-        // Slug je jazyk-neutrální → stejný slug v každé jazykové variantě URL.
         $response->assertSee('hreflang="cs"', false);
         $response->assertSee('hreflang="en"', false);
         $response->assertSee('hreflang="de"', false);
         $response->assertSee('/projekty/'.$slug, false);
         $response->assertSee('/en/projects/'.$slug, false);
         $response->assertSee('/de/projekte/'.$slug, false);
+    }
+
+    /* ================================================================== */
+    /*  OND-209 — slug per locale                                         */
+    /* ================================================================== */
+
+    /**
+     * @return array<string, array{0: string, 1: string, 2: string}>
+     */
+    public static function localizedSlugProvider(): array
+    {
+        // [cs slug, de slug, en slug]
+        return [
+            'animace-delejme'     => ['animace-delejme', 'aufmerksamkeits-animation', 'attention-grabbing-animation'],
+            'pitarena-cedule'     => ['pitarena-cedule', 'pitarena-werbeschild', 'pitarena-outdoor-sign'],
+            'clanek-motorkari-cz' => ['clanek-motorkari-cz', 'artikel-motorkari-cz', 'article-motorkari-cz'],
+            'pitarena-eshop'      => ['pitarena-eshop', 'pitarena-onlineshop', 'pitarena-online-shop'],
+        ];
+    }
+
+    #[\PHPUnit\Framework\Attributes\DataProvider('localizedSlugProvider')]
+    public function test_localized_slug_serves_project_detail(string $cs, string $de, string $en): void
+    {
+        $this->get('/projekty/'.$cs)->assertOk();
+        $this->get('/de/projekte/'.$de)->assertOk();
+        $this->get('/en/projects/'.$en)->assertOk();
+    }
+
+    #[\PHPUnit\Framework\Attributes\DataProvider('localizedSlugProvider')]
+    public function test_old_czech_slug_redirects_301_to_localized_slug(string $cs, string $de, string $en): void
+    {
+        $this->get('/de/projekte/'.$cs)
+            ->assertStatus(301)
+            ->assertRedirect(url('/de/projekte/'.$de));
+
+        $this->get('/en/projects/'.$cs)
+            ->assertStatus(301)
+            ->assertRedirect(url('/en/projects/'.$en));
+    }
+
+    #[\PHPUnit\Framework\Attributes\DataProvider('localizedSlugProvider')]
+    public function test_localized_slug_is_not_reachable_in_other_locale(string $cs, string $de, string $en): void
+    {
+        // DE slug nesmí fungovat na české ani anglické adrese (a naopak).
+        $this->get('/projekty/'.$de)->assertNotFound();
+        $this->get('/en/projects/'.$de)->assertNotFound();
+        $this->get('/de/projekte/'.$en)->assertNotFound();
+    }
+
+    public function test_project_detail_hreflang_uses_localized_slugs(): void
+    {
+        $response = $this->get('/de/projekte/aufmerksamkeits-animation');
+
+        $response->assertOk();
+        $response->assertSee('/projekty/animace-delejme', false);
+        $response->assertSee('/de/projekte/aufmerksamkeits-animation', false);
+        $response->assertSee('/en/projects/attention-grabbing-animation', false);
+    }
+
+    public function test_project_listing_links_to_localized_slug(): void
+    {
+        $this->get('/de/projekte')
+            ->assertOk()
+            ->assertSee('/de/projekte/aufmerksamkeits-animation', false)
+            ->assertDontSee('/de/projekte/animace-delejme', false);
+
+        $this->get('/projekty')
+            ->assertOk()
+            ->assertSee('/projekty/animace-delejme', false);
+    }
+
+    public function test_sitemap_contains_localized_project_slugs(): void
+    {
+        $response = $this->get('/sitemap.xml');
+
+        $response->assertOk();
+        $response->assertSee('/de/projekte/aufmerksamkeits-animation', false);
+        $response->assertSee('/en/projects/attention-grabbing-animation', false);
+        $response->assertDontSee('/de/projekte/animace-delejme', false);
+    }
+
+    /**
+     * Kolize by tiše ukradla detail jinému projektu — resolving bere
+     * lokalizovaný slug dřív než jazyk-neutrální.
+     */
+    public function test_resolved_slugs_are_unique_within_each_locale(): void
+    {
+        $projects = PortfolioProject::published()->with('translations')->get();
+
+        foreach (['cs', 'en', 'de'] as $locale) {
+            $slugs = $projects->map(fn (PortfolioProject $p) => $p->slugFor($locale))->all();
+
+            $this->assertSame(
+                count($slugs),
+                count(array_unique($slugs)),
+                "Duplicitní slug v locale {$locale}: ".implode(', ', array_diff_assoc($slugs, array_unique($slugs)))
+            );
+        }
+
+        // Lokalizovaný slug nesmí kolidovat ani s jazyk-neutrálním slugem
+        // jiného projektu — jinak by ten projekt v dané locale zmizel.
+        $neutral = $projects->pluck('slug', 'id');
+
+        foreach ($projects as $project) {
+            foreach (['en', 'de'] as $locale) {
+                $localized = $project->translations->firstWhere('locale', $locale)?->slug;
+                if (! filled($localized)) {
+                    continue;
+                }
+
+                $owner = $neutral->search($localized);
+                $this->assertTrue(
+                    $owner === false || $owner === $project->id,
+                    "Lokalizovaný slug `{$localized}` ({$locale}) koliduje s neutrálním slugem jiného projektu."
+                );
+            }
+        }
     }
 
     public function test_project_listing_available_in_all_locales(): void

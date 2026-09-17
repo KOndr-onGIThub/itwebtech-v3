@@ -233,6 +233,7 @@ projects:
         meta_title: "PitAréna — e-shop s motorkami YCF a náhradními díly"
         meta_description: "Případová studie: e-shop se 4 551 produkty v 695 kategoriích. Náhradní díly roztříděné podle 19 modelů YCF, filtrování podle modelu a ročníku."
       en:
+        slug: "pitarena-online-shop"   # OND-209: lokalizovaný slug
         title: "PitArena — online shop"
         subtitle: "An online shop where customers find the part for their model and year"
         summary: "Online shop for YCF pitbikes and spare parts. Parts sorted by model and group, with filtering by model and year."
@@ -267,6 +268,7 @@ projects:
         meta_title: "PitArena — online shop for YCF pitbikes and spare parts"
         meta_description: "Case study: an online shop with 4,551 products in 695 categories. Spare parts split across 19 YCF models, filtering by model and year."
       de:
+        slug: "pitarena-onlineshop"   # OND-209: lokalizovaný slug
         title: "PitArena — Onlineshop"
         subtitle: "Ein Shop, in dem Kunden das Teil für Modell und Baujahr finden"
         summary: "Onlineshop für YCF-Pitbikes und Ersatzteile. Teile nach Modellen und Gruppen sortiert, mit Filter nach Modell und Baujahr."
@@ -3003,6 +3005,7 @@ projects:
         meta_title: "Článek na Motorkáři.cz — content marketing pro PitArenu"
         meta_description: "Případová studie: článek pro PitArenu o YCF Cupu publikovaný na blogu klienta a v upravené formě i na Motorkáři.cz."
       en:
+        slug: "article-motorkari-cz"   # OND-209: lokalizovaný slug
         title: "Article on Motorkáři.cz"
         subtitle: "Content marketing that reached the country's biggest moto portal"
         summary: "Article about YCF Cup written for PitArena — first published on pitarena.cz and later, lightly edited, on Motorkáři.cz."
@@ -3036,6 +3039,7 @@ projects:
         meta_title: "Motorkáři.cz article — content marketing for PitArena"
         meta_description: "Case study: article for PitArena about YCF Cup, published on the client's blog and, edited, on Motorkáři.cz."
       de:
+        slug: "artikel-motorkari-cz"   # OND-209: lokalizovaný slug
         title: "Artikel auf Motorkáři.cz"
         subtitle: "Content-Marketing, das es bis ins größte Motorrad-Portal des Landes geschafft hat"
         summary: "Artikel über den YCF Cup für PitArena — zuerst auf pitarena.cz, später leicht editiert auf Motorkáři.cz veröffentlicht."
@@ -3357,6 +3361,7 @@ projects:
         meta_title: "Reklamní cedule PitArena — návrh velkoformátového tisku"
         meta_description: "Případová studie: design a tiskové podklady pro velkoformátovou ceduli nad servis PitArena."
       en:
+        slug: "pitarena-outdoor-sign"   # OND-209: lokalizovaný slug
         title: "PitArena outdoor sign"
         subtitle: "A large-format sign above the workshop, ready for print"
         summary: "Design and print files for a large-format outdoor sign installed above the PitArena service building."
@@ -3388,6 +3393,7 @@ projects:
         meta_title: "PitArena outdoor sign — large-format print design"
         meta_description: "Case study: design and print files for a large-format outdoor sign above the PitArena service building."
       de:
+        slug: "pitarena-werbeschild"   # OND-209: lokalizovaný slug
         title: "PitArena Werbeschild"
         subtitle: "Großformatiges Schild über der Werkstatt, druckfertig"
         summary: "Design und Druckdateien für ein großformatiges Werbeschild über dem Servicegebäude von PitArena."
@@ -3473,6 +3479,7 @@ projects:
         meta_title: "Animace upoutání pozornosti — ukázka pro sociální sítě"
         meta_description: "Vlastní ukázková animace pro sociální sítě — referenční formát, který klientům ukáže, jak může jejich video propagace vypadat."
       en:
+        slug: "attention-grabbing-animation"   # OND-209: lokalizovaný slug
         title: "Attention-grabbing animation"
         subtitle: "A sample of how to break through a saturated feed"
         summary: "An in-house animation sample for social media. Proof that video can work in a saturated feed — if it's well-targeted."
@@ -3504,6 +3511,7 @@ projects:
         meta_title: "Attention-grabbing animation — social media sample"
         meta_description: "An in-house social media animation sample — a reference format showing clients what their video promotion could look like."
       de:
+        slug: "aufmerksamkeits-animation"   # OND-209: lokalizovaný slug
         title: "Aufmerksamkeits-Animation"
         subtitle: "Ein Sample, wie man den übersättigten Feed durchbricht"
         summary: "Eigene Animations-Referenz für Social Media. Nachweis, dass Video im übersättigten Feed funktioniert — wenn das Targeting stimmt."

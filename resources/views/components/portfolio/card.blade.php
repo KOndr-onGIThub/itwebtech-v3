@@ -22,7 +22,8 @@
         $categoryLabel = ucfirst($project->category);
     }
 
-    $detailHref = lroute('projects') . '/' . $project->slug;
+    // OND-209: slug může být lokalizovaný (DE/EN), detailUrl to řeší.
+    $detailHref = $project->detailUrl($locale);
     $ariaLabel = ($t?->title ?? $project->client_name ?? $project->slug) . ' — ' . __('projects.view_project');
 @endphp
 

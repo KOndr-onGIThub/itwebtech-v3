@@ -201,6 +201,14 @@ class PortfolioProjectResource extends Resource
                     ->label('Titulek')
                     ->required($required)
                     ->maxLength(191),
+                // OND-209: lokalizovaný slug. Prázdné = použije se
+                // jazyk-neutrální slug ze záložky Základ (tak to má zůstat
+                // u značek — PitArena, BARANA, Střechy Zajíc).
+                Forms\Components\TextInput::make("$key.slug")
+                    ->label('Slug (URL) pro tento jazyk')
+                    ->maxLength(191)
+                    ->alphaDash()
+                    ->helperText('Nepovinné. Prázdné = použije se jazyk-neutrální slug. Změna slugu u publikovaného projektu = stará adresa přestane fungovat.'),
                 Forms\Components\TextInput::make("$key.subtitle")
                     ->label('Podtitulek')
                     ->maxLength(191),
@@ -483,6 +491,7 @@ class PortfolioProjectResource extends Resource
         foreach (['cs', 'en', 'de'] as $locale) {
             $tr = $record->translations->firstWhere('locale', $locale);
             $data['translations'][$locale] = [
+                'slug'             => $tr?->slug,
                 'title'            => $tr?->title,
                 'subtitle'         => $tr?->subtitle,
                 'summary'          => $tr?->summary,
@@ -619,6 +628,8 @@ class PortfolioProjectResource extends Resource
             $record->translations()->updateOrCreate(
                 ['locale' => $locale],
                 [
+                    // Prázdný string → NULL, ať unique index nespadne na duplicitě ''.
+                    'slug'             => filled($row['slug'] ?? null) ? $row['slug'] : null,
                     'title'            => $title,
                     'subtitle'         => $row['subtitle'] ?? null,
                     'summary'          => $row['summary'] ?? null,

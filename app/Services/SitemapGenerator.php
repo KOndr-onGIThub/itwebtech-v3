@@ -109,15 +109,16 @@ class SitemapGenerator
         }
 
         try {
-            $projects = PortfolioProject::published()->get();
+            $projects = PortfolioProject::published()->with('translations')->get();
         } catch (Throwable $e) {
             return $entries;
         }
 
         foreach ($projects as $project) {
+            // OND-209: každá locale má vlastní slug (fallback = neutrální slug).
             $alternates = [];
             foreach ($this->locales as $locale) {
-                $alternates[$locale] = route("{$locale}.project", ['url' => $project->slug]);
+                $alternates[$locale] = $project->detailUrl($locale);
             }
 
             $lastmod = $project->updated_at ?? $project->published_at ?? null;

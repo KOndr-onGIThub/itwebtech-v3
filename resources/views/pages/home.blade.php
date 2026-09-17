@@ -621,7 +621,8 @@
                     $screens = $project->screenshots ?? collect();
                     $hero = portfolio_card_thumbnail($screens);
 
-                    $detailHref = lroute('projects') . '/' . $project->slug;
+                    // OND-209: slug může být lokalizovaný (DE/EN), detailUrl to řeší.
+                    $detailHref = $project->detailUrl();
                     // Karty mají tmavé pozadí (--bg-card), používáme bílé varianty log.
                     $logoSrc = asset('images/portfolio/logos/' . $project->slug . '-white.svg');
                 @endphp

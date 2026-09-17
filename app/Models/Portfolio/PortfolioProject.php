@@ -82,4 +82,31 @@ class PortfolioProject extends Model
         return $this->translations->firstWhere('locale', $locale)
             ?? $this->translations->firstWhere('locale', 'cs');
     }
+
+    /**
+     * OND-209: kanonický slug pro danou locale.
+     *
+     * Překlad může mít vlastní slug (`/de/projekte/aufmerksamkeits-animation`).
+     * Když ho nemá — typicky u značek (PitArena, BARANA, Střechy Zajíc) — padá
+     * se zpátky na jazyk-neutrální `portfolio_projects.slug`. Záměrně bez
+     * fallbacku na cs *překlad*: cs slug je právě ten neutrální.
+     */
+    public function slugFor(?string $locale = null): string
+    {
+        $locale ??= app()->getLocale();
+
+        $localized = $this->translations->firstWhere('locale', $locale)?->slug;
+
+        return filled($localized) ? $localized : $this->slug;
+    }
+
+    /**
+     * Absolutní URL detailu projektu v dané locale (včetně lokalizovaného slugu).
+     */
+    public function detailUrl(?string $locale = null): string
+    {
+        $locale ??= app()->getLocale();
+
+        return route("{$locale}.project", ['url' => $this->slugFor($locale)]);
+    }
 }
