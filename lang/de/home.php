@@ -346,16 +346,12 @@ return [
         'heading' => 'Häufige Fragen',
         // `key` ist ein stabiler Slug für Analytics (data-faq-key) und JSON-LD; nicht lokalisieren.
         'items'   => [
-            // OND-201 (Kapitel 6.3, Einwand 1): der schwerwiegendste Einwand
-            // bei einem sechsstelligen Projekt — die Website behandelte ihn
-            // gar nicht. Nur Fakten: Code und Daten gehören dem Kunden, die
-            // Website ist nicht an eine Plattform gebunden, ein anderer
-            // Entwickler kann übernehmen.
-            [
-                'key'      => 'single-person',
-                'question' => 'Sie sind eine Person. Was, wenn Sie krank werden oder aufhören?',
-                'answer'   => 'Ein berechtigtes Bedenken — bei einem Auftrag über hunderttausend ist das die wichtigste Frage. Code und Daten sind von Anfang an Ihre und liegen bei Ihnen: nichts ist bei mir oder auf einer Plattform eingeschlossen, die Sie nicht verlassen könnten. Die Website läuft auf Laravel, einer verbreiteten und gängigen Technologie, also kann jeder Entwickler weitermachen, der sie kennt. Eine Rund-um-die-Uhr-Bereitschaft halte ich nicht und werde das auch nicht behaupten. Wofür ich einstehe: Bei mir bleibt nichts eingeschlossen.',
-            ],
+            // OND-201 (Kapitel 6.3, Einwand 1): Die Antwort auf „Sie sind eine
+            // Person. Was, wenn Sie krank werden oder aufhören?" war hier
+            // ausgeliefert, wurde aber am 2026-09-16 vom Board zurückgezogen
+            // (Karte questions:OND-201:body-5-7-confirm, Option „aus dem FAQ
+            // nehmen, später klären") — die zugrunde liegenden Fakten waren
+            // nicht bestätigt. Erst nach Bestätigung wieder einsetzen.
             [
                 'key'      => 'price',
                 'question' => 'Was kostet es?',

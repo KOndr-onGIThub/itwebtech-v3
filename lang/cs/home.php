@@ -364,16 +364,12 @@ return [
         'heading' => 'Časté otázky',
         // `key` je stabilní slug pro analytics (data-faq-key) a JSON-LD; ne lokalizovat.
         'items'   => [
-            // OND-201 (kap. 6.3 bod 1): nejzávažnější námitka u zakázky za
-            // 150 tisíc — dosud ji web neřešil vůbec. Odpověď stojí na faktech
-            // z dokumentů homepage-texty a texty-podstranky (OND-186): kód
-            // i data patří klientovi, web není vázaný na platformu, může ho
-            // převzít jiný vývojář. Záměrně bez slibu nepřetržité pohotovosti.
-            [
-                'key'      => 'single-person',
-                'question' => 'Jste jeden člověk. Co když onemocníte nebo skončíte?',
-                'answer'   => 'Rozumím obavě — u zakázky za víc než sto tisíc je to ta nejdůležitější otázka. Kód i data jsou od začátku vaše a máte je u sebe: nejsou zamčené u mě ani u platformy, ze které byste nemohli odejít. Web stojí na Laravelu, tedy na běžné a rozšířené technologii, takže na něm může pokračovat kterýkoli vývojář, který ji zná. Nepřetržitou pohotovost nedržím a nebudu tvrdit, že ano. Ručím za to, že vám u mě nic nezůstane zamčené.',
-            ],
+            // OND-201 (kap. 6.3 bod 1): odpověď na námitku „Jste jeden člověk.
+            // Co když onemocníte nebo skončíte?" byla na tomhle místě nasazená,
+            // ale board ji 2026-09-16 stáhl (karta questions:OND-201:body-5-7-confirm,
+            // volba „Stáhni tu odpověď z FAQ, dořešíme později") — fakta, na
+            // kterých stála, nebyla potvrzená. Znovu ji nasazovat až po
+            // potvrzení faktů, viz navazující issue. NEPŘIDÁVAT zpět bez toho.
             [
                 'key'      => 'price',
                 'question' => 'Kolik to bude stát?',

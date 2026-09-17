@@ -348,15 +348,12 @@ return [
         'heading' => 'Frequently asked questions',
         // `key` is a stable slug for analytics (data-faq-key) and JSON-LD; do not localize.
         'items'   => [
-            // OND-201 (chapter 6.3, objection 1): the most serious objection
-            // on a six-figure project — the site did not address it at all.
-            // Built on facts only: the client owns the code and the data, the
-            // site is not tied to a platform, another developer can take over.
-            [
-                'key'      => 'single-person',
-                'question' => 'You are one person. What if you get ill or quit?',
-                'answer'   => 'A fair concern — on a six-figure project it is the most important question. The code and the data are yours from day one and you hold them: nothing is locked at my end or on a platform you could not leave. The site runs on Laravel, a common and widely used technology, so any developer who knows it can carry on. I do not keep round-the-clock availability and I will not claim otherwise. What I do guarantee is that nothing stays locked up with me.',
-            ],
+            // OND-201 (chapter 6.3, objection 1): the answer to "You are one
+            // person. What if you get ill or quit?" was deployed here, but the
+            // board withdrew it on 2026-09-16 (card questions:OND-201:body-5-7-confirm,
+            // option "withdraw it from the FAQ, we will settle it later") — the
+            // facts it stood on were not confirmed. Re-deploy only after the
+            // facts are confirmed. DO NOT add it back before that.
             [
                 'key'      => 'price',
                 'question' => 'What will it cost?',
