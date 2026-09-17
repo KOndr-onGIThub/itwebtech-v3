@@ -97,4 +97,102 @@
     </div>
 </section>
 
+{{-- Dateline — social proof jako sázený řádek novin --}}
+<section class="pb-section pb-strip" aria-label="{{ __('home.social_proof.rating_aria') }}">
+    <div class="container-site">
+        <ul class="pb-strip__list">
+            <li><strong>{{ __('home.social_proof.rating_value') }}</strong> {{ __('home.social_proof.reviews') }}</li>
+            <li><strong>{{ __('home.social_proof.projects') }}</strong></li>
+            <li><strong>{{ __('home.social_proof.experience') }}</strong></li>
+            <li>{{ __('home.social_proof.response') }}</li>
+            <li>{{ __('home.social_proof.award') }}</li>
+        </ul>
+    </div>
+</section>
+
+{{-- Metoda — standfirst + rejstřík vymezení --}}
+<section class="pb-section">
+    <div class="container-site">
+        <header class="pb-proof__head">
+            <h2 class="pb-proof__heading">{{ __('home.problems.heading') }}</h2>
+            <span class="pb-proof__index" aria-hidden="true">03</span>
+        </header>
+        <p class="pb-standfirst">{{ __('home.problems.lead') }}</p>
+
+        <p class="pb-avoid">{{ __('home.problems.transition_heading') }}</p>
+        <p class="pb-avoid-sub">{{ __('home.problems.transition_text') }}</p>
+
+        <div class="pb-issues">
+            @foreach (__('home.problems.items') as $i => $item)
+            <article class="pb-issue">
+                <span class="pb-issue__num" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                <div>
+                    <h3>{{ $item['heading'] }}</h3>
+                    <p>{{ $item['text'] }}</p>
+                    @if (!empty($item['quote_text']))
+                    <blockquote>
+                        {{ $item['quote_text'] }}
+                        <footer>— {{ $item['quote_author'] }}</footer>
+                    </blockquote>
+                    @endif
+                </div>
+            </article>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+{{-- Cenová kotva — tři sloupce s vlasovými linkami, žádné boxy --}}
+<section class="pb-section">
+    <div class="container-site">
+        <header class="pb-proof__head">
+            <h2 class="pb-proof__heading">{{ __('home.price_anchor.heading') }}</h2>
+            <span class="pb-proof__index" aria-hidden="true">04</span>
+        </header>
+        <p class="pb-proof__intro">{{ __('home.price_anchor.intro') }}</p>
+
+        <div class="pb-price-grid">
+            @foreach (__('home.price_anchor.items') as $item)
+            <div class="pb-price-col">
+                <h3 class="pb-price-col__title">{{ $item['title'] }}@if ($item['featured'] ?? false) <em>· {{ __('home.price_anchor.featured_label') }}</em>@endif</h3>
+                <p class="pb-price-col__price">{{ $item['price'] }}</p>
+                <p class="pb-price-col__desc">{{ $item['desc'] }}</p>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+{{-- Reference — specimen citací --}}
+@php
+    $allTestimonials = collect(__('testimonials.items'));
+    $homeTestimonialOrder = config('site.features.show_toyota_testimonial')
+        ? ['Pavel Baudyš', 'Rostislav Toman', 'Stanislav Holcmann', 'Hana Jaskmanická', 'Ing. Ivo Štěpánek', 'Václav Pešice']
+        : ['Peter Vidlička', 'Rostislav Toman', 'Stanislav Holcmann', 'Hana Jaskmanická', 'Ing. Ivo Štěpánek', 'Václav Pešice'];
+    $homeTestimonials = collect($homeTestimonialOrder)
+        ->map(fn ($name) => $allTestimonials->firstWhere('name', $name))
+        ->filter()
+        ->values();
+@endphp
+<section class="pb-section">
+    <div class="container-site">
+        <header class="pb-proof__head">
+            <h2 class="pb-proof__heading">{{ __('home.testimonials.heading') }}</h2>
+            <span class="pb-proof__index" aria-hidden="true">05</span>
+        </header>
+
+        <div class="pb-testi-grid">
+            @foreach ($homeTestimonials as $i => $review)
+            <article class="pb-testi">
+                <span class="pb-testi__num" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                <div>
+                    <p class="pb-testi__text">{{ $review['text'] }}</p>
+                    <p class="pb-testi__meta">{{ $review['name'] }} — {{ $review['company'] }}@if ($review['role']), {{ $review['role'] }}@endif</p>
+                </div>
+            </article>
+            @endforeach
+        </div>
+    </div>
+</section>
+
 @endsection

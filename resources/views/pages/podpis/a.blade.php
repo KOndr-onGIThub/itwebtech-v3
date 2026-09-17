@@ -115,4 +115,103 @@
     </div>
 </section>
 
+{{-- Kótovací pás — social proof jako řada měr s pravítkem --}}
+<section class="pa-section pa-strip" aria-label="{{ __('home.social_proof.rating_aria') }}">
+    <div class="container-site">
+        <ul class="pa-strip__list">
+            <li class="pa-strip__item"><span class="pa-strip__stars" aria-hidden="true">★★★★★</span> <strong>{{ __('home.social_proof.rating_value') }}</strong> {{ __('home.social_proof.reviews') }}</li>
+            <li class="pa-strip__item"><strong>{{ __('home.social_proof.projects') }}</strong></li>
+            <li class="pa-strip__item"><strong>{{ __('home.social_proof.experience') }}</strong></li>
+            <li class="pa-strip__item">{{ __('home.social_proof.response') }}</li>
+            <li class="pa-strip__item">{{ __('home.social_proof.award') }}</li>
+        </ul>
+    </div>
+</section>
+
+{{-- Metoda — Jak weby stavím + vymezení jako revizní poznámky --}}
+<section class="pa-section">
+    <div class="container-site">
+        <header class="pa-proof__head">
+            <span class="pa-proof__index" aria-hidden="true">03</span>
+            <h2 class="pa-proof__heading">{{ __('home.problems.heading') }}</h2>
+        </header>
+        <p class="pa-lead">{{ __('home.problems.lead') }}</p>
+
+        <p class="pa-avoid">{{ __('home.problems.transition_heading') }}</p>
+        <p class="pa-avoid-sub">{{ __('home.problems.transition_text') }}</p>
+
+        <div class="pa-issues">
+            @foreach (__('home.problems.items') as $i => $item)
+            <article class="pa-issue">
+                <p class="pa-issue__num" aria-hidden="true">REV {{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</p>
+                <h3>{{ $item['heading'] }}</h3>
+                <p>{{ $item['text'] }}</p>
+                @if (!empty($item['quote_text']))
+                <blockquote>
+                    {{ $item['quote_text'] }}
+                    <footer>— {{ $item['quote_author'] }}</footer>
+                </blockquote>
+                @endif
+            </article>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+{{-- Cenová kotva — tři tabulky výkresu --}}
+<section class="pa-section">
+    <div class="container-site">
+        <header class="pa-proof__head">
+            <span class="pa-proof__index" aria-hidden="true">04</span>
+            <h2 class="pa-proof__heading">{{ __('home.price_anchor.heading') }}</h2>
+        </header>
+        <p class="pa-lead">{{ __('home.price_anchor.intro') }}</p>
+
+        <div class="pa-price-grid">
+            @foreach (__('home.price_anchor.items') as $item)
+            <article class="pa-price-card {{ ($item['featured'] ?? false) ? 'pa-price-card--featured' : '' }}">
+                @if ($item['featured'] ?? false)
+                <span class="pa-price-card__badge">{{ __('home.price_anchor.featured_label') }}</span>
+                @endif
+                <div class="pa-price-card__head">
+                    <h3 class="pa-price-card__title">{{ $item['title'] }}</h3>
+                    <p class="pa-price-card__price">{{ $item['price'] }}</p>
+                </div>
+                <p class="pa-price-card__desc">{{ $item['desc'] }}</p>
+            </article>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+{{-- Reference — ledger citací --}}
+@php
+    $allTestimonials = collect(__('testimonials.items'));
+    $homeTestimonialOrder = config('site.features.show_toyota_testimonial')
+        ? ['Pavel Baudyš', 'Rostislav Toman', 'Stanislav Holcmann', 'Hana Jaskmanická', 'Ing. Ivo Štěpánek', 'Václav Pešice']
+        : ['Peter Vidlička', 'Rostislav Toman', 'Stanislav Holcmann', 'Hana Jaskmanická', 'Ing. Ivo Štěpánek', 'Václav Pešice'];
+    $homeTestimonials = collect($homeTestimonialOrder)
+        ->map(fn ($name) => $allTestimonials->firstWhere('name', $name))
+        ->filter()
+        ->values();
+@endphp
+<section class="pa-section">
+    <div class="container-site">
+        <header class="pa-proof__head">
+            <span class="pa-proof__index" aria-hidden="true">05</span>
+            <h2 class="pa-proof__heading">{{ __('home.testimonials.heading') }}</h2>
+        </header>
+
+        <div class="pa-testi-grid">
+            @foreach ($homeTestimonials as $i => $review)
+            <article class="pa-testi">
+                <p class="pa-testi__num" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }} / {{ $review['source'] }}</p>
+                <p class="pa-testi__text">{{ $review['text'] }}</p>
+                <p class="pa-testi__meta"><strong>{{ $review['name'] }}</strong> — {{ $review['company'] }}@if ($review['role']), {{ $review['role'] }}@endif</p>
+            </article>
+            @endforeach
+        </div>
+    </div>
+</section>
+
 @endsection
