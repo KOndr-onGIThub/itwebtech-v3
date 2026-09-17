@@ -3,6 +3,9 @@
 @import './foundation/design-system.css';
 @import './components/button.css';
 @import './components/cookies.css';
+/* OND-227 — prototypy vizuálního podpisu (?podpis=a|b|c); po výběru
+   varianty boardem se soubor zredukuje na vítězný blok. */
+@import './podpis.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
