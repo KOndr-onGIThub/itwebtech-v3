@@ -83,27 +83,44 @@ class PageController extends Controller
     {
         $locale = App::getLocale();
 
+        $relations = [
+            'translations',
+            'screenshots.translations',
+            'tags.translations',
+            'outcomes.translations',
+        ];
+
+        // OND-209: nejdřív lokalizovaný slug (`/de/projekte/aufmerksamkeits-animation`),
+        // pak jazyk-neutrální (`portfolio_projects.slug`). Pořadí je důležité:
+        // neutrální slug drží i staré DE/EN adresy, ty se níž přesměrují 301.
         $project = PortfolioProject::published()
-            ->where('slug', $url)
-            ->with([
-                'translations',
-                'screenshots.translations',
-                'tags.translations',
-                'outcomes.translations',
-            ])
-            ->first();
+            ->whereHas('translations', function ($query) use ($locale, $url) {
+                $query->where('locale', $locale)->where('slug', $url);
+            })
+            ->with($relations)
+            ->first()
+            ?? PortfolioProject::published()
+                ->where('slug', $url)
+                ->with($relations)
+                ->first();
 
         if (! $project) {
             abort(404);
         }
 
+        // 301 na kanonickou adresu pro aktuální locale — staré indexované
+        // `/de/projekte/{cs-slug}` tím neztratí sílu odkazů.
+        $canonicalSlug = $project->slugFor($locale);
+        if ($canonicalSlug !== $url) {
+            return redirect()->route("{$locale}.project", ['url' => $canonicalSlug], 301);
+        }
+
         $translation = $project->translation($locale);
 
-        // Hreflang — slug je jazyk-neutrální, takže pro každý jazyk
-        // vygenerujeme stejný slug v příslušné jazykové routě.
+        // Hreflang — každý jazyk má vlastní slug (s fallbackem na neutrální).
         $hreflangs = [];
         foreach (['cs', 'en', 'de'] as $lang) {
-            $hreflangs[$lang] = route("{$lang}.project", ['url' => $project->slug]);
+            $hreflangs[$lang] = $project->detailUrl($lang);
         }
 
         // Související projekty: 3 kusy, stejná kategorie, vyloučit aktuální.

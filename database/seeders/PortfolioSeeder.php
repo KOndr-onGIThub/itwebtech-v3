@@ -97,6 +97,9 @@ class PortfolioSeeder extends Seeder
             PortfolioProjectTranslation::create([
                 'project_id'       => $project->id,
                 'locale'           => $locale,
+                // OND-209: lokalizovaný slug jen tam, kde je v YAML;
+                // jinak NULL = použije se jazyk-neutrální slug projektu.
+                'slug'             => $tr['slug'] ?? null,
                 'title'            => $tr['title'] ?? '',
                 'subtitle'         => $tr['subtitle'] ?? null,
                 'summary'          => $tr['summary'] ?? null,
