@@ -348,12 +348,19 @@ return [
         'heading' => 'Frequently asked questions',
         // `key` is a stable slug for analytics (data-faq-key) and JSON-LD; do not localize.
         'items'   => [
-            // OND-201 (chapter 6.3, objection 1): the answer to "You are one
-            // person. What if you get ill or quit?" was deployed here, but the
-            // board withdrew it on 2026-09-16 (card questions:OND-201:body-5-7-confirm,
-            // option "withdraw it from the FAQ, we will settle it later") — the
-            // facts it stood on were not confirmed. Re-deploy only after the
-            // facts are confirmed. DO NOT add it back before that.
+            // OND-222 (chapter 6.3, objection 1): the most serious objection on
+            // a 150k project. Withdrawn on 2026-09-16 (facts unconfirmed),
+            // confirmed by Ondra on 2026-09-17 with two corrections:
+            //  - the code belongs to the client, but Ondra holds it until the
+            //    final payment; NOT "yours from day one and you hold it";
+            //  - no mention of Laravel — it means nothing to the client;
+            //  - documentation is not standard, only on request.
+            // Still in force: no promise of round-the-clock availability.
+            [
+                'key'      => 'single-person',
+                'question' => 'You are one person. What if you get ill or quit?',
+                'answer'   => 'A fair concern — on a project this size it is the most important question. The site does not run on a platform you could not leave: it is custom code on ordinary web hosting. You can hold the hosting admin and FTP credentials the whole time — just ask for them. Once the project is paid in full the code is yours; I hand it over whenever you ask, and any developer can carry on with it — if documentation is needed for the handover, I will write it. I do not keep round-the-clock availability and I will not claim otherwise. What I do guarantee is that nothing stays locked up with me.',
+            ],
             [
                 'key'      => 'price',
                 'question' => 'What will it cost?',

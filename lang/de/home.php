@@ -346,12 +346,20 @@ return [
         'heading' => 'Häufige Fragen',
         // `key` ist ein stabiler Slug für Analytics (data-faq-key) und JSON-LD; nicht lokalisieren.
         'items'   => [
-            // OND-201 (Kapitel 6.3, Einwand 1): Die Antwort auf „Sie sind eine
-            // Person. Was, wenn Sie krank werden oder aufhören?" war hier
-            // ausgeliefert, wurde aber am 2026-09-16 vom Board zurückgezogen
-            // (Karte questions:OND-201:body-5-7-confirm, Option „aus dem FAQ
-            // nehmen, später klären") — die zugrunde liegenden Fakten waren
-            // nicht bestätigt. Erst nach Bestätigung wieder einsetzen.
+            // OND-222 (Kapitel 6.3, Einwand 1): schwerwiegendster Einwand bei
+            // einem Auftrag über 150 Tsd. Am 2026-09-16 zurückgezogen (Fakten
+            // unbestätigt), am 2026-09-17 von Ondra bestätigt, mit zwei
+            // Korrekturen:
+            //  - Der Code gehört dem Kunden, liegt aber bis zur Schlusszahlung
+            //    bei Ondra; NICHT „von Anfang an bei Ihnen";
+            //  - keine Erwähnung von Laravel — sagt dem Kunden nichts;
+            //  - Dokumentation ist nicht Standard, nur auf Wunsch.
+            // Weiterhin gilt: kein Versprechen einer Rund-um-die-Uhr-Bereitschaft.
+            [
+                'key'      => 'single-person',
+                'question' => 'Sie sind eine Person. Was, wenn Sie krank werden oder aufhören?',
+                'answer'   => 'Ein berechtigtes Bedenken — bei einem Projekt dieser Größe ist das die wichtigste Frage. Die Website läuft auf keiner Plattform, die Sie nicht verlassen könnten: Es ist eigener Code auf einem normalen Webhosting. Die Zugänge zur Hosting-Verwaltung und zum FTP können Sie die ganze Zeit haben, sagen Sie einfach Bescheid. Nach der vollständigen Bezahlung gehört der Code Ihnen — ich übergebe ihn, wann immer Sie darum bitten, und jeder Entwickler kann daran weiterarbeiten; wenn eine Dokumentation zur Übergabe nötig ist, schreibe ich sie. Eine Rund-um-die-Uhr-Bereitschaft halte ich nicht und werde das auch nicht behaupten. Wofür ich einstehe: Bei mir bleibt nichts eingeschlossen.',
+            ],
             [
                 'key'      => 'price',
                 'question' => 'Was kostet es?',

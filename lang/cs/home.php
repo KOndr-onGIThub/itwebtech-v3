@@ -364,12 +364,20 @@ return [
         'heading' => 'Časté otázky',
         // `key` je stabilní slug pro analytics (data-faq-key) a JSON-LD; ne lokalizovat.
         'items'   => [
-            // OND-201 (kap. 6.3 bod 1): odpověď na námitku „Jste jeden člověk.
-            // Co když onemocníte nebo skončíte?" byla na tomhle místě nasazená,
-            // ale board ji 2026-09-16 stáhl (karta questions:OND-201:body-5-7-confirm,
-            // volba „Stáhni tu odpověď z FAQ, dořešíme později") — fakta, na
-            // kterých stála, nebyla potvrzená. Znovu ji nasazovat až po
-            // potvrzení faktů, viz navazující issue. NEPŘIDÁVAT zpět bez toho.
+            // OND-222 (kap. 6.3 bod 1): nejzávažnější námitka u zakázky za
+            // 150 tisíc. Odpověď byla 2026-09-16 stažená (fakta nepotvrzená),
+            // Ondra je potvrdil 2026-09-17 a dvě z nich opravil:
+            //  - kód patří klientovi, ale fyzicky ho drží Ondra do doplacení;
+            //    NE „od začátku máte u sebe" (to bylo nepravdivé);
+            //  - Laravel se nezmiňuje — klientovi to nic neříká (princip 0);
+            //  - dokumentace se standardně nedělá, jen na vyžádání.
+            // Platí dál: bez slibu nepřetržité pohotovosti a bez věty
+            // o „připraveném předání" (nedoložitelné).
+            [
+                'key'      => 'single-person',
+                'question' => 'Jste jeden člověk. Co když onemocníte nebo skončíte?',
+                'answer'   => 'Rozumím — u zakázky za víc než sto tisíc je to ta nejdůležitější otázka. Web neběží na platformě, ze které byste nemohli odejít: je to vlastní kód na běžném webhostingu. Přístupy do administrace hostingu a na FTP můžete mít po celou dobu, stačí si o ně říct. Po doplacení projektu je kód váš — předám vám ho, kdykoli si o něj řeknete, a pokračovat na něm může kterýkoli vývojář; když bude potřeba, sepíšu k tomu i dokumentaci. Nepřetržitou pohotovost nedržím a nebudu tvrdit, že ano. Ručím za to, že u mě nic nezůstane zamčené.',
+            ],
             [
                 'key'      => 'price',
                 'question' => 'Kolik to bude stát?',
