@@ -1,7 +1,7 @@
 # Portfolio dataset — OND-59 / OND-62
 # Vytvořeno: 2026-05-06 (Content Writer)
 # Zdroje: ondraweb.cz/projekty (preferováno) + itwebtech.cz/projects
-# 23 projektů po deduplikaci: 13 webů, 5 aplikací, 5 ostatní
+# 24 projektů po deduplikaci: 14 webů, 5 aplikací, 5 ostatní
 # Schéma odpovídá návrhu z OND-60 (portfolio_projects + *_translations + *_screenshots)
 # Engineer ve fázi 2: stáhne obrázky z `screenshots_source[].url`, uloží do
 # `resources/img/projects/{slug}/...`, pole `path` v DB doplní podle vlastní
@@ -72,107 +72,227 @@ projects:
     translations:
       cs:
         title: PitArena
-        subtitle: "Z nuly k rezervacím obsazeným měsíce dopředu"
-        summary: "Brand, web a online rezervační systém pro nové motokrosové centrum. Hned po spuštění začaly chodit objednávky tréninků z Googlu."
+        subtitle: "Od nuly ke značce, webu a online prodeji programů"
+        summary: "Značka, web a online prodej pro nové motokrosové centrum. Web dnes nese programy, poukazy na jízdu i registrace na závody."
         description: >-
-          PitArena startovala bez webu, brandu i bez první zakázky. Postavili
-          jsme kompletní digitální základ — značku, web s online rezervací
-          tréninků, prodej voucherů a registraci na akce. Od roku 2023 web
-          dál rozvíjím spolu s majitelem.
+          PitArena startovala bez webu, brandu i bez první zakázky. Postavil jsem
+          kompletní digitální základ — značku, web s nabídkou programů, online
+          prodejem poukazů a registracemi na závody. Od roku 2023 web dál rozvíjím
+          spolu s majitelem.
         challenge: >-
           Klient otevíral nové motokrosové centrum v Česku. Žádný web,
           žádná značka, nula obsazenosti. Bylo potřeba vybudovat důvěru
           ještě dřív, než se PitArena fyzicky otevřela, a zařídit, aby si
           lidé tréninky mohli objednat 24/7 bez telefonátů a e-mailů.
         solution: >-
-          Navrhli jsme značku a postavili na míru web s integrovaným
-          rezervačním systémem, online platbami, prodejem dárkových voucherů
-          a registracemi na akce. SEO a obsahové články cílí přesně na lidi,
-          kteří hledají „motokrosový kemp" nebo „pitbike trénink". Doplňuje
+          Navrhl jsem značku a postavil na míru web s online prodejem poukazů na
+          jízdu, nabídkou programů (akademie, zájmový kroužek, kempy a MX
+          soustředění) a registracemi na závody YCF Cup. SEO a obsahové články cílí
+          na lidi, kteří hledají „motokrosový kemp" nebo „pitbike trénink". Doplňuje
           to správa sociálních sítí a propojení s merchem.
         result: >-
-          Web už v prvním roce přivádí stovky návštěv týdně a generuje
-          rezervace bez zásahu majitele. Tréninky bývají obsazené měsíce
-          dopředu, vouchery se prodávají před Vánoci samy a registrace
-          na motokrosové kempy běží přes web. Dlouhodobá spolupráce
+          Web dnes stojí na vlastních nohách — zájemce si sám najde program, koupí
+          poukaz na jízdu nebo se přihlásí na závod, bez telefonátu majiteli. Vedle
+          toho web nese e-shop, půjčovnu, servis a blog. Dlouhodobá spolupráce
           pokračuje dodnes.
         outcomes:
           - "Spuštění značky i webu od nuly za jeden ucelený projekt"
-          - "Online rezervace tréninků, voucherů i akcí bez ručního zásahu"
-          - "Stovky návštěv týdně, plné kapacity měsíce dopředu"
-          - "SEO + obsahové články přivádějí poptávky z Googlu"
+          - "Online prodej poukazů a registrace na závody bez ručního zásahu"
+          - "Programy, půjčovna, servis a e-shop na jednom webu"
+          - "SEO a obsahové články cílené na motokrosové kempy a pitbike tréninky"
           - "Web a brand drží konzistentní tvář napříč webem, sociálními sítěmi a merchem"
         meta_title: "PitArena — web, rezervace a brand pro motokrosové centrum"
-        meta_description: "Případová studie: brand, web a online rezervační systém pro PitArenu. Plné kapacity tréninků a stovky návštěv týdně už od prvního roku."
+        meta_description: "Případová studie: značka, web a online prodej pro PitArenu — programy, poukazy na jízdu a registrace na závody na jednom webu."
       en:
         title: PitArena
-        subtitle: "From zero to bookings filled months ahead"
-        summary: "Brand, website, and online booking for a brand-new motocross centre. Training sessions started selling from Google straight after launch."
+        subtitle: "From zero to a brand, a website and online sales"
+        summary: "Brand, website and online sales for a brand-new motocross centre. The site now carries programmes, ride vouchers and race registrations."
         description: >-
-          PitArena launched with no website, no brand, and no customers.
-          We built the full digital foundation — identity, a custom website
-          with online training booking, voucher sales, and event sign-ups.
-          The site has been growing alongside the owner since 2023.
+          PitArena launched with no website, no brand, and no customers. I built the
+          full digital foundation — identity, a custom website with programme
+          listings, online voucher sales and race registrations. The site has been
+          growing alongside the owner since 2023.
         challenge: >-
-          The client was opening a new motocross training centre in Czechia.
-          No web presence, no brand, zero occupancy. We needed to build
-          trust before PitArena physically opened, and let people book
-          training 24/7 — without phone calls or e-mails.
+          The client was opening a new motocross training centre in Czechia. No web
+          presence, no brand, zero occupancy. Trust had to be built before PitArena
+          physically opened, and let people book training 24/7 — without phone calls
+          or e-mails.
         solution: >-
-          We designed the brand and built a custom website with an
-          integrated booking system, online payments, gift voucher sales,
-          and event registrations. SEO and content articles target people
-          searching for "motocross camp" or "pitbike training". Social
+          I designed the brand and built a custom website with online ride-voucher
+          sales, programme listings (academy, youth club, camps and MX training
+          weeks) and race registrations for the YCF Cup. SEO and content articles
+          target people searching for "motocross camp" or "pitbike training". Social
           media management and merch integration round it out.
         result: >-
-          The site brings hundreds of weekly visits and generates bookings
-          without owner intervention. Training slots fill months in advance,
-          vouchers sell themselves before Christmas, and motocross camps
-          register through the web. The long-term partnership continues today.
+          The site now stands on its own — a visitor finds a programme, buys a ride
+          voucher or signs up for a race without calling the owner. Alongside that
+          it carries the online shop, rentals, service and a blog. The long-term
+          partnership continues today.
         outcomes:
           - "Brand and website launched from scratch as a single project"
-          - "Online booking for training, vouchers and events runs hands-off"
-          - "Hundreds of weekly visits, capacity booked months ahead"
-          - "SEO and content drive enquiries straight from Google"
+          - "Online voucher sales and race registrations run hands-off"
+          - "Programmes, rentals, service and online shop on one site"
+          - "SEO and content aimed at motocross camps and pitbike training"
           - "Consistent identity across website, social media and merch"
         meta_title: "PitArena — website, booking & brand for a motocross centre"
-        meta_description: "Case study: brand, website and online booking for PitArena. Full training capacity and hundreds of weekly visits from year one."
+        meta_description: "Case study: brand, website and online sales for PitArena — programmes, ride vouchers and race registrations on one site."
       de:
         title: PitArena
-        subtitle: "Von Null zu Buchungen, die Monate im Voraus voll sind"
-        summary: "Marke, Website und Online-Buchung für ein neues Motocross-Zentrum. Trainingsbuchungen kamen direkt nach dem Launch über Google."
+        subtitle: "Von Null zu Marke, Website und Online-Verkauf"
+        summary: "Marke, Website und Online-Verkauf für ein neues Motocross-Zentrum. Die Site trägt heute Programme, Fahrgutscheine und Rennanmeldungen."
         description: >-
-          PitArena startete ohne Website, ohne Marke und ohne Kunden.
-          Wir haben die gesamte digitale Grundlage gebaut — Identität,
-          eine maßgeschneiderte Website mit Online-Buchung von Trainings,
-          Gutscheinverkauf und Event-Anmeldungen. Seit 2023 entwickle
-          ich die Site gemeinsam mit dem Inhaber weiter.
+          PitArena startete ohne Website, ohne Marke und ohne Kunden. Ich habe die
+          gesamte digitale Grundlage gebaut — Identität, eine maßgeschneiderte
+          Website mit Programmübersicht, Online-Gutscheinverkauf und
+          Rennanmeldungen. Seit 2023 entwickle ich die Site gemeinsam mit dem
+          Inhaber weiter.
         challenge: >-
           Der Kunde eröffnete ein neues Motocross-Trainingszentrum in
           Tschechien. Keine Website, keine Marke, null Auslastung. Vertrauen
           musste entstehen, bevor PitArena physisch öffnete — und Menschen
           mussten 24/7 buchen können, ohne Anrufe oder E-Mails.
         solution: >-
-          Wir entwarfen die Marke und bauten eine individuelle Website
-          mit integriertem Buchungssystem, Online-Zahlungen, Geschenkgutschein-
-          Verkauf und Event-Registrierungen. SEO- und Content-Artikel
-          zielen auf Suchen wie „Motocross-Camp" oder „Pitbike-Training".
-          Social-Media-Betreuung und Merch-Anbindung runden alles ab.
+          Ich habe die Marke entworfen und eine individuelle Website gebaut — mit
+          Online-Verkauf von Fahrgutscheinen, Programmübersicht (Akademie,
+          Jugendclub, Camps und MX-Trainingswochen) und Anmeldungen zum YCF Cup.
+          SEO- und Content-Artikel zielen auf Suchen wie „Motocross-Camp" oder
+          „Pitbike-Training". Social-Media-Betreuung und Merch-Anbindung runden
+          alles ab.
         result: >-
-          Die Site bringt schon im ersten Jahr Hunderte Besuche pro Woche
-          und Buchungen laufen ohne Zutun des Inhabers. Trainingsplätze
-          sind Monate im Voraus ausgebucht, Gutscheine verkaufen sich
-          vor Weihnachten von selbst, Camps werden über das Web registriert.
-          Die langfristige Zusammenarbeit läuft bis heute.
+          Die Site steht heute auf eigenen Beinen — Interessenten finden ein
+          Programm, kaufen einen Fahrgutschein oder melden sich zum Rennen an, ohne
+          beim Inhaber anzurufen. Daneben trägt sie Onlineshop, Verleih, Service und
+          Blog. Die langfristige Zusammenarbeit läuft bis heute.
         outcomes:
           - "Marke und Website von Null als ein einziges Projekt"
-          - "Online-Buchung von Training, Gutscheinen und Events ohne Handarbeit"
-          - "Hunderte Besuche pro Woche, Kapazität Monate im Voraus voll"
-          - "SEO und Content liefern Anfragen direkt aus Google"
+          - "Online-Gutscheinverkauf und Rennanmeldungen ohne Handarbeit"
+          - "Programme, Verleih, Service und Onlineshop auf einer Site"
+          - "SEO und Content für Motocross-Camps und Pitbike-Training"
           - "Konsistente Identität auf Website, Social Media und Merch"
         meta_title: "PitArena — Website, Buchung & Marke für ein Motocross-Zentrum"
-        meta_description: "Case Study: Marke, Website und Online-Buchung für PitArena. Volle Trainingskapazität und Hunderte Besuche pro Woche ab dem ersten Jahr."
+        meta_description: "Case Study: Marke, Website und Online-Verkauf für PitArena — Programme, Fahrgutscheine und Rennanmeldungen auf einer Site."
 
+  # ----------------------------------------------------------------------
+  # 1b) PitArena e-shop — shop.pitarena.cz (OND-208)
+  #     Texty ze schváleného dokumentu `pripadovky` (OND-186 §1), čísla
+  #     výhradně z `namerena-cisla` (OND-206 §1). Mobilní skóre 87/100
+  #     (rozptyl 81–91) se dle omezení QA nepublikuje.
+  # ----------------------------------------------------------------------
+  - slug: pitarena-eshop
+    category: website
+    client_name: PitArena
+    live_url: https://shop.pitarena.cz
+    year: null  # rok spuštění e-shopu není doložený
+    duration: null
+    featured: true
+    sort_order: 15
+    # Jen štítky, které v DB už existují. Nový slug (`e-shop`, `katalog`) by
+    # seeder pojmenoval přes humanizeSlug na „E shop" / „Katalog" — tedy ten
+    # samý žargon, který opravovala migrace z OND-198.
+    tags: [web, motocykly]
+    screenshots_source: []  # screenshot e-shopu zatím nemáme — karta zobrazí placeholder
+    translations:
+      cs:
+        title: "PitAréna — e-shop"
+        subtitle: "E-shop, kde zákazník najde díl na svůj model a ročník"
+        summary: "E-shop s pitbike motorkami YCF a náhradními díly. Díly roztříděné podle modelů a skupin, filtrování podle modelu a ročníku."
+        description: >-
+          Klient prodává pitbike motorky YCF a náhradní díly. Potřeboval prodávat
+          online — a u dílů je klíčové poskládat správný kus pro daný model a
+          ročník. Postavil jsem e-shop s katalogem motorek i dílů, roztříděných
+          podle modelů a skupin.
+        challenge: >-
+          U náhradních dílů nestačí seznam produktů. Zákazník potřebuje jistotu, že
+          díl sedne na jeho model a ročník — jinak nakupuje naslepo a vrací. Katalog
+          o tisícových počtech položek musel zůstat průchodný, ne se z něj stát
+          nekonečný seznam.
+        solution: >-
+          Postavil jsem e-shop s katalogem motorek i dílů. Díly jsou roztříděné
+          podle modelů (LITE 125, PILOT 125, Factory 190) a skupin — brzdy, motory,
+          tlumiče, elektrika. K tomu filtrování podle modelu a ročníku, košík a
+          zákaznický účet, oblíbené položky a porovnání produktů.
+        result: >-
+          E-shop dnes nabízí 4 551 produktů v 695 kategoriích a katalog náhradních
+          dílů rozpadnutý podle 19 modelů motocyklů YCF — zákazník klikne na svůj
+          model a vidí jen díly, které na něj sedí. I s tímhle rozsahem drží na
+          desktopu 99/100 v Lighthouse Performance a hlavní obsah se vykreslí do 0,9
+          s (měřeno lokálním Lighthouse 13.4.1, 16. 9. 2026).
+        outcomes:
+          - "4 551 produktů v 695 kategoriích"
+          - "Katalog náhradních dílů podle 19 modelů motocyklů YCF"
+          - "Filtrování podle modelu a ročníku"
+          - "Košík, zákaznický účet, oblíbené položky a porovnání produktů"
+          - "99/100 v Lighthouse Performance na desktopu (měřeno 16. 9. 2026)"
+        meta_title: "PitAréna — e-shop s motorkami YCF a náhradními díly"
+        meta_description: "Případová studie: e-shop se 4 551 produkty v 695 kategoriích. Náhradní díly roztříděné podle 19 modelů YCF, filtrování podle modelu a ročníku."
+      en:
+        title: "PitArena — online shop"
+        subtitle: "An online shop where customers find the part for their model and year"
+        summary: "Online shop for YCF pitbikes and spare parts. Parts sorted by model and group, with filtering by model and year."
+        description: >-
+          The client sells YCF pitbikes and spare parts and needed to sell online —
+          and with parts, the crucial thing is matching the right piece to the model
+          and year. I built an online shop with a catalogue of both bikes and parts,
+          sorted by model and group.
+        challenge: >-
+          With spare parts, a product list is not enough. The customer needs
+          certainty that a part fits their model and year — otherwise they buy blind
+          and send it back. A catalogue running into thousands of items had to stay
+          navigable instead of turning into an endless list.
+        solution: >-
+          I built an online shop with a catalogue of bikes and parts. Parts are
+          sorted by model (LITE 125, PILOT 125, Factory 190) and by group — brakes,
+          engines, suspension, electrics. Plus filtering by model and year, a cart
+          and customer account, favourites and product comparison.
+        result: >-
+          The shop now offers 4,551 products in 695 categories, with the spare-parts
+          catalogue broken down across 19 YCF motorcycle models — the customer
+          clicks their model and sees only parts that fit. Even at that scale it
+          holds 99/100 in Lighthouse Performance on desktop, with the main content
+          rendering in under 0.9 s (measured with local Lighthouse 13.4.1 on 16
+          September 2026).
+        outcomes:
+          - "4,551 products in 695 categories"
+          - "Spare-parts catalogue split across 19 YCF motorcycle models"
+          - "Filtering by model and year"
+          - "Cart, customer account, favourites and product comparison"
+          - "99/100 in Lighthouse Performance on desktop (measured 16 September 2026)"
+        meta_title: "PitArena — online shop for YCF pitbikes and spare parts"
+        meta_description: "Case study: an online shop with 4,551 products in 695 categories. Spare parts split across 19 YCF models, filtering by model and year."
+      de:
+        title: "PitArena — Onlineshop"
+        subtitle: "Ein Shop, in dem Kunden das Teil für Modell und Baujahr finden"
+        summary: "Onlineshop für YCF-Pitbikes und Ersatzteile. Teile nach Modellen und Gruppen sortiert, mit Filter nach Modell und Baujahr."
+        description: >-
+          Der Kunde verkauft YCF-Pitbikes und Ersatzteile und wollte online
+          verkaufen — bei Teilen ist entscheidend, das richtige Stück für Modell und
+          Baujahr zu treffen. Ich habe einen Onlineshop mit Katalog für Motorräder
+          und Teile gebaut, sortiert nach Modellen und Gruppen.
+        challenge: >-
+          Bei Ersatzteilen genügt eine Produktliste nicht. Kunden brauchen die
+          Sicherheit, dass ein Teil auf ihr Modell und Baujahr passt — sonst kaufen
+          sie blind und schicken zurück. Ein Katalog mit Tausenden Positionen musste
+          begehbar bleiben, statt zur endlosen Liste zu werden.
+        solution: >-
+          Ich habe einen Onlineshop mit Katalog für Motorräder und Teile gebaut. Die
+          Teile sind nach Modellen (LITE 125, PILOT 125, Factory 190) und Gruppen
+          sortiert — Bremsen, Motoren, Federung, Elektrik. Dazu Filter nach Modell
+          und Baujahr, Warenkorb und Kundenkonto, Favoriten und Produktvergleich.
+        result: >-
+          Der Shop bietet heute 4.551 Produkte in 695 Kategorien, der
+          Ersatzteilkatalog ist nach 19 YCF-Motorradmodellen aufgeteilt — Kunden
+          klicken ihr Modell an und sehen nur passende Teile. Auch in dieser Größe
+          hält er auf dem Desktop 99/100 in Lighthouse Performance, der Hauptinhalt
+          erscheint in unter 0,9 s (gemessen mit lokalem Lighthouse 13.4.1 am
+          16.09.2026).
+        outcomes:
+          - "4.551 Produkte in 695 Kategorien"
+          - "Ersatzteilkatalog nach 19 YCF-Motorradmodellen aufgeteilt"
+          - "Filter nach Modell und Baujahr"
+          - "Warenkorb, Kundenkonto, Favoriten und Produktvergleich"
+          - "99/100 in Lighthouse Performance auf dem Desktop (gemessen 16.09.2026)"
+        meta_title: "PitArena — Onlineshop für YCF-Pitbikes und Ersatzteile"
+        meta_description: "Case Study: Onlineshop mit 4.551 Produkten in 695 Kategorien. Ersatzteile nach 19 YCF-Modellen aufgeteilt, Filter nach Modell und Baujahr."
   # ----------------------------------------------------------------------
   # 2) HCMS — Toyota Kolín, hala-kritická aplikace
   # ----------------------------------------------------------------------
@@ -748,19 +868,16 @@ projects:
           starého webu nedávala smysl — bylo levnější a bezpečnější
           udělat ho znovu pořádně.
         solution: >-
-          Začali jsme analýzou klientova podnikání a pohledem na
-          domácí i zahraniční konkurenci. Navrhl jsem strukturu, copy
-          a vlastní design, vše ručně kódované kvůli robustnosti a
-          rychlosti. Doplnil jsem správu produktů (klient si sám
-          aktualizuje sortiment), Google Maps profil a propagační
-          článek na Kudy z nudy. Web teď odpovídá kvalitě servisu,
-          který nabízí.
+          Začal jsem analýzou klientova podnikání a pohledem na domácí i zahraniční
+          konkurenci. Navrhl jsem strukturu, copy a vlastní design, vše ručně
+          kódované kvůli robustnosti a rychlosti. Doplnil jsem správu produktů
+          (klient si sám aktualizuje sortiment), Google Maps profil a propagační
+          článek na Kudy z nudy. Web teď odpovídá kvalitě servisu, který nabízí.
         result: >-
-          Nový web přivedl první nové zákazníky během pár dní od
-          spuštění. Klient potvrzuje, že má za sebou „prezentaci,
-          kterou je za co schovat". Návštěvník rychle najde, co
-          umíme servisovat, co se dá půjčit a jak nás kontaktovat —
-          tedy přesně to, kvůli čemu na web přichází.
+          Nový web přivedl první nové zákazníky během pár dní od spuštění. Klient
+          potvrzuje, že má za sebou „prezentaci, kterou je za co schovat".
+          Návštěvník rychle najde, co se dá nechat opravit, co se dá půjčit a jak se
+          s klientem spojit — tedy přesně to, kvůli čemu na web přichází.
         outcomes:
           - "První nové zákazníky web přivedl během dnů od spuštění"
           - "Klient si sám spravuje sortiment přes admin"
@@ -786,19 +903,17 @@ projects:
           had closed. Salvaging the old site made no sense — rebuilding
           properly was cheaper and safer.
         solution: >-
-          We started with a deep look at the business and at Czech and
-          foreign competitors. I designed the structure, wrote the copy,
-          and hand-coded the site for robustness and speed. Added a
-          product management module (the client updates inventory
-          themselves), a Google Maps profile, and a promo article on
-          Kudy z nudy. The site now matches the quality of the service
+          I started with a deep look at the business and at Czech and foreign
+          competitors. I designed the structure, wrote the copy, and hand-coded the
+          site for robustness and speed. Added a product management module (the
+          client updates inventory themselves), a Google Maps profile, and a promo
+          article on Kudy z nudy. The site now matches the quality of the service
           behind it.
         result: >-
-          The new site brought the first new customers within days of
-          launch. The client confirms they finally have "a presentation
-          they aren't ashamed of". Visitors quickly find what we service,
-          what's available to rent, and how to get in touch — exactly
-          what they came for.
+          The new site brought the first new customers within days of launch. The
+          client confirms they finally have "a presentation they aren't ashamed of".
+          Visitors quickly find what the workshop services, what's available to
+          rent, and how to get in touch — exactly what they came for.
         outcomes:
           - "First new customers arrived within days of launch"
           - "Client manages products themselves via admin"
@@ -824,19 +939,17 @@ projects:
           Den alten Auftritt zu retten war sinnlos; ein sauberer
           Neubau war günstiger und sicherer.
         solution: >-
-          Wir begannen mit einer Analyse des Geschäfts sowie tschechischer
-          und internationaler Wettbewerber. Ich habe Struktur, Texte und
-          eigenes Design entworfen, alles handgecodet für Robustheit und
-          Tempo. Dazu Produktverwaltung (der Kunde aktualisiert das
-          Sortiment selbst), Google-Maps-Profil und ein Werbeartikel auf
-          Kudy z nudy. Die Website entspricht jetzt der Qualität des
-          Service.
+          Ich begann mit einer Analyse des Geschäfts sowie tschechischer und
+          internationaler Wettbewerber. Ich habe Struktur, Texte und eigenes Design
+          entworfen, alles handgecodet für Robustheit und Tempo. Dazu
+          Produktverwaltung (der Kunde aktualisiert das Sortiment selbst),
+          Google-Maps-Profil und ein Werbeartikel auf Kudy z nudy. Die Website
+          entspricht jetzt der Qualität des Service.
         result: >-
-          Die neue Site brachte die ersten neuen Kunden innerhalb weniger
-          Tage. Der Kunde bestätigt: endlich „eine Präsentation, für die
-          man sich nicht schämen muss". Besucher finden schnell, was
-          wir servicen, was zu mieten ist und wie man uns erreicht —
-          genau dafür sind sie da.
+          Die neue Site brachte die ersten neuen Kunden innerhalb weniger Tage. Der
+          Kunde bestätigt: endlich „eine Präsentation, für die man sich nicht
+          schämen muss". Besucher finden schnell, was der Betrieb serviciert, was zu
+          mieten ist und wie man Kontakt aufnimmt — genau dafür sind sie da.
         outcomes:
           - "Erste neue Kunden innerhalb weniger Tage nach Launch"
           - "Kunde verwaltet Produkte selbst über das Admin-Modul"
@@ -1240,11 +1353,11 @@ projects:
           strukturu a webovou architekturu, která tomuhle růstu
           neudělá překážku.
         solution: >-
-          Začali jsme analýzou konkurence a mapováním klíčových slov.
-          Web má detailní produktové stránky s technickými specifikacemi,
-          ukázkovými videi a případovými studiemi. SEO je technicky
-          správně, analytika napojená a struktura počítá s budoucími
-          články. Vše připravené, aby kampaň jen sedla na hotový základ.
+          Začal jsem analýzou konkurence a mapováním klíčových slov. Web má detailní
+          produktové stránky s technickými specifikacemi, ukázkovými videi a
+          případovými studiemi. SEO je technicky správně, analytika napojená a
+          struktura počítá s budoucími články. Vše připravené, aby kampaň jen sedla
+          na hotový základ.
         result: >-
           Web je technicky připravený na růst — chybí jen aktivní
           obsahová a kampaňová práce, kterou klient zatím odložil.
@@ -1270,17 +1383,16 @@ projects:
           content. Competitor analysis, keywords, copy and structure
           are now in place — the technical foundation is done.
         challenge: >-
-          The client wanted a site set up for long-term organic growth,
-          not a few-month marketing burst. We had to understand the
-          competitive landscape, define keywords, and build content
-          and architecture that would not block that growth.
+          The client wanted a site set up for long-term organic growth, not a
+          few-month marketing burst. The job was to understand the competitive
+          landscape, define keywords, and build content and architecture that would
+          not block that growth.
         solution: >-
-          We started with competitor research and keyword mapping.
-          The site has detailed product pages with technical specs,
-          sample videos and case studies. SEO is technically clean,
-          analytics is in place, and the structure assumes future
-          articles. The infrastructure is ready — a content campaign
-          can drop straight onto it.
+          I started with competitor research and keyword mapping. The site has
+          detailed product pages with technical specs, sample videos and case
+          studies. SEO is technically clean, analytics is in place, and the
+          structure assumes future articles. The infrastructure is ready — a content
+          campaign can drop straight onto it.
         result: >-
           The site is technically ready to grow; what's missing is the
           active content and campaign work the client has paused for
@@ -1312,12 +1424,11 @@ projects:
           Content-Architektur aufzubauen, die diesem Wachstum nicht
           im Weg steht.
         solution: >-
-          Wir starteten mit Wettbewerbs- und Keyword-Recherche. Die
-          Site hat detaillierte Produktseiten mit technischen Specs,
-          Videos und Case Studies. SEO ist technisch sauber, Analytics
-          läuft, und die Struktur rechnet mit zukünftigen Artikeln.
-          Die Infrastruktur ist bereit — eine Content-Kampagne kann
-          direkt aufsetzen.
+          Ich startete mit Wettbewerbs- und Keyword-Recherche. Die Site hat
+          detaillierte Produktseiten mit technischen Specs, Videos und Case Studies.
+          SEO ist technisch sauber, Analytics läuft, und die Struktur rechnet mit
+          zukünftigen Artikeln. Die Infrastruktur ist bereit — eine Content-Kampagne
+          kann direkt aufsetzen.
         result: >-
           Technisch ist die Site bereit zu wachsen; was fehlt, ist die
           aktive Content- und Kampagnenarbeit, die der Kunde derzeit
@@ -1586,11 +1697,10 @@ projects:
           had to deliver: a gallery of completed jobs, clear service
           descriptions, and a logo that strengthens the brand.
         challenge: >-
-          The client needed a presentation that proves quality of work
-          more convincingly than a few Facebook photos. We had to
-          structure the services (roof reconstruction, carpentry,
-          building work), set up a reference gallery, and add trade
-          articles that support SEO and trust.
+          The client needed a presentation that proves quality of work more
+          convincingly than a few Facebook photos. The job was to structure the
+          services (roof reconstruction, carpentry, building work), set up a
+          reference gallery, and add trade articles that support SEO and trust.
         solution: >-
           A responsive site with a service catalogue, detailed
           descriptions, and a photo gallery of completed projects.

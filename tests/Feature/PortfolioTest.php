@@ -25,7 +25,8 @@ class PortfolioTest extends TestCase
     {
         $expectedCount = PortfolioProject::published()->count();
 
-        $this->assertSame(23, $expectedCount, 'Seeder by měl vytvořit 23 publikovaných projektů.');
+        // OND-208: 24. projekt je `pitarena-eshop` (shop.pitarena.cz).
+        $this->assertSame(24, $expectedCount, 'Seeder by měl vytvořit 24 publikovaných projektů.');
 
         $response = $this->get('/projekty');
 

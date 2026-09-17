@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * Načte `docs/portfolio-data.yaml` a vytvoří všech 23 projektů
+ * Načte `docs/portfolio-data.yaml` a vytvoří všech 24 projektů
  * + překlady (cs/en/de) + screenshoty + outcomes + tagy.
  *
  * Idempotentní: `updateOrCreate` po slug; překlady, screenshoty,
