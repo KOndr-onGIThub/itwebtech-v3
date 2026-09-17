@@ -91,10 +91,12 @@ projects:
           na lidi, kteří hledají „motokrosový kemp" nebo „pitbike trénink". Doplňuje
           to správa sociálních sítí a propojení s merchem.
         result: >-
-          Web dnes stojí na vlastních nohách — zájemce si sám najde program, koupí
-          poukaz na jízdu nebo se přihlásí na závod, bez telefonátu majiteli. Vedle
-          toho web nese e-shop, půjčovnu, servis a blog. Dlouhodobá spolupráce
-          pokračuje dodnes.
+          Z Googlu si web řekne o víc než 15 000 návštěv za 16 měsíců (Search
+          Console, 16. 5. 2025 – 13. 9. 2026: 15 472 prokliků při 288 925
+          zobrazeních) a průměrná pozice ve vyhledávání se za tu dobu zvedla z 10,3
+          na 7,6. Zájemce si sám najde program, koupí poukaz na jízdu nebo se
+          přihlásí na závod, bez telefonátu majiteli. Vedle toho web nese e-shop,
+          půjčovnu, servis a blog. Dlouhodobá spolupráce pokračuje dodnes.
         outcomes:
           - "Spuštění značky i webu od nuly za jeden ucelený projekt"
           - "Online prodej poukazů a registrace na závody bez ručního zásahu"
@@ -124,10 +126,12 @@ projects:
           target people searching for "motocross camp" or "pitbike training". Social
           media management and merch integration round it out.
         result: >-
-          The site now stands on its own — a visitor finds a programme, buys a ride
-          voucher or signs up for a race without calling the owner. Alongside that
-          it carries the online shop, rentals, service and a blog. The long-term
-          partnership continues today.
+          The site pulls more than 15,000 visits from Google over 16 months (Search
+          Console, 16 May 2025 – 13 Sep 2026: 15,472 clicks on 288,925 impressions),
+          and its average search position rose from 10.3 to 7.6 over that period. A
+          visitor finds a programme, buys a ride voucher or signs up for a race
+          without calling the owner. Alongside that it carries the online shop,
+          rentals, service and a blog. The long-term partnership continues today.
         outcomes:
           - "Brand and website launched from scratch as a single project"
           - "Online voucher sales and race registrations run hands-off"
@@ -159,10 +163,13 @@ projects:
           „Pitbike-Training". Social-Media-Betreuung und Merch-Anbindung runden
           alles ab.
         result: >-
-          Die Site steht heute auf eigenen Beinen — Interessenten finden ein
-          Programm, kaufen einen Fahrgutschein oder melden sich zum Rennen an, ohne
-          beim Inhaber anzurufen. Daneben trägt sie Onlineshop, Verleih, Service und
-          Blog. Die langfristige Zusammenarbeit läuft bis heute.
+          Aus Google holt die Site in 16 Monaten mehr als 15.000 Besuche (Search
+          Console, 16.5.2025 – 13.9.2026: 15.472 Klicks bei 288.925 Impressionen),
+          und die durchschnittliche Suchposition verbesserte sich in dieser Zeit von
+          10,3 auf 7,6. Interessenten finden ein Programm, kaufen einen
+          Fahrgutschein oder melden sich zum Rennen an, ohne beim Inhaber anzurufen.
+          Daneben trägt sie Onlineshop, Verleih, Service und Blog. Die langfristige
+          Zusammenarbeit läuft bis heute.
         outcomes:
           - "Marke und Website von Null als ein einziges Projekt"
           - "Online-Gutscheinverkauf und Rennanmeldungen ohne Handarbeit"
@@ -854,7 +861,7 @@ projects:
       cs:
         title: "Cyklocentrum Březí"
         subtitle: "Záchrana po neúspěšném webaři, postaveno znovu od nuly"
-        summary: "Web cykloservisu a půjčovny, který klient potřeboval znovu — předchozí dodavatel rok pracoval a zanechal po sobě polotovar. Nové zákazníky web přivedl během pár dní."
+        summary: "Web cykloservisu a půjčovny, který klient potřeboval znovu — předchozí dodavatel rok pracoval a zanechal po sobě polotovar. Na klíčové lokální dotazy je dnes web v Googlu první."
         description: >-
           Cyklocentrum Březí nabízí servis kol, půjčovnu a prodej. Po roce
           práce s předchozím dodavatelem skončili s rozjetým, ale
@@ -874,10 +881,13 @@ projects:
           (klient si sám aktualizuje sortiment), Google Maps profil a propagační
           článek na Kudy z nudy. Web teď odpovídá kvalitě servisu, který nabízí.
         result: >-
-          Nový web přivedl první nové zákazníky během pár dní od spuštění. Klient
-          potvrzuje, že má za sebou „prezentaci, kterou je za co schovat".
-          Návštěvník rychle najde, co se dá nechat opravit, co se dá půjčit a jak se
-          s klientem spojit — tedy přesně to, kvůli čemu na web přichází.
+          Na dotazy jako „cyklocentrum březí" nebo „půjčovna kol březí" je web v
+          Googlu na první pozici a průměrná pozice napříč dotazy se zvedla z 16,8 na
+          8,6 (Search Console, 16. 5. 2025 – 13. 9. 2026). Z Googlu tak přichází víc
+          než polovina veškeré návštěvnosti — 1 780 z 3 149 návštěv (Google
+          Analytics, 1. 1. – 16. 9. 2026). Klient potvrzuje, že má za sebou
+          „prezentaci, kterou je za co schovat". Návštěvník rychle najde, co se dá
+          nechat opravit, co se dá půjčit a jak se s klientem spojit.
         outcomes:
           - "První nové zákazníky web přivedl během dnů od spuštění"
           - "Klient si sám spravuje sortiment přes admin"
@@ -889,7 +899,7 @@ projects:
       en:
         title: "Cyklocentrum Březí"
         subtitle: "A rescue project — rebuilt from scratch after a year wasted with another vendor"
-        summary: "Bike service and rental website the client needed redone — the previous vendor left them with an unfinished mess. New customers started arriving within days."
+        summary: "Bike service and rental website the client needed redone — the previous vendor left them with an unfinished mess. Today the site ranks first in Google for its key local searches."
         description: >-
           Cyklocentrum Březí offers bike service, rentals and sales. After a
           year with another vendor, they were stuck with a half-built
@@ -910,10 +920,13 @@ projects:
           article on Kudy z nudy. The site now matches the quality of the service
           behind it.
         result: >-
-          The new site brought the first new customers within days of launch. The
-          client confirms they finally have "a presentation they aren't ashamed of".
-          Visitors quickly find what the workshop services, what's available to
-          rent, and how to get in touch — exactly what they came for.
+          For searches like "cyklocentrum březí" or "půjčovna kol březí" the site
+          ranks first in Google, and its average position across queries rose from
+          16.8 to 8.6 (Search Console, 16 May 2025 – 13 Sep 2026). Google therefore
+          brings more than half of all traffic — 1,780 of 3,149 visits (Google
+          Analytics, 1 Jan – 16 Sep 2026). The client confirms they finally have "a
+          presentation they aren't ashamed of". Visitors quickly find what the
+          workshop services, what's available to rent, and how to get in touch.
         outcomes:
           - "First new customers arrived within days of launch"
           - "Client manages products themselves via admin"
@@ -925,7 +938,7 @@ projects:
       de:
         title: "Cyklocentrum Březí"
         subtitle: "Rettungsprojekt — von Grund auf neu nach einem verlorenen Jahr"
-        summary: "Website für Fahrradservice und Verleih, die der Kunde neu brauchte — der vorherige Anbieter hinterließ ein halbfertiges Chaos. Neue Kunden kamen innerhalb weniger Tage."
+        summary: "Website für Fahrradservice und Verleih, die der Kunde neu brauchte — der vorherige Anbieter hinterließ ein halbfertiges Chaos. Heute steht die Site bei den wichtigsten lokalen Suchen in Google auf Platz eins."
         description: >-
           Cyklocentrum Březí bietet Fahrradservice, Verleih und Verkauf. Nach
           einem Jahr beim vorherigen Anbieter steckten sie mit einer
@@ -946,10 +959,14 @@ projects:
           Google-Maps-Profil und ein Werbeartikel auf Kudy z nudy. Die Website
           entspricht jetzt der Qualität des Service.
         result: >-
-          Die neue Site brachte die ersten neuen Kunden innerhalb weniger Tage. Der
-          Kunde bestätigt: endlich „eine Präsentation, für die man sich nicht
-          schämen muss". Besucher finden schnell, was der Betrieb serviciert, was zu
-          mieten ist und wie man Kontakt aufnimmt — genau dafür sind sie da.
+          Bei Suchen wie „cyklocentrum březí" oder „půjčovna kol březí" steht die
+          Site in Google auf Platz eins, und die durchschnittliche Position über
+          alle Suchanfragen verbesserte sich von 16,8 auf 8,6 (Search Console,
+          16.5.2025 – 13.9.2026). Aus Google kommt damit mehr als die Hälfte des
+          gesamten Traffics — 1.780 von 3.149 Besuchen (Google Analytics, 1.1. –
+          16.9.2026). Der Kunde bestätigt: endlich „eine Präsentation, für die man
+          sich nicht schämen muss". Besucher finden schnell, was der Betrieb
+          serviciert, was zu mieten ist und wie man Kontakt aufnimmt.
         outcomes:
           - "Erste neue Kunden innerhalb weniger Tage nach Launch"
           - "Kunde verwaltet Produkte selbst über das Admin-Modul"
@@ -1181,7 +1198,7 @@ projects:
       cs:
         title: "Zubní Provázek"
         subtitle: "Redesign ordinace s důrazem na lokální vyhledávání"
-        summary: "Redesign webu zubní ordinace v Hraběticích — moderní vzhled, kompletní informace o ošetřeních, blog a lokální SEO. Po spuštění více poptávek od pacientů."
+        summary: "Redesign webu zubní ordinace v Hraběticích — moderní vzhled, kompletní informace o ošetřeních, blog a lokální SEO. Na dotaz „zubař Hrabětice\" je ordinace v Googlu první."
         description: >-
           MDDr. Václav Provázek vede zubní ordinaci v Hraběticích.
           Původní web byl zastaralý, nečitelný na mobilu a nedával
@@ -1199,11 +1216,11 @@ projects:
           dál rozšiřovat. Lokální SEO cílí na klíčová slova „zubní
           lékař Hrabětice" a „dentální hygiena Hrabětice".
         result: >-
-          Klient po spuštění zaznamenal vyšší zájem o ošetření a
-          pozitivní reakce na úplnost informací a profesionální dojem.
-          Web teď konkrétně přesvědčuje pacienty, že ordinace funguje
-          moderně a transparentně — což je v lokální zdravotnické péči
-          rozhodující.
+          Na klíčový lokální dotaz „zubař Hrabětice" je ordinace v Googlu na první
+          pozici a z Googlu přichází většina veškeré návštěvnosti — 460 z 524
+          návštěv (Google Analytics, 1. 1. – 16. 9. 2026). Web pacientům odpovídá na
+          to, na co se dřív museli ptát telefonem: ceny, přehled ošetření, otevírací
+          doba a umístění.
         outcomes:
           - "Po spuštění zaznamenán vyšší zájem o ošetření"
           - "Kompletní info o ošetřeních, cenách a FAQ"
@@ -1215,7 +1232,7 @@ projects:
       en:
         title: "Zubní Provázek"
         subtitle: "Dental practice redesign with local SEO focus"
-        summary: "Redesign for a dental practice in Hrabětice — modern look, full treatment information, a blog, and local SEO. More patient enquiries after launch."
+        summary: "Redesign for a dental practice in Hrabětice — modern look, full treatment information, a blog, and local SEO. The practice ranks first in Google for \"zubař Hrabětice\"."
         description: >-
           MDDr. Václav Provázek runs a dental practice in Hrabětice.
           The old site looked dated, didn't work on mobile, and left
@@ -1235,11 +1252,11 @@ projects:
           extend. Local SEO targets keywords like "dentist Hrabětice"
           and "dental hygiene Hrabětice".
         result: >-
-          Post-launch the client recorded higher interest in treatments
-          and positive feedback on the completeness of the information
-          and the professional impression. The site now actively
-          convinces patients that the practice operates transparently
-          and modernly — decisive for local healthcare.
+          The practice ranks first in Google for its key local search, "zubař
+          Hrabětice", and Google brings most of all traffic — 460 of 524 visits
+          (Google Analytics, 1 Jan – 16 Sep 2026). The site answers what patients
+          used to have to ask over the phone: prices, treatment overview, opening
+          hours and location.
         outcomes:
           - "Higher patient interest recorded after launch"
           - "Complete treatment, pricing and FAQ information"
@@ -1251,7 +1268,7 @@ projects:
       de:
         title: "Zubní Provázek"
         subtitle: "Redesign einer Zahnarztpraxis mit Fokus auf lokales SEO"
-        summary: "Redesign für eine Zahnarztpraxis in Hrabětice — moderne Optik, vollständige Behandlungsinfos, Blog und lokales SEO. Mehr Patientenanfragen nach dem Launch."
+        summary: "Redesign für eine Zahnarztpraxis in Hrabětice — moderne Optik, vollständige Behandlungsinfos, Blog und lokales SEO. Bei der Suche „zubař Hrabětice\" steht die Praxis in Google auf Platz eins."
         description: >-
           MDDr. Václav Provázek führt eine Zahnarztpraxis in Hrabětice.
           Die alte Website wirkte veraltet, war auf dem Handy
@@ -1271,12 +1288,11 @@ projects:
           selbst erweitern kann. Lokales SEO zielt auf Begriffe wie
           „Zahnarzt Hrabětice" und „Dentalhygiene Hrabětice".
         result: >-
-          Nach dem Launch verzeichnete der Kunde höheres Interesse an
-          Behandlungen und positive Reaktionen auf die Vollständigkeit
-          der Informationen und den professionellen Eindruck. Die Site
-          überzeugt Patienten aktiv davon, dass die Praxis modern und
-          transparent arbeitet — in der lokalen Gesundheitsversorgung
-          entscheidend.
+          Bei der zentralen lokalen Suche „zubař Hrabětice" steht die Praxis in
+          Google auf Platz eins, und aus Google kommt der Großteil des gesamten
+          Traffics — 460 von 524 Besuchen (Google Analytics, 1.1. – 16.9.2026). Die
+          Site beantwortet, was Patienten früher telefonisch fragen mussten: Preise,
+          Behandlungsübersicht, Öffnungszeiten und Anfahrt.
         outcomes:
           - "Nach Launch höheres Patienteninteresse verzeichnet"
           - "Vollständige Behandlungs-, Preis- und FAQ-Infos"
