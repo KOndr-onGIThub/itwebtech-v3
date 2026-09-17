@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Portfolio\PortfolioProject;
 use Database\Seeders\PortfolioSeeder;
+use Database\Seeders\PortfolioTagNamesSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
@@ -200,6 +201,68 @@ class PortfolioTest extends TestCase
         $this->get('/projekty')->assertOk();
         $this->get('/en/projects')->assertOk();
         $this->get('/de/projekte')->assertOk();
+    }
+
+    /**
+     * OND-223: štítky se dřív vyráběly z humanizovaného slugu a jen česky,
+     * takže na detailu svítilo „Seo" / „Dlouhodoba spoluprace" a na německé
+     * stránce české popisky. Seeder názvů musí pokrýt každý použitý slug
+     * ve všech třech jazycích.
+     */
+    public function test_every_used_tag_has_a_name_in_all_locales(): void
+    {
+        $usedSlugs = DB::table('portfolio_tags')
+            ->whereIn('id', DB::table('portfolio_project_tag')->select('tag_id'))
+            ->pluck('slug', 'id');
+
+        $this->assertNotEmpty($usedSlugs, 'Seeder musí navěsit na projekty nějaké štítky.');
+
+        foreach ($usedSlugs as $tagId => $slug) {
+            // Název musí pocházet ze slovníku, ne z humanizovaného slugu.
+            $this->assertArrayHasKey(
+                $slug,
+                PortfolioTagNamesSeeder::NAMES,
+                "Štítek „{$slug}\" chybí v PortfolioTagNamesSeeder::NAMES, takže by se vykreslil jako slug."
+            );
+
+            $names = DB::table('portfolio_tag_translations')
+                ->where('tag_id', $tagId)
+                ->pluck('name', 'locale');
+
+            foreach (['cs', 'en', 'de'] as $locale) {
+                $this->assertArrayHasKey(
+                    $locale,
+                    $names->all(),
+                    "Štítek „{$slug}\" nemá název v jazyce {$locale}."
+                );
+                $this->assertSame(
+                    PortfolioTagNamesSeeder::NAMES[$slug][$locale],
+                    $names[$locale],
+                    "Štítek „{$slug}\" má v jazyce {$locale} jiný název, než říká slovník."
+                );
+            }
+        }
+    }
+
+    public function test_project_detail_shows_localized_tag_names(): void
+    {
+        // pitarena nese štítky, které byly vidět rozbité: `seo`, `dlouhodoba-spoluprace`.
+        $this->get('/projekty/pitarena')
+            ->assertOk()
+            ->assertSee('Viditelnost ve vyhledávačích', false)
+            ->assertSee('Dlouhodobá spolupráce', false)
+            ->assertDontSee('Dlouhodoba spoluprace', false);
+
+        $this->get('/de/projekte/pitarena')
+            ->assertOk()
+            ->assertSee('Sichtbarkeit in Suchmaschinen', false)
+            ->assertSee('Langfristige Zusammenarbeit', false)
+            ->assertDontSee('Dlouhodoba spoluprace', false);
+
+        $this->get('/en/projects/pitarena')
+            ->assertOk()
+            ->assertSee('Search visibility', false)
+            ->assertSee('Long-term partnership', false);
     }
 
     public function test_deleting_project_cascades_to_all_children(): void

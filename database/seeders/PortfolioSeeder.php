@@ -59,6 +59,10 @@ class PortfolioSeeder extends Seeder
             foreach ($projects as $row) {
                 $this->seedProject($row);
             }
+
+            // Názvy štítků (OND-223) — až po vytvoření štítků, přepíše
+            // humanizované slugy z `seedProject()` a doplní EN/DE.
+            (new PortfolioTagNamesSeeder())->run();
         });
 
         $count = PortfolioProject::count();
