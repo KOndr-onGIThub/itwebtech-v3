@@ -11,6 +11,9 @@
     @endphp
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{-- OND-231 F3: příznak „JS běží". Jen pod ním smí obsah startovat
+         v opacity: 0 (scroll reveal) — bez JS by tam uvízl navždy. --}}
+    <script>document.documentElement.classList.add('js');</script>
     <title>{!! $metaTitle !!}</title>
     <meta name="description" content="{!! $metaDesc !!}">
     <meta name="color-scheme" content="only dark">

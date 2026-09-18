@@ -41,11 +41,15 @@
     --color-ink-200:  #E2E8F0;
     --color-ink-50:   #F8FAFC;
 
-    /* — Zlatá akcent paleta — */
-    --color-gold-600: #D97706;
-    --color-gold-500: #F59E0B;
-    --color-gold-200: #FDE68A;
-    --color-gold-100: #FEF3C7;
+    /* — Akcentní paleta — OND-231 F3: sitewide rollout ACID.
+         Jména --color-gold-* zůstávají (jsou na ~200 místech
+         napříč legacy styly), hodnoty jsou nově acid. --gold-600
+         je hover variantou --gold-500, a v ACID je hover světlejší,
+         ne tmavší — proto je 600 světlejší než 500. */
+    --color-gold-600: #E6FF70;
+    --color-gold-500: #D8FF3A;
+    --color-gold-200: #EFFFB0;
+    --color-gold-100: #F7FFD6;
 
     /* — Stav — */
     --color-ok:    #10B981;
@@ -61,9 +65,11 @@
     --color-fg-muted:    #9B9AA0;
     --color-fg-faint:    #5C5C63;
 
-    --color-accent:        #E8A64A;
-    --color-accent-hover:  #F0B665;
-    --color-accent-press:  #C98E3A;
+    /* OND-231 F3 — ACID (hodnota musí zrcadlit :root
+       ve foundation/design-system.css). */
+    --color-accent:        #D8FF3A;
+    --color-accent-hover:  #E6FF70;
+    --color-accent-press:  #C2E62E;
 }
 
 @layer components {
@@ -79,7 +85,7 @@
 
     .landing-body {
         background:
-            radial-gradient(circle at top left, rgba(245, 158, 11, 0.14), transparent 34%),
+            radial-gradient(circle at top left, rgba(216, 255, 58, 0.14), transparent 34%),
             radial-gradient(circle at top right, rgba(56, 189, 248, 0.09), transparent 28%),
             var(--bg-page);
     }
@@ -265,7 +271,7 @@
 
     .landing-panel--accent {
         background:
-            linear-gradient(180deg, rgba(245, 158, 11, 0.16), rgba(255, 255, 255, 0.04)),
+            linear-gradient(180deg, rgba(216, 255, 58, 0.16), rgba(255, 255, 255, 0.04)),
             rgba(255, 255, 255, 0.04);
         border-color: var(--border-gold);
     }
@@ -378,7 +384,7 @@
         align-items: center;
         justify-content: center;
         border-radius: 999px;
-        background: rgba(245, 158, 11, 0.16);
+        background: rgba(216, 255, 58, 0.16);
         color: var(--color-gold-100);
         font-weight: 700;
     }
@@ -427,7 +433,7 @@
 
     .landing-section--form {
         background:
-            radial-gradient(circle at top center, rgba(245, 158, 11, 0.12), transparent 42%),
+            radial-gradient(circle at top center, rgba(216, 255, 58, 0.12), transparent 42%),
             linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
     }
 
@@ -680,11 +686,13 @@
     --bg-card-hover:   rgba(255, 255, 255, 0.072);
 
     --border-subtle:   rgba(255, 255, 255, 0.07);
-    --border-gold:     rgba(245, 158, 11, 0.28);
+    --border-gold:     rgba(216, 255, 58, 0.28);
     --border-emphasis: rgba(255, 255, 255, 0.14);
 
-    --glow-gold:       rgba(245, 158, 11, 0.22);
-    --accent-glow:     rgba(245, 158, 11, 0.07);
+    /* OND-231 F3: acid je světlejší a syté glow by na tmavém
+       podkladu svítilo víc než obsah — proto nižší alfa než amber. */
+    --glow-gold:       rgba(216, 255, 58, 0.14);
+    --accent-glow:     rgba(216, 255, 58, 0.06);
 
     --color-heading:   #E2E8F0;
     --color-body:      #94A3B8;
@@ -752,21 +760,36 @@
     img { max-width: 100%; }
 
     ::selection {
-        background: rgba(245, 158, 11, 0.35);
-        color: var(--color-heading);
+        background: var(--color-accent);
+        color: var(--color-accent-on);
     }
 
-    /* ── Scroll reveal ── */
-    [data-reveal] {
+    /* ── Scroll reveal ──
+       OND-231 F3 — dvojitá pojistka proti „prázdné stránce":
+       1. výchozí opacity: 0 platí jen pod `html.js`, tj. když je
+          jisté, že JS běží a `.is-visible` dorazí. Bez JS (nebo
+          když se bundle nenačte) je obsah normálně vidět —
+          `data-reveal` byl v minulosti zdrojem falešných NO_FCP
+          nálezů, protože animace nikdy nedoběhla.
+       2. při `prefers-reduced-motion: reduce` se observer v app.js
+          vůbec nespustí, takže tam musí být obsah viditelný taky. */
+    .js [data-reveal] {
         opacity: 0;
         transform: translateY(36px) scale(0.985);
         transition:
             opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
             transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    [data-reveal].is-visible {
+    .js [data-reveal].is-visible {
         opacity: 1;
         transform: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .js [data-reveal] {
+            opacity: 1;
+            transform: none;
+            transition: none;
+        }
     }
 
     /* ── Shimmer animace ── */
@@ -860,7 +883,7 @@
     .btn-primary:hover {
         background-color: var(--color-gold-600);
         border-color: var(--color-gold-600);
-        box-shadow: 0 4px 28px var(--glow-gold), 0 0 60px rgba(245, 158, 11, 0.10);
+        box-shadow: 0 4px 28px var(--glow-gold), 0 0 60px rgba(216, 255, 58, 0.10);
     }
 
     /* Sekundární — na tmavém pozadí */
@@ -914,7 +937,7 @@
         transform: translateX(-50%);
         width: 600px;
         height: 300px;
-        background: radial-gradient(ellipse, rgba(245, 158, 11, 0.10) 0%, transparent 70%);
+        background: radial-gradient(ellipse, rgba(216, 255, 58, 0.10) 0%, transparent 70%);
         pointer-events: none;
         z-index: 0;
     }
@@ -2149,7 +2172,7 @@
 
     .about-stats blockquote,
     .about-extras blockquote {
-        background: rgba(245, 158, 11, 0.06);
+        background: rgba(216, 255, 58, 0.06);
         border-left: 3px solid var(--color-gold-500);
         border-radius: 0 0.875rem 0.875rem 0;
         padding: 1.125rem 1.375rem;
@@ -2672,7 +2695,7 @@
     .form-group select:focus {
         border-color: var(--color-gold-500);
         background: rgba(255, 255, 255, 0.07);
-        box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.14);
+        box-shadow: 0 0 0 3px rgba(216, 255, 58, 0.14);
     }
     .form-group input::placeholder,
     .form-group textarea::placeholder {
@@ -2771,7 +2794,7 @@
     .form-file:hover,
     .form-file.is-drag-over {
         border-color: var(--color-gold-500);
-        background: rgba(245, 158, 11, 0.05);
+        background: rgba(216, 255, 58, 0.05);
     }
 
     .form-file__icon {
@@ -3580,7 +3603,7 @@
     }
     .pricing-compare__table thead th.is-featured {
         color: var(--color-gold-500);
-        background: rgba(245, 158, 11, 0.06);
+        background: rgba(216, 255, 58, 0.06);
     }
     .pricing-compare__group-row td {
         padding: 1.25rem 1rem 0.5rem;
@@ -3608,7 +3631,7 @@
         font-weight: 500;
     }
     .pricing-compare__table tbody td.is-featured {
-        background: rgba(245, 158, 11, 0.04);
+        background: rgba(216, 255, 58, 0.04);
     }
     .pricing-compare__yes {
         display: inline-flex;
@@ -3791,7 +3814,7 @@
         position: absolute;
         inset: 0;
         border-radius: 999px;
-        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.55);
+        box-shadow: 0 0 0 0 rgba(216, 255, 58, 0.55);
         animation: pulse-ring 2.5s ease-out infinite;
     }
     .contact-fab__btn:hover {
@@ -3879,7 +3902,7 @@
         margin: 1.25rem 0 0;
         padding: 0.875rem 1.125rem;
         border-left: 3px solid var(--color-gold-500);
-        background: rgba(245, 158, 11, 0.05);
+        background: rgba(216, 255, 58, 0.05);
         border-radius: 0 0.75rem 0.75rem 0;
     }
     .citation-inline__text {
@@ -3964,9 +3987,9 @@
         border: 1.5px solid var(--border-subtle);
     }
     .ai-compare__col--featured {
-        background: rgba(245, 158, 11, 0.06);
+        background: rgba(216, 255, 58, 0.06);
         border: 1.5px solid var(--border-gold);
-        box-shadow: 0 8px 40px rgba(245, 158, 11, 0.08);
+        box-shadow: 0 8px 40px rgba(216, 255, 58, 0.08);
     }
 
     .ai-compare__header {
@@ -4031,7 +4054,7 @@
         line-height: 1.55;
     }
     .ai-compare__col--featured .ai-compare__note {
-        color: rgba(245, 158, 11, 0.7);
+        color: rgba(216, 255, 58, 0.7);
     }
 
     .ai-compare__closing {
@@ -4073,7 +4096,7 @@
     .faq-item[open] {
         background: var(--bg-card-hover);
         border-color: var(--border-gold);
-        box-shadow: 0 4px 24px rgba(245, 158, 11, 0.08);
+        box-shadow: 0 4px 24px rgba(216, 255, 58, 0.08);
     }
 
     .faq-item summary {
@@ -4140,7 +4163,7 @@
         transform: translateX(-50%);
         width: 500px;
         height: 300px;
-        background: radial-gradient(ellipse, rgba(245, 158, 11, 0.08) 0%, transparent 70%);
+        background: radial-gradient(ellipse, rgba(216, 255, 58, 0.08) 0%, transparent 70%);
         pointer-events: none;
         z-index: 0;
     }
@@ -4238,7 +4261,7 @@
         transform: translateX(-50%);
         width: 700px;
         height: 400px;
-        background: radial-gradient(ellipse, rgba(245, 158, 11, 0.055) 0%, transparent 65%);
+        background: radial-gradient(ellipse, rgba(216, 255, 58, 0.055) 0%, transparent 65%);
         pointer-events: none;
         z-index: 0;
     }
@@ -4295,7 +4318,7 @@
         margin: 1.25rem 0 0 0;
         padding: 1rem 1.25rem;
         border-left: 3px solid var(--color-gold-500);
-        background: rgba(245, 158, 11, 0.05);
+        background: rgba(216, 255, 58, 0.05);
         border-radius: 0 0.5rem 0.5rem 0;
     }
     .inline-quote p {
@@ -4320,7 +4343,7 @@
         padding: 2rem;
         border: 1px solid var(--border-gold);
         border-radius: 1rem;
-        background: rgba(245, 158, 11, 0.04);
+        background: rgba(216, 255, 58, 0.04);
     }
     .problems-transition strong {
         display: block;
@@ -4801,7 +4824,7 @@
         border: 1px solid var(--border-subtle);
         border-radius: 1.25rem;
         box-shadow:
-            0 0 0 1px rgba(245, 158, 11, 0.08),
+            0 0 0 1px rgba(216, 255, 58, 0.08),
             0 32px 80px rgba(0, 0, 0, 0.7);
         padding: clamp(1.5rem, 5vw, 2.5rem);
         top: 50%;
@@ -4933,20 +4956,20 @@
         height: 72px;
         border-radius: 50%;
         background: rgba(10, 10, 15, 0.82);
-        border: 2px solid var(--color-gold-500, #F59E0B);
+        border: 2px solid var(--color-gold-500, #D8FF3A);
         box-shadow:
-            0 0 18px var(--glow-gold, rgba(245, 158, 11, 0.22)),
+            0 0 18px var(--glow-gold, rgba(216, 255, 58, 0.22)),
             0 4px 20px rgba(0, 0, 0, 0.55);
-        color: var(--color-gold-500, #F59E0B);
+        color: var(--color-gold-500, #D8FF3A);
         transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     }
 
     .consult-modal-video__play-btn:hover .consult-modal-video__play-btn-inner,
     .consult-modal-video__play-btn:focus-visible .consult-modal-video__play-btn-inner {
         transform: scale(1.09);
-        border-color: var(--color-gold-200, #FDE68A);
+        border-color: var(--color-gold-200, #EFFFB0);
         box-shadow:
-            0 0 32px rgba(245, 158, 11, 0.45),
+            0 0 32px rgba(216, 255, 58, 0.45),
             0 4px 24px rgba(0, 0, 0, 0.65);
     }
 
@@ -4955,7 +4978,7 @@
     }
 
     .consult-modal-video__play-btn:focus-visible .consult-modal-video__play-btn-inner {
-        outline: 2px solid var(--color-gold-500, #F59E0B);
+        outline: 2px solid var(--color-gold-500, #D8FF3A);
         outline-offset: 5px;
     }
 
@@ -4970,13 +4993,13 @@
 
     .consult-modal-video__play-btn-inner::before {
         inset: -10px;
-        border: 2px solid var(--color-gold-500, #F59E0B);
+        border: 2px solid var(--color-gold-500, #D8FF3A);
         animation: consult-pulse 2s ease-out infinite;
     }
 
     .consult-modal-video__play-btn-inner::after {
         inset: -18px;
-        border: 1.5px solid var(--color-gold-200, #FDE68A);
+        border: 1.5px solid var(--color-gold-200, #EFFFB0);
         animation: consult-pulse 2s ease-out infinite 0.5s;
     }
 
@@ -5479,8 +5502,8 @@
         padding: 0.25rem 0.625rem;
         margin: 0.5rem 0 0.75rem;
         border-radius: 999px;
-        background: rgba(245, 158, 11, 0.14);
-        border: 1px solid rgba(245, 158, 11, 0.32);
+        background: rgba(216, 255, 58, 0.14);
+        border: 1px solid rgba(216, 255, 58, 0.32);
         color: var(--color-gold-200);
         font-size: 0.75rem;
         font-weight: 600;
@@ -5490,7 +5513,7 @@
     /* Inline poptávkový formulář (T05) — reusuje vizuální tokeny landing-form */
     .section-inline-form {
         background:
-            radial-gradient(circle at top center, rgba(245, 158, 11, 0.08), transparent 42%),
+            radial-gradient(circle at top center, rgba(216, 255, 58, 0.08), transparent 42%),
             linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
     }
     .inline-form-shell {
@@ -5563,7 +5586,7 @@
     }
     .phone-cta:hover {
         color: var(--color-gold-500);
-        border-color: rgba(245, 158, 11, 0.6);
+        border-color: rgba(216, 255, 58, 0.6);
     }
     .navbar__phone {
         display: none;
@@ -5695,7 +5718,7 @@
             border-radius: 1.25rem;
             box-shadow:
                 0 20px 60px rgba(0, 0, 0, 0.4),
-                0 0 0 1px rgba(245, 158, 11, 0.15);
+                0 0 0 1px rgba(216, 255, 58, 0.15);
         }
         .section-hero__portrait-img {
             width: 100%;
@@ -5723,7 +5746,7 @@
         transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
     .faq-item[open] {
-        border-color: rgba(245, 158, 11, 0.35);
+        border-color: rgba(216, 255, 58, 0.35);
         box-shadow: 0 8px 24px rgba(15, 23, 42, 0.18);
     }
     .faq-item__question {
@@ -5790,7 +5813,7 @@
         padding: 1.5rem;
         background: var(--bg-card);
         border-radius: 0.875rem;
-        border: 1px solid rgba(245, 158, 11, 0.18);
+        border: 1px solid rgba(216, 255, 58, 0.18);
     }
     .faq-form__intro {
         margin-bottom: 1rem;
@@ -5908,9 +5931,18 @@
         margin: 0 0 1.75rem;
         max-width: 18ch;
     }
+    /* OND-231 F3 — sjednocení podpisu: důraz v titulku podstránky drží
+       stejnou gramatiku jako ACID homepage (`.pd-heading em`) — bílé
+       slovo s acid podtržením. Plné vybarvení, které fungovalo
+       u teplého amberu, by v acid velikosti hero titulku překřičelo
+       zbytek stránky. */
     .page-hero--contact .page-hero__heading em {
-        color: var(--color-accent);
+        color: var(--color-fg-primary);
         font-style: normal;
+        text-decoration: underline;
+        text-decoration-color: var(--color-accent);
+        text-decoration-thickness: 0.12em;
+        text-underline-offset: 0.08em;
     }
 
     .page-hero__subline {
@@ -6137,8 +6169,12 @@
         max-width: 18ch;
     }
     .page-hero--price .page-hero__heading em {
-        color: var(--color-accent);
+        color: var(--color-fg-primary);
         font-style: normal;
+        text-decoration: underline;
+        text-decoration-color: var(--color-accent);
+        text-decoration-thickness: 0.12em;
+        text-underline-offset: 0.08em;
     }
 
     /* Sticky CTA — viewport-anchored, top-of-z-index, bottom-right.
@@ -6250,8 +6286,12 @@
         max-width: 18ch;
     }
     .page-hero--projects .page-hero__heading em {
-        color: var(--color-accent);
+        color: var(--color-fg-primary);
         font-style: normal;
+        text-decoration: underline;
+        text-decoration-color: var(--color-accent);
+        text-decoration-thickness: 0.12em;
+        text-underline-offset: 0.08em;
     }
 
     /* Outcome metric emphasis — když Content Writer dorazí čísla pro

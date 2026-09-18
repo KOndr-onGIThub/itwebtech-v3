@@ -34,7 +34,7 @@ return [
     // OND-167 — Cookie consent modal.
     'cookies' => [
         'title'       => 'Mind a few cookies?',
-        'body'        => 'They help me see what works on the site and what doesn\'t. No data selling, no tracking nonsense — just a few numbers so I know whether to keep improving things.',
+        'body'        => 'I only measure a few numbers about what works on the site. No data selling.',
         'policy_link' => 'See the cookie policy',
         'accept'      => 'Accept all',
         'reject'      => 'Decline',

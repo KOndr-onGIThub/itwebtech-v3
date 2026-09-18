@@ -53,6 +53,9 @@ return [
 
     'social_proof' => [
         'rating_aria'  => 'Hodnocení 5 z 5',
+        // OND-231: řada log klientů má vlastní landmark label, aby čtečka
+        // nečetla druhý blok pod stejným „Hodnocení 5 z 5".
+        'clients_aria' => 'Klienti',
         'rating_value' => '5,0',
         'reviews'      => '(21 recenzí Google + Firmy.cz)',
         'projects'     => '23+ realizací',

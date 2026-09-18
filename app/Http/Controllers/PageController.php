@@ -26,14 +26,8 @@ class PageController extends Controller
                 ->values();
         }
 
-        // OND-227 — prototypy autorského vizuálního podpisu (hero + důkazy).
-        // Přepínání ?podpis=a|b|c; bez parametru se renderuje produkční homepage.
-        // Prototypy neindexovat — jde o interní výběr varianty boardem.
-        $podpis = request()->query('podpis');
-        if (in_array($podpis, ['a', 'b', 'c', 'd'], true)) {
-            return view('pages.podpis.' . $podpis, compact('featuredHomeProjects'));
-        }
-
+        // OND-231 (F3): prototypové větvení `?podpis=a|b|c|d` z OND-227 je pryč.
+        // Vítězná varianta D („Studio" / ACID) je od F3 rovnou `pages.home`.
         return view('pages.home', compact('featuredHomeProjects'));
     }
 

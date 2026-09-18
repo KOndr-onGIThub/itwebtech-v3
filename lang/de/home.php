@@ -48,6 +48,7 @@ return [
 
     'social_proof' => [
         'rating_aria'  => 'Bewertung 5 von 5',
+        'clients_aria' => 'Kunden',
         'rating_value' => '5,0',
         'reviews'      => '(21 Bewertungen auf Google + Firmy.cz)',
         'projects'     => '23+ realisierte Projekte',

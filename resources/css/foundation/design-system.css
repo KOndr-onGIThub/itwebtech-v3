@@ -59,11 +59,13 @@
     --color-border-mid:      #3A3A41;
     --color-border-on-cream: #D8D2C5;
 
-    /* Accent (warm amber CTA + headline emphasis) */
-    --color-accent:       #E8A64A;
-    --color-accent-hover: #F0B665;
-    --color-accent-press: #C98E3A;
-    --color-accent-on:    #15151A;  /* text na amber tlačítku */
+    /* Accent — OND-231 F3: sitewide rollout vizuálního podpisu ACID
+       (OND-227 varianta D). Amber #E8A64A skončil; barva je nově
+       signální inkoust: existuje jen tam, kde je akce nebo důraz. */
+    --color-accent:       #D8FF3A;
+    --color-accent-hover: #E6FF70;
+    --color-accent-press: #C2E62E;
+    --color-accent-on:    #0A0A0B;  /* text na acid tlačítku */
 
     /* Stavové (form feedback) */
     --color-success: #5BB97F;
