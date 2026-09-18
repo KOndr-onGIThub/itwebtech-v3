@@ -30,7 +30,7 @@ class PageController extends Controller
         // Přepínání ?podpis=a|b|c; bez parametru se renderuje produkční homepage.
         // Prototypy neindexovat — jde o interní výběr varianty boardem.
         $podpis = request()->query('podpis');
-        if (in_array($podpis, ['a', 'b', 'c'], true)) {
+        if (in_array($podpis, ['a', 'b', 'c', 'd'], true)) {
             return view('pages.podpis.' . $podpis, compact('featuredHomeProjects'));
         }
 
