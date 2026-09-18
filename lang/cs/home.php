@@ -353,6 +353,60 @@ return [
         ],
     ],
 
+    // OND-229 (F2 — důkazní vrstva, R3 plánu OND-226): sekce „Pod kapotou"
+    // ukazuje řemeslo, které v kódu reálně je. Každé tvrzení je ověřitelné
+    // v repu: 7 šířek obrázků = resources/js/app.js (`w: '320;…;1536'`),
+    // vlastní kód = žádný CMS/builder v composeru, tokeny = resources/css.
+    // Čas načtení měří Performance API v prohlížeči návštěvníka — nikdy
+    // netvrdíme číslo, které jsme nenaměřili.
+    'craft' => [
+        'heading' => 'Pod kapotou',
+        'intro'   => 'Web, který vám stavím, vypadá takhle i zevnitř. Tohle nejsou marketingové věty — všechno níž se dá ověřit přímo na stránce, na které právě jste.',
+        'facts'   => [
+            [
+                'heading' => 'Vlastní kód',
+                'text'    => 'Žádný WordPress, žádný page-builder, žádná platforma. Stránka je napsaná na míru a běží bez pluginů, které by bylo nutné měsíčně aktualizovat.',
+            ],
+            [
+                'heading' => 'Obrázky šité na displej',
+                'text'    => 'Každý obrázek tu existuje v sedmi velikostech a úsporném formátu AVIF. Váš prohlížeč si stáhl jen tu, kterou váš displej opravdu potřebuje.',
+            ],
+            [
+                'heading' => 'Design drží systém',
+                'text'    => 'Barvy, písmo a rozestupy neřídí šablona, ale vlastní systém proměnných. Proto nic nepřečnívá — a proto si na to níž můžete sáhnout.',
+            ],
+        ],
+        'perf_prefix' => 'Tahle stránka se vám načetla za',
+        'perf_suffix' => '— změřeno právě teď, ve vašem prohlížeči.',
+    ],
+
+    // OND-229 (F2 — živé demo řemesla): interaktivní ukázka design tokenů.
+    // Obsah karty je smyšlená ukázková firma (žádná klientská data).
+    'demo' => [
+        'eyebrow'  => 'Živá ukázka',
+        'heading'  => 'Tři proměnné, žádná šablona',
+        'text'     => 'Takhle vzniká web na míru: design neurčuje šablona, ale systém. Přenastavte tři proměnné a sledujte, jak se ukázka přeskládá — a nic se nerozbije. Stejný princip drží pohromadě i tuhle stránku.',
+        'controls' => [
+            'accent' => 'Barva akcentu',
+            'scale'  => 'Velikost písma',
+            'space'  => 'Vzdušnost',
+        ],
+        'accents'  => [
+            'acid'   => 'Acid',
+            'klein'  => 'Klein',
+            'sarlat' => 'Šarlat',
+            'jantar' => 'Jantar',
+        ],
+        'card' => [
+            'eyebrow' => 'Ukázka — smyšlená firma',
+            'heading' => 'Pekárna U Dvou kvásků',
+            'text'    => 'Chleba pečeme každé ráno od čtyř. Co se do poledne neprodá, večer rozdáme.',
+            'cta'     => 'Objednat chleba',
+            'stat_value' => '120',
+            'stat_label' => 'bochníků denně',
+        ],
+    ],
+
     // OND-201 (nález 5.8): konec homepage byl tři výzvy za sebou —
     // „Pošlete mi pár vět o projektu" (inline_form), „Připraveni začít?
     // Konzultace je zdarma." (home.cta) a „Řeknu vám upřímný názor na váš

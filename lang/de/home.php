@@ -337,6 +337,57 @@ return [
         ],
     ],
 
+    // OND-229 (F2 — Beweisschicht): Abschnitt „Unter der Haube" + Live-Demo
+    // der Design-Tokens. Jede Aussage ist im Repo überprüfbar; die Ladezeit
+    // misst die Performance API im Browser des Besuchers.
+    'craft' => [
+        'heading' => 'Unter der Haube',
+        'intro'   => 'Die Website, die ich für Sie baue, sieht auch von innen so aus. Das sind keine Marketingsätze — alles unten lässt sich direkt auf dieser Seite überprüfen.',
+        'facts'   => [
+            [
+                'heading' => 'Eigener Code',
+                'text'    => 'Kein WordPress, kein Page-Builder, keine Plattform. Die Seite ist maßgeschrieben und läuft ohne Plugins, die monatliche Updates bräuchten.',
+            ],
+            [
+                'heading' => 'Bilder nach Maß für Ihr Display',
+                'text'    => 'Jedes Bild existiert hier in sieben Größen und im sparsamen AVIF-Format. Ihr Browser hat nur die geladen, die Ihr Display wirklich braucht.',
+            ],
+            [
+                'heading' => 'Design mit System',
+                'text'    => 'Farben, Schrift und Abstände steuert keine Vorlage, sondern ein eigenes System von Variablen. Deshalb ragt nichts heraus — und deshalb können Sie es unten selbst ausprobieren.',
+            ],
+        ],
+        'perf_prefix' => 'Diese Seite wurde für Sie in',
+        'perf_suffix' => 'geladen — gemessen gerade eben, in Ihrem Browser.',
+    ],
+
+    // OND-229 (F2 — Live-Demo des Handwerks): interaktive Token-Demo.
+    // Der Karteninhalt ist eine fiktive Beispielfirma (keine Kundendaten).
+    'demo' => [
+        'eyebrow'  => 'Live-Demo',
+        'heading'  => 'Drei Variablen, keine Vorlage',
+        'text'     => 'So entsteht eine Website nach Maß: Das Design bestimmt ein System, keine Vorlage. Verstellen Sie drei Variablen und sehen Sie zu, wie sich das Beispiel neu ordnet — ohne zu brechen. Dasselbe Prinzip hält auch diese Seite zusammen.',
+        'controls' => [
+            'accent' => 'Akzentfarbe',
+            'scale'  => 'Schriftgröße',
+            'space'  => 'Weißraum',
+        ],
+        'accents'  => [
+            'acid'   => 'Acid',
+            'klein'  => 'Klein',
+            'sarlat' => 'Scharlach',
+            'jantar' => 'Bernstein',
+        ],
+        'card' => [
+            'eyebrow' => 'Beispiel — fiktive Firma',
+            'heading' => 'Bäckerei Zu den zwei Sauerteigen',
+            'text'    => 'Wir backen jeden Morgen ab vier Uhr Brot. Was bis mittags nicht verkauft ist, verschenken wir am Abend.',
+            'cta'     => 'Brot bestellen',
+            'stat_value' => '120',
+            'stat_label' => 'Laibe pro Tag',
+        ],
+    ],
+
     // OND-201 (Befund 5.8): Das Ende der Homepage waren drei Handlungs-
     // aufforderungen hintereinander. Die Blöcke `cta` und `final_cta` sind
     // entfernt; es bleibt eine Aufforderung mit einem Formular in

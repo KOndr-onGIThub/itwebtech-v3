@@ -175,12 +175,110 @@
     </div>
 </section>
 
+{{-- OND-229 F2 — Služby: tři sloupce s vlasovými linkami, bez ikon
+     a boxů. Ikony jsou slovník šablon; sloupec unese titulek sám. --}}
+<section class="pd-section">
+    <div class="container-site">
+        <header class="pd-head">
+            <h2 class="pd-head__title">{{ __('home.services.heading_primary') }}</h2>
+            <span class="pd-head__index" aria-hidden="true">04</span>
+        </header>
+
+        <div class="pd-services">
+            @foreach (['weby', 'aplikace', 'eshop'] as $i => $key)
+            <article class="pd-service">
+                <span class="pd-service__num" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                <h3 class="pd-service__title">{{ __("home.services.primary.{$key}.title") }}</h3>
+                <p class="pd-service__desc">{{ __("home.services.primary.{$key}.description") }}</p>
+                <ul class="pd-service__bullets">
+                    @foreach (__("home.services.primary.{$key}.bullets") as $bullet)
+                    <li>{{ $bullet }}</li>
+                    @endforeach
+                </ul>
+            </article>
+            @endforeach
+        </div>
+
+        <p class="pd-services__secondary">
+            {!! __('home.services.secondary_inline', [
+                'pricing_link' => '<a href="' . lroute('price') . '">' . e(__('home.services.secondary_inline_pricing')) . '</a>',
+                'contact_link' => '<a href="#' . __('home.anchors.poptavka') . '">' . e(__('home.services.secondary_inline_contact')) . '</a>',
+            ]) !!}
+        </p>
+    </div>
+</section>
+
+{{-- OND-229 F2 — Případovky (R3: ukaž, neříkej): reálné vizuály
+     nasazených webů z DB přes AVIF pipeline; dílo mluví první,
+     věta o výsledku druhá. Střídavý layout, žádné karty. --}}
+@if (config('site.features.show_portfolio_section') && ($featuredHomeProjects ?? collect())->isNotEmpty())
+<section class="pd-section">
+    <div class="container-site">
+        <header class="pd-head">
+            <h2 class="pd-head__title">{{ __('home.portfolio.heading') }}</h2>
+            <span class="pd-head__index" aria-hidden="true">05</span>
+        </header>
+
+        <div class="pd-cases">
+            @foreach ($featuredHomeProjects as $i => $project)
+                @php
+                    $t = $project->translation();
+                    $cardCopy = __('home.portfolio.cards.' . $project->slug);
+                    $clientLabel = is_array($cardCopy) && !empty($cardCopy['client'])
+                        ? $cardCopy['client']
+                        : ($project->client_name ?: ($t?->title ?? $project->slug));
+                    $outcome = is_array($cardCopy) && !empty($cardCopy['outcome'])
+                        ? $cardCopy['outcome']
+                        : ($t?->subtitle ?? '');
+                    // OND-202: jednotný výběr náhledovky — viz portfolio_card_thumbnail().
+                    $hero = portfolio_card_thumbnail($project->screenshots ?? collect());
+                    $detailHref = $project->detailUrl();
+                @endphp
+                <article class="pd-case">
+                    <a
+                        href="{{ $detailHref }}"
+                        class="pd-case__visual"
+                        aria-label="{{ $clientLabel }} — {{ __('home.portfolio.detail_cta') }}"
+                        data-analytics="project_card_click"
+                        data-analytics-props='{"slug":"{{ $project->slug }}"}'
+                    >
+                        @if ($hero)
+                            <x-portfolio.screenshot
+                                :path="$hero->path"
+                                :alt="$clientLabel"
+                                sizes="(min-width: 1024px) 58vw, 100vw"
+                                loading="lazy"
+                            />
+                        @endif
+                    </a>
+                    <div class="pd-case__body">
+                        <span class="pd-case__num" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                        <h3 class="pd-case__client">{{ $clientLabel }}</h3>
+                        @if ($outcome)
+                        <p class="pd-case__outcome">{{ $outcome }}</p>
+                        @endif
+                        <a
+                            href="{{ $detailHref }}"
+                            class="pd-case__cta"
+                            data-analytics="project_card_click"
+                            data-analytics-props='{"slug":"{{ $project->slug }}"}'
+                        >{{ __('home.portfolio.detail_cta') }} &rarr;</a>
+                    </div>
+                </article>
+            @endforeach
+        </div>
+
+        <p class="pd-more"><a href="{{ lroute('projects') }}" class="pd-more__link">{{ __('home.portfolio.cta') }}</a></p>
+    </div>
+</section>
+@endif
+
 {{-- Cenová kotva — tři sloupce, vlasové linky, žádné boxy --}}
 <section class="pd-section">
     <div class="container-site">
         <header class="pd-head">
             <h2 class="pd-head__title">{{ __('home.price_anchor.heading') }}</h2>
-            <span class="pd-head__index" aria-hidden="true">04</span>
+            <span class="pd-head__index" aria-hidden="true">06</span>
         </header>
         <p class="pd-intro">{{ __('home.price_anchor.intro') }}</p>
 
@@ -196,12 +294,180 @@
     </div>
 </section>
 
+{{-- OND-229 F2 — Proč já: video nese sekci (mluví Ondra sám),
+     výhody jako tichá mřížka s vlasovými linkami vedle. --}}
+<section class="pd-section">
+    <div class="container-site">
+        <header class="pd-head">
+            <h2 class="pd-head__title">{{ __('home.why_me.heading') }}</h2>
+            <span class="pd-head__index" aria-hidden="true">07</span>
+        </header>
+
+        <div class="pd-why">
+            <div class="pd-why__media">
+                <div class="pd-why__video">
+                    <x-video-intro :ariaLabel="__('home.why_me.video_aria')" />
+                </div>
+                <p class="pd-why__bio">{{ __('home.why_me.bio') }}</p>
+            </div>
+
+            <div class="pd-why__grid">
+                @foreach (__('home.why_me.advantages') as $i => $adv)
+                <article class="pd-why__item">
+                    <span class="pd-why__num" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                    <div>
+                        <h3>{{ $adv['heading'] }}</h3>
+                        <p>{{ $adv['text'] }}</p>
+                    </div>
+                </article>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- OND-229 F2 — Pod kapotou (R3: decentní moment řemesla):
+     fakta ověřitelná v repu + čas načtení změřený Performance API
+     v prohlížeči návštěvníka. Bez JS zůstane řádek s časem skrytý —
+     nikdy neukazujeme číslo, které jsme nenaměřili. --}}
+<section class="pd-section">
+    <div class="container-site">
+        <header class="pd-head">
+            <h2 class="pd-head__title">{{ __('home.craft.heading') }}</h2>
+            <span class="pd-head__index" aria-hidden="true">08</span>
+        </header>
+        <p class="pd-intro">{{ __('home.craft.intro') }}</p>
+
+        <div class="pd-hood">
+            @foreach (__('home.craft.facts') as $fact)
+            <article class="pd-hood__fact">
+                <h3>{{ $fact['heading'] }}</h3>
+                <p>{{ $fact['text'] }}</p>
+            </article>
+            @endforeach
+        </div>
+
+        <p class="pd-hood__perf" id="pd-perf" hidden>
+            {{ __('home.craft.perf_prefix') }}
+            <strong id="pd-perf-value"></strong>
+            {{ __('home.craft.perf_suffix') }}
+        </p>
+
+        {{-- Živé demo řemesla (R3: jeden interaktivní prvek): tři
+             proměnné design systému přepisují ukázku naživo. Nativní
+             ovládací prvky = klávesnice i dotyk zdarma, žádná knihovna.
+             Obsah karty je smyšlená firma — žádná klientská data. --}}
+        <div class="pd-demo" id="pd-demo">
+            <div class="pd-demo__copy">
+                <p class="pd-eyebrow">{{ __('home.demo.eyebrow') }}</p>
+                <h3 class="pd-demo__heading">{{ __('home.demo.heading') }}</h3>
+                <p class="pd-demo__text">{{ __('home.demo.text') }}</p>
+
+                <form class="pd-demo__controls">
+                    <fieldset class="pd-demo__group">
+                        <legend>{{ __('home.demo.controls.accent') }}</legend>
+                        <div class="pd-demo__swatches">
+                            @foreach (['acid' => '#D8FF3A', 'klein' => '#3B5BFF', 'sarlat' => '#FF3B30', 'jantar' => '#E8A64A'] as $key => $hex)
+                            <label class="pd-demo__swatch">
+                                <input
+                                    type="radio"
+                                    name="demo-accent"
+                                    value="{{ $hex }}"
+                                    data-on="{{ in_array($key, ['acid', 'jantar'], true) ? '#0A0A0B' : '#F2F0EA' }}"
+                                    @checked($key === 'acid')
+                                >
+                                <span class="pd-demo__chip" style="background: {{ $hex }}" aria-hidden="true"></span>
+                                {{ __('home.demo.accents.' . $key) }}
+                            </label>
+                            @endforeach
+                        </div>
+                    </fieldset>
+                    <div class="pd-demo__group">
+                        <label for="pd-demo-scale">{{ __('home.demo.controls.scale') }}</label>
+                        <input type="range" id="pd-demo-scale" min="0.85" max="1.25" step="0.01" value="1">
+                    </div>
+                    <div class="pd-demo__group">
+                        <label for="pd-demo-space">{{ __('home.demo.controls.space') }}</label>
+                        <input type="range" id="pd-demo-space" min="0.7" max="1.6" step="0.01" value="1">
+                    </div>
+                </form>
+            </div>
+
+            <div class="pd-demo__stage" id="pd-demo-stage">
+                <p class="pd-demo-card__eyebrow">{{ __('home.demo.card.eyebrow') }}</p>
+                <p class="pd-demo-card__heading">{{ __('home.demo.card.heading') }}</p>
+                <p class="pd-demo-card__text">{{ __('home.demo.card.text') }}</p>
+                <div class="pd-demo-card__row">
+                    <span class="pd-demo-card__cta">{{ __('home.demo.card.cta') }}</span>
+                    <span class="pd-demo-card__stat">
+                        <strong>{{ __('home.demo.card.stat_value') }}</strong>
+                        {{ __('home.demo.card.stat_label') }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- OND-229 F2 — Postup: čtyři kroky pod sebou, čas jako acid
+     datový štítek; citace klientů zůstávají u kroků, kde vznikly. --}}
+<section class="pd-section" id="{{ __('home.anchors.how_i_work') }}">
+    <div class="container-site">
+        <header class="pd-head">
+            <h2 class="pd-head__title">{{ __('home.how_i_work.heading') }}</h2>
+            <span class="pd-head__index" aria-hidden="true">09</span>
+        </header>
+
+        <ol class="pd-steps">
+            @foreach (__('home.how_i_work.steps') as $i => $step)
+            <li class="pd-step">
+                <span class="pd-step__num" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                <div class="pd-step__body">
+                    <h3 class="pd-step__title">{{ $step['heading'] }}@if (!empty($step['time'])) <em>{{ $step['time'] }}</em>@endif</h3>
+                    <p class="pd-step__text">{{ $step['text'] }}</p>
+                    @if (!empty($step['quote_text']))
+                    <blockquote>
+                        {{ $step['quote_text'] }}
+                        <footer>— {{ $step['quote_author'] }}</footer>
+                    </blockquote>
+                    @endif
+                    @if (!empty($step['note']))
+                    <p class="pd-step__note">{{ $step['note'] }}</p>
+                    @endif
+                </div>
+            </li>
+            @endforeach
+        </ol>
+
+        {{-- Rezervace: přímý odkaz místo vendor widgetu — Reservanto
+             button si nese vlastní žluté barvy a rozbíjel by podpis;
+             direct_url je stejný cíl (viz config/site.php, OND-123). --}}
+        <div class="pd-steps__cta">
+            <p class="pd-steps__cta-intro">{{ __('home.how_i_work.cta_intro') }}</p>
+            @php
+                $booking = config('site.booking');
+            @endphp
+            @if (($booking['enabled'] ?? false) && !empty($booking['direct_url']))
+                <a href="{{ $booking['direct_url'] }}" target="_blank" rel="noopener" class="pd-cta" data-analytics="final_cta_secondary_click">
+                    {{ __('home.how_i_work.cta_label') }}
+                    <x-icon.arrow-right class="w-4 h-4 shrink-0 pd-cta__arrow" />
+                </a>
+            @else
+                <a href="#{{ __('home.anchors.poptavka') }}" class="pd-cta">
+                    {{ __('home.how_i_work.cta_label') }}
+                    <x-icon.arrow-right class="w-4 h-4 shrink-0 pd-cta__arrow" />
+                </a>
+            @endif
+        </div>
+    </div>
+</section>
+
 {{-- Reference — přesná mřížka citací --}}
 <section class="pd-section">
     <div class="container-site">
         <header class="pd-head">
             <h2 class="pd-head__title">{{ __('home.testimonials.heading') }}</h2>
-            <span class="pd-head__index" aria-hidden="true">05</span>
+            <span class="pd-head__index" aria-hidden="true">10</span>
         </header>
 
         <div class="pd-testi">
@@ -214,6 +480,179 @@
                 </div>
             </article>
             @endforeach
+        </div>
+    </div>
+</section>
+
+{{-- OND-229 F2 — FAQ: nativní details/summary, vlasové linky,
+     acid křížek jako indikátor. Stejné analytics klíče a JSON-LD
+     jako produkční homepage (parita pro případný flip). --}}
+@php
+    $faqItems = __('home.faq.items');
+@endphp
+<section class="pd-section" id="faq">
+    <div class="container-site">
+        <header class="pd-head">
+            <h2 class="pd-head__title">{{ __('home.faq.heading') }}</h2>
+            <span class="pd-head__index" aria-hidden="true">11</span>
+        </header>
+
+        <div class="pd-faq">
+            @foreach ($faqItems as $i => $item)
+            <details class="pd-faq__item" data-q-id="{{ $i }}">
+                <summary
+                    class="pd-faq__q"
+                    data-analytics="faq_item_open"
+                    data-faq-key="{{ $item['key'] ?? 'item-' . $i }}"
+                >
+                    <span>{{ $item['question'] }}</span>
+                    <span class="pd-faq__mark" aria-hidden="true"></span>
+                </summary>
+                <p class="pd-faq__a">{{ $item['answer'] }}</p>
+            </details>
+            @endforeach
+        </div>
+
+        <script type="application/ld+json">
+        @php
+            $faqLd = [
+                '@context'   => 'https://schema.org',
+                '@type'      => 'FAQPage',
+                'mainEntity' => array_map(static function (array $item): array {
+                    return [
+                        '@type'          => 'Question',
+                        'name'           => $item['question'],
+                        'acceptedAnswer' => [
+                            '@type' => 'Answer',
+                            'text'  => $item['answer'],
+                        ],
+                    ];
+                }, $faqItems),
+            ];
+        @endphp
+        {!! json_encode($faqLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+        </script>
+    </div>
+</section>
+
+{{-- OND-229 F2 — Poptávka: jediná závěrečná výzva (drží nález
+     OND-201/5.8 — FAQ mikro-formulář se nepřidává, dva formuláře
+     hned po sobě by výzvu rozmělnily). Stejný endpoint, pole i
+     session handling jako produkční partial home-inline-form. --}}
+<section class="pd-section" id="{{ __('home.anchors.poptavka') }}">
+    <div class="container-site">
+        <header class="pd-head">
+            <h2 class="pd-head__title">{{ __('home.inline_form.heading') }}</h2>
+            <span class="pd-head__index" aria-hidden="true">12</span>
+        </header>
+
+        <div class="pd-form">
+            <div class="pd-form__intro">
+                <p class="pd-intro">{{ __('home.inline_form.description') }}</p>
+                <blockquote class="pd-form__quote">
+                    {{ __('home.inline_form.quote_text') }}
+                    <footer>— {{ __('home.inline_form.quote_author') }}</footer>
+                </blockquote>
+            </div>
+
+            <div class="pd-form__panel">
+                @if (session('home_lead_success'))
+                    <div class="pd-alert pd-alert--success" role="status">
+                        {{ __('home.inline_form.success') }}
+                    </div>
+                @endif
+
+                @if ($errors->any() && session('home_lead_target') !== 'faq')
+                    <div class="pd-alert pd-alert--error" role="alert">
+                        {{ $errors->first() }}
+                    </div>
+                @endif
+
+                @php
+                    $isInlineTarget = session('home_lead_target') !== 'faq';
+                @endphp
+
+                <form
+                    method="POST"
+                    action="{{ route('home.lead.store') }}"
+                    novalidate
+                    x-data="{ submitting: false }"
+                    @submit="submitting = true; window.dispatchEvent(new CustomEvent('inline-form-submit-attempt'))"
+                >
+                    @csrf
+
+                    <div class="pd-form__grid">
+                        <div class="pd-field">
+                            <label for="pd-lead-name">{{ __('home.inline_form.name') }} <span aria-hidden="true">*</span></label>
+                            <input
+                                type="text"
+                                id="pd-lead-name"
+                                name="name"
+                                value="{{ $isInlineTarget ? old('name') : '' }}"
+                                required
+                                placeholder="{{ __('home.inline_form.placeholders.name') }}"
+                                autocomplete="name"
+                            >
+                            @if ($isInlineTarget) @error('name') <p class="pd-field__error">{{ $message }}</p> @enderror @endif
+                        </div>
+
+                        <div class="pd-field">
+                            <label for="pd-lead-email">{{ __('home.inline_form.email') }} <span aria-hidden="true">*</span></label>
+                            <input
+                                type="email"
+                                id="pd-lead-email"
+                                name="email"
+                                value="{{ $isInlineTarget ? old('email') : '' }}"
+                                required
+                                placeholder="{{ __('home.inline_form.placeholders.email') }}"
+                                autocomplete="email"
+                            >
+                            @if ($isInlineTarget) @error('email') <p class="pd-field__error">{{ $message }}</p> @enderror @endif
+                        </div>
+
+                        <div class="pd-field pd-field--full">
+                            <label for="pd-lead-phone">{{ __('home.inline_form.phone') }}</label>
+                            <input
+                                type="tel"
+                                id="pd-lead-phone"
+                                name="phone"
+                                value="{{ $isInlineTarget ? old('phone') : '' }}"
+                                placeholder="{{ __('home.inline_form.placeholders.phone') }}"
+                                autocomplete="tel"
+                            >
+                            @if ($isInlineTarget) @error('phone') <p class="pd-field__error">{{ $message }}</p> @enderror @endif
+                        </div>
+
+                        <div class="pd-field pd-field--full">
+                            <label for="pd-lead-message">{{ __('home.inline_form.message') }} <span aria-hidden="true">*</span></label>
+                            <textarea
+                                id="pd-lead-message"
+                                name="message"
+                                rows="5"
+                                required
+                                placeholder="{{ __('home.inline_form.placeholders.message') }}"
+                            >{{ $isInlineTarget ? old('message') : '' }}</textarea>
+                            @if ($isInlineTarget) @error('message') <p class="pd-field__error">{{ $message }}</p> @enderror @endif
+                        </div>
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="pd-cta pd-form__submit"
+                        :disabled="submitting"
+                        data-analytics="inline_form_submit_attempt"
+                    >
+                        <span x-show="!submitting">{{ __('home.inline_form.submit') }}</span>
+                        <span x-show="submitting" x-cloak>{{ __('home.inline_form.submitting') }}</span>
+                    </button>
+
+                    <p class="pd-form__note">{{ __('home.inline_form.note') }}</p>
+
+                    <p class="pd-form__privacy">
+                        {{ __('home.inline_form.privacy_prefix') }}<a href="{{ lroute('privacy') }}">{{ __('home.inline_form.privacy_link') }}</a>.
+                    </p>
+                </form>
+            </div>
         </div>
     </div>
 </section>
@@ -243,5 +682,52 @@
             photo.style.transform = '';
         });
     })();
+
+    // OND-229 — Pod kapotou: skutečný čas načtení z Performance API.
+    // Bez podpory API zůstane odstavec `hidden` — žádné vymyšlené číslo.
+    (function () {
+        function show() {
+            var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+            if (!nav || !nav.loadEventEnd) return;
+            var s = nav.loadEventEnd / 1000;
+            if (!(s > 0) || s > 60) return;
+            var value = document.getElementById('pd-perf-value');
+            var wrap = document.getElementById('pd-perf');
+            if (!value || !wrap) return;
+            value.textContent = s.toLocaleString(document.documentElement.lang || 'cs', {
+                minimumFractionDigits: 1,
+                maximumFractionDigits: 1
+            }) + ' s';
+            wrap.hidden = false;
+        }
+        if (document.readyState === 'complete') { setTimeout(show, 0); }
+        else { window.addEventListener('load', function () { setTimeout(show, 0); }); }
+    })();
+
+    // OND-229 — Živé demo: tři proměnné přepisují CSS tokeny ukázky.
+    (function () {
+        var demo = document.getElementById('pd-demo');
+        var stage = document.getElementById('pd-demo-stage');
+        if (!demo || !stage) return;
+        demo.addEventListener('input', function (e) {
+            var t = e.target;
+            if (t.name === 'demo-accent') {
+                stage.style.setProperty('--demo-accent', t.value);
+                stage.style.setProperty('--demo-accent-on', t.dataset.on);
+            } else if (t.id === 'pd-demo-scale') {
+                stage.style.setProperty('--demo-scale', t.value);
+            } else if (t.id === 'pd-demo-space') {
+                stage.style.setProperty('--demo-space', t.value);
+            }
+        });
+    })();
+
+    // OND-229 — po submitu formuláře (redirect back()) doskrolovat
+    // k výsledku, stejně jako na produkční homepage.
+    document.addEventListener('DOMContentLoaded', function () {
+        @if ($errors->any() || session('home_lead_success'))
+        document.getElementById('{{ __('home.anchors.poptavka') }}')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        @endif
+    });
 </script>
 @endpush
