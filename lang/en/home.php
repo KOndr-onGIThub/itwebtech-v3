@@ -50,6 +50,7 @@ return [
 
     'social_proof' => [
         'rating_aria'  => '5 out of 5 rating',
+        'clients_aria' => 'Clients',
         'rating_value' => '5.0',
         'reviews'      => '(21 reviews on Google + Firmy.cz)',
         'projects'     => '23+ delivered projects',

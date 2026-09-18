@@ -275,12 +275,11 @@
         overlayEl.classList.remove('cookie-overlay--hiding');
         overlayEl.classList.add('cookie-overlay--visible');
         overlayEl.setAttribute('aria-hidden', 'false');
-        // Focus na primární tlačítko (a11y)
+        // OND-231 F3: lišta není modal — focus nepřebíráme. Dřív sem
+        // skočil focus na „Přijmout", což na klávesnici odstřihlo
+        // uživatele od obsahu, který si právě otevřel.
         try {
             lastFocusedEl = document.activeElement;
-            if (acceptBtn && typeof acceptBtn.focus === 'function') {
-                acceptBtn.focus({ preventScroll: true });
-            }
         } catch (e) { /* swallow */ }
     }
 

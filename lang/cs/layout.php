@@ -34,7 +34,11 @@ return [
     // OND-167 — Cookie consent modal (singulární, freelance tón).
     'cookies' => [
         'title'       => 'Smím nasadit pár cookies?',
-        'body'        => 'Pomůžou mi vidět, co na webu funguje a co ne. Žádné prodávání dat, žádné triky — jen pár čísel, abych věděl, jestli má cenu web dál vylepšovat.',
+        // OND-231 F3: z modalu se stala lišta u spodní hrany, takže text
+        // musí být krátký — dřívější tři věty zabraly na mobilu půl
+        // obrazovky. Účel měření zůstává pojmenovaný, detail nese odkaz
+        // na zásady (informovaný souhlas beze změny).
+        'body'        => 'Měřím jen pár čísel o tom, co na webu funguje. Žádné prodávání dat.',
         'policy_link' => 'Detail v zásadách',
         'accept'      => 'Přijmout vše',
         'reject'      => 'Odmítnout',
