@@ -1345,7 +1345,7 @@
         right: -120px;
         width: 560px;
         height: 560px;
-        background: radial-gradient(circle, rgba(232, 166, 74, 0.12) 0%, transparent 70%);
+        background: radial-gradient(circle, rgba(216, 255, 58, 0.12) 0%, transparent 70%);
         pointer-events: none;
         z-index: 1;
     }
@@ -5860,12 +5860,12 @@
         text-align: left;
         padding-top: calc(68px + 4rem);
         padding-bottom: 4rem;
-        border-bottom: 1px solid rgba(232, 166, 74, 0.08);
+        border-bottom: 1px solid rgba(216, 255, 58, 0.08);
     }
     .page-hero--contact::after {
         /* Replace the centered gold-glow halo with a soft top-right amber bleed. */
         background: radial-gradient(ellipse 600px 300px at 90% 0%,
-                                    rgba(232, 166, 74, 0.10) 0%,
+                                    rgba(216, 255, 58, 0.10) 0%,
                                     transparent 65%);
         top: 0;
         left: auto;
@@ -5990,7 +5990,7 @@
         position: relative;
         padding-top: 3.25rem;
         padding-left: 0;
-        border-top: 1px solid rgba(232, 166, 74, 0.18);
+        border-top: 1px solid rgba(216, 255, 58, 0.18);
     }
     .next-steps__index {
         position: absolute;
@@ -6027,7 +6027,7 @@
     .contact-form__thanks {
         padding: 2.5rem 2rem;
         background: var(--color-bg-elev-2);
-        border: 1px solid rgba(232, 166, 74, 0.22);
+        border: 1px solid rgba(216, 255, 58, 0.22);
         border-radius: 16px;
         text-align: left;
     }
@@ -6052,7 +6052,7 @@
         color: var(--color-fg-muted);
         margin: 0 0 1.5rem;
         padding-top: 1.25rem;
-        border-top: 1px solid rgba(232, 166, 74, 0.18);
+        border-top: 1px solid rgba(216, 255, 58, 0.18);
     }
     .contact-form__thanks-ctas {
         display: flex;
@@ -6077,7 +6077,7 @@
         position: absolute;
         inset: 0;
         background: radial-gradient(ellipse 700px 360px at 50% 0%,
-                                    rgba(232, 166, 74, 0.08) 0%,
+                                    rgba(216, 255, 58, 0.08) 0%,
                                     transparent 65%);
         pointer-events: none;
         z-index: 0;
@@ -6138,11 +6138,11 @@
         text-align: left;
         padding-top: calc(68px + 4rem);
         padding-bottom: 4rem;
-        border-bottom: 1px solid rgba(232, 166, 74, 0.08);
+        border-bottom: 1px solid rgba(216, 255, 58, 0.08);
     }
     .page-hero--price::after {
         background: radial-gradient(ellipse 600px 320px at 90% 0%,
-                                    rgba(232, 166, 74, 0.10) 0%,
+                                    rgba(216, 255, 58, 0.10) 0%,
                                     transparent 65%);
         top: 0;
         left: auto;
@@ -6206,8 +6206,11 @@
         letter-spacing: -0.005em;
         border-radius: 9999px;
         text-decoration: none;
+        /* OND-231 F3 corrective: acid je proti amberu výrazně světlejší,
+           takže původní alfa 0,55/0,7 by ze záře pod tlačítkem udělala
+           druhý zdroj světla. Ztlumeno na 0,30/0,38. */
         box-shadow:
-            0 12px 32px -8px rgba(232, 166, 74, 0.55),
+            0 12px 32px -8px rgba(216, 255, 58, 0.30),
             0 0 0 1px rgba(10, 10, 11, 0.08) inset;
         transition: background-color 0.18s var(--ease-out, ease-out),
                     transform 0.18s var(--ease-out, ease-out),
@@ -6218,7 +6221,7 @@
         background: var(--color-accent-hover);
         transform: translateY(-1px);
         box-shadow:
-            0 16px 40px -8px rgba(232, 166, 74, 0.7),
+            0 16px 40px -8px rgba(216, 255, 58, 0.38),
             0 0 0 1px rgba(10, 10, 11, 0.08) inset;
     }
     .price-sticky-cta__btn:focus-visible {
@@ -6255,11 +6258,11 @@
         text-align: left;
         padding-top: calc(68px + 4rem);
         padding-bottom: 4rem;
-        border-bottom: 1px solid rgba(232, 166, 74, 0.08);
+        border-bottom: 1px solid rgba(216, 255, 58, 0.08);
     }
     .page-hero--projects::after {
         background: radial-gradient(ellipse 600px 320px at 90% 0%,
-                                    rgba(232, 166, 74, 0.10) 0%,
+                                    rgba(216, 255, 58, 0.10) 0%,
                                     transparent 65%);
         top: 0;
         left: auto;
