@@ -2051,7 +2051,7 @@
         transform: translateY(-50%);
         height: 3px;
         width: 0%;
-        background: var(--color-gold-500, #e5a100);
+        background: var(--color-gold-500);
         border-radius: 2px;
         z-index: 1;
         pointer-events: none;
@@ -3281,7 +3281,11 @@
     }
     .project-fit__cta {
         border-radius: 1rem;
-        border: 1px solid rgba(240, 185, 11, 0.35);
+        /* OND-232: byl to hardcoded amber rgba(240,185,11,0.35) mimo token
+           systém — proto ho sweep na --color-* i na #E8A64A minul. Token
+           --border-gold je ACID a má nižší alfu (0,28), což je u světlejšího
+           akcentu správný směr. */
+        border: 1px solid var(--border-gold);
         background: linear-gradient(160deg, rgba(27, 46, 90, 0.65), rgba(12, 15, 24, 0.9));
         padding: 1.5rem;
     }
