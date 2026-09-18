@@ -13,6 +13,8 @@
 @section('hide_prefooter', 'true')
 
 @push('preloads')
+    {{-- Prototypova routa ?podpis=* nesmi do indexu (prevazi nad výchozím index,follow) --}}
+    <meta name="robots" content="noindex, nofollow">
     <link rel="preload" as="font" type="font/woff2" crossorigin
           href="{{ Vite::asset('node_modules/@fontsource-variable/ibm-plex-sans/files/ibm-plex-sans-latin-wght-normal.woff2') }}">
     <link rel="preload" as="font" type="font/woff2" crossorigin

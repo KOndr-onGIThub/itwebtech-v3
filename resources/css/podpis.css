@@ -1982,3 +1982,41 @@
     .pd-cta:hover,
     .pd-work:hover .pd-work__plate { transform: none; }
 }
+
+/* ============================================================
+   OND-227 iterace 5 — Ondra vybral ACID (18. 9. 08:14).
+   Dotažení vítězného směru: na stránce s prototypem D/ACID se
+   přeladí i sdílený chrom (navbar, mobile bar), aby amber
+   zmizel z celého viewportu a podpis byl konzistentní.
+   Scoped přes body:has(.pd--acid) — produkčních stránek se
+   nedotkne; plné sitewide přeladění tokenů je F2 rollout.
+   ============================================================ */
+
+body:has(.pd--acid) .navbar__cta.btn.btn-primary {
+    background: #D8FF3A;
+    border-color: #D8FF3A;
+    color: #0A0A0B;
+    border-radius: 0;
+    box-shadow: none;
+}
+body:has(.pd--acid) .navbar__cta.btn.btn-primary:hover {
+    background: #E6FF70;
+    border-color: #E6FF70;
+}
+body:has(.pd--acid) .navbar__logo-img {
+    /* logo má amber tečku — na ACID stránce ji ztlumíme do ČB,
+       finální logo varianta je součást F2 */
+    filter: grayscale(1) brightness(1.4);
+}
+body:has(.pd--acid) .navbar__lang-item--active,
+body:has(.pd--acid) .navbar__link--active {
+    color: #D8FF3A;
+}
+body:has(.pd--acid) .mobile-bottom-bar__primary {
+    background: #D8FF3A;
+    color: #0A0A0B;
+    border-radius: 0;
+}
+body:has(.pd--acid) .footer-bar a:hover {
+    color: #D8FF3A;
+}
