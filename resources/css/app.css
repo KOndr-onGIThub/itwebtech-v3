@@ -12,6 +12,11 @@
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
+/* OND-233: reference/ je snapshot cizího klientského webu, není routovaný
+   ani importovaný. Automatické skenování kořene z něj do našeho bundlu
+   tahalo utility s cizím brandem (#D4A853). Ven ze skenování. */
+@source not '../../reference/**';
+
 /* ============================================================
    DESIGN TOKENS — Tailwind v4 @theme
    Dark + Gold / Luxusní tmavý styl

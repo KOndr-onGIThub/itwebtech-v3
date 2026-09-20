@@ -424,13 +424,13 @@
                     <fieldset class="pd-demo__group">
                         <legend>{{ __('home.demo.controls.accent') }}</legend>
                         <div class="pd-demo__swatches">
-                            @foreach (['acid' => '#D8FF3A', 'klein' => '#3B5BFF', 'sarlat' => '#FF3B30', 'jantar' => '#E8A64A'] as $key => $hex)
+                            @foreach (['acid' => '#D8FF3A', 'klein' => '#3B5BFF', 'sarlat' => '#FF3B30', 'ametyst' => '#8B5CF6'] as $key => $hex)
                             <label class="pd-demo__swatch">
                                 <input
                                     type="radio"
                                     name="demo-accent"
                                     value="{{ $hex }}"
-                                    data-on="{{ in_array($key, ['acid', 'jantar'], true) ? '#0A0A0B' : '#F2F0EA' }}"
+                                    data-on="{{ in_array($key, ['acid'], true) ? '#0A0A0B' : '#F2F0EA' }}"
                                     @checked($key === 'acid')
                                 >
                                 <span class="pd-demo__chip" style="background: {{ $hex }}" aria-hidden="true"></span>

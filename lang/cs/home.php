@@ -395,10 +395,10 @@ return [
             'space'  => 'Vzdušnost',
         ],
         'accents'  => [
-            'acid'   => 'Acid',
-            'klein'  => 'Klein',
-            'sarlat' => 'Šarlat',
-            'jantar' => 'Jantar',
+            'acid'    => 'Acid',
+            'klein'   => 'Klein',
+            'sarlat'  => 'Šarlat',
+            'ametyst' => 'Ametyst',
         ],
         'card' => [
             'eyebrow' => 'Ukázka — smyšlená firma',
