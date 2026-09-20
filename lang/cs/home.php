@@ -383,32 +383,9 @@ return [
         'perf_suffix' => '— změřeno právě teď, ve vašem prohlížeči.',
     ],
 
-    // OND-229 (F2 — živé demo řemesla): interaktivní ukázka design tokenů.
-    // Obsah karty je smyšlená ukázková firma (žádná klientská data).
-    'demo' => [
-        'eyebrow'  => 'Živá ukázka',
-        'heading'  => 'Tři proměnné, žádná šablona',
-        'text'     => 'Takhle vzniká web na míru: design neurčuje šablona, ale systém. Přenastavte tři proměnné a sledujte, jak se ukázka přeskládá — a nic se nerozbije. Stejný princip drží pohromadě i tuhle stránku.',
-        'controls' => [
-            'accent' => 'Barva akcentu',
-            'scale'  => 'Velikost písma',
-            'space'  => 'Vzdušnost',
-        ],
-        'accents'  => [
-            'acid'    => 'Acid',
-            'klein'   => 'Klein',
-            'sarlat'  => 'Šarlat',
-            'ametyst' => 'Ametyst',
-        ],
-        'card' => [
-            'eyebrow' => 'Ukázka — smyšlená firma',
-            'heading' => 'Pekárna U Dvou kvásků',
-            'text'    => 'Chleba pečeme každé ráno od čtyř. Co se do poledne neprodá, večer rozdáme.',
-            'cta'     => 'Objednat chleba',
-            'stat_value' => '120',
-            'stat_label' => 'bochníků denně',
-        ],
-    ],
+    // OND-235: živé demo (OND-229) zrušeno — majitel webu sám neuměl
+    // popsat přínos pro návštěvníka a na mobilu byl efekt ovladačů
+    // mimo viditelnou oblast. Klíče i CSS (.pd-demo*) odstraněny.
 
     // OND-201 (nález 5.8): konec homepage byl tři výzvy za sebou —
     // „Pošlete mi pár vět o projektu" (inline_form), „Připraveni začít?

@@ -362,32 +362,9 @@ return [
         'perf_suffix' => 'geladen — gemessen gerade eben, in Ihrem Browser.',
     ],
 
-    // OND-229 (F2 — Live-Demo des Handwerks): interaktive Token-Demo.
-    // Der Karteninhalt ist eine fiktive Beispielfirma (keine Kundendaten).
-    'demo' => [
-        'eyebrow'  => 'Live-Demo',
-        'heading'  => 'Drei Variablen, keine Vorlage',
-        'text'     => 'So entsteht eine Website nach Maß: Das Design bestimmt ein System, keine Vorlage. Verstellen Sie drei Variablen und sehen Sie zu, wie sich das Beispiel neu ordnet — ohne zu brechen. Dasselbe Prinzip hält auch diese Seite zusammen.',
-        'controls' => [
-            'accent' => 'Akzentfarbe',
-            'scale'  => 'Schriftgröße',
-            'space'  => 'Weißraum',
-        ],
-        'accents'  => [
-            'acid'    => 'Acid',
-            'klein'   => 'Klein',
-            'sarlat'  => 'Scharlach',
-            'ametyst' => 'Amethyst',
-        ],
-        'card' => [
-            'eyebrow' => 'Beispiel — fiktive Firma',
-            'heading' => 'Bäckerei Zu den zwei Sauerteigen',
-            'text'    => 'Wir backen jeden Morgen ab vier Uhr Brot. Was bis mittags nicht verkauft ist, verschenken wir am Abend.',
-            'cta'     => 'Brot bestellen',
-            'stat_value' => '120',
-            'stat_label' => 'Laibe pro Tag',
-        ],
-    ],
+    // OND-235: Live-Demo (OND-229) entfernt — der Website-Inhaber konnte
+    // den Besuchernutzen selbst nicht benennen, und auf dem Handy scrollte
+    // der Reglereffekt außer Sicht. Keys und CSS (.pd-demo*) entfernt.
 
     // OND-201 (Befund 5.8): Das Ende der Homepage waren drei Handlungs-
     // aufforderungen hintereinander. Die Blöcke `cta` und `final_cta` sind
