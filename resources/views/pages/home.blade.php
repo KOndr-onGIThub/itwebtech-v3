@@ -411,58 +411,6 @@
             {{ __('home.craft.perf_suffix') }}
         </p>
 
-        {{-- Živé demo řemesla: tři proměnné design systému přepisují
-             ukázku naživo. Nativní ovládací prvky = klávesnice i dotyk
-             zdarma, žádná knihovna. Obsah karty je smyšlená firma. --}}
-        <div class="pd-demo" id="pd-demo">
-            <div class="pd-demo__copy">
-                <p class="pd-eyebrow">{{ __('home.demo.eyebrow') }}</p>
-                <h3 class="pd-demo__heading">{{ __('home.demo.heading') }}</h3>
-                <p class="pd-demo__text">{{ __('home.demo.text') }}</p>
-
-                <form class="pd-demo__controls">
-                    <fieldset class="pd-demo__group">
-                        <legend>{{ __('home.demo.controls.accent') }}</legend>
-                        <div class="pd-demo__swatches">
-                            @foreach (['acid' => '#D8FF3A', 'klein' => '#3B5BFF', 'sarlat' => '#FF3B30', 'ametyst' => '#8B5CF6'] as $key => $hex)
-                            <label class="pd-demo__swatch">
-                                <input
-                                    type="radio"
-                                    name="demo-accent"
-                                    value="{{ $hex }}"
-                                    data-on="{{ in_array($key, ['acid'], true) ? '#0A0A0B' : '#F2F0EA' }}"
-                                    @checked($key === 'acid')
-                                >
-                                <span class="pd-demo__chip" style="background: {{ $hex }}" aria-hidden="true"></span>
-                                {{ __('home.demo.accents.' . $key) }}
-                            </label>
-                            @endforeach
-                        </div>
-                    </fieldset>
-                    <div class="pd-demo__group">
-                        <label for="pd-demo-scale">{{ __('home.demo.controls.scale') }}</label>
-                        <input type="range" id="pd-demo-scale" min="0.85" max="1.25" step="0.01" value="1">
-                    </div>
-                    <div class="pd-demo__group">
-                        <label for="pd-demo-space">{{ __('home.demo.controls.space') }}</label>
-                        <input type="range" id="pd-demo-space" min="0.7" max="1.6" step="0.01" value="1">
-                    </div>
-                </form>
-            </div>
-
-            <div class="pd-demo__stage" id="pd-demo-stage">
-                <p class="pd-demo-card__eyebrow">{{ __('home.demo.card.eyebrow') }}</p>
-                <p class="pd-demo-card__heading">{{ __('home.demo.card.heading') }}</p>
-                <p class="pd-demo-card__text">{{ __('home.demo.card.text') }}</p>
-                <div class="pd-demo-card__row">
-                    <span class="pd-demo-card__cta">{{ __('home.demo.card.cta') }}</span>
-                    <span class="pd-demo-card__stat">
-                        <strong>{{ __('home.demo.card.stat_value') }}</strong>
-                        {{ __('home.demo.card.stat_label') }}
-                    </span>
-                </div>
-            </div>
-        </div>
     </div>
 </section>
 
@@ -901,24 +849,6 @@
         }
         if (document.readyState === 'complete') { setTimeout(show, 0); }
         else { window.addEventListener('load', function () { setTimeout(show, 0); }); }
-    })();
-
-    // OND-229 — Živé demo: tři proměnné přepisují CSS tokeny ukázky.
-    (function () {
-        var demo = document.getElementById('pd-demo');
-        var stage = document.getElementById('pd-demo-stage');
-        if (!demo || !stage) return;
-        demo.addEventListener('input', function (e) {
-            var t = e.target;
-            if (t.name === 'demo-accent') {
-                stage.style.setProperty('--demo-accent', t.value);
-                stage.style.setProperty('--demo-accent-on', t.dataset.on);
-            } else if (t.id === 'pd-demo-scale') {
-                stage.style.setProperty('--demo-scale', t.value);
-            } else if (t.id === 'pd-demo-space') {
-                stage.style.setProperty('--demo-space', t.value);
-            }
-        });
     })();
 
     // Po submitu formuláře (redirect back()) doskrolovat k výsledku

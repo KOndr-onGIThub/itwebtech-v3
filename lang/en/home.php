@@ -364,32 +364,9 @@ return [
         'perf_suffix' => '— measured just now, in your browser.',
     ],
 
-    // OND-229 (F2 — live craft demo): interactive design token showcase.
-    // The card content is a fictional sample business (no client data).
-    'demo' => [
-        'eyebrow'  => 'Live demo',
-        'heading'  => 'Three variables, no template',
-        'text'     => 'This is how a custom website comes together: the design is driven by a system, not a template. Adjust three variables and watch the sample rearrange itself — without breaking. The same principle holds this very page together.',
-        'controls' => [
-            'accent' => 'Accent colour',
-            'scale'  => 'Type size',
-            'space'  => 'Breathing room',
-        ],
-        'accents'  => [
-            'acid'    => 'Acid',
-            'klein'   => 'Klein',
-            'sarlat'  => 'Scarlet',
-            'ametyst' => 'Amethyst',
-        ],
-        'card' => [
-            'eyebrow' => 'Sample — fictional business',
-            'heading' => 'The Two Sourdoughs Bakery',
-            'text'    => 'We bake bread every morning from four. Whatever isn\'t sold by noon, we give away in the evening.',
-            'cta'     => 'Order bread',
-            'stat_value' => '120',
-            'stat_label' => 'loaves a day',
-        ],
-    ],
+    // OND-235: live demo (OND-229) removed — the site owner couldn't
+    // articulate the visitor benefit himself, and on mobile the control
+    // effect scrolled out of view. Keys and CSS (.pd-demo*) removed.
 
     // OND-201 (finding 5.8): the end of the homepage was three calls to
     // action in a row. The `cta` and `final_cta` blocks are removed; one
