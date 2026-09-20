@@ -859,12 +859,37 @@
 
     // OND-229 — Pod kapotou: skutečný čas načtení z Performance API.
     // Bez podpory API zůstane odstavec `hidden` — žádné vymyšlené číslo.
+    // OND-234 — Věta je chlouba, ne přiznání. Když číslo není dobré nebo
+    // není důvěryhodné, odstavec zůstane `hidden`. Radši nic než alibi.
     (function () {
+        // Strop 2,0 s. Měříme `load`, tedy okamžik po dotažení všech
+        // zdrojů — metriku pozdější než LCP. Core Web Vitals má hranici
+        // „dobrého" LCP na 2,5 s; kdybychom stejné číslo dali na `load`,
+        // chlubili bychom se i návštěvami, jejichž LCP bylo hluboko za
+        // hranicí. 2,0 s je zároveň poslední hodnota, která se při jednom
+        // desetinném místě ještě čte jako „pod dvě sekundy" — od „2,3 s"
+        // výš věta přestává být důkaz a začíná být výmluva.
+        var MAX_SECONDS = 2;
+        // Pod 0,05 s by se vypsalo „0,0 s" — to vypadá jako rozbité měření,
+        // ne jako rychlost.
+        var MIN_SECONDS = 0.05;
+
+        // Načtení na pozadí (otevřeno do nového panelu, obnovená session)
+        // má throttlované časovače a vyjde nesmyslně velké. Stačí, že byla
+        // stránka schovaná kdykoli před změřením.
+        var wasHidden = document.visibilityState === 'hidden';
+        document.addEventListener('visibilitychange', function () {
+            if (document.visibilityState === 'hidden') { wasHidden = true; }
+        });
+
         function show() {
-            var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
-            if (!nav || !nav.loadEventEnd) return;
+            if (wasHidden) return;
+            if (typeof performance === 'undefined' || !performance.getEntriesByType) return;
+            var nav = performance.getEntriesByType('navigation')[0];
+            if (!nav) return;
             var s = nav.loadEventEnd / 1000;
-            if (!(s > 0) || s > 60) return;
+            // Chytí i NaN, undefined, zápor a nulu (load ještě nedoběhl).
+            if (!(s >= MIN_SECONDS) || s > MAX_SECONDS) return;
             var value = document.getElementById('pd-perf-value');
             var wrap = document.getElementById('pd-perf');
             if (!value || !wrap) return;
