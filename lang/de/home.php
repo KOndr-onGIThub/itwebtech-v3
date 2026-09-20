@@ -374,10 +374,10 @@ return [
             'space'  => 'Weißraum',
         ],
         'accents'  => [
-            'acid'   => 'Acid',
-            'klein'  => 'Klein',
-            'sarlat' => 'Scharlach',
-            'jantar' => 'Bernstein',
+            'acid'    => 'Acid',
+            'klein'   => 'Klein',
+            'sarlat'  => 'Scharlach',
+            'ametyst' => 'Amethyst',
         ],
         'card' => [
             'eyebrow' => 'Beispiel — fiktive Firma',

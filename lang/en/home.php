@@ -376,10 +376,10 @@ return [
             'space'  => 'Breathing room',
         ],
         'accents'  => [
-            'acid'   => 'Acid',
-            'klein'  => 'Klein',
-            'sarlat' => 'Scarlet',
-            'jantar' => 'Amber',
+            'acid'    => 'Acid',
+            'klein'   => 'Klein',
+            'sarlat'  => 'Scarlet',
+            'ametyst' => 'Amethyst',
         ],
         'card' => [
             'eyebrow' => 'Sample — fictional business',
