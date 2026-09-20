@@ -4,7 +4,7 @@
     @php
         $metaTitle = View::hasSection('title') ? View::getSection('title') : config('app.name');
         $metaDesc = View::hasSection('description') ? View::getSection('description') : __('landing.meta.description');
-        $ogImage = View::hasSection('og_image') ? View::getSection('og_image') : asset('img/og/og-default.jpg');
+        $ogImage = View::hasSection('og_image') ? View::getSection('og_image') : asset_v('img/og/og-default.jpg');
     @endphp
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,10 +27,10 @@
     <meta name="twitter:description" content="{!! $metaDesc !!}">
     <meta name="twitter:image" content="{{ $ogImage }}">
 
-    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="{{ asset_v('favicon-96x96.png') }}" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="{{ asset_v('favicon.svg') }}" />
     <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset_v('apple-touch-icon.png') }}" />
     <link rel="manifest" href="/site.webmanifest" />
 
     <script type="application/ld+json">
@@ -56,7 +56,7 @@
         <div class="container-site landing-topbar__inner">
             <a href="{{ url()->current() }}" class="landing-topbar__brand" aria-label="{{ config('app.name') }}">
                 <img
-                    src="{{ asset('img/logo/logo_main_svg.svg') }}"
+                    src="{{ asset_v('img/logo/logo_main_svg.svg') }}"
                     alt="{{ config('app.name') }}"
                     width="220"
                     height="26"

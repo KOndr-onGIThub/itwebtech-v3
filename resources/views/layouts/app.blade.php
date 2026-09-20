@@ -5,7 +5,7 @@
     @php
         $metaTitle    = View::hasSection('title') ? View::getSection('title') : config('app.name');
         $metaDesc     = View::hasSection('description') ? View::getSection('description') : __('layout.meta.description');
-        $ogImage      = View::hasSection('og_image') ? View::getSection('og_image') : asset('img/og/og-default.jpg');
+        $ogImage      = View::hasSection('og_image') ? View::getSection('og_image') : asset_v('img/og/og-default.jpg');
         $ogLocale     = ['cs' => 'cs_CZ', 'en' => 'en_US', 'de' => 'de_DE'][app()->getLocale()] ?? 'cs_CZ';
         $ogAlternates = array_filter(['cs_CZ', 'en_US', 'de_DE'], fn($l) => $l !== $ogLocale);
     @endphp
@@ -58,10 +58,14 @@
     <link rel="alternate" hreflang="de" href="{{ $hreflangDe }}">
     <link rel="alternate" hreflang="x-default" href="{{ $hreflangCs }}">
 
-    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {{-- OND-237: brand assety přes asset_v() — nginx na ně posílá `immutable`
+         na rok, takže bez otisku v URL zůstane stará verze v cache navždy.
+         `/favicon.ico` výjimku nepotřebuje: base image pro něj má vlastní
+         `location = /favicon.ico` bez Cache-Control, revaliduje se normálně. --}}
+    <link rel="icon" type="image/png" href="{{ asset_v('favicon-96x96.png') }}" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="{{ asset_v('favicon.svg') }}" />
     <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset_v('apple-touch-icon.png') }}" />
     <meta name="apple-mobile-web-app-title" content="{{ config('app.name') }}" />
     <link rel="manifest" href="/site.webmanifest" />
 
@@ -113,7 +117,7 @@
         "name": "{{ config('app.name') }}",
         "url": "{!! url('/') !!}",
         "email": "ok@ondraweb.cz",
-        "logo": "{{ asset('img/logo/logo_main_svg.svg') }}",
+        "logo": "{{ asset_v('img/logo/logo_main_svg.svg') }}",
         "founder": {
             "@@type": "Person",
             "name": "Ondřej Kriška"
@@ -163,7 +167,7 @@
         <div class="container-site footer-prefooter__inner">
 
             <img
-                src="{{ asset('img/logo/logo_main_svg.svg') }}"
+                src="{{ asset_v('img/logo/logo_main_svg.svg') }}"
                 alt="{{ config('app.name') }}"
                 class="footer-prefooter__logo"
                 width="220" height="26"

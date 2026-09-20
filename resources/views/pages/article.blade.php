@@ -160,7 +160,7 @@
             <p class="article-author__eyebrow">{{ __('blog.article.author.eyebrow') }}</p>
             <div class="article-author__body">
                 <img
-                    src="{{ asset('img/about/ondrej_kriska.jpg') }}"
+                    src="{{ asset_v('img/about/ondrej_kriska.jpg') }}"
                     alt="{{ __('blog.article.author.name') }}"
                     class="article-author__photo"
                     width="96" height="96"
@@ -223,7 +223,7 @@
             'url'   => url('/'),
             'logo'  => [
                 '@type' => 'ImageObject',
-                'url'   => asset('img/logo/logo_main_svg.svg'),
+                'url'   => asset_v('img/logo/logo_main_svg.svg'),
             ],
         ],
         'mainEntityOfPage' => [

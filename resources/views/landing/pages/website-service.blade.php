@@ -170,7 +170,7 @@
             <div class="landing-logo-strip" data-reveal-group>
                 @foreach (__('landing.results.logos') as $logo)
                     <div class="landing-logo-item">
-                        <img src="{{ asset('img/' . $logo['src']) }}" alt="{{ $logo['alt'] }}" loading="lazy">
+                        <img src="{{ asset_v('img/' . $logo['src']) }}" alt="{{ $logo['alt'] }}" loading="lazy">
                     </div>
                 @endforeach
             </div>
