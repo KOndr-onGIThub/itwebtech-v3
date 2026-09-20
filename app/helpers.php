@@ -315,6 +315,48 @@ if (!function_exists('responsive_image_srcsets')) {
     }
 }
 
+if (!function_exists('asset_v')) {
+    /**
+     * OND-237: URL veřejného assetu z `public/` s content-hash otiskem v query.
+     *
+     * Proč to existuje: base image `serversideup/php` má v
+     * `/etc/nginx/server-opts.d/performance.conf` plošné pravidlo
+     * `Cache-Control: public, max-age=31536000, immutable` pro VŠECHNY
+     * obrázky/css/js podle přípony — ne jen pro hashované `/build/` assety.
+     * `immutable` znamená, že prohlížeč soubor ani nereviduje, dokud rok
+     * nevyprší; ani běžný reload nepomůže.
+     *
+     * Naše brand assety ale žijí na stabilní cestě (`img/logo/logo_main_svg.svg`),
+     * takže rebranding itwebtech → ONDRAWEB (OND-199, 2026-09-16) obsah souboru
+     * vyměnil, ale URL ne. Každý, kdo web navštívil dřív, dostával ze své cache
+     * staré logo — přesně to hlásil board z mobilu (OND-237).
+     *
+     * Otisk je z OBSAHU (ne z mtime): deploy, který soubor nemění, URL nemění,
+     * takže dlouhá cache zůstává účinná; změna souboru = nová URL = nová cache
+     * entry. Tím se `immutable` stává pravdivým tvrzením a nemusíme headery
+     * oslabovat (viz OND-123, kde šly nahoru kvůli PSI auditu).
+     *
+     * Výsledek se drží v per-request statické memo mapě; hashují se jen soubory,
+     * které stránka opravdu vykreslí (logo, favicony, OG obrázek).
+     */
+    function asset_v(string $path): string
+    {
+        static $cache = [];
+
+        $path = ltrim($path, '/');
+
+        if (!array_key_exists($path, $cache)) {
+            $absPath = public_path($path);
+            $hash = is_file($absPath) ? @md5_file($absPath) : false;
+            $cache[$path] = $hash === false ? null : substr($hash, 0, 8);
+        }
+
+        $url = asset($path);
+
+        return $cache[$path] === null ? $url : $url . '?v=' . $cache[$path];
+    }
+}
+
 if (!function_exists('current_page')) {
     /**
      * Get the current page name without locale prefix.
