@@ -19,8 +19,8 @@ nepadlo).
 ## Jak si to ověřit
 
 ```bash
-python3 ond273/build-redline.py    # kontroly + zápis redline.json
-python3 ond273/build-md.py         # regenerace tohohle dokumentu
+python3 ond274/build-redline.py    # kontroly + zápis redline.json
+python3 ond274/build-md.py         # regenerace tohohle dokumentu
 ```
 
 Skript **nic nemění**, jen kontroluje a zapisuje; návratový kód != 0 = neshoda.

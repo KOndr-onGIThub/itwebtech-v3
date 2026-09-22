@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""OND-274 — vygeneruje ond273/redline-en-blog.md ze stejného zdroje jako redline.json.
+"""OND-274 — vygeneruje ond274/redline-en-blog.md ze stejného zdroje jako redline.json.
 
 Texty žijí na jednom místě (`build-redline.py`), aby se .md a .json nikdy
 nerozešly. Spouštěj až po `build-redline.py` (ten kontroluje vstupy).
 
-    python3 ond273/build-redline.py && python3 ond273/build-md.py
+    python3 ond274/build-redline.py && python3 ond274/build-md.py
 """
 import importlib.util
 import os
@@ -93,8 +93,8 @@ nepadlo).\n""")
 
     w('## Jak si to ověřit\n')
     w("""```bash
-python3 ond273/build-redline.py    # kontroly + zápis redline.json
-python3 ond273/build-md.py         # regenerace tohohle dokumentu
+python3 ond274/build-redline.py    # kontroly + zápis redline.json
+python3 ond274/build-md.py         # regenerace tohohle dokumentu
 ```
 
 Skript **nic nemění**, jen kontroluje a zapisuje; návratový kód != 0 = neshoda.

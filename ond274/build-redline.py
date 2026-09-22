@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""OND-274 — sestaví ond273/redline.json a OVĚŘÍ vstupy proti zdrojům.
+"""OND-274 — sestaví ond274/redline.json a OVĚŘÍ vstupy proti zdrojům.
 
 Co se ověřuje (skript nic nemění, jen kontroluje a zapisuje):
 
@@ -20,7 +20,7 @@ Co se ověřuje (skript nic nemění, jen kontroluje a zapisuje):
      obsahovou předlohou je CS.
 
 Použití:
-    python3 ond273/build-redline.py [cesta_k_rozbalenemu_origin/staging]
+    python3 ond274/build-redline.py [cesta_k_rozbalenemu_origin/staging]
 
 Bez argumentu si skript vytáhne soubory z gitu sám (`git show origin/staging:...`).
 Návratový kód != 0 = neshoda.
