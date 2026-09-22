@@ -61,6 +61,15 @@
     function lightParallax() {
         if (reduce) return;   /* statické nasvícení zůstává, pohyb ne */
 
+        /* Na mobilu a tabletu posun zdroje NEBĚŽÍ. Je to jediná věc v celé
+           vrstvě, která počítá při každém snímku scrollu, a na telefonu je
+           scroll to nejdražší, co stránka dělá — zatímco ±7px posunu světla
+           je na malé obrazovce stejně skoro nepostřehnutelný. Statické
+           nasvícení (tedy 95 % efektu) zůstává úplně stejné. */
+        var fine = window.matchMedia &&
+            window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        if (!fine) return;
+
         var sections = Array.prototype.slice.call(root.querySelectorAll(':scope > section'));
         if (!sections.length) return;
 
@@ -137,7 +146,7 @@
 
     var TARGETS = [
         '.pd-hero',                     /* podtržení v H1 → CTA */
-        '.pd-works',                    /* 02 — tři dlaždice postupně */
+        '.pd-work',                     /* 02 — každá dlaždice zvlášť (kvůli mobilu) */
         '.pd-price__col--featured',     /* 06 — uzavřená smyčka */
         '.pd-step',                     /* 09 — každý krok zvlášť */
         '.pd-form__panel'               /* 15 — cíl stránky */

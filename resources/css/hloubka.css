@@ -609,11 +609,16 @@
 }
 
 /* --- 02 ŽIVÉ WEBY — „tady, tady a tady to běží" --------------------------
-   Sekce ukazuje tři weby, které JSOU V PROVOZU. Tři rámečky se proto nabijí
-   postupně (01 → 02 → 03) s odstupem 120 ms, vždy jen horní hrana. Čte se to
-   jako tři nezávislé běžící stroje, ne jako jedna skupina. Dlaždice stojí
-   vedle sebe, takže do čtecího pásma dojedou naráz — prodleva je tu kvůli
-   rytmu, ne kvůli scrollu. */
+   Sekce ukazuje tři weby, které JSOU V PROVOZU. Nabíjí se vždy jen horní
+   hrana rámečku. Čte se to jako tři nezávislé běžící stroje, ne jako jedna
+   skupina.
+
+   POZOR NA MOBIL: od 768px jsou dlaždice vedle sebe a do čtecího pásma dojedou
+   naráz — tam má odstup 120 ms smysl, dělá rytmus. Pod 768px jsou ale POD SEBOU
+   a druhá s třetí jsou v tu chvíli ještě mimo obrazovku; kdyby je spouštěl
+   společný obal, proběhly by naslepo. Proto se každá dlaždice spouští sama
+   (JS pozoruje .pd-work, ne .pd-works) a odstup se přidává jen tam, kde
+   dlaždice opravdu stojí vedle sebe. */
 .pd--depth .pd-work__plate { position: relative; }
 .pd--depth .pd-work__plate::before {
     content: "";
@@ -627,19 +632,33 @@
     background-size: 34% 100%;
     background-position: -72% 0;
 }
-.pd--depth .pd-works.is-lit .pd-work:nth-child(1) .pd-work__plate::before { animation: pdd-run-x 800ms linear 260ms 1 both; }
-.pd--depth .pd-works.is-lit .pd-work:nth-child(2) .pd-work__plate::before { animation: pdd-run-x 800ms linear 380ms 1 both; }
-.pd--depth .pd-works.is-lit .pd-work:nth-child(3) .pd-work__plate::before { animation: pdd-run-x 800ms linear 500ms 1 both; }
+.pd--depth .pd-work.is-lit .pd-work__plate::before {
+    animation: pdd-run-x 800ms linear 1 both;
+}
+@media (min-width: 768px) {
+    .pd--depth .pd-work:nth-child(1).is-lit .pd-work__plate::before { animation-delay: 260ms; }
+    .pd--depth .pd-work:nth-child(2).is-lit .pd-work__plate::before { animation-delay: 380ms; }
+    .pd--depth .pd-work:nth-child(3).is-lit .pd-work__plate::before { animation-delay: 500ms; }
+}
 
 /* Hover = jen ten jeden segment: najetím se rozsvítí horní hrana jen té
-   dlaždice, krátký dosvit --duration-micro. */
-.pd--depth .pd-work:hover .pd-work__plate::before,
+   dlaždice, krátký dosvit --duration-micro.
+   Jen pro skutečný kurzor — na dotyku se :hover po klepnutí „zasekne“
+   a dlaždice by zůstala svítit, dokud člověk neklepne jinam. */
+@media (hover: hover) and (pointer: fine) {
+    .pd--depth .pd-work:hover .pd-work__plate::before {
+        animation: none;
+        background-image: linear-gradient(var(--pd-accent), var(--pd-accent));
+        background-size: 100% 100%;
+        background-position: 0 0;
+        transition: background-size var(--duration-micro) var(--ease-out);
+    }
+}
 .pd--depth .pd-work:focus-visible .pd-work__plate::before {
     animation: none;
     background-image: linear-gradient(var(--pd-accent), var(--pd-accent));
     background-size: 100% 100%;
     background-position: 0 0;
-    transition: background-size var(--duration-micro) var(--ease-out);
 }
 
 /* --- 06 CENÍK — jediná UZAVŘENÁ SMYČKA na celé stránce -------------------
@@ -708,13 +727,15 @@
 .pd--depth .pd-step.is-lit::before {
     animation: pdd-run-x-rev 720ms linear 1 both;
 }
-/* hover: rozsvítí se jen linka toho kroku */
-.pd--depth .pd-step:hover::before {
-    animation: none;
-    background-image: linear-gradient(rgba(216, 255, 58, .40), rgba(216, 255, 58, .40));
-    background-size: 100% 100%;
-    background-position: 0 0;
-    transition: background-size var(--duration-micro) var(--ease-out);
+/* hover: rozsvítí se jen linka toho kroku (jen skutečný kurzor, viz výše) */
+@media (hover: hover) and (pointer: fine) {
+    .pd--depth .pd-step:hover::before {
+        animation: none;
+        background-image: linear-gradient(rgba(216, 255, 58, .40), rgba(216, 255, 58, .40));
+        background-size: 100% 100%;
+        background-position: 0 0;
+        transition: background-size var(--duration-micro) var(--ease-out);
+    }
 }
 
 /* --- 14 FAQ — jediná sekce, kde náboj nespouští scroll, ale ČLOVĚK -------
@@ -737,12 +758,14 @@
 .pd--depth .pd-faq__item.is-firing > .pd-faq__q::after {
     animation: pdd-run-x 750ms linear 1 both;
 }
-/* hover: jen slabý náznak té linky, bez běhu */
-.pd--depth .pd-faq__q:hover::after {
-    background-image: linear-gradient(rgba(216, 255, 58, .22), rgba(216, 255, 58, .22));
-    background-size: 100% 100%;
-    background-position: 0 0;
-    transition: background-size var(--duration-micro) var(--ease-out);
+/* hover: jen slabý náznak té linky, bez běhu (jen skutečný kurzor, viz výše) */
+@media (hover: hover) and (pointer: fine) {
+    .pd--depth .pd-faq__q:hover::after {
+        background-image: linear-gradient(rgba(216, 255, 58, .22), rgba(216, 255, 58, .22));
+        background-size: 100% 100%;
+        background-position: 0 0;
+        transition: background-size var(--duration-micro) var(--ease-out);
+    }
 }
 
 /* --- 15 POPTÁVKA — jediné místo, kde náboj ZŮSTANE SVÍTIT ----------------
