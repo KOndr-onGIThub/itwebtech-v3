@@ -2660,8 +2660,11 @@
     .contact-form__title {
         margin-bottom: .5rem;
     }
+    /* OND-279: --color-ink-500 (#64748B) dával 4,05:1 — těsně pod normou. Poslední
+       zbloudilý výskyt téhle vady; varianta .contact-form__thanks už na --color-body
+       dávno je. Perex nad formulářem je text, který vede k odeslání, ne dekorace. */
     .contact-form__subtitle {
-        color: var(--color-ink-500);
+        color: var(--color-body);
         font-size: .9375rem;
         margin-bottom: 1.75rem;
         line-height: 1.65;
