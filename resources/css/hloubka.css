@@ -305,12 +305,32 @@
     /* z-index −1 uvnitř `isolation: isolate` = pod obsahem sekce,
        ale nad pozadím stránky. Sekce samy žádné pozadí nemají. */
     z-index: -1;
-    /* Přesah 24 px nahoru i dolů drží vrchol kuželu nad hranou sekce,
-       takže světlo nezačíná ostrým řezem. */
-    inset: -24px 0;
+
+    /* NESMÍ PŘESAHOVAT ZE SEKCE VEN. Tady byl bug, který Ondra našel
+       hned po nasazení (22. 9.): vrstva měla `inset: -24px 0`, aby vrchol
+       světelného kuželu přečníval nad hranu sekce. Dokud svit seděl
+       v `background-image` sekce, přesah nešel udělat jinak než přes
+       background-size — a pozadí se VŽDYCKY ořízne boxem prvku.
+       Pseudo-element se ale neořezává: těch 24 px přetékalo do sousední
+       sekce. A protože `isolation: isolate` dělá z každé sekce vlastní
+       vykreslovací kontext a ty se kreslí v pořadí podle DOM, svit sekce 02
+       se maloval PŘES fotku v heru — s tvrdou vodorovnou hranou tam, kde
+       obdélník končil. Vypadalo to, že jsou sekce přes sebe.
+
+       Řešení: pseudo-element drží přesně box sekce (`inset: 0`) a přesah
+       se dělá tam, kde se dělal vždycky — roztažením gradientu přes
+       background-size/position. Kužel je pořád o 48 px vyšší a posazený
+       o 24 px nahoru, takže světlo nezačíná ostrým řezem, ale všechno,
+       co by vyčnívalo, se ořízne hranou sekce. Vizuálně to odpovídá stavu
+       před rozsvěcováním; jediný rozdíl je, že to jde stmívat.
+
+       Kdo sem bude sahat: `inset` musí zůstat 0. Přesah patří do
+       background-size, ne do geometrie prvku. */
+    inset: 0;
     pointer-events: none;
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-size: 100% calc(100% + 48px);
+    background-position: 0 -24px;
     background-image: var(--pdd-wash, none);
     opacity: var(--pdd-up);
     transition: opacity 1100ms var(--ease-out);
