@@ -201,13 +201,6 @@
     color: var(--color-fg-primary);
     margin: 0;
 }
-.pd-head__index {
-    font-family: var(--font-display);
-    font-weight: 200;
-    font-variation-settings: 'wght' 200;
-    font-size: var(--text-h3);
-    color: var(--pd-accent);
-}
 .pd-intro {
     font-family: var(--font-body);
     font-size: var(--text-body);
