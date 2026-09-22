@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Landing;
 
 use App\Http\Controllers\Controller;
 use App\Models\LandingLead;
+use App\Support\LeadMailer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Throwable;
@@ -23,7 +24,7 @@ class LandingLeadController extends Controller
         ]);
 
         try {
-            LandingLead::create([
+            $lead = LandingLead::create([
                 'name' => $data['name'],
                 'company' => $data['company'] ?? null,
                 'email' => $data['email'],
@@ -31,6 +32,7 @@ class LandingLeadController extends Controller
                 'budget' => $data['budget'] ?? null,
                 'message' => $data['message'],
                 'source' => 'landing.website-service',
+                'mail_status' => LandingLead::MAIL_PENDING,
                 'ip_address' => $request->ip(),
                 'user_agent' => $request->userAgent(),
             ]);
@@ -43,6 +45,9 @@ class LandingLeadController extends Controller
                     'lead' => __('landing.form.error'),
                 ]);
         }
+
+        // OND-264: notifikace stejnou cestou jako u ostatních formulářů.
+        LeadMailer::notify($lead);
 
         return back()
             ->with('landing_lead_success', true);
