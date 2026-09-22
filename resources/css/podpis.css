@@ -175,7 +175,7 @@
 .pd-note {
     font-family: var(--font-body);
     font-size: var(--text-body-sm);
-    color: var(--color-fg-faint);
+    color: var(--color-fg-muted);
     max-width: 48ch;
     margin: 0;
 }
@@ -258,7 +258,7 @@
     font-weight: 200;
     font-variation-settings: 'wght' 200;
     font-size: var(--text-body);
-    color: var(--color-fg-faint);
+    color: var(--color-fg-decorative);
 }
 .pd-work__desc {
     font-family: var(--font-body);
@@ -347,7 +347,7 @@
     font-style: italic;
     font-size: var(--text-body-sm);
     line-height: var(--leading-relaxed);
-    color: var(--color-fg-faint);
+    color: var(--color-fg-muted);
 }
 .pd-issue blockquote footer {
     font-style: normal;
@@ -423,7 +423,7 @@
     font-variation-settings: 'wght' 200;
     font-size: var(--text-h3);
     line-height: 1.1;
-    color: var(--color-fg-faint);
+    color: var(--color-fg-decorative);
 }
 .pd-testi__text {
     font-family: var(--font-body);
@@ -437,7 +437,7 @@
     font-size: var(--text-caption);
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--color-fg-faint);
+    color: var(--color-fg-muted);
 }
 
 /* ============================================================
@@ -549,7 +549,7 @@
     font-variation-settings: 'wght' 200;
     font-size: var(--text-h3);
     line-height: 1;
-    color: var(--color-fg-faint);
+    color: var(--color-fg-decorative);
     margin-bottom: var(--space-3);
 }
 .pd-case__client {
@@ -629,7 +629,7 @@
     font-variation-settings: 'wght' 200;
     font-size: var(--text-h3);
     line-height: 1.1;
-    color: var(--color-fg-faint);
+    color: var(--color-fg-decorative);
 }
 .pd-why__item h3 {
     font-family: var(--font-display);
@@ -734,7 +734,7 @@
     font-style: italic;
     font-size: var(--text-body-sm);
     line-height: var(--leading-relaxed);
-    color: var(--color-fg-faint);
+    color: var(--color-fg-muted);
     max-width: 62ch;
 }
 .pd-step__body blockquote footer {
@@ -748,7 +748,7 @@
     font-family: var(--font-body);
     font-size: var(--text-body-sm);
     line-height: var(--leading-relaxed);
-    color: var(--color-fg-faint);
+    color: var(--color-fg-muted);
     max-width: 62ch;
     margin: var(--space-3) 0 0;
 }
@@ -830,7 +830,7 @@
     font-style: italic;
     font-size: var(--text-body-sm);
     line-height: var(--leading-relaxed);
-    color: var(--color-fg-faint);
+    color: var(--color-fg-muted);
 }
 .pd-form__quote footer {
     font-style: normal;
@@ -866,7 +866,7 @@
     transition: border-color var(--duration-micro) var(--ease-out);
 }
 .pd-field input::placeholder,
-.pd-field textarea::placeholder { color: var(--color-fg-faint); }
+.pd-field textarea::placeholder { color: var(--color-fg-muted); }
 .pd-field input:focus,
 .pd-field textarea:focus {
     outline: none;
@@ -912,7 +912,7 @@
 .pd-form__privacy {
     font-family: var(--font-body);
     font-size: var(--text-caption);
-    color: var(--color-fg-faint);
+    color: var(--color-fg-muted);
     margin: var(--space-3) 0 0;
 }
 .pd-form__privacy a {
@@ -997,7 +997,7 @@
     font-size: var(--text-eyebrow);
     letter-spacing: var(--tracking-eyebrow);
     text-transform: uppercase;
-    color: var(--color-fg-faint);
+    color: var(--color-fg-muted);
     margin: 0 0 var(--space-3);
 }
 .pd-versus__col--mine .pd-versus__label { color: var(--pd-accent); }
@@ -1030,7 +1030,7 @@
     font-family: var(--font-body);
     font-size: var(--text-body-sm);
     line-height: var(--leading-relaxed);
-    color: var(--color-fg-faint);
+    color: var(--color-fg-muted);
     margin: 0;
 }
 .pd-versus__closing {
@@ -1076,7 +1076,7 @@
     font-family: var(--font-body);
     font-size: var(--text-body-sm);
     line-height: var(--leading-relaxed);
-    color: var(--color-fg-faint);
+    color: var(--color-fg-muted);
 }
 
 /* --- Záruky ------------------------------------------------- */
@@ -1135,7 +1135,7 @@
     border: 1px solid var(--color-border-mid);
     font-size: var(--text-caption);
     letter-spacing: 0.04em;
-    color: var(--color-fg-faint);
+    color: var(--color-fg-muted);
     white-space: nowrap;
 }
 

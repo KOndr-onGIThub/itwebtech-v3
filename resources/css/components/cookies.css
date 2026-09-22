@@ -155,7 +155,7 @@
     justify-content: center;
     border: 0;
     background: transparent;
-    color: var(--color-fg-faint, #5C5C63);
+    color: var(--color-fg-muted, #9B9AA0);
     font-size: 0.8125rem;
     line-height: 1;
     cursor: pointer;

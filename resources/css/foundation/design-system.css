@@ -51,7 +51,7 @@
     /* Foregrounds */
     --color-fg-primary:  #F2F0EA;  /* warm white (sníží halaci na dark) */
     --color-fg-muted:    #9B9AA0;
-    --color-fg-faint:    #5C5C63;
+    --color-fg-decorative: #5C5C63;  /* OND-279: 2,98:1 — jen dekorace (ordinály, linky), nikdy text s informací */
     --color-fg-on-cream: #15151A;  /* text na cream backgroundu */
 
     /* Borders */
