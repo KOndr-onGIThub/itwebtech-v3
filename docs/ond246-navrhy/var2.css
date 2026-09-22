@@ -1,0 +1,570 @@
+/* ==========================================================================
+   OND-246 — varianta 2: „Proud v lince"
+   --------------------------------------------------------------------------
+   PREMISA
+   Acid #D8FF3A na tomhle webu není nátěr, je to PROUD. Web je celý postavený
+   z vlasových linek (#26262B): vodorovná dělítka sekcí, svislá dělítka sloupců,
+   podtržení odkazů. Tyhle linky přestanou být mrtvé — když sekce vjede do
+   výřezu, po její lince JEDNOU proběhne acid náboj, dojede na konec a zhasne.
+   Je to jednorázové, rychlé a přesné. Ne smyčka, ne blikání.
+
+   „Hra světel" je v DRÁZE toho náboje: v každé sekci vede jinudy, podle toho,
+   jak se ta sekce čte.
+
+   CO TAHLE VARIANTA NEDĚLÁ (schválně):
+   - nesahá na pozadí sekcí (žádné gradienty, žádné plochy, žádné zrno)
+   - nepoužívá box-shadow ani filter: blur()
+   - nepřidává zaoblení ani karty
+   - nic nestartuje v opacity: 0 — všechny animované vrstvy jsou dekorace
+     nad linkou, která existuje i bez JS; obsah se nedotýká
+
+   ANIMUJE SE JEN: background-position, transform, opacity.
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   1. SLOVNÍK NÁBOJE
+   Jeden tvar světla, čtyři směry. Hlava náboje je ostrá, za ní dlouhá slabá
+   stopa — proto to nepůsobí jako tečka, ale jako průchod proudu.
+   -------------------------------------------------------------------------- */
+:root {
+    /* hlava vpravo, stopa doleva → náboj cestuje DOPRAVA */
+    --v2-run-right: linear-gradient(90deg,
+        rgba(216, 255, 58, 0) 0%,
+        rgba(216, 255, 58, .07) 34%,
+        rgba(216, 255, 58, .22) 60%,
+        rgba(216, 255, 58, .55) 80%,
+        rgba(230, 255, 112, .95) 93%,
+        rgba(216, 255, 58, .40) 98%,
+        rgba(216, 255, 58, 0) 100%);
+
+    /* zrcadlo → náboj cestuje DOLEVA */
+    --v2-run-left: linear-gradient(270deg,
+        rgba(216, 255, 58, 0) 0%,
+        rgba(216, 255, 58, .07) 34%,
+        rgba(216, 255, 58, .22) 60%,
+        rgba(216, 255, 58, .55) 80%,
+        rgba(230, 255, 112, .95) 93%,
+        rgba(216, 255, 58, .40) 98%,
+        rgba(216, 255, 58, 0) 100%);
+
+    /* náboj cestuje DOLŮ */
+    --v2-run-down: linear-gradient(180deg,
+        rgba(216, 255, 58, 0) 0%,
+        rgba(216, 255, 58, .07) 34%,
+        rgba(216, 255, 58, .22) 60%,
+        rgba(216, 255, 58, .55) 80%,
+        rgba(230, 255, 112, .95) 93%,
+        rgba(216, 255, 58, .40) 98%,
+        rgba(216, 255, 58, 0) 100%);
+
+    /* náboj cestuje NAHORU */
+    --v2-run-up: linear-gradient(0deg,
+        rgba(216, 255, 58, 0) 0%,
+        rgba(216, 255, 58, .07) 34%,
+        rgba(216, 255, 58, .22) 60%,
+        rgba(216, 255, 58, .55) 80%,
+        rgba(230, 255, 112, .95) 93%,
+        rgba(216, 255, 58, .40) 98%,
+        rgba(216, 255, 58, 0) 100%);
+
+    /* STOPA PO PRŮCHODU: linka, po které náboj proběhl, zůstane o chlup
+       světlejší než byla. Neutrální šedá mezi --color-border-soft (#26262B)
+       a --color-border-mid (#3A3A41) — žádná nová barva, jen o krok dál
+       po stejné ose. Díky tomu scroll po stránce „zapisuje" trasu. */
+    --v2-line-lit: #2F2F35;
+
+    --v2-ease: cubic-bezier(.2, .8, .2, 1);
+}
+
+/* Délka hlavy + stopy vůči délce linky. 34 % je kompromis: dost dlouhé,
+   aby to byl proud, dost krátké, aby byl vidět pohyb.
+
+   POZOR NA ČASOVÁNÍ: náboj jede LINEÁRNĚ, ne přes --ease-out. Ověřeno na
+   snímcích — cubic-bezier(.2,.8,.2,1) má 90 % dráhy za sebou v první čtvrtině
+   času, takže z náboje je záblesk a zbytek animace se plazí. Proud musí mít
+   konstantní rychlost, jinak to nečte jako průchod. --ease-out zůstává tam,
+   kam patří: na krátké hover dosvity. */
+@keyframes v2-run-x {
+    from { background-position-x: -72%; }
+    to   { background-position-x: 172%; }
+}
+@keyframes v2-run-x-rev {
+    from { background-position-x: 172%; }
+    to   { background-position-x: -72%; }
+}
+@keyframes v2-run-y {
+    from { background-position-y: -72%; }
+    to   { background-position-y: 172%; }
+}
+
+
+/* --------------------------------------------------------------------------
+   2. ZÁKLADNÍ PRAVIDLO SYSTÉMU — dělítko sekce
+   Každá sekce má dnes `border-top: 1px solid #26262B`. To je „přívodní kabel".
+   Když sekce vjede do výřezu, po tom kabelu proběhne náboj a linka pak zůstane
+   o chlup světlejší.
+
+   Směr se střídá: liché sekce zleva doprava, sudé zprava doleva. Stránka tak
+   při scrollu „cik-cak" plyne dolů místo aby 14× zopakovala totéž gesto.
+   Tohle je DEFAULT — sekce, které mají vlastní provedení (02, 03, 04, 06, 09,
+   14, 15), ho dostanou navíc, se zpožděním, jako „odbočku z hlavního vedení".
+   -------------------------------------------------------------------------- */
+.pd-section,
+.pd-strip {
+    position: relative;
+    transition: border-top-color 800ms var(--v2-ease);
+}
+
+.pd-section::before,
+.pd-strip::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    pointer-events: none;
+    background-image: var(--v2-run-right);
+    background-repeat: no-repeat;
+    background-size: 34% 100%;
+    background-position: -72% 0;
+}
+
+.pd-section:nth-of-type(even)::before {
+    background-image: var(--v2-run-left);
+    background-position: 172% 0;
+}
+
+.pd-section.v2-on::before,
+.pd-strip.v2-on::before {
+    animation: v2-run-x 900ms linear 1 both;
+}
+.pd-section:nth-of-type(even).v2-on::before {
+    animation-name: v2-run-x-rev;
+}
+
+/* stopa: linka po průchodu zůstane o krok světlejší */
+.pd-section.v2-lit,
+.pd-strip.v2-lit {
+    border-top-color: var(--v2-line-lit);
+}
+
+
+/* ==========================================================================
+   3. PROVEDENÍ PO SEKCÍCH — dráha odvozená z obsahu
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   HERO — „náboj dojede do klíčového slova a zůstane tam"
+   PROČ: hero nemá žádné dělítko sekce (je první). Jedinou skutečnou linkou
+   v něm je acid podtržení pod „na míru" v H1 — a to je zároveň to jediné
+   slovo, které celá stránka prodává. Náboj proto vjede zleva přesně do téhle
+   linky. Druhý takt: dojede a „vybije se" do CTA tlačítka — od zvýrazněného
+   slova k akci. To je čtecí dráha hera, doslova.
+
+   TECHNIKA: podtržení překreslím z `text-decoration` na background vrstvu
+   (geometricky totožnou), aby po něm mohl náboj jet. Statická vrstva je
+   pořád plný acid pruh — bez JS i při reduced-motion vypadá hero stejně
+   jako dnes. Nic nestartuje neviditelné.
+   -------------------------------------------------------------------------- */
+.pd-heading em {
+    -webkit-text-decoration-color: transparent;
+    text-decoration-color: transparent;
+    background-image:
+        var(--v2-run-right),                                  /* náboj */
+        linear-gradient(var(--pd-accent), var(--pd-accent));  /* statický pruh */
+    background-repeat: no-repeat, no-repeat;
+    background-size: 34% .14em, 100% .14em;
+    background-position: -72% calc(100% - .055em), 0 calc(100% - .055em);
+}
+
+.pd-hero.v2-on .pd-heading em {
+    animation: v2-run-x 850ms var(--v2-ease) 1 both;
+}
+
+/* Druhý takt: náboj dorazí do CTA. Přejezd světla přes plnou acid plochu
+   tlačítka — barva se na okamžik zvedne k --color-accent-hover (#E6FF70),
+   což je existující hover tón. Kontrast textu se tím jen zlepší. */
+.pd-hero .pd-cta {
+    position: relative;
+    overflow: hidden;
+}
+.pd-hero .pd-cta::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: linear-gradient(90deg,
+        rgba(230, 255, 112, 0) 0%,
+        rgba(230, 255, 112, .35) 58%,
+        rgba(230, 255, 112, .95) 88%,
+        rgba(230, 255, 112, 0) 100%);
+    background-repeat: no-repeat;
+    background-size: 34% 100%;
+    background-position: -72% 0;
+    mix-blend-mode: normal;
+}
+.pd-hero.v2-on .pd-cta::after {
+    animation: v2-run-x 700ms var(--v2-ease) 620ms 1 both;
+}
+
+
+/* --------------------------------------------------------------------------
+   02 ŽIVÉ WEBY — „tady, tady a tady to běží"
+   PROČ: sekce ukazuje tři weby, které JSOU V PROVOZU. Tři rámečky se proto
+   nabijí POSTUPNĚ (01 → 02 → 03), vždy jen horní hrana rámečku, s odstupem
+   120 ms. Čte se to jako tři nezávislé běžící stroje, ne jako jedna skupina.
+   Vodorovná hrana je zvolená proto, že dlaždice se čtou zleva doprava.
+   -------------------------------------------------------------------------- */
+.pd-work__plate {
+    position: relative;
+}
+.pd-work__plate::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    z-index: 2;
+    pointer-events: none;
+    background-image: var(--v2-run-right);
+    background-repeat: no-repeat;
+    background-size: 34% 100%;
+    background-position: -72% 0;
+}
+.pd-works.v2-on .pd-work:nth-child(1) .pd-work__plate::before { animation: v2-run-x 800ms linear 260ms 1 both; }
+.pd-works.v2-on .pd-work:nth-child(2) .pd-work__plate::before { animation: v2-run-x 800ms linear 380ms 1 both; }
+.pd-works.v2-on .pd-work:nth-child(3) .pd-work__plate::before { animation: v2-run-x 800ms linear 500ms 1 both; }
+
+/* HOVER = jen ten jeden segment (bod 3 konceptu): najetím na dlaždici se
+   rozsvítí horní hrana jen té dlaždice, krátký dosvit --duration-micro. */
+.pd-work:hover .pd-work__plate::before,
+.pd-work:focus-visible .pd-work__plate::before {
+    animation: none;
+    background-image: linear-gradient(var(--pd-accent), var(--pd-accent));
+    background-size: 100% 100%;
+    background-position: 0 0;
+    transition: background-size 120ms var(--v2-ease);
+}
+
+
+/* --------------------------------------------------------------------------
+   03 JAK STAVÍM — „čísla ven, text dovnitř", náboj jede SVISLE DOLŮ
+   PROČ: tahle sekce je jediná, která na stránce nemá žádnou vnitřní linku —
+   dva problémy s velkými acid čísly volně plavou v prázdnu. Dostanou proto
+   svislé vlasové dělítko přesně v mezeře mezi číslem a textem (stejná
+   gramatika jako `.pd-service + .pd-service { border-left }`, nic nového).
+   Náboj po něm jede SHORA DOLŮ — obě linky současně, protože ty dva problémy
+   jsou rovnocenné, ne posloupnost. Svislý směr odlišuje sekci od okolí a
+   zároveň dává obsahu hloubku, která mu dnes chybí.
+   -------------------------------------------------------------------------- */
+.pd-issue {
+    position: relative;
+}
+.pd-issue::before {
+    /* trvalá vlasová linka — existuje i bez JS a při reduced-motion */
+    content: "";
+    position: absolute;
+    left: 64px;                 /* střed 16px mezery mezi 56px sloupcem čísla a textem */
+    top: .18em;
+    bottom: 0;
+    width: 1px;
+    background: var(--color-border-soft);
+}
+.pd-issue::after {
+    /* náboj nad ní */
+    content: "";
+    position: absolute;
+    left: 64px;
+    top: .18em;
+    bottom: 0;
+    width: 1px;
+    pointer-events: none;
+    background-image: var(--v2-run-down);
+    background-repeat: no-repeat;
+    background-size: 100% 34%;
+    background-position: 0 -72%;
+}
+.pd-issues.v2-on .pd-issue::after {
+    animation: v2-run-y 950ms linear 260ms 1 both;
+}
+
+
+/* --------------------------------------------------------------------------
+   04 CO STAVÍM — dvě svislá dělítka sloupců, náboj shora dolů SOUČASNĚ
+   PROČ: tři služby jsou tři paralelní nabídky, ne kroky. Proto se obě
+   existující svislá dělítka (`border-left` mezi sloupci) nabijí ve stejnou
+   chvíli a stejným směrem — čte se to jako tři souběžné linky provozu.
+   Sekce 03 jede svisle taky, ale tam jsou linky uvnitř bloku (číslo | text);
+   tady oddělují celé sloupce přes celou výšku sekce. Jiné měřítko, jiná role.
+   -------------------------------------------------------------------------- */
+@media (min-width: 1024px) {
+    .pd-service {
+        position: relative;
+    }
+    .pd-service + .pd-service::before {
+        content: "";
+        position: absolute;
+        left: -1px;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        pointer-events: none;
+        background-image: var(--v2-run-down);
+        background-repeat: no-repeat;
+        background-size: 100% 34%;
+        background-position: 0 -72%;
+    }
+    .pd-services.v2-on .pd-service + .pd-service::before {
+        animation: v2-run-y 900ms linear 260ms 1 both;
+    }
+    /* hover: rozsvítí se jen dělítko toho sloupce, na kterém stojím */
+    .pd-service:hover + .pd-service::before,
+    .pd-service + .pd-service:hover::before {
+        animation: none;
+        background-image: linear-gradient(rgba(216, 255, 58, .45), rgba(216, 255, 58, .45));
+        background-size: 100% 100%;
+        background-position: 0 0;
+        transition: background-size 120ms var(--v2-ease);
+    }
+}
+
+
+/* --------------------------------------------------------------------------
+   06 CENÍK — jediná UZAVŘENÁ SMYČKA na celé stránce
+   PROČ: ceník je místo, kde se rozhoduje. Náboj proto nabitý sloupec
+   („Nejčastější volba") OBKROUŽÍ dokola: horní hrana → pravá → spodní → levá,
+   a zhasne tam, kde začal. Nikde jinde na stránce se smyčka neopakuje —
+   uzavřený obrys = uzavřené rozhodnutí. Rám se přitom trvale nekreslí,
+   viditelná je jen dráha náboje, takže nevzniká žádná „karta".
+
+   TECHNIKA: jeden pseudo-element, čtyři background vrstvy (top/right/bottom/
+   left), jedna keyframe sada — v každé čtvrtině se hýbe jen jedna vrstva,
+   ostatní drží. Proto to jede po obvodu a ne všude naráz.
+   -------------------------------------------------------------------------- */
+.pd-price__col--featured {
+    position: relative;
+}
+.pd-price__col--featured::before {
+    content: "";
+    position: absolute;
+    inset: -2px 0 0 0;          /* -2px = sedne na existující 2px acid border-top */
+    pointer-events: none;
+    background-image:
+        var(--v2-run-right),    /* 1 — horní hrana, doprava */
+        var(--v2-run-down),     /* 2 — pravá hrana, dolů */
+        var(--v2-run-left),     /* 3 — spodní hrana, doleva */
+        var(--v2-run-up);       /* 4 — levá hrana, nahoru */
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+    background-size: 34% 1px, 1px 34%, 34% 1px, 1px 34%;
+    background-position: -72% 0, 100% -72%, 172% 100%, 0 172%;
+}
+@keyframes v2-loop {
+    0%   { background-position: -72% 0, 100% -72%, 172% 100%, 0 172%; }
+    25%  { background-position: 172% 0, 100% -72%, 172% 100%, 0 172%; }
+    50%  { background-position: 172% 0, 100% 172%, 172% 100%, 0 172%; }
+    75%  { background-position: 172% 0, 100% 172%, -72% 100%, 0 172%; }
+    100% { background-position: 172% 0, 100% 172%, -72% 100%, 0 -72%; }
+}
+.pd-price.v2-on .pd-price__col--featured::before {
+    animation: v2-loop 1500ms linear 300ms 1 both;
+}
+
+
+/* --------------------------------------------------------------------------
+   09 POSTUP — doslovný PRŮCHOD PROCESEM
+   PROČ: sekce tvrdí „4 jasné kroky". Náboj proto sjíždí svisle po pravé hraně
+   celé sekce (prázdný okraj, nic tam nepřekáží) a jak míjí jednotlivé kroky,
+   zažehne vodorovnou linku každého z nich — ZPRAVA DOLEVA, protože jiskra
+   přilétá z pravé hrany. Časování linek počítá JS z reálné pozice každého
+   kroku, takže zážeh nastane přesně ve chvíli, kdy tudy jiskra projíždí.
+   Je to jediné místo na stránce, kde se náboj větví. Sekce je o posloupnosti,
+   tak ji náboj projde.
+   -------------------------------------------------------------------------- */
+.pd-steps {
+    position: relative;
+}
+.pd-steps::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 1px;
+    pointer-events: none;
+    background-image: var(--v2-run-down);
+    background-repeat: no-repeat;
+    background-size: 100% 22%;
+    background-position: 0 -30%;
+}
+.pd-steps.v2-on::before {
+    animation: v2-run-y 1700ms linear 200ms 1 both;
+}
+
+.pd-step {
+    position: relative;
+}
+.pd-step::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    pointer-events: none;
+    background-image: var(--v2-run-left);
+    background-repeat: no-repeat;
+    background-size: 34% 100%;
+    background-position: 172% 0;
+}
+.pd-steps.v2-on .pd-step::before {
+    /* --v2-delay dopočítá JS z offsetTop kroku; fallback kdyby JS nedoběhl */
+    animation: v2-run-x-rev 720ms linear var(--v2-delay, 200ms) 1 both;
+}
+/* hover: rozsvítí se jen linka toho kroku */
+.pd-step:hover::before {
+    animation: none;
+    background-image: linear-gradient(rgba(216, 255, 58, .40), rgba(216, 255, 58, .40));
+    background-size: 100% 100%;
+    background-position: 0 0;
+    transition: background-size 120ms var(--v2-ease);
+}
+
+
+/* --------------------------------------------------------------------------
+   14 FAQ — jediná sekce, kde náboj nespouští SCROLL, ale ČLOVĚK
+   PROČ: FAQ se nečte odshora dolů, otevírá se výběrem. Náboj proto při scrollu
+   neběží vůbec — proběhne až ve chvíli, kdy někdo rozklikne otázku, a to přesně
+   linkou pod TOU otázkou (mezi otázkou a odpovědí). Linka se tím zároveň
+   nakreslí a zhasne — nevzniká trvalé dělítko navíc, jen stopa po otevření.
+   Je to jediná reakce na vstup uživatele mezi „scrollovými" sekcemi, což té
+   sekci dává přesně ten interaktivní charakter, který má.
+   -------------------------------------------------------------------------- */
+.pd-faq__q {
+    position: relative;
+}
+.pd-faq__q::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    pointer-events: none;
+    background-image: var(--v2-run-right);
+    background-repeat: no-repeat;
+    background-size: 34% 100%;
+    background-position: -72% 0;
+}
+.pd-faq__item.v2-fire > .pd-faq__q::after {
+    animation: v2-run-x 750ms linear 1 both;
+}
+/* hover: jen slabý náznak té linky, bez běhu */
+.pd-faq__q:hover::after {
+    background-image: linear-gradient(rgba(216, 255, 58, .22), rgba(216, 255, 58, .22));
+    background-size: 100% 100%;
+    background-position: 0 0;
+    transition: background-size 120ms var(--v2-ease);
+}
+
+
+/* --------------------------------------------------------------------------
+   15 POPTÁVKA — jediné místo, kde náboj ZŮSTANE SVÍTIT
+   PROČ: formulář je cíl celé stránky. Jeho horní hrana se nabije a — na rozdíl
+   od všech ostatních linek — nezhasne úplně: zůstane slabě acid. Je to jediná
+   trvale nabitá linka na webu, takže oko při scrollu pozná, že tohle je konec
+   trasy. Navíc fokus v poli rozsvítí jeho SPODNÍ linku (samostatný krátký
+   náboj) — proud pokračuje z panelu do konkrétního políčka, kde právě píšete.
+   -------------------------------------------------------------------------- */
+.pd-form__panel {
+    position: relative;
+    padding-top: var(--space-5);
+}
+.pd-form__panel::before {
+    /* základní stav = slabě nabitá linka. Existuje i bez JS. */
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: rgba(216, 255, 58, .20);
+    pointer-events: none;
+}
+.pd-form__panel::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    pointer-events: none;
+    background-image: var(--v2-run-right);
+    background-repeat: no-repeat;
+    background-size: 34% 100%;
+    background-position: -72% 0;
+}
+.pd-form__panel.v2-on::after {
+    animation: v2-run-x 900ms linear 200ms 1 both;
+}
+
+/* fokus v poli: krátký náboj po spodní hraně vstupu. Stávající acid rámeček
+   při fokusu zůstává beze změny — přístupnost se nezhoršuje, jen přibývá
+   potvrzení „proud je tady". */
+.pd-field {
+    position: relative;
+}
+.pd-field::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    pointer-events: none;
+    background-image: var(--v2-run-right);
+    background-repeat: no-repeat;
+    background-size: 34% 100%;
+    background-position: -72% 0;
+}
+.pd-field:focus-within::after {
+    animation: v2-run-x 600ms linear 1 both;
+}
+
+
+/* --------------------------------------------------------------------------
+   4. PŘÍSTUPNOST — prefers-reduced-motion
+   Pohyb se vypne úplně. Statické části efektu zůstávají: acid podtržení v H1,
+   nové svislé dělítko v sekci 03, slabě nabitá horní hrana formuláře, stopa
+   po lince. Nic neskáče, nic nebliká, nic nezmizí.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    .pd-section::before,
+    .pd-strip::before,
+    .pd-heading em,
+    .pd-hero .pd-cta::after,
+    .pd-work__plate::before,
+    .pd-issue::after,
+    .pd-service + .pd-service::before,
+    .pd-price__col--featured::before,
+    .pd-steps::before,
+    .pd-step::before,
+    .pd-faq__q::after,
+    .pd-form__panel::after,
+    .pd-field::after {
+        animation: none !important;
+        transition: none !important;
+    }
+    /* jen ten jeden background layer, který kreslí statické podtržení v H1 */
+    .pd-heading em {
+        background-image: linear-gradient(var(--pd-accent), var(--pd-accent));
+        background-size: 100% .14em;
+        background-position: 0 calc(100% - .055em);
+    }
+    .pd-section,
+    .pd-strip {
+        transition: none;
+    }
+}

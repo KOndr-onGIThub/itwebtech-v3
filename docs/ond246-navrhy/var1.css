@@ -1,0 +1,612 @@
+/* =========================================================================
+   OND-246 — varianta 1: „Světlo shora"
+   -------------------------------------------------------------------------
+   PREMISA
+   Stránka není plochá černá plocha, ale fyzická scéna s jedním světelným
+   zdrojem. Světlo dopadá na plochu sekce, plocha má v místě dopadu svit
+   a spád do tmy. Existující vlasové linky se chovají jako hrany materiálu:
+   chytají odlesk tam, kde jsou blíž ke zdroji, a mizí do ztracena.
+   Zdroj se sekci od sekce posouvá — při scrollu člověk cítí, že obchází
+   jeden osvětlený objekt. Statické nasvícení, žádné blikání.
+
+   AMPLITUDA
+   Základ je #0A0A0B = rgb(10,10,11). Bílá s alfou a dá 10 + 245*a.
+   Strop, který si dovolím, je zhruba #131316 (=19,19,22) → alfa 0.038.
+   Všechny „wash" vrstvy se drží v pásmu 0.010–0.048.
+   Stávající linka #26262B odpovídá bílé s alfou ~0.114 — odlesk na lince
+   proto pracuje v pásmu 0.02 (ve stínu) až 0.30 (v místě dopadu).
+
+   BARVY
+   Jen neutrály (bílá/černá nad #0A0A0B) a stávající acid
+   #D8FF3A / #E6FF70 / #C2E62E. Žádná nová barva, žádné blury.
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   0. ZÁKLAD SYSTÉMU
+   Sekce dostane kotvu pro odlesk a vypne se jí plná barva horní linky —
+   místo ní kreslí odlesk pseudoprvek ::before. Barva linky se nemění
+   plošně, mění se její jas po délce.
+   ------------------------------------------------------------------------- */
+.pd > section {
+    position: relative;
+    background-repeat: no-repeat;
+    /* Plocha svitu je o 48 px vyšší než sekce, aby se při parallaxu nikdy
+       neodhalil holý okraj. Posun drží JS v proměnné --pd-py (±9 px). */
+    background-size: 100% calc(100% + 48px);
+    background-position: 0 calc(-24px + var(--pd-py, 0px));
+}
+
+.pd-section,
+.pd-strip {
+    /* linku převezme ::before, ale 1px místo musí zůstat, ať nic neposkočí */
+    border-top-color: transparent !important;
+}
+
+.pd-section::before,
+.pd-strip::before {
+    content: "";
+    position: absolute;
+    inset: -1px 0 auto 0;
+    height: 1px;
+    pointer-events: none;
+    z-index: 2;
+    background-image: var(--pd-edge,
+        linear-gradient(90deg,
+            rgba(242, 240, 234, 0.02) 0%,
+            rgba(242, 240, 234, 0.26) 50%,
+            rgba(242, 240, 234, 0.02) 100%));
+}
+
+/* Specular na velkých číslech: světlo je olízne z jedné strany.
+   Tmavý konec není nová barva — je to tentýž odstín se sníženou alfou,
+   takže prosvítá pozadí sekce (= ta část číslice je ve stínu).
+
+   POZOR na dvě různé rodiny číslic:
+   (a) acidové — .pd-head__index, .pd-issue__num, .pd-service__num,
+       .pd-step__num, .pd-promise__num
+   (b) tiché šedé (--color-fg-faint) — .pd-work__num, .pd-case__num,
+       .pd-testi__num, .pd-why__num
+   Každá dostane specular ve své vlastní barvě; přebarvit (b) na acid
+   by přidalo barvu tam, kde podle gramatiky webu být nemá. */
+.pd-head__index,
+.pd-issue__num,
+.pd-step__num,
+.pd-service__num,
+.pd-promise__num {
+    background-image: var(--pd-spec,
+        linear-gradient(100deg,
+            #e6ff70 0%,
+            #d8ff3a 40%,
+            rgba(216, 255, 58, 0.46) 100%));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Tiché šedé ordinály: specular jen přisvětlí náběžnou hranu k #9B9AA0,
+   odvrácená strana zůstává na původním #5C5C63. Kontrast tím roste,
+   ne klesá. */
+.pd-work__num,
+.pd-case__num,
+.pd-testi__num,
+.pd-why__num {
+    background-image: var(--pd-spec-mute,
+        linear-gradient(100deg,
+            #9b9aa0 0%,
+            #6f6f76 46%,
+            #5c5c63 100%));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+/* -------------------------------------------------------------------------
+   1. HERO — světlo zprava, JEDNO nasvícení přes fotku i přes plochu
+   Proč: na fotce Ondry svítí zdroj zprava. Aby fotka a pozadí patřily
+   do jedné scény, musí je olízlo totéž světlo — proto svit neleží
+   v pozadí sekce (tam by ho fotka useklo a vznikl by viditelný svislý šev
+   na hraně fotky), ale ve vrstvě NAD fotkou a POD textem. Přechod z plochy
+   do snímku je tím plynulý a text si drží plný kontrast.
+   ------------------------------------------------------------------------- */
+.pd > .pd-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0; /* fotka má z-index 0 a je v DOM dřív; .container-site má 1 */
+    pointer-events: none;
+    background-repeat: no-repeat;
+    background-size: 100% calc(100% + 48px);
+    background-position: 0 calc(-24px + var(--pd-py, 0px));
+    background-image:
+        radial-gradient(86% 96% at 62% -4%,
+            rgba(255, 255, 255, 0.05) 0%,
+            rgba(255, 255, 255, 0.018) 44%,
+            rgba(255, 255, 255, 0) 76%);
+}
+
+/* -------------------------------------------------------------------------
+   2. SEKCE 02 — Weby, které běží v praxi. Světlo shora, kolmo.
+   Proč: tři dlaždice se screenshoty mají působit jako vzorky položené
+   na stole. Proto je nasvícený pruh plochy právě v pásu, kde dlaždice leží,
+   a dlaždice do něj vrhají kontaktní stín. Bez nasvícené plochy by stín
+   na černé nebyl vidět — tady je.
+   ------------------------------------------------------------------------- */
+.pd > section:nth-child(2) {
+    --pd-edge: linear-gradient(90deg,
+        rgba(242, 240, 234, 0.02) 0%,
+        rgba(242, 240, 234, 0.30) 50%,
+        rgba(242, 240, 234, 0.02) 100%);
+    background-image:
+        radial-gradient(86% 44% at 50% -6%,
+            rgba(255, 255, 255, 0.05) 0%,
+            rgba(255, 255, 255, 0.012) 52%,
+            rgba(255, 255, 255, 0) 80%),
+        radial-gradient(96% 38% at 50% 50%,
+            rgba(255, 255, 255, 0.046) 0%,
+            rgba(255, 255, 255, 0.012) 54%,
+            rgba(255, 255, 255, 0) 78%);
+}
+
+/* Dlaždice: horní hrana blíž ke zdroji → chytá světlo; dole kontaktní stín.
+   Stín je vidět jenom proto, že plocha pod dlaždicemi je nasvícená —
+   na holé černé by nebyl. Přesně tím dlaždice „sedne na stůl". */
+.pd > section:nth-child(2) .pd-work__plate {
+    border-top-color: rgba(242, 240, 234, 0.24);
+    box-shadow: 0 20px 26px -14px rgba(0, 0, 0, 1);
+}
+/* Krajní dlaždice jsou dál od osy zdroje → odlesk na hraně je slabší. */
+.pd > section:nth-child(2) .pd-work:first-child .pd-work__plate,
+.pd > section:nth-child(2) .pd-work:last-child .pd-work__plate {
+    border-top-color: rgba(242, 240, 234, 0.13);
+}
+
+/* -------------------------------------------------------------------------
+   3. STRIP (social proof) — světlo odchází doleva
+   Proč: úzký proužek mezi dvěma sekcemi. Nesmí na sebe strhnout pozornost,
+   ale musí ukázat, že zdroj putuje — odlesk na lince je proto posunutý
+   doleva, ne v ose.
+   ------------------------------------------------------------------------- */
+.pd > .pd-strip {
+    --pd-edge: linear-gradient(90deg,
+        rgba(242, 240, 234, 0.20) 0%,
+        rgba(242, 240, 234, 0.10) 34%,
+        rgba(242, 240, 234, 0.015) 72%,
+        rgba(242, 240, 234, 0) 100%);
+    background-image:
+        radial-gradient(60% 200% at 16% 50%,
+            rgba(255, 255, 255, 0.03) 0%,
+            rgba(255, 255, 255, 0) 70%);
+}
+
+/* -------------------------------------------------------------------------
+   4. KLIENTI — plocha téměř bez světla
+   Proč: tichá řada jmen. Je to nejtmavší místo stránky, „mezi reflektory".
+   Kontrast s následující sekcí 03 pak víc vynikne.
+   ------------------------------------------------------------------------- */
+.pd > .pd-clients {
+    background-image:
+        radial-gradient(70% 160% at 30% 50%,
+            rgba(255, 255, 255, 0.014) 0%,
+            rgba(255, 255, 255, 0) 70%);
+}
+
+/* -------------------------------------------------------------------------
+   5. SEKCE 03 — Jak weby stavím. Světlo zleva.
+   Proč: sekce mluví o problémech, které vidím u cizích webů. Světlo zleva
+   olizuje velká čísla .pd-issue__num z levé hrany — čísla dostanou objem
+   a „vystoupí" z plochy stejně, jako má vystoupit ten problém.
+   ------------------------------------------------------------------------- */
+.pd > section:nth-child(5) {
+    --pd-edge: linear-gradient(90deg,
+        rgba(242, 240, 234, 0.02) 0%,
+        rgba(242, 240, 234, 0.28) 22%,
+        rgba(242, 240, 234, 0.05) 62%,
+        rgba(242, 240, 234, 0) 100%);
+    background-image:
+        radial-gradient(70% 80% at 12% 2%,
+            rgba(255, 255, 255, 0.048) 0%,
+            rgba(255, 255, 255, 0.013) 46%,
+            rgba(255, 255, 255, 0) 78%);
+}
+.pd > section:nth-child(5) .pd-issue__num {
+    --pd-spec: linear-gradient(95deg,
+        #e6ff70 0%,
+        #d8ff3a 34%,
+        rgba(216, 255, 58, 0.46) 100%);
+}
+.pd > section:nth-child(5) .pd-head__index {
+    /* index je vpravo, tedy na odvrácené straně → je ve stínu */
+    --pd-spec: linear-gradient(100deg,
+        rgba(216, 255, 58, 0.80) 0%,
+        rgba(216, 255, 58, 0.46) 100%);
+}
+
+/* -------------------------------------------------------------------------
+   6. SEKCE 04 — Co stavím. Světlo shora, tři svislé linky různě nasvícené.
+   Proč: tři sloupce služeb. Svislé vlasové linky jsou jediné „hrany"
+   v sekci — když je nasvítím různě (prostřední nejsilněji), sloupce
+   přestanou být tabulkou a dostanou hloubku jako tři desky za sebou.
+   ------------------------------------------------------------------------- */
+.pd > section:nth-child(6) {
+    --pd-edge: linear-gradient(90deg,
+        rgba(242, 240, 234, 0.03) 0%,
+        rgba(242, 240, 234, 0.27) 46%,
+        rgba(242, 240, 234, 0.03) 100%);
+    background-image:
+        radial-gradient(64% 70% at 48% -6%,
+            rgba(255, 255, 255, 0.05) 0%,
+            rgba(255, 255, 255, 0.012) 50%,
+            rgba(255, 255, 255, 0) 80%);
+}
+/* Svislé dělící linky: nahoře u zdroje jasné, dolů se ztrácejí. */
+.pd > section:nth-child(6) .pd-service + .pd-service {
+    border-left-color: transparent;
+    position: relative;
+}
+.pd > section:nth-child(6) .pd-service + .pd-service::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 1px;
+    pointer-events: none;
+    background-image: linear-gradient(180deg,
+        rgba(242, 240, 234, 0.24) 0%,
+        rgba(242, 240, 234, 0.09) 34%,
+        rgba(242, 240, 234, 0.02) 100%);
+}
+/* Prostřední předěl je nejblíž ose zdroje → nejjasnější. */
+.pd > section:nth-child(6) .pd-service:nth-child(2)::before {
+    background-image: linear-gradient(180deg,
+        rgba(242, 240, 234, 0.34) 0%,
+        rgba(242, 240, 234, 0.12) 34%,
+        rgba(242, 240, 234, 0.02) 100%);
+}
+
+/* -------------------------------------------------------------------------
+   7. SEKCE 05 — Realizované projekty. Světlo zprava shora.
+   Proč: případovky střídají stranu vizuálu (sudé mají order:2). Světlo
+   zprava dá každému vizuálu jinou roli — jednou je u zdroje, jednou dál —
+   a střídání layoutu tím dostane fyzikální důvod.
+   ------------------------------------------------------------------------- */
+.pd > section:nth-child(7) {
+    --pd-edge: linear-gradient(90deg,
+        rgba(242, 240, 234, 0) 0%,
+        rgba(242, 240, 234, 0.06) 44%,
+        rgba(242, 240, 234, 0.28) 82%,
+        rgba(242, 240, 234, 0.03) 100%);
+    background-image:
+        radial-gradient(72% 74% at 84% 0%,
+            rgba(255, 255, 255, 0.046) 0%,
+            rgba(255, 255, 255, 0.012) 48%,
+            rgba(255, 255, 255, 0) 78%);
+}
+.pd > section:nth-child(7) .pd-case__visual {
+    border-top-color: rgba(242, 240, 234, 0.18);
+    box-shadow: 0 22px 34px -18px rgba(0, 0, 0, 0.95);
+}
+.pd > section:nth-child(7) .pd-head__index {
+    --pd-spec: linear-gradient(260deg, #e6ff70 0%, #d8ff3a 45%, rgba(216, 255, 58, 0.5) 100%);
+}
+
+/* -------------------------------------------------------------------------
+   8. SEKCE 06 — Ceník. Nejjasnější místo stránky.
+   Proč: tohle je sekce, na kterou se má člověk dívat. Zdroj je nejblíž,
+   plocha má nejvyšší povolenou amplitudu a doporučený sloupec stojí
+   v kuželu světla. Jen tady (a u formuláře) smí linka na krátkém úseku
+   přejít do acidu — je to jediný „horký bod" nasvícení.
+   ------------------------------------------------------------------------- */
+#section-price {
+    --pd-edge:
+        linear-gradient(90deg,
+            rgba(216, 255, 58, 0) 34%,
+            rgba(216, 255, 58, 0.30) 50%,
+            rgba(216, 255, 58, 0) 66%),
+        linear-gradient(90deg,
+            rgba(242, 240, 234, 0.02) 0%,
+            rgba(242, 240, 234, 0.30) 50%,
+            rgba(242, 240, 234, 0.02) 100%);
+    background-image:
+        radial-gradient(70% 60% at 50% -8%,
+            rgba(255, 255, 255, 0.058) 0%,
+            rgba(255, 255, 255, 0.016) 46%,
+            rgba(255, 255, 255, 0) 78%);
+}
+/* Kužel světla na doporučeném sloupci — bez rámečku, bez rádiusu.
+   Poloměr je schválně menší než sloupec, aby svit zhasl dřív, než dojde
+   k jeho hraně. Kdyby doběhl až k okraji, vznikne tvrdý roh a z kuželu
+   světla se rázem stane karta — to je přesně to, co gramatika webu zakazuje. */
+#section-price .pd-price__col--featured {
+    background-image:
+        radial-gradient(74% 50% at 46% -2%,
+            rgba(255, 255, 255, 0.062) 0%,
+            rgba(255, 255, 255, 0.015) 44%,
+            rgba(255, 255, 255, 0) 74%);
+}
+/* Cena je bílá typografie — specular je proto neutrální, ne acidový. */
+#section-price .pd-price__value {
+    background-image: linear-gradient(100deg, #ffffff 0%, #f2f0ea 38%, #9b9aa0 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+/* -------------------------------------------------------------------------
+   9. SEKCE 07 — Proč já. Světlo zprava, měkké.
+   Proč: osobní sekce s videem. Zdroj se po ceníku odklání doprava,
+   plocha jde o stupeň dolů — po nejjasnějším místě musí přijít úlevu.
+   ------------------------------------------------------------------------- */
+.pd > section:nth-child(9) {
+    --pd-edge: linear-gradient(90deg,
+        rgba(242, 240, 234, 0.01) 0%,
+        rgba(242, 240, 234, 0.08) 40%,
+        rgba(242, 240, 234, 0.26) 76%,
+        rgba(242, 240, 234, 0.04) 100%);
+    background-image:
+        radial-gradient(66% 78% at 78% 4%,
+            rgba(255, 255, 255, 0.04) 0%,
+            rgba(255, 255, 255, 0.011) 48%,
+            rgba(255, 255, 255, 0) 78%);
+}
+.pd > section:nth-child(9) .pd-why__video {
+    box-shadow: 0 20px 32px -18px rgba(0, 0, 0, 0.95);
+}
+
+/* -------------------------------------------------------------------------
+   10. SEKCE 08 — Pod kapotou. Světlo zespodu.
+   Proč: doslovná práce s obsahem — „pod kapotou" se svítí montážní lampou
+   zespodu. Jediné místo na stránce, kde světlo přichází zdola; horní linka
+   je proto skoro zhaslá a plocha se rozjasňuje směrem dolů k faktům.
+   ------------------------------------------------------------------------- */
+.pd > section:nth-child(10) {
+    --pd-edge: linear-gradient(90deg,
+        rgba(242, 240, 234, 0.02) 0%,
+        rgba(242, 240, 234, 0.07) 50%,
+        rgba(242, 240, 234, 0.02) 100%);
+    background-image:
+        radial-gradient(78% 62% at 34% 104%,
+            rgba(255, 255, 255, 0.05) 0%,
+            rgba(255, 255, 255, 0.014) 46%,
+            rgba(255, 255, 255, 0) 76%);
+}
+
+/* -------------------------------------------------------------------------
+   11. SEKCE 09 — Postup ve 4 krocích. Světlo sestupuje po stránce.
+   Proč: sekce je o čase a pohybu vpřed. Zdroj proto během sekce klesá:
+   u kroku 01 je nahoře a odlesk na lince je vlevo, u kroku 04 je dole
+   a odlesk je vpravo. Při scrollování to vypadá, že světlo jde s vámi
+   od prvního kroku k poslednímu.
+   ------------------------------------------------------------------------- */
+#jak-pracuji {
+    --pd-edge: linear-gradient(90deg,
+        rgba(242, 240, 234, 0.24) 0%,
+        rgba(242, 240, 234, 0.08) 40%,
+        rgba(242, 240, 234, 0) 84%);
+    background-image:
+        linear-gradient(162deg,
+            rgba(255, 255, 255, 0.046) 0%,
+            rgba(255, 255, 255, 0.016) 40%,
+            rgba(255, 255, 255, 0) 72%);
+}
+/* Vodorovné linky mezi kroky: odlesk se krok po kroku posouvá doprava. */
+#jak-pracuji .pd-step {
+    border-top-color: transparent;
+    position: relative;
+}
+#jak-pracuji .pd-step::before {
+    content: "";
+    position: absolute;
+    inset: -1px 0 auto 0;
+    height: 1px;
+    pointer-events: none;
+    background-image: linear-gradient(90deg,
+        rgba(242, 240, 234, 0.28) 0%,
+        rgba(242, 240, 234, 0.06) 40%,
+        rgba(242, 240, 234, 0) 78%);
+}
+#jak-pracuji .pd-step:nth-child(2)::before {
+    background-image: linear-gradient(90deg,
+        rgba(242, 240, 234, 0.04) 0%,
+        rgba(242, 240, 234, 0.26) 30%,
+        rgba(242, 240, 234, 0.04) 74%,
+        rgba(242, 240, 234, 0) 100%);
+}
+#jak-pracuji .pd-step:nth-child(3)::before {
+    background-image: linear-gradient(90deg,
+        rgba(242, 240, 234, 0) 4%,
+        rgba(242, 240, 234, 0.05) 26%,
+        rgba(242, 240, 234, 0.26) 58%,
+        rgba(242, 240, 234, 0.03) 100%);
+}
+#jak-pracuji .pd-step:nth-child(4)::before {
+    background-image: linear-gradient(90deg,
+        rgba(242, 240, 234, 0) 10%,
+        rgba(242, 240, 234, 0.04) 40%,
+        rgba(242, 240, 234, 0.10) 70%,
+        rgba(242, 240, 234, 0.28) 100%);
+}
+/* Čísla kroků: specular se stáčí spolu se zdrojem. */
+#jak-pracuji .pd-step:nth-child(1) .pd-step__num {
+    --pd-spec: linear-gradient(120deg, #e6ff70 0%, #d8ff3a 40%, rgba(216, 255, 58, 0.46) 100%);
+}
+#jak-pracuji .pd-step:nth-child(2) .pd-step__num {
+    --pd-spec: linear-gradient(150deg, #e6ff70 0%, #d8ff3a 44%, rgba(216, 255, 58, 0.46) 100%);
+}
+#jak-pracuji .pd-step:nth-child(3) .pd-step__num {
+    --pd-spec: linear-gradient(200deg, #e6ff70 0%, #d8ff3a 46%, rgba(216, 255, 58, 0.48) 100%);
+}
+#jak-pracuji .pd-step:nth-child(4) .pd-step__num {
+    --pd-spec: linear-gradient(240deg, #e6ff70 0%, #d8ff3a 48%, rgba(216, 255, 58, 0.5) 100%);
+}
+
+/* -------------------------------------------------------------------------
+   12. SEKCE 10 — Reference. Světlo shora vlevo, šest položek v řadě.
+   Proč: šest citací pod sebou. Aby to nebyl jednolitý seznam, odlesk
+   na linkách každé položky slábne odshora dolů — stejně, jako slábne
+   světlo se vzdáleností od zdroje. Seznam tím dostane hloubku, aniž by
+   se cokoli zvýrazňovalo obsahově.
+   ------------------------------------------------------------------------- */
+#section-testimonials {
+    --pd-edge: linear-gradient(90deg,
+        rgba(242, 240, 234, 0.26) 0%,
+        rgba(242, 240, 234, 0.07) 44%,
+        rgba(242, 240, 234, 0) 86%);
+    background-image:
+        radial-gradient(66% 62% at 16% 0%,
+            rgba(255, 255, 255, 0.042) 0%,
+            rgba(255, 255, 255, 0.012) 46%,
+            rgba(255, 255, 255, 0) 76%);
+}
+#section-testimonials .pd-testi__item {
+    border-top-color: rgba(242, 240, 234, 0.13);
+}
+#section-testimonials .pd-testi__item:nth-child(n + 3) {
+    border-top-color: rgba(242, 240, 234, 0.09);
+}
+#section-testimonials .pd-testi__item:nth-child(n + 5) {
+    border-top-color: rgba(242, 240, 234, 0.06);
+}
+
+/* -------------------------------------------------------------------------
+   13. SEKCE 11 — Generátor versus váš byznys. Světlo jen na jednom sloupci.
+   Proč: sekce staví proti sobě dvě varianty. Zdroj stojí nad sloupcem
+   „--mine" — ten je ve světle, generátor zůstává ve stínu. Argument sekce
+   je tím řečený fyzikálně, ne další barvou ani tučným písmem.
+   ------------------------------------------------------------------------- */
+.pd > section:nth-child(13) {
+    --pd-edge: linear-gradient(90deg,
+        rgba(242, 240, 234, 0.02) 0%,
+        rgba(242, 240, 234, 0.05) 42%,
+        rgba(242, 240, 234, 0.27) 74%,
+        rgba(242, 240, 234, 0.03) 100%);
+    background-image:
+        radial-gradient(52% 78% at 74% -2%,
+            rgba(255, 255, 255, 0.05) 0%,
+            rgba(255, 255, 255, 0.013) 48%,
+            rgba(255, 255, 255, 0) 78%);
+}
+.pd > section:nth-child(13) .pd-versus__col--mine {
+    border-left-color: rgba(242, 240, 234, 0.20);
+}
+
+/* -------------------------------------------------------------------------
+   14. SEKCE 12 — 18 let v Toyotě. Úzký kužel na citaci.
+   Proč: osobní vzpomínka, jeden odstavec, který má nést váhu. Světlo je
+   nejužší na stránce — jako lampa nad jedním dokumentem. Okolí sekce
+   je záměrně skoro černé.
+   ------------------------------------------------------------------------- */
+.pd > section:nth-child(14) {
+    --pd-edge: linear-gradient(90deg,
+        rgba(242, 240, 234, 0.02) 0%,
+        rgba(242, 240, 234, 0.22) 30%,
+        rgba(242, 240, 234, 0.03) 70%,
+        rgba(242, 240, 234, 0) 100%);
+    background-image:
+        radial-gradient(38% 72% at 26% 6%,
+            rgba(255, 255, 255, 0.05) 0%,
+            rgba(255, 255, 255, 0.012) 44%,
+            rgba(255, 255, 255, 0) 74%);
+}
+
+/* -------------------------------------------------------------------------
+   15. SEKCE 13 — Záruky. Světlo shora, symetricky na obě položky.
+   Proč: dva rovnocenné sliby. Tady zdroj vědomě stojí v ose a obě položky
+   jsou nasvícené stejně — symetrie je sdělení. Svislý předěl mezi nimi
+   chytá odlesk nahoře a dole se ztrácí.
+   ------------------------------------------------------------------------- */
+.pd > section:nth-child(15) {
+    --pd-edge: linear-gradient(90deg,
+        rgba(242, 240, 234, 0.02) 0%,
+        rgba(242, 240, 234, 0.25) 50%,
+        rgba(242, 240, 234, 0.02) 100%);
+    background-image:
+        radial-gradient(84% 56% at 50% -4%,
+            rgba(255, 255, 255, 0.042) 0%,
+            rgba(255, 255, 255, 0.012) 50%,
+            rgba(255, 255, 255, 0) 80%);
+}
+.pd > section:nth-child(15) .pd-promise__item + .pd-promise__item {
+    border-left-color: transparent;
+    position: relative;
+}
+.pd > section:nth-child(15) .pd-promise__item + .pd-promise__item::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 1px;
+    pointer-events: none;
+    background-image: linear-gradient(180deg,
+        rgba(242, 240, 234, 0.26) 0%,
+        rgba(242, 240, 234, 0.08) 40%,
+        rgba(242, 240, 234, 0.02) 100%);
+}
+
+/* -------------------------------------------------------------------------
+   16. SEKCE 14 — FAQ. Světlo dopadá shora a s délkou seznamu ubývá.
+   Proč: FAQ je servisní obsah, nemá soutěžit s poptávkou pod ním. Linky
+   jednotlivých otázek proto postupně tmavnou — seznam se „propadá"
+   do stínu a oko sklouzne na formulář.
+   ------------------------------------------------------------------------- */
+#faq {
+    --pd-edge: linear-gradient(90deg,
+        rgba(242, 240, 234, 0.03) 0%,
+        rgba(242, 240, 234, 0.22) 40%,
+        rgba(242, 240, 234, 0.02) 100%);
+    background-image:
+        radial-gradient(86% 42% at 38% -6%,
+            rgba(255, 255, 255, 0.04) 0%,
+            rgba(255, 255, 255, 0.011) 50%,
+            rgba(255, 255, 255, 0) 80%);
+}
+#faq .pd-faq__item:nth-child(1) { border-top-color: rgba(242, 240, 234, 0.15); }
+#faq .pd-faq__item:nth-child(2) { border-top-color: rgba(242, 240, 234, 0.12); }
+#faq .pd-faq__item:nth-child(3) { border-top-color: rgba(242, 240, 234, 0.10); }
+#faq .pd-faq__item:nth-child(4) { border-top-color: rgba(242, 240, 234, 0.08); }
+#faq .pd-faq__item:nth-child(5) { border-top-color: rgba(242, 240, 234, 0.06); }
+
+/* -------------------------------------------------------------------------
+   17. SEKCE 15 — Poptávka. Lampa zblízka nad papírem na stole.
+   Proč: poslední krok cesty. Zdroj je nejníž a nejblíž — panel formuláře
+   je nejjasnější plocha na stránce a vrhá kontaktní stín, takže na ní
+   „leží". Druhý (a poslední) acidový horký bod na lince navazuje
+   na ten z ceníku: obě sekce, kde se rozhoduje, jsou označené stejně.
+   ------------------------------------------------------------------------- */
+#poptavka {
+    --pd-edge:
+        linear-gradient(90deg,
+            rgba(216, 255, 58, 0) 52%,
+            rgba(216, 255, 58, 0.28) 70%,
+            rgba(216, 255, 58, 0) 88%),
+        linear-gradient(90deg,
+            rgba(242, 240, 234, 0.02) 0%,
+            rgba(242, 240, 234, 0.12) 34%,
+            rgba(242, 240, 234, 0.30) 70%,
+            rgba(242, 240, 234, 0.03) 100%);
+    background-image:
+        radial-gradient(56% 78% at 72% 4%,
+            rgba(255, 255, 255, 0.058) 0%,
+            rgba(255, 255, 255, 0.016) 44%,
+            rgba(255, 255, 255, 0) 74%);
+}
+/* Panel nemá vlastní výplň — kdyby ji měl, useknou se jí rohy a je z toho
+   karta. Nejjasnější je proto díky svitu sekce, který je nad ním vycentrovaný.
+   Vlastní má jen osvětlenou horní hranu (to je ta hrana blíž k lampě)
+   a měkký kontaktní stín, aby na ploše ležel, ne plaval. */
+#poptavka .pd-form__panel {
+    position: relative;
+    border-top: 1px solid rgba(242, 240, 234, 0.20);
+    box-shadow: 0 28px 44px -26px rgba(0, 0, 0, 1);
+}
+
+/* -------------------------------------------------------------------------
+   18. PŘÍSTUPNOST A VÝKON
+   Parallax zdroje je jediný pohyb v celé variantě a vypíná se úplně.
+   Statické nasvícení zůstává — je to materiál, ne animace.
+   ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    .pd > section {
+        background-position: 0 0 !important;
+    }
+}
