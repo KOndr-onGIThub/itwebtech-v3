@@ -25,6 +25,13 @@
 
 @section('content')
 
+{{-- OND-251 — vrstva hloubky ZAPNUTÁ, v plném rozsahu (světlo + proud + hmota).
+     Kontakt je rozhodovací stránka a formulář je tentýž objekt jako sekce 15
+     na domovské stránce, takže dostává doslova totéž: desku, nabitou horní
+     hranu a proud do políčka. Rozhodnutí a jeho důvod jsou v §E hloubka.css.
+     Sekce se adresují přes `data-pdd`, nikdy přes pořadí. --}}
+<div class="pd--depth pd--depth-sub">
+
 {{-- Page hero — OND-135 iter 4: plán §3.1 design DNA (page-mark + display italic + amber accent) --}}
 <div class="page-hero page-hero--contact">
     <div class="container-site">
@@ -42,7 +49,7 @@
     </div>
 </div>
 
-<section class="section-wrapper">
+<section class="section-wrapper" data-pdd="contact-form">
     <div class="container-site">
 
         <div class="contact-layout">
@@ -184,7 +191,7 @@
 </section>
 
 {{-- 3-step „Co se stane potom" — OND-136 next_steps --}}
-<section class="section-wrapper section-wrapper--alt next-steps">
+<section class="section-wrapper section-wrapper--alt next-steps" data-pdd="contact-next">
     <div class="container-site">
         <p class="section-subheading">{{ __('contact.next_steps.eyebrow') }}</p>
         <h2 class="section-heading">{{ __('contact.next_steps.heading') }}</h2>
@@ -200,5 +207,7 @@
         </ol>
     </div>
 </section>
+
+</div>
 
 @endsection

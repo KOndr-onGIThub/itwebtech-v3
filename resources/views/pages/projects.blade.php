@@ -25,6 +25,12 @@
 
 @section('content')
 
+{{-- OND-251 — vrstva hloubky ZAPNUTÁ: jen světlo a hmota, žádný pohyb.
+     Důkazová stránka. Náboj na každé dlaždici mřížky by byl přesně ta
+     „přeplácanost", kterou vrstva odstraňovala — karty místo toho dostávají
+     kontaktní stín, aby ležely na ploše. Rozbor v §E hloubka.css. --}}
+<div class="pd--depth pd--depth-sub">
+
 {{-- Page hero — OND-135 iter 6: plán §3.1 design DNA (page-mark + display + amber accent) --}}
 <div class="page-hero page-hero--projects">
     <div class="container-site">
@@ -50,7 +56,7 @@
 />
 
 {{-- 2. Portfolio grid --}}
-<section class="section-wrapper section-wrapper--tight" data-reveal>
+<section class="section-wrapper section-wrapper--tight" data-reveal data-pdd="projects-grid">
     <div class="container-site">
         <x-portfolio.grid :projects="$portfolioProjects" :locale="$locale" />
     </div>
@@ -61,7 +67,7 @@
      Nově skutečné případovky z dokumentu `pripadovky` (OND-186). Druhý
      meta slot nese odkaz na živý web místo vymyšlené doby realizace —
      u interních aplikací (Toyota TSM) je `url` null a odkaz se nevykreslí. --}}
-<section class="section-wrapper" data-reveal>
+<section class="section-wrapper" data-reveal data-pdd="projects-cases">
     <div class="container-site">
         <header class="section-header">
             <p class="section-subheading">{{ __('projects.snapshots.subheading') }}</p>
@@ -99,7 +105,7 @@
 </section>
 
 {{-- 4. Project fit (existující) --}}
-<section class="section-wrapper section-alt" data-reveal>
+<section class="section-wrapper section-alt" data-reveal data-pdd="projects-fit">
     <div class="container-site">
         <header class="section-header">
             <p class="section-subheading">{{ __('projects.fit.subheading') }}</p>
@@ -134,7 +140,7 @@
 </section>
 
 {{-- 5. Why me (existující) --}}
-<section class="section-wrapper" data-reveal>
+<section class="section-wrapper" data-reveal data-pdd="projects-why">
     <div class="container-site">
         <header class="section-header">
             <p class="section-subheading">{{ __('projects.why_me.subheading') }}</p>
@@ -153,7 +159,7 @@
 </section>
 
 {{-- 6. Final CTA --}}
-<section class="section-wrapper" data-reveal>
+<section class="section-wrapper" data-reveal data-pdd="projects-cta">
     <div class="container-site">
         <div class="cta-block">
             <h2>{{ __('projects.cta.heading') }}</h2>
@@ -167,4 +173,5 @@
     </div>
 </section>
 
+</div>
 @endsection
