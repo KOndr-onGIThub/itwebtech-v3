@@ -1,6 +1,8 @@
 import './bootstrap';
 import './cookies';
 import './analytics';
+// OND-246 — hloubka. Sám se vypne, když na stránce není `.pd--depth`.
+import './hloubka';
 import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;

@@ -51,7 +51,10 @@
 @endphp
 
 @section('content')
-<div class="pd">
+{{-- OND-246 — `pd--depth` zapíná vrstvu hloubky (resources/css/hloubka.css
+     + resources/js/hloubka.js). Zatím jen tady, na domovské stránce; sundání
+     téhle jedné třídy vrátí stránku do původního stavu. --}}
+<div class="pd pd--depth">
 
 {{-- ===================================================
      01 — HERO
