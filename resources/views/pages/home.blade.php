@@ -106,7 +106,6 @@
     <div class="container-site">
         <header class="pd-head">
             <h2 class="pd-head__title">{{ __('home.showcase.heading') }}</h2>
-            <span class="pd-head__index" aria-hidden="true">02</span>
         </header>
         <p class="pd-intro">{{ __('home.showcase.intro') }}</p>
 
@@ -186,7 +185,6 @@
     <div class="container-site">
         <header class="pd-head">
             <h2 class="pd-head__title">{{ __('home.problems.heading') }}</h2>
-            <span class="pd-head__index" aria-hidden="true">03</span>
         </header>
         <p class="pd-lead">{{ __('home.problems.lead') }}</p>
 
@@ -222,7 +220,6 @@
     <div class="container-site">
         <header class="pd-head">
             <h2 class="pd-head__title">{{ __('home.services.heading_primary') }}</h2>
-            <span class="pd-head__index" aria-hidden="true">04</span>
         </header>
 
         <div class="pd-services">
@@ -260,7 +257,6 @@
     <div class="container-site">
         <header class="pd-head">
             <h2 class="pd-head__title">{{ __('home.portfolio.heading') }}</h2>
-            <span class="pd-head__index" aria-hidden="true">05</span>
         </header>
 
         <div class="pd-cases">
@@ -326,7 +322,6 @@
     <div class="container-site">
         <header class="pd-head">
             <h2 class="pd-head__title">{{ __('home.price_anchor.heading') }}</h2>
-            <span class="pd-head__index" aria-hidden="true">06</span>
         </header>
         <p class="pd-intro">{{ __('home.price_anchor.intro') }}</p>
 
@@ -359,7 +354,6 @@
     <div class="container-site">
         <header class="pd-head">
             <h2 class="pd-head__title">{{ __('home.why_me.heading') }}</h2>
-            <span class="pd-head__index" aria-hidden="true">07</span>
         </header>
 
         <div class="pd-why">
@@ -395,7 +389,6 @@
     <div class="container-site">
         <header class="pd-head">
             <h2 class="pd-head__title">{{ __('home.craft.heading') }}</h2>
-            <span class="pd-head__index" aria-hidden="true">08</span>
         </header>
         <p class="pd-intro">{{ __('home.craft.intro') }}</p>
 
@@ -426,7 +419,6 @@
     <div class="container-site">
         <header class="pd-head">
             <h2 class="pd-head__title">{{ __('home.how_i_work.heading') }}</h2>
-            <span class="pd-head__index" aria-hidden="true">09</span>
         </header>
 
         <ol class="pd-steps">
@@ -480,7 +472,6 @@
     <div class="container-site">
         <header class="pd-head">
             <h2 class="pd-head__title">{{ __('home.testimonials.heading') }}</h2>
-            <span class="pd-head__index" aria-hidden="true">10</span>
         </header>
 
         <div class="pd-testi">
@@ -520,7 +511,6 @@
     <div class="container-site">
         <header class="pd-head">
             <h2 class="pd-head__title">{{ __('home.ai.heading') }}</h2>
-            <span class="pd-head__index" aria-hidden="true">11</span>
         </header>
         <p class="pd-lead">{{ __('home.ai.subheading') }}</p>
         <p class="pd-intro">{{ __('home.ai.intro') }}</p>
@@ -562,7 +552,6 @@
     <div class="container-site">
         <header class="pd-head">
             <h2 class="pd-head__title">{{ __('home.toyota.heading') }}</h2>
-            <span class="pd-head__index" aria-hidden="true">12</span>
         </header>
 
         <div class="pd-origin">
@@ -587,7 +576,6 @@
     <div class="container-site">
         <header class="pd-head">
             <h2 class="pd-head__title">{{ __('home.guarantee.heading') }}</h2>
-            <span class="pd-head__index" aria-hidden="true">13</span>
         </header>
 
         <div class="pd-promise">
@@ -618,7 +606,6 @@
     <div class="container-site">
         <header class="pd-head">
             <h2 class="pd-head__title">{{ __('home.faq.heading') }}</h2>
-            <span class="pd-head__index" aria-hidden="true">14</span>
         </header>
 
         <div class="pd-faq">
@@ -672,7 +659,6 @@
     <div class="container-site">
         <header class="pd-head">
             <h2 class="pd-head__title">{{ __('home.inline_form.heading') }}</h2>
-            <span class="pd-head__index" aria-hidden="true">15</span>
         </header>
 
         <div class="pd-form">
