@@ -22,10 +22,22 @@ class ContactSubmission extends Model
         'tel',
         'subject',
         'message',
+        'attachments',
         'locale',
         'mail_status',
         'mail_error',
         'ip_address',
         'user_agent',
     ];
+
+    /**
+     * OND-264: `attachments` je seznam metadat uložených příloh —
+     * [['name','size','mime','disk','path','mailed'], ...].
+     */
+    protected function casts(): array
+    {
+        return [
+            'attachments' => 'array',
+        ];
+    }
 }

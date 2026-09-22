@@ -3,9 +3,11 @@
      popiskem svítilo browserové „Vybrat soubory / No file chosen". Teď jdou
      všechny texty z lang/*/contact.php a input je schovaný za vlastní
      tlačítko — input zůstává v DOMu, protože nese soubory do FormData. --}}
+{{-- OND-264: limity (počet, velikost, přípony) chodí z config/contact.php,
+     takže prohlížeč kontroluje přesně to, co pak vynutí server. --}}
 @props([
     'hint'     => null,
-    'accept'   => '.pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.webp,.zip',
+    'accept'   => null,
     'name'     => 'attachment[]',
     'label'    => null,
     'dragText' => null,
@@ -14,17 +16,26 @@
 ])
 
 @php
+    $limits = config('contact.uploads');
+
     $hint     ??= __('contact.upload.hint');
     $label    ??= __('contact.upload.label');
     $dragText ??= __('contact.upload.drag_text');
     $maxFiles ??= __('contact.upload.max_files');
     $maxSize  ??= __('contact.upload.max_size');
+    $accept   ??= collect($limits['extensions'])->map(fn ($ext) => '.'.$ext)->implode(',');
 @endphp
 
 <div class="form-file-wrapper"
      x-data="fileDropZone({
          tooManyFiles: @js(__('contact.upload.error_too_many')),
          tooLarge: @js(__('contact.upload.error_too_large')),
+         perFileTooLarge: @js(__('contact.upload.error_per_file', ['max' => $limits['max_file_mb']])),
+         badType: @js(__('contact.upload.error_mime', ['types' => strtoupper(implode(', ', $limits['extensions']))])),
+         maxFiles: @js($limits['max_files']),
+         maxFileMb: @js($limits['max_file_mb']),
+         maxTotalMb: @js($limits['max_total_mb']),
+         extensions: @js($limits['extensions']),
      })"
      @dragover.prevent="isDragOver = true"
      @dragleave.prevent="isDragOver = false"
@@ -36,7 +47,7 @@
         <p class="form-file__label"><strong>{{ $label }}</strong> {{ $dragText }}</p>
         <p class="form-file__hint">{{ $hint }}</p>
         <p class="form-file__hint" style="margin-top: 0.125rem;">{{ $maxFiles }}, {{ $maxSize }}</p>
-        <p class="form-file__error" x-show="error" x-text="error" x-cloak></p>
+        <p class="form-file__error" role="alert" aria-live="polite" x-show="error" x-text="error" x-cloak></p>
 
         <button type="button" class="form-file__trigger" @click="$refs.input.click()">
             {{ __('contact.upload.browse') }}
