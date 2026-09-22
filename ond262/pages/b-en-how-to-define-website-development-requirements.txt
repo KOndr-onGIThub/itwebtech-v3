@@ -1,0 +1,135 @@
+How to define website development requirements
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+CZ
+EN
+DE
+Book a consultation
+CZ
+EN
+DE
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+Book a consultation
+💬
+Enquiry
+← Back to blog
+NOTES
+How to define website development requirements
+Are you planning to create or redesign a website and don't know where to start? With our guide you will learn the key questions you need to ask yourself to achieve the ideal result. From setting goals to technical details - everything supported by Martin's story, which will show you how it works in practice. Get ready to work effectively with the developer and create a website that exactly matches your ideas!"
+Imagine you are defining the requirements for a new website or redesigning an existing website , it is essential that you ask yourself the right questions. This will ensure that the resulting product will meet your needs and expectations. This article will provide you with a series of questions to consider before contacting a developer.
+It is essential to start with a clear understanding of the purpose of the site. Consider what you want the site to achieve and what key functionality will be necessary to meet those goals.
+1. Objectives and purpose of the site
+Define specific goals and KPIs (Key Performance Indicators) that will allow you to measure the success of the site after launch. Examples might be the number of new registrations, the amount of merchandise sold, or the interaction rate on the blog.
+Why do I want a website?
+What are my main goals with the website? (sales, information, presentation, etc.)
+2. Target group
+Identify and describe your target group in detail. Avoid assuming that your products or services are for "everyone". Instead, create detailed personas of your ideal customers and consider their needs, preferences and online behaviour.
+Who is the page for?
+What are the needs and expectations of my target group?
+Who is my competitor on the web? (find examples of competitors)
+3. Design
+Define the key functionality and design elements that the site needs. Make sure the design is intuitive and matches the expectations of your target audience. Consider what technologies and platforms will be best suited to your requirements and budget.
+Do I already have a corporate identity (logos, colors, fonts)?
+What style should the website have? (modern, classic, minimalist, rich in graphics, etc.)
+You can look on the Internet and choose examples of sites that you like.
+4. Functionality and Content
+Conduct a thorough analysis of your direct and indirect competitors. Identify their strengths and weaknesses and find ways to differentiate yourself from them. Consider what unique value you can offer to make your site stand out.
+What main sections should the page contain? (e.g. homepage, about us, products, contact)
+Will I need an e-shop or blog?
+What type of content will the Page present? (texts, photos, videos, documents)
+5. Search Engine Optimization (SEO)
+Read more about SEO in this article What is SEO and why is it so important? Get a basic overview.
+What keywords should my Page target?
+Do I have an SEO strategy? (regular analyses)
+6. Budget and timeframe
+If you're thinking something like "I want it cheap and fast", I suggest you go back to point #1. I'm sure you want the site to accomplish exactly what you're getting it for in the first place - that is, to bring value to your business.
+If I showed you 2 websites one of which cost 20.000,- CZK and the other 120.000,- CZK, which one would you say was expensive? Probably the one for 120.000,-. But if I told you that in a year of its existence the first website did not bring even one customer/client, whereas the second website brought dozens of them - which one would be the expensive one now?
+What is my budget for this project?
+When do I need to have the page ready?
+7. Other services
+A quality web specialist will be happy to help you with everything. But let's mention a few more things to think about.
+Develop a strategy that describes how you will drive visitors to the site both online and offline. The plan should include different channels such as SEO, social media, email marketing, PPC ads and other relevant methods.
+Will I need regular maintenance and page updates?
+How do I promote my website? (social networks, advertising, or content creation?)
+Do I want the developer to also provide hosting and domain?
+Do I have a preference for the technology on which the site should be built? (e.g. WordPress or manual coding)
+Is it necessary to integrate the site with other systems or applications?
+To submit a demand to a developer
+Familiarize yourself with the developer portfolio. See if he has experience with projects similar to yours.
+Prepare for a consultation. Present your vision and answer the above questions.
+Communicate regularly. Whether during development or after the completion of the project, communication is key.
+This way you ensure that your website meets your ideas and needs. Cooperation with the developer will then be smooth and efficient.
+User testing
+Before launching a website, it is essential to conduct user testing to identify and fix any problems in the user experience. Include different types of users and observe how they interact with the site, and adjust the design or functionality according to feedback.
+Let's take an example of the whole procedure
+The story of Martin and his journey to the perfect side
+Martin faced a difficult task. He needed a new website for his café. Although he was great at making coffee, he wasn't sure how to define the requirements for developers. Fortunately, he had this guide at his disposal.
+1. Defining objectives
+Martin started by asking himself why he wanted the website. He quickly discovered that he wanted to:
+Present your coffee offer.
+Inform customers about opening hours.
+And offer online bookings.
+2. Identification of the needs of the target group
+Martin knew that his café attracted mainly young people and working professionals. He decided that on the site should:
+Detailed photos of his coffees.
+Quick links to menus and price lists.
+Simple form for reservations.
+3. Visual presentation
+Since the café had a vintage style, he wanted the website to reflect this atmosphere. He imagined:
+Design in earthy tones.
+Fonts that resemble handwriting.
+Photos of the interior that emphasize the vintage element.
+4. Content and Functionality
+Martin was worried about what content he should include on the web. After a moment of thought, he realized that in addition to the already mentioned photos and menu, he could have:
+Blog about the origin of coffee and how to prepare it correctly.
+A section of reviews of satisfied customers.
+Integration map with the location of the café.
+5. Technical aspects
+Although Martin was not technically proficient, he knew that he wanted to:
+A page that loads quickly.
+Integration form for the newsletter.
+And the ability to easily add blog articles without having to call a developer.
+At the first meeting with the developer, Martin was ready. He presented his visions and concrete ideas. The developer was impressed by the clarity of the requirements, and the two began working on creating the perfect website for Martin's café. The result was a website that accurately reflected Martin's ideas and the needs of his customers.
+You can prepare everything and contact the developer only when you are clear about these issues. But you can also schedule a consultation where I will guide you through the entire process and put everything together.
+About the author
+Ondřej Kriška
+I build custom websites and applications. On my own, on my own code.
+I spent eighteen years in Toyota logistics. Today I build websites, e-shops and custom applications for small and mid-sized companies. I quote the price up front and you deal with me directly.
+LinkedIn
+Write to Ondřej
+Dealing with a website or an application?
+Tell me what you need. I will get back to you within two working days and tell you whether I can help.
+Write to Ondřej
+I help entrepreneurs succeed in the online world
+Book a free consultation
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+© 2026 ONDRAWEB — All rights reserved.
++420 728 697 712
+Privacy Policy
+Cookies
+Let's talk
+Free consultation — no commitment, no registration.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Pick a consultation slot
+Free. No commitment.
+Mind a few cookies?
+I only measure a few numbers about what works on the site. No data selling.
+See the cookie policy .
+Decline
+Accept all
+✕

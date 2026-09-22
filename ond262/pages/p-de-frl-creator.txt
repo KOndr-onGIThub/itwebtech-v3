@@ -1,0 +1,105 @@
+FRL Creator — PDF-Generator für Regaletiketten bei Toyota Kolín
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+CZ
+EN
+DE
+Beratung vereinbaren
+CZ
+EN
+DE
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+Beratung vereinbaren
+💬
+Anfrage
+← Zurück zu Projekten
+Webanwendung
+·
+2019
+·
+Toyota Kolín
+FRL Creator
+Ein PDF-Generator für Regal-Informationsblätter
+Beratung buchen
+FRL Creator erzeugt für Toyota Kolín Regal-Informations- blätter im PDF-Format auf Basis variabler Daten. Der Nutzer gibt einen Zeitraum ein, importiert Daten, prüft die Korrektheit und wählt eine Blattgruppe — die Ausgabe ist ein druckfertiges PDF.
+Herausforderung
+Regaletiketten wurden manuell erstellt — langsam, fehleranfällig und abhängig von einer bestimmten Person. Es brauchte ein System, das als zuverlässiger Partner in den Prozess passt: Parameter aufnimmt, aktuelle Daten importiert und ein konsistentes Druck-PDF generiert.
+Lösung
+Eine Webanwendung mit Parameter-Eingabe, externem Datenimport, Validierung und PDF-Ausgabe. Vor der Entwicklung standen Prozessanalyse, Anforderungsabbildung und klare Meilensteine. Findings im Test wurden zügig beseitigt.
+Ergebnis
+Der Kunde erhielt ein Werkzeug, das Zeit spart und Fehler bei der Etikettenproduktion reduziert. Im Feedback heißt es: „professioneller Arbeitsansatz", gründliche Prozessanalyse und schnelle Beseitigung der Findings im Test (5/5).
+Kunde
+Toyota Kolín
+Jahr
+2019
+Dauer
+několik měsíců
+Kategorie
+Webanwendung
+Technologien
+Individuelle Anwendung
+Fertigung
+Anwendung im Browser
+Ausgabe als PDF
+Dokumentenerstellung
+Weitere Projekte
+Webanwendung
+·
+2021
+·
+Toyota Kolín
+HCMS — Produktions-Informationssystem
+Eine App, die das Montageband am Laufen hält
+Projekt anzeigen
+Webanwendung
+·
+2023
+·
+Toyota Kolín
+Picker — Logistik-Steuerungssystem
+Eine App für das Kommissionieren von Teilen vom Lager ans Band
+Projekt anzeigen
+Webanwendung
+·
+2024
+·
+Tradiční výroba pralinek, s.r.o.
+Choccoboard — strategisches Dashboard
+Ein BI-Dashboard, das 30 Minuten tägliche Handarbeit ersetzt
+Projekt anzeigen
+Möchten Sie ein ähnliches Ergebnis für Ihr Unternehmen?
+Beratung buchen
+← Zurück zu Projekten
+Ich helfe Unternehmern, in der Online-Welt erfolgreich zu sein
+Kostenlose Beratung vereinbaren
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+© 2026 ONDRAWEB — Alle Rechte vorbehalten.
++420 728 697 712
+Datenschutzerklärung
+Cookies
+Lassen Sie uns sprechen
+Kostenlose Beratung — unverbindlich, ohne Registrierung.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Beratungstermin auswählen
+Kostenlos. Unverbindlich.
+Darf ich ein paar Cookies setzen?
+Ich messe nur ein paar Zahlen darüber, was auf der Seite funktioniert. Kein Datenhandel.
+Details in den Richtlinien .
+Ablehnen
+Alle akzeptieren
+✕

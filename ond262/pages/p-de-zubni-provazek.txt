@@ -1,0 +1,109 @@
+Zubní Provázek — Redesign einer Zahnarztpraxis-Website
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+CZ
+EN
+DE
+Beratung vereinbaren
+CZ
+EN
+DE
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+Beratung vereinbaren
+💬
+Anfrage
+← Zurück zu Projekten
+Webseite
+·
+2025
+·
+Zubní ordinace Provázek s.r.o.
+Zubní Provázek
+Redesign einer Zahnarztpraxis mit Fokus auf lokales SEO
+Live-Seite besuchen
+Beratung buchen
+MDDr. Václav Provázek führt eine Zahnarztpraxis in Hrabětice. Die alte Website wirkte veraltet, war auf dem Handy unbrauchbar und ließ Patienten ohne Antworten auf Grundfragen. Ich habe sie neu gebaut — mit Fokus auf lesbare Informationen, transparente Preise, FAQ und lokale Sichtbarkeit.
+Herausforderung
+Die Site wirkte unseriös, mobil war sie kaum benutzbar und Informationen zu Behandlungen und Preisen fehlten. Bei Google war sie praktisch unsichtbar. Für eine Arztpraxis ist der erste Eindruck entscheidend — die meisten Patienten finden ihre Praxis online.
+Lösung
+Eine moderne, responsive Site mit vollständiger Behandlungs- übersicht, Richtpreisen und FAQ. Ergänzt durch einen Bildungs- Blog mit drei Einstiegsartikeln zur Zahnpflege, die der Kunde selbst erweitern kann. Lokales SEO zielt auf Begriffe wie „Zahnarzt Hrabětice" und „Dentalhygiene Hrabětice".
+Ergebnis
+Bei der zentralen lokalen Suche „zubař Hrabětice" steht die Praxis in Google auf Platz eins, und aus Google kommt der Großteil des gesamten Traffics — 460 von 524 Besuchen (Google Analytics, 1.1. – 16.9.2026). Die Site beantwortet, was Patienten früher telefonisch fragen mussten: Preise, Behandlungsübersicht, Öffnungszeiten und Anfahrt.
+Kunde
+Zubní ordinace Provázek s.r.o.
+Jahr
+2025
+Dauer
+několik týdnů
+Kategorie
+Webseite
+Live-Seite
+zubniprovazek.cz
+Technologien
+Website
+Neubau einer alten Website
+Website-Texte
+Blog
+Lokale Suche
+Gesundheitswesen
+Weitere Projekte
+Webseite
+·
+2023
+·
+PitArena
+PitArena
+Von Null zu Marke, Website und Online-Verkauf
+Projekt anzeigen
+Webseite
+·
+2026
+·
+PitArena
+PitArena — Onlineshop
+Ein Shop, in dem Kunden das Teil für Modell und Baujahr finden
+Projekt anzeigen
+Webseite
+·
+2026
+·
+BARANA
+BARANA
+Premium-Website für bioklimatische Pergolen, kampagnenbereit
+Projekt anzeigen
+Möchten Sie ein ähnliches Ergebnis für Ihr Unternehmen?
+Beratung buchen
+← Zurück zu Projekten
+Ich helfe Unternehmern, in der Online-Welt erfolgreich zu sein
+Kostenlose Beratung vereinbaren
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+© 2026 ONDRAWEB — Alle Rechte vorbehalten.
++420 728 697 712
+Datenschutzerklärung
+Cookies
+Lassen Sie uns sprechen
+Kostenlose Beratung — unverbindlich, ohne Registrierung.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Beratungstermin auswählen
+Kostenlos. Unverbindlich.
+Darf ich ein paar Cookies setzen?
+Ich messe nur ein paar Zahlen darüber, was auf der Seite funktioniert. Kein Datenhandel.
+Details in den Richtlinien .
+Ablehnen
+Alle akzeptieren
+✕

@@ -1,0 +1,109 @@
+PitArena — website, booking & brand for a motocross centre
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+CZ
+EN
+DE
+Book a consultation
+CZ
+EN
+DE
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+Book a consultation
+💬
+Enquiry
+← Back to projects
+Website
+·
+2023
+·
+PitArena
+PitArena
+From zero to a brand, a website and online sales
+Visit live site
+Book a consultation
+PitArena launched with no website, no brand, and no customers. I built the full digital foundation — identity, a custom website with programme listings, online voucher sales and race registrations. The site has been growing alongside the owner since 2023.
+Challenge
+The client was opening a new motocross training centre in Czechia. No web presence, no brand, zero occupancy. Trust had to be built before PitArena physically opened, and let people book training 24/7 — without phone calls or e-mails.
+Solution
+I designed the brand and built a custom website with online ride-voucher sales, programme listings (academy, youth club, camps and MX training weeks) and race registrations for the YCF Cup. SEO and content articles target people searching for "motocross camp" or "pitbike training". Social media management and merch integration round it out.
+Result
+The site pulls more than 15,000 visits from Google over 16 months (Search Console, 16 May 2025 – 13 Sep 2026: 15,472 clicks on 288,925 impressions), and its average search position rose from 10.3 to 7.6 over that period. A visitor finds a programme, buys a ride voucher or signs up for a race without calling the owner. Alongside that it carries the online shop, rentals, service and a blog. The long-term partnership continues today.
+Client
+PitArena
+Year
+2023
+Duration
+průběžně 2023–dnes
+Category
+Website
+Live site
+pitarena.cz
+Tech stack
+Website
+Brand
+Booking
+Online payments
+Search visibility
+Long-term partnership
+More projects
+Website
+·
+2026
+·
+PitArena
+PitArena — online shop
+An online shop where customers find the part for their model and year
+View project
+Website
+·
+2026
+·
+BARANA
+BARANA
+Premium website for bioclimatic pergolas, ready for ad campaigns
+View project
+Website
+·
+2026
+·
+Nové interiéry — Petr Kroulík
+Nové interiéry
+A website that works like a first business meeting
+View project
+Want a similar result for your business?
+Book a consultation
+← Back to projects
+I help entrepreneurs succeed in the online world
+Book a free consultation
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+© 2026 ONDRAWEB — All rights reserved.
++420 728 697 712
+Privacy Policy
+Cookies
+Let's talk
+Free consultation — no commitment, no registration.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Pick a consultation slot
+Free. No commitment.
+Mind a few cookies?
+I only measure a few numbers about what works on the site. No data selling.
+See the cookie policy .
+Decline
+Accept all
+✕

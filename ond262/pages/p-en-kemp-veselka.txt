@@ -1,0 +1,109 @@
+Autokemp Veselka — modern family campsite website
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+CZ
+EN
+DE
+Book a consultation
+CZ
+EN
+DE
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+Book a consultation
+💬
+Enquiry
+← Back to projects
+Website
+·
+2024
+·
+Autokemp Veselka — Jana Veselá
+Autokemp Veselka
+The campsite's calm atmosphere translated to the web
+Visit live site
+Book a consultation
+Autokemp Veselka is a family campsite where the real product is atmosphere. The redesign had to carry that atmosphere onto the web and make the booking decision easy — no fussy navigation, no awkward forms.
+Challenge
+The original site was outdated, poorly organised, and not mobile-ready. For a campsite where people typically decide while travelling or on a phone, that meant lost bookings. The site needed to show accommodation clearly, make booking a few taps away, and preserve the family-camp atmosphere.
+Solution
+A single-page modern website with mobile first in mind. Clear accommodation information, a simple booking flow, photos that match the atmosphere. Plus a logo the campsite didn't have before. Loading speed was a priority for the first impression on mobile data.
+Result
+The client reports higher interest since launch and says "the modern look inspires trust and a professional feel". The site now works as a quiet sales tool — visitors find what they need, see what it looks like, and can book on the spot.
+Client
+Autokemp Veselka — Jana Veselá
+Year
+2024
+Duration
+několik týdnů
+Category
+Website
+Live site
+kempveselka.cz
+Tech stack
+Website
+Brand
+Rebuild of an old site
+Logo
+Everything on one page
+Accommodation
+More projects
+Website
+·
+2023
+·
+PitArena
+PitArena
+From zero to a brand, a website and online sales
+View project
+Website
+·
+2026
+·
+PitArena
+PitArena — online shop
+An online shop where customers find the part for their model and year
+View project
+Website
+·
+2026
+·
+BARANA
+BARANA
+Premium website for bioclimatic pergolas, ready for ad campaigns
+View project
+Want a similar result for your business?
+Book a consultation
+← Back to projects
+I help entrepreneurs succeed in the online world
+Book a free consultation
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+© 2026 ONDRAWEB — All rights reserved.
++420 728 697 712
+Privacy Policy
+Cookies
+Let's talk
+Free consultation — no commitment, no registration.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Pick a consultation slot
+Free. No commitment.
+Mind a few cookies?
+I only measure a few numbers about what works on the site. No data selling.
+See the cookie policy .
+Decline
+Accept all
+✕

@@ -1,0 +1,290 @@
+Pricing — Ondřej Kriška
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+CZ
+EN
+DE
+Book a consultation
+CZ
+EN
+DE
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+Book a consultation
+💬
+Enquiry
+PRICING
+No "request a quote" mystery.
+Three levels,
+one clear price .
+The invoice matches the spec. No extra costs without your agreement.
+Most projects I build land between €2,200 and €6,000. If you are looking for a website under €800, I am not the right supplier for you and I will tell you so straight away. Every project is different — you'll get the final price after a free consultation. This overview gives you a clear idea before we even meet.
+Most popular
+Standard
+For businesses that want their website to be their best sales tool.
+€2,200
+indicative price
+Up to 12 custom pages
+Conversion-focused design
+Blog or gallery with content editing
+Multilingual website
+Analytics and conversion tracking
+Hosting and domain for 1 year free
+1 month of post-launch support
+Get a free quote
+Custom
+For demanding projects without compromise — e-shop, booking system or web application.
+from €3,800
+indicative price
+Unlimited project scope
+E-shop or booking system
+Custom administration interface
+Advanced SEO strategy with reporting
+External system integrations
+3 months of post-launch support
+Get a free quote
+Starter
+An exception, not the standard entry point. For sole traders where a larger scope makes no sense — a credible online presence up to 5 pages.
+€1,000
+indicative price
+Up to 5 custom pages
+Modern responsive design
+Contact form
+Technical SEO
+Page speed optimisation
+14 days of post-launch support
+Get a free quote
+Not VAT-registered — these prices are final, nothing is added.
+What exactly you get
+Standard
+Custom
+Starter
+Project scope
+Number of pages
+up to 12
+unlimited
+up to 5
+Responsive design
+Included
+Included
+Included
+Contact form
+Included
+Included
+Included
+Website features
+Blog or gallery with editing
+Included
+Included
+—
+Not included
+Multilingual website
+Included
+Included
+—
+Not included
+Booking system
+optional
+Included
+—
+Not included
+E-shop
+—
+Not included
+Included
+—
+Not included
+Custom administration
+—
+Not included
+Included
+—
+Not included
+External system integrations
+—
+Not included
+Included
+—
+Not included
+Marketing & performance
+Technical SEO
+Included
+Included
+Included
+Page speed optimisation
+Included
+Included
+Included
+Analytics & conversion tracking
+Included
+Included
+—
+Not included
+Advanced SEO strategy
+—
+Not included
+Included
+—
+Not included
+Service & support
+Free hosting and domain
+1 year
+1 year
+—
+Not included
+Post-launch support
+1 month
+3 months
+14 days
+Maintenance-free operation
+Included
+Included
+Included
+Standard
+Custom
+Starter
+Project scope
+Number of pages
+up to 12
+unlimited
+up to 5
+Responsive design
+Included
+Included
+Included
+Contact form
+Included
+Included
+Included
+Website features
+Blog or gallery with editing
+Included
+Included
+—
+Not included
+Multilingual website
+Included
+Included
+—
+Not included
+Booking system
+optional
+Included
+—
+Not included
+E-shop
+—
+Not included
+Included
+—
+Not included
+Custom administration
+—
+Not included
+Included
+—
+Not included
+External system integrations
+—
+Not included
+Included
+—
+Not included
+Marketing & performance
+Technical SEO
+Included
+Included
+Included
+Page speed optimisation
+Included
+Included
+Included
+Analytics & conversion tracking
+Included
+Included
+—
+Not included
+Advanced SEO strategy
+—
+Not included
+Included
+—
+Not included
+Service & support
+Free hosting and domain
+1 year
+1 year
+—
+Not included
+Post-launch support
+1 month
+3 months
+14 days
+Maintenance-free operation
+Included
+Included
+Included
+What is included in every project
+Maintenance-free websites
+No WordPress, no third-party plugins. Save thousands per year compared to WordPress — no monthly updates and no security patching costs.
+Fixed price, no surprises
+You receive an exact quote before work begins. What is in the quote is on the invoice — no extra costs without your consent.
+Direct communication
+You talk directly to me — no account managers, no project coordinators. One point of contact, one point of responsibility.
+Support after launch
+I respond within 24 hours, even weeks and months after project delivery. Minor adjustments and technical questions are always welcome.
+Additional services
+Comprehensive digital support even after your project launches.
+SEO & content marketing
+Keyword analysis, content strategy, performance monitoring. Organic visibility that works even without an advertising budget.
+from €180 / mo.
+Get a quote
+Social media management
+Content creation, scheduling and publishing. Consistent presence that builds customer trust.
+from €400 / mo.
+Get a quote
+Custom web application
+Inventory systems, internal tools, customer portals. Price reflects the complexity and scope of the project.
+custom quote
+Get a quote
+Graphic design & branding
+Logo, visual identity, banners. Everything you need for a consistent and memorable brand presentation.
+from €190
+Get a quote
+{ visible = window.scrollY > 480 && window.scrollY
+Get a free quote
+Not sure what you need?
+The consultation is free and non-binding. In 30 minutes I will tell you what makes sense for your business — honestly, even if that means we should not work together.
+Book a free consultation
+I help entrepreneurs succeed in the online world
+Book a free consultation
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+© 2026 ONDRAWEB — All rights reserved.
++420 728 697 712
+Privacy Policy
+Cookies
+Let's talk
+Free consultation — no commitment, no registration.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Pick a consultation slot
+Free. No commitment.
+Mind a few cookies?
+I only measure a few numbers about what works on the site. No data selling.
+See the cookie policy .
+Decline
+Accept all
+✕

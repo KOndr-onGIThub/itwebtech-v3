@@ -1,0 +1,110 @@
+Realiťačky v Akci — Immobilien-Website mit Terminbuchung
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+CZ
+EN
+DE
+Beratung vereinbaren
+CZ
+EN
+DE
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+Beratung vereinbaren
+💬
+Anfrage
+← Zurück zu Projekten
+Webseite
+·
+2024
+·
+Realiťačky v Akci — Magda Pernicová Novotná
+Realiťačky v Akci
+Eine Immobilien-Website, die die Kundin selbst pflegt
+Live-Seite besuchen
+Beratung buchen
+Magda Pernicová Novotná macht Immobilien menschlich und wollte eine Website, die das widerspiegelt. Ich habe eine individuelle Lösung ohne Template-Bindung und ohne monatliche Kosten gebaut — Online-Terminbuchung, Objektverwaltung, Blog und ein Branding im gleichen Geist wie ihre Arbeit.
+Herausforderung
+Die Maklerin brauchte einen Auftritt, der nicht „eine WordPress- Visitenkarte" ist und keine laufenden Kosten erzeugt. Er sollte professionell und gleichzeitig persönlich wirken und ihre Arbeitsweise zeigen. Einige Objekte hatten keine guten Fotos, und die Kundin war kein Tech-User — das System musste sich selbst erklären.
+Lösung
+Die Site ist von Grund auf gecodet, kein Template-CMS. Die Kundin hat ein Admin für Objekte, Anfragen und Blog und aktualisiert alles selbst. Dazu ein Reservanto-Buchungssystem, zwei Einführungsartikel und Stock-Fotos, wo eigene Bilder fehlten. Branding, Keyword-Analyse und SEO-Struktur runden das Ganze ab.
+Ergebnis
+Die Kundin hat eine Website, die 24/7 für sie arbeitet — ohne laufende Kosten. Sie verlinkt sie aktiv und aktualisiert Objekte und Artikel selbst. In der Bewertung beschreibt sie einen professionellen und gleichzeitig menschlichen Ansatz und jemanden, der wirklich zugehört hat.
+Kunde
+Realiťačky v Akci — Magda Pernicová Novotná
+Jahr
+2024
+Dauer
+září 2024
+Kategorie
+Webseite
+Live-Seite
+realitackyvakci.cz
+Technologien
+Website
+Marke
+Buchung
+Sichtbarkeit in Suchmaschinen
+Website-Texte
+Inhaltspflege durch den Kunden
+Blog
+Weitere Projekte
+Webseite
+·
+2023
+·
+PitArena
+PitArena
+Von Null zu Marke, Website und Online-Verkauf
+Projekt anzeigen
+Webseite
+·
+2026
+·
+PitArena
+PitArena — Onlineshop
+Ein Shop, in dem Kunden das Teil für Modell und Baujahr finden
+Projekt anzeigen
+Webseite
+·
+2026
+·
+BARANA
+BARANA
+Premium-Website für bioklimatische Pergolen, kampagnenbereit
+Projekt anzeigen
+Möchten Sie ein ähnliches Ergebnis für Ihr Unternehmen?
+Beratung buchen
+← Zurück zu Projekten
+Ich helfe Unternehmern, in der Online-Welt erfolgreich zu sein
+Kostenlose Beratung vereinbaren
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+© 2026 ONDRAWEB — Alle Rechte vorbehalten.
++420 728 697 712
+Datenschutzerklärung
+Cookies
+Lassen Sie uns sprechen
+Kostenlose Beratung — unverbindlich, ohne Registrierung.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Beratungstermin auswählen
+Kostenlos. Unverbindlich.
+Darf ich ein paar Cookies setzen?
+Ich messe nur ein paar Zahlen darüber, was auf der Seite funktioniert. Kein Datenhandel.
+Details in den Richtlinien .
+Ablehnen
+Alle akzeptieren
+✕

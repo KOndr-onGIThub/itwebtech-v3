@@ -1,0 +1,104 @@
+Logo Realiťačky v Akci — vector logo for an estate agent
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+CZ
+EN
+DE
+Book a consultation
+CZ
+EN
+DE
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+Book a consultation
+💬
+Enquiry
+← Back to projects
+Other
+·
+2024
+·
+Realiťačky v Akci
+Logo — Realiťačky v Akci
+A memorable logo that holds at any size
+Book a consultation
+The Realiťačky v Akci logo was the opening act of the full web package. Goal: memorable, different from the typical real-estate visual wave, in clean vector — so it holds at every size, from a favicon to outdoor signage.
+Challenge
+Czech real-estate brands lean on a similar visual vocabulary — house icons, similar colours, similar fonts. The client wanted a logo that breaks the uniformity without losing credibility. And it had to work everywhere — website, business card, signage, social profile.
+Solution
+The logo is vector-built with a focus on simplicity and clean forms. No gradients or effects that fall apart at small sizes. It's tuned to the identity of the website I then built — the logo is part of one consistent brand, not a "sticker on top".
+Result
+The client has a logo that works across media and stands out on a street full of generic real-estate logos. It came as a free part of the web package, so the brand has one author's hand — and a consistent feel.
+Client
+Realiťačky v Akci
+Year
+2024
+Duration
+leden 2024
+Category
+Other
+Tech stack
+Brand
+Logo
+Consistent brand look
+Logo in print quality
+More projects
+Other
+·
+2024
+·
+PitArena (Stanislav Holcmann)
+Article on Motorkáři.cz
+Content marketing that reached the country's biggest moto portal
+View project
+Other
+·
+2023
+·
+PitArena (Stanislav Holcmann)
+Video — Pitbike Akademie
+A promo animation that stops the thumb mid-scroll
+View project
+Other
+·
+2023
+·
+PitArena (Stanislav Holcmann)
+PitArena outdoor sign
+A large-format sign above the workshop, ready for print
+View project
+Want a similar result for your business?
+Book a consultation
+← Back to projects
+I help entrepreneurs succeed in the online world
+Book a free consultation
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+© 2026 ONDRAWEB — All rights reserved.
++420 728 697 712
+Privacy Policy
+Cookies
+Let's talk
+Free consultation — no commitment, no registration.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Pick a consultation slot
+Free. No commitment.
+Mind a few cookies?
+I only measure a few numbers about what works on the site. No data selling.
+See the cookie policy .
+Decline
+Accept all
+✕

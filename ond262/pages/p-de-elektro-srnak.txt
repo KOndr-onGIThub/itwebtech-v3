@@ -1,0 +1,105 @@
+Elektro Srnák — minimalistische Website für einen Elektriker
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+CZ
+EN
+DE
+Beratung vereinbaren
+CZ
+EN
+DE
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+Beratung vereinbaren
+💬
+Anfrage
+← Zurück zu Projekten
+Webseite
+·
+2023
+·
+Elektro Srnák — Lukáš Srnák
+Elektro Srnák
+Eine kleine Site für einen Elektriker, die keine Zeit verschwendet
+Beratung buchen
+Lukáš Srnák brauchte eine kleine Visitenkarte, die sagt, was er macht und was er verleiht. Die Microsite ist minimalistisch an der Oberfläche, mit technischer Hygiene darunter — Schema, OpenGraph, Google Analytics, Search Console, Maps-Integration. Hinweis: Die Site ist seit Mitte 2025 offline (Kunde hat Hosting beendet).
+Herausforderung
+Der Kunde brauchte keine große Website, aber die kleine musste etwas bringen. Lokale Kunden suchen Elektriker auf dem Handy — die Site musste schnell, lesbar und in Google auffindbar sein. Ohne SEO-Grundlage wäre sie untergegangen.
+Lösung
+Eine minimalistische Site mit den notwendigen Sektionen (Leistungen, Verleih, Kontakt). Darunter technische Hygiene: Local-Business-Schema, OG-Metadaten, Google Search Console und Analytics, Foto-Lightbox und eigenes Logo. Nichts Überflüssiges — und nichts, was Suchmaschinen erwarten, fehlt.
+Ergebnis
+Der Kunde hat eine funktionale Visitenkarte zu fairem Preis — sie führt Nutzer schnell zum Kontakt und verhält sich in Google korrekt. Bewertung: 5/5 Sterne, mit Lob für Tempo, Hilfsbereitschaft und faire Preise. Online bis Mitte 2025, dann Hosting-Ende seitens des Kunden.
+Kunde
+Elektro Srnák — Lukáš Srnák
+Jahr
+2023
+Dauer
+kratší realizace
+Kategorie
+Webseite
+Technologien
+Website
+Sichtbarkeit in Suchmaschinen
+Kleine Ein-Seiten-Website
+Website als Visitenkarte der Firma
+Lokales Unternehmen
+Weitere Projekte
+Webseite
+·
+2023
+·
+PitArena
+PitArena
+Von Null zu Marke, Website und Online-Verkauf
+Projekt anzeigen
+Webseite
+·
+2026
+·
+PitArena
+PitArena — Onlineshop
+Ein Shop, in dem Kunden das Teil für Modell und Baujahr finden
+Projekt anzeigen
+Webseite
+·
+2026
+·
+BARANA
+BARANA
+Premium-Website für bioklimatische Pergolen, kampagnenbereit
+Projekt anzeigen
+Möchten Sie ein ähnliches Ergebnis für Ihr Unternehmen?
+Beratung buchen
+← Zurück zu Projekten
+Ich helfe Unternehmern, in der Online-Welt erfolgreich zu sein
+Kostenlose Beratung vereinbaren
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+© 2026 ONDRAWEB — Alle Rechte vorbehalten.
++420 728 697 712
+Datenschutzerklärung
+Cookies
+Lassen Sie uns sprechen
+Kostenlose Beratung — unverbindlich, ohne Registrierung.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Beratungstermin auswählen
+Kostenlos. Unverbindlich.
+Darf ich ein paar Cookies setzen?
+Ich messe nur ein paar Zahlen darüber, was auf der Seite funktioniert. Kein Datenhandel.
+Details in den Richtlinien .
+Ablehnen
+Alle akzeptieren
+✕

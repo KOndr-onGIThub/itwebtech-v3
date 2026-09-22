@@ -1,0 +1,106 @@
+Choccoboard — strategisches Dashboard für einen Pralinenhersteller
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+CZ
+EN
+DE
+Beratung vereinbaren
+CZ
+EN
+DE
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+Beratung vereinbaren
+💬
+Anfrage
+← Zurück zu Projekten
+Webanwendung
+·
+2024
+·
+Tradiční výroba pralinek, s.r.o.
+Choccoboard — strategisches Dashboard
+Ein BI-Dashboard, das 30 Minuten tägliche Handarbeit ersetzt
+Beratung buchen
+Choccoboard ist eine Webanwendung für die Geschäftsführung. Sie macht Vertriebs-KPIs und Kennzahlen in Echtzeit von jedem Gerät zugänglich. Früher steckte das Management 30 Minuten am Tag in manueller Datenarbeit — nicht mehr.
+Herausforderung
+Die Geschäftsführung brauchte einen Überblick über Verkäufe und Kennzahlen für tägliche Entscheidungen. Realität: jeden Tag 30 Minuten Handarbeit — herunterladen, zusammenfügen, prüfen. Neben dem Zeitverlust begrenzte das, wie oft überhaupt jemand auf die Zahlen schaute.
+Lösung
+Ein sicheres, authentifiziertes Dashboard mit einer Übersichtsseite für KPIs und flexibler Filterung (Umsatz nach Schicht, Produkttyp, Zeitraum). Läuft im Web — also erreichbar aus dem Büro, aus der Produktion und vom Handy beim Kundentermin.
+Ergebnis
+Die 30-Minuten-Routine ist weg. Die Geschäftsführung sieht aktuelle Zahlen sofort, wann immer entschieden wird. Im Kundenfeedback heißt es: höhere Fachkenntnis, Professionalität und „Erwartungen übertroffen".
+Kunde
+Tradiční výroba pralinek, s.r.o.
+Jahr
+2024
+Dauer
+několik týdnů
+Kategorie
+Webanwendung
+Technologien
+Individuelle Anwendung
+Anwendung im Browser
+Alle Zahlen auf einem Bildschirm
+Auswertung von Unternehmensdaten
+Verfolgung wichtiger Kennzahlen
+Grundlage für Entscheidungen der Leitung
+Weitere Projekte
+Webanwendung
+·
+2021
+·
+Toyota Kolín
+HCMS — Produktions-Informationssystem
+Eine App, die das Montageband am Laufen hält
+Projekt anzeigen
+Webanwendung
+·
+2023
+·
+Toyota Kolín
+Picker — Logistik-Steuerungssystem
+Eine App für das Kommissionieren von Teilen vom Lager ans Band
+Projekt anzeigen
+Webanwendung
+·
+2019
+·
+Toyota Kolín
+FRL Creator
+Ein PDF-Generator für Regal-Informationsblätter
+Projekt anzeigen
+Möchten Sie ein ähnliches Ergebnis für Ihr Unternehmen?
+Beratung buchen
+← Zurück zu Projekten
+Ich helfe Unternehmern, in der Online-Welt erfolgreich zu sein
+Kostenlose Beratung vereinbaren
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+© 2026 ONDRAWEB — Alle Rechte vorbehalten.
++420 728 697 712
+Datenschutzerklärung
+Cookies
+Lassen Sie uns sprechen
+Kostenlose Beratung — unverbindlich, ohne Registrierung.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Beratungstermin auswählen
+Kostenlos. Unverbindlich.
+Darf ich ein paar Cookies setzen?
+Ich messe nur ein paar Zahlen darüber, was auf der Seite funktioniert. Kein Datenhandel.
+Details in den Richtlinien .
+Ablehnen
+Alle akzeptieren
+✕
