@@ -111,7 +111,7 @@ return [
             [
                 'heading'      => 'A template sold as a custom solution',
                 'text'         => 'A supplier reuses a layout they have already used five times and drops in your text and logo. The result looks professional — until you open a competitor\'s website and find the same sections and the same words. On top of that, the platform keeps you on a monthly subscription you cannot take with you.',
-                'quote_text'   => 'This is not the case where other would-be web designers just fill templates with data for outrageous fees.',
+                'quote_text'   => 'Unlike the would-be web designers who just pour your content into a template and charge outrageous fees.',
                 'quote_author' => 'Petr Kroulík, Nové Interiéry s.r.o.',
             ],
             [
@@ -130,14 +130,14 @@ return [
                 'heading'      => 'Consultation',
                 'time'         => '60 min, within a week',
                 'text'         => 'I start with a consultation, not a form. I need to understand your business, your customers and what the website should actually do — bring contacts, sell a product or build trust.',
-                'quote_text'   => 'He truly listened to my needs and then turned them into something I was completely satisfied with.',
+                'quote_text'   => 'He really listened to what I needed and then turned it into something I am completely happy with.',
                 'quote_author' => 'Magda Pernicová, Realiťačky v akci',
             ],
             [
                 'heading'      => 'Specification',
                 'time'         => '2–5 days',
                 'text'         => 'Before I start working, you\'ll receive a written specification: what will be on the website, how many pages, what technology and how much it will cost. No surprises on the invoice. I\'ll estimate the delivery date realistically — always upfront, never retrospectively.',
-                'quote_text'   => 'He rigorously analyses the situation and wants to understand current processes. He collects requirements from clients and explores visions for the future.',
+                'quote_text'   => 'He analyses the starting position thoroughly and wants to understand the existing processes. He gathers requirements from users and asks where things are heading.',
                 'quote_author' => 'Jan Stybor, Head of Project Department, Toyota',
                 'note'         => 'Note on timelines: a website doesn\'t only depend on my side. Approvals, materials from the client and feedback are part of the process. The timeline is always an estimate, not a binding commitment — and I say that openly from the start.',
             ],
@@ -208,7 +208,7 @@ return [
             ],
             'nove-interiery' => [
                 'client'  => 'Nové interiéry',
-                'outcome' => 'The site pre-filters irrelevant enquiries and acts as the first sales meeting — the client reports a noticeably stronger brand credibility.',
+                'outcome' => 'The site pre-filters irrelevant enquiries and acts as the first sales meeting — the client reports noticeably stronger brand credibility.',
             ],
         ],
     ],
@@ -324,6 +324,7 @@ return [
 
     'testimonials' => [
         'heading' => 'What my clients say about working together.',
+        'note'    => 'Translated from the Czech originals on Google, Firmy.cz and Facebook.',
     ],
 
     'guarantee' => [

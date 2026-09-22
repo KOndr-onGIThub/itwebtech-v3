@@ -16,7 +16,8 @@ return [
     'address_name'        => 'Ondřej Kriška',
     'address_street'      => 'Dunajovská 116',
     'address_city'        => '691 81 Březí, Tschechien',
-    'address_registration' => 'Unternehmens-ID 19231407, nicht umsatzsteuerpflichtig',
+    'address_registration' => 'IČO (tschechische Unternehmens-ID) 19231407, nicht umsatzsteuerpflichtig',
+    'email_label'         => 'E-Mail',
     'phone_label'         => 'Telefon',
     'hours_label'         => 'Verfügbarkeit',
     'open_hours'          => 'Ich melde mich innerhalb von 24 Stunden an Arbeitstagen. An Wochenenden und Feiertagen halte ich keine Bereitschaft, aber nichts geht verloren.',
@@ -63,10 +64,10 @@ return [
     // Copy folgt der freigegebenen CS-Fassung.
     'hero' => [
         'page_mark_label' => 'KONTAKT',
-        'upline'          => 'Sie schreiben direkt mir.',
+        'upline'          => 'Sie schreiben mir direkt.',
         'heading_html'    => 'Kein CRM,<br>kein Callcenter — <em>nur Ondřej</em>.',
-        'eyebrow'         => 'Sie schreiben direkt mir',
-        'heading'         => 'Sie schreiben direkt mir, Ondřej.',
+        'eyebrow'         => 'Sie schreiben mir direkt',
+        'heading'         => 'Sie schreiben direkt an mich, Ondřej.',
         'subline'         => 'Ich lese Ihre Nachricht persönlich. Ich melde mich innerhalb von 24 Stunden an Arbeitstagen.',
         'photo_alt'       => 'Ondřej Kriška — Autor dieser Website und Ihr Ansprechpartner',
         'role_label'      => 'Entwickler, Autor dieser Website, Ihr einziger Ansprechpartner',
@@ -81,7 +82,7 @@ return [
                 'text'  => 'Sie erhalten eine E-Mail von mir persönlich, keine automatische Bestätigung. An Wochenenden und Feiertagen halte ich keine Bereitschaft — ich melde mich am ersten Arbeitstag.',
             ],
             [
-                'title' => 'Wir vereinbaren 30 Minuten Gespräch',
+                'title' => 'Wir vereinbaren ein 30-minütiges Gespräch',
                 'text'  => 'Ein kurzes Telefon- oder Videogespräch — wir klären, ob eine Zusammenarbeit Sinn ergibt. Ohne Präsentation, ohne Folien, ohne Verkaufsdruck.',
             ],
             [

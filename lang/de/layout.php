@@ -18,7 +18,7 @@ return [
 
     'footer' => [
         'rights'    => 'Alle Rechte vorbehalten.',
-        'developer' => 'Webseite von',
+        'developer' => 'Website von',
     ],
 
     'prefooter' => [

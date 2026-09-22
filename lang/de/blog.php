@@ -7,7 +7,7 @@ return [
     // der Inhalt, der verschwinden soll. URL-Slug bleibt unverändert (SEO).
     'meta' => [
         'title'       => 'Notizen — Ondřej Kriška',
-        'description' => 'Ich schreibe darüber, womit ich beim Bau von Webseiten und Anwendungen wirklich zu tun habe. Preise, Briefings, Redesign, Anwendungen nach Maß.',
+        'description' => 'Ich schreibe darüber, womit ich beim Bau von Websites und Anwendungen wirklich zu tun habe. Preise, Briefings, Redesign, Anwendungen nach Maß.',
     ],
 
     'subheading'    => 'Notizen',
@@ -44,8 +44,8 @@ return [
         'author' => [
             'eyebrow'  => 'Über den Autor',
             'name'     => 'Ondřej Kriška',
-            'role'     => 'Ich baue Webseiten und Anwendungen nach Maß. Allein, mit eigenem Code.',
-            'bio'      => 'Achtzehn Jahre habe ich in der Logistik von Toyota gearbeitet. Heute baue ich Webseiten, Onlineshops und Anwendungen nach Maß für kleine und mittlere Firmen. Den Preis nenne ich vorab und Sie sprechen direkt mit mir.',
+            'role'     => 'Ich baue Websites und Anwendungen nach Maß. Allein, mit eigenem Code.',
+            'bio'      => 'Achtzehn Jahre habe ich in der Logistik von Toyota gearbeitet. Heute baue ich Websites, Onlineshops und Anwendungen nach Maß für kleine und mittlere Firmen. Den Preis nenne ich vorab und Sie sprechen direkt mit mir.',
             'linkedin_label' => 'LinkedIn',
             'linkedin_url'   => 'https://www.linkedin.com/in/ondrejkriska/',
             'contact_cta'    => 'Ondřej schreiben',
@@ -54,7 +54,7 @@ return [
 
 
     'cta' => [
-        'heading' => 'Geht es um eine Webseite oder eine Anwendung?',
+        'heading' => 'Geht es um eine Website oder eine Anwendung?',
         'text'    => 'Schreiben Sie mir, was Sie brauchen. Ich melde mich innerhalb von 24 Stunden an Arbeitstagen und sage Ihnen, ob ich helfen kann.',
         'primary' => 'Ondřej schreiben',
     ],

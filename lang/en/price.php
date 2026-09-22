@@ -86,14 +86,14 @@ return [
         ],
     ],
 
-    'note' => 'Not VAT-registered — these prices are final, nothing is added.',
+    'note' => 'I am not registered for VAT — the prices above are final, no VAT is added.',
 
     'guarantees' => [
         'heading' => 'What is included in every project',
         'items'   => [
             [
                 'title' => 'Maintenance-free websites',
-                'text'  => 'No WordPress, no third-party plugins. Save thousands per year compared to WordPress — no monthly updates and no security patching costs.',
+                'text'  => 'No WordPress, no third-party plugins. Save hundreds of euros a year compared to WordPress — no monthly updates and no security patching bills.',
             ],
             [
                 'title' => 'Fixed price, no surprises',
