@@ -189,6 +189,8 @@ return [
         'name'    => 'jméno',
         'email'   => 'e-mail',
         'phone'   => 'telefon',
+        'tel'     => 'telefon',
+        'subject' => 'předmět',
         'message' => 'zpráva',
         'company' => 'firma',
         'budget'  => 'rozpočet',

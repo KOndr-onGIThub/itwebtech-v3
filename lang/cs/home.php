@@ -27,7 +27,7 @@ return [
         'upline'          => 'Pro firmy, které poznají rozdíl.',
         'heading_html'    => 'Weby a aplikace <em>na míru</em>.<br>Postavím vám je sám, na vlastním kódu.',
         'subline'         => 'Jsem Ondřej Kriška, zkušený vývojář. Pracuju s vámi napřímo, bez agentury a bez prostředníků. Weby stavím tak, aby fungovaly roky a nezdržovaly vás údržbou.',
-        'note'            => 'Ozvu se do dvou pracovních dnů. Nezávazně proberu, co dává smysl.',
+        'note'            => 'Ozvu se do 24 hodin v pracovní dny. Nezávazně proberu, co dává smysl.',
 
         // Backwards compat — staré klíče zachované pro non-hero spotřebitele
         // (consultation modal, fallback render). cta_secondary není v hero.
@@ -60,7 +60,7 @@ return [
         'reviews'      => '(21 recenzí Google + Firmy.cz)',
         'projects'     => '23+ realizací',
         'experience'   => '18 let praxe',
-        'response'     => 'Odpověď do 24 hodin',
+        'response'     => 'Odpověď do 24 hodin v pracovní dny',
         // OND-201 (nález 5.11): ocenění TOP firma 2025 z Firmy.cz je ověřitelný
         // důkaz třetí strany, byl na obou starých webech a na stagingu chyběl.
         // Formulace podle sekce 2 dokumentu homepage-texty (OND-186).
@@ -442,7 +442,7 @@ return [
     'faq_form' => [
         'eyebrow'     => 'Máte jinou otázku?',
         'heading'     => 'Napište ji rovnou.',
-        'description' => 'Zachytím to, odpovím do druhého pracovního dne. Bez obchodního tlaku.',
+        'description' => 'Zachytím to, ozvu se do 24 hodin v pracovní dny. Bez obchodního tlaku.',
         'name'        => 'Jméno',
         'email'       => 'E-mail',
         'message'     => 'Vaše otázka',
@@ -461,12 +461,13 @@ return [
     'inline_form' => [
         'eyebrow'         => 'Poptávka',
         'heading'         => 'Napište mi, co potřebujete',
-        'description'     => 'Popište mi ve zkratce, co řešíte. Ozvu se do dvou pracovních dnů a nezávazně probereme, jestli si sedneme a co dává smysl. Když zjistíme, že na sebe nepasujeme, řeknu vám to rovnou.',
+        'description'     => 'Popište mi ve zkratce, co řešíte. Ozvu se do 24 hodin v pracovní dny a nezávazně probereme, jestli si sedneme a co dává smysl. Když zjistíme, že na sebe nepasujeme, řeknu vám to rovnou.',
         'quote_text'      => 'Díky individuálnímu přístupu, flexibilitě a profesionalitě odpovídá výsledek našim představám.',
         'quote_author'    => 'Hana Jaskmanická, výkonná ředitelka, VP Industry',
         'name'            => 'Jméno a příjmení',
         'email'           => 'E-mail',
         'phone'           => 'Telefon (nepovinný)',
+        'phone_hint'      => 'S číslem se ozvu rychleji.',
         'message'         => 'Co potřebujete vyřešit?',
         'placeholders'    => [
             'name'    => 'Jan Novák',

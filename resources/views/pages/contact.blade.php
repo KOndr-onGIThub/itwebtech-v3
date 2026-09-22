@@ -94,6 +94,16 @@
                         </dd>
                     </div>
 
+                    {{-- OND-256/7: telefon byl na /kontakt jen v config/contact.php,
+                         na stránce chyběl úplně. Číslo bere z configu, ať je
+                         jedno místo pravdy. --}}
+                    <div>
+                        <dt>{{ __('contact.phone_label') }}</dt>
+                        <dd>
+                            <a href="tel:{{ preg_replace('/\s+/', '', config('contact.phone')) }}">{{ config('contact.phone') }}</a>
+                        </dd>
+                    </div>
+
                     <div>
                         <dt>{{ __('contact.hours_label') }}</dt>
                         <dd>{!! __('contact.open_hours') !!}</dd>
@@ -106,7 +116,11 @@
             </aside>
 
             {{-- Contact form --}}
-            <div id="kontaktni-formular" class="contact-form" x-data="contactForm">
+            {{-- OND-256/1: chyby se ukazují inline pod polem (stejný vzor jako
+                 formulář na homepage), ne v anglickém modálu. `genericError`
+                 je hláška pro pád bez 422 payloadu. --}}
+            <div id="kontaktni-formular" class="contact-form"
+                 x-data="contactForm({ genericError: @js(__('contact.message_error')) })">
 
                 {{-- Thank-you state — replaces the form on success (OND-136). --}}
                 <div class="contact-form__thanks" x-show="submitted" x-cloak>
@@ -126,49 +140,81 @@
                 <h2 class="contact-form__title" x-show="!submitted">{{ __('contact.form_heading') }}</h2>
                 <p class="contact-form__subtitle" x-show="!submitted">{{ __('contact.form_subheading') }}</p>
 
-                <form @submit.prevent="submit" novalidate x-show="!submitted">
+                <form @submit.prevent="submit" novalidate x-show="!submitted" x-ref="form">
                     @csrf
 
                     <div class="form-group">
                         <label for="name">{{ __('contact.name') }} <span aria-hidden="true">*</span></label>
                         <input type="text" id="name" name="name" required autocomplete="name"
-                               placeholder="{{ __('contact.name') }}">
+                               placeholder="{{ __('contact.name') }}"
+                               @input="clearError('name')"
+                               :aria-invalid="errors.name ? 'true' : null"
+                               :aria-describedby="errors.name ? 'name-error' : null">
+                        <p class="form-group__error" id="name-error" x-show="errors.name" x-text="errors.name" x-cloak></p>
                     </div>
 
                     <div class="form-row-2col">
                         <div class="form-group form-group--inline">
                             <label for="email">{{ __('contact.email') }} <span aria-hidden="true">*</span></label>
                             <input type="email" id="email" name="email" required autocomplete="email"
-                                   placeholder="vas@email.cz">
+                                   placeholder="vas@email.cz"
+                                   @input="clearError('email')"
+                                   :aria-invalid="errors.email ? 'true' : null"
+                                   :aria-describedby="errors.email ? 'email-error' : null">
+                            <p class="form-group__error" id="email-error" x-show="errors.email" x-text="errors.email" x-cloak></p>
                         </div>
+                        {{-- OND-256/4: telefon je nepovinný (backend ho tak validoval
+                             odjakživa, hvězdička v labelu lhala). Pošťouchnutí pod
+                             polem říká, co uživatel získá, když ho vyplní. --}}
                         <div class="form-group form-group--inline">
-                            <label for="tel">{{ __('contact.tel') }} <span aria-hidden="true">*</span></label>
-                            <input type="tel" id="tel" name="tel" required autocomplete="tel"
-                                   placeholder="+420 000 000 000">
+                            <label for="tel">{{ __('contact.tel') }}</label>
+                            <input type="tel" id="tel" name="tel" autocomplete="tel"
+                                   placeholder="+420 000 000 000"
+                                   @input="clearError('tel')"
+                                   :aria-invalid="errors.tel ? 'true' : null"
+                                   :aria-describedby="errors.tel ? 'tel-error' : 'tel-hint'">
+                            <p class="form-group__hint" id="tel-hint">{{ __('contact.tel_hint') }}</p>
+                            <p class="form-group__error" id="tel-error" x-show="errors.tel" x-text="errors.tel" x-cloak></p>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="subject">{{ __('contact.subject') }}</label>
                         <input type="text" id="subject" name="subject"
-                               placeholder="{{ __('contact.subject') }}">
+                               placeholder="{{ __('contact.subject') }}"
+                               @input="clearError('subject')"
+                               :aria-invalid="errors.subject ? 'true' : null"
+                               :aria-describedby="errors.subject ? 'subject-error' : null">
+                        <p class="form-group__error" id="subject-error" x-show="errors.subject" x-text="errors.subject" x-cloak></p>
                     </div>
 
                     <div class="form-group">
                         <label for="message">{{ __('contact.message') }}</label>
                         <textarea id="message" name="message" rows="5"
-                                  placeholder="{{ __('contact.message_placeholder') }}"></textarea>
+                                  placeholder="{{ __('contact.message_placeholder') }}"
+                                  @input="clearError('message')"
+                                  :aria-invalid="errors.message ? 'true' : null"
+                                  :aria-describedby="errors.message ? 'message-error' : null"></textarea>
+                        <p class="form-group__error" id="message-error" x-show="errors.message" x-text="errors.message" x-cloak></p>
                     </div>
 
                     <x-form.file-drop />
 
                     <div class="form-group form-group--checkbox">
                         <label>
-                            <input type="checkbox" name="gdpr" required>
+                            <input type="checkbox" name="gdpr" required
+                                   @change="clearError('gdpr')"
+                                   :aria-invalid="errors.gdpr ? 'true' : null"
+                                   :aria-describedby="errors.gdpr ? 'gdpr-error' : null">
                             {{ __('contact.agree') }}
                             <a href="{{ lroute('privacy') }}">{{ __('contact.policy') }}</a>
                         </label>
+                        <p class="form-group__error" id="gdpr-error" x-show="errors.gdpr" x-text="errors.gdpr" x-cloak></p>
                     </div>
+
+                    {{-- Pád bez 422 (500, výpadek sítě) — jediná souhrnná hláška. --}}
+                    <p class="form-alert form-alert--error" role="alert" x-ref="formError"
+                       x-show="formError" x-text="formError" x-cloak></p>
 
                     <div class="form-group form-group--inline">
                         <button type="submit" class="btn btn-primary btn-block" :disabled="loading">

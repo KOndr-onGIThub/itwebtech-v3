@@ -172,6 +172,8 @@ return [
         'name'    => 'Name',
         'email'   => 'E-Mail',
         'phone'   => 'Telefon',
+        'tel'     => 'Telefon',
+        'subject' => 'Betreff',
         'message' => 'Nachricht',
         'company' => 'Firma',
         'budget'  => 'Budget',

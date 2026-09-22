@@ -173,6 +173,8 @@ return [
         'name'    => 'name',
         'email'   => 'email',
         'phone'   => 'phone',
+        'tel'     => 'phone',
+        'subject' => 'subject',
         'message' => 'message',
         'company' => 'company',
         'budget'  => 'budget',

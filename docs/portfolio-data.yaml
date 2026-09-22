@@ -197,7 +197,17 @@ projects:
     # seeder pojmenoval přes humanizeSlug na „E shop" / „Katalog" — tedy ten
     # samý žargon, který opravovala migrace z OND-198.
     tags: [web, motocykly]
-    screenshots_source: []  # screenshot e-shopu zatím nemáme — karta zobrazí placeholder
+    # OND-256 bod 6: e-shop byl jediný projekt bez obrázku — chyběl na kartě
+    # v /projekty, v hero detailu i v kartách „Další projekty". Snímek je
+    # vlastní záběr shop.pitarena.cz (22. 9. 2026), ne externí URL, proto tu
+    # `url` chybí a `path` míří rovnou do resources/img.
+    screenshots_source:
+      - path: "projects/pitarena-eshop/hero-1.webp"
+        type: hero
+        alt:
+          cs: "PitAréna – e-shop s pitbike motorkami YCF a náhradními díly"
+          en: "PitArena – e-shop with YCF pit bikes and spare parts"
+          de: "PitArena – Onlineshop mit YCF-Pitbikes und Ersatzteilen"
     translations:
       cs:
         title: "PitAréna — e-shop"
@@ -545,7 +555,7 @@ projects:
         description: >-
           BARANA prodává bioklimatické pergoly, hliníkové ploty a brány —
           tedy produkt, který si zákazník v hlavě staví dlouho. Web musí
-          tu úvahu zkrátit a převést do poptávky. Postavil jsem premiové
+          tu úvahu zkrátit a převést do poptávky. Postavil jsem prémiové
           prezentační stránky se silnou hierarchií a landing page přímo
           pro placené kampaně.
         challenge: >-
@@ -724,7 +734,7 @@ projects:
           tomu odpovídat.
         result: >-
           Klient zpětně mluví o lepší věrohodnosti značky a o tom, že
-          si zákazníci dopředu vědomí, jak spolupráce probíhá. Část
+          zákazníci dopředu vědí, jak spolupráce probíhá. Část
           poptávek, které dřív skončily ztrátou času na obou stranách,
           web předem odfiltruje. Pozitivní zpětná vazba se týkala
           zejména designu, přehlednosti a celkového UX.
@@ -1840,7 +1850,7 @@ projects:
           dvojjazyčný web a navrhl logo, e-mailovou identitu a vizitky
           s QR kódem.
         challenge: >-
-          Klient potřeboval visačku stavební firmy, která bude působit
+          Klient potřeboval vizitku stavební firmy, která bude působit
           jako solidní lokální partner v Německu. Bez vlastního brandu,
           bez webu a bez konzistentní identity v ničem nevyčníval.
           Vícejazyčnost byla zásadní — komunikace s klienty probíhá
@@ -2568,7 +2578,7 @@ projects:
           Postavil jsem zabezpečený dashboard s autentizací, jednou
           přehledovou obrazovkou s KPI a flexibilním filtrováním
           (tržby podle směny, typu produktu, období). Aplikace běží
-          na webu, takže se k ní dostaneš odkudkoli — z kanceláře,
+          na webu, takže se k ní dostanete odkudkoli — z kanceláře,
           z výroby i z mobilu při schůzce u zákazníka.
         result: >-
           Manuální 30 minutová denní rutina je pryč. Vedení vidí
@@ -2696,7 +2706,7 @@ projects:
           PDF k tisku.
         challenge: >-
           Tvorba regálových štítků se dělala ručně — tedy zdlouhavě,
-          chybovo a se zbytečnou závislostí na konkrétním člověku.
+          chybově a se zbytečnou závislostí na konkrétním člověku.
           Bylo potřeba systém, který vstupuje do procesu jako
           spolehlivý spoluhráč: přijme parametry, importuje aktuální
           data a vygeneruje konzistentní PDF k tisku.
@@ -3003,7 +3013,7 @@ projects:
           zkušeného redaktora.
         result: >-
           PitArena dostala pozornost mimo svou bublinu — značka se
-          objevila v největším motopotálu v zemi a klient navíc
+          objevila v největším motoportálu v zemi a klient navíc
           získal kvalitní obsah pro vlastní blog. Tedy přesně to,
           co content marketing umí, když ho někdo dělá správně.
         outcomes:

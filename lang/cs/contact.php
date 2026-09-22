@@ -8,7 +8,7 @@ return [
     ],
 
     'subheading'          => 'Pomůžu vám',
-    'heading'             => 'Napište mi a do 24 hodin se ozvu',
+    'heading'             => 'Ozvu se do 24 hodin v pracovní dny',
     // OND-201 (nález 5.9): „Ondřej Kriška, Česká republika" byl signál
     // anonymního dodavatele. Plná adresa a IČO jsou veřejné údaje, zvyšují
     // důvěru i lokální viditelnost. Zdroj: lang/cs/about.php („Kde sídlím").
@@ -17,15 +17,17 @@ return [
     'address_street'      => 'Dunajovská 116',
     'address_city'        => '691 81 Březí',
     'address_registration' => 'IČO 19231407, neplátce DPH',
+    'phone_label'         => 'Telefon',
     'hours_label'         => 'Dostupnost',
-    'open_hours'          => 'Na zprávy odpovídám v pracovní dny, obvykle do dvou pracovních dnů. O víkendech a svátcích nedržím pohotovost, ale nic mi nezapadne.',
+    'open_hours'          => 'Ozvu se do 24 hodin v pracovní dny. O víkendech a svátcích nedržím pohotovost, ale nic mi nezapadne.',
     'cta_consultation'    => 'Napište mi',
 
     'form_heading'        => 'Kontaktní formulář',
     'form_subheading'     => 'Získejte zdarma a nezávazně nabídku — nebo mi pošlete jakýkoli dotaz.',
     'name'                => 'Celé jméno',
     'email'               => 'Email',
-    'tel'                 => 'Tel. číslo',
+    'tel'                 => 'Telefon (nepovinný)',
+    'tel_hint'            => 'S číslem se ozvu rychleji.',
     'subject'             => 'Předmět',
     'message'             => 'Vaše zpráva',
     'message_placeholder' => 'Stručně popište, co byste potřebovali — nebo jen napište, kdy vám mám zavolat…',
@@ -36,6 +38,20 @@ return [
     'required'            => 'Vyplňte prosím toto pole.',
     'enter_valid_email'   => 'Vložte platnou emailovou adresu.',
     'policy_not_agreed'   => 'Pro odeslání musíme mít váš souhlas se zpracováním údajů.',
+    // OND-256/8 — texty upload widgetu. Dřív byly natvrdo anglicky
+    // v propech `x-form.file-drop`.
+    'upload' => [
+        'label'            => 'Přidat přílohy',
+        'drag_text'        => '— nebo je sem přetáhněte',
+        'browse'           => 'Vybrat soubory',
+        'hint'             => 'PDF, DOC, DOCX, XLS, XLSX, JPG, PNG, ZIP…',
+        'max_files'        => 'Max. 5 souborů',
+        'max_size'         => 'celkem 20 MB',
+        'remove'           => 'Odebrat',
+        'error_too_many'   => 'Najednou lze přiložit nejvýš 5 souborů.',
+        'error_too_large'  => 'Přílohy dohromady nesmí přesáhnout 20 MB.',
+    ],
+
     'message_success'     => 'Děkuji za zprávu.',
     'message_error'       => 'Něco se cestou pokazilo. Zkuste to prosím znovu — nebo mi napište přímo na ok@ondraweb.cz.',
 
@@ -52,7 +68,7 @@ return [
         'heading_html'    => 'Žádné CRM,<br>žádné call centrum — <em>jen Ondřej</em>.',
         'eyebrow'      => 'Píšete přímo mně',
         'heading'      => 'Píšete přímo mně, Ondřejovi.',
-        'subline'      => 'Vaši zprávu si přečtu osobně a odepíšu obvykle do druhého pracovního dne.',
+        'subline'      => 'Vaši zprávu si přečtu osobně. Ozvu se do 24 hodin v pracovní dny.',
         'photo_alt'    => 'Ondřej Kriška — autor a kontaktní osoba',
         'role_label'   => 'Vývojář, autor webu, jediný kontakt',
     ],
@@ -63,8 +79,8 @@ return [
         'heading' => 'Tři kroky — žádný marketingový trychtýř.',
         'steps'   => [
             [
-                'title' => 'Odpovím do 24 hodin',
-                'text'  => 'Dorazí vám e-mail ode mě osobně, ne automatická potvrzovací zpráva. Pokud budu na cestách, ozvu se nejpozději druhý pracovní den.',
+                'title' => 'Ozvu se do 24 hodin v pracovní dny',
+                'text'  => 'Dorazí vám e-mail ode mě osobně, ne automatická potvrzovací zpráva. O víkendech a svátcích nedržím pohotovost — ozvu se první pracovní den.',
             ],
             [
                 'title' => 'Dohodneme 30 minut hovoru',
@@ -80,7 +96,7 @@ return [
     // Thank-you state — zobrazí se po úspěšném odeslání místo formuláře.
     'thank_you' => [
         'heading'  => 'Hotovo, zpráva dorazila.',
-        'subline'  => 'Děkuji. Přečtu si ji osobně a odepíšu nejpozději do druhého pracovního dne.',
+        'subline'  => 'Děkuji. Přečtu si ji osobně a ozvu se do 24 hodin v pracovní dny.',
         'next'     => 'Mezitím se můžete podívat na realizované projekty nebo si přečíst ceník.',
         'cta_projects' => 'Realizované projekty',
         'cta_price'    => 'Ceník',

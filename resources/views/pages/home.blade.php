@@ -149,10 +149,13 @@
 </section>
 
 {{-- ===================================================
-     SOCIAL PROOF — jeden přesný řádek + tichá řada klientů.
-     OND-231: loga klientů se v prototypu D ztratila; jsou to
-     ověřitelná jména, ne dekorace, takže se vracejí — ale bez
-     rámečků, jen jako ztlumená řada, která ožije na hover.
+     SOCIAL PROOF — jeden přesný řádek.
+     OND-256/5: řada jmen klientů (MAKOplast, Yolk Studio, …)
+     z homepage odebrána rozhodnutím boardu. Nikam se zatím
+     nepřesouvá — umístění na /projekty i s logy navrhne Jack
+     samostatně, až loga budou. Klíč `home.social_proof.brands`
+     i styly `.pd-clients*` proto zůstávají v repu, aby se
+     řada dala vrátit jedním blokem.
      =================================================== --}}
 <section class="pd-strip" aria-label="{{ __('home.social_proof.rating_aria') }}">
     <div class="container-site">
@@ -162,23 +165,6 @@
             <li><strong>{{ __('home.social_proof.experience') }}</strong></li>
             <li>{{ __('home.social_proof.response') }}</li>
             <li>{{ __('home.social_proof.award') }}</li>
-        </ul>
-    </div>
-</section>
-
-<section class="pd-clients" aria-label="{{ __('home.social_proof.clients_aria') }}">
-    <div class="container-site">
-        <ul class="pd-clients__list">
-            {{-- OND-231: záměrně jen jména, ne loga. Dvě z nich existují jen
-                 jako rastry se světlým pozadím (yolk, pitarena) a na dark
-                 ploše se z nich staly šedé placky mezi textovými jmény.
-                 Důkazem je jméno klienta, ne jeho logo — řada tak drží
-                 jednu sazbu a ACID gramatiku. --}}
-            @foreach (__('home.social_proof.brands') as $brand)
-            <li class="pd-clients__item">
-                <span class="pd-clients__name">{{ $brand['name'] }}</span>
-            </li>
-            @endforeach
         </ul>
     </div>
 </section>
@@ -735,7 +721,10 @@
                                 value="{{ old('phone') }}"
                                 placeholder="{{ __('home.inline_form.placeholders.phone') }}"
                                 autocomplete="tel"
+                                aria-describedby="pd-lead-phone-hint"
                             >
+                            {{-- OND-256/4: pošťouchnutí — proč číslo vyplnit, když je nepovinné. --}}
+                            <p class="pd-field__hint" id="pd-lead-phone-hint">{{ __('home.inline_form.phone_hint') }}</p>
                             @error('phone') <p class="pd-field__error">{{ $message }}</p> @enderror
                         </div>
 

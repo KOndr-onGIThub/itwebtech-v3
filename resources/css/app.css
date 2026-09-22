@@ -2749,6 +2749,43 @@
         margin-bottom: 0;
     }
 
+    /* OND-256/1 — inline validační chyba pod polem. Protějšek `.pd-field__error`
+       z podpis.css (formulář na homepage), jen v tokenech app.css. */
+    .form-group__error {
+        font-size: 0.8125rem;
+        line-height: 1.5;
+        color: var(--color-fail);
+        margin: 0;
+    }
+    .form-group__hint {
+        font-size: 0.8125rem;
+        line-height: 1.5;
+        color: var(--color-muted);
+        margin: 0;
+    }
+    /* `:not(:focus)` schválně — při psaní má přednost zlatý focus ring,
+       červený rámeček se vrátí, jakmile z pole odejdeš. Bez `input`/`textarea`
+       v selektoru by pravidlo prohrálo na specificitě s `.form-group input[type=…]`. */
+    .form-group input[aria-invalid="true"]:not(:focus),
+    .form-group textarea[aria-invalid="true"]:not(:focus) {
+        border-color: var(--color-fail);
+    }
+
+    /* Souhrnná hláška pro pád bez validačního payloadu (500, výpadek sítě). */
+    .form-alert {
+        font-size: 0.875rem;
+        line-height: 1.6;
+        border: 1px solid;
+        border-radius: 10px;
+        padding: 0.875rem 1rem;
+        margin: 0 0 1.125rem;
+    }
+    .form-alert--error {
+        border-color: var(--color-fail);
+        color: var(--color-fail);
+        background: rgba(255, 255, 255, 0.03);
+    }
+
     /* Dvousloupcový řádek formuláře — přizpůsobí se úzkým viewportům */
     .form-row-2col {
         display: grid;
@@ -2823,6 +2860,43 @@
         font-size: 0.8125rem;
         color: var(--color-fail);
         margin-top: 0.25rem;
+    }
+
+    /* OND-256/8 — nativní input schovaný, ovládá ho `.form-file__trigger`.
+       Zůstává v DOMu (nese soubory do FormData), proto ne `display: none`
+       s odstraněním z formuláře, ale jen vizuální skrytí. */
+    .form-file__input {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+    .form-file__trigger {
+        margin-top: 0.875rem;
+        padding: 0.5rem 1.125rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        font-family: inherit;
+        color: var(--color-heading);
+        background: rgba(255, 255, 255, 0.06);
+        border: 1.5px solid var(--border-subtle);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: border-color 0.15s, background-color 0.15s, color 0.15s;
+    }
+    .form-file__trigger:hover {
+        border-color: var(--border-gold);
+        background: var(--bg-card-hover);
+        color: var(--color-gold-500);
+    }
+    .form-file__trigger:focus-visible {
+        outline: 2px solid var(--color-gold-500);
+        outline-offset: 3px;
     }
 
     .form-file__list {
@@ -3254,6 +3328,98 @@
     }
     .project-card__live:hover {
         text-decoration: underline;
+    }
+
+    /* ============================================================
+       PŘÍPADOVKY „Čtyři projekty zblízka" (/projekty)
+       ============================================================
+       OND-256/2. Rebranding (657bfa5) přejmenoval tenhle blok na
+       `.project-card`, ale šablonu nechal na starých třídách — sekce
+       od té doby na produkci visela jako holý text: žádná deska,
+       žádný grid, ikonka odtržená od popisku a za sekcí ~2 obrazovky
+       prázdna (neostylované články byly tak vysoké, že se
+       `[data-reveal]` nestihl spustit a držel opacity 0).
+
+       Karty záměrně mluví stejnou řečí jako `.portfolio-card` o kus
+       výš na téže stránce — stejná deska, rámeček, rádius i hover.
+       Grid je ale max. dvousloupcový, ne `auto-fill` po 320 px:
+       případovka nese shrnutí a 4–5 výsledků, ve třech úzkých
+       sloupcích by se z toho stal nečitelný sloupec textu. */
+    .project-snapshots {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+    @media (min-width: 768px) {
+        .project-snapshots {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+    }
+    @media (min-width: 1024px) {
+        .project-snapshots { gap: 1.75rem; }
+    }
+
+    .project-snapshot {
+        display: flex;
+        flex-direction: column;
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        transition: border-color 0.25s, background-color 0.25s, transform 0.25s;
+    }
+    .project-snapshot:hover {
+        border-color: var(--border-gold);
+        background: var(--bg-card-hover);
+        transform: translateY(-2px);
+    }
+
+    .project-snapshot__meta {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 0.5rem 0.75rem;
+        margin-bottom: 0.875rem;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--color-gold-500);
+    }
+
+    .project-snapshot h3 {
+        margin: 0 0 0.5rem;
+        font-size: 1.25rem;
+        line-height: 1.3;
+        color: var(--color-heading);
+    }
+    .project-snapshot > p {
+        margin: 0;
+        font-size: 0.9375rem;
+        line-height: 1.65;
+        color: var(--color-body);
+    }
+
+    .project-snapshot ul {
+        margin: 1.125rem 0 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 0.625rem;
+    }
+    .project-snapshot li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+        line-height: 1.55;
+        color: var(--color-body);
+    }
+    /* Ikona sedí na účaří prvního řádku, ne na jeho horní hraně. */
+    .project-snapshot li svg {
+        color: var(--color-gold-500);
+        margin-top: 0.1875rem;
     }
 
     .project-fit {

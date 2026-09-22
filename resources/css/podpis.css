@@ -870,6 +870,13 @@
     color: #FF6157;
     margin: var(--space-2) 0 0;
 }
+/* OND-256/4 — pošťouchnutí pod nepovinným polem. */
+.pd-field__hint {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    color: var(--color-fg-muted);
+    margin: var(--space-2) 0 0;
+}
 .pd-alert {
     font-family: var(--font-body);
     font-size: var(--text-body-sm);
