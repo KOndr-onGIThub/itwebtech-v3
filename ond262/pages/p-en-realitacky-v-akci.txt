@@ -1,0 +1,110 @@
+Realiťačky v Akci — custom real-estate website with booking
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+CZ
+EN
+DE
+Book a consultation
+CZ
+EN
+DE
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+Book a consultation
+💬
+Enquiry
+← Back to projects
+Website
+·
+2024
+·
+Realiťačky v Akci — Magda Pernicová Novotná
+Realiťačky v Akci
+A real-estate website the client runs herself
+Visit live site
+Book a consultation
+Magda Pernicová Novotná does real estate with a personal touch and wanted a site to match. I built a custom solution with no template lock-in and no monthly fees — online appointment booking, property management, a blog, and branding that carries the same spirit as her work.
+Challenge
+The agent needed a site that wasn't just "a WordPress business card" and didn't generate monthly costs. It had to feel professional yet personal and show how she actually works. Some listings lacked quality photos, and she wasn't a tech user — the system had to be self-explanatory.
+Solution
+The site is hand-coded with no template CMS. The client has an admin for properties, enquiries and the blog, so she updates everything herself. Added a Reservanto-based booking system, two intro blog articles, and stock photography to fill in for missing imagery. Branding, keyword research and SEO structure rounded it out.
+Result
+The client has a website that works for her 24/7 with zero recurring fees. She links to it in conversations and updates properties and articles on her own. Her review describes a professional yet human approach and someone who actually listened to what she needed.
+Client
+Realiťačky v Akci — Magda Pernicová Novotná
+Year
+2024
+Duration
+září 2024
+Category
+Website
+Live site
+realitackyvakci.cz
+Tech stack
+Website
+Brand
+Booking
+Search visibility
+Website copy
+Content managed by the client
+Blog
+More projects
+Website
+·
+2023
+·
+PitArena
+PitArena
+From zero to a brand, a website and online sales
+View project
+Website
+·
+2026
+·
+PitArena
+PitArena — online shop
+An online shop where customers find the part for their model and year
+View project
+Website
+·
+2026
+·
+BARANA
+BARANA
+Premium website for bioclimatic pergolas, ready for ad campaigns
+View project
+Want a similar result for your business?
+Book a consultation
+← Back to projects
+I help entrepreneurs succeed in the online world
+Book a free consultation
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+© 2026 ONDRAWEB — All rights reserved.
++420 728 697 712
+Privacy Policy
+Cookies
+Let's talk
+Free consultation — no commitment, no registration.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Pick a consultation slot
+Free. No commitment.
+Mind a few cookies?
+I only measure a few numbers about what works on the site. No data selling.
+See the cookie policy .
+Decline
+Accept all
+✕

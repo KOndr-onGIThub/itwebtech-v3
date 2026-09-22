@@ -1,0 +1,109 @@
+Zubní Provázek — dental practice website redesign
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+CZ
+EN
+DE
+Book a consultation
+CZ
+EN
+DE
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+Book a consultation
+💬
+Enquiry
+← Back to projects
+Website
+·
+2025
+·
+Zubní ordinace Provázek s.r.o.
+Zubní Provázek
+Dental practice redesign with local SEO focus
+Visit live site
+Book a consultation
+MDDr. Václav Provázek runs a dental practice in Hrabětice. The old site looked dated, didn't work on mobile, and left patients without basic answers. I rebuilt it with a focus on readable information, transparent pricing, FAQ, and local search visibility.
+Challenge
+The site looked untrustworthy, mobile use was painful, and treatment and pricing information was missing. It was also essentially invisible in Google. For a medical practice the first impression is decisive — most patients find their dentist online.
+Solution
+A modern responsive site with a full overview of treatments, indicative pricing, and FAQ. I added an educational blog with three intro articles on dental care that the client can extend. Local SEO targets keywords like "dentist Hrabětice" and "dental hygiene Hrabětice".
+Result
+The practice ranks first in Google for its key local search, "zubař Hrabětice", and Google brings most of all traffic — 460 of 524 visits (Google Analytics, 1 Jan – 16 Sep 2026). The site answers what patients used to have to ask over the phone: prices, treatment overview, opening hours and location.
+Client
+Zubní ordinace Provázek s.r.o.
+Year
+2025
+Duration
+několik týdnů
+Category
+Website
+Live site
+zubniprovazek.cz
+Tech stack
+Website
+Rebuild of an old site
+Website copy
+Blog
+Local search
+Healthcare
+More projects
+Website
+·
+2023
+·
+PitArena
+PitArena
+From zero to a brand, a website and online sales
+View project
+Website
+·
+2026
+·
+PitArena
+PitArena — online shop
+An online shop where customers find the part for their model and year
+View project
+Website
+·
+2026
+·
+BARANA
+BARANA
+Premium website for bioclimatic pergolas, ready for ad campaigns
+View project
+Want a similar result for your business?
+Book a consultation
+← Back to projects
+I help entrepreneurs succeed in the online world
+Book a free consultation
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+© 2026 ONDRAWEB — All rights reserved.
++420 728 697 712
+Privacy Policy
+Cookies
+Let's talk
+Free consultation — no commitment, no registration.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Pick a consultation slot
+Free. No commitment.
+Mind a few cookies?
+I only measure a few numbers about what works on the site. No data selling.
+See the cookie policy .
+Decline
+Accept all
+✕

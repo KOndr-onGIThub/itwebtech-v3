@@ -1,0 +1,80 @@
+Wann ein Website-Relaunch Sinn ergibt und wann nicht
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+CZ
+EN
+DE
+Beratung vereinbaren
+CZ
+EN
+DE
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+Beratung vereinbaren
+💬
+Anfrage
+← Zurück zum Blog
+NOTIZEN
+Wann ein Website-Relaunch Sinn ergibt und wann nicht
+Fünf Gründe, warum ein Website-Relaunch Sinn ergibt, und drei, warum nicht. Dazu, worauf Sie achten, damit danach der Traffic nicht einbricht.
+Über einen Relaunch wird meistens dann gesprochen, wenn die Website jemandem nicht mehr gefällt. Das ist der schwächste Grund, den ich kenne. Ich schreibe, wann es sich lohnt, eine Website neu zu machen, wann nicht, und was dabei am häufigsten schiefgeht.
+Fünf Gründe, warum ein Relaunch Sinn ergibt
+1. Die Website lässt sich nicht pflegen. Eine geänderte Telefonnummer bedeutet, jemandem zu schreiben, der sich in einer Woche meldet. Das allein ist einen Relaunch wert.
+2. Auf dem Handy ist sie unbrauchbar. Die meisten Menschen schauen heute vom Handy auf eine Website. Wenn sie dort zoomen und seitwärts schieben müssen, gehen sie weg.
+3. Die Website fällt auseinander oder stürzt ab. Typisch bei Baukästen, die aus Plug-ins verschiedener Autoren zusammengesteckt sind. Ein Update und das Bestellformular funktioniert nicht mehr.
+4. Die Firma hat sich verändert. Sie machen etwas anderes, wollen etwas anderes verkaufen, liegen in einer anderen Preisklasse. Die Website ist dort geblieben, wo Sie vor fünf Jahren waren.
+5. Die Websites Ihrer Mitbewerber sehen eine Klasse besser aus. Der Kunde vergleicht Sie nebeneinander, ob Sie wollen oder nicht.
+Drei Situationen, in denen Sie das Geld behalten sollten
+Die Website ist zwei Jahre alt und funktioniert. Alter allein ist kein Grund. Wenn sie sich pflegen lässt, schnell ist und die Leute darauf finden, was sie brauchen, lassen Sie sie in Ruhe.
+Sie gefällt Ihnen nicht, aber die Kunden stört sie nicht. Ihr Geschmack und der Geschmack Ihres Kunden sind nicht dasselbe. Bevor Sie ein paar tausend Euro hineinstecken, fragen Sie fünf Kunden, was ihnen auf der Website gefehlt hat.
+Das eigentliche Problem liegt woanders. Wenn keine Anfragen kommen, weil Sie drei Klassen teurer sind als die Umgebung und es nirgends erklären, repariert das ein neues Aussehen nicht.
+Ein Relaunch ist Arbeit am Inhalt und an der Struktur. Das Aussehen ist erst die Folge.
+Was bei einem Relaunch am häufigsten schiefgeht
+Die Seitenadressen werden weggeworfen. Die neue Website hat eine andere Struktur und die alten Adressen funktionieren nicht mehr. Suchmaschinen und Links von fremden Websites führen plötzlich ins Leere. Die Lösung ist einfach und wird vor dem Start gemacht: Die alte Adresse muss dauerhaft auf die neue weiterleiten. Ich möchte, dass Sie das von jedem einfordern, der Ihnen die Website baut.
+Es wird nur das Aussehen erneuert. Die Texte werden eins zu eins übernommen, auch die, die niemand verstanden hat. Die Website sieht dann neu aus und funktioniert genauso schlecht.
+Dinge verschwinden, die funktioniert haben. Manchmal hat die alte Website eine Seite, auf die die Hälfte des Traffics kommt. Bevor etwas gelöscht wird, muss man in die Statistik schauen.
+Niemand übernimmt die Inhalte. Referenzen, Fotos von Umsetzungen, Dokumente zum Herunterladen. Es ist meistens mehr, als man erwartet.
+Wie ich an einen Relaunch herangehe
+Zuerst schaue ich, was auf der alten Website funktioniert, und das behalte ich. Dann gehen wir durch, was die Website tun soll und wem sie es sagen soll. Erst danach geht es darum, wie sie aussehen wird. Die Seitenadressen regle ich vor dem Start, nicht danach.
+Den Code schreibe ich selbst, ohne fertige Plug-ins fremder Autoren. Genau die sind meistens der Grund, warum eine Website nach einiger Zeit auseinanderfällt und neu gemacht werden muss.
+Über den Autor
+Ondřej Kriška
+Ich baue Webseiten und Anwendungen nach Maß. Allein, mit eigenem Code.
+Achtzehn Jahre habe ich in der Logistik von Toyota gearbeitet. Heute baue ich Webseiten, Onlineshops und Anwendungen nach Maß für kleine und mittlere Firmen. Den Preis nenne ich vorab und Sie sprechen direkt mit mir.
+LinkedIn
+Ondřej schreiben
+Geht es um eine Webseite oder eine Anwendung?
+Schreiben Sie mir, was Sie brauchen. Ich melde mich innerhalb von zwei Werktagen und sage Ihnen, ob ich helfen kann.
+Ondřej schreiben
+Ich helfe Unternehmern, in der Online-Welt erfolgreich zu sein
+Kostenlose Beratung vereinbaren
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+© 2026 ONDRAWEB — Alle Rechte vorbehalten.
++420 728 697 712
+Datenschutzerklärung
+Cookies
+Lassen Sie uns sprechen
+Kostenlose Beratung — unverbindlich, ohne Registrierung.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Beratungstermin auswählen
+Kostenlos. Unverbindlich.
+Darf ich ein paar Cookies setzen?
+Ich messe nur ein paar Zahlen darüber, was auf der Seite funktioniert. Kein Datenhandel.
+Details in den Richtlinien .
+Ablehnen
+Alle akzeptieren
+✕

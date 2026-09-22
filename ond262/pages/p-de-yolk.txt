@@ -1,0 +1,105 @@
+YOLK — Agentur-Entwicklung auf Klinikportalen
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+CZ
+EN
+DE
+Beratung vereinbaren
+CZ
+EN
+DE
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+Beratung vereinbaren
+💬
+Anfrage
+← Zurück zu Projekten
+Webseite
+·
+2025
+·
+YOLK Studio (Peter Vidlička)
+YOLK — Agentur-Entwicklung auf Klinikportalen
+Entwicklung und Wartung auf Healthcare-Portalen für eine Agentur
+Beratung buchen
+Für das YOLK Studio arbeite ich laufend an großen Kunden- Websites — am Patientenportal unica.cz und an der Site der Reproduktionsklinik reproclinic.com. Die Arbeit umfasst saisonale Updates, Formularänderungen, Grafik-Feintuning und Custom-Features, die über Standard-WordPress hinausgehen.
+Herausforderung
+Die Agentur betreut Kunden mit großen Portalen, wo jede kleine kaputte Stelle direkt die Patientenerfahrung verschlechtert. Die Sites brauchten zuverlässige Pflege, saisonale Updates und Custom-Features, die WordPress allein nicht liefert.
+Lösung
+Ich arbeite als externer Entwickler an konkreten Aufgaben — saisonale Änderungen, Bugfixes, Custom-PHP/JS-Erweiterungen und Formularanpassungen. Die Kommunikation läuft direkt mit dem Agenturteam; für die Endkunden bleibt das Ergebnis unsichtbar im guten Sinn — alles funktioniert.
+Ergebnis
+Die Agentur hat einen zuverlässigen technischen Partner für Aufträge, die qualifizierte Entwicklung verlangen. Zitat: „Ondra ist ein sehr zuverlässiger und geschickter Entwickler, die Zusammenarbeit lief immer sehr gut." (5/5)
+Kunde
+YOLK Studio (Peter Vidlička)
+Jahr
+2025
+Dauer
+průběžná spolupráce
+Kategorie
+Webseite
+Technologien
+Website
+WordPress
+Arbeit für eine Agentur
+Individuelle Programmierung
+Wartung und Änderungen
+Weitere Projekte
+Webseite
+·
+2023
+·
+PitArena
+PitArena
+Von Null zu Marke, Website und Online-Verkauf
+Projekt anzeigen
+Webseite
+·
+2026
+·
+PitArena
+PitArena — Onlineshop
+Ein Shop, in dem Kunden das Teil für Modell und Baujahr finden
+Projekt anzeigen
+Webseite
+·
+2026
+·
+BARANA
+BARANA
+Premium-Website für bioklimatische Pergolen, kampagnenbereit
+Projekt anzeigen
+Möchten Sie ein ähnliches Ergebnis für Ihr Unternehmen?
+Beratung buchen
+← Zurück zu Projekten
+Ich helfe Unternehmern, in der Online-Welt erfolgreich zu sein
+Kostenlose Beratung vereinbaren
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+© 2026 ONDRAWEB — Alle Rechte vorbehalten.
++420 728 697 712
+Datenschutzerklärung
+Cookies
+Lassen Sie uns sprechen
+Kostenlose Beratung — unverbindlich, ohne Registrierung.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Beratungstermin auswählen
+Kostenlos. Unverbindlich.
+Darf ich ein paar Cookies setzen?
+Ich messe nur ein paar Zahlen darüber, was auf der Seite funktioniert. Kein Datenhandel.
+Details in den Richtlinien .
+Ablehnen
+Alle akzeptieren
+✕
