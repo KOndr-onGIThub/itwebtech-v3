@@ -1,17 +1,31 @@
 /* ==========================================================================
    OND-246 — HLOUBKA, spouštěč
    --------------------------------------------------------------------------
-   Patří k resources/css/hloubka.css. Dělá přesně tři věci:
+   Patří k resources/css/hloubka.css. Dělá přesně dvě věci:
 
-     1) POSOUVÁ ZDROJ SVĚTLA o ±7 px podle pozice sekce ve výřezu (vrstva A).
-     2) SPOUŠTÍ NÁBOJ na vyjmenovaných prvcích, až dojedou do čtecího pásma
+     1) SPOUŠTÍ NÁBOJ na vyjmenovaných prvcích, až dojedou do čtecího pásma
         (vrstva B).
-     3) SPOUŠTÍ NÁBOJ V FAQ při rozkliknutí otázky — tam ho nepouští scroll,
+     2) SPOUŠTÍ NÁBOJ V FAQ při rozkliknutí otázky — tam ho nepouští scroll,
         ale člověk.
 
    CO NEDĚLÁ: nic nezobrazuje ani neskrývá. Když se tenhle soubor vůbec
    nenačte, stránka vypadá stejně jako dnes plus statické nasvícení. Žádný
    obsah na JS nezávisí a nic nestartuje v opacity: 0.
+
+   --------------------------------------------------------------------------
+   PROČ TU NENÍ POSUN ZDROJE SVĚTLA
+
+   Byl. Posouval svit o ±7 px podle pozice sekce ve výřezu, aby světlo při
+   scrollu „žilo". Změřeno proti současnému webu na 8 prostřídaných dvojicích
+   běhů: byla to JEDINÁ věc v celé vrstvě, která počítala při každém snímku
+   scrollu, a stála za celou její cenu —
+
+     přepočet stylů při scrollu   s posunem +130 ms   bez posunu +0,06 ms
+     rasterizace při scrollu      s posunem +728 ms   bez posunu  +121 ms
+
+   Za to se kupovalo 7 px pohybu světla, kterých si nikdo nevšimne.
+   Statické nasvícení (tedy drtivá většina efektu) zůstalo beze změny
+   a „hru světel" dělá akcentní náboj, ne tenhle posun. Vyhozeno.
 
    --------------------------------------------------------------------------
    ČTECÍ PÁSMO — proč zrovna 62 %
@@ -30,10 +44,9 @@
    prolítne kolečkem, nenechá za sebou stopu rozběhnutých animací —
    ty prvky se prostě nespustí a spustí se, až u nich zastaví.
 
-   VÝKON: animuje se výhradně background-position na pseudo-elementech,
-   parallax mění jednu CSS proměnnou. Čtení layoutu a zápis stylů jsou
-   oddělené do dvou fází, aby nevznikal forced reflow. Počítají se jen sekce,
-   které jsou právě ve výřezu.
+   VÝKON: při scrollu tenhle soubor nepočítá nic — jen čeká na
+   IntersectionObserver, a každý prvek odpozoruje hned, jak mu náboj pustí.
+   Animuje se výhradně background-position na pseudo-elementech.
    ========================================================================== */
 (function () {
     'use strict';
@@ -55,89 +68,7 @@
 
 
     /* ======================================================================
-       1. SVĚTLO — posun zdroje (vrstva A)
-       ====================================================================== */
-
-    function lightParallax() {
-        if (reduce) return;   /* statické nasvícení zůstává, pohyb ne */
-
-        /* Na mobilu a tabletu posun zdroje NEBĚŽÍ. Je to jediná věc v celé
-           vrstvě, která počítá při každém snímku scrollu, a na telefonu je
-           scroll to nejdražší, co stránka dělá — zatímco ±7px posunu světla
-           je na malé obrazovce stejně skoro nepostřehnutelný. Statické
-           nasvícení (tedy 95 % efektu) zůstává úplně stejné. */
-        var fine = window.matchMedia &&
-            window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-        if (!fine) return;
-
-        var sections = Array.prototype.slice.call(root.querySelectorAll(':scope > section'));
-        if (!sections.length) return;
-
-        var AMP = 7;          /* maximální posun svitu v px */
-        var visible = sections;
-        var ticking = false;
-
-        function request() {
-            if (ticking) return;
-            ticking = true;
-            window.requestAnimationFrame(update);
-        }
-
-        function update() {
-            ticking = false;
-            var vh = window.innerHeight || document.documentElement.clientHeight;
-            var reads = [];
-            var i, el, rect, p, y;
-
-            /* fáze 1 — jen čtení layoutu */
-            for (i = 0; i < visible.length; i++) {
-                el = visible[i];
-                rect = el.getBoundingClientRect();
-                /* 0 = sekce vstupuje zdola, 1 = odchází nahoře */
-                p = (vh - rect.top) / (vh + rect.height);
-                if (p < 0) p = 0; else if (p > 1) p = 1;
-                reads.push([el, Math.round((0.5 - p) * 2 * AMP)]);
-            }
-
-            /* fáze 2 — jen zápis, a to jen když se hodnota opravdu změnila */
-            for (i = 0; i < reads.length; i++) {
-                el = reads[i][0];
-                y = reads[i][1];
-                if (el.__pddPy !== y) {
-                    el.__pddPy = y;
-                    el.style.setProperty('--pdd-py', y + 'px');
-                }
-            }
-        }
-
-        if (hasIO) {
-            visible = [];
-            var io = new IntersectionObserver(function (entries) {
-                for (var i = 0; i < entries.length; i++) {
-                    var e = entries[i];
-                    var at = visible.indexOf(e.target);
-                    if (e.isIntersecting) {
-                        if (at === -1) visible.push(e.target);
-                    } else if (at !== -1) {
-                        visible.splice(at, 1);
-                        e.target.__pddPy = 0;
-                        e.target.style.setProperty('--pdd-py', '0px');
-                    }
-                }
-                request();
-            }, { rootMargin: '140px 0px' });
-
-            for (var i = 0; i < sections.length; i++) io.observe(sections[i]);
-        }
-
-        window.addEventListener('scroll', request, { passive: true });
-        window.addEventListener('resize', request, { passive: true });
-        request();
-    }
-
-
-    /* ======================================================================
-       2. PROUD — uzavřený seznam prvků (vrstva B)
+       1. PROUD — uzavřený seznam prvků (vrstva B)
        ----------------------------------------------------------------------
        Cokoli tady není, náboj nedostane. Zejména NE dělítka sekcí
        (.pd-section / .pd-strip) — přejezd u každé sekce je přesně ten šum,
@@ -197,7 +128,7 @@
 
 
     /* ======================================================================
-       3. FAQ — náboj pouští člověk, ne scroll
+       2. FAQ — náboj pouští člověk, ne scroll
        ----------------------------------------------------------------------
        Třídu po doběhnutí sundáme, aby šla otázka otevřít znovu a náboj
        proběhl zas. Při zavírání se nespouští nic.
@@ -230,7 +161,6 @@
     /* ====================================================================== */
 
     function boot() {
-        lightParallax();
         armFaq();
         /* Náboje se armují až po usazení stránky, ať hero nevystřelí
            do rozjeté sazby. */

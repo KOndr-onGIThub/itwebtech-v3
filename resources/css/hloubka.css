@@ -128,10 +128,12 @@
 .pd--depth > section {
     position: relative;
     background-repeat: no-repeat;
-    /* Plocha svitu je o 48 px vyšší než sekce, aby při posunu zdroje nikdy
-       nevykoukl holý okraj. Posun drží JS v --pdd-py (±7 px). */
+    /* Plocha svitu je o 48 px vyšší než sekce a je posazená o 24 px nahoru.
+       Původně to byla rezerva pro posun zdroje při scrollu; ten je vyhozený
+       (viz hloubka.js), přesah ale zůstává — drží vrchol kuželu nad hranou
+       sekce, takže světlo nezačíná ostrým řezem. */
     background-size: 100% calc(100% + 48px);
-    background-position: 0 calc(-24px + var(--pdd-py, 0px));
+    background-position: 0 -24px;
 }
 
 /* Dělítko sekce: barva linky se nemění plošně, mění se její jas po délce.
@@ -213,7 +215,7 @@
     pointer-events: none;
     background-repeat: no-repeat;
     background-size: 100% calc(100% + 48px);
-    background-position: 0 calc(-24px + var(--pdd-py, 0px));
+    background-position: 0 -24px;
     background-image:
         radial-gradient(86% 96% at 62% -4%,
             rgba(255, 255, 255, 0.05) 0%,
@@ -904,14 +906,16 @@
    D. PŘÍSTUPNOST
    --------------------------------------------------------------------------
    Pohyb se vypne úplně. Statická část zůstává celá: nasvícení, specular
-   na číslech, acid podtržení v H1, kontaktní stíny, obě vyzdvižené desky.
-   Nic neskáče, nic nebliká, nic nezmizí — a hlavně nic nestartuje
+   na číslech, acid podtržení v H1, kontaktní stíny i vyzdvižený panel
+   poptávky. Nic neskáče, nic nebliká, nic nezmizí — a hlavně nic nestartuje
    v opacity: 0, takže ani při vypnutém JS nechybí kus obsahu.
+
+   Nasvícení se tu schválně NEPŘEPISUJE. Dřív tu stálo
+   `background-position: 0 0 !important`, aby se zmrazil posun zdroje —
+   ten je ale vyhozený a to pravidlo by dnes nasvícení o 24 px posunulo,
+   takže by lidi s vypnutými animacemi viděli jinou stránku než ostatní.
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
-    .pd--depth > section {
-        background-position: 0 0 !important;
-    }
     .pd--depth .pd-heading em,
     .pd--depth .pd-hero .pd-cta::after,
     .pd--depth .pd-work__plate::before,
