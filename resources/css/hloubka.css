@@ -339,7 +339,22 @@
        před rozsvěcováním; jediný rozdíl je, že to jde stmívat.
 
        Kdo sem bude sahat: `inset` musí zůstat 0. Přesah patří do
-       background-size, ne do geometrie prvku. */
+       background-size, ne do geometrie prvku.
+
+       OND-251 — JAK SI TO OVĚŘIT, když sem přesto sáhneš. Detektor švů:
+       full-page snímek, pět svislých pruhů napříč šířkou (2–10, 20–30,
+       45–55, 70–80, 88–97 %), v každém průměr jasu PO ŘÁDCÍCH, a v pásu
+       3–40 px nad každou hranicí sekce se hledá skok mezi sousedními řádky.
+       Jeden pruh nestačí: první verze brala jen levý okraj a vyšlo z ní
+       „produkce i oprava mají stejná čísla" — jenže v tom pruhu žádný
+       z nových svitů neleží, takže měřila místo, kde se nic nezměnilo.
+
+       Kalibrace (naměřeno 22. 9. na /kontakt, /cenik, /o-mne, 1440 px):
+         inset: -24px 0   (bug z OND-246)   max skok 9,2–12,0 úrovní jasu
+         inset: 0         (správně)         max skok 1,0 úrovně
+         živá produkce                      max skok 0,1 úrovně
+       Ta jedna úroveň u správné verze NENÍ hrana — je to 8bitové schodování
+       plynulého přechodu. Hranice pro poplach je tedy řádově 5+, ne 1. */
     inset: 0;
     pointer-events: none;
     background-repeat: no-repeat;
