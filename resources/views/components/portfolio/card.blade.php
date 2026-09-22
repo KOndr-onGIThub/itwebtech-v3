@@ -24,7 +24,14 @@
 
     // OND-209: slug může být lokalizovaný (DE/EN), detailUrl to řeší.
     $detailHref = $project->detailUrl($locale);
-    $ariaLabel = ($t?->title ?? $project->client_name ?? $project->slug) . ' — ' . __('projects.view_project');
+    $projectName = $t?->title ?? $project->client_name ?? $project->slug;
+    $ariaLabel = $projectName . ' — ' . __('projects.view_project');
+
+    // OND-265 (audit OND-254): náhledy měly natvrdo `alt=""`. Odkaz sice nese
+    // aria-label, ale při nenačteném obrázku i pro vyhledávače tu nezbylo nic.
+    // Preferujeme popis snímku z překladu, jinak generický popis náhledu.
+    $thumbAlt = $hero?->translation()?->alt
+        ?: __('projects.card.thumbnail_alt', ['project' => $projectName]);
 @endphp
 
 <article
@@ -38,7 +45,7 @@
             @if ($hero)
                 <x-portfolio.screenshot
                     :path="$hero->path"
-                    alt=""
+                    :alt="$thumbAlt"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     loading="{{ $eager ? 'eager' : 'lazy' }}"
                     fetchpriority="{{ $eager ? 'high' : null }}"

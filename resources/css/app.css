@@ -5508,15 +5508,46 @@
         overflow: hidden;
         background: var(--bg-card-hover);
     }
-    .portfolio-detail-gallery__item picture,
-    .portfolio-detail-gallery__item picture img,
-    .portfolio-detail-gallery__item > a > img,
-    .portfolio-detail-gallery__item > img {
+    /* OND-265: dlaždice drží poměr snímku (`--shot-ratio` ze šablony)
+       a obrázek se do ní vejde celý (`contain`). Dřív byl natvrdo čtverec
+       s `cover`, což u nečtvercových zdrojů usekávalo funkčně podstatný
+       obsah — audit OND-254 to našel u pickeru (tabulka DÍL/SKLAD/POČET)
+       i u FRL Creatoru (formulář useknutý z obou stran). */
+    .portfolio-detail-gallery__frame {
+        aspect-ratio: var(--shot-ratio, 1);
+        overflow: hidden;
+    }
+    .portfolio-detail-gallery__frame > a,
+    .portfolio-detail-gallery__frame picture {
         display: block;
         width: 100%;
-        aspect-ratio: 1 / 1;
-        object-fit: cover;
-        object-position: top;
+        height: 100%;
+    }
+    .portfolio-detail-gallery__frame img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+    }
+    @media (min-width: 641px) {
+        /* Dvousloupcová mřížka drží jednotný rytmus čtverců (OND-202);
+           celý obsah snímku zůstává vidět díky `contain`. Osamocená dlaždice
+           souseda nemá, koho by dorovnávala — bere přirozený poměr, ať je
+           snímek co největší. */
+        .portfolio-detail-gallery__item:not(.portfolio-detail-gallery__item--alone):not(.portfolio-detail-gallery__item--alone-band)
+            .portfolio-detail-gallery__frame {
+            aspect-ratio: 1 / 1;
+        }
+        /* Poslední osamocená dlaždice — žádná prázdná buňka vedle ní. */
+        .portfolio-detail-gallery__item--alone,
+        .portfolio-detail-gallery__item--alone-band {
+            grid-column: 1 / -1;
+        }
+        .portfolio-detail-gallery__item--alone {
+            max-width: calc(50% - 0.625rem);
+            margin-inline: auto;
+        }
     }
 
     /* — Detail body + meta layout — */

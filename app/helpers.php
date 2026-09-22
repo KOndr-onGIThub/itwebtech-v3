@@ -199,12 +199,60 @@ if (!function_exists('screenshot_gallery_role')) {
     }
 }
 
+if (!function_exists('screenshot_is_square_ish')) {
+    /**
+     * OND-265: je snímek „skoro čtverec"? Dominantní zdroje galerie jsou
+     * čtverce 1800×1800 — ty se do čtvercové dlaždice vejdou bez ořezu.
+     * Všechno ostatní (1.48 diagramy, 1.33 screenshoty webů, 0.58 mobilní
+     * obrazovky) čtvercový `cover` usekával; audit OND-254 to našel jako
+     * ztrátu funkčně podstatného obsahu (picker: tabulka DÍL/SKLAD/POČET).
+     */
+    function screenshot_is_square_ish(?string $path): bool
+    {
+        $dims = screenshot_dimensions_any($path);
+        if ($dims === null) {
+            return false;
+        }
+        $ratio = $dims['width'] / $dims['height'];
+
+        return $ratio >= 0.85 && $ratio <= 1.2;
+    }
+}
+
+if (!function_exists('screenshot_tile_ratio')) {
+    /**
+     * OND-265: poměr stran dlaždice v mřížce galerie detailu.
+     *
+     * Vrací přirozený poměr snímku ořezaný do rozumného rozsahu, aby extrémní
+     * portréty (address_data 1076×2545) nevyrobily dvoumetrový sloupec. Spolu
+     * s `object-fit: contain` v CSS to znamená: uvnitř rozsahu nulový ořez
+     * i nulové letterbox pruhy, mimo rozsah decentní pruhy místo useknutého
+     * obsahu. Neznámé rozměry → 1 (původní čtverec).
+     */
+    function screenshot_tile_ratio(?string $path): float
+    {
+        $dims = screenshot_dimensions_any($path);
+        if ($dims === null) {
+            return 1.0;
+        }
+
+        return round(max(0.6, min(1.5, $dims['width'] / $dims['height'])), 4);
+    }
+}
+
 if (!function_exists('portfolio_card_thumbnail')) {
     /**
      * OND-202: výběr náhledovky do malé karty (výpis projektů, homepage).
      * Wide 3-device mockup je v malé kartě nečitelný (zadání boardu) —
-     * preferujeme explicitní `thumbnail`, pak první čtvercový/`card` snímek
+     * preferujeme explicitní `thumbnail`, pak první čtvercový snímek
      * (detailní záběr jednoho zařízení), teprve pak hero/první.
+     *
+     * OND-265: „čtvercový" se zpřísnil z `role === 'card'` (cokoli pod 1.5)
+     * na skutečně čtvercový. Volnější pravidlo bralo jako náhledovku první
+     * lepší snímek pod 1.5 a vyrábělo nesmyslné miniatury: HCMS dostal
+     * functions-model diagram (1760×1191), picker mobilní obrazovku
+     * a vanspedition screenshot STARÉHO webu klienta. Bez čtvercového snímku
+     * je lepší `hero` (preview banner projektu).
      *
      * @param \Illuminate\Support\Collection $screens
      */
@@ -212,7 +260,7 @@ if (!function_exists('portfolio_card_thumbnail')) {
     {
         $screens = collect($screens ?? []);
         return $screens->firstWhere('type', 'thumbnail')
-            ?? $screens->first(static fn ($s) => screenshot_gallery_role($s->path) === 'card')
+            ?? $screens->first(static fn ($s) => screenshot_is_square_ish($s->path))
             ?? $screens->firstWhere('type', 'hero')
             ?? $screens->first();
     }
@@ -307,10 +355,16 @@ if (!function_exists('responsive_image_srcsets')) {
         $fallback = $variants['webp'][0] ?? $variants['avif'][0] ?? '';
         $fallback = explode(' ', $fallback)[0];
 
+        // OND-265: největší WebP — cíl odkazu do lightboxu. Dřív tam šel
+        // `fallback`, tj. 320px varianta: po kliknutí se otevřela miniatura.
+        $largest = end($variants['webp']) ?: end($variants['avif']) ?: $fallback;
+        $largest = explode(' ', (string) $largest)[0];
+
         return $cache[$path] = [
             'avif'     => implode(', ', $variants['avif']),
             'webp'     => implode(', ', $variants['webp']),
             'fallback' => $fallback,
+            'largest'  => $largest,
         ];
     }
 }

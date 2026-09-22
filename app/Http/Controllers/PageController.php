@@ -127,30 +127,51 @@ class PageController extends Controller
 
         // Související projekty: 3 kusy, stejná kategorie, vyloučit aktuální.
         // Pokud je < 3 v kategorii, doplníme z ostatních (featured první).
-        $sameCategory = PortfolioProject::published()
+        //
+        // OND-265 (audit OND-254): dřív se bralo prvních 2×3 z pevného pořadí,
+        // takže všech 14 webových detailů doporučovalo tutéž trojici a zbylých
+        // 11 projektů se z doporučení nedalo dostat. Teď se stejné pořadí bere
+        // jako kruh a každý detail ukáže tři projekty NÁSLEDUJÍCÍ za sebou —
+        // výběr je pořád deterministický (stejná URL = stejné karty, žádný
+        // rozjezd cache), ale napříč kategorií se prostřídají všechny.
+        $rotate = static function ($pool, $currentId, int $count = 3) {
+            $pool = $pool->values();
+            if ($pool->isEmpty()) {
+                return $pool;
+            }
+            // Aktuální projekt v poolu = začni hned za ním; když v něm není
+            // (doplňování z ostatních kategorií), odvoď start z jeho id, ať
+            // se i doplňky střídají místo pořád stejné dvojice.
+            $start = $pool->search(fn ($p) => $p->id === $currentId);
+            $start = $start === false ? $currentId % $pool->count() : $start + 1;
+
+            return collect(range(0, min($count, $pool->count()) - 1))
+                ->map(fn ($i) => $pool[($start + $i) % $pool->count()]);
+        };
+
+        $categoryPool = PortfolioProject::published()
             ->where('category', $project->category)
-            ->where('id', '!=', $project->id)
             ->with(['translations', 'screenshots'])
             ->orderByDesc('featured')
             ->orderBy('sort_order')
             ->orderByDesc('year')
-            ->limit(3)
             ->get();
 
-        if ($sameCategory->count() < 3) {
-            $needed  = 3 - $sameCategory->count();
-            $excluded = $sameCategory->pluck('id')->push($project->id);
-            $extras  = PortfolioProject::published()
+        $relatedProjects = $rotate($categoryPool, $project->id)
+            ->reject(fn ($p) => $p->id === $project->id)
+            ->values();
+
+        if ($relatedProjects->count() < 3) {
+            $excluded = $relatedProjects->pluck('id')->push($project->id);
+            $extrasPool = PortfolioProject::published()
                 ->whereNotIn('id', $excluded)
                 ->with(['translations', 'screenshots'])
                 ->orderByDesc('featured')
                 ->orderBy('sort_order')
                 ->orderByDesc('year')
-                ->limit($needed)
                 ->get();
-            $relatedProjects = $sameCategory->concat($extras);
-        } else {
-            $relatedProjects = $sameCategory;
+            $extras = $rotate($extrasPool, $project->id, 3 - $relatedProjects->count());
+            $relatedProjects = $relatedProjects->concat($extras)->values();
         }
 
         return view('pages.project', compact(
