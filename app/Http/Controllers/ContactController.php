@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\ContactMessage;
 use App\Models\ContactSubmission;
+use App\Support\Honeypot;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -33,6 +34,13 @@ class ContactController extends Controller
      */
     public function send(Request $request): JsonResponse
     {
+        // OND-280: Past na boty. Musí být před validací — bot nesmí z odpovědi
+        // poznat vůbec nic, ani že mu něco chybí. Vrací se stejný úspěch jako
+        // při skutečném odeslání, ale nic se neuloží ani neodešle.
+        if (Honeypot::tripped($request, 'contact')) {
+            return response()->json(['message' => __('contact.message_success')]);
+        }
+
         $limits     = config('contact.uploads');
         $extensions = implode(',', $limits['extensions']);
 

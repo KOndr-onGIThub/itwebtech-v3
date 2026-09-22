@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Landing;
 
 use App\Http\Controllers\Controller;
 use App\Models\LandingLead;
+use App\Support\Honeypot;
 use App\Support\LeadMailer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -13,6 +14,13 @@ class LandingLeadController extends Controller
 {
     public function store(Request $request): RedirectResponse
     {
+        // OND-280: Past na boty — stejná jako na /kontakt a /poptavka.
+        // Tenhle formulář je taky veřejný (`/lp/…/lead`), takže by jinak
+        // zůstal jako jediná otevřená cesta.
+        if (Honeypot::tripped($request, 'landing.website-service')) {
+            return back()->with('landing_lead_success', true);
+        }
+
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',

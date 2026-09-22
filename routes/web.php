@@ -74,9 +74,14 @@ foreach (array_slice($locales, 1) as $locale) {
 | SetLocale middleware runs so že validační hlášky se přeloží podle URL
 | segmentu (defaultně cs) — bez něj Laravel padne na config('app.locale').
 */
-// OND-264: `throttle` proti dávkám spamu — 26. 7. přišly na /poptavka čtyři
-// zprávy z jedné adresy během 30 vteřin. Limit je nad rámec běžného použití
-// (člověk neodešle osm poptávek za minutu), takže nikoho reálného neomezí.
+// OND-264: `throttle` jako pojistka proti skutečné záplavě požadavků. Limit je
+// nad rámec běžného použití (člověk neodešle osm poptávek za minutu), takže
+// nikoho reálného neomezí.
+//
+// OND-280 upřesnění: na spam z 26. 7. tenhle limit NEstačí. Ty čtyři zprávy
+// přišly ze DVOU adres po dvou kusech (103.83.87.91 a 192.210.150.199, ověřeno
+// v produkční DB), a `throttle` klíčuje po IP — dvě zprávy na adresu se limitu
+// ani nedotknou. Proti tomuhle útoku funguje past v App\Support\Honeypot.
 Route::post('/contact', [ContactController::class, 'send'])
     ->middleware([SetLocale::class, 'throttle:8,1'])
     ->name('contact.send');

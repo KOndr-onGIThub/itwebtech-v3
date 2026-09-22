@@ -683,6 +683,8 @@
                 >
                     @csrf
 
+                    <x-form.honeypot id="lead-website-url" />
+
                     <div class="pd-form__grid">
                         <div class="pd-field">
                             <label for="pd-lead-name">{{ __('home.inline_form.name') }} <span aria-hidden="true">*</span></label>

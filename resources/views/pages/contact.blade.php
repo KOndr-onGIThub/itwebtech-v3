@@ -143,6 +143,8 @@
                 <form @submit.prevent="submit" novalidate x-show="!submitted" x-ref="form">
                     @csrf
 
+                    <x-form.honeypot id="contact-website-url" />
+
                     <div class="form-group">
                         <label for="name">{{ __('contact.name') }} <span aria-hidden="true">*</span></label>
                         <input type="text" id="name" name="name" required autocomplete="name"
