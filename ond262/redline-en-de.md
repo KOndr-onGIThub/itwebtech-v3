@@ -43,7 +43,7 @@ by problém nevyřešilo, jen vyměnilo jeden český řetězec za jiný.
 
 **Doporučuju lang klíč, ne DB.** Přesně tak už je vyřešená „Kategorie" na témže řádku
 (`projects.detail.category_label.<category>` — viz mapa polí v `ond261/redline-pripadovky-cs.md`).
-Po zásahu z OND-261 zbude uzavřený slovník **šesti** hodnot, takže mapa v `lang` je
+Po zásahu z OND-261 zbude uzavřený slovník **pěti** hodnot, takže mapa v `lang` je
 malá a úplná. Návrh znění v části A1. Mechanismus je rozhodnutí Engineera — pokud
 zvolí přidání `duration` do translations tabulky, texty z části A1 platí beze změny,
 jen se zapíšou jinam.
@@ -74,7 +74,7 @@ Sloupec „klíč" je cesta v poli daného souboru; číslo řádku je orientač
 
 ## A1 — Doba realizace (P1-2): slovník hodnot
 
-Nové klíče, návrh `projects.detail.duration.*`. Šest hodnot pokryje všechny projekty,
+Nové klíče, návrh `projects.detail.duration.*`. Pět hodnot pokryje všechny projekty,
 které po OND-261 řádek Duration ponechají.
 
 | Klíč | CS (po OND-261) | EN | DE | Projekty |
