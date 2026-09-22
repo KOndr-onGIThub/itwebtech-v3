@@ -4,9 +4,8 @@
     Opens when any element dispatches the custom event `open-consultation-modal`.
     Usage: @click="$dispatch('open-consultation-modal')"
 
-    Video:
-      - Place the MP4 file at public/videos/consultation.mp4
-      - Set CONSULTATION_VIDEO_URL in .env (or leave blank to show placeholder)
+    OND-258: video z modálu je pryč (Ondřej 22. 9.: „to video v modalu!!!").
+    Nesmí jít oživit env proměnnou — proto tu po něm nezůstal ani `@if`.
 
     Calendly:
       - Set CALENDLY_URL in .env
@@ -14,7 +13,6 @@
         → Event types → Edit event → Questions & cancelation
 --}}
 @php
-    $videoSrc  = env('CONSULTATION_VIDEO_URL', '');
     $calendlyUrl = env('CALENDLY_URL', '');
 @endphp
 
@@ -68,38 +66,6 @@
             {{ __('home.modal.title') }}
         </h2>
         <p class="consult-modal-subtitle">{{ __('home.modal.subtitle') }}</p>
-
-        {{-- Video area — render only when CONSULTATION_VIDEO_URL is set --}}
-        @if ($videoSrc)
-            <div class="consult-modal-video">
-                <video
-                    x-ref="video"
-                    class="consult-modal-video__player"
-                    :src="videoReady ? '{{ $videoSrc }}' : ''"
-                    preload="none"
-                    :controls="playing"
-                    playsinline
-                    @play="playing = true"
-                    @pause="playing = false"
-                    @ended="playing = false; $refs.video.currentTime = 0;"
-                    x-init="$watch('open', val => { if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
-                ></video>
-                {{-- Play button overlay — visible when video is not playing --}}
-                <button
-                    type="button"
-                    class="consult-modal-video__play-btn"
-                    x-show="!playing"
-                    @click="$refs.video.play()"
-                    aria-label="{{ __('home.modal.play_btn') }}"
-                >
-                    <span class="consult-modal-video__play-btn-inner" aria-hidden="true">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <polygon points="6 4 20 12 6 20 6 4"/>
-                        </svg>
-                    </span>
-                </button>
-            </div>
-        @endif
 
         {{-- Calendly CTA --}}
         <div class="consult-modal-cta">
