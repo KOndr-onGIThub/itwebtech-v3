@@ -95,7 +95,77 @@ je horší problém než estetika. **Doporučení: řádek screenshotu smazat, b
 
 ## 3. Zapečená play tlačítka + screenshot přehrávače
 
+> **Aktualizace 22. 9. 22:15 — po odpovědi boardu.** Ondřej potvrdil, že videa existují
+> a dodá je později. Cílový stav u těchhle případovek tedy není statický obrázek, ale
+> **skutečné `<video>` s přehrávačem**. Nic z níže dodaného se nezahazuje, jen se mění role:
+> přibyl **poster frame** v nativním poměru videa. Zapečené play kolečko mizí z rastru tak
+> jako tak — ovládání patří přehrávači, ne obrázku.
+
+### 3.0 Poster framy — hlavní deliverable bodu 3
+
+Zdrojová videa jsou **1080×1920 (9:16, na výšku)**, 30 fps:
+`pitarena_pitbike_akademie (1080 × 1920 px).mp4` (44,5 s) a `delejte_animace.mp4` (24,75 s),
+obě v `reference/itwebtech/public/images/projects/`. Framy řezané `ffmpeg -ss` přes
+Higgsfield sandbox (lokální Chromium neumí H.264), pak jen ořez, žádná retuš.
+
+| projekt | soubor | rozměr | čas ve videu | k čemu |
+|---|---|---|---|---|
+| video-pitbike-akademie | `poster/video-pitbike-akademie-poster.jpg` | 1080×1920 | **t = 0,00 s** | atribut `poster` u `<video>` |
+| video-pitbike-akademie | `poster/video-pitbike-akademie-card.jpg` | 1080×1080 | t = 0,00 s, výřez y 760–1840 | karta galerie / dlaždice „Další projekty" |
+| animace-delejme | `poster/animace-delejme-poster.jpg` | 1080×1920 | **t = 1,60 s** | atribut `poster` u `<video>` |
+| animace-delejme | `poster/animace-delejme-card.jpg` | 1080×1080 | t = 13,40 s, výřez y 460–1540 | karta galerie / dlaždice |
+
+**Proč zrovna tyhle framy**
+- *pitbike t=0* — je to doslova první snímek videa (poster → přehrávání nepřeskočí) a zároveň
+  jediný záběr skoku, kde ještě **nenajely kruhové výřezy koláže**. Ostrý, klidný, čitelný
+  i ve 180 px.
+- *delejme t=1,6* — dokončený titulek „Zvyšte zájem s Animacemi a Videi". V t=0 je titulek
+  rozepsaný („Zvyšte"), poster by ukazoval půlku věty.
+- *karty* jsou schválně z jiného času než postery: v 1:1 výřezu z posteru by u pitbike zůstal
+  černý hlavičkový pruh a u delejme **osamocený řádek „a Videi"** — přesně ta useknutá
+  typografie, kterou audit vytýká jinde. Karta delejme je proto z **beztextového** framu.
+- Oba výřezy `…-card.jpg` jsou zvolené tak, aby subjekt přežil i **druhý** ořez na 16:10
+  dlaždici. Ověřeno simulací `work/card-check.jpg` (598 / 385×240 / 180 px).
+
+**Pozor na roli podle poměru stran (viz 0.2).** Poster má poměr 0,5625 → kdyby se vložil do
+galerie, spadne do role `card` a `object-position:top` z něj ukáže černou hlavičku. Poster
+patří **jen** do atributu `poster` u `<video>`; do mřížky jde soubor `…-card.jpg`.
+
+### 3.0b Premisa, která padla — „vybrat lepší frame"
+
+Zadání chtělo u pitbike vybrat lepší frame, protože ten současný „má prázdný bílý štítek
+a osamocené — PRAVICE". **Žádný frame to nespraví.** Ta hlavička (PITARENA.CZ / PITBIKE
+MOTOKROS / bílý štítek „— PRAVICE" / www.pitarena.cz) je **grafika samotného videa** a je
+na všech 1335 snímcích, včetně t=0. Ověřeno kontaktním listem přes celou stopáž
+a hustým listem prvních sekund (`work/open-sheet.jpg`).
+
+Co s tím jde dělat:
+1. **Poster nechat s hlavičkou** (co dodávám) — poster musí sedět na první snímek videa,
+   jinak start přehrávání poskočí. Prázdný štítek je vada zdrojového videa, ne posteru.
+2. **Kartu udělat z fotky pod hlavičkou** (co dodávám) — v mřížce se hlavička neukáže vůbec.
+3. Poprosit Pitarenu o export bez toho štítku. To je práce na jejich straně, nezadávám ji.
+
+### 3.0c logo-realitacky — video v repozitáři neexistuje
+
+Prohledáno: `reference/itwebtech/public/images/projects/realitacky/` obsahuje jediný soubor
+`logo_realitacky_v_akci.png` a **žádné video**; na celém stroji není mp4/webm/mov
+k realiťačkám. Přitom právě tenhle obrázek má zapečené červené play kolečko.
+
+→ Poster frame odtud vyrobit nejde. Dodávám překreslenou statickou prezentaci loga (viz 3b)
+a k už otevřené otázce 2 v kartě rozhodnutí přidávám: **existuje k realiťačkám video vůbec?**
+Když ano, poster z něj uříznu stejně jako u ostatních dvou.
+
+### 3.0d Bonus nález — video k HCMS v repu leží
+
+`reference/itwebtech/public/images/projects/HCMS/Hot Call Management System Toyota od itwebtech.mp4`,
+960×960, 60 s. Zadání o něm nemluví a HCMS dnes play tlačítko nemá, takže nic neměním —
+ale až se budou videa vkládat, tohle je třetí, které už doma je.
+
+### 3.1 Překreslené mockupy (zůstávají v platnosti)
+
 Mockupy překreslené v DOM (Playwright), ne retušované. Rovné telefony, bez falešného play.
+Slouží jako **hero, dokud tam není video** — až přehrávač nastoupí, hero je `<video>`
++ poster a tenhle wide soubor buď zmizí, nebo zůstane jako široký pás v galerii.
 
 | projekt | slot | nový soubor | rozměr | co se tím opravuje |
 |---|---|---|---|---|
@@ -252,7 +322,15 @@ articles/best_web.webp
 
 public/img/about/ondrej_kriska.jpg
 public/img/about/ondrej_kriska_preview.webp
+
+poster/video-pitbike-akademie-poster.jpg   1080×1920  (nový, 22. 9. 22:15)
+poster/video-pitbike-akademie-card.jpg     1080×1080  (nový)
+poster/animace-delejme-poster.jpg          1080×1920  (nový)
+poster/animace-delejme-card.jpg            1080×1080  (nový)
 ```
+
+Složka `poster/` je **oddělená schválně**: tyhle čtyři soubory se nenasazují do mřížky teď,
+patří k vložení videí (viz 3.0). Zbytek balíku jde nasadit hned.
 
 Datové změny bez souboru (pro OND-268): smazat `josefopa/gallery-2`, `josefopa/gallery-3`,
 `excel-tools/gallery-2`; přidat `hcms/thumbnail-1` jako `type='thumbnail'`; přeskládat pozice
@@ -261,6 +339,8 @@ u kemp-veselka, nove-interiery, zubni-provazek a picker (bod 4).
 ## Co zůstává na Ondrovi
 
 1. **vp-industry** — potvrdit, že se má pořídit nový screenshot homepage vpindustry.cz.
-2. **logo-realitacky** — originál loga „Realiťačky v akci" (SVG/AI/PNG bez telefonu).
+2. **logo-realitacky** — originál loga „Realiťačky v akci" (SVG/AI/PNG bez telefonu)
+   a **navíc: existuje k realiťačkám vůbec video?** V repu žádné není (viz 3.0c), přitom
+   obrázek má zapečené play kolečko.
 3. **animace-delejme** — smí případovka ukazovat promo se starým logem itwebtech? (stejná otázka jako raketa)
 4. **otázka 2** (stock v článcích) a **otázka 5** (interní vývojové podklady v galeriích) — inventura a varianty výše.
