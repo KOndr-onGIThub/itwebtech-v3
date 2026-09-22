@@ -52,9 +52,14 @@
 
 @section('content')
 {{-- OND-246 — `pd--depth` zapíná vrstvu hloubky (resources/css/hloubka.css
-     + resources/js/hloubka.js). Zatím jen tady, na domovské stránce; sundání
-     téhle jedné třídy vrátí stránku do původního stavu. --}}
-<div class="pd pd--depth">
+     + resources/js/hloubka.js); sundání téhle jedné třídy vrátí stránku
+     do původního stavu.
+
+     OND-251 — `pd--depth-home` navíc pouští pravidla navázaná na POŘADÍ
+     sekcí téhle stránky (`> section:nth-child(N)` v §A). Podstránky mají
+     vlastní scope `pd--depth-sub` a adresují se přes `data-pdd`. Kdo sem
+     přidá nebo odebere sekci, musí přečíslovat nth-child v hloubka.css. --}}
+<div class="pd pd--depth pd--depth-home">
 
 {{-- ===================================================
      01 — HERO

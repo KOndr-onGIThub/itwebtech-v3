@@ -62,6 +62,13 @@
 
 @section('content')
 
+{{-- OND-251 — vrstva hloubky ZAPNUTÁ: světlo ano, pohyb ne.
+     Rozhodovací stránka, takže pásma dostávají nejjasnější nasvícení a všechno
+     pod nimi se propadá do stínu. Uzavřená smyčka z homepage (sekce 06) se sem
+     VĚDOMĚ nepřenáší — doporučené pásmo je už označené čtyřikrát; rozbor je
+     v §E4 hloubka.css. --}}
+<div class="pd--depth pd--depth-sub">
+
 {{-- Page hero — OND-135 iter 5: plán §3.1 design DNA (page-mark + display + amber accent) --}}
 <div class="page-hero page-hero--price">
     <div class="container-site">
@@ -80,7 +87,7 @@
 </div>
 
 {{-- Pricing tiers --}}
-<section class="section-wrapper" data-reveal>
+<section class="section-wrapper" data-reveal data-pdd="price-tiers">
     <div class="container-site">
 
         {{-- OND-198 (nález 5.4): očekávací věta musí padnout dřív, než čtenář
@@ -147,7 +154,7 @@
     $featuredIdx   = array_search(true, array_column(__('price.tiers'), 'popular'), true);
     $featuredIdx   = $featuredIdx === false ? -1 : $featuredIdx;
 @endphp
-<section class="section-wrapper section-alt" data-reveal>
+<section class="section-wrapper section-alt" data-reveal data-pdd="price-compare">
     <div class="container-site">
         <header class="section-header">
             <h2>{{ __('price.compare.heading') }}</h2>
@@ -257,7 +264,7 @@
 </section>
 
 {{-- What's included --}}
-<section class="section-wrapper" data-reveal>
+<section class="section-wrapper" data-reveal data-pdd="price-guarantees">
     <div class="container-site">
         <header class="section-header">
             <h2>{{ __('price.guarantees.heading') }}</h2>
@@ -275,7 +282,7 @@
 </section>
 
 {{-- Addons --}}
-<section class="section-wrapper" data-reveal>
+<section class="section-wrapper" data-reveal data-pdd="price-addons">
     <div class="container-site">
         <header class="section-header">
             <h2>{{ __('price.addons.heading') }}</h2>
@@ -321,7 +328,7 @@
 </aside>
 
 {{-- CTA --}}
-<section class="section-wrapper section-cta price-cta" data-reveal>
+<section class="section-wrapper section-cta price-cta" data-reveal data-pdd="price-cta">
     <div class="container-site">
         <div class="price-cta__inner">
             <h2 class="final-cta-heading">{{ __('price.cta.heading') }}</h2>
@@ -334,4 +341,5 @@
     </div>
 </section>
 
+</div>
 @endsection

@@ -25,6 +25,12 @@
 
 @section('content')
 
+{{-- OND-251 — vrstva hloubky ZAPNUTÁ, ale jen tiché nasvícení a stíny
+     pod náhledy. Blog je rozcestník: tady se vybírá, nečte. Kdyby tu bylo
+     světla jako na ceníku, slibovalo by to rozhodnutí, které se tu nedělá.
+     Vlastní článek vrstvu NEMÁ — viz §E hloubka.css. --}}
+<div class="pd--depth pd--depth-sub">
+
 {{-- Page hero — OND-130 iter 8: plán §3.1 page-mark + Plex Sans display (post OND-145 swap). --}}
 <div class="page-hero page-hero--blog">
     <div class="container-site">
@@ -41,7 +47,7 @@
     </div>
 </div>
 
-<section class="section-wrapper" data-reveal>
+<section class="section-wrapper" data-reveal data-pdd="blog-list">
     <div class="container-site">
         <div class="blog-layout">
 
@@ -92,4 +98,5 @@
     </div>
 </section>
 
+</div>
 @endsection

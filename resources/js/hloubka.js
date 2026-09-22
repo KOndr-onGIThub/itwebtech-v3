@@ -64,7 +64,9 @@
     'use strict';
 
     var root = document.querySelector('.pd--depth');
-    if (!root) return;   /* zatím jen domovská stránka */
+    /* Stránky bez vrstvy (článek, cookies, gdpr) obal `.pd--depth` nemají
+       a tenhle soubor se na nich nedostane dál než sem. */
+    if (!root) return;
 
     var reduce = window.matchMedia &&
         window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -98,7 +100,19 @@
         '.pd-step',                     /* 09 — každý krok zvlášť */
         '.pd-versus__col--mine',        /* 11 — levá hrana „mého" sloupce */
         '.pd-promise',                  /* 13 — dva přejezdy přes číslo záruky */
-        '.pd-form__panel'               /* 15 — cíl stránky */
+        '.pd-form__panel',              /* 15 — cíl stránky */
+
+        /* OND-251 — PODSTRÁNKY. Jediná položka. Není to výjimka ze seznamu,
+           je to TENTÝŽ OBJEKT jako `.pd-form__panel` o řádek výš: poptávkový
+           formulář. Na /kontakt se jmenuje `.contact-form`, protože podstránky
+           mají starší slovník tříd (viz §E v hloubka.css).
+
+           Všechno ostatní na podstránkách stojí na vrstvě A (nasvícení), která
+           se pouští z armLight() a žádný seznam nepotřebuje. Kdo sem bude chtít
+           přidat další řádek, ať si napřed přečte tabulku rozhodnutí v §E —
+           „na podstránkách se nic nehýbe kromě formuláře" je rozhodnutí, ne
+           nedodělek. */
+        '.contact-form'
     ];
 
     /* Kontejnery vs. jednotlivé položky: .pd-services, .pd-hood a .pd-promise

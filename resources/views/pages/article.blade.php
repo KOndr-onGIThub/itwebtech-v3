@@ -58,6 +58,15 @@
 
 @section('content')
 
+{{-- OND-251 — vrstva hloubky VĚDOMĚ VYPNUTÁ (žádný obal `pd--depth`).
+     Článek je čtecí stránka. Náboj u odstavce nebo dělítka ruší při čtení —
+     to byla původní výtka k návrhu 2. Nepatří sem ale ani nasvícení plochy:
+     text běží přes celou výšku okna, takže rozsvěcování při scrollu by měnilo
+     kontrast POD právě čteným odstavcem. A kontaktní stíny u obrázků samy
+     nedávají smysl — stín je vidět jen na nasvícené ploše (§C hloubka.css),
+     kterou tu schválně nemáme. Buď celá vrstva, nebo žádná; půlka je horší
+     než nic. Rozbor v §E hloubka.css. --}}
+
 {{-- Page hero — OND-130 iter 8: plán §3.1 page-mark eyebrow + Plex Sans title (post OND-145 swap).
      Title je dynamický (DB), proto heading_html nedává smysl; jen statická
      page-mark eyebrow + článek title. --}}

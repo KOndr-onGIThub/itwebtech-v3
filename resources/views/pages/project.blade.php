@@ -26,6 +26,11 @@
 
 @section('content')
 
+{{-- OND-251 — vrstva hloubky ZAPNUTÁ: jen světlo a hmota.
+     Detail jedné realizace = jeden dokument pod lampou, stejná role jako
+     sekce 12 na homepage. Nejužší kužel na webu, okolí skoro černé. --}}
+<div class="pd--depth pd--depth-sub">
+
 {{-- 1. Detail hero — OND-137 P4 §6: case_study_view event (Jack §6) na
      hero sekci přes IntersectionObserver (data-analytics-view). --}}
 <div data-analytics-view="case_study_view"
@@ -39,7 +44,7 @@
 <x-portfolio.detail-gallery :screenshots="$project->screenshots" part="lead" />
 
 {{-- 3+4. Body + meta --}}
-<section class="section-wrapper portfolio-detail-body-wrapper" data-reveal>
+<section class="section-wrapper portfolio-detail-body-wrapper" data-reveal data-pdd="project-body">
     <div class="container-site">
         <div class="portfolio-detail-body-wrapper__grid">
             <div class="portfolio-detail-body-wrapper__main">
@@ -58,7 +63,7 @@
 
 {{-- 5. Related projects --}}
 @if ($relatedProjects && $relatedProjects->count())
-<section class="section-wrapper section-alt portfolio-related" data-reveal>
+<section class="section-wrapper section-alt portfolio-related" data-reveal data-pdd="project-related">
     <div class="container-site">
         <header class="section-header section-header--left">
             <h2>{{ __('projects.detail.related_heading') }}</h2>
@@ -90,4 +95,5 @@
     </div>
 </section>
 
+</div>
 @endsection

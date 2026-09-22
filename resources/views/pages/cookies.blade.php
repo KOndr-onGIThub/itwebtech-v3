@@ -7,6 +7,11 @@
 
 @section('content')
 
+{{-- OND-251 — vrstva hloubky VĚDOMĚ VYPNUTÁ (žádný obal `pd--depth`).
+     Právní text. Nasvícení pod souvislým odstavcem snižuje kontrast a nic za
+     to nedává — tahle stránka nemá co prodat, má být čitelná a nudná.
+     Rozbor v §E hloubka.css. --}}
+
 {{-- Page hero — OND-130 iter 8: plán §3.1 page-mark + Plex Sans display (post OND-145 swap).
      OND-168 (2026-05-22): localizován do EN/DE — všechny stringy přesunuty do
      lang/{cs,en,de}/cookies.php a route přesunuta pod localized routes group

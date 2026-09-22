@@ -1,7 +1,21 @@
 /* ==========================================================================
    OND-246 — HLOUBKA
    Sloučení tří návrhů do jednoho systému. Zapíná se třídou `pd--depth`
-   na obalu stránky, zatím jen na domovské stránce.
+   na obalu stránky.
+   --------------------------------------------------------------------------
+   DVA SCOPY (OND-251)
+
+     .pd--depth        vrstva samotná — slovník, geometrie náboje,
+                       rozsvěcování sekcí. Platí všude, kde je zapnutá.
+     .pd--depth-home   pravidla navázaná na POŘADÍ SEKCÍ domovské stránky
+                       (`> section:nth-child(N)`). Jen domovská stránka.
+     .pd--depth-sub    podstránky. Vlastní sazba, vlastní rozhodnutí — viz §E
+                       úplně dole. Sekce se tam adresují přes `data-pdd`,
+                       ne přes pořadí.
+
+   Kdo přidává novou sekci na homepage, přečísluje nth-child v §A. Proto
+   se na podstránkách nth-child nepoužívá vůbec: tam by pořadí ukazovalo
+   jinam a vzniklo by nasvícení, které nikdo nezadal.
    --------------------------------------------------------------------------
    TŘI VRSTVY, TŘI RŮZNÉ ÚKOLY — schválně se nepřekrývají:
 
@@ -325,7 +339,22 @@
        před rozsvěcováním; jediný rozdíl je, že to jde stmívat.
 
        Kdo sem bude sahat: `inset` musí zůstat 0. Přesah patří do
-       background-size, ne do geometrie prvku. */
+       background-size, ne do geometrie prvku.
+
+       OND-251 — JAK SI TO OVĚŘIT, když sem přesto sáhneš. Detektor švů:
+       full-page snímek, pět svislých pruhů napříč šířkou (2–10, 20–30,
+       45–55, 70–80, 88–97 %), v každém průměr jasu PO ŘÁDCÍCH, a v pásu
+       3–40 px nad každou hranicí sekce se hledá skok mezi sousedními řádky.
+       Jeden pruh nestačí: první verze brala jen levý okraj a vyšlo z ní
+       „produkce i oprava mají stejná čísla" — jenže v tom pruhu žádný
+       z nových svitů neleží, takže měřila místo, kde se nic nezměnilo.
+
+       Kalibrace (naměřeno 22. 9. na /kontakt, /cenik, /o-mne, 1440 px):
+         inset: -24px 0   (bug z OND-246)   max skok 9,2–12,0 úrovní jasu
+         inset: 0         (správně)         max skok 1,0 úrovně
+         živá produkce                      max skok 0,1 úrovně
+       Ta jedna úroveň u správné verze NENÍ hrana — je to 8bitové schodování
+       plynulého přechodu. Hranice pro poplach je tedy řádově 5+, ne 1. */
     inset: 0;
     pointer-events: none;
     background-repeat: no-repeat;
@@ -435,7 +464,7 @@
    Proto je nasvícený pruh plochy právě v pásu, kde dlaždice leží — a ony
    do něj vrhají kontaktní stín (vrstva C). Bez nasvícené plochy by stín
    na černé nebyl vidět. */
-.pd--depth > section:nth-child(2) {
+.pd--depth-home > section:nth-child(2) {
     --pdd-edge: linear-gradient(90deg,
         rgba(242, 240, 234, 0.02) 0%,
         rgba(242, 240, 234, 0.30) 50%,
@@ -480,7 +509,7 @@
    Sekce mluví o problémech cizích webů. Světlo zleva olizuje velká acid čísla
    z levé hrany — čísla dostanou objem a „vystoupí“ z plochy stejně, jako má
    vystoupit ten problém. */
-.pd--depth > section:nth-child(5) {
+.pd--depth-home > section:nth-child(5) {
     --pdd-edge: linear-gradient(90deg,
         rgba(242, 240, 234, 0.02) 0%,
         rgba(242, 240, 234, 0.28) 22%,
@@ -492,7 +521,7 @@
             rgba(255, 255, 255, 0.013) 46%,
             rgba(255, 255, 255, 0) 78%);
 }
-.pd--depth > section:nth-child(5) .pd-issue__num {
+.pd--depth-home > section:nth-child(5) .pd-issue__num {
     --pdd-spec: linear-gradient(95deg,
         #e6ff70 0%, #d8ff3a 34%, rgba(216, 255, 58, 0.46) 100%);
 }
@@ -501,7 +530,7 @@
    Svislé vlasové linky jsou jediné „hrany“ v sekci. Když je nasvítím různě
    (prostřední nejsilněji), sloupce přestanou být tabulkou a dostanou hloubku
    jako tři desky za sebou. Statické — nic tudy neprojíždí. */
-.pd--depth > section:nth-child(6) {
+.pd--depth-home > section:nth-child(6) {
     --pdd-edge: linear-gradient(90deg,
         rgba(242, 240, 234, 0.03) 0%,
         rgba(242, 240, 234, 0.27) 46%,
@@ -513,11 +542,11 @@
             rgba(255, 255, 255, 0) 80%);
 }
 @media (min-width: 1024px) {
-    .pd--depth > section:nth-child(6) .pd-service + .pd-service {
+    .pd--depth-home > section:nth-child(6) .pd-service + .pd-service {
         border-left-color: transparent;
         position: relative;
     }
-    .pd--depth > section:nth-child(6) .pd-service + .pd-service::before {
+    .pd--depth-home > section:nth-child(6) .pd-service + .pd-service::before {
         content: "";
         position: absolute;
         inset: 0 auto 0 -1px;
@@ -529,7 +558,7 @@
             rgba(242, 240, 234, 0.02) 100%);
     }
     /* Prostřední předěl je nejblíž ose zdroje → nejjasnější. */
-    .pd--depth > section:nth-child(6) .pd-service:nth-child(2)::before {
+    .pd--depth-home > section:nth-child(6) .pd-service:nth-child(2)::before {
         background-image: linear-gradient(180deg,
             rgba(242, 240, 234, 0.34) 0%,
             rgba(242, 240, 234, 0.12) 34%,
@@ -541,7 +570,7 @@
    Případovky střídají stranu vizuálu (sudé mají order:2). Světlo zprava dá
    každému vizuálu jinou roli — jednou je u zdroje, jednou dál — a střídání
    layoutu tím dostane fyzikální důvod. */
-.pd--depth > section:nth-child(7) {
+.pd--depth-home > section:nth-child(7) {
     --pdd-edge: linear-gradient(90deg,
         rgba(242, 240, 234, 0) 0%,
         rgba(242, 240, 234, 0.06) 44%,
@@ -587,7 +616,7 @@
 /* --- 07 PROČ JÁ — světlo zprava, měkké -----------------------------------
    Osobní sekce s videem. Zdroj se po ceníku odklání doprava a plocha jde
    o stupeň dolů — po nejjasnějším místě musí přijít úleva. */
-.pd--depth > section:nth-child(9) {
+.pd--depth-home > section:nth-child(9) {
     --pdd-edge: linear-gradient(90deg,
         rgba(242, 240, 234, 0.01) 0%,
         rgba(242, 240, 234, 0.08) 40%,
@@ -604,7 +633,7 @@
    Doslovná práce s obsahem: „pod kapotou“ se svítí montážní lampou zespodu.
    Jediné místo na stránce, kde světlo přichází zdola — horní linka je proto
    skoro zhaslá a plocha se rozjasňuje dolů k faktům. */
-.pd--depth > section:nth-child(10) {
+.pd--depth-home > section:nth-child(10) {
     --pdd-edge: linear-gradient(90deg,
         rgba(242, 240, 234, 0.02) 0%,
         rgba(242, 240, 234, 0.07) 50%,
@@ -660,7 +689,7 @@
    Sekce staví proti sobě dvě varianty. Zdroj stojí nad sloupcem „--mine“ —
    ten je ve světle, generátor zůstává ve stínu. Argument sekce je tím řečený
    fyzikálně, ne další barvou ani tučným písmem. */
-.pd--depth > section:nth-child(13) {
+.pd--depth-home > section:nth-child(13) {
     --pdd-edge: linear-gradient(90deg,
         rgba(242, 240, 234, 0.02) 0%,
         rgba(242, 240, 234, 0.05) 42%,
@@ -672,14 +701,14 @@
             rgba(255, 255, 255, 0.013) 48%,
             rgba(255, 255, 255, 0) 78%);
 }
-.pd--depth > section:nth-child(13) .pd-versus__col--mine {
+.pd--depth-home > section:nth-child(13) .pd-versus__col--mine {
     border-left-color: rgba(242, 240, 234, 0.20);
 }
 
 /* --- 12 18 LET V TOYOTĚ — úzký kužel na citaci ----------------------------
    Osobní vzpomínka, jeden odstavec, který má nést váhu. Světlo je nejužší
    na stránce — jako lampa nad jedním dokumentem. Okolí je záměrně skoro černé. */
-.pd--depth > section:nth-child(14) {
+.pd--depth-home > section:nth-child(14) {
     --pdd-edge: linear-gradient(90deg,
         rgba(242, 240, 234, 0.02) 0%,
         rgba(242, 240, 234, 0.22) 30%,
@@ -695,7 +724,7 @@
 /* --- 13 ZÁRUKY — světlo shora, symetricky --------------------------------
    Dva rovnocenné sliby. Tady zdroj vědomě stojí v ose a obě položky jsou
    nasvícené stejně — symetrie je sdělení. */
-.pd--depth > section:nth-child(15) {
+.pd--depth-home > section:nth-child(15) {
     --pdd-edge: linear-gradient(90deg,
         rgba(242, 240, 234, 0.02) 0%,
         rgba(242, 240, 234, 0.25) 50%,
@@ -1231,6 +1260,448 @@
 
 
 /* ==========================================================================
+   E. PODSTRÁNKY (OND-251)
+   ==========================================================================
+   Zadání znělo „pusť to i na podstránky". Při otevření se ukázalo, že to
+   není zapnutí třídy: PODSTRÁNKY NESDÍLEJÍ S DOMOVSKOU STRÁNKOU ANI JEDEN
+   PRVEK. Homepage je psaná ve slovníku `pd-*` (podpis.css, OND-227);
+   podstránky mají svůj starší slovník `section-wrapper` / `page-hero` /
+   `container-site`. Grep `pd-` mimo home.blade.php vrací nulu.
+
+   Prakticky to znamená:
+     - vrstva B a C z §B/§C se na podstránkách NEMÁ ČEHO CHYTIT. Selektory
+       jako `.pd-work__plate` tam prostě neexistují.
+     - kdyby se tam jen přidala třída `pd--depth`, jediné, co by se opravdu
+       zapnulo, jsou pravidla `> section:nth-child(N)` z §A — a ta jsou
+       psaná na pořadí sekcí homepage. Na /cenik by „ceník" seděl na
+       srovnávací tabulce. Proto jsou přescopnuté na `.pd--depth-home`.
+
+   Přenositelná je VRSTVA A: nasvícení plochy nepotřebuje konkrétní prvky,
+   jen sekce. Ta je tu proto páteří. Vrstvy B a C dostávají jen ty prvky,
+   které mají na homepage svůj doslovný protějšek.
+
+   --------------------------------------------------------------------------
+   ROZDÍL V RYTMU — a proč není chyba
+
+   Na homepage zdroj PUTUJE: sekci po sekci se posouvá a dvakrát se přiblíží
+   (ceník, poptávka). To je správné pro stránku, která je cesta o 17 zastávkách.
+
+   Podstránka je jedno téma, ne cesta. Zdroj proto STOJÍ NAHOŘE, u `page-hero`
+   (ten už dneska vlastní acid záři má, §app.css), a k patičce ubývá — s jedním
+   jediným rozsvícením tam, kde se na té stránce rozhoduje. Míň gest, čitelnější
+   stránka.
+
+   `page-hero` je `<div>`, ne `<section>`, takže ho `> section` nebere: nedostane
+   ani svit, ani rozsvěcování. Je to správně — hero je vidět hned při načtení,
+   nemá se před čím rozsvěcovat (stejná úvaha jako u `.pd-hero` v §A).
+
+   --------------------------------------------------------------------------
+   ADRESOVÁNÍ SEKCÍ: `data-pdd`, nikdy nth-child
+
+   Sekce se na podstránkách pojmenovávají atributem `data-pdd` přímo v Blade
+   šabloně. Ne pořadím (to byla ta past výš) a ne layoutovou třídou —
+   `.section-wrapper` je na stránce 4–6× po sobě a `.section-alt` označuje
+   barvu pozadí, ne roli. `data-pdd` je jediná věc, která přežije přerovnání
+   sekcí i redesign.
+
+   --------------------------------------------------------------------------
+   AMPLITUDA — jiná než na homepage, schválně
+
+   Homepage stojí na #0A0A0B a strop nasvícení je tam bílá s alfou 0.058.
+   Podstránky mají jiný základ a navíc pruhované pozadí:
+
+     plocha stránky   --bg-page      #0C0E14
+     pruh „alt"       --bg-surface   #101318   ← už sám o sobě světlejší
+     CTA / elevated   --bg-elevated  #161A24   ← světlejší než strop homepage
+     next-steps       --color-bg-elev-1 #131316
+
+   Na pruzích `alt`/`cta` je proto strop stlačený na ~0.034: kdyby se tam
+   sypala plná amplituda, pruh by se rozsvítil do šeda a z „hloubky" by byla
+   jen světlejší tapeta.
+
+   --------------------------------------------------------------------------
+   ROZHODNUTÍ PO STRÁNKÁCH — co dostává co a proč
+
+     stránka     A       B      C     důvod
+     ---------   -----   ----   ---   ---------------------------------------
+     kontakt     ANO     ANO    ANO   rozhodovací stránka; formulář je týž
+                                      objekt jako sekce 15 na homepage, takže
+                                      dostává doslova totéž: desku, nabitou
+                                      horní hranu a proud do políčka
+     cenik       ANO     ano*   –     rozhodovací stránka; *viz poznámka
+                                      u smyčky níž — doporučené pásmo je už
+                                      označené třikrát a čtvrté označení
+                                      homepage sama zakazuje (§C)
+     projekty    ANO     NE     ANO   důkazová stránka. Náboj na každé dlaždici
+                                      mřížky (9–12 kusů) je přesně ta
+                                      „přeplácanost" — na homepage má náboj
+                                      3 dlaždice, ne 12. Místo pohybu dostanou
+                                      karty kontaktní stín: leží na ploše.
+     projekt     ANO     NE     ANO   detail = jeden dokument pod lampou,
+                                      stejná role jako sekce 12
+     o-mne       ANO     NE     ANO   osobní stránka. Na homepage je osobní
+                                      sekce (07) vědomě ÚLEVA po nejjasnějším
+                                      místě — tady platí totéž, jen měkké
+                                      světlo a stín pod videem
+     blog        ANO     NE     ANO   rozcestník, ne čtecí stránka: tady se
+                                      vybírá, nečte. Jen tiché nasvícení
+                                      a stín pod náhledy.
+
+     BEZ VRSTVY — a to je taky rozhodnutí
+     ---------------------------------------------------------------------
+     clanek      Čtecí stránka. Náboj u odstavce ruší (to byla původní
+                 výtka k návrhu 2) — ale nepatří sem ani nasvícení: text
+                 běží přes celou výšku okna, takže by se při scrollu měnil
+                 kontrast POD čteným odstavcem. Vrstva, která zhorší čtení,
+                 nemá na čtecí stránce co dělat. Ani kontaktní stíny
+                 u obrázků: stín je vidět jen na nasvícené ploše (§C), a ta
+                 tu není. Buď celá vrstva, nebo žádná — půlka je horší.
+     cookies     Právní texty. Nasvícení pod souvislým právním odstavcem
+     gdpr        snižuje kontrast a nic za to nedává; tyhle stránky nemají
+                 co prodat, mají být čitelné a nudné. Bez vrstvy.
+   ========================================================================== */
+
+
+/* --- KONTAKT — zdroj stojí nad formulářem ---------------------------------
+   Obdoba sekce 15. Formulář je vpravo (desktop 260px + 1fr), takže kužel
+   je mimo osu doprava — světlo dopadá na to, co se má vyplnit, ne na
+   postranní kontaktní údaje. Nejvyšší amplituda na stránce; jinde už jen
+   ubývá. */
+.pd--depth-sub > section[data-pdd="contact-form"] {
+    --pdd-wash:
+        radial-gradient(58% 78% at 70% 0%,
+            rgba(255, 255, 255, 0.054) 0%,
+            rgba(255, 255, 255, 0.015) 44%,
+            rgba(255, 255, 255, 0) 74%);
+}
+/* „Co se stane potom" — poslední pruh stránky, po rozhodnutí přichází úleva.
+   Pozadí je tu #131316, takže amplituda dolů. Odlesk odchází doleva, pryč
+   od formuláře: zdroj se vzdaluje. */
+.pd--depth-sub > section[data-pdd="contact-next"] {
+    --pdd-wash:
+        radial-gradient(64% 150% at 14% 50%,
+            rgba(255, 255, 255, 0.026) 0%,
+            rgba(255, 255, 255, 0) 68%);
+}
+
+/* --- CENÍK — nejjasnější je pásmo, ne tabulka -----------------------------
+   Doporučené pásmo je v lang souboru PRVNÍ (`popular => true` u Standardu),
+   takže na desktopu stojí vlevo. Kužel je proto nad levou třetinou, ne
+   v ose — kdo srovnává ceny, má oko tažené k tomu, co doporučuju.
+
+   Srovnávací tabulka pod tím je servisní obsah, přesně jako FAQ na homepage:
+   je tam pro toho, kdo si chce ověřit detail, ne pro toho, kdo se rozhoduje.
+   Dostává proto výrazně míň světla než pásma nad ní. */
+.pd--depth-sub > section[data-pdd="price-tiers"] {
+    --pdd-wash:
+        radial-gradient(64% 66% at 26% -6%,
+            rgba(255, 255, 255, 0.056) 0%,
+            rgba(255, 255, 255, 0.016) 46%,
+            rgba(255, 255, 255, 0) 78%);
+}
+.pd--depth-sub > section[data-pdd="price-compare"] {
+    --pdd-wash:
+        radial-gradient(86% 44% at 40% -6%,
+            rgba(255, 255, 255, 0.030) 0%,
+            rgba(255, 255, 255, 0.009) 50%,
+            rgba(255, 255, 255, 0) 80%);
+}
+/* Záruky: dva rovnocenné sliby, zdroj vědomě v ose — symetrie je sdělení.
+   Doslova stejná úvaha jako u sekce 13 na homepage. */
+.pd--depth-sub > section[data-pdd="price-guarantees"] {
+    --pdd-wash:
+        radial-gradient(84% 56% at 50% -4%,
+            rgba(255, 255, 255, 0.038) 0%,
+            rgba(255, 255, 255, 0.011) 50%,
+            rgba(255, 255, 255, 0) 80%);
+}
+/* Doplňky = ceník ceníku. Nejtmavší místo stránky, „mezi reflektory“ —
+   bez tmy tady by přestalo mít cenu, že svítí pásma nahoře. */
+.pd--depth-sub > section[data-pdd="price-addons"] {
+    --pdd-wash:
+        radial-gradient(70% 150% at 30% 50%,
+            rgba(255, 255, 255, 0.014) 0%,
+            rgba(255, 255, 255, 0) 70%);
+}
+/* Závěrečná výzva: jediné druhé rozsvícení na stránce. Pozadí je tu
+   #161A24 (světlejší než strop homepage), proto jen 0.034. */
+.pd--depth-sub > section[data-pdd="price-cta"] {
+    --pdd-wash:
+        radial-gradient(60% 80% at 50% -6%,
+            rgba(255, 255, 255, 0.034) 0%,
+            rgba(255, 255, 255, 0.010) 48%,
+            rgba(255, 255, 255, 0) 78%);
+}
+
+/* --- PROJEKTY — světlo zprava shora na mřížku -----------------------------
+   Stejné gesto jako u případovek na homepage (sekce 05): zdroj je mimo osu,
+   takže dlaždice vlevo a vpravo nejsou nasvícené stejně a mřížka přestane
+   být tabulkou. Filtrační lišta nad mřížkou svit nedostává — je to ovládání,
+   ne obsah. */
+.pd--depth-sub > section[data-pdd="projects-grid"] {
+    --pdd-wash:
+        radial-gradient(72% 60% at 84% -4%,
+            rgba(255, 255, 255, 0.048) 0%,
+            rgba(255, 255, 255, 0.013) 48%,
+            rgba(255, 255, 255, 0) 78%);
+}
+.pd--depth-sub > section[data-pdd="projects-cases"] {
+    --pdd-wash:
+        radial-gradient(66% 62% at 18% 0%,
+            rgba(255, 255, 255, 0.034) 0%,
+            rgba(255, 255, 255, 0.010) 46%,
+            rgba(255, 255, 255, 0) 76%);
+}
+/* „Pro koho to je“ — vpravo stojí výzva k akci, tam míří i světlo. */
+.pd--depth-sub > section[data-pdd="projects-fit"] {
+    --pdd-wash:
+        radial-gradient(56% 80% at 74% -2%,
+            rgba(255, 255, 255, 0.030) 0%,
+            rgba(255, 255, 255, 0.009) 48%,
+            rgba(255, 255, 255, 0) 78%);
+}
+/* „Proč já“ — tiché místo před závěrem. */
+.pd--depth-sub > section[data-pdd="projects-why"] {
+    --pdd-wash:
+        radial-gradient(70% 160% at 30% 50%,
+            rgba(255, 255, 255, 0.014) 0%,
+            rgba(255, 255, 255, 0) 70%);
+}
+.pd--depth-sub > section[data-pdd="projects-cta"] {
+    --pdd-wash:
+        radial-gradient(70% 62% at 50% -6%,
+            rgba(255, 255, 255, 0.046) 0%,
+            rgba(255, 255, 255, 0.013) 48%,
+            rgba(255, 255, 255, 0) 78%);
+}
+
+/* --- DETAIL PROJEKTU — nejužší kužel na webu ------------------------------
+   Jeden projekt = jeden dokument pod lampou. Stejná role jako sekce 12
+   (Toyota) na homepage a stejně úzké světlo: okolí je schválně skoro černé,
+   aby text případovky dostal váhu. */
+.pd--depth-sub > section[data-pdd="project-body"] {
+    --pdd-wash:
+        radial-gradient(44% 70% at 30% 2%,
+            rgba(255, 255, 255, 0.050) 0%,
+            rgba(255, 255, 255, 0.012) 44%,
+            rgba(255, 255, 255, 0) 74%);
+}
+/* Související projekty — dozvuk, ne druhý důkaz. */
+.pd--depth-sub > section[data-pdd="project-related"] {
+    --pdd-wash:
+        radial-gradient(86% 40% at 50% -6%,
+            rgba(255, 255, 255, 0.026) 0%,
+            rgba(255, 255, 255, 0.008) 50%,
+            rgba(255, 255, 255, 0) 80%);
+}
+.pd--depth-sub > section[data-pdd="project-cta"] {
+    --pdd-wash:
+        radial-gradient(70% 62% at 50% -6%,
+            rgba(255, 255, 255, 0.044) 0%,
+            rgba(255, 255, 255, 0.012) 48%,
+            rgba(255, 255, 255, 0) 78%);
+}
+
+/* --- O MNĚ — měkké světlo zprava, na video --------------------------------
+   Osobní stránka. Na homepage je osobní sekce (07 PROČ JÁ) vědomě úleva
+   a světlo tam jde zprava na video; tady je to doslova totéž video ve stejné
+   pozici, takže i stejné světlo. Žádný pohyb — o sobě se nevykřikuje. */
+.pd--depth-sub > section[data-pdd="about-intro"] {
+    --pdd-wash:
+        radial-gradient(66% 78% at 76% 2%,
+            rgba(255, 255, 255, 0.042) 0%,
+            rgba(255, 255, 255, 0.012) 48%,
+            rgba(255, 255, 255, 0) 78%);
+}
+/* Vyprávění: úzký kužel nad jedním sloupcem textu, pruh je navíc `alt`
+   (#101318), takže amplituda dolů. */
+.pd--depth-sub > section[data-pdd="about-story"] {
+    --pdd-wash:
+        radial-gradient(40% 76% at 28% 4%,
+            rgba(255, 255, 255, 0.032) 0%,
+            rgba(255, 255, 255, 0.009) 44%,
+            rgba(255, 255, 255, 0) 74%);
+}
+.pd--depth-sub > section[data-pdd="about-cta"] {
+    --pdd-wash:
+        radial-gradient(66% 62% at 50% -4%,
+            rgba(255, 255, 255, 0.034) 0%,
+            rgba(255, 255, 255, 0.010) 48%,
+            rgba(255, 255, 255, 0) 78%);
+}
+
+/* --- BLOG — jedno tiché nasvícení -----------------------------------------
+   Rozcestník o jedné sekci. Kdyby tady bylo světla jako na ceníku, slibovalo
+   by to rozhodnutí, které se tu nedělá. Jeden měkký kužel shora, nic víc. */
+.pd--depth-sub > section[data-pdd="blog-list"] {
+    --pdd-wash:
+        radial-gradient(80% 52% at 42% -6%,
+            rgba(255, 255, 255, 0.034) 0%,
+            rgba(255, 255, 255, 0.010) 50%,
+            rgba(255, 255, 255, 0) 80%);
+}
+
+
+/* ==========================================================================
+   E2. PODSTRÁNKY — vrstva C (hmota)
+   --------------------------------------------------------------------------
+   Přesně tři druhy prvků, všechny „orámované médium“ — tedy tentýž případ,
+   jaký na homepage řeší §C: obrázek má ležet na ploše, ne v ní plavat.
+   Stín je vidět jen proto, že plocha pod ním je nasvícená (vrstva A) —
+   proto tyhle stíny nedostává článek ani právní stránky, kde vrstva A není.
+   Žádné nové zaoblení, žádná nová barva: jen stín a přisvětlená horní hrana.
+   ========================================================================== */
+
+/* Karty projektů a článků — leží na ploše. Hover si zvedá vlastní translateY
+   (app.css), stín se s ním protáhne, jako by se karta od plochy vzdálila. */
+.pd--depth-sub .portfolio-card,
+.pd--depth-sub .blog-card {
+    box-shadow: 0 18px 28px -18px rgba(0, 0, 0, 0.95);
+}
+.pd--depth-sub .portfolio-card:hover,
+.pd--depth-sub .blog-card:hover {
+    box-shadow: 0 24px 34px -18px rgba(0, 0, 0, 1);
+}
+/* Portrét na kontaktu a video na „o mně“ — stejná fyzika jako .pd-why__video. */
+.pd--depth-sub .contact-info__photo-wrap,
+.pd--depth-sub .about-intro__video {
+    box-shadow: 0 20px 32px -18px rgba(0, 0, 0, 0.95);
+}
+
+
+/* ==========================================================================
+   E3. KONTAKT — vrstva B a C na formuláři
+   --------------------------------------------------------------------------
+   Jediné místo na podstránkách, kde běží náboj. Důvod je věcný, ne
+   estetický: je to TENTÝŽ OBJEKT jako `.pd-form__panel` v sekci 15 —
+   poptávkový formulář, cíl celé cesty. Kdyby se choval jinak než na
+   domovské stránce, byla by to nedůslednost, ne rozhodnutí.
+
+   Přenáší se proto doslova celá trojice ze sekce 15:
+     deska (papír na stole) + trvale nabitá horní hrana + proud do políčka.
+
+   GEOMETRIE: přesah -16px = přesně padding `.container-site` na mobilu
+   (clamp(1rem, …)), takže deska dojede k okraji okna a nic nepřeteče.
+   Od 768px je padding 2rem a panel má kolem sebe vzduch.
+   ========================================================================== */
+.pd--depth-sub .contact-form {
+    position: relative;
+    isolation: isolate;
+}
+.pd--depth-sub .contact-form::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: -20px -16px -24px -16px;
+    /* NE `--color-bg-elev-1` jako na homepage, ale `--bg-elevated`. Homepage
+       stojí na neutrální #0A0A0B, podstránky na namodralé #0C0E14 — neutrální
+       deska by na nich vyšla o odstín dozelena. `--bg-elevated` (#161A24) je
+       token, kterým si podstránky vyzdvihují plochy samy (CTA pruhy,
+       doporučené pásmo ceníku, page-hero), takže deska sedí do jejich rodiny.
+       Žádná nová barva ani tady. */
+    background: var(--bg-elevated);
+    /* Horní hrana papíru JE ta nabitá linka — jeden 1px, ne dva nad sebou. */
+    box-shadow:
+        inset 0 1px 0 rgba(216, 255, 58, 0.20),
+        0 30px 46px -28px rgba(0, 0, 0, 1);
+}
+@media (min-width: 768px) {
+    .pd--depth-sub .contact-form::before {
+        inset: -32px;
+    }
+}
+/* Náboj jede po hraně DESKY, ne po boxu formuláře — geometrie odpovídá
+   ::before výš: deska začíná na -20px (od 768px na -32px), jádro je uvnitř
+   15px pásu na y = 7px, takže pás musí začínat o 7px výš. */
+.pd--depth-sub .contact-form::after {
+    content: "";
+    position: absolute;
+    height: var(--pdd-bloom);
+    pointer-events: none;
+    background-repeat: no-repeat;
+    background-size: var(--pdd-band) var(--pdd-bloom), var(--pdd-band) 1px;
+    background-position-y: 0, 7px;
+    inset: -27px -16px auto -16px;
+    z-index: 1;
+    background-image: var(--pdd-glow-right), var(--pdd-run-right);
+    background-position-x: -115%;
+}
+.pd--depth-sub .contact-form.is-lit::after {
+    animation: pdd-run-x 1000ms linear 200ms 1 both;
+}
+@media (min-width: 768px) {
+    .pd--depth-sub .contact-form::after {
+        inset: -39px -32px auto -32px;
+    }
+}
+/* Proud pokračuje z desky do políčka, ve kterém se zrovna píše. Stávající
+   acid rámeček při fokusu zůstává beze změny — přístupnost se nezhoršuje.
+
+   `:has()` tu drží uzavřený seznam: náboj dostanou jen skupiny se SKUTEČNÝM
+   textovým polem. Bez toho by se rozsvítilo i zaškrtávátko souhlasu s GDPR
+   a skupina s odesílacím tlačítkem — tedy proud po lince, kterou nikdo
+   nevyplňuje. Prohlížeč bez `:has()` nedostane náboj vůbec; nic se nerozbije,
+   jen se tam nic nehne. */
+.pd--depth-sub .contact-form .form-group:has(input:not([type="checkbox"])),
+.pd--depth-sub .contact-form .form-group:has(textarea) {
+    position: relative;
+}
+.pd--depth-sub .contact-form .form-group:has(input:not([type="checkbox"]))::after,
+.pd--depth-sub .contact-form .form-group:has(textarea)::after {
+    content: "";
+    position: absolute;
+    height: var(--pdd-bloom);
+    pointer-events: none;
+    background-repeat: no-repeat;
+    background-size: var(--pdd-band) var(--pdd-bloom), var(--pdd-band) 1px;
+    background-position-y: 0, 7px;
+    inset: auto 0 -8px 0;
+    background-image: var(--pdd-glow-right), var(--pdd-run-right);
+    background-position-x: -115%;
+}
+.pd--depth-sub .contact-form .form-group:focus-within:has(input:not([type="checkbox"]))::after,
+.pd--depth-sub .contact-form .form-group:focus-within:has(textarea)::after {
+    animation: pdd-run-x 650ms linear 1 both;
+}
+/* Deska je širší než formulář; ať z ní na úzkém okně nevznikne vodorovný
+   scroll. Totéž dělá `.pd--depth #poptavka` na homepage. */
+.pd--depth-sub > section[data-pdd="contact-form"] {
+    overflow-x: clip;
+}
+
+
+/* ==========================================================================
+   E4. CENÍK — proč doporučené pásmo NEDOSTÁVÁ uzavřenou smyčku
+   --------------------------------------------------------------------------
+   Smyčka kolem `.pd-price__col--featured` je na homepage nejsilnější gesto
+   celé vrstby B, a zadání čekalo, že se sem přenese. Nepřenáší se, a je to
+   rozhodnutí, ne opomenutí:
+
+   Na homepage je doporučený sloupec HOLÝ — nemá kartu, jen 2px acid linku
+   nahoře. Smyčka tam kreslí jediný uzavřený obrys, který na stránce je,
+   a proto něco znamená.
+
+   Na /cenik je doporučené pásmo hotová karta: vlastní pozadí (#161A24),
+   acid rámeček dokola, vržený stín a navrch odznak „nejčastější volba“.
+   Je označené čtyřikrát dřív, než na něj cokoli přijede. Pátý obrys po
+   téže dráze, jakou už kreslí rámeček, nepřidá informaci — jen se po
+   existující lince svezme. Homepage si přesně tohle sama zakazuje v §C
+   („Čtvrté označení by z toho udělalo kartu“); tady by to byla táž chyba
+   o patro výš.
+
+   Navíc: karta má `border-radius: 1rem`. Smyčka je složená ze čtyř rovných
+   pásů na hranách boxu, takže by se u každého rohu na ~16px ztratila pod
+   zaoblením. Čtyři výpadky v gestu, které stojí na tom, že je souvislé.
+
+   Rozhodnutí: na /cenik nese rozhodovací moment VRSTVA A — pásma dostávají
+   nejjasnější nasvícení na stránce (viz `data-pdd="price-tiers"` výš)
+   a všechno pod nimi se propadá do stínu. Pohyb se sem nepřidává.
+   Kdyby se někdy pásma přepsala na holé sloupce jako na homepage, smyčka
+   sem patřit začne — do té doby ne.
+   ========================================================================== */
+
+
+/* ==========================================================================
    D. PŘÍSTUPNOST
    --------------------------------------------------------------------------
    Pohyb se vypne úplně. Statická část zůstává celá: nasvícení, specular
@@ -1266,7 +1737,11 @@
     .pd--depth .pd-field::after,
     .pd--depth > section::after,
     .pd--depth .pd-section::before,
-    .pd--depth .pd-strip::before {
+    .pd--depth .pd-strip::before,
+    /* OND-251 — podstránky: jediné dva pohyblivé prvky, oba na kontaktu (§E3) */
+    .pd--depth-sub .contact-form::after,
+    .pd--depth-sub .contact-form .form-group::after,
+    .pd--depth-sub .contact-form .form-group:has(textarea)::after {
         animation: none !important;
         transition: none !important;
     }

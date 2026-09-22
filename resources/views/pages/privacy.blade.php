@@ -7,6 +7,10 @@
 
 @section('content')
 
+{{-- OND-251 — vrstva hloubky VĚDOMĚ VYPNUTÁ (žádný obal `pd--depth`).
+     Totéž co u cookies: právní text, kde je čitelnost jediné kritérium.
+     Rozbor v §E hloubka.css. --}}
+
 {{-- Page hero — OND-130 iter 8: plán §3.1 page-mark + Plex Sans display (post OND-145 swap). --}}
 <div class="page-hero page-hero--privacy">
     <div class="container-site">
