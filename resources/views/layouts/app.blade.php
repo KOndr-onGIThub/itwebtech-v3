@@ -67,6 +67,10 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset_v('apple-touch-icon.png') }}" />
     <meta name="apple-mobile-web-app-title" content="{{ config('app.name') }}" />
+    {{-- OND-244: `site.webmanifest` je statický soubor, takže na ikony uvnitř
+         nedosáhne asset_v() — mají tam `?v=` otisk napsaný ručně. Když někdy
+         měníš logo_icon.png / logo_square.png, přepiš i ten otisk v manifestu
+         (`md5sum <soubor> | cut -c1-8`), jinak zůstanou staré v cache. --}}
     <link rel="manifest" href="/site.webmanifest" />
 
     <script type="application/ld+json">
