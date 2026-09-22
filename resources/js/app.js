@@ -226,16 +226,14 @@ Alpine.data('contactForm', ({ genericError = '' } = {}) => ({
 }));
 
 // ---------------------------------------------------------------------------
-// Consultation modal — video + Calendly CTA
+// Consultation modal — Calendly CTA
 // ---------------------------------------------------------------------------
+// OND-258: video z modálu je pryč, takže zmizel i jeho stav (videoReady/playing).
 Alpine.data('consultationModal', () => ({
     open: false,
-    videoReady: false,
-    playing: false,
 
     openModal() {
         this.open = true;
-        this.videoReady = true;
         // Prevent body scroll
         document.body.style.overflow = 'hidden';
         // Focus the dialog on next tick
@@ -247,11 +245,7 @@ Alpine.data('consultationModal', () => ({
 
     closeModal() {
         this.open = false;
-        this.playing = false;
         document.body.style.overflow = '';
-        // Pause & reset video if present
-        const video = this.$el.querySelector('video');
-        if (video) { video.pause(); video.currentTime = 0; }
     },
 }));
 
