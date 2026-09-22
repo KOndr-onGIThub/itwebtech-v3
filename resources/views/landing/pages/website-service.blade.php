@@ -274,6 +274,8 @@
                 <form method="POST" action="{{ $leadAction }}" novalidate x-data="{ submitting: false }" @submit="submitting = true">
                     @csrf
 
+                    <x-form.honeypot id="landing-website-url" />
+
                     <div class="landing-form-grid">
                         <div class="form-group">
                             <label for="name">{{ __('landing.form.name') }} <span aria-hidden="true">*</span></label>
