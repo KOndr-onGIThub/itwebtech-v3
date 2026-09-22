@@ -142,6 +142,11 @@ return [
 
     'empty'            => 'Derzeit sind keine Projekte verfügbar.',
     'view_project'     => 'Projekt anzeigen',
+
+    // OND-265: Alt-Text für Projektvorschauen in der Übersicht und in „Weitere Projekte".
+    'card' => [
+        'thumbnail_alt' => 'Vorschau des Projekts :project',
+    ],
     'back_to_projects' => '← Zurück zu Projekten',
 
     'before_after' => 'Vorher-Nachher-Vergleich',

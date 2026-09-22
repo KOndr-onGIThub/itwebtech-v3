@@ -87,15 +87,32 @@
                 </figure>
             @else
                 <div class="portfolio-detail-gallery__grid" data-reveal-group>
-                    @foreach ($block['items'] as $shot)
-                        <figure class="portfolio-detail-gallery__item">
-                            <x-portfolio.screenshot
-                                :path="$shot->path"
-                                :alt="$shot->translation()?->alt ?? ''"
-                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 540px"
-                                loading="lazy"
-                                :lightbox-gallery="'portfolio-screenshots'"
-                            />
+                    @foreach ($block['items'] as $i => $shot)
+                        @php
+                            // OND-265: lichý počet dlaždic nechával v mřížce
+                            // prázdnou pravou buňku („černá díra", nález OND-254).
+                            // Poslední osamocená dlaždice proto jde přes obě
+                            // buňky: široký snímek v přirozeném poměru jako band,
+                            // čtvercový vycentrovaný v původní velikosti.
+                            $isAlone = $i === count($block['items']) - 1 && $i % 2 === 0;
+                            $ratio   = screenshot_tile_ratio($shot->path);
+                            $classes = 'portfolio-detail-gallery__item';
+                            if ($isAlone) {
+                                $classes .= $ratio >= 1.2
+                                    ? ' portfolio-detail-gallery__item--alone-band'
+                                    : ' portfolio-detail-gallery__item--alone';
+                            }
+                        @endphp
+                        <figure class="{{ $classes }}" style="--shot-ratio: {{ $ratio }}">
+                            <div class="portfolio-detail-gallery__frame">
+                                <x-portfolio.screenshot
+                                    :path="$shot->path"
+                                    :alt="$shot->translation()?->alt ?? ''"
+                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 540px"
+                                    loading="lazy"
+                                    :lightbox-gallery="'portfolio-screenshots'"
+                                />
+                            </div>
                             @if ($shot->translation()?->caption)
                                 <figcaption>{{ $shot->translation()->caption }}</figcaption>
                             @endif

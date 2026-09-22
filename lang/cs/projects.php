@@ -143,6 +143,11 @@ return [
 
     'empty'            => 'Momentálně nejsou k dispozici žádné projekty.',
     'view_project'     => 'Zobrazit projekt',
+
+    // OND-265: alt náhledu projektu na výpisu a v „Další projekty".
+    'card' => [
+        'thumbnail_alt' => 'Náhled projektu :project',
+    ],
     'back_to_projects' => '← Zpět na projekty',
 
     'before_after' => 'Porovnání před a po',

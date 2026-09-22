@@ -142,6 +142,11 @@ return [
 
     'empty'            => 'No projects are currently available.',
     'view_project'     => 'View project',
+
+    // OND-265: alt for project thumbnails on the listing and in "More projects".
+    'card' => [
+        'thumbnail_alt' => 'Preview of the :project project',
+    ],
     'back_to_projects' => '← Back to projects',
 
     'before_after' => 'Before & After comparison',
