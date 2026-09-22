@@ -55,7 +55,7 @@ return [
 
     'cta' => [
         'heading' => 'Geht es um eine Webseite oder eine Anwendung?',
-        'text'    => 'Schreiben Sie mir, was Sie brauchen. Ich melde mich innerhalb von zwei Werktagen und sage Ihnen, ob ich helfen kann.',
+        'text'    => 'Schreiben Sie mir, was Sie brauchen. Ich melde mich innerhalb von 24 Stunden an Arbeitstagen und sage Ihnen, ob ich helfen kann.',
         'primary' => 'Ondřej schreiben',
     ],
 

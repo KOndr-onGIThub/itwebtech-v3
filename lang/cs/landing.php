@@ -8,7 +8,7 @@ return [
     // co WordPress je, to neříká nic; princip 0).
     'meta' => [
         'title' => 'Webové stránky na míru pro podnikatele a firmy | ONDRAWEB',
-        'description' => 'Tvorba webových stránek na míru na vlastním kódu, bez pravidelné údržby. Jasná struktura, přímá spolupráce s vývojářem a odpověď do 24 hodin.',
+        'description' => 'Tvorba webových stránek na míru na vlastním kódu, bez pravidelné údržby. Jasná struktura, přímá spolupráce s vývojářem a odpověď do 24 hodin v pracovní dny.',
         'schema_name' => 'Tvorba webových stránek na míru',
     ],
 
@@ -25,7 +25,7 @@ return [
         'description' => 'Vytvořím vám web, který rychle vysvětlí, co nabízíte, proč si vybrat právě vás a jak udělat další krok. Bez hotových stavebnic, bez zbytečných komplikací a bez přehazování mezi obchodníkem, grafikem a vývojářem.',
         'primary_cta' => 'Chci nezávaznou konzultaci',
         'secondary_cta' => 'Zobrazit orientační ceny',
-        'microcopy' => 'Ozvu se do 24 hodin. Bez tlaku, bez obchodníka, přímo s člověkem, který bude web řešit.',
+        'microcopy' => 'Ozvu se do 24 hodin v pracovní dny. Bez tlaku, bez obchodníka, přímo s člověkem, který bude web řešit.',
         'chips' => [
             '18 let zkušeností',
             'Přímá spolupráce',
@@ -35,7 +35,7 @@ return [
         'trust' => [
             'title' => 'Rychlé ověřitelné body',
             'items' => [
-                'Odpověď do 24 hodin',
+                'Odpověď do 24 hodin v pracovní dny',
                 'Vlastní kód, ne stavebnice',
                 'Řešení na míru',
                 '21 recenzí, 5 z 5',
@@ -91,7 +91,7 @@ return [
         'text' => 'Neřešíte obchodníka, projektového manažera a vývojáře zvlášť. Mluvíte přímo se mnou od první konzultace po spuštění webu.',
         'items' => [
             '18 let zkušeností v Toyotě mi dalo silný důraz na kvalitu, proces a detail.',
-            'Odpovídám do 24 hodin i po spuštění projektu.',
+            'Ozvu se do 24 hodin v pracovní dny, i po spuštění projektu.',
             // OND-201 (nález 5.4): normou je pásmo 55–150 tisíc, ne nejlevnější vstup.
             'Orientační ceny máte předem. Většina projektů vychází mezi 55 a 150 tisíci korunami.',
             // OND-201 (nález 5.5): žargon přepsaný do řeči klienta.
@@ -118,7 +118,7 @@ return [
             ],
             [
                 'title' => 'Spuštění a podpora',
-                'text' => 'Po spuštění nezmizím. Když budete potřebovat úpravu nebo radu, ozvu se do 24 hodin.',
+                'text' => 'Po spuštění nezmizím. Když budete potřebovat úpravu nebo radu, ozvu se do 24 hodin v pracovní dny.',
             ],
         ],
     ],
@@ -206,7 +206,7 @@ return [
 
     'form' => [
         'eyebrow' => 'Nezávazná poptávka',
-        'title' => 'Řekněte mi stručně, co potřebujete. Ozvu se zpět do 24 hodin.',
+        'title' => 'Řekněte mi stručně, co potřebujete. Ozvu se do 24 hodin v pracovní dny.',
         'description' => 'Napište mi pár vět o vašem podnikání a současné situaci. Odesláním formuláře nezačíná žádný závazek. Jen první smysluplná konverzace.',
         'success' => 'Děkuji, zpráva dorazila. Ozvu se co nejdřív s dalším krokem.',
         'error' => 'Poptávku se teď nepodařilo uložit. Zkuste to prosím znovu.',
@@ -237,7 +237,7 @@ return [
         ],
         'trust_title' => 'Nezávazná konzultace',
         'trust_items' => [
-            'Odpověď do 24 hodin',
+            'Odpověď do 24 hodin v pracovní dny',
             'Bez spamu a bez předávání kontaktu dál',
             'Jasný další krok ještě před začátkem projektu',
         ],

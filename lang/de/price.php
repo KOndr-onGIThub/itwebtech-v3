@@ -105,7 +105,7 @@ return [
             ],
             [
                 'title' => 'Support nach dem Launch',
-                'text'  => 'Ich antworte innerhalb von 24 Stunden, auch noch Wochen und Monate nach der Projektübergabe. Kleine Anpassungen und technische Fragen sind immer willkommen.',
+                'text'  => 'Ich melde mich innerhalb von 24 Stunden an Arbeitstagen, auch noch Wochen und Monate nach der Projektübergabe. Kleine Anpassungen und technische Fragen sind immer willkommen.',
             ],
         ],
     ],

@@ -198,7 +198,7 @@ class BlogContentDeSeeder extends Seeder
                     <h2>Wann Sie keine Website bei mir kaufen sollten</h2>
                     <p>Wenn Ihr Budget unter 800 € liegt. Wenn Sie die Website in einer Woche brauchen. Wenn Sie nur ein bestehendes WordPress reparieren wollen. Nichts davon mache ich, und es ist besser, Sie wissen es jetzt als nach zwei Terminen.</p>
                     <h2>Wie Sie zum genauen Preis kommen</h2>
-                    <p>Schreiben Sie mir, was Sie brauchen. Ruhig kurz. Ich melde mich innerhalb von zwei Werktagen und wir gehen es durch. Wenn dabei herauskommt, dass ich Ihnen helfen kann, bekommen Sie eine Spezifikation mit einem konkreten Preis. Wenn nicht, sage ich es Ihnen und dränge Ihnen nichts auf.</p>
+                    <p>Schreiben Sie mir, was Sie brauchen. Ruhig kurz. Ich melde mich innerhalb von 24 Stunden an Arbeitstagen und wir gehen es durch. Wenn dabei herauskommt, dass ich Ihnen helfen kann, bekommen Sie eine Spezifikation mit einem konkreten Preis. Wenn nicht, sage ich es Ihnen und dränge Ihnen nichts auf.</p>
                     HTML,
             ],
 

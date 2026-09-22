@@ -31,7 +31,8 @@ window.sharedImages = Object.fromEntries(
 // ---------------------------------------------------------------------------
 // File drop zone — used in all contact/inquiry forms
 // ---------------------------------------------------------------------------
-Alpine.data('fileDropZone', () => ({
+// OND-256/8: hlášky chodí z blade (lang/*/contact.php), dřív byly natvrdo anglicky.
+Alpine.data('fileDropZone', ({ tooManyFiles = '', tooLarge = '' } = {}) => ({
     isDragOver: false,
     files: [],
     error: '',
@@ -47,12 +48,12 @@ Alpine.data('fileDropZone', () => ({
 
     validate(fileList) {
         if (fileList.length > 5) {
-            this.error = 'Maximum 5 files at once.';
+            this.error = tooManyFiles;
             return false;
         }
         const totalSize = fileList.reduce((sum, f) => sum + f.size, 0);
         if (totalSize > 20 * 1024 * 1024) {
-            this.error = 'Total size must not exceed 20 MB.';
+            this.error = tooLarge;
             return false;
         }
         this.error = '';
@@ -101,16 +102,32 @@ Alpine.data('fileDropZone', () => ({
 }));
 
 // ---------------------------------------------------------------------------
-// Contact / inquiry form — async submit with SweetAlert2 feedback
+// Contact / inquiry form — async submit s inline chybami
 // ---------------------------------------------------------------------------
-Alpine.data('contactForm', () => ({
+// OND-256/1: dřív se chyby ukazovaly v anglickém SweetAlert2 modálu
+// („Submission error" / „Close"). Teď stejný vzor jako inline formulář na
+// homepage — česká hláška pod polem, kterého se týká. `genericError` je
+// přeložený text pro pád, který nemá 422 payload (500, výpadek sítě).
+Alpine.data('contactForm', ({ genericError = '' } = {}) => ({
     loading: false,
     submitted: false,
+    errors: {},
+    formError: '',
+
+    // Chyba u pole zmizí, jakmile ho uživatel začne opravovat.
+    clearError(field) {
+        if (!this.errors[field]) return;
+        const next = { ...this.errors };
+        delete next[field];
+        this.errors = next;
+    },
 
     async submit() {
-        const form = this.$el;
+        const form = this.$refs.form;
         const data = new FormData(form);
         this.loading = true;
+        this.errors = {};
+        this.formError = '';
 
         try {
             await window.axios.post('/contact', data);
@@ -132,26 +149,35 @@ Alpine.data('contactForm', () => ({
             });
 
         } catch (err) {
-            // Lazy-load SweetAlert only for the error path.
-            const { default: Swal } = await import('sweetalert2');
-            const errors = err.response?.data?.errors;
-            let msg = 'The form could not be submitted. Please try again.';
-            if (errors) {
-                msg = Object.values(errors).flat().join('\n');
-            } else if (err.response?.data?.message) {
-                msg = err.response.data.message;
-            }
+            const fieldErrors = err.response?.data?.errors;
 
-            Swal.fire({
-                icon: 'error',
-                title: 'Submission error',
-                text: msg,
-                confirmButtonColor: '#1B2E5A',
-                confirmButtonText: 'Close',
-            });
+            if (fieldErrors) {
+                // Laravel 422 — první hláška ke každému poli, česky z lang/*/validation.php.
+                this.errors = Object.fromEntries(
+                    Object.entries(fieldErrors).map(([field, messages]) => [
+                        field,
+                        Array.isArray(messages) ? messages[0] : messages,
+                    ]),
+                );
+                this.$nextTick(() => this.focusFirstError());
+            } else {
+                // 500 / výpadek sítě — jedna souhrnná hláška nad tlačítkem.
+                this.formError = genericError;
+                this.$nextTick(() => {
+                    this.$refs.formError?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
+            }
         } finally {
             this.loading = false;
         }
+    },
+
+    focusFirstError() {
+        // Pořadí podle DOM, ne podle pořadí klíčů v odpovědi.
+        const first = this.$refs.form.querySelector('[aria-invalid="true"]');
+        if (!first) return;
+        first.focus({ preventScroll: true });
+        first.scrollIntoView({ behavior: 'smooth', block: 'center' });
     },
 }));
 

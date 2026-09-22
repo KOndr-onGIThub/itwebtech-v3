@@ -23,7 +23,7 @@ return [
         'upline'          => 'For businesses that know the difference.',
         'heading_html'    => 'Websites and applications <em>built to fit</em>.<br>I build them myself, on my own code.',
         'subline'         => 'I am Ondřej Kriška, an experienced developer. You work with me directly — no agency, no middlemen. I build websites to run for years without tying you up in maintenance.',
-        'note'            => 'I reply within two working days. No commitment, we just go through what makes sense.',
+        'note'            => 'I\'ll get back to you within 24 hours on business days. No commitment, we just go through what makes sense.',
 
         // Backwards compat (consultation modal, fallback render).
         'eyebrow'       => 'Custom websites & web applications',
@@ -55,7 +55,7 @@ return [
         'reviews'      => '(21 reviews on Google + Firmy.cz)',
         'projects'     => '23+ delivered projects',
         'experience'   => '18 years of experience',
-        'response'     => 'Reply within 24 hours',
+        'response'     => 'Reply within 24 hours on business days',
         // OND-201 (finding 5.11): TOP firma 2025 award from Firmy.cz —
         // verifiable third-party proof that was missing on staging.
         'award'        => 'TOP firma 2025 on Firmy.cz',
@@ -417,7 +417,7 @@ return [
     'faq_form' => [
         'eyebrow'     => 'Got a different question?',
         'heading'     => 'Send it over.',
-        'description' => 'I pick it up and reply by the next business day. No sales pressure.',
+        'description' => 'I pick it up and get back to you within 24 hours on business days. No sales pressure.',
         'name'        => 'Name',
         'email'       => 'Email',
         'message'     => 'Your question',
@@ -435,12 +435,13 @@ return [
     'inline_form' => [
         'eyebrow'         => 'Enquiry',
         'heading'         => 'Tell me what you need',
-        'description'     => 'Describe briefly what you are dealing with. I reply within two business days and we will go through what makes sense, with no obligation. If we turn out not to be a fit, I will tell you straight.',
+        'description'     => 'Describe briefly what you are dealing with. I\'ll get back to you within 24 hours on business days and we will go through what makes sense, with no obligation. If we turn out not to be a fit, I will tell you straight.',
         'quote_text'      => 'Thanks to the individual approach, flexibility and professionalism, the result matches our expectations.',
         'quote_author'    => 'Hana Jaskmanická, Executive Director, VP Industry',
         'name'            => 'Full name',
         'email'           => 'Email',
         'phone'           => 'Phone (optional)',
+        'phone_hint'      => 'Leave a number and I can get back to you faster.',
         'message'         => 'What do you need solved?',
         'placeholders'    => [
             'name'    => 'John Smith',

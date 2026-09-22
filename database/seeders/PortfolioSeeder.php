@@ -154,8 +154,16 @@ class PortfolioSeeder extends Seeder
             $type = $shot['type'] ?? 'gallery';
             $typeCounters[$type] = ($typeCounters[$type] ?? 0) + 1;
             $n = $typeCounters[$type];
-            $ext = $this->extensionFromUrl($shot['url'] ?? '');
-            $relativePath = "projects/{$slug}/{$type}-{$n}.{$ext}";
+            // OND-256: snímky, které jsme pořídili sami (ne stažené přes
+            // `portfolio:fetch-screenshots`), nemají zdrojové `url`, ze kterého
+            // se jinak odvozuje přípona. Pro ně je v YAMLu rovnou `path`.
+            // `path` je relativní k `resources/img/`, stejně jako sloupec v DB.
+            if (! empty($shot['path'])) {
+                $relativePath = $shot['path'];
+            } else {
+                $ext = $this->extensionFromUrl($shot['url'] ?? '');
+                $relativePath = "projects/{$slug}/{$type}-{$n}.{$ext}";
+            }
 
             // Pokud lokální soubor neexistuje, screenshot do DB nepřidávej
             // (chrání před tím, aby <x-responsive-image> hodila chybu).

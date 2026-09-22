@@ -23,7 +23,7 @@ return [
         'upline'          => 'Für Unternehmen, die den Unterschied erkennen.',
         'heading_html'    => 'Websites und Anwendungen <em>nach Maß</em>.<br>Ich baue sie selbst, mit eigenem Code.',
         'subline'         => 'Ich bin Ondřej Kriška, erfahrener Entwickler. Sie arbeiten direkt mit mir — ohne Agentur, ohne Zwischenhändler. Ich baue Websites so, dass sie jahrelang laufen und Sie nicht mit Wartung aufhalten.',
-        'note'            => 'Ich melde mich innerhalb von zwei Arbeitstagen. Unverbindlich besprechen wir, was sinnvoll ist.',
+        'note'            => 'Ich melde mich innerhalb von 24 Stunden an Arbeitstagen. Unverbindlich besprechen wir, was sinnvoll ist.',
 
         // Backwards compat (consultation modal, fallback render).
         'eyebrow'       => 'Maßgeschneiderte Websites & Webanwendungen',
@@ -53,7 +53,7 @@ return [
         'reviews'      => '(21 Bewertungen auf Google + Firmy.cz)',
         'projects'     => '23+ realisierte Projekte',
         'experience'   => '18 Jahre Erfahrung',
-        'response'     => 'Antwort innerhalb von 24 Std.',
+        'response'     => 'Antwort innerhalb von 24 Stunden an Arbeitstagen',
         // OND-201 (Befund 5.11): Auszeichnung TOP firma 2025 von Firmy.cz —
         // überprüfbarer Nachweis Dritter, der auf Staging fehlte.
         'award'        => 'TOP firma 2025 auf Firmy.cz',
@@ -416,7 +416,7 @@ return [
     'faq_form' => [
         'eyebrow'     => 'Andere Frage?',
         'heading'     => 'Schreiben Sie sie direkt.',
-        'description' => 'Ich greife sie auf und antworte bis zum nächsten Werktag. Kein Verkaufsdruck.',
+        'description' => 'Ich greife sie auf und melde mich innerhalb von 24 Stunden an Arbeitstagen. Kein Verkaufsdruck.',
         'name'        => 'Name',
         'email'       => 'E-Mail',
         'message'     => 'Ihre Frage',
@@ -434,12 +434,13 @@ return [
     'inline_form' => [
         'eyebrow'         => 'Anfrage',
         'heading'         => 'Schreiben Sie mir, was Sie brauchen',
-        'description'     => 'Beschreiben Sie kurz, worum es geht. Ich melde mich innerhalb von zwei Werktagen und wir gehen unverbindlich durch, was Sinn ergibt. Wenn wir nicht zusammenpassen, sage ich es Ihnen geradeheraus.',
+        'description'     => 'Beschreiben Sie kurz, worum es geht. Ich melde mich innerhalb von 24 Stunden an Arbeitstagen und wir gehen unverbindlich durch, was Sinn ergibt. Wenn wir nicht zusammenpassen, sage ich es Ihnen geradeheraus.',
         'quote_text'      => 'Dank des individuellen Ansatzes, der Flexibilität und der Professionalität entspricht das Ergebnis unseren Vorstellungen.',
         'quote_author'    => 'Hana Jaskmanická, Geschäftsführerin, VP Industry',
         'name'            => 'Vor- und Nachname',
         'email'           => 'E-Mail',
         'phone'           => 'Telefon (optional)',
+        'phone_hint'      => 'Mit Nummer melde ich mich schneller.',
         'message'         => 'Was möchten Sie lösen?',
         'placeholders'    => [
             'name'    => 'Max Mustermann',
