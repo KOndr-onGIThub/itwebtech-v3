@@ -47,6 +47,10 @@ return [
         'remove'           => 'Remove',
         'error_too_many'   => 'You can attach at most 5 files at once.',
         'error_too_large'  => 'Attachments must not exceed 20 MB in total.',
+        // OND-264: server-side attachment validation messages.
+        'error_per_file'   => 'A single file can be at most :max MB.',
+        'error_mime'       => 'This file type cannot be sent. Allowed: :types.',
+        'error_failed'     => 'The attachment could not be saved. Please try again — or send me the file at ok@ondraweb.cz.',
     ],
 
     'message_success'     => 'Thanks for your message.',

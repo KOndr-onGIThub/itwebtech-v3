@@ -55,6 +55,8 @@ class LeadsRecent extends Command
                 'locale'      => $l->locale,
                 'mail_status' => $l->mail_status,
                 'mail_error'  => $l->mail_error,
+                // OND-264: ať je na jeden pohled vidět, jestli přílohy dorazily.
+                'attachments' => $l->attachments ?? [],
                 'created_at'  => $l->created_at?->toIso8601String(),
             ])->toJson(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
@@ -68,7 +70,7 @@ class LeadsRecent extends Command
         }
 
         $this->table(
-            ['ID', 'Jméno', 'E-mail', 'Předmět', 'Lang', 'Mail', 'Vytvořeno'],
+            ['ID', 'Jméno', 'E-mail', 'Předmět', 'Lang', 'Mail', 'Přílohy', 'Vytvořeno'],
             $leads->map(fn (ContactSubmission $l) => [
                 $l->id,
                 \Illuminate\Support\Str::limit($l->name, 20),
@@ -76,6 +78,7 @@ class LeadsRecent extends Command
                 \Illuminate\Support\Str::limit($l->subject ?? '—', 28),
                 $l->locale ?? '—',
                 $l->mail_status,
+                count($l->attachments ?? []) ?: '—',
                 $l->created_at?->format('d.m.Y H:i'),
             ])->toArray(),
         );

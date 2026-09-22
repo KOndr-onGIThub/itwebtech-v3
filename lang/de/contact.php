@@ -48,6 +48,10 @@ return [
         'remove'           => 'Entfernen',
         'error_too_many'   => 'Es lassen sich höchstens 5 Dateien auf einmal anhängen.',
         'error_too_large'  => 'Die Anhänge dürfen zusammen 20 MB nicht überschreiten.',
+        // OND-264: Meldungen der serverseitigen Anhang-Validierung.
+        'error_per_file'   => 'Eine einzelne Datei darf höchstens :max MB groß sein.',
+        'error_mime'       => 'Dieser Dateityp kann nicht gesendet werden. Erlaubt: :types.',
+        'error_failed'     => 'Der Anhang konnte nicht gespeichert werden. Bitte versuchen Sie es erneut — oder senden Sie mir die Datei an ok@ondraweb.cz.',
     ],
 
     'message_success'     => 'Danke für Ihre Nachricht.',

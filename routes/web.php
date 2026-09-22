@@ -74,8 +74,11 @@ foreach (array_slice($locales, 1) as $locale) {
 | SetLocale middleware runs so že validační hlášky se přeloží podle URL
 | segmentu (defaultně cs) — bez něj Laravel padne na config('app.locale').
 */
+// OND-264: `throttle` proti dávkám spamu — 26. 7. přišly na /poptavka čtyři
+// zprávy z jedné adresy během 30 vteřin. Limit je nad rámec běžného použití
+// (člověk neodešle osm poptávek za minutu), takže nikoho reálného neomezí.
 Route::post('/contact', [ContactController::class, 'send'])
-    ->middleware(SetLocale::class)
+    ->middleware([SetLocale::class, 'throttle:8,1'])
     ->name('contact.send');
 
 /*
@@ -87,7 +90,7 @@ Route::post('/contact', [ContactController::class, 'send'])
 | existující lang/cs/validation.php (OND-100 QA blocker).
 */
 Route::post('/poptavka', [HomeLeadController::class, 'store'])
-    ->middleware(SetLocale::class)
+    ->middleware([SetLocale::class, 'throttle:8,1'])
     ->name('home.lead.store');
 
 /*

@@ -2917,7 +2917,15 @@
         border: 1px solid var(--border-subtle);
         border-radius: 8px;
     }
-    .form-file__list-icon { color: var(--color-muted); flex-shrink: 0; }
+    /* OND-264: SVG v seznamu nemá width/height atributy, takže se bez tohohle
+       roztáhlo přes celou šířku položky — po výběru souboru na /kontakt svítil
+       přes půl stránky obří ikona dokumentu. */
+    .form-file__list-icon {
+        color: var(--color-muted);
+        flex-shrink: 0;
+        width: 1.125rem;
+        height: 1.125rem;
+    }
     .form-file__list-name {
         flex: 1;
         min-width: 0;
@@ -2944,6 +2952,12 @@
     }
     .form-file__list-remove:hover {
         color: var(--color-fail);
+    }
+    /* OND-264: stejný případ jako u ikony souboru — křížek bez rozměru. */
+    .form-file__list-remove svg {
+        width: 1rem;
+        height: 1rem;
+        display: block;
     }
 
     /* ============================================================

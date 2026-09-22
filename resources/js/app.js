@@ -32,7 +32,19 @@ window.sharedImages = Object.fromEntries(
 // File drop zone — used in all contact/inquiry forms
 // ---------------------------------------------------------------------------
 // OND-256/8: hlášky chodí z blade (lang/*/contact.php), dřív byly natvrdo anglicky.
-Alpine.data('fileDropZone', ({ tooManyFiles = '', tooLarge = '' } = {}) => ({
+// OND-264: limity chodí z config/contact.php (`uploads`), aby se prohlížeč a
+// server nemohly rozejít, a přibyla kontrola typu i velikosti jednoho souboru.
+// Serverová 422 hláška se zobrazí ve stejném místě přes `file-drop:error`.
+Alpine.data('fileDropZone', ({
+    tooManyFiles = '',
+    tooLarge = '',
+    perFileTooLarge = '',
+    badType = '',
+    maxFiles = 5,
+    maxFileMb = 10,
+    maxTotalMb = 20,
+    extensions = [],
+} = {}) => ({
     isDragOver: false,
     files: [],
     error: '',
@@ -44,15 +56,34 @@ Alpine.data('fileDropZone', ({ tooManyFiles = '', tooLarge = '' } = {}) => ({
             this.error = '';
             if (this.$refs.input) this.$refs.input.value = '';
         });
+
+        // contactForm dispatches this when the server rejects the attachments
+        this.$el.addEventListener('file-drop:error', (e) => {
+            this.error = e.detail || '';
+        });
     },
 
     validate(fileList) {
-        if (fileList.length > 5) {
+        if (fileList.length > maxFiles) {
             this.error = tooManyFiles;
             return false;
         }
+        if (extensions.length) {
+            const rejected = fileList.find((f) => {
+                const ext = f.name.split('.').pop()?.toLowerCase() ?? '';
+                return !extensions.includes(ext);
+            });
+            if (rejected) {
+                this.error = badType;
+                return false;
+            }
+        }
+        if (fileList.some(f => f.size > maxFileMb * 1024 * 1024)) {
+            this.error = perFileTooLarge;
+            return false;
+        }
         const totalSize = fileList.reduce((sum, f) => sum + f.size, 0);
-        if (totalSize > 20 * 1024 * 1024) {
+        if (totalSize > maxTotalMb * 1024 * 1024) {
             this.error = tooLarge;
             return false;
         }
@@ -159,6 +190,19 @@ Alpine.data('contactForm', ({ genericError = '' } = {}) => ({
                         Array.isArray(messages) ? messages[0] : messages,
                     ]),
                 );
+
+                // OND-264: chyby k přílohám (`attachment`, `attachment.0`, …) nemají
+                // vlastní pole ve formuláři — patří do drop zóny, jinak by 422
+                // skončila neviditelně a uživatel by klikal do prázdna.
+                const attachmentError = Object.entries(this.errors)
+                    .find(([field]) => field === 'attachment' || field.startsWith('attachment.'));
+
+                if (attachmentError) {
+                    form.querySelectorAll('[x-data]').forEach(el => {
+                        el.dispatchEvent(new CustomEvent('file-drop:error', { detail: attachmentError[1] }));
+                    });
+                }
+
                 this.$nextTick(() => this.focusFirstError());
             } else {
                 // 500 / výpadek sítě — jedna souhrnná hláška nad tlačítkem.

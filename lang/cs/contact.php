@@ -50,6 +50,10 @@ return [
         'remove'           => 'Odebrat',
         'error_too_many'   => 'Najednou lze přiložit nejvýš 5 souborů.',
         'error_too_large'  => 'Přílohy dohromady nesmí přesáhnout 20 MB.',
+        // OND-264: hlášky ze serverové validace příloh.
+        'error_per_file'   => 'Jeden soubor smí mít nejvýš :max MB.',
+        'error_mime'       => 'Tenhle typ souboru poslat nejde. Povolené jsou: :types.',
+        'error_failed'     => 'Přílohu se nepodařilo uložit. Zkuste to prosím znovu — nebo mi soubor pošlete na ok@ondraweb.cz.',
     ],
 
     'message_success'     => 'Děkuji za zprávu.',
