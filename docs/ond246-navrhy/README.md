@@ -1,10 +1,25 @@
 # OND-246 — tři návrhy hloubky homepage
 
-Prototypy ke třem návrhům, které dostal board. **Nic z toho zatím není
-produkční kód** — jsou to vrstvy, které se za běhu přikládají na současnou
-homepage, aby šlo rozhodnout, kterým směrem jít. Po výběru se vítězná
-varianta přepíše do `resources/css/podpis.css` (a pro podstránky do
-`resources/css/app.css`), zbylé dvě se smažou.
+> **STAV: tyhle tři soubory jsou PŘEKONANÉ.** Board si vyžádal všechny tři
+> dohromady, ale s ořezáním — výsledek žije v `resources/css/hloubka.css`
+> a `resources/js/hloubka.js` a zapíná se třídou `pd--depth` na domovské
+> stránce. Prototypy tu zůstávají jen do schválení finální podoby; pak se
+> celá složka smaže.
+>
+> Co se do finální vrstvy **nedostalo** a proč:
+>
+> | z návrhu | co vypadlo | důvod |
+> |---|---|---|
+> | 2 | přejezd náboje po dělítku každé sekce | rušilo čtenáře; náboj dostávají jen konkrétní prvky |
+> | 2 | jiskra sjíždějící celou sekcí 09 | předbíhala čtenáře, seznam kroků je vyšší než okno |
+> | 2 | svislá dělítka v sekcích 03 a 04 | nic nevyprávějí, jen přidávala pohyb |
+> | 3 | hladiny desek po sekcích (`--pd-plate-0..8`) | celé sekce proti sobě vyzdvižené board nechtěl |
+> | 3 | povrchové zrno (feTurbulence maska + `mask-composite`) | nebylo zadané a bylo to měřitelně nejdražší: při pohybu myši 1305 ms rasterizace proti 10 ms bez něj |
+> | 3 | vyzdvižená deska pod doporučeným sloupcem ceníku | sloupec je označený už třikrát; deska rozbíjela levou hranu mřížky |
+
+Prototypy ke třem návrhům, které dostal board. **Nic z toho není produkční
+kód** — jsou to vrstvy, které se za běhu přikládaly na tehdejší homepage,
+aby šlo rozhodnout, kterým směrem jít.
 
 ## Proč to není rovnou v repu
 
