@@ -14,8 +14,22 @@
 > | 2 | jiskra sjíždějící celou sekcí 09 | předbíhala čtenáře, seznam kroků je vyšší než okno |
 > | 2 | svislá dělítka v sekcích 03 a 04 | nic nevyprávějí, jen přidávala pohyb |
 > | 3 | hladiny desek po sekcích (`--pd-plate-0..8`) | celé sekce proti sobě vyzdvižené board nechtěl |
-> | 3 | povrchové zrno (feTurbulence maska + `mask-composite`) | nebylo zadané a bylo to měřitelně nejdražší: při pohybu myši 1305 ms rasterizace proti 10 ms bez něj |
+> | 3 | povrchový efekt (maska sledující kurzor + feTurbulence zrno) | nebylo zadané a bylo to nejdražší místo ze všech tří prototypů: při pohybu myši 1305 ms rasterizace proti 10 ms bez něj |
 > | 3 | vyzdvižená deska pod doporučeným sloupcem ceníku | sloupec je označený už třikrát; deska rozbíjela levou hranu mřížky |
+> | 1 | posun zdroje světla při scrollu (`--pd-py`) | **jednotlivě úplně nejdražší konstrukce ze všech tří návrhů**: +801 ms rasterizace a +154 ms přepočtu stylů na jeden průjezd stránkou, za 7 px pohybu světla |
+
+## Poznámka k tomu, co bylo drahé — měřeno, ne odhadnuto
+
+Původní domněnka byla, že za cenu návrhu 3 může zrno (`feTurbulence`).
+**Měření to vyvrátilo.** Zrno samo o sobě stojí +18 ms — statická maska se
+rasterizuje jednou. Drahá byla kombinace: `pointermove` zapisuje `--mx/--my`,
+radiální maska je čte, takže se při každém pohybu myši překreslí maskovaný
+`::after` na všech 17 sekcích. Samotná maska bez obsluhy myši (+4 ms) ani
+obsluha bez masky (+5 ms) nestojí nic — teprve obě dohromady dají +1295 ms.
+Zrno je zesilovač (+401 ms navíc), ne spouštěč.
+
+A hlavně: nejdražší jednotlivá věc nebyla v návrhu 3, ale v návrhu 1 —
+posun zdroje světla při scrollu. Proto ve finální vrstvě není.
 
 Prototypy ke třem návrhům, které dostal board. **Nic z toho není produkční
 kód** — jsou to vrstvy, které se za běhu přikládaly na tehdejší homepage,
