@@ -2,6 +2,9 @@
 # Vytvořeno: 2026-05-06 (Content Writer)
 # Zdroje: ondraweb.cz/projekty (preferováno) + itwebtech.cz/projects
 # 24 projektů po deduplikaci: 14 webů, 5 aplikací, 5 ostatní
+# OND-282: tři z nich (logo-realitacky, video-pitbike-akademie, animace-delejme)
+# mají `published_at: null` — v datasetu zůstávají, na web se nedostanou.
+# Publikovaných je tedy 21: 14 webů, 5 aplikací, 2 ostatní.
 # Schéma odpovídá návrhu z OND-60 (portfolio_projects + *_translations + *_screenshots)
 # Engineer ve fázi 2: stáhne obrázky z `screenshots_source[].url`, uloží do
 # `resources/img/projects/{slug}/...`, pole `path` v DB doplní podle vlastní
@@ -3089,6 +3092,9 @@ projects:
     year: 2024
     featured: false
     sort_order: 310
+    # OND-282: Ondřej rozhodl, že projekt nebude na webu. Data zůstávají,
+    # jen se nepublikují. Zpět = `published_at: now` (nebo přepínač v adminu).
+    published_at: null
     tags: [logo, branding, identita, vektor]
     screenshots_source:
       - url: "https://itwebtech.cz/images/projects/realitacky/logo_realitacky_v_akci.png"
@@ -3206,6 +3212,8 @@ projects:
     year: 2023
     featured: false
     sort_order: 320
+    # OND-282: viz logo-realitacky — odpublikováno, nemazáno.
+    published_at: null
     tags: [video, animace, social-media, propagace]
     screenshots_source:
       - url: "https://itwebtech.cz/images/projects/pitarena/video-pitbike-akademie.jpg"
@@ -3437,6 +3445,8 @@ projects:
     year: 2023
     featured: false
     sort_order: 340
+    # OND-282: viz logo-realitacky — odpublikováno, nemazáno.
+    published_at: null
     tags: [video, animace, social-media, ukazka, vlastni-projekt]
     screenshots_source:
       - url: "https://itwebtech.cz/images/projects/itwebtech/video_delejme_animace.jpg"
