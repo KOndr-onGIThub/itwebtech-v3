@@ -59,14 +59,14 @@
 
                 <div class="contact-info__photo-wrap">
                     <picture>
-                        <source srcset="{{ asset_v('img/about/ondrej_kriska_preview.webp') }}" type="image/webp">
+                        <source srcset="{{ asset_v('img/about/ondrej_kriska_2026_preview.webp') }}" type="image/webp">
                         <img
-                            src="{{ asset_v('img/about/ondrej_kriska.jpg') }}"
+                            src="{{ asset_v('img/about/ondrej_kriska_2026.jpg') }}"
                             alt="{{ __('contact.hero.photo_alt') }}"
                             class="contact-info__photo"
                             loading="lazy"
                             width="260"
-                            height="300"
+                            height="325"
                         >
                     </picture>
                     <p class="contact-info__role">{{ __('contact.hero.role_label') }}</p>

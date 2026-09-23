@@ -168,13 +168,20 @@
         <aside class="article-author" data-reveal>
             <p class="article-author__eyebrow">{{ __('blog.article.author.eyebrow') }}</p>
             <div class="article-author__body">
-                <img
-                    src="{{ asset_v('img/about/ondrej_kriska.jpg') }}"
-                    alt="{{ __('blog.article.author.name') }}"
-                    class="article-author__photo"
-                    width="96" height="96"
-                    loading="lazy"
-                />
+                {{-- OND-297: obal kolem fotky. Zdroj je od OND-295 celý záběr
+                     1080×810 na šířku, do kolečka 96 px se z něj přímým
+                     `object-fit: cover` vejde obličej jen jako malý flek
+                     v horní polovině. Přiblížení řeší CSS na obalu, v repu
+                     leží jediný soubor sdílený s /o-mne a /kontakt. --}}
+                <span class="article-author__photo">
+                    <img
+                        src="{{ asset_v('img/about/ondrej_kriska_2026.jpg') }}"
+                        alt="{{ __('blog.article.author.name') }}"
+                        class="article-author__photo-img"
+                        width="200" height="150"
+                        loading="lazy"
+                    />
+                </span>
                 <div class="article-author__content">
                     <p class="article-author__name">{{ __('blog.article.author.name') }}</p>
                     <p class="article-author__role">{{ __('blog.article.author.role') }}</p>
