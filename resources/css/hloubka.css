@@ -7,26 +7,26 @@
 
      .pd--depth        vrstva samotná — slovník, geometrie náboje,
                        rozsvěcování sekcí. Platí všude, kde je zapnutá.
-     .pd--depth-home   pravidla navázaná na POŘADÍ SEKCÍ domovské stránky
-                       (`> section:nth-child(N)`). Jen domovská stránka.
+     .pd--depth-home   pravidla navázaná na POŘADÍ SEKCÍ (`> section:nth-child(N)`).
+                       OND-308: MRTVÝ SCOPE. Novou homepage nese `id`,
+                       tenhle scope drží už jen zmrazená /puvodni-homepage
+                       a smaže se spolu s ní.
      .pd--depth-sub    podstránky. Vlastní sazba, vlastní rozhodnutí — viz §E
                        úplně dole. Sekce se tam adresují přes `data-pdd`,
                        ne přes pořadí.
 
-   Kdo přidává novou sekci na homepage, přečísluje nth-child v §A. Proto
-   se na podstránkách nth-child nepoužívá vůbec: tam by pořadí ukazovalo
-   jinam a vzniklo by nasvícení, které nikdo nezadal.
+   POŘADÍ SEKCÍ SE UŽ NIKDE NEPOUŽÍVÁ — a je to rozhodnutí, ne nedodělek.
+   Dvakrát se stalo, že někdo přeskládal homepage a nth-child v §A
+   nepřečísloval: OND-256 sundal řadu log klientů a od sekce „Jak weby
+   stavím" dál mířilo nasvícení o sekci vedle (ověřeno 23. 9. na produkci —
+   `.pd-issue__num` měl `--pdd-spec` prázdný, pravidlo nesedělo na nic).
+   OND-269 to narovnal a OND-308 přeskládal stránku znovu.
 
-   A přesně to se stalo. OND-256 sundal z homepage řadu log klientů a
-   nth-child v §A nikdo nepřečísloval — od sekce „Jak weby stavím" dál
-   mířilo všechno o jednu sekci vedle. Ověřeno 23. 9. na produkci:
-   `.pd-issue__num` měl `--pdd-spec` prázdný (pravidlo nesedělo na nic)
-   a „můj" sloupec v sekci versus měl výchozí tmavou linku místo světlé.
-   OND-269 mění pořadí sekcí znovu a při té příležitosti to narovnává.
-   Aktuální pořadí (1–12): hero, projekty, social pás, jak weby stavím,
-   co stavím, ceník, proč já, pod kapotou, postup, reference, FAQ,
-   poptávka. Sekce s vlastním `id` (ceník, postup, reference, FAQ,
-   poptávka) se adresují přes id a přečíslování se jich netýká.
+   Nová homepage (OND-308) proto `pd--depth-home` vůbec nezapíná a každá
+   sekce, která má vlastní světlo, má `id`: `#section-toyota`,
+   `#section-projects`, `#section-services`, `#section-price`,
+   `#jak-pracuji`, `#section-testimonials`, `#poptavka`. Kdo přidá sekci,
+   nemusí přepočítat nic.
    --------------------------------------------------------------------------
    TŘI VRSTVY, TŘI RŮZNÉ ÚKOLY — schválně se nepřekrývají:
 
@@ -459,10 +459,12 @@
             rgba(255, 255, 255, 0) 76%);
 }
 
-/* --- 02 WEBY, KTERÉ BĚŽÍ V PRAXI — světlo zprava shora --------------------
+/* --- PROJEKTY — světlo zprava shora ---------------------------------------
    Případovky střídají stranu vizuálu (sudé mají order:2). Světlo zprava dá
    každému vizuálu jinou roli — jednou je u zdroje, jednou dál — a střídání
-   layoutu tím dostane fyzikální důvod. */
+   layoutu tím dostane fyzikální důvod.
+   (Druhý selektor je pořadové adresování zmrazené /puvodni-homepage.) */
+.pd--depth #section-projects,
 .pd--depth-home > section:nth-child(2) {
     --pdd-edge: linear-gradient(90deg,
         rgba(242, 240, 234, 0) 0%,
@@ -497,10 +499,11 @@
         #e6ff70 0%, #d8ff3a 34%, rgba(216, 255, 58, 0.46) 100%);
 }
 
-/* --- 04 CO STAVÍM — světlo shora, tři svislé linky různě nasvícené --------
+/* --- CO STAVÍM — světlo shora, tři svislé linky různě nasvícené -----------
    Svislé vlasové linky jsou jediné „hrany“ v sekci. Když je nasvítím různě
    (prostřední nejsilněji), sloupce přestanou být tabulkou a dostanou hloubku
    jako tři desky za sebou. Statické — nic tudy neprojíždí. */
+.pd--depth #section-services,
 .pd--depth-home > section:nth-child(5) {
     --pdd-edge: linear-gradient(90deg,
         rgba(242, 240, 234, 0.03) 0%,
@@ -513,10 +516,12 @@
             rgba(255, 255, 255, 0) 80%);
 }
 @media (min-width: 1024px) {
+    .pd--depth #section-services .pd-service + .pd-service,
     .pd--depth-home > section:nth-child(5) .pd-service + .pd-service {
         border-left-color: transparent;
         position: relative;
     }
+    .pd--depth #section-services .pd-service + .pd-service::before,
     .pd--depth-home > section:nth-child(5) .pd-service + .pd-service::before {
         content: "";
         position: absolute;
@@ -529,6 +534,7 @@
             rgba(242, 240, 234, 0.02) 100%);
     }
     /* Prostřední předěl je nejblíž ose zdroje → nejjasnější. */
+    .pd--depth #section-services .pd-service:nth-child(2)::before,
     .pd--depth-home > section:nth-child(5) .pd-service:nth-child(2)::before {
         background-image: linear-gradient(180deg,
             rgba(242, 240, 234, 0.34) 0%,
@@ -567,9 +573,11 @@
     -webkit-text-fill-color: transparent;
 }
 
-/* --- 07 PROČ JÁ — světlo zprava, měkké -----------------------------------
-   Osobní sekce s videem. Zdroj se po ceníku odklání doprava a plocha jde
-   o stupeň dolů — po nejjasnějším místě musí přijít úleva. */
+/* --- 18 LET V TOYOTĚ — světlo zprava, měkké -------------------------------
+   Osobní sekce s videem. Nejtišší místo horní půlky stránky: plocha jde
+   o stupeň dolů a nic se v ní nerozsvěcuje. Tma mezi reflektory.
+   (Na zmrazené /puvodni-homepage je to sedmá sekce, „Proč já".) */
+.pd--depth #section-toyota,
 .pd--depth-home > section:nth-child(7) {
     --pdd-edge: linear-gradient(90deg,
         rgba(242, 240, 234, 0.01) 0%,
@@ -640,10 +648,16 @@
 .pd--depth #section-testimonials .pd-testi__item            { border-top-color: rgba(242, 240, 234, 0.13); }
 .pd--depth #section-testimonials .pd-testi__item:nth-child(n + 3) { border-top-color: rgba(242, 240, 234, 0.09); }
 
-/* --- 10 FAQ — světlo ubývá s délkou seznamu -------------------------------
+/* --- FAQ — světlo ubývá s délkou seznamu ----------------------------------
    FAQ je servisní obsah, nemá soutěžit s poptávkou pod ním. Linky otázek
    proto postupně tmavnou — seznam se „propadá“ do stínu a oko sklouzne
-   na formulář. */
+   na formulář.
+
+   OND-308: na nové homepage je `#faq` vnořený blok uvnitř sekce
+   „Reference a námitky", ne vlastní sekce. Slábnoucí linky otázek platí
+   dál; `--pdd-edge` / `--pdd-wash` níž spotřebuje jen `.pd-section::before`,
+   takže na nové stránce zůstávají bez účinku a svítí tam nasvícení
+   celé sekce (`#section-testimonials`). Pro /puvodni-homepage platí obojí. */
 .pd--depth #faq {
     --pdd-edge: linear-gradient(90deg,
         rgba(242, 240, 234, 0.03) 0%,

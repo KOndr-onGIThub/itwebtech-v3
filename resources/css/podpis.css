@@ -220,6 +220,11 @@
     max-width: 36ch;
     margin: 0 0 var(--space-8);
 }
+/* OND-308: odstavec o situaci klienta jsou tři věty, ne heslo — na 36 ch
+   by z nich byl sloupec o osmi řádcích. Sekce kolem něj má zkrácené
+   odsazení: plná výška sekce by z jednoho odstavce udělala prázdný pás. */
+.pd-lead--wide { max-width: 52ch; margin-bottom: 0; }
+.pd-situation { padding-block: clamp(2.5rem, 4.5vw, 4rem); }
 
 /* --- Social pás --------------------------------------------- */
 .pd-strip {
@@ -460,6 +465,12 @@
     height: 1px;
     background: var(--pd-accent);
 }
+/* OND-308: odrážka má dvě části — hlavní větu v jazyce klienta a pod ní
+   technický doplněk. Hierarchii nese barva, ne velikost: doplněk zůstává
+   na stejném stupni písma, aby byl pořád čitelný (--color-fg-decorative
+   je na text s informací příliš tmavý, viz design-system.css). */
+.pd-service__bullet-main { display: block; color: var(--color-fg-primary); }
+.pd-service__bullet-note { display: block; margin-top: 2px; }
 .pd-services__secondary {
     margin: var(--space-8) 0 0;
     font-family: var(--font-body);
@@ -582,11 +593,27 @@
         align-items: start;
     }
 }
-.pd-why__video {
+.pd-why__video,
+.pd-toyota__media {
     border: 1px solid var(--color-border-soft);
     max-width: 340px;
 }
-.pd-why__video video { display: block; width: 100%; height: auto; }
+.pd-why__video video,
+.pd-toyota__media video { display: block; width: 100%; height: auto; }
+
+/* OND-308: sekce „18 let v Toyotě". Text vlevo, portrétní video vpravo —
+   pod zdrojem světla, které má sekce v hloubkové vrstvě zprava. Video je
+   o dvě stě pixelů vyšší než text s citací, proto se text sází na střed
+   jeho výšky: jinak má sekce useknutý pravý sloupec a pod ním prázdno. */
+.pd-toyota { display: grid; gap: var(--space-8); }
+@media (min-width: 900px) {
+    .pd-toyota {
+        grid-template-columns: 7fr 5fr;
+        gap: var(--space-9);
+        align-items: center;
+    }
+    .pd-toyota__media { justify-self: end; }
+}
 .pd-why__bio {
     font-family: var(--font-body);
     font-size: var(--text-body);
@@ -650,7 +677,12 @@
     color: var(--color-fg-muted);
     margin: 0;
 }
-.pd-hood__perf {
+/* OND-308: naměřený čas načtení stojí nově na konci pruhu čísel
+   (`.pd-strip__perf`). Sazbu si nese z původní sekce „Pod kapotou" —
+   ta žije už jen na zmrazené /puvodni-homepage a zmizí spolu s ní,
+   `.pd-hood__perf` se pak z téhle dvojice vyškrtne. */
+.pd-hood__perf,
+.pd-strip__perf {
     font-family: var(--font-display);
     font-weight: 300;
     font-variation-settings: 'wght' 300;
@@ -661,10 +693,13 @@
     max-width: 40ch;
     margin: var(--space-8) 0 0;
 }
-.pd-hood__perf strong {
+.pd-hood__perf strong,
+.pd-strip__perf strong {
     font-weight: 700;
     color: var(--pd-accent);
 }
+/* V pruhu čísel stojí věta hned pod řádkem údajů, ne pod mřížkou faktů. */
+.pd-strip__perf { margin-top: var(--space-5); }
 
 /* --- 09 Postup — kroky pod sebou, čas jako acid štítek ------- */
 .pd-steps { list-style: none; margin: 0; padding: 0; }
@@ -748,6 +783,32 @@
     letter-spacing: var(--tracking-tight);
     color: var(--color-fg-primary);
     margin: 0;
+}
+/* OND-308: pod kroky procesu už tlačítko není, zůstala jedna věta.
+   Předěl a odsazení proto nese ona sama, ne obal `.pd-steps__cta`
+   (ten drží jen zmrazená /puvodni-homepage). */
+.pd-steps + .pd-steps__cta-intro {
+    margin-top: var(--space-8);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border-soft);
+}
+
+/* --- Vnořený předěl uvnitř sekce ---------------------------- */
+/* OND-308: sekce „Reference a námitky" má dva poctivé nadpisy — citace
+   a pod nimi otázky. Druhou půlku odděluje vlasová linka a vlastní
+   mezisoučtový titulek (h3), ne hlava sekce. */
+.pd-subsection {
+    margin-top: var(--space-9);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--color-border-soft);
+}
+.pd-subsection__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-h3);
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-fg-primary);
+    margin: 0 0 var(--space-6);
 }
 
 /* --- 11 FAQ — details/summary s acid křížkem ----------------- */

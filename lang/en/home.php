@@ -29,10 +29,9 @@ return [
         'eyebrow'       => 'Custom websites & web applications',
         'heading'       => 'Websites and applications built to fit. I build them myself, on my own code.',
         // OND-130 + OND-136: single primary CTA in hero, exact wording per spec.
-        // cta_secondary kept for backwards compat — not shown in hero.
+        // OND-308: `cta_secondary` and `phone_label` removed — no reservations
+        // since OND-303 and the phone number splits the decision in the hero.
         'cta_primary'   => 'Tell me what you need',
-        'cta_secondary' => 'Book a 30-min consultation',
-        'phone_label'   => 'or call:',
     ],
 
     'anchors' => [
@@ -70,39 +69,15 @@ return [
     // took over the heading from here and gained a link to the live site
     // (`live_cta` / `live_aria`).
 
-    // OND-201 (finding 5.7): the section used to define the business by
-    // negating competitors and two of three items said the same thing.
-    // What I do now leads (`lead`), the delimitation is short, and the
-    // duplicate items are merged into one.
-    'problems' => [
-        'heading'            => 'How I build websites',
-        'lead'               => 'Every project starts with understanding your business. I write custom code from the ground up, so the site follows how your company actually works. You speak directly with me from the first message through launch and beyond.',
-        'transition_heading' => 'What that spares you',
-        'transition_text'    => 'The two things I see most often on web projects.',
-        'items' => [
-            [
-                'heading'      => 'A template sold as a custom solution',
-                'text'         => 'A supplier reuses a layout they have already used five times and drops in your text and logo. The result looks professional — until you open a competitor\'s website and find the same sections and the same words. On top of that, the platform keeps you on a monthly subscription you cannot take with you.',
-                'quote_text'   => 'Unlike the would-be web designers who just pour your content into a template and charge outrageous fees.',
-                'quote_author' => 'Petr Kroulík, Nové Interiéry s.r.o.',
-            ],
-            [
-                'heading' => 'You never speak with the person who builds the site',
-                'text'    => 'The person selling you the website isn\'t building it. The people building it aren\'t talking to you. Context and intent get lost in the middle — and the result doesn\'t match what you wanted.',
-            ],
-        ],
-        // OND-269 (audit OND-254, finding 7): what is left of the retired
-        // "Generator versus your business" section. Same argument as the first
-        // item above ("a template sold as a custom build"), so it belongs here
-        // rather than in a section of its own four screens further down.
-        'ai_heading' => 'A template is quick to build. Leads aren\'t.',
-        'ai_text'    => 'A generator can click a layout together and drop in text and images — what it cannot do is work out who you sell to, why a customer should choose you, or where prospects drop off. I use AI as a tool; the decisions about what the site should say and in what order are not something it can make for you.',
-    ],
+    // OND-308: the `problems` block is gone — the rebuilt homepage does not
+    // define itself by negating competitors. In its place sits a paragraph on
+    // the client's situation (`situation.text` in lang/cs); the EN wording is
+    // part of the translation card, so the paragraph stays hidden here until
+    // then. Same for `services.subheading`.
 
     'how_i_work' => [
         'heading'   => 'From first message to a launched website — 4 clear steps.',
         'cta_intro' => 'Let\'s jump straight to step 1.',
-        'cta_label' => 'Book a consultation',
         'steps'   => [
             [
                 'heading'      => 'Consultation',
@@ -133,15 +108,9 @@ return [
         ],
     ],
 
-    // OND-269 (audit OND-254, finding 7): the "Generator versus your business"
-    // section (two columns, eight bullets) is gone — the board approved the
-    // cut on 22 Sept. Two sentences survive in `problems.ai_heading` /
-    // `problems.ai_text`, where the same argument already stood.
-
-    // OND-269: `toyota` is no longer a section of its own — it renders inside
-    // "Why work with me", under the video and bio. The "18 years at Toyota"
-    // headline used to appear twice (here and in `why_me.bio`), so Toyota is
-    // out of the bio.
+    // OND-308: `toyota` is the third section of the page again and carries
+    // the video and Pavel Baudyš's quote. The CS text was rewritten; EN and DE
+    // keep the old wording until the translation card.
     'toyota' => [
         'heading'      => '18 years at Toyota. Then I left.',
         'text'         => 'The automotive industry taught me one thing: behind every top result there are always the same steps. Analysis, design, testing, verification — and then again. No shortcuts, no guesses. Principles that work regardless of the industry.',
@@ -261,32 +230,12 @@ return [
         'cta' => 'Detailed pricing →',
     ],
 
+    // OND-308: only the two screen-reader labels are left — the video and
+    // the photo belong to the Toyota section. `heading`, `bio` and the four
+    // `advantages` are gone from the rebuilt homepage.
     'why_me' => [
         'video_aria' => 'Video: Ondřej Kriška — who I am and how I build websites',
-        'heading'   => 'Why work with me',
         'photo_alt' => 'Ondřej Kriška — web developer',
-        // OND-269: the opening sentence ("For 18 years I ran projects at
-        // Toyota…") moved out — the Toyota story is told in full right below
-        // this paragraph, in the `toyota` block.
-        'bio'       => 'I work solo. You talk directly to me from the first consultation through launch and beyond — the same exact specification, analysis and verification on every project.',
-        'advantages' => [
-            [
-                'heading' => 'Custom code, no templates',
-                'text'    => 'I build to your business — not from a template your competitors have already used.',
-            ],
-            [
-                'heading' => 'Price upfront',
-                'text'    => 'You receive a specification with an exact price before work begins. What\'s in the specification is on the invoice.',
-            ],
-            [
-                'heading' => 'Direct contact',
-                'text'    => 'You communicate with me directly — no salesperson, no coordinator, no ticket system.',
-            ],
-            [
-                'heading' => 'Built to last',
-                'text'    => 'Maintenance-free operation without WordPress updates and plugins — no monthly security patching.',
-            ],
-        ],
     ],
 
     'testimonials' => [
@@ -294,31 +243,11 @@ return [
         'note'    => 'Translated from the Czech originals on Google, Firmy.cz and Facebook.',
     ],
 
-    // OND-269 (audit OND-254, finding 7): the "Two things you can count on."
-    // section is gone — the board approved the cut on 22 Sept. Both promises
-    // ("Price up front", "Direct contact") appeared verbatim a second time;
-    // the single remaining wording lives in `why_me.advantages` 02 and 03.
-
-    // OND-229 (F2 — proof layer): "Under the hood" section + live design
-    // token demo. Every claim is verifiable in the repo; load time is
-    // measured by the Performance API in the visitor's own browser.
+    // OND-308: the technical "Under the hood" section is gone. What is left
+    // is the measured load time, now in the numbers strip — the only claim
+    // a visitor verifies on themselves. Performance API measures it in the
+    // visitor's own browser; we never state a number we did not measure.
     'craft' => [
-        'heading' => 'Under the hood',
-        'intro'   => 'The website I build for you looks like this on the inside too. These aren\'t marketing lines — everything below can be verified right on the page you\'re on.',
-        'facts'   => [
-            [
-                'heading' => 'Custom code',
-                'text'    => 'No WordPress, no page builder, no platform. The page is written from scratch and runs without plugins that would need monthly updates.',
-            ],
-            [
-                'heading' => 'Images tailored to your screen',
-                'text'    => 'Every image here exists in seven sizes and the efficient AVIF format. Your browser downloaded only the one your display actually needs.',
-            ],
-            [
-                'heading' => 'Design held together by a system',
-                'text'    => 'Colours, type and spacing aren\'t governed by a template but by a custom system of variables. That\'s why nothing sticks out — and why you can play with it below.',
-            ],
-        ],
         'perf_prefix' => 'This page loaded for you in',
         'perf_suffix' => '— measured just now, in your browser.',
     ],
@@ -372,22 +301,6 @@ return [
         ],
     ],
 
-    'faq_form' => [
-        'eyebrow'     => 'Got a different question?',
-        'heading'     => 'Send it over.',
-        'description' => 'I pick it up and get back to you within 24 hours on business days. No sales pressure.',
-        'name'        => 'Name',
-        'email'       => 'Email',
-        'message'     => 'Your question',
-        'placeholders' => [
-            'name'    => 'John Smith',
-            'email'   => 'john@company.com',
-            'message' => 'E.g. Can you deliver before the end of the quarter?',
-        ],
-        'submit'      => 'Send question',
-        'submitting'  => 'Sending…',
-        'success'     => 'Thanks, the question has arrived. I\'ll get back to you as soon as possible.',
-    ],
 
     // OND-201 (finding 5.8): the single closing call to action of the homepage.
     'inline_form' => [
@@ -417,8 +330,10 @@ return [
     ],
 
     // TODO: review pro EN — copy podle CS varianty A (OND-100)
+    // OND-308: `cta` promised a calendar that no longer exists (OND-303).
+    // The link target is unchanged, only the label.
     'sticky' => [
-        'cta'    => 'Book a consultation',
+        'cta'    => 'Write an enquiry',
         'mobile' => 'Enquiry',
         'phone'  => 'Call',
     ],

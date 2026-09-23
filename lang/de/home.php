@@ -26,11 +26,12 @@ return [
         'note'            => 'Ich melde mich innerhalb von 24 Stunden an Arbeitstagen. Unverbindlich besprechen wir, was sinnvoll ist.',
 
         // Backwards compat (fallback render).
+        // OND-308: `cta_secondary` und `phone_label` entfernt — seit OND-303
+        // gibt es keine Reservierungen, und die Telefonnummer zersplittert
+        // die Entscheidung direkt unter dem Haupt-CTA.
         'eyebrow'       => 'Maßgeschneiderte Websites & Webanwendungen',
         'heading'       => 'Websites und Anwendungen nach Maß. Ich baue sie selbst, mit eigenem Code.',
         'cta_primary'   => 'Schreiben Sie mir, was Sie brauchen',
-        'cta_secondary' => '30-Min-Beratung vereinbaren',
-        'phone_label'   => 'oder anrufen:',
     ],
 
     'anchors' => [
@@ -68,39 +69,15 @@ return [
     // unten, die die Überschrift von hier übernommen hat und einen Link zur
     // Live-Website bekam (`live_cta` / `live_aria`).
 
-    // OND-201 (Befund 5.7): Der Abschnitt definierte sich über die Negation
-    // der Konkurrenz und zwei von drei Punkten sagten dasselbe. Jetzt führt,
-    // was ich tue (`lead`), die Abgrenzung ist kurz und die doppelten
-    // Punkte sind zu einem zusammengeführt.
-    'problems' => [
-        'heading'            => 'Wie ich Websites baue',
-        'lead'               => 'Jedes Projekt beginnt mit dem Verständnis Ihres Unternehmens. Ich schreibe eigenen Code von Grund auf, damit die Website dem folgt, wie Ihre Firma tatsächlich arbeitet. Sie sprechen direkt mit mir — von der ersten Nachricht bis zum Launch und darüber hinaus.',
-        'transition_heading' => 'Was Sie sich damit ersparen',
-        'transition_text'    => 'Die zwei Dinge, die ich bei Web-Projekten am häufigsten sehe.',
-        'items' => [
-            [
-                'heading'      => 'Eine Vorlage als individuelle Lösung verkauft',
-                'text'         => 'Ein Anbieter verwendet ein Layout, das er schon fünfmal genutzt hat, und fügt Ihren Text und Ihr Logo ein. Das Ergebnis wirkt professionell — bis Sie die Website der Konkurrenz öffnen und dieselben Abschnitte und dieselben Worte finden. Dazu hält die Plattform Sie in einem monatlichen Abonnement, das Sie nicht mitnehmen können.',
-                'quote_text'   => 'Ganz anders als die Möchtegern-Webdesigner, die für überhöhte Preise einfach Vorlagen mit Inhalten befüllen.',
-                'quote_author' => 'Petr Kroulík, Nové Interiéry s.r.o.',
-            ],
-            [
-                'heading' => 'Sie sprechen nie mit der Person, die die Website erstellt',
-                'text'    => 'Die Person, die Ihnen die Website verkauft, baut sie nicht. Die Personen, die sie bauen, sprechen nicht mit Ihnen. Kontext und Absicht gehen in der Mitte verloren — und das Ergebnis entspricht nicht dem, was Sie wollten.',
-            ],
-        ],
-        // OND-269 (Audit OND-254, Befund 7): Rest der gestrichenen Sektion
-        // „Generator versus Ihr Geschäft". Dasselbe Argument wie im ersten
-        // Punkt oben („eine Vorlage, verkauft als Maßarbeit") — es gehört
-        // hierher, nicht in eine eigene Sektion vier Bildschirme weiter unten.
-        'ai_heading' => 'Eine Vorlage ist schnell fertig. Anfragen kommen davon nicht.',
-        'ai_text'    => 'Ein Generator klickt ein Layout zusammen und füllt Texte und Bilder ein — er findet aber nicht heraus, an wen Sie verkaufen, warum ein Kunde Sie wählen sollte und wo Interessenten abspringen. KI nutze ich als Werkzeug; die Entscheidung, was die Website sagen soll und in welcher Reihenfolge, trifft sie nicht für Sie.',
-    ],
+    // OND-308: Der Block `problems` ist weg — die neue Startseite definiert
+    // sich nicht mehr über die Negation der Konkurrenz. An seiner Stelle steht
+    // ein Absatz zur Situation des Kunden (`situation.text` in lang/cs); die
+    // deutsche Fassung gehört zur Übersetzungskarte, bis dahin bleibt der
+    // Absatz hier ausgeblendet. Ebenso `services.subheading`.
 
     'how_i_work' => [
         'heading'   => 'Von der ersten Nachricht zur veröffentlichten Website — 4 klare Schritte.',
         'cta_intro' => 'Gleich zu Schritt 1.',
-        'cta_label' => 'Beratung vereinbaren',
         'steps'   => [
             [
                 'heading'      => 'Beratung',
@@ -131,16 +108,9 @@ return [
         ],
     ],
 
-    // OND-269 (Audit OND-254, Befund 7): Die Sektion „Generator versus Ihr
-    // Geschäft" (zwei Spalten, acht Stichpunkte) ist gestrichen — der Board
-    // hat den Schnitt am 22. 9. freigegeben. Übrig blieben zwei Sätze in
-    // `problems.ai_heading` / `problems.ai_text`, wo dasselbe Argument
-    // ohnehin schon stand.
-
-    // OND-269: `toyota` ist keine eigene Sektion mehr — der Block wird
-    // innerhalb von „Warum mit mir" unter Video und Bio ausgegeben. Die
-    // Überschrift „18 Jahre bei Toyota" stand zuvor zweimal auf der Seite
-    // (hier und in `why_me.bio`), deshalb ist Toyota aus der Bio raus.
+    // OND-308: `toyota` ist wieder die dritte Sektion der Seite und trägt das
+    // Video und das Zitat von Pavel Baudyš. Der CS-Text wurde neu geschrieben;
+    // EN und DE behalten die alte Fassung bis zur Übersetzungskarte.
     'toyota' => [
         'heading'      => '18 Jahre bei Toyota. Dann bin ich gegangen.',
         'text'         => 'Die Automobilindustrie hat mir eines beigebracht: Hinter jedem Spitzenergebnis stehen immer dieselben Schritte. Analyse, Design, Testen, Verifizieren — und dann wieder. Keine Abkürzungen, keine Schätzungen. Prinzipien, die unabhängig von der Branche funktionieren.',
@@ -261,32 +231,12 @@ return [
         'cta' => 'Detaillierte Preisliste →',
     ],
 
+    // OND-308: Übrig sind nur die beiden Beschriftungen für den Screenreader —
+    // Video und Foto gehören zum Toyota-Abschnitt. `heading`, `bio` und die
+    // vier `advantages` sind auf der neuen Startseite nicht mehr da.
     'why_me' => [
         'video_aria' => 'Video: Ondřej Kriška — wer ich bin und wie ich Websites baue',
-        'heading'   => 'Warum mit mir',
         'photo_alt' => 'Ondřej Kriška — Webentwickler',
-        // OND-269: Der erste Satz („18 Jahre lang habe ich bei Toyota…") ist
-        // hier raus — die Toyota-Geschichte steht direkt unter diesem Absatz
-        // vollständig im Block `toyota`.
-        'bio'       => 'Ich arbeite allein. Sie sprechen direkt mit mir — von der ersten Beratung bis zum Launch und darüber hinaus, mit derselben präzisen Spezifikation, Analyse und Verifikation bei jedem Projekt.',
-        'advantages' => [
-            [
-                'heading' => 'Eigener Code, keine Vorlagen',
-                'text'    => 'Ich baue passend zu Ihrem Unternehmen — nicht aus einer Vorlage, die Ihre Konkurrenz bereits verwendet.',
-            ],
-            [
-                'heading' => 'Preis im Voraus',
-                'text'    => 'Sie erhalten eine Spezifikation mit genauem Preis, bevor die Arbeit beginnt. Was in der Spezifikation steht, steht auf der Rechnung.',
-            ],
-            [
-                'heading' => 'Direkter Kontakt',
-                'text'    => 'Sie kommunizieren direkt mit mir — ohne Verkäufer, Koordinator und Ticket-System.',
-            ],
-            [
-                'heading' => 'Gebaut, damit es hält',
-                'text'    => 'Wartungsfreier Betrieb ohne WordPress-Updates und Plugins — keine monatlichen Sicherheits-Patches.',
-            ],
-        ],
     ],
 
     'testimonials' => [
@@ -294,32 +244,11 @@ return [
         'note'    => 'Aus dem Tschechischen übersetzt — die Originale stehen auf Google, Firmy.cz und Facebook.',
     ],
 
-    // OND-269 (Audit OND-254, Befund 7): Die Sektion „Zwei Dinge, auf die Sie
-    // sich verlassen können." ist gestrichen — der Board hat den Schnitt am
-    // 22. 9. freigegeben. Beide Zusagen („Preis im Voraus", „Direkter
-    // Kontakt") standen wörtlich ein zweites Mal; die einzige verbleibende
-    // Fassung steht in `why_me.advantages` 02 und 03.
-
-    // OND-229 (F2 — Beweisschicht): Abschnitt „Unter der Haube" + Live-Demo
-    // der Design-Tokens. Jede Aussage ist im Repo überprüfbar; die Ladezeit
-    // misst die Performance API im Browser des Besuchers.
+    // OND-308: Der technische Abschnitt „Unter der Haube" ist weg. Geblieben
+    // ist die gemessene Ladezeit, jetzt im Zahlenstreifen — die einzige
+    // Aussage, die der Besucher an sich selbst überprüft. Die Performance API
+    // misst im Browser des Besuchers; wir nennen nie eine ungemessene Zahl.
     'craft' => [
-        'heading' => 'Unter der Haube',
-        'intro'   => 'Die Website, die ich für Sie baue, sieht auch von innen so aus. Das sind keine Marketingsätze — alles unten lässt sich direkt auf dieser Seite überprüfen.',
-        'facts'   => [
-            [
-                'heading' => 'Eigener Code',
-                'text'    => 'Kein WordPress, kein Page-Builder, keine Plattform. Die Seite ist maßgeschrieben und läuft ohne Plugins, die monatliche Updates bräuchten.',
-            ],
-            [
-                'heading' => 'Bilder nach Maß für Ihr Display',
-                'text'    => 'Jedes Bild existiert hier in sieben Größen und im sparsamen AVIF-Format. Ihr Browser hat nur die geladen, die Ihr Display wirklich braucht.',
-            ],
-            [
-                'heading' => 'Design mit System',
-                'text'    => 'Farben, Schrift und Abstände steuert keine Vorlage, sondern ein eigenes System von Variablen. Deshalb wirkt nichts fehl am Platz — und deshalb können Sie es unten selbst ausprobieren.',
-            ],
-        ],
         'perf_prefix' => 'Diese Seite wurde für Sie in',
         'perf_suffix' => 'geladen — gemessen gerade eben, in Ihrem Browser.',
     ],
@@ -374,22 +303,6 @@ return [
         ],
     ],
 
-    'faq_form' => [
-        'eyebrow'     => 'Andere Frage?',
-        'heading'     => 'Schreiben Sie sie direkt.',
-        'description' => 'Ich greife sie auf und melde mich innerhalb von 24 Stunden an Arbeitstagen. Kein Verkaufsdruck.',
-        'name'        => 'Name',
-        'email'       => 'E-Mail',
-        'message'     => 'Ihre Frage',
-        'placeholders' => [
-            'name'    => 'Max Mustermann',
-            'email'   => 'max@firma.de',
-            'message' => 'Z. B. Schaffen Sie es bis zum Quartalsende?',
-        ],
-        'submit'      => 'Frage senden',
-        'submitting'  => 'Wird gesendet…',
-        'success'     => 'Danke, die Frage ist eingegangen. Ich melde mich so schnell wie möglich.',
-    ],
 
     // OND-201 (Befund 5.8): die einzige abschließende Aufforderung der Homepage.
     'inline_form' => [
@@ -419,8 +332,10 @@ return [
     ],
 
     // TODO: review pro DE — copy podle CS varianty A (OND-100)
+    // OND-308: `cta` versprach einen Kalender, den es seit OND-303 nicht
+    // mehr gibt. Das Linkziel bleibt, nur die Beschriftung ändert sich.
     'sticky' => [
-        'cta'    => 'Beratung vereinbaren',
+        'cta'    => 'Anfrage schreiben',
         'mobile' => 'Anfrage',
         'phone'  => 'Anrufen',
     ],
