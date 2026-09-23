@@ -10,7 +10,6 @@ return [
         'description' => 'Custom websites, online shops and web applications for small and mid-sized companies. Custom code, an exact price up front, and you deal with me directly. I am Ondřej Kriška.',
     ],
 
-    // TODO (OND-136 P3): final EN tone polish — Content Writer scope.
     'hero' => [
         // OND-127 P0 incident hotfix (2026-05-14) — plagiátor strings removed.
         // Placeholder copy derived from meta description = pre-redesign safe copy.
@@ -20,14 +19,19 @@ return [
         // artefact, itwebtech has no „pages" hierarchy in hero context.
         // OND-198 (finding 5.1): the previous headline promised the client's
         // business result. Replaced with the approved hero copy (CS source of truth).
-        'upline'          => 'For businesses that know the difference.',
-        'heading_html'    => 'Websites and applications <em>built to fit</em>.<br>I build them myself, on my own code.',
-        'subline'         => 'I am Ondřej Kriška, an experienced developer. You work with me directly — no agency, no middlemen. I build websites to run for years without tying you up in maintenance.',
+        // OND-310: EN now follows the rebuilt CS hero (OND-307 / OND-308).
+        // The old headline led with "on my own code" — a technical term in
+        // the one place where the visitor decides whether to write at all.
+        // The custom code does not disappear, it moves down into the subline
+        // and into the "What I build" section.
+        'upline'          => 'For businesses that are growing.',
+        'heading_html'    => 'A website that can <em>carry</em> what is going well for you.',
+        'subline'         => 'I am Ondřej Kriška. I build websites and applications on my own code and I do the work myself — from the first conversation to launch you deal with me and nobody else.',
         'note'            => 'I\'ll get back to you within 24 hours on business days. No commitment, we just go through what makes sense.',
 
         // Backwards compat (fallback render).
         'eyebrow'       => 'Custom websites & web applications',
-        'heading'       => 'Websites and applications built to fit. I build them myself, on my own code.',
+        'heading'       => 'A website that can carry what is going well for you.',
         // OND-130 + OND-136: single primary CTA in hero, exact wording per spec.
         // OND-308: `cta_secondary` and `phone_label` removed — no reservations
         // since OND-303 and the phone number splits the decision in the hero.
@@ -71,50 +75,56 @@ return [
 
     // OND-308: the `problems` block is gone — the rebuilt homepage does not
     // define itself by negating competitors. In its place sits a paragraph on
-    // the client's situation (`situation.text` in lang/cs); the EN wording is
-    // part of the translation card, so the paragraph stays hidden here until
-    // then. Same for `services.subheading`.
+    // the client's situation. OND-310 supplies the EN wording, so the section
+    // renders on /en/ too. It describes a situation, not a pain: the reader
+    // nods along. No scare copy (spec chapter 0.5).
+    'situation' => [
+        'text' => 'You have more work coming in than a year ago, and the website is still the one you had then. Orders get copied into a spreadsheet by hand, and enquiries get answered in the evening from your phone. Or you are adding a new service, and you want it to look as good on the website as you are at delivering it.',
+    ],
 
     'how_i_work' => [
-        'heading'   => 'From first message to a launched website — 4 clear steps.',
+        'heading'   => 'From your first message to a launched website in four steps',
         'cta_intro' => 'Let\'s jump straight to step 1.',
         'steps'   => [
             [
                 'heading'      => 'Consultation',
                 'time'         => '60 min, within a week',
-                'text'         => 'I start with a consultation, not a form. I need to understand your business, your customers and what the website should actually do — bring contacts, sell a product or build trust.',
+                'text'         => 'You write to me through the form below and tell me what you are dealing with. I get back to you within 24 hours on business days and we arrange a call or a meeting. You talk to me, not to a salesperson — I want to know who you sell to, how enquiries reach you today and what the website has to do.',
                 'quote_text'   => 'He really listened to what I needed and then turned it into something I am completely happy with.',
                 'quote_author' => 'Magda Pernicová, Realiťačky v akci',
             ],
             [
                 'heading'      => 'Specification',
                 'time'         => '2–5 days',
-                'text'         => 'Before I start working, you\'ll receive a written specification: what will be on the website, how many pages, what technology and how much it will cost. No surprises on the invoice. I\'ll estimate the delivery date realistically — always upfront, never retrospectively.',
+                'text'         => 'You get it in writing: what will be on the website, how many pages it has and what it will cost. What is in the specification is what is on the invoice. I estimate the delivery date up front, not after the fact.',
                 'quote_text'   => 'He analyses the starting position thoroughly and wants to understand the existing processes. He gathers requirements from users and asks where things are heading.',
                 'quote_author' => 'Jan Stybor, Head of Project Department, Toyota',
-                'note'         => 'Note on timelines: a website doesn\'t only depend on my side. Approvals, materials from the client and feedback are part of the process. The timeline is always an estimate, not a binding commitment — and I say that openly from the start.',
+                'note'         => 'The date is an estimate, not a commitment. Your approvals and your materials are part of the work, and I say so right at the start.',
             ],
             [
                 'heading' => 'Build',
                 'time'    => '3–10 weeks',
-                'text'    => 'I keep you informed about progress and involve you in key decisions. The result reflects what you wanted — because I don\'t wait until the end of the project to find out.',
+                'text'    => 'I write my own code, so the website follows your company and not a ready-made layout. I send previews as I go and ask you about the decisions worth making together. You are not finding out at the end whether it fits — you know all along.',
             ],
             [
                 'heading' => 'Launch and support',
                 'time'    => 'by the next business day',
-                'text'    => 'Once you approve deployment, the site usually goes live within one business day. After launch I stay available — small tweaks, technical questions and analytics help go through me directly, with no ticket and no waiting.',
+                'text'    => 'Once you approve it, the site usually goes live within one business day. From then on there is nothing to maintain — it has no add-ons that force monthly updates, so in two years no invoice arrives for repairing something that broke on its own. Small changes and questions after launch go through me directly.',
                 'note'    => 'Launch within 1 business day of approval.',
             ],
         ],
     ],
 
     // OND-308: `toyota` is the third section of the page again and carries
-    // the video and Pavel Baudyš's quote. The CS text was rewritten; EN and DE
-    // keep the old wording until the translation card.
+    // the video and Pavel Baudyš's quote.
+    // OND-310: the EN text follows the rewritten CS. The old wording stated
+    // abstract principles ("analysis, design, testing, verification"); the
+    // new one states what Ondřej actually did there. This is the section
+    // where the visitor checks the craft, so it speaks in his voice.
     'toyota' => [
         'heading'      => '18 years at Toyota. Then I left.',
-        'text'         => 'The automotive industry taught me one thing: behind every top result there are always the same steps. Analysis, design, testing, verification — and then again. No shortcuts, no guesses. Principles that work regardless of the industry.',
-        'text_2'       => 'I now apply these principles to every web project. You\'ll notice it at the first consultation, in the specification you receive before work begins — and in the result.',
+        'text'         => 'I started as a labourer in logistics and left as a senior specialist in the project team. For eighteen years I looked for where production and assembly lose time, and I wrote an in-house application for it that saved millions of crowns. On a production line you cannot afford for something to go down. That is where I learned that software is either done properly or not at all.',
+        'text_2'       => 'I build websites the same way. Before I write the first line I want to know how enquiries reach you and what happens to them next. Only then does the site take shape. You see it in the specification you get before I start working.',
         'quote_text'   => 'One of Ondřej\'s greatest strengths is his strong desire to develop — not just meeting customer needs, but exceeding their expectations.',
         'quote_author' => 'Pavel Baudyš, Director of Manufacturing, Assembly & Logistics, Toyota Motor Manufacturing Czech Republic (2024)',
     ],
@@ -147,7 +157,9 @@ return [
     ],
 
     'services' => [
-        'heading_primary'  => 'What I build — custom websites, apps and e-shops',
+        'heading_primary'  => 'What I build',
+        // OND-310: the mention of custom code moved here out of the hero.
+        'subheading'       => 'I write my own code. I do not use a template your competitors already have.',
         'heading_other'    => 'Additional services',
         'secondary_inline' => 'I also handle SEO, graphic design and social media management — :pricing_link or :contact_link.',
         'secondary_inline_pricing' => 'see the pricing',
@@ -158,29 +170,31 @@ return [
                 'title'       => 'Custom websites',
                 // OND-198 (finding 5.1): "starts bringing in customers" promised
                 // the client's business result — replaced with what I deliver.
-                'description' => 'A presentation website that sets you apart from template-driven competition and clearly explains what you do and how you differ.',
+                'description' => 'A website that explains what you do and why someone should pick you. It follows your company, not a ready-made layout.',
+                // OND-310 (spec task 3.9): a bullet is now a pair — the client's
+                // sentence first, the technical note under it.
                 'bullets'     => [
-                    'Custom code — no WordPress, no templates',
-                    'Conversion-focused structure built around your business',
-                    'Maintenance-free with fast load times',
+                    ['You will not find the same website one street away.', 'I write my own code and I do not use templates.'],
+                    ['The pages follow the order in which your customer actually decides.', 'I design the structure around how enquiries reach you.'],
+                    ['In two years no invoice arrives for repairing something that broke on its own.', 'The site does not run on add-ons that force monthly updates.'],
                 ],
             ],
             'aplikace' => [
                 'title'       => 'Web applications',
                 'description' => 'Internal systems, customer portals and tracking tools built around how your operation actually runs.',
                 'bullets'     => [
-                    'Process design before a single line of code',
-                    'Integrations with your existing tools',
-                    'Custom admin without monthly licence fees',
+                    ['Before I start writing, we go through how things run at your company today.', 'The process design comes before the first line of code.'],
+                    ['The site passes orders on by itself to wherever you already record them. Nobody retypes anything.', 'I connect it to the tools you already use.'],
+                    ['The admin area is yours and you do not pay for it every month.', 'No licence fees per user and none per record.'],
                 ],
             ],
             'eshop' => [
                 'title'       => 'E-shops',
-                'description' => 'An e-shop built around your product — without paying for plugins and themes every month.',
+                'description' => 'An e-shop built around your product range and the way you sell it.',
                 'bullets'     => [
-                    'Checkout and catalogue designed for your range',
-                    'Integrations with accounting, couriers and payment gateways',
-                    'No monthly platform fees',
+                    ['The checkout and the catalogue fit what you actually sell.', 'I design them around your range, not around a template.'],
+                    ['The site passes every order on by itself to your accounting, your courier and the payment gateway.', 'I sort the connections out while building, not after launch.'],
+                    ['Nobody charges you rent for having your own shop online.', 'No monthly fees for a platform or for add-ons.'],
                 ],
             ],
         ],
@@ -223,7 +237,8 @@ return [
             [
                 'title'    => 'Starter',
                 'price'    => '€1,000',
-                'desc'     => 'An exception, not the standard entry point: up to 5-page presentation site for sole traders. I take it on only where a larger scope makes no sense.',
+                // OND-310: the apologetic sentence is gone (spec task 3.7).
+                'desc'     => 'A presentation website of up to five pages for sole traders.',
                 'featured' => false,
             ],
         ],
@@ -239,7 +254,7 @@ return [
     ],
 
     'testimonials' => [
-        'heading' => 'What my clients say about working together.',
+        'heading' => 'What my clients say',
         'note'    => 'Translated from the Czech originals on Google, Firmy.cz and Facebook.',
     ],
 
@@ -262,7 +277,7 @@ return [
     // quote moved next to it.
 
     'faq' => [
-        'heading' => 'Frequently asked questions',
+        'heading' => 'What you ask me most often',
         // `key` is a stable slug for analytics (data-faq-key) and JSON-LD; do not localize.
         'items'   => [
             // OND-222 (chapter 6.3, objection 1): the most serious objection on
@@ -285,7 +300,7 @@ return [
             [
                 'key'      => 'duration',
                 'question' => 'How long does it take?',
-                'answer'   => 'From first message to a launched site typically 4–12 weeks — a week for consultation, 2–5 days for the specification, 3–10 weeks for the build, and launch by the next business day after approval. The detailed timeline for your project goes into the specification.',
+                'answer'   => 'From first message to a launched site typically 4–12 weeks — a week for consultation, 2–5 days for the specification, 3–10 weeks for the build, and launch by the next business day after approval. I put the exact timeline for your project into the specification.',
             ],
             [
                 'key'      => 'satisfaction',
@@ -294,8 +309,11 @@ return [
             ],
             [
                 'key'      => 'maintenance-free',
-                'question' => 'What does "maintenance-free" mean?',
-                'answer'   => 'No WordPress, no plugins, no monthly security updates. The site runs on custom code — it just works, doesn\'t need regular patching and doesn\'t break from template collisions. Small content changes go through me directly, with no ticket.',
+                // OND-310: the old question asked what "maintenance-free" means —
+                // that is my word, not the client's, and the answer named other
+                // people's technology. This is the question the client asks himself.
+                'question' => 'Will the website need regular maintenance?',
+                'answer'   => 'No. It does not sit on a ready-made platform with add-ons that have to be updated every month, so there is nothing in there to break on its own. When you want to change the content or add a page, you write to me and I do it.',
             ],
             // Archive: additional FAQ items move off the homepage (to /faq or /sluzby — out of OND-121 scope).
         ],
@@ -329,7 +347,6 @@ return [
         'error'           => 'The enquiry could not be saved right now. Please try again.',
     ],
 
-    // TODO: review pro EN — copy podle CS varianty A (OND-100)
     // OND-308: `cta` promised a calendar that no longer exists (OND-303).
     // The link target is unchanged, only the label.
     'sticky' => [
