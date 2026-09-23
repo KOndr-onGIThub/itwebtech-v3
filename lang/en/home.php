@@ -71,32 +71,12 @@ return [
     ],
 
     // OND-202: work samples as the primary visual material (live client sites).
-    'showcase' => [
-        'heading' => 'Websites running in the real world',
-        'intro'   => 'These are live projects you can open right now. Click through and explore them.',
-        'visit'   => 'Open the live site',
-        'aria'    => 'Open :domain in a new window',
-        'sites'   => [
-            [
-                'slug'   => 'barana',
-                'domain' => 'barana.cz',
-                'url'    => 'https://www.barana.cz/',
-                'desc'   => 'Bioclimatic pergolas, gates and fences',
-            ],
-            [
-                'slug'   => 'zubniprovazek',
-                'domain' => 'zubniprovazek.cz',
-                'url'    => 'https://www.zubniprovazek.cz/',
-                'desc'   => 'Dental practice for children and adults',
-            ],
-            [
-                'slug'   => 'pitarena',
-                'domain' => 'shop.pitarena.cz',
-                'url'    => 'https://shop.pitarena.cz/',
-                'desc'   => 'E-shop with pit bikes and spare parts',
-            ],
-        ],
-    ],
+    // OND-269 (audit OND-254, finding 7): the `showcase` block ("Websites
+    // running in the real world" — three tiles linking to the live site) is
+    // gone. Two project sections said the same thing and BARANA and PitArena
+    // were in both. Merged into the single `portfolio` section below, which
+    // took over the heading from here and gained a link to the live site
+    // (`live_cta` / `live_aria`).
 
     // OND-201 (finding 5.7): the section used to define the business by
     // negating competitors and two of three items said the same thing.
@@ -119,6 +99,12 @@ return [
                 'text'    => 'The person selling you the website isn\'t building it. The people building it aren\'t talking to you. Context and intent get lost in the middle — and the result doesn\'t match what you wanted.',
             ],
         ],
+        // OND-269 (audit OND-254, finding 7): what is left of the retired
+        // "Generator versus your business" section. Same argument as the first
+        // item above ("a template sold as a custom build"), so it belongs here
+        // rather than in a section of its own four screens further down.
+        'ai_heading' => 'A template is quick to build. Leads aren\'t.',
+        'ai_text'    => 'A generator can click a layout together and drop in text and images — what it cannot do is work out who you sell to, why a customer should choose you, or where prospects drop off. I use AI as a tool; the decisions about what the site should say and in what order are not something it can make for you.',
     ],
 
     'how_i_work' => [
@@ -155,35 +141,15 @@ return [
         ],
     ],
 
-    'ai' => [
-        'subheading' => 'A template is quick to build. Leads aren\'t.',
-        'heading'    => 'Generator versus your business',
-        'intro'      => 'Today\'s generators can click a layout together and drop in text and images. What they can\'t do: work out who you sell to, why a customer should choose you, or where prospects drop off. A website built to sell starts with the second part.',
-        'laik' => [
-            'label'   => 'Non-expert + AI',
-            'outcome' => 'Quick result.',
-            'items'   => [
-                'Generic, unvalidated, interchangeable',
-                'Without customer and competitor research',
-                'Without a strategy for what the site says and in what order',
-                'Nice-looking — identical to dozens of others',
-            ],
-            'note' => 'An AI website makes sense when you\'re testing an idea without commitment.',
-        ],
-        'expert' => [
-            'label'   => 'Expert + AI',
-            'outcome' => 'Just as fast where it makes sense. And without a generic result.',
-            'items'   => [
-                'Built on strategy, data and your customers',
-                'Control and a result someone is accountable for',
-                'Content designed so people stay and contact you',
-                'A website that differs from competitors — intentionally',
-            ],
-            'note' => 'If you run a business, this is a difference your customers will notice.',
-        ],
-        'closing' => 'I use AI as a tool — it cuts down on routine work. Decisions about what the site should say, to whom, and in what order are not something it can make for you. That work has to be done before the website is built.',
-    ],
+    // OND-269 (audit OND-254, finding 7): the "Generator versus your business"
+    // section (two columns, eight bullets) is gone — the board approved the
+    // cut on 22 Sept. Two sentences survive in `problems.ai_heading` /
+    // `problems.ai_text`, where the same argument already stood.
 
+    // OND-269: `toyota` is no longer a section of its own — it renders inside
+    // "Why work with me", under the video and bio. The "18 years at Toyota"
+    // headline used to appear twice (here and in `why_me.bio`), so Toyota is
+    // out of the bio.
     'toyota' => [
         'heading'      => '18 years at Toyota. Then I left.',
         'text'         => 'The automotive industry taught me one thing: behind every top result there are always the same steps. Analysis, design, testing, verification — and then again. No shortcuts, no guesses. Principles that work regardless of the industry.',
@@ -192,10 +158,16 @@ return [
         'quote_author' => 'Pavel Baudyš, Director of Manufacturing, Assembly & Logistics, Toyota Motor Manufacturing Czech Republic (2024)',
     ],
 
+    // OND-269: the only projects section on the homepage (formerly `showcase`
+    // + `portfolio`). Heading and intro come from the retired `showcase` —
+    // they talk about live websites, which is more concrete for a visitor.
     'portfolio' => [
-        'heading'    => 'Selected projects',
+        'heading'    => 'Websites running in the real world',
+        'intro'      => 'These are live projects you can open right now. Each one also says what it did for the client.',
         'cta'        => 'All projects →',
         'detail_cta' => 'See the project',
+        'live_cta'   => 'Open the live site',
+        'live_aria'  => 'Open the :client website in a new window',
         'cards' => [
             'pitarena' => [
                 'client'  => 'PitArena',
@@ -301,7 +273,10 @@ return [
         'video_aria' => 'Video: Ondřej Kriška — who I am and how I build websites',
         'heading'   => 'Why work with me',
         'photo_alt' => 'Ondřej Kriška — web developer',
-        'bio'       => 'For 18 years I ran projects at Toyota where the production line was not allowed to stop. I now apply those same principles — exact specification, analysis, verification — to web projects. I work solo: you talk directly to me from the first consultation through launch and beyond.',
+        // OND-269: the opening sentence ("For 18 years I ran projects at
+        // Toyota…") moved out — the Toyota story is told in full right below
+        // this paragraph, in the `toyota` block.
+        'bio'       => 'I work solo. You talk directly to me from the first consultation through launch and beyond — the same exact specification, analysis and verification on every project.',
         'advantages' => [
             [
                 'heading' => 'Custom code, no templates',
@@ -327,19 +302,10 @@ return [
         'note'    => 'Translated from the Czech originals on Google, Firmy.cz and Facebook.',
     ],
 
-    'guarantee' => [
-        'heading' => 'Two things you can rely on.',
-        'items'   => [
-            [
-                'heading' => 'Price upfront',
-                'text'    => 'You\'ll receive a specification with an exact price before work begins. What\'s in the specification is on the invoice. No extra costs, no surprises.',
-            ],
-            [
-                'heading' => 'Direct contact always',
-                'text'    => 'You communicate directly with me — not a salesperson or coordinator. Call any time. In the vast majority of cases I\'ll pick up immediately.',
-            ],
-        ],
-    ],
+    // OND-269 (audit OND-254, finding 7): the "Two things you can count on."
+    // section is gone — the board approved the cut on 22 Sept. Both promises
+    // ("Price up front", "Direct contact") appeared verbatim a second time;
+    // the single remaining wording lives in `why_me.advantages` 02 and 03.
 
     // OND-229 (F2 — proof layer): "Under the hood" section + live design
     // token demo. Every claim is verifiable in the repo; load time is
@@ -391,11 +357,10 @@ return [
                 'question' => 'You are one person. What if you get ill or quit?',
                 'answer'   => 'A fair concern — on a project this size it is the most important question. The site does not run on a platform you could not leave: it is custom code on ordinary web hosting. You can hold the hosting admin and FTP credentials the whole time — just ask for them. Once the project is paid in full the code is yours; I hand it over whenever you ask, and any developer can carry on with it — if documentation is needed for the handover, I will write it. I do not keep round-the-clock availability and I will not claim otherwise. What I do guarantee is that nothing stays locked up with me.',
             ],
-            [
-                'key'      => 'price',
-                'question' => 'What will it cost?',
-                'answer'   => 'See the pricing anchor above for indicative entry prices — Starter €1,000, Standard €2,200, Custom from €3,800. You get an exact written quote after a short consultation, and the invoice matches the specification line by line.',
-            ],
+            // OND-269 (audit OND-254, finding 7): the "What will it cost?"
+            // question is gone from here — the same heading and the same
+            // numbers stand four sections above in the pricing anchor
+            // (`price_anchor`) and in the price list.
             [
                 'key'      => 'duration',
                 'question' => 'How long does it take?',

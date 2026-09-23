@@ -18,6 +18,13 @@
        loga klientů, sekce „Generátor versus váš byznys", původ principů
        (Toyota), záruky, CTA na ceník, analytics-view kotvy a dispatch
        konverzních eventů po úspěšném odeslání formuláře.
+
+     OND-269 (2026-09-23) — zkrácení podle auditu OND-254 (nález 7),
+     schváleno boardem 22. 9.: ze 16 sekcí zbylo 12. Sloučené sekce
+     projektů, „Generátor versus váš byznys" na dvě věty, Toyota uvnitř
+     „Proč já", zrušené „Dvě věci…", ceny jen jednou (duplicitní FAQ
+     otázka pryč), tři recenze místo šesti. Každý škrt má komentář
+     u místa, kde se stal.
      =================================================== --}}
 @extends('layouts.app')
 
@@ -44,9 +51,14 @@
     $homeTestimonialOrder = config('site.features.show_toyota_testimonial')
         ? ['Pavel Baudyš', 'Rostislav Toman', 'Stanislav Holcmann', 'Hana Jaskmanická', 'Ing. Ivo Štěpánek', 'Václav Pešice']
         : ['Peter Vidlička', 'Rostislav Toman', 'Stanislav Holcmann', 'Hana Jaskmanická', 'Ing. Ivo Štěpánek', 'Václav Pešice'];
+    // OND-269 (audit OND-254, nález 7): homepage vypisovala šest recenzí
+    // (908 px desktop / 1 784 px mobil). Tři stačí — zbytek je jedno
+    // kliknutí daleko na Google i Firmy.cz, na které odkazuje pás
+    // se social proof výš. Pořadí zůstává, mění se jen počet.
     $homeTestimonials = collect($homeTestimonialOrder)
         ->map(fn ($name) => $allTestimonials->firstWhere('name', $name))
         ->filter()
+        ->take(3)
         ->values();
 @endphp
 
@@ -105,48 +117,100 @@
 </section>
 
 {{-- ===================================================
-     02 — ŽIVÉ WEBY (důkaz hned po hero)
+     02 — PRÁCE (důkaz hned po hero)
+
+     OND-269 (audit OND-254, nález 7): dřív tu stály DVĚ sekce projektů —
+     „Weby, které běží v praxi" (tři dlaždice s odkazem na živý web) hned
+     po hero a „Realizované projekty" (případovky z DB) o čtyři sekce níž.
+     BARANA i PitArena byly v obou. Board 22. 9. schválil sloučení.
+
+     Zůstala případovková podoba, protože nese větu o výsledku pro klienta
+     — to je to, co dlaždice neuměly. Odkaz na živý web se z dlaždic
+     přestěhoval do karty (`live_url` z DB), takže se nic neztratilo.
+     Jediné, co z homepage odešlo, je zubniprovazek.cz — zůstává na
+     /projekty.
+
+     Vizuál: `hero` snímek projektu, ne `portfolio_card_thumbnail()`.
+     Helper vybírá náhledovku do MALÉ karty (preferuje čtvercový detail
+     jednoho zařízení) a na 58vw široké ploše z toho vycházely slabé
+     záběry — u PitAreny zastaralá podstránka PIT & GO (nález 19 auditu),
+     u BARANY billboard na zastávce, který není ani web. `hero` je
+     kurátorovaný preview banner projektu a na tuhle velikost patří.
      =================================================== --}}
+@if (config('site.features.show_portfolio_section') && ($featuredHomeProjects ?? collect())->isNotEmpty())
 <section class="pd-section">
     <div class="container-site">
         <header class="pd-head">
-            <h2 class="pd-head__title">{{ __('home.showcase.heading') }}</h2>
+            <h2 class="pd-head__title">{{ __('home.portfolio.heading') }}</h2>
         </header>
-        <p class="pd-intro">{{ __('home.showcase.intro') }}</p>
+        <p class="pd-intro">{{ __('home.portfolio.intro') }}</p>
 
-        <div class="pd-works">
-            @foreach (__('home.showcase.sites') as $i => $site)
-            <a
-                href="{{ $site['url'] }}"
-                target="_blank"
-                rel="noopener"
-                class="pd-work"
-                aria-label="{{ __('home.showcase.aria', ['domain' => $site['domain']]) }}"
-                data-analytics="showcase_site_click"
-                data-analytics-props='{"site":"{{ $site['slug'] }}"}'
-            >
-                <span class="pd-work__plate">
-                    <x-responsive-image
-                        path="showcase/{{ $site['slug'] }}-desktop.webp"
-                        alt="{{ $site['domain'] }} — {{ $site['desc'] }}"
-                        sizes="(max-width: 767px) 100vw, 33vw"
-                        loading="lazy"
-                        decoding="async"
-                        width="1600"
-                        height="1000"
-                    />
-                </span>
-                <span class="pd-work__row">
-                    <h3 class="pd-work__domain">{{ $site['domain'] }}</h3>
-                    <span class="pd-work__num" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
-                </span>
-                <p class="pd-work__desc">{{ $site['desc'] }}</p>
-                <span class="pd-work__visit">{{ __('home.showcase.visit') }} &rarr;</span>
-            </a>
+        <div class="pd-cases">
+            @foreach ($featuredHomeProjects as $i => $project)
+                @php
+                    $t = $project->translation();
+                    $cardCopy = __('home.portfolio.cards.' . $project->slug);
+                    $clientLabel = is_array($cardCopy) && !empty($cardCopy['client'])
+                        ? $cardCopy['client']
+                        : ($project->client_name ?: ($t?->title ?? $project->slug));
+                    $outcome = is_array($cardCopy) && !empty($cardCopy['outcome'])
+                        ? $cardCopy['outcome']
+                        : ($t?->subtitle ?? '');
+                    $screens = $project->screenshots ?? collect();
+                    $hero = $screens->firstWhere('type', 'hero') ?? portfolio_card_thumbnail($screens);
+                    $detailHref = $project->detailUrl();
+                @endphp
+                <article class="pd-case">
+                    <a
+                        href="{{ $detailHref }}"
+                        class="pd-case__visual"
+                        aria-label="{{ $clientLabel }} — {{ __('home.portfolio.detail_cta') }}"
+                        data-analytics="project_card_click"
+                        data-analytics-props='{"slug":"{{ $project->slug }}"}'
+                    >
+                        @if ($hero)
+                            <x-portfolio.screenshot
+                                :path="$hero->path"
+                                :alt="$clientLabel"
+                                sizes="(min-width: 1024px) 58vw, 100vw"
+                                loading="lazy"
+                            />
+                        @endif
+                    </a>
+                    <div class="pd-case__body">
+                        <span class="pd-case__num" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                        <h3 class="pd-case__client">{{ $clientLabel }}</h3>
+                        @if ($outcome)
+                        <p class="pd-case__outcome">{{ $outcome }}</p>
+                        @endif
+                        <p class="pd-case__links">
+                            <a
+                                href="{{ $detailHref }}"
+                                class="pd-case__cta"
+                                data-analytics="project_card_click"
+                                data-analytics-props='{"slug":"{{ $project->slug }}"}'
+                            >{{ __('home.portfolio.detail_cta') }} &rarr;</a>
+                            @if ($project->live_url)
+                            <a
+                                href="{{ $project->live_url }}"
+                                class="pd-case__live"
+                                target="_blank"
+                                rel="noopener"
+                                aria-label="{{ __('home.portfolio.live_aria', ['client' => $clientLabel]) }}"
+                                data-analytics="showcase_site_click"
+                                data-analytics-props='{"site":"{{ $project->slug }}"}'
+                            >{{ __('home.portfolio.live_cta') }} &nearr;</a>
+                            @endif
+                        </p>
+                    </div>
+                </article>
             @endforeach
         </div>
+
+        <p class="pd-more"><a href="{{ lroute('projects') }}" class="pd-more__link">{{ __('home.portfolio.cta') }}</a></p>
     </div>
 </section>
+@endif
 
 {{-- ===================================================
      SOCIAL PROOF — jeden přesný řádek.
@@ -199,6 +263,14 @@
             </article>
             @endforeach
         </div>
+
+        {{-- OND-269 (audit OND-254, nález 7): ze samostatné sekce „Generátor
+             versus váš byznys" (dva sloupce, osm odrážek, 1 086 px desktop)
+             zbyly dvě věty. Stejný argument, o který v ní šlo, stojí o pár
+             řádků výš jako první „čemu se vyhnete" — vlastní sekci o čtyři
+             obrazovky níž nepotřeboval. --}}
+        <p class="pd-avoid pd-avoid--second">{{ __('home.problems.ai_heading') }}</p>
+        <p class="pd-avoid-sub">{{ __('home.problems.ai_text') }}</p>
     </div>
 </section>
 
@@ -238,74 +310,7 @@
 </section>
 
 {{-- ===================================================
-     05 — PŘÍPADOVKY (ukaž, neříkej)
-     Reálné vizuály nasazených webů z DB přes AVIF pipeline;
-     dílo mluví první, věta o výsledku druhá.
-     Zapnuto přes SHOW_PORTFOLIO_SECTION (config/site.php).
-     =================================================== --}}
-@if (config('site.features.show_portfolio_section') && ($featuredHomeProjects ?? collect())->isNotEmpty())
-<section class="pd-section">
-    <div class="container-site">
-        <header class="pd-head">
-            <h2 class="pd-head__title">{{ __('home.portfolio.heading') }}</h2>
-        </header>
-
-        <div class="pd-cases">
-            @foreach ($featuredHomeProjects as $i => $project)
-                @php
-                    $t = $project->translation();
-                    $cardCopy = __('home.portfolio.cards.' . $project->slug);
-                    $clientLabel = is_array($cardCopy) && !empty($cardCopy['client'])
-                        ? $cardCopy['client']
-                        : ($project->client_name ?: ($t?->title ?? $project->slug));
-                    $outcome = is_array($cardCopy) && !empty($cardCopy['outcome'])
-                        ? $cardCopy['outcome']
-                        : ($t?->subtitle ?? '');
-                    // OND-202: jednotný výběr náhledovky — viz portfolio_card_thumbnail().
-                    $hero = portfolio_card_thumbnail($project->screenshots ?? collect());
-                    $detailHref = $project->detailUrl();
-                @endphp
-                <article class="pd-case">
-                    <a
-                        href="{{ $detailHref }}"
-                        class="pd-case__visual"
-                        aria-label="{{ $clientLabel }} — {{ __('home.portfolio.detail_cta') }}"
-                        data-analytics="project_card_click"
-                        data-analytics-props='{"slug":"{{ $project->slug }}"}'
-                    >
-                        @if ($hero)
-                            <x-portfolio.screenshot
-                                :path="$hero->path"
-                                :alt="$clientLabel"
-                                sizes="(min-width: 1024px) 58vw, 100vw"
-                                loading="lazy"
-                            />
-                        @endif
-                    </a>
-                    <div class="pd-case__body">
-                        <span class="pd-case__num" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
-                        <h3 class="pd-case__client">{{ $clientLabel }}</h3>
-                        @if ($outcome)
-                        <p class="pd-case__outcome">{{ $outcome }}</p>
-                        @endif
-                        <a
-                            href="{{ $detailHref }}"
-                            class="pd-case__cta"
-                            data-analytics="project_card_click"
-                            data-analytics-props='{"slug":"{{ $project->slug }}"}'
-                        >{{ __('home.portfolio.detail_cta') }} &rarr;</a>
-                    </div>
-                </article>
-            @endforeach
-        </div>
-
-        <p class="pd-more"><a href="{{ lroute('projects') }}" class="pd-more__link">{{ __('home.portfolio.cta') }}</a></p>
-    </div>
-</section>
-@endif
-
-{{-- ===================================================
-     06 — CENOVÁ KOTVA
+     05 — CENOVÁ KOTVA
      Pořadí pásem je dané lang souborem, zvýrazněné pásmo
      se řídí klíčem `featured`, ne pozicí v poli (OND-198/5.4).
      =================================================== --}}
@@ -337,7 +342,7 @@
 </section>
 
 {{-- ===================================================
-     07 — PROČ JÁ
+     06 — PROČ JÁ
      Video nese sekci (mluví Ondra sám), výhody jako tichá
      mřížka s vlasovými linkami vedle.
      =================================================== --}}
@@ -367,11 +372,28 @@
                 @endforeach
             </div>
         </div>
+
+        {{-- OND-269 (audit OND-254, nález 7): „18 let v Toyotě" stálo na
+             homepage dvakrát — jednou v `why_me.bio` a pak ještě jako
+             samostatná sekce o čtyři sekce níž. Sekce se sem přestěhovala
+             celá (text i citace Pavla Baudyše), z bio Toyota vypadla.
+             Je to totéž téma: proč pracuju tak, jak pracuju. --}}
+        <div class="pd-origin pd-origin--nested">
+            <h3 class="pd-origin__title">{{ __('home.toyota.heading') }}</h3>
+            <div class="pd-origin__text">
+                <p>{{ __('home.toyota.text') }}</p>
+                <p>{{ __('home.toyota.text_2') }}</p>
+            </div>
+            <blockquote class="pd-origin__quote">
+                {{ __('home.toyota.quote_text') }}
+                <footer>— {{ __('home.toyota.quote_author') }}</footer>
+            </blockquote>
+        </div>
     </div>
 </section>
 
 {{-- ===================================================
-     08 — POD KAPOTOU (decentní moment řemesla)
+     07 — POD KAPOTOU (decentní moment řemesla)
      Fakta ověřitelná v repu + čas načtení změřený Performance
      API v prohlížeči návštěvníka. Bez JS zůstane řádek s časem
      skrytý — nikdy neukazujeme číslo, které jsme nenaměřili.
@@ -402,7 +424,7 @@
 </section>
 
 {{-- ===================================================
-     09 — POSTUP
+     08 — POSTUP
      Čtyři kroky pod sebou, čas jako acid datový štítek;
      citace klientů zůstávají u kroků, kde vznikly.
      =================================================== --}}
@@ -457,7 +479,7 @@
 </section>
 
 {{-- ===================================================
-     10 — REFERENCE
+     09 — REFERENCE
      =================================================== --}}
 <section class="pd-section" id="section-testimonials" data-analytics-view="testimonial_view">
     <div class="container-site">
@@ -498,99 +520,18 @@
 </section>
 
 {{-- ===================================================
-     11 — GENERÁTOR VERSUS VÁŠ BYZNYS
-     OND-231: sekce z původní homepage, přepsaná do ACID —
-     dva sloupce oddělené vlasovou linkou, žádné ikonky
-     v kolečkách, rozdíl nese sazba a barva jen u převažující
-     strany. Argument, proč zákazník neřeší jen „udělat web".
+     OND-269 (audit OND-254, nález 7) — tři sekce odsud pryč:
+
+       • „Generátor versus váš byznys" → dvě věty v sekci 03
+       • „Odkud pocházejí mé principy" (Toyota) → dovnitř sekce 06
+       • „Dvě věci, na které se můžete spolehnout." → zrušeno,
+         oba sliby doslova stály v sekci 06 jako body 02 a 03
+
+     Board schválil škrt 22. 9. (otázka 1 na OND-259).
      =================================================== --}}
-<section class="pd-section">
-    <div class="container-site">
-        <header class="pd-head">
-            <h2 class="pd-head__title">{{ __('home.ai.heading') }}</h2>
-        </header>
-        <p class="pd-lead">{{ __('home.ai.subheading') }}</p>
-        <p class="pd-intro">{{ __('home.ai.intro') }}</p>
-
-        <div class="pd-versus">
-            <div class="pd-versus__col">
-                <p class="pd-versus__label">{{ __('home.ai.laik.label') }}</p>
-                <p class="pd-versus__outcome">{{ __('home.ai.laik.outcome') }}</p>
-                <ul class="pd-versus__list">
-                    @foreach (__('home.ai.laik.items') as $item)
-                    <li>{{ $item }}</li>
-                    @endforeach
-                </ul>
-                <p class="pd-versus__note">{{ __('home.ai.laik.note') }}</p>
-            </div>
-
-            <div class="pd-versus__col pd-versus__col--mine">
-                <p class="pd-versus__label">{{ __('home.ai.expert.label') }}</p>
-                <p class="pd-versus__outcome">{{ __('home.ai.expert.outcome') }}</p>
-                <ul class="pd-versus__list">
-                    @foreach (__('home.ai.expert.items') as $item)
-                    <li>{{ $item }}</li>
-                    @endforeach
-                </ul>
-                <p class="pd-versus__note">{{ __('home.ai.expert.note') }}</p>
-            </div>
-        </div>
-
-        <p class="pd-versus__closing">{{ __('home.ai.closing') }}</p>
-    </div>
-</section>
 
 {{-- ===================================================
-     12 — ODKUD POCHÁZEJÍ MÉ PRINCIPY
-     OND-231: sekce z původní homepage. Je to jediné místo,
-     kde web vysvětluje, proč Ondra pracuje tak, jak pracuje.
-     =================================================== --}}
-<section class="pd-section">
-    <div class="container-site">
-        <header class="pd-head">
-            <h2 class="pd-head__title">{{ __('home.toyota.heading') }}</h2>
-        </header>
-
-        <div class="pd-origin">
-            <div class="pd-origin__text">
-                <p>{{ __('home.toyota.text') }}</p>
-                <p>{{ __('home.toyota.text_2') }}</p>
-            </div>
-            <blockquote class="pd-origin__quote">
-                {{ __('home.toyota.quote_text') }}
-                <footer>— {{ __('home.toyota.quote_author') }}</footer>
-            </blockquote>
-        </div>
-    </div>
-</section>
-
-{{-- ===================================================
-     13 — ZÁRUKY
-     OND-231: sekce z původní homepage — snížení rizika těsně
-     před FAQ a výzvou. Vlasové linky, žádné karty.
-     =================================================== --}}
-<section class="pd-section">
-    <div class="container-site">
-        <header class="pd-head">
-            <h2 class="pd-head__title">{{ __('home.guarantee.heading') }}</h2>
-        </header>
-
-        <div class="pd-promise">
-            @foreach (__('home.guarantee.items') as $i => $item)
-            <article class="pd-promise__item">
-                <span class="pd-promise__num" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
-                <div>
-                    <h3>{{ $item['heading'] }}</h3>
-                    <p>{{ $item['text'] }}</p>
-                </div>
-            </article>
-            @endforeach
-        </div>
-    </div>
-</section>
-
-{{-- ===================================================
-     14 — FAQ
+     10 — FAQ
      Nativní details/summary, vlasové linky, acid křížek jako
      indikátor. Stejné analytics klíče i JSON-LD jako dřív —
      FAQPage rich snippet se generuje ze stejných lang klíčů
@@ -644,7 +585,7 @@
 </section>
 
 {{-- ===================================================
-     15 — POPTÁVKA
+     11 — POPTÁVKA
      Jediná závěrečná výzva (nález OND-201/5.8 — FAQ
      mikro-formulář se nevrací, dva formuláře hned po sobě
      výzvu rozmělní). Stejný endpoint, pole i session
