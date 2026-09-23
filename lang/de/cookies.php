@@ -4,7 +4,7 @@ return [
 
     'meta' => [
         'title'       => 'Cookies und Einwilligung — ondraweb.cz',
-        'description' => 'Informationen zu den Cookies und Analysetools, die wir auf ondraweb.cz verwenden, und wie Sie Ihre Einwilligung jederzeit widerrufen können.',
+        'description' => 'Informationen zu den Cookies und Analysetools, die ich auf ondraweb.cz verwende, und wie Sie Ihre Einwilligung jederzeit widerrufen können.',
     ],
 
     'hero' => [
@@ -26,16 +26,16 @@ return [
     'intro' => 'Diese Seite fasst zusammen, welche Cookies und Analysetools auf der Website <strong>ondraweb.cz</strong> eingesetzt werden, wozu sie dienen und wie Sie Ihre Einwilligung jederzeit widerrufen können.',
 
     'what_we_use' => [
-        'heading' => 'Was wir verwenden',
+        'heading' => 'Was ich verwende',
         'items'   => [
             '<strong>Google Analytics 4 (GA4)</strong> — anonyme Besucherstatistiken, die zeigen, wie viele Menschen die Website besuchen, woher sie kommen und welche Bereiche sie ansprechen.',
             '<strong>Microsoft Clarity</strong> — Heatmaps und Sitzungsaufzeichnungen (mit anonymisierten Inhalten), die zeigen, wo Besucher Schwierigkeiten haben, das Gesuchte zu finden.',
         ],
-        'note'    => 'Wir verwenden keine Werbe-Cookies und kein Ad-Targeting. In GA4 bleiben die Werbe-Einwilligungen (<code>ad_storage</code>, <code>ad_user_data</code>, <code>ad_personalization</code>) dauerhaft auf <code>denied</code>.',
+        'note'    => 'Ich verwende keine Werbe-Cookies und kein Ad-Targeting. In GA4 bleiben die Werbe-Einwilligungen (<code>ad_storage</code>, <code>ad_user_data</code>, <code>ad_personalization</code>) dauerhaft auf <code>denied</code>.',
     ],
 
     'what_we_measure' => [
-        'heading' => 'Was wir messen',
+        'heading' => 'Was ich messe',
         'items'   => [
             'Besuche und Quellen (woher die Besucher kommen, wie viele Seiten sie aufrufen, wie lange sie bleiben).',
             // OND-269 (Audit OND-254): Den CTA „Angebot erhalten“ gibt es auf

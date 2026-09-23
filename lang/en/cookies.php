@@ -4,7 +4,7 @@ return [
 
     'meta' => [
         'title'       => 'Cookies and consent — ondraweb.cz',
-        'description' => 'Information about the cookies and analytics tools we use on ondraweb.cz, and how to revoke your consent at any time.',
+        'description' => 'Information about the cookies and analytics tools I use on ondraweb.cz, and how to revoke your consent at any time.',
     ],
 
     'hero' => [
@@ -26,16 +26,16 @@ return [
     'intro' => 'This page summarises the cookies and analytics tools used on <strong>ondraweb.cz</strong>, what they are for, and how to revoke your consent to their use at any time.',
 
     'what_we_use' => [
-        'heading' => 'What we use',
+        'heading' => 'What I use',
         'items'   => [
             '<strong>Google Analytics 4 (GA4)</strong> — anonymous traffic statistics that show how many people visit the site, where they come from, and which sections engage them.',
             '<strong>Microsoft Clarity</strong> — heatmaps and session recordings (with anonymised content) that help spot where visitors struggle to find what they are looking for.',
         ],
-        'note'    => 'We do not use any advertising cookies or ad targeting. In GA4, the advertising consents (<code>ad_storage</code>, <code>ad_user_data</code>, <code>ad_personalization</code>) remain permanently set to <code>denied</code>.',
+        'note'    => 'I do not use any advertising cookies or ad targeting. In GA4, the advertising consents (<code>ad_storage</code>, <code>ad_user_data</code>, <code>ad_personalization</code>) remain permanently set to <code>denied</code>.',
     ],
 
     'what_we_measure' => [
-        'heading' => 'What we measure',
+        'heading' => 'What I measure',
         'items'   => [
             'Traffic and sources (where visitors come from, how many pages they view, how long they stay).',
             // OND-269 (audit OND-254): the CTA “Get a quote” does not exist
@@ -43,7 +43,7 @@ return [
             // purpose — a legal page should not go stale every time a
             // button is reworded. What is described is the behaviour.
             'Interactions with the main calls to action — clicks on the call-to-action button, the phone number, opening the form, submitting an inquiry.',
-            'Session recordings (Clarity) — anonymised video capture of cursor movement and clicks so we can spot places where visitors get lost.',
+            'Session recordings (Clarity) — anonymised video capture of cursor movement and clicks so I can spot places where visitors get lost.',
         ],
     ],
 

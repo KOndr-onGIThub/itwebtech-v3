@@ -4,7 +4,7 @@ return [
 
     'meta' => [
         'title'       => 'Cookies a souhlas se zpracováním — ondraweb.cz',
-        'description' => 'Informace o cookies a měřicích nástrojích, které používáme na ondraweb.cz, a jak svůj souhlas kdykoli odvolat.',
+        'description' => 'Informace o cookies a měřicích nástrojích, které používám na ondraweb.cz, a jak svůj souhlas kdykoli odvolat.',
     ],
 
     'hero' => [
@@ -23,19 +23,19 @@ return [
         ],
     ],
 
-    'intro' => 'Tato stránka shrnuje, jaké cookies a měřicí nástroje na webu <strong>ondraweb.cz</strong> používáme, k čemu slouží a jak souhlas s jejich používáním kdykoli odvoláte.',
+    'intro' => 'Tahle stránka shrnuje, jaké cookies a měřicí nástroje na webu <strong>ondraweb.cz</strong> používám, k čemu mi slouží a jak souhlas s jejich používáním kdykoli odvoláte.',
 
     'what_we_use' => [
-        'heading' => 'Co používáme',
+        'heading' => 'Co používám',
         'items'   => [
-            '<strong>Google Analytics 4 (GA4)</strong> — anonymní statistika návštěvnosti, ze které vidíme, kolik lidí web navštíví, odkud přicházejí a které sekce zaujmou.',
+            '<strong>Google Analytics 4 (GA4)</strong> — anonymní statistika návštěvnosti, ze které vidím, kolik lidí web navštíví, odkud přicházejí a které sekce je zaujmou.',
             '<strong>Microsoft Clarity</strong> — heatmapy a nahrávky relací (s anonymizovaným obsahem), které pomáhají odhalit, kde mají návštěvníci problém najít to, co hledají.',
         ],
-        'note'    => 'Žádné reklamní cookies nebo cílení reklam nepoužíváme. V GA4 zůstávají reklamní souhlasy (<code>ad_storage</code>, <code>ad_user_data</code>, <code>ad_personalization</code>) trvale na hodnotě <code>denied</code>.',
+        'note'    => 'Žádné reklamní cookies ani cílení reklam nepoužívám. V GA4 zůstávají reklamní souhlasy (<code>ad_storage</code>, <code>ad_user_data</code>, <code>ad_personalization</code>) trvale na hodnotě <code>denied</code>.',
     ],
 
     'what_we_measure' => [
-        'heading' => 'Co měříme',
+        'heading' => 'Co měřím',
         'items'   => [
             'Návštěvnost a zdroje (odkud lidé přicházejí, kolik stránek shlédnou, jak dlouho zůstanou).',
             // OND-269 (audit OND-254): CTA „Získat cenovou nabídku“ na webu
