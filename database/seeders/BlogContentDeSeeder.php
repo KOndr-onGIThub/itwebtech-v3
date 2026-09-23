@@ -27,8 +27,9 @@ use Illuminate\Support\Facades\DB;
  * z CS verze. Když se čísla v `lang/de/price.php` změní, je potřeba srovnat
  * i tenhle text.
  *
- * EN překlady jsou pořád ze starého importu a s přepsanou CS verzí se nekryjí
- * — mimo rozsah tohoto issue.
+ * EN překlady: článek 3 a titulek/perex článku 6 přepsalo OND-267
+ * (`BlogContentEnSeeder`). Zbylé tři články a tělo šestky jsou pořád ze
+ * starého importu a s přepsanou CS verzí se nekryjí — řeší OND-275.
  */
 class BlogContentDeSeeder extends Seeder
 {
@@ -179,7 +180,7 @@ class BlogContentDeSeeder extends Seeder
                     <p><strong>Standard — 2.200 €.</strong> Eine Website nach Maß bis zwölf Seiten. Mit einer einfachen Inhaltsverwaltung, sodass Sie Texte, Fotos oder Referenzen selbst ändern. Eine weitere Sprachversion ist möglich. Das bestellen die meisten Firmen.</p>
                     <p><strong>Custom — ab 3.800 €.</strong> Onlineshop, Reservierungssystem oder eine Anwendung nach Maß. Der Umfang steht nicht vorher fest, der Preis ergibt sich daraus, was die Website können muss und an welche Systeme sie angebunden wird.</p>
                     <p><strong>Starter — 1.000 €.</strong> Die Ausnahme, nicht der normale Einstieg. Eine Präsentation bis fünf Seiten für Selbstständige, bei denen ein größerer Umfang keinen Sinn ergibt.</p>
-                    <p>Ich bin kein Umsatzsteuerpflichtiger. Der Preis, den ich Ihnen nenne, ist endgültig. Was genau in den einzelnen Stufen steckt, steht aufgeschlüsselt in der <a href="/de/preisliste">Preisliste</a>.</p>
+                    <p>Ich bin nicht umsatzsteuerpflichtig. Der Preis, den ich Ihnen nenne, ist ein Endpreis — es kommt keine Mehrwertsteuer hinzu. Was genau in den einzelnen Stufen steckt, steht aufgeschlüsselt in der <a href="/de/preisliste">Preisliste</a>.</p>
                     HTML,
                 'content_mid' => <<<'HTML'
                     <blockquote><p>Sie kennen den Preis, bevor ich anfange zu arbeiten. Nicht erst auf der Rechnung.</p></blockquote>

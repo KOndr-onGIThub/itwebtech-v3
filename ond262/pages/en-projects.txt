@@ -1,0 +1,316 @@
+What I have built | ONDRAWEB
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+CZ
+EN
+DE
+Book a consultation
+CZ
+EN
+DE
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+Book a consultation
+💬
+Enquiry
+PROJECTS
+Live websites, not pictures in a gallery.
+What I have
+built .
+For every project you can read what the site does and the scope I built it in. The link goes to the live version — check it yourself.
+All
+24
+Websites
+14
+Web apps
+5
+Others
+5
+projects shown
+Website
+·
+2023
+·
+PitArena
+PitArena
+From zero to a brand, a website and online sales
+View project
+Website
+·
+2026
+·
+PitArena
+PitArena — online shop
+An online shop where customers find the part for their model and year
+View project
+Web application
+·
+2021
+·
+Toyota Kolín
+HCMS — production information system
+An app that keeps the assembly line moving
+View project
+Website
+·
+2026
+·
+BARANA
+BARANA
+Premium website for bioclimatic pergolas, ready for ad campaigns
+View project
+Website
+·
+2026
+·
+Nové interiéry — Petr Kroulík
+Nové interiéry
+A website that works like a first business meeting
+View project
+Website
+·
+2025
+·
+Cyklo Centrum — Petr Kňourek
+Cyklo Centrum
+A rescue project — rebuilt from scratch after a year wasted with another vendor
+View project
+Website
+·
+2024
+·
+Realiťačky v Akci — Magda Pernicová Novotná
+Realiťačky v Akci
+A real-estate website the client runs herself
+View project
+Website
+·
+2025
+·
+Zubní ordinace Provázek s.r.o.
+Zubní Provázek
+Dental practice redesign with local SEO focus
+View project
+Website
+·
+2024
+·
+VP Industry — Miroslav Pekárek
+VP Industry
+A site built to grow the moment content kicks in
+View project
+Website
+·
+2024
+·
+Autokemp Veselka — Jana Veselá
+Autokemp Veselka
+The campsite's calm atmosphere translated to the web
+View project
+Website
+·
+2023
+·
+Střechy Zajíc — Jaroslav Zajíc
+Střechy Zajíc
+Carpentry, roofing and masonry in one focused website
+View project
+Website
+·
+2024
+·
+Josef Opa
+Josef Opa
+A multilingual website for a construction firm with its own brand
+View project
+Website
+·
+2023
+·
+VAN spedition — Antonín Vrbka
+VAN spedition
+A logistics micro-site with a single clear path to contact
+View project
+Website
+·
+2025
+·
+YOLK Studio (Peter Vidlička)
+YOLK — agency development on clinic portals
+Agency-side development and maintenance on healthcare portals
+View project
+Website
+·
+2023
+·
+Elektro Srnák — Lukáš Srnák
+Elektro Srnák
+A small website for an electrician that wastes no time
+View project
+Web application
+·
+2023
+·
+Toyota Kolín
+Picker — logistics control system
+An app for picking parts from the warehouse to the assembly line
+View project
+Web application
+·
+2024
+·
+Tradiční výroba pralinek, s.r.o.
+Choccoboard — strategic dashboard
+A BI dashboard that replaced 30 minutes of daily manual work
+View project
+Web application
+·
+2019
+·
+Toyota Kolín
+FRL Creator
+A PDF generator for shelf information sheets
+View project
+Web application
+·
+2020
+·
+Toyota Kolín
+Excel Tools (VBA)
+A suite of VBA tools that keep production running
+View project
+Other
+·
+2024
+·
+PitArena (Stanislav Holcmann)
+Article on Motorkáři.cz
+Content marketing that reached the country's biggest moto portal
+View project
+Other
+·
+2024
+·
+Realiťačky v Akci
+Logo — Realiťačky v Akci
+A memorable logo that holds at any size
+View project
+Other
+·
+2023
+·
+PitArena (Stanislav Holcmann)
+Video — Pitbike Akademie
+A promo animation that stops the thumb mid-scroll
+View project
+Other
+·
+2023
+·
+PitArena (Stanislav Holcmann)
+PitArena outdoor sign
+A large-format sign above the workshop, ready for print
+View project
+Other
+·
+2023
+·
+itwebtech (vlastní práce)
+Attention-grabbing animation
+A sample of how to break through a saturated feed
+View project
+Case studies
+Four projects up close
+For each one you can read what the client came with, what I built and what the site does. Where the site is public, the link goes to the live version.
+Online shop — motorbikes and spare parts
+shop.pitarena.cz
+PitArena
+The client sells YCF pit bikes and spare parts. They needed to sell online — and with parts, getting the right piece for a given model and year is what matters. I built an online shop with a catalogue of both bikes and parts, sorted by model and part group.
+Cart and customer account.
+Categories by model (LITE 125, PILOT 125, Factory 190) and by part group — brakes, engines, suspension, electrics.
+Filtering by model and year.
+Favourites and product comparison.
+Clear navigation across a large range.
+Brochure site — aluminium structures
+barana.cz
+BARANA
+The client makes custom aluminium pergolas, gates and fences. They needed a site that explains clearly what they do and makes it easy to get in touch. I built a brochure site with services, a gallery of finished work and an enquiry form.
+Services split out — bioclimatic pergolas, gates and fences, custom design.
+Gallery of finished installations.
+Enquiry form and contact details.
+A "How it works" section.
+Clean, uncluttered design.
+Brochure site with online booking — dentistry
+zubniprovazek.cz
+Provázek dental practice
+The client runs a dental practice for adults and children. They needed a site with practice information and, above all, easy online booking. I built a brochure site with online booking.
+Online booking.
+Overview of treatments — prevention, dental hygiene, whitening, restorative care, prosthetics and implants, paediatric dentistry.
+Price list.
+About, contact, opening hours and location.
+Clear, friendly design.
+Internal application — logistics
+Toyota — the TSM application
+A web application built around real logistics processes, which I programmed during my eighteen years at Toyota. It replaced lengthy manual work and saved the company an amount in the order of millions of Czech koruna.
+Built around the real logistics process, not a generic tool.
+Replaced lengthy manual work.
+Savings in the order of millions of Czech koruna.
+An internal system — not publicly available, hence no link.
+Quick qualification
+Does it make sense to solve now?
+Your website has traffic but inquiries are inconsistent.
+Your service offer is unclear or buried in content.
+There is no clear next step after inquiry submission.
+You do not want another "nice website" but something built around how your company actually works.
+If 2+ points match, this is worth solving now.
+In the intro call, we define the shortest path to a working solution without unnecessary extras.
+Book consultation
+See pricing first
+This is how I do it
+I put the following into projects
+Expertise and practice
+Thanks to 18 years of experience at Toyota, I have unique expertise in process optimisation and web application development.
+Stability and robustness
+I don't build websites from third-party add-ons that break with the next update. I write my own code that holds up.
+Thorough testing
+I leave nothing to chance. I test apps and websites during development and after completion.
+Speed and design
+Fast loading and modern design come first — they ensure a positive first impression and a pleasant user experience.
+Customised solutions
+Every project is unique to me and I always look for the best solution adapted to each client's specific needs and goals.
+Emphasis on detail
+I always pay close attention to details that can be decisive for the success of your project.
+Want a similar result for your business?
+Book a consultation
+I help entrepreneurs succeed in the online world
+Book a free consultation
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+© 2026 ONDRAWEB — All rights reserved.
++420 728 697 712
+Privacy Policy
+Cookies
+Let's talk
+Free consultation — no commitment, no registration.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Pick a consultation slot
+Free. No commitment.
+Mind a few cookies?
+I only measure a few numbers about what works on the site. No data selling.
+See the cookie policy .
+Decline
+Accept all
+✕

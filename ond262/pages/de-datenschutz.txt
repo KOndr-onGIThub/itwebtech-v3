@@ -1,0 +1,81 @@
+Datenschutzerklärung — Ondřej Kriška
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+CZ
+EN
+DE
+Beratung vereinbaren
+CZ
+EN
+DE
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+Beratung vereinbaren
+💬
+Anfrage
+DATENSCHUTZ
+Klar, verständlich, DSGVO-konform.
+Ihre Daten gehören Ihnen .
+Was ich erhebe, warum ich es erhebe und wie ich es schütze. Ohne Juristensprache.
+Kurz gesagt
+Ich erhebe nur Daten, die Sie mir selbst übermitteln (Formular, E-Mail, Telefon).
+Ich gebe sie nicht an Dritte für Marketing weiter — sie dienen nur zur Antwort auf Ihre Anfrage.
+Webanalyse ist anonym (GA4 ohne Werbe-Cookies, Clarity).
+Sie können jederzeit Löschung beantragen: ok@ondraweb.cz.
+Datum des Inkrafttretens: 6. Mai 2026
+Die Website (nachfolgend „Dienst") wird vom Unternehmer Ondřej Kriška (nachfolgend „Betreiber" oder „ONDRAWEB") betrieben.
+Diese Seite informiert Sie über unsere Richtlinien bezüglich der Erhebung, Verwendung und Weitergabe personenbezogener Daten bei der Nutzung unseres Dienstes.
+Erhebung und Verwendung von Informationen
+Wir erheben verschiedene Arten von Informationen für verschiedene Zwecke, um Ihnen unseren Dienst bereitzustellen und zu verbessern.
+Arten der erhobenen Daten
+Personenbezogene Daten
+Bei der Nutzung unseres Dienstes können wir Sie bitten, uns bestimmte personenbezogene Daten zu übermitteln. Personenbezogene Daten können unter anderem umfassen:
+E-Mail-Adresse
+Telefonnummer
+Adresse, Bundesland, Postleitzahl, Stadt
+Cookies und Nutzungsdaten
+Nutzungsdaten
+Wir können auch Informationen darüber erheben, wie auf den Dienst zugegriffen und wie er genutzt wird. Diese Nutzungsdaten können Informationen wie die Internetprotokolladresse Ihres Computers (z. B. IP-Adresse), den Browsertyp, die besuchten Seiten unseres Dienstes sowie Uhrzeit und Datum Ihres Besuchs umfassen.
+Tracking- und Cookie-Daten
+Wir verwenden Cookies und ähnliche Tracking-Technologien, um die Aktivität in unserem Dienst zu verfolgen. Cookies sind Dateien mit einer kleinen Datenmenge. Cookies werden von einer Website an Ihren Browser gesendet und auf Ihrem Gerät gespeichert.
+Verwendung der Daten
+ONDRAWEB verwendet die erhobenen Daten für verschiedene Zwecke:
+Zur Bereitstellung und Aufrechterhaltung des Dienstes
+Um Sie über Änderungen unseres Dienstes zu informieren
+Zur Bereitstellung von Kundendienst und Support
+Zur Überwachung der Nutzung des Dienstes
+Zur Erkennung, Verhinderung und Behebung technischer Probleme
+Datensicherheit
+Die Sicherheit Ihrer Daten ist uns wichtig. Obwohl wir uns bemühen, kommerziell akzeptable Mittel zum Schutz Ihrer personenbezogenen Daten einzusetzen, können wir deren absolute Sicherheit nicht garantieren.
+Analytik
+Google Analytics: Ein Webanalysedienst zur Verfolgung und Analyse der Nutzung unseres Dienstes.
+Datenschutz von Kindern
+Unser Dienst richtet sich nicht an Personen unter 18 Jahren. Wir erheben wissentlich keine personenbezogenen Daten von Personen unter 18 Jahren.
+Änderungen dieser Datenschutzerklärung
+Wir können unsere Datenschutzerklärung von Zeit zu Zeit aktualisieren. Wir werden Sie über Änderungen informieren, indem wir die neue Datenschutzerklärung auf dieser Seite veröffentlichen.
+Kontakt
+Per E-Mail: ok@ondraweb.cz
+© 2026 ONDRAWEB — Alle Rechte vorbehalten.
++420 728 697 712
+Datenschutzerklärung
+Cookies
+Lassen Sie uns sprechen
+Kostenlose Beratung — unverbindlich, ohne Registrierung.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Beratungstermin auswählen
+Kostenlos. Unverbindlich.
+Darf ich ein paar Cookies setzen?
+Ich messe nur ein paar Zahlen darüber, was auf der Seite funktioniert. Kein Datenhandel.
+Details in den Richtlinien .
+Ablehnen
+Alle akzeptieren
+✕

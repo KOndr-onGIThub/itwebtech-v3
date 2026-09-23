@@ -170,9 +170,27 @@ return [
             'live_url' => 'Web',
             'tags'     => 'Technologie',
         ],
+        // OND-267 (audit P1-2): `duration` je sloupec na `portfolio_projects`,
+        // ne na překladové tabulce — jedna hodnota pro všechny tři jazyky.
+        // Proto stál na /en i /de český text u 23 z 24 projektů. Řeší se
+        // stejně jako „Kategorie" o řádek níž: česká hodnota z DB je klíčem
+        // do tohohle slovníku (viz PortfolioProject::durationLabel()).
+        // Když hodnota v DB neodpovídá žádnému klíči, vyrenderuje se syrová
+        // hodnota z DB — nový projekt nikdy neukáže rozbitý překladový klíč.
+        'duration'        => [
+            'ongoing_since'           => 'průběžně od :year',
+            'weeks_few'               => 'několik týdnů',
+            'months_few'              => 'několik měsíců',
+            'weeks_5'                 => '5 týdnů',
+            'months_few_still_running' => 'několik měsíců, aplikace běží dodnes',
+        ],
         'category_label'  => [
             'website'     => 'Webová stránka',
-            'application' => 'Webová aplikace',
+            // OND-267 / redline OND-261 (ex-1): „Webová aplikace“ popírala
+            // obsah stránky u Excel Tools — sada VBA maker v Excelu webová
+            // aplikace není. Kategorie je popisek, ne filtr: filtr na
+            // /projekty má vlastní klíč `filter_webapps` („Aplikace“).
+            'application' => 'Aplikace',
             'other'       => 'Ostatní',
         ],
     ],

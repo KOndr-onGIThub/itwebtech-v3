@@ -31,10 +31,10 @@ return [
 
     'content' =>'<p>Datum des Inkrafttretens: 6. Mai 2026</p>
 <p>Die Website (nachfolgend „Dienst") wird vom Unternehmer Ondřej Kriška (nachfolgend „Betreiber" oder „ONDRAWEB") betrieben.</p>
-<p>Diese Seite informiert Sie über unsere Richtlinien bezüglich der Erhebung, Verwendung und Weitergabe personenbezogener Daten bei der Nutzung unseres Dienstes.</p>
+<p>Auf dieser Seite erkläre ich, welche personenbezogenen Daten ich erhebe, wie ich sie verwende und an wen ich sie weitergebe, wenn Sie meine Website nutzen bei der Nutzung unseres Dienstes.</p>
 
 <h2>Erhebung und Verwendung von Informationen</h2>
-<p>Wir erheben verschiedene Arten von Informationen für verschiedene Zwecke, um Ihnen unseren Dienst bereitzustellen und zu verbessern.</p>
+<p>Ich erhebe verschiedene Arten von Informationen zu verschiedenen Zwecken, um die Website bereitzustellen und zu verbessern.</p>
 
 <h3>Arten der erhobenen Daten</h3>
 
@@ -43,7 +43,7 @@ return [
 <ul>
 <li>E-Mail-Adresse</li>
 <li>Telefonnummer</li>
-<li>Adresse, Bundesland, Postleitzahl, Stadt</li>
+<li>Adresse, PLZ und Ort</li>
 <li>Cookies und Nutzungsdaten</li>
 </ul>
 
@@ -64,7 +64,7 @@ return [
 </ul>
 
 <h2>Datensicherheit</h2>
-<p>Die Sicherheit Ihrer Daten ist uns wichtig. Obwohl wir uns bemühen, kommerziell akzeptable Mittel zum Schutz Ihrer personenbezogenen Daten einzusetzen, können wir deren absolute Sicherheit nicht garantieren.</p>
+<p>Die Sicherheit Ihrer Daten ist mir wichtig. Ich schütze sie nach dem Stand der Technik, können wir deren absolute Sicherheit nicht garantieren.</p>
 
 <h3>Analytik</h3>
 <ul>
@@ -72,7 +72,7 @@ return [
 </ul>
 
 <h2>Datenschutz von Kindern</h2>
-<p>Unser Dienst richtet sich nicht an Personen unter 18 Jahren. Wir erheben wissentlich keine personenbezogenen Daten von Personen unter 18 Jahren.</p>
+<p>Meine Website richtet sich nicht an Personen unter 18 Jahren. Ich erhebe wissentlich keine personenbezogenen Daten von Personen unter 18 Jahren.</p>
 
 <h2>Änderungen dieser Datenschutzerklärung</h2>
 <p>Wir können unsere Datenschutzerklärung von Zeit zu Zeit aktualisieren. Wir werden Sie über Änderungen informieren, indem wir die neue Datenschutzerklärung auf dieser Seite veröffentlichen.</p>

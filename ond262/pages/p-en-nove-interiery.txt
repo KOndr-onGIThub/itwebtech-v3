@@ -1,0 +1,108 @@
+Nové interiéry — flooring & doors showroom website redesign
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+CZ
+EN
+DE
+Book a consultation
+CZ
+EN
+DE
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+Book a consultation
+💬
+Enquiry
+← Back to projects
+Website
+·
+2026
+·
+Nové interiéry — Petr Kroulík
+Nové interiéry
+A website that works like a first business meeting
+Visit live site
+Book a consultation
+Petr Kroulík runs a showroom for flooring, doors and interiors. The 15-year-old website was driving away the customers who would have otherwise dropped by. I rebuilt the site from scratch — design, copy, structure. The goal wasn't a "nice website"; it was a site that functions like a first business meeting.
+Challenge
+The original site looked like a budget catalogue. Clients looking for a premium showroom left without making contact, and the owner himself admitted the site failed to communicate the quality of his service. It needed to clearly outclass template-based catalogue sites and bring the client's trustworthy voice forward.
+Solution
+The site walks visitors from inspiration to a concrete action. The breadth of work (flooring, doors, interiors) is clear without overwhelming. Copy avoids jargon and explains what the client actually receives in cooperation. The visual style matches the showroom's real quality — no "fake luxury". The website is the first touchpoint with the business, and it should look like one.
+Result
+The client now speaks about higher brand credibility and customers arriving informed about how the collaboration works. Enquiries that used to waste time on both sides are now filtered upfront. Positive feedback focused on design, clarity and overall UX.
+Client
+Nové interiéry — Petr Kroulík
+Year
+2026
+Duration
+několik týdnů
+Category
+Website
+Live site
+noveinteriery.cz
+Tech stack
+Website
+Rebuild of an old site
+Website copy
+A layout people can find their way in
+Showroom
+More projects
+Website
+·
+2023
+·
+PitArena
+PitArena
+From zero to a brand, a website and online sales
+View project
+Website
+·
+2026
+·
+PitArena
+PitArena — online shop
+An online shop where customers find the part for their model and year
+View project
+Website
+·
+2026
+·
+BARANA
+BARANA
+Premium website for bioclimatic pergolas, ready for ad campaigns
+View project
+Want a similar result for your business?
+Book a consultation
+← Back to projects
+I help entrepreneurs succeed in the online world
+Book a free consultation
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+© 2026 ONDRAWEB — All rights reserved.
++420 728 697 712
+Privacy Policy
+Cookies
+Let's talk
+Free consultation — no commitment, no registration.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Pick a consultation slot
+Free. No commitment.
+Mind a few cookies?
+I only measure a few numbers about what works on the site. No data selling.
+See the cookie policy .
+Decline
+Accept all
+✕

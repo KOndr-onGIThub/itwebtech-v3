@@ -6,8 +6,8 @@ return [
     // der Konkurrenz definieren, und „kein WordPress" sagt jemandem nichts,
     // der nicht weiß, was WordPress ist (Prinzip 0).
     'meta' => [
-        'title'       => 'Webseiten und Webanwendungen nach Maß | ONDRAWEB',
-        'description' => 'Webseiten, Onlineshops und Webanwendungen nach Maß für kleine und mittlere Unternehmen. Eigener Code, genauer Preis im Voraus, und Sie sprechen direkt mit mir. Ich bin Ondřej Kriška.',
+        'title'       => 'Websites und Webanwendungen nach Maß | ONDRAWEB',
+        'description' => 'Websites, Onlineshops und Webanwendungen nach Maß für kleine und mittlere Unternehmen. Eigener Code, genauer Preis im Voraus, und Sie sprechen direkt mit mir. Ich bin Ondřej Kriška.',
     ],
 
     // TODO (OND-136 P3): final DE tone polish — Content Writer scope.
@@ -71,7 +71,7 @@ return [
     // OND-202: Arbeitsproben als primäres Bildmaterial (live Kunden-Websites).
     'showcase' => [
         'heading' => 'Websites, die in der Praxis laufen',
-        'intro'   => 'Das sind live Projekte, die Sie sich sofort ansehen können. Klicken Sie sich durch.',
+        'intro'   => 'Das sind Live-Projekte, die Sie sich sofort ansehen können. Klicken Sie sich durch.',
         'visit'   => 'Live-Website öffnen',
         'aria'    => ':domain in neuem Fenster öffnen',
         'sites'   => [
@@ -101,15 +101,15 @@ return [
     // was ich tue (`lead`), die Abgrenzung ist kurz und die doppelten
     // Punkte sind zu einem zusammengeführt.
     'problems' => [
-        'heading'            => 'Wie ich Webseiten baue',
-        'lead'               => 'Jedes Projekt beginnt mit dem Verständnis Ihres Unternehmens. Ich schreibe eigenen Code von Grund auf, damit die Website dem folgt, wie Ihre Firma tatsächlich arbeitet. Sie sprechen direkt mit mir — von der ersten Nachricht über den Launch und darüber hinaus.',
+        'heading'            => 'Wie ich Websites baue',
+        'lead'               => 'Jedes Projekt beginnt mit dem Verständnis Ihres Unternehmens. Ich schreibe eigenen Code von Grund auf, damit die Website dem folgt, wie Ihre Firma tatsächlich arbeitet. Sie sprechen direkt mit mir — von der ersten Nachricht bis zum Launch und darüber hinaus.',
         'transition_heading' => 'Was Sie sich damit ersparen',
         'transition_text'    => 'Die zwei Dinge, die ich bei Web-Projekten am häufigsten sehe.',
         'items' => [
             [
                 'heading'      => 'Eine Vorlage als individuelle Lösung verkauft',
                 'text'         => 'Ein Anbieter verwendet ein Layout, das er schon fünfmal genutzt hat, und fügt Ihren Text und Ihr Logo ein. Das Ergebnis wirkt professionell — bis Sie die Website der Konkurrenz öffnen und dieselben Abschnitte und dieselben Worte finden. Dazu hält die Plattform Sie in einem monatlichen Abonnement, das Sie nicht mitnehmen können.',
-                'quote_text'   => 'Das ist nicht der Fall, in dem andere Hobbyentwickler einfach Vorlagen mit Daten für überhöhte Preise füllen.',
+                'quote_text'   => 'Ganz anders als die Möchtegern-Webdesigner, die für überhöhte Preise einfach Vorlagen mit Inhalten befüllen.',
                 'quote_author' => 'Petr Kroulík, Nové Interiéry s.r.o.',
             ],
             [
@@ -127,15 +127,15 @@ return [
             [
                 'heading'      => 'Beratung',
                 'time'         => '60 Min., binnen einer Woche',
-                'text'         => 'Ich beginne mit einem Gespräch, nicht mit einem Formular. Ich muss Ihr Unternehmen, Ihre Kunden und verstehen, was die Website wirklich tun soll — Kontakte bringen, ein Produkt verkaufen oder Vertrauen aufbauen.',
-                'quote_text'   => 'Er hörte wirklich meinen Bedürfnissen zu und verarbeitete diese Informationen bis zu meiner vollständigen Zufriedenheit.',
+                'text'         => 'Ich beginne mit einem Gespräch, nicht mit einem Formular. Ich muss Ihr Unternehmen und Ihre Kunden verstehen — und wissen, was die Website wirklich leisten soll: Kontakte bringen, ein Produkt verkaufen oder Vertrauen aufbauen.',
+                'quote_text'   => 'Er hat mir wirklich zugehört und daraus etwas gemacht, mit dem ich rundum zufrieden bin.',
                 'quote_author' => 'Magda Pernicová, Realiťačky v akci',
             ],
             [
                 'heading'      => 'Spezifikation',
                 'time'         => '2–5 Tage',
                 'text'         => 'Bevor ich mit der Arbeit beginne, erhalten Sie eine schriftliche Spezifikation: was auf der Website sein wird, wie viele Seiten, welche Technologie und was es kostet. Keine Überraschungen auf der Rechnung. Den Liefertermin schätze ich realistisch ein — immer im Voraus, nie rückwirkend.',
-                'quote_text'   => 'Er analysiert gründlich den Zustand und möchte die aktuellen Prozesse kennenlernen. Er sammelt Anforderungen von Kunden und erkundigt sich nach Zukunftsvisionen.',
+                'quote_text'   => 'Er analysiert die Ausgangslage gründlich und will die bestehenden Prozesse wirklich verstehen. Er sammelt die Anforderungen der Nutzer und fragt nach, wohin es gehen soll.',
                 'quote_author' => 'Jan Stybor, Leiter der Projektabteilung, Toyota',
                 'note'         => 'Hinweis zu Terminen: Eine Website entsteht nicht nur auf meiner Seite. Genehmigungen, Unterlagen vom Kunden und Feedback sind Teil des Prozesses. Der Termin ist daher immer eine Schätzung, keine Verpflichtung — und ich sage das offen von Anfang an.',
             ],
@@ -232,7 +232,7 @@ return [
             ],
             'aplikace' => [
                 'title'       => 'Webanwendungen',
-                'description' => 'Interne Systeme, Kundenportale und Verwaltungstools, gebaut auf der Art, wie Ihr Betrieb tatsächlich funktioniert.',
+                'description' => 'Interne Systeme, Kundenportale und Verwaltungstools — zugeschnitten auf die Art, wie Ihr Betrieb tatsächlich arbeitet.',
                 'bullets'     => [
                     'Prozessdesign vor der ersten Codezeile',
                     'Integration in Ihre bestehenden Werkzeuge',
@@ -244,7 +244,7 @@ return [
                 'description' => 'Ein Online-Shop, der zu Ihrem Produkt passt — ohne monatliche Gebühren für Plugins und Vorlagen.',
                 'bullets'     => [
                     'Kasse und Katalog passend zu Ihrem Sortiment',
-                    'Anbindung an Buchhaltung, Spediteure und Zahlungsanbieter',
+                    'Anbindung an Buchhaltung, Versanddienstleister und Zahlungsanbieter',
                     'Keine monatlichen Plattform-Gebühren',
                 ],
             ],
@@ -299,7 +299,7 @@ return [
         'video_aria' => 'Video: Ondřej Kriška — wer ich bin und wie ich Websites baue',
         'heading'   => 'Warum mit mir',
         'photo_alt' => 'Ondřej Kriška — Webentwickler',
-        'bio'       => '18 Jahre lang habe ich bei Toyota Projekte geleitet, bei denen das Band nicht stehen durfte. Dieselben Prinzipien — präzise Spezifikation, Analyse, Verifikation — wende ich heute auf Web-Projekte an. Ich arbeite allein: Sie sprechen direkt mit mir, von der ersten Beratung über den Launch hinaus.',
+        'bio'       => '18 Jahre lang habe ich bei Toyota Projekte geleitet, bei denen das Band nicht stehen durfte. Dieselben Prinzipien — präzise Spezifikation, Analyse, Verifikation — wende ich heute auf Web-Projekte an. Ich arbeite allein: Sie sprechen direkt mit mir — von der ersten Beratung bis zum Launch und darüber hinaus.',
         'advantages' => [
             [
                 'heading' => 'Eigener Code, keine Vorlagen',
@@ -322,6 +322,7 @@ return [
 
     'testimonials' => [
         'heading' => 'Was meine Kunden über die Zusammenarbeit sagen.',
+        'note'    => 'Aus dem Tschechischen übersetzt — die Originale stehen auf Google, Firmy.cz und Facebook.',
     ],
 
     'guarantee' => [
@@ -355,7 +356,7 @@ return [
             ],
             [
                 'heading' => 'Design mit System',
-                'text'    => 'Farben, Schrift und Abstände steuert keine Vorlage, sondern ein eigenes System von Variablen. Deshalb ragt nichts heraus — und deshalb können Sie es unten selbst ausprobieren.',
+                'text'    => 'Farben, Schrift und Abstände steuert keine Vorlage, sondern ein eigenes System von Variablen. Deshalb wirkt nichts fehl am Platz — und deshalb können Sie es unten selbst ausprobieren.',
             ],
         ],
         'perf_prefix' => 'Diese Seite wurde für Sie in',

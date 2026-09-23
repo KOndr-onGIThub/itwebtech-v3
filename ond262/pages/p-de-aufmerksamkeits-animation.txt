@@ -1,0 +1,105 @@
+Aufmerksamkeits-Animation — Social-Media-Sample
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+CZ
+EN
+DE
+Beratung vereinbaren
+CZ
+EN
+DE
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+Beratung vereinbaren
+💬
+Anfrage
+← Zurück zu Projekten
+Sonstiges
+·
+2023
+·
+itwebtech (vlastní práce)
+Aufmerksamkeits-Animation
+Ein Sample, wie man den übersättigten Feed durchbricht
+Beratung buchen
+Eine eigene Animation, die ich als Referenz im Gespräch mit Kunden zur Social-Media-Promotion nutze. Video ist im übersättigten Feed heute fast Pflicht — aber nur, wenn es gut targetet ist und in den ersten Sekunden etwas zu sagen hat.
+Herausforderung
+Der meiste Social-Content rauscht ungesehen vorbei. Ein statischer Post reicht nicht — das Gehirn legt ihn als Rauschen ab. Es braucht etwas, das dieses Rauschen durchbricht.
+Lösung
+Eine Animation mit Bewegung schon im Thumbnail, einer einfachen Botschaft und einem Tempo, das für den Mobile- Feed gebaut ist. Sie dient als Sample, das ich Kunden zeige, um das Konzept Video-Promotion greifbar zu machen.
+Ergebnis
+Ich habe ein Referenzformat, das Kunden konkret zeigt, wie ihre Werbung aussehen könnte. Statt abstrakter Debatte „lass uns Video machen" gibt es ein greifbares Stück — und damit eine greifbare Entscheidung.
+Kunde
+itwebtech (vlastní práce)
+Jahr
+2023
+Dauer
+krátká produkce
+Kategorie
+Sonstiges
+Technologien
+Video
+Animation
+Inhalte für soziale Netzwerke
+Schaustück
+Mein eigenes Projekt
+Weitere Projekte
+Sonstiges
+·
+2024
+·
+PitArena (Stanislav Holcmann)
+Artikel auf Motorkáři.cz
+Content-Marketing, das es bis ins größte Motorrad-Portal des Landes geschafft hat
+Projekt anzeigen
+Sonstiges
+·
+2024
+·
+Realiťačky v Akci
+Logo — Realiťačky v Akci
+Ein einprägsames Logo, das in jeder Größe funktioniert
+Projekt anzeigen
+Sonstiges
+·
+2023
+·
+PitArena (Stanislav Holcmann)
+Video — Pitbike Akademie
+Eine Promo-Animation, die den Daumen im Scroll stoppt
+Projekt anzeigen
+Möchten Sie ein ähnliches Ergebnis für Ihr Unternehmen?
+Beratung buchen
+← Zurück zu Projekten
+Ich helfe Unternehmern, in der Online-Welt erfolgreich zu sein
+Kostenlose Beratung vereinbaren
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+© 2026 ONDRAWEB — Alle Rechte vorbehalten.
++420 728 697 712
+Datenschutzerklärung
+Cookies
+Lassen Sie uns sprechen
+Kostenlose Beratung — unverbindlich, ohne Registrierung.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Beratungstermin auswählen
+Kostenlos. Unverbindlich.
+Darf ich ein paar Cookies setzen?
+Ich messe nur ein paar Zahlen darüber, was auf der Seite funktioniert. Kein Datenhandel.
+Details in den Richtlinien .
+Ablehnen
+Alle akzeptieren
+✕

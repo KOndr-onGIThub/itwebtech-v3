@@ -465,6 +465,12 @@
             <h2 class="pd-head__title">{{ __('home.testimonials.heading') }}</h2>
         </header>
 
+        {{-- Recenze jsou v EN/DE překlad českých originálů — poznámka drží
+             dohledatelnost zdroje. Česky je klíč prázdný (viz lang/cs/home.php). --}}
+        @if (filled(__('home.testimonials.note')))
+        <p class="pd-testi__note">{{ __('home.testimonials.note') }}</p>
+        @endif
+
         <div class="pd-testi">
             @foreach ($homeTestimonials as $i => $review)
             <article class="pd-testi__item">

@@ -1,0 +1,108 @@
+Cyklo Centrum — Fahrradservice-Website neu aufgebaut
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+CZ
+EN
+DE
+Beratung vereinbaren
+CZ
+EN
+DE
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+Beratung vereinbaren
+💬
+Anfrage
+← Zurück zu Projekten
+Webseite
+·
+2025
+·
+Cyklo Centrum — Petr Kňourek
+Cyklo Centrum
+Rettungsprojekt — von Grund auf neu nach einem verlorenen Jahr
+Live-Seite besuchen
+Beratung buchen
+Cyklo Centrum bietet Fahrradservice, Verleih und Verkauf. Nach einem Jahr beim vorherigen Anbieter steckten sie mit einer halb gebauten Site fest, die Besucher aktiv vertrieb. Ich habe den Ersatz komplett neu gebaut — Analyse, Struktur, Texte, SEO, Produktverwaltung und externe Promotion.
+Herausforderung
+Der vorherige Entwickler arbeitete ein Jahr — und das Ergebnis schadete dem Ruf, den der Kunde offline aufgebaut hatte. Manche fragten sogar, ob der Betrieb noch läuft. Den alten Auftritt zu retten war sinnlos; ein sauberer Neubau war günstiger und sicherer.
+Lösung
+Ich begann mit einer Analyse des Geschäfts sowie tschechischer und internationaler Wettbewerber. Ich habe Struktur, Texte und eigenes Design entworfen, alles handgecodet für Robustheit und Tempo. Dazu Produktverwaltung (der Kunde aktualisiert das Sortiment selbst), Google-Maps-Profil und ein Werbeartikel auf Kudy z nudy. Die Website entspricht jetzt der Qualität des Service.
+Ergebnis
+Bei Suchen wie „cyklocentrum březí" oder „půjčovna kol březí" steht die Site in Google auf Platz eins, und die durchschnittliche Position über alle Suchanfragen verbesserte sich von 16,8 auf 8,6 (Search Console, 16.5.2025 – 13.9.2026). Aus Google kommt damit mehr als die Hälfte des gesamten Traffics — 1.780 von 3.149 Besuchen (Google Analytics, 1.1. – 16.9.2026). Der Kunde bestätigt: endlich „eine Präsentation, für die man sich nicht schämen muss". Besucher finden schnell, was der Betrieb serviciert, was zu mieten ist und wie man Kontakt aufnimmt.
+Kunde
+Cyklo Centrum — Petr Kňourek
+Jahr
+2025
+Dauer
+několik týdnů
+Kategorie
+Webseite
+Live-Seite
+cykloservispujcovna.cz
+Technologien
+Website
+Sichtbarkeit in Suchmaschinen
+Website-Texte
+Aufbau, in dem man sich zurechtfindet
+Pflege des Produktangebots
+Weitere Projekte
+Webseite
+·
+2023
+·
+PitArena
+PitArena
+Von Null zu Marke, Website und Online-Verkauf
+Projekt anzeigen
+Webseite
+·
+2026
+·
+PitArena
+PitArena — Onlineshop
+Ein Shop, in dem Kunden das Teil für Modell und Baujahr finden
+Projekt anzeigen
+Webseite
+·
+2026
+·
+BARANA
+BARANA
+Premium-Website für bioklimatische Pergolen, kampagnenbereit
+Projekt anzeigen
+Möchten Sie ein ähnliches Ergebnis für Ihr Unternehmen?
+Beratung buchen
+← Zurück zu Projekten
+Ich helfe Unternehmern, in der Online-Welt erfolgreich zu sein
+Kostenlose Beratung vereinbaren
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+© 2026 ONDRAWEB — Alle Rechte vorbehalten.
++420 728 697 712
+Datenschutzerklärung
+Cookies
+Lassen Sie uns sprechen
+Kostenlose Beratung — unverbindlich, ohne Registrierung.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Beratungstermin auswählen
+Kostenlos. Unverbindlich.
+Darf ich ein paar Cookies setzen?
+Ich messe nur ein paar Zahlen darüber, was auf der Seite funktioniert. Kein Datenhandel.
+Details in den Richtlinien .
+Ablehnen
+Alle akzeptieren
+✕

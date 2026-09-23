@@ -1,0 +1,106 @@
+Picker — Webanwendung für die Kommissionierung im Werk
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+CZ
+EN
+DE
+Beratung vereinbaren
+CZ
+EN
+DE
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+Beratung vereinbaren
+💬
+Anfrage
+← Zurück zu Projekten
+Webanwendung
+·
+2023
+·
+Toyota Kolín
+Picker — Logistik-Steuerungssystem
+Eine App für das Kommissionieren von Teilen vom Lager ans Band
+Beratung buchen
+Picker steuert das Kommissionieren von Teilen aus dem Lager und ihre Lieferung ans Montageband. Sie führt den Mitarbeiter Schritt für Schritt am Bildschirm, unterstützt Barcode- Scanner, misst Operationszeiten und gibt der Teamleitung Echtzeit-Überblick. Gebaut für den Werksboden.
+Herausforderung
+Kommissionieren muss schnell und fehlerfrei laufen — Fehler bedeuten Rückweg ins Regal, Verzögerung, Bandstillstand. Die alte „Papierliste" hielt das Tempo nicht und ließ der Schichtleitung keine Sicht. Es brauchte ein System, das den Mitarbeiter führt und der Leitung Überblick gibt.
+Lösung
+Webanwendung mit Mitarbeiteroberfläche (Anweisungen, manuelle Navigation, Barcode-Scanner, Timer), Monitoring-Dashboard für die Teamleitung und Admin-Bereich für die Prozesskonfiguration. Funktioniert in Hoch- und Querformat — je nach Werkssituation. Dazu In-App-Meldung von Abweichungen, damit der Mitarbeiter nicht ablaufen und mündlich melden muss.
+Ergebnis
+Der Kunde hat ein Steuersystem, das Tempo hält und gleich- zeitig der Leitung Sicht gibt. Mitarbeiter sind nicht allein — die App führt sie, dokumentiert die Arbeit und erfasst Probleme. Die Prozesskonfiguration liegt im Admin, das System lässt sich ohne Entwickler anpassen.
+Kunde
+Toyota Kolín
+Jahr
+2023
+Dauer
+několik měsíců
+Kategorie
+Webanwendung
+Technologien
+Individuelle Anwendung
+Logistik
+Anwendung im Browser
+Kommissionierung
+Lager
+Barcode-Scannen
+Weitere Projekte
+Webanwendung
+·
+2021
+·
+Toyota Kolín
+HCMS — Produktions-Informationssystem
+Eine App, die das Montageband am Laufen hält
+Projekt anzeigen
+Webanwendung
+·
+2024
+·
+Tradiční výroba pralinek, s.r.o.
+Choccoboard — strategisches Dashboard
+Ein BI-Dashboard, das 30 Minuten tägliche Handarbeit ersetzt
+Projekt anzeigen
+Webanwendung
+·
+2019
+·
+Toyota Kolín
+FRL Creator
+Ein PDF-Generator für Regal-Informationsblätter
+Projekt anzeigen
+Möchten Sie ein ähnliches Ergebnis für Ihr Unternehmen?
+Beratung buchen
+← Zurück zu Projekten
+Ich helfe Unternehmern, in der Online-Welt erfolgreich zu sein
+Kostenlose Beratung vereinbaren
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+© 2026 ONDRAWEB — Alle Rechte vorbehalten.
++420 728 697 712
+Datenschutzerklärung
+Cookies
+Lassen Sie uns sprechen
+Kostenlose Beratung — unverbindlich, ohne Registrierung.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Beratungstermin auswählen
+Kostenlos. Unverbindlich.
+Darf ich ein paar Cookies setzen?
+Ich messe nur ein paar Zahlen darüber, was auf der Seite funktioniert. Kein Datenhandel.
+Details in den Richtlinien .
+Ablehnen
+Alle akzeptieren
+✕

@@ -1,0 +1,105 @@
+Attention-grabbing animation — social media sample
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+CZ
+EN
+DE
+Book a consultation
+CZ
+EN
+DE
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+Book a consultation
+💬
+Enquiry
+← Back to projects
+Other
+·
+2023
+·
+itwebtech (vlastní práce)
+Attention-grabbing animation
+A sample of how to break through a saturated feed
+Book a consultation
+An in-house animation I use as a reference when discussing social media promotion with clients. Video is almost a necessity in a saturated feed today — but only when it's well-targeted and has something to say in the first seconds.
+Challenge
+Most social content scrolls past unnoticed. A static post isn't enough — the brain files it as noise. Something is needed that breaks through that noise.
+Solution
+An animation built to have motion already in the thumbnail, a simple message, and pacing tuned for the mobile feed. It works as a sample I can show clients to make the concept of video promotion concrete.
+Result
+I have a reference format that shows clients exactly what their promotion could look like. Instead of an abstract debate about "let's do video", there's a tangible piece — and so a tangible decision.
+Client
+itwebtech (vlastní práce)
+Year
+2023
+Duration
+krátká produkce
+Category
+Other
+Tech stack
+Video
+Animation
+Content for social media
+Showcase piece
+My own project
+More projects
+Other
+·
+2024
+·
+PitArena (Stanislav Holcmann)
+Article on Motorkáři.cz
+Content marketing that reached the country's biggest moto portal
+View project
+Other
+·
+2024
+·
+Realiťačky v Akci
+Logo — Realiťačky v Akci
+A memorable logo that holds at any size
+View project
+Other
+·
+2023
+·
+PitArena (Stanislav Holcmann)
+Video — Pitbike Akademie
+A promo animation that stops the thumb mid-scroll
+View project
+Want a similar result for your business?
+Book a consultation
+← Back to projects
+I help entrepreneurs succeed in the online world
+Book a free consultation
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+© 2026 ONDRAWEB — All rights reserved.
++420 728 697 712
+Privacy Policy
+Cookies
+Let's talk
+Free consultation — no commitment, no registration.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Pick a consultation slot
+Free. No commitment.
+Mind a few cookies?
+I only measure a few numbers about what works on the site. No data selling.
+See the cookie policy .
+Decline
+Accept all
+✕

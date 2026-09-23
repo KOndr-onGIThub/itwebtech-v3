@@ -1,0 +1,67 @@
+Notes — Ondřej Kriška
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+CZ
+EN
+DE
+Book a consultation
+CZ
+EN
+DE
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+Book a consultation
+💬
+Enquiry
+NOTES
+What I actually deal with at work.
+I write about
+what I do myself .
+No generic advice. Only things I run into on real projects: what it costs, how to write a brief, when a redesign makes sense.
+Website redesign: reasons, signals and how to do it
+Website redesign is the process of fundamentally renewing the appearance, structure, and functions of your website.
+Read
+How much does a website cost
+Get an overview of website prices. Dive into our comprehensive guide to find out what factors affect price, from design to functionality. Get insight into how to optimize your budget and what to expect from an online presence investment.
+Read
+Does your business need a website?
+To have or not to have a website? Explore how a website can transform your business and why it is essential to your business's growth and competitiveness in the digital age.
+Read
+How a simple web application can save your business millions
+Tired of dealing with manual processes in your business? From human error to inefficient resource allocation, it's time to let go of the old ways and embrace the future. A web application can save your business millions by streamlining communications, automating tasks, and allocating resources efficiently.
+Read
+How to define website development requirements
+Are you planning to create or redesign a website and don't know where to start? With our guide you will learn the key questions you need to ask yourself to achieve the ideal result. From setting goals to technical details - everything supported by Martin's story, which will show you how it works in practice. Get ready to work effectively with the developer and create a website that exactly matches your ideas!"
+Read
+I help entrepreneurs succeed in the online world
+Book a free consultation
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+© 2026 ONDRAWEB — All rights reserved.
++420 728 697 712
+Privacy Policy
+Cookies
+Let's talk
+Free consultation — no commitment, no registration.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Pick a consultation slot
+Free. No commitment.
+Mind a few cookies?
+I only measure a few numbers about what works on the site. No data selling.
+See the cookie policy .
+Decline
+Accept all
+✕

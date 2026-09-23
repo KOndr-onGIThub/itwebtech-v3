@@ -1,0 +1,103 @@
+PitArena — Onlineshop für YCF-Pitbikes und Ersatzteile
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+CZ
+EN
+DE
+Beratung vereinbaren
+CZ
+EN
+DE
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+Beratung vereinbaren
+💬
+Anfrage
+← Zurück zu Projekten
+Webseite
+·
+2026
+·
+PitArena
+PitArena — Onlineshop
+Ein Shop, in dem Kunden das Teil für Modell und Baujahr finden
+Live-Seite besuchen
+Beratung buchen
+Der Kunde verkauft YCF-Pitbikes und Ersatzteile und wollte online verkaufen — bei Teilen ist entscheidend, das richtige Stück für Modell und Baujahr zu treffen. Ich habe einen Onlineshop mit Katalog für Motorräder und Teile gebaut, sortiert nach Modellen und Gruppen.
+Herausforderung
+Bei Ersatzteilen genügt eine Produktliste nicht. Kunden brauchen die Sicherheit, dass ein Teil auf ihr Modell und Baujahr passt — sonst kaufen sie blind und schicken zurück. Ein Katalog mit Tausenden Positionen musste begehbar bleiben, statt zur endlosen Liste zu werden.
+Lösung
+Ich habe einen Onlineshop mit Katalog für Motorräder und Teile gebaut. Die Teile sind nach Modellen (LITE 125, PILOT 125, Factory 190) und Gruppen sortiert — Bremsen, Motoren, Federung, Elektrik. Dazu Filter nach Modell und Baujahr, Warenkorb und Kundenkonto, Favoriten und Produktvergleich.
+Ergebnis
+Der Shop bietet heute 4.551 Produkte in 695 Kategorien, der Ersatzteilkatalog ist nach 19 YCF-Motorradmodellen aufgeteilt — Kunden klicken ihr Modell an und sehen nur passende Teile. Auch in dieser Größe hält er auf dem Desktop 99/100 in Lighthouse Performance, der Hauptinhalt erscheint in unter 0,9 s (gemessen mit lokalem Lighthouse 13.4.1 am 16.09.2026). In den ersten zweieinhalb Monaten (1.7. – 17.9.2026) wickelte er 116 Bestellungen im Gesamtwert von 468.202 CZK ab, im Schnitt 4.036 CZK pro Bestellung (Daten aus der Shop-Administration).
+Kunde
+PitArena
+Jahr
+2026
+Kategorie
+Webseite
+Live-Seite
+shop.pitarena.cz
+Technologien
+Website
+Motorräder
+Weitere Projekte
+Webseite
+·
+2023
+·
+PitArena
+PitArena
+Von Null zu Marke, Website und Online-Verkauf
+Projekt anzeigen
+Webseite
+·
+2026
+·
+BARANA
+BARANA
+Premium-Website für bioklimatische Pergolen, kampagnenbereit
+Projekt anzeigen
+Webseite
+·
+2026
+·
+Nové interiéry — Petr Kroulík
+Nové interiéry
+Eine Website, die wie ein erstes Geschäftstreffen wirkt
+Projekt anzeigen
+Möchten Sie ein ähnliches Ergebnis für Ihr Unternehmen?
+Beratung buchen
+← Zurück zu Projekten
+Ich helfe Unternehmern, in der Online-Welt erfolgreich zu sein
+Kostenlose Beratung vereinbaren
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+© 2026 ONDRAWEB — Alle Rechte vorbehalten.
++420 728 697 712
+Datenschutzerklärung
+Cookies
+Lassen Sie uns sprechen
+Kostenlose Beratung — unverbindlich, ohne Registrierung.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Beratungstermin auswählen
+Kostenlos. Unverbindlich.
+Darf ich ein paar Cookies setzen?
+Ich messe nur ein paar Zahlen darüber, was auf der Seite funktioniert. Kein Datenhandel.
+Details in den Richtlinien .
+Ablehnen
+Alle akzeptieren
+✕

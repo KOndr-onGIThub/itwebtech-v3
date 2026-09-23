@@ -1,0 +1,106 @@
+Picker — web application for warehouse picking
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+CZ
+EN
+DE
+Book a consultation
+CZ
+EN
+DE
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+Book a consultation
+💬
+Enquiry
+← Back to projects
+Web application
+·
+2023
+·
+Toyota Kolín
+Picker — logistics control system
+An app for picking parts from the warehouse to the assembly line
+Book a consultation
+Picker controls the process of pulling parts from the warehouse and delivering them to the assembly line. It guides the worker step by step on screen, supports barcode scanners, tracks operation time, and gives the team leader a real-time overview. Built for the shop floor.
+Challenge
+Picking has to run fast and without errors — a mistake means a trip back to the rack, a delay, and a stalled line. Toyota's old "paper checklist" couldn't keep up and gave supervisors no visibility. The team needed a system that guides the worker and lets the supervisor see what's happening.
+Solution
+A web application with a worker interface (instructions, manual navigation, barcode scanner, timer), a monitoring dashboard for the supervisor, and an admin section for process configuration. It runs in portrait or landscape to match the floor situation. I added in-app issue reporting so the worker doesn't have to run and report verbally.
+Result
+The client gained a control system that keeps the pace and gives the supervisor visibility at the same time. Workers aren't alone — the app guides them, records work, and captures issues. Process configuration sits in admin, so the system can adapt without developer involvement.
+Client
+Toyota Kolín
+Year
+2023
+Duration
+několik měsíců
+Category
+Web application
+Tech stack
+Custom application
+Logistics
+Application in the browser
+Order picking
+Warehouse
+Barcode scanning
+More projects
+Web application
+·
+2021
+·
+Toyota Kolín
+HCMS — production information system
+An app that keeps the assembly line moving
+View project
+Web application
+·
+2024
+·
+Tradiční výroba pralinek, s.r.o.
+Choccoboard — strategic dashboard
+A BI dashboard that replaced 30 minutes of daily manual work
+View project
+Web application
+·
+2019
+·
+Toyota Kolín
+FRL Creator
+A PDF generator for shelf information sheets
+View project
+Want a similar result for your business?
+Book a consultation
+← Back to projects
+I help entrepreneurs succeed in the online world
+Book a free consultation
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+© 2026 ONDRAWEB — All rights reserved.
++420 728 697 712
+Privacy Policy
+Cookies
+Let's talk
+Free consultation — no commitment, no registration.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Pick a consultation slot
+Free. No commitment.
+Mind a few cookies?
+I only measure a few numbers about what works on the site. No data selling.
+See the cookie policy .
+Decline
+Accept all
+✕
