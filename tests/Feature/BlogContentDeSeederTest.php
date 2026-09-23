@@ -22,7 +22,7 @@ class BlogContentDeSeederTest extends TestCase
     use RefreshDatabase;
 
     /** `<loc>` detailu článku v libovolné locale (ne výpis, ten nemá další segment). */
-    private const ARTICLE_LOC_PATTERN = '#<loc>[^<]*/(?:jak-na-to|en/blog|de/blog)/[^<]+</loc>#';
+    private const ARTICLE_LOC_PATTERN = '#<loc>[^<]*/(?:zapisky|en/blog|de/blog)/[^<]+</loc>#';
 
     /** Články, které seeder překládá (id → [cs slug, en slug] po OND-204). */
     private const FIXTURE_ARTICLES = [

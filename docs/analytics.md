@@ -220,8 +220,8 @@ deployem P4 na produkci vyplnit pre-launch hodnoty z GA4 (last 30d).
 | `LocalBusiness` | každá stránka | `resources/views/layouts/app.blade.php` |
 | `Organization` | každá stránka | `resources/views/layouts/app.blade.php` |
 | `Service` (per tier) | /cenik | `resources/views/pages/price.blade.php` (`@push('jsonld')`) |
-| `Article` | /jak-na-to/{slug} | `resources/views/pages/article.blade.php` |
-| `BreadcrumbList` | /cenik, /kontakt, /projekty, /projekty/{slug}, /jak-na-to, /jak-na-to/{slug} | příslušné `pages/*.blade.php` |
+| `Article` | /zapisky/{slug} | `resources/views/pages/article.blade.php` |
+| `BreadcrumbList` | /cenik, /kontakt, /projekty, /projekty/{slug}, /zapisky, /zapisky/{slug} | příslušné `pages/*.blade.php` |
 
 Per-page JSON-LD se vkládá přes `@push('jsonld')` → `@stack('jsonld')` v
 layout `<head>`. Pro validaci:

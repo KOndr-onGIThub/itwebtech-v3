@@ -60,7 +60,7 @@ class ArticleSlugLocaleTest extends TestCase
     public function test_returns_200_when_slug_matches_current_locale(): void
     {
         $this->get('/en/blog/how-much-does-a-website-cost')->assertOk();
-        $this->get('/jak-na-to/kolik-stoji-webove-stranky')->assertOk();
+        $this->get('/zapisky/kolik-stoji-webove-stranky')->assertOk();
         $this->get('/de/blog/wieviel-kostet-eine-webseite')->assertOk();
     }
 
@@ -75,8 +75,8 @@ class ArticleSlugLocaleTest extends TestCase
             ->assertRedirect('/en/blog/how-much-does-a-website-cost');
 
         // CS URL s EN slugem → 301 na CS slug
-        $this->get('/jak-na-to/how-much-does-a-website-cost')
-            ->assertRedirect('/jak-na-to/kolik-stoji-webove-stranky');
+        $this->get('/zapisky/how-much-does-a-website-cost')
+            ->assertRedirect('/zapisky/kolik-stoji-webove-stranky');
 
         // DE URL s EN slugem → 301 na DE slug
         $this->get('/de/blog/how-much-does-a-website-cost')
@@ -86,7 +86,7 @@ class ArticleSlugLocaleTest extends TestCase
     public function test_returns_404_when_slug_does_not_exist(): void
     {
         $this->get('/en/blog/non-existent-slug')->assertNotFound();
-        $this->get('/jak-na-to/neexistuje')->assertNotFound();
+        $this->get('/zapisky/neexistuje')->assertNotFound();
         $this->get('/de/blog/gibt-es-nicht')->assertNotFound();
     }
 
@@ -112,7 +112,7 @@ class ArticleSlugLocaleTest extends TestCase
             'active'     => true,
         ]);
 
-        $this->get('/jak-na-to/pouze-cs')->assertOk();
+        $this->get('/zapisky/pouze-cs')->assertOk();
         $this->get('/en/blog/pouze-cs')->assertNotFound();
         $this->get('/de/blog/pouze-cs')->assertNotFound();
     }
@@ -127,7 +127,7 @@ class ArticleSlugLocaleTest extends TestCase
      */
     public function test_404_on_article_route_renders_branded_error_page(): void
     {
-        $this->get('/jak-na-to/neexistuje')
+        $this->get('/zapisky/neexistuje')
             ->assertNotFound()
             ->assertSee(__('errors.404.heading'), false)
             ->assertDontSee('An Error Occurred');
