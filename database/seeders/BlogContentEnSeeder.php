@@ -78,13 +78,16 @@ class BlogContentEnSeeder extends Seeder
      * `extra` se na webu nevykresluje (žije jen v modelu a ve Filamentu),
      * maže se kvůli paritě s CS/DE a aby se odtud text nevrátil zpátky.
      *
-     * Článek 3 v seznamu schválně není: jeho `bonus` není strojový překlad,
-     * ale Ondrova poznámka o transparentnosti cen s odkazem na
-     * `itwebtech.cz/projects/elektro-srnak`. Odkaz míří na starou doménu, ale
-     * co s tím textem je rozhodnutí pro Ondru, ne pro migraci — otázka je
-     * v OND-275.
+     * Článek 3 je v seznamu na základě verdiktu z OND-287: jeho `bonus` není
+     * strojový překlad, ale poznámka o transparentnosti cen s odkazem na
+     * `itwebtech.cz/projects/elektro-srnak`, která zbyla po předchozí verzi
+     * textu. Přepsané tělo (část C redlinu OND-262) mluví o ceně „Custom —
+     * from €3,800", blok pod ním posílá čtenáře na web za 7 000 Kč a bere
+     * pointu závěrečnému CTA. CS ani DE mutace ten motiv nemají, takže
+     * smazáním se mutace naopak srovnají. V `extra` je navíc v anglické větě
+     * odkaz na český ceník.
      */
-    private const CLEARED_BLOCKS = [4, 6, 10, 13];
+    private const CLEARED_BLOCKS = [3, 4, 6, 10, 13];
 
     public function run(): void
     {
