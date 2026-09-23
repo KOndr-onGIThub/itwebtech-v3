@@ -71,6 +71,34 @@ class BlogListingLocaleTest extends TestCase
             ->assertRedirect('/zapisky/kolik-stoji-webove-stranky');
     }
 
+    /**
+     * OND-266: `/blog` nesmí vzniknout řetěz `/blog → /jak-na-to → /zapisky`.
+     * Test výš hlídá cíl prvního skoku; tenhle hlídá, že cíl je koncový —
+     * tedy že odpoví 200 a ne dalším redirectem.
+     */
+    public function test_old_urls_redirect_in_a_single_hop(): void
+    {
+        foreach (['/blog', '/jak-na-to'] as $old) {
+            $this->get($this->get($old)->headers->get('Location'))->assertOk();
+        }
+    }
+
+    /**
+     * OND-266: v sitemapě nesmí zůstat stará CS adresa sekce — jinak tam
+     * posíláme roboty na 301 a `/zapisky` nemá vlastní záznam.
+     */
+    public function test_sitemap_carries_new_cs_blog_url_only(): void
+    {
+        $xml = $this->get('/sitemap.xml')->assertOk()->getContent();
+
+        $this->assertStringNotContainsString('/jak-na-to', $xml);
+        $this->assertStringContainsString('/zapisky', $xml);
+        $this->assertStringContainsString('/zapisky/kolik-stoji-webove-stranky', $xml);
+
+        // EN/DE zůstávají na `/blog` — Ondřej řekl „v češtině".
+        $this->assertStringContainsString('/en/blog', $xml);
+    }
+
     public function test_listing_hides_article_without_slug_in_current_locale(): void
     {
         $this->get('/de/blog')
