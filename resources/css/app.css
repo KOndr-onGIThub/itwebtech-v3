@@ -5173,6 +5173,8 @@
     .about-intro__video .video-intro {
         max-width: 340px;
     }
+    /* OND-300: chování ve fullscreenu řeší nevrstvený blok na konci
+       tohoto souboru — musí přebít i `.pd-why__video video` z podpis.css. */
 
     /* ============================================================
        GUARANTEE SECTION
@@ -6830,3 +6832,43 @@
         text-decoration-thickness: 2px;
     }
 }
+
+/* ==========================================================================
+   OND-300 — VIDEO NA CELOU OBRAZOVKU
+   --------------------------------------------------------------------------
+   Board: „když to zobrazím na celou obrazovku, tak se roztáhne plně do šířky
+   a přeleze horní okraj obrazovky."
+
+   Příčina je `object-fit: cover` z `.video-intro`. Rozměry elementu si ve
+   fullscreenu prohlížeč srovná sám (UA styly to mají přes `!important`),
+   `object-fit` ale ne — a tak se svislý obraz 1080×1920 natáhne tak, aby
+   POKRYL vodorovnou obrazovku: na šířku 1920 mu vyjde výška 3413 px a
+   1167 px nahoře i dole se ořízne. Ondrovi zmizí hlava nad horní hranou.
+   Změřeno probem `scripts/ond300-fullscreen-probe.cjs` (1920×1080).
+
+   `cover` proto ve fullscreenu měníme na `contain` (celý obraz, černé
+   pruhy po stranách) a pro jistotu nulujeme i rozměrové deklarace —
+   prohlížeče, které je nemají jako `!important`, by jinak dopadly hůř.
+
+   Tenhle blok je ZÁMĚRNĚ mimo `@layer components`: `podpis.css` a
+   `hloubka.css` se importují nevrstvené, a nevrstvená pravidla vyhrávají
+   nad vrstvenými bez ohledu na specificitu. Uvnitř vrstvy by tedy
+   `.pd-why__video video { width: 100%; height: auto }` (podpis.css)
+   opravu na domovské stránce zase přebilo.
+   ========================================================================== */
+.video-intro:fullscreen {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    aspect-ratio: auto;
+    object-fit: contain;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: #000;
+}
+/* Prefixovanou kopii `.video-intro:-webkit-full-screen` (Safari < 16.4)
+   sem nepřidávej — Lightning CSS ji při buildu zahodí, v bundlu skončí
+   jen tohle pravidlo. Safari umí `:fullscreen` od 16.4, na iOS jede
+   video v nativním přehrávači, kam CSS stejně nedosáhne. */
