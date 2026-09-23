@@ -30,9 +30,22 @@
 
 {{-- Anchor tag for lightbox, if title or gallery is provided --}}
 @if ($lightboxTitle || $lightboxGallery)
+    @php
+        // OND-265: `data-glightbox` se dřív vypisoval JEN při vyplněném
+        // `lightboxTitle`. Galerie případovek posílá pouze `lightboxGallery`,
+        // takže odkaz vznikl, ale atribut ne — `app.js` se bez
+        // `[data-glightbox]` na stránce rovnou vrátí a knihovna se ani
+        // nestáhla. Klik na obrázek pak vyhodil návštěvníka z webu na holý
+        // soubor (~101 obrázků na 24 detailech, ověřeno na produkci).
+        // Titulek dopočítáváme z `alt`; středník je v GLightboxu oddělovač
+        // parametrů, takže ho z titulku vyhazujeme.
+        $glightboxTitle = trim(str_replace(';', ',', (string) ($lightboxTitle ?: $alt)));
+        // Cíl odkazu = největší varianta (ne 320px `fallback`).
+        $lightboxHref = $srcsets ? ($srcsets['largest'] ?? $srcsets['fallback']) : '';
+    @endphp
     <a
-        href="{{ $srcsets ? $srcsets['fallback'] : '' }}"
-        {!! $lightboxTitle ? "data-glightbox=\"title: {$lightboxTitle}\"" : '' !!}
+        href="{{ $lightboxHref }}"
+        data-glightbox="{{ $glightboxTitle !== '' ? 'title: ' . $glightboxTitle : '' }}"
         {!! $lightboxGallery ? "data-gallery=\"{$lightboxGallery}\"" : '' !!}
     >
 @endif

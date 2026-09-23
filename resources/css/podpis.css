@@ -1,0 +1,1035 @@
+/* ============================================================
+   VIZUÁLNÍ PODPIS ACID — produkční homepage
+   ------------------------------------------------------------
+   Namespace `.pd-` („podpis D") pochází z prototypu OND-227
+   `?podpis=d&barva=acid`. OND-231 (F3) tenhle jazyk povýšil na
+   produkční `/`; varianty A/B/C i barevné směry KLEIN a ŠARLAT
+   jsou smazané — rozhodnutí padlo a mrtvý kód na produkci
+   nepatří. Sitewide tokeny (navbar, patička, podstránky) řeší
+   app.css / foundation/design-system.css.
+
+   Gramatika:
+   - barva je signální inkoust: jen tam, kde je akce nebo důraz
+   - žádné pill tvary, zaoblené karty ani glow blury
+   - obsah nikdy nestartuje v opacity: 0 (žádný data-reveal)
+   - pohyb je přesný a účelový, ne dekorativní
+   ============================================================ */
+
+.pd {
+    --pd-accent: #D8FF3A;
+    --pd-accent-hover: #E6FF70;
+    --pd-accent-on: #0A0A0B;
+    background: var(--color-bg-base);
+}
+.pd ::selection {
+    background: var(--pd-accent);
+    color: var(--pd-accent-on);
+}
+
+/* --- Hero --------------------------------------------------- */
+.pd-hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-bg-base);
+    padding-top: 68px;
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+@media (min-width: 1024px) {
+    .pd-hero {
+        padding-top: calc(68px + clamp(2.5rem, 6vw, 5rem));
+        min-height: 94svh;
+        display: flex;
+        align-items: center;
+    }
+}
+
+.pd-hero__photo {
+    position: relative;
+    margin: 0 0 var(--space-6);
+    transition: transform 320ms var(--ease-out);
+    will-change: transform;
+}
+.pd-hero__photo picture,
+.pd-hero__photo img { display: block; width: 100%; height: auto; }
+@media (min-width: 1024px) {
+    .pd-hero__photo {
+        position: absolute;
+        inset: 0 0 0 auto;
+        width: 54%;
+        margin: 0;
+        z-index: 0;
+    }
+    .pd-hero__photo picture,
+    .pd-hero__photo img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        object-position: 62% 20%;
+    }
+    .pd-hero__photo::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, var(--color-bg-base) 0%, transparent 26%);
+        pointer-events: none;
+        z-index: 1;
+    }
+    .pd-hero .container-site { position: relative; z-index: 1; }
+    .pd-hero__content { max-width: 46%; }
+}
+
+.pd-eyebrow {
+    font-family: var(--font-body);
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-fg-muted);
+    margin: 0 0 var(--space-6);
+}
+
+.pd-heading {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-variation-settings: 'wght' 700;
+    font-size: clamp(40px, 5.2vw, 76px);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: var(--color-fg-primary);
+    margin: 0 0 var(--space-6);
+    max-width: 21ch;
+}
+/* Barva se v titulku objeví jen jako podtržení klíčového slova. */
+.pd-heading em {
+    font-style: normal;
+    color: var(--color-fg-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--pd-accent);
+    text-decoration-thickness: 0.14em;
+    text-underline-offset: 0.08em;
+}
+
+.pd-sub {
+    font-family: var(--font-body);
+    font-size: var(--text-body-lg);
+    line-height: var(--leading-body);
+    color: var(--color-fg-muted);
+    max-width: 46ch;
+    margin: 0 0 var(--space-4);
+}
+
+.pd-sign {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: var(--text-body);
+    color: var(--color-fg-primary);
+    margin: 0 0 var(--space-6);
+}
+.pd-sign__mark {
+    width: 84px;
+    height: auto;
+    color: var(--pd-accent);
+    flex: 0 0 auto;
+    transform: translateY(2px);
+}
+
+.pd-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-5);
+    margin-bottom: var(--space-3);
+}
+
+.pd-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    font-weight: 600;
+    text-decoration: none;
+    background: var(--pd-accent);
+    color: var(--pd-accent-on);
+    padding: 15px 26px;
+    transition: background-color var(--duration-micro) var(--ease-out),
+                transform var(--duration-micro) var(--ease-out);
+}
+.pd-cta:hover,
+.pd-cta:focus-visible {
+    background: var(--pd-accent-hover);
+    transform: translateY(-1px);
+}
+.pd-phone.phone-cta {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    color: var(--color-fg-muted);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+.pd-phone.phone-cta:hover { color: var(--color-fg-primary); }
+
+.pd-note {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    color: var(--color-fg-muted);
+    max-width: 48ch;
+    margin: 0;
+}
+
+/* --- Sekce: sdílená hlava a rytmus -------------------------- */
+.pd-section {
+    background: var(--color-bg-base);
+    border-top: 1px solid var(--color-border-soft);
+    padding-block: clamp(3.5rem, 7vw, 6.5rem);
+}
+.pd-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-5);
+    margin-bottom: var(--space-5);
+}
+.pd-head__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-h2);
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-fg-primary);
+    margin: 0;
+}
+.pd-intro {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--color-fg-muted);
+    max-width: 58ch;
+    margin: 0 0 var(--space-8);
+}
+.pd-lead {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-variation-settings: 'wght' 300;
+    font-size: clamp(19px, 2.2vw, 28px);
+    line-height: 1.45;
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-fg-primary);
+    max-width: 36ch;
+    margin: 0 0 var(--space-8);
+}
+
+/* --- Social pás --------------------------------------------- */
+.pd-strip {
+    border-top: 1px solid var(--color-border-soft);
+    padding-block: var(--space-6);
+    background: var(--color-bg-base);
+}
+.pd-strip__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-6);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    letter-spacing: 0.02em;
+    color: var(--color-fg-muted);
+}
+.pd-strip__list strong { color: var(--color-fg-primary); font-weight: 600; }
+.pd-strip__list li + li::before {
+    content: '·';
+    color: var(--pd-accent);
+    margin-right: var(--space-6);
+}
+/* --- Metoda ------------------------------------------------- */
+.pd-avoid {
+    font-family: var(--font-body);
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--pd-accent);
+    margin: 0 0 var(--space-2);
+}
+.pd-avoid-sub {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    color: var(--color-fg-muted);
+    margin: 0 0 var(--space-7);
+}
+/* OND-269: dvě věty, které zbyly ze sekce „Generátor versus váš byznys",
+   stojí pod mřížkou problémů. Vlasová linka je oddělí, ať nevypadají jako
+   třetí položka mřížky. */
+.pd-avoid--second {
+    margin-top: var(--space-9);
+    padding-top: var(--space-7);
+    border-top: 1px solid var(--color-border-soft);
+}
+.pd-avoid--second + .pd-avoid-sub { margin-bottom: 0; max-width: 72ch; }
+.pd-issues { display: grid; gap: var(--space-7); }
+@media (min-width: 1024px) { .pd-issues { grid-template-columns: 1fr 1fr; gap: var(--space-9); } }
+.pd-issue { display: grid; grid-template-columns: 56px 1fr; gap: var(--space-4); }
+.pd-issue__num {
+    font-family: var(--font-display);
+    font-weight: 200;
+    font-variation-settings: 'wght' 200;
+    font-size: var(--text-h2);
+    line-height: 1;
+    color: var(--pd-accent);
+}
+.pd-issue h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-h4);
+    color: var(--color-fg-primary);
+    margin: 0 0 var(--space-3);
+}
+.pd-issue p {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--color-fg-muted);
+    margin: 0 0 var(--space-3);
+}
+.pd-issue blockquote {
+    margin: var(--space-4) 0 0;
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+}
+.pd-issue blockquote footer {
+    font-style: normal;
+    font-size: var(--text-caption);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: var(--space-2);
+}
+
+/* --- Cenová kotva ------------------------------------------- */
+.pd-price { display: grid; gap: var(--space-7); }
+@media (min-width: 1024px) {
+    .pd-price { grid-template-columns: repeat(3, 1fr); gap: 0; }
+    .pd-price__col + .pd-price__col {
+        border-left: 1px solid var(--color-border-soft);
+        padding-left: var(--space-7);
+    }
+    .pd-price__col { padding-right: var(--space-7); }
+}
+.pd-price__title {
+    font-family: var(--font-body);
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-fg-muted);
+    margin: 0 0 var(--space-4);
+}
+.pd-price__title em {
+    font-style: normal;
+    color: var(--pd-accent);
+    margin-left: var(--space-2);
+}
+.pd-price__value {
+    font-family: var(--font-display);
+    font-weight: 200;
+    font-variation-settings: 'wght' 200;
+    font-size: clamp(30px, 3.2vw, 46px);
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-fg-primary);
+    margin: 0 0 var(--space-4);
+}
+.pd-price__desc {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+    margin: 0;
+}
+/* Doporučené pásmo jen vlasovou linkou nahoře — žádná plocha. */
+.pd-price__col--featured { border-top: 2px solid var(--pd-accent); padding-top: var(--space-4); }
+
+/* --- Reference ---------------------------------------------- */
+/* OND-279: „Přeloženo z českých originálů na Google, Firmy.cz a Facebooku" je
+   údaj o původu recenzí — stejná třída jako .pd-testi__source, tedy informace. */
+.pd-testi__note {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+    margin: calc(-1 * var(--space-3)) 0 var(--space-5);
+    max-width: 58ch;
+}
+.pd-testi { display: grid; }
+@media (min-width: 1024px) { .pd-testi { grid-template-columns: 1fr 1fr; column-gap: var(--space-9); } }
+.pd-testi__item {
+    border-top: 1px solid var(--color-border-soft);
+    padding: var(--space-6) 0;
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: var(--space-4);
+}
+.pd-testi__num {
+    font-family: var(--font-display);
+    font-weight: 200;
+    font-variation-settings: 'wght' 200;
+    font-size: var(--text-h3);
+    line-height: 1.1;
+    color: var(--color-fg-decorative);
+}
+.pd-testi__text {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--color-fg-primary);
+    margin: 0 0 var(--space-3);
+}
+.pd-testi__meta {
+    font-family: var(--font-body);
+    font-size: var(--text-caption);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-fg-muted);
+}
+
+/* ============================================================
+   OND-229 — F2: dostavba homepage v ACID
+   Nové sekce drží gramatiku D/ACID: vlasové linky, negativní
+   prostor, tenké číslice, barva jen jako signální inkoust akcí
+   a důrazu. Žádné boxy, žádné ikony, žádná dekorace.
+   ============================================================ */
+
+/* --- 04 Služby — tři sloupce s vlasovými linkami ------------- */
+.pd-services { display: grid; gap: var(--space-7); }
+@media (min-width: 1024px) {
+    .pd-services { grid-template-columns: repeat(3, 1fr); gap: 0; }
+    .pd-service { padding-right: var(--space-7); }
+    .pd-service + .pd-service {
+        border-left: 1px solid var(--color-border-soft);
+        padding-left: var(--space-7);
+    }
+}
+.pd-service__num {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 200;
+    font-variation-settings: 'wght' 200;
+    font-size: var(--text-h3);
+    line-height: 1;
+    color: var(--pd-accent);
+    margin-bottom: var(--space-4);
+}
+.pd-service__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-h4);
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-fg-primary);
+    margin: 0 0 var(--space-3);
+}
+.pd-service__desc {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--color-fg-muted);
+    margin: 0 0 var(--space-4);
+}
+.pd-service__bullets {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+}
+.pd-service__bullets li {
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: var(--space-2);
+}
+.pd-service__bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 10px;
+    height: 1px;
+    background: var(--pd-accent);
+}
+.pd-services__secondary {
+    margin: var(--space-8) 0 0;
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    color: var(--color-fg-muted);
+}
+.pd-services__secondary a {
+    color: var(--color-fg-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--pd-accent);
+    text-underline-offset: 3px;
+}
+.pd-services__secondary a:hover { color: var(--pd-accent); }
+
+/* --- 05 Případovky — dílo první, výsledek druhý -------------- */
+.pd-cases { display: grid; gap: var(--space-9); }
+.pd-case { display: grid; gap: var(--space-5); }
+@media (min-width: 1024px) {
+    .pd-case {
+        grid-template-columns: 7fr 5fr;
+        gap: var(--space-8);
+        align-items: end;
+    }
+    /* Střídavý rytmus: sudé případovky mají vizuál vpravo —
+       sloupce se prohodí, aby vizuál držel širší (7fr) dráhu */
+    .pd-case:nth-child(even) { grid-template-columns: 5fr 7fr; }
+    .pd-case:nth-child(even) .pd-case__visual { order: 2; }
+}
+.pd-case__visual {
+    display: block;
+    border: 1px solid var(--color-border-soft);
+    overflow: hidden;
+    transition: border-color var(--duration-micro) var(--ease-out);
+}
+.pd-case__visual img { display: block; width: 100%; height: auto; }
+.pd-case__visual:hover,
+.pd-case__visual:focus-visible { border-color: var(--pd-accent); }
+.pd-case__num {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 200;
+    font-variation-settings: 'wght' 200;
+    font-size: var(--text-h3);
+    line-height: 1;
+    color: var(--color-fg-decorative);
+    margin-bottom: var(--space-3);
+}
+.pd-case__client {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-h3);
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-fg-primary);
+    margin: 0 0 var(--space-3);
+}
+.pd-case__outcome {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-variation-settings: 'wght' 300;
+    font-size: clamp(17px, 1.8vw, 22px);
+    line-height: 1.5;
+    color: var(--color-fg-muted);
+    max-width: 40ch;
+    margin: 0 0 var(--space-5);
+}
+.pd-case__cta {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    font-weight: 600;
+    color: var(--color-fg-primary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--pd-accent);
+    padding-bottom: 2px;
+    transition: color var(--duration-micro) var(--ease-out);
+}
+.pd-case__cta:hover { color: var(--pd-accent); }
+/* OND-269: karta nese dva odkazy — na případovku a na živý web. Druhý
+   odkaz je tišší (bez acid podtržení), aby první zůstal hlavní akcí. */
+.pd-case__links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-3) var(--space-6);
+    margin: 0;
+}
+.pd-case__live {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    font-weight: 600;
+    color: var(--color-fg-muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-border-soft);
+    padding-bottom: 2px;
+    transition: color var(--duration-micro) var(--ease-out),
+                border-color var(--duration-micro) var(--ease-out);
+}
+.pd-case__live:hover,
+.pd-case__live:focus-visible {
+    color: var(--color-fg-primary);
+    border-bottom-color: var(--pd-accent);
+}
+.pd-more { margin: var(--space-8) 0 0; }
+.pd-more__link {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    font-weight: 600;
+    color: var(--color-fg-primary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--pd-accent);
+    padding-bottom: 2px;
+}
+.pd-more__link:hover { color: var(--pd-accent); }
+
+/* --- 07 Proč já — video + tichá mřížka výhod ----------------- */
+.pd-why { display: grid; gap: var(--space-8); }
+@media (min-width: 1024px) {
+    .pd-why {
+        grid-template-columns: 5fr 7fr;
+        gap: var(--space-9);
+        align-items: start;
+    }
+}
+.pd-why__video {
+    border: 1px solid var(--color-border-soft);
+    max-width: 340px;
+}
+.pd-why__video video { display: block; width: 100%; height: auto; }
+.pd-why__bio {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--color-fg-muted);
+    max-width: 52ch;
+    margin: var(--space-5) 0 0;
+}
+.pd-why__grid { display: grid; }
+.pd-why__item {
+    border-top: 1px solid var(--color-border-soft);
+    padding: var(--space-5) 0;
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: var(--space-4);
+}
+.pd-why__num {
+    font-family: var(--font-display);
+    font-weight: 200;
+    font-variation-settings: 'wght' 200;
+    font-size: var(--text-h3);
+    line-height: 1.1;
+    color: var(--color-fg-decorative);
+}
+.pd-why__item h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-h4);
+    color: var(--color-fg-primary);
+    margin: 0 0 var(--space-2);
+}
+.pd-why__item p {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+    margin: 0;
+}
+
+/* --- 08 Pod kapotou — fakta + naměřený čas ------------------- */
+.pd-hood { display: grid; gap: var(--space-6); }
+@media (min-width: 1024px) {
+    .pd-hood { grid-template-columns: repeat(3, 1fr); gap: 0; }
+    .pd-hood__fact { padding-right: var(--space-7); }
+    .pd-hood__fact + .pd-hood__fact {
+        border-left: 1px solid var(--color-border-soft);
+        padding-left: var(--space-7);
+    }
+}
+.pd-hood__fact h3 {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    font-weight: 600;
+    color: var(--color-fg-primary);
+    margin: 0 0 var(--space-2);
+}
+.pd-hood__fact p {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+    margin: 0;
+}
+.pd-hood__perf {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-variation-settings: 'wght' 300;
+    font-size: clamp(19px, 2.2vw, 26px);
+    line-height: 1.5;
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-fg-primary);
+    max-width: 40ch;
+    margin: var(--space-8) 0 0;
+}
+.pd-hood__perf strong {
+    font-weight: 700;
+    color: var(--pd-accent);
+}
+
+/* --- 09 Postup — kroky pod sebou, čas jako acid štítek ------- */
+.pd-steps { list-style: none; margin: 0; padding: 0; }
+.pd-step {
+    border-top: 1px solid var(--color-border-soft);
+    padding: var(--space-6) 0;
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: var(--space-4);
+}
+.pd-step__num {
+    font-family: var(--font-display);
+    font-weight: 200;
+    font-variation-settings: 'wght' 200;
+    font-size: var(--text-h2);
+    line-height: 1;
+    color: var(--pd-accent);
+}
+.pd-step__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-h4);
+    color: var(--color-fg-primary);
+    margin: 0 0 var(--space-3);
+}
+.pd-step__title em {
+    font-style: normal;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: var(--text-caption);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--pd-accent);
+    margin-left: var(--space-3);
+}
+.pd-step__text {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--color-fg-muted);
+    max-width: 62ch;
+    margin: 0;
+}
+.pd-step__body blockquote {
+    margin: var(--space-4) 0 0;
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+    max-width: 62ch;
+}
+.pd-step__body blockquote footer {
+    font-style: normal;
+    font-size: var(--text-caption);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: var(--space-2);
+}
+.pd-step__note {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+    max-width: 62ch;
+    margin: var(--space-3) 0 0;
+}
+.pd-steps__cta {
+    border-top: 1px solid var(--color-border-soft);
+    padding-top: var(--space-6);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-5);
+}
+.pd-steps__cta-intro {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-variation-settings: 'wght' 300;
+    font-size: clamp(18px, 2vw, 24px);
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-fg-primary);
+    margin: 0;
+}
+
+/* --- 11 FAQ — details/summary s acid křížkem ----------------- */
+.pd-faq { display: grid; }
+.pd-faq__item { border-top: 1px solid var(--color-border-soft); }
+.pd-faq__item:last-child { border-bottom: 1px solid var(--color-border-soft); }
+.pd-faq__q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-5);
+    padding: var(--space-5) 0;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-body-lg);
+    color: var(--color-fg-primary);
+}
+.pd-faq__q::-webkit-details-marker { display: none; }
+.pd-faq__q:hover { color: var(--pd-accent); }
+.pd-faq__mark {
+    position: relative;
+    flex: 0 0 auto;
+    width: 14px;
+    height: 14px;
+}
+.pd-faq__mark::before,
+.pd-faq__mark::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    background: var(--pd-accent);
+    transition: transform var(--duration-micro) var(--ease-out);
+}
+.pd-faq__mark::before { width: 14px; height: 2px; }
+.pd-faq__mark::after { width: 2px; height: 14px; }
+.pd-faq__item[open] .pd-faq__mark::after { transform: scaleY(0); }
+.pd-faq__a {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--color-fg-muted);
+    max-width: 70ch;
+    margin: 0;
+    padding: 0 0 var(--space-6);
+}
+
+/* --- 12 Poptávka — jediná závěrečná výzva -------------------- */
+.pd-form { display: grid; gap: var(--space-8); }
+@media (min-width: 1024px) {
+    .pd-form { grid-template-columns: 5fr 7fr; gap: var(--space-9); }
+}
+.pd-form__quote {
+    margin: var(--space-6) 0 0;
+    padding-left: var(--space-4);
+    border-left: 2px solid var(--pd-accent);
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+}
+.pd-form__quote footer {
+    font-style: normal;
+    font-size: var(--text-caption);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: var(--space-2);
+}
+.pd-form__grid { display: grid; gap: var(--space-5); }
+@media (min-width: 768px) {
+    .pd-form__grid { grid-template-columns: 1fr 1fr; }
+    .pd-field--full { grid-column: 1 / -1; }
+}
+.pd-field label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: var(--text-caption);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-fg-muted);
+    margin-bottom: var(--space-2);
+}
+.pd-field input,
+.pd-field textarea {
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--color-border-soft);
+    border-radius: 0;
+    color: var(--color-fg-primary);
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    padding: 12px 14px;
+    transition: border-color var(--duration-micro) var(--ease-out);
+}
+.pd-field input::placeholder,
+.pd-field textarea::placeholder { color: var(--color-fg-muted); }
+.pd-field input:focus,
+.pd-field textarea:focus {
+    outline: none;
+    border-color: var(--pd-accent);
+}
+.pd-field__error {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    color: #FF6157;
+    margin: var(--space-2) 0 0;
+}
+/* OND-256/4 — pošťouchnutí pod nepovinným polem. */
+.pd-field__hint {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    color: var(--color-fg-muted);
+    margin: var(--space-2) 0 0;
+}
+.pd-alert {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    border: 1px solid;
+    padding: var(--space-4);
+    margin-bottom: var(--space-5);
+}
+.pd-alert--success { border-color: rgba(16, 185, 129, 0.5); color: #6EE7B7; }
+.pd-alert--error { border-color: rgba(255, 97, 87, 0.6); color: #FFB4AE; }
+.pd-form__submit {
+    border: 0;
+    cursor: pointer;
+    margin-top: var(--space-6);
+}
+.pd-form__submit[disabled] { opacity: 0.6; cursor: wait; }
+.pd-form__note {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+    max-width: 52ch;
+    margin: var(--space-4) 0 0;
+}
+.pd-form__privacy {
+    font-family: var(--font-body);
+    font-size: var(--text-caption);
+    color: var(--color-fg-muted);
+    margin: var(--space-3) 0 0;
+}
+.pd-form__privacy a {
+    color: var(--color-fg-muted);
+    text-decoration: underline;
+    text-decoration-color: var(--pd-accent);
+    text-underline-offset: 3px;
+}
+.pd-form__privacy a:hover { color: var(--pd-accent); }
+
+@media (prefers-reduced-motion: reduce) {
+    .pd-hero__photo,
+    .pd-cta,
+    .pd-case__visual,
+    .pd-faq__mark::before,
+    .pd-faq__mark::after { transition: none; }
+    .pd-cta:hover,
+}
+
+/* ============================================================
+   OND-231 F3 — SITEWIDE: nové sekce homepage + zbytek webu
+   ============================================================ */
+
+/* --- Klienti: tichá řada jmen a log pod social pásem -------- */
+.pd-clients {
+    background: var(--color-bg-base);
+    padding-block: var(--space-6);
+}
+.pd-clients__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-5) var(--space-8);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.pd-clients__item {
+    display: inline-flex;
+    align-items: center;
+    /* Loga i jména startují ztlumená a ožijí pod kurzorem — jsou to
+       důkazy, ne dekorace, a nesmí soutěžit s obsahem sekcí. */
+    opacity: 0.55;
+    transition: opacity var(--duration-macro) var(--ease-out);
+}
+.pd-clients__item:hover { opacity: 1; }
+.pd-clients__name {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    letter-spacing: 0.04em;
+    color: var(--color-fg-muted);
+    white-space: nowrap;
+}
+@media (prefers-reduced-motion: reduce) {
+    .pd-clients__item { transition: none; }
+}
+
+/* --- Odkud pocházejí principy ------------------------------- */
+/* OND-269: blok už nestojí ve vlastní sekci, ale uvnitř „Proč já" pod
+   videem a mřížkou výhod. Odděluje ho proto vlasová linka a vlastní
+   mezisoučtový titulek (h3), ne hlava sekce. */
+.pd-origin--nested {
+    margin-top: var(--space-9);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--color-border-soft);
+}
+.pd-origin__title {
+    grid-column: 1 / -1;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-h3);
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-fg-primary);
+    margin: 0;
+}
+.pd-origin {
+    display: grid;
+    gap: var(--space-7);
+    margin-top: var(--space-6);
+}
+@media (min-width: 900px) {
+    .pd-origin { grid-template-columns: 1.15fr 1fr; gap: var(--space-8); }
+}
+.pd-origin__text p {
+    font-family: var(--font-body);
+    font-size: var(--text-body-lg);
+    line-height: var(--leading-body);
+    color: var(--color-fg-muted);
+    margin: 0 0 var(--space-5);
+    max-width: 62ch;
+}
+.pd-origin__text p:last-child { margin-bottom: 0; }
+.pd-origin__quote {
+    margin: 0;
+    padding-left: var(--space-5);
+    border-left: 2px solid var(--pd-accent);
+    font-family: var(--font-display);
+    font-size: var(--text-h4);
+    line-height: var(--leading-snug);
+    color: var(--color-fg-primary);
+}
+.pd-origin__quote footer {
+    margin-top: var(--space-4);
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+}
+
+/* --- Reference: zdroj hodnocení jako datový štítek ---------- */
+.pd-testi__source {
+    display: inline-block;
+    margin-left: var(--space-2);
+    padding: 0 0.4em;
+    border: 1px solid var(--color-border-mid);
+    font-size: var(--text-caption);
+    letter-spacing: 0.04em;
+    color: var(--color-fg-muted);
+    white-space: nowrap;
+}
+
+/* ============================================================
+   OND-231 F3 — chrom celého webu v ACID
+   ------------------------------------------------------------
+   V F2 byly tyhle přepisy scoped přes `body:has(.pd--acid)`,
+   aby se zbytku webu nedotkly. F3 je rollout: podpis platí
+   sitewide, takže se přelaďují rovnou globální tokeny
+   (definice viz app.css a foundation/design-system.css)
+   a `:has()` scoping padá — navbar, patička, mobilní lišta
+   i podstránky drží stejnou barvu jako homepage.
+   ============================================================ */
+
+/* Shimmer na primárním tlačítku je šablonový tik — v ACID
+   gramatice je pohyb přesný a účelový, ne dekorativní. */
+.btn-primary::after { animation: none; }
+.navbar__cta.btn.btn-primary,
+.mobile-bottom-bar__primary {
+    border-radius: 0;
+    box-shadow: none;
+}

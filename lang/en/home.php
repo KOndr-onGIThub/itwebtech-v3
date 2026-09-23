@@ -2,26 +2,35 @@
 
 return [
 
+    // OND-201 (finding 5.7): the page title must not define the business by
+    // negating competitors, and "no WordPress" says nothing to someone who
+    // does not know what WordPress is (principle 0).
     'meta' => [
-        'title'       => 'Ondřej Kriška — Websites & Web Applications for Businesses',
-        'description' => 'Custom websites and web applications built for results. Maintenance-free, no WordPress, no hidden fees. 18 years of experience. Free consultation.',
+        'title'       => 'Custom websites and web applications | ONDRAWEB',
+        'description' => 'Custom websites, online shops and web applications for small and mid-sized companies. Custom code, an exact price up front, and you deal with me directly. I am Ondřej Kriška.',
     ],
 
     // TODO (OND-136 P3): final EN tone polish — Content Writer scope.
     'hero' => [
-        // OND-135 P2 (plán §3.1) — page-mark + upline + display heading.
-        'page_mark_label' => 'AI & WEB',
-        'page_mark_index' => '01 / 01',
-        'upline'          => 'AI builds a website in an afternoon.',
-        'heading_html'    => 'But what kind of website?<br>One that <em>sells</em>.',
-        'subline'         => 'Strategy, research, and craft have no shortcuts.',
+        // OND-127 P0 incident hotfix (2026-05-14) — plagiátor strings removed.
+        // Placeholder copy derived from meta description = pre-redesign safe copy.
+        // FINAL COPY: Content Writer delivers in OND-136 P3 (SLA 2h from 11:10 UTC).
+        'page_mark_label' => 'CUSTOM WEB',
+        // OND-145 P0.3: page_mark_index removed — agency-portfolio pagination
+        // artefact, itwebtech has no „pages" hierarchy in hero context.
+        // OND-198 (finding 5.1): the previous headline promised the client's
+        // business result. Replaced with the approved hero copy (CS source of truth).
+        'upline'          => 'For businesses that know the difference.',
+        'heading_html'    => 'Websites and applications <em>built to fit</em>.<br>I build them myself, on my own code.',
+        'subline'         => 'I am Ondřej Kriška, an experienced developer. You work with me directly — no agency, no middlemen. I build websites to run for years without tying you up in maintenance.',
+        'note'            => 'I\'ll get back to you within 24 hours on business days. No commitment, we just go through what makes sense.',
 
         // Backwards compat (consultation modal, fallback render).
         'eyebrow'       => 'Custom websites & web applications',
-        'heading'       => 'A website that finally earns its keep. No WordPress, no maintenance, no compromises.',
+        'heading'       => 'Websites and applications built to fit. I build them myself, on my own code.',
         // OND-130 + OND-136: single primary CTA in hero, exact wording per spec.
         // cta_secondary kept for backwards compat (consultation modal) — not shown in hero.
-        'cta_primary'   => 'Get a free quote',
+        'cta_primary'   => 'Tell me what you need',
         'cta_secondary' => 'Book a 30-min consultation',
         'phone_label'   => 'or call:',
     ],
@@ -41,11 +50,15 @@ return [
 
     'social_proof' => [
         'rating_aria'  => '5 out of 5 rating',
+        'clients_aria' => 'Clients',
         'rating_value' => '5.0',
         'reviews'      => '(21 reviews on Google + Firmy.cz)',
         'projects'     => '23+ delivered projects',
         'experience'   => '18 years of experience',
-        'response'     => 'Reply within 24 hours',
+        'response'     => 'Reply within 24 hours on business days',
+        // OND-201 (finding 5.11): TOP firma 2025 award from Firmy.cz —
+        // verifiable third-party proof that was missing on staging.
+        'award'        => 'TOP firma 2025 on Firmy.cz',
         'brands' => [
             ['name' => 'MAKOplast',             'image' => null],
             ['name' => 'Yolk Studio',           'image' => 'yolk_studio.png'],
@@ -57,26 +70,41 @@ return [
         ],
     ],
 
+    // OND-202: work samples as the primary visual material (live client sites).
+    // OND-269 (audit OND-254, finding 7): the `showcase` block ("Websites
+    // running in the real world" — three tiles linking to the live site) is
+    // gone. Two project sections said the same thing and BARANA and PitArena
+    // were in both. Merged into the single `portfolio` section below, which
+    // took over the heading from here and gained a link to the live site
+    // (`live_cta` / `live_aria`).
+
+    // OND-201 (finding 5.7): the section used to define the business by
+    // negating competitors and two of three items said the same thing.
+    // What I do now leads (`lead`), the delimitation is short, and the
+    // duplicate items are merged into one.
     'problems' => [
-        'heading'            => 'What keeps happening on most web projects.',
-        'transition_heading' => 'How I do it differently:',
-        'transition_text'    => 'Every project starts with understanding your business. I write custom code — no templates, no WordPress, no intermediaries. You speak directly with me from the first meeting through launch and beyond.',
+        'heading'            => 'How I build websites',
+        'lead'               => 'Every project starts with understanding your business. I write custom code from the ground up, so the site follows how your company actually works. You speak directly with me from the first message through launch and beyond.',
+        'transition_heading' => 'What that spares you',
+        'transition_text'    => 'The two things I see most often on web projects.',
         'items' => [
             [
                 'heading'      => 'A template sold as a custom solution',
-                'text'         => 'An agency uses a layout they\'ve used five times before. They add your text and logo. The result looks professional — until you look at your competitor\'s website. Same sections, same words, different colours and logo.',
-                'quote_text'   => 'This is not the case where other would-be web designers just fill templates with data for outrageous fees.',
+                'text'         => 'A supplier reuses a layout they have already used five times and drops in your text and logo. The result looks professional — until you open a competitor\'s website and find the same sections and the same words. On top of that, the platform keeps you on a monthly subscription you cannot take with you.',
+                'quote_text'   => 'Unlike the would-be web designers who just pour your content into a template and charge outrageous fees.',
                 'quote_author' => 'Petr Kroulík, Nové Interiéry s.r.o.',
-            ],
-            [
-                'heading' => 'An AI website in an afternoon: nice-looking, generic, interchangeable',
-                'text'    => 'Tools can generate a website quickly these days. But without research, without strategy, without understanding your business, what emerges looks like a website — and functions like everyone else\'s. Plus the platform locks you into a subscription forever.',
             ],
             [
                 'heading' => 'You never speak with the person who builds the site',
                 'text'    => 'The person selling you the website isn\'t building it. The people building it aren\'t talking to you. Context and intent get lost in the middle — and the result doesn\'t match what you wanted.',
             ],
         ],
+        // OND-269 (audit OND-254, finding 7): what is left of the retired
+        // "Generator versus your business" section. Same argument as the first
+        // item above ("a template sold as a custom build"), so it belongs here
+        // rather than in a section of its own four screens further down.
+        'ai_heading' => 'A template is quick to build. Leads aren\'t.',
+        'ai_text'    => 'A generator can click a layout together and drop in text and images — what it cannot do is work out who you sell to, why a customer should choose you, or where prospects drop off. I use AI as a tool; the decisions about what the site should say and in what order are not something it can make for you.',
     ],
 
     'how_i_work' => [
@@ -88,14 +116,14 @@ return [
                 'heading'      => 'Consultation',
                 'time'         => '60 min, within a week',
                 'text'         => 'I start with a consultation, not a form. I need to understand your business, your customers and what the website should actually do — bring contacts, sell a product or build trust.',
-                'quote_text'   => 'He truly listened to my needs and then turned them into something I was completely satisfied with.',
+                'quote_text'   => 'He really listened to what I needed and then turned it into something I am completely happy with.',
                 'quote_author' => 'Magda Pernicová, Realiťačky v akci',
             ],
             [
                 'heading'      => 'Specification',
                 'time'         => '2–5 days',
                 'text'         => 'Before I start working, you\'ll receive a written specification: what will be on the website, how many pages, what technology and how much it will cost. No surprises on the invoice. I\'ll estimate the delivery date realistically — always upfront, never retrospectively.',
-                'quote_text'   => 'He rigorously analyses the situation and wants to understand current processes. He collects requirements from clients and explores visions for the future.',
+                'quote_text'   => 'He analyses the starting position thoroughly and wants to understand the existing processes. He gathers requirements from users and asks where things are heading.',
                 'quote_author' => 'Jan Stybor, Head of Project Department, Toyota',
                 'note'         => 'Note on timelines: a website doesn\'t only depend on my side. Approvals, materials from the client and feedback are part of the process. The timeline is always an estimate, not a binding commitment — and I say that openly from the start.',
             ],
@@ -113,35 +141,15 @@ return [
         ],
     ],
 
-    'ai' => [
-        'subheading' => 'AI & web design',
-        'heading'    => 'A website in an afternoon. But which website?',
-        'intro'      => 'Technically, it\'s possible. A tool can generate pages, text, images. The problem isn\'t speed.',
-        'laik' => [
-            'label'   => 'Non-expert + AI',
-            'outcome' => 'Quick result.',
-            'items'   => [
-                'Generic, unvalidated, interchangeable',
-                'Without customer and competitor research',
-                'Without a strategy for what the site says and in what order',
-                'Nice-looking — identical to dozens of others',
-            ],
-            'note' => 'An AI website makes sense when you\'re testing an idea without commitment.',
-        ],
-        'expert' => [
-            'label'   => 'Expert + AI',
-            'outcome' => 'Just as fast where it makes sense. And without a generic result.',
-            'items'   => [
-                'Strategy, research and understanding of your business',
-                'Control and a result someone is accountable for',
-                'Content designed so people stay and contact you',
-                'A website that differs from competitors — intentionally',
-            ],
-            'note' => 'If you run a business, this is a difference your customers will notice.',
-        ],
-        'closing' => 'I use AI as a tool — it shortens time on routine work. Strategy, research and decisions about what the site must do cannot be skipped. That work has to be done before a single line of the website itself is written.',
-    ],
+    // OND-269 (audit OND-254, finding 7): the "Generator versus your business"
+    // section (two columns, eight bullets) is gone — the board approved the
+    // cut on 22 Sept. Two sentences survive in `problems.ai_heading` /
+    // `problems.ai_text`, where the same argument already stood.
 
+    // OND-269: `toyota` is no longer a section of its own — it renders inside
+    // "Why work with me", under the video and bio. The "18 years at Toyota"
+    // headline used to appear twice (here and in `why_me.bio`), so Toyota is
+    // out of the bio.
     'toyota' => [
         'heading'      => '18 years at Toyota. Then I left.',
         'text'         => 'The automotive industry taught me one thing: behind every top result there are always the same steps. Analysis, design, testing, verification — and then again. No shortcuts, no guesses. Principles that work regardless of the industry.',
@@ -150,10 +158,16 @@ return [
         'quote_author' => 'Pavel Baudyš, Director of Manufacturing, Assembly & Logistics, Toyota Motor Manufacturing Czech Republic (2024)',
     ],
 
+    // OND-269: the only projects section on the homepage (formerly `showcase`
+    // + `portfolio`). Heading and intro come from the retired `showcase` —
+    // they talk about live websites, which is more concrete for a visitor.
     'portfolio' => [
-        'heading'    => 'Selected projects',
+        'heading'    => 'Websites running in the real world',
+        'intro'      => 'These are live projects you can open right now. Each one also says what it did for the client.',
         'cta'        => 'All projects →',
         'detail_cta' => 'See the project',
+        'live_cta'   => 'Open the live site',
+        'live_aria'  => 'Open the :client website in a new window',
         'cards' => [
             'pitarena' => [
                 'client'  => 'PitArena',
@@ -161,11 +175,12 @@ return [
             ],
             'barana' => [
                 'client'  => 'BARANA',
-                'outcome' => 'A premium presentation built directly for Meta Ads and Google Ads campaigns — visitors grasp the offer without picking up the phone.',
+                // OND-198 (finding 5.5): ad-platform jargon rewritten in client language.
+                'outcome' => 'A standalone page built for paid advertising — visitors grasp the offer without picking up the phone.',
             ],
             'nove-interiery' => [
                 'client'  => 'Nové interiéry',
-                'outcome' => 'The site pre-filters irrelevant enquiries and acts as the first sales meeting — the client reports a noticeably stronger brand credibility.',
+                'outcome' => 'The site pre-filters irrelevant enquiries and acts as the first sales meeting — the client reports noticeably stronger brand credibility.',
             ],
         ],
     ],
@@ -180,23 +195,23 @@ return [
         'primary' => [
             'weby' => [
                 'title'       => 'Custom websites',
-                'description' => 'A presentation website that sets you apart from template-driven competition and starts bringing in customers.',
+                // OND-198 (finding 5.1): "starts bringing in customers" promised
+                // the client's business result — replaced with what I deliver.
+                'description' => 'A presentation website that sets you apart from template-driven competition and clearly explains what you do and how you differ.',
                 'bullets'     => [
                     'Custom code — no WordPress, no templates',
                     'Conversion-focused structure built around your business',
                     'Maintenance-free with fast load times',
                 ],
-                'price'       => 'from €1,000',
             ],
             'aplikace' => [
                 'title'       => 'Web applications',
-                'description' => 'Internal systems, customer portals and tracking tools that save you both time and headcount.',
+                'description' => 'Internal systems, customer portals and tracking tools built around how your operation actually runs.',
                 'bullets'     => [
                     'Process design before a single line of code',
                     'Integrations with your existing tools',
                     'Custom admin without monthly licence fees',
                 ],
-                'price'       => 'from €2,200',
             ],
             'eshop' => [
                 'title'       => 'E-shops',
@@ -206,7 +221,6 @@ return [
                     'Integrations with accounting, couriers and payment gateways',
                     'No monthly platform fees',
                 ],
-                'price'       => 'from €3,800',
             ],
         ],
         'seo' => [
@@ -225,32 +239,44 @@ return [
 
     'price_anchor' => [
         'heading' => 'What will it cost?',
-        'intro'   => 'Indicative entry prices for the three project tiers. You receive an exact written quote after a short consultation.',
+        // OND-198 (finding 5.4): expectation sentence before the first number.
+        // OND-198 (finding 5.5): "tiers" → "three levels".
+        'intro'   => 'Most projects I build land between €2,200 and €6,000. If you are looking for a website under €800, I am not the right supplier for you and I will tell you so straight away. Below are indicative entry prices for three levels — you receive an exact written quote after a short consultation.',
         // OND-136: 25 / 55 / 95 thousand CZK → EUR conversion (CEO-confirmed 1:25 anchor). One source of truth across the site.
+        // OND-198 (finding 5.4): order Standard → Custom → Starter; the cheapest
+        // band is last and framed as an exception. Standard is highlighted.
+        'featured_label' => 'Most common choice',
         'items'   => [
             [
-                'title' => 'Starter',
-                'price' => '€1,000',
-                'desc'  => 'Up to 5-page presentation site for sole traders and small businesses.',
+                'title'    => 'Standard',
+                'price'    => '€2,200',
+                'desc'     => 'Multilingual site with blog, conversion tracking and a booking system.',
+                'featured' => true,
             ],
             [
-                'title' => 'Standard',
-                'price' => '€2,200',
-                'desc'  => 'Multilingual site with blog, conversion tracking and a booking system.',
+                'title'    => 'Custom',
+                'price'    => 'from €3,800',
+                'desc'     => 'E-shop, web application or a complex custom portal.',
+                'featured' => false,
             ],
             [
-                'title' => 'Custom',
-                'price' => 'from €3,800',
-                'desc'  => 'E-shop, web application or a complex custom portal.',
+                'title'    => 'Starter',
+                'price'    => '€1,000',
+                'desc'     => 'An exception, not the standard entry point: up to 5-page presentation site for sole traders. I take it on only where a larger scope makes no sense.',
+                'featured' => false,
             ],
         ],
         'cta' => 'Detailed pricing →',
     ],
 
     'why_me' => [
+        'video_aria' => 'Video: Ondřej Kriška — who I am and how I build websites',
         'heading'   => 'Why work with me',
         'photo_alt' => 'Ondřej Kriška — web developer',
-        'bio'       => 'For 18 years I ran projects at Toyota where the production line was not allowed to stop. I now apply those same principles — exact specification, analysis, verification — to web projects. I work solo: you talk directly to me from the first consultation through launch and beyond.',
+        // OND-269: the opening sentence ("For 18 years I ran projects at
+        // Toyota…") moved out — the Toyota story is told in full right below
+        // this paragraph, in the `toyota` block.
+        'bio'       => 'I work solo. You talk directly to me from the first consultation through launch and beyond — the same exact specification, analysis and verification on every project.',
         'advantages' => [
             [
                 'heading' => 'Custom code, no templates',
@@ -273,48 +299,68 @@ return [
 
     'testimonials' => [
         'heading' => 'What my clients say about working together.',
+        'note'    => 'Translated from the Czech originals on Google, Firmy.cz and Facebook.',
     ],
 
-    'guarantee' => [
-        'heading' => 'Two things you can rely on.',
-        'items'   => [
+    // OND-269 (audit OND-254, finding 7): the "Two things you can count on."
+    // section is gone — the board approved the cut on 22 Sept. Both promises
+    // ("Price up front", "Direct contact") appeared verbatim a second time;
+    // the single remaining wording lives in `why_me.advantages` 02 and 03.
+
+    // OND-229 (F2 — proof layer): "Under the hood" section + live design
+    // token demo. Every claim is verifiable in the repo; load time is
+    // measured by the Performance API in the visitor's own browser.
+    'craft' => [
+        'heading' => 'Under the hood',
+        'intro'   => 'The website I build for you looks like this on the inside too. These aren\'t marketing lines — everything below can be verified right on the page you\'re on.',
+        'facts'   => [
             [
-                'heading' => 'Price upfront',
-                'text'    => 'You\'ll receive a specification with an exact price before work begins. What\'s in the specification is on the invoice. No extra costs, no surprises.',
+                'heading' => 'Custom code',
+                'text'    => 'No WordPress, no page builder, no platform. The page is written from scratch and runs without plugins that would need monthly updates.',
             ],
             [
-                'heading' => 'Direct contact always',
-                'text'    => 'You communicate directly with me — not a salesperson or coordinator. Call any time. In the vast majority of cases I\'ll pick up immediately.',
+                'heading' => 'Images tailored to your screen',
+                'text'    => 'Every image here exists in seven sizes and the efficient AVIF format. Your browser downloaded only the one your display actually needs.',
+            ],
+            [
+                'heading' => 'Design held together by a system',
+                'text'    => 'Colours, type and spacing aren\'t governed by a template but by a custom system of variables. That\'s why nothing sticks out — and why you can play with it below.',
             ],
         ],
+        'perf_prefix' => 'This page loaded for you in',
+        'perf_suffix' => '— measured just now, in your browser.',
     ],
 
-    // TODO: review pro EN — copy podle CS varianty A (OND-100)
-    'cta' => [
-        'heading'      => 'Ready to start? The consultation is free.',
-        'consultation' => 'Get a price quote',
-        'message'      => 'Book a 30-min consultation',
-    ],
+    // OND-235: live demo (OND-229) removed — the site owner couldn't
+    // articulate the visitor benefit himself, and on mobile the control
+    // effect scrolled out of view. Keys and CSS (.pd-demo*) removed.
 
-    'final_cta' => [
-        'quote_text'   => 'Thanks to the individual approach, flexibility and professionalism, the result matches our expectations.',
-        'quote_author' => 'Hana Jaskmanická, Executive Director, VP Industry',
-        'heading'      => 'I\'ll give you an honest opinion on your project.',
-        'subtext'      => 'I reply by the next business day. If working together doesn\'t make sense, I\'ll tell you straight — no sales pressure, no follow-up emails.',
-        'cta_label'    => 'Get a price quote',
-        'cta_secondary' => 'Book a 30-min consultation',
-        'cta_note'     => 'Free. No commitment.',
-    ],
+    // OND-201 (finding 5.8): the end of the homepage was three calls to
+    // action in a row. The `cta` and `final_cta` blocks are removed; one
+    // call with one form remains in `inline_form` below, and the client
+    // quote moved next to it.
 
     'faq' => [
         'heading' => 'Frequently asked questions',
         // `key` is a stable slug for analytics (data-faq-key) and JSON-LD; do not localize.
         'items'   => [
+            // OND-222 (chapter 6.3, objection 1): the most serious objection on
+            // a 150k project. Withdrawn on 2026-09-16 (facts unconfirmed),
+            // confirmed by Ondra on 2026-09-17 with two corrections:
+            //  - the code belongs to the client, but Ondra holds it until the
+            //    final payment; NOT "yours from day one and you hold it";
+            //  - no mention of Laravel — it means nothing to the client;
+            //  - documentation is not standard, only on request.
+            // Still in force: no promise of round-the-clock availability.
             [
-                'key'      => 'price',
-                'question' => 'What will it cost?',
-                'answer'   => 'See the pricing anchor above for indicative entry prices — Starter €1,000, Standard €2,200, Custom from €3,800. You get an exact written quote after a short consultation, and the invoice matches the specification line by line.',
+                'key'      => 'single-person',
+                'question' => 'You are one person. What if you get ill or quit?',
+                'answer'   => 'A fair concern — on a project this size it is the most important question. The site does not run on a platform you could not leave: it is custom code on ordinary web hosting. You can hold the hosting admin and FTP credentials the whole time — just ask for them. Once the project is paid in full the code is yours; I hand it over whenever you ask, and any developer can carry on with it — if documentation is needed for the handover, I will write it. I do not keep round-the-clock availability and I will not claim otherwise. What I do guarantee is that nothing stays locked up with me.',
             ],
+            // OND-269 (audit OND-254, finding 7): the "What will it cost?"
+            // question is gone from here — the same heading and the same
+            // numbers stand four sections above in the pricing anchor
+            // (`price_anchor`) and in the price list.
             [
                 'key'      => 'duration',
                 'question' => 'How long does it take?',
@@ -337,7 +383,7 @@ return [
     'faq_form' => [
         'eyebrow'     => 'Got a different question?',
         'heading'     => 'Send it over.',
-        'description' => 'I pick it up and reply by the next business day. No sales pressure.',
+        'description' => 'I pick it up and get back to you within 24 hours on business days. No sales pressure.',
         'name'        => 'Name',
         'email'       => 'Email',
         'message'     => 'Your question',
@@ -351,14 +397,17 @@ return [
         'success'     => 'Thanks, the question has arrived. I\'ll get back to you as soon as possible.',
     ],
 
-    // TODO: review pro EN — copy podle CS varianty A (OND-100)
+    // OND-201 (finding 5.8): the single closing call to action of the homepage.
     'inline_form' => [
         'eyebrow'         => 'Enquiry',
-        'heading'         => 'Send me a few lines about your project. I\'ll reply within 24 hours.',
-        'description'     => 'No salesperson, no ten-field form. A short description is enough — I\'ll reply personally and we\'ll see if working together makes sense.',
+        'heading'         => 'Tell me what you need',
+        'description'     => 'Describe briefly what you are dealing with. I\'ll get back to you within 24 hours on business days and we will go through what makes sense, with no obligation. If we turn out not to be a fit, I will tell you straight.',
+        'quote_text'      => 'Thanks to the individual approach, flexibility and professionalism, the result matches our expectations.',
+        'quote_author'    => 'Hana Jaskmanická, Executive Director, VP Industry',
         'name'            => 'Full name',
         'email'           => 'Email',
         'phone'           => 'Phone (optional)',
+        'phone_hint'      => 'Leave a number and I can get back to you faster.',
         'message'         => 'What do you need solved?',
         'placeholders'    => [
             'name'    => 'John Smith',
@@ -368,6 +417,7 @@ return [
         ],
         'submit'          => 'Send enquiry',
         'submitting'      => 'Sending…',
+        'note'            => 'Or email me at ok@ondraweb.cz. I reply personally, not through a form robot.',
         'privacy_prefix'  => 'By submitting you agree to processing of personal data in line with the ',
         'privacy_link'    => 'privacy policy',
         'success'         => 'Thanks, the enquiry has arrived. I\'ll get back to you as soon as possible.',

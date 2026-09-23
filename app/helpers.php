@@ -5,13 +5,47 @@ if (!function_exists('lroute')) {
      * Generate a URL for a locale-aware named route.
      *
      * Route names follow the pattern: {locale}.{page}
-     * Example: lroute('home')       → /cs/
+     * Example: lroute('home')       → /
      *          lroute('home', 'en') → /en/
+     *
+     * OND-162 F4: home routes mají trailing slash konzistentně s tím, jak je
+     * web serveruje (`/`, `/en/`, `/de/`). Bez toho hreflang URL bez slashe
+     * neodpovídala canonical s lomítkem a Google to hlásil jako mismatch.
      */
     function lroute(string $name, ?string $locale = null): string
     {
         $locale ??= app()->getLocale();
-        return route("{$locale}.{$name}");
+        $url = route("{$locale}.{$name}");
+
+        if ($name === 'home') {
+            return rtrim($url, '/') . '/';
+        }
+
+        return $url;
+    }
+}
+
+if (!function_exists('lroute_safe')) {
+    /**
+     * Jako lroute(), ale pro routes s povinnými parametry vrátí homepage.
+     *
+     * OND-212: chybové stránky se renderují pod routou, která chybu vyvolala.
+     * Na `/zapisky/{slug}` je to `cs.article`, na `/projekty/{url}` `cs.project`
+     * — obě mají povinný parametr. Layout i navbar staví přepínač jazyků přes
+     * `lroute(current_page(), $locale)` a bez parametru z toho spadne
+     * UrlGenerationException. Laravel pak místo naší 404 vrátí holou Symfony
+     * stránku „An Error Occurred".
+     *
+     * Na běžných stránkách k výjimce nedojde: detail článku i projektu si
+     * hreflang URL předává explicitně přes $hreflangs, sem to nikdy nedojde.
+     */
+    function lroute_safe(string $name, ?string $locale = null): string
+    {
+        try {
+            return lroute($name, $locale);
+        } catch (\Illuminate\Routing\Exceptions\UrlGenerationException) {
+            return lroute('home', $locale);
+        }
     }
 }
 
@@ -54,6 +88,181 @@ if (!function_exists('screenshot_is_storage')) {
     function screenshot_is_storage(?string $path): bool
     {
         return $path !== null && str_starts_with($path, 'portfolio/');
+    }
+}
+
+if (!function_exists('screenshot_dimensions')) {
+    /**
+     * Resolve intrinsic width/height for a storage-served portfolio screenshot
+     * (OND-137 P4 — CLS reduction).
+     *
+     * Build-time Vite assets (`img/projects/...`) už `<x-responsive-image>` řeší
+     * sám (preset šířky + height z imagetools metadata). Tady řešíme jen
+     * uploady přes Filament admin do `storage/app/public/portfolio/...`, kde
+     * žádná migrace s width/height column zatím neexistuje.
+     *
+     * Strategy:
+     *  - getimagesize() na disk file (fast — čte jen image header, ne celý obsah).
+     *  - cache::rememberForever s mtime-based key → re-upload souboru se stejným
+     *    path invaliduje cache automaticky.
+     *  - Pokud soubor chybí nebo není image, vrátí null a šablona dimensions
+     *    prostě nevypíše (graceful degradation).
+     *
+     * @return array{width:int,height:int}|null
+     */
+    function screenshot_dimensions(?string $path): ?array
+    {
+        if ($path === null || $path === '' || !screenshot_is_storage($path)) {
+            return null;
+        }
+
+        $disk = \Illuminate\Support\Facades\Storage::disk('public');
+
+        try {
+            if (!$disk->exists($path)) {
+                return null;
+            }
+            $mtime = $disk->lastModified($path);
+            $absPath = $disk->path($path);
+        } catch (\Throwable $e) {
+            return null;
+        }
+
+        $cacheKey = 'screenshot_dims:' . md5($path) . ':' . $mtime;
+
+        return \Illuminate\Support\Facades\Cache::rememberForever($cacheKey, function () use ($absPath) {
+            $info = @getimagesize($absPath);
+            if ($info === false || !isset($info[0], $info[1])) {
+                return null;
+            }
+            return ['width' => (int) $info[0], 'height' => (int) $info[1]];
+        });
+    }
+}
+
+if (!function_exists('screenshot_dimensions_any')) {
+    /**
+     * OND-202: intrinsic rozměry screenshotu pro OBĚ rodiny cest —
+     * storage uploady (`portfolio/...`, deleguje na screenshot_dimensions)
+     * i build-time zdroje (`projects/...` v resources/img). Render-time
+     * getimagesize čte jen hlavičku; cache klíč nese mtime, takže výměna
+     * souboru invaliduje sama.
+     *
+     * @return array{width:int,height:int}|null
+     */
+    function screenshot_dimensions_any(?string $path): ?array
+    {
+        if ($path === null || $path === '') {
+            return null;
+        }
+        if (screenshot_is_storage($path)) {
+            return screenshot_dimensions($path);
+        }
+        $absPath = resource_path('img/' . ltrim($path, '/'));
+        if (!is_file($absPath)) {
+            return null;
+        }
+        $cacheKey = 'shot-dims:' . $path . ':' . (string) @filemtime($absPath);
+        return \Illuminate\Support\Facades\Cache::rememberForever($cacheKey, static function () use ($absPath): ?array {
+            $info = @getimagesize($absPath);
+            if ($info === false || !isset($info[0], $info[1]) || (int) $info[1] === 0) {
+                return null;
+            }
+            return ['width' => (int) $info[0], 'height' => (int) $info[1]];
+        });
+    }
+}
+
+if (!function_exists('screenshot_gallery_role')) {
+    /**
+     * OND-202 (zamítnutí karty boardem 2×): role snímku v galerii detailu
+     * projektu, určená z poměru stran — přesně dle zadání boardu („jde
+     * jednoduše vidět z rozměrů"):
+     *
+     *  - `wide` (poměr >= 1.5): hlavní vizuály — 3-device studio mockupy
+     *    (2048×1152) a widescreen bannery (1500×750). Zobrazují se VÝHRADNĚ
+     *    na celou šířku v přirozeném poměru, nikdy v malé kartě.
+     *  - `card` (poměr < 1.5): podpůrné snímky — čtvercové detailní záběry
+     *    (1800×1800), portréty stránek. Zobrazují se v párové mřížce
+     *    v jednotném čtvercovém výřezu (dominantní čtverce = nulový ořez;
+     *    plný snímek je vždy v lightboxu).
+     *
+     * Neznámé rozměry (např. absolutní URL) → `wide` (bez ořezu = bezpečné).
+     */
+    function screenshot_gallery_role(?string $path): string
+    {
+        $dims = screenshot_dimensions_any($path);
+        if ($dims === null) {
+            return 'wide';
+        }
+        return ($dims['width'] / $dims['height']) >= 1.5 ? 'wide' : 'card';
+    }
+}
+
+if (!function_exists('screenshot_is_square_ish')) {
+    /**
+     * OND-265: je snímek „skoro čtverec"? Dominantní zdroje galerie jsou
+     * čtverce 1800×1800 — ty se do čtvercové dlaždice vejdou bez ořezu.
+     * Všechno ostatní (1.48 diagramy, 1.33 screenshoty webů, 0.58 mobilní
+     * obrazovky) čtvercový `cover` usekával; audit OND-254 to našel jako
+     * ztrátu funkčně podstatného obsahu (picker: tabulka DÍL/SKLAD/POČET).
+     */
+    function screenshot_is_square_ish(?string $path): bool
+    {
+        $dims = screenshot_dimensions_any($path);
+        if ($dims === null) {
+            return false;
+        }
+        $ratio = $dims['width'] / $dims['height'];
+
+        return $ratio >= 0.85 && $ratio <= 1.2;
+    }
+}
+
+if (!function_exists('screenshot_tile_ratio')) {
+    /**
+     * OND-265: poměr stran dlaždice v mřížce galerie detailu.
+     *
+     * Vrací přirozený poměr snímku ořezaný do rozumného rozsahu, aby extrémní
+     * portréty (address_data 1076×2545) nevyrobily dvoumetrový sloupec. Spolu
+     * s `object-fit: contain` v CSS to znamená: uvnitř rozsahu nulový ořez
+     * i nulové letterbox pruhy, mimo rozsah decentní pruhy místo useknutého
+     * obsahu. Neznámé rozměry → 1 (původní čtverec).
+     */
+    function screenshot_tile_ratio(?string $path): float
+    {
+        $dims = screenshot_dimensions_any($path);
+        if ($dims === null) {
+            return 1.0;
+        }
+
+        return round(max(0.6, min(1.5, $dims['width'] / $dims['height'])), 4);
+    }
+}
+
+if (!function_exists('portfolio_card_thumbnail')) {
+    /**
+     * OND-202: výběr náhledovky do malé karty (výpis projektů, homepage).
+     * Wide 3-device mockup je v malé kartě nečitelný (zadání boardu) —
+     * preferujeme explicitní `thumbnail`, pak první čtvercový snímek
+     * (detailní záběr jednoho zařízení), teprve pak hero/první.
+     *
+     * OND-265: „čtvercový" se zpřísnil z `role === 'card'` (cokoli pod 1.5)
+     * na skutečně čtvercový. Volnější pravidlo bralo jako náhledovku první
+     * lepší snímek pod 1.5 a vyrábělo nesmyslné miniatury: HCMS dostal
+     * functions-model diagram (1760×1191), picker mobilní obrazovku
+     * a vanspedition screenshot STARÉHO webu klienta. Bez čtvercového snímku
+     * je lepší `hero` (preview banner projektu).
+     *
+     * @param \Illuminate\Support\Collection $screens
+     */
+    function portfolio_card_thumbnail($screens)
+    {
+        $screens = collect($screens ?? []);
+        return $screens->firstWhere('type', 'thumbnail')
+            ?? $screens->first(static fn ($s) => screenshot_is_square_ish($s->path))
+            ?? $screens->firstWhere('type', 'hero')
+            ?? $screens->first();
     }
 }
 
@@ -146,11 +355,59 @@ if (!function_exists('responsive_image_srcsets')) {
         $fallback = $variants['webp'][0] ?? $variants['avif'][0] ?? '';
         $fallback = explode(' ', $fallback)[0];
 
+        // OND-265: největší WebP — cíl odkazu do lightboxu. Dřív tam šel
+        // `fallback`, tj. 320px varianta: po kliknutí se otevřela miniatura.
+        $largest = end($variants['webp']) ?: end($variants['avif']) ?: $fallback;
+        $largest = explode(' ', (string) $largest)[0];
+
         return $cache[$path] = [
             'avif'     => implode(', ', $variants['avif']),
             'webp'     => implode(', ', $variants['webp']),
             'fallback' => $fallback,
+            'largest'  => $largest,
         ];
+    }
+}
+
+if (!function_exists('asset_v')) {
+    /**
+     * OND-237: URL veřejného assetu z `public/` s content-hash otiskem v query.
+     *
+     * Proč to existuje: base image `serversideup/php` má v
+     * `/etc/nginx/server-opts.d/performance.conf` plošné pravidlo
+     * `Cache-Control: public, max-age=31536000, immutable` pro VŠECHNY
+     * obrázky/css/js podle přípony — ne jen pro hashované `/build/` assety.
+     * `immutable` znamená, že prohlížeč soubor ani nereviduje, dokud rok
+     * nevyprší; ani běžný reload nepomůže.
+     *
+     * Naše brand assety ale žijí na stabilní cestě (`img/logo/logo_main_svg.svg`),
+     * takže rebranding itwebtech → ONDRAWEB (OND-199, 2026-09-16) obsah souboru
+     * vyměnil, ale URL ne. Každý, kdo web navštívil dřív, dostával ze své cache
+     * staré logo — přesně to hlásil board z mobilu (OND-237).
+     *
+     * Otisk je z OBSAHU (ne z mtime): deploy, který soubor nemění, URL nemění,
+     * takže dlouhá cache zůstává účinná; změna souboru = nová URL = nová cache
+     * entry. Tím se `immutable` stává pravdivým tvrzením a nemusíme headery
+     * oslabovat (viz OND-123, kde šly nahoru kvůli PSI auditu).
+     *
+     * Výsledek se drží v per-request statické memo mapě; hashují se jen soubory,
+     * které stránka opravdu vykreslí (logo, favicony, OG obrázek).
+     */
+    function asset_v(string $path): string
+    {
+        static $cache = [];
+
+        $path = ltrim($path, '/');
+
+        if (!array_key_exists($path, $cache)) {
+            $absPath = public_path($path);
+            $hash = is_file($absPath) ? @md5_file($absPath) : false;
+            $cache[$path] = $hash === false ? null : substr($hash, 0, 8);
+        }
+
+        $url = asset($path);
+
+        return $cache[$path] === null ? $url : $url . '?v=' . $cache[$path];
     }
 }
 

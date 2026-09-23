@@ -1,0 +1,104 @@
+Pitbike Akademie video — social media animation
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+CZ
+EN
+DE
+Book a consultation
+CZ
+EN
+DE
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+Book a consultation
+💬
+Enquiry
+← Back to projects
+Other
+·
+2023
+·
+PitArena (Stanislav Holcmann)
+Video — Pitbike Akademie
+A promo animation that stops the thumb mid-scroll
+Book a consultation
+A short animation promoting Pitbike Akademie on social media. The goal is simple: stop the thumb mid-scroll and deliver the main message in a few seconds — because that's exactly the window where viewers decide whether to keep watching.
+Challenge
+Social feeds are saturated. A static image isn't enough; a long video gets skipped. The format had to sit between the two — the dynamism of video at the length of a banner. And it had to work without sound, because most people scroll muted.
+Solution
+An animation with motion that draws attention even in the preview and a message readable without sound. Pace and cuts are built for a mobile screen — no tiny text, no overcomplicated scenes.
+Result
+The client has a video format that fits a Facebook audience and broadens awareness of the academy without launching expensive video production. Easy to reuse across seasons.
+Client
+PitArena (Stanislav Holcmann)
+Year
+2023
+Duration
+krátká produkce
+Category
+Other
+Tech stack
+Video
+Animation
+Content for social media
+Promotion
+More projects
+Other
+·
+2024
+·
+PitArena (Stanislav Holcmann)
+Article on Motorkáři.cz
+Content marketing that reached the country's biggest moto portal
+View project
+Other
+·
+2024
+·
+Realiťačky v Akci
+Logo — Realiťačky v Akci
+A memorable logo that holds at any size
+View project
+Other
+·
+2023
+·
+PitArena (Stanislav Holcmann)
+PitArena outdoor sign
+A large-format sign above the workshop, ready for print
+View project
+Want a similar result for your business?
+Book a consultation
+← Back to projects
+I help entrepreneurs succeed in the online world
+Book a free consultation
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+© 2026 ONDRAWEB — All rights reserved.
++420 728 697 712
+Privacy Policy
+Cookies
+Let's talk
+Free consultation — no commitment, no registration.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Pick a consultation slot
+Free. No commitment.
+Mind a few cookies?
+I only measure a few numbers about what works on the site. No data selling.
+See the cookie policy .
+Decline
+Accept all
+✕

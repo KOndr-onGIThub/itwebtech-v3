@@ -2,26 +2,38 @@
 
 return [
 
+    // OND-201 (nález 5.7): titulek se definoval negací konkurence („Žádné
+    // šablony, žádný WordPress"). Zákazník s rozpočtem 150 tisíc nehledá,
+    // kdo nadává na konkurenci, a „WordPress" navíc neříká nic člověku,
+    // který netuší, co to je (princip 0).
     'meta' => [
-        'title'       => 'Ondřej Kriška — Weby na míru | Žádné šablony, žádný WordPress',
-        'description' => 'Weby na míru pro podnikatele, kteří poznají rozdíl. Vlastní kód, přesná cena předem, přímý kontakt. Bez šablon, bez WordPressu, bez prostředníků.',
+        'title'       => 'Weby a aplikace na míru | ONDRAWEB',
+        'description' => 'Weby, e-shopy a webové aplikace na míru pro menší a střední firmy. Vlastní kód, přesná cena předem a jednáte přímo se mnou. Jsem Ondřej Kriška.',
     ],
 
     'hero' => [
-        // OND-135 P2 (plán §3.1) — page-mark eyebrow + upline + display heading
-        // s italic key-word amber emphasis. Provizorní copy dle §3.1 reference;
-        // finální tone v CS/EN/DE doladí Content Writer v OND-136 P3.
-        'page_mark_label' => 'AI A WEB',
-        'page_mark_index' => '01 / 01',
-        'upline'          => 'AI udělá web za odpoledne.',
-        'heading_html'    => 'Ale jaký web?<br>Ten, který <em>prodává</em>.',
-        'subline'         => 'Strategie, výzkum a řemeslo zkratku nemají.',
+        // OND-127 P0 incident hotfix (2026-05-14) — plagiátorské stringy
+        // (page_mark_label, upline, subline + "Ale jaký..." heading)
+        // odebrány z produkce. Placeholder copy vychází z meta description
+        // = pre-redesign Ondřejova safe copy (B2B IT, weby na míru).
+        // FINAL COPY: Content Writer dodá v OND-136 P3 (SLA 2h od 11:10 UTC).
+        // Žádný fragment z reference screenshotu (governance: design ref = DNA only).
+        'page_mark_label' => 'WEB NA MÍRU',
+        // OND-145 P0.3: page_mark_index odebrán — agency-portfolio pagination
+        // artefakt, itwebtech nemá „pages" hierarchy v hero kontextu (CEO 13:48).
+        // OND-198 (nález 5.1): původní titulek „Web, který vám konečně vydělá."
+        // sliboval výsledek za klienta. Nahrazen schválenou hero sekcí
+        // z dokumentu homepage-texty (OND-186).
+        'upline'          => 'Pro firmy, které poznají rozdíl.',
+        'heading_html'    => 'Weby a aplikace <em>na míru</em>.<br>Postavím vám je sám, na vlastním kódu.',
+        'subline'         => 'Jsem Ondřej Kriška, zkušený vývojář. Pracuju s vámi napřímo, bez agentury a bez prostředníků. Weby stavím tak, aby fungovaly roky a nezdržovaly vás údržbou.',
+        'note'            => 'Ozvu se do 24 hodin v pracovní dny. Nezávazně proberu, co dává smysl.',
 
         // Backwards compat — staré klíče zachované pro non-hero spotřebitele
         // (consultation modal, fallback render). cta_secondary není v hero.
         'eyebrow'       => 'Webové stránky a aplikace na míru',
-        'heading'       => 'Web, který vám konečně vydělá. Bez WordPressu, bez údržby, bez kompromisů.',
-        'cta_primary'   => 'Chci nezávaznou nabídku',
+        'heading'       => 'Weby a aplikace na míru. Postavím vám je sám, na vlastním kódu.',
+        'cta_primary'   => 'Napište mi, co potřebujete',
         'cta_secondary' => 'Domluvit 30min konzultaci',
         'phone_label'   => 'nebo zavolat:',
     ],
@@ -41,11 +53,18 @@ return [
 
     'social_proof' => [
         'rating_aria'  => 'Hodnocení 5 z 5',
+        // OND-231: řada log klientů má vlastní landmark label, aby čtečka
+        // nečetla druhý blok pod stejným „Hodnocení 5 z 5".
+        'clients_aria' => 'Klienti',
         'rating_value' => '5,0',
         'reviews'      => '(21 recenzí Google + Firmy.cz)',
         'projects'     => '23+ realizací',
         'experience'   => '18 let praxe',
-        'response'     => 'Odpověď do 24 hodin',
+        'response'     => 'Odpověď do 24 hodin v pracovní dny',
+        // OND-201 (nález 5.11): ocenění TOP firma 2025 z Firmy.cz je ověřitelný
+        // důkaz třetí strany, byl na obou starých webech a na stagingu chyběl.
+        // Formulace podle sekce 2 dokumentu homepage-texty (OND-186).
+        'award'        => 'TOP firma 2025 na Firmy.cz',
         'brands' => [
             ['name' => 'MAKOplast',             'image' => null],
             ['name' => 'Yolk Studio',           'image' => 'yolk_studio.png'],
@@ -57,26 +76,40 @@ return [
         ],
     ],
 
+    // OND-269 (audit OND-254, nález 7): blok `showcase` („Weby, které běží
+    // v praxi" — tři dlaždice s odkazem na živý web) je zrušený. Dvě sekce
+    // projektů nad sebou říkaly totéž a BARANA i PitArena byly v obou.
+    // Slito do jedné sekce `portfolio` níž, která nese titulek odsud
+    // a doplnila si odkaz na živý web (`live_cta` / `live_aria`).
+
+    // OND-201 (nález 5.7): první velká sekce homepage se definovala negací
+    // konkurence („Co se opakuje u většiny webových projektů") a dva ze tří
+    // bodů říkaly totéž (šablona vypadá jako u konkurence). Nově vede to, co
+    // dělám já (`lead`), vymezení je krátké a duplicitní body jsou slité
+    // do jednoho. Pořadí bloků v `home.blade.php` je tomu přizpůsobené.
     'problems' => [
-        'heading'             => 'Co se opakuje u většiny webových projektů.',
-        'transition_heading'  => 'Jak to dělám jinak:',
-        'transition_text'     => 'Každý projekt začínám pochopením vašeho byznysu. Píšu vlastní kód — bez šablon, bez WordPressu, bez prostředníků. Mluvíte přímo se mnou od první schůzky po spuštění i dál.',
+        'heading'             => 'Jak weby stavím',
+        'lead'                => 'Každý projekt začínám pochopením vašeho byznysu. Píšu vlastní kód od základu, takže web vychází z toho, jak vaše firma reálně funguje. Mluvíte přímo se mnou od první zprávy po spuštění i dál.',
+        'transition_heading'  => 'Čemu se tím vyhnete',
+        'transition_text'     => 'Dvě věci, které u webových projektů vídám nejčastěji.',
         'items' => [
             [
-                'heading'      => 'Šablona vydávaná za řešení',
-                'text'         => 'Agentura použije rozvržení, které použila pětkrát. Doplní vaše texty a logo. Výsledek vypadá profesionálně — dokud se nepodíváte na web konkurence. Stejné sekce, stejná slova, jiné barvy a logo.',
+                'heading'      => 'Šablona vydávaná za řešení na míru',
+                'text'         => 'Dodavatel použije rozvržení, které použil už pětkrát, a doplní vaše texty a logo. Výsledek vypadá profesionálně — dokud neotevřete web konkurence a nenajdete stejné sekce i stejná slova. Platforma vás navíc drží v měsíčním předplatném, ze kterého si web nevezmete s sebou.',
                 'quote_text'   => 'Není to případ, kdy ostatní rádoby tvůrci webů pouze plní daty šablony za nehorázné částky.',
                 'quote_author' => 'Petr Kroulík, Nové Interiéry s.r.o.',
-            ],
-            [
-                'heading' => 'AI web za odpoledne: hezký, generický, zaměnitelný',
-                'text'    => 'Nástroje dnes vygenerují web rychle. Ale bez výzkumu, bez strategie, bez pochopení vašeho byznysu vznikne něco, co vypadá jako web — a funguje jako web každého jiného. Navíc vás platforma drží na svém předplatném navždy.',
             ],
             [
                 'heading' => 'Nikdy nemluvíte s člověkem, který web dělá',
                 'text'    => 'Ten, kdo vám prodává web, ho nestaví. Ti, kdo ho staví, s vámi nemluví. Uprostřed se ztrácí kontext a záměr — a výsledek neodpovídá tomu, co jste chtěli.',
             ],
         ],
+        // OND-269 (audit OND-254, nález 7): ze zrušené sekce „Generátor versus
+        // váš byznys" (dva sloupce, osm odrážek) zbyly dvě věty. Argument je
+        // stejný jako u první položky výš („šablona vydávaná za řešení na
+        // míru"), takže patří sem, ne do vlastní sekce o čtyři obrazovky níž.
+        'ai_heading' => 'Šablona je hotová rychle. Poptávky tím rychle nepřijdou.',
+        'ai_text'    => 'Generátor naklikne layout, doplní texty i obrázky — nezjistí ale, komu prodáváte, proč si vás vybrat a kde se vám zákazník ztrácí. AI používám jako nástroj, rozhodnutí o tom, co má web říkat a v jakém pořadí, za vás neudělá.',
     ],
 
     'how_i_work' => [
@@ -113,35 +146,14 @@ return [
         ],
     ],
 
-    'ai' => [
-        'subheading' => 'AI a webdesign',
-        'heading'    => 'Web za odpoledne. Ale který web?',
-        'intro'      => 'Technicky to jde. Nástroj vygeneruje stránky, texty, obrázky. Problém není rychlost.',
-        'laik' => [
-            'label'   => 'Laik + AI',
-            'outcome' => 'Rychlý výsledek.',
-            'items'   => [
-                'Generický, neověřený, zaměnitelný',
-                'Bez výzkumu zákazníků a konkurence',
-                'Bez strategie, co má web říkat a v jakém pořadí',
-                'Hezky vypadající — identický s desítkami dalších',
-            ],
-            'note' => 'AI web dává smysl, když zkoušíte nápad bez závazku.',
-        ],
-        'expert' => [
-            'label'   => 'Odborník + AI',
-            'outcome' => 'Stejně rychlé tam, kde to dává smysl. A bez generického výsledku.',
-            'items'   => [
-                'Strategie, výzkum a pochopení vašeho byznysu',
-                'Kontrola a výsledek, za který někdo ručí',
-                'Obsah navržený tak, aby člověk zůstal a kontaktoval vás',
-                'Web, který se liší od konkurence — záměrně',
-            ],
-            'note' => 'Pokud provozujete byznys, je to rozdíl, který zákazníci poznají.',
-        ],
-        'closing' => 'AI používám jako nástroj — zkracuje čas na rutinní práci. Strategii, výzkum a rozhodnutí o tom, co web musí dělat, nelze přeskočit. To je práce, která musí být hotová dřív, než se začne web vůbec stavět.',
-    ],
+    // OND-269 (audit OND-254, nález 7): sekce „Generátor versus váš byznys"
+    // (1 086 px desktop / 1 607 px mobil) je zrušená — board schválil škrt
+    // 22. 9. Zbyly z ní dvě věty v `problems.ai_heading` / `problems.ai_text`,
+    // kde stejný argument už stejně stál.
 
+    // OND-269: `toyota` už není samostatná sekce — vykresluje se uvnitř „Proč
+    // já" pod videem a bio. Titulek „18 let v Toyotě" dřív stál dvakrát
+    // (jednou tady, jednou v `why_me.bio`); z bio je proto Toyota vypuštěná.
     'toyota' => [
         'heading'      => '18 let v Toyotě. Pak jsem odešel.',
         'text'         => 'Automobilový průmysl mě naučil jedno: za špičkovým výsledkem stojí vždy stejné kroky. Analýza, návrh, testování, ověřování — a pak znovu. Ne zkratky, ne odhady. Principy, které fungují bez ohledu na obor.',
@@ -150,10 +162,16 @@ return [
         'quote_author' => 'Pavel Baudyš, ředitel řízení výroby, montáže a logistiky, Toyota Motor Manufacturing Czech Republic (2024)',
     ],
 
+    // OND-269: jediná sekce projektů na homepage (dřív `showcase` + `portfolio`).
+    // Titulek i intro pocházejí ze zrušeného `showcase` — mluví o živých webech,
+    // ne o „realizacích", a to je pro návštěvníka konkrétnější.
     'portfolio' => [
-        'heading'    => 'Realizované projekty',
+        'heading'    => 'Weby, které běží v praxi',
+        'intro'      => 'Tohle jsou živé projekty, na které se můžete podívat hned teď. U každého je i to, co klientovi přinesl.',
         'cta'        => 'Všechny projekty →',
         'detail_cta' => 'Více o projektu',
+        'live_cta'   => 'Otevřít živý web',
+        'live_aria'  => 'Otevřít web :client v novém okně',
         'cards' => [
             'pitarena' => [
                 'client'  => 'PitArena',
@@ -161,7 +179,9 @@ return [
             ],
             'barana' => [
                 'client'  => 'BARANA',
-                'outcome' => 'Premium prezentace připravená přímo pro placené kampaně Meta Ads / Google Ads — návštěvník chápe nabídku bez nutnosti volat.',
+                // OND-198 (nález 5.5): „landing page" / „Meta Ads / Google Ads"
+                // přepsáno do řeči klienta.
+                'outcome' => 'Samostatná stránka pro placenou reklamu — návštěvník chápe nabídku bez nutnosti volat.',
             ],
             'nove-interiery' => [
                 'client'  => 'Nové interiéry',
@@ -183,23 +203,23 @@ return [
             // cenu z odpovídajícího tieru — viz price_anchor / price.tiers níže.
             'weby' => [
                 'title'       => 'Webové stránky na míru',
-                'description' => 'Prezentační web, který vás odliší od šablon konkurence a začne přivádět zákazníky.',
+                // OND-198 (nález 5.1): „a začne přivádět zákazníky" byl slib
+                // výsledku za klienta — nahrazeno tím, za co ručím já.
+                'description' => 'Prezentační web, který vás odliší od šablon konkurence a srozumitelně vysvětlí, co děláte a v čem jste jiní.',
                 'bullets'     => [
                     'Vlastní kód — bez WordPressu a šablon',
                     'Konverzní struktura postavená na vašem byznysu',
                     'Bezúdržbový provoz a rychlé načítání',
                 ],
-                'price'       => 'od 25 000 Kč',
             ],
             'aplikace' => [
                 'title'       => 'Webové aplikace',
-                'description' => 'Interní systémy, zákaznické portály a evidenční nástroje, které vám šetří čas i lidi.',
+                'description' => 'Interní systémy, zákaznické portály a evidenční nástroje postavené na tom, jak váš provoz reálně funguje.',
                 'bullets'     => [
                     'Návrh procesu před prvním řádkem kódu',
                     'Integrace na vaše stávající nástroje',
                     'Vlastní administrace bez měsíčních licencí',
                 ],
-                'price'       => 'od 55 000 Kč',
             ],
             'eshop' => [
                 'title'       => 'E-shopy',
@@ -209,7 +229,6 @@ return [
                     'Napojení na účetnictví, dopravce a platební bránu',
                     'Bez měsíčních poplatků za platformu',
                 ],
-                'price'       => 'od 95 000 Kč',
             ],
         ],
         'seo' => [
@@ -228,34 +247,46 @@ return [
 
     'price_anchor' => [
         'heading' => 'Kolik to bude stát?',
-        'intro'   => 'Orientační vstupní ceny pro tři tiery projektu. Přesnou nabídku dostanete písemně po krátké konzultaci.',
+        // OND-198 (nález 5.4): očekávací věta musí padnout dřív než první číslo,
+        // aby normou bylo pásmo 55–150 tis. Kč, ne nejlevnější vstup.
+        // OND-198 (nález 5.5): „tiery" → „tři úrovně".
+        'intro'   => 'Většina projektů, které stavím, vychází mezi 55 a 150 tisíci korunami. Pokud hledáte web do dvaceti tisíc, nebudu pro vás ten správný dodavatel a řeknu vám to rovnou. Níž jsou orientační vstupní ceny tří úrovní — přesnou nabídku dostanete písemně po krátké konzultaci.',
         // OND-130 (B2 §1, klíčová direktiva 2 + plán §3.6): pricing teaser
-        // sjednocen s /cenik — Startovní 25 / Standard 55 / Custom od 95 tis. Kč.
+        // sjednocen s /cenik — Standard 55 / Custom od 95 / Startovní 25 tis. Kč.
+        // OND-198 (nález 5.4): pořadí Standard → Custom → Startovní, nejlevnější
+        // pásmo je poslední a rámované jako výjimka. Standard je zvýrazněný.
         // Service-typový rozklad (web vs. aplikace vs. e-shop) je v sekci „services".
+        'featured_label' => 'Nejčastější volba',
         'items'   => [
             [
-                'title' => 'Startovní',
-                'price' => '25 000 Kč',
-                'desc'  => 'Prezentační web do 5 stránek pro živnostníky a malé firmy.',
+                'title'    => 'Standard',
+                'price'    => '55 000 Kč',
+                'desc'     => 'Vícejazyčný web s blogem, měřením konverzí a rezervačním systémem.',
+                'featured' => true,
             ],
             [
-                'title' => 'Standard',
-                'price' => '55 000 Kč',
-                'desc'  => 'Vícejazyčný web s blogem, měřením konverzí a rezervačním systémem.',
+                'title'    => 'Custom',
+                'price'    => 'od 95 000 Kč',
+                'desc'     => 'E-shop, webová aplikace nebo komplexní portál na míru.',
+                'featured' => false,
             ],
             [
-                'title' => 'Custom',
-                'price' => 'od 95 000 Kč',
-                'desc'  => 'E-shop, webová aplikace nebo komplexní portál na míru.',
+                'title'    => 'Startovní',
+                'price'    => '25 000 Kč',
+                'desc'     => 'Výjimka, ne standardní vstup: prezentační web do 5 stránek pro živnostníky. Beru ho jen tam, kde větší rozsah nedává smysl.',
+                'featured' => false,
             ],
         ],
         'cta' => 'Detailní ceník →',
     ],
 
     'why_me' => [
+        'video_aria' => 'Video: Ondřej Kriška — kdo jsem a jak stavím weby',
         'heading'   => 'Proč já',
         'photo_alt' => 'Ondřej Kriška — webový vývojář',
-        'bio'       => '18 let jsem v Toyotě řídil projekty, ve kterých nesměla padnout linka. Dnes ty samé principy — přesná specifikace, analýza, ověřování — používám pro webové projekty. Pracuji sám, mluvíte přímo se mnou od první konzultace po spuštění i dál.',
+        // OND-269: první věta („18 let jsem v Toyotě…") odsud vypadla —
+        // Toyota se hned pod tímhle odstavcem vypráví celá, v bloku `toyota`.
+        'bio'       => 'Pracuji sám. Mluvíte přímo se mnou od první konzultace po spuštění i dál — stejná přesná specifikace, analýza a ověřování u každého projektu.',
         'advantages' => [
             [
                 'heading' => 'Vlastní kód, žádné šablony',
@@ -278,47 +309,79 @@ return [
 
     'testimonials' => [
         'heading' => 'Co o spolupráci říkají moji klienti.',
+        // OND-267 (audit P1-1): v EN/DE jde o překlad českých originálů —
+        // bez téhle věty návštěvník originál na Google/Firmy.cz nedohledá.
+        // Česky poznámka nedává smysl, šablona prázdnou hodnotu nevykreslí.
+        'note'    => '',
     ],
 
-    'guarantee' => [
-        'heading' => 'Dvě věci, na které se můžete spolehnout.',
-        'items'   => [
+    // OND-269 (audit OND-254, nález 7): sekce „Dvě věci, na které se můžete
+    // spolehnout." je zrušená — board schválil škrt 22. 9. Oba sliby
+    // („Cena dopředu", „Přímý kontakt") stály doslova podruhé; jediné znění
+    // zůstává v `why_me.advantages` 02 a 03.
+
+    // OND-229 (F2 — důkazní vrstva, R3 plánu OND-226): sekce „Pod kapotou"
+    // ukazuje řemeslo, které v kódu reálně je. Každé tvrzení je ověřitelné
+    // v repu: 7 šířek obrázků = resources/js/app.js (`w: '320;…;1536'`),
+    // vlastní kód = žádný CMS/builder v composeru, tokeny = resources/css.
+    // Čas načtení měří Performance API v prohlížeči návštěvníka — nikdy
+    // netvrdíme číslo, které jsme nenaměřili.
+    'craft' => [
+        'heading' => 'Pod kapotou',
+        'intro'   => 'Web, který vám stavím, vypadá takhle i zevnitř. Tohle nejsou marketingové věty — všechno níž se dá ověřit přímo na stránce, na které právě jste.',
+        'facts'   => [
             [
-                'heading' => 'Cena dopředu',
-                'text'    => 'Dostanete specifikaci s přesnou cenou ještě před zahájením práce. Co je ve specifikaci, to je na faktuře. Bez vícenákladů, bez překvapení.',
+                'heading' => 'Vlastní kód',
+                'text'    => 'Žádný WordPress, žádný page-builder, žádná platforma. Stránka je napsaná na míru a běží bez pluginů, které by bylo nutné měsíčně aktualizovat.',
             ],
             [
-                'heading' => 'Přímý kontakt vždy',
-                'text'    => 'Komunikujete přímo se mnou — ne s obchodníkem nebo koordinátorem. Zavolejte kdykoliv. V drtivé většině případů zvednu hned.',
+                'heading' => 'Obrázky šité na displej',
+                'text'    => 'Každý obrázek tu existuje v sedmi velikostech a úsporném formátu AVIF. Váš prohlížeč si stáhl jen tu, kterou váš displej opravdu potřebuje.',
+            ],
+            [
+                'heading' => 'Design drží systém',
+                'text'    => 'Barvy, písmo a rozestupy neřídí šablona, ale vlastní systém proměnných. Proto nic nepřečnívá — a proto si na to níž můžete sáhnout.',
             ],
         ],
+        'perf_prefix' => 'Tahle stránka se vám načetla za',
+        'perf_suffix' => '— změřeno právě teď, ve vašem prohlížeči.',
     ],
 
-    'cta' => [
-        'heading'      => 'Připraveni začít? Konzultace je zdarma.',
-        'consultation' => 'Získat cenovou nabídku',
-        'message'      => 'Domluvit 30min konzultaci',
-    ],
+    // OND-235: živé demo (OND-229) zrušeno — majitel webu sám neuměl
+    // popsat přínos pro návštěvníka a na mobilu byl efekt ovladačů
+    // mimo viditelnou oblast. Klíče i CSS (.pd-demo*) odstraněny.
 
-    'final_cta' => [
-        'quote_text'   => 'Díky individuálnímu přístupu, flexibilitě a profesionalitě odpovídá výsledek našim představám.',
-        'quote_author' => 'Hana Jaskmanická, výkonná ředitelka, VP Industry',
-        'heading'      => 'Řeknu vám upřímný názor na váš projekt.',
-        'subtext'      => 'Odpovídám do druhého pracovního dne. Pokud spolupráce nedává smysl, řeknu vám to rovnou — žádný obchodní tlak, žádné dotěrné e-maily.',
-        'cta_label'    => 'Získat cenovou nabídku',
-        'cta_secondary' => 'Domluvit 30min konzultaci',
-        'cta_note'     => 'Bezplatně. Bez závazku.',
-    ],
+    // OND-201 (nález 5.8): konec homepage byl tři výzvy za sebou —
+    // „Pošlete mi pár vět o projektu" (inline_form), „Připraveni začít?
+    // Konzultace je zdarma." (home.cta) a „Řeknu vám upřímný názor na váš
+    // projekt." (home.final_cta). Bloky `cta` a `final_cta` jsou zrušené;
+    // zůstala jedna výzva s jedním formulářem v `inline_form` níž.
+    // Klientská citace z `final_cta` se přesunula k té jedné výzvě.
 
     'faq' => [
         'heading' => 'Časté otázky',
         // `key` je stabilní slug pro analytics (data-faq-key) a JSON-LD; ne lokalizovat.
         'items'   => [
+            // OND-222 (kap. 6.3 bod 1): nejzávažnější námitka u zakázky za
+            // 150 tisíc. Odpověď byla 2026-09-16 stažená (fakta nepotvrzená),
+            // Ondra je potvrdil 2026-09-17 a dvě z nich opravil:
+            //  - kód patří klientovi, ale fyzicky ho drží Ondra do doplacení;
+            //    NE „od začátku máte u sebe" (to bylo nepravdivé);
+            //  - Laravel se nezmiňuje — klientovi to nic neříká (princip 0);
+            //  - dokumentace se standardně nedělá, jen na vyžádání.
+            // Platí dál: bez slibu nepřetržité pohotovosti a bez věty
+            // o „připraveném předání" (nedoložitelné).
             [
-                'key'      => 'price',
-                'question' => 'Kolik to bude stát?',
-                'answer'   => 'Orientační vstupní ceny najdete v cenové kotvě výše — Startovní 25 000 Kč, Standard 55 000 Kč, Custom od 95 000 Kč. Přesnou cenu dostanete písemně po krátké konzultaci, na faktuře je pak přesně to, co je ve specifikaci.',
+                'key'      => 'single-person',
+                'question' => 'Jste jeden člověk. Co když onemocníte nebo skončíte?',
+                'answer'   => 'Rozumím — u zakázky za víc než sto tisíc je to ta nejdůležitější otázka. Web neběží na platformě, ze které byste nemohli odejít: je to vlastní kód na běžném webhostingu. Přístupy do administrace hostingu a na FTP můžete mít po celou dobu, stačí si o ně říct. Po doplacení projektu je kód váš — předám vám ho, kdykoli si o něj řeknete, a pokračovat na něm může kterýkoli vývojář; když bude potřeba, sepíšu k tomu i dokumentaci. Nepřetržitou pohotovost nedržím a nebudu tvrdit, že ano. Ručím za to, že u mě nic nezůstane zamčené.',
             ],
+            // OND-269 (audit OND-254, nález 7): otázka „Kolik to bude stát?“
+            // odsud vypadla — stejný titulek i stejná čísla stojí o čtyři
+            // sekce výš v cenové kotvě (`price_anchor`) a v ceníku.
+            // OND-266 tu mezitím opravil rovné uvozovky v odpovědi na cenu;
+            // ta oprava zanikla se smazanou položkou, ne přetažením ze staré
+            // větve. Druhá oprava z OND-266 („bezúdržbové weby“) zůstává níž.
             [
                 'key'      => 'duration',
                 'question' => 'Jak dlouho to trvá?',
@@ -331,7 +394,7 @@ return [
             ],
             [
                 'key'      => 'maintenance-free',
-                'question' => 'Co jsou „bezúdržbové weby"?',
+                'question' => 'Co jsou „bezúdržbové weby“?',
                 'answer'   => 'Žádný WordPress, žádné pluginy, žádné měsíční bezpečnostní aktualizace. Web stojí na vlastním kódu — běží sám, nevyžaduje pravidelné opravy a nepadá kvůli kolizi šablon. Drobné změny obsahu řešíme přímo, bez ticketu.',
             ],
             // Archiv: další FAQ otázky se přesouvají mimo homepage (na /faq nebo /sluzby — mimo scope OND-121).
@@ -341,7 +404,7 @@ return [
     'faq_form' => [
         'eyebrow'     => 'Máte jinou otázku?',
         'heading'     => 'Napište ji rovnou.',
-        'description' => 'Zachytím to, odpovím do druhého pracovního dne. Bez obchodního tlaku.',
+        'description' => 'Zachytím to, ozvu se do 24 hodin v pracovní dny. Bez obchodního tlaku.',
         'name'        => 'Jméno',
         'email'       => 'E-mail',
         'message'     => 'Vaše otázka',
@@ -355,13 +418,18 @@ return [
         'success'     => 'Děkuji, otázka dorazila. Ozvu se co nejdříve.',
     ],
 
+    // OND-201 (nález 5.8): jediná závěrečná výzva homepage. Text ze schválené
+    // sekce 9 dokumentu homepage-texty (OND-186).
     'inline_form' => [
         'eyebrow'         => 'Poptávka',
-        'heading'         => 'Pošlete mi pár vět o projektu. Ozvu se do 24 hodin.',
-        'description'     => 'Žádný obchodník, žádný formulář na deset polí. Stačí krátký popis — odpovím vám osobně a probereme, jestli má spolupráce smysl.',
+        'heading'         => 'Napište mi, co potřebujete',
+        'description'     => 'Popište mi ve zkratce, co řešíte. Ozvu se do 24 hodin v pracovní dny a nezávazně probereme, jestli si sedneme a co dává smysl. Když zjistíme, že na sebe nepasujeme, řeknu vám to rovnou.',
+        'quote_text'      => 'Díky individuálnímu přístupu, flexibilitě a profesionalitě odpovídá výsledek našim představám.',
+        'quote_author'    => 'Hana Jaskmanická, výkonná ředitelka, VP Industry',
         'name'            => 'Jméno a příjmení',
         'email'           => 'E-mail',
         'phone'           => 'Telefon (nepovinný)',
+        'phone_hint'      => 'S číslem se ozvu rychleji.',
         'message'         => 'Co potřebujete vyřešit?',
         'placeholders'    => [
             'name'    => 'Jan Novák',
@@ -369,8 +437,9 @@ return [
             'phone'   => '+420 000 000 000',
             'message' => 'Např. nový web pro výrobní firmu, 5–10 stran',
         ],
-        'submit'          => 'Odeslat poptávku',
+        'submit'          => 'Poslat poptávku',
         'submitting'      => 'Odesílám…',
+        'note'            => 'Nebo mi napište na ok@ondraweb.cz. Ozvu se osobně, ne přes formulářového robota.',
         'privacy_prefix'  => 'Odesláním souhlasíte se zpracováním osobních údajů v souladu se ',
         'privacy_link'    => 'zásadami ochrany osobních údajů',
         'success'         => 'Děkuji, poptávka dorazila. Ozvu se co nejdříve.',

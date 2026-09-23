@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * Načte `docs/portfolio-data.yaml` a vytvoří všech 23 projektů
+ * Načte `docs/portfolio-data.yaml` a vytvoří všech 24 projektů
  * + překlady (cs/en/de) + screenshoty + outcomes + tagy.
  *
  * Idempotentní: `updateOrCreate` po slug; překlady, screenshoty,
@@ -59,6 +59,10 @@ class PortfolioSeeder extends Seeder
             foreach ($projects as $row) {
                 $this->seedProject($row);
             }
+
+            // Názvy štítků (OND-223) — až po vytvoření štítků, přepíše
+            // humanizované slugy z `seedProject()` a doplní EN/DE.
+            (new PortfolioTagNamesSeeder())->run();
         });
 
         $count = PortfolioProject::count();
@@ -83,7 +87,12 @@ class PortfolioSeeder extends Seeder
                 'duration'     => $row['duration'] ?? null,
                 'featured'     => (bool) ($row['featured'] ?? false),
                 'sort_order'   => (int) ($row['sort_order'] ?? 0),
-                'published_at' => $row['published_at'] ?? now(),
+                // OND-282: `?? now()` by explicitní `published_at: null`
+                // v YAMLu přepsalo zpátky na publikováno. Klíč v YAMLu
+                // je teď rozhodující — chybí = publikuj, `null` = neveřejné.
+                'published_at' => array_key_exists('published_at', $row)
+                    ? $row['published_at']
+                    : now(),
             ]
         );
 
@@ -97,6 +106,9 @@ class PortfolioSeeder extends Seeder
             PortfolioProjectTranslation::create([
                 'project_id'       => $project->id,
                 'locale'           => $locale,
+                // OND-209: lokalizovaný slug jen tam, kde je v YAML;
+                // jinak NULL = použije se jazyk-neutrální slug projektu.
+                'slug'             => $tr['slug'] ?? null,
                 'title'            => $tr['title'] ?? '',
                 'subtitle'         => $tr['subtitle'] ?? null,
                 'summary'          => $tr['summary'] ?? null,
@@ -147,8 +159,16 @@ class PortfolioSeeder extends Seeder
             $type = $shot['type'] ?? 'gallery';
             $typeCounters[$type] = ($typeCounters[$type] ?? 0) + 1;
             $n = $typeCounters[$type];
-            $ext = $this->extensionFromUrl($shot['url'] ?? '');
-            $relativePath = "projects/{$slug}/{$type}-{$n}.{$ext}";
+            // OND-256: snímky, které jsme pořídili sami (ne stažené přes
+            // `portfolio:fetch-screenshots`), nemají zdrojové `url`, ze kterého
+            // se jinak odvozuje přípona. Pro ně je v YAMLu rovnou `path`.
+            // `path` je relativní k `resources/img/`, stejně jako sloupec v DB.
+            if (! empty($shot['path'])) {
+                $relativePath = $shot['path'];
+            } else {
+                $ext = $this->extensionFromUrl($shot['url'] ?? '');
+                $relativePath = "projects/{$slug}/{$type}-{$n}.{$ext}";
+            }
 
             // Pokud lokální soubor neexistuje, screenshot do DB nepřidávej
             // (chrání před tím, aby <x-responsive-image> hodila chybu).

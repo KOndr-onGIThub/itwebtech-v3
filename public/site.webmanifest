@@ -1,20 +1,20 @@
 {
-    "name": "ITWebTech",
-    "short_name": "ITWebTech",
+    "name": "ONDRAWEB",
+    "short_name": "ONDRAWEB",
     "description": "Tvorba webových stránek a aplikací — Ondřej Kriška",
     "start_url": "/",
     "display": "browser",
-    "theme_color": "#F59E0B",
-    "background_color": "#0F172A",
+    "theme_color": "#0A0A0B",
+    "background_color": "#0A0A0B",
     "icons": [
         {
-            "src": "/img/logo/logo_icon.png",
-            "sizes": "any",
+            "src": "/img/logo/logo_icon.png?v=fad66207",
+            "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/img/logo/logo_square.png",
-            "sizes": "any",
+            "src": "/img/logo/logo_square.png?v=85448afb",
+            "sizes": "512x512",
             "type": "image/png"
         }
     ]

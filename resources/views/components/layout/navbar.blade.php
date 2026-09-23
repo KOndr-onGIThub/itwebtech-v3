@@ -7,6 +7,7 @@
         ['route' => 'projects', 'label' => __('layout.nav.projects')],
         ['route' => 'price',    'label' => __('layout.nav.price')],
         ['route' => 'blog',     'label' => __('layout.nav.blog')],
+        ['route' => 'about',    'label' => __('layout.nav.about')],
         ['route' => 'contact',  'label' => __('layout.nav.contact')],
     ];
     $langLabels = ['cs' => 'CZ', 'en' => 'EN', 'de' => 'DE'];
@@ -19,7 +20,7 @@
         <div class="container-site navbar__inner">
 
             <a href="{{ lroute('home') }}" class="navbar__logo">
-                <img src="{{ asset('img/logo/logo_main_svg.svg') }}" alt="{{ config('app.name') }}" class="navbar__logo-img" width="274" height="58">
+                <img src="{{ asset_v('img/logo/logo_main_svg.svg') }}" alt="{{ config('app.name') }}" class="navbar__logo-img" width="220" height="26">
             </a>
 
             {{-- Desktop nav --}}
@@ -39,9 +40,12 @@
             {{-- Right side: lang switcher + CTA + hamburger --}}
             <div class="navbar__right">
 
-                <div class="navbar__lang">
+                <div class="navbar__lang" role="group" aria-label="{{ __('layout.nav.lang_switcher') }}">
                     @foreach ($langLabels as $code => $label)
-                        <a href="{{ $hreflangs[$code] ?? lroute($currentPage, $code) }}"
+                        <a href="{{ $hreflangs[$code] ?? lroute_safe($currentPage, $code) }}"
+                           hreflang="{{ $code }}"
+                           lang="{{ $code }}"
+                           @if($locale === $code) aria-current="true" @endif
                            class="navbar__lang-item {{ $locale === $code ? 'navbar__lang-item--active' : '' }}">
                             {{ $label }}
                         </a>
@@ -98,19 +102,22 @@
 
         <div class="drawer__header">
             <a href="{{ lroute('home') }}" class="navbar__logo" @click="open = false">
-                <img src="{{ asset('img/logo/logo_main_svg.svg') }}" alt="{{ config('app.name') }}" class="navbar__logo-img" width="274" height="58">
+                <img src="{{ asset_v('img/logo/logo_main_svg.svg') }}" alt="{{ config('app.name') }}" class="navbar__logo-img" width="220" height="26">
             </a>
             <button class="drawer__close" @click="open = false" aria-label="Close menu">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                     <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
             </button>
         </div>
 
         {{-- Language switcher in drawer --}}
-        <div class="drawer__lang">
+        <div class="drawer__lang" role="group" aria-label="{{ __('layout.nav.lang_switcher') }}">
             @foreach ($langLabels as $code => $label)
-                <a href="{{ $hreflangs[$code] ?? lroute($currentPage, $code) }}"
+                <a href="{{ $hreflangs[$code] ?? lroute_safe($currentPage, $code) }}"
+                   hreflang="{{ $code }}"
+                   lang="{{ $code }}"
+                   @if($locale === $code) aria-current="true" @endif
                    class="navbar__lang-item {{ $locale === $code ? 'navbar__lang-item--active' : '' }}">
                     {{ $label }}
                 </a>

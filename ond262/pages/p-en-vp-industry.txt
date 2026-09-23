@@ -1,0 +1,109 @@
+VP Industry — industrial marking website redesign
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+CZ
+EN
+DE
+Book a consultation
+CZ
+EN
+DE
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+Book a consultation
+💬
+Enquiry
+← Back to projects
+Website
+·
+2024
+·
+VP Industry — Miroslav Pekárek
+VP Industry
+A site built to grow the moment content kicks in
+Visit live site
+Book a consultation
+VP Industry makes industrial marking and automation systems. The redesign goal was clear: take the site to a state where it grows organically the moment the company starts producing content. Competitor analysis, keywords, copy and structure are now in place — the technical foundation is done.
+Challenge
+The client wanted a site set up for long-term organic growth, not a few-month marketing burst. The job was to understand the competitive landscape, define keywords, and build content and architecture that would not block that growth.
+Solution
+I started with competitor research and keyword mapping. The site has detailed product pages with technical specs, sample videos and case studies. SEO is technically clean, analytics is in place, and the structure assumes future articles. The infrastructure is ready — a content campaign can drop straight onto it.
+Result
+The site is technically ready to grow; what's missing is the active content and campaign work the client has paused for now. The organic-growth potential is wired in and waiting for the next phase. That's the honest outcome — I delivered what was scoped, and I'm clear about what remains.
+Client
+VP Industry — Miroslav Pekárek
+Year
+2024
+Duration
+několik týdnů
+Category
+Website
+Live site
+vpindustry.cz
+Tech stack
+Website
+Search visibility
+Rebuild of an old site
+Website copy
+Industry
+Selling to businesses
+More projects
+Website
+·
+2023
+·
+PitArena
+PitArena
+From zero to a brand, a website and online sales
+View project
+Website
+·
+2026
+·
+PitArena
+PitArena — online shop
+An online shop where customers find the part for their model and year
+View project
+Website
+·
+2026
+·
+BARANA
+BARANA
+Premium website for bioclimatic pergolas, ready for ad campaigns
+View project
+Want a similar result for your business?
+Book a consultation
+← Back to projects
+I help entrepreneurs succeed in the online world
+Book a free consultation
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+© 2026 ONDRAWEB — All rights reserved.
++420 728 697 712
+Privacy Policy
+Cookies
+Let's talk
+Free consultation — no commitment, no registration.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Pick a consultation slot
+Free. No commitment.
+Mind a few cookies?
+I only measure a few numbers about what works on the site. No data selling.
+See the cookie policy .
+Decline
+Accept all
+✕

@@ -1,0 +1,105 @@
+Elektro Srnák — minimalist website for an electrician
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+CZ
+EN
+DE
+Book a consultation
+CZ
+EN
+DE
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+Book a consultation
+💬
+Enquiry
+← Back to projects
+Website
+·
+2023
+·
+Elektro Srnák — Lukáš Srnák
+Elektro Srnák
+A small website for an electrician that wastes no time
+Book a consultation
+Lukáš Srnák needed a small calling card stating what he does and what he rents out. The micro-site is minimalist on the surface, with proper technical hygiene under the hood — Schema markup, OpenGraph, Google Analytics, Search Console, Maps integration. Note: the site has been offline since mid-2025 (client ended hosting).
+Challenge
+The client didn't need a big website, but the small one had to deliver. Local customers search for electricians on mobile — the site had to be fast, scannable, and easy to find on Google. Without SEO basics, it would have been lost.
+Solution
+A minimalist site with the essential sections (services, equipment rental, contact). Underneath: technical hygiene — local-business Schema, OG metadata, Google Search Console and Analytics integration, photo lightbox, and a custom logo. Nothing extra — and nothing search engines expect is missing.
+Result
+The client got a functional calling card at a reasonable cost — it leads users to contact quickly and behaves correctly in Google. Review: 5/5 stars highlighting speed, willingness, and fair pricing. The site was online until mid-2025, when the client ended hosting.
+Client
+Elektro Srnák — Lukáš Srnák
+Year
+2023
+Duration
+kratší realizace
+Category
+Website
+Tech stack
+Website
+Search visibility
+Small one-page site
+Site as the company’s calling card
+Local business
+More projects
+Website
+·
+2023
+·
+PitArena
+PitArena
+From zero to a brand, a website and online sales
+View project
+Website
+·
+2026
+·
+PitArena
+PitArena — online shop
+An online shop where customers find the part for their model and year
+View project
+Website
+·
+2026
+·
+BARANA
+BARANA
+Premium website for bioclimatic pergolas, ready for ad campaigns
+View project
+Want a similar result for your business?
+Book a consultation
+← Back to projects
+I help entrepreneurs succeed in the online world
+Book a free consultation
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+© 2026 ONDRAWEB — All rights reserved.
++420 728 697 712
+Privacy Policy
+Cookies
+Let's talk
+Free consultation — no commitment, no registration.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Pick a consultation slot
+Free. No commitment.
+Mind a few cookies?
+I only measure a few numbers about what works on the site. No data selling.
+See the cookie policy .
+Decline
+Accept all
+✕

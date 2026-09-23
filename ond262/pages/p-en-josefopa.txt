@@ -1,0 +1,110 @@
+Josef Opa — multilingual website for a German construction firm
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+CZ
+EN
+DE
+Book a consultation
+CZ
+EN
+DE
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+Book a consultation
+💬
+Enquiry
+← Back to projects
+Website
+·
+2024
+·
+Josef Opa
+Josef Opa
+A multilingual website for a construction firm with its own brand
+Visit live site
+Book a consultation
+Josef Opa handles renovations, modernisations, and full builds. He works mainly in Germany, so he needed a presentation that works on both German- and English-speaking markets. I built a bilingual website and designed the logo, e-mail identity, and business cards with a QR code.
+Challenge
+The client needed a credible nameplate as a solid local construction partner in Germany. Without his own brand, website, or consistent identity, he didn't stand out anywhere. Multilingual support was essential — most communication happens in German, but enquiries also come in English.
+Solution
+A responsive multilingual website, a bold playful logo, a professional e-mail on a custom domain, and business cards with a QR code that points straight to the site. Subtle animations enhance the experience without slowing the site down.
+Result
+The firm now has one consistent identity across web, e-mail, and printed cards. The client looks credible on both language markets, the @josefopa e-mail address adds weight to written communication, and the QR-code card makes handing over contact info a single move.
+Client
+Josef Opa
+Year
+2024
+Duration
+říjen 2024
+Category
+Website
+Live site
+josefopa.de
+Tech stack
+Website
+Brand
+Logo
+Site in several languages
+Company email
+Business cards
+Construction
+More projects
+Website
+·
+2023
+·
+PitArena
+PitArena
+From zero to a brand, a website and online sales
+View project
+Website
+·
+2026
+·
+PitArena
+PitArena — online shop
+An online shop where customers find the part for their model and year
+View project
+Website
+·
+2026
+·
+BARANA
+BARANA
+Premium website for bioclimatic pergolas, ready for ad campaigns
+View project
+Want a similar result for your business?
+Book a consultation
+← Back to projects
+I help entrepreneurs succeed in the online world
+Book a free consultation
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+© 2026 ONDRAWEB — All rights reserved.
++420 728 697 712
+Privacy Policy
+Cookies
+Let's talk
+Free consultation — no commitment, no registration.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Pick a consultation slot
+Free. No commitment.
+Mind a few cookies?
+I only measure a few numbers about what works on the site. No data selling.
+See the cookie policy .
+Decline
+Accept all
+✕

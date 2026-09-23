@@ -10,7 +10,7 @@
         <p class="error-page__lead">{{ __('errors.503.subheading') }}</p>
 
         <div class="error-page__ctas">
-            <a href="mailto:ok@itwebtech.cz" class="btn btn-primary">
+            <a href="mailto:ok@ondraweb.cz" class="btn btn-primary">
                 {{ __('errors.503.cta_primary') }}
             </a>
         </div>

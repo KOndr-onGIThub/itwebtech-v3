@@ -12,19 +12,26 @@
     // Tagline: subtitle → fallback summary (zkrácený)
     $tagline = $t?->subtitle ?: ($t?->summary ? \Illuminate\Support\Str::limit($t->summary, 110) : null);
 
-    // Thumbnail: hero → první gallery → null (placeholder)
+    // Thumbnail (OND-202): wide 3-device mockup je v malé kartě nečitelný —
+    // preferuj explicitní thumbnail, pak čtvercový detailní záběr, pak hero.
     $screens = $project->screenshots ?? collect();
-    $hero    = $screens->firstWhere('type', 'hero')
-            ?? $screens->firstWhere('type', 'thumbnail')
-            ?? $screens->first();
+    $hero    = portfolio_card_thumbnail($screens);
 
     $categoryLabel = __('projects.detail.category_label.' . $project->category);
     if (str_starts_with($categoryLabel, 'projects.detail.category_label.')) {
         $categoryLabel = ucfirst($project->category);
     }
 
-    $detailHref = lroute('projects') . '/' . $project->slug;
-    $ariaLabel = ($t?->title ?? $project->client_name ?? $project->slug) . ' — ' . __('projects.view_project');
+    // OND-209: slug může být lokalizovaný (DE/EN), detailUrl to řeší.
+    $detailHref = $project->detailUrl($locale);
+    $projectName = $t?->title ?? $project->client_name ?? $project->slug;
+    $ariaLabel = $projectName . ' — ' . __('projects.view_project');
+
+    // OND-265 (audit OND-254): náhledy měly natvrdo `alt=""`. Odkaz sice nese
+    // aria-label, ale při nenačteném obrázku i pro vyhledávače tu nezbylo nic.
+    // Preferujeme popis snímku z překladu, jinak generický popis náhledu.
+    $thumbAlt = $hero?->translation()?->alt
+        ?: __('projects.card.thumbnail_alt', ['project' => $projectName]);
 @endphp
 
 <article
@@ -38,7 +45,7 @@
             @if ($hero)
                 <x-portfolio.screenshot
                     :path="$hero->path"
-                    alt=""
+                    :alt="$thumbAlt"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     loading="{{ $eager ? 'eager' : 'lazy' }}"
                     fetchpriority="{{ $eager ? 'high' : null }}"

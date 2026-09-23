@@ -3,38 +3,58 @@
 @section('title', __('blog.meta.title'))
 @section('description', __('blog.meta.description'))
 
-{{-- OND-137 P4 §SEO: BreadcrumbList JSON-LD pro blog listing. --}}
+{{-- OND-137 P4 §SEO: BreadcrumbList JSON-LD pro blog listing.
+     Pozn.: viz price.blade.php — schema-context klíč řešíme přes PHP blok,
+     aby ho nesežrala Blade direktiva (Laravel 12 CompilesContexts). --}}
 @push('jsonld')
+@php
+    $breadcrumbLd = [
+        '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            ['@type' => 'ListItem', 'position' => 1, 'name' => __('layout.nav.home'), 'item' => lroute('home')],
+            ['@type' => 'ListItem', 'position' => 2, 'name' => __('layout.nav.blog'), 'item' => lroute('blog')],
+        ],
+    ];
+    $breadcrumbJson = json_encode($breadcrumbLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+@endphp
 <script type="application/ld+json">
-{!! json_encode([
-    '@context' => 'https://schema.org',
-    '@type' => 'BreadcrumbList',
-    'itemListElement' => [
-        ['@type' => 'ListItem', 'position' => 1, 'name' => __('layout.nav.home'), 'item' => lroute('home')],
-        ['@type' => 'ListItem', 'position' => 2, 'name' => __('layout.nav.blog'), 'item' => lroute('blog')],
-    ],
-], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
+{!! $breadcrumbJson !!}
 </script>
 @endpush
 
 @section('content')
 
-{{-- Page hero --}}
-<div class="page-hero">
+{{-- OND-251 — vrstva hloubky ZAPNUTÁ, ale jen tiché nasvícení a stíny
+     pod náhledy. Blog je rozcestník: tady se vybírá, nečte. Kdyby tu bylo
+     světla jako na ceníku, slibovalo by to rozhodnutí, které se tu nedělá.
+     Vlastní článek vrstvu NEMÁ — viz §E hloubka.css. --}}
+<div class="pd--depth pd--depth-sub">
+
+{{-- Page hero — OND-130 iter 8: plán §3.1 page-mark + Plex Sans display (post OND-145 swap). --}}
+<div class="page-hero page-hero--blog">
     <div class="container-site">
-        <p class="section-subheading">{{ __('blog.subheading') }}</p>
-        <h1>{{ __('blog.heading') }}</h1>
+        {{-- OND-135 cleanup (2026-05-14): page_mark_index span odebrán jako
+             agency-portfolio artefakt per CEO PR #78/#80/#82/#83 precedent. --}}
+        <p class="page-hero__page-mark">
+            <span class="page-hero__page-mark-label">{{ __('blog.hero.page_mark_label') }}</span>
+        </p>
+        <p class="page-hero__upline">{{ __('blog.hero.upline') }}</p>
+        <h1 class="page-hero__heading">
+            {!! __('blog.hero.heading_html') !!}
+        </h1>
+        <p class="page-hero__subline">{{ __('blog.hero.subline') }}</p>
     </div>
 </div>
 
-<section class="section-wrapper" data-reveal>
+<section class="section-wrapper" data-reveal data-pdd="blog-list">
     <div class="container-site">
         <div class="blog-layout">
 
             <main class="blog-articles">
 
                 {{-- DB articles --}}
-                @foreach ($articles ?? [] as $dbArticle)
+                @forelse ($articles ?? [] as $dbArticle)
                     @php $t = $dbArticle->translation($locale); @endphp
                     @if ($t && $t->title)
                     <article class="blog-card" data-reveal>
@@ -63,66 +83,20 @@
                         </div>
                     </article>
                     @endif
-                @endforeach
+                @empty
+                    <p class="blog-empty">{{ __('blog.empty') }}</p>
+                @endforelse
 
-                {{-- Conversion-first blog fallback --}}
-                <article class="blog-conversion-card" data-reveal>
-                    <p class="section-subheading">{{ __('blog.now.subheading') }}</p>
-                    <h2>{{ __('blog.now.heading') }}</h2>
-                    <p>{{ __('blog.now.desc') }}</p>
-                    <ul class="blog-conversion-list">
-                        @foreach (__('blog.now.items') as $item)
-                        <li>
-                            <x-icon.circle-check-big class="w-4 h-4 shrink-0" />
-                            <span>{{ $item }}</span>
-                        </li>
-                        @endforeach
-                    </ul>
-                </article>
-
-                <article class="blog-conversion-card blog-conversion-card--highlight" data-reveal>
-                    <p class="section-subheading">{{ __('blog.audit.subheading') }}</p>
-                    <h2>{{ __('blog.audit.heading') }}</h2>
-                    <ul class="blog-conversion-list">
-                        @foreach (__('blog.audit.items') as $item)
-                        <li>
-                            <x-icon.circle-check-big class="w-4 h-4 shrink-0" />
-                            <span>{{ $item }}</span>
-                        </li>
-                        @endforeach
-                    </ul>
-                    <div class="blog-conversion-actions">
-                        <a href="{{ lroute('contact') }}" class="btn btn-primary">
-                            {{ __('blog.audit.cta_primary') }}
-                            <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-                        </a>
-                        <a href="{{ lroute('price') }}" class="btn btn-secondary">
-                            {{ __('blog.audit.cta_secondary') }}
-                        </a>
-                    </div>
-                </article>
+                {{-- OND-204 (OND-197 bod 11b): odebrány karty „Obsah v přípravě"
+                     a „audit webu zdarma" + postranní nabídka. Audit sliboval
+                     výsledek za klienta a stránka měla tři výzvy k akci vedle
+                     sebe. Zůstává jedna CTA na konci článku (blog.cta.*). --}}
 
             </main>
-
-            {{-- Sidebar --}}
-            <aside class="blog-sidebar">
-                <div class="sidebar-ad">
-                    <p class="section-subheading">{{ __('blog.sidebar_ad.subheading') }}</p>
-                    <h2>{{ __('blog.sidebar_ad.heading') }}</h2>
-                    <p>{{ __('blog.sidebar_ad.text') }}</p>
-                    <div class="sidebar-ad__actions">
-                        <a href="{{ lroute('contact') }}" class="btn btn-primary">
-                            {{ __('blog.sidebar_ad.cta_contact') }}
-                        </a>
-                        <a href="{{ lroute('price') }}" class="btn btn-secondary">
-                            {{ __('blog.sidebar_ad.cta_price') }}
-                        </a>
-                    </div>
-                </div>
-            </aside>
 
         </div>
     </div>
 </section>
 
+</div>
 @endsection

@@ -8,17 +8,32 @@ return [
     ],
 
     'subheading'          => 'Pomůžu vám',
-    'heading'             => 'Napište mi a do 24 hodin se ozvu',
+    'heading'             => 'Ozvu se do 24 hodin v pracovní dny',
+    // OND-201 (nález 5.9): „Ondřej Kriška, Česká republika" byl signál
+    // anonymního dodavatele. Plná adresa a IČO jsou veřejné údaje, zvyšují
+    // důvěru i lokální viditelnost.
+    // OND-292: /o-mne mělo tytéž údaje v sekci „Kde sídlím“ podruhé; board
+    // 23. 9. rozhodl sekci zrušit, takže tohle je teď jediný výskyt adresy
+    // mimo zásady ochrany osobních údajů.
     'address_label'       => 'Adresa',
+    'address_name'        => 'Ondřej Kriška',
+    'address_street'      => 'Dunajovská 116',
+    'address_city'        => '691 81 Březí',
+    'address_registration' => 'IČO 19231407, neplátce DPH',
+    // OND-267 (E-1): popisek byl natvrdo v šabloně, takže i německá mutace
+    // psala „E-mail" — německy se píše jen „E-Mail".
+    'email_label'         => 'E-mail',
+    'phone_label'         => 'Telefon',
     'hours_label'         => 'Dostupnost',
-    'open_hours'          => 'Po–Pá: 9:00–19:00<br>So–Ne: 12:00–17:00',
-    'cta_consultation'    => 'Naplánovat online schůzku',
+    'open_hours'          => 'Ozvu se do 24 hodin v pracovní dny. O víkendech a svátcích nedržím pohotovost, ale nic mi nezapadne.',
+    'cta_consultation'    => 'Napište mi',
 
     'form_heading'        => 'Kontaktní formulář',
     'form_subheading'     => 'Získejte zdarma a nezávazně nabídku — nebo mi pošlete jakýkoli dotaz.',
     'name'                => 'Celé jméno',
     'email'               => 'Email',
-    'tel'                 => 'Tel. číslo',
+    'tel'                 => 'Telefon (nepovinný)',
+    'tel_hint'            => 'S číslem se ozvu rychleji.',
     'subject'             => 'Předmět',
     'message'             => 'Vaše zpráva',
     'message_placeholder' => 'Stručně popište, co byste potřebovali — nebo jen napište, kdy vám mám zavolat…',
@@ -29,8 +44,26 @@ return [
     'required'            => 'Vyplňte prosím toto pole.',
     'enter_valid_email'   => 'Vložte platnou emailovou adresu.',
     'policy_not_agreed'   => 'Pro odeslání musíme mít váš souhlas se zpracováním údajů.',
+    // OND-256/8 — texty upload widgetu. Dřív byly natvrdo anglicky
+    // v propech `x-form.file-drop`.
+    'upload' => [
+        'label'            => 'Přidat přílohy',
+        'drag_text'        => '— nebo je sem přetáhněte',
+        'browse'           => 'Vybrat soubory',
+        'hint'             => 'PDF, DOC, DOCX, XLS, XLSX, JPG, PNG, ZIP…',
+        'max_files'        => 'Max. 5 souborů',
+        'max_size'         => 'celkem 20 MB',
+        'remove'           => 'Odebrat',
+        'error_too_many'   => 'Najednou lze přiložit nejvýš 5 souborů.',
+        'error_too_large'  => 'Přílohy dohromady nesmí přesáhnout 20 MB.',
+        // OND-264: hlášky ze serverové validace příloh.
+        'error_per_file'   => 'Jeden soubor smí mít nejvýš :max MB.',
+        'error_mime'       => 'Tenhle typ souboru poslat nejde. Povolené jsou: :types.',
+        'error_failed'     => 'Přílohu se nepodařilo uložit. Zkuste to prosím znovu — nebo mi soubor pošlete na ok@ondraweb.cz.',
+    ],
+
     'message_success'     => 'Děkuji za zprávu.',
-    'message_error'       => 'Něco se cestou pokazilo. Zkuste to prosím znovu — nebo mi napište přímo na ok@itwebtech.cz.',
+    'message_error'       => 'Něco se cestou pokazilo. Zkuste to prosím znovu — nebo mi napište přímo na ok@ondraweb.cz.',
 
     // OND-136: net-new copy blocky pro /kontakt redesign (plán §1).
     // Engineer (B2) tyto klíče napojí v `resources/views/pages/contact.blade.php`.
@@ -38,13 +71,14 @@ return [
     // Trust signal hero — „he-it's-a-person".
     'hero' => [
         // Plán §3.1 hero — page-mark, upline, italic display heading, subline.
+        // OND-135 cleanup (2026-05-14): page_mark_index odebrán — agency-
+        // portfolio artefakt per CEO PR #78 precedent (home).
         'page_mark_label' => 'KONTAKT',
-        'page_mark_index' => '02 / 09',
         'upline'          => 'Píšete přímo mně.',
         'heading_html'    => 'Žádné CRM,<br>žádné call centrum — <em>jen Ondřej</em>.',
         'eyebrow'      => 'Píšete přímo mně',
         'heading'      => 'Píšete přímo mně, Ondřejovi.',
-        'subline'      => 'Vaši zprávu si přečtu osobně a odepíšu obvykle do druhého pracovního dne.',
+        'subline'      => 'Vaši zprávu si přečtu osobně. Ozvu se do 24 hodin v pracovní dny.',
         'photo_alt'    => 'Ondřej Kriška — autor a kontaktní osoba',
         'role_label'   => 'Vývojář, autor webu, jediný kontakt',
     ],
@@ -55,8 +89,8 @@ return [
         'heading' => 'Tři kroky — žádný marketingový trychtýř.',
         'steps'   => [
             [
-                'title' => 'Odpovím do 24 hodin',
-                'text'  => 'Dorazí vám e-mail ode mě osobně, ne automatická potvrzovací zpráva. Pokud budu na cestách, ozvu se nejpozději druhý pracovní den.',
+                'title' => 'Ozvu se do 24 hodin v pracovní dny',
+                'text'  => 'Dorazí vám e-mail ode mě osobně, ne automatická potvrzovací zpráva. O víkendech a svátcích nedržím pohotovost — ozvu se první pracovní den.',
             ],
             [
                 'title' => 'Dohodneme 30 minut hovoru',
@@ -72,7 +106,7 @@ return [
     // Thank-you state — zobrazí se po úspěšném odeslání místo formuláře.
     'thank_you' => [
         'heading'  => 'Hotovo, zpráva dorazila.',
-        'subline'  => 'Děkuji. Přečtu si ji osobně a odepíšu nejpozději do druhého pracovního dne.',
+        'subline'  => 'Děkuji. Přečtu si ji osobně a ozvu se do 24 hodin v pracovní dny.',
         'next'     => 'Mezitím se můžete podívat na realizované projekty nebo si přečíst ceník.',
         'cta_projects' => 'Realizované projekty',
         'cta_price'    => 'Ceník',

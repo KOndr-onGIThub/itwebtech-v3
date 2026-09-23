@@ -3,28 +3,48 @@
 @section('title', __('projects.meta.title'))
 @section('description', __('projects.meta.description'))
 
-{{-- OND-137 P4 §SEO: BreadcrumbList JSON-LD pro /projekty. --}}
+{{-- OND-137 P4 §SEO: BreadcrumbList JSON-LD pro /projekty.
+     Pozn.: viz price.blade.php — schema-context klíč řešíme přes PHP blok,
+     aby ho nesežrala Blade direktiva (Laravel 12 CompilesContexts). --}}
 @push('jsonld')
+@php
+    $breadcrumbLd = [
+        '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            ['@type' => 'ListItem', 'position' => 1, 'name' => __('layout.nav.home'),     'item' => lroute('home')],
+            ['@type' => 'ListItem', 'position' => 2, 'name' => __('layout.nav.projects'), 'item' => lroute('projects')],
+        ],
+    ];
+    $breadcrumbJson = json_encode($breadcrumbLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+@endphp
 <script type="application/ld+json">
-{!! json_encode([
-    '@context' => 'https://schema.org',
-    '@type' => 'BreadcrumbList',
-    'itemListElement' => [
-        ['@type' => 'ListItem', 'position' => 1, 'name' => __('layout.nav.home'),     'item' => lroute('home')],
-        ['@type' => 'ListItem', 'position' => 2, 'name' => __('layout.nav.projects'), 'item' => lroute('projects')],
-    ],
-], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
+{!! $breadcrumbJson !!}
 </script>
 @endpush
 
 @section('content')
 
-{{-- Page hero --}}
-<div class="page-hero">
+{{-- OND-251 — vrstva hloubky ZAPNUTÁ: jen světlo a hmota, žádný pohyb.
+     Důkazová stránka. Náboj na každé dlaždici mřížky by byl přesně ta
+     „přeplácanost", kterou vrstva odstraňovala — karty místo toho dostávají
+     kontaktní stín, aby ležely na ploše. Rozbor v §E hloubka.css. --}}
+<div class="pd--depth pd--depth-sub">
+
+{{-- Page hero — OND-135 iter 6: plán §3.1 design DNA (page-mark + display + amber accent) --}}
+<div class="page-hero page-hero--projects">
     <div class="container-site">
-        <p class="section-subheading">{{ __('projects.subheading') }}</p>
-        <h1>{{ __('projects.heading') }}</h1>
-        <p>{{ __('projects.intro') }}</p>
+        {{-- OND-135 cleanup (2026-05-14): page_mark_index span odebrán jako
+             agency-portfolio artefakt (itwebtech nemá „pages" hierarchii) —
+             aplikováno per CEO PR #78/#80/#82 precedent (home/kontakt/cenik). --}}
+        <p class="page-hero__page-mark">
+            <span class="page-hero__page-mark-label">{{ __('projects.hero.page_mark_label') }}</span>
+        </p>
+        <p class="page-hero__upline">{{ __('projects.hero.upline') }}</p>
+        <h1 class="page-hero__heading">
+            {!! __('projects.hero.heading_html') !!}
+        </h1>
+        <p class="page-hero__subline">{{ __('projects.hero.subline') }}</p>
     </div>
 </div>
 
@@ -36,14 +56,18 @@
 />
 
 {{-- 2. Portfolio grid --}}
-<section class="section-wrapper section-wrapper--tight" data-reveal>
+<section class="section-wrapper section-wrapper--tight" data-reveal data-pdd="projects-grid">
     <div class="container-site">
         <x-portfolio.grid :projects="$portfolioProjects" :locale="$locale" />
     </div>
 </section>
 
-{{-- 3. Conversion snapshots (existující) --}}
-<section class="section-wrapper" data-reveal>
+{{-- 3. Případovky
+     OND-201 (nález 5.2): dřív anonymní „snapshots" s vymyšlenými termíny.
+     Nově skutečné případovky z dokumentu `pripadovky` (OND-186). Druhý
+     meta slot nese odkaz na živý web místo vymyšlené doby realizace —
+     u interních aplikací (Toyota TSM) je `url` null a odkaz se nevykreslí. --}}
+<section class="section-wrapper" data-reveal data-pdd="projects-cases">
     <div class="container-site">
         <header class="section-header">
             <p class="section-subheading">{{ __('projects.snapshots.subheading') }}</p>
@@ -56,7 +80,13 @@
             <article class="project-snapshot">
                 <div class="project-snapshot__meta">
                     <span>{{ $snapshot['type'] }}</span>
-                    <span>{{ $snapshot['timeline'] }}</span>
+                    @if (!empty($snapshot['url']))
+                    <a href="{{ $snapshot['url'] }}" target="_blank" rel="noopener"
+                       data-analytics="case_study_live_click"
+                       data-analytics-props='{"domain":"{{ $snapshot['domain'] }}"}'>
+                        {{ $snapshot['domain'] }}
+                    </a>
+                    @endif
                 </div>
                 <h3>{{ $snapshot['title'] }}</h3>
                 <p>{{ $snapshot['summary'] }}</p>
@@ -75,7 +105,7 @@
 </section>
 
 {{-- 4. Project fit (existující) --}}
-<section class="section-wrapper section-alt" data-reveal>
+<section class="section-wrapper section-alt" data-reveal data-pdd="projects-fit">
     <div class="container-site">
         <header class="section-header">
             <p class="section-subheading">{{ __('projects.fit.subheading') }}</p>
@@ -110,7 +140,7 @@
 </section>
 
 {{-- 5. Why me (existující) --}}
-<section class="section-wrapper" data-reveal>
+<section class="section-wrapper" data-reveal data-pdd="projects-why">
     <div class="container-site">
         <header class="section-header">
             <p class="section-subheading">{{ __('projects.why_me.subheading') }}</p>
@@ -129,7 +159,7 @@
 </section>
 
 {{-- 6. Final CTA --}}
-<section class="section-wrapper" data-reveal>
+<section class="section-wrapper" data-reveal data-pdd="projects-cta">
     <div class="container-site">
         <div class="cta-block">
             <h2>{{ __('projects.cta.heading') }}</h2>
@@ -143,4 +173,5 @@
     </div>
 </section>
 
+</div>
 @endsection

@@ -12,6 +12,9 @@ class PortfolioProjectTranslation extends Model
     protected $fillable = [
         'project_id',
         'locale',
+        // OND-209: nepovinný lokalizovaný slug. NULL = použije se
+        // jazyk-neutrální `portfolio_projects.slug`.
+        'slug',
         'title',
         'subtitle',
         'summary',

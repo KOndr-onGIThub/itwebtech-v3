@@ -45,7 +45,7 @@
 
             <aside class="landing-hero__aside" data-reveal>
                 <x-responsive-image
-                    path="hero/itwebtech_3.webp"
+                    path="hero/hero-uvod.webp"
                     alt="Ondřej Kriška"
                     sizes="(min-width: 1024px) 420px, 100vw"
                     loading="eager"
@@ -170,7 +170,7 @@
             <div class="landing-logo-strip" data-reveal-group>
                 @foreach (__('landing.results.logos') as $logo)
                     <div class="landing-logo-item">
-                        <img src="{{ asset('img/' . $logo['src']) }}" alt="{{ $logo['alt'] }}" loading="lazy">
+                        <img src="{{ asset_v('img/' . $logo['src']) }}" alt="{{ $logo['alt'] }}" loading="lazy">
                     </div>
                 @endforeach
             </div>
@@ -273,6 +273,8 @@
 
                 <form method="POST" action="{{ $leadAction }}" novalidate x-data="{ submitting: false }" @submit="submitting = true">
                     @csrf
+
+                    <x-form.honeypot id="landing-website-url" />
 
                     <div class="landing-form-grid">
                         <div class="form-group">

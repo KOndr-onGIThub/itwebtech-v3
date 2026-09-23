@@ -1,0 +1,82 @@
+Wann sich eine eigene Anwendung statt Excel lohnt
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+CZ
+EN
+DE
+Beratung vereinbaren
+CZ
+EN
+DE
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+Beratung vereinbaren
+💬
+Anfrage
+← Zurück zum Blog
+NOTIZEN
+Wann sich eine eigene Anwendung statt Excel lohnt
+Achtzehn Jahre habe ich in der Toyota-Logistik gearbeitet und dort Anwendungen für den Betrieb geschrieben. Woran Sie merken, dass Excel nicht mehr reicht.
+Achtzehn Jahre lang habe ich bei Toyota gearbeitet. Angefangen habe ich als Arbeiter in der Logistik, aufgehört als Senior-Spezialist im Projektteam. In der Zeit habe ich viele Prozesse gesehen, die auf Tabellen und Papier liefen, und ein paar davon habe ich durch eine Anwendung ersetzt. Ich schreibe, woran Sie merken, dass Sie auch an diesem Punkt sind.
+Die Tabelle ist nicht der Feind
+Excel ist ein ausgezeichnetes Werkzeug und viele Firmen können damit jahrelang problemlos arbeiten. Ich will Ihnen nicht einreden, dass Sie eine Anwendung brauchen. Meistens brauchen Sie keine.
+Das Problem beginnt in dem Moment, in dem mehrere Leute gleichzeitig mit der Tabelle arbeiten, in dem daraus etwas gedruckt wird, nach dem dann gearbeitet wird, und in dem ein Fehler darin Geld kostet. Ab da lohnt sich die Frage.
+Fünf Signale, dass die Tabelle an ihrer Grenze ist
+Es gibt mehrere Versionen derselben Tabelle und niemand weiß genau, welche die gültige ist.
+Jemand überträgt Daten von einem System ins andere. Von Hand, jeden Tag, immer wieder.
+Wenn dieser Mensch krank ist, steht die Arbeit. Der Prozess hängt an einer Person und ihrer Tabelle.
+Fehler fallen zu spät auf. Ein Zahlendreher in der Zelle zeigt sich erst beim Kunden.
+Niemand kann sagen, wie der Stand gerade ist. Die Zahl muss aus fünf Dateien zusammengesetzt werden.
+Wenn davon ein Punkt passt, lassen Sie es. Wenn drei oder mehr passen, lohnt es sich nachzurechnen.
+Sie brauchen eine Anwendung nicht, weil sie modern ist. Sie brauchen sie, wenn die Handarbeit Sie mehr kostet als ihre Entwicklung.
+Was ich bei Toyota gemacht habe
+Meine Aufgabe war es, die Logistik im Zusammenspiel mit der Montage effizienter zu machen. In der Produktion können Sie sich nicht leisten, dass das Band stehen bleibt, also muss jede Änderung vorher durchdacht und getestet werden.
+Ich habe dort eine Webanwendung namens TSM programmiert, die einen Teil der Handarbeit in der Logistik ersetzt hat. Nach und nach habe ich noch mehrere weitere Anwendungen in den Betrieb gebracht.
+Es ging dabei nicht um spektakuläre Technologie. Es ging darum, die Stelle zu finden, an der Zeit verschwendet wird, und diese Stelle zu beseitigen. Genauso denke ich auch heute, wenn ich für eine Firma eine Anwendung nach Maß baue.
+Wie Sie es selbst nachrechnen
+Nehmen Sie eine Tätigkeit, die von Hand erledigt wird. Wie viele Minuten am Tag kostet sie? Wie oft im Monat passiert dabei ein Fehler und was kostet dieser Fehler? Multiplizieren Sie es mit zwölf Monaten. Wenn eine Zahl im Bereich von mehreren tausend Euro pro Jahr herauskommt, rechnet sich eine Anwendung nach Maß in ein paar Jahren und spart danach nur noch. Wenn ein paar hundert Euro herauskommen, lassen Sie es und kaufen Sie sich lieber eine ordentliche Tabelle.
+Diese Rechnung mache ich Ihnen beim ersten Gespräch kostenlos. Wenn dabei herauskommt, dass es sich nicht lohnt, sage ich es Ihnen.
+Was eine Anwendung nach Maß ist und was nicht
+Es ist ein Programm, das genau darauf gebaut ist, wie Ihre Firma arbeitet. Erfassung, Bestellungen, Planung, Auswertungen. Es läuft im Browser, Sie installieren also nichts und kommen auch vom Handy daran.
+Es ist kein fertiges System, an das Sie sich anpassen müssen. Das ist der wesentliche Unterschied und auch der Grund, warum es mehr kostet als ein Monatsabo für eine Standardsoftware.
+Über den Autor
+Ondřej Kriška
+Ich baue Webseiten und Anwendungen nach Maß. Allein, mit eigenem Code.
+Achtzehn Jahre habe ich in der Logistik von Toyota gearbeitet. Heute baue ich Webseiten, Onlineshops und Anwendungen nach Maß für kleine und mittlere Firmen. Den Preis nenne ich vorab und Sie sprechen direkt mit mir.
+LinkedIn
+Ondřej schreiben
+Geht es um eine Webseite oder eine Anwendung?
+Schreiben Sie mir, was Sie brauchen. Ich melde mich innerhalb von zwei Werktagen und sage Ihnen, ob ich helfen kann.
+Ondřej schreiben
+Ich helfe Unternehmern, in der Online-Welt erfolgreich zu sein
+Kostenlose Beratung vereinbaren
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+© 2026 ONDRAWEB — Alle Rechte vorbehalten.
++420 728 697 712
+Datenschutzerklärung
+Cookies
+Lassen Sie uns sprechen
+Kostenlose Beratung — unverbindlich, ohne Registrierung.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Beratungstermin auswählen
+Kostenlos. Unverbindlich.
+Darf ich ein paar Cookies setzen?
+Ich messe nur ein paar Zahlen darüber, was auf der Seite funktioniert. Kein Datenhandel.
+Details in den Richtlinien .
+Ablehnen
+Alle akzeptieren
+✕

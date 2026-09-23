@@ -20,18 +20,6 @@ Route::get('/robots.txt', RobotsController::class)->name('robots');
 
 /*
 |--------------------------------------------------------------------------
-| Cookie policy (OND-125) — společná napříč jazyky.
-|--------------------------------------------------------------------------
-| Banner v cookies.js linkuje na `/cookies` (bez locale prefixu).
-| Text na stránce zatím česky; pokud přibyde lokalizace, přidat slug
-| do config/slugs.php a přesunout pod localized routes group.
-*/
-Route::get('/cookies', [PageController::class, 'cookies'])
-    ->middleware(SetLocale::class)
-    ->name('cookies');
-
-/*
-|--------------------------------------------------------------------------
 | Localized routes
 |--------------------------------------------------------------------------
 | Default locale (cs) has no URL prefix.
@@ -47,9 +35,11 @@ Route::middleware(SetLocale::class)->group(function () use ($defaultLocale) {
     $s = config('slugs.' . $defaultLocale);
 
     Route::get('/',            [PageController::class, 'home'])->name("{$defaultLocale}.home");
+    Route::get($s['about'],    [PageController::class, 'about'])->name("{$defaultLocale}.about");
     Route::get($s['contact'],  [PageController::class, 'contact'])->name("{$defaultLocale}.contact");
     Route::get($s['price'],    [PageController::class, 'price'])->name("{$defaultLocale}.price");
     Route::get($s['privacy'],  [PageController::class, 'privacy'])->name("{$defaultLocale}.privacy");
+    Route::get($s['cookies'],  [PageController::class, 'cookies'])->name("{$defaultLocale}.cookies");
     Route::get($s['projects'], [PageController::class, 'projects'])->name("{$defaultLocale}.projects");
     Route::get($s['projects'] . '/{url}', [PageController::class, 'project'])->name("{$defaultLocale}.project");
     Route::get($s['blog'],     [PageController::class, 'blog'])->name("{$defaultLocale}.blog");
@@ -64,9 +54,11 @@ foreach (array_slice($locales, 1) as $locale) {
             $s = config('slugs.' . $locale);
 
             Route::get('/',            [PageController::class, 'home'])->name("{$locale}.home");
+            Route::get($s['about'],    [PageController::class, 'about'])->name("{$locale}.about");
             Route::get($s['contact'],  [PageController::class, 'contact'])->name("{$locale}.contact");
             Route::get($s['price'],    [PageController::class, 'price'])->name("{$locale}.price");
             Route::get($s['privacy'],  [PageController::class, 'privacy'])->name("{$locale}.privacy");
+            Route::get($s['cookies'],  [PageController::class, 'cookies'])->name("{$locale}.cookies");
             Route::get($s['projects'], [PageController::class, 'projects'])->name("{$locale}.projects");
             Route::get($s['projects'] . '/{url}', [PageController::class, 'project'])->name("{$locale}.project");
             Route::get($s['blog'],     [PageController::class, 'blog'])->name("{$locale}.blog");
@@ -82,8 +74,16 @@ foreach (array_slice($locales, 1) as $locale) {
 | SetLocale middleware runs so že validační hlášky se přeloží podle URL
 | segmentu (defaultně cs) — bez něj Laravel padne na config('app.locale').
 */
+// OND-264: `throttle` jako pojistka proti skutečné záplavě požadavků. Limit je
+// nad rámec běžného použití (člověk neodešle osm poptávek za minutu), takže
+// nikoho reálného neomezí.
+//
+// OND-280 upřesnění: na spam z 26. 7. tenhle limit NEstačí. Ty čtyři zprávy
+// přišly ze DVOU adres po dvou kusech (103.83.87.91 a 192.210.150.199, ověřeno
+// v produkční DB), a `throttle` klíčuje po IP — dvě zprávy na adresu se limitu
+// ani nedotknou. Proti tomuhle útoku funguje past v App\Support\Honeypot.
 Route::post('/contact', [ContactController::class, 'send'])
-    ->middleware(SetLocale::class)
+    ->middleware([SetLocale::class, 'throttle:8,1'])
     ->name('contact.send');
 
 /*
@@ -95,7 +95,7 @@ Route::post('/contact', [ContactController::class, 'send'])
 | existující lang/cs/validation.php (OND-100 QA blocker).
 */
 Route::post('/poptavka', [HomeLeadController::class, 'store'])
-    ->middleware(SetLocale::class)
+    ->middleware([SetLocale::class, 'throttle:8,1'])
     ->name('home.lead.store');
 
 /*
@@ -119,13 +119,18 @@ Route::get('/projects',       fn() => redirect('/projekty', 301));
 Route::get('/projects/{any}', fn(string $any) => redirect('/projekty/' . $any, 301))->where('any', '.*');
 
 // OND-130 (B2 §1, klíčová direktiva 4): CS routing fix.
-// `/blog` musí 301 → `/jak-na-to` (default CS slug), aby byla CS landing
+// `/blog` musí 301 → `/zapisky` (default CS slug), aby byla CS landing
 // stránka konzistentní s ostatními CS slugy. Bez explicitního redirectu
 // by fallback `/{slug}` níže prohledal non-default mapy a poslal uživatele
 // na `/en/blog` (první match v dict order) — to je SEO + UX regrese.
 // EN i DE mají vlastní /{locale}/blog prefix, takže není konflikt.
-Route::get('/blog',           fn() => redirect('/jak-na-to', 301));
-Route::get('/blog/{any}',     fn(string $any) => redirect('/jak-na-to/' . $any, 301))->where('any', '.*');
+Route::get('/blog',           fn() => redirect('/zapisky', 301));
+Route::get('/blog/{any}',     fn(string $any) => redirect('/zapisky/' . $any, 301))->where('any', '.*');
+
+// OND-266: CS slug sekce se změnil `jak-na-to` → `zapisky` (Ondřej 23. 9.).
+// Staré adresy musí držet 301, jsou v indexu i v odkazech zvenčí.
+Route::get('/jak-na-to',       fn() => redirect('/zapisky', 301));
+Route::get('/jak-na-to/{any}', fn(string $any) => redirect('/zapisky/' . $any, 301))->where('any', '.*');
 
 /*
 |--------------------------------------------------------------------------

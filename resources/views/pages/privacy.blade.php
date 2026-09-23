@@ -3,19 +3,49 @@
 @section('title', __('privacy.meta.title'))
 @section('description', __('privacy.meta.description'))
 
-@section('hide_prefooter') true @endsection
+{{-- OND-266 (5): `hide_prefooter` odebráno — právní stránky byly bez navigace
+     slepá ulička. Patička je teď stejná jako na /projekty, /cenik a /kontakt. --}}
 
 @section('content')
 
-{{-- Page hero --}}
-<div class="page-hero">
+{{-- OND-251 — vrstva hloubky VĚDOMĚ VYPNUTÁ (žádný obal `pd--depth`).
+     Totéž co u cookies: právní text, kde je čitelnost jediné kritérium.
+     Rozbor v §E hloubka.css. --}}
+
+{{-- Page hero — OND-130 iter 8: plán §3.1 page-mark + Plex Sans display (post OND-145 swap). --}}
+<div class="page-hero page-hero--privacy">
     <div class="container-site">
-        <h1>{{ __('privacy.heading') }}</h1>
+        {{-- OND-135 cleanup (2026-05-14): page_mark_index span odebrán jako
+             agency-portfolio artefakt per CEO PR #78/#80/#82/#83 precedent. --}}
+        <p class="page-hero__page-mark">
+            <span class="page-hero__page-mark-label">{{ __('privacy.hero.page_mark_label') }}</span>
+        </p>
+        <p class="page-hero__upline">{{ __('privacy.hero.upline') }}</p>
+        <h1 class="page-hero__heading">
+            {!! __('privacy.hero.heading_html') !!}
+        </h1>
+        <p class="page-hero__subline">{{ __('privacy.hero.subline') }}</p>
     </div>
 </div>
 
 <section class="section-wrapper">
     <div class="container-site">
+
+        {{-- TL;DR card — OND-130 iter 8: plain-language summary nad právním textem.
+             Sníží bounce ze stránky a respektuje, že většina návštěvníků hledá
+             rychlou odpověď. Detailní GDPR text následuje níž. --}}
+        <aside class="legal-tldr" data-reveal>
+            <p class="legal-tldr__eyebrow">{{ __('privacy.tldr.eyebrow') }}</p>
+            <ul class="legal-tldr__list">
+                @foreach (__('privacy.tldr.items') as $item)
+                <li>
+                    <x-icon.circle-check-big class="w-4 h-4 shrink-0" />
+                    <span>{{ $item }}</span>
+                </li>
+                @endforeach
+            </ul>
+        </aside>
+
         <article class="prose-content">
             {!! __('privacy.content') !!}
         </article>

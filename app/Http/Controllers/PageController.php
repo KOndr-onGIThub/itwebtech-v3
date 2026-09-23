@@ -26,7 +26,14 @@ class PageController extends Controller
                 ->values();
         }
 
+        // OND-231 (F3): prototypové větvení `?podpis=a|b|c|d` z OND-227 je pryč.
+        // Vítězná varianta D („Studio" / ACID) je od F3 rovnou `pages.home`.
         return view('pages.home', compact('featuredHomeProjects'));
+    }
+
+    public function about()
+    {
+        return view('pages.about');
     }
 
     public function contact()
@@ -78,55 +85,93 @@ class PageController extends Controller
     {
         $locale = App::getLocale();
 
+        $relations = [
+            'translations',
+            'screenshots.translations',
+            'tags.translations',
+            'outcomes.translations',
+        ];
+
+        // OND-209: nejdřív lokalizovaný slug (`/de/projekte/aufmerksamkeits-animation`),
+        // pak jazyk-neutrální (`portfolio_projects.slug`). Pořadí je důležité:
+        // neutrální slug drží i staré DE/EN adresy, ty se níž přesměrují 301.
         $project = PortfolioProject::published()
-            ->where('slug', $url)
-            ->with([
-                'translations',
-                'screenshots.translations',
-                'tags.translations',
-                'outcomes.translations',
-            ])
-            ->first();
+            ->whereHas('translations', function ($query) use ($locale, $url) {
+                $query->where('locale', $locale)->where('slug', $url);
+            })
+            ->with($relations)
+            ->first()
+            ?? PortfolioProject::published()
+                ->where('slug', $url)
+                ->with($relations)
+                ->first();
 
         if (! $project) {
             abort(404);
         }
 
+        // 301 na kanonickou adresu pro aktuální locale — staré indexované
+        // `/de/projekte/{cs-slug}` tím neztratí sílu odkazů.
+        $canonicalSlug = $project->slugFor($locale);
+        if ($canonicalSlug !== $url) {
+            return redirect()->route("{$locale}.project", ['url' => $canonicalSlug], 301);
+        }
+
         $translation = $project->translation($locale);
 
-        // Hreflang — slug je jazyk-neutrální, takže pro každý jazyk
-        // vygenerujeme stejný slug v příslušné jazykové routě.
+        // Hreflang — každý jazyk má vlastní slug (s fallbackem na neutrální).
         $hreflangs = [];
         foreach (['cs', 'en', 'de'] as $lang) {
-            $hreflangs[$lang] = route("{$lang}.project", ['url' => $project->slug]);
+            $hreflangs[$lang] = $project->detailUrl($lang);
         }
 
         // Související projekty: 3 kusy, stejná kategorie, vyloučit aktuální.
         // Pokud je < 3 v kategorii, doplníme z ostatních (featured první).
-        $sameCategory = PortfolioProject::published()
+        //
+        // OND-265 (audit OND-254): dřív se bralo prvních 2×3 z pevného pořadí,
+        // takže všech 14 webových detailů doporučovalo tutéž trojici a zbylých
+        // 11 projektů se z doporučení nedalo dostat. Teď se stejné pořadí bere
+        // jako kruh a každý detail ukáže tři projekty NÁSLEDUJÍCÍ za sebou —
+        // výběr je pořád deterministický (stejná URL = stejné karty, žádný
+        // rozjezd cache), ale napříč kategorií se prostřídají všechny.
+        $rotate = static function ($pool, $currentId, int $count = 3) {
+            $pool = $pool->values();
+            if ($pool->isEmpty()) {
+                return $pool;
+            }
+            // Aktuální projekt v poolu = začni hned za ním; když v něm není
+            // (doplňování z ostatních kategorií), odvoď start z jeho id, ať
+            // se i doplňky střídají místo pořád stejné dvojice.
+            $start = $pool->search(fn ($p) => $p->id === $currentId);
+            $start = $start === false ? $currentId % $pool->count() : $start + 1;
+
+            return collect(range(0, min($count, $pool->count()) - 1))
+                ->map(fn ($i) => $pool[($start + $i) % $pool->count()]);
+        };
+
+        $categoryPool = PortfolioProject::published()
             ->where('category', $project->category)
-            ->where('id', '!=', $project->id)
             ->with(['translations', 'screenshots'])
             ->orderByDesc('featured')
             ->orderBy('sort_order')
             ->orderByDesc('year')
-            ->limit(3)
             ->get();
 
-        if ($sameCategory->count() < 3) {
-            $needed  = 3 - $sameCategory->count();
-            $excluded = $sameCategory->pluck('id')->push($project->id);
-            $extras  = PortfolioProject::published()
+        $relatedProjects = $rotate($categoryPool, $project->id)
+            ->reject(fn ($p) => $p->id === $project->id)
+            ->values();
+
+        if ($relatedProjects->count() < 3) {
+            $excluded = $relatedProjects->pluck('id')->push($project->id);
+            $extrasPool = PortfolioProject::published()
                 ->whereNotIn('id', $excluded)
                 ->with(['translations', 'screenshots'])
                 ->orderByDesc('featured')
                 ->orderBy('sort_order')
                 ->orderByDesc('year')
-                ->limit($needed)
                 ->get();
-            $relatedProjects = $sameCategory->concat($extras);
-        } else {
-            $relatedProjects = $sameCategory;
+            $extras = $rotate($extrasPool, $project->id, 3 - $relatedProjects->count());
+            $relatedProjects = $relatedProjects->concat($extras)->values();
         }
 
         return view('pages.project', compact(
@@ -140,8 +185,18 @@ class PageController extends Controller
 
     public function blog()
     {
-        $locale   = App::getLocale();
+        $locale = App::getLocale();
+
+        // OND-217: jen články s aktivním slugem v aktuální locale. Bez filtru
+        // sáhne `Article::slug()` po cs fallbacku a výpis odkáže na
+        // /de/blog/{cs-slug}, kde article() od OND-160 vrací 404 (kontrola
+        // kanonického slugu pro locale). Stejná logika jako
+        // SitemapGenerator::collectArticleUrls() — locale bez vlastních slugů
+        // vyjde prázdná a zobrazí se `blog.empty` místo mrtvých odkazů.
         $articles = Article::where('published', true)
+            ->whereHas('slugs', fn ($query) => $query
+                ->where('locale', $locale)
+                ->where('active', true))
             ->orderBy('position')
             ->with(['translations', 'slugs'])
             ->get();
@@ -153,8 +208,16 @@ class PageController extends Controller
     {
         $locale = App::getLocale();
 
+        // OND-160: validate slug per locale (cross-slug duplicate content fix).
+        // Slug musí patřit článku v aktuální locale. Pokud slug existuje,
+        // ale patří jiné locale, 301 → kanonický slug pro current locale.
+        // Bez tohoto check byl každý článek dostupný pod ~3 slug variantami
+        // × 3 locale prefixy se self-canonical → duplicate content v Google.
+        // OND-204: neaktivní slugy se dohledávají taky — jsou to staré adresy
+        // článků, které dostaly nový slug. Aktivní má přednost, pak se níž
+        // 301 přesměruje na kanonickou adresu. Bez toho by starý slug 404oval.
         $slugRecord = ArticleSlug::where('slug', $slug)
-            ->where('active', true)
+            ->orderByDesc('active')
             ->first();
 
         if (! $slugRecord) {
@@ -167,7 +230,23 @@ class PageController extends Controller
             ->first();
 
         if (! $article) {
+            return $this->redirectRemovedArticle($slugRecord->article_id, $locale);
+        }
+
+        // Aktivní slug pro aktuální locale — bez fallbacku na cs, protože
+        // pokud článek nemá svou jazykovou variantu, nesmí být dostupný pod
+        // cizí locale prefix (jinak by /en/blog/cs-slug renderoval cs obsah).
+        $canonical = $article->slugs
+            ->where('locale', $locale)
+            ->where('active', true)
+            ->first();
+
+        if (! $canonical) {
             abort(404);
+        }
+
+        if ($canonical->slug !== $slug) {
+            return redirect()->route("{$locale}.article", ['slug' => $canonical->slug], 301);
         }
 
         $translation = $article->translation($locale);
@@ -181,5 +260,44 @@ class PageController extends Controller
         }
 
         return view('pages.article', compact('article', 'translation', 'locale', 'hreflangs'));
+    }
+
+    /**
+     * OND-204: mapa přesměrování pro články stažené z blogu (published = 0).
+     *
+     * Klíč = id staženého článku, hodnota = id článku, na který má stará
+     * adresa vést. Co v mapě není, jde na výpis blogu. Mapuje se na id,
+     * ne na slug, aby přesměrování sedělo i v EN/DE verzi webu.
+     *
+     * Zdroj: dokument `blog-texty` (OND-203), tabulka „Mapa přesměrování".
+     * 4 = „Co si připravit, než oslovíte vývojáře webu".
+     */
+    private const REMOVED_ARTICLE_REDIRECTS = [
+        7  => 4,  // Design nebo obsah?
+        8  => 4,  // Web, který převádí návštěvníky na zákazníky
+        11 => 4,  // Jak vytvořit úspěšnou webovou stránku
+    ];
+
+    /**
+     * Stažený článek: adresa zůstává funkční a 301 vede na nejbližší
+     * relevantní stránku. Nikdy 404 — staré adresy mají odkazy zvenčí.
+     */
+    private function redirectRemovedArticle(int $articleId, string $locale)
+    {
+        $targetId = self::REMOVED_ARTICLE_REDIRECTS[$articleId] ?? null;
+
+        if ($targetId) {
+            $targetSlug = Article::where('id', $targetId)
+                ->where('published', true)
+                ->with('slugs')
+                ->first()
+                ?->slug($locale);
+
+            if ($targetSlug) {
+                return redirect()->route("{$locale}.article", ['slug' => $targetSlug], 301);
+            }
+        }
+
+        return redirect()->to(lroute('blog', $locale), 301);
     }
 }

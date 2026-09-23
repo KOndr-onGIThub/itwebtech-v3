@@ -38,5 +38,30 @@ class EnsureArticlesSeededSeeder extends Seeder
 
         $after = DB::table('articles')->count();
         $this->command->info("[ensure-articles] articles count po importu: {$after}");
+
+        // OND-204: dumpy v database/sql/ jsou stará data z itwebtech.cz.
+        // Na čerstvé DB je hned po importu přepíšeme aktuálním zněním blogu —
+        // na existující DB dělá totéž migrace 2026_09_16_110000_rewrite_blog_content.
+        $this->call(BlogContentSeeder::class);
+
+        // OND-219: dumpy DE překlady ani DE slugy vůbec neobsahují, takže
+        // /de/blog by bez tohohle zůstal prázdný (filtr z OND-217).
+        // Na existující DB dělá totéž migrace 2026_09_16_120000_seed_de_blog_content.
+        $this->call(BlogContentDeSeeder::class);
+
+        // OND-267 + OND-275: EN texty jsou v dumpech pořád ze starého importu
+        // (jiná osnova než přepsaná CS/DE verze). Na existující DB dělají
+        // totéž migrace 2026_09_23_100300_ond267_en_blog_obsah
+        // a 2026_09_23_100400_ond275_en_blog_obsah.
+        $this->call(BlogContentEnSeeder::class);
+
+        // OND-286 + OND-289: musí běžet až poslední. Dumpy i seedery výš nesou
+        // absolutní odkazy na starou doménu — jak do sekce článků
+        // (`itwebtech.cz/jak-na-to/...`), tak na `/contact`, `/price`
+        // a `/projects`; tenhle seeder je uklízí nad hotovým obsahem.
+        // Na existující DB dělají totéž migrace
+        // 2026_09_23_110000_ond286_odkazy_na_starou_domenu
+        // a 2026_09_23_140000_ond289_odkazy_mimo_sekci_clanku.
+        $this->call(BlogLegacyDomainLinksSeeder::class);
     }
 }

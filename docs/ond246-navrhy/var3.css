@@ -1,0 +1,505 @@
+/* ===========================================================================
+   OND-246 — varianta 3: „Vrstvy"
+   Stránka není jedna černá plocha, ale stoh desek z jednoho tmavého materiálu.
+   Hloubka nevzniká světlem ani barvou, ale HMOTOU: každá sekce je vlastní deska
+   s vlastní hladinou jasu, osvětlenou horní hranou a povrchem, který je vidět,
+   jen když po něm přejde světlo.
+
+   Pravidla, která tahle varianta dodržuje:
+   - ani jeden nový barevný prvek; acid #D8FF3A zůstává přesně tam, kde byl
+   - všechny hladiny leží v rozmezí --color-bg-base (#0A0A0B) .. --color-bg-elev-1
+     (#131316) a drží stejný neutrální odstín (R=G, B o 1–3 vyšší) jako základ
+   - ostré hrany, žádné zaoblení, žádné glow koule
+   - nic nestartuje v opacity: 0
+   - pohyb: max. 2px dosednutí desky, jinak statika
+   =========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   1. ŽEBŘÍK HLADIN
+   Sedm stupňů jednoho materiálu. Rozdíl mezi sousedními deskami je nejvýš
+   5–6 jednotek jasu — dost, aby byl předěl znát, málo na to, aby stránka
+   vypadala pruhovaně. Úroveň se nastavuje přepsáním --color-bg-base, protože
+   .pd-section, .pd-strip, .pd-clients i .pd-hero__photo:before z něj už dnes
+   čtou — hladina se tím propíše i do přechodu pod hero fotkou.
+--------------------------------------------------------------------------- */
+.pd {
+    --pd-plate-0: #08080a; /* dno stohu */
+    --pd-plate-1: #09090b;
+    --pd-plate-2: #0a0a0c;
+    --pd-plate-3: #0c0c0f;
+    --pd-plate-4: #0d0d10;
+    --pd-plate-5: #0f0f12;
+    --pd-plate-6: #101013;
+    --pd-plate-7: #121215;
+    --pd-plate-8: #131316; /* = --color-bg-elev-1, vrchol stohu */
+
+    /* světlo dopadá shora — z toho se odvozuje hrana i vnitřní stín */
+    --pd-lit: 242, 240, 234; /* --color-fg-primary jako RGB, bez nové barvy */
+
+    /* výchozí hodnoty hrany; jednotlivé desky si je přepisují */
+    --pd-edge: 0.04; /* jas osvětlené horní hrany desky */
+    --pd-drop: 0.26; /* hloubka tmavého spádu pod hranou */
+    --pd-drop-len: 34px; /* jak daleko spád dobíhá */
+
+    /* výchozí těžiště povrchového světla (bez kurzoru / na dotyku) */
+    --mx: 30%;
+    --my: 0%;
+    --pd-lightsize: 560px;
+}
+
+/* ---------------------------------------------------------------------------
+   2. HRANA DESKY
+   Nahrazuje dnešní tvrdý border-top: 1px solid #26262B. Místo linky je tu
+   profil materiálu: 1px osvětlená hrana (světlo shora), pod ní úzký tmavý
+   spád (tloušťka desky ve stínu), který do ~34px zmizí do plochy.
+   Desky, které oproti předchozí klesají, mají hranu potlačenou a spád delší —
+   čtou se jako podklad, nad kterým předchozí deska přečnívá.
+--------------------------------------------------------------------------- */
+.pd-section,
+.pd-strip,
+.pd-clients,
+.pd-hero {
+    position: relative;
+    isolation: isolate; /* povrchové zrno se míchá jen uvnitř své desky */
+}
+
+.pd-section,
+.pd-strip {
+    border-top-color: transparent; /* linku nahrazuje profil hrany, rozměr zůstává */
+}
+
+.pd-section::before,
+.pd-strip::before,
+.pd-clients::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: var(--pd-drop-len);
+    pointer-events: none;
+    z-index: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(var(--pd-lit), var(--pd-edge)) 0,
+        rgba(var(--pd-lit), var(--pd-edge)) 1px,
+        rgba(0, 0, 0, var(--pd-drop)) 1px,
+        rgba(0, 0, 0, calc(var(--pd-drop) * 0.34)) 7px,
+        rgba(0, 0, 0, 0) var(--pd-drop-len)
+    );
+}
+
+/* ---------------------------------------------------------------------------
+   3. POVRCH POD SVĚTLEM
+   Vrstva je jedno jediné velmi slabé bílé světlo (0.04 alfa, žádná barva),
+   které je proseté dvěma maskami najednou:
+     - zrnem materiálu (SVG feTurbulence, 200px dlaždice),
+     - měkkým kruhem tam, kde po desce právě přejde světlo.
+   Na ploché desce mimo světlo je vrstva úplně odmaskovaná, takže není vidět
+   vůbec nic. Uvnitř kruhu se objeví struktura materiálu — proto „povrch pod
+   světlem", ne „svit". Na tmavém podkladu tohle funguje, zatímco soft-light
+   zrno by bylo neviditelné.
+   S myší se ohnisko drží kurzoru (--mx/--my z var3.js, throttlované rAF),
+   bez myši zůstává statické a u každé sekce jinde, takže stránka není
+   jeden efekt donekonečna.
+--------------------------------------------------------------------------- */
+.pd-section::after,
+.pd-hero::after,
+.pd-strip::after,
+.pd-clients::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+    background-color: rgba(var(--pd-lit), var(--pd-sheen, 0.055));
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E"),
+        radial-gradient(
+            var(--pd-lightsize) circle at var(--mx) var(--my),
+            #000 0%,
+            rgba(0, 0, 0, 0.62) 40%,
+            transparent 82%
+        );
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E"),
+        radial-gradient(
+            var(--pd-lightsize) circle at var(--mx) var(--my),
+            #000 0%,
+            rgba(0, 0, 0, 0.62) 40%,
+            transparent 82%
+        );
+    -webkit-mask-size: 200px 200px, 100% 100%;
+    mask-size: 200px 200px, 100% 100%;
+    /* první vrstva (zrno) se protne s druhou (kruh světla); druhá se jen položí */
+    -webkit-mask-composite: source-in, source-over;
+    mask-composite: intersect, add;
+}
+
+/* obsah desky leží nad zrnem i nad hranou */
+.pd-section > .container-site,
+.pd-strip > .container-site,
+.pd-clients > .container-site {
+    position: relative;
+    z-index: 2;
+}
+
+/* ---------------------------------------------------------------------------
+   4. DOSEDNUTÍ DESKY
+   Jediný pohyb v celé variantě: obsah desky dosedne o 2 px do své hladiny.
+   Nic nestartuje v opacity: 0, nic nebliká. Bez JS deska prostě leží o 2 px níž.
+--------------------------------------------------------------------------- */
+.pd-section > .container-site {
+    transform: translate3d(0, 2px, 0);
+    transition: transform var(--duration-macro) var(--ease-out);
+}
+.pd-section.is-plate-set > .container-site {
+    transform: none;
+}
+
+/* ===========================================================================
+   5. HLADINY JEDNOTLIVÝCH DESEK
+   Pořadí sekcí uvnitř div.pd je pevné (17 sekcí, ověřeno v DOM), takže
+   nth-of-type je bezpečný; kde existuje skutečné id, používám je.
+   =========================================================================== */
+
+/* --- HERO — dno stohu ------------------------------------------------------
+   Nejtmavší deska stránky. Fotka i bílý titulek tím dostanou největší možný
+   kontrast a acid podpis a CTA září nejvíc právě tady. Hero nemá horní hranu,
+   protože nad ním nic neleží. Světlo na povrchu je staticky vlevo nahoře —
+   ve stejném rohu, odkud je nasvícený i obličej na fotce.                    */
+.pd > section:nth-of-type(1),
+.pd-hero {
+    --color-bg-base: var(--pd-plate-0);
+    --mx: 22%;
+    --my: 12%;
+    --pd-lightsize: 760px;
+}
+
+/* --- 02 WEBY, KTERÉ BĚŽÍ V PRAXI — vitrína ---------------------------------
+   Deska zřetelně vystoupí nad hero (+5), protože je to první důkaz. Dlaždice
+   v ní jsou naopak zapuštěné (viz bod 6) — deska nahoře, výřezy dole: přesně
+   to dělá z řady screenshotů vitrínu místo tří plovoucích obrázků.           */
+.pd > section:nth-of-type(2) {
+    --color-bg-base: var(--pd-plate-4);
+    --pd-edge: 0.075;
+    --pd-drop: 0.3;
+    --mx: 50%;
+    --my: 30%;
+    --pd-lightsize: 700px;
+}
+
+/* --- pd-strip (hodnocení) — tenká nízká deska ------------------------------
+   Jen jeden řádek popisku, ne obsah. Klesá pod vitrínu, hranu má potlačenou
+   a spád delší — vypadá jako spára mezi dvěma velkými deskami.               */
+.pd > section:nth-of-type(3) {
+    --color-bg-base: var(--pd-plate-2);
+    --pd-edge: 0.014;
+    --pd-drop: 0.42;
+    --pd-drop-len: 22px;
+    --mx: 16%;
+    --my: 50%;
+    --pd-lightsize: 420px;
+}
+
+/* --- pd-clients (jména klientů) — nejnižší deska ---------------------------
+   Tichá řada jmen. Nejnižší hladina v horní polovině stránky; spolu se stripem
+   tvoří jednu úzkou prohlubeň, ze které se dál stoupá.                        */
+.pd > section:nth-of-type(4) {
+    --color-bg-base: var(--pd-plate-1);
+    --pd-edge: 0.01;
+    --pd-drop: 0.3;
+    --pd-drop-len: 18px;
+    --mx: 30%;
+    --my: 50%;
+    --pd-lightsize: 420px;
+}
+
+/* --- 03 JAK WEBY STAVÍM — podloží ------------------------------------------
+   Argumentační sekce bez vizuálů. Střední, klidná hladina: podloží, na kterém
+   stojí zbytek stránky. Světlo staticky vlevo, u velkých acid číslic .pd-issue__num. */
+.pd > section:nth-of-type(5) {
+    --color-bg-base: var(--pd-plate-3);
+    --pd-edge: 0.05;
+    --pd-drop: 0.22;
+    --mx: 24%;
+    --my: 40%;
+}
+
+/* --- 04 CO STAVÍM — totéž podloží o stupínek výš ---------------------------
+   Patří k sekci 03 (co dělám × jak to dělám), proto jen +1 jednotka: dvě desky
+   ze stejné vrstvy, mezi nimi je vidět spára, ne skok.                        */
+.pd > section:nth-of-type(6) {
+    --color-bg-base: var(--pd-plate-4);
+    --pd-edge: 0.038;
+    --pd-drop: 0.18;
+    --mx: 50%;
+    --my: 34%;
+}
+
+/* --- 05 REALIZOVANÉ PROJEKTY — druhá vitrína -------------------------------
+   Stejná role jako sekce 02, proto o stupínek výš a se stejně zapuštěnými
+   vizuály: obě „důkazní" sekce se tím rýmují a čtou se jako jeden typ desky.  */
+.pd > section:nth-of-type(7) {
+    --color-bg-base: var(--pd-plate-5);
+    --pd-edge: 0.05;
+    --pd-drop: 0.2;
+    --mx: 62%;
+    --my: 26%;
+    --pd-lightsize: 720px;
+}
+
+/* --- 06 CENÍK — vrchol stohu -----------------------------------------------
+   Nejvyšší deska stránky (--color-bg-elev-1). Tady se rozhoduje, takže je
+   fyzicky nejblíž ke čtenáři. Hrana je nejsvětlejší na celé stránce.          */
+#section-price {
+    --color-bg-base: var(--pd-plate-8);
+    --pd-edge: 0.1;
+    --pd-drop: 0.34;
+    --pd-drop-len: 40px;
+    --mx: 50%;
+    --my: 22%;
+    --pd-lightsize: 820px;
+}
+
+/* --- 07 PROČ JÁ — sestup z vrcholu -----------------------------------------
+   Po ceníku se stránka vrací dolů. Klidná deska, do které je zapuštěné video
+   (viz bod 6) — osobní část, ne prodejní.                                     */
+.pd > section:nth-of-type(9) {
+    --color-bg-base: var(--pd-plate-4);
+    --pd-edge: 0.016;
+    --pd-drop: 0.46;
+    --pd-drop-len: 48px;
+    --mx: 28%;
+    --my: 34%;
+}
+
+/* --- 08 POD KAPOTOU — pohled dovnitř ---------------------------------------
+   Nejhlubší deska v dolní polovině stránky, na úrovni hero. Technický obsah:
+   díváte se pod povrch, tak jste i vizuálně níž než kdekoli jinde.            */
+.pd > section:nth-of-type(10) {
+    --color-bg-base: var(--pd-plate-0);
+    --pd-edge: 0.012;
+    --pd-drop: 0.5;
+    --pd-drop-len: 56px;
+    --mx: 50%;
+    --my: 44%;
+    --pd-lightsize: 640px;
+}
+
+/* --- 09 POSTUP — schody ----------------------------------------------------
+   Jediná sekce, kde desky nejsou celé: každý ze 4 kroků má vlastní tenkou desku
+   o stupínek výš než předchozí. Postup tím fyzicky stoupá od první zprávy ke
+   spuštění. Sekce sama leží nízko, aby bylo kam stoupat.                      */
+#jak-pracuji {
+    --color-bg-base: var(--pd-plate-2);
+    --pd-edge: 0.045;
+    --pd-drop: 0.2;
+    --mx: 22%;
+    --my: 10%;
+    --pd-lightsize: 900px;
+    overflow: clip; /* aby plné desky kroků nepřetekly přes okraj okna */
+}
+
+#jak-pracuji .pd-step {
+    position: relative;
+    isolation: isolate;
+    border-top-color: transparent;
+}
+/* deska kroku je přetažená přes celou šířku okna, ne jen přes container */
+#jak-pracuji .pd-step::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -1px;
+    bottom: 0;
+    left: -50vw;
+    right: -50vw;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(var(--pd-lit), 0.055) 0,
+            rgba(var(--pd-lit), 0.055) 1px,
+            rgba(0, 0, 0, 0.28) 1px,
+            rgba(0, 0, 0, 0.07) 8px,
+            rgba(0, 0, 0, 0) 30px
+        ),
+        var(--pd-step-plate, transparent);
+}
+#jak-pracuji .pd-step:nth-child(1) {
+    --pd-step-plate: var(--pd-plate-1);
+}
+#jak-pracuji .pd-step:nth-child(2) {
+    --pd-step-plate: var(--pd-plate-3);
+}
+#jak-pracuji .pd-step:nth-child(3) {
+    --pd-step-plate: var(--pd-plate-5);
+}
+#jak-pracuji .pd-step:nth-child(4) {
+    --pd-step-plate: var(--pd-plate-7);
+}
+
+/* --- 10 REFERENCE — lidská svědectví ---------------------------------------
+   Vystoupená deska: cizí hlasy mají být blíž ke čtenáři než moje argumenty.
+   „Teplo" je tu udělané jen jasem, ne odstínem — žádná nová barva.            */
+#section-testimonials {
+    --color-bg-base: var(--pd-plate-6);
+    --pd-edge: 0.08;
+    --pd-drop: 0.26;
+    --mx: 50%;
+    --my: 18%;
+    --pd-lightsize: 860px;
+}
+
+/* --- 11 GENERÁTOR VERSUS VÁŠ BYZNYS — srovnávací podloží -------------------
+   Dvě kolonky proti sobě; deska klesá zpátky na úroveň podloží, aby se
+   nepřetahovala s referencemi. Světlo je posunuté doprava, k sloupci --mine.  */
+.pd > section:nth-of-type(13) {
+    --color-bg-base: var(--pd-plate-3);
+    --pd-edge: 0.014;
+    --pd-drop: 0.44;
+    --pd-drop-len: 44px;
+    --mx: 72%;
+    --my: 40%;
+}
+
+/* --- 12 18 LET V TOYOTĚ — druhé lidské svědectví ---------------------------
+   Stejná hladina jako Reference: obě sekce jsou osobní výpověď, takže obě
+   leží na stejné desce a stránka má symetrii, ne náhodné střídání.            */
+.pd > section:nth-of-type(14) {
+    --color-bg-base: var(--pd-plate-6);
+    --pd-edge: 0.08;
+    --pd-drop: 0.26;
+    --mx: 34%;
+    --my: 30%;
+    --pd-lightsize: 760px;
+}
+
+/* --- 13 ZÁRUKY — sestup k závěru -------------------------------------------
+   Krátká sekce, která uzavírá argumentaci. O stupínek níž než svědectví,
+   ale pořád nad podložím: je to slib, ne poznámka.                            */
+.pd > section:nth-of-type(15) {
+    --color-bg-base: var(--pd-plate-5);
+    --pd-edge: 0.02;
+    --pd-drop: 0.36;
+    --mx: 50%;
+    --my: 40%;
+}
+
+/* --- 14 FAQ — poslední překážka před formulářem ----------------------------
+   Klesá, aby poptávkový formulář za ní vystoupil tím výrazněji. Sekce je
+   dlouhá a rozbalovací, takže nízká, tichá hladina jí sedí.                   */
+#faq {
+    --color-bg-base: var(--pd-plate-3);
+    --pd-edge: 0.016;
+    --pd-drop: 0.42;
+    --pd-drop-len: 46px;
+    --mx: 26%;
+    --my: 16%;
+    --pd-lightsize: 800px;
+}
+
+/* --- 15 POPTÁVKA — druhá nejvyšší deska ------------------------------------
+   Hned po ceníku nejvyšší místo stránky: cíl celé cesty. Panel formuláře na ní
+   pak leží jako list papíru položený na desku (viz bod 6).                    */
+#poptavka {
+    --color-bg-base: var(--pd-plate-7);
+    --pd-edge: 0.095;
+    --pd-drop: 0.32;
+    --pd-drop-len: 40px;
+    --mx: 62%;
+    --my: 28%;
+    --pd-lightsize: 860px;
+}
+
+/* ===========================================================================
+   6. ZAPUŠTĚNÍ A VYSTOUPENÍ UVNITŘ DESKY
+   =========================================================================== */
+
+/* --- ZAPUŠTĚNÉ VÝŘEZY ------------------------------------------------------
+   Screenshoty webů, vizuály případovek a video nejsou obrázky položené na
+   desku, ale výřezy v ní: podklad je tmavší než deska, horní vnitřní stěna je
+   ve stínu, spodní vnitřní stěna zachytí světlo (1px světlá linka dole).
+   Tím obrázky sedí v ploše a neplavou.                                        */
+.pd-work__plate,
+.pd-case__visual,
+.pd-why__video {
+    position: relative;
+    background-color: var(--pd-plate-0);
+    /* vlasová linka zůstává stejně silná jako dnes, jen se rozdělí na
+       zastíněnou horní stěnu a osvětlenou spodní stěnu výřezu */
+    border-color: rgba(var(--pd-lit), 0.1);
+    border-top-color: rgba(var(--pd-lit), 0.035);
+    border-bottom-color: rgba(var(--pd-lit), 0.17);
+}
+.pd-work__plate::after,
+.pd-case__visual::after,
+.pd-why__video::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    box-shadow:
+        inset 0 7px 14px -7px rgba(0, 0, 0, 0.8),
+        inset 0 -1px 0 rgba(var(--pd-lit), 0.07);
+}
+/* hover zůstává beze změny — acid rámeček přebíjí hranu výřezu */
+.pd-work:hover .pd-work__plate,
+.pd-work:focus-visible .pd-work__plate,
+.pd-case__visual:hover,
+.pd-case__visual:focus-visible {
+    border-color: var(--pd-accent);
+}
+
+/* --- VYSTOUPENÝ SLOUPEC CENÍKU ---------------------------------------------
+   Nejčastější volba vystupuje i z nejvyšší desky stránky. Deska pod ním je
+   plný obdélník s ostrými rohy (žádná zaoblená karta), s osvětlenou horní
+   hranou a měkkým stínem dolů. Acid linka nad ním zůstává, jak byla.          */
+.pd-price__col--featured {
+    position: relative;
+    isolation: isolate;
+}
+.pd-price__col--featured::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: -20px -24px -24px -24px;
+    background: var(--color-bg-elev-2);
+    box-shadow:
+        inset 0 1px 0 rgba(var(--pd-lit), 0.09),
+        0 22px 34px -26px rgba(0, 0, 0, 0.9);
+}
+
+/* --- PANEL FORMULÁŘE — list papíru na desce --------------------------------
+   Vystoupí nad poptávkovou desku o dva stupně. Ostré hrany, osvětlená horní
+   hrana, jemný stín dolů — čte se jako list papíru položený na stůl.          */
+.pd-form__panel {
+    position: relative;
+    isolation: isolate;
+}
+.pd-form__panel::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: -28px -28px -28px -28px;
+    background: var(--pd-plate-8);
+    box-shadow:
+        inset 0 1px 0 rgba(var(--pd-lit), 0.085),
+        0 26px 40px -30px rgba(0, 0, 0, 0.95);
+}
+
+/* ===========================================================================
+   7. PŘÍSTUPNOST A VÝKON
+   =========================================================================== */
+
+/* Bez jemného ukazovátka (dotyk, klávesnice) zůstává povrchové světlo statické —
+   nic se nikam nehoní, efekt je pořád vidět. JS na takových zařízeních
+   pointermove vůbec nenavěsí. */
+
+@media (prefers-reduced-motion: reduce) {
+    .pd-section > .container-site {
+        transform: none;
+        transition: none;
+    }
+    /* statická část efektu (hladiny, hrany, zrno) zůstává */
+}

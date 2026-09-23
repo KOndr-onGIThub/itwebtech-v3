@@ -1,505 +1,152 @@
+{{-- ===================================================
+     HOMEPAGE — vizuální podpis ACID (OND-231 F3)
+
+     Historie: podpis vznikl v OND-227 jako prototyp `?podpis=d&barva=acid`,
+     dostavěn v OND-229 (F2). F3 ho povyšuje na produkční `/`: prototypové
+     větvení v PageController@home je pryč, varianty a/b/c smazané,
+     `noindex` odstraněn. Prefix tříd `pd-` (podpis D) zůstal — je to
+     jediný žijící vizuální jazyk webu, přejmenování by bylo jen šum
+     v diffu (styly viz resources/css/podpis.css).
+
+     Gramatika ACID:
+       - barva je signální inkoust: existuje jen tam, kde je akce nebo důraz
+       - vlasové linky místo karet a boxů, hodně negativního prostoru
+       - žádný obsah nestartuje v opacity: 0 (tj. žádné `data-reveal`)
+       - pohyb je přesný a účelový, ne dekorativní
+
+     F3 doplnil oproti prototypu D (parita s původní homepage):
+       loga klientů, sekce „Generátor versus váš byznys", původ principů
+       (Toyota), záruky, CTA na ceník, analytics-view kotvy a dispatch
+       konverzních eventů po úspěšném odeslání formuláře.
+
+     OND-269 (2026-09-23) — zkrácení podle auditu OND-254 (nález 7),
+     schváleno boardem 22. 9.: ze 16 sekcí zbylo 12. Sloučené sekce
+     projektů, „Generátor versus váš byznys" na dvě věty, Toyota uvnitř
+     „Proč já", zrušené „Dvě věci…", ceny jen jednou (duplicitní FAQ
+     otázka pryč), tři recenze místo šesti. Každý škrt má komentář
+     u místa, kde se stal.
+     =================================================== --}}
 @extends('layouts.app')
 
 @section('title', __('home.meta.title'))
 @section('description', __('home.meta.description'))
+{{-- Závěrečná výzva je poslední sekce stránky — generický prefooter
+     by za ní byl čtvrtá CTA v řadě (nález OND-201/5.8). --}}
+@section('hide_prefooter', 'true')
 
-@section('content')
+{{-- OND-145 P2 — preload display fontu (IBM Plex Sans Variable wght axis)
+     pro hero LCP. Variable woff2 nese weights 100–700 v jednom souboru.
+     latin + latin-ext kvůli CS diakritice; DE umlauty jsou v latin subsetu. --}}
+@push('preloads')
+    <link rel="preload" as="font" type="font/woff2" crossorigin
+          href="{{ Vite::asset('node_modules/@fontsource-variable/ibm-plex-sans/files/ibm-plex-sans-latin-wght-normal.woff2') }}">
+    <link rel="preload" as="font" type="font/woff2" crossorigin
+          href="{{ Vite::asset('node_modules/@fontsource-variable/ibm-plex-sans/files/ibm-plex-sans-latin-ext-wght-normal.woff2') }}">
+@endpush
 
-{{-- ===================================================
-     HERO
-     =================================================== --}}
-<section class="section-hero">
-    <x-responsive-image
-        path="hero/itwebtech_3.webp"
-        alt="Ondřej Kriška — webové stránky a aplikace"
-        sizes="100vw"
-        loading="eager"
-        fetchpriority="high"
-        classPicture="section-hero__bg-picture"
-        classImg="section-hero__bg-img"
-    />
-
-    <div class="container-site section-hero__inner">
-        <div class="section-hero__content">
-            {{-- OND-135 P2 (plán §3.1) — page-mark eyebrow s indexem.
-                 Nahrazuje T08 eyebrow „Webové stránky a aplikace na míru"
-                 (přesunut do meta/intro v dolních sekcích). --}}
-            <p class="section-hero__page-mark">
-                <span class="section-hero__page-mark-label">{{ __('home.hero.page_mark_label') }}</span>
-                <span class="section-hero__page-mark-index" aria-hidden="true">{{ __('home.hero.page_mark_index') }}</span>
-            </p>
-
-            {{-- §3.1 upline (Fraunces muted, 40 px) — kontext před display headingem --}}
-            <p class="section-hero__upline">{{ __('home.hero.upline') }}</p>
-
-            <h1 class="section-hero__heading">
-                {{-- heading_html obsahuje <br> a <em> pro key-word amber emphasis.
-                     Copy je owned by Content Writer (OND-136 P3) — provizorně
-                     plněno per plán §3.1, P3 ladí finální tone v CS/EN/DE. --}}
-                {!! __('home.hero.heading_html') !!}
-            </h1>
-
-            <p class="section-hero__subline">{{ __('home.hero.subline') }}</p>
-
-            <div class="section-hero__actions">
-                {{-- OND-130 (B2 §1, klíčová direktiva 3 + plán §3.1):
-                     V hero **jediný** primary CTA „Chci nezávaznou nabídku".
-                     Reservanto (Calendly-style booking) zůstává jako sekundární CTA
-                     v sekci „Jak pracuji" a v final CTA — v hero by soutěžil
-                     o pozornost a rozmělnil primary message. Telefon ponechán
-                     jako lehký text-link (ne button). --}}
-                <a
-                    href="#{{ __('home.anchors.poptavka') }}"
-                    class="btn btn-primary"
-                    data-analytics="hero_cta_primary_click"
-                >
-                    {{ __('home.hero.cta_primary') }}
-                    <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-                </a>
-                <x-phone-cta class="section-hero__phone-link" :label="__('home.hero.phone_label')" />
-            </div>
-        </div>
-
-        {{-- T20 — Foto Ondřeje v hero (polo-portrét vpravo, desktop only).
-             Decision A1 (OND-102): používáme existující ondrej_kriska.jpg.
-             Mobile: skryto (preferujeme compact hero nad foldem). --}}
-        <div class="section-hero__portrait" aria-hidden="true">
-            <x-responsive-image
-                path="about/ondrej_kriska.jpg"
-                alt="{{ __('home.why_me.photo_alt') }}"
-                sizes="(min-width: 1024px) 360px, 0px"
-                loading="eager"
-                fetchpriority="high"
-                classPicture="section-hero__portrait-picture"
-                classImg="section-hero__portrait-img"
-            />
-        </div>
-    </div>
-</section>
-
-{{-- ===================================================
-     SOCIAL PROOF BAR
-     =================================================== --}}
-<section class="section-wrapper section-alt section-social-proof" aria-label="Klienti">
-    <div class="container-site">
-        <ul class="social-proof-bar" aria-label="{{ __('home.social_proof.rating_aria') }}">
-            <li class="social-proof-bar__item">
-                <span class="social-proof-bar__stars" aria-hidden="true">★★★★★</span>
-                <span class="social-proof-bar__value">{{ __('home.social_proof.rating_value') }}</span>
-                <span class="social-proof-bar__meta">{{ __('home.social_proof.reviews') }}</span>
-            </li>
-            <li class="social-proof-bar__item">{{ __('home.social_proof.projects') }}</li>
-            <li class="social-proof-bar__item">{{ __('home.social_proof.experience') }}</li>
-            <li class="social-proof-bar__item">{{ __('home.social_proof.response') }}</li>
-        </ul>
-
-        <div class="brands-grid">
-            @foreach (__('home.social_proof.brands') as $brand)
-            <div class="brand-item">
-                @if ($brand['image'])
-                    {{-- OND-123: brand loga přes <x-responsive-image> → AVIF/WebP varianty.
-                         Předtím se servíroval ~278×100 PNG jen pro 105×38 displej (PSI image audit).
-                         Sizes hint je úzký (do 120 CSS px), takže browser vezme nejmenší AVIF variantu. --}}
-                    <x-responsive-image
-                        :path="'brands/' . $brand['image']"
-                        :alt="$brand['name']"
-                        sizes="120px"
-                        loading="lazy"
-                        decoding="async"
-                        width="120"
-                        height="48"
-                    />
-                @else
-                    <span class="brand-item__name">{{ $brand['name'] }}</span>
-                @endif
-            </div>
-            @endforeach
-        </div>
-    </div>
-</section>
-
-{{-- ===================================================
-     PROBLÉMY NA TRHU (T16 — 3 karty po Sprint 2 P1)
-     =================================================== --}}
-<section class="section-wrapper" data-reveal>
-    <div class="container-site">
-        <header class="section-header">
-            <h2>{{ __('home.problems.heading') }}</h2>
-        </header>
-
-        <ol class="pain-list">
-            @foreach (__('home.problems.items') as $i => $item)
-            <li class="pain-item" data-reveal style="transition-delay: {{ $i * 90 }}ms">
-                <span class="pain-item__num" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
-                <div class="pain-item__body">
-                    <h3>{{ $item['heading'] }}</h3>
-                    <p>{{ $item['text'] }}</p>
-                    @if (!empty($item['quote_text']))
-                    <blockquote class="citation-inline">
-                        <p class="citation-inline__text">{{ $item['quote_text'] }}</p>
-                        <footer class="citation-inline__footer">
-                            <span class="citation-inline__avatar" aria-hidden="true">{{ mb_substr($item['quote_author'], 0, 1) }}</span>
-                            <cite class="citation-inline__author">
-                                <strong>{{ $item['quote_author'] }}</strong>
-                            </cite>
-                        </footer>
-                    </blockquote>
-                    @endif
-                </div>
-            </li>
-            @endforeach
-        </ol>
-
-        <div class="problems-transition" data-reveal>
-            <strong>{{ __('home.problems.transition_heading') }}</strong>
-            <p>{{ __('home.problems.transition_text') }}</p>
-        </div>
-    </div>
-</section>
-
-{{-- ===================================================
-     SERVICES — primary (weby, aplikace, e-shopy)
-     OND-103 §4.4 — primární služby s kotvou „od 20 000 Kč"
-     Pořadí dle plánu §3 (OND-118): po Pain, před cenovou kotvou.
-     =================================================== --}}
-<section class="section-wrapper section-alt" data-reveal>
-    <div class="container-site">
-        <header class="section-header">
-            <h2>{{ __('home.services.heading_primary') }}</h2>
-        </header>
-
-        @php
-        $primaryServiceIcons = [
-            'weby'     => 'layers',
-            'aplikace' => 'boxes',
-            'eshop'    => 'store',
-        ];
-        @endphp
-
-        <div class="services-grid services-grid--primary" data-reveal-group>
-            @foreach (['weby','aplikace','eshop'] as $key)
-            <article class="service-card service-card--primary">
-                <x-dynamic-component :component="'icon.' . $primaryServiceIcons[$key]" class="w-8 h-8 service-card__icon" />
-                <h3>{{ __("home.services.primary.{$key}.title") }}</h3>
-                <p>{{ __("home.services.primary.{$key}.description") }}</p>
-                <ul class="service-card__bullets">
-                    @foreach (__("home.services.primary.{$key}.bullets") as $bullet)
-                    <li>{{ $bullet }}</li>
-                    @endforeach
-                </ul>
-                <p class="service-card__price">{{ __("home.services.primary.{$key}.price") }}</p>
-            </article>
-            @endforeach
-        </div>
-
-        {{-- T14 — Inline odkaz na doplňkové služby (SEO/design/social) místo samostatné sekce. --}}
-        <p class="services-secondary-inline" data-reveal>
-            {!! __('home.services.secondary_inline', [
-                'pricing_link' => '<a href="' . lroute('price') . '">' . e(__('home.services.secondary_inline_pricing')) . '</a>',
-                'contact_link' => '<a href="#' . __('home.anchors.poptavka') . '">' . e(__('home.services.secondary_inline_contact')) . '</a>',
-            ]) !!}
-        </p>
-    </div>
-</section>
-
-{{-- ===================================================
-     T08 — CENOVÁ KOTVA
-     Plán §4.7 / §3 (OND-118). Mezi Primary services a Proč já.
-     =================================================== --}}
-<section id="section-price" class="section-wrapper" data-reveal data-analytics-view="price_anchor_view">
-    <div class="container-site">
-        <header class="section-header">
-            <h2>{{ __('home.price_anchor.heading') }}</h2>
-            <p class="section-header__desc">{{ __('home.price_anchor.intro') }}</p>
-        </header>
-
-        <div class="price-anchor-grid" data-reveal-group>
-            @foreach (__('home.price_anchor.items') as $i => $item)
-            <article class="price-anchor-card" data-reveal style="transition-delay: {{ $i * 80 }}ms">
-                <h3 class="price-anchor-card__title">{{ $item['title'] }}</h3>
-                <p class="price-anchor-card__price">{{ $item['price'] }}</p>
-                <p class="price-anchor-card__desc">{{ $item['desc'] }}</p>
-            </article>
-            @endforeach
-        </div>
-
-        <div class="section-footer-cta">
-            <a href="{{ lroute('price') }}" class="btn btn-secondary" data-analytics="price_anchor_cta_click">
-                {{ __('home.price_anchor.cta') }}
-            </a>
-        </div>
-    </div>
-</section>
-
-{{-- ===================================================
-     T09 — PROČ JÁ (sjednoceno z About + Advantages)
-     Plán §4.8. 2-sloupcový layout: foto + bio | 4 advantages 2×2.
-     =================================================== --}}
-<section class="section-wrapper section-alt" data-reveal>
-    <div class="container-site">
-        <header class="section-header">
-            <h2>{{ __('home.why_me.heading') }}</h2>
-        </header>
-
-        <div class="why-me-layout">
-            <div class="why-me-bio" data-reveal>
-                <div class="why-me-photo">
-                    {{-- OND-123 follow-up: tighter sizes (320 CSS px max na mobile)
-                         — PSI servoval 768×1152 pro displej 358×537 (úspora 16 KiB). --}}
-                    <x-responsive-image
-                        path="about/ondrej_kriska.jpg"
-                        alt="{{ __('home.why_me.photo_alt') }}"
-                        sizes="(min-width: 768px) 360px, 320px"
-                        loading="lazy"
-                        decoding="async"
-                        width="360"
-                        height="540"
-                        classImg="why-me-photo__img"
-                    />
-                </div>
-                <p class="why-me-bio__text">{{ __('home.why_me.bio') }}</p>
-            </div>
-
-            <div class="why-me-advantages" data-reveal-group>
-                @foreach (__('home.why_me.advantages') as $i => $adv)
-                <article class="why-me-advantage" data-reveal style="transition-delay: {{ $i * 80 }}ms">
-                    <h3 class="why-me-advantage__heading">{{ $adv['heading'] }}</h3>
-                    <p class="why-me-advantage__text">{{ $adv['text'] }}</p>
-                </article>
-                @endforeach
-            </div>
-        </div>
-    </div>
-</section>
-
-{{-- ===================================================
-     JAK PRACUJI
-     =================================================== --}}
-<section id="{{ __('home.anchors.how_i_work') }}" class="section-wrapper" data-reveal>
-    <div class="container-site">
-        <header class="section-header">
-            <h2>{{ __('home.how_i_work.heading') }}</h2>
-        </header>
-
-        <ol class="steps-list" data-reveal-group>
-            @foreach (__('home.how_i_work.steps') as $i => $step)
-            <li class="step-item">
-                <span class="step-number">{{ $i + 1 }}</span>
-                <div class="step-content">
-                    <h3>{{ $step['heading'] }}</h3>
-                    @if (!empty($step['time']))
-                    <p class="step-time">{{ $step['time'] }}</p>
-                    @endif
-                    <p>{{ $step['text'] }}</p>
-                    @if (!empty($step['quote_text']))
-                    <blockquote class="inline-quote">
-                        <p>{{ $step['quote_text'] }}</p>
-                        <footer>— {{ $step['quote_author'] }}</footer>
-                    </blockquote>
-                    @endif
-                    @if (!empty($step['note']))
-                    <p class="step-note">{{ $step['note'] }}</p>
-                    @endif
-                </div>
-            </li>
-            @endforeach
-        </ol>
-
-        {{-- T17 — CTA pod sekcí: vede rovnou ke kroku 1 (Reservanto). --}}
-        <div class="section-footer-cta steps-footer-cta" data-reveal>
-            <p class="steps-footer-cta__intro">{{ __('home.how_i_work.cta_intro') }}</p>
-            <x-booking.reservanto-widget :ctaText="__('home.how_i_work.cta_label')" />
-        </div>
-    </div>
-</section>
-
-{{-- ===================================================
-     REFERENCE KLIENTŮ (T10 — 6 karet vždy)
-     Curated 6 nejsilnějších testimonialů (per OND-101 §2.2, OND-118 T10).
-     Toyota (Pavel Baudyš) zůstává za feature flagem (publikační souhlas).
-     Pokud Toyota off → fallback Peter Vidlička (Yolk studio, dlouhodobý B2B).
-     =================================================== --}}
 @php
     $allTestimonials = collect(__('testimonials.items'));
-
+    // Toyota (Pavel Baudyš) je za feature flagem (publikační souhlas).
+    // Když je off → fallback Peter Vidlička (Yolk studio, dlouhodobý B2B).
     $homeTestimonialOrder = config('site.features.show_toyota_testimonial')
         ? ['Pavel Baudyš', 'Rostislav Toman', 'Stanislav Holcmann', 'Hana Jaskmanická', 'Ing. Ivo Štěpánek', 'Václav Pešice']
         : ['Peter Vidlička', 'Rostislav Toman', 'Stanislav Holcmann', 'Hana Jaskmanická', 'Ing. Ivo Štěpánek', 'Václav Pešice'];
-
+    // OND-269 (audit OND-254, nález 7): homepage vypisovala šest recenzí
+    // (908 px desktop / 1 784 px mobil). Tři stačí — zbytek je jedno
+    // kliknutí daleko na Google i Firmy.cz, na které odkazuje pás
+    // se social proof výš. Pořadí zůstává, mění se jen počet.
     $homeTestimonials = collect($homeTestimonialOrder)
         ->map(fn ($name) => $allTestimonials->firstWhere('name', $name))
         ->filter()
+        ->take(3)
         ->values();
 @endphp
 
-<section id="section-testimonials" class="section-wrapper section-alt section-wrapper--glow" data-reveal data-analytics-view="testimonial_view">
-    <div class="container-site">
-        <header class="section-header">
-            <h2>{{ __('home.testimonials.heading') }}</h2>
-        </header>
+@section('content')
+{{-- OND-246 — `pd--depth` zapíná vrstvu hloubky (resources/css/hloubka.css
+     + resources/js/hloubka.js); sundání téhle jedné třídy vrátí stránku
+     do původního stavu.
 
-        <div class="testimonials-grid" data-reveal-group>
-            @foreach ($homeTestimonials as $review)
-            <article class="testimonial-card">
-                <header class="testimonial-card__header">
-
-                    @php
-                        $publicLogos = ['makoplast.png'];
-                        $isPublic = in_array($review['image'], $publicLogos);
-                    @endphp
-
-                    @if ($isPublic)
-                        <img
-                            src="{{ asset('img/testimonials/' . $review['image']) }}"
-                            alt="{{ $review['company'] }}"
-                            loading="lazy"
-                            width="46"
-                            height="46"
-                            class="testimonial-avatar"
-                        >
-                    @else
-                        <x-responsive-image
-                            path="testimonials/{{ $review['image'] }}"
-                            alt="{{ $review['name'] }}"
-                            sizes="46px"
-                            loading="lazy"
-                            classImg="testimonial-avatar"
-                        />
-                    @endif
-
-                    <div class="testimonial-card__info">
-                        <h3>{{ $review['name'] }}</h3>
-                        <p>
-                            <strong>{{ $review['company'] }}</strong>
-                            @if ($review['role'])
-                            <br><span>{{ $review['role'] }}</span>
-                            @endif
-                        </p>
-                    </div>
-                </header>
-
-                @if (!empty($review['badge']))
-                <p class="testimonial-card__badge">{{ $review['badge'] }}</p>
-                @endif
-
-                <p class="testimonial-card__text">{{ $review['text'] }}</p>
-
-                @php
-                    $sourceIcons = [
-                        'google'   => 'google.png',
-                        'facebook' => 'fb.png',
-                        'firmy_cz' => 'firmy_cz.svg',
-                    ];
-                    $icon = $sourceIcons[$review['source']] ?? null;
-                @endphp
-                @if ($icon)
-                <footer class="testimonial-card__source">
-                    <img
-                        src="{{ asset('img/testimonials/' . $icon) }}"
-                        alt="{{ $review['source'] }}"
-                        loading="lazy"
-                        width="20"
-                        height="20"
-                    >
-                    <span class="testimonials-stars testimonials-stars--sm" aria-hidden="true">★★★★★</span>
-                </footer>
-                @endif
-            </article>
-            @endforeach
-        </div>
-    </div>
-</section>
+     OND-251 — `pd--depth-home` navíc pouští pravidla navázaná na POŘADÍ
+     sekcí téhle stránky (`> section:nth-child(N)` v §A). Podstránky mají
+     vlastní scope `pd--depth-sub` a adresují se přes `data-pdd`. Kdo sem
+     přidá nebo odebere sekci, musí přečíslovat nth-child v hloubka.css. --}}
+<div class="pd pd--depth pd--depth-home">
 
 {{-- ===================================================
-     TOYOTA — ODKUD POCHÁZEJÍ MÉ PRINCIPY
+     01 — HERO
+     Fotka „tak jak je" přes pravou část, text v negativním
+     prostoru vlevo, autogram. Tilt jen na hover zařízeních.
      =================================================== --}}
-<section class="section-wrapper" data-reveal>
+<section class="pd-hero" id="pd-hero-tilt">
+    <div class="pd-hero__photo" data-tilt>
+        <x-responsive-image
+            path="hero/hero-uvod.webp"
+            alt="Ondřej Kriška — weby a aplikace na míru"
+            sizes="(min-width: 1024px) 54vw, 100vw"
+            loading="eager"
+            fetchpriority="high"
+        />
+    </div>
     <div class="container-site">
-        <div class="toyota-layout">
-            <div class="toyota-content">
-                <header class="section-header section-header--left">
-                    <h2>{{ __('home.toyota.heading') }}</h2>
-                </header>
-                <p class="section-prose-text">{{ __('home.toyota.text') }}</p>
-                <p class="section-prose-text">{{ __('home.toyota.text_2') }}</p>
+        <div class="pd-hero__content">
+            <p class="pd-eyebrow">{{ __('home.hero.page_mark_label') }} — {{ __('home.hero.upline') }}</p>
+
+            <h1 class="pd-heading">{!! __('home.hero.heading_html') !!}</h1>
+
+            <p class="pd-sub">{{ __('home.hero.subline') }}</p>
+
+            <p class="pd-sign">
+                &mdash; Ondřej Kriška
+                <svg class="pd-sign__mark" viewBox="0 0 220 60" fill="none" aria-hidden="true">
+                    <path d="M4 40C16 12 28 8 34 26C40 44 46 20 54 18C62 16 60 38 70 38C82 38 84 10 96 10C110 10 104 44 118 44C136 44 132 14 150 14C166 14 158 34 172 30C182 27 184 16 194 16C202 16 200 26 210 24"
+                          stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </p>
+
+            <div class="pd-actions">
+                <a href="#{{ __('home.anchors.poptavka') }}" class="pd-cta" data-analytics="hero_cta_primary_click">
+                    {{ __('home.hero.cta_primary') }}
+                    <x-icon.arrow-right class="w-4 h-4 shrink-0 pd-cta__arrow" />
+                </a>
+                <x-phone-cta class="pd-phone" :label="__('home.hero.phone_label')" />
             </div>
-            <div class="toyota-quote" data-reveal>
-                <blockquote class="featured-quote">
-                    <p>{{ __('home.toyota.quote_text') }}</p>
-                    <footer>— {{ __('home.toyota.quote_author') }}</footer>
-                </blockquote>
-            </div>
+            <p class="pd-note">{{ __('home.hero.note') }}</p>
         </div>
     </div>
 </section>
 
 {{-- ===================================================
-     AI COMPARISON — Laik + AI vs. Odborník + AI
-     =================================================== --}}
-<section class="section-wrapper section-alt section-wrapper--glow" data-reveal>
-    <div class="container-site">
-        <header class="section-header">
-            <p class="section-subheading">{{ __('home.ai.subheading') }}</p>
-            <h2>{{ __('home.ai.heading') }}</h2>
-            <p class="section-header__desc">{{ __('home.ai.intro') }}</p>
-        </header>
+     02 — PRÁCE (důkaz hned po hero)
 
-        <div class="ai-compare">
-            {{-- Laik + AI --}}
-            <div class="ai-compare__col ai-compare__col--muted" data-reveal style="transition-delay: 60ms">
-                <div class="ai-compare__header">
-                    <span class="ai-compare__label">{{ __('home.ai.laik.label') }}</span>
-                    <p class="ai-compare__outcome">{{ __('home.ai.laik.outcome') }}</p>
-                </div>
-                <ul class="ai-compare__list">
-                    @foreach (__('home.ai.laik.items') as $item)
-                    <li>
-                        <svg class="ai-compare__icon ai-compare__icon--no" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd"/></svg>
-                        {{ $item }}
-                    </li>
-                    @endforeach
-                </ul>
-                <p class="ai-compare__note">{{ __('home.ai.laik.note') }}</p>
-            </div>
+     OND-269 (audit OND-254, nález 7): dřív tu stály DVĚ sekce projektů —
+     „Weby, které běží v praxi" (tři dlaždice s odkazem na živý web) hned
+     po hero a „Realizované projekty" (případovky z DB) o čtyři sekce níž.
+     BARANA i PitArena byly v obou. Board 22. 9. schválil sloučení.
 
-            {{-- Odborník + AI --}}
-            <div class="ai-compare__col ai-compare__col--featured" data-reveal style="transition-delay: 160ms">
-                <div class="ai-compare__header">
-                    <span class="ai-compare__label">{{ __('home.ai.expert.label') }}</span>
-                    <p class="ai-compare__outcome">{{ __('home.ai.expert.outcome') }}</p>
-                </div>
-                <ul class="ai-compare__list">
-                    @foreach (__('home.ai.expert.items') as $item)
-                    <li>
-                        <svg class="ai-compare__icon ai-compare__icon--yes" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
-                        {{ $item }}
-                    </li>
-                    @endforeach
-                </ul>
-                <p class="ai-compare__note">{{ __('home.ai.expert.note') }}</p>
-            </div>
-        </div>
+     Zůstala případovková podoba, protože nese větu o výsledku pro klienta
+     — to je to, co dlaždice neuměly. Odkaz na živý web se z dlaždic
+     přestěhoval do karty (`live_url` z DB), takže se nic neztratilo.
+     Jediné, co z homepage odešlo, je zubniprovazek.cz — zůstává na
+     /projekty.
 
-        <p class="ai-compare__closing" data-reveal style="transition-delay: 240ms">{{ __('home.ai.closing') }}</p>
-    </div>
-</section>
-
-{{-- ===================================================
-     PORTFOLIO — REALIZOVANÉ PROJEKTY (OND-120)
-     3 reference s písemným souhlasem klienta (PitArena, BARANA, Nové interiéry).
-     Zapnout přes env SHOW_PORTFOLIO_SECTION=true (config/site.php).
-     Data tečou z DB (PortfolioProject), 1-věty výsledku z lang/*/home.php
-     (klíč `home.portfolio.cards.{slug}`). Loga v public/images/portfolio/logos/.
+     Vizuál: `hero` snímek projektu, ne `portfolio_card_thumbnail()`.
+     Helper vybírá náhledovku do MALÉ karty (preferuje čtvercový detail
+     jednoho zařízení) a na 58vw široké ploše z toho vycházely slabé
+     záběry — u PitAreny zastaralá podstránka PIT & GO (nález 19 auditu),
+     u BARANY billboard na zastávce, který není ani web. `hero` je
+     kurátorovaný preview banner projektu a na tuhle velikost patří.
      =================================================== --}}
 @if (config('site.features.show_portfolio_section') && ($featuredHomeProjects ?? collect())->isNotEmpty())
-<section class="section-wrapper" data-reveal>
+<section class="pd-section">
     <div class="container-site">
-        <header class="section-header">
-            <h2>{{ __('home.portfolio.heading') }}</h2>
+        <header class="pd-head">
+            <h2 class="pd-head__title">{{ __('home.portfolio.heading') }}</h2>
         </header>
+        <p class="pd-intro">{{ __('home.portfolio.intro') }}</p>
 
-        <div class="home-projects-grid" data-reveal-group>
-            @foreach ($featuredHomeProjects as $project)
+        <div class="pd-cases">
+            @foreach ($featuredHomeProjects as $i => $project)
                 @php
                     $t = $project->translation();
                     $cardCopy = __('home.portfolio.cards.' . $project->slug);
@@ -509,22 +156,15 @@
                     $outcome = is_array($cardCopy) && !empty($cardCopy['outcome'])
                         ? $cardCopy['outcome']
                         : ($t?->subtitle ?? '');
-
                     $screens = $project->screenshots ?? collect();
-                    $hero = $screens->firstWhere('type', 'hero')
-                        ?? $screens->firstWhere('type', 'thumbnail')
-                        ?? $screens->first();
-
-                    $detailHref = lroute('projects') . '/' . $project->slug;
-                    // Karty mají tmavé pozadí (--bg-card), používáme bílé varianty log.
-                    $logoSrc = asset('images/portfolio/logos/' . $project->slug . '-white.svg');
+                    $hero = $screens->firstWhere('type', 'hero') ?? portfolio_card_thumbnail($screens);
+                    $detailHref = $project->detailUrl();
                 @endphp
-
-                <article class="home-projects-card" data-reveal>
+                <article class="pd-case">
                     <a
                         href="{{ $detailHref }}"
-                        class="home-projects-card__visual"
-                        aria-label="{{ $clientLabel }} — {{ __('projects.view_project') }}"
+                        class="pd-case__visual"
+                        aria-label="{{ $clientLabel }} — {{ __('home.portfolio.detail_cta') }}"
                         data-analytics="project_card_click"
                         data-analytics-props='{"slug":"{{ $project->slug }}"}'
                     >
@@ -532,114 +172,396 @@
                             <x-portfolio.screenshot
                                 :path="$hero->path"
                                 :alt="$clientLabel"
-                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                sizes="(min-width: 1024px) 58vw, 100vw"
                                 loading="lazy"
                             />
-                        @else
-                            <div class="home-projects-card__visual-placeholder" aria-hidden="true"></div>
                         @endif
                     </a>
-
-                    <div class="home-projects-card__body">
-                        <header class="home-projects-card__head">
-                            <img
-                                src="{{ $logoSrc }}"
-                                alt="{{ $clientLabel }}"
-                                class="home-projects-card__logo"
-                                loading="lazy"
-                                width="160"
-                                height="40"
-                            >
-                            <span class="home-projects-card__client">{{ $clientLabel }}</span>
-                        </header>
-
+                    <div class="pd-case__body">
+                        <span class="pd-case__num" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                        <h3 class="pd-case__client">{{ $clientLabel }}</h3>
                         @if ($outcome)
-                            <p class="home-projects-card__outcome">{{ $outcome }}</p>
+                        <p class="pd-case__outcome">{{ $outcome }}</p>
                         @endif
-
-                        <a
-                            href="{{ $detailHref }}"
-                            class="home-projects-card__cta"
-                            data-analytics="project_card_click"
-                            data-analytics-props='{"slug":"{{ $project->slug }}"}'
-                        >
-                            {{ __('home.portfolio.detail_cta') }}
-                            <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-                        </a>
+                        <p class="pd-case__links">
+                            <a
+                                href="{{ $detailHref }}"
+                                class="pd-case__cta"
+                                data-analytics="project_card_click"
+                                data-analytics-props='{"slug":"{{ $project->slug }}"}'
+                            >{{ __('home.portfolio.detail_cta') }} &rarr;</a>
+                            @if ($project->live_url)
+                            <a
+                                href="{{ $project->live_url }}"
+                                class="pd-case__live"
+                                target="_blank"
+                                rel="noopener"
+                                aria-label="{{ __('home.portfolio.live_aria', ['client' => $clientLabel]) }}"
+                                data-analytics="showcase_site_click"
+                                data-analytics-props='{"site":"{{ $project->slug }}"}'
+                            >{{ __('home.portfolio.live_cta') }} &nearr;</a>
+                            @endif
+                        </p>
                     </div>
                 </article>
             @endforeach
         </div>
 
-        <div class="section-footer-cta">
-            <a href="{{ lroute('projects') }}" class="btn btn-secondary">
-                {{ __('home.portfolio.cta') }}
-                <x-icon.arrow-right class="w-4 h-4 shrink-0" />
-            </a>
-        </div>
+        <p class="pd-more"><a href="{{ lroute('projects') }}" class="pd-more__link">{{ __('home.portfolio.cta') }}</a></p>
     </div>
 </section>
 @endif
 
 {{-- ===================================================
-     GARANCE
+     SOCIAL PROOF — jeden přesný řádek.
+     OND-256/5: řada jmen klientů (MAKOplast, Yolk Studio, …)
+     z homepage odebrána rozhodnutím boardu. Nikam se zatím
+     nepřesouvá — umístění na /projekty i s logy navrhne Jack
+     samostatně, až loga budou. Klíč `home.social_proof.brands`
+     i styly `.pd-clients*` proto zůstávají v repu, aby se
+     řada dala vrátit jedním blokem.
      =================================================== --}}
-<section class="section-wrapper" data-reveal>
+<section class="pd-strip" aria-label="{{ __('home.social_proof.rating_aria') }}">
     <div class="container-site">
-        <header class="section-header">
-            <h2>{{ __('home.guarantee.heading') }}</h2>
+        <ul class="pd-strip__list">
+            <li><strong>{{ __('home.social_proof.rating_value') }}</strong> {{ __('home.social_proof.reviews') }}</li>
+            <li><strong>{{ __('home.social_proof.projects') }}</strong></li>
+            <li><strong>{{ __('home.social_proof.experience') }}</strong></li>
+            <li>{{ __('home.social_proof.response') }}</li>
+            <li>{{ __('home.social_proof.award') }}</li>
+        </ul>
+    </div>
+</section>
+
+{{-- ===================================================
+     03 — METODA (co dělám + krátké vymezení)
+     =================================================== --}}
+<section class="pd-section">
+    <div class="container-site">
+        <header class="pd-head">
+            <h2 class="pd-head__title">{{ __('home.problems.heading') }}</h2>
+        </header>
+        <p class="pd-lead">{{ __('home.problems.lead') }}</p>
+
+        <p class="pd-avoid">{{ __('home.problems.transition_heading') }}</p>
+        <p class="pd-avoid-sub">{{ __('home.problems.transition_text') }}</p>
+
+        <div class="pd-issues">
+            @foreach (__('home.problems.items') as $i => $item)
+            <article class="pd-issue">
+                <span class="pd-issue__num" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                <div>
+                    <h3>{{ $item['heading'] }}</h3>
+                    <p>{{ $item['text'] }}</p>
+                    @if (!empty($item['quote_text']))
+                    <blockquote>
+                        {{ $item['quote_text'] }}
+                        <footer>— {{ $item['quote_author'] }}</footer>
+                    </blockquote>
+                    @endif
+                </div>
+            </article>
+            @endforeach
+        </div>
+
+        {{-- OND-269 (audit OND-254, nález 7): ze samostatné sekce „Generátor
+             versus váš byznys" (dva sloupce, osm odrážek, 1 086 px desktop)
+             zbyly dvě věty. Stejný argument, o který v ní šlo, stojí o pár
+             řádků výš jako první „čemu se vyhnete" — vlastní sekci o čtyři
+             obrazovky níž nepotřeboval. --}}
+        <p class="pd-avoid pd-avoid--second">{{ __('home.problems.ai_heading') }}</p>
+        <p class="pd-avoid-sub">{{ __('home.problems.ai_text') }}</p>
+    </div>
+</section>
+
+{{-- ===================================================
+     04 — SLUŽBY
+     Tři sloupce s vlasovými linkami, bez ikon a boxů —
+     ikony jsou slovník šablon, sloupec unese titulek sám.
+     =================================================== --}}
+<section class="pd-section">
+    <div class="container-site">
+        <header class="pd-head">
+            <h2 class="pd-head__title">{{ __('home.services.heading_primary') }}</h2>
         </header>
 
-        <div class="guarantee-grid" data-reveal-group>
-            @foreach (__('home.guarantee.items') as $item)
-            <div class="guarantee-card">
-                <h3>{{ $item['heading'] }}</h3>
-                <p>{{ $item['text'] }}</p>
+        <div class="pd-services">
+            @foreach (['weby', 'aplikace', 'eshop'] as $i => $key)
+            <article class="pd-service">
+                <span class="pd-service__num" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                <h3 class="pd-service__title">{{ __("home.services.primary.{$key}.title") }}</h3>
+                <p class="pd-service__desc">{{ __("home.services.primary.{$key}.description") }}</p>
+                <ul class="pd-service__bullets">
+                    @foreach (__("home.services.primary.{$key}.bullets") as $bullet)
+                    <li>{{ $bullet }}</li>
+                    @endforeach
+                </ul>
+            </article>
+            @endforeach
+        </div>
+
+        <p class="pd-services__secondary">
+            {!! __('home.services.secondary_inline', [
+                'pricing_link' => '<a href="' . lroute('price') . '">' . e(__('home.services.secondary_inline_pricing')) . '</a>',
+                'contact_link' => '<a href="#' . __('home.anchors.poptavka') . '">' . e(__('home.services.secondary_inline_contact')) . '</a>',
+            ]) !!}
+        </p>
+    </div>
+</section>
+
+{{-- ===================================================
+     05 — CENOVÁ KOTVA
+     Pořadí pásem je dané lang souborem, zvýrazněné pásmo
+     se řídí klíčem `featured`, ne pozicí v poli (OND-198/5.4).
+     =================================================== --}}
+<section class="pd-section" id="section-price" data-analytics-view="price_anchor_view">
+    <div class="container-site">
+        <header class="pd-head">
+            <h2 class="pd-head__title">{{ __('home.price_anchor.heading') }}</h2>
+        </header>
+        <p class="pd-intro">{{ __('home.price_anchor.intro') }}</p>
+
+        <div class="pd-price">
+            @foreach (__('home.price_anchor.items') as $item)
+            <div class="pd-price__col {{ ($item['featured'] ?? false) ? 'pd-price__col--featured' : '' }}">
+                <h3 class="pd-price__title">{{ $item['title'] }}@if ($item['featured'] ?? false) <em>{{ __('home.price_anchor.featured_label') }}</em>@endif</h3>
+                <p class="pd-price__value">{{ $item['price'] }}</p>
+                <p class="pd-price__desc">{{ $item['desc'] }}</p>
             </div>
+            @endforeach
+        </div>
+
+        {{-- OND-231: odkaz na detailní ceník se v prototypu ztratil —
+             je to jediná cesta z kotvy na rozpad cen. --}}
+        <p class="pd-more">
+            <a href="{{ lroute('price') }}" class="pd-more__link" data-analytics="price_anchor_cta_click">
+                {{ __('home.price_anchor.cta') }}
+            </a>
+        </p>
+    </div>
+</section>
+
+{{-- ===================================================
+     06 — PROČ JÁ
+     Video nese sekci (mluví Ondra sám), výhody jako tichá
+     mřížka s vlasovými linkami vedle.
+     =================================================== --}}
+<section class="pd-section">
+    <div class="container-site">
+        <header class="pd-head">
+            <h2 class="pd-head__title">{{ __('home.why_me.heading') }}</h2>
+        </header>
+
+        <div class="pd-why">
+            <div class="pd-why__media">
+                <div class="pd-why__video">
+                    <x-video-intro :ariaLabel="__('home.why_me.video_aria')" />
+                </div>
+                <p class="pd-why__bio">{{ __('home.why_me.bio') }}</p>
+            </div>
+
+            <div class="pd-why__grid">
+                @foreach (__('home.why_me.advantages') as $i => $adv)
+                <article class="pd-why__item">
+                    <span class="pd-why__num" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                    <div>
+                        <h3>{{ $adv['heading'] }}</h3>
+                        <p>{{ $adv['text'] }}</p>
+                    </div>
+                </article>
+                @endforeach
+            </div>
+        </div>
+
+        {{-- OND-269 (audit OND-254, nález 7): „18 let v Toyotě" stálo na
+             homepage dvakrát — jednou v `why_me.bio` a pak ještě jako
+             samostatná sekce o čtyři sekce níž. Sekce se sem přestěhovala
+             celá (text i citace Pavla Baudyše), z bio Toyota vypadla.
+             Je to totéž téma: proč pracuju tak, jak pracuju. --}}
+        <div class="pd-origin pd-origin--nested">
+            <h3 class="pd-origin__title">{{ __('home.toyota.heading') }}</h3>
+            <div class="pd-origin__text">
+                <p>{{ __('home.toyota.text') }}</p>
+                <p>{{ __('home.toyota.text_2') }}</p>
+            </div>
+            <blockquote class="pd-origin__quote">
+                {{ __('home.toyota.quote_text') }}
+                <footer>— {{ __('home.toyota.quote_author') }}</footer>
+            </blockquote>
+        </div>
+    </div>
+</section>
+
+{{-- ===================================================
+     07 — POD KAPOTOU (decentní moment řemesla)
+     Fakta ověřitelná v repu + čas načtení změřený Performance
+     API v prohlížeči návštěvníka. Bez JS zůstane řádek s časem
+     skrytý — nikdy neukazujeme číslo, které jsme nenaměřili.
+     =================================================== --}}
+<section class="pd-section">
+    <div class="container-site">
+        <header class="pd-head">
+            <h2 class="pd-head__title">{{ __('home.craft.heading') }}</h2>
+        </header>
+        <p class="pd-intro">{{ __('home.craft.intro') }}</p>
+
+        <div class="pd-hood">
+            @foreach (__('home.craft.facts') as $fact)
+            <article class="pd-hood__fact">
+                <h3>{{ $fact['heading'] }}</h3>
+                <p>{{ $fact['text'] }}</p>
+            </article>
+            @endforeach
+        </div>
+
+        <p class="pd-hood__perf" id="pd-perf" hidden>
+            {{ __('home.craft.perf_prefix') }}
+            <strong id="pd-perf-value"></strong>
+            {{ __('home.craft.perf_suffix') }}
+        </p>
+
+    </div>
+</section>
+
+{{-- ===================================================
+     08 — POSTUP
+     Čtyři kroky pod sebou, čas jako acid datový štítek;
+     citace klientů zůstávají u kroků, kde vznikly.
+     =================================================== --}}
+<section class="pd-section" id="{{ __('home.anchors.how_i_work') }}">
+    <div class="container-site">
+        <header class="pd-head">
+            <h2 class="pd-head__title">{{ __('home.how_i_work.heading') }}</h2>
+        </header>
+
+        <ol class="pd-steps">
+            @foreach (__('home.how_i_work.steps') as $i => $step)
+            <li class="pd-step">
+                <span class="pd-step__num" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                <div class="pd-step__body">
+                    <h3 class="pd-step__title">{{ $step['heading'] }}@if (!empty($step['time'])) <em>{{ $step['time'] }}</em>@endif</h3>
+                    <p class="pd-step__text">{{ $step['text'] }}</p>
+                    @if (!empty($step['quote_text']))
+                    <blockquote>
+                        {{ $step['quote_text'] }}
+                        <footer>— {{ $step['quote_author'] }}</footer>
+                    </blockquote>
+                    @endif
+                    @if (!empty($step['note']))
+                    <p class="pd-step__note">{{ $step['note'] }}</p>
+                    @endif
+                </div>
+            </li>
+            @endforeach
+        </ol>
+
+        {{-- Rezervace: přímý odkaz místo vendor widgetu — Reservanto
+             button si nese vlastní žluté barvy a rozbíjel by podpis;
+             direct_url je stejný cíl (viz config/site.php, OND-123). --}}
+        <div class="pd-steps__cta">
+            <p class="pd-steps__cta-intro">{{ __('home.how_i_work.cta_intro') }}</p>
+            @php
+                $booking = config('site.booking');
+            @endphp
+            @if (($booking['enabled'] ?? false) && !empty($booking['direct_url']))
+                <a href="{{ $booking['direct_url'] }}" target="_blank" rel="noopener" class="pd-cta" data-analytics="final_cta_secondary_click">
+                    {{ __('home.how_i_work.cta_label') }}
+                    <x-icon.arrow-right class="w-4 h-4 shrink-0 pd-cta__arrow" />
+                </a>
+            @else
+                <a href="#{{ __('home.anchors.poptavka') }}" class="pd-cta">
+                    {{ __('home.how_i_work.cta_label') }}
+                    <x-icon.arrow-right class="w-4 h-4 shrink-0 pd-cta__arrow" />
+                </a>
+            @endif
+        </div>
+    </div>
+</section>
+
+{{-- ===================================================
+     09 — REFERENCE
+     =================================================== --}}
+<section class="pd-section" id="section-testimonials" data-analytics-view="testimonial_view">
+    <div class="container-site">
+        <header class="pd-head">
+            <h2 class="pd-head__title">{{ __('home.testimonials.heading') }}</h2>
+        </header>
+
+        {{-- Recenze jsou v EN/DE překlad českých originálů — poznámka drží
+             dohledatelnost zdroje. Česky je klíč prázdný (viz lang/cs/home.php). --}}
+        @if (filled(__('home.testimonials.note')))
+        <p class="pd-testi__note">{{ __('home.testimonials.note') }}</p>
+        @endif
+
+        <div class="pd-testi">
+            @foreach ($homeTestimonials as $i => $review)
+            <article class="pd-testi__item">
+                <span class="pd-testi__num" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                <div>
+                    <p class="pd-testi__text">{{ $review['text'] }}</p>
+                    <p class="pd-testi__meta">
+                        {{ $review['name'] }} — {{ $review['company'] }}@if ($review['role']), {{ $review['role'] }}@endif
+                        @php
+                            $sourceLabels = [
+                                'google'   => 'Google',
+                                'facebook' => 'Facebook',
+                                'firmy_cz' => 'Firmy.cz',
+                            ];
+                        @endphp
+                        @if (!empty($sourceLabels[$review['source'] ?? '']))
+                        <span class="pd-testi__source">{{ $sourceLabels[$review['source']] }}</span>
+                        @endif
+                    </p>
+                </div>
+            </article>
             @endforeach
         </div>
     </div>
 </section>
 
 {{-- ===================================================
-     FAQ — 4 otázky (OND-121 T19 + OND-119 JSON-LD/analytics)
-     Plán §4.10 / §3 (pozice 9). 4 otázky v cs/en/de.
+     OND-269 (audit OND-254, nález 7) — tři sekce odsud pryč:
+
+       • „Generátor versus váš byznys" → dvě věty v sekci 03
+       • „Odkud pocházejí mé principy" (Toyota) → dovnitř sekce 06
+       • „Dvě věci, na které se můžete spolehnout." → zrušeno,
+         oba sliby doslova stály v sekci 06 jako body 02 a 03
+
+     Board schválil škrt 22. 9. (otázka 1 na OND-259).
+     =================================================== --}}
+
+{{-- ===================================================
+     10 — FAQ
+     Nativní details/summary, vlasové linky, acid křížek jako
+     indikátor. Stejné analytics klíče i JSON-LD jako dřív —
+     FAQPage rich snippet se generuje ze stejných lang klíčů
+     jako accordion (single source of truth).
      =================================================== --}}
 @php
     $faqItems = __('home.faq.items');
 @endphp
-<section id="faq" class="section-wrapper section-faq" data-reveal>
+<section class="pd-section" id="faq">
     <div class="container-site">
-        <header class="section-header">
-            <h2>{{ __('home.faq.heading') }}</h2>
+        <header class="pd-head">
+            <h2 class="pd-head__title">{{ __('home.faq.heading') }}</h2>
         </header>
 
-        <div class="faq-list" data-reveal-group>
+        <div class="pd-faq">
             @foreach ($faqItems as $i => $item)
-            <details
-                class="faq-item"
-                data-reveal
-                data-q-id="{{ $i }}"
-                style="transition-delay: {{ $i * 60 }}ms"
-            >
+            <details class="pd-faq__item" data-q-id="{{ $i }}">
                 <summary
-                    class="faq-item__question"
+                    class="pd-faq__q"
                     data-analytics="faq_item_open"
                     data-faq-key="{{ $item['key'] ?? 'item-' . $i }}"
                 >
                     <span>{{ $item['question'] }}</span>
-                    <span class="faq-item__icon" aria-hidden="true"></span>
+                    <span class="pd-faq__mark" aria-hidden="true"></span>
                 </summary>
-                <div class="faq-item__answer">
-                    <p>{{ $item['answer'] }}</p>
-                </div>
+                <p class="pd-faq__a">{{ $item['answer'] }}</p>
             </details>
             @endforeach
         </div>
 
-        {{-- OND-119 — JSON-LD FAQPage pro rich snippets v Google SERP.
-             Generováno ze stejných lang klíčů jako accordion (single source of truth).
-             Validace: https://search.google.com/test/rich-results --}}
         <script type="application/ld+json">
         @php
             $faqLd = [
@@ -659,163 +581,217 @@
         @endphp
         {!! json_encode($faqLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
         </script>
-
-        {{-- T18 — Mikro-formulář po FAQ: zachytí lead, který nenašel odpověď v FAQ.
-             Posílá na stejný endpoint /poptavka (home.lead.store), source = home.faq. --}}
-        <div class="faq-form" data-reveal>
-            <div class="faq-form__intro">
-                <p class="section-subheading">{{ __('home.faq_form.eyebrow') }}</p>
-                <h3 class="faq-form__heading">{{ __('home.faq_form.heading') }}</h3>
-                <p class="faq-form__desc">{{ __('home.faq_form.description') }}</p>
-            </div>
-
-            @if (session('faq_lead_success'))
-                <div class="landing-alert landing-alert--success" role="status">
-                    {{ __('home.faq_form.success') }}
-                </div>
-            @endif
-
-            @if ($errors->any() && session('home_lead_target') === 'faq')
-                <div class="landing-alert landing-alert--error" role="alert">
-                    {{ $errors->first() }}
-                </div>
-            @endif
-
-            <form
-                method="POST"
-                action="{{ route('home.lead.store') }}"
-                novalidate
-                x-data="{ submitting: false }"
-                @submit="submitting = true"
-                class="faq-form__form"
-            >
-                @csrf
-                <input type="hidden" name="source" value="home.faq">
-
-                <div class="faq-form__grid">
-                    <div class="form-group">
-                        <label for="faq-lead-name">{{ __('home.faq_form.name') }} <span aria-hidden="true">*</span></label>
-                        <input
-                            type="text"
-                            id="faq-lead-name"
-                            name="name"
-                            value="{{ session('home_lead_target') === 'faq' ? old('name') : '' }}"
-                            required
-                            placeholder="{{ __('home.faq_form.placeholders.name') }}"
-                            autocomplete="name"
-                        >
-                    </div>
-
-                    <div class="form-group">
-                        <label for="faq-lead-email">{{ __('home.faq_form.email') }} <span aria-hidden="true">*</span></label>
-                        <input
-                            type="email"
-                            id="faq-lead-email"
-                            name="email"
-                            value="{{ session('home_lead_target') === 'faq' ? old('email') : '' }}"
-                            required
-                            placeholder="{{ __('home.faq_form.placeholders.email') }}"
-                            autocomplete="email"
-                        >
-                    </div>
-
-                    <div class="form-group form-group--full">
-                        <label for="faq-lead-message">{{ __('home.faq_form.message') }} <span aria-hidden="true">*</span></label>
-                        <textarea
-                            id="faq-lead-message"
-                            name="message"
-                            rows="3"
-                            required
-                            placeholder="{{ __('home.faq_form.placeholders.message') }}"
-                        >{{ session('home_lead_target') === 'faq' ? old('message') : '' }}</textarea>
-                    </div>
-                </div>
-
-                <button
-                    type="submit"
-                    class="btn btn-primary faq-form__submit"
-                    :disabled="submitting"
-                    data-analytics="faq_form_submit_attempt"
-                >
-                    <span class="btn__inner" x-show="!submitting">
-                        {{ __('home.faq_form.submit') }}
-                        <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-                    </span>
-                    <span class="btn__inner" x-show="submitting" x-cloak>{{ __('home.faq_form.submitting') }}</span>
-                </button>
-            </form>
-        </div>
     </div>
 </section>
 
 {{-- ===================================================
-     INLINE POPTÁVKA (OND-100, T05)
+     11 — POPTÁVKA
+     Jediná závěrečná výzva (nález OND-201/5.8 — FAQ
+     mikro-formulář se nevrací, dva formuláře hned po sobě
+     výzvu rozmělní). Stejný endpoint, pole i session
+     handling jako partial home-inline-form, který stránka
+     nahradila; `home.faq` větve v session zůstávají
+     obslouženy pro případ redirectu z jiného zdroje.
      =================================================== --}}
-@include('partials.home-inline-form')
-
-{{-- ===================================================
-     ZÁVĚREČNÉ CTA
-     =================================================== --}}
-<section class="section-wrapper section-cta" data-reveal>
+<section class="pd-section" id="{{ __('home.anchors.poptavka') }}">
     <div class="container-site">
-        <div class="final-cta__intro">
-            <h2 class="final-cta-heading">
-                {!! __('home.cta.heading') ?? __('layout.prefooter.tagline') !!}
-            </h2>
-            <div class="final-cta__actions">
-                <a href="#{{ __('home.anchors.poptavka') }}" class="btn btn-primary" data-analytics="final_cta_primary_click">
-                    {{ __('home.cta.consultation') }}
-                    <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-                </a>
-                {{-- Sekundární CTA — Reservanto widget (OND-116/T15) --}}
-                <x-booking.reservanto-widget />
+        <header class="pd-head">
+            <h2 class="pd-head__title">{{ __('home.inline_form.heading') }}</h2>
+        </header>
+
+        <div class="pd-form">
+            <div class="pd-form__intro">
+                <p class="pd-intro">{{ __('home.inline_form.description') }}</p>
+                <blockquote class="pd-form__quote">
+                    {{ __('home.inline_form.quote_text') }}
+                    <footer>— {{ __('home.inline_form.quote_author') }}</footer>
+                </blockquote>
             </div>
-            <blockquote class="final-cta-quote">
-                <p>{{ __('home.final_cta.quote_text') }}</p>
-                <footer>— {{ __('home.final_cta.quote_author') }}</footer>
-            </blockquote>
-        </div>
 
-        <div class="final-cta__closing">
-            <h2 class="final-cta-heading">{{ __('home.final_cta.heading') }}</h2>
-            <p class="final-cta-subtext">{{ __('home.final_cta.subtext') }}</p>
+            <div class="pd-form__panel">
+                @if (session('home_lead_success') || session('faq_lead_success'))
+                    <div class="pd-alert pd-alert--success" role="status">
+                        {{ __('home.inline_form.success') }}
+                    </div>
+                @endif
 
-            <div class="final-cta__actions">
-                <a
-                    href="#{{ __('home.anchors.poptavka') }}"
-                    class="btn btn-primary"
-                    data-analytics="final_cta_closing_primary_click"
+                @if ($errors->any())
+                    <div class="pd-alert pd-alert--error" role="alert">
+                        {{ $errors->first() }}
+                    </div>
+                @endif
+
+                <form
+                    method="POST"
+                    action="{{ route('home.lead.store') }}"
+                    novalidate
+                    x-data="{ submitting: false }"
+                    @submit="submitting = true; window.dispatchEvent(new CustomEvent('inline-form-submit-attempt'))"
                 >
-                    {{ __('home.final_cta.cta_label') }}
-                    <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-                </a>
-                {{-- Sekundární CTA — Reservanto widget (OND-116/T15) --}}
-                <x-booking.reservanto-widget />
+                    @csrf
+
+                    <x-form.honeypot id="lead-website-url" />
+
+                    <div class="pd-form__grid">
+                        <div class="pd-field">
+                            <label for="pd-lead-name">{{ __('home.inline_form.name') }} <span aria-hidden="true">*</span></label>
+                            <input
+                                type="text"
+                                id="pd-lead-name"
+                                name="name"
+                                value="{{ old('name') }}"
+                                required
+                                placeholder="{{ __('home.inline_form.placeholders.name') }}"
+                                autocomplete="name"
+                            >
+                            @error('name') <p class="pd-field__error">{{ $message }}</p> @enderror
+                        </div>
+
+                        <div class="pd-field">
+                            <label for="pd-lead-email">{{ __('home.inline_form.email') }} <span aria-hidden="true">*</span></label>
+                            <input
+                                type="email"
+                                id="pd-lead-email"
+                                name="email"
+                                value="{{ old('email') }}"
+                                required
+                                placeholder="{{ __('home.inline_form.placeholders.email') }}"
+                                autocomplete="email"
+                            >
+                            @error('email') <p class="pd-field__error">{{ $message }}</p> @enderror
+                        </div>
+
+                        <div class="pd-field pd-field--full">
+                            <label for="pd-lead-phone">{{ __('home.inline_form.phone') }}</label>
+                            <input
+                                type="tel"
+                                id="pd-lead-phone"
+                                name="phone"
+                                value="{{ old('phone') }}"
+                                placeholder="{{ __('home.inline_form.placeholders.phone') }}"
+                                autocomplete="tel"
+                                aria-describedby="pd-lead-phone-hint"
+                            >
+                            {{-- OND-256/4: pošťouchnutí — proč číslo vyplnit, když je nepovinné. --}}
+                            <p class="pd-field__hint" id="pd-lead-phone-hint">{{ __('home.inline_form.phone_hint') }}</p>
+                            @error('phone') <p class="pd-field__error">{{ $message }}</p> @enderror
+                        </div>
+
+                        <div class="pd-field pd-field--full">
+                            <label for="pd-lead-message">{{ __('home.inline_form.message') }} <span aria-hidden="true">*</span></label>
+                            <textarea
+                                id="pd-lead-message"
+                                name="message"
+                                rows="5"
+                                required
+                                placeholder="{{ __('home.inline_form.placeholders.message') }}"
+                            >{{ old('message') }}</textarea>
+                            @error('message') <p class="pd-field__error">{{ $message }}</p> @enderror
+                        </div>
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="pd-cta pd-form__submit"
+                        :disabled="submitting"
+                        data-analytics="inline_form_submit_attempt"
+                    >
+                        <span x-show="!submitting">{{ __('home.inline_form.submit') }}</span>
+                        <span x-show="submitting" x-cloak>{{ __('home.inline_form.submitting') }}</span>
+                    </button>
+
+                    <p class="pd-form__note">{{ __('home.inline_form.note') }}</p>
+
+                    <p class="pd-form__privacy">
+                        {{ __('home.inline_form.privacy_prefix') }}<a href="{{ lroute('privacy') }}">{{ __('home.inline_form.privacy_link') }}</a>.
+                    </p>
+                </form>
             </div>
-            <p class="final-cta-note">{{ __('home.final_cta.cta_note') }}</p>
         </div>
     </div>
 </section>
 
+</div>
 @endsection
 
 @push('scripts')
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        @php
-            $leadTarget = session('home_lead_target');
-            $scrollAnchor = $leadTarget === 'faq' ? 'faq' : __('home.anchors.poptavka');
-        @endphp
+    // Tilt portrétu — vanilla, no-op na touch a reduced-motion.
+    (function () {
+        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var hasHover = window.matchMedia('(hover: hover)').matches;
+        if (reduceMotion || !hasHover) return;
+
+        var section = document.getElementById('pd-hero-tilt');
+        var photo = section && section.querySelector('[data-tilt]');
+        if (!photo) return;
+
+        section.addEventListener('mousemove', function (e) {
+            var rect = section.getBoundingClientRect();
+            var px = (e.clientX - rect.left) / rect.width - 0.5;
+            var py = (e.clientY - rect.top) / rect.height - 0.5;
+            photo.style.transform = 'scale(1.02) rotate(' + (px * -0.6) + 'deg) translate(' + (px * -8) + 'px, ' + (py * -6) + 'px)';
+        });
+        section.addEventListener('mouseleave', function () {
+            photo.style.transform = '';
+        });
+    })();
+
+    // OND-229 — Pod kapotou: skutečný čas načtení z Performance API.
+    // Bez podpory API zůstane odstavec `hidden` — žádné vymyšlené číslo.
+    // OND-234 — Věta je chlouba, ne přiznání. Když číslo není dobré nebo
+    // není důvěryhodné, odstavec zůstane `hidden`. Radši nic než alibi.
+    (function () {
+        // Strop 2,0 s. Měříme `load`, tedy okamžik po dotažení všech
+        // zdrojů — metriku pozdější než LCP. Core Web Vitals má hranici
+        // „dobrého“ LCP na 2,5 s; kdybychom stejné číslo dali na `load`,
+        // chlubili bychom se i návštěvami, jejichž LCP bylo hluboko za
+        // hranicí. 2,0 s je zároveň poslední hodnota, která se při jednom
+        // desetinném místě ještě čte jako „pod dvě sekundy“ — od „2,3 s“
+        // výš věta přestává být důkaz a začíná být výmluva.
+        var MAX_SECONDS = 2;
+        // Pod 0,05 s by se vypsalo „0,0 s“ — to vypadá jako rozbité měření,
+        // ne jako rychlost.
+        var MIN_SECONDS = 0.05;
+
+        // Načtení na pozadí (otevřeno do nového panelu, obnovená session)
+        // má throttlované časovače a vyjde nesmyslně velké. Stačí, že byla
+        // stránka schovaná kdykoli před změřením.
+        var wasHidden = document.visibilityState === 'hidden';
+        document.addEventListener('visibilitychange', function () {
+            if (document.visibilityState === 'hidden') { wasHidden = true; }
+        });
+
+        function show() {
+            if (wasHidden) return;
+            if (typeof performance === 'undefined' || !performance.getEntriesByType) return;
+            var nav = performance.getEntriesByType('navigation')[0];
+            if (!nav) return;
+            var s = nav.loadEventEnd / 1000;
+            // Chytí i NaN, undefined, zápor a nulu (load ještě nedoběhl).
+            if (!(s >= MIN_SECONDS) || s > MAX_SECONDS) return;
+            var value = document.getElementById('pd-perf-value');
+            var wrap = document.getElementById('pd-perf');
+            if (!value || !wrap) return;
+            value.textContent = s.toLocaleString(document.documentElement.lang || 'cs', {
+                minimumFractionDigits: 1,
+                maximumFractionDigits: 1
+            }) + ' s';
+            wrap.hidden = false;
+        }
+        if (document.readyState === 'complete') { setTimeout(show, 0); }
+        else { window.addEventListener('load', function () { setTimeout(show, 0); }); }
+    })();
+
+    // Po submitu formuláře (redirect back()) doskrolovat k výsledku
+    // a ohlásit konverzi analytics vrstvě (viz resources/js/analytics.js).
+    document.addEventListener('DOMContentLoaded', function () {
         @if ($errors->any() || session('home_lead_success') || session('faq_lead_success'))
-        document.getElementById('{{ $scrollAnchor }}')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.getElementById('{{ __('home.anchors.poptavka') }}')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         @endif
 
-        @if (session('home_lead_success'))
+        @if (session('home_lead_success') || session('faq_lead_success'))
         window.dispatchEvent(new CustomEvent('inline-form-submit-success'));
-        @endif
-
-        @if (session('faq_lead_success'))
-        window.dispatchEvent(new CustomEvent('faq-form-submit-success'));
         @endif
     });
 </script>

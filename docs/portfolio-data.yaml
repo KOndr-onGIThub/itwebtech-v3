@@ -1,7 +1,10 @@
 # Portfolio dataset — OND-59 / OND-62
 # Vytvořeno: 2026-05-06 (Content Writer)
 # Zdroje: ondraweb.cz/projekty (preferováno) + itwebtech.cz/projects
-# 23 projektů po deduplikaci: 13 webů, 5 aplikací, 5 ostatní
+# 24 projektů po deduplikaci: 14 webů, 5 aplikací, 5 ostatní
+# OND-282: tři z nich (logo-realitacky, video-pitbike-akademie, animace-delejme)
+# mají `published_at: null` — v datasetu zůstávají, na web se nedostanou.
+# Publikovaných je tedy 21: 14 webů, 5 aplikací, 2 ostatní.
 # Schéma odpovídá návrhu z OND-60 (portfolio_projects + *_translations + *_screenshots)
 # Engineer ve fázi 2: stáhne obrázky z `screenshots_source[].url`, uloží do
 # `resources/img/projects/{slug}/...`, pole `path` v DB doplní podle vlastní
@@ -28,7 +31,7 @@ projects:
     client_name: PitArena
     live_url: https://pitarena.cz/
     year: 2023
-    duration: "průběžně 2023–dnes"
+    duration: "průběžně od 2023"
     featured: true
     sort_order: 10
     tags: [web, branding, rezervace, platby, seo, dlouhodoba-spoluprace]
@@ -72,107 +75,255 @@ projects:
     translations:
       cs:
         title: PitArena
-        subtitle: "Z nuly k rezervacím obsazeným měsíce dopředu"
-        summary: "Brand, web a online rezervační systém pro nové motokrosové centrum. Hned po spuštění začaly chodit objednávky tréninků z Googlu."
+        subtitle: "Od nuly ke značce, webu a online prodeji programů"
+        summary: "Značka, web a online prodej pro nové motokrosové centrum. Web dnes nese programy, poukazy na jízdu i registrace na závody."
         description: >-
-          PitArena startovala bez webu, brandu i bez první zakázky. Postavili
-          jsme kompletní digitální základ — značku, web s online rezervací
-          tréninků, prodej voucherů a registraci na akce. Od roku 2023 web
-          dál rozvíjím spolu s majitelem.
+          PitArena startovala bez webu, brandu i bez první zakázky. Postavil jsem
+          kompletní digitální základ — značku, web s nabídkou programů, online
+          prodejem poukazů a registracemi na závody. Od roku 2023 web dál rozvíjím
+          spolu s majitelem.
         challenge: >-
           Klient otevíral nové motokrosové centrum v Česku. Žádný web,
           žádná značka, nula obsazenosti. Bylo potřeba vybudovat důvěru
           ještě dřív, než se PitArena fyzicky otevřela, a zařídit, aby si
           lidé tréninky mohli objednat 24/7 bez telefonátů a e-mailů.
         solution: >-
-          Navrhli jsme značku a postavili na míru web s integrovaným
-          rezervačním systémem, online platbami, prodejem dárkových voucherů
-          a registracemi na akce. SEO a obsahové články cílí přesně na lidi,
-          kteří hledají „motokrosový kemp" nebo „pitbike trénink". Doplňuje
+          Navrhl jsem značku a postavil na míru web s online prodejem poukazů na
+          jízdu, nabídkou programů (akademie, zájmový kroužek, kempy a MX
+          soustředění) a registracemi na závody YCF Cup. SEO a obsahové články cílí
+          na lidi, kteří hledají „motokrosový kemp" nebo „pitbike trénink". Doplňuje
           to správa sociálních sítí a propojení s merchem.
         result: >-
-          Web už v prvním roce přivádí stovky návštěv týdně a generuje
-          rezervace bez zásahu majitele. Tréninky bývají obsazené měsíce
-          dopředu, vouchery se prodávají před Vánoci samy a registrace
-          na motokrosové kempy běží přes web. Dlouhodobá spolupráce
-          pokračuje dodnes.
+          Z Googlu si web řekne o víc než 15 000 návštěv za 16 měsíců (Search
+          Console, 16. 5. 2025 – 13. 9. 2026: 15 472 prokliků při 288 925
+          zobrazeních) a průměrná pozice ve vyhledávání se za tu dobu zvedla z 10,3
+          na 7,6. Zájemce si sám najde program, koupí poukaz na jízdu nebo se
+          přihlásí na závod, bez telefonátu majiteli. Vedle toho web nese e-shop,
+          půjčovnu, servis a blog. Dlouhodobá spolupráce pokračuje dodnes.
         outcomes:
           - "Spuštění značky i webu od nuly za jeden ucelený projekt"
-          - "Online rezervace tréninků, voucherů i akcí bez ručního zásahu"
-          - "Stovky návštěv týdně, plné kapacity měsíce dopředu"
-          - "SEO + obsahové články přivádějí poptávky z Googlu"
+          - "Online prodej poukazů a registrace na závody bez ručního zásahu"
+          - "Programy, půjčovna, servis a e-shop na jednom webu"
+          - "SEO a obsahové články cílené na motokrosové kempy a pitbike tréninky"
           - "Web a brand drží konzistentní tvář napříč webem, sociálními sítěmi a merchem"
         meta_title: "PitArena — web, rezervace a brand pro motokrosové centrum"
-        meta_description: "Případová studie: brand, web a online rezervační systém pro PitArenu. Plné kapacity tréninků a stovky návštěv týdně už od prvního roku."
+        meta_description: "Případová studie: značka, web a online prodej pro PitArenu — programy, poukazy na jízdu a registrace na závody na jednom webu."
       en:
         title: PitArena
-        subtitle: "From zero to bookings filled months ahead"
-        summary: "Brand, website, and online booking for a brand-new motocross centre. Training sessions started selling from Google straight after launch."
+        subtitle: "From zero to a brand, a website and online sales"
+        summary: "Brand, website and online sales for a brand-new motocross centre. The site now carries programmes, ride vouchers and race registrations."
         description: >-
-          PitArena launched with no website, no brand, and no customers.
-          We built the full digital foundation — identity, a custom website
-          with online training booking, voucher sales, and event sign-ups.
-          The site has been growing alongside the owner since 2023.
+          PitArena launched with no website, no brand, and no customers. I built the
+          full digital foundation — identity, a custom website with programme
+          listings, online voucher sales and race registrations. The site has been
+          growing alongside the owner since 2023.
         challenge: >-
-          The client was opening a new motocross training centre in Czechia.
-          No web presence, no brand, zero occupancy. We needed to build
-          trust before PitArena physically opened, and let people book
-          training 24/7 — without phone calls or e-mails.
+          The client was opening a new motocross training centre in Czechia. No web
+          presence, no brand, zero occupancy. Trust had to be built before PitArena
+          physically opened, and let people book training 24/7 — without phone calls
+          or e-mails.
         solution: >-
-          We designed the brand and built a custom website with an
-          integrated booking system, online payments, gift voucher sales,
-          and event registrations. SEO and content articles target people
-          searching for "motocross camp" or "pitbike training". Social
+          I designed the brand and built a custom website with online ride-voucher
+          sales, programme listings (academy, youth club, camps and MX training
+          weeks) and race registrations for the YCF Cup. SEO and content articles
+          target people searching for "motocross camp" or "pitbike training". Social
           media management and merch integration round it out.
         result: >-
-          The site brings hundreds of weekly visits and generates bookings
-          without owner intervention. Training slots fill months in advance,
-          vouchers sell themselves before Christmas, and motocross camps
-          register through the web. The long-term partnership continues today.
+          The site pulls more than 15,000 visits from Google over 16 months (Search
+          Console, 16 May 2025 – 13 Sep 2026: 15,472 clicks on 288,925 impressions),
+          and its average search position rose from 10.3 to 7.6 over that period. A
+          visitor finds a programme, buys a ride voucher or signs up for a race
+          without calling the owner. Alongside that it carries the online shop,
+          rentals, service and a blog. The long-term partnership continues today.
         outcomes:
           - "Brand and website launched from scratch as a single project"
-          - "Online booking for training, vouchers and events runs hands-off"
-          - "Hundreds of weekly visits, capacity booked months ahead"
-          - "SEO and content drive enquiries straight from Google"
+          - "Online voucher sales and race registrations run hands-off"
+          - "Programmes, rentals, service and online shop on one site"
+          - "SEO and content aimed at motocross camps and pitbike training"
           - "Consistent identity across website, social media and merch"
         meta_title: "PitArena — website, booking & brand for a motocross centre"
-        meta_description: "Case study: brand, website and online booking for PitArena. Full training capacity and hundreds of weekly visits from year one."
+        meta_description: "Case study: brand, website and online sales for PitArena — programmes, ride vouchers and race registrations on one site."
       de:
         title: PitArena
-        subtitle: "Von Null zu Buchungen, die Monate im Voraus voll sind"
-        summary: "Marke, Website und Online-Buchung für ein neues Motocross-Zentrum. Trainingsbuchungen kamen direkt nach dem Launch über Google."
+        subtitle: "Von Null zu Marke, Website und Online-Verkauf"
+        summary: "Marke, Website und Online-Verkauf für ein neues Motocross-Zentrum. Die Site trägt heute Programme, Fahrgutscheine und Rennanmeldungen."
         description: >-
-          PitArena startete ohne Website, ohne Marke und ohne Kunden.
-          Wir haben die gesamte digitale Grundlage gebaut — Identität,
-          eine maßgeschneiderte Website mit Online-Buchung von Trainings,
-          Gutscheinverkauf und Event-Anmeldungen. Seit 2023 entwickle
-          ich die Site gemeinsam mit dem Inhaber weiter.
+          PitArena startete ohne Website, ohne Marke und ohne Kunden. Ich habe die
+          gesamte digitale Grundlage gebaut — Identität, eine maßgeschneiderte
+          Website mit Programmübersicht, Online-Gutscheinverkauf und
+          Rennanmeldungen. Seit 2023 entwickle ich die Site gemeinsam mit dem
+          Inhaber weiter.
         challenge: >-
           Der Kunde eröffnete ein neues Motocross-Trainingszentrum in
           Tschechien. Keine Website, keine Marke, null Auslastung. Vertrauen
           musste entstehen, bevor PitArena physisch öffnete — und Menschen
           mussten 24/7 buchen können, ohne Anrufe oder E-Mails.
         solution: >-
-          Wir entwarfen die Marke und bauten eine individuelle Website
-          mit integriertem Buchungssystem, Online-Zahlungen, Geschenkgutschein-
-          Verkauf und Event-Registrierungen. SEO- und Content-Artikel
-          zielen auf Suchen wie „Motocross-Camp" oder „Pitbike-Training".
-          Social-Media-Betreuung und Merch-Anbindung runden alles ab.
+          Ich habe die Marke entworfen und eine individuelle Website gebaut — mit
+          Online-Verkauf von Fahrgutscheinen, Programmübersicht (Akademie,
+          Jugendclub, Camps und MX-Trainingswochen) und Anmeldungen zum YCF Cup.
+          SEO- und Content-Artikel zielen auf Suchen wie „Motocross-Camp" oder
+          „Pitbike-Training". Social-Media-Betreuung und Merch-Anbindung runden
+          alles ab.
         result: >-
-          Die Site bringt schon im ersten Jahr Hunderte Besuche pro Woche
-          und Buchungen laufen ohne Zutun des Inhabers. Trainingsplätze
-          sind Monate im Voraus ausgebucht, Gutscheine verkaufen sich
-          vor Weihnachten von selbst, Camps werden über das Web registriert.
-          Die langfristige Zusammenarbeit läuft bis heute.
+          Aus Google holt die Site in 16 Monaten mehr als 15.000 Besuche (Search
+          Console, 16.5.2025 – 13.9.2026: 15.472 Klicks bei 288.925 Impressionen),
+          und die durchschnittliche Suchposition verbesserte sich in dieser Zeit von
+          10,3 auf 7,6. Interessenten finden ein Programm, kaufen einen
+          Fahrgutschein oder melden sich zum Rennen an, ohne beim Inhaber anzurufen.
+          Daneben trägt sie Onlineshop, Verleih, Service und Blog. Die langfristige
+          Zusammenarbeit läuft bis heute.
         outcomes:
           - "Marke und Website von Null als ein einziges Projekt"
-          - "Online-Buchung von Training, Gutscheinen und Events ohne Handarbeit"
-          - "Hunderte Besuche pro Woche, Kapazität Monate im Voraus voll"
-          - "SEO und Content liefern Anfragen direkt aus Google"
+          - "Online-Gutscheinverkauf und Rennanmeldungen ohne Handarbeit"
+          - "Programme, Verleih, Service und Onlineshop auf einer Site"
+          - "SEO und Content für Motocross-Camps und Pitbike-Training"
           - "Konsistente Identität auf Website, Social Media und Merch"
         meta_title: "PitArena — Website, Buchung & Marke für ein Motocross-Zentrum"
-        meta_description: "Case Study: Marke, Website und Online-Buchung für PitArena. Volle Trainingskapazität und Hunderte Besuche pro Woche ab dem ersten Jahr."
+        meta_description: "Case Study: Marke, Website und Online-Verkauf für PitArena — Programme, Fahrgutscheine und Rennanmeldungen auf einer Site."
 
+  # ----------------------------------------------------------------------
+  # 1b) PitArena e-shop — shop.pitarena.cz (OND-208)
+  #     Texty ze schváleného dokumentu `pripadovky` (OND-186 §1), čísla
+  #     výhradně z `namerena-cisla` (OND-206 §1). Mobilní skóre 87/100
+  #     (rozptyl 81–91) se dle omezení QA nepublikuje.
+  # ----------------------------------------------------------------------
+  - slug: pitarena-eshop
+    category: website
+    client_name: PitArena
+    live_url: https://shop.pitarena.cz
+    year: 2026  # spuštěno 1. 7. 2026 (OND-224, potvrdil Ondra)
+    duration: null
+    featured: true
+    sort_order: 15
+    # Jen štítky, které v DB už existují. Nový slug (`e-shop`, `katalog`) by
+    # seeder pojmenoval přes humanizeSlug na „E shop" / „Katalog" — tedy ten
+    # samý žargon, který opravovala migrace z OND-198.
+    tags: [web, motocykly]
+    # OND-256 bod 6: e-shop byl jediný projekt bez obrázku — chyběl na kartě
+    # v /projekty, v hero detailu i v kartách „Další projekty". Snímek je
+    # vlastní záběr shop.pitarena.cz (22. 9. 2026), ne externí URL, proto tu
+    # `url` chybí a `path` míří rovnou do resources/img.
+    screenshots_source:
+      - path: "projects/pitarena-eshop/hero-1.webp"
+        type: hero
+        alt:
+          cs: "PitAréna – e-shop s pitbike motorkami YCF a náhradními díly"
+          en: "PitArena – e-shop with YCF pit bikes and spare parts"
+          de: "PitArena – Onlineshop mit YCF-Pitbikes und Ersatzteilen"
+    translations:
+      cs:
+        title: "PitArena — e-shop"
+        subtitle: "E-shop, kde zákazník najde díl na svůj model a ročník"
+        summary: "E-shop s pitbike motorkami YCF a náhradními díly. Díly roztříděné podle modelů a skupin, filtrování podle modelu a ročníku."
+        description: >-
+          Klient prodává pitbike motorky YCF a náhradní díly. Potřeboval prodávat
+          online — a u dílů je klíčové poskládat správný kus pro daný model a
+          ročník. Postavil jsem e-shop s katalogem motorek i dílů, roztříděných
+          podle modelů a skupin.
+        challenge: >-
+          U náhradních dílů nestačí seznam produktů. Zákazník potřebuje jistotu, že
+          díl sedne na jeho model a ročník — jinak nakupuje naslepo a vrací. Katalog
+          o tisícových počtech položek musel zůstat průchodný, ne se z něj stát
+          nekonečný seznam.
+        solution: >-
+          Postavil jsem e-shop s katalogem motorek i dílů. Díly jsou roztříděné
+          podle modelů (LITE 125, PILOT 125, Factory 190) a skupin — brzdy, motory,
+          tlumiče, elektrika. K tomu filtrování podle modelu a ročníku, košík a
+          zákaznický účet, oblíbené položky a porovnání produktů.
+        result: >-
+          E-shop dnes nabízí 4 551 produktů v 695 kategoriích a katalog náhradních
+          dílů rozpadnutý podle 19 modelů motocyklů YCF — zákazník klikne na svůj
+          model a vidí jen díly, které na něj sedí. I s tímhle rozsahem drží na
+          desktopu 99/100 v Lighthouse Performance a hlavní obsah se vykreslí do 0,9
+          s (měřeno lokálním Lighthouse 13.4.1, 16. 9. 2026). Za první dva a půl
+          měsíce provozu (1. 7. – 17. 9. 2026) jím prošlo 116 objednávek za 468 202
+          Kč, průměrná objednávka 4 036 Kč (údaje z administrace e-shopu).
+        outcomes:
+          - "4 551 produktů v 695 kategoriích"
+          - "Katalog náhradních dílů podle 19 modelů motocyklů YCF"
+          - "Filtrování podle modelu a ročníku"
+          - "Košík, zákaznický účet, oblíbené položky a porovnání produktů"
+          - "99/100 v Lighthouse Performance na desktopu (měřeno 16. 9. 2026)"
+          - "116 objednávek za 468 202 Kč za první dva a půl měsíce provozu (1. 7. – 17. 9. 2026)"
+        meta_title: "PitArena — e-shop s motorkami YCF a náhradními díly"
+        meta_description: "Případová studie: e-shop se 4 551 produkty v 695 kategoriích. Náhradní díly roztříděné podle 19 modelů YCF, filtrování podle modelu a ročníku."
+      en:
+        slug: "pitarena-online-shop"   # OND-209: lokalizovaný slug
+        title: "PitArena — online shop"
+        subtitle: "An online shop where customers find the part for their model and year"
+        summary: "Online shop for YCF pitbikes and spare parts. Parts sorted by model and group, with filtering by model and year."
+        description: >-
+          The client sells YCF pitbikes and spare parts and needed to sell online —
+          and with parts, the crucial thing is matching the right piece to the model
+          and year. I built an online shop with a catalogue of both bikes and parts,
+          sorted by model and group.
+        challenge: >-
+          With spare parts, a product list is not enough. The customer needs
+          certainty that a part fits their model and year — otherwise they buy blind
+          and send it back. A catalogue running into thousands of items had to stay
+          navigable instead of turning into an endless list.
+        solution: >-
+          I built an online shop with a catalogue of bikes and parts. Parts are
+          sorted by model (LITE 125, PILOT 125, Factory 190) and by group — brakes,
+          engines, suspension, electrics. Plus filtering by model and year, a cart
+          and customer account, favourites and product comparison.
+        result: >-
+          The shop now offers 4,551 products in 695 categories, with the spare-parts
+          catalogue broken down across 19 YCF motorcycle models — the customer
+          clicks their model and sees only parts that fit. Even at that scale it
+          holds 99/100 in Lighthouse Performance on desktop, with the main content
+          rendering in under 0.9 s (measured with local Lighthouse 13.4.1 on 16
+          September 2026). In its first two and a half months (1 July – 17 September
+          2026) it handled 116 orders worth CZK 468,202 in total, averaging CZK
+          4,036 per order (figures from the shop administration).
+        outcomes:
+          - "4,551 products in 695 categories"
+          - "Spare-parts catalogue split across 19 YCF motorcycle models"
+          - "Filtering by model and year"
+          - "Cart, customer account, favourites and product comparison"
+          - "99/100 in Lighthouse Performance on desktop (measured 16 September 2026)"
+          - "116 orders worth CZK 468,202 in the first two and a half months (1 July – 17 September 2026)"
+        meta_title: "PitArena — online shop for YCF pitbikes and spare parts"
+        meta_description: "Case study: an online shop with 4,551 products in 695 categories. Spare parts split across 19 YCF models, filtering by model and year."
+      de:
+        slug: "pitarena-onlineshop"   # OND-209: lokalizovaný slug
+        title: "PitArena — Onlineshop"
+        subtitle: "Ein Shop, in dem Kunden das Teil für Modell und Baujahr finden"
+        summary: "Onlineshop für YCF-Pitbikes und Ersatzteile. Teile nach Modellen und Gruppen sortiert, mit Filter nach Modell und Baujahr."
+        description: >-
+          Der Kunde verkauft YCF-Pitbikes und Ersatzteile und wollte online
+          verkaufen — bei Teilen ist entscheidend, das richtige Stück für Modell und
+          Baujahr zu treffen. Ich habe einen Onlineshop mit Katalog für Motorräder
+          und Teile gebaut, sortiert nach Modellen und Gruppen.
+        challenge: >-
+          Bei Ersatzteilen genügt eine Produktliste nicht. Kunden brauchen die
+          Sicherheit, dass ein Teil auf ihr Modell und Baujahr passt — sonst kaufen
+          sie blind und schicken zurück. Ein Katalog mit Tausenden Positionen musste
+          begehbar bleiben, statt zur endlosen Liste zu werden.
+        solution: >-
+          Ich habe einen Onlineshop mit Katalog für Motorräder und Teile gebaut. Die
+          Teile sind nach Modellen (LITE 125, PILOT 125, Factory 190) und Gruppen
+          sortiert — Bremsen, Motoren, Federung, Elektrik. Dazu Filter nach Modell
+          und Baujahr, Warenkorb und Kundenkonto, Favoriten und Produktvergleich.
+        result: >-
+          Der Shop bietet heute 4.551 Produkte in 695 Kategorien, der
+          Ersatzteilkatalog ist nach 19 YCF-Motorradmodellen aufgeteilt — Kunden
+          klicken ihr Modell an und sehen nur passende Teile. Auch in dieser Größe
+          hält er auf dem Desktop 99/100 in Lighthouse Performance, der Hauptinhalt
+          erscheint in unter 0,9 s (gemessen mit lokalem Lighthouse 13.4.1 am
+          16.09.2026). In den ersten zweieinhalb Monaten (1.7. – 17.9.2026) wickelte
+          er 116 Bestellungen im Gesamtwert von 468.202 CZK ab, im Schnitt 4.036 CZK
+          pro Bestellung (Daten aus der Shop-Administration).
+        outcomes:
+          - "4.551 Produkte in 695 Kategorien"
+          - "Ersatzteilkatalog nach 19 YCF-Motorradmodellen aufgeteilt"
+          - "Filter nach Modell und Baujahr"
+          - "Warenkorb, Kundenkonto, Favoriten und Produktvergleich"
+          - "99/100 in Lighthouse Performance auf dem Desktop (gemessen 16.09.2026)"
+          - "116 Bestellungen im Wert von 468.202 CZK in den ersten zweieinhalb Monaten (1.7. – 17.9.2026)"
+        meta_title: "PitArena — Onlineshop für YCF-Pitbikes und Ersatzteile"
+        meta_description: "Case Study: Onlineshop mit 4.551 Produkten in 695 Kategorien. Ersatzteile nach 19 YCF-Modellen aufgeteilt, Filter nach Modell und Baujahr."
   # ----------------------------------------------------------------------
   # 2) HCMS — Toyota Kolín, hala-kritická aplikace
   # ----------------------------------------------------------------------
@@ -181,7 +332,7 @@ projects:
     client_name: Toyota Kolín
     live_url: null  # interní aplikace
     year: 2021
-    duration: "několik měsíců (2021), provoz dodnes"
+    duration: "několik měsíců, aplikace běží dodnes"
     featured: true
     sort_order: 20
     tags: [aplikace, logistika, vyroba, web-app, tablet]
@@ -228,6 +379,16 @@ projects:
           cs: "HCMS — informační systém pro výrobu – sekce 6"
           en: "HCMS — production information system – section 6"
           de: "HCMS — Produktions-Informationssystem – Abschnitt 6"
+      # OND-268: miniatura karty projektu. `portfolio_card_thumbnail()` dává
+      # `type: thumbnail` přednost; šablona detailu ho z galerie vynechává,
+      # takže se v galerii neobjeví podruhé. Bez něj se miniatura brala
+      # z první čtvercové karty = functions model (nečitelná šedozelená plocha).
+      - path: "projects/hcms/thumbnail-1.jpg"
+        type: thumbnail
+        alt:
+          cs: "HCMS – obrazovka Hot Call Management System pro závod Toyota"
+          en: "HCMS – Hot Call Management System screen for the Toyota plant"
+          de: "HCMS – Bildschirm des Hot Call Management System für das Toyota-Werk"
     translations:
       cs:
         title: "HCMS — informační systém pro výrobu"
@@ -247,12 +408,12 @@ projects:
           pořadí pracovníci postupují, aby zásah proběhl spolehlivě i pod
           tlakem.
         solution: >-
-          Po analýze procesů na hale jsem navrhl doménový model, use case
-          mapu a postavil webovou aplikaci s tabletovým rozhraním pro
-          operátory a desktopovým pohledem pro vedoucí. Aplikace vede
-          člověka krok za krokem, eviduje stav, udržuje historii a umí
-          předávat úkoly mezi směnami. Zkušenost z 18 let přímo v Toyotě
-          se promítla do detailů, které se z venku nedají odhadnout.
+          Po analýze procesů přímo na hale jsem zmapoval, co všechno se při
+          výpadku dílu děje a kdo v tom hraje jakou roli, a z toho postavil
+          webovou aplikaci — tabletové rozhraní pro operátory, desktopový přehled
+          pro vedoucí. Aplikace vede člověka krok za krokem, eviduje stav, udržuje
+          historii a umí předávat úkoly mezi směnami. Zkušenost z 18 let přímo v
+          Toyotě se promítla do detailů, které se z venku nedají odhadnout.
         result: >-
           Klient uvádí roční úsporu nejméně 3 milionů Kč — odpovídající
           jednomu pracovníkovi na směnu napříč třemi směnami. V obdobích
@@ -402,12 +563,12 @@ projects:
     translations:
       cs:
         title: BARANA
-        subtitle: "Premium web pro bioklimatické pergoly připravený na kampaně"
+        subtitle: "Prémiový web pro bioklimatické pergoly připravený na kampaně"
         summary: "Premium prezentace pro firmu s bioklimatickými pergolami a hliníkovými ploty. Kampaň-ready landing page s jasnou cestou ke kontaktu."
         description: >-
           BARANA prodává bioklimatické pergoly, hliníkové ploty a brány —
           tedy produkt, který si zákazník v hlavě staví dlouho. Web musí
-          tu úvahu zkrátit a převést do poptávky. Postavil jsem premiové
+          tu úvahu zkrátit a převést do poptávky. Postavil jsem prémiové
           prezentační stránky se silnou hierarchií a landing page přímo
           pro placené kampaně.
         challenge: >-
@@ -435,8 +596,8 @@ projects:
           - "Hierarchie titulek → benefit → akce na každé sekci"
           - "Mobile-first chování, rychlé načítání"
           - "Struktura připravená na růst obsahu bez ztráty čistoty"
-        meta_title: "BARANA — premium web pro pergoly, ploty a brány"
-        meta_description: "Případová studie: premium prezentace BARANA s landingem pro Meta Ads a Google Ads. Postaveno za 5 týdnů, ready pro placené kampaně."
+        meta_title: "BARANA — prémiový web pro pergoly, ploty a brány"
+        meta_description: "Případová studie: prémiová prezentace BARANA se samostatnou stránkou pro Meta Ads a Google Ads. Postaveno za 5 týdnů."
       en:
         title: BARANA
         subtitle: "Premium website for bioclimatic pergolas, ready for ad campaigns"
@@ -550,9 +711,9 @@ projects:
       - url: "https://framerusercontent.com/images/E8KTFdQxsC4zPigZb2BCF6xZ1g.png"
         type: gallery
         alt:
-          cs: "Nové interiéry – sekce 4"
-          en: "Nové interiéry – section 4"
-          de: "Nové interiéry – Abschnitt 4"
+          cs: "Nové interiéry – pozvánka do showroomu v Říčanech"
+          en: "Nové interiéry – invitation to the showroom in Říčany"
+          de: "Nové interiéry – Einladung in den Showroom in Říčany"
       - url: "https://framerusercontent.com/images/p0LgiOAOHK7xGX1MFL5EV1l9yUo.png"
         type: gallery
         alt:
@@ -578,15 +739,14 @@ projects:
           (typicky šablony a katalogové weby) jasně přebít a získat
           klientův důvěryhodný hlas.
         solution: >-
-          Web vede zákazníka od inspirace ke konkrétní akci. Šíře
-          řešení (podlahy, dveře, interiéry) je čitelná, ale
-          nezahlcuje. Texty mluví bez jargonu o tom, co klient od
-          spolupráce dostane. Vizuální styl odpovídá kvalitě showroomu —
-          nic „rádobyluxusního". Web je první kontakt s firmou a má
+          Web vede zákazníka od inspirace ke konkrétní akci. Šíře řešení (podlahy,
+          dveře, interiéry) je čitelná, ale nezahlcuje. Texty bez žargonu říkají,
+          co klient od spolupráce dostane. Vizuální styl odpovídá kvalitě
+          showroomu — nic „rádobyluxusního". Web je první kontakt s firmou a má
           tomu odpovídat.
         result: >-
           Klient zpětně mluví o lepší věrohodnosti značky a o tom, že
-          si zákazníci dopředu vědomí, jak spolupráce probíhá. Část
+          zákazníci dopředu vědí, jak spolupráce probíhá. Část
           poptávek, které dřív skončily ztrátou času na obou stranách,
           web předem odfiltruje. Pozitivní zpětná vazba se týkala
           zejména designu, přehlednosti a celkového UX.
@@ -640,7 +800,7 @@ projects:
         meta_description: "Case study: Nové interiéry website redesign. A site that works like a first business meeting and filters serious enquiries."
       de:
         title: "Nové interiéry"
-        subtitle: "Eine Website, die wie ein erstes Geschäftstreffen wirkt"
+        subtitle: "Eine Website, die wie ein erstes Verkaufsgespräch wirkt"
         summary: "Redesign für einen Showroom für Böden, Türen und Interieurs. Ein funktionales Werkzeug, das ernsthafte Anfragen filtert — kein hübsches Schaufenster."
         description: >-
           Petr Kroulík betreibt einen Showroom für Böden, Türen und
@@ -721,20 +881,20 @@ projects:
       - url: "https://framerusercontent.com/images/ts7VthxqIAmrSZgLfGLUxjliw.png"
         type: gallery
         alt:
-          cs: "Cyklocentrum Březí – sekce 4"
-          en: "Cyklocentrum Březí – section 4"
-          de: "Cyklocentrum Březí – Abschnitt 4"
+          cs: "Cyklo Centrum – domovská stránka půjčovny, prodeje a servisu kol"
+          en: "Cyklo Centrum – homepage of the bike rental, sales and service shop"
+          de: "Cyklo Centrum – Startseite von Fahrradverleih, -verkauf und -service"
       - url: "https://framerusercontent.com/images/YiOQN9VFcYx3ZtU82crjfRB2lw.webp"
         type: gallery
         alt:
-          cs: "Cyklocentrum Březí – sekce 5"
-          en: "Cyklocentrum Březí – section 5"
-          de: "Cyklocentrum Březí – Abschnitt 5"
+          cs: "Cyklo Centrum – ceník půjčovny kol na třech mobilních obrazovkách"
+          en: "Cyklo Centrum – bike rental price list on three mobile screens"
+          de: "Cyklo Centrum – Preisliste des Fahrradverleihs auf drei Mobilbildschirmen"
     translations:
       cs:
         title: "Cyklocentrum Březí"
         subtitle: "Záchrana po neúspěšném webaři, postaveno znovu od nuly"
-        summary: "Web cykloservisu a půjčovny, který klient potřeboval znovu — předchozí dodavatel rok pracoval a zanechal po sobě polotovar. Nové zákazníky web přivedl během pár dní."
+        summary: "Web cykloservisu a půjčovny, který klient potřeboval znovu — předchozí dodavatel rok pracoval a zanechal po sobě polotovar. Na klíčové lokální dotazy je dnes web v Googlu první."
         description: >-
           Cyklocentrum Březí nabízí servis kol, půjčovnu a prodej. Po roce
           práce s předchozím dodavatelem skončili s rozjetým, ale
@@ -748,19 +908,19 @@ projects:
           starého webu nedávala smysl — bylo levnější a bezpečnější
           udělat ho znovu pořádně.
         solution: >-
-          Začali jsme analýzou klientova podnikání a pohledem na
-          domácí i zahraniční konkurenci. Navrhl jsem strukturu, copy
-          a vlastní design, vše ručně kódované kvůli robustnosti a
-          rychlosti. Doplnil jsem správu produktů (klient si sám
-          aktualizuje sortiment), Google Maps profil a propagační
-          článek na Kudy z nudy. Web teď odpovídá kvalitě servisu,
-          který nabízí.
+          Začal jsem analýzou klientova podnikání a pohledem na domácí i zahraniční
+          konkurenci. Navrhl jsem strukturu, copy a vlastní design, vše ručně
+          kódované kvůli robustnosti a rychlosti. Doplnil jsem správu produktů
+          (klient si sám aktualizuje sortiment), Google Maps profil a propagační
+          článek na Kudy z nudy. Web teď odpovídá kvalitě servisu, který nabízí.
         result: >-
-          Nový web přivedl první nové zákazníky během pár dní od
-          spuštění. Klient potvrzuje, že má za sebou „prezentaci,
-          kterou je za co schovat". Návštěvník rychle najde, co
-          umíme servisovat, co se dá půjčit a jak nás kontaktovat —
-          tedy přesně to, kvůli čemu na web přichází.
+          Na dotazy jako „cyklocentrum březí" nebo „půjčovna kol březí" je web v
+          Googlu na první pozici a průměrná pozice napříč dotazy se zvedla z 16,8
+          na 8,6 (Search Console, 16. 5. 2025 – 13. 9. 2026). Z Googlu tak
+          přichází víc než polovina veškeré návštěvnosti — 1 780 z 3 149 návštěv
+          (Google Analytics, 1. 1. – 16. 9. 2026). Klient potvrzuje, že má konečně
+          prezentaci, za kterou se nemusí stydět. Návštěvník rychle najde, co se
+          dá nechat opravit, co se dá půjčit a jak se s klientem spojit.
         outcomes:
           - "První nové zákazníky web přivedl během dnů od spuštění"
           - "Klient si sám spravuje sortiment přes admin"
@@ -772,7 +932,7 @@ projects:
       en:
         title: "Cyklocentrum Březí"
         subtitle: "A rescue project — rebuilt from scratch after a year wasted with another vendor"
-        summary: "Bike service and rental website the client needed redone — the previous vendor left them with an unfinished mess. New customers started arriving within days."
+        summary: "Bike service and rental website the client needed redone — the previous vendor left them with an unfinished mess. Today the site ranks first in Google for its key local searches."
         description: >-
           Cyklocentrum Březí offers bike service, rentals and sales. After a
           year with another vendor, they were stuck with a half-built
@@ -786,19 +946,20 @@ projects:
           had closed. Salvaging the old site made no sense — rebuilding
           properly was cheaper and safer.
         solution: >-
-          We started with a deep look at the business and at Czech and
-          foreign competitors. I designed the structure, wrote the copy,
-          and hand-coded the site for robustness and speed. Added a
-          product management module (the client updates inventory
-          themselves), a Google Maps profile, and a promo article on
-          Kudy z nudy. The site now matches the quality of the service
+          I started with a deep look at the business and at Czech and foreign
+          competitors. I designed the structure, wrote the copy, and hand-coded the
+          site for robustness and speed. Added a product management module (the
+          client updates inventory themselves), a Google Maps profile, and a promo
+          article on Kudy z nudy. The site now matches the quality of the service
           behind it.
         result: >-
-          The new site brought the first new customers within days of
-          launch. The client confirms they finally have "a presentation
-          they aren't ashamed of". Visitors quickly find what we service,
-          what's available to rent, and how to get in touch — exactly
-          what they came for.
+          For searches like "cyklocentrum březí" or "půjčovna kol březí" the site
+          ranks first in Google, and its average position across queries rose from
+          16.8 to 8.6 (Search Console, 16 May 2025 – 13 Sep 2026). Google therefore
+          brings more than half of all traffic — 1,780 of 3,149 visits (Google
+          Analytics, 1 Jan – 16 Sep 2026). The client confirms they finally have "a
+          presentation they aren't ashamed of". Visitors quickly find what the
+          workshop services, what's available to rent, and how to get in touch.
         outcomes:
           - "First new customers arrived within days of launch"
           - "Client manages products themselves via admin"
@@ -810,7 +971,7 @@ projects:
       de:
         title: "Cyklocentrum Březí"
         subtitle: "Rettungsprojekt — von Grund auf neu nach einem verlorenen Jahr"
-        summary: "Website für Fahrradservice und Verleih, die der Kunde neu brauchte — der vorherige Anbieter hinterließ ein halbfertiges Chaos. Neue Kunden kamen innerhalb weniger Tage."
+        summary: "Website für Fahrradservice und Verleih, die der Kunde neu brauchte — der vorherige Anbieter hinterließ ein halbfertiges Chaos. Heute steht die Site bei den wichtigsten lokalen Suchen in Google auf Platz eins."
         description: >-
           Cyklocentrum Březí bietet Fahrradservice, Verleih und Verkauf. Nach
           einem Jahr beim vorherigen Anbieter steckten sie mit einer
@@ -824,19 +985,21 @@ projects:
           Den alten Auftritt zu retten war sinnlos; ein sauberer
           Neubau war günstiger und sicherer.
         solution: >-
-          Wir begannen mit einer Analyse des Geschäfts sowie tschechischer
-          und internationaler Wettbewerber. Ich habe Struktur, Texte und
-          eigenes Design entworfen, alles handgecodet für Robustheit und
-          Tempo. Dazu Produktverwaltung (der Kunde aktualisiert das
-          Sortiment selbst), Google-Maps-Profil und ein Werbeartikel auf
-          Kudy z nudy. Die Website entspricht jetzt der Qualität des
-          Service.
+          Ich begann mit einer Analyse des Geschäfts sowie tschechischer und
+          internationaler Wettbewerber. Ich habe Struktur, Texte und eigenes Design
+          entworfen, alles handgecodet für Robustheit und Tempo. Dazu
+          Produktverwaltung (der Kunde aktualisiert das Sortiment selbst),
+          Google-Maps-Profil und ein Werbeartikel auf Kudy z nudy. Die Website
+          entspricht jetzt der Qualität des Service.
         result: >-
-          Die neue Site brachte die ersten neuen Kunden innerhalb weniger
-          Tage. Der Kunde bestätigt: endlich „eine Präsentation, für die
-          man sich nicht schämen muss". Besucher finden schnell, was
-          wir servicen, was zu mieten ist und wie man uns erreicht —
-          genau dafür sind sie da.
+          Bei Suchen wie „cyklocentrum březí" oder „půjčovna kol březí" steht die
+          Site in Google auf Platz eins, und die durchschnittliche Position über
+          alle Suchanfragen verbesserte sich von 16,8 auf 8,6 (Search Console,
+          16.5.2025 – 13.9.2026). Aus Google kommt damit mehr als die Hälfte des
+          gesamten Traffics — 1.780 von 3.149 Besuchen (Google Analytics, 1.1. –
+          16.9.2026). Der Kunde bestätigt: endlich „eine Präsentation, für die man
+          sich nicht schämen muss". Besucher finden schnell, was der Betrieb
+          serviciert, was zu mieten ist und wie man Kontakt aufnimmt.
         outcomes:
           - "Erste neue Kunden innerhalb weniger Tage nach Launch"
           - "Kunde verwaltet Produkte selbst über das Admin-Modul"
@@ -854,7 +1017,6 @@ projects:
     client_name: "Realiťačky v Akci — Magda Pernicová Novotná"
     live_url: https://realitackyvakci.cz/
     year: 2024
-    duration: "září 2024"
     featured: true
     sort_order: 60
     tags: [web, rezervace, admin, blog, branding, copywriting, seo]
@@ -877,25 +1039,25 @@ projects:
           cs: "Realiťačky v Akci – sekce 2"
           en: "Realiťačky v Akci – section 2"
           de: "Realiťačky v Akci – Abschnitt 2"
-      - url: "https://itwebtech.cz/images/projects/realitackyvakci/realitackyvakci_03.webp"
-        type: gallery
-        alt:
-          cs: "Realiťačky v Akci – sekce 3"
-          en: "Realiťačky v Akci – section 3"
-          de: "Realiťačky v Akci – Abschnitt 3"
+      # OND-294 bod 3: `gallery-3` odstraněna. Byla to brandingová nástěnka
+      # s desítkami mikro-textů (archetypy, seznam konkurence, poznámky
+      # k tone of voice) — na stránce nečitelná a působící jako interní
+      # pracovní dokument, ne jako ukázka práce. `path` u `gallery-4` drží
+      # číslování, aby ji seeder neposunul na 3.
       - url: "https://itwebtech.cz/images/projects/realitackyvakci/realitackyvakci_04.webp"
+        path: "projects/realitacky-v-akci/gallery-4.webp"
         type: gallery
         alt:
-          cs: "Realiťačky v Akci – sekce 4"
-          en: "Realiťačky v Akci – section 4"
-          de: "Realiťačky v Akci – Abschnitt 4"
-      - url: "https://itwebtech.cz/images/projects/realitackyvakci/realitackyvakci_05.webp"
-        type: gallery
-        alt:
-          cs: "Realiťačky v Akci – sekce 5"
-          en: "Realiťačky v Akci – section 5"
-          de: "Realiťačky v Akci – Abschnitt 5"
+          cs: "Realiťačky v Akci – správa nabídek nemovitostí v administraci webu"
+          en: "Realiťačky v Akci – property listing management in the site administration"
+          de: "Realiťačky v Akci – Verwaltung der Immobilienangebote im Website-Backend"
+      # OND-268 bod 6: `gallery-5` odstraněna. Byl to marketingový vizuál
+      # rezervačního a pokladního systému pro fitness („FitnessGym",
+      # permanentky, věrnostní body) — k tomuhle projektu nepatří a podle
+      # kontroly všech 101 snímků galerií (OND-260) ani k žádnému jinému.
+      # `path` u `gallery-6` drží číslování, aby ji seeder neposunul na 5.
       - url: "https://itwebtech.cz/images/projects/realitackyvakci/realitackyvakci_06.webp"
+        path: "projects/realitacky-v-akci/gallery-6.webp"
         type: gallery
         alt:
           cs: "Realiťačky v Akci – sekce 6"
@@ -913,11 +1075,11 @@ projects:
           správou nemovitostí, blogem a brandingem postaveným ze stejného
           ducha jako její práce.
         challenge: >-
-          Makléřka potřebovala web, který nebude jen „WordPress vizitka"
-          a nebude generovat měsíční náklady. Měla působit profesionálně,
-          ale lidsky, a měla z webu jít poznat, jak pracuje. Část
-          nabídek neměla kvalitní fotky a klientka neuměla webové
-          systémy — řešení muselo být sebevysvětlující.
+          Makléřka potřebovala web, který nebude jen „WordPress vizitka" a nebude
+          generovat měsíční náklady. Web měl působit profesionálně, ale lidsky, a
+          mělo z něj jít poznat, jak makléřka pracuje. Část nabídek neměla
+          kvalitní fotky a klientka neuměla webové systémy — řešení muselo být
+          sebevysvětlující.
         solution: >-
           Web je naprogramovaný od základu, bez šablonového CMS. Klient
           má admin pro nemovitosti, poptávky a blog, takže si všechno
@@ -1031,21 +1193,21 @@ projects:
       - url: "https://framerusercontent.com/images/04979nLksOVVZT5HBjnMKNzg0.png"
         type: hero
         alt:
-          cs: "Zubní Provázek – domovská stránka zubní ordinace s lokálním SEO"
-          en: "Zubní Provázek – homepage of the dental practice with local SEO"
-          de: "Zubní Provázek – Startseite der Zahnarztpraxis mit lokalem SEO"
+          cs: "Zubní Provázek – administrace webu: úprava ordinačních hodin"
+          en: "Zubní Provázek – site administration: editing the opening hours"
+          de: "Zubní Provázek – Website-Verwaltung: Bearbeitung der Sprechzeiten"
       - url: "https://framerusercontent.com/images/oHRxCrCbgpiR3s5r1s9OScGjmgE.png"
         type: gallery
         alt:
-          cs: "Zubní Provázek – sekce 1"
-          en: "Zubní Provázek – section 1"
-          de: "Zubní Provázek – Abschnitt 1"
+          cs: "Zubní Provázek – domovská stránka zubní ordinace"
+          en: "Zubní Provázek – homepage of the dental practice"
+          de: "Zubní Provázek – Startseite der Zahnarztpraxis"
       - url: "https://framerusercontent.com/images/Qz1O7nzK3WGd5dLTcedMU3Ihok.png"
         type: gallery
         alt:
-          cs: "Zubní Provázek – sekce 2"
-          en: "Zubní Provázek – section 2"
-          de: "Zubní Provázek – Abschnitt 2"
+          cs: "Zubní Provázek – web ordinace na tabletu, logo a tým v ordinaci"
+          en: "Zubní Provázek – the practice website on a tablet, logo and the team"
+          de: "Zubní Provázek – Praxis-Website auf dem Tablet, Logo und das Team"
       - url: "https://framerusercontent.com/images/WyrWv7O1Lhq9i3sbk9NAq0ZD0WM.png"
         type: gallery
         alt:
@@ -1055,20 +1217,37 @@ projects:
       - url: "https://framerusercontent.com/images/Z93ZKiajg8sH7vlh2jyFmvjvhnY.png"
         type: gallery
         alt:
-          cs: "Zubní Provázek – sekce 4"
-          en: "Zubní Provázek – section 4"
-          de: "Zubní Provázek – Abschnitt 4"
+          cs: "Zubní Provázek – článek na blogu ordinace"
+          en: "Zubní Provázek – an article on the practice blog"
+          de: "Zubní Provázek – ein Artikel im Blog der Praxis"
       - url: "https://framerusercontent.com/images/zPHkujYnsVFlKP76UKAVcCXo.png"
         type: gallery
         alt:
-          cs: "Zubní Provázek – sekce 5"
-          en: "Zubní Provázek – section 5"
-          de: "Zubní Provázek – Abschnitt 5"
+          cs: "Zubní Provázek – informace pro pacienty a ordinační doba na notebooku"
+          en: "Zubní Provázek – patient information and opening hours on a laptop"
+          de: "Zubní Provázek – Patienteninformationen und Sprechzeiten auf dem Notebook"
+      # OND-294 bod 7: miniatura karty projektu se dosud brala z prvního
+      # čtvercového snímku, a tím je po výměně hera z OND-263 `hero-1.png` —
+      # tmavý notebook s administrací ordinačních hodin. Jako pozvánka na
+      # redesign webu zubní ordinace to neříká nic, a karta je vidět na
+      # `/projekty` i v „Dalších projektech" po celém webu.
+      # `portfolio_card_thumbnail()` dává přednost `type = 'thumbnail'`,
+      # šablona detailu takové řádky naopak vynechává — proto ukazujeme
+      # na TÝŽ soubor jako `gallery-2` (tablet s logem ordinace a týmem
+      # v ordinaci). Nic nového se nenačítá a galerie zůstane beze změny.
+      # Stejný nástroj jako u HCMS a VAN spedition (OND-268).
+      - url: "https://framerusercontent.com/images/Qz1O7nzK3WGd5dLTcedMU3Ihok.png"
+        path: "projects/zubni-provazek/gallery-2.png"
+        type: thumbnail
+        alt:
+          cs: "Zubní Provázek – web ordinace na tabletu, logo a tým v ordinaci"
+          en: "Zubní Provázek – the practice website on a tablet, logo and the team"
+          de: "Zubní Provázek – Praxis-Website auf dem Tablet, Logo und das Team"
     translations:
       cs:
         title: "Zubní Provázek"
         subtitle: "Redesign ordinace s důrazem na lokální vyhledávání"
-        summary: "Redesign webu zubní ordinace v Hraběticích — moderní vzhled, kompletní informace o ošetřeních, blog a lokální SEO. Po spuštění více poptávek od pacientů."
+        summary: "Redesign webu zubní ordinace v Hraběticích — moderní vzhled, kompletní informace o ošetřeních, blog a lokální SEO. Na dotaz „zubař Hrabětice\" je ordinace v Googlu první."
         description: >-
           MDDr. Václav Provázek vede zubní ordinaci v Hraběticích.
           Původní web byl zastaralý, nečitelný na mobilu a nedával
@@ -1086,11 +1265,11 @@ projects:
           dál rozšiřovat. Lokální SEO cílí na klíčová slova „zubní
           lékař Hrabětice" a „dentální hygiena Hrabětice".
         result: >-
-          Klient po spuštění zaznamenal vyšší zájem o ošetření a
-          pozitivní reakce na úplnost informací a profesionální dojem.
-          Web teď konkrétně přesvědčuje pacienty, že ordinace funguje
-          moderně a transparentně — což je v lokální zdravotnické péči
-          rozhodující.
+          Na klíčový lokální dotaz „zubař Hrabětice" je ordinace v Googlu na první
+          pozici a z Googlu přichází většina veškeré návštěvnosti — 460 z 524
+          návštěv (Google Analytics, 1. 1. – 16. 9. 2026). Web pacientům odpovídá na
+          to, na co se dřív museli ptát telefonem: ceny, přehled ošetření, otevírací
+          doba a umístění.
         outcomes:
           - "Po spuštění zaznamenán vyšší zájem o ošetření"
           - "Kompletní info o ošetřeních, cenách a FAQ"
@@ -1102,7 +1281,7 @@ projects:
       en:
         title: "Zubní Provázek"
         subtitle: "Dental practice redesign with local SEO focus"
-        summary: "Redesign for a dental practice in Hrabětice — modern look, full treatment information, a blog, and local SEO. More patient enquiries after launch."
+        summary: "Redesign for a dental practice in Hrabětice — modern look, full treatment information, a blog, and local SEO. The practice ranks first in Google for \"zubař Hrabětice\"."
         description: >-
           MDDr. Václav Provázek runs a dental practice in Hrabětice.
           The old site looked dated, didn't work on mobile, and left
@@ -1122,11 +1301,11 @@ projects:
           extend. Local SEO targets keywords like "dentist Hrabětice"
           and "dental hygiene Hrabětice".
         result: >-
-          Post-launch the client recorded higher interest in treatments
-          and positive feedback on the completeness of the information
-          and the professional impression. The site now actively
-          convinces patients that the practice operates transparently
-          and modernly — decisive for local healthcare.
+          The practice ranks first in Google for its key local search, "zubař
+          Hrabětice", and Google brings most of all traffic — 460 of 524 visits
+          (Google Analytics, 1 Jan – 16 Sep 2026). The site answers what patients
+          used to have to ask over the phone: prices, treatment overview, opening
+          hours and location.
         outcomes:
           - "Higher patient interest recorded after launch"
           - "Complete treatment, pricing and FAQ information"
@@ -1138,7 +1317,7 @@ projects:
       de:
         title: "Zubní Provázek"
         subtitle: "Redesign einer Zahnarztpraxis mit Fokus auf lokales SEO"
-        summary: "Redesign für eine Zahnarztpraxis in Hrabětice — moderne Optik, vollständige Behandlungsinfos, Blog und lokales SEO. Mehr Patientenanfragen nach dem Launch."
+        summary: "Redesign für eine Zahnarztpraxis in Hrabětice — moderne Optik, vollständige Behandlungsinfos, Blog und lokales SEO. Bei der Suche „zubař Hrabětice\" steht die Praxis in Google auf Platz eins."
         description: >-
           MDDr. Václav Provázek führt eine Zahnarztpraxis in Hrabětice.
           Die alte Website wirkte veraltet, war auf dem Handy
@@ -1158,12 +1337,11 @@ projects:
           selbst erweitern kann. Lokales SEO zielt auf Begriffe wie
           „Zahnarzt Hrabětice" und „Dentalhygiene Hrabětice".
         result: >-
-          Nach dem Launch verzeichnete der Kunde höheres Interesse an
-          Behandlungen und positive Reaktionen auf die Vollständigkeit
-          der Informationen und den professionellen Eindruck. Die Site
-          überzeugt Patienten aktiv davon, dass die Praxis modern und
-          transparent arbeitet — in der lokalen Gesundheitsversorgung
-          entscheidend.
+          Bei der zentralen lokalen Suche „zubař Hrabětice" steht die Praxis in
+          Google auf Platz eins, und aus Google kommt der Großteil des gesamten
+          Traffics — 460 von 524 Besuchen (Google Analytics, 1.1. – 16.9.2026). Die
+          Site beantwortet, was Patienten früher telefonisch fragen mussten: Preise,
+          Behandlungsübersicht, Öffnungszeiten und Anfahrt.
         outcomes:
           - "Nach Launch höheres Patienteninteresse verzeichnet"
           - "Vollständige Behandlungs-, Preis- und FAQ-Infos"
@@ -1189,39 +1367,42 @@ projects:
       - url: "https://framerusercontent.com/images/BIf60XsCyeCTbYOiX9rKTeuU0.webp"
         type: hero
         alt:
-          cs: "VP Industry – domovská stránka průmyslového webu"
-          en: "VP Industry – homepage of the industrial website"
-          de: "VP Industry – Startseite der Industrie-Website"
-      - url: "https://framerusercontent.com/images/kCezUd7rLRv3PzcbPrUQK600N6Y.webp"
-        type: gallery
-        alt:
-          cs: "VP Industry – sekce 1"
-          en: "VP Industry – section 1"
-          de: "VP Industry – Abschnitt 1"
+          cs: "VP Industry – katalog značících laserů na tabletu"
+          en: "VP Industry – catalogue of marking lasers on a tablet"
+          de: "VP Industry – Katalog der Markierlaser auf einem Tablet"
+      # OND-294 bod 6: `gallery-1` odstraněna. Byla to stránka dokumentu
+      # „Analýza konkurence" s legendou ŠPATNĚ/DOBRÉ — textový podklad mezi
+      # ukázkami webu, navíc se jménem klienta a číslem analýzy v hlavičce.
+      # Analýza je popsaná v textu případovky, obrázek k ní nic nepřidával.
+      # `path` u zbylých čtyř je explicitní, aby je seeder nepřečísloval.
       - url: "https://framerusercontent.com/images/uiQvFy0kAI9J0CCdhXPs0PLfEr8.webp"
+        path: "projects/vp-industry/gallery-2.webp"
         type: gallery
         alt:
-          cs: "VP Industry – sekce 2"
-          en: "VP Industry – section 2"
-          de: "VP Industry – Abschnitt 2"
+          cs: "VP Industry – domovská stránka webu pro průmyslové značení"
+          en: "VP Industry – homepage of the industrial marking website"
+          de: "VP Industry – Startseite der Website für industrielle Kennzeichnung"
       - url: "https://framerusercontent.com/images/w4E0n0ywwDBuq9z8QyDwJTVH9To.webp"
+        path: "projects/vp-industry/gallery-3.webp"
         type: gallery
         alt:
           cs: "VP Industry – sekce 3"
           en: "VP Industry – section 3"
           de: "VP Industry – Abschnitt 3"
       - url: "https://framerusercontent.com/images/X5kDFut5iwyTM7bCs67ea9hMPg.webp"
+        path: "projects/vp-industry/gallery-4.webp"
         type: gallery
         alt:
-          cs: "VP Industry – sekce 4"
-          en: "VP Industry – section 4"
-          de: "VP Industry – Abschnitt 4"
+          cs: "VP Industry – článek o typech značících laserů na tabletu"
+          en: "VP Industry – article on types of marking lasers on a tablet"
+          de: "VP Industry – Artikel über Typen von Markierlasern auf einem Tablet"
       - url: "https://framerusercontent.com/images/YIv52DqTXQ6ZNAMJ1A84kZ6lYQ.webp"
+        path: "projects/vp-industry/gallery-5.webp"
         type: gallery
         alt:
-          cs: "VP Industry – sekce 5"
-          en: "VP Industry – section 5"
-          de: "VP Industry – Abschnitt 5"
+          cs: "VP Industry – články webu na mobilních obrazovkách"
+          en: "VP Industry – the site's articles on mobile screens"
+          de: "VP Industry – Artikel der Website auf Mobilbildschirmen"
     translations:
       cs:
         title: "VP Industry"
@@ -1240,17 +1421,17 @@ projects:
           strukturu a webovou architekturu, která tomuhle růstu
           neudělá překážku.
         solution: >-
-          Začali jsme analýzou konkurence a mapováním klíčových slov.
-          Web má detailní produktové stránky s technickými specifikacemi,
-          ukázkovými videi a případovými studiemi. SEO je technicky
-          správně, analytika napojená a struktura počítá s budoucími
-          články. Vše připravené, aby kampaň jen sedla na hotový základ.
+          Začal jsem analýzou konkurence a mapováním klíčových slov. Web má detailní
+          produktové stránky s technickými specifikacemi, ukázkovými videi a
+          případovými studiemi. SEO je technicky správně, analytika napojená a
+          struktura počítá s budoucími články. Vše připravené, aby kampaň jen sedla
+          na hotový základ.
         result: >-
-          Web je technicky připravený na růst — chybí jen aktivní
-          obsahová a kampaňová práce, kterou klient zatím odložil.
-          Potenciál pro organický růst je v infrastruktuře nachystaný
-          a čeká na další fázi. Tohle je férový výsledek: dělám to,
-          co bylo zadáno, a otevřeně říkám, kde leží další kus práce.
+          Klient dostal web, který je technicky hotový: produktové stránky s
+          parametry a videi, správně nastavené SEO, napojenou analytiku a
+          strukturu, která unese další články bez přestavby. Obsahovou a
+          kampaňovou fázi zatím odložil — až ji zapne, nic se nebude muset
+          předělávat.
         outcomes:
           - "Konkurenční a klíčová analýza jako základ struktury"
           - "Detailní produktové stránky s technickou specifikací"
@@ -1270,17 +1451,16 @@ projects:
           content. Competitor analysis, keywords, copy and structure
           are now in place — the technical foundation is done.
         challenge: >-
-          The client wanted a site set up for long-term organic growth,
-          not a few-month marketing burst. We had to understand the
-          competitive landscape, define keywords, and build content
-          and architecture that would not block that growth.
+          The client wanted a site set up for long-term organic growth, not a
+          few-month marketing burst. The job was to understand the competitive
+          landscape, define keywords, and build content and architecture that would
+          not block that growth.
         solution: >-
-          We started with competitor research and keyword mapping.
-          The site has detailed product pages with technical specs,
-          sample videos and case studies. SEO is technically clean,
-          analytics is in place, and the structure assumes future
-          articles. The infrastructure is ready — a content campaign
-          can drop straight onto it.
+          I started with competitor research and keyword mapping. The site has
+          detailed product pages with technical specs, sample videos and case
+          studies. SEO is technically clean, analytics is in place, and the
+          structure assumes future articles. The infrastructure is ready — a content
+          campaign can drop straight onto it.
         result: >-
           The site is technically ready to grow; what's missing is the
           active content and campaign work the client has paused for
@@ -1312,12 +1492,11 @@ projects:
           Content-Architektur aufzubauen, die diesem Wachstum nicht
           im Weg steht.
         solution: >-
-          Wir starteten mit Wettbewerbs- und Keyword-Recherche. Die
-          Site hat detaillierte Produktseiten mit technischen Specs,
-          Videos und Case Studies. SEO ist technisch sauber, Analytics
-          läuft, und die Struktur rechnet mit zukünftigen Artikeln.
-          Die Infrastruktur ist bereit — eine Content-Kampagne kann
-          direkt aufsetzen.
+          Ich startete mit Wettbewerbs- und Keyword-Recherche. Die Site hat
+          detaillierte Produktseiten mit technischen Specs, Videos und Case Studies.
+          SEO ist technisch sauber, Analytics läuft, und die Struktur rechnet mit
+          zukünftigen Artikeln. Die Infrastruktur ist bereit — eine Content-Kampagne
+          kann direkt aufsetzen.
         result: >-
           Technisch ist die Site bereit zu wachsen; was fehlt, ist die
           aktive Content- und Kampagnenarbeit, die der Kunde derzeit
@@ -1557,11 +1736,10 @@ projects:
           stavební úpravy), zařídit galerii referencí a navíc
           tematické články, které pomáhají SEO i důvěře.
         solution: >-
-          Postavil jsem responzivní web s katalogem služeb, podrobnými
-          popisy a galerií fotek z hotových zakázek. K tomu logo,
-          obsahová optimalizace a články o oboru. Web funguje stejně
-          dobře na desktopu i na chytrém telefonu, kterým si Honzové
-          ze stavby běžně ověřují, „ten chlap jak se jmenuje".
+          Postavil jsem responzivní web s katalogem služeb, podrobnými popisy a
+          galerií fotek z hotových zakázek. K tomu logo, obsahová optimalizace a
+          články o oboru. Web funguje stejně dobře na počítači i na telefonu — a
+          právě z telefonu si lidé firmu nejčastěji vyhledají.
         result: >-
           Klient má důstojnou prezentaci, která reprezentuje řemeslo,
           ne lacinou stavbařskou stránku. Zakázky se objednávají na
@@ -1586,11 +1764,10 @@ projects:
           had to deliver: a gallery of completed jobs, clear service
           descriptions, and a logo that strengthens the brand.
         challenge: >-
-          The client needed a presentation that proves quality of work
-          more convincingly than a few Facebook photos. We had to
-          structure the services (roof reconstruction, carpentry,
-          building work), set up a reference gallery, and add trade
-          articles that support SEO and trust.
+          The client needed a presentation that proves quality of work more
+          convincingly than a few Facebook photos. The job was to structure the
+          services (roof reconstruction, carpentry, building work), set up a
+          reference gallery, and add trade articles that support SEO and trust.
         solution: >-
           A responsive site with a service catalogue, detailed
           descriptions, and a photo gallery of completed projects.
@@ -1656,7 +1833,6 @@ projects:
     client_name: "Josef Opa"
     live_url: https://josefopa.de/
     year: 2024
-    duration: "říjen 2024"
     featured: false
     sort_order: 110
     tags: [web, vicejazycny, branding, logo, e-mail, vizitky, stavebnictvi]
@@ -1673,19 +1849,14 @@ projects:
           cs: "Josef Opa – sekce 1"
           en: "Josef Opa – section 1"
           de: "Josef Opa – Abschnitt 1"
-      - url: "https://itwebtech.cz/images/projects/josefopa/josefopa_00.webp"
-        type: gallery
-        alt:
-          cs: "Josef Opa – sekce 2"
-          en: "Josef Opa – section 2"
-          de: "Josef Opa – Abschnitt 2"
-      - url: "https://itwebtech.cz/images/projects/josefopa/josefopa_01.webp"
-        type: gallery
-        alt:
-          cs: "Josef Opa – sekce 3"
-          en: "Josef Opa – section 3"
-          de: "Josef Opa – Abschnitt 3"
+      # OND-268: `gallery-2` (josefopa_00) a `gallery-3` (josefopa_01) odstraněny.
+      # Po výměně hero za čistou bílou verzi mockupu byl `gallery-2` jeho
+      # doslovný duplikát; `gallery-3` byla mřížka klipartových maskotů
+      # s useknutými popisky. Soubory zůstávají v repu, jen je nic nereferencuje.
+      # `path` níž je explicitní schválně: seeder jinak čísluje podle pořadí
+      # v seznamu a `josefopa_02` by se přejmenovala na `gallery-2`.
       - url: "https://itwebtech.cz/images/projects/josefopa/josefopa_02.webp"
+        path: "projects/josefopa/gallery-4.webp"
         type: gallery
         alt:
           cs: "Josef Opa – sekce 4"
@@ -1694,7 +1865,7 @@ projects:
     translations:
       cs:
         title: "Josef Opa"
-        subtitle: "Vícejazyčná prezentace stavební firmy s vlastním brandem"
+        subtitle: "Dvojjazyčná prezentace stavební firmy s vlastním brandem"
         summary: "Web pro stavební firmu působící v Německu — dvojjazyčná prezentace (DE/EN), vlastní logo, business e-mail a vizitky s QR kódem."
         description: >-
           Josef Opa řeší rekonstrukce, modernizace a stavby od A do Z.
@@ -1703,16 +1874,16 @@ projects:
           dvojjazyčný web a navrhl logo, e-mailovou identitu a vizitky
           s QR kódem.
         challenge: >-
-          Klient potřeboval visačku stavební firmy, která bude působit
-          jako solidní lokální partner v Německu. Bez vlastního brandu,
-          bez webu a bez konzistentní identity v ničem nevyčníval.
-          Vícejazyčnost byla zásadní — komunikace s klienty probíhá
-          převážně německy, ale poptávky chodí i v angličtině.
+          Klient potřeboval, aby jeho stavební firma v Německu působila jako
+          solidní lokální partner. Bez vlastního brandu, bez webu a bez
+          konzistentní identity v ničem nevyčníval. Dvojjazyčnost byla zásadní —
+          komunikace s klienty probíhá převážně německy, ale poptávky chodí i v
+          angličtině.
         solution: >-
-          Postavil jsem responzivní vícejazyčný web, navrhl výrazné a
-          hravé logo, nastavil profesionální e-mail na vlastní doméně
-          a vyrobil vizitky s QR kódem směrujícím přímo na web.
-          Drobné animace doplňují web bez toho, aby ho zpomalovaly.
+          Postavil jsem responzivní dvojjazyčný web v němčině a angličtině, navrhl
+          výrazné a hravé logo, nastavil profesionální e-mail na vlastní doméně a
+          vyrobil vizitky s QR kódem směrujícím přímo na web. Drobné animace
+          doplňují web bez toho, aby ho zpomalovaly.
         result: >-
           Stavební firma má jednotnou identitu napříč webem, e-mailem
           i tištěnými vizitkami. Klient působí důvěryhodně na obou
@@ -1725,7 +1896,7 @@ projects:
           - "Konzistentní brand napříč digitálem i tiskem"
           - "Profesionální e-mail na vlastní doméně"
           - "Připraveno pro lokální stavební trh v Německu"
-        meta_title: "Josef Opa — vícejazyčný web stavební firmy v Německu"
+        meta_title: "Josef Opa — dvojjazyčný web stavební firmy v Německu"
         meta_description: "Případová studie: dvojjazyčný web (DE/EN) pro stavební firmu, logo, business e-mail a vizitky s QR kódem."
       en:
         title: "Josef Opa"
@@ -1811,7 +1982,6 @@ projects:
     client_name: "VAN spedition — Antonín Vrbka"
     live_url: https://www.vanspedition.com/
     year: 2023
-    duration: "kratší realizace"
     featured: false
     sort_order: 120
     tags: [web, mikroweb, logistika, b2b]
@@ -1834,6 +2004,25 @@ projects:
           cs: "VAN spedition – sekce 2"
           en: "VAN spedition – section 2"
           de: "VAN spedition – Abschnitt 2"
+      # OND-268: protějšek „po" k předchozímu „před". Vlastní snímek,
+      # žádné zdrojové `url` — proto explicitní `path`.
+      - path: "projects/vanspedition/gallery-3.webp"
+        type: gallery
+        alt:
+          cs: "VAN spedition – dnešní podoba webu, protějšek snímku původní verze"
+          en: "VAN spedition – the current website, counterpart to the shot of the old version"
+          de: "VAN spedition – die heutige Website als Gegenstück zur alten Version"
+      # OND-268: pojistka miniatury, ne nový obrázek — ukazuje na TÝŽ soubor
+      # jako hero. `portfolio_card_thumbnail()` bere první skoro čtvercový
+      # snímek dřív než hero, a „před" (`gallery-2`, starý červený web) je po
+      # doplnění na 1:1 přesně takový. Bez tohohle řádku by karta projektu
+      # v /projekty i v „Další projekty" ukazovala web, který jsme nahradili.
+      - path: "projects/vanspedition/hero-1.webp"
+        type: thumbnail
+        alt:
+          cs: "VAN spedition – domovská stránka mikrowebu logistické firmy"
+          en: "VAN spedition – homepage of the logistics company micro-site"
+          de: "VAN spedition – Startseite der Logistikunternehmens-Microsite"
     translations:
       cs:
         title: "VAN spedition"
@@ -1847,9 +2036,9 @@ projects:
           dává smysl: ozvat se.
         challenge: >-
           Pro spediční firmu nemá smysl obsáhlý web s dvaceti podstránkami.
-          Klienti potřebují rychle vědět, co umíte, kdo to dělá a jak se
-          ozvat. Cílem bylo dostat všechno podstatné na jednu stránku
-          a nezatěžovat návštěvníka.
+          Zákazníci spedice potřebují rychle vědět, co firma umí, kdo za ní stojí
+          a jak se ozvat. Cílem bylo dostat všechno podstatné na jednu stránku a
+          nezatěžovat návštěvníka.
         solution: >-
           Mikroweb s jasnou strukturou a důrazem na rychlost. Hlavní
           informace, klíčové výhody, kontakt — vše v dohledu. Vizuál
@@ -1937,14 +2126,14 @@ projects:
         meta_description: "Case Study: Logistik-Microsite mit klarem Weg zum Kontakt — kein Füllstoff, alles Wesentliche im Blick."
 
   # ----------------------------------------------------------------------
-  # 13) YOLK — agenturní spolupráce na klinikových portálech
+  # 13) YOLK — agenturní spolupráce na klinických portálech
   # ----------------------------------------------------------------------
   - slug: yolk
     category: website
     client_name: "YOLK Studio (Peter Vidlička)"
     live_url: null  # agenturní práce na vícero klientech (unica.cz, reproclinic.com)
     year: 2025
-    duration: "průběžná spolupráce"
+    duration: "průběžně od 2025"
     featured: false
     sort_order: 130
     tags: [web, wordpress, agenturni-spoluprace, vyvoj, udrzba]
@@ -1952,24 +2141,24 @@ projects:
       - url: "https://itwebtech.cz/images/projects/yolk/yolk_preview.jpg"
         type: hero
         alt:
-          cs: "YOLK – ukázka klinikového portálu spravovaného agenturou"
+          cs: "YOLK – ukázka klinického portálu spravovaného agenturou"
           en: "YOLK – preview of an agency-managed clinic portal"
           de: "YOLK – Vorschau eines agenturbetreuten Klinikportals"
       - url: "https://itwebtech.cz/images/projects/yolk/unica_introduction.webp"
         type: gallery
         alt:
-          cs: "YOLK — vývoj na klinikových portálech – sekce 1"
+          cs: "YOLK — vývoj na klinických portálech – sekce 1"
           en: "YOLK — agency development on clinic portals – section 1"
           de: "YOLK — Agentur-Entwicklung auf Klinikportalen – Abschnitt 1"
       - url: "https://itwebtech.cz/images/projects/yolk/reproclinic_introduction.webp"
         type: gallery
         alt:
-          cs: "YOLK — vývoj na klinikových portálech – sekce 2"
+          cs: "YOLK — vývoj na klinických portálech – sekce 2"
           en: "YOLK — agency development on clinic portals – section 2"
           de: "YOLK — Agentur-Entwicklung auf Klinikportalen – Abschnitt 2"
     translations:
       cs:
-        title: "YOLK — vývoj na klinikových portálech"
+        title: "YOLK — vývoj na webech zdravotnických klinik"
         subtitle: "Agenturní vývoj a údržba na webech zdravotnických portálů"
         summary: "Průběžná spolupráce s agenturou YOLK na rozsáhlých webech (unica.cz, reproclinic.com) — sezónní úpravy, formuláře, custom funkce nad WordPressem."
         description: >-
@@ -1979,17 +2168,16 @@ projects:
           formulářů, ladění grafiky a custom funkce, které sahají za
           možnosti standardního WordPressu.
         challenge: >-
-          Agentura má klienty s rozsáhlými portály, kde každý drobný
-          chybný kus tlačí dolů kvalitu zákaznické zkušenosti pacientů.
-          Bylo potřeba spolehlivě udržovat běh, dělat sezónní změny v
-          akcích a dotazníkách a doplňovat custom funkce, které
-          WordPress sám neumí.
+          Agentura má klienty s rozsáhlými weby, na kterých si pacienti hledají
+          péči — každá drobná chyba tam shazuje dojem z celé kliniky. Bylo potřeba
+          weby spolehlivě držet v chodu, dělat sezónní změny v akcích a
+          dotaznících a doplňovat funkce, které WordPress sám neumí.
         solution: >-
-          Pracuji jako externí vývojář na konkrétní zakázky — sezónní
-          úpravy, opravy chyb, custom PHP/JS rozšíření a úpravy
-          formulářů. Komunikace probíhá rovnou s týmem agentury,
-          výstup je pro klienty agentury prakticky neviditelný v tom
-          dobrém smyslu — všechno jede.
+          Pracuji jako externí vývojář na konkrétní zakázky — sezónní úpravy,
+          opravy chyb, rozšíření v PHP a JavaScriptu a úpravy formulářů. WordPress
+          na nových webech nestavím, ale když na něm klient už stojí, umím ho
+          opravit a udržet v chodu. Komunikace jde rovnou s týmem agentury a
+          pacient z mojí práce nepozná nic — a přesně o to jde.
         result: >-
           Agentura získala spolehlivého technického partnera na
           zakázky, které vyžadují kvalifikovaný vývojový zásah.
@@ -2001,7 +2189,7 @@ projects:
           - "Custom funkce nad rámec standardního WordPressu"
           - "Rychlá reakce na chyby a požadavky klientů agentury"
           - "5/5 hvězd v referenci YOLK"
-        meta_title: "YOLK — agenturní vývoj na klinikových portálech"
+        meta_title: "YOLK — agenturní vývoj na klinických portálech"
         meta_description: "Případová studie: dlouhodobý vývoj a údržba pro studio YOLK na rozsáhlých webech (unica.cz, reproclinic.com)."
       en:
         title: "YOLK — agency development on clinic portals"
@@ -2082,7 +2270,6 @@ projects:
     client_name: "Elektro Srnák — Lukáš Srnák"
     live_url: null  # web od poloviny 2025 bez hostingu
     year: 2023
-    duration: "kratší realizace"
     featured: false
     sort_order: 140
     tags: [web, mikroweb, vizitka, seo, lokalni-podnikani]
@@ -2272,18 +2459,16 @@ projects:
           operace a vedoucímu týmu nabízí přehled v reálném čase.
           Postaveno pro běh ve výrobním prostředí.
         challenge: >-
-          Vychystávání dílů musí běžet rychle a bez chyb — chyba
-          znamená vrácení k regálu, zpoždění a stojící linku. Klasické
-          „papír s checklistem" v Toyotě tempo neudržel a navíc
-          neumožňoval vedoucím vidět, co se právě děje. Bylo potřeba
-          systém, který pracovníka vede a vedoucímu dává přehled.
+          Vychystávání dílů musí běžet rychle a bez chyb — chyba znamená vrácení k
+          regálu, zpoždění a stojící linku. Klasický papír s checklistem v Toyotě
+          tempo neudržel a navíc neumožňoval vedoucím vidět, co se právě děje.
+          Bylo potřeba systém, který pracovníka vede a vedoucímu dává přehled.
         solution: >-
-          Webová aplikace s rozhraním pro pracovníky (instrukce,
-          ruční navigace, čtečka kódů, časomíra), monitorovacím
-          dashboardem pro vedoucí a admin sekcí pro konfiguraci
-          procesů. Funguje na výšku i šířku, podle situace na hale.
-          Doplnil jsem hlášení problémů, takže pracovník nemusí běhat
-          a hlásit ústně.
+          Webová aplikace s rozhraním pro pracovníky (instrukce, ruční navigace,
+          čtečka kódů, časomíra), přehledovou obrazovkou pro vedoucího a
+          nastavením, ve kterém si firma sama upraví průběh procesů. Funguje na
+          výšku i šířku, podle situace na hale. Doplnil jsem hlášení problémů,
+          takže pracovník nemusí běhat a hlásit ústně.
         result: >-
           Klient získal řídicí systém, který drží tempo a zároveň
           dává vedoucímu kontrolu. Pracovník nezůstává sám —
@@ -2393,18 +2578,31 @@ projects:
           cs: "Choccoboard – BI dashboard se strategickými výrobními metrikami"
           en: "Choccoboard – BI dashboard with strategic production metrics"
           de: "Choccoboard – BI-Dashboard mit strategischen Produktionsmetriken"
+      # OND-294 bod 1: v obou dashboardech je přes hodnoty v KPI tabulce
+      # a ve sloupci „Tržby" u TOP 10 položek jednolitá šedá plocha. Je to
+      # anonymizace klientových čísel, ale bez popisku se čte jako
+      # nedonačtený obsah. Popisek to pojmenuje; do obrázků nesaháme,
+      # jsou to podklady klienta.
       - url: "https://itwebtech.cz/images/projects/choccoboard/choccoboard_01.webp"
         type: gallery
         alt:
-          cs: "Choccoboard — strategický dashboard – sekce 1"
-          en: "Choccoboard — strategic dashboard – section 1"
-          de: "Choccoboard — strategisches Dashboard – Abschnitt 1"
+          cs: "Choccoboard – přehledová obrazovka s KPI tabulkou a TOP 10 položek na notebooku"
+          en: "Choccoboard – overview screen with the KPI table and top 10 items on a laptop"
+          de: "Choccoboard – Übersichtsbildschirm mit KPI-Tabelle und Top-10-Positionen auf dem Notebook"
+        caption:
+          cs: "Konkrétní tržby jsou na přání klienta zakryté."
+          en: "The actual revenue figures are masked at the client's request."
+          de: "Die konkreten Umsatzzahlen sind auf Wunsch des Kunden ausgeblendet."
       - url: "https://itwebtech.cz/images/projects/choccoboard/choccoboard_02.webp"
         type: gallery
         alt:
-          cs: "Choccoboard — strategický dashboard – sekce 2"
-          en: "Choccoboard — strategic dashboard – section 2"
-          de: "Choccoboard — strategisches Dashboard – Abschnitt 2"
+          cs: "Choccoboard – tentýž přehled na tabletu a na mobilu"
+          en: "Choccoboard – the same overview on a tablet and on a phone"
+          de: "Choccoboard – dieselbe Übersicht auf Tablet und Smartphone"
+        caption:
+          cs: "Konkrétní tržby jsou na přání klienta zakryté."
+          en: "The actual revenue figures are masked at the client's request."
+          de: "Die konkreten Umsatzzahlen sind auf Wunsch des Kunden ausgeblendet."
       - url: "https://itwebtech.cz/images/projects/choccoboard/choccoboard_03.webp"
         type: gallery
         alt:
@@ -2414,13 +2612,13 @@ projects:
     translations:
       cs:
         title: "Choccoboard — strategický dashboard"
-        subtitle: "BI dashboard, který nahradil 30 minut ruční práce denně"
+        subtitle: "Přehled prodejních čísel, který nahradil 30 minut ruční práce denně"
         summary: "Webový dashboard pro vedení tradičního výrobce pralinek — prodejní KPI a klíčové ukazatele dostupné okamžitě, místo 30 minut ručního stahování dat."
         description: >-
-          Choccoboard je webová aplikace pro vedení firmy, která
-          zpřístupňuje prodejní KPI a klíčové ukazatele v reálném
-          čase z jakéhokoli zařízení. Dříve management trávil 30 minut
-          denně ručním stahováním a skládáním dat — to už není potřeba.
+          Choccoboard je webová aplikace pro vedení firmy: ukazuje aktuální
+          prodejní čísla a další klíčové ukazatele z jakéhokoli zařízení. Dříve
+          management trávil 30 minut denně ručním stahováním a skládáním dat — to
+          už není potřeba.
         challenge: >-
           Vedení firmy potřebovalo přehled o prodejích a klíčových
           ukazatelích pro denní rozhodování. Realita: každý den
@@ -2428,11 +2626,10 @@ projects:
           Kromě časové ztráty to limitovalo i to, jak často se vůbec
           člověk na čísla mohl podívat.
         solution: >-
-          Postavil jsem zabezpečený dashboard s autentizací, jednou
-          přehledovou obrazovkou s KPI a flexibilním filtrováním
-          (tržby podle směny, typu produktu, období). Aplikace běží
-          na webu, takže se k ní dostaneš odkudkoli — z kanceláře,
-          z výroby i z mobilu při schůzce u zákazníka.
+          Postavil jsem zabezpečený dashboard s autentizací, jednou přehledovou
+          obrazovkou s hlavními čísly a filtrováním (tržby podle směny, typu
+          produktu, období). Aplikace běží na webu, takže se k ní dostanete
+          odkudkoli — z kanceláře, z výroby i z mobilu při schůzce u zákazníka.
         result: >-
           Manuální 30 minutová denní rutina je pryč. Vedení vidí
           aktuální čísla okamžitě, kdykoli se rozhodují. Klient
@@ -2445,7 +2642,7 @@ projects:
           - "Bezpečný přihlášený přístup pro management"
           - "Klient v referenci uvádí překonaná očekávání"
         meta_title: "Choccoboard — strategický dashboard pro výrobce pralinek"
-        meta_description: "Případová studie: webový BI dashboard, který eliminoval 30 minut ručního stahování dat denně. Reálný čas, dostupný z mobilu."
+        meta_description: "Případová studie: webový přehled prodejních čísel, který ušetřil 30 minut ručního stahování dat denně. Reálný čas, dostupný z mobilu."
       en:
         title: "Choccoboard — strategic dashboard"
         subtitle: "A BI dashboard that replaced 30 minutes of daily manual work"
@@ -2528,8 +2725,15 @@ projects:
     sort_order: 220
     tags: [aplikace, pdf, generator, vyroba, web-app]
     screenshots_source:
+      # OND-292: `hero-1` ukazuje týž formulář jako `gallery-1` (tam na
+      # notebooku, tady naplocho) — v galerii to byl viditelný duplikát.
+      # Role `thumbnail` ho z galerie vyřadí, ale nechá ho miniaturou karty
+      # (`portfolio_card_thumbnail()` jí dává přednost), takže se karta
+      # v /projekty nezmění. Explicitní `path` je nutný: bez něj by se
+      # jméno souboru odvodilo z typu na `thumbnail-1.jpg`.
       - url: "https://itwebtech.cz/images/projects/FLR/FRLcreator_main_page.jpg"
-        type: hero
+        path: "projects/frl-creator/hero-1.jpg"
+        type: thumbnail
         alt:
           cs: "FRL Creator – obrazovka generátoru regálových PDF štítků"
           en: "FRL Creator – screen of the shelf-label PDF generator"
@@ -2549,7 +2753,7 @@ projects:
     translations:
       cs:
         title: "FRL Creator"
-        subtitle: "Generátor regálových štítků z proměnných dat"
+        subtitle: "Štítky do regálů, které se samy poskládají z aktuálních dat"
         summary: "Aplikace pro Toyotu Kolín, která dynamicky generuje regálové informační listy v PDF — uživatel zadá parametry, systém připraví výstup pro tisk."
         description: >-
           FRL Creator je aplikace, která pro Toyotu Kolín generuje
@@ -2559,21 +2763,20 @@ projects:
           PDF k tisku.
         challenge: >-
           Tvorba regálových štítků se dělala ručně — tedy zdlouhavě,
-          chybovo a se zbytečnou závislostí na konkrétním člověku.
+          chybově a se zbytečnou závislostí na konkrétním člověku.
           Bylo potřeba systém, který vstupuje do procesu jako
           spolehlivý spoluhráč: přijme parametry, importuje aktuální
           data a vygeneruje konzistentní PDF k tisku.
         solution: >-
-          Webová aplikace s rozhraním pro zadávání parametrů, importem
-          externích dat, validací a generováním PDF výstupů. Před
-          vývojem proběhla analýza současných procesů, mapování
-          požadavků a vytvoření jasných milníků. Při testování se
-          rychle odstraňovaly nálezy.
+          Webová aplikace s rozhraním pro zadávání parametrů, importem externích
+          dat, validací a generováním PDF výstupů. Před vývojem proběhla analýza
+          současných procesů, mapování požadavků a vytvoření jasných milníků.
+          Chyby, které se při testování objevily, jsem opravoval průběžně.
         result: >-
-          Klient získal nástroj, který šetří čas a snižuje chybovost
-          při tvorbě regálových štítků. V referenci hodnotí
-          „profesionální přístup k práci", důslednou analýzu procesů
-          a rychlé řešení nálezů během testování (5/5 hvězd).
+          Klient získal nástroj, který šetří čas a snižuje chybovost při tvorbě
+          regálových štítků. V referenci hodnotí „profesionální přístup k práci",
+          důslednou analýzu procesů a rychlé opravy chyb během testování (5/5
+          hvězd).
         outcomes:
           - "Generování regálových PDF z proměnných parametrů"
           - "Import a validace externích dat"
@@ -2581,7 +2784,7 @@ projects:
           - "Rychlé odstraňování nálezů při testování"
           - "5/5 hvězd v referenci"
         meta_title: "FRL Creator — generátor PDF regálových štítků pro Toyotu Kolín"
-        meta_description: "Případová studie: aplikace generující PDF regálové štítky z proměnných dat. Analýza procesů, rychlé řešení nálezů, 5/5 hvězd."
+        meta_description: "Případová studie: aplikace generující PDF regálové štítky z proměnných dat. Analýza procesů, rychlé opravy během testování, 5/5 hvězd."
       en:
         title: "FRL Creator"
         subtitle: "A PDF generator for shelf information sheets"
@@ -2659,7 +2862,6 @@ projects:
     client_name: Toyota Kolín
     live_url: null  # interní nástroje
     year: 2020
-    duration: "průběžně"
     featured: false
     sort_order: 230
     tags: [aplikace, vba, excel, automatizace, vyroba]
@@ -2676,30 +2878,40 @@ projects:
           cs: "Excel Tools (VBA) – sekce 1"
           en: "Excel Tools (VBA) – section 1"
           de: "Excel Tools (VBA) – Abschnitt 1"
-      - url: "https://itwebtech.cz/images/projects/excel/address_data.jpg"
-        type: gallery
-        alt:
-          cs: "Excel Tools (VBA) – sekce 2"
-          en: "Excel Tools (VBA) – section 2"
-          de: "Excel Tools (VBA) – Abschnitt 2"
+      # OND-268: `gallery-2` (address_data) odstraněna rozhodnutím Ondřeje
+      # (22. 9. 22:37), bez náhrady. Nebyla to ukázka práce, ale interní návod
+      # s kurzorovými šipkami — a nesl adresářovou strukturu a názvy serverů
+      # klienta. `path` u zbylých tří je explicitní, aby je seeder nepřečísloval.
       - url: "https://itwebtech.cz/images/projects/excel/pdf_kanban.jpg"
+        path: "projects/excel-tools/gallery-3.jpg"
         type: gallery
         alt:
           cs: "Excel Tools (VBA) – sekce 3"
           en: "Excel Tools (VBA) – section 3"
           de: "Excel Tools (VBA) – Abschnitt 3"
       - url: "https://itwebtech.cz/images/projects/excel/process_combinations.jpg"
+        path: "projects/excel-tools/gallery-4.jpg"
         type: gallery
         alt:
           cs: "Excel Tools (VBA) – sekce 4"
           en: "Excel Tools (VBA) – section 4"
           de: "Excel Tools (VBA) – Abschnitt 4"
+      # OND-294 bod 2: přes grafy Head count a Absence jsou nalepené černé
+      # bloky. Board u OND-268 rozhodl interní podklady v galerii nechat,
+      # o podobě anonymizačních masek nerozhodoval — obrázek proto zůstává
+      # a popisek jen řekne, že černá plocha je začerněné jméno a číslo,
+      # ne vada snímku.
       - url: "https://itwebtech.cz/images/projects/excel/report.jpg"
+        path: "projects/excel-tools/gallery-5.jpg"
         type: gallery
         alt:
-          cs: "Excel Tools (VBA) – sekce 5"
-          en: "Excel Tools (VBA) – section 5"
-          de: "Excel Tools (VBA) – Abschnitt 5"
+          cs: "Excel Tools (VBA) – denní logistický report s grafy Head count a Absence"
+          en: "Excel Tools (VBA) – daily logistics report with head count and absence charts"
+          de: "Excel Tools (VBA) – täglicher Logistikbericht mit Head-count- und Absenz-Diagrammen"
+        caption:
+          cs: "Jména a čísla v grafech jsou začerněná — jde o interní provozní data klienta."
+          en: "Names and figures in the charts are redacted — this is the client's internal operational data."
+          de: "Namen und Zahlen in den Diagrammen sind geschwärzt — es sind interne Betriebsdaten des Kunden."
     translations:
       cs:
         title: "Excel Tools (VBA)"
@@ -2718,12 +2930,11 @@ projects:
           vejde do existujícího ekosystému, který pracovníci znají
           a používají.
         solution: >-
-          Šest interních aplikací: FLR Backup 1 (CSV generátor podle
-          parametrů), FLR Backup 2 (krok-za-krokem záloha pro dodávku
-          dílů), Address Data (sloučení dat z více zdrojů), Kanban
-          (generátor PDF kanbanů), Kombinace procesů (vizualizace
-          plánovaných dodávek napříč procesy) a Report (Excel→PDF
-          export s automatickým e-mailem a maskováním dat).
+          Šest nástrojů šitých na konkrétní úkoly. Tři z nich dělají většinu
+          práce: záložní postup pro dodávku dílů na linku, který člověka provede
+          krok za krokem; generátor štítků, který je rovnou vysází do PDF k tisku;
+          a rozesílač reportů, který si data sám vytáhne, skryje citlivé údaje a
+          pošle je e-mailem. Zbylé tři připravují podklady a plánování dodávek.
         result: >-
           Tým získal nástroje, které berou rutinní úkoly z hlavy a
           vrací je v podobě jednoho tlačítka. To šetří čas, snižuje
@@ -2819,7 +3030,6 @@ projects:
     client_name: "PitArena (Stanislav Holcmann)"
     live_url: "https://www.motorkari.cz/motosport/motocross/ostatni/ycf-cup-motokrosovych-pitbiku-si-ziskava-srdce-jezdcu-i-fanousku-50728.html"
     year: 2024
-    duration: "krátká spolupráce"
     featured: false
     sort_order: 300
     tags: [obsah, content-marketing, copywriting, pr, motocykly]
@@ -2866,7 +3076,7 @@ projects:
           zkušeného redaktora.
         result: >-
           PitArena dostala pozornost mimo svou bublinu — značka se
-          objevila v největším motopotálu v zemi a klient navíc
+          objevila v největším motoportálu v zemi a klient navíc
           získal kvalitní obsah pro vlastní blog. Tedy přesně to,
           co content marketing umí, když ho někdo dělá správně.
         outcomes:
@@ -2877,6 +3087,7 @@ projects:
         meta_title: "Článek na Motorkáři.cz — content marketing pro PitArenu"
         meta_description: "Případová studie: článek pro PitArenu o YCF Cupu publikovaný na blogu klienta a v upravené formě i na Motorkáři.cz."
       en:
+        slug: "article-motorkari-cz"   # OND-209: lokalizovaný slug
         title: "Article on Motorkáři.cz"
         subtitle: "Content marketing that reached the country's biggest moto portal"
         summary: "Article about YCF Cup written for PitArena — first published on pitarena.cz and later, lightly edited, on Motorkáři.cz."
@@ -2910,6 +3121,7 @@ projects:
         meta_title: "Motorkáři.cz article — content marketing for PitArena"
         meta_description: "Case study: article for PitArena about YCF Cup, published on the client's blog and, edited, on Motorkáři.cz."
       de:
+        slug: "artikel-motorkari-cz"   # OND-209: lokalizovaný slug
         title: "Artikel auf Motorkáři.cz"
         subtitle: "Content-Marketing, das es bis ins größte Motorrad-Portal des Landes geschafft hat"
         summary: "Artikel über den YCF Cup für PitArena — zuerst auf pitarena.cz, später leicht editiert auf Motorkáři.cz veröffentlicht."
@@ -2952,9 +3164,11 @@ projects:
     client_name: "Realiťačky v Akci"
     live_url: null  # logo asset, ne web
     year: 2024
-    duration: "leden 2024"
     featured: false
     sort_order: 310
+    # OND-282: Ondřej rozhodl, že projekt nebude na webu. Data zůstávají,
+    # jen se nepublikují. Zpět = `published_at: now` (nebo přepínač v adminu).
+    published_at: null
     tags: [logo, branding, identita, vektor]
     screenshots_source:
       - url: "https://itwebtech.cz/images/projects/realitacky/logo_realitacky_v_akci.png"
@@ -2986,10 +3200,9 @@ projects:
           postavil — logo není „nálepka navíc", ale součást konzistentního
           brandu.
         result: >-
-          Klient získal logo, které funguje napříč médii a odlišuje se
-          v ulici plné typických realitkových log. Bylo zdarma součástí
-          webového balíčku, takže celý brand má jednu autorskou ruku
-          a tedy konzistentní pocit.
+          Klient získal logo, které funguje napříč médii a odlišuje se v ulici
+          plné typických realitkových log. Vzniklo jako součást webového balíčku,
+          takže celý brand má jednu autorskou ruku a drží pohromadě.
         outcomes:
           - "Vektorové logo připravené pro každou velikost"
           - "Odlišení od typické realitkové vizuální vlny"
@@ -3071,9 +3284,10 @@ projects:
     client_name: "PitArena (Stanislav Holcmann)"
     live_url: null  # promo video pro sociální sítě
     year: 2023
-    duration: "krátká produkce"
     featured: false
     sort_order: 320
+    # OND-282: viz logo-realitacky — odpublikováno, nemazáno.
+    published_at: null
     tags: [video, animace, social-media, propagace]
     screenshots_source:
       - url: "https://itwebtech.cz/images/projects/pitarena/video-pitbike-akademie.jpg"
@@ -3105,9 +3319,9 @@ projects:
           jsou postavené pro mobilní obrazovku — žádné drobné texty,
           žádné spletité scény.
         result: >-
-          Klient má video formát, který sedí na Facebookové publikum
-          a rozšiřuje povědomí o akademii bez nutnosti rozjíždět
-          drahou videoprodukci. Snadno se reuse-uje pro další sezóny.
+          Klient má formát, který sedí facebookovému publiku a rozšiřuje povědomí
+          o akademii bez drahé videoprodukce. Pro další sezóny se dá použít znovu
+          s minimem úprav.
         outcomes:
           - "Krátká animace optimalizovaná pro Facebook"
           - "Funguje i bez zvuku"
@@ -3187,7 +3401,6 @@ projects:
     client_name: "PitArena (Stanislav Holcmann)"
     live_url: null  # tisková zakázka
     year: 2023
-    duration: "krátká zakázka"
     featured: false
     sort_order: 330
     tags: [tisk, signage, design, velkoformat]
@@ -3220,9 +3433,9 @@ projects:
           si tiskárna může rovnou vzít a zpracovat — žádné dohadování
           s barvami nebo rozlišením.
         result: >-
-          Cedule je nad servisem fyzicky umístěná a posiluje brand
-          každého, kdo do areálu zajede. Klient ušetřil čas tím, že
-          dostal hotové podklady na první dobrou.
+          Cedule visí nad servisem a připomíná značku každému, kdo do areálu
+          zajede. Klient ušetřil čas tím, že dostal hotové podklady na první
+          dobrou.
         outcomes:
           - "Design v souladu s brandem PitArena"
           - "Tiskové podklady připravené pro velkoformát"
@@ -3231,6 +3444,7 @@ projects:
         meta_title: "Reklamní cedule PitArena — návrh velkoformátového tisku"
         meta_description: "Případová studie: design a tiskové podklady pro velkoformátovou ceduli nad servis PitArena."
       en:
+        slug: "pitarena-outdoor-sign"   # OND-209: lokalizovaný slug
         title: "PitArena outdoor sign"
         subtitle: "A large-format sign above the workshop, ready for print"
         summary: "Design and print files for a large-format outdoor sign installed above the PitArena service building."
@@ -3262,6 +3476,7 @@ projects:
         meta_title: "PitArena outdoor sign — large-format print design"
         meta_description: "Case study: design and print files for a large-format outdoor sign above the PitArena service building."
       de:
+        slug: "pitarena-werbeschild"   # OND-209: lokalizovaný slug
         title: "PitArena Werbeschild"
         subtitle: "Großformatiges Schild über der Werkstatt, druckfertig"
         summary: "Design und Druckdateien für ein großformatiges Werbeschild über dem Servicegebäude von PitArena."
@@ -3302,9 +3517,10 @@ projects:
     client_name: "itwebtech (vlastní práce)"
     live_url: null  # ukázková animace pro vlastní propagaci
     year: 2023
-    duration: "krátká produkce"
     featured: false
     sort_order: 340
+    # OND-282: viz logo-realitacky — odpublikováno, nemazáno.
+    published_at: null
     tags: [video, animace, social-media, ukazka, vlastni-projekt]
     screenshots_source:
       - url: "https://itwebtech.cz/images/projects/itwebtech/video_delejme_animace.jpg"
@@ -3315,7 +3531,7 @@ projects:
           de: "Aufmerksamkeits-Animation – Vorschau einer Social-Media-Animation"
     translations:
       cs:
-        title: "Animace upoutání pozornosti"
+        title: "Animace pro upoutání pozornosti"
         subtitle: "Ukázka, jak v přesyceném feedu zatáhnout pozornost"
         summary: "Vlastní ukázková animace pro sociální sítě. Důkaz, že video formát může v přesyceném feedu zafungovat — pokud je dobře zacílené."
         description: >-
@@ -3325,10 +3541,9 @@ projects:
           tehdy, když je dobře zacílené a má co říct během prvních
           sekund.
         challenge: >-
-          Většina obsahu na sociálních sítích projde kolem člověka
-          aniž by si ho všiml. Statický příspěvek dnes nestačí —
-          mozek si ho zařadí jako šum. Je třeba přijít s něčím,
-          co ten šum prolomí.
+          Většina obsahu na sociálních sítích projde kolem člověka, aniž by si jí
+          všiml. Statický příspěvek dnes nestačí — mozek si ho zařadí jako šum. Je
+          třeba přijít s něčím, co ten šum prolomí.
         solution: >-
           Animace navržená tak, aby měla pohyb už v miniatuře,
           jednoduché sdělení a tempo přizpůsobené mobilnímu feedu.
@@ -3344,9 +3559,10 @@ projects:
           - "Pohyb v miniatuře pro zachycení pozornosti"
           - "Tempo navržené pro mobilní feed"
           - "Konkrétní ukázka místo abstraktního pitche"
-        meta_title: "Animace upoutání pozornosti — ukázka pro sociální sítě"
+        meta_title: "Animace pro upoutání pozornosti — ukázka pro sociální sítě"
         meta_description: "Vlastní ukázková animace pro sociální sítě — referenční formát, který klientům ukáže, jak může jejich video propagace vypadat."
       en:
+        slug: "attention-grabbing-animation"   # OND-209: lokalizovaný slug
         title: "Attention-grabbing animation"
         subtitle: "A sample of how to break through a saturated feed"
         summary: "An in-house animation sample for social media. Proof that video can work in a saturated feed — if it's well-targeted."
@@ -3378,6 +3594,7 @@ projects:
         meta_title: "Attention-grabbing animation — social media sample"
         meta_description: "An in-house social media animation sample — a reference format showing clients what their video promotion could look like."
       de:
+        slug: "aufmerksamkeits-animation"   # OND-209: lokalizovaný slug
         title: "Aufmerksamkeits-Animation"
         subtitle: "Ein Sample, wie man den übersättigten Feed durchbricht"
         summary: "Eigene Animations-Referenz für Social Media. Nachweis, dass Video im übersättigten Feed funktioniert — wenn das Targeting stimmt."

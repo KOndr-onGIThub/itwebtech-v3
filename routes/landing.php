@@ -16,6 +16,7 @@ if (filled($previewPath)) {
                 ->name($domain ? 'landing.preview' : 'landing.show');
 
             Route::post('/lead', [LandingLeadController::class, 'store'])
+                ->middleware('throttle:8,1') // OND-264: stejný strop jako u ostatních formulářů
                 ->name($domain ? 'landing.lead.preview' : 'landing.lead.store');
         });
 }
@@ -25,6 +26,8 @@ if (filled($domain)) {
         ->middleware(SetLocale::class)
         ->group(function () {
             Route::get('/', [LandingPageController::class, 'show'])->name('landing.show');
-            Route::post('/lead', [LandingLeadController::class, 'store'])->name('landing.lead.store');
+            Route::post('/lead', [LandingLeadController::class, 'store'])
+                ->middleware('throttle:8,1') // OND-264
+                ->name('landing.lead.store');
         });
 }

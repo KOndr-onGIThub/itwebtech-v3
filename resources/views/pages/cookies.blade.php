@@ -1,64 +1,96 @@
 @extends('layouts.app')
 
-@section('title', 'Cookies a souhlas se zpracováním — itwebtech.cz')
-@section('description', 'Informace o cookies a měřicích nástrojích, které používáme na itwebtech.cz, a jak svůj souhlas kdykoli odvolat.')
+@section('title', __('cookies.meta.title'))
+@section('description', __('cookies.meta.description'))
 
-@section('hide_prefooter') true @endsection
+{{-- OND-266 (5): `hide_prefooter` odebráno — právní stránky byly bez navigace
+     slepá ulička. Patička je teď stejná jako na /projekty, /cenik a /kontakt. --}}
 
 @section('content')
 
-{{-- Page hero --}}
-<div class="page-hero">
+{{-- OND-251 — vrstva hloubky VĚDOMĚ VYPNUTÁ (žádný obal `pd--depth`).
+     Právní text. Nasvícení pod souvislým odstavcem snižuje kontrast a nic za
+     to nedává — tahle stránka nemá co prodat, má být čitelná a nudná.
+     Rozbor v §E hloubka.css. --}}
+
+{{-- Page hero — OND-130 iter 8: plán §3.1 page-mark + Plex Sans display (post OND-145 swap).
+     OND-168 (2026-05-22): localizován do EN/DE — všechny stringy přesunuty do
+     lang/{cs,en,de}/cookies.php a route přesunuta pod localized routes group
+     ({cs,en,de}.cookies). --}}
+<div class="page-hero page-hero--cookies">
     <div class="container-site">
-        <h1>Cookies a souhlas se zpracováním</h1>
+        <p class="page-hero__page-mark">
+            <span class="page-hero__page-mark-label">{{ __('cookies.hero.page_mark_label') }}</span>
+        </p>
+        <p class="page-hero__upline">{{ __('cookies.hero.upline') }}</p>
+        <h1 class="page-hero__heading">
+            {!! __('cookies.hero.heading_html') !!}
+        </h1>
+        <p class="page-hero__subline">{{ __('cookies.hero.subline') }}</p>
     </div>
 </div>
 
 <section class="section-wrapper">
     <div class="container-site">
+
+        {{-- TL;DR card — OND-130 iter 8: plain-language summary nad detailem. --}}
+        <aside class="legal-tldr" data-reveal>
+            <p class="legal-tldr__eyebrow">{{ __('cookies.tldr.eyebrow') }}</p>
+            <ul class="legal-tldr__list">
+                @foreach (__('cookies.tldr.items') as $item)
+                <li>
+                    <x-icon.circle-check-big class="w-4 h-4 shrink-0" />
+                    <span>{!! $item !!}</span>
+                </li>
+                @endforeach
+            </ul>
+        </aside>
+
         <article class="prose-content">
 
-            <p>Tato stránka shrnuje, jaké cookies a měřicí nástroje na webu <strong>itwebtech.cz</strong> používáme, k čemu slouží a jak souhlas s jejich používáním kdykoli odvoláte.</p>
+            <p>{!! __('cookies.intro') !!}</p>
 
-            <h2>Co používáme</h2>
+            <h2>{{ __('cookies.what_we_use.heading') }}</h2>
             <ul>
-                <li><strong>Google Analytics 4 (GA4)</strong> — anonymní statistika návštěvnosti, ze které vidíme, kolik lidí web navštíví, odkud přicházejí a které sekce zaujmou.</li>
-                <li><strong>Microsoft Clarity</strong> — heatmapy a nahrávky relací (s anonymizovaným obsahem), které pomáhají odhalit, kde mají návštěvníci problém najít to, co hledají.</li>
+                @foreach (__('cookies.what_we_use.items') as $item)
+                <li>{!! $item !!}</li>
+                @endforeach
             </ul>
-            <p>Žádné reklamní cookies nebo cílení reklam nepoužíváme. V GA4 zůstávají reklamní souhlasy (<code>ad_storage</code>, <code>ad_user_data</code>, <code>ad_personalization</code>) trvale na hodnotě <code>denied</code>.</p>
+            <p>{!! __('cookies.what_we_use.note') !!}</p>
 
-            <h2>Co měříme</h2>
+            <h2>{{ __('cookies.what_we_measure.heading') }}</h2>
             <ul>
-                <li>Návštěvnost a zdroje (odkud lidé přicházejí, kolik stránek shlédnou, jak dlouho zůstanou).</li>
-                <li>Interakci s primárními CTA — klik na „Získat cenovou nabídku“, telefonní číslo, otevření formuláře, odeslání poptávky.</li>
-                <li>Nahrávky relací (Clarity) — anonymizovaný video záznam pohybu kurzoru a kliků, aby šlo odhalit místa, kde návštěvník bloudí.</li>
-            </ul>
-
-            <h2>Doba uchování</h2>
-            <ul>
-                <li>Souhlas „Přijmout vše“ — uložen v prohlížeči (<code>localStorage</code>) na <strong>365 dnů</strong>, poté budete znovu dotázáni.</li>
-                <li>„Odmítnout“ — uložen na <strong>180 dnů</strong>; po tuto dobu se vás banner znovu nezeptá a žádné měřicí cookies se nenastavují.</li>
-                <li>Cookies GA4 (<code>_ga</code>, <code>_ga_*</code>) — standardně 2 roky (pouze pokud udělíte souhlas).</li>
-                <li>Cookies Microsoft Clarity (<code>_clck</code>, <code>_clsk</code>, <code>MUID</code>, <code>CLID</code>) — dle nastavení Microsoftu (typicky 1 rok).</li>
+                @foreach (__('cookies.what_we_measure.items') as $item)
+                <li>{!! $item !!}</li>
+                @endforeach
             </ul>
 
-            <h2>Jak souhlas odvolat</h2>
-            <p>Pokud chcete svůj souhlas odvolat, klikněte na následující tlačítko. Smaže se uložený souhlas i případné GA / Clarity cookies a po obnovení stránky se znovu zobrazí banner.</p>
+            <h2>{{ __('cookies.retention.heading') }}</h2>
+            <ul>
+                @foreach (__('cookies.retention.items') as $item)
+                <li>{!! $item !!}</li>
+                @endforeach
+            </ul>
+
+            <h2>{{ __('cookies.revoke.heading') }}</h2>
+            <p>{{ __('cookies.revoke.description') }}</p>
             <p>
                 <button type="button"
                         class="btn btn-primary"
                         onclick="if (window.ItwebtechAnalytics) { window.ItwebtechAnalytics.revokeConsent(); location.reload(); }">
-                    Odvolat souhlas a smazat cookies
+                    {{ __('cookies.revoke.button') }}
                 </button>
             </p>
-            <p>Alternativně můžete cookies pro doménu <code>itwebtech.cz</code> smazat ručně v nastavení vašeho prohlížeče.</p>
+            <p>{!! __('cookies.revoke.manual') !!}</p>
 
-            <h2>Správce dat</h2>
+            <h2>{{ __('cookies.controller.heading') }}</h2>
             <p>
-                Ondřej Kriška – itwebtech<br>
-                E-mail: <a href="mailto:ok@itwebtech.cz">ok@itwebtech.cz</a>
+                {{ __('cookies.controller.name') }}<br>
+                {{ __('cookies.controller.email_label') }}: <a href="mailto:ok@ondraweb.cz">ok@ondraweb.cz</a>
             </p>
-            <p>Pro detailnější informace o zpracování osobních údajů viz <a href="{{ lroute('privacy') }}">zásady ochrany osobních údajů</a>.</p>
+            <p>{!! __('cookies.controller.see_privacy_html', [
+                'link' => '<a href="' . lroute('privacy') . '">' . __('cookies.controller.see_privacy_link') . '</a>',
+            ]) !!}</p>
 
         </article>
     </div>

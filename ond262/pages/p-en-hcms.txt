@@ -1,0 +1,105 @@
+HCMS for Toyota Kolín — keeping the assembly line moving
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+CZ
+EN
+DE
+Book a consultation
+CZ
+EN
+DE
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+Book a consultation
+💬
+Enquiry
+← Back to projects
+Web application
+·
+2021
+·
+Toyota Kolín
+HCMS — production information system
+An app that keeps the assembly line moving
+Book a consultation
+HCMS is an internal web application that gives Toyota's logistics team clear instructions when parts run short on the line. Operators confirm steps on a tablet, the system keeps a full history. Built from real process analysis on the shop floor — not from a paper spec.
+Challenge
+When an assembly line runs out of a part, every minute counts — a stopped line is a direct loss. Logistics used to handle emergencies from memory and pass instructions verbally. The team needed a system that shows in real time where a part is, who delivers it, and in what order people proceed, so the response works even under pressure.
+Solution
+After analysing real processes on the shop floor, I built the domain model, use case map, and a web application with a tablet interface for operators and a desktop view for shift leaders. The app walks people through each step, tracks state, keeps history, and hands tasks across shifts. Eighteen years of first-hand Toyota experience shaped details an outside vendor would never spot.
+Result
+The client reports annual savings of at least 3 million CZK — equivalent to one full-time worker per shift across three shifts. During model-change periods, when abnormalities peak, savings reportedly multiply further. The system has been in production since 2021 and serves as a reference for what software designed by people who actually know the operation looks like.
+Client
+Toyota Kolín
+Year
+2021
+Duration
+několik měsíců (2021), provoz dodnes
+Category
+Web application
+Tech stack
+Custom application
+Logistics
+Manufacturing
+Application in the browser
+Operated on a tablet
+More projects
+Web application
+·
+2023
+·
+Toyota Kolín
+Picker — logistics control system
+An app for picking parts from the warehouse to the assembly line
+View project
+Web application
+·
+2024
+·
+Tradiční výroba pralinek, s.r.o.
+Choccoboard — strategic dashboard
+A BI dashboard that replaced 30 minutes of daily manual work
+View project
+Web application
+·
+2019
+·
+Toyota Kolín
+FRL Creator
+A PDF generator for shelf information sheets
+View project
+Want a similar result for your business?
+Book a consultation
+← Back to projects
+I help entrepreneurs succeed in the online world
+Book a free consultation
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+© 2026 ONDRAWEB — All rights reserved.
++420 728 697 712
+Privacy Policy
+Cookies
+Let's talk
+Free consultation — no commitment, no registration.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Pick a consultation slot
+Free. No commitment.
+Mind a few cookies?
+I only measure a few numbers about what works on the site. No data selling.
+See the cookie policy .
+Decline
+Accept all
+✕

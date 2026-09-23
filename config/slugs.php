@@ -20,27 +20,35 @@ return [
 
     'cs' => [
         'home'     => '/',
+        'about'    => 'o-mne',
         'contact'  => 'kontakt',
         'price'    => 'cenik',
         'privacy'  => 'zasady-ochrany-osobnich-udaju',
+        'cookies'  => 'cookies',
         'projects' => 'projekty',
-        'blog'     => 'jak-na-to',
+        // OND-266: adresa sjednocená s názvem sekce (Ondřej 23. 9.).
+        // Staré `/jak-na-to` drží 301 v routes/web.php.
+        'blog'     => 'zapisky',
     ],
 
     'en' => [
         'home'     => '/',
+        'about'    => 'about',
         'contact'  => 'contact',
         'price'    => 'price',
         'privacy'  => 'privacy-policy',
+        'cookies'  => 'cookies',
         'projects' => 'projects',
         'blog'     => 'blog',
     ],
 
     'de' => [
         'home'     => '/',
+        'about'    => 'ueber-mich',
         'contact'  => 'kontakt',
         'price'    => 'preisliste',
         'privacy'  => 'datenschutz',
+        'cookies'  => 'cookies',
         'projects' => 'projekte',
         'blog'     => 'blog',
     ],

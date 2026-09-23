@@ -1,0 +1,105 @@
+FRL Creator — PDF shelf-label generator for Toyota Kolín
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+CZ
+EN
+DE
+Book a consultation
+CZ
+EN
+DE
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+Book a consultation
+💬
+Enquiry
+← Back to projects
+Web application
+·
+2019
+·
+Toyota Kolín
+FRL Creator
+A PDF generator for shelf information sheets
+Book a consultation
+FRL Creator is an application that generates shelf information sheets in PDF for Toyota Kolín, based on variable data. The user enters a period, imports data, validates the result, and selects a sheet group — the output is a ready PDF for printing.
+Challenge
+Creating shelf labels was done manually — slow, error-prone, and dependent on one particular person. The team needed a system that fits into the process as a reliable partner: accepts parameters, imports current data, and generates a consistent PDF for print.
+Solution
+A web application with a parameter-entry interface, external data import, validation, and PDF output. The work began with process analysis, requirement mapping, and a clear milestone plan. Findings during testing were resolved quickly.
+Result
+The client gained a tool that saves time and reduces errors when producing shelf labels. The review highlights "a professional approach to work", thorough process analysis, and rapid resolution of findings during testing (5/5).
+Client
+Toyota Kolín
+Year
+2019
+Duration
+několik měsíců
+Category
+Web application
+Tech stack
+Custom application
+Manufacturing
+Application in the browser
+PDF output
+Document generation
+More projects
+Web application
+·
+2021
+·
+Toyota Kolín
+HCMS — production information system
+An app that keeps the assembly line moving
+View project
+Web application
+·
+2023
+·
+Toyota Kolín
+Picker — logistics control system
+An app for picking parts from the warehouse to the assembly line
+View project
+Web application
+·
+2024
+·
+Tradiční výroba pralinek, s.r.o.
+Choccoboard — strategic dashboard
+A BI dashboard that replaced 30 minutes of daily manual work
+View project
+Want a similar result for your business?
+Book a consultation
+← Back to projects
+I help entrepreneurs succeed in the online world
+Book a free consultation
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+© 2026 ONDRAWEB — All rights reserved.
++420 728 697 712
+Privacy Policy
+Cookies
+Let's talk
+Free consultation — no commitment, no registration.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Pick a consultation slot
+Free. No commitment.
+Mind a few cookies?
+I only measure a few numbers about what works on the site. No data selling.
+See the cookie policy .
+Decline
+Accept all
+✕

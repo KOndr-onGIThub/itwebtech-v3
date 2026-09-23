@@ -2,24 +2,33 @@
 
 return [
 
+    // OND-201 (Befund 5.7): Der Seitentitel darf sich nicht über die Negation
+    // der Konkurrenz definieren, und „kein WordPress" sagt jemandem nichts,
+    // der nicht weiß, was WordPress ist (Prinzip 0).
     'meta' => [
-        'title'       => 'Ondřej Kriška — Webseiten & Webanwendungen für Unternehmen',
-        'description' => 'Maßgeschneiderte Webseiten und Webanwendungen, die Ergebnisse liefern. Wartungsfrei, kein WordPress, keine versteckten Kosten. 18 Jahre Erfahrung. Kostenlose Beratung.',
+        'title'       => 'Websites und Webanwendungen nach Maß | ONDRAWEB',
+        'description' => 'Websites, Onlineshops und Webanwendungen nach Maß für kleine und mittlere Unternehmen. Eigener Code, genauer Preis im Voraus, und Sie sprechen direkt mit mir. Ich bin Ondřej Kriška.',
     ],
 
     // TODO (OND-136 P3): final DE tone polish — Content Writer scope.
     'hero' => [
-        // OND-135 P2 (plán §3.1) — page-mark + upline + display heading.
-        'page_mark_label' => 'KI & WEB',
-        'page_mark_index' => '01 / 01',
-        'upline'          => 'KI baut eine Website an einem Nachmittag.',
-        'heading_html'    => 'Aber was für eine Website?<br>Eine, die <em>verkauft</em>.',
-        'subline'         => 'Strategie, Recherche und Handwerk kennen keine Abkürzung.',
+        // OND-127 P0 incident hotfix (2026-05-14) — Plagiat-Strings entfernt.
+        // Placeholder copy aus meta description = pre-redesign safe copy.
+        // FINAL COPY: Content Writer liefert in OND-136 P3 (SLA 2h von 11:10 UTC).
+        'page_mark_label' => 'MASSGESCHNEIDERT',
+        // OND-145 P0.3: page_mark_index entfernt — Agency-Portfolio-Pagination-
+        // Artefakt, itwebtech hat im Hero-Kontext keine „pages" Hierarchie.
+        // OND-198 (Befund 5.1): die alte Überschrift versprach das Geschäfts-
+        // ergebnis des Kunden. Ersetzt durch den freigegebenen Hero-Text (CS = Quelle).
+        'upline'          => 'Für Unternehmen, die den Unterschied erkennen.',
+        'heading_html'    => 'Websites und Anwendungen <em>nach Maß</em>.<br>Ich baue sie selbst, mit eigenem Code.',
+        'subline'         => 'Ich bin Ondřej Kriška, erfahrener Entwickler. Sie arbeiten direkt mit mir — ohne Agentur, ohne Zwischenhändler. Ich baue Websites so, dass sie jahrelang laufen und Sie nicht mit Wartung aufhalten.',
+        'note'            => 'Ich melde mich innerhalb von 24 Stunden an Arbeitstagen. Unverbindlich besprechen wir, was sinnvoll ist.',
 
         // Backwards compat (consultation modal, fallback render).
         'eyebrow'       => 'Maßgeschneiderte Websites & Webanwendungen',
-        'heading'       => 'Eine Website, die sich endlich auszahlt. Ohne WordPress, ohne Wartung, ohne Kompromisse.',
-        'cta_primary'   => 'Unverbindliches Angebot anfordern',
+        'heading'       => 'Websites und Anwendungen nach Maß. Ich baue sie selbst, mit eigenem Code.',
+        'cta_primary'   => 'Schreiben Sie mir, was Sie brauchen',
         'cta_secondary' => '30-Min-Beratung vereinbaren',
         'phone_label'   => 'oder anrufen:',
     ],
@@ -39,11 +48,15 @@ return [
 
     'social_proof' => [
         'rating_aria'  => 'Bewertung 5 von 5',
+        'clients_aria' => 'Kunden',
         'rating_value' => '5,0',
         'reviews'      => '(21 Bewertungen auf Google + Firmy.cz)',
         'projects'     => '23+ realisierte Projekte',
         'experience'   => '18 Jahre Erfahrung',
-        'response'     => 'Antwort innerhalb von 24 Std.',
+        'response'     => 'Antwort innerhalb von 24 Stunden an Arbeitstagen',
+        // OND-201 (Befund 5.11): Auszeichnung TOP firma 2025 von Firmy.cz —
+        // überprüfbarer Nachweis Dritter, der auf Staging fehlte.
+        'award'        => 'TOP firma 2025 auf Firmy.cz',
         'brands' => [
             ['name' => 'MAKOplast',             'image' => null],
             ['name' => 'Yolk Studio',           'image' => 'yolk_studio.png'],
@@ -55,26 +68,41 @@ return [
         ],
     ],
 
+    // OND-202: Arbeitsproben als primäres Bildmaterial (live Kunden-Websites).
+    // OND-269 (Audit OND-254, Befund 7): Der Block `showcase` („Websites, die
+    // in der Praxis laufen" — drei Kacheln mit Link zur Live-Website) ist
+    // gestrichen. Zwei Projektsektionen sagten dasselbe, BARANA und PitArena
+    // standen in beiden. Zusammengelegt in die eine Sektion `portfolio`
+    // unten, die die Überschrift von hier übernommen hat und einen Link zur
+    // Live-Website bekam (`live_cta` / `live_aria`).
+
+    // OND-201 (Befund 5.7): Der Abschnitt definierte sich über die Negation
+    // der Konkurrenz und zwei von drei Punkten sagten dasselbe. Jetzt führt,
+    // was ich tue (`lead`), die Abgrenzung ist kurz und die doppelten
+    // Punkte sind zu einem zusammengeführt.
     'problems' => [
-        'heading'            => 'Was bei den meisten Web-Projekten immer wieder passiert.',
-        'transition_heading' => 'Wie ich es anders mache:',
-        'transition_text'    => 'Jedes Projekt beginnt mit dem Verständnis Ihres Unternehmens. Ich schreibe eigenen Code — keine Vorlagen, kein WordPress, keine Vermittler. Sie sprechen direkt mit mir vom ersten Treffen über den Launch und darüber hinaus.',
+        'heading'            => 'Wie ich Websites baue',
+        'lead'               => 'Jedes Projekt beginnt mit dem Verständnis Ihres Unternehmens. Ich schreibe eigenen Code von Grund auf, damit die Website dem folgt, wie Ihre Firma tatsächlich arbeitet. Sie sprechen direkt mit mir — von der ersten Nachricht bis zum Launch und darüber hinaus.',
+        'transition_heading' => 'Was Sie sich damit ersparen',
+        'transition_text'    => 'Die zwei Dinge, die ich bei Web-Projekten am häufigsten sehe.',
         'items' => [
             [
                 'heading'      => 'Eine Vorlage als individuelle Lösung verkauft',
-                'text'         => 'Eine Agentur verwendet ein Layout, das sie fünfmal zuvor genutzt hat. Sie fügen Ihren Text und Ihr Logo hinzu. Das Ergebnis wirkt professionell — bis Sie die Website der Konkurrenz betrachten. Gleiche Abschnitte, gleiche Worte, andere Farben und Logo.',
-                'quote_text'   => 'Das ist nicht der Fall, in dem andere Hobbyentwickler einfach Vorlagen mit Daten für überhöhte Preise füllen.',
+                'text'         => 'Ein Anbieter verwendet ein Layout, das er schon fünfmal genutzt hat, und fügt Ihren Text und Ihr Logo ein. Das Ergebnis wirkt professionell — bis Sie die Website der Konkurrenz öffnen und dieselben Abschnitte und dieselben Worte finden. Dazu hält die Plattform Sie in einem monatlichen Abonnement, das Sie nicht mitnehmen können.',
+                'quote_text'   => 'Ganz anders als die Möchtegern-Webdesigner, die für überhöhte Preise einfach Vorlagen mit Inhalten befüllen.',
                 'quote_author' => 'Petr Kroulík, Nové Interiéry s.r.o.',
-            ],
-            [
-                'heading' => 'Eine KI-Website in einem Nachmittag: hübsch, generisch, austauschbar',
-                'text'    => 'Werkzeuge können heute schnell eine Website generieren. Aber ohne Recherche, ohne Strategie, ohne Verständnis Ihres Unternehmens entsteht etwas, das wie eine Website aussieht — und wie die Website aller anderen funktioniert. Zusätzlich hält Sie die Plattform für immer in ihrem Abonnement.',
             ],
             [
                 'heading' => 'Sie sprechen nie mit der Person, die die Website erstellt',
                 'text'    => 'Die Person, die Ihnen die Website verkauft, baut sie nicht. Die Personen, die sie bauen, sprechen nicht mit Ihnen. Kontext und Absicht gehen in der Mitte verloren — und das Ergebnis entspricht nicht dem, was Sie wollten.',
             ],
         ],
+        // OND-269 (Audit OND-254, Befund 7): Rest der gestrichenen Sektion
+        // „Generator versus Ihr Geschäft". Dasselbe Argument wie im ersten
+        // Punkt oben („eine Vorlage, verkauft als Maßarbeit") — es gehört
+        // hierher, nicht in eine eigene Sektion vier Bildschirme weiter unten.
+        'ai_heading' => 'Eine Vorlage ist schnell fertig. Anfragen kommen davon nicht.',
+        'ai_text'    => 'Ein Generator klickt ein Layout zusammen und füllt Texte und Bilder ein — er findet aber nicht heraus, an wen Sie verkaufen, warum ein Kunde Sie wählen sollte und wo Interessenten abspringen. KI nutze ich als Werkzeug; die Entscheidung, was die Website sagen soll und in welcher Reihenfolge, trifft sie nicht für Sie.',
     ],
 
     'how_i_work' => [
@@ -85,15 +113,15 @@ return [
             [
                 'heading'      => 'Beratung',
                 'time'         => '60 Min., binnen einer Woche',
-                'text'         => 'Ich beginne mit einem Gespräch, nicht mit einem Formular. Ich muss Ihr Unternehmen, Ihre Kunden und verstehen, was die Website wirklich tun soll — Kontakte bringen, ein Produkt verkaufen oder Vertrauen aufbauen.',
-                'quote_text'   => 'Er hörte wirklich meinen Bedürfnissen zu und verarbeitete diese Informationen bis zu meiner vollständigen Zufriedenheit.',
+                'text'         => 'Ich beginne mit einem Gespräch, nicht mit einem Formular. Ich muss Ihr Unternehmen und Ihre Kunden verstehen — und wissen, was die Website wirklich leisten soll: Kontakte bringen, ein Produkt verkaufen oder Vertrauen aufbauen.',
+                'quote_text'   => 'Er hat mir wirklich zugehört und daraus etwas gemacht, mit dem ich rundum zufrieden bin.',
                 'quote_author' => 'Magda Pernicová, Realiťačky v akci',
             ],
             [
                 'heading'      => 'Spezifikation',
                 'time'         => '2–5 Tage',
                 'text'         => 'Bevor ich mit der Arbeit beginne, erhalten Sie eine schriftliche Spezifikation: was auf der Website sein wird, wie viele Seiten, welche Technologie und was es kostet. Keine Überraschungen auf der Rechnung. Den Liefertermin schätze ich realistisch ein — immer im Voraus, nie rückwirkend.',
-                'quote_text'   => 'Er analysiert gründlich den Zustand und möchte die aktuellen Prozesse kennenlernen. Er sammelt Anforderungen von Kunden und erkundigt sich nach Zukunftsvisionen.',
+                'quote_text'   => 'Er analysiert die Ausgangslage gründlich und will die bestehenden Prozesse wirklich verstehen. Er sammelt die Anforderungen der Nutzer und fragt nach, wohin es gehen soll.',
                 'quote_author' => 'Jan Stybor, Leiter der Projektabteilung, Toyota',
                 'note'         => 'Hinweis zu Terminen: Eine Website entsteht nicht nur auf meiner Seite. Genehmigungen, Unterlagen vom Kunden und Feedback sind Teil des Prozesses. Der Termin ist daher immer eine Schätzung, keine Verpflichtung — und ich sage das offen von Anfang an.',
             ],
@@ -111,35 +139,16 @@ return [
         ],
     ],
 
-    'ai' => [
-        'subheading' => 'KI & Webdesign',
-        'heading'    => 'Eine Website an einem Nachmittag. Aber welche Website?',
-        'intro'      => 'Technisch ist es möglich. Ein Werkzeug kann Seiten, Texte, Bilder generieren. Das Problem ist nicht die Geschwindigkeit.',
-        'laik' => [
-            'label'   => 'Laie + KI',
-            'outcome' => 'Schnelles Ergebnis.',
-            'items'   => [
-                'Generisch, unvalidiert, austauschbar',
-                'Ohne Kunden- und Wettbewerbsrecherche',
-                'Ohne Strategie, was die Website sagt und in welcher Reihenfolge',
-                'Hübsch aussehend — identisch mit Dutzenden anderen',
-            ],
-            'note' => 'Eine KI-Website ist sinnvoll, wenn Sie eine Idee ohne Verpflichtung testen.',
-        ],
-        'expert' => [
-            'label'   => 'Experte + KI',
-            'outcome' => 'Genauso schnell, wo es sinnvoll ist. Und ohne generisches Ergebnis.',
-            'items'   => [
-                'Strategie, Recherche und Verständnis Ihres Unternehmens',
-                'Kontrolle und ein Ergebnis, für das jemand verantwortlich ist',
-                'Inhalte, die so gestaltet sind, dass Nutzer bleiben und Sie kontaktieren',
-                'Eine Website, die sich bewusst von der Konkurrenz unterscheidet',
-            ],
-            'note' => 'Wenn Sie ein Unternehmen führen, ist das ein Unterschied, den Ihre Kunden bemerken werden.',
-        ],
-        'closing' => 'Ich nutze KI als Werkzeug — es verkürzt die Zeit bei Routinearbeiten. Strategie, Recherche und Entscheidungen darüber, was die Website tun muss, können nicht übersprungen werden. Diese Arbeit muss erledigt sein, bevor die eigentliche Website überhaupt entsteht.',
-    ],
+    // OND-269 (Audit OND-254, Befund 7): Die Sektion „Generator versus Ihr
+    // Geschäft" (zwei Spalten, acht Stichpunkte) ist gestrichen — der Board
+    // hat den Schnitt am 22. 9. freigegeben. Übrig blieben zwei Sätze in
+    // `problems.ai_heading` / `problems.ai_text`, wo dasselbe Argument
+    // ohnehin schon stand.
 
+    // OND-269: `toyota` ist keine eigene Sektion mehr — der Block wird
+    // innerhalb von „Warum mit mir" unter Video und Bio ausgegeben. Die
+    // Überschrift „18 Jahre bei Toyota" stand zuvor zweimal auf der Seite
+    // (hier und in `why_me.bio`), deshalb ist Toyota aus der Bio raus.
     'toyota' => [
         'heading'      => '18 Jahre bei Toyota. Dann bin ich gegangen.',
         'text'         => 'Die Automobilindustrie hat mir eines beigebracht: Hinter jedem Spitzenergebnis stehen immer dieselben Schritte. Analyse, Design, Testen, Verifizieren — und dann wieder. Keine Abkürzungen, keine Schätzungen. Prinzipien, die unabhängig von der Branche funktionieren.',
@@ -148,10 +157,17 @@ return [
         'quote_author' => 'Pavel Baudyš, Direktor Produktion, Montage & Logistik, Toyota Motor Manufacturing Czech Republic (2024)',
     ],
 
+    // OND-269: die einzige Projektsektion der Startseite (früher `showcase`
+    // + `portfolio`). Überschrift und Intro stammen aus dem gestrichenen
+    // `showcase` — sie sprechen von laufenden Websites, und das ist für
+    // Besucher konkreter.
     'portfolio' => [
-        'heading'    => 'Umgesetzte Projekte',
+        'heading'    => 'Websites, die in der Praxis laufen',
+        'intro'      => 'Das sind Live-Projekte, die Sie sich sofort ansehen können. Bei jedem steht auch, was es dem Kunden gebracht hat.',
         'cta'        => 'Alle Projekte →',
         'detail_cta' => 'Projekt ansehen',
+        'live_cta'   => 'Live-Website öffnen',
+        'live_aria'  => 'Website von :client in neuem Fenster öffnen',
         'cards' => [
             'pitarena' => [
                 'client'  => 'PitArena',
@@ -159,7 +175,8 @@ return [
             ],
             'barana' => [
                 'client'  => 'BARANA',
-                'outcome' => 'Premium-Präsentation direkt für bezahlte Meta- und Google-Ads-Kampagnen — Besucher verstehen das Angebot ohne Anruf.',
+                // OND-198 (Befund 5.5): Werbeplattform-Jargon in Kundensprache umgeschrieben.
+                'outcome' => 'Eine eigenständige Seite für bezahlte Werbung — Besucher verstehen das Angebot ohne Anruf.',
             ],
             'nove-interiery' => [
                 'client'  => 'Nové interiéry',
@@ -178,33 +195,32 @@ return [
         'primary' => [
             'weby' => [
                 'title'       => 'Maßgeschneiderte Websites',
-                'description' => 'Eine Präsentations-Website, die sich von schablonenhaften Wettbewerbern abhebt und Kunden bringt.',
+                // OND-198 (Befund 5.1): „und Kunden bringt" war ein Versprechen
+                // des Kundenergebnisses — ersetzt durch das, wofür ich einstehe.
+                'description' => 'Eine Präsentations-Website, die sich von schablonenhaften Wettbewerbern abhebt und verständlich erklärt, was Sie tun und worin Sie sich unterscheiden.',
                 'bullets'     => [
                     'Eigener Code — kein WordPress, keine Vorlagen',
                     'Konversionsorientierte Struktur passend zu Ihrem Geschäft',
                     'Wartungsfreier Betrieb und schnelle Ladezeiten',
                 ],
-                'price'       => 'ab 1.000 €',
             ],
             'aplikace' => [
                 'title'       => 'Webanwendungen',
-                'description' => 'Interne Systeme, Kundenportale und Verwaltungstools, die Zeit und Personal sparen.',
+                'description' => 'Interne Systeme, Kundenportale und Verwaltungstools — zugeschnitten auf die Art, wie Ihr Betrieb tatsächlich arbeitet.',
                 'bullets'     => [
                     'Prozessdesign vor der ersten Codezeile',
                     'Integration in Ihre bestehenden Werkzeuge',
                     'Eigene Administration ohne monatliche Lizenzgebühren',
                 ],
-                'price'       => 'ab 2.200 €',
             ],
             'eshop' => [
                 'title'       => 'Online-Shops',
                 'description' => 'Ein Online-Shop, der zu Ihrem Produkt passt — ohne monatliche Gebühren für Plugins und Vorlagen.',
                 'bullets'     => [
                     'Kasse und Katalog passend zu Ihrem Sortiment',
-                    'Anbindung an Buchhaltung, Spediteure und Zahlungsanbieter',
+                    'Anbindung an Buchhaltung, Versanddienstleister und Zahlungsanbieter',
                     'Keine monatlichen Plattform-Gebühren',
                 ],
-                'price'       => 'ab 3.800 €',
             ],
         ],
         'seo' => [
@@ -223,32 +239,44 @@ return [
 
     'price_anchor' => [
         'heading' => 'Was kostet es?',
-        'intro'   => 'Orientierende Einstiegspreise für die drei Projekt-Tiers. Ein verbindliches Angebot erhalten Sie schriftlich nach einer kurzen Beratung.',
+        // OND-198 (Befund 5.4): Erwartungssatz vor der ersten Zahl.
+        // OND-198 (Befund 5.5): „Tiers" → „drei Stufen".
+        'intro'   => 'Die meisten Projekte, die ich baue, liegen zwischen 2.200 und 6.000 €. Wenn Sie eine Website unter 800 € suchen, bin ich nicht der richtige Anbieter für Sie — und das sage ich Ihnen gleich. Unten finden Sie orientierende Einstiegspreise für drei Stufen — ein verbindliches Angebot erhalten Sie schriftlich nach einer kurzen Beratung.',
         // OND-136: 25 / 55 / 95 Tausend CZK → EUR-Umrechnung (CEO-bestätigter 1:25-Anker). Eine Quelle der Wahrheit.
+        // OND-198 (Befund 5.4): Reihenfolge Standard → Custom → Starter; die
+        // günstigste Stufe steht zuletzt und wird als Ausnahme gerahmt.
+        'featured_label' => 'Häufigste Wahl',
         'items'   => [
             [
-                'title' => 'Starter',
-                'price' => '1.000 €',
-                'desc'  => 'Präsentations-Website bis 5 Seiten für Selbstständige und kleine Unternehmen.',
+                'title'    => 'Standard',
+                'price'    => '2.200 €',
+                'desc'     => 'Mehrsprachige Website mit Blog, Konversions-Tracking und Reservierungssystem.',
+                'featured' => true,
             ],
             [
-                'title' => 'Standard',
-                'price' => '2.200 €',
-                'desc'  => 'Mehrsprachige Website mit Blog, Konversions-Tracking und Reservierungssystem.',
+                'title'    => 'Custom',
+                'price'    => 'ab 3.800 €',
+                'desc'     => 'Online-Shop, Webanwendung oder ein komplexes Portal auf Maß.',
+                'featured' => false,
             ],
             [
-                'title' => 'Custom',
-                'price' => 'ab 3.800 €',
-                'desc'  => 'Online-Shop, Webanwendung oder ein komplexes Portal auf Maß.',
+                'title'    => 'Starter',
+                'price'    => '1.000 €',
+                'desc'     => 'Eine Ausnahme, kein Standard-Einstieg: Präsentations-Website bis 5 Seiten für Selbstständige. Ich nehme sie nur an, wo ein größerer Umfang keinen Sinn ergibt.',
+                'featured' => false,
             ],
         ],
         'cta' => 'Detaillierte Preisliste →',
     ],
 
     'why_me' => [
+        'video_aria' => 'Video: Ondřej Kriška — wer ich bin und wie ich Websites baue',
         'heading'   => 'Warum mit mir',
         'photo_alt' => 'Ondřej Kriška — Webentwickler',
-        'bio'       => '18 Jahre lang habe ich bei Toyota Projekte geleitet, bei denen das Band nicht stehen durfte. Dieselben Prinzipien — präzise Spezifikation, Analyse, Verifikation — wende ich heute auf Web-Projekte an. Ich arbeite allein: Sie sprechen direkt mit mir, von der ersten Beratung über den Launch hinaus.',
+        // OND-269: Der erste Satz („18 Jahre lang habe ich bei Toyota…") ist
+        // hier raus — die Toyota-Geschichte steht direkt unter diesem Absatz
+        // vollständig im Block `toyota`.
+        'bio'       => 'Ich arbeite allein. Sie sprechen direkt mit mir — von der ersten Beratung bis zum Launch und darüber hinaus, mit derselben präzisen Spezifikation, Analyse und Verifikation bei jedem Projekt.',
         'advantages' => [
             [
                 'heading' => 'Eigener Code, keine Vorlagen',
@@ -271,48 +299,70 @@ return [
 
     'testimonials' => [
         'heading' => 'Was meine Kunden über die Zusammenarbeit sagen.',
+        'note'    => 'Aus dem Tschechischen übersetzt — die Originale stehen auf Google, Firmy.cz und Facebook.',
     ],
 
-    'guarantee' => [
-        'heading' => 'Zwei Dinge, auf die Sie sich verlassen können.',
-        'items'   => [
+    // OND-269 (Audit OND-254, Befund 7): Die Sektion „Zwei Dinge, auf die Sie
+    // sich verlassen können." ist gestrichen — der Board hat den Schnitt am
+    // 22. 9. freigegeben. Beide Zusagen („Preis im Voraus", „Direkter
+    // Kontakt") standen wörtlich ein zweites Mal; die einzige verbleibende
+    // Fassung steht in `why_me.advantages` 02 und 03.
+
+    // OND-229 (F2 — Beweisschicht): Abschnitt „Unter der Haube" + Live-Demo
+    // der Design-Tokens. Jede Aussage ist im Repo überprüfbar; die Ladezeit
+    // misst die Performance API im Browser des Besuchers.
+    'craft' => [
+        'heading' => 'Unter der Haube',
+        'intro'   => 'Die Website, die ich für Sie baue, sieht auch von innen so aus. Das sind keine Marketingsätze — alles unten lässt sich direkt auf dieser Seite überprüfen.',
+        'facts'   => [
             [
-                'heading' => 'Preis im Voraus',
-                'text'    => 'Sie erhalten eine Spezifikation mit einem genauen Preis, bevor die Arbeit beginnt. Was in der Spezifikation steht, steht auf der Rechnung. Keine Mehrkosten, keine Überraschungen.',
+                'heading' => 'Eigener Code',
+                'text'    => 'Kein WordPress, kein Page-Builder, keine Plattform. Die Seite ist maßgeschrieben und läuft ohne Plugins, die monatliche Updates bräuchten.',
             ],
             [
-                'heading' => 'Direkter Kontakt immer',
-                'text'    => 'Sie kommunizieren direkt mit mir — nicht mit einem Verkäufer oder Koordinator. Rufen Sie jederzeit an. In den allermeisten Fällen nehme ich sofort ab.',
+                'heading' => 'Bilder nach Maß für Ihr Display',
+                'text'    => 'Jedes Bild existiert hier in sieben Größen und im sparsamen AVIF-Format. Ihr Browser hat nur die geladen, die Ihr Display wirklich braucht.',
+            ],
+            [
+                'heading' => 'Design mit System',
+                'text'    => 'Farben, Schrift und Abstände steuert keine Vorlage, sondern ein eigenes System von Variablen. Deshalb wirkt nichts fehl am Platz — und deshalb können Sie es unten selbst ausprobieren.',
             ],
         ],
+        'perf_prefix' => 'Diese Seite wurde für Sie in',
+        'perf_suffix' => 'geladen — gemessen gerade eben, in Ihrem Browser.',
     ],
 
-    // TODO: review pro DE — copy podle CS varianty A (OND-100)
-    'cta' => [
-        'heading'      => 'Bereit anzufangen? Die Beratung ist kostenlos.',
-        'consultation' => 'Preisangebot anfordern',
-        'message'      => '30-Min-Beratung vereinbaren',
-    ],
+    // OND-235: Live-Demo (OND-229) entfernt — der Website-Inhaber konnte
+    // den Besuchernutzen selbst nicht benennen, und auf dem Handy scrollte
+    // der Reglereffekt außer Sicht. Keys und CSS (.pd-demo*) entfernt.
 
-    'final_cta' => [
-        'quote_text'   => 'Dank des individuellen Ansatzes, der Flexibilität und der Professionalität entspricht das Ergebnis unseren Vorstellungen.',
-        'quote_author' => 'Hana Jaskmanická, Geschäftsführerin, VP Industry',
-        'heading'      => 'Ich gebe Ihnen eine ehrliche Meinung zu Ihrem Projekt.',
-        'subtext'      => 'Ich antworte bis zum nächsten Werktag. Wenn eine Zusammenarbeit keinen Sinn ergibt, sage ich es Ihnen geradeheraus — kein Verkaufsdruck, keine lästigen Folge-E-Mails.',
-        'cta_label'    => 'Preisangebot anfordern',
-        'cta_secondary' => '30-Min-Beratung vereinbaren',
-        'cta_note'     => 'Kostenlos. Unverbindlich.',
-    ],
+    // OND-201 (Befund 5.8): Das Ende der Homepage waren drei Handlungs-
+    // aufforderungen hintereinander. Die Blöcke `cta` und `final_cta` sind
+    // entfernt; es bleibt eine Aufforderung mit einem Formular in
+    // `inline_form` unten, das Kundenzitat ist dorthin umgezogen.
 
     'faq' => [
         'heading' => 'Häufige Fragen',
         // `key` ist ein stabiler Slug für Analytics (data-faq-key) und JSON-LD; nicht lokalisieren.
         'items'   => [
+            // OND-222 (Kapitel 6.3, Einwand 1): schwerwiegendster Einwand bei
+            // einem Auftrag über 150 Tsd. Am 2026-09-16 zurückgezogen (Fakten
+            // unbestätigt), am 2026-09-17 von Ondra bestätigt, mit zwei
+            // Korrekturen:
+            //  - Der Code gehört dem Kunden, liegt aber bis zur Schlusszahlung
+            //    bei Ondra; NICHT „von Anfang an bei Ihnen";
+            //  - keine Erwähnung von Laravel — sagt dem Kunden nichts;
+            //  - Dokumentation ist nicht Standard, nur auf Wunsch.
+            // Weiterhin gilt: kein Versprechen einer Rund-um-die-Uhr-Bereitschaft.
             [
-                'key'      => 'price',
-                'question' => 'Was kostet es?',
-                'answer'   => 'Orientierende Einstiegspreise finden Sie oben im Preisanker — Starter 1.000 €, Standard 2.200 €, Custom ab 3.800 €. Ein verbindliches Angebot erhalten Sie schriftlich nach einer kurzen Beratung. Auf der Rechnung steht genau das, was in der Spezifikation steht — Punkt für Punkt.',
+                'key'      => 'single-person',
+                'question' => 'Sie sind eine Person. Was, wenn Sie krank werden oder aufhören?',
+                'answer'   => 'Ein berechtigtes Bedenken — bei einem Projekt dieser Größe ist das die wichtigste Frage. Die Website läuft auf keiner Plattform, die Sie nicht verlassen könnten: Es ist eigener Code auf einem normalen Webhosting. Die Zugänge zur Hosting-Verwaltung und zum FTP können Sie die ganze Zeit haben, sagen Sie einfach Bescheid. Nach der vollständigen Bezahlung gehört der Code Ihnen — ich übergebe ihn, wann immer Sie darum bitten, und jeder Entwickler kann daran weiterarbeiten; wenn eine Dokumentation zur Übergabe nötig ist, schreibe ich sie. Eine Rund-um-die-Uhr-Bereitschaft halte ich nicht und werde das auch nicht behaupten. Wofür ich einstehe: Bei mir bleibt nichts eingeschlossen.',
             ],
+            // OND-269 (Audit OND-254, Befund 7): Die Frage „Was kostet es?"
+            // ist hier raus — dieselbe Überschrift und dieselben Zahlen
+            // stehen vier Sektionen weiter oben im Preisanker
+            // (`price_anchor`) und in der Preisliste.
             [
                 'key'      => 'duration',
                 'question' => 'Wie lange dauert es?',
@@ -325,7 +375,7 @@ return [
             ],
             [
                 'key'      => 'maintenance-free',
-                'question' => 'Was bedeutet „wartungsfreie Website"?',
+                'question' => 'Was bedeutet „wartungsfreie Website“?',
                 'answer'   => 'Kein WordPress, keine Plugins, keine monatlichen Sicherheitsupdates. Die Website läuft auf eigenem Code — sie funktioniert von selbst, benötigt keine regelmäßigen Patches und fällt nicht durch Template-Konflikte aus. Kleine Inhaltsänderungen laufen direkt über mich, ohne Ticket.',
             ],
             // Archiv: weitere FAQ-Einträge wandern von der Homepage weg (nach /faq oder /sluzby — außerhalb des OND-121-Umfangs).
@@ -335,7 +385,7 @@ return [
     'faq_form' => [
         'eyebrow'     => 'Andere Frage?',
         'heading'     => 'Schreiben Sie sie direkt.',
-        'description' => 'Ich greife sie auf und antworte bis zum nächsten Werktag. Kein Verkaufsdruck.',
+        'description' => 'Ich greife sie auf und melde mich innerhalb von 24 Stunden an Arbeitstagen. Kein Verkaufsdruck.',
         'name'        => 'Name',
         'email'       => 'E-Mail',
         'message'     => 'Ihre Frage',
@@ -349,14 +399,17 @@ return [
         'success'     => 'Danke, die Frage ist eingegangen. Ich melde mich so schnell wie möglich.',
     ],
 
-    // TODO: review pro DE — copy podle CS varianty A (OND-100)
+    // OND-201 (Befund 5.8): die einzige abschließende Aufforderung der Homepage.
     'inline_form' => [
         'eyebrow'         => 'Anfrage',
-        'heading'         => 'Schicken Sie mir ein paar Zeilen zum Projekt. Ich melde mich innerhalb von 24 Stunden.',
-        'description'     => 'Kein Verkäufer, kein Formular mit zehn Feldern. Eine kurze Beschreibung reicht — ich antworte persönlich und wir prüfen, ob eine Zusammenarbeit Sinn ergibt.',
+        'heading'         => 'Schreiben Sie mir, was Sie brauchen',
+        'description'     => 'Beschreiben Sie kurz, worum es geht. Ich melde mich innerhalb von 24 Stunden an Arbeitstagen und wir gehen unverbindlich durch, was Sinn ergibt. Wenn wir nicht zusammenpassen, sage ich es Ihnen geradeheraus.',
+        'quote_text'      => 'Dank des individuellen Ansatzes, der Flexibilität und der Professionalität entspricht das Ergebnis unseren Vorstellungen.',
+        'quote_author'    => 'Hana Jaskmanická, Geschäftsführerin, VP Industry',
         'name'            => 'Vor- und Nachname',
         'email'           => 'E-Mail',
         'phone'           => 'Telefon (optional)',
+        'phone_hint'      => 'Mit Nummer melde ich mich schneller.',
         'message'         => 'Was möchten Sie lösen?',
         'placeholders'    => [
             'name'    => 'Max Mustermann',
@@ -366,6 +419,7 @@ return [
         ],
         'submit'          => 'Anfrage senden',
         'submitting'      => 'Wird gesendet…',
+        'note'            => 'Oder schreiben Sie mir an ok@ondraweb.cz. Ich antworte persönlich, nicht über einen Formular-Roboter.',
         'privacy_prefix'  => 'Mit dem Absenden stimmen Sie der Verarbeitung personenbezogener Daten gemäß den ',
         'privacy_link'    => 'Datenschutzrichtlinien zu',
         'success'         => 'Danke, die Anfrage ist eingegangen. Ich melde mich so schnell wie möglich.',

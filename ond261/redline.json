@@ -1,0 +1,539 @@
+[
+ {
+  "id": "X1-1",
+  "slug": "pitarena-eshop",
+  "field": "title",
+  "old": "PitAréna — e-shop",
+  "new": "PitArena — e-shop",
+  "why": "Sjednocení značky. pitarena.cz i doména klienta píší PitArena; PitAréna se objevuje jen na shop.pitarena.cz. V portfoliu stojí obě varianty vedle sebe na jedné kartě (klient „PitArena“, titulek „PitAréna“). Pole title pohání H1, kartu v „Další projekty“ i výpis /projekty."
+ },
+ {
+  "id": "X1-2",
+  "slug": "pitarena-eshop",
+  "field": "meta_title",
+  "old": "PitAréna — e-shop s motorkami YCF a náhradními díly",
+  "new": "PitArena — e-shop s motorkami YCF a náhradními díly",
+  "why": "Totéž v SEO titulku, aby značka nebyla ve výsledcích vyhledávání psaná jinak než na webu klienta."
+ },
+ {
+  "id": "X2-1",
+  "slug": "pitarena",
+  "field": "duration",
+  "old": "průběžně 2023–dnes",
+  "new": "průběžně od 2023",
+  "why": "Jednotný tvar pro dlouhodobé spolupráce: „průběžně od <rok>“. „–dnes“ je redundantní."
+ },
+ {
+  "id": "X2-2",
+  "slug": "hcms",
+  "field": "duration",
+  "old": "několik měsíců (2021), provoz dodnes",
+  "new": "několik měsíců, aplikace běží dodnes",
+  "why": "Závorka s rokem duplikuje řádek „Rok: 2021“ hned nad tím. Věta bez závorky se čte přirozeně."
+ },
+ {
+  "id": "X2-3",
+  "slug": "yolk",
+  "field": "duration",
+  "old": "průběžná spolupráce",
+  "new": "průběžně od 2025",
+  "why": "„Průběžná spolupráce“ neříká jak dlouho. Rok 2025 je v datech projektu, jednotný tvar s PitArenou."
+ },
+ {
+  "id": "X2-4",
+  "slug": "realitacky-v-akci",
+  "field": "duration",
+  "old": "září 2024",
+  "new": "",
+  "why": "Název měsíce je datum zahájení, ne doba realizace — řádek slibuje jinou informaci, než dodá. Rok 2024 je na stránce o řádek výš. Bez ověřeného řádu (týdny/měsíce) řádek vypustit."
+ },
+ {
+  "id": "X2-5",
+  "slug": "josefopa",
+  "field": "duration",
+  "old": "říjen 2024",
+  "new": "",
+  "why": "Stejný důvod jako u realitacky-v-akci — datum místo doby."
+ },
+ {
+  "id": "X2-6",
+  "slug": "logo-realitacky",
+  "field": "duration",
+  "old": "leden 2024",
+  "new": "",
+  "why": "Stejný důvod — datum místo doby."
+ },
+ {
+  "id": "X2-7",
+  "slug": "vanspedition",
+  "field": "duration",
+  "old": "kratší realizace",
+  "new": "",
+  "why": "„Doba realizace: kratší realizace“ je tautologie a hodnotící přívlastek místo údaje. Bez ověřeného řádu vypustit."
+ },
+ {
+  "id": "X2-8",
+  "slug": "elektro-srnak",
+  "field": "duration",
+  "old": "kratší realizace",
+  "new": "",
+  "why": "Tatáž tautologie."
+ },
+ {
+  "id": "X2-9",
+  "slug": "clanek-motorkari-cz",
+  "field": "duration",
+  "old": "krátká spolupráce",
+  "new": "",
+  "why": "Hodnotící přívlastek místo údaje; „krátká“ navíc podbízí malou hodnotu práce."
+ },
+ {
+  "id": "X2-10",
+  "slug": "video-pitbike-akademie",
+  "field": "duration",
+  "old": "krátká produkce",
+  "new": "",
+  "why": "Hodnotící přívlastek místo údaje."
+ },
+ {
+  "id": "X2-11",
+  "slug": "animace-delejme",
+  "field": "duration",
+  "old": "krátká produkce",
+  "new": "",
+  "why": "Hodnotící přívlastek místo údaje."
+ },
+ {
+  "id": "X2-12",
+  "slug": "pitarena-cedule",
+  "field": "duration",
+  "old": "krátká zakázka",
+  "new": "",
+  "why": "Hodnotící přívlastek místo údaje."
+ },
+ {
+  "id": "X2-13",
+  "slug": "excel-tools",
+  "field": "duration",
+  "old": "průběžně",
+  "new": "",
+  "why": "Samotné „průběžně“ bez rozsahu nic neříká a proti řádku „Rok: 2020“ působí rozporně. Pokud Ondřej potvrdí rozsah, nasadit „průběžně 2019–2021“ (nebo skutečné roky); jinak vypustit."
+ },
+ {
+  "id": "hcms-1",
+  "slug": "hcms",
+  "field": "solution",
+  "old": "Po analýze procesů na hale jsem navrhl doménový model, use case mapu a postavil webovou aplikaci s tabletovým rozhraním pro operátory a desktopovým pohledem pro vedoucí.",
+  "new": "Po analýze procesů přímo na hale jsem zmapoval, co všechno se při výpadku dílu děje a kdo v tom hraje jakou roli, a z toho postavil webovou aplikaci — tabletové rozhraní pro operátory, desktopový přehled pro vedoucí.",
+  "why": "„Doménový model“ a „use case mapa“ jsou pojmy z vývojářské analýzy; majiteli firmy neřeknou nic. Nová věta popisuje tutéž práci jako výsledek, ne jako název metody."
+ },
+ {
+  "id": "barana-1",
+  "slug": "barana",
+  "field": "subtitle",
+  "old": "Premium web pro bioklimatické pergoly připravený na kampaně",
+  "new": "Prémiový web pro bioklimatické pergoly připravený na kampaně",
+  "why": "Podtitul píše anglicky „Premium web“, zbytek textu česky „prémiové“. U projektu, který prodává prémiovost i copywriting, je mix obzvlášť vidět."
+ },
+ {
+  "id": "barana-2",
+  "slug": "barana",
+  "field": "meta_title",
+  "old": "BARANA — premium web pro pergoly, ploty a brány",
+  "new": "BARANA — prémiový web pro pergoly, ploty a brány",
+  "why": "Sjednocení s podtitulem a perexem."
+ },
+ {
+  "id": "barana-3",
+  "slug": "barana",
+  "field": "meta_description",
+  "old": "Případová studie: premium prezentace BARANA s landingem pro Meta Ads a Google Ads. Postaveno za 5 týdnů, ready pro placené kampaně.",
+  "new": "Případová studie: prémiová prezentace BARANA se samostatnou stránkou pro Meta Ads a Google Ads. Postaveno za 5 týdnů.",
+  "why": "Tři anglicismy v jedné SEO větě („premium“, „landing“, „ready“). „Samostatná stránka pro reklamu“ je formulace, kterou už web používá ve štítcích u téhož projektu."
+ },
+ {
+  "id": "ni-1",
+  "slug": "nove-interiery",
+  "field": "solution",
+  "old": "Texty mluví bez jargonu o tom, co klient od spolupráce dostane.",
+  "new": "Texty bez žargonu říkají, co klient od spolupráce dostane.",
+  "why": "Česky „žargon“. Věta o textech bez žargonu s pravopisnou chybou působí ironicky. Zároveň „mluví … o tom, co“ je vata."
+ },
+ {
+  "id": "cyklo-1",
+  "slug": "cyklocentrum",
+  "field": "result",
+  "old": "Klient potvrzuje, že má za sebou „prezentaci, kterou je za co schovat\".",
+  "new": "Klient potvrzuje, že má konečně prezentaci, za kterou se nemusí stydět.",
+  "why": "Uvozená věta v češtině nedává smysl (zřejmě zkomolené „za kterou se nemusí stydět“) a jako doslovný citát je to chyba přepisu. Nové znění uvozovky vypouští a formuluje to jako parafrázi — tím nic klientovi nevkládám do úst. POZOR: pokud se dohledá původní znění reference, nasadit doslovný citát v uvozovkách místo parafráze."
+ },
+ {
+  "id": "real-1",
+  "slug": "realitacky-v-akci",
+  "field": "challenge",
+  "old": "Měla působit profesionálně, ale lidsky, a měla z webu jít poznat, jak pracuje.",
+  "new": "Web měl působit profesionálně, ale lidsky, a mělo z něj jít poznat, jak makléřka pracuje.",
+  "why": "Předchozí věta mluví o webu (rod mužský), takže „Měla působit“ nemá podmět, ke kterému by se vázalo. Druhá polovina má navíc nesprávný rod („měla z webu jít poznat“ → „mělo“) a nejasné „jak pracuje“ (kdo?)."
+ },
+ {
+  "id": "vp-1",
+  "slug": "vp-industry",
+  "field": "result",
+  "old": "Web je technicky připravený na růst — chybí jen aktivní obsahová a kampaňová práce, kterou klient zatím odložil. Potenciál pro organický růst je v infrastruktuře nachystaný a čeká na další fázi. Tohle je férový výsledek: dělám to, co bylo zadáno, a otevřeně říkám, kde leží další kus práce.",
+  "new": "Klient dostal web, který je technicky hotový: produktové stránky s parametry a videi, správně nastavené SEO, napojenou analytiku a strukturu, která unese další články bez přestavby. Obsahovou a kampaňovou fázi zatím odložil — až ji zapne, nic se nebude muset předělávat.",
+  "why": "Poslední věta je sebeobhajoba, ne výsledek — čtenář se dozví, jak se Ondřej cítí, ne co dostal klient. Nové znění popisuje hotový stav konkrétně a další fázi odbude jednou neutrální větou. Žádný slib výsledku zůstává zachován."
+ },
+ {
+  "id": "sz-1",
+  "slug": "strechy-zajic",
+  "field": "solution",
+  "old": "Web funguje stejně dobře na desktopu i na chytrém telefonu, kterým si Honzové ze stavby běžně ověřují, „ten chlap jak se jmenuje\".",
+  "new": "Web funguje stejně dobře na počítači i na telefonu — a právě z telefonu si lidé firmu nejčastěji vyhledají.",
+  "why": "Vtip na účet cílovky klienta („Honzové ze stavby“) v oficiální případovce, navíc syntakticky rozpadlý (uvozená část se na větu nenapojuje). Klient si ten text může přečíst."
+ },
+ {
+  "id": "jo-1",
+  "slug": "josefopa",
+  "field": "challenge",
+  "old": "Klient potřeboval visačku stavební firmy, která bude působit jako solidní lokální partner v Německu.",
+  "new": "Klient potřeboval, aby jeho stavební firma v Německu působila jako solidní lokální partner.",
+  "why": "Navazuje na vlnu 1 (OND-256 mění „visačku“ → „vizitku“). I po té opravě věta nefunguje: vztažná věta se váže k vizitce, takže jako solidní partner má působit vizitka, ne firma.",
+  "depends_on": "OND-256"
+ },
+ {
+  "id": "jo-2",
+  "slug": "josefopa",
+  "field": "subtitle",
+  "old": "Vícejazyčná prezentace stavební firmy s vlastním brandem",
+  "new": "Dvojjazyčná prezentace stavební firmy s vlastním brandem",
+  "why": "Stránka si protiřečí: podtitul a meta říkají „vícejazyčná“, perex „dvojjazyčný web“, meta popis upřesňuje (DE/EN). Dva jazyky = dvojjazyčný. Sjednoceno na konkrétní a ověřitelný fakt."
+ },
+ {
+  "id": "jo-3",
+  "slug": "josefopa",
+  "field": "challenge",
+  "old": "Vícejazyčnost byla zásadní — komunikace s klienty probíhá převážně německy, ale poptávky chodí i v angličtině.",
+  "new": "Dvojjazyčnost byla zásadní — komunikace s klienty probíhá převážně německy, ale poptávky chodí i v angličtině.",
+  "why": "Sjednocení téhož."
+ },
+ {
+  "id": "jo-4",
+  "slug": "josefopa",
+  "field": "solution",
+  "old": "Postavil jsem responzivní vícejazyčný web, navrhl výrazné a hravé logo",
+  "new": "Postavil jsem responzivní dvojjazyčný web v němčině a angličtině, navrhl výrazné a hravé logo",
+  "why": "Sjednocení téhož a doplnění, které dva jazyky to jsou."
+ },
+ {
+  "id": "jo-5",
+  "slug": "josefopa",
+  "field": "meta_title",
+  "old": "Josef Opa — vícejazyčný web stavební firmy v Německu",
+  "new": "Josef Opa — dvojjazyčný web stavební firmy v Německu",
+  "why": "Sjednocení téhož v SEO titulku."
+ },
+ {
+  "id": "jo-6",
+  "slug": "josefopa",
+  "field": "tag",
+  "old": "Web ve více jazycích",
+  "new": "Web ve dvou jazycích",
+  "why": "Štítek u projektu tvrdí „více jazyků“. Engineer: jde o sdílený řádek v portfolio_tag_translations — ověřit, že štítek nevisí i u jiného projektu; podle produkčních dat ho má jen josefopa."
+ },
+ {
+  "id": "vs-1",
+  "slug": "vanspedition",
+  "field": "challenge",
+  "old": "Klienti potřebují rychle vědět, co umíte, kdo to dělá a jak se ozvat.",
+  "new": "Zákazníci spedice potřebují rychle vědět, co firma umí, kdo za ní stojí a jak se ozvat.",
+  "why": "Věta popisuje zákazníky spediční firmy, ale „co umíte“ najednou osloví čtenáře webu — adresát se uprostřed věty přehodí. Navíc „klienti“ tu znamená zákazníky klienta, což mate."
+ },
+ {
+  "id": "yolk-1",
+  "slug": "yolk",
+  "field": "title",
+  "old": "YOLK — vývoj na klinikových portálech",
+  "new": "YOLK — vývoj na webech zdravotnických klinik",
+  "why": "„Klinikový“ není české slovo (správně „klinický“, ale ani to sem nesedí — nejde o klinické studie). Pole title pohání H1 i kartu projektu, takže se ten patvar opakuje na dalších stránkách."
+ },
+ {
+  "id": "yolk-2",
+  "slug": "yolk",
+  "field": "challenge",
+  "old": "Agentura má klienty s rozsáhlými portály, kde každý drobný chybný kus tlačí dolů kvalitu zákaznické zkušenosti pacientů. Bylo potřeba spolehlivě udržovat běh, dělat sezónní změny v akcích a dotazníkách a doplňovat custom funkce, které WordPress sám neumí.",
+  "new": "Agentura má klienty s rozsáhlými weby, na kterých si pacienti hledají péči — každá drobná chyba tam shazuje dojem z celé kliniky. Bylo potřeba weby spolehlivě držet v chodu, dělat sezónní změny v akcích a dotaznících a doplňovat funkce, které WordPress sám neumí.",
+  "why": "Tři vady v jednom odstavci: „v dotazníkách“ → správně „v dotaznících“; „každý drobný chybný kus tlačí dolů kvalitu zákaznické zkušenosti“ je doslovný překlad z angličtiny, nikdo tak nemluví; „custom funkce“ je žargon."
+ },
+ {
+  "id": "yolk-3",
+  "slug": "yolk",
+  "field": "solution",
+  "old": "Pracuji jako externí vývojář na konkrétní zakázky — sezónní úpravy, opravy chyb, custom PHP/JS rozšíření a úpravy formulářů. Komunikace probíhá rovnou s týmem agentury, výstup je pro klienty agentury prakticky neviditelný v tom dobrém smyslu — všechno jede.",
+  "new": "Pracuji jako externí vývojář na konkrétní zakázky — sezónní úpravy, opravy chyb, rozšíření v PHP a JavaScriptu a úpravy formulářů. WordPress na nových webech nestavím, ale když na něm klient už stojí, umím ho opravit a udržet v chodu. Komunikace jde rovnou s týmem agentury a pacient z mojí práce nepozná nic — a přesně o to jde.",
+  "why": "Doplněna rámující věta k WordPressu: web na jiných stránkách WordPress zavrhuje, zatímco tahle případovka otevřeně popisuje práci na něm. Bez jedné věty to vypadá jako rozpor, s ní je to postoj. Zároveň odstraněn „custom“ a vata „prakticky neviditelný v tom dobrém smyslu — všechno jede“."
+ },
+ {
+  "id": "pick-1",
+  "slug": "picker",
+  "field": "challenge",
+  "old": "Klasické „papír s checklistem\" v Toyotě tempo neudržel",
+  "new": "Klasický papír s checklistem v Toyotě tempo neudržel",
+  "why": "Shoda: „klasické“ se neshoduje s „papír“. Uvozovky tu nic necitují, jen maskují chybnou shodu — pryč s nimi."
+ },
+ {
+  "id": "pick-2",
+  "slug": "picker",
+  "field": "solution",
+  "old": "monitorovacím dashboardem pro vedoucí a admin sekcí pro konfiguraci procesů",
+  "new": "přehledovou obrazovkou pro vedoucího a nastavením, ve kterém si firma sama upraví průběh procesů",
+  "why": "„Monitorovací dashboard“ a „admin sekce pro konfiguraci procesů“ jsou tři žargony v jedné větě. Výsledek přitom totéž umí říct lidsky („bez vývojářského zásahu“) — Řešení se tomu jen přizpůsobuje."
+ },
+ {
+  "id": "choc-1",
+  "slug": "choccoboard",
+  "field": "subtitle",
+  "old": "BI dashboard, který nahradil 30 minut ruční práce denně",
+  "new": "Přehled prodejních čísel, který nahradil 30 minut ruční práce denně",
+  "why": "„BI dashboard“ je zkratka z oboru; majitel výrobny pralinek ji nemusí znát. Meta karta téhož projektu to už umí česky („Přehled čísel na jedné obrazovce“) — podtitul se k ní srovnává."
+ },
+ {
+  "id": "choc-2",
+  "slug": "choccoboard",
+  "field": "description",
+  "old": "Choccoboard je webová aplikace pro vedení firmy, která zpřístupňuje prodejní KPI a klíčové ukazatele v reálném čase z jakéhokoli zařízení.",
+  "new": "Choccoboard je webová aplikace pro vedení firmy: ukazuje aktuální prodejní čísla a další klíčové ukazatele z jakéhokoli zařízení.",
+  "why": "„Prodejní KPI“ je totéž co „klíčové ukazatele“ hned vedle — zkratka navíc a tautologie. „V reálném čase“ nahrazeno srozumitelným „aktuální“."
+ },
+ {
+  "id": "choc-3",
+  "slug": "choccoboard",
+  "field": "solution",
+  "old": "jednou přehledovou obrazovkou s KPI a flexibilním filtrováním",
+  "new": "jednou přehledovou obrazovkou s hlavními čísly a filtrováním",
+  "why": "Zbylá zkratka KPI; „flexibilní filtrování“ je vata — filtrování, které nic neumí, by tam nebylo."
+ },
+ {
+  "id": "choc-4",
+  "slug": "choccoboard",
+  "field": "meta_description",
+  "old": "Případová studie: webový BI dashboard, který eliminoval 30 minut ručního stahování dat denně.",
+  "new": "Případová studie: webový přehled prodejních čísel, který ušetřil 30 minut ručního stahování dat denně.",
+  "why": "Tentýž žargon v SEO popisu, na který se klikne ve výsledcích vyhledávání."
+ },
+ {
+  "id": "frl-1",
+  "slug": "frl-creator",
+  "field": "subtitle",
+  "old": "Generátor regálových štítků z proměnných dat",
+  "new": "Štítky do regálů, které se samy poskládají z aktuálních dat",
+  "why": "„Generátor … z proměnných dat“ je popis pro vývojáře. Nové znění říká totéž z pohledu člověka, který ty štítky potřebuje."
+ },
+ {
+  "id": "frl-2",
+  "slug": "frl-creator",
+  "field": "solution",
+  "old": "Při testování se rychle odstraňovaly nálezy.",
+  "new": "Chyby, které se při testování objevily, jsem opravoval průběžně.",
+  "why": "„Nálezy“ je hantýrka z testování. Zároveň trpný rod zakrývá, kdo to dělal — na webu psaném v ich-formě to působí vyhýbavě."
+ },
+ {
+  "id": "frl-3",
+  "slug": "frl-creator",
+  "field": "result",
+  "old": "důslednou analýzu procesů a rychlé řešení nálezů během testování (5/5 hvězd)",
+  "new": "důslednou analýzu procesů a rychlé opravy chyb během testování (5/5 hvězd)",
+  "why": "Tatáž hantýrka v parafrázi reference (mimo uvozovky, takže citát to neposouvá)."
+ },
+ {
+  "id": "frl-4",
+  "slug": "frl-creator",
+  "field": "meta_description",
+  "old": "Analýza procesů, rychlé řešení nálezů, 5/5 hvězd.",
+  "new": "Analýza procesů, rychlé opravy během testování, 5/5 hvězd.",
+  "why": "Tatáž hantýrka v SEO popisu."
+ },
+ {
+  "id": "ex-1",
+  "slug": "excel-tools",
+  "field": "category_label",
+  "old": "Webová aplikace",
+  "new": "Aplikace",
+  "why": "Sada VBA maker v Excelu není webová aplikace — kategorie popírá obsah stránky (vlastní štítky projektu říkají „Makra v Excelu“, „Excel“). DOPORUČENÁ VARIANTA: přejmenovat popisek kategorie `application` z „Webová aplikace“ na „Aplikace“ (EN „Application“, DE „Anwendung“). Klíč `projects.detail.category_label.application` v lang/{cs,en,de}/projects.php, žádná datová migrace. Zůstane pravdivý i pro HCMS, Picker, Choccoboard a FRL Creator — u těch stránka sama v podtitulu i ve štítcích říká, že běží v prohlížeči. Proč ne „Aplikace na míru“: tenhle název už na týchž stránkách visí jako štítek v řádku Technologie, kategorie by ho duplikovala. ZÁLOŽNÍ VARIANTA, pokud má filtr „Webová aplikace“ zůstat beze změny: přesunout jen excel-tools do kategorie `other` („Ostatní“) — jednořádková datová migrace, ale sada nástrojů pak sedí vedle loga a cedule."
+ },
+ {
+  "id": "ex-2",
+  "slug": "excel-tools",
+  "field": "solution",
+  "old": "Šest interních aplikací: FLR Backup 1 (CSV generátor podle parametrů), FLR Backup 2 (krok-za-krokem záloha pro dodávku dílů), Address Data (sloučení dat z více zdrojů), Kanban (generátor PDF kanbanů), Kombinace procesů (vizualizace plánovaných dodávek napříč procesy) a Report (Excel→PDF export s automatickým e-mailem a maskováním dat).",
+  "new": "Šest nástrojů šitých na konkrétní úkoly. Tři z nich dělají většinu práce: záložní postup pro dodávku dílů na linku, který člověka provede krok za krokem; generátor štítků, který je rovnou vysází do PDF k tisku; a rozesílač reportů, který si data sám vytáhne, skryje citlivé údaje a pošle je e-mailem. Zbylé tři připravují podklady a plánování dodávek.",
+  "why": "Šest interních názvů a zkratek („FLR Backup 1“, „CSV“, „kanban“, „maskování dat“) neřekne nic nikomu mimo Toyotu. Nové znění drží počet šest (fakt), ale popisuje tři nástroje přínosem a zbytek shrne."
+ },
+ {
+  "id": "logo-1",
+  "slug": "logo-realitacky",
+  "field": "result",
+  "old": "Bylo zdarma součástí webového balíčku, takže celý brand má jednu autorskou ruku a tedy konzistentní pocit.",
+  "new": "Vzniklo jako součást webového balíčku, takže celý brand má jednu autorskou ruku a drží pohromadě.",
+  "why": "„Zdarma“ snižuje vnímanou hodnotu práce, kterou ta stránka zrovna předvádí — čtenář si odnese, kolik to stálo, ne co to umí. Zároveň „a tedy konzistentní pocit“ je kostrbaté."
+ },
+ {
+  "id": "vid-1",
+  "slug": "video-pitbike-akademie",
+  "field": "result",
+  "old": "Klient má video formát, který sedí na Facebookové publikum a rozšiřuje povědomí o akademii bez nutnosti rozjíždět drahou videoprodukci. Snadno se reuse-uje pro další sezóny.",
+  "new": "Klient má formát, který sedí facebookovému publiku a rozšiřuje povědomí o akademii bez drahé videoprodukce. Pro další sezóny se dá použít znovu s minimem úprav.",
+  "why": "Tři vady: „reuse-uje“ je patvar; „Facebookové“ jako přídavné jméno se píše malým písmenem; „sedí na publikum“ → vazba je „sedí publiku“."
+ },
+ {
+  "id": "ced-1",
+  "slug": "pitarena-cedule",
+  "field": "result",
+  "old": "Cedule je nad servisem fyzicky umístěná a posiluje brand každého, kdo do areálu zajede.",
+  "new": "Cedule visí nad servisem a připomíná značku každému, kdo do areálu zajede.",
+  "why": "Logický lapsus: takhle cedule posiluje značku návštěvníků, ne PitAreny. Navíc „je fyzicky umístěná“ je úřednické."
+ },
+ {
+  "id": "anim-1",
+  "slug": "animace-delejme",
+  "field": "title",
+  "old": "Animace upoutání pozornosti",
+  "new": "Animace pro upoutání pozornosti",
+  "why": "Chybí předložka — bez ní to čteme jako „animace něčeho“. Pole title pohání H1 i kartu projektu."
+ },
+ {
+  "id": "anim-2",
+  "slug": "animace-delejme",
+  "field": "meta_title",
+  "old": "Animace upoutání pozornosti — ukázka pro sociální sítě",
+  "new": "Animace pro upoutání pozornosti — ukázka pro sociální sítě",
+  "why": "Totéž v SEO titulku."
+ },
+ {
+  "id": "anim-3",
+  "slug": "animace-delejme",
+  "field": "challenge",
+  "old": "Většina obsahu na sociálních sítích projde kolem člověka aniž by si ho všiml.",
+  "new": "Většina obsahu na sociálních sítích projde kolem člověka, aniž by si jí všiml.",
+  "why": "Před „aniž“ patří čárka. Zájmeno „ho“ navíc míří na „člověka“, ne na obsah — správně „jí“ (většiny)."
+ },
+ {
+  "id": "anim-4",
+  "slug": "animace-delejme",
+  "field": "slug",
+  "old": "animace-delejme",
+  "new": "animace-pro-upoutani-pozornosti",
+  "why": "Slug „delejme“ se k názvu ani obsahu nevztahuje — je to zbytek po jiném projektu a v adrese ho návštěvník vidí. Engineer: změna slugu vyžaduje 301 přesměrování ze staré adresy a promítnutí do sitemapy; pokud je to nad rámec balíčku, nechat na samostatnou kartu."
+ },
+ {
+  "id": "Q1",
+  "slug": "*",
+  "field": "*",
+  "old": "\"",
+  "new": "“",
+  "why": "CELOWEBOVÁ TYPOGRAFIE: ve všech 22 uvozených úsecích v textech projektů je otevírací uvozovka správná česká „ (U+201E), ale zavírací je rovná palcová \" (U+0022) místo české “ (U+201C). Ověřeno na produkci 22. 9. 2026: 22 otevíracích „, 22 rovných \", nula správných “. Protože se rovná uvozovka v těchto polích nevyskytuje nikde jinde, je bezpečná plošná záměna U+0022 → U+201C napříč poli title, subtitle, summary, challenge, solution, result, meta_title, meta_description všech projektů. Dotčené projekty: pitarena (2), cyklocentrum (3), zubni-provazek (3), nove-interiery (2), barana, realitacky-v-akci, kemp-veselka, strechy-zajic, vanspedition, yolk, picker, choccoboard, frl-creator, excel-tools, logo-realitacky, animace-delejme (po 1)."
+ },
+ {
+  "id": "K1",
+  "slug": "zubni-provazek",
+  "field": "*",
+  "old": "",
+  "new": "",
+  "why": "PONECHAT. Audit u této stránky neuvádí žádnou textovou vadu a kontrolní čtení perexu, Výzvy, Řešení i Výsledku ji nenašlo: shody sedí, čísla jsou zdrojovaná (GA, datum měření), žargon žádný. Jediná změna je plošná oprava uvozovek (Q1)."
+ },
+ {
+  "id": "K2",
+  "slug": "kemp-veselka",
+  "field": "*",
+  "old": "",
+  "new": "",
+  "why": "PONECHAT. Audit u této stránky hlásí jen vizuální nálezy (prázdné sloupce galerie, prázdný CTA blok). Texty jsou v pořádku, citace klientky je uvozená a atribuovaná. Jediná změna je Q1."
+ },
+ {
+  "id": "K3",
+  "slug": "elektro-srnak",
+  "field": "*",
+  "old": "",
+  "new": "",
+  "why": "PONECHAT texty. Audit výslovně chválí, že ukončený hosting je na dvou místech poctivě přiznaný — to neměnit. Mění se jen řádek Doba realizace (X2-8)."
+ },
+ {
+  "id": "K4",
+  "slug": "pitarena",
+  "field": "*",
+  "old": "",
+  "new": "",
+  "why": "PONECHAT texty. Bez textového nálezu; čísla ze Search Console jsou zdrojovaná včetně období. Mění se jen Doba realizace (X2-1) a uvozovky (Q1)."
+ },
+ {
+  "id": "K5",
+  "slug": "pitarena-eshop",
+  "field": "*",
+  "old": "",
+  "new": "",
+  "why": "PONECHAT texty mimo značku. Bez textového nálezu; čísla z administrace e-shopu jsou zdrojovaná. Mění se jen psaní značky (X1)."
+ },
+ {
+  "id": "K6",
+  "slug": "clanek-motorkari-cz",
+  "field": "*",
+  "old": "",
+  "new": "",
+  "why": "PONECHAT texty. Jediná textová vada („motopotálu“) patří vlně 1 (OND-256). Mění se jen Doba realizace (X2-9)."
+ },
+ {
+  "id": "K7",
+  "slug": "cyklocentrum",
+  "field": "*",
+  "old": "",
+  "new": "",
+  "why": "PONECHAT zbytek textů. Kromě zkomolené citace (cyklo-1) je stránka v pořádku, SEO a GA čísla jsou zdrojovaná."
+ },
+ {
+  "id": "W1",
+  "slug": "barana",
+  "field": "description",
+  "old": "Postavil jsem premiové prezentační stránky",
+  "new": "Postavil jsem prémiové prezentační stránky",
+  "why": "VLNA 1 (OND-256) — needěláme znovu, uvedeno jen pro úplnost a proto, že barana-1..3 na stejném slově staví."
+ },
+ {
+  "id": "W2",
+  "slug": "nove-interiery",
+  "field": "result",
+  "old": "že si zákazníci dopředu vědomí",
+  "new": "že zákazníci dopředu vědí",
+  "why": "VLNA 1 (OND-256) — needěláme znovu."
+ },
+ {
+  "id": "W3",
+  "slug": "josefopa",
+  "field": "challenge",
+  "old": "visačku",
+  "new": "vizitku",
+  "why": "VLNA 1 (OND-256) — needěláme znovu; jo-1 celou tu větu nahrazuje, takže po vlně 1 je nutné brát staré znění s „vizitku“."
+ },
+ {
+  "id": "W4",
+  "slug": "choccoboard",
+  "field": "solution",
+  "old": "se k ní dostaneš",
+  "new": "se k ní dostanete",
+  "why": "VLNA 1 (OND-256) — needěláme znovu."
+ },
+ {
+  "id": "W5",
+  "slug": "frl-creator",
+  "field": "challenge",
+  "old": "chybovo",
+  "new": "chybově",
+  "why": "VLNA 1 (OND-256) — needěláme znovu."
+ },
+ {
+  "id": "W6",
+  "slug": "clanek-motorkari-cz",
+  "field": "result",
+  "old": "motopotálu",
+  "new": "motoportálu",
+  "why": "VLNA 1 (OND-256) — needěláme znovu."
+ }
+]

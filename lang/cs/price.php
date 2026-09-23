@@ -9,7 +9,25 @@ return [
 
     'subheading' => 'Orientační ceny',
     'heading'    => 'Víte, do čeho jdete, ještě před první schůzkou.',
-    'intro'      => 'Každý projekt je jiný — finální cenu znáte po bezplatné konzultaci. Tento přehled vám dá jasnou představu, kolik to bude stát, ještě před naší první schůzkou.',
+    // OND-198 (nález 5.4): očekávací věta musí padnout dřív než první číslo.
+    'intro'      => 'Většina projektů, které stavím, vychází mezi 55 a 150 tisíci korunami. Pokud hledáte web do dvaceti tisíc, nebudu pro vás ten správný dodavatel a řeknu vám to rovnou. Každý projekt je jiný — finální cenu znáte po bezplatné konzultaci. Tento přehled vám dá jasnou představu ještě před naší první schůzkou.',
+
+    // OND-135 P2 iter 5 — plán §3.1 hero (page-mark + amber accent).
+    // OND-135 cleanup (2026-05-14): page_mark_index odebrán — agency-
+    // portfolio artefakt per CEO PR #78 precedent (home / kontakt).
+    'hero' => [
+        'page_mark_label' => 'CENÍK',
+        'upline'          => 'Žádné nabídky na vyžádání.',
+        // OND-198 (nález 5.4): v podnadpisu vede Standard, ne nejlevnější pásmo.
+        'heading_html'    => 'Tři pásma,<br>jedna <em>jasná cena</em>.',
+        'subline'         => 'Cena na faktuře = cena ve specifikaci. Žádné vícenáklady bez vašeho vědomí.',
+    ],
+
+    // Sticky CTA — viditelné napříč scrollem, „cena nikdy nezmizí".
+    'sticky_cta' => [
+        'label' => 'Vyberte si pásmo',
+        'cta'   => 'Chci nezávaznou nabídku',
+    ],
 
     'popular'   => 'Nejoblíbenější',
     'quotation' => 'Nezávazná poptávka',
@@ -22,21 +40,6 @@ return [
     // 3-card kotvě (`home.services.primary.*`). Featurelisty zachovány,
     // doladění obsahu řeší B3 (Content Writer) v rámci stejného PR.
     'tiers' => [
-        [
-            'name'    => 'Startovní',
-            'desc'    => 'Pro živnostníky a malé firmy, kteří potřebují důvěryhodnou online prezentaci.',
-            'price'   => '25 000 Kč',
-            'popular' => false,
-            'features' => [
-                'Do 5 stránek na míru',
-                'Moderní responzivní design',
-                'Kontaktní formulář',
-                'Technické SEO',
-                'Optimalizace rychlosti načítání',
-                '14 dní podpory po spuštění',
-            ],
-            'cta' => 'Chci nezávaznou nabídku',
-        ],
         [
             'name'    => 'Standard',
             'desc'    => 'Pro firmy, které chtějí web jako svůj nejlepší obchodní nástroj.',
@@ -68,6 +71,22 @@ return [
             ],
             'cta' => 'Chci nezávaznou nabídku',
         ],
+        [
+            'name'    => 'Startovní',
+            // OND-198 (nález 5.4): nejlevnější pásmo je poslední a rámované jako výjimka.
+            'desc'    => 'Výjimka, ne standardní vstup. Pro živnostníky, kterým větší rozsah nedává smysl — důvěryhodná online prezentace do 5 stránek.',
+            'price'   => '25 000 Kč',
+            'popular' => false,
+            'features' => [
+                'Do 5 stránek na míru',
+                'Moderní responzivní design',
+                'Kontaktní formulář',
+                'Technické SEO',
+                'Optimalizace rychlosti načítání',
+                '14 dní podpory po spuštění',
+            ],
+            'cta' => 'Chci nezávaznou nabídku',
+        ],
     ],
 
     'note' => 'Nejsem plátce DPH — uvedené ceny jsou konečné, nic se k nim nepřičítá.',
@@ -89,7 +108,7 @@ return [
             ],
             [
                 'title' => 'Podpora i po spuštění',
-                'text'  => 'Odpovím do 24 hodin, i týdny a měsíce po předání projektu. Drobné úpravy a technické dotazy jsou samozřejmostí.',
+                'text'  => 'Ozvu se do 24 hodin v pracovní dny, i týdny a měsíce po předání projektu. Drobné úpravy a technické dotazy jsou samozřejmostí.',
             ],
         ],
     ],
@@ -124,12 +143,15 @@ return [
     'compare' => [
         'heading' => 'Co přesně dostanete',
         // OND-130 sjednocená taxonomie — viz `tiers` výše.
-        'tiers'   => ['Startovní', 'Standard', 'Custom'],
+        'tiers'   => ['Standard', 'Custom', 'Startovní'],
+        'tabs_aria'     => 'Výběr cenové úrovně',
+        'included'      => 'Zahrnuto',
+        'not_included'  => 'Nezahrnuto',
         'groups'  => [
             [
                 'label' => 'Rozsah projektu',
                 'rows'  => [
-                    ['label' => 'Počet stránek', 'values' => ['do 5', 'do 12', 'bez omezení']],
+                    ['label' => 'Počet stránek', 'values' => ['do 12', 'bez omezení', 'do 5']],
                     ['label' => 'Responzivní design', 'values' => [true, true, true]],
                     ['label' => 'Kontaktní formulář', 'values' => [true, true, true]],
                 ],
@@ -137,12 +159,12 @@ return [
             [
                 'label' => 'Funkce webu',
                 'rows'  => [
-                    ['label' => 'Blog nebo galerie s editací', 'values' => [false, true, true]],
-                    ['label' => 'Vícejazyčný web', 'values' => [false, true, true]],
-                    ['label' => 'Rezervační systém', 'values' => [false, 'volitelně', true]],
-                    ['label' => 'E-shop', 'values' => [false, false, true]],
-                    ['label' => 'Vlastní administrace', 'values' => [false, false, true]],
-                    ['label' => 'Integrace externích systémů', 'values' => [false, false, true]],
+                    ['label' => 'Blog nebo galerie s editací', 'values' => [true, true, false]],
+                    ['label' => 'Vícejazyčný web', 'values' => [true, true, false]],
+                    ['label' => 'Rezervační systém', 'values' => ['volitelně', true, false]],
+                    ['label' => 'E-shop', 'values' => [false, true, false]],
+                    ['label' => 'Vlastní administrace', 'values' => [false, true, false]],
+                    ['label' => 'Integrace externích systémů', 'values' => [false, true, false]],
                 ],
             ],
             [
@@ -150,15 +172,15 @@ return [
                 'rows'  => [
                     ['label' => 'Technické SEO', 'values' => [true, true, true]],
                     ['label' => 'Optimalizace rychlosti', 'values' => [true, true, true]],
-                    ['label' => 'Analytika a měření konverzí', 'values' => [false, true, true]],
-                    ['label' => 'Pokročilá SEO strategie', 'values' => [false, false, true]],
+                    ['label' => 'Analytika a měření konverzí', 'values' => [true, true, false]],
+                    ['label' => 'Pokročilá SEO strategie', 'values' => [false, true, false]],
                 ],
             ],
             [
                 'label' => 'Servis a podpora',
                 'rows'  => [
-                    ['label' => 'Hosting a doména zdarma', 'values' => [false, '1 rok', '1 rok']],
-                    ['label' => 'Podpora po spuštění', 'values' => ['14 dní', '1 měsíc', '3 měsíce']],
+                    ['label' => 'Hosting a doména zdarma', 'values' => ['1 rok', '1 rok', false]],
+                    ['label' => 'Podpora po spuštění', 'values' => ['1 měsíc', '3 měsíce', '14 dní']],
                     ['label' => 'Bezúdržbový provoz', 'values' => [true, true, true]],
                 ],
             ],

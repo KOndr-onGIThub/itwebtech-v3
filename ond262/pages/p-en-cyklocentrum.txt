@@ -1,0 +1,108 @@
+Cyklo Centrum — bike service website rescued from scratch
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+CZ
+EN
+DE
+Book a consultation
+CZ
+EN
+DE
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+Book a consultation
+💬
+Enquiry
+← Back to projects
+Website
+·
+2025
+·
+Cyklo Centrum — Petr Kňourek
+Cyklo Centrum
+A rescue project — rebuilt from scratch after a year wasted with another vendor
+Visit live site
+Book a consultation
+Cyklo Centrum offers bike service, rentals and sales. After a year with another vendor, they were stuck with a half-built site that was actively pushing visitors away. I rebuilt the replacement from scratch — analysis, structure, copy, SEO, product management, and external promotion.
+Challenge
+A previous developer worked on the site for a year, and the result was damaging the offline reputation the client had earned. People were even calling to ask whether the business had closed. Salvaging the old site made no sense — rebuilding properly was cheaper and safer.
+Solution
+I started with a deep look at the business and at Czech and foreign competitors. I designed the structure, wrote the copy, and hand-coded the site for robustness and speed. Added a product management module (the client updates inventory themselves), a Google Maps profile, and a promo article on Kudy z nudy. The site now matches the quality of the service behind it.
+Result
+For searches like "cyklocentrum březí" or "půjčovna kol březí" the site ranks first in Google, and its average position across queries rose from 16.8 to 8.6 (Search Console, 16 May 2025 – 13 Sep 2026). Google therefore brings more than half of all traffic — 1,780 of 3,149 visits (Google Analytics, 1 Jan – 16 Sep 2026). The client confirms they finally have "a presentation they aren't ashamed of". Visitors quickly find what the workshop services, what's available to rent, and how to get in touch.
+Client
+Cyklo Centrum — Petr Kňourek
+Year
+2025
+Duration
+několik týdnů
+Category
+Website
+Live site
+cykloservispujcovna.cz
+Tech stack
+Website
+Search visibility
+Website copy
+A layout people can find their way in
+Managing the product range
+More projects
+Website
+·
+2023
+·
+PitArena
+PitArena
+From zero to a brand, a website and online sales
+View project
+Website
+·
+2026
+·
+PitArena
+PitArena — online shop
+An online shop where customers find the part for their model and year
+View project
+Website
+·
+2026
+·
+BARANA
+BARANA
+Premium website for bioclimatic pergolas, ready for ad campaigns
+View project
+Want a similar result for your business?
+Book a consultation
+← Back to projects
+I help entrepreneurs succeed in the online world
+Book a free consultation
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+© 2026 ONDRAWEB — All rights reserved.
++420 728 697 712
+Privacy Policy
+Cookies
+Let's talk
+Free consultation — no commitment, no registration.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Pick a consultation slot
+Free. No commitment.
+Mind a few cookies?
+I only measure a few numbers about what works on the site. No data selling.
+See the cookie policy .
+Decline
+Accept all
+✕

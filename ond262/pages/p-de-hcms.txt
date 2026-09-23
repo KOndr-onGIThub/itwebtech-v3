@@ -1,0 +1,105 @@
+HCMS für Toyota Kolín — Montageband ohne Stillstand
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+CZ
+EN
+DE
+Beratung vereinbaren
+CZ
+EN
+DE
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+Beratung vereinbaren
+💬
+Anfrage
+← Zurück zu Projekten
+Webanwendung
+·
+2021
+·
+Toyota Kolín
+HCMS — Produktions-Informationssystem
+Eine App, die das Montageband am Laufen hält
+Beratung buchen
+HCMS ist eine interne Webanwendung, die dem Logistikteam von Toyota klare Anweisungen liefert, wenn Teile am Band knapp werden. Operatoren bestätigen Schritte am Tablet, das System führt die komplette Historie. Entstanden aus echter Prozess- analyse in der Werkshalle — nicht aus einer Papier-Spec.
+Herausforderung
+Fehlt ein Teil am Band, zählt jede Minute — Stillstand bedeutet direkten Verlust. Bisher hat die Logistik Notfälle aus dem Gedächtnis gelöst und Anweisungen mündlich weitergegeben. Gesucht war ein System, das in Echtzeit zeigt, wo das Teil liegt, wer es liefert und in welcher Reihenfolge Mitarbeiter arbeiten, damit die Reaktion auch unter Druck zuverlässig läuft.
+Lösung
+Nach Analyse realer Prozesse in der Werkshalle entstand das Domänenmodell, eine Use-Case-Karte sowie eine Webanwendung mit Tablet-Oberfläche für Operatoren und Desktop-Ansicht für Schichtleiter. Die App führt Schritt für Schritt durch den Ablauf, verfolgt den Status, hält die Historie und gibt Aufgaben zwischen Schichten weiter. 18 Jahre Toyota-Praxis flossen in Details, die von außen niemand sieht.
+Ergebnis
+Der Kunde nennt eine jährliche Einsparung von mindestens 3 Millionen CZK — das entspricht einer Vollzeitkraft pro Schicht über drei Schichten. In Modellwechsel-Phasen, wenn Abweichungen ihren Höhepunkt erreichen, vervielfachen sich die Einsparungen laut Kunde. Das System läuft seit 2021 und ist Referenz dafür, wie Software aussieht, wenn sie von Menschen mit echter Werkserfahrung entworfen wird.
+Kunde
+Toyota Kolín
+Jahr
+2021
+Dauer
+několik měsíců (2021), provoz dodnes
+Kategorie
+Webanwendung
+Technologien
+Individuelle Anwendung
+Logistik
+Fertigung
+Anwendung im Browser
+Bedienung auf dem Tablet
+Weitere Projekte
+Webanwendung
+·
+2023
+·
+Toyota Kolín
+Picker — Logistik-Steuerungssystem
+Eine App für das Kommissionieren von Teilen vom Lager ans Band
+Projekt anzeigen
+Webanwendung
+·
+2024
+·
+Tradiční výroba pralinek, s.r.o.
+Choccoboard — strategisches Dashboard
+Ein BI-Dashboard, das 30 Minuten tägliche Handarbeit ersetzt
+Projekt anzeigen
+Webanwendung
+·
+2019
+·
+Toyota Kolín
+FRL Creator
+Ein PDF-Generator für Regal-Informationsblätter
+Projekt anzeigen
+Möchten Sie ein ähnliches Ergebnis für Ihr Unternehmen?
+Beratung buchen
+← Zurück zu Projekten
+Ich helfe Unternehmern, in der Online-Welt erfolgreich zu sein
+Kostenlose Beratung vereinbaren
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+© 2026 ONDRAWEB — Alle Rechte vorbehalten.
++420 728 697 712
+Datenschutzerklärung
+Cookies
+Lassen Sie uns sprechen
+Kostenlose Beratung — unverbindlich, ohne Registrierung.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Beratungstermin auswählen
+Kostenlos. Unverbindlich.
+Darf ich ein paar Cookies setzen?
+Ich messe nur ein paar Zahlen darüber, was auf der Seite funktioniert. Kein Datenhandel.
+Details in den Richtlinien .
+Ablehnen
+Alle akzeptieren
+✕

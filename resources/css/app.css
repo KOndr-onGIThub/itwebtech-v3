@@ -3,11 +3,22 @@
 @import './foundation/design-system.css';
 @import './components/button.css';
 @import './components/cookies.css';
+/* OND-227 — prototypy vizuálního podpisu (?podpis=a|b|c); po výběru
+   varianty boardem se soubor zredukuje na vítězný blok. */
+@import './podpis.css';
+/* OND-246 — hloubka (světlo / proud / vyzdvižení). Všechna pravidla jsou
+   scopnutá pod `.pd--depth`, což je zatím jen domovská stránka. */
+@import './hloubka.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
+
+/* OND-233: reference/ je snapshot cizího klientského webu, není routovaný
+   ani importovaný. Automatické skenování kořene z něj do našeho bundlu
+   tahalo utility s cizím brandem (#D4A853). Ven ze skenování. */
+@source not '../../reference/**';
 
 /* ============================================================
    DESIGN TOKENS — Tailwind v4 @theme
@@ -23,7 +34,11 @@
 @theme {
     --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif,
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-    --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+    /* OND-145 P2 corrective: display swap z Fraunces → IBM Plex Sans Variable
+       (P0 incident response, CEO 2026-05-14). Hodnota musí zrcadlit
+       :root --font-display ve foundation/design-system.css. */
+    --font-display: 'IBM Plex Sans Variable', 'IBM Plex Sans',
+        ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
 
     /* — Primární tmavá paleta — */
     --color-ink-950:  #0F172A;
@@ -34,11 +49,15 @@
     --color-ink-200:  #E2E8F0;
     --color-ink-50:   #F8FAFC;
 
-    /* — Zlatá akcent paleta — */
-    --color-gold-600: #D97706;
-    --color-gold-500: #F59E0B;
-    --color-gold-200: #FDE68A;
-    --color-gold-100: #FEF3C7;
+    /* — Akcentní paleta — OND-231 F3: sitewide rollout ACID.
+         Jména --color-gold-* zůstávají (jsou na ~200 místech
+         napříč legacy styly), hodnoty jsou nově acid. --gold-600
+         je hover variantou --gold-500, a v ACID je hover světlejší,
+         ne tmavší — proto je 600 světlejší než 500. */
+    --color-gold-600: #E6FF70;
+    --color-gold-500: #D8FF3A;
+    --color-gold-200: #EFFFB0;
+    --color-gold-100: #F7FFD6;
 
     /* — Stav — */
     --color-ok:    #10B981;
@@ -52,11 +71,13 @@
 
     --color-fg-primary:  #F2F0EA;
     --color-fg-muted:    #9B9AA0;
-    --color-fg-faint:    #5C5C63;
+    --color-fg-decorative: #5C5C63;  /* OND-279: jen dekorace (linky, ordinály). Nikdy text s informací. */
 
-    --color-accent:        #E8A64A;
-    --color-accent-hover:  #F0B665;
-    --color-accent-press:  #C98E3A;
+    /* OND-231 F3 — ACID (hodnota musí zrcadlit :root
+       ve foundation/design-system.css). */
+    --color-accent:        #D8FF3A;
+    --color-accent-hover:  #E6FF70;
+    --color-accent-press:  #C2E62E;
 }
 
 @layer components {
@@ -72,7 +93,7 @@
 
     .landing-body {
         background:
-            radial-gradient(circle at top left, rgba(245, 158, 11, 0.14), transparent 34%),
+            radial-gradient(circle at top left, rgba(216, 255, 58, 0.14), transparent 34%),
             radial-gradient(circle at top right, rgba(56, 189, 248, 0.09), transparent 28%),
             var(--bg-page);
     }
@@ -184,7 +205,7 @@
 
     .landing-microcopy {
         margin-top: 0.875rem;
-        color: var(--color-muted);
+        color: var(--color-body);
         font-size: 0.9375rem;
         line-height: 1.7;
     }
@@ -258,7 +279,7 @@
 
     .landing-panel--accent {
         background:
-            linear-gradient(180deg, rgba(245, 158, 11, 0.16), rgba(255, 255, 255, 0.04)),
+            linear-gradient(180deg, rgba(216, 255, 58, 0.16), rgba(255, 255, 255, 0.04)),
             rgba(255, 255, 255, 0.04);
         border-color: var(--border-gold);
     }
@@ -371,7 +392,7 @@
         align-items: center;
         justify-content: center;
         border-radius: 999px;
-        background: rgba(245, 158, 11, 0.16);
+        background: rgba(216, 255, 58, 0.16);
         color: var(--color-gold-100);
         font-weight: 700;
     }
@@ -420,7 +441,7 @@
 
     .landing-section--form {
         background:
-            radial-gradient(circle at top center, rgba(245, 158, 11, 0.12), transparent 42%),
+            radial-gradient(circle at top center, rgba(216, 255, 58, 0.12), transparent 42%),
             linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
     }
 
@@ -673,15 +694,23 @@
     --bg-card-hover:   rgba(255, 255, 255, 0.072);
 
     --border-subtle:   rgba(255, 255, 255, 0.07);
-    --border-gold:     rgba(245, 158, 11, 0.28);
+    --border-gold:     rgba(216, 255, 58, 0.28);
     --border-emphasis: rgba(255, 255, 255, 0.14);
 
-    --glow-gold:       rgba(245, 158, 11, 0.22);
-    --accent-glow:     rgba(245, 158, 11, 0.07);
+    /* OND-231 F3: acid je světlejší a syté glow by na tmavém
+       podkladu svítilo víc než obsah — proto nižší alfa než amber. */
+    --glow-gold:       rgba(216, 255, 58, 0.14);
+    --accent-glow:     rgba(216, 255, 58, 0.06);
 
     --color-heading:   #E2E8F0;
     --color-body:      #94A3B8;
-    --color-muted:     #5A6480;
+    /* OND-279: #5A6480 nesplní AA (4,5:1) na ŽÁDNÉM povrchu webu — nejhůř 2,43:1.
+       Token proto nedrží "tlumený text", ale "dekoraci": oddělovače, ikony,
+       které opakují to, co už říká text vedle nich. Text, který uživatel
+       potřebuje k rozhodnutí, patří na --color-body (nejhůř 5,58:1).
+       Třetí čitelný stupeň šedi se do palety nevejde — hierarchii nese
+       velikost, váha a umístění, ne další odstín. */
+    --color-decorative: #5A6480;
 }
 
 /* ============================================================
@@ -745,21 +774,36 @@
     img { max-width: 100%; }
 
     ::selection {
-        background: rgba(245, 158, 11, 0.35);
-        color: var(--color-heading);
+        background: var(--color-accent);
+        color: var(--color-accent-on);
     }
 
-    /* ── Scroll reveal ── */
-    [data-reveal] {
+    /* ── Scroll reveal ──
+       OND-231 F3 — dvojitá pojistka proti „prázdné stránce":
+       1. výchozí opacity: 0 platí jen pod `html.js`, tj. když je
+          jisté, že JS běží a `.is-visible` dorazí. Bez JS (nebo
+          když se bundle nenačte) je obsah normálně vidět —
+          `data-reveal` byl v minulosti zdrojem falešných NO_FCP
+          nálezů, protože animace nikdy nedoběhla.
+       2. při `prefers-reduced-motion: reduce` se observer v app.js
+          vůbec nespustí, takže tam musí být obsah viditelný taky. */
+    .js [data-reveal] {
         opacity: 0;
         transform: translateY(36px) scale(0.985);
         transition:
             opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
             transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    [data-reveal].is-visible {
+    .js [data-reveal].is-visible {
         opacity: 1;
         transform: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .js [data-reveal] {
+            opacity: 1;
+            transform: none;
+            transition: none;
+        }
     }
 
     /* ── Shimmer animace ── */
@@ -853,7 +897,7 @@
     .btn-primary:hover {
         background-color: var(--color-gold-600);
         border-color: var(--color-gold-600);
-        box-shadow: 0 4px 28px var(--glow-gold), 0 0 60px rgba(245, 158, 11, 0.10);
+        box-shadow: 0 4px 28px var(--glow-gold), 0 0 60px rgba(216, 255, 58, 0.10);
     }
 
     /* Sekundární — na tmavém pozadí */
@@ -907,7 +951,7 @@
         transform: translateX(-50%);
         width: 600px;
         height: 300px;
-        background: radial-gradient(ellipse, rgba(245, 158, 11, 0.10) 0%, transparent 70%);
+        background: radial-gradient(ellipse, rgba(216, 255, 58, 0.10) 0%, transparent 70%);
         pointer-events: none;
         z-index: 0;
     }
@@ -979,6 +1023,21 @@
         flex-shrink: 0;
     }
 
+    /* AI sekce-specifický lead slot (OND-153).
+       Sdílený .section-subheading je uppercase eyebrow s gold dash glyfem
+       a 2-věta CW lock copy v něm vizuálně neunese. Tato třída je opt-in
+       pro AI sekci — žádný impact na ostatní eyebrow sloty. */
+    .section-header__lead {
+        display: block;
+        font-size: clamp(1rem, 1.5vw, 1.125rem);
+        font-weight: 400;
+        line-height: 1.5;
+        letter-spacing: normal;
+        text-transform: none;
+        color: var(--color-body);
+        margin-bottom: 0.5rem;
+    }
+
     .section-header__desc {
         margin-top: 0.875rem;
         font-size: 1.0625rem;
@@ -1042,7 +1101,7 @@
         align-items: center;
     }
     .navbar__logo-img {
-        height: 34px;
+        height: 26px;
         width: auto;
         display: block;
     }
@@ -1095,7 +1154,7 @@
         font-size: 0.8125rem;
         font-weight: 600;
         letter-spacing: 0.03em;
-        color: var(--color-muted);
+        color: var(--color-body);
         border-radius: 6px;
         transition: color 0.15s, background-color 0.15s;
     }
@@ -1243,7 +1302,7 @@
 
     /* ============================================================
        HERO SEKCE — OND-135 P2 reskin (plán §3.1)
-       Editorial dark base, Fraunces display, italic key-word
+       Editorial dark base, IBM Plex Sans display, italic key-word
        emphasis ve warm amber. Asymetrický left-anchor s
        editorial breath (--space-9 = 96 px) na desktopu.
        ============================================================ */
@@ -1300,7 +1359,7 @@
         right: -120px;
         width: 560px;
         height: 560px;
-        background: radial-gradient(circle, rgba(232, 166, 74, 0.12) 0%, transparent 70%);
+        background: radial-gradient(circle, rgba(216, 255, 58, 0.12) 0%, transparent 70%);
         pointer-events: none;
         z-index: 1;
     }
@@ -1335,12 +1394,11 @@
     .section-hero__page-mark-label {
         flex: 1 1 auto;
     }
-    .section-hero__page-mark-index {
-        font-variant-numeric: tabular-nums;
-        color: var(--color-fg-faint);
-    }
+    /* OND-135 cleanup (2026-05-14): `.section-hero__page-mark-index` rule
+       odebrán — orphan token po PR #78 removal counter slotu (Jack §2.0
+       nit pro iter 5/6: „label-only token, ne jen z dat"). */
 
-    /* Upline — menší muted Fraunces (§3.1 „AI udělá web za odpoledne.") */
+    /* Upline — menší muted display (§3.1 „AI udělá web za odpoledne.") */
     .section-hero__upline {
         font-family: var(--font-display);
         font-weight: 400;
@@ -1351,23 +1409,30 @@
         letter-spacing: var(--tracking-tight);
     }
 
-    /* Display heading — Fraunces italic, key word v amber */
+    /* Display heading — upright Plex Sans wght 700, key word v amber.
+       OND-147 (Jack §2.0 rule #10): display = vždy upright, italic povolen
+       jen v body roli (Inter slnt). Editorial italic display = agency tone,
+       nevhodný pro B2B IT enterprise audience. */
     .section-hero__heading {
         font-family: var(--font-display);
-        font-style: italic;
-        font-weight: 500;
-        font-size: var(--text-display-lg);
+        font-style: normal;
+        font-weight: 700;
+        /* OND-198 (nález 5.1): schválený titulek je dvouvětý a výrazně delší
+           než původní „Web, který vám konečně vydělá." — bez zmenšení stupně
+           a rozšíření míry se lámal do pěti řádků a přetlačil CTA pod fold. */
+        font-size: clamp(32px, 4vw, 56px);
         line-height: var(--leading-tight);
         letter-spacing: var(--tracking-tight);
         color: var(--color-fg-primary);
         margin-block: 0 var(--space-5);
-        max-width: 18ch;
-        /* Fraunces optical sizing — větší display velikost */
-        font-variation-settings: 'opsz' 144, 'SOFT' 50, 'wght' 500;
+        max-width: 26ch;
+        /* Plex Variable range 100–700; wght 700 je horní enterprise-confident
+           tone. opsz/SOFT axes na Plex neexistují (Fraunces-only). */
+        font-variation-settings: 'wght' 700;
     }
     .section-hero__heading em,
     .section-hero__heading .text-accent {
-        font-style: italic;
+        font-style: normal;
         color: var(--color-accent);
         background: none;
         -webkit-background-clip: initial;
@@ -1484,6 +1549,16 @@
         align-items: center;
     }
 
+    /* OND-198 — věta pod hero tlačítkem (nález 5.1, dokument homepage-texty) */
+    .section-hero__note {
+        margin: 0.875rem 0 0;
+        font-family: var(--font-body);
+        font-size: var(--text-body-sm);
+        line-height: 1.55;
+        color: var(--color-fg-muted);
+        max-width: 48ch;
+    }
+
     .hero-chips {
         display: flex;
         flex-wrap: wrap;
@@ -1580,14 +1655,8 @@
         background: var(--border-gold, currentColor);
         opacity: 0.85;
     }
-    .service-card__price {
-        margin-top: auto;
-        padding-top: 0.5rem;
-        font-weight: 600;
-        color: var(--color-heading);
-        font-size: 1rem;
-        letter-spacing: 0.01em;
-    }
+    /* OND-198 (nález 5.4): .service-card__price odebrán spolu s cenovým
+       štítkem na service kartách — cenu nese až sekce „Kolik to bude stát?". */
 
     /* Inline doplňkové služby (T14 — OND-118) */
     .services-secondary-inline {
@@ -1637,6 +1706,28 @@
         border-color: var(--border-gold);
         transform: translateY(-3px);
         box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+    }
+    /* OND-198 (nález 5.4) — zvýrazněné prostřední pásmo (Standard).
+       Stejná vizuální logika jako .pricing-tier--featured na /cenik. */
+    .price-anchor-card--featured {
+        position: relative;
+        border-color: var(--border-gold);
+        background: var(--bg-card-hover);
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+    }
+    .price-anchor-card__badge {
+        position: absolute;
+        top: -0.75rem;
+        left: 1.5rem;
+        background: var(--color-gold-500);
+        color: var(--color-ink-950);
+        font-size: 0.6875rem;
+        font-weight: 800;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        padding: 0.25rem 1rem;
+        border-radius: 999px;
+        white-space: nowrap;
     }
     .price-anchor-card__title {
         margin: 0;
@@ -1870,6 +1961,55 @@
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
     }
 
+    /* ── About page: intro + portrait ── */
+    .about-intro {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        align-items: center;
+    }
+    @media (min-width: 1024px) {
+        .about-intro {
+            grid-template-columns: 1fr 340px;
+            gap: 4rem;
+        }
+        .about-intro__photo {
+            order: 1;
+        }
+    }
+    .about-intro__photo {
+        max-width: 340px;
+        margin-inline: auto;
+        width: 100%;
+    }
+
+    /* ── About page: portrét uvnitř vyprávění (OND-295) ──
+       Sedí v textovém sloupci .prose-content (760 px), nevybíhá z něj.
+       Odsazení je větší než mezera mezi odstavci, aby fotka fungovala
+       jako předěl, a menší než margin-top nadpisu, který po ní následuje. */
+    .about-portrait {
+        margin-block: 2.5rem;
+    }
+    /* Zdroj je 4:3 na šířku. Na úzkém displeji by z něj byl proužek, ve kterém
+       obličej zmizí — proto se tam ořezává na výšku (4:5) a na šířce zůstává
+       3:2. Ořez řeší CSS, v repu leží jeden soubor v plném záběru. */
+    .about-portrait__img {
+        display: block;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4 / 5;
+        object-fit: cover;
+        object-position: center 30%;
+        border-radius: 1.25rem;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+    @media (min-width: 640px) {
+        .about-portrait__img {
+            aspect-ratio: 3 / 2;
+            object-position: center 25%;
+        }
+    }
+
     /* ── Video player ── */
     .about-video {
         position: relative;
@@ -1952,7 +2092,7 @@
         transform: translateY(-50%);
         height: 3px;
         width: 0%;
-        background: var(--color-gold-500, #e5a100);
+        background: var(--color-gold-500);
         border-radius: 2px;
         z-index: 1;
         pointer-events: none;
@@ -2073,7 +2213,7 @@
 
     .about-stats blockquote,
     .about-extras blockquote {
-        background: rgba(245, 158, 11, 0.06);
+        background: rgba(216, 255, 58, 0.06);
         border-left: 3px solid var(--color-gold-500);
         border-radius: 0 0.875rem 0.875rem 0;
         padding: 1.125rem 1.375rem;
@@ -2279,7 +2419,7 @@
     }
     .project-preview-card__type {
         font-size: 0.8125rem;
-        color: var(--color-muted);
+        color: var(--color-body);
         font-weight: 400;
     }
     .project-preview-card__cta {
@@ -2403,7 +2543,7 @@
     }
 
     .footer-prefooter__logo {
-        height: 30px;
+        height: 24px;
         width: auto;
         opacity: 0.5;
     }
@@ -2451,7 +2591,7 @@
         gap: 0.375rem;
         text-align: center;
         font-size: 0.8125rem;
-        /* OND-123: --color-muted (#5A6480) na #161A24 ≈ 3.3:1 → WCAG AA fail.
+        /* OND-123: --color-muted (dnes --color-decorative) (#5A6480) na #161A24 ≈ 3.3:1 → WCAG AA fail.
            --color-body (#94A3B8) ≈ 5.8:1 → PASS pro normální text. */
         color: var(--color-body);
     }
@@ -2521,7 +2661,7 @@
         font-weight: 700;
         letter-spacing: 0.09em;
         text-transform: uppercase;
-        color: var(--color-muted);
+        color: var(--color-body);
         margin-bottom: 0.25rem;
     }
     .contact-info dd {
@@ -2547,8 +2687,11 @@
     .contact-form__title {
         margin-bottom: .5rem;
     }
+    /* OND-279: --color-ink-500 (#64748B) dával 4,05:1 — těsně pod normou. Poslední
+       zbloudilý výskyt téhle vady; varianta .contact-form__thanks už na --color-body
+       dávno je. Perex nad formulářem je text, který vede k odeslání, ne dekorace. */
     .contact-form__subtitle {
-        color: var(--color-ink-500);
+        color: var(--color-body);
         font-size: .9375rem;
         margin-bottom: 1.75rem;
         line-height: 1.65;
@@ -2596,11 +2739,11 @@
     .form-group select:focus {
         border-color: var(--color-gold-500);
         background: rgba(255, 255, 255, 0.07);
-        box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.14);
+        box-shadow: 0 0 0 3px rgba(216, 255, 58, 0.14);
     }
     .form-group input::placeholder,
     .form-group textarea::placeholder {
-        color: var(--color-muted);
+        color: var(--color-body);
     }
     .form-group textarea {
         resize: vertical;
@@ -2640,6 +2783,43 @@
     /* Inline form-group bez bottom marginu (pro skupiny v gridu nebo poslední button) */
     .form-group--inline {
         margin-bottom: 0;
+    }
+
+    /* OND-256/1 — inline validační chyba pod polem. Protějšek `.pd-field__error`
+       z podpis.css (formulář na homepage), jen v tokenech app.css. */
+    .form-group__error {
+        font-size: 0.8125rem;
+        line-height: 1.5;
+        color: var(--color-fail);
+        margin: 0;
+    }
+    .form-group__hint {
+        font-size: 0.8125rem;
+        line-height: 1.5;
+        color: var(--color-body);
+        margin: 0;
+    }
+    /* `:not(:focus)` schválně — při psaní má přednost zlatý focus ring,
+       červený rámeček se vrátí, jakmile z pole odejdeš. Bez `input`/`textarea`
+       v selektoru by pravidlo prohrálo na specificitě s `.form-group input[type=…]`. */
+    .form-group input[aria-invalid="true"]:not(:focus),
+    .form-group textarea[aria-invalid="true"]:not(:focus) {
+        border-color: var(--color-fail);
+    }
+
+    /* Souhrnná hláška pro pád bez validačního payloadu (500, výpadek sítě). */
+    .form-alert {
+        font-size: 0.875rem;
+        line-height: 1.6;
+        border: 1px solid;
+        border-radius: 10px;
+        padding: 0.875rem 1rem;
+        margin: 0 0 1.125rem;
+    }
+    .form-alert--error {
+        border-color: var(--color-fail);
+        color: var(--color-fail);
+        background: rgba(255, 255, 255, 0.03);
     }
 
     /* Dvousloupcový řádek formuláře — přizpůsobí se úzkým viewportům */
@@ -2695,11 +2875,11 @@
     .form-file:hover,
     .form-file.is-drag-over {
         border-color: var(--color-gold-500);
-        background: rgba(245, 158, 11, 0.05);
+        background: rgba(216, 255, 58, 0.05);
     }
 
     .form-file__icon {
-        color: var(--color-muted);
+        color: var(--color-decorative);
         width: 2rem;
         height: 2rem;
     }
@@ -2710,12 +2890,49 @@
     }
     .form-file__hint {
         font-size: 0.8125rem;
-        color: var(--color-muted);
+        color: var(--color-body);
     }
     .form-file__error {
         font-size: 0.8125rem;
         color: var(--color-fail);
         margin-top: 0.25rem;
+    }
+
+    /* OND-256/8 — nativní input schovaný, ovládá ho `.form-file__trigger`.
+       Zůstává v DOMu (nese soubory do FormData), proto ne `display: none`
+       s odstraněním z formuláře, ale jen vizuální skrytí. */
+    .form-file__input {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+    .form-file__trigger {
+        margin-top: 0.875rem;
+        padding: 0.5rem 1.125rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        font-family: inherit;
+        color: var(--color-heading);
+        background: rgba(255, 255, 255, 0.06);
+        border: 1.5px solid var(--border-subtle);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: border-color 0.15s, background-color 0.15s, color 0.15s;
+    }
+    .form-file__trigger:hover {
+        border-color: var(--border-gold);
+        background: var(--bg-card-hover);
+        color: var(--color-gold-500);
+    }
+    .form-file__trigger:focus-visible {
+        outline: 2px solid var(--color-gold-500);
+        outline-offset: 3px;
     }
 
     .form-file__list {
@@ -2736,7 +2953,15 @@
         border: 1px solid var(--border-subtle);
         border-radius: 8px;
     }
-    .form-file__list-icon { color: var(--color-muted); flex-shrink: 0; }
+    /* OND-264: SVG v seznamu nemá width/height atributy, takže se bez tohohle
+       roztáhlo přes celou šířku položky — po výběru souboru na /kontakt svítil
+       přes půl stránky obří ikona dokumentu. */
+    .form-file__list-icon {
+        color: var(--color-decorative);
+        flex-shrink: 0;
+        width: 1.125rem;
+        height: 1.125rem;
+    }
     .form-file__list-name {
         flex: 1;
         min-width: 0;
@@ -2747,7 +2972,7 @@
         font-weight: 500;
     }
     .form-file__list-size {
-        color: var(--color-muted);
+        color: var(--color-body);
         white-space: nowrap;
         font-size: 0.8125rem;
     }
@@ -2755,7 +2980,7 @@
         background: none;
         border: none;
         cursor: pointer;
-        color: var(--color-muted);
+        color: var(--color-body);
         padding: 0.25rem;
         border-radius: 4px;
         line-height: 1;
@@ -2763,6 +2988,12 @@
     }
     .form-file__list-remove:hover {
         color: var(--color-fail);
+    }
+    /* OND-264: stejný případ jako u ikony souboru — křížek bez rozměru. */
+    .form-file__list-remove svg {
+        width: 1rem;
+        height: 1rem;
+        display: block;
     }
 
     /* ============================================================
@@ -2863,7 +3094,7 @@
 
     .pricing-tier__price-note {
         font-size: 0.8125rem;
-        color: var(--color-muted);
+        color: var(--color-body);
         margin-top: 0.25rem;
         margin-bottom: 0;
     }
@@ -2906,10 +3137,20 @@
         color: var(--color-heading);
     }
 
+    /* OND-198 (nález 5.4) — očekávací věta nad pásmy, dřív než první číslo. */
+    .pricing-expectation {
+        max-width: 62ch;
+        margin: 0 auto 2.25rem;
+        text-align: center;
+        font-size: 1.0625rem;
+        line-height: 1.6;
+        color: var(--color-body);
+    }
+
     .pricing-note {
         text-align: center;
         font-size: 0.75rem;
-        color: var(--color-muted);
+        color: var(--color-body);
         margin-top: 1.25rem;
         letter-spacing: 0.01em;
         margin-inline: auto;
@@ -3028,7 +3269,7 @@
     .projects-preview-placeholder {
         padding: 4rem 1rem;
         text-align: center;
-        color: var(--color-muted);
+        color: var(--color-body);
         border: 1.5px dashed var(--border-subtle);
         border-radius: 1rem;
         font-size: 0.9375rem;
@@ -3075,12 +3316,103 @@
         gap: 1.5rem;
     }
 
+    /* Project cards (výpis realizací) */
+    .project-card {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        transition: border-color 0.25s, background-color 0.25s, transform 0.25s;
+    }
+    .project-card:hover {
+        border-color: var(--border-gold);
+        background: var(--bg-card-hover);
+        transform: translateY(-2px);
+    }
+    .project-card__body {
+        flex: 1;
+    }
+    .project-card__field {
+        display: inline-block;
+        margin-bottom: 0.75rem;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--color-gold-500);
+    }
+    .project-card h3 {
+        margin: 0 0 0.5rem;
+        font-size: 1.25rem;
+        color: var(--color-heading);
+    }
+    .project-card h3 a {
+        color: inherit;
+        text-decoration: none;
+    }
+    .project-card h3 a:hover {
+        color: var(--color-gold-500);
+    }
+    .project-card__body p {
+        margin: 0;
+        color: var(--color-body);
+        font-size: 0.9375rem;
+        line-height: 1.65;
+    }
+    .project-card__actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.75rem 1.25rem;
+    }
+    .project-card__live {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--color-gold-500);
+        text-decoration: none;
+    }
+    .project-card__live:hover {
+        text-decoration: underline;
+    }
+
+    /* ============================================================
+       PŘÍPADOVKY „Čtyři projekty zblízka" (/projekty)
+       ============================================================
+       OND-256/2. Rebranding (657bfa5) přejmenoval tenhle blok na
+       `.project-card`, ale šablonu nechal na starých třídách — sekce
+       od té doby na produkci visela jako holý text: žádná deska,
+       žádný grid, ikonka odtržená od popisku a za sekcí ~2 obrazovky
+       prázdna (neostylované články byly tak vysoké, že se
+       `[data-reveal]` nestihl spustit a držel opacity 0).
+
+       Karty záměrně mluví stejnou řečí jako `.portfolio-card` o kus
+       výš na téže stránce — stejná deska, rámeček, rádius i hover.
+       Grid je ale max. dvousloupcový, ne `auto-fill` po 320 px:
+       případovka nese shrnutí a 4–5 výsledků, ve třech úzkých
+       sloupcích by se z toho stal nečitelný sloupec textu. */
     .project-snapshots {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+        grid-template-columns: 1fr;
         gap: 1.25rem;
     }
+    @media (min-width: 768px) {
+        .project-snapshots {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+    }
+    @media (min-width: 1024px) {
+        .project-snapshots { gap: 1.75rem; }
+    }
+
     .project-snapshot {
+        display: flex;
+        flex-direction: column;
         background: var(--bg-card);
         border: 1px solid var(--border-subtle);
         border-radius: 1rem;
@@ -3092,29 +3424,35 @@
         background: var(--bg-card-hover);
         transform: translateY(-2px);
     }
+
     .project-snapshot__meta {
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
-        gap: 0.75rem;
+        align-items: baseline;
+        gap: 0.5rem 0.75rem;
         margin-bottom: 0.875rem;
         font-size: 0.75rem;
         text-transform: uppercase;
         letter-spacing: 0.05em;
         color: var(--color-gold-500);
     }
+
     .project-snapshot h3 {
         margin: 0 0 0.5rem;
-        font-size: 1.125rem;
+        font-size: 1.25rem;
+        line-height: 1.3;
         color: var(--color-heading);
     }
-    .project-snapshot p {
+    .project-snapshot > p {
         margin: 0;
-        color: var(--color-body);
         font-size: 0.9375rem;
         line-height: 1.65;
+        color: var(--color-body);
     }
+
     .project-snapshot ul {
-        margin: 1rem 0 0;
+        margin: 1.125rem 0 0;
         padding: 0;
         list-style: none;
         display: grid;
@@ -3124,13 +3462,14 @@
         display: flex;
         align-items: flex-start;
         gap: 0.5rem;
-        color: var(--color-body);
         font-size: 0.875rem;
         line-height: 1.55;
+        color: var(--color-body);
     }
+    /* Ikona sedí na účaří prvního řádku, ne na jeho horní hraně. */
     .project-snapshot li svg {
         color: var(--color-gold-500);
-        margin-top: 0.125rem;
+        margin-top: 0.1875rem;
     }
 
     .project-fit {
@@ -3166,7 +3505,11 @@
     }
     .project-fit__cta {
         border-radius: 1rem;
-        border: 1px solid rgba(240, 185, 11, 0.35);
+        /* OND-232: byl to hardcoded amber rgba(240,185,11,0.35) mimo token
+           systém — proto ho sweep na --color-* i na #E8A64A minul. Token
+           --border-gold je ACID a má nižší alfu (0,28), což je u světlejšího
+           akcentu správný směr. */
+        border: 1px solid var(--border-gold);
         background: linear-gradient(160deg, rgba(27, 46, 90, 0.65), rgba(12, 15, 24, 0.9));
         padding: 1.5rem;
     }
@@ -3243,9 +3586,12 @@
         grid-template-columns: 1fr;
         gap: 3rem;
     }
+    /* OND-204: postranní nabídka odebrána, výpis článků je jednosloupcový
+       a vycentrovaný — bez tohoto by po aside zbyl prázdný 320px sloupec. */
     @media (min-width: 1024px) {
         .blog-layout {
-            grid-template-columns: 1fr 320px;
+            grid-template-columns: minmax(0, 860px);
+            justify-content: center;
         }
     }
 
@@ -3255,102 +3601,14 @@
         gap: 1.5rem;
     }
 
-    .blog-conversion-card {
-        border: 1px solid var(--border-subtle);
-        background: var(--bg-card);
-        border-radius: 1rem;
-        padding: 1.5rem;
-    }
-    .blog-conversion-card h2 {
-        margin: 0.25rem 0 0.625rem;
-        color: var(--color-heading);
-        font-size: 1.5rem;
-        line-height: 1.25;
-        letter-spacing: -0.02em;
-    }
-    .blog-conversion-card > p {
-        margin: 0;
+    .blog-empty {
         color: var(--color-body);
         line-height: 1.65;
     }
-    .blog-conversion-list {
-        margin: 1rem 0 0;
-        padding: 0;
-        list-style: none;
-        display: grid;
-        gap: 0.75rem;
-    }
-    .blog-conversion-list li {
-        display: flex;
-        gap: 0.625rem;
-        align-items: flex-start;
-        font-size: 0.9375rem;
-        line-height: 1.6;
-        color: var(--color-body);
-    }
-    .blog-conversion-list li svg {
-        color: var(--color-gold-500);
-        margin-top: 0.1875rem;
-    }
-    .blog-conversion-card--highlight {
-        border-color: rgba(240, 185, 11, 0.3);
-        background: linear-gradient(170deg, rgba(27, 46, 90, 0.45), rgba(12, 15, 24, 0.95));
-    }
-    .blog-conversion-actions {
-        margin-top: 1.25rem;
-        display: grid;
-        gap: 0.625rem;
-    }
-    @media (min-width: 640px) {
-        .blog-conversion-actions {
-            grid-template-columns: 1fr 1fr;
-        }
-    }
-    .blog-conversion-actions .btn {
-        justify-content: center;
-    }
 
-    .blog-sidebar {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-    @media (min-width: 1024px) {
-        .blog-sidebar {
-            position: sticky;
-            top: calc(68px + 2rem);
-        }
-    }
-
-    .sidebar-ad {
-        background: var(--bg-elevated);
-        border: 1px solid var(--border-subtle);
-        border-radius: 1.25rem;
-        padding: 2rem;
-        color: var(--color-heading);
-    }
-    .sidebar-ad .section-subheading {
-        color: var(--color-gold-500);
-    }
-    .sidebar-ad h2 {
-        font-size: 1.375rem;
-        color: var(--color-heading);
-        margin-block: 0.375rem 0.875rem;
-    }
-    .sidebar-ad > p {
-        font-size: 0.9375rem;
-        color: var(--color-body);
-        line-height: 1.65;
-        margin-bottom: 1.375rem;
-    }
-    .sidebar-ad__actions {
-        display: flex;
-        flex-direction: column;
-        gap: 0.625rem;
-    }
-    .sidebar-ad__actions .btn {
-        justify-content: center;
-    }
+    /* OND-204: styly pro .blog-conversion-card (karty „Obsah v přípravě"
+       a „audit webu zdarma"), .blog-sidebar a .sidebar-ad odebrány spolu
+       s bloky v resources/views/pages/blog.blade.php. */
 
     /* ============================================================
        PROSE (privacy, blog)
@@ -3396,6 +3654,342 @@
         color: var(--color-gold-500);
         margin-bottom: 0.875rem;
         flex-shrink: 0;
+    }
+
+    /* ============================================================
+       LEGAL TL;DR (OND-130 iter 8)
+       — plain-language summary card nad /cookies a /privacy.
+       ============================================================ */
+    .legal-tldr {
+        max-width: 760px;
+        margin: 0 auto 2.5rem;
+        padding: 1.75rem 2rem;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border-subtle);
+        border-left: 3px solid var(--color-gold-500);
+        border-radius: 1rem;
+    }
+    .legal-tldr__eyebrow {
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--color-gold-500);
+        margin-bottom: 1rem;
+    }
+    .legal-tldr__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.625rem;
+    }
+    .legal-tldr__list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.625rem;
+        font-size: 0.9375rem;
+        line-height: 1.6;
+        color: var(--color-body);
+    }
+    .legal-tldr__list li svg {
+        margin-top: 0.25rem;
+        color: var(--color-gold-500);
+        flex-shrink: 0;
+    }
+
+    /* ============================================================
+       DOTYKOVÉ CÍLE ≥ 44 px (OND-266, bod 2)
+
+       Změřeno v prohlížeči přes getBoundingClientRect na 390×844,
+       šest stránek. Prvky níž měly výšku 19–35 px. Jde vždy o samostatné
+       cíle (patička, přepínač, checkbox) — odkazy uvnitř vět neřešíme,
+       ty z toku textu vytrhnout nejde a WCAG 2.5.8 je z požadavku
+       výslovně vyjímá.
+
+       Vzorec: `display: inline-flex` + `min-height: 44px`; tam, kde by
+       odsazení rozhodilo řádkování okolního textu, ho vrací záporná
+       svislá marže.
+       ============================================================ */
+
+    /* Patička — právní odkazy 21 px, telefon 21 px */
+    /* Odsazení schválně jen svislé — vodorovné by roztáhlo podtržení
+       odkazu za jeho text. */
+    .footer-bar__gdpr-link,
+    .footer-bar__phone {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.75rem;
+    }
+    .footer-bar__inner {
+        /* Odsazení odkazů si vlastní mezeru přineslo samo; původních
+           0,375rem by s ním na mobilu udělalo zbytečně vysokou patičku. */
+        gap: 0;
+    }
+    @media (min-width: 640px) {
+        .footer-bar__inner { gap: 0.75rem; }
+    }
+
+    /* Pre-footer navigace — 35 px */
+    .footer-prefooter__link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.75rem;
+    }
+
+    /* Hamburger v hlavičce — 40×40 */
+    .navbar__hamburger {
+        min-width: 2.75rem;
+        min-height: 2.75rem;
+    }
+
+    /* Tlačítka napříč webem — 40 px (padding 0,75rem + line-height 1) */
+    .btn {
+        min-height: 2.75rem;
+    }
+
+    /* Logo v hlavičce — klikací plocha 26 px podle výšky obrázku */
+    .navbar__logo {
+        min-height: 2.75rem;
+    }
+
+    /* Výběr souborů ve formulářích — 41 px */
+    .form-file__trigger {
+        min-height: 2.75rem;
+    }
+
+    /* Ceník, přepínač pásem — 80×31 */
+    .pcm-tab {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 2.75rem;
+    }
+
+    /* /kontakt — e-mail a telefon v kartě kontaktů 19 px */
+    .contact-info dd a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.75rem;
+    }
+
+    /* /kontakt — GDPR checkbox 16×16 (řádek labelu 43 px) */
+    .form-group--checkbox label {
+        min-height: 2.75rem;
+        padding-block: 0.125rem;
+    }
+    .form-group--checkbox input[type="checkbox"] {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-top: 0;
+    }
+
+    /* ============================================================
+       ARTICLE BODY — typografie článku (OND-266, bod 8)
+
+       Šablona článku neměla žádné typografické styly: `.article-body`,
+       `.article-content`, `.article-perex`, `.article-figure` ani
+       `.container-site--narrow` neexistovaly v CSS. Důsledky změřené
+       na produkci (1440 px):
+         • odstavec 1216 px při 16 px ≈ 152 znaků na řádek (norma 45–75)
+         • `p { margin: 0 }` z base vrstvy → odstavce slepené k sobě
+         • `a { text-decoration: none }` → odkazy v textu nerozeznatelné
+         • Tailwind preflight → `<ul>` bez odrážek a odsazení
+         • `.article-author` měl 760 px, text nad ním 1216 px → rozjeté
+
+       Míra (measure) je vedená přes `--article-measure` v `ch`, takže
+       drží počet znaků na řádek i kdyby se změnil stupeň písma.
+       `content-box` je tu schválně: max-width pak platí na text, ne
+       na text včetně paddingu.
+
+       OND-290: `width: auto` musí přepsat `width: 100%` z `.container-site`.
+       S `content-box` totiž `100%` nastaví *obsahovou* šířku na šířku
+       rodiče a padding se přičte navrch — na 390px viewportu vyšel box
+       390 + 2×17,55 = 425 px, tedy 35 px přes okno. `auto` box naopak
+       zmenší o padding (354,9 px) a `max-width` dál drží míru na širokých
+       displejích.
+       ============================================================ */
+    .article-body {
+        --article-measure: 62ch;
+        color: var(--color-body);
+    }
+    .article-body .container-site--narrow {
+        box-sizing: content-box;
+        width: auto;
+        max-width: var(--article-measure);
+        margin-inline: auto;
+        padding-inline: clamp(1rem, 4.5vw, 2rem);
+    }
+
+    .article-perex,
+    .article-content,
+    .article-bonus {
+        font-size: 1.0625rem;
+        line-height: 1.75;
+        color: var(--color-body);
+    }
+    .article-perex {
+        font-size: 1.1875rem;
+        line-height: 1.65;
+        color: var(--color-heading);
+        margin-bottom: 2rem;
+    }
+
+    /* Vertikální rytmus — základní krok 1,25rem, nadpisy dostávají
+       výrazně větší mezeru nahoře než dole, aby patřily k textu pod
+       sebou a ne nad sebou. */
+    .article-perex p,
+    .article-content p,
+    .article-bonus p { margin-bottom: 1.25rem; }
+    .article-perex > :last-child,
+    .article-content > :last-child,
+    .article-bonus > :last-child { margin-bottom: 0; }
+
+    .article-content h2,
+    .article-bonus h2 {
+        font-size: 1.5rem;
+        line-height: 1.3;
+        font-weight: 700;
+        color: var(--color-heading);
+        margin-top: 2.75rem;
+        margin-bottom: 0.875rem;
+    }
+    .article-content h3,
+    .article-bonus h3 {
+        font-size: 1.125rem;
+        line-height: 1.4;
+        font-weight: 700;
+        color: var(--color-heading);
+        margin-top: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    .article-content > :first-child,
+    .article-bonus > :first-child { margin-top: 0; }
+
+    .article-content ul,
+    .article-content ol,
+    .article-bonus ul,
+    .article-bonus ol {
+        padding-left: 1.5rem;
+        margin-bottom: 1.25rem;
+        list-style-position: outside;
+    }
+    .article-content ul,
+    .article-bonus ul { list-style-type: disc; }
+    .article-content ol,
+    .article-bonus ol { list-style-type: decimal; }
+    .article-content li,
+    .article-bonus li { margin-bottom: 0.4375rem; }
+
+    .article-perex a,
+    .article-content a,
+    .article-bonus a {
+        color: var(--color-gold-500);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+    .article-perex a:hover,
+    .article-content a:hover,
+    .article-bonus a:hover { color: var(--color-gold-200); }
+
+    .article-perex strong,
+    .article-content strong,
+    .article-bonus strong {
+        color: var(--color-heading);
+        font-weight: 700;
+    }
+
+    .article-perex blockquote,
+    .article-content blockquote,
+    .article-bonus blockquote {
+        margin: 2rem 0;
+        padding: 0.25rem 0 0.25rem 1.25rem;
+        border-left: 3px solid var(--color-gold-500);
+        color: var(--color-heading);
+    }
+    .article-content blockquote p:last-child,
+    .article-bonus blockquote p:last-child { margin-bottom: 0; }
+
+    /* Obrázky sedí na míru textu — dřív byly zarovnané doleva na plnou
+       šířku 1280px kontejneru, zatímco text běžel pod nimi. */
+    .article-figure {
+        margin: 2.5rem 0;
+    }
+    .article-figure img,
+    .article-figure picture img {
+        width: 100%;
+        height: auto;
+        border-radius: 0.875rem;
+        border: 1px solid var(--border-subtle);
+    }
+
+    /* ============================================================
+       ARTICLE AUTHOR BOX (OND-130 iter 8)
+       — E-E-A-T signál pro Google + osobní podpis pro čtenáře.
+       ============================================================ */
+    .article-author {
+        max-width: 760px;
+        margin: 3rem auto 0;
+        padding: 2rem;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border-subtle);
+        border-radius: 1.25rem;
+        color: var(--color-heading);
+    }
+    .article-author__eyebrow {
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--color-gold-500);
+        margin-bottom: 1.25rem;
+    }
+    .article-author__body {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+    @media (min-width: 640px) {
+        .article-author__body {
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+    }
+    .article-author__photo {
+        width: 96px;
+        height: 96px;
+        flex-shrink: 0;
+        border-radius: 9999px;
+        object-fit: cover;
+        border: 1px solid var(--border-subtle);
+    }
+    .article-author__content {
+        flex: 1;
+        min-width: 0;
+    }
+    .article-author__name {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: var(--color-heading);
+        margin-bottom: 0.25rem;
+    }
+    .article-author__role {
+        font-size: 0.875rem;
+        color: var(--color-gold-500);
+        margin-bottom: 0.75rem;
+    }
+    .article-author__bio {
+        font-size: 0.9375rem;
+        line-height: 1.65;
+        color: var(--color-body);
+        margin-bottom: 1.25rem;
+    }
+    .article-author__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.625rem;
     }
 
     /* ============================================================
@@ -3462,7 +4056,7 @@
     }
     .pricing-compare__table thead th.is-featured {
         color: var(--color-gold-500);
-        background: rgba(245, 158, 11, 0.06);
+        background: rgba(216, 255, 58, 0.06);
     }
     .pricing-compare__group-row td {
         padding: 1.25rem 1rem 0.5rem;
@@ -3470,7 +4064,7 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.08em;
-        color: var(--color-muted);
+        color: var(--color-body);
         background: var(--bg-elevated);
         border-top: 1.5px solid var(--border-subtle);
     }
@@ -3490,7 +4084,7 @@
         font-weight: 500;
     }
     .pricing-compare__table tbody td.is-featured {
-        background: rgba(245, 158, 11, 0.04);
+        background: rgba(216, 255, 58, 0.04);
     }
     .pricing-compare__yes {
         display: inline-flex;
@@ -3499,7 +4093,7 @@
         color: var(--color-ok);
     }
     .pricing-compare__no {
-        color: var(--color-muted);
+        color: var(--color-body);
         font-size: 1.1rem;
         font-weight: 700;
     }
@@ -3566,7 +4160,7 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.08em;
-        color: var(--color-muted);
+        color: var(--color-body);
         background: var(--bg-elevated);
         border-top: 1.5px solid var(--border-subtle);
     }
@@ -3595,7 +4189,7 @@
         min-width: 56px;
     }
     .pcm-value-wrap .pricing-compare__yes { color: var(--color-ok); }
-    .pcm-value-wrap .pricing-compare__no  { color: var(--color-muted); }
+    .pcm-value-wrap .pricing-compare__no  { color: var(--color-body); }
     .pcm-value-wrap .pricing-compare__val {
         font-size: 0.875rem;
         font-weight: 700;
@@ -3673,7 +4267,7 @@
         position: absolute;
         inset: 0;
         border-radius: 999px;
-        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.55);
+        box-shadow: 0 0 0 0 rgba(216, 255, 58, 0.55);
         animation: pulse-ring 2.5s ease-out infinite;
     }
     .contact-fab__btn:hover {
@@ -3761,7 +4355,7 @@
         margin: 1.25rem 0 0;
         padding: 0.875rem 1.125rem;
         border-left: 3px solid var(--color-gold-500);
-        background: rgba(245, 158, 11, 0.05);
+        background: rgba(216, 255, 58, 0.05);
         border-radius: 0 0.75rem 0.75rem 0;
     }
     .citation-inline__text {
@@ -3804,7 +4398,7 @@
     }
     .citation-inline__author span {
         font-size: 0.75rem;
-        color: var(--color-muted);
+        color: var(--color-body);
         display: block;
     }
 
@@ -3846,9 +4440,9 @@
         border: 1.5px solid var(--border-subtle);
     }
     .ai-compare__col--featured {
-        background: rgba(245, 158, 11, 0.06);
+        background: rgba(216, 255, 58, 0.06);
         border: 1.5px solid var(--border-gold);
-        box-shadow: 0 8px 40px rgba(245, 158, 11, 0.08);
+        box-shadow: 0 8px 40px rgba(216, 255, 58, 0.08);
     }
 
     .ai-compare__header {
@@ -3861,7 +4455,7 @@
         font-weight: 800;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: var(--color-muted);
+        color: var(--color-body);
     }
     .ai-compare__col--featured .ai-compare__label {
         color: var(--color-gold-500);
@@ -3897,9 +4491,11 @@
         flex-shrink: 0;
         margin-top: 1px;
     }
+    /* OND-279: ✕ je v porovnání JEDINÝ nositel informace „tohle tam není" —
+       opacita 0,6 na tlumené šedi z něj dělala 2,0:1. Že je „ne" tišší než
+       „ano", nese kontrast proti acidu, ne průhlednost. */
     .ai-compare__icon--no {
-        color: var(--color-muted);
-        opacity: 0.6;
+        color: var(--color-body);
     }
     .ai-compare__icon--yes {
         color: var(--color-gold-500);
@@ -3907,13 +4503,13 @@
 
     .ai-compare__note {
         font-size: 0.8125rem;
-        color: var(--color-muted);
+        color: var(--color-body);
         font-style: italic;
         margin: 0;
         line-height: 1.55;
     }
     .ai-compare__col--featured .ai-compare__note {
-        color: rgba(245, 158, 11, 0.7);
+        color: rgba(216, 255, 58, 0.7);
     }
 
     .ai-compare__closing {
@@ -3955,7 +4551,7 @@
     .faq-item[open] {
         background: var(--bg-card-hover);
         border-color: var(--border-gold);
-        box-shadow: 0 4px 24px rgba(245, 158, 11, 0.08);
+        box-shadow: 0 4px 24px rgba(216, 255, 58, 0.08);
     }
 
     .faq-item summary {
@@ -4022,7 +4618,7 @@
         transform: translateX(-50%);
         width: 500px;
         height: 300px;
-        background: radial-gradient(ellipse, rgba(245, 158, 11, 0.08) 0%, transparent 70%);
+        background: radial-gradient(ellipse, rgba(216, 255, 58, 0.08) 0%, transparent 70%);
         pointer-events: none;
         z-index: 0;
     }
@@ -4047,6 +4643,63 @@
         margin-inline: auto;
         line-height: 1.7;
     }
+    .page-hero__actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75rem;
+        margin-top: 1.75rem;
+    }
+
+    /* ============================================================
+       PROJECT DETAIL
+       ============================================================ */
+    .project-detail {
+        display: grid;
+        gap: 2rem;
+        max-width: 760px;
+    }
+    .project-detail__block h2 {
+        font-size: 1.375rem;
+        color: var(--color-heading);
+        margin-bottom: 0.75rem;
+    }
+    .project-detail__block p {
+        color: var(--color-body);
+        font-size: 1.0625rem;
+        line-height: 1.75;
+        margin: 0;
+    }
+    .project-detail__features {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 0.75rem;
+    }
+    .project-detail__features li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.625rem;
+        color: var(--color-body);
+        line-height: 1.6;
+    }
+    .project-detail__features li svg {
+        color: var(--color-gold-500);
+        margin-top: 0.1875rem;
+    }
+    .project-detail__footer {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1rem;
+        padding-top: 0.5rem;
+    }
+    .project-detail__internal {
+        color: var(--color-body);
+        font-style: italic;
+        margin: 0;
+    }
 
     /* ============================================================
        SECTION AMBIENT GLOW — radial gold spot na vybraných sekcích
@@ -4063,7 +4716,7 @@
         transform: translateX(-50%);
         width: 700px;
         height: 400px;
-        background: radial-gradient(ellipse, rgba(245, 158, 11, 0.055) 0%, transparent 65%);
+        background: radial-gradient(ellipse, rgba(216, 255, 58, 0.055) 0%, transparent 65%);
         pointer-events: none;
         z-index: 0;
     }
@@ -4105,7 +4758,7 @@
         font-size: 0.875rem;
         font-weight: 600;
         letter-spacing: 0.04em;
-        /* OND-123: bumped from --color-muted (#5A6480) + 0.65 opacity → --color-body
+        /* OND-123: bumped from --color-muted (dnes --color-decorative) (#5A6480) + 0.65 opacity → --color-body
            (#94A3B8) + 0.9 opacity. WCAG AA na #101318 background: ~5.4:1 (bylo ~2.3:1). */
         color: var(--color-body);
         text-transform: uppercase;
@@ -4120,7 +4773,7 @@
         margin: 1.25rem 0 0 0;
         padding: 1rem 1.25rem;
         border-left: 3px solid var(--color-gold-500);
-        background: rgba(245, 158, 11, 0.05);
+        background: rgba(216, 255, 58, 0.05);
         border-radius: 0 0.5rem 0.5rem 0;
     }
     .inline-quote p {
@@ -4133,7 +4786,7 @@
     .inline-quote footer {
         font-size: 0.8125rem;
         font-weight: 600;
-        color: var(--color-gold-400, #fbbf24);
+        color: var(--color-gold-200);
         letter-spacing: 0.02em;
     }
 
@@ -4145,7 +4798,7 @@
         padding: 2rem;
         border: 1px solid var(--border-gold);
         border-radius: 1rem;
-        background: rgba(245, 158, 11, 0.04);
+        background: rgba(216, 255, 58, 0.04);
     }
     .problems-transition strong {
         display: block;
@@ -4168,7 +4821,7 @@
     .step-note {
         margin-top: 1rem;
         font-size: 0.875rem;
-        color: var(--color-muted);
+        color: var(--color-body);
         font-style: italic;
         line-height: 1.6;
         padding: 0.75rem 1rem;
@@ -4224,7 +4877,7 @@
     .featured-quote footer {
         font-size: 0.875rem;
         font-weight: 600;
-        color: var(--color-gold-400, #fbbf24);
+        color: var(--color-gold-200);
         line-height: 1.5;
     }
 
@@ -4308,7 +4961,7 @@
         font-size: 0.8125rem;
         text-transform: uppercase;
         letter-spacing: 0.06em;
-        color: var(--color-muted);
+        color: var(--color-body);
         font-weight: 500;
     }
     .home-projects-card__outcome {
@@ -4329,9 +4982,178 @@
         transition: color 0.2s, gap 0.2s;
     }
     .home-projects-card__cta:hover {
-        color: var(--color-gold-400, #fbbf24);
+        color: var(--color-gold-600);
         text-decoration: underline;
         gap: 0.55rem;
+    }
+
+    /* ============================================================
+       SHOWCASE — Weby, které běží v praxi (OND-202)
+       Živé weby klientů hned po hero (kap. 9 bod 2). Jednotné
+       rámování: browser frame (lišta + doména) a phone frame
+       s přesahem — místo prostých screenshotů. Hover idiom
+       převzat z .home-projects-card (border-gold + lift).
+       ============================================================ */
+    .showcase-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    @media (min-width: 768px) {
+        .showcase-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.75rem;
+        }
+    }
+    .showcase-card {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .showcase-device {
+        position: relative;
+        display: block;
+        /* prostor pro spodní přesah phone framu */
+        padding-bottom: 2.75rem;
+        outline: none;
+    }
+    .showcase-device:focus-visible .showcase-browser {
+        outline: 2px solid var(--color-gold-500);
+        outline-offset: 4px;
+    }
+    .showcase-browser {
+        display: block;
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-md);
+        background: var(--bg-card);
+        overflow: hidden;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+        transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+    .showcase-device:hover .showcase-browser {
+        border-color: var(--border-gold);
+        transform: translateY(-3px);
+        box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45);
+    }
+    .showcase-browser__bar {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 0.75rem;
+        background: var(--bg-card-hover);
+        border-bottom: 1px solid var(--border-subtle);
+    }
+    .showcase-browser__dots {
+        display: inline-flex;
+        gap: 0.3rem;
+        flex: 1 0 auto;
+    }
+    .showcase-browser__dots i {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background: var(--border-emphasis);
+    }
+    .showcase-browser__url {
+        flex: 0 1 auto;
+        margin-right: auto;
+        padding: 0.125rem 0.75rem;
+        border-radius: var(--radius-pill);
+        background: rgba(255, 255, 255, 0.05);
+        font-size: 0.6875rem;
+        letter-spacing: 0.04em;
+        line-height: 1.5;
+        color: var(--color-body);
+        white-space: nowrap;
+    }
+    .showcase-browser picture,
+    .showcase-browser__img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
+        object-position: top;
+    }
+    .showcase-phone {
+        position: absolute;
+        right: 0.875rem;
+        bottom: 0;
+        width: clamp(5.25rem, 24%, 6.5rem);
+        border: 1px solid var(--border-emphasis);
+        border-radius: 0.875rem;
+        overflow: hidden;
+        background: var(--bg-card-hover);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55);
+    }
+    .showcase-phone picture,
+    .showcase-phone__img {
+        display: block;
+        width: 100%;
+        /* výřez horní části mobilního snímku (390×844 viewport) */
+        aspect-ratio: 39 / 68;
+        object-fit: cover;
+        object-position: top;
+    }
+    .showcase-card__body {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        padding-inline: 0.25rem;
+    }
+    .showcase-card__domain {
+        margin: 0;
+        font-size: 1.0625rem;
+        font-weight: 600;
+        color: var(--color-heading);
+    }
+    .showcase-card__desc {
+        margin: 0;
+        font-size: 0.9375rem;
+        line-height: 1.55;
+        color: var(--color-body);
+    }
+    .showcase-card__cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        margin-top: 0.35rem;
+        font-size: 0.9375rem;
+        font-weight: 500;
+        color: var(--color-gold-500);
+        text-decoration: none;
+        transition: color 0.2s, gap 0.2s;
+    }
+    .showcase-card__cta:hover {
+        color: var(--color-gold-600);
+        text-decoration: underline;
+        gap: 0.55rem;
+    }
+
+    /* ============================================================
+       VIDEO INTRO — Ondrovo video (OND-202, kap. 9 bod 1)
+       Vertikální 9:16 přehrávač; poster + native controls, žádný
+       autoplay. Sloty: .why-me-video (homepage), .about-intro__video.
+       ============================================================ */
+    .video-intro {
+        display: block;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 9 / 16;
+        object-fit: cover;
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-lg);
+        background: var(--bg-card);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    }
+    .why-me-video {
+        max-width: 320px;
+    }
+    @media (min-width: 768px) {
+        .why-me-video {
+            max-width: 360px;
+        }
+    }
+    .about-intro__video .video-intro {
+        max-width: 340px;
     }
 
     /* ============================================================
@@ -4387,7 +5209,7 @@
     .final-cta-quote footer {
         font-size: 0.875rem;
         font-weight: 600;
-        color: var(--color-gold-400, #fbbf24);
+        color: var(--color-gold-200);
     }
     .final-cta-heading {
         font-size: clamp(1.75rem, 3.5vw, 2.5rem);
@@ -4398,14 +5220,14 @@
     }
     .final-cta-subtext {
         font-size: 1rem;
-        color: var(--color-muted);
+        color: var(--color-body);
         margin-bottom: 2rem;
         text-align: center;
     }
     .final-cta-note {
         margin-top: 0.75rem;
         font-size: 0.875rem;
-        color: var(--color-muted);
+        color: var(--color-body);
         text-align: center;
     }
 
@@ -4428,7 +5250,7 @@
        INLINE MUTED TEXT
        ============================================================ */
     .text-body    { color: var(--color-body); }
-    .text-muted   { color: var(--color-muted); }
+    .text-muted   { color: var(--color-body); }
     .text-heading { color: var(--color-heading); }
     .text-gold    { color: var(--color-gold-500); }
 
@@ -4457,7 +5279,7 @@
         border: 1px solid var(--border-subtle);
         border-radius: 1.25rem;
         box-shadow:
-            0 0 0 1px rgba(245, 158, 11, 0.08),
+            0 0 0 1px rgba(216, 255, 58, 0.08),
             0 32px 80px rgba(0, 0, 0, 0.7);
         padding: clamp(1.5rem, 5vw, 2.5rem);
         top: 50%;
@@ -4589,20 +5411,20 @@
         height: 72px;
         border-radius: 50%;
         background: rgba(10, 10, 15, 0.82);
-        border: 2px solid var(--color-gold-500, #F59E0B);
+        border: 2px solid var(--color-gold-500, #D8FF3A);
         box-shadow:
-            0 0 18px var(--glow-gold, rgba(245, 158, 11, 0.22)),
+            0 0 18px var(--glow-gold, rgba(216, 255, 58, 0.22)),
             0 4px 20px rgba(0, 0, 0, 0.55);
-        color: var(--color-gold-500, #F59E0B);
+        color: var(--color-gold-500, #D8FF3A);
         transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     }
 
     .consult-modal-video__play-btn:hover .consult-modal-video__play-btn-inner,
     .consult-modal-video__play-btn:focus-visible .consult-modal-video__play-btn-inner {
         transform: scale(1.09);
-        border-color: var(--color-gold-200, #FDE68A);
+        border-color: var(--color-gold-200, #EFFFB0);
         box-shadow:
-            0 0 32px rgba(245, 158, 11, 0.45),
+            0 0 32px rgba(216, 255, 58, 0.45),
             0 4px 24px rgba(0, 0, 0, 0.65);
     }
 
@@ -4611,7 +5433,7 @@
     }
 
     .consult-modal-video__play-btn:focus-visible .consult-modal-video__play-btn-inner {
-        outline: 2px solid var(--color-gold-500, #F59E0B);
+        outline: 2px solid var(--color-gold-500, #D8FF3A);
         outline-offset: 5px;
     }
 
@@ -4626,13 +5448,13 @@
 
     .consult-modal-video__play-btn-inner::before {
         inset: -10px;
-        border: 2px solid var(--color-gold-500, #F59E0B);
+        border: 2px solid var(--color-gold-500, #D8FF3A);
         animation: consult-pulse 2s ease-out infinite;
     }
 
     .consult-modal-video__play-btn-inner::after {
         inset: -18px;
-        border: 1.5px solid var(--color-gold-200, #FDE68A);
+        border: 1.5px solid var(--color-gold-200, #EFFFB0);
         animation: consult-pulse 2s ease-out infinite 0.5s;
     }
 
@@ -4648,7 +5470,7 @@
         align-items: center;
         justify-content: center;
         gap: 0.875rem;
-        color: var(--color-muted);
+        color: var(--color-body);
         font-size: 0.9375rem;
         font-style: italic;
         text-align: center;
@@ -4673,7 +5495,7 @@
 
     .consult-modal-cta__note {
         font-size: 0.8125rem;
-        color: var(--color-muted);
+        color: var(--color-body);
     }
 
     /* Mobile adjustments — vertically centered, not bottom-sheet */
@@ -4719,7 +5541,8 @@
         align-items: center;
         gap: 0.4rem;
         padding: 0.5rem 1.125rem;
-        min-height: 40px;
+        /* OND-266 (2): 40 → 44 px, dotykový cíl. */
+        min-height: 2.75rem;
         background: transparent;
         border: 1px solid var(--border-subtle);
         border-radius: 999px;
@@ -4748,12 +5571,12 @@
     }
     .portfolio-filter__tab-count {
         font-size: 0.8125rem;
-        color: var(--color-muted);
+        color: var(--color-body);
     }
     .portfolio-filter__count {
         margin: 0;
         font-size: 0.8125rem;
-        color: var(--color-muted);
+        color: var(--color-body);
         display: inline-flex;
         gap: 0.35rem;
         align-items: baseline;
@@ -4848,7 +5671,7 @@
         color: var(--color-gold-500);
     }
     .portfolio-card__meta .portfolio-card__client {
-        color: var(--color-muted);
+        color: var(--color-body);
         text-transform: none;
         letter-spacing: 0;
     }
@@ -4896,32 +5719,46 @@
         margin-top: 1.5rem;
     }
 
-    /* — Detail galerie — */
-    .portfolio-detail-gallery__hero {
+    /* — Detail galerie (OND-202: kurátorské role dle poměru stran) —
+       `band` = hlavní wide vizuál (mockupy, bannery) na celou šířku
+       v přirozeném poměru, bez ořezu. `item` = podpůrná karta v párové
+       mřížce s jednotným čtvercovým výřezem — dominantní zdroje jsou
+       čtverce 1800×1800 (nulový ořez), plný snímek je v lightboxu. */
+    .portfolio-detail-gallery--lead {
+        padding-block: 0 clamp(1.5rem, 3vw, 2.5rem);
+    }
+    .portfolio-detail-gallery__band {
         margin: 0 0 1.5rem;
         border-radius: 1rem;
         overflow: hidden;
-        aspect-ratio: 16 / 9;
         background: var(--bg-card-hover);
     }
-    .portfolio-detail-gallery__hero picture,
-    .portfolio-detail-gallery__hero picture img {
+    .portfolio-detail-gallery__band:last-child {
+        margin-bottom: 0;
+    }
+    .portfolio-detail-gallery__band picture,
+    .portfolio-detail-gallery__band picture img,
+    .portfolio-detail-gallery__band > a > img,
+    .portfolio-detail-gallery__band > img {
         display: block;
         width: 100%;
-        height: 100%;
-        object-fit: cover;
+        height: auto;
     }
-    .portfolio-detail-gallery__hero figcaption,
+    .portfolio-detail-gallery__band figcaption,
     .portfolio-detail-gallery__item figcaption {
         margin-top: 0.5rem;
         padding: 0 0.25rem;
         font-size: 0.8125rem;
-        color: var(--color-muted);
+        color: var(--color-body);
     }
     .portfolio-detail-gallery__grid {
         display: grid;
         grid-template-columns: 1fr;
         gap: 1rem;
+        margin: 0 0 1.5rem;
+    }
+    .portfolio-detail-gallery__grid:last-child {
+        margin-bottom: 0;
     }
     @media (min-width: 641px) {
         .portfolio-detail-gallery__grid {
@@ -4935,11 +5772,46 @@
         overflow: hidden;
         background: var(--bg-card-hover);
     }
-    .portfolio-detail-gallery__item picture,
-    .portfolio-detail-gallery__item picture img {
+    /* OND-265: dlaždice drží poměr snímku (`--shot-ratio` ze šablony)
+       a obrázek se do ní vejde celý (`contain`). Dřív byl natvrdo čtverec
+       s `cover`, což u nečtvercových zdrojů usekávalo funkčně podstatný
+       obsah — audit OND-254 to našel u pickeru (tabulka DÍL/SKLAD/POČET)
+       i u FRL Creatoru (formulář useknutý z obou stran). */
+    .portfolio-detail-gallery__frame {
+        aspect-ratio: var(--shot-ratio, 1);
+        overflow: hidden;
+    }
+    .portfolio-detail-gallery__frame > a,
+    .portfolio-detail-gallery__frame picture {
         display: block;
         width: 100%;
-        height: auto;
+        height: 100%;
+    }
+    .portfolio-detail-gallery__frame img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+    }
+    @media (min-width: 641px) {
+        /* Dvousloupcová mřížka drží jednotný rytmus čtverců (OND-202);
+           celý obsah snímku zůstává vidět díky `contain`. Osamocená dlaždice
+           souseda nemá, koho by dorovnávala — bere přirozený poměr, ať je
+           snímek co největší. */
+        .portfolio-detail-gallery__item:not(.portfolio-detail-gallery__item--alone):not(.portfolio-detail-gallery__item--alone-band)
+            .portfolio-detail-gallery__frame {
+            aspect-ratio: 1 / 1;
+        }
+        /* Poslední osamocená dlaždice — žádná prázdná buňka vedle ní. */
+        .portfolio-detail-gallery__item--alone,
+        .portfolio-detail-gallery__item--alone-band {
+            grid-column: 1 / -1;
+        }
+        .portfolio-detail-gallery__item--alone {
+            max-width: calc(50% - 0.625rem);
+            margin-inline: auto;
+        }
     }
 
     /* — Detail body + meta layout — */
@@ -4980,7 +5852,7 @@
         font-size: 1rem;
     }
     .portfolio-detail-body__empty {
-        color: var(--color-muted);
+        color: var(--color-body);
         font-style: italic;
     }
 
@@ -5003,7 +5875,7 @@
     .portfolio-detail-meta__row dt {
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        color: var(--color-muted);
+        color: var(--color-body);
         font-size: 0.75rem;
     }
     .portfolio-detail-meta__row dd {
@@ -5092,7 +5964,7 @@
     .social-proof-bar__item + .social-proof-bar__item::before {
         content: '•';
         margin-right: 0.75rem;
-        color: var(--color-muted, var(--color-ink-400));
+        color: var(--color-decorative);
         opacity: 0.6;
     }
     .social-proof-bar__stars {
@@ -5104,7 +5976,7 @@
         color: var(--color-heading);
     }
     .social-proof-bar__meta {
-        /* OND-123: --color-muted (#5A6480) na #101318 dává jen ~3.5:1 → WCAG AA fail.
+        /* OND-123: --color-muted (dnes --color-decorative) (#5A6480) na #101318 dává jen ~3.5:1 → WCAG AA fail.
            --color-body (#94A3B8) ≈ 5.9:1 → PASS pro normální text. */
         color: var(--color-body);
     }
@@ -5117,8 +5989,8 @@
         padding: 0.25rem 0.625rem;
         margin: 0.5rem 0 0.75rem;
         border-radius: 999px;
-        background: rgba(245, 158, 11, 0.14);
-        border: 1px solid rgba(245, 158, 11, 0.32);
+        background: rgba(216, 255, 58, 0.14);
+        border: 1px solid rgba(216, 255, 58, 0.32);
         color: var(--color-gold-200);
         font-size: 0.75rem;
         font-weight: 600;
@@ -5128,7 +6000,7 @@
     /* Inline poptávkový formulář (T05) — reusuje vizuální tokeny landing-form */
     .section-inline-form {
         background:
-            radial-gradient(circle at top center, rgba(245, 158, 11, 0.08), transparent 42%),
+            radial-gradient(circle at top center, rgba(216, 255, 58, 0.08), transparent 42%),
             linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
     }
     .inline-form-shell {
@@ -5165,10 +6037,19 @@
         justify-content: center;
         margin-top: 0.5rem;
     }
+    /* OND-201 (nález 5.8): věta pod tlačítkem jediné závěrečné výzvy
+       („Nebo mi napište na ok@ondraweb.cz…"). Je nad privacy notem
+       a o stupeň výraznější, aby fungovala jako alternativní cesta. */
+    .inline-form__note {
+        margin-top: 0.875rem;
+        font-size: 0.875rem;
+        color: var(--color-ink-200);
+        line-height: 1.55;
+    }
     .inline-form__privacy {
         margin-top: 0.875rem;
         font-size: 0.8125rem;
-        color: var(--color-muted, var(--color-ink-400));
+        color: var(--color-body);
         line-height: 1.5;
     }
     .inline-form__privacy a {
@@ -5192,7 +6073,7 @@
     }
     .phone-cta:hover {
         color: var(--color-gold-500);
-        border-color: rgba(245, 158, 11, 0.6);
+        border-color: rgba(216, 255, 58, 0.6);
     }
     .navbar__phone {
         display: none;
@@ -5324,7 +6205,7 @@
             border-radius: 1.25rem;
             box-shadow:
                 0 20px 60px rgba(0, 0, 0, 0.4),
-                0 0 0 1px rgba(245, 158, 11, 0.15);
+                0 0 0 1px rgba(216, 255, 58, 0.15);
         }
         .section-hero__portrait-img {
             width: 100%;
@@ -5352,7 +6233,7 @@
         transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
     .faq-item[open] {
-        border-color: rgba(245, 158, 11, 0.35);
+        border-color: rgba(216, 255, 58, 0.35);
         box-shadow: 0 8px 24px rgba(15, 23, 42, 0.18);
     }
     .faq-item__question {
@@ -5419,7 +6300,7 @@
         padding: 1.5rem;
         background: var(--bg-card);
         border-radius: 0.875rem;
-        border: 1px solid rgba(245, 158, 11, 0.18);
+        border: 1px solid rgba(216, 255, 58, 0.18);
     }
     .faq-form__intro {
         margin-bottom: 1rem;
@@ -5455,7 +6336,7 @@
 
     /* ============================================================
        OND-135 P2 iter 4 — Contact page reskin (plán §3.1 + §1 dir 5)
-       Page-mark eyebrow, Fraunces italic display heading, amber accent,
+       Page-mark eyebrow, IBM Plex Sans italic display heading, amber accent,
        3-step "Co se stane potom" listing, in-DOM thank-you state.
        ============================================================ */
 
@@ -5466,12 +6347,12 @@
         text-align: left;
         padding-top: calc(68px + 4rem);
         padding-bottom: 4rem;
-        border-bottom: 1px solid rgba(232, 166, 74, 0.08);
+        border-bottom: 1px solid rgba(216, 255, 58, 0.08);
     }
     .page-hero--contact::after {
-        /* Replace the centered gold-glow halo with a soft top-right amber bleed. */
+        /* Replace the centered gold-glow halo with a soft top-right acid bleed. */
         background: radial-gradient(ellipse 600px 300px at 90% 0%,
-                                    rgba(232, 166, 74, 0.10) 0%,
+                                    rgba(216, 255, 58, 0.10) 0%,
                                     transparent 65%);
         top: 0;
         left: auto;
@@ -5489,7 +6370,7 @@
         align-items: center;
         gap: 1rem;
         font-family: var(--font-display);
-        font-style: italic;
+        font-style: normal;
         font-weight: 400;
         font-size: 0.875rem;
         letter-spacing: 0.18em;
@@ -5510,16 +6391,13 @@
         font-weight: 600;
         letter-spacing: 0.24em;
     }
-    .page-hero__page-mark-index {
-        margin-left: auto;
-        font-style: italic;
-        color: var(--color-fg-faint);
-        letter-spacing: 0.14em;
-    }
+    /* OND-135 cleanup (2026-05-14): `.page-hero__page-mark-index` rule
+       odebrán — orphan token po removal counter slotu z component shape
+       (Jack §2.0 nit pro iter 5/6: „label-only token, ne jen z dat"). */
 
     .page-hero__upline {
         font-family: var(--font-display);
-        font-style: italic;
+        font-style: normal;
         font-weight: 400;
         font-size: clamp(1.25rem, 2vw, 1.75rem);
         line-height: 1.35;
@@ -5529,9 +6407,10 @@
 
     .page-hero--contact .page-hero__heading {
         font-family: var(--font-display);
-        font-style: italic;
-        font-weight: 500;
-        font-variation-settings: 'opsz' 144, 'SOFT' 50, 'wght' 500;
+        font-style: normal;
+        font-weight: 700;
+        /* OND-147: opsz/SOFT (Fraunces-only) odstraněno, Plex wght 700 = enterprise. */
+        font-variation-settings: 'wght' 700;
         font-size: clamp(2.25rem, 5.5vw, 4.25rem);
         line-height: 1.02;
         letter-spacing: -0.015em;
@@ -5539,9 +6418,18 @@
         margin: 0 0 1.75rem;
         max-width: 18ch;
     }
+    /* OND-231 F3 — sjednocení podpisu: důraz v titulku podstránky drží
+       stejnou gramatiku jako ACID homepage (`.pd-heading em`) — bílé
+       slovo s acid podtržením. Plné vybarvení, které fungovalo
+       u teplého amberu, by v acid velikosti hero titulku překřičelo
+       zbytek stránky. */
     .page-hero--contact .page-hero__heading em {
-        color: var(--color-accent);
-        font-style: italic;
+        color: var(--color-fg-primary);
+        font-style: normal;
+        text-decoration: underline;
+        text-decoration-color: var(--color-accent);
+        text-decoration-thickness: 0.12em;
+        text-underline-offset: 0.08em;
     }
 
     .page-hero__subline {
@@ -5561,7 +6449,7 @@
         top: 0.85em;
         width: 32px;
         height: 1px;
-        background: var(--color-fg-faint);
+        background: var(--color-fg-decorative);
     }
 
     /* ============================================================
@@ -5589,7 +6477,7 @@
         position: relative;
         padding-top: 3.25rem;
         padding-left: 0;
-        border-top: 1px solid rgba(232, 166, 74, 0.18);
+        border-top: 1px solid rgba(216, 255, 58, 0.18);
     }
     .next-steps__index {
         position: absolute;
@@ -5598,16 +6486,16 @@
         background: var(--color-bg-elev-1);
         padding-right: 0.75rem;
         font-family: var(--font-display);
-        font-style: italic;
-        font-weight: 500;
+        font-style: normal;
+        font-weight: 600;
         font-size: 1rem;
         letter-spacing: 0.12em;
         color: var(--color-accent);
     }
     .next-steps__title {
         font-family: var(--font-display);
-        font-style: italic;
-        font-weight: 500;
+        font-style: normal;
+        font-weight: 600;
         font-size: clamp(1.25rem, 2vw, 1.625rem);
         line-height: 1.25;
         color: var(--color-fg-primary);
@@ -5626,14 +6514,14 @@
     .contact-form__thanks {
         padding: 2.5rem 2rem;
         background: var(--color-bg-elev-2);
-        border: 1px solid rgba(232, 166, 74, 0.22);
+        border: 1px solid rgba(216, 255, 58, 0.22);
         border-radius: 16px;
         text-align: left;
     }
     .contact-form__thanks .contact-form__title {
         font-family: var(--font-display);
-        font-style: italic;
-        font-weight: 500;
+        font-style: normal;
+        font-weight: 600;
         font-size: clamp(1.5rem, 2.5vw, 2rem);
         line-height: 1.15;
         color: var(--color-fg-primary);
@@ -5651,7 +6539,7 @@
         color: var(--color-fg-muted);
         margin: 0 0 1.5rem;
         padding-top: 1.25rem;
-        border-top: 1px solid rgba(232, 166, 74, 0.18);
+        border-top: 1px solid rgba(216, 255, 58, 0.18);
     }
     .contact-form__thanks-ctas {
         display: flex;
@@ -5676,7 +6564,7 @@
         position: absolute;
         inset: 0;
         background: radial-gradient(ellipse 700px 360px at 50% 0%,
-                                    rgba(232, 166, 74, 0.08) 0%,
+                                    rgba(216, 255, 58, 0.08) 0%,
                                     transparent 65%);
         pointer-events: none;
         z-index: 0;
@@ -5694,9 +6582,10 @@
     }
     .error-page__heading {
         font-family: var(--font-display);
-        font-style: italic;
-        font-weight: 500;
-        font-variation-settings: 'opsz' 144, 'SOFT' 50, 'wght' 500;
+        font-style: normal;
+        font-weight: 700;
+        /* OND-147: opsz/SOFT (Fraunces-only) odstraněno, Plex wght 700. */
+        font-variation-settings: 'wght' 700;
         font-size: clamp(2rem, 5vw, 3.25rem);
         line-height: 1.1;
         letter-spacing: -0.02em;
@@ -5727,4 +6616,199 @@
         gap: 0.875rem;
     }
 
+    /* ============================================================
+       OND-135 P2 iter 5 — /cenik reskin (plán §3.1 + §3.2)
+       Page-hero variant + sticky CTA widget (plán "cena nikdy nezmizí").
+       ============================================================ */
+    .page-hero--price {
+        background: var(--color-bg-base);
+        text-align: left;
+        padding-top: calc(68px + 4rem);
+        padding-bottom: 4rem;
+        border-bottom: 1px solid rgba(216, 255, 58, 0.08);
+    }
+    .page-hero--price::after {
+        background: radial-gradient(ellipse 600px 320px at 90% 0%,
+                                    rgba(216, 255, 58, 0.10) 0%,
+                                    transparent 65%);
+        top: 0;
+        left: auto;
+        right: 0;
+        transform: none;
+        width: 100%;
+        height: 100%;
+    }
+    .page-hero--price .container-site {
+        max-width: 960px;
+    }
+    .page-hero--price .page-hero__heading {
+        font-family: var(--font-display);
+        font-style: normal;
+        font-weight: 700;
+        /* OND-147: opsz/SOFT (Fraunces-only) odstraněno, Plex wght 700 = enterprise.
+           Parita s .page-hero--contact .page-hero__heading (PR #78 + PR #80 precedent). */
+        font-variation-settings: 'wght' 700;
+        font-size: clamp(2.25rem, 5.5vw, 4.25rem);
+        line-height: 1.02;
+        letter-spacing: -0.015em;
+        color: var(--color-fg-primary);
+        margin: 0 0 1.75rem;
+        max-width: 18ch;
+    }
+    .page-hero--price .page-hero__heading em {
+        color: var(--color-fg-primary);
+        font-style: normal;
+        text-decoration: underline;
+        text-decoration-color: var(--color-accent);
+        text-decoration-thickness: 0.12em;
+        text-underline-offset: 0.08em;
+    }
+
+    /* Sticky CTA — viewport-anchored, top-of-z-index, bottom-right.
+       Floats above content while cena visible-on-scroll je guaranteed. */
+    .price-sticky-cta {
+        position: fixed;
+        right: 1.25rem;
+        bottom: 1.25rem;
+        z-index: 50;
+        pointer-events: auto;
+    }
+    @media (max-width: 640px) {
+        .price-sticky-cta {
+            right: 0.75rem;
+            bottom: 0.75rem;
+            left: 0.75rem;
+        }
+    }
+    .price-sticky-cta__btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.625rem;
+        padding: 0.875rem 1.5rem;
+        background: var(--color-accent);
+        color: #0A0A0B;
+        font-family: 'Inter Variable', system-ui, sans-serif;
+        font-size: 0.9375rem;
+        font-weight: 600;
+        letter-spacing: -0.005em;
+        border-radius: 9999px;
+        text-decoration: none;
+        /* OND-231 F3 corrective: acid je proti amberu výrazně světlejší,
+           takže původní alfa 0,55/0,7 by ze záře pod tlačítkem udělala
+           druhý zdroj světla. Ztlumeno na 0,30/0,38. */
+        box-shadow:
+            0 12px 32px -8px rgba(216, 255, 58, 0.30),
+            0 0 0 1px rgba(10, 10, 11, 0.08) inset;
+        transition: background-color 0.18s var(--ease-out, ease-out),
+                    transform 0.18s var(--ease-out, ease-out),
+                    box-shadow 0.18s var(--ease-out, ease-out);
+    }
+    .price-sticky-cta__btn:hover,
+    .price-sticky-cta__btn:focus-visible {
+        background: var(--color-accent-hover);
+        transform: translateY(-1px);
+        box-shadow:
+            0 16px 40px -8px rgba(216, 255, 58, 0.38),
+            0 0 0 1px rgba(10, 10, 11, 0.08) inset;
+    }
+    .price-sticky-cta__btn:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 3px;
+    }
+    .price-sticky-cta__btn:active {
+        background: var(--color-accent-press);
+        transform: translateY(0);
+    }
+    @media (max-width: 640px) {
+        .price-sticky-cta__btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .price-sticky-cta__btn {
+            transition: none;
+        }
+        .price-sticky-cta__btn:hover,
+        .price-sticky-cta__btn:focus-visible,
+        .price-sticky-cta__btn:active {
+            transform: none;
+        }
+    }
+
+    /* ============================================================
+       OND-135 P2 iter 6 — /realizace reskin (plán §3.1 + §3.3)
+       Reuses page-hero--contact base shape; parita s PR #78/#80/#82.
+       ============================================================ */
+    .page-hero--projects {
+        background: var(--color-bg-base);
+        text-align: left;
+        padding-top: calc(68px + 4rem);
+        padding-bottom: 4rem;
+        border-bottom: 1px solid rgba(216, 255, 58, 0.08);
+    }
+    .page-hero--projects::after {
+        background: radial-gradient(ellipse 600px 320px at 90% 0%,
+                                    rgba(216, 255, 58, 0.10) 0%,
+                                    transparent 65%);
+        top: 0;
+        left: auto;
+        right: 0;
+        transform: none;
+        width: 100%;
+        height: 100%;
+    }
+    .page-hero--projects .container-site {
+        max-width: 960px;
+    }
+    .page-hero--projects .page-hero__heading {
+        font-family: var(--font-display);
+        font-style: normal;
+        font-weight: 700;
+        /* OND-147: opsz/SOFT (Fraunces-only) odstraněno, Plex wght 700 = enterprise.
+           Parita s .page-hero--contact + .page-hero--price (PR #78/#80/#82). */
+        font-variation-settings: 'wght' 700;
+        font-size: clamp(2.25rem, 5.5vw, 4.25rem);
+        line-height: 1.02;
+        letter-spacing: -0.015em;
+        color: var(--color-fg-primary);
+        margin: 0 0 1.75rem;
+        max-width: 18ch;
+    }
+    .page-hero--projects .page-hero__heading em {
+        color: var(--color-fg-primary);
+        font-style: normal;
+        text-decoration: underline;
+        text-decoration-color: var(--color-accent);
+        text-decoration-thickness: 0.12em;
+        text-underline-offset: 0.08em;
+    }
+
+    /* Outcome metric emphasis — když Content Writer dorazí čísla pro
+       projects.snapshots, lze obalit `<strong class="metric">42 %</strong>`
+       a získat amber prominence.
+       OND-147: italic + opsz (Fraunces axes) odstraněn — Plex wght 600 upright
+       pro enterprise tone (B2B IT consistency). */
+    .project-snapshot .metric,
+    .project-snapshot strong {
+        font-family: var(--font-display);
+        font-style: normal;
+        font-weight: 600;
+        font-variation-settings: 'wght' 600;
+        color: var(--color-accent);
+        letter-spacing: -0.005em;
+    }
+
+    /* OND-201 (nález 5.2): druhý meta slot případovky je odkaz na živý web
+       (dřív tam stála vymyšlená doba realizace). Zvýrazněný, protože je
+       to hlavní ověřitelný důkaz celé sekce. */
+    .project-snapshot__meta a {
+        color: var(--color-accent);
+        text-decoration: underline;
+        text-underline-offset: 0.2em;
+    }
+    .project-snapshot__meta a:hover,
+    .project-snapshot__meta a:focus-visible {
+        text-decoration-thickness: 2px;
+    }
 }
