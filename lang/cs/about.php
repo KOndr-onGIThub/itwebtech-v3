@@ -11,7 +11,7 @@ return [
     'heading'    => 'Kdo vám web postaví',
     'intro'      => 'Jmenuju se Ondřej Kriška. Stavím weby a webové aplikace na vlastním kódu. Pracuju sám a s klientem jednám napřímo. Žádný obchodník, žádný koordinátor mezi námi.',
 
-    'portrait_alt' => 'Ondřej Kriška',
+    'portrait_alt' => 'Portrét Ondřeje Krišky',
     'video_aria' => 'Video: Ondřej Kriška — kdo jsem a jak stavím weby',
 
     'sections' => [

@@ -11,7 +11,7 @@ return [
     'heading'    => 'Who will build your website',
     'intro'      => 'My name is Ondřej Kriška. I build websites and web applications in custom code. I work alone and deal with clients directly. No salesperson, no coordinator between us.',
 
-    'portrait_alt' => 'Ondřej Kriška',
+    'portrait_alt' => 'Portrait of Ondřej Kriška',
     'video_aria' => 'Video: Ondřej Kriška — who I am and how I build websites',
 
     'sections' => [
