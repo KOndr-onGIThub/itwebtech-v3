@@ -50,7 +50,9 @@ class ArticleResource extends Resource
         'img_preview',
         'img_main',
         'img_mid',
+        'img_mid_alt',
         'img_end',
+        'img_end_alt',
     ];
 
     public const LOCALES = ['cs', 'en', 'de'];
@@ -223,12 +225,22 @@ class ArticleResource extends Resource
                     ->label('Obrázek uprostřed (filename)')
                     ->maxLength(191)
                     ->columnSpanFull(),
+                Forms\Components\TextInput::make("$key.img_mid_alt")
+                    ->label('Alt text obrázku uprostřed')
+                    ->helperText('Co je na obrázku vidět. Prázdné = obrázek je jen dekorace.')
+                    ->maxLength(191)
+                    ->columnSpanFull(),
                 Forms\Components\Textarea::make("$key.content_2")
                     ->label('Obsah – druhý díl (HTML)')
                     ->rows(8)
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make("$key.img_end")
                     ->label('Obrázek na konci (filename)')
+                    ->maxLength(191)
+                    ->columnSpanFull(),
+                Forms\Components\TextInput::make("$key.img_end_alt")
+                    ->label('Alt text obrázku na konci')
+                    ->helperText('Co je na obrázku vidět. Prázdné = obrázek je jen dekorace.')
                     ->maxLength(191)
                     ->columnSpanFull(),
                 Forms\Components\Textarea::make("$key.bonus")
@@ -353,7 +365,8 @@ class ArticleResource extends Resource
                             $attrs = $tr->only([
                                 'locale', 'active', 'title', 'description', 'perex',
                                 'content_1', 'content_mid', 'content_2', 'bonus', 'extra',
-                                'img_preview', 'img_main', 'img_mid', 'img_end',
+                                'img_preview', 'img_main',
+                                'img_mid', 'img_mid_alt', 'img_end', 'img_end_alt',
                             ]);
                             $replica->translations()->create($attrs);
                         }
