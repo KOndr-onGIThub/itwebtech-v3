@@ -226,30 +226,6 @@ Alpine.data('contactForm', ({ genericError = '' } = {}) => ({
 }));
 
 // ---------------------------------------------------------------------------
-// Consultation modal — Calendly CTA
-// ---------------------------------------------------------------------------
-// OND-258: video z modálu je pryč, takže zmizel i jeho stav (videoReady/playing).
-Alpine.data('consultationModal', () => ({
-    open: false,
-
-    openModal() {
-        this.open = true;
-        // Prevent body scroll
-        document.body.style.overflow = 'hidden';
-        // Focus the dialog on next tick
-        this.$nextTick(() => {
-            const dialog = this.$el.querySelector('[role="dialog"]');
-            if (dialog) dialog.focus({ preventScroll: true });
-        });
-    },
-
-    closeModal() {
-        this.open = false;
-        document.body.style.overflow = '';
-    },
-}));
-
-// ---------------------------------------------------------------------------
 // Portfolio filter — client-side filter pro listing /projekty
 // ---------------------------------------------------------------------------
 Alpine.data('portfolioFilter', ({ target = 'portfolio-grid', categories = [], counts = {} } = {}) => ({
@@ -536,38 +512,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
 });
 
-// ---------------------------------------------------------------------------
-// Reservanto widget — patch missing href on vendor-injected <a> (OND-123)
-// ---------------------------------------------------------------------------
-// Reservanto vendor skript injektuje <a class="reservanto-button …"> bez href,
-// PSI „Odkazy nelze procházet" → SEO score 92 → fail (cíl ≥ 95).
-//
-// Vendor skript přidá vlastní click handler s preventDefault → uživatelský
-// klik otevře modal, ne href. Cíl: dodat crawler-readable href + no-JS fallback.
-// Direct URL přichází z data-direct-url na wrapperu (config/site.booking).
-document.addEventListener('DOMContentLoaded', () => {
-    const widgets = document.querySelectorAll('.reservanto-widget');
-    if (!widgets.length) return;
-
-    const patchAnchors = () => {
-        widgets.forEach(widget => {
-            const href = widget.dataset.directUrl;
-            if (!href) return;
-            widget.querySelectorAll('a:not([href])').forEach(a => {
-                a.setAttribute('href', href);
-                a.setAttribute('rel', 'noopener');
-                a.setAttribute('target', '_blank');
-            });
-        });
-    };
-
-    // Vendor skript je `defer`, takže může injektovat <a> až po DOMContentLoaded.
-    // MutationObserver na každém widget kontejneru zachytí přidání <a> i pozdější
-    // re-rendery (např. když Reservanto resize-uje).
-    const observer = new MutationObserver(patchAnchors);
-    widgets.forEach(widget => {
-        observer.observe(widget, { childList: true, subtree: true });
-    });
-    // První pass — kdyby už byly injektnuté (race po defer scriptu)
-    patchAnchors();
-});

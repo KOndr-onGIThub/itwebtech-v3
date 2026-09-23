@@ -25,22 +25,14 @@ return [
         'subline'         => 'I am Ondřej Kriška, an experienced developer. You work with me directly — no agency, no middlemen. I build websites to run for years without tying you up in maintenance.',
         'note'            => 'I\'ll get back to you within 24 hours on business days. No commitment, we just go through what makes sense.',
 
-        // Backwards compat (consultation modal, fallback render).
+        // Backwards compat (fallback render).
         'eyebrow'       => 'Custom websites & web applications',
         'heading'       => 'Websites and applications built to fit. I build them myself, on my own code.',
         // OND-130 + OND-136: single primary CTA in hero, exact wording per spec.
-        // cta_secondary kept for backwards compat (consultation modal) — not shown in hero.
+        // cta_secondary kept for backwards compat — not shown in hero.
         'cta_primary'   => 'Tell me what you need',
         'cta_secondary' => 'Book a 30-min consultation',
         'phone_label'   => 'or call:',
-    ],
-
-    'modal' => [
-        'title'             => 'Let\'s talk',
-        'subtitle'          => 'Free consultation — no commitment, no registration.',
-        'calendly_btn'      => 'Pick a consultation slot',
-        'cta_note'          => 'Free. No commitment.',
-        'play_btn'          => 'Play video',
     ],
 
     'anchors' => [

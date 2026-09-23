@@ -30,20 +30,12 @@ return [
         'note'            => 'Ozvu se do 24 hodin v pracovní dny. Nezávazně proberu, co dává smysl.',
 
         // Backwards compat — staré klíče zachované pro non-hero spotřebitele
-        // (consultation modal, fallback render). cta_secondary není v hero.
+        // (fallback render). cta_secondary není v hero.
         'eyebrow'       => 'Webové stránky a aplikace na míru',
         'heading'       => 'Weby a aplikace na míru. Postavím vám je sám, na vlastním kódu.',
         'cta_primary'   => 'Napište mi, co potřebujete',
         'cta_secondary' => 'Domluvit 30min konzultaci',
         'phone_label'   => 'nebo zavolat:',
-    ],
-
-    'modal' => [
-        'title'              => 'Domluvme se',
-        'subtitle'           => 'Bezplatná konzultace — nezávazně, bez registrace.',
-        'calendly_btn'       => 'Vybrat termín konzultace',
-        'cta_note'           => 'Bezplatně. Bez závazku.',
-        'play_btn'           => 'Přehrát video',
     ],
 
     'anchors' => [

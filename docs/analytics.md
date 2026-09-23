@@ -5,13 +5,13 @@ napojený na homepage, jak ho zapnout/vypnout a kde najít data.
 
 ## Co měříme
 
-11 mikrokonverzí per plán §9.2 ([OND-99 plan](/OND/issues/OND-99#document-plan)):
+10 mikrokonverzí per plán §9.2 (`calendly_booking_complete` zrušen v OND-303) ([OND-99 plan](/OND/issues/OND-99#document-plan)):
 
 | Event | Spouštěč | Kde v kódu |
 |---|---|---|
 | `hero_cta_primary_click` | klik na primární CTA v hero („Získat cenovou nabídku") | `resources/views/pages/home.blade.php` (`data-analytics`) |
-| `hero_cta_secondary_click` | klik na sekundární CTA (Reservanto widget) v hero | `resources/views/components/booking/reservanto-widget.blade.php` (přes `analyticsEvent` prop) |
-| `sticky_cta_click` | klik na sticky / mobile bottom bar | `resources/views/layouts/app.blade.php` (mobile bottom bar) |
+| `final_cta_secondary_click` | klik na sekundární CTA v sekci „Jak pracuji" | `resources/views/pages/home.blade.php` (`data-analytics`) |
+| `sticky_cta_click` | klik na CTA „Domluvit konzultaci" v navigaci / draweru / mobile bottom baru | `resources/views/components/layout/navbar.blade.php`, `resources/views/layouts/app.blade.php` |
 | `phone_click` | klik na `tel:` link | `resources/views/components/phone-cta.blade.php` |
 | `price_anchor_view` | scroll do sekce „Investice do webu" (intersection ≥ 40 %) | `data-analytics-view` na `#section-price` |
 | `project_card_click` | klik na kartu v „Realizované projekty" | `home-projects-card__visual` + `__cta` v `home.blade.php` |
@@ -19,7 +19,6 @@ napojený na homepage, jak ho zapnout/vypnout a kde najít data.
 | `faq_open` | rozbalení FAQ položky (event s `q_id` jako prop) | listener v `resources/js/analytics.js`, hooks na `.faq-item details` |
 | `inline_form_submit_attempt` | klik na submit / Enter v inline formuláři | `resources/views/partials/home-inline-form.blade.php` |
 | `inline_form_submit_success` | server-side success (200) z `/poptavka` | dispatch z `home.blade.php` po `session('home_lead_success')` |
-| `calendly_booking_complete` | webhook z Reservanto | **out-of-scope** — Reservanto widget je popup, nemáme přímý callback; viz „Známé gapy" |
 
 Eventy se odesílají z `resources/js/analytics.js` přes:
 
@@ -73,12 +72,9 @@ zkreslí data). Master vypínač skryje **všechny** skripty (Plausible, GA4 i C
 
 ## Známé gapy / out-of-scope
 
-- **`calendly_booking_complete`** — Reservanto widget otevírá iframe popup;
-  nemáme přímý webhook ani callback po dokončené rezervaci. Cesty řešení
-  (mimo OND-122):
-  - zjistit, jestli Reservanto umožňuje webhook na nový lead → server-side endpoint, který trigne Plausible Custom Events API;
-  - alternativně po dokončené rezervaci přesměrovat na náš thanks-page s UTM parametry a tam fírnout event;
-  - zatím měříme jen `hero_cta_secondary_click` jako proxy pro „někdo otevřel booking flow".
+- **`calendly_booking_complete`** — zrušeno (OND-303). Rezervační systémy
+  (Reservanto i Calendly) jsou z webu pryč, všechna CTA „Domluvit konzultaci"
+  vedou na formulář poptávky. Konverzi měří `inline_form_submit_success`.
 
 - **`faq_open`** — FAQ sekce na homepage zatím není v `staging`. Až bude
   OND-121 (Sprint 3 P2) smerge-ovaná, automaticky se nahodí přes listener
