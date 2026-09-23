@@ -3775,6 +3775,13 @@
        drží počet znaků na řádek i kdyby se změnil stupeň písma.
        `content-box` je tu schválně: max-width pak platí na text, ne
        na text včetně paddingu.
+
+       OND-290: `width: auto` musí přepsat `width: 100%` z `.container-site`.
+       S `content-box` totiž `100%` nastaví *obsahovou* šířku na šířku
+       rodiče a padding se přičte navrch — na 390px viewportu vyšel box
+       390 + 2×17,55 = 425 px, tedy 35 px přes okno. `auto` box naopak
+       zmenší o padding (354,9 px) a `max-width` dál drží míru na širokých
+       displejích.
        ============================================================ */
     .article-body {
         --article-measure: 62ch;
@@ -3782,6 +3789,7 @@
     }
     .article-body .container-site--narrow {
         box-sizing: content-box;
+        width: auto;
         max-width: var(--article-measure);
         margin-inline: auto;
         padding-inline: clamp(1rem, 4.5vw, 2rem);
