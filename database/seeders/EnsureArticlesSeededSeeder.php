@@ -55,10 +55,13 @@ class EnsureArticlesSeededSeeder extends Seeder
         // a 2026_09_23_100400_ond275_en_blog_obsah.
         $this->call(BlogContentEnSeeder::class);
 
-        // OND-286: musí běžet až poslední. Dumpy i seedery výš nesou absolutní
-        // odkazy na `itwebtech.cz/jak-na-to/...`; tenhle seeder je uklízí nad
-        // hotovým obsahem. Na existující DB dělá totéž migrace
-        // 2026_09_23_110000_ond286_odkazy_na_starou_domenu.
+        // OND-286 + OND-289: musí běžet až poslední. Dumpy i seedery výš nesou
+        // absolutní odkazy na starou doménu — jak do sekce článků
+        // (`itwebtech.cz/jak-na-to/...`), tak na `/contact`, `/price`
+        // a `/projects`; tenhle seeder je uklízí nad hotovým obsahem.
+        // Na existující DB dělají totéž migrace
+        // 2026_09_23_110000_ond286_odkazy_na_starou_domenu
+        // a 2026_09_23_140000_ond289_odkazy_mimo_sekci_clanku.
         $this->call(BlogLegacyDomainLinksSeeder::class);
     }
 }
