@@ -8,7 +8,11 @@
      a v @push('jsonld')) zůstává plný, schema.org limit nemá. --}}
 @section('description', \Illuminate\Support\Str::limit($translation?->description ?? '', 155, '…'))
 
-{{-- OND-137 P4 §SEO: Article + BreadcrumbList JSON-LD pro detail článku.
+{{-- OND-137 P4 §SEO: BreadcrumbList JSON-LD pro detail článku.
+     OND-299: Article blok tady dřív byl taky, ale duplikoval ten v body
+     (ř. ~200, $articleLd) — dvě Article entity se stejným mainEntityOfPage.@id
+     na jedné stránce. Tenhle byl chudší podmnožina (bez dateModified,
+     author.url, jobTitle, publisher.logo), takže šel pryč celý.
      Pozn.: viz price.blade.php — schema-context klíč řešíme přes PHP blok,
      aby ho nesežrala Blade direktiva (Laravel 12 CompilesContexts). --}}
 @push('jsonld')
@@ -23,36 +27,9 @@
         ],
     ];
     $breadcrumbJson = json_encode($breadcrumbLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-
-    $articleLd = array_filter([
-        '@context' => 'https://schema.org',
-        '@type' => 'Article',
-        'headline' => $translation?->title,
-        'description' => $translation?->description,
-        'image' => $article?->hero_image_url ?: null,
-        'datePublished' => optional($article?->published_at)->toAtomString(),
-        'inLanguage' => app()->getLocale(),
-        'mainEntityOfPage' => [
-            '@type' => 'WebPage',
-            '@id' => url()->current(),
-        ],
-        'author' => [
-            '@type' => 'Person',
-            'name'  => $article?->author ?: 'Ondřej Kriška',
-        ],
-        'publisher' => [
-            '@type' => 'Organization',
-            'name'  => config('app.name'),
-            'url'   => url('/'),
-        ],
-    ]);
-    $articleJson = json_encode($articleLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 @endphp
 <script type="application/ld+json">
 {!! $breadcrumbJson !!}
-</script>
-<script type="application/ld+json">
-{!! $articleJson !!}
 </script>
 @endpush
 
