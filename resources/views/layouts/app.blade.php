@@ -8,6 +8,9 @@
         $ogImage      = View::hasSection('og_image') ? View::getSection('og_image') : asset_v('img/og/og-default.jpg');
         $ogLocale     = ['cs' => 'cs_CZ', 'en' => 'en_US', 'de' => 'de_DE'][app()->getLocale()] ?? 'cs_CZ';
         $ogAlternates = array_filter(['cs_CZ', 'en_US', 'de_DE'], fn($l) => $l !== $ogLocale);
+        // OND-306: hodnota `robots` je přepsatelná z view (`$robots`), aby šlo
+        // vyřadit konkrétní stránku z indexu. Výchozí chování se nemění.
+        $robotsMeta = $robots ?? 'index, follow';
     @endphp
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,7 +38,7 @@
     <meta name="twitter:title"       content="{!! $metaTitle !!}">
     <meta name="twitter:description" content="{!! $metaDesc !!}">
     <meta name="twitter:image"       content="{{ $ogImage }}">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="{{ $robotsMeta }}">
     @php
         // OND-162 F4: canonical pro home musí mít trailing slash (web serveruje
         // `/` a `/en/`), aby seděla s hreflang URL z lroute('home', ...).

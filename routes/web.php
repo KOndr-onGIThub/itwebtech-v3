@@ -44,6 +44,12 @@ Route::middleware(SetLocale::class)->group(function () use ($defaultLocale) {
     Route::get($s['projects'] . '/{url}', [PageController::class, 'project'])->name("{$defaultLocale}.project");
     Route::get($s['blog'],     [PageController::class, 'blog'])->name("{$defaultLocale}.blog");
     Route::get($s['blog'] . '/{slug}', [PageController::class, 'article'])->name("{$defaultLocale}.article");
+
+    // OND-306 (dočasné lešení, smazat s OND-305): původní homepage na
+    // podstránce, aby šlo starou a novou verzi porovnat vedle sebe.
+    // Slug schválně NENÍ v config/slugs.php — z něj se generuje sitemapa
+    // i fallback /{slug} routa a tahle interní stránka tam nepatří.
+    Route::get('puvodni-homepage', [PageController::class, 'homeLegacy'])->name("{$defaultLocale}.home_legacy");
 });
 
 // Non-default locales — keep /{locale}/... prefix
@@ -63,6 +69,9 @@ foreach (array_slice($locales, 1) as $locale) {
             Route::get($s['projects'] . '/{url}', [PageController::class, 'project'])->name("{$locale}.project");
             Route::get($s['blog'],     [PageController::class, 'blog'])->name("{$locale}.blog");
             Route::get($s['blog'] . '/{slug}', [PageController::class, 'article'])->name("{$locale}.article");
+
+            // OND-306 (dočasné lešení, smazat s OND-305) — viz komentář výš.
+            Route::get('puvodni-homepage', [PageController::class, 'homeLegacy'])->name("{$locale}.home_legacy");
         });
 }
 

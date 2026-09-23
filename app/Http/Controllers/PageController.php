@@ -31,6 +31,46 @@ class PageController extends Controller
         return view('pages.home', compact('featuredHomeProjects'));
     }
 
+    /**
+     * OND-306: původní homepage odklopená na `/puvodni-homepage`.
+     *
+     * DOČASNÉ LEŠENÍ pro přestavbu domovské stránky (OND-305) — Ondřej
+     * porovnává starou a novou verzi ve dvou záložkách. Data se schválně
+     * kopírují z home() a nesdílí se přes společnou metodu: až se lešení
+     * bude mazat, má to být jeden smazaný blok, ne refaktor.
+     *
+     * Stránka je vyřazená z indexu (`$robots`) a není v sitemapě — slug
+     * není v config/slugs.php, ze kterého se sitemapa generuje.
+     */
+    public function homeLegacy()
+    {
+        $featuredHomeProjects = collect();
+
+        if (config('site.features.show_portfolio_section')) {
+            $slugs = ['pitarena', 'barana', 'nove-interiery'];
+
+            $featuredHomeProjects = PortfolioProject::published()
+                ->whereIn('slug', $slugs)
+                ->with(['translations', 'screenshots'])
+                ->get()
+                ->sortBy(fn ($p) => array_search($p->slug, $slugs, true))
+                ->values();
+        }
+
+        // Layout staví canonical i hreflang z current_page() přes lroute().
+        // Pro `home_legacy` routy existují ve všech třech jazycích, ale
+        // předáváme je explicitně, aby canonical nikdy neukázal na `/`.
+        $hreflangs = [
+            'cs' => route('cs.home_legacy'),
+            'en' => route('en.home_legacy'),
+            'de' => route('de.home_legacy'),
+        ];
+
+        $robots = 'noindex, nofollow';
+
+        return view('pages.home-legacy', compact('featuredHomeProjects', 'hreflangs', 'robots'));
+    }
+
     public function about()
     {
         return view('pages.about');
