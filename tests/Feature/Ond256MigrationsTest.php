@@ -24,11 +24,23 @@ class Ond256MigrationsTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** Opravy z bodu 9: slug => [pole, typo, správně]. */
+    /**
+     * Opravy z bodu 9: slug => [pole, typo, správně].
+     *
+     * Migrace jich má šest, tady je jich pět. Chybí `josefopa.challenge`
+     * („visačku" → „vizitku"): vlna 2 (OND-267, redline OND-261 položka jo-1)
+     * tu větu nahradila celou — místo „Klient potřeboval vizitku stavební
+     * firmy, která bude působit…" tam dnes stojí „Klient potřeboval, aby jeho
+     * stavební firma v Německu působila…". Slovo „vizitku" v tom poli už není,
+     * takže ho fixture nemá jak vrátit na „visačku" a není co testovat.
+     *
+     * Záměrně se tím **nemění migrace ani data** — migrace 2026_09_22_110000
+     * na produkci proběhla ještě nad starým zněním a je podmíněná, takže dnes
+     * je její šestá položka trvale no-op. Zdrojem pravdy je redline, ne test.
+     */
     private const TYPO_FIXES = [
         'clanek-motorkari-cz' => ['result', 'motopotálu', 'motoportálu'],
         'barana'              => ['description', 'Postavil jsem premiové', 'Postavil jsem prémiové'],
-        'josefopa'            => ['challenge', 'visačku stavební firmy', 'vizitku stavební firmy'],
         'frl-creator'         => ['challenge', 'chybovo a se zbytečnou', 'chybově a se zbytečnou'],
         'choccoboard'         => ['solution', 'se k ní dostaneš odkudkoli', 'se k ní dostanete odkudkoli'],
         'nove-interiery'      => ['result', 'si zákazníci dopředu vědomí, jak', 'zákazníci dopředu vědí, jak'],
@@ -41,7 +53,7 @@ class Ond256MigrationsTest extends TestCase
     // Bod 9 — textové opravy případovek
     // ------------------------------------------------------------------
 
-    public function test_typo_migration_fixes_all_six_case_study_texts(): void
+    public function test_typo_migration_fixes_the_case_study_texts_it_still_owns(): void
     {
         $this->seed(PortfolioSeeder::class);
         $this->revertToTypos();
@@ -245,7 +257,15 @@ class Ond256MigrationsTest extends TestCase
         return require database_path('migrations/2026_09_22_100000_ond256_reakcni_doba_v_clancich.php');
     }
 
-    /** Vrátí texty do stavu před opravou (YAML už má správné znění). */
+    /**
+     * Vrátí texty do stavu před opravou (YAML už má správné znění).
+     *
+     * Ta první asercí je schválně — je to pojistka proti tichému rozejití
+     * fixture a `docs/portfolio-data.yaml`. Když někdo přepíše text, který
+     * si tenhle test drží, spadne to tady s jasnou hláškou, a ne až na
+     * nesrozumitelné aserci o kus dál. Přesně tohle se stalo u `josefopa`
+     * po vlně 2 (OND-267) — viz komentář u TYPO_FIXES.
+     */
     private function revertToTypos(): void
     {
         foreach (self::TYPO_FIXES as $slug => [$field, $typo, $fixed]) {
