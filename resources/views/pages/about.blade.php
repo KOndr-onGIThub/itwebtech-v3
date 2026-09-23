@@ -42,6 +42,27 @@
             @foreach (__('about.sections') as $section)
                 <h2>{{ $section['heading'] }}</h2>
                 <p>{{ $section['text'] }}</p>
+
+                {{-- OND-295: Ondrův portrét doprostřed vyprávění. Video nahoře
+                     zůstává (OND-202), tohle jen rozbíjí dlouhý blok textu
+                     zhruba v polovině — po „Proč jsem přešel k webům",
+                     před nejdelší sekcí „Jak pracuju". --}}
+                @if ($loop->index === 1)
+                    <figure class="about-portrait">
+                        <picture>
+                            <source srcset="{{ asset_v('img/about/ondrej_kriska_2026_preview.webp') }}" type="image/webp">
+                            <img
+                                src="{{ asset_v('img/about/ondrej_kriska_2026.jpg') }}"
+                                alt="{{ __('about.portrait_alt') }}"
+                                class="about-portrait__img"
+                                loading="lazy"
+                                decoding="async"
+                                width="1080"
+                                height="810"
+                            >
+                        </picture>
+                    </figure>
+                @endif
             @endforeach
         </article>
     </div>

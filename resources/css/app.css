@@ -1983,6 +1983,33 @@
         width: 100%;
     }
 
+    /* ── About page: portrét uvnitř vyprávění (OND-295) ──
+       Sedí v textovém sloupci .prose-content (760 px), nevybíhá z něj.
+       Odsazení je větší než mezera mezi odstavci, aby fotka fungovala
+       jako předěl, a menší než margin-top nadpisu, který po ní následuje. */
+    .about-portrait {
+        margin-block: 2.5rem;
+    }
+    /* Zdroj je 4:3 na šířku. Na úzkém displeji by z něj byl proužek, ve kterém
+       obličej zmizí — proto se tam ořezává na výšku (4:5) a na šířce zůstává
+       3:2. Ořez řeší CSS, v repu leží jeden soubor v plném záběru. */
+    .about-portrait__img {
+        display: block;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4 / 5;
+        object-fit: cover;
+        object-position: center 30%;
+        border-radius: 1.25rem;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+    @media (min-width: 640px) {
+        .about-portrait__img {
+            aspect-ratio: 3 / 2;
+            object-position: center 25%;
+        }
+    }
+
     /* ── Video player ── */
     .about-video {
         position: relative;

@@ -11,7 +11,7 @@ return [
     'heading'    => 'Wer Ihre Website baut',
     'intro'      => 'Mein Name ist Ondřej Kriška. Ich entwickle Websites und Webanwendungen in eigenem Code. Ich arbeite allein und kommuniziere direkt mit dem Kunden. Kein Vertrieb, kein Koordinator zwischen uns.',
 
-    'portrait_alt' => 'Ondřej Kriška',
+    'portrait_alt' => 'Porträt von Ondřej Kriška',
     'video_aria' => 'Video: Ondřej Kriška — wer ich bin und wie ich Websites baue',
 
     'sections' => [
