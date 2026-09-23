@@ -1039,18 +1039,18 @@ projects:
           cs: "Realiťačky v Akci – sekce 2"
           en: "Realiťačky v Akci – section 2"
           de: "Realiťačky v Akci – Abschnitt 2"
-      - url: "https://itwebtech.cz/images/projects/realitackyvakci/realitackyvakci_03.webp"
-        type: gallery
-        alt:
-          cs: "Realiťačky v Akci – sekce 3"
-          en: "Realiťačky v Akci – section 3"
-          de: "Realiťačky v Akci – Abschnitt 3"
+      # OND-294 bod 3: `gallery-3` odstraněna. Byla to brandingová nástěnka
+      # s desítkami mikro-textů (archetypy, seznam konkurence, poznámky
+      # k tone of voice) — na stránce nečitelná a působící jako interní
+      # pracovní dokument, ne jako ukázka práce. `path` u `gallery-4` drží
+      # číslování, aby ji seeder neposunul na 3.
       - url: "https://itwebtech.cz/images/projects/realitackyvakci/realitackyvakci_04.webp"
+        path: "projects/realitacky-v-akci/gallery-4.webp"
         type: gallery
         alt:
-          cs: "Realiťačky v Akci – sekce 4"
-          en: "Realiťačky v Akci – section 4"
-          de: "Realiťačky v Akci – Abschnitt 4"
+          cs: "Realiťačky v Akci – správa nabídek nemovitostí v administraci webu"
+          en: "Realiťačky v Akci – property listing management in the site administration"
+          de: "Realiťačky v Akci – Verwaltung der Immobilienangebote im Website-Backend"
       # OND-268 bod 6: `gallery-5` odstraněna. Byl to marketingový vizuál
       # rezervačního a pokladního systému pro fitness („FitnessGym",
       # permanentky, věrnostní body) — k tomuhle projektu nepatří a podle
@@ -1205,9 +1205,9 @@ projects:
       - url: "https://framerusercontent.com/images/Qz1O7nzK3WGd5dLTcedMU3Ihok.png"
         type: gallery
         alt:
-          cs: "Zubní Provázek – sekce 2"
-          en: "Zubní Provázek – section 2"
-          de: "Zubní Provázek – Abschnitt 2"
+          cs: "Zubní Provázek – web ordinace na tabletu, logo a tým v ordinaci"
+          en: "Zubní Provázek – the practice website on a tablet, logo and the team"
+          de: "Zubní Provázek – Praxis-Website auf dem Tablet, Logo und das Team"
       - url: "https://framerusercontent.com/images/WyrWv7O1Lhq9i3sbk9NAq0ZD0WM.png"
         type: gallery
         alt:
@@ -1223,9 +1223,26 @@ projects:
       - url: "https://framerusercontent.com/images/zPHkujYnsVFlKP76UKAVcCXo.png"
         type: gallery
         alt:
-          cs: "Zubní Provázek – sekce 5"
-          en: "Zubní Provázek – section 5"
-          de: "Zubní Provázek – Abschnitt 5"
+          cs: "Zubní Provázek – informace pro pacienty a ordinační doba na notebooku"
+          en: "Zubní Provázek – patient information and opening hours on a laptop"
+          de: "Zubní Provázek – Patienteninformationen und Sprechzeiten auf dem Notebook"
+      # OND-294 bod 7: miniatura karty projektu se dosud brala z prvního
+      # čtvercového snímku, a tím je po výměně hera z OND-263 `hero-1.png` —
+      # tmavý notebook s administrací ordinačních hodin. Jako pozvánka na
+      # redesign webu zubní ordinace to neříká nic, a karta je vidět na
+      # `/projekty` i v „Dalších projektech" po celém webu.
+      # `portfolio_card_thumbnail()` dává přednost `type = 'thumbnail'`,
+      # šablona detailu takové řádky naopak vynechává — proto ukazujeme
+      # na TÝŽ soubor jako `gallery-2` (tablet s logem ordinace a týmem
+      # v ordinaci). Nic nového se nenačítá a galerie zůstane beze změny.
+      # Stejný nástroj jako u HCMS a VAN spedition (OND-268).
+      - url: "https://framerusercontent.com/images/Qz1O7nzK3WGd5dLTcedMU3Ihok.png"
+        path: "projects/zubni-provazek/gallery-2.png"
+        type: thumbnail
+        alt:
+          cs: "Zubní Provázek – web ordinace na tabletu, logo a tým v ordinaci"
+          en: "Zubní Provázek – the practice website on a tablet, logo and the team"
+          de: "Zubní Provázek – Praxis-Website auf dem Tablet, Logo und das Team"
     translations:
       cs:
         title: "Zubní Provázek"
@@ -1353,36 +1370,39 @@ projects:
           cs: "VP Industry – katalog značících laserů na tabletu"
           en: "VP Industry – catalogue of marking lasers on a tablet"
           de: "VP Industry – Katalog der Markierlaser auf einem Tablet"
-      - url: "https://framerusercontent.com/images/kCezUd7rLRv3PzcbPrUQK600N6Y.webp"
-        type: gallery
-        alt:
-          cs: "VP Industry – sekce 1"
-          en: "VP Industry – section 1"
-          de: "VP Industry – Abschnitt 1"
+      # OND-294 bod 6: `gallery-1` odstraněna. Byla to stránka dokumentu
+      # „Analýza konkurence" s legendou ŠPATNĚ/DOBRÉ — textový podklad mezi
+      # ukázkami webu, navíc se jménem klienta a číslem analýzy v hlavičce.
+      # Analýza je popsaná v textu případovky, obrázek k ní nic nepřidával.
+      # `path` u zbylých čtyř je explicitní, aby je seeder nepřečísloval.
       - url: "https://framerusercontent.com/images/uiQvFy0kAI9J0CCdhXPs0PLfEr8.webp"
+        path: "projects/vp-industry/gallery-2.webp"
         type: gallery
         alt:
           cs: "VP Industry – domovská stránka webu pro průmyslové značení"
           en: "VP Industry – homepage of the industrial marking website"
           de: "VP Industry – Startseite der Website für industrielle Kennzeichnung"
       - url: "https://framerusercontent.com/images/w4E0n0ywwDBuq9z8QyDwJTVH9To.webp"
+        path: "projects/vp-industry/gallery-3.webp"
         type: gallery
         alt:
           cs: "VP Industry – sekce 3"
           en: "VP Industry – section 3"
           de: "VP Industry – Abschnitt 3"
       - url: "https://framerusercontent.com/images/X5kDFut5iwyTM7bCs67ea9hMPg.webp"
+        path: "projects/vp-industry/gallery-4.webp"
         type: gallery
         alt:
-          cs: "VP Industry – sekce 4"
-          en: "VP Industry – section 4"
-          de: "VP Industry – Abschnitt 4"
+          cs: "VP Industry – článek o typech značících laserů na tabletu"
+          en: "VP Industry – article on types of marking lasers on a tablet"
+          de: "VP Industry – Artikel über Typen von Markierlasern auf einem Tablet"
       - url: "https://framerusercontent.com/images/YIv52DqTXQ6ZNAMJ1A84kZ6lYQ.webp"
+        path: "projects/vp-industry/gallery-5.webp"
         type: gallery
         alt:
-          cs: "VP Industry – sekce 5"
-          en: "VP Industry – section 5"
-          de: "VP Industry – Abschnitt 5"
+          cs: "VP Industry – články webu na mobilních obrazovkách"
+          en: "VP Industry – the site's articles on mobile screens"
+          de: "VP Industry – Artikel der Website auf Mobilbildschirmen"
     translations:
       cs:
         title: "VP Industry"
@@ -2558,18 +2578,31 @@ projects:
           cs: "Choccoboard – BI dashboard se strategickými výrobními metrikami"
           en: "Choccoboard – BI dashboard with strategic production metrics"
           de: "Choccoboard – BI-Dashboard mit strategischen Produktionsmetriken"
+      # OND-294 bod 1: v obou dashboardech je přes hodnoty v KPI tabulce
+      # a ve sloupci „Tržby" u TOP 10 položek jednolitá šedá plocha. Je to
+      # anonymizace klientových čísel, ale bez popisku se čte jako
+      # nedonačtený obsah. Popisek to pojmenuje; do obrázků nesaháme,
+      # jsou to podklady klienta.
       - url: "https://itwebtech.cz/images/projects/choccoboard/choccoboard_01.webp"
         type: gallery
         alt:
-          cs: "Choccoboard — strategický dashboard – sekce 1"
-          en: "Choccoboard — strategic dashboard – section 1"
-          de: "Choccoboard — strategisches Dashboard – Abschnitt 1"
+          cs: "Choccoboard – přehledová obrazovka s KPI tabulkou a TOP 10 položek na notebooku"
+          en: "Choccoboard – overview screen with the KPI table and top 10 items on a laptop"
+          de: "Choccoboard – Übersichtsbildschirm mit KPI-Tabelle und Top-10-Positionen auf dem Notebook"
+        caption:
+          cs: "Konkrétní tržby jsou na přání klienta zakryté."
+          en: "The actual revenue figures are masked at the client's request."
+          de: "Die konkreten Umsatzzahlen sind auf Wunsch des Kunden ausgeblendet."
       - url: "https://itwebtech.cz/images/projects/choccoboard/choccoboard_02.webp"
         type: gallery
         alt:
-          cs: "Choccoboard — strategický dashboard – sekce 2"
-          en: "Choccoboard — strategic dashboard – section 2"
-          de: "Choccoboard — strategisches Dashboard – Abschnitt 2"
+          cs: "Choccoboard – tentýž přehled na tabletu a na mobilu"
+          en: "Choccoboard – the same overview on a tablet and on a phone"
+          de: "Choccoboard – dieselbe Übersicht auf Tablet und Smartphone"
+        caption:
+          cs: "Konkrétní tržby jsou na přání klienta zakryté."
+          en: "The actual revenue figures are masked at the client's request."
+          de: "Die konkreten Umsatzzahlen sind auf Wunsch des Kunden ausgeblendet."
       - url: "https://itwebtech.cz/images/projects/choccoboard/choccoboard_03.webp"
         type: gallery
         alt:
@@ -2856,13 +2889,22 @@ projects:
           cs: "Excel Tools (VBA) – sekce 4"
           en: "Excel Tools (VBA) – section 4"
           de: "Excel Tools (VBA) – Abschnitt 4"
+      # OND-294 bod 2: přes grafy Head count a Absence jsou nalepené černé
+      # bloky. Board u OND-268 rozhodl interní podklady v galerii nechat,
+      # o podobě anonymizačních masek nerozhodoval — obrázek proto zůstává
+      # a popisek jen řekne, že černá plocha je začerněné jméno a číslo,
+      # ne vada snímku.
       - url: "https://itwebtech.cz/images/projects/excel/report.jpg"
         path: "projects/excel-tools/gallery-5.jpg"
         type: gallery
         alt:
-          cs: "Excel Tools (VBA) – sekce 5"
-          en: "Excel Tools (VBA) – section 5"
-          de: "Excel Tools (VBA) – Abschnitt 5"
+          cs: "Excel Tools (VBA) – denní logistický report s grafy Head count a Absence"
+          en: "Excel Tools (VBA) – daily logistics report with head count and absence charts"
+          de: "Excel Tools (VBA) – täglicher Logistikbericht mit Head-count- und Absenz-Diagrammen"
+        caption:
+          cs: "Jména a čísla v grafech jsou začerněná — jde o interní provozní data klienta."
+          en: "Names and figures in the charts are redacted — this is the client's internal operational data."
+          de: "Namen und Zahlen in den Diagrammen sind geschwärzt — es sind interne Betriebsdaten des Kunden."
     translations:
       cs:
         title: "Excel Tools (VBA)"
