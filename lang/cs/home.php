@@ -361,12 +361,17 @@ return [
 
     // OND-201 (nález 5.8): jediná závěrečná výzva homepage. Text ze schválené
     // sekce 9 dokumentu homepage-texty (OND-186).
+    // OND-309: citace u formuláře byla Jaskmanická — stejná věta ale stojí
+    // o obrazovku výš jako její recenze v sekci „Co říkají klienti"
+    // (řada referencí je rozhodnutí z OND-308 a zůstává). Nahrazená
+    // zkráceným citátem Ing. Iva Štěpánka z `lang/cs/testimonials.php`:
+    // u formuláře stojí člověk, který typicky už nějakého dodavatele má.
     'inline_form' => [
         'eyebrow'         => 'Poptávka',
         'heading'         => 'Napište mi, co potřebujete',
         'description'     => 'Napište ve zkratce, co řešíte. Ozvu se do 24 hodin v pracovní dny a nezávazně probereme, co dává smysl. Když zjistím, že na sebe nepasujeme, řeknu vám to rovnou.',
-        'quote_text'      => 'Díky individuálnímu přístupu, flexibilitě a profesionalitě odpovídá výsledek našim představám.',
-        'quote_author'    => 'Hana Jaskmanická, výkonná ředitelka, VP Industry',
+        'quote_text'      => 'Jedná rychle a efektivně. Byl to pro mě velký rozdíl mezi předchozím IT dodavatelem.',
+        'quote_author'    => 'Ing. Ivo Štěpánek, J. K. fire and safety consulting',
         'name'            => 'Jméno a příjmení',
         'email'           => 'E-mail',
         'phone'           => 'Telefon (nepovinný)',
