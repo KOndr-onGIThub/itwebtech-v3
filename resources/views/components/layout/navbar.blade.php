@@ -11,6 +11,11 @@
         ['route' => 'contact',  'label' => __('layout.nav.contact')],
     ];
     $langLabels = ['cs' => 'CZ', 'en' => 'EN', 'de' => 'DE'];
+    // OND-303: CTA „Domluvit konzultaci" vede vždy na formulář poptávky —
+    // na homepage kotvou v rámci stránky, jinde na /kontakt.
+    $ctaHref = $currentPage === 'home'
+        ? '#' . __('home.anchors.poptavka')
+        : lroute('contact');
 @endphp
 
 <div x-data="{ open: false }">
@@ -54,14 +59,13 @@
 
                 <x-phone-cta class="navbar__phone" />
 
-                <button
-                    type="button"
+                <a
+                    href="{{ $ctaHref }}"
                     class="btn btn-primary navbar__cta"
-                    @click="$dispatch('open-consultation-modal')"
                     data-analytics="sticky_cta_click"
                 >
                     {{ __('home.sticky.cta') }}
-                </button>
+                </a>
 
                 <button class="navbar__hamburger"
                         @click="open = true"
@@ -138,14 +142,14 @@
             @endforeach
 
             <div class="drawer__cta">
-                <button
-                    type="button"
+                <a
+                    href="{{ $ctaHref }}"
                     class="btn btn-primary"
-                    @click="open = false; $dispatch('open-consultation-modal')"
+                    @click="open = false"
                     data-analytics="sticky_cta_click"
                 >
                     {{ __('home.sticky.cta') }}
-                </button>
+                </a>
                 <x-phone-cta class="drawer__phone" />
             </div>
         </nav>

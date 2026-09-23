@@ -25,20 +25,12 @@ return [
         'subline'         => 'Ich bin Ondřej Kriška, erfahrener Entwickler. Sie arbeiten direkt mit mir — ohne Agentur, ohne Zwischenhändler. Ich baue Websites so, dass sie jahrelang laufen und Sie nicht mit Wartung aufhalten.',
         'note'            => 'Ich melde mich innerhalb von 24 Stunden an Arbeitstagen. Unverbindlich besprechen wir, was sinnvoll ist.',
 
-        // Backwards compat (consultation modal, fallback render).
+        // Backwards compat (fallback render).
         'eyebrow'       => 'Maßgeschneiderte Websites & Webanwendungen',
         'heading'       => 'Websites und Anwendungen nach Maß. Ich baue sie selbst, mit eigenem Code.',
         'cta_primary'   => 'Schreiben Sie mir, was Sie brauchen',
         'cta_secondary' => '30-Min-Beratung vereinbaren',
         'phone_label'   => 'oder anrufen:',
-    ],
-
-    'modal' => [
-        'title'             => 'Lassen Sie uns sprechen',
-        'subtitle'          => 'Kostenlose Beratung — unverbindlich, ohne Registrierung.',
-        'calendly_btn'      => 'Beratungstermin auswählen',
-        'cta_note'          => 'Kostenlos. Unverbindlich.',
-        'play_btn'          => 'Video abspielen',
     ],
 
     'anchors' => [

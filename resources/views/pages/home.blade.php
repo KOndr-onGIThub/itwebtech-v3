@@ -455,25 +455,13 @@
             @endforeach
         </ol>
 
-        {{-- Rezervace: přímý odkaz místo vendor widgetu — Reservanto
-             button si nese vlastní žluté barvy a rozbíjel by podpis;
-             direct_url je stejný cíl (viz config/site.php, OND-123). --}}
+        {{-- OND-303: rezervační systém je pryč, CTA vede na formulář poptávky. --}}
         <div class="pd-steps__cta">
             <p class="pd-steps__cta-intro">{{ __('home.how_i_work.cta_intro') }}</p>
-            @php
-                $booking = config('site.booking');
-            @endphp
-            @if (($booking['enabled'] ?? false) && !empty($booking['direct_url']))
-                <a href="{{ $booking['direct_url'] }}" target="_blank" rel="noopener" class="pd-cta" data-analytics="final_cta_secondary_click">
-                    {{ __('home.how_i_work.cta_label') }}
-                    <x-icon.arrow-right class="w-4 h-4 shrink-0 pd-cta__arrow" />
-                </a>
-            @else
-                <a href="#{{ __('home.anchors.poptavka') }}" class="pd-cta">
-                    {{ __('home.how_i_work.cta_label') }}
-                    <x-icon.arrow-right class="w-4 h-4 shrink-0 pd-cta__arrow" />
-                </a>
-            @endif
+            <a href="#{{ __('home.anchors.poptavka') }}" class="pd-cta" data-analytics="final_cta_secondary_click">
+                {{ __('home.how_i_work.cta_label') }}
+                <x-icon.arrow-right class="w-4 h-4 shrink-0 pd-cta__arrow" />
+            </a>
         </div>
     </div>
 </section>
