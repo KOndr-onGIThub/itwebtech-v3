@@ -2641,12 +2641,16 @@
         overflow: hidden;
         border: 1.5px solid var(--border-subtle);
     }
+    /* OND-297: `center top` bylo laděné na starou fotku 1000×1250 na výšku.
+       Nový zdroj (OND-295) je 1080×810 na šířku, takže se v boxu 4:5 ořezává
+       do stran a na výšku sedí přesně — stejně jako .about-portrait na úzkém
+       displeji. Držím proto tentýž zápis jako tam. */
     .contact-info__photo {
         width: 100%;
         height: auto;
         display: block;
         object-fit: cover;
-        object-position: center top;
+        object-position: center 30%;
         aspect-ratio: 4/5;
     }
 
@@ -3957,13 +3961,27 @@
             gap: 1.5rem;
         }
     }
+    /* OND-297: kolečko je jen rámeček s ořezem, samotná fotka uvnitř je větší.
+       Zdroj (OND-295) je 1080×810 na šířku a Ondřej na něm zabírá zhruba
+       čtvrtinu plochy; nasazený 1:1 by v 96px kolečku zbyl obličej ~32 px
+       v horní polovině. Proto se fotka vykreslí na 200×150 a posune doleva
+       tak, aby hlava seděla uprostřed kolečka. Žádná další varianta souboru
+       — sdílí se tentýž JPEG jako /o-mne a /kontakt. */
     .article-author__photo {
+        display: block;
         width: 96px;
         height: 96px;
         flex-shrink: 0;
         border-radius: 9999px;
-        object-fit: cover;
+        overflow: hidden;
         border: 1px solid var(--border-subtle);
+    }
+    .article-author__photo-img {
+        display: block;
+        width: 200px;
+        height: 150px;
+        max-width: none;
+        margin-left: -45px;
     }
     .article-author__content {
         flex: 1;
