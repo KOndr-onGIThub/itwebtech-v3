@@ -16,7 +16,7 @@ return [
         'page_mark_label' => 'OCHRANA OSOBNÍCH ÚDAJŮ',
         'upline'          => 'Stručně, srozumitelně, GDPR.',
         'heading_html'    => 'Vaše data jsou <em>vaše</em>.',
-        'subline'         => 'Co sbíráme, proč to sbíráme a jak to ochráním. Bez právničtiny.',
+        'subline'         => 'Co sbírám, proč to sbírám a jak to ochráním. Bez právničtiny.',
     ],
 
     'tldr' => [
