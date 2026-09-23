@@ -221,62 +221,6 @@
     margin: 0 0 var(--space-8);
 }
 
-/* --- Živé weby ---------------------------------------------- */
-.pd-works { display: grid; gap: var(--space-7); }
-@media (min-width: 768px) { .pd-works { grid-template-columns: repeat(3, 1fr); gap: var(--space-6); } }
-.pd-work { text-decoration: none; display: block; }
-.pd-work__plate {
-    display: block;
-    border: 1px solid var(--color-border-soft);
-    overflow: hidden;
-    transition: border-color var(--duration-micro) var(--ease-out),
-                transform var(--duration-macro) var(--ease-out);
-}
-.pd-work__plate img { display: block; width: 100%; height: auto; }
-.pd-work:hover .pd-work__plate,
-.pd-work:focus-visible .pd-work__plate {
-    border-color: var(--pd-accent);
-    transform: translateY(-3px);
-}
-.pd-work__row {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: var(--space-3);
-    margin-top: var(--space-4);
-}
-.pd-work__domain {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: var(--text-h4);
-    letter-spacing: var(--tracking-tight);
-    color: var(--color-fg-primary);
-    margin: 0;
-}
-.pd-work__num {
-    font-family: var(--font-display);
-    font-weight: 200;
-    font-variation-settings: 'wght' 200;
-    font-size: var(--text-body);
-    color: var(--color-fg-faint);
-}
-.pd-work__desc {
-    font-family: var(--font-body);
-    font-size: var(--text-body-sm);
-    color: var(--color-fg-muted);
-    margin: 2px 0 var(--space-3);
-}
-.pd-work__visit {
-    font-family: var(--font-body);
-    font-size: var(--text-body-sm);
-    font-weight: 600;
-    color: var(--color-fg-primary);
-    border-bottom: 1px solid var(--pd-accent);
-    padding-bottom: 2px;
-    transition: color var(--duration-micro) var(--ease-out);
-}
-.pd-work:hover .pd-work__visit { color: var(--pd-accent); }
-
 /* --- Social pás --------------------------------------------- */
 .pd-strip {
     border-top: 1px solid var(--color-border-soft);
@@ -316,6 +260,15 @@
     color: var(--color-fg-muted);
     margin: 0 0 var(--space-7);
 }
+/* OND-269: dvě věty, které zbyly ze sekce „Generátor versus váš byznys",
+   stojí pod mřížkou problémů. Vlasová linka je oddělí, ať nevypadají jako
+   třetí položka mřížky. */
+.pd-avoid--second {
+    margin-top: var(--space-9);
+    padding-top: var(--space-7);
+    border-top: 1px solid var(--color-border-soft);
+}
+.pd-avoid--second + .pd-avoid-sub { margin-bottom: 0; max-width: 72ch; }
 .pd-issues { display: grid; gap: var(--space-7); }
 @media (min-width: 1024px) { .pd-issues { grid-template-columns: 1fr 1fr; gap: var(--space-9); } }
 .pd-issue { display: grid; grid-template-columns: 56px 1fr; gap: var(--space-4); }
@@ -581,6 +534,31 @@
     transition: color var(--duration-micro) var(--ease-out);
 }
 .pd-case__cta:hover { color: var(--pd-accent); }
+/* OND-269: karta nese dva odkazy — na případovku a na živý web. Druhý
+   odkaz je tišší (bez acid podtržení), aby první zůstal hlavní akcí. */
+.pd-case__links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-3) var(--space-6);
+    margin: 0;
+}
+.pd-case__live {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    font-weight: 600;
+    color: var(--color-fg-muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-border-soft);
+    padding-bottom: 2px;
+    transition: color var(--duration-micro) var(--ease-out),
+                border-color var(--duration-micro) var(--ease-out);
+}
+.pd-case__live:hover,
+.pd-case__live:focus-visible {
+    color: var(--color-fg-primary);
+    border-bottom-color: var(--pd-accent);
+}
 .pd-more { margin: var(--space-8) 0 0; }
 .pd-more__link {
     font-family: var(--font-body);
@@ -926,12 +904,10 @@
 @media (prefers-reduced-motion: reduce) {
     .pd-hero__photo,
     .pd-cta,
-    .pd-work__plate,
     .pd-case__visual,
     .pd-faq__mark::before,
     .pd-faq__mark::after { transition: none; }
     .pd-cta:hover,
-    .pd-work:hover .pd-work__plate { transform: none; }
 }
 
 /* ============================================================
@@ -972,79 +948,24 @@
     .pd-clients__item { transition: none; }
 }
 
-/* --- Generátor versus váš byznys ---------------------------- */
-.pd-versus {
-    display: grid;
-    gap: var(--space-7);
-    margin-top: var(--space-7);
+/* --- Odkud pocházejí principy ------------------------------- */
+/* OND-269: blok už nestojí ve vlastní sekci, ale uvnitř „Proč já" pod
+   videem a mřížkou výhod. Odděluje ho proto vlasová linka a vlastní
+   mezisoučtový titulek (h3), ne hlava sekce. */
+.pd-origin--nested {
+    margin-top: var(--space-9);
+    padding-top: var(--space-8);
     border-top: 1px solid var(--color-border-soft);
-    padding-top: var(--space-7);
 }
-@media (min-width: 900px) {
-    .pd-versus {
-        grid-template-columns: 1fr 1fr;
-        gap: 0;
-    }
-    /* Rozdíl drží jedna vlasová linka mezi sloupci, ne rámečky. */
-    .pd-versus__col + .pd-versus__col {
-        border-left: 1px solid var(--color-border-soft);
-        padding-left: var(--space-7);
-        margin-left: var(--space-7);
-    }
-}
-.pd-versus__label {
-    font-family: var(--font-body);
-    font-size: var(--text-eyebrow);
-    letter-spacing: var(--tracking-eyebrow);
-    text-transform: uppercase;
-    color: var(--color-fg-faint);
-    margin: 0 0 var(--space-3);
-}
-.pd-versus__col--mine .pd-versus__label { color: var(--pd-accent); }
-.pd-versus__outcome {
+.pd-origin__title {
+    grid-column: 1 / -1;
     font-family: var(--font-display);
-    font-weight: 600;
-    font-size: var(--text-h4);
-    line-height: var(--leading-snug);
-    color: var(--color-fg-muted);
-    margin: 0 0 var(--space-5);
-    max-width: 30ch;
-}
-.pd-versus__col--mine .pd-versus__outcome { color: var(--color-fg-primary); }
-.pd-versus__list {
-    list-style: none;
-    margin: 0 0 var(--space-5);
-    padding: 0;
-    font-family: var(--font-body);
-    font-size: var(--text-body);
-    line-height: var(--leading-body);
-    color: var(--color-fg-muted);
-}
-.pd-versus__list li {
-    padding: var(--space-3) 0;
-    border-bottom: 1px solid var(--color-border-soft);
-}
-.pd-versus__list li:last-child { border-bottom: 0; }
-.pd-versus__col--mine .pd-versus__list li { color: var(--color-fg-primary); }
-.pd-versus__note {
-    font-family: var(--font-body);
-    font-size: var(--text-body-sm);
-    line-height: var(--leading-relaxed);
-    color: var(--color-fg-faint);
+    font-weight: 700;
+    font-size: var(--text-h3);
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-fg-primary);
     margin: 0;
 }
-.pd-versus__closing {
-    font-family: var(--font-body);
-    font-size: var(--text-body-lg);
-    line-height: var(--leading-body);
-    color: var(--color-fg-muted);
-    max-width: 76ch;
-    margin: var(--space-7) 0 0;
-    border-top: 1px solid var(--color-border-soft);
-    padding-top: var(--space-5);
-}
-
-/* --- Odkud pocházejí principy ------------------------------- */
 .pd-origin {
     display: grid;
     gap: var(--space-7);
@@ -1077,54 +998,6 @@
     font-size: var(--text-body-sm);
     line-height: var(--leading-relaxed);
     color: var(--color-fg-faint);
-}
-
-/* --- Záruky ------------------------------------------------- */
-.pd-promise {
-    display: grid;
-    gap: 0;
-    margin-top: var(--space-6);
-    border-top: 1px solid var(--color-border-soft);
-}
-@media (min-width: 900px) {
-    .pd-promise { grid-template-columns: repeat(2, 1fr); }
-    .pd-promise__item + .pd-promise__item {
-        border-left: 1px solid var(--color-border-soft);
-        padding-left: var(--space-7);
-    }
-}
-.pd-promise__item {
-    display: grid;
-    grid-template-columns: 3.5rem 1fr;
-    gap: var(--space-4);
-    padding-block: var(--space-6);
-    border-bottom: 1px solid var(--color-border-soft);
-}
-@media (min-width: 900px) {
-    .pd-promise__item { border-bottom: 0; }
-}
-.pd-promise__num {
-    font-family: var(--font-display);
-    font-weight: 300;
-    font-size: var(--text-h3);
-    line-height: 1;
-    color: var(--pd-accent);
-}
-.pd-promise__item h3 {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: var(--text-h4);
-    line-height: var(--leading-snug);
-    color: var(--color-fg-primary);
-    margin: 0 0 var(--space-3);
-}
-.pd-promise__item p {
-    font-family: var(--font-body);
-    font-size: var(--text-body);
-    line-height: var(--leading-body);
-    color: var(--color-fg-muted);
-    margin: 0;
-    max-width: 52ch;
 }
 
 /* --- Reference: zdroj hodnocení jako datový štítek ---------- */

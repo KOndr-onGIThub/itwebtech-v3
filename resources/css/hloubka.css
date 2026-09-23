@@ -16,6 +16,17 @@
    Kdo přidává novou sekci na homepage, přečísluje nth-child v §A. Proto
    se na podstránkách nth-child nepoužívá vůbec: tam by pořadí ukazovalo
    jinam a vzniklo by nasvícení, které nikdo nezadal.
+
+   A přesně to se stalo. OND-256 sundal z homepage řadu log klientů a
+   nth-child v §A nikdo nepřečísloval — od sekce „Jak weby stavím" dál
+   mířilo všechno o jednu sekci vedle. Ověřeno 23. 9. na produkci:
+   `.pd-issue__num` měl `--pdd-spec` prázdný (pravidlo nesedělo na nic)
+   a „můj" sloupec v sekci versus měl výchozí tmavou linku místo světlé.
+   OND-269 mění pořadí sekcí znovu a při té příležitosti to narovnává.
+   Aktuální pořadí (1–12): hero, projekty, social pás, jak weby stavím,
+   co stavím, ceník, proč já, pod kapotou, postup, reference, FAQ,
+   poptávka. Sekce s vlastním `id` (ceník, postup, reference, FAQ,
+   poptávka) se adresují přes id a přečíslování se jich netýká.
    --------------------------------------------------------------------------
    TŘI VRSTVY, TŘI RŮZNÉ ÚKOLY — schválně se nepřekrývají:
 
@@ -70,21 +81,17 @@
      ------------------------------   -----  --------  -----------------------
      hero: podtržení v H1 → CTA         ●        –      jediné slovo, které
                                                         stránka prodává → CTA
-     02  .pd-work__plate ×3             ●        ●      „tyhle weby BĚŽÍ"
-     03  .pd-issue__num (přejezd)       ●        –      problém se zažehne
-     04  svislá linka mezi službami     ●        –      jiný směr: shora dolů
-     05  .pd-case__visual               ●        ●      důkaz, horní hrana
+     02  .pd-case__visual               ●        ●      důkaz, horní hrana
+     04  .pd-issue__num (přejezd)       ●        –      problém se zažehne
+     05  svislá linka mezi službami     ●        –      jiný směr: shora dolů
      06  .pd-price__col--featured       ●        –      uzavřená smyčka
      07  .pd-why__video                 –        ●      jen kontaktní stín
      08  svislá linka mezi fakty        ●        –      zdola nahoru — v téhle
                                                         sekci svítí lampa zespod
      09  .pd-step ×4                    ●        –      proces jde s člověkem
-     11  .pd-versus__col--mine          ●        –      argument sekce, levá
-                                                        hrana „mého" sloupce
-     13  .pd-promise__num (přejezd)     ●        –      slib se rozsvítí
-     14  .pd-faq__q (při rozkliknutí)   ●        –      spouští člověk, ne scroll
-     15  .pd-form__panel                ●        ●      cíl celé cesty
-     15  .pd-field (při fokusu)         ●        –      proud teče do políčka
+     10  .pd-faq__q (při rozkliknutí)   ●        –      spouští člověk, ne scroll
+     11  .pd-form__panel                ●        ●      cíl celé cesty
+     11  .pd-field (při fokusu)         ●        –      proud teče do políčka
 
    CO SCHVÁLNĚ NIC NEDOSTÁVÁ — a to je taky rozhodnutí
      - dělítka sekcí (`.pd-section` border-top) — žádný přejezd. Tohle byla
@@ -230,7 +237,6 @@
    ========================================================================== */
 
 /* -- vodorovný, jádro uprostřed 15px pásu -------------------------------- */
-.pd--depth .pd-work__plate::before,
 .pd--depth .pd-case__visual::before,
 .pd--depth .pd-step::before,
 .pd--depth .pd-faq__q::after,
@@ -246,8 +252,7 @@
 }
 
 /* -- ÚNIK ZE SNÍMKU -------------------------------------------------------
-   .pd-work__plate a .pd-case__visual mají overflow: hidden, aby uvnitř
-   držel screenshot. Náboj se tím ale celý zavřel DOVNITŘ obrázku — a to byl
+   .pd-case__visual má overflow: hidden, aby uvnitř držel screenshot. Náboj se tím ale celý zavřel DOVNITŘ obrázku — a to byl
    přesně jeden z těch případů, kdy „to není vidět": záře s alfou 0,22 nad
    světlým screenshotem prostě zanikne. Na tmavém pozadí sekce je vidět
    okamžitě.
@@ -256,7 +261,6 @@
    ale obrázek se pořád ořezává na rámeček. Prohlížeč, který clip-margin
    neumí, spadne zpět na dřívější chování (náboj uvnitř) — nic se nerozbije,
    jen to bude míň vidět. */
-.pd--depth .pd-work__plate,
 .pd--depth .pd-case__visual {
     overflow: clip;
     overflow-clip-margin: 20px;
@@ -264,8 +268,7 @@
 
 /* -- svislý, jádro uprostřed 15px pásu ----------------------------------- */
 .pd--depth .pd-service + .pd-service::after,
-.pd--depth .pd-hood__fact + .pd-hood__fact::after,
-.pd--depth .pd-versus__col--mine::after {
+.pd--depth .pd-hood__fact + .pd-hood__fact::after {
     content: "";
     position: absolute;
     width: var(--pdd-bloom);
@@ -402,15 +405,13 @@
    číslice je ve stínu).
 
    Dvě různé rodiny číslic, každá dostane specular ve své vlastní barvě:
-     (a) acidové — .pd-issue__num, .pd-service__num, .pd-step__num,
-         .pd-promise__num
-     (b) tiché šedé — .pd-work__num, .pd-case__num, .pd-testi__num, .pd-why__num
+     (a) acidové — .pd-issue__num, .pd-service__num, .pd-step__num
+     (b) tiché šedé — .pd-case__num, .pd-testi__num, .pd-why__num
    Přebarvit (b) na acid by přidalo barvu tam, kde podle gramatiky webu
    být nemá. */
 .pd--depth .pd-issue__num,
 .pd--depth .pd-step__num,
-.pd--depth .pd-service__num,
-.pd--depth .pd-promise__num {
+.pd--depth .pd-service__num {
     background-image: var(--pdd-spec,
         linear-gradient(100deg,
             #e6ff70 0%,
@@ -424,7 +425,6 @@
 
 /* Tiché šedé ordinály: specular jen přisvětlí náběžnou hranu k #9B9AA0,
    odvrácená strana zůstává na původním #5C5C63. Kontrast tím roste, ne klesá. */
-.pd--depth .pd-work__num,
 .pd--depth .pd-case__num,
 .pd--depth .pd-testi__num,
 .pd--depth .pd-why__num {
@@ -459,57 +459,28 @@
             rgba(255, 255, 255, 0) 76%);
 }
 
-/* --- 02 WEBY, KTERÉ BĚŽÍ V PRAXI — světlo shora, kolmo --------------------
-   Tři dlaždice se screenshoty mají působit jako vzorky položené na stole.
-   Proto je nasvícený pruh plochy právě v pásu, kde dlaždice leží — a ony
-   do něj vrhají kontaktní stín (vrstva C). Bez nasvícené plochy by stín
-   na černé nebyl vidět. */
+/* --- 02 WEBY, KTERÉ BĚŽÍ V PRAXI — světlo zprava shora --------------------
+   Případovky střídají stranu vizuálu (sudé mají order:2). Světlo zprava dá
+   každému vizuálu jinou roli — jednou je u zdroje, jednou dál — a střídání
+   layoutu tím dostane fyzikální důvod. */
 .pd--depth-home > section:nth-child(2) {
     --pdd-edge: linear-gradient(90deg,
-        rgba(242, 240, 234, 0.02) 0%,
-        rgba(242, 240, 234, 0.30) 50%,
-        rgba(242, 240, 234, 0.02) 100%);
+        rgba(242, 240, 234, 0) 0%,
+        rgba(242, 240, 234, 0.06) 44%,
+        rgba(242, 240, 234, 0.28) 82%,
+        rgba(242, 240, 234, 0.03) 100%);
     --pdd-wash:
-        radial-gradient(86% 44% at 50% -6%,
-            rgba(255, 255, 255, 0.05) 0%,
-            rgba(255, 255, 255, 0.012) 52%,
-            rgba(255, 255, 255, 0) 80%),
-        radial-gradient(96% 38% at 50% 50%,
+        radial-gradient(72% 74% at 84% 0%,
             rgba(255, 255, 255, 0.046) 0%,
-            rgba(255, 255, 255, 0.012) 54%,
+            rgba(255, 255, 255, 0.012) 48%,
             rgba(255, 255, 255, 0) 78%);
-}
-
-/* --- STRIP (hodnocení) — světlo odchází doleva ----------------------------
-   Úzký proužek mezi dvěma sekcemi. Nesmí na sebe strhnout pozornost, ale má
-   ukázat, že zdroj putuje — odlesk je proto mimo osu. */
-.pd--depth > .pd-strip {
-    --pdd-edge: linear-gradient(90deg,
-        rgba(242, 240, 234, 0.20) 0%,
-        rgba(242, 240, 234, 0.10) 34%,
-        rgba(242, 240, 234, 0.015) 72%,
-        rgba(242, 240, 234, 0) 100%);
-    --pdd-wash:
-        radial-gradient(60% 200% at 16% 50%,
-            rgba(255, 255, 255, 0.03) 0%,
-            rgba(255, 255, 255, 0) 70%);
-}
-
-/* --- KLIENTI — plocha téměř bez světla ------------------------------------
-   Tichá řada jmen, nejtmavší místo horní poloviny. „Mezi reflektory“ —
-   kontrast s následující sekcí pak víc vynikne. */
-.pd--depth > .pd-clients {
-    --pdd-wash:
-        radial-gradient(70% 160% at 30% 50%,
-            rgba(255, 255, 255, 0.014) 0%,
-            rgba(255, 255, 255, 0) 70%);
 }
 
 /* --- 03 JAK WEBY STAVÍM — světlo zleva ------------------------------------
    Sekce mluví o problémech cizích webů. Světlo zleva olizuje velká acid čísla
    z levé hrany — čísla dostanou objem a „vystoupí“ z plochy stejně, jako má
    vystoupit ten problém. */
-.pd--depth-home > section:nth-child(5) {
+.pd--depth-home > section:nth-child(4) {
     --pdd-edge: linear-gradient(90deg,
         rgba(242, 240, 234, 0.02) 0%,
         rgba(242, 240, 234, 0.28) 22%,
@@ -521,7 +492,7 @@
             rgba(255, 255, 255, 0.013) 46%,
             rgba(255, 255, 255, 0) 78%);
 }
-.pd--depth-home > section:nth-child(5) .pd-issue__num {
+.pd--depth-home > section:nth-child(4) .pd-issue__num {
     --pdd-spec: linear-gradient(95deg,
         #e6ff70 0%, #d8ff3a 34%, rgba(216, 255, 58, 0.46) 100%);
 }
@@ -530,7 +501,7 @@
    Svislé vlasové linky jsou jediné „hrany“ v sekci. Když je nasvítím různě
    (prostřední nejsilněji), sloupce přestanou být tabulkou a dostanou hloubku
    jako tři desky za sebou. Statické — nic tudy neprojíždí. */
-.pd--depth-home > section:nth-child(6) {
+.pd--depth-home > section:nth-child(5) {
     --pdd-edge: linear-gradient(90deg,
         rgba(242, 240, 234, 0.03) 0%,
         rgba(242, 240, 234, 0.27) 46%,
@@ -542,11 +513,11 @@
             rgba(255, 255, 255, 0) 80%);
 }
 @media (min-width: 1024px) {
-    .pd--depth-home > section:nth-child(6) .pd-service + .pd-service {
+    .pd--depth-home > section:nth-child(5) .pd-service + .pd-service {
         border-left-color: transparent;
         position: relative;
     }
-    .pd--depth-home > section:nth-child(6) .pd-service + .pd-service::before {
+    .pd--depth-home > section:nth-child(5) .pd-service + .pd-service::before {
         content: "";
         position: absolute;
         inset: 0 auto 0 -1px;
@@ -558,29 +529,12 @@
             rgba(242, 240, 234, 0.02) 100%);
     }
     /* Prostřední předěl je nejblíž ose zdroje → nejjasnější. */
-    .pd--depth-home > section:nth-child(6) .pd-service:nth-child(2)::before {
+    .pd--depth-home > section:nth-child(5) .pd-service:nth-child(2)::before {
         background-image: linear-gradient(180deg,
             rgba(242, 240, 234, 0.34) 0%,
             rgba(242, 240, 234, 0.12) 34%,
             rgba(242, 240, 234, 0.02) 100%);
     }
-}
-
-/* --- 05 REALIZOVANÉ PROJEKTY — světlo zprava shora ------------------------
-   Případovky střídají stranu vizuálu (sudé mají order:2). Světlo zprava dá
-   každému vizuálu jinou roli — jednou je u zdroje, jednou dál — a střídání
-   layoutu tím dostane fyzikální důvod. */
-.pd--depth-home > section:nth-child(7) {
-    --pdd-edge: linear-gradient(90deg,
-        rgba(242, 240, 234, 0) 0%,
-        rgba(242, 240, 234, 0.06) 44%,
-        rgba(242, 240, 234, 0.28) 82%,
-        rgba(242, 240, 234, 0.03) 100%);
-    --pdd-wash:
-        radial-gradient(72% 74% at 84% 0%,
-            rgba(255, 255, 255, 0.046) 0%,
-            rgba(255, 255, 255, 0.012) 48%,
-            rgba(255, 255, 255, 0) 78%);
 }
 
 /* --- 06 CENÍK — nejjasnější místo stránky ---------------------------------
@@ -616,7 +570,7 @@
 /* --- 07 PROČ JÁ — světlo zprava, měkké -----------------------------------
    Osobní sekce s videem. Zdroj se po ceníku odklání doprava a plocha jde
    o stupeň dolů — po nejjasnějším místě musí přijít úleva. */
-.pd--depth-home > section:nth-child(9) {
+.pd--depth-home > section:nth-child(7) {
     --pdd-edge: linear-gradient(90deg,
         rgba(242, 240, 234, 0.01) 0%,
         rgba(242, 240, 234, 0.08) 40%,
@@ -633,7 +587,7 @@
    Doslovná práce s obsahem: „pod kapotou“ se svítí montážní lampou zespodu.
    Jediné místo na stránce, kde světlo přichází zdola — horní linka je proto
    skoro zhaslá a plocha se rozjasňuje dolů k faktům. */
-.pd--depth-home > section:nth-child(10) {
+.pd--depth-home > section:nth-child(8) {
     --pdd-edge: linear-gradient(90deg,
         rgba(242, 240, 234, 0.02) 0%,
         rgba(242, 240, 234, 0.07) 50%,
@@ -666,10 +620,12 @@
 .pd--depth #jak-pracuji .pd-step:nth-child(3) .pd-step__num { --pdd-spec: linear-gradient(200deg, #e6ff70 0%, #d8ff3a 46%, rgba(216, 255, 58, 0.48) 100%); }
 .pd--depth #jak-pracuji .pd-step:nth-child(4) .pd-step__num { --pdd-spec: linear-gradient(240deg, #e6ff70 0%, #d8ff3a 48%, rgba(216, 255, 58, 0.50) 100%); }
 
-/* --- 10 REFERENCE — světlo shora vlevo ------------------------------------
-   Šest citací pod sebou. Aby to nebyl jednolitý seznam, odlesk na linkách
+/* --- 09 REFERENCE — světlo shora vlevo ------------------------------------
+   Citace pod sebou. Aby to nebyl jednolitý seznam, odlesk na linkách
    položek slábne odshora dolů — stejně, jako slábne světlo se vzdáleností.
-   Hloubka bez zvýrazňování čehokoli obsahového. */
+   Hloubka bez zvýrazňování čehokoli obsahového.
+   OND-269: homepage vypisuje tři citace místo šesti, pravidlo pro pátou
+   a další položku je proto zrušené (na /o-mne se tenhle blok nepoužívá). */
 .pd--depth #section-testimonials {
     --pdd-edge: linear-gradient(90deg,
         rgba(242, 240, 234, 0.26) 0%,
@@ -683,60 +639,8 @@
 }
 .pd--depth #section-testimonials .pd-testi__item            { border-top-color: rgba(242, 240, 234, 0.13); }
 .pd--depth #section-testimonials .pd-testi__item:nth-child(n + 3) { border-top-color: rgba(242, 240, 234, 0.09); }
-.pd--depth #section-testimonials .pd-testi__item:nth-child(n + 5) { border-top-color: rgba(242, 240, 234, 0.06); }
 
-/* --- 11 GENERÁTOR VERSUS VÁŠ BYZNYS — světlo jen na jednom sloupci --------
-   Sekce staví proti sobě dvě varianty. Zdroj stojí nad sloupcem „--mine“ —
-   ten je ve světle, generátor zůstává ve stínu. Argument sekce je tím řečený
-   fyzikálně, ne další barvou ani tučným písmem. */
-.pd--depth-home > section:nth-child(13) {
-    --pdd-edge: linear-gradient(90deg,
-        rgba(242, 240, 234, 0.02) 0%,
-        rgba(242, 240, 234, 0.05) 42%,
-        rgba(242, 240, 234, 0.27) 74%,
-        rgba(242, 240, 234, 0.03) 100%);
-    --pdd-wash:
-        radial-gradient(52% 78% at 74% -2%,
-            rgba(255, 255, 255, 0.05) 0%,
-            rgba(255, 255, 255, 0.013) 48%,
-            rgba(255, 255, 255, 0) 78%);
-}
-.pd--depth-home > section:nth-child(13) .pd-versus__col--mine {
-    border-left-color: rgba(242, 240, 234, 0.20);
-}
-
-/* --- 12 18 LET V TOYOTĚ — úzký kužel na citaci ----------------------------
-   Osobní vzpomínka, jeden odstavec, který má nést váhu. Světlo je nejužší
-   na stránce — jako lampa nad jedním dokumentem. Okolí je záměrně skoro černé. */
-.pd--depth-home > section:nth-child(14) {
-    --pdd-edge: linear-gradient(90deg,
-        rgba(242, 240, 234, 0.02) 0%,
-        rgba(242, 240, 234, 0.22) 30%,
-        rgba(242, 240, 234, 0.03) 70%,
-        rgba(242, 240, 234, 0) 100%);
-    --pdd-wash:
-        radial-gradient(38% 72% at 26% 6%,
-            rgba(255, 255, 255, 0.05) 0%,
-            rgba(255, 255, 255, 0.012) 44%,
-            rgba(255, 255, 255, 0) 74%);
-}
-
-/* --- 13 ZÁRUKY — světlo shora, symetricky --------------------------------
-   Dva rovnocenné sliby. Tady zdroj vědomě stojí v ose a obě položky jsou
-   nasvícené stejně — symetrie je sdělení. */
-.pd--depth-home > section:nth-child(15) {
-    --pdd-edge: linear-gradient(90deg,
-        rgba(242, 240, 234, 0.02) 0%,
-        rgba(242, 240, 234, 0.25) 50%,
-        rgba(242, 240, 234, 0.02) 100%);
-    --pdd-wash:
-        radial-gradient(84% 56% at 50% -4%,
-            rgba(255, 255, 255, 0.042) 0%,
-            rgba(255, 255, 255, 0.012) 50%,
-            rgba(255, 255, 255, 0) 80%);
-}
-
-/* --- 14 FAQ — světlo ubývá s délkou seznamu -------------------------------
+/* --- 10 FAQ — světlo ubývá s délkou seznamu -------------------------------
    FAQ je servisní obsah, nemá soutěžit s poptávkou pod ním. Linky otázek
    proto postupně tmavnou — seznam se „propadá“ do stínu a oko sklouzne
    na formulář. */
@@ -755,9 +659,8 @@
 .pd--depth #faq .pd-faq__item:nth-child(2) { border-top-color: rgba(242, 240, 234, 0.12); }
 .pd--depth #faq .pd-faq__item:nth-child(3) { border-top-color: rgba(242, 240, 234, 0.10); }
 .pd--depth #faq .pd-faq__item:nth-child(4) { border-top-color: rgba(242, 240, 234, 0.08); }
-.pd--depth #faq .pd-faq__item:nth-child(5) { border-top-color: rgba(242, 240, 234, 0.06); }
 
-/* --- 15 POPTÁVKA — lampa zblízka nad papírem na stole ---------------------
+/* --- 11 POPTÁVKA — lampa zblízka nad papírem na stole ---------------------
    Poslední krok cesty. Zdroj je nejníž a nejblíž — panel formuláře je
    nejjasnější plocha na stránce. Druhý (a poslední) acidový horký bod
    na lince navazuje na ten z ceníku. */
@@ -851,55 +754,6 @@
     animation: pdd-run-x 780ms linear 700ms 1 both;
 }
 
-/* --- 02 ŽIVÉ WEBY — „tady, tady a tady to běží" --------------------------
-   Sekce ukazuje tři weby, které JSOU V PROVOZU. Nabíjí se vždy jen horní
-   hrana rámečku. Čte se to jako tři nezávislé běžící stroje, ne jako jedna
-   skupina.
-
-   POZOR NA MOBIL: od 768px jsou dlaždice vedle sebe a do čtecího pásma dojedou
-   naráz — tam má odstup 120 ms smysl, dělá rytmus. Pod 768px jsou ale POD SEBOU
-   a druhá s třetí jsou v tu chvíli ještě mimo obrazovku; kdyby je spouštěl
-   společný obal, proběhly by naslepo. Proto se každá dlaždice spouští sama
-   (JS pozoruje .pd-work, ne .pd-works) a odstup se přidává jen tam, kde
-   dlaždice opravdu stojí vedle sebe. */
-.pd--depth .pd-work__plate { position: relative; }
-.pd--depth .pd-work__plate::before {
-    inset: -8px 0 auto 0;   /* jádro na y = 7px → sedne na 1px rámeček dlaždice */
-    z-index: 2;
-    background-image: var(--pdd-glow-right), var(--pdd-run-right);
-    background-position-x: -115%;
-}
-.pd--depth .pd-work.is-lit .pd-work__plate::before {
-    animation: pdd-run-x 880ms linear 1 both;
-}
-@media (min-width: 768px) {
-    .pd--depth .pd-work:nth-child(1).is-lit .pd-work__plate::before { animation-delay: 260ms; }
-    .pd--depth .pd-work:nth-child(2).is-lit .pd-work__plate::before { animation-delay: 380ms; }
-    .pd--depth .pd-work:nth-child(3).is-lit .pd-work__plate::before { animation-delay: 500ms; }
-}
-
-/* Hover = jen ten jeden segment: najetím se rozsvítí horní hrana jen té
-   dlaždice, krátký dosvit --duration-micro.
-   Jen pro skutečný kurzor — na dotyku se :hover po klepnutí „zasekne“
-   a dlaždice by zůstala svítit, dokud člověk neklepne jinam.
-   POZOR: pás je 15 px vysoký, takže hover musí explicitně nastavit výšku
-   vrstvy na 1px — jinak z linky bude patnáctipixelový acid blok. */
-@media (hover: hover) and (pointer: fine) {
-    .pd--depth .pd-work:hover .pd-work__plate::before {
-        animation: none;
-        background-image: linear-gradient(var(--pd-accent), var(--pd-accent));
-        background-size: 100% 1px;
-        background-position: 0 7px;
-        transition: background-size var(--duration-micro) var(--ease-out);
-    }
-}
-.pd--depth .pd-work:focus-visible .pd-work__plate::before {
-    animation: none;
-    background-image: linear-gradient(var(--pd-accent), var(--pd-accent));
-    background-size: 100% 1px;
-    background-position: 0 7px;
-}
-
 /* --- 03 PROBLÉMY — světlo přejede přes číslo problému --------------------
    Sekce vyjmenovává, co je na cizích webech špatně. Nemá žádné vlastní
    linky (je to mřížka bez dělítek) a vyrobit je jen kvůli animaci by sekci
@@ -910,7 +764,6 @@
    Každý problém se spouští sám (JS pozoruje .pd-issue), takže při sjíždění
    se čísla zažíhají postupně tak, jak na ně jde oko. */
 .pd--depth .pd-issue__num,
-.pd--depth .pd-promise__num,
 .pd--depth .pd-service__num {
     background-image:
         linear-gradient(100deg,
@@ -960,7 +813,7 @@
     .pd--depth .pd-services.is-lit .pd-service:nth-child(3) .pd-service__num { animation: pdd-run-x 900ms linear 360ms 1 both; }
 }
 
-/* --- 05 PŘÍPADOVKY — světlo po horní hraně vizuálu -----------------------
+/* --- 02 PŘÍPADOVKY — světlo po horní hraně vizuálu -----------------------
    Případovky jsou důkaz. Nabíjí se horní hrana snímku — tedy přesně ta věc,
    kterou má člověk vidět. Případovky střídají stranu (sudé mají vizuál
    vpravo), takže i náboj střídá směr: k vizuálu, ne od něj. Layout tím
@@ -1084,37 +937,7 @@
     }
 }
 
-/* --- 11 GENERÁTOR VERSUS VÁŠ BYZNYS — náboj po hraně „mého" sloupce ------
-   Sekce staví proti sobě dvě varianty a celý její argument je, která z nich
-   je ta vaše. Vrstva A nad tím sloupcem drží světlo; tohle je druhá půlka
-   téhož gesta — po jeho levé hraně sjede náboj. Generátor vlevo nedostane
-   nic. Argument je řečený pohybem, ne dalším tučným písmem.
-   Linka mezi sloupci existuje od 900px; níž jsou sloupce pod sebou a žádná
-   hrana, po které by šlo jet, tam není. */
-@media (min-width: 900px) {
-    .pd--depth .pd-versus__col--mine { position: relative; }
-    .pd--depth .pd-versus__col--mine::after {
-        top: 0;
-        bottom: 0;
-        left: -8px;
-        z-index: 2;
-        background-image: var(--pdd-glow-down), var(--pdd-run-down);
-        background-position-y: -115%;
-    }
-    .pd--depth .pd-versus__col--mine.is-lit::after {
-        animation: pdd-run-y 1100ms linear 1 both;
-    }
-}
-
-/* --- 13 ZÁRUKY — světlo přejede přes číslo záruky ------------------------
-   Záruka je slib. Stejná technika jako v sekci 03 (přejezd přes číslici),
-   protože jde o tentýž druh obsahu: krátká očíslovaná tvrzení bez vlastních
-   linek. Dvě položky, dva přejezdy s malým odstupem — ne naráz, to by
-   vypadalo jako jedno bliknutí. */
-.pd--depth .pd-promise.is-lit .pd-promise__item:nth-child(1) .pd-promise__num { animation: pdd-run-x 900ms linear   0ms 1 both; }
-.pd--depth .pd-promise.is-lit .pd-promise__item:nth-child(2) .pd-promise__num { animation: pdd-run-x 900ms linear 220ms 1 both; }
-
-/* --- 14 FAQ — jediná sekce, kde náboj nespouští scroll, ale ČLOVĚK -------
+/* --- 10 FAQ — jediná sekce, kde náboj nespouští scroll, ale ČLOVĚK -------
    FAQ se nečte odshora dolů, otevírá se výběrem. Náboj proto při scrollu
    neběží vůbec — proběhne až ve chvíli, kdy někdo rozklikne otázku, a to
    přesně linkou pod TOU otázkou. Linka se tím zároveň nakreslí a zhasne;
@@ -1138,7 +961,7 @@
     }
 }
 
-/* --- 15 POPTÁVKA — jediné místo, kde náboj ZŮSTANE SVÍTIT ----------------
+/* --- 11 POPTÁVKA — jediné místo, kde náboj ZŮSTANE SVÍTIT ----------------
    Formulář je cíl celé stránky. Horní hrana panelu se nabije a — na rozdíl
    od všech ostatních linek — nezhasne úplně: zůstane slabě acid. Je to jediná
    trvale nabitá linka na webu, takže oko při scrollu pozná, že tohle je konec
@@ -1190,22 +1013,8 @@
    Screenshoty, vizuály případovek a video. Stín je vidět jen proto, že plocha
    pod nimi je nasvícená (vrstva A) — na holé černé by nebyl. Přesně tím
    obrázek „sedne na stůl“.
-   Hover je zapuštěný do stejné fyziky: dlaždice se zvedne (translateY -3px
-   z podpis.css) a stín se protáhne, jako by se vzdálila od plochy. */
-.pd--depth .pd-work__plate {
-    box-shadow: 0 20px 26px -14px rgba(0, 0, 0, 1);
-    border-top-color: rgba(242, 240, 234, 0.24);
-}
-/* Krajní dlaždice jsou dál od osy zdroje → odlesk na hraně je slabší. */
-.pd--depth .pd-work:first-child .pd-work__plate,
-.pd--depth .pd-work:last-child .pd-work__plate {
-    border-top-color: rgba(242, 240, 234, 0.13);
-}
-.pd--depth .pd-work:hover .pd-work__plate,
-.pd--depth .pd-work:focus-visible .pd-work__plate {
-    box-shadow: 0 26px 34px -14px rgba(0, 0, 0, 1);
-}
-
+   OND-269: dlaždice živých webů (.pd-work__plate) zanikly se sloučením
+   projektových sekcí — zůstaly vizuály případovek a video. */
 .pd--depth .pd-case__visual {
     border-top-color: rgba(242, 240, 234, 0.18);
     box-shadow: 0 22px 34px -18px rgba(0, 0, 0, 0.95);
@@ -1270,7 +1079,7 @@
 
    Prakticky to znamená:
      - vrstva B a C z §B/§C se na podstránkách NEMÁ ČEHO CHYTIT. Selektory
-       jako `.pd-work__plate` tam prostě neexistují.
+       jako `.pd-case__visual` tam prostě neexistují.
      - kdyby se tam jen přidala třída `pd--depth`, jediné, co by se opravdu
        zapnulo, jsou pravidla `> section:nth-child(N)` z §A — a ta jsou
        psaná na pořadí sekcí homepage. Na /cenik by „ceník" seděl na
@@ -1722,14 +1531,11 @@
 @media (prefers-reduced-motion: reduce) {
     .pd--depth .pd-heading em,
     .pd--depth .pd-hero .pd-cta::after,
-    .pd--depth .pd-work__plate::before,
     .pd--depth .pd-case__visual::before,
     .pd--depth .pd-issue__num,
     .pd--depth .pd-service__num,
-    .pd--depth .pd-promise__num,
     .pd--depth .pd-service + .pd-service::after,
     .pd--depth .pd-hood__fact + .pd-hood__fact::after,
-    .pd--depth .pd-versus__col--mine::after,
     .pd--depth .pd-price__col--featured::after,
     .pd--depth .pd-step::before,
     .pd--depth .pd-faq__q::after,

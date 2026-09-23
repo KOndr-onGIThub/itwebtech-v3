@@ -38,7 +38,11 @@ return [
         'heading' => 'Was wir messen',
         'items'   => [
             'Besuche und Quellen (woher die Besucher kommen, wie viele Seiten sie aufrufen, wie lange sie bleiben).',
-            'Interaktionen mit primären CTAs — Klicks auf „Angebot erhalten“, Telefonnummer, Öffnen des Formulars, Absenden der Anfrage.',
+            // OND-269 (Audit OND-254): Den CTA „Angebot erhalten“ gibt es auf
+            // der Website nicht. Hier wird bewusst kein Button-Text zitiert —
+            // ein Rechtstext soll nicht jedes Mal veralten, wenn ein Button
+            // umformuliert wird. Beschrieben ist das Verhalten.
+            'Interaktionen mit den wichtigsten Handlungsaufforderungen — Klicks auf den CTA-Button, die Telefonnummer, Öffnen des Formulars, Absenden der Anfrage.',
             'Sitzungsaufzeichnungen (Clarity) — anonymisierte Videoaufzeichnung von Cursorbewegungen und Klicks, um Stellen zu erkennen, an denen Besucher sich verirren.',
         ],
     ],
