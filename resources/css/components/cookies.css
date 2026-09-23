@@ -187,3 +187,70 @@
         transition: opacity 80ms linear;
     }
 }
+
+/* ============================================================
+   OND-266 (6) — fixní vrstvy na mobilu
+
+   Změřeno na produkci (390×844, čerstvý návštěvník): cookie lišta
+   158 px + spodní CTA lišta 69 px stály nad sebou a zabraly 226 px,
+   tedy 26,8 % obrazovky, dokud návštěvník o cookies nerozhodl.
+
+   Řešení: dokud souhlas chybí, `cookies.js` dá na <html> třídu
+   `cookie-pending` — spodní CTA se schová (její akci nabídne stránka
+   sama, cookie lišta je teď jediná fixní vrstva) a cookie lišta jde
+   až k dolní hraně. Po rozhodnutí (i po zavření křížkem) se spodní
+   lišta vrátí.
+   ============================================================ */
+@media (max-width: 767px) {
+    html.cookie-pending .mobile-bottom-bar { display: none; }
+    html.cookie-pending body { padding-bottom: 0; }
+    html.cookie-pending .cookie-overlay { bottom: 0; }
+}
+
+/* ============================================================
+   OND-266 (2) — dotykové cíle v cookie liště
+
+   Změřeno: „Detail v zásadách“ 107×16, ✕ 28×28, „Odmítnout“ 69×39,
+   „Přijmout vše“ 239×39. Všechno pod 44 px.
+   ============================================================ */
+.cookie-bar__policy-link {
+    display: inline-block;
+    padding-block: 0.8125rem;
+    /* Odsazení nesmí roztáhnout řádkování odstavce, ve kterém odkaz
+       sedí — proto záporná svislá marže o stejnou hodnotu. */
+    margin-block: -0.8125rem;
+}
+
+.cookie-bar__close {
+    top: 0;
+    right: 0;
+    width: 2.75rem;
+    height: 2.75rem;
+    font-size: 0.9375rem;
+}
+
+.cookie-bar__accept,
+.cookie-bar__reject {
+    min-height: 2.75rem;
+}
+
+/* ============================================================
+   OND-266 (6) — kompaktnější cookie lišta na mobilu
+   ============================================================ */
+@media (max-width: 639px) {
+    .cookie-bar {
+        /* Vpravo nahoře sedí křížek 44 px — text mu musí uhnout. */
+        padding: var(--space-3) var(--space-4);
+        gap: var(--space-2);
+    }
+    /* Obal lišty si na mobilu bere menší rám. */
+    .cookie-overlay { padding: var(--space-2); }
+    .cookie-bar__title { margin-bottom: 0; }
+    .cookie-bar__text {
+        flex-basis: 100%;
+        /* Křížek zabírá pravý horní roh; první řádek textu se mu vyhne. */
+        padding-right: 2.5rem;
+        line-height: 1.4;
+    }
+    .cookie-bar__actions { gap: var(--space-2); }
+}

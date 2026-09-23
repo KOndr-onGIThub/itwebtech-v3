@@ -84,14 +84,14 @@ class ArticleResource extends Resource
                     ->maxLength(191)
                     ->alphaDash()
                     ->unique(ignoreRecord: true)
-                    ->helperText('Master slug pro `/blog/{slug}`. Při změně se starý slug zachová pro 301 redirect.'),
+                    ->helperText('Master slug pro `/zapisky/{slug}`. Při změně se starý slug zachová pro 301 redirect.'),
                 Forms\Components\DateTimePicker::make('published_at')
                     ->label('Datum publikace')
                     ->seconds(false)
                     ->displayFormat('d.m.Y H:i'),
                 Forms\Components\Toggle::make('is_published')
                     ->label('Publikováno')
-                    ->helperText('Skryté články se nezobrazí v `/blog` ani v detailu.'),
+                    ->helperText('Skryté články se nezobrazí v `/zapisky` ani v detailu.'),
                 Forms\Components\TextInput::make('author')
                     ->label('Autor')
                     ->maxLength(191)

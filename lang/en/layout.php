@@ -7,7 +7,7 @@ return [
         'contact'  => 'Contact',
         'price'    => 'Pricing',
         'projects' => 'Projects',
-        'blog'     => 'Blog',
+        'blog'     => 'Notes',
         'about'    => 'About',
         'lang_switcher' => 'Language switcher',
     ],
@@ -22,7 +22,7 @@ return [
     ],
 
     'prefooter' => [
-        'tagline'   => 'I help entrepreneurs succeed in the online world',
+        'tagline'   => 'Custom websites and applications. Direct.',
         'cta'       => 'Book a free consultation',
         'nav_label' => 'Footer navigation',
     ],
@@ -43,6 +43,7 @@ return [
 
     'gdpr_form_note' => 'By submitting you agree to our',
     'gdpr_form_link' => 'Privacy Policy',
+    'footer_privacy_link' => 'Privacy Policy',
     'cookies_link'   => 'Cookies',
 
     'meta' => [

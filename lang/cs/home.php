@@ -422,7 +422,7 @@ return [
                 // OND-198 (nález 5.5): „cenová kotva výše" byl žargon; odkaz teď
                 // míří na skutečnou sekci. OND-198 (nález 5.4): vede Standard,
                 // nejlevnější pásmo je uvedené jako výjimka.
-                'answer'   => 'Většina projektů vychází mezi 55 a 150 tisíci korunami. Ceny najdete výš na této stránce v sekci „Kolik to bude stát?" a podrobně v ceníku — Standard 55 000 Kč, Custom od 95 000 Kč. Startovní pásmo za 25 000 Kč je výjimka pro živnostníky, ne standardní vstup. Přesnou cenu dostanete písemně po krátké konzultaci, na faktuře je pak přesně to, co je ve specifikaci.',
+                'answer'   => 'Většina projektů vychází mezi 55 a 150 tisíci korunami. Ceny najdete výš na této stránce v sekci „Kolik to bude stát?“ a podrobně v ceníku — Standard 55 000 Kč, Custom od 95 000 Kč. Startovní pásmo za 25 000 Kč je výjimka pro živnostníky, ne standardní vstup. Přesnou cenu dostanete písemně po krátké konzultaci, na faktuře je pak přesně to, co je ve specifikaci.',
             ],
             [
                 'key'      => 'duration',
@@ -436,7 +436,7 @@ return [
             ],
             [
                 'key'      => 'maintenance-free',
-                'question' => 'Co jsou „bezúdržbové weby"?',
+                'question' => 'Co jsou „bezúdržbové weby“?',
                 'answer'   => 'Žádný WordPress, žádné pluginy, žádné měsíční bezpečnostní aktualizace. Web stojí na vlastním kódu — běží sám, nevyžaduje pravidelné opravy a nepadá kvůli kolizi šablon. Drobné změny obsahu řešíme přímo, bez ticketu.',
             ],
             // Archiv: další FAQ otázky se přesouvají mimo homepage (na /faq nebo /sluzby — mimo scope OND-121).

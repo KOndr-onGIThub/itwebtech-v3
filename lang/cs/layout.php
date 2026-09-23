@@ -7,7 +7,7 @@ return [
         'contact'  => 'Kontakt',
         'price'    => 'Ceník',
         'projects' => 'Projekty',
-        'blog'     => 'Blog',
+        'blog'     => 'Zápisky',
         'about'    => 'O mně',
         'lang_switcher' => 'Přepínač jazyků',
     ],
@@ -22,7 +22,7 @@ return [
     ],
 
     'prefooter' => [
-        'tagline'   => 'Pomáhám podnikatelům uspět v online světě',
+        'tagline'   => 'Weby a aplikace na míru. Napřímo.',
         'cta'       => 'Domluvit konzultaci zdarma',
         'nav_label' => 'Footer navigace',
     ],
@@ -47,6 +47,10 @@ return [
 
     'gdpr_form_note' => 'Odesláním souhlasíte se',
     'gdpr_form_link' => 'zásadami ochrany osobních údajů',
+    // OND-266 (3): v patičce stojí odkaz samostatně, ne ve větě — 7. pád
+    // („zásadami…“) tam byl bez řídící věty. `gdpr_form_*` výš zůstává
+    // pro formulářovou variantu „Odesláním souhlasíte se …“.
+    'footer_privacy_link' => 'Zásady ochrany osobních údajů',
     'cookies_link'   => 'Cookies',
 
     'meta' => [

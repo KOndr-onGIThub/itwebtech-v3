@@ -3,7 +3,8 @@
 @section('title', __('privacy.meta.title'))
 @section('description', __('privacy.meta.description'))
 
-@section('hide_prefooter') true @endsection
+{{-- OND-266 (5): `hide_prefooter` odebráno — právní stránky byly bez navigace
+     slepá ulička. Patička je teď stejná jako na /projekty, /cenik a /kontakt. --}}
 
 @section('content')
 

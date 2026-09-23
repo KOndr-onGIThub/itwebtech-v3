@@ -33,8 +33,8 @@ Všech 25 URL = HTTP 200, `<html lang>` matchuje očekávané locale.
 | price | ✅ `/cenik` | ✅ `/en/price` | ✅ `/de/preisliste` |
 | projects index | ✅ `/projekty` | ✅ `/en/projects` | ✅ `/de/projekte` |
 | project detail | ✅ `/projekty/yolk` | ✅ `/en/projects/yolk` | ✅ `/de/projekte/yolk` |
-| blog index | ✅ `/jak-na-to` | ✅ `/en/blog` | ✅ `/de/blog` |
-| article | ✅ `/jak-na-to/kolik-stoji-webove-stranky` | ✅ `/en/blog/how-much-does-a-website-cost` | ✅ `/de/blog/kolik-stoji-webove-stranky` |
+| blog index | ✅ `/zapisky` | ✅ `/en/blog` | ✅ `/de/blog` |
+| article | ✅ `/zapisky/kolik-stoji-webove-stranky` | ✅ `/en/blog/how-much-does-a-website-cost` | ✅ `/de/blog/kolik-stoji-webove-stranky` |
 | privacy | ✅ `/zasady-ochrany-osobnich-udaju` | ✅ `/en/privacy-policy` | ✅ `/de/datenschutz` |
 | cookies | ✅ `/cookies` (lang=cs) | ✅ `/en/cookies` (lang=en, [OND-168](/OND/issues/OND-168)) | ✅ `/de/cookies` (lang=de, [OND-168](/OND/issues/OND-168)) |
 
@@ -129,12 +129,12 @@ Tento blok je delegovaný na `scripts/b4-verify.sh` z [OND-132](/OND/issues/OND-
 
 ### F2 — Article cross-slug duplicate content (medium, SEO)
 
-**Pozadí:** Article entity má jeden slug per locale v DB, ale route handler `/jak-na-to/{slug}` (a EN/DE variants) přijímá JAKÝKOLI existující slug a vrací 200 se self-canonical.
+**Pozadí:** Article entity má jeden slug per locale v DB, ale route handler `/zapisky/{slug}` (a EN/DE variants) přijímá JAKÝKOLI existující slug a vrací 200 se self-canonical.
 
 **Reprodukce:**
 - `https://itwebtech.ondrejkriska.cz/en/blog/how-much-does-a-website-cost` → 200, canonical=self, title "How much does a website cost"
 - `https://itwebtech.ondrejkriska.cz/en/blog/kolik-stoji-webove-stranky` → 200, canonical=self, title "How much does a website cost" (= same article, different URL)
-- Stejně CS i DE: `/jak-na-to/how-much-does-a-website-cost` → 200 (CS prefix + EN slug), `/de/blog/how-much-does-a-website-cost` → 200
+- Stejně CS i DE: `/zapisky/how-much-does-a-website-cost` → 200 (CS prefix + EN slug), `/de/blog/how-much-does-a-website-cost` → 200
 
 **Impact:** Duplicate content na úrovni article detail. Google může označit duplicates a snížit ranking originálního slug. Affected: každý article × 3 locales × N alternative slugs.
 
@@ -160,7 +160,7 @@ Tento blok je delegovaný na `scripts/b4-verify.sh` z [OND-132](/OND/issues/OND-
 
 **Pozadí:** Article detail pages mají `<meta name="description">` 237-268 znaků. Doporučených max je ~155-160 znaků (Google truncate snippet).
 
-**Affected:** `/jak-na-to/kolik-stoji-webove-stranky` (268), `/en/blog/how-much-does-a-website-cost` (237), `/de/blog/kolik-stoji-webove-stranky` (268).
+**Affected:** `/zapisky/kolik-stoji-webove-stranky` (268), `/en/blog/how-much-does-a-website-cost` (237), `/de/blog/kolik-stoji-webove-stranky` (268).
 
 **Recommended fix (low priority):** Trim na ~155 chars nebo lépe = explicit meta_description field na Article model + Filament editor field.
 
