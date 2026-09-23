@@ -11,7 +11,10 @@ return [
     'heading'             => 'Ozvu se do 24 hodin v pracovní dny',
     // OND-201 (nález 5.9): „Ondřej Kriška, Česká republika" byl signál
     // anonymního dodavatele. Plná adresa a IČO jsou veřejné údaje, zvyšují
-    // důvěru i lokální viditelnost. Zdroj: lang/cs/about.php („Kde sídlím").
+    // důvěru i lokální viditelnost.
+    // OND-292: /o-mne mělo tytéž údaje v sekci „Kde sídlím“ podruhé; board
+    // 23. 9. rozhodl sekci zrušit, takže tohle je teď jediný výskyt adresy
+    // mimo zásady ochrany osobních údajů.
     'address_label'       => 'Adresa',
     'address_name'        => 'Ondřej Kriška',
     'address_street'      => 'Dunajovská 116',

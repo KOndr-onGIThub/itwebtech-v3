@@ -28,10 +28,6 @@ return [
             'text'    => 'Jsem zkušený programátor webů. Píšu vlastní kód od základu. Nestavím weby ze stavebnic typu WordPress, které se skládají z hotových dílů od různých autorů a časem se rozbíjejí. Weby, které dodávám, jsou bezúdržbové. Nepoužívám hotové doplňky od cizích firem, které se musí pořád aktualizovat a opravovat. To bývá nejčastější zdroj problémů a výpadků. Pracuju sám. To znamená, že mluvíte přímo se mnou od první zprávy až po spuštění. Kód, který napíšu, patří vám. Umím pracovat i pro zahraničí. Mluvím a píšu česky. Anglicky komunikuju písemně. Německy jen písemně, s pomocí překladu.',
         ],
         [
-            'heading' => 'Kde sídlím',
-            'text'    => 'Sídlím v Březí u Břeclavi. Fakturuju jako Ondřej Kriška, IČO 19231407, Dunajovská 116, 691 81 Březí. Nejsem plátce DPH.',
-        ],
-        [
             'heading' => 'Co nedělám',
             'text'    => 'Nedělám nejlevnější weby na trhu. Neslibuju, kolik vám web vydělá, to nemám jak ovlivnit. Beru jen zakázky, které odvedu pořádně. Když vím, že vám za rozumnou cenu nepomůžu, řeknu to rovnou.',
         ],
