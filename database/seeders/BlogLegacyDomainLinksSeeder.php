@@ -2,10 +2,18 @@
 
 namespace Database\Seeders;
 
+use App\Models\Portfolio\PortfolioProject;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
 
 /**
+ * OND-286 + OND-289 — úklid absolutních odkazů na starou doménu `itwebtech.cz`
+ * v textech článků.
+ *
+ * OND-286 (níž) řeší odkazy do sekce článků `/jak-na-to/...`, OND-289
+ * (`rewriteSiteLinks()`) zbytek webu — `/price`, `/contact`, `/projects`.
+ *
  * OND-286 — úklid absolutních odkazů na `itwebtech.cz/jak-na-to/...` v textech článků.
  *
  * V `article_translations` stálo 26 odkazů na starou doménu. Doména sice pořád
@@ -25,13 +33,16 @@ use Illuminate\Support\Facades\DB;
  * Bod 3 se musí provést **před** bodem 2, jinak by po rozbalení zůstalo
  * doporučení přečíst si článek, který na webu není.
  *
- * Seeder je čistá transformace už existujících textů, proto ho volá jak migrace
- * `2026_09_23_110000_ond286_odkazy_na_starou_domenu` (existující DB), tak
+ * Seeder je čistá transformace už existujících textů, proto ho volají migrace
+ * `2026_09_23_110000_ond286_odkazy_na_starou_domenu`
+ * a `2026_09_23_140000_ond289_odkazy_mimo_sekci_clanku` (existující DB) i
  * `EnsureArticlesSeededSeeder` po importu dumpů (čerstvá DB) — dumpy v
  * `database/sql/` ty odkazy pořád obsahují.
  *
- * Opakované spuštění je no-op: po prvním běhu už žádný odkaz na starou doménu
- * pod `/jak-na-to/` v datech není, takže se nemá co chytit.
+ * Opakované spuštění je no-op: po prvním běhu v datech žádný přepsatelný odkaz
+ * na starou doménu nezůstane. Jediné, co seeder vědomě nechává být, je
+ * podpisový blok článku 12 — ten čeká na redakční rozhodnutí, viz
+ * `rewriteSiteLinks()`.
  */
 class BlogLegacyDomainLinksSeeder extends Seeder
 {
@@ -53,6 +64,12 @@ class BlogLegacyDomainLinksSeeder extends Seeder
     /** Odkaz na starou doménu do sekce článků — `jak-na-to` je i koncovka jednoho slugu, proto celý tvar. */
     private const LINK_PATTERN = '~<a\b[^>]*\bhref="https?://(?:www\.)?itwebtech\.cz/jak-na-to/([^"]+)"[^>]*>(.*?)</a>~s';
 
+    /** OND-289 — jakýkoli zbylý odkaz na starou doménu; cestu vyhodnotí `sitePath()`. */
+    private const SITE_LINK_PATTERN = '~<a\b[^>]*\bhref="https?://(?:www\.)?itwebtech\.cz(/[^"]*)?"[^>]*>(.*?)</a>~s';
+
+    /** Odkaz, jehož viditelným textem je jméno staré značky — viz `rewriteSiteLinks()`. */
+    private const BRAND_AS_LINK_TEXT = '~<a\b[^>]*>(?:<[^>]+>|\s)*itwebtech\.cz(?:</[^>]+>|\s)*</a>~i';
+
     public function run(): void
     {
         // Na nenaplněné DB nemá co dělat — obsah tam teprve doputuje importem.
@@ -66,11 +83,12 @@ class BlogLegacyDomainLinksSeeder extends Seeder
             foreach (self::COLUMNS as $column) {
                 $original = (string) ($row->$column ?? '');
 
-                if (! str_contains($original, 'itwebtech.cz/jak-na-to/')) {
+                if (! str_contains($original, 'itwebtech.cz')) {
                     continue;
                 }
 
                 $rewritten = $this->rewriteLinks($this->rewriteSentences($original));
+                $rewritten = $this->rewriteSiteLinks($rewritten, (string) $row->locale);
 
                 if ($rewritten !== $original) {
                     $changes[$column] = $rewritten;
@@ -148,5 +166,83 @@ class BlogLegacyDomainLinksSeeder extends Seeder
     private function articlePath(string $slug, string $locale): string
     {
         return route("{$locale}.article", ['slug' => $slug], absolute: false);
+    }
+
+    /**
+     * OND-289 — zbylé odkazy na starou doménu mimo sekci článků.
+     *
+     * Na rozdíl od bloku výš tady cíl na dnešním webu existuje (`/cenik`,
+     * `/kontakt`, `/projekty/...`), takže stačí relativní adresa. Cílová adresa
+     * se ale liší podle jazyka článku, proto locale řádku a ne konstanta.
+     *
+     * Cesty, které se nedají namapovat na dnešní web, zůstávají beze změny —
+     * radši viditelně starý odkaz než tichý interní 404.
+     */
+    private function rewriteSiteLinks(string $value, string $locale): string
+    {
+        // Podpisový blok článku 12 (cs i en): textem odkazu je jméno staré
+        // značky — „Ondřej Kriška … | kontakt (itwebtech.cz)". Přepsání `href`
+        // by na webu nechalo napsáno `itwebtech.cz`, takže blok potřebuje
+        // redakční rozhodnutí, ne mechanickou opravu. Do té doby se ho
+        // nedotýkáme; článek 12 není publikovaný, takže netlačí.
+        if (preg_match(self::BRAND_AS_LINK_TEXT, $value)) {
+            return $value;
+        }
+
+        return preg_replace_callback(self::SITE_LINK_PATTERN, function (array $match) use ($locale): string {
+            $path = $this->sitePath($match[1], $locale);
+
+            if ($path === null) {
+                return $match[0];
+            }
+
+            // Stejně jako u článků: bez domény, bez `target` i bez `nofollow`.
+            return '<a href="'.$path.'">'.$match[2].'</a>';
+        }, $value);
+    }
+
+    /** Cesta ze starého webu → adresa na dnešním webu v dané locale, nebo `null`, když cíl neznáme. */
+    private function sitePath(string $path, string $locale): ?string
+    {
+        $path = rtrim($path, '/');
+
+        if (preg_match('~^/projects/([^/]+)$~', $path, $match)) {
+            return $this->projectPath($match[1], $locale);
+        }
+
+        return match ($path) {
+            ''          => $this->routePath("{$locale}.home"),
+            '/contact'  => $this->routePath("{$locale}.contact"),
+            '/price'    => $this->routePath("{$locale}.price"),
+            '/projects' => $this->routePath("{$locale}.projects"),
+            default     => null,
+        };
+    }
+
+    /**
+     * Detail projektu — jen když na dnešním webu opravdu je.
+     *
+     * OND-282 tři projekty odpublikovalo, takže existence slugu ve starém
+     * textu nestačí. Slug se navíc liší podle jazyka (`slugFor()`), ve starém
+     * odkazu stojí ten jazykově neutrální.
+     */
+    private function projectPath(string $slug, string $locale): ?string
+    {
+        $project = PortfolioProject::published()->where('slug', $slug)->first()
+            ?? PortfolioProject::published()
+                ->whereHas('translations', fn ($query) => $query->where('slug', $slug))
+                ->first();
+
+        if (! $project) {
+            return null;
+        }
+
+        return $this->routePath("{$locale}.project", ['url' => $project->slugFor($locale)]);
+    }
+
+    /** Adresa se bere z routování; neznámá locale (rozšíření o další jazyk) odkaz nechá být. */
+    private function routePath(string $name, array $parameters = []): ?string
+    {
+        return Route::has($name) ? route($name, $parameters, absolute: false) : null;
     }
 }
