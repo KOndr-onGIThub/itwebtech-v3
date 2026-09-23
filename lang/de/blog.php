@@ -34,7 +34,7 @@ return [
     // Website-Audit) und `sidebar_ad` entfernt — das Audit-Angebot versprach
     // Ergebnisse anstelle des Kunden und die Seite hatte drei CTAs nebeneinander.
 
-    'back_to_blog' => '← Zurück zum Blog',
+    'back_to_blog' => '← Zurück zu den Notizen',
 
     // OND-130 P2 iter 8 — Article page-mark eyebrow + Autor-Box.
     // OND-135 Bereinigung (2026-05-14): page_mark_index entfernt per

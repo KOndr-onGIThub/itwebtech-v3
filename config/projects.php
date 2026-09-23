@@ -53,7 +53,7 @@ return [
                 'Rozdělené služby (bioklimatické pergoly, brány a ploty, návrh na míru).',
                 'Galerie realizací.',
                 'Poptávkový formulář a kontakt.',
-                'Sekce „Jak to probíhá".',
+                'Sekce „Jak to probíhá“.',
             ],
             'result'   => null,
         ],

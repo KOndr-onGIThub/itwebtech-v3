@@ -30,7 +30,7 @@ return [
     ],
 
     'content' =>'<p>Datum des Inkrafttretens: 6. Mai 2026</p>
-<p>Die Website (nachfolgend „Dienst") wird vom Unternehmer Ondřej Kriška (nachfolgend „Betreiber" oder „ONDRAWEB") betrieben.</p>
+<p>Die Website (nachfolgend „Dienst“) wird vom Unternehmer Ondřej Kriška (nachfolgend „Betreiber“ oder „ONDRAWEB“) betrieben.</p>
 <p>Diese Seite informiert Sie über unsere Richtlinien bezüglich der Erhebung, Verwendung und Weitergabe personenbezogener Daten bei der Nutzung unseres Dienstes.</p>
 
 <h2>Erhebung und Verwendung von Informationen</h2>

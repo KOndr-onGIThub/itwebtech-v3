@@ -7,7 +7,7 @@ return [
         'contact'  => 'Kontakt',
         'price'    => 'Preisliste',
         'projects' => 'Projekte',
-        'blog'     => 'Blog',
+        'blog'     => 'Notizen',
         'about'    => 'Über mich',
         'lang_switcher' => 'Sprachumschalter',
     ],
@@ -22,7 +22,7 @@ return [
     ],
 
     'prefooter' => [
-        'tagline'   => 'Ich helfe Unternehmern, in der Online-Welt erfolgreich zu sein',
+        'tagline'   => 'Websites und Anwendungen nach Maß. Direkt.',
         'cta'       => 'Kostenlose Beratung vereinbaren',
         'nav_label' => 'Footer-Navigation',
     ],
@@ -43,6 +43,7 @@ return [
 
     'gdpr_form_note' => 'Mit dem Absenden stimmen Sie unserer',
     'gdpr_form_link' => 'Datenschutzerklärung',
+    'footer_privacy_link' => 'Datenschutzerklärung',
     'cookies_link'   => 'Cookies',
 
     'meta' => [

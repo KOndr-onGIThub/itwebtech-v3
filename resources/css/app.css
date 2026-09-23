@@ -3664,6 +3664,223 @@
     }
 
     /* ============================================================
+       DOTYKOVÉ CÍLE ≥ 44 px (OND-266, bod 2)
+
+       Změřeno v prohlížeči přes getBoundingClientRect na 390×844,
+       šest stránek. Prvky níž měly výšku 19–35 px. Jde vždy o samostatné
+       cíle (patička, přepínač, checkbox) — odkazy uvnitř vět neřešíme,
+       ty z toku textu vytrhnout nejde a WCAG 2.5.8 je z požadavku
+       výslovně vyjímá.
+
+       Vzorec: `display: inline-flex` + `min-height: 44px`; tam, kde by
+       odsazení rozhodilo řádkování okolního textu, ho vrací záporná
+       svislá marže.
+       ============================================================ */
+
+    /* Patička — právní odkazy 21 px, telefon 21 px */
+    /* Odsazení schválně jen svislé — vodorovné by roztáhlo podtržení
+       odkazu za jeho text. */
+    .footer-bar__gdpr-link,
+    .footer-bar__phone {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.75rem;
+    }
+    .footer-bar__inner {
+        /* Odsazení odkazů si vlastní mezeru přineslo samo; původních
+           0,375rem by s ním na mobilu udělalo zbytečně vysokou patičku. */
+        gap: 0;
+    }
+    @media (min-width: 640px) {
+        .footer-bar__inner { gap: 0.75rem; }
+    }
+
+    /* Pre-footer navigace — 35 px */
+    .footer-prefooter__link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.75rem;
+    }
+
+    /* Hamburger v hlavičce — 40×40 */
+    .navbar__hamburger {
+        min-width: 2.75rem;
+        min-height: 2.75rem;
+    }
+
+    /* Tlačítka napříč webem — 40 px (padding 0,75rem + line-height 1) */
+    .btn {
+        min-height: 2.75rem;
+    }
+
+    /* Logo v hlavičce — klikací plocha 26 px podle výšky obrázku */
+    .navbar__logo {
+        min-height: 2.75rem;
+    }
+
+    /* Výběr souborů ve formulářích — 41 px */
+    .form-file__trigger {
+        min-height: 2.75rem;
+    }
+
+    /* Ceník, přepínač pásem — 80×31 */
+    .pcm-tab {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 2.75rem;
+    }
+
+    /* /kontakt — e-mail a telefon v kartě kontaktů 19 px */
+    .contact-info dd a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.75rem;
+    }
+
+    /* /kontakt — GDPR checkbox 16×16 (řádek labelu 43 px) */
+    .form-group--checkbox label {
+        min-height: 2.75rem;
+        padding-block: 0.125rem;
+    }
+    .form-group--checkbox input[type="checkbox"] {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-top: 0;
+    }
+
+    /* ============================================================
+       ARTICLE BODY — typografie článku (OND-266, bod 8)
+
+       Šablona článku neměla žádné typografické styly: `.article-body`,
+       `.article-content`, `.article-perex`, `.article-figure` ani
+       `.container-site--narrow` neexistovaly v CSS. Důsledky změřené
+       na produkci (1440 px):
+         • odstavec 1216 px při 16 px ≈ 152 znaků na řádek (norma 45–75)
+         • `p { margin: 0 }` z base vrstvy → odstavce slepené k sobě
+         • `a { text-decoration: none }` → odkazy v textu nerozeznatelné
+         • Tailwind preflight → `<ul>` bez odrážek a odsazení
+         • `.article-author` měl 760 px, text nad ním 1216 px → rozjeté
+
+       Míra (measure) je vedená přes `--article-measure` v `ch`, takže
+       drží počet znaků na řádek i kdyby se změnil stupeň písma.
+       `content-box` je tu schválně: max-width pak platí na text, ne
+       na text včetně paddingu.
+       ============================================================ */
+    .article-body {
+        --article-measure: 62ch;
+        color: var(--color-body);
+    }
+    .article-body .container-site--narrow {
+        box-sizing: content-box;
+        max-width: var(--article-measure);
+        margin-inline: auto;
+        padding-inline: clamp(1rem, 4.5vw, 2rem);
+    }
+
+    .article-perex,
+    .article-content,
+    .article-bonus {
+        font-size: 1.0625rem;
+        line-height: 1.75;
+        color: var(--color-body);
+    }
+    .article-perex {
+        font-size: 1.1875rem;
+        line-height: 1.65;
+        color: var(--color-heading);
+        margin-bottom: 2rem;
+    }
+
+    /* Vertikální rytmus — základní krok 1,25rem, nadpisy dostávají
+       výrazně větší mezeru nahoře než dole, aby patřily k textu pod
+       sebou a ne nad sebou. */
+    .article-perex p,
+    .article-content p,
+    .article-bonus p { margin-bottom: 1.25rem; }
+    .article-perex > :last-child,
+    .article-content > :last-child,
+    .article-bonus > :last-child { margin-bottom: 0; }
+
+    .article-content h2,
+    .article-bonus h2 {
+        font-size: 1.5rem;
+        line-height: 1.3;
+        font-weight: 700;
+        color: var(--color-heading);
+        margin-top: 2.75rem;
+        margin-bottom: 0.875rem;
+    }
+    .article-content h3,
+    .article-bonus h3 {
+        font-size: 1.125rem;
+        line-height: 1.4;
+        font-weight: 700;
+        color: var(--color-heading);
+        margin-top: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    .article-content > :first-child,
+    .article-bonus > :first-child { margin-top: 0; }
+
+    .article-content ul,
+    .article-content ol,
+    .article-bonus ul,
+    .article-bonus ol {
+        padding-left: 1.5rem;
+        margin-bottom: 1.25rem;
+        list-style-position: outside;
+    }
+    .article-content ul,
+    .article-bonus ul { list-style-type: disc; }
+    .article-content ol,
+    .article-bonus ol { list-style-type: decimal; }
+    .article-content li,
+    .article-bonus li { margin-bottom: 0.4375rem; }
+
+    .article-perex a,
+    .article-content a,
+    .article-bonus a {
+        color: var(--color-gold-500);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+    .article-perex a:hover,
+    .article-content a:hover,
+    .article-bonus a:hover { color: var(--color-gold-200); }
+
+    .article-perex strong,
+    .article-content strong,
+    .article-bonus strong {
+        color: var(--color-heading);
+        font-weight: 700;
+    }
+
+    .article-perex blockquote,
+    .article-content blockquote,
+    .article-bonus blockquote {
+        margin: 2rem 0;
+        padding: 0.25rem 0 0.25rem 1.25rem;
+        border-left: 3px solid var(--color-gold-500);
+        color: var(--color-heading);
+    }
+    .article-content blockquote p:last-child,
+    .article-bonus blockquote p:last-child { margin-bottom: 0; }
+
+    /* Obrázky sedí na míru textu — dřív byly zarovnané doleva na plnou
+       šířku 1280px kontejneru, zatímco text běžel pod nimi. */
+    .article-figure {
+        margin: 2.5rem 0;
+    }
+    .article-figure img,
+    .article-figure picture img {
+        width: 100%;
+        height: auto;
+        border-radius: 0.875rem;
+        border: 1px solid var(--border-subtle);
+    }
+
+    /* ============================================================
        ARTICLE AUTHOR BOX (OND-130 iter 8)
        — E-E-A-T signál pro Google + osobní podpis pro čtenáře.
        ============================================================ */
@@ -5278,7 +5495,8 @@
         align-items: center;
         gap: 0.4rem;
         padding: 0.5rem 1.125rem;
-        min-height: 40px;
+        /* OND-266 (2): 40 → 44 px, dotykový cíl. */
+        min-height: 2.75rem;
         background: transparent;
         border: 1px solid var(--border-subtle);
         border-radius: 999px;

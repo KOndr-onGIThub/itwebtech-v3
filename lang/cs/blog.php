@@ -34,7 +34,7 @@ return [
     // a `sidebar_ad` odstraněny — nabídka auditu slibovala výsledek za klienta
     // a stránka měla tři výzvy k akci vedle sebe. Zůstává jedna, `cta` níž.
 
-    'back_to_blog' => '← Zpět na blog',
+    'back_to_blog' => '← Zpět na zápisky',
 
     // OND-130 P2 iter 8 — Article page-mark eyebrow + autor box.
     // OND-135 cleanup (2026-05-14): page_mark_index odebrán per sitewide

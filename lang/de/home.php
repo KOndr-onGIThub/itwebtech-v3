@@ -406,7 +406,7 @@ return [
             ],
             [
                 'key'      => 'maintenance-free',
-                'question' => 'Was bedeutet „wartungsfreie Website"?',
+                'question' => 'Was bedeutet „wartungsfreie Website“?',
                 'answer'   => 'Kein WordPress, keine Plugins, keine monatlichen Sicherheitsupdates. Die Website läuft auf eigenem Code — sie funktioniert von selbst, benötigt keine regelmäßigen Patches und fällt nicht durch Template-Konflikte aus. Kleine Inhaltsänderungen laufen direkt über mich, ohne Ticket.',
             ],
             // Archiv: weitere FAQ-Einträge wandern von der Homepage weg (nach /faq oder /sluzby — außerhalb des OND-121-Umfangs).
