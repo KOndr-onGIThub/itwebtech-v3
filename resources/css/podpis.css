@@ -400,11 +400,13 @@
 .pd-price__col--featured { border-top: 2px solid var(--pd-accent); padding-top: var(--space-4); }
 
 /* --- Reference ---------------------------------------------- */
+/* OND-279: „Přeloženo z českých originálů na Google, Firmy.cz a Facebooku" je
+   údaj o původu recenzí — stejná třída jako .pd-testi__source, tedy informace. */
 .pd-testi__note {
     font-family: var(--font-body);
     font-size: var(--text-body-sm);
     line-height: var(--leading-relaxed);
-    color: var(--color-fg-faint);
+    color: var(--color-fg-muted);
     margin: calc(-1 * var(--space-3)) 0 var(--space-5);
     max-width: 58ch;
 }
