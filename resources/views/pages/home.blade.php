@@ -744,13 +744,13 @@
     (function () {
         // Strop 2,0 s. Měříme `load`, tedy okamžik po dotažení všech
         // zdrojů — metriku pozdější než LCP. Core Web Vitals má hranici
-        // „dobrého" LCP na 2,5 s; kdybychom stejné číslo dali na `load`,
+        // „dobrého“ LCP na 2,5 s; kdybychom stejné číslo dali na `load`,
         // chlubili bychom se i návštěvami, jejichž LCP bylo hluboko za
         // hranicí. 2,0 s je zároveň poslední hodnota, která se při jednom
-        // desetinném místě ještě čte jako „pod dvě sekundy" — od „2,3 s"
+        // desetinném místě ještě čte jako „pod dvě sekundy“ — od „2,3 s“
         // výš věta přestává být důkaz a začíná být výmluva.
         var MAX_SECONDS = 2;
-        // Pod 0,05 s by se vypsalo „0,0 s" — to vypadá jako rozbité měření,
+        // Pod 0,05 s by se vypsalo „0,0 s“ — to vypadá jako rozbité měření,
         // ne jako rychlost.
         var MIN_SECONDS = 0.05;
 

@@ -2106,7 +2106,7 @@ projects:
         meta_description: "Case Study: Logistik-Microsite mit klarem Weg zum Kontakt — kein Füllstoff, alles Wesentliche im Blick."
 
   # ----------------------------------------------------------------------
-  # 13) YOLK — agenturní spolupráce na klinikových portálech
+  # 13) YOLK — agenturní spolupráce na klinických portálech
   # ----------------------------------------------------------------------
   - slug: yolk
     category: website
@@ -2121,19 +2121,19 @@ projects:
       - url: "https://itwebtech.cz/images/projects/yolk/yolk_preview.jpg"
         type: hero
         alt:
-          cs: "YOLK – ukázka klinikového portálu spravovaného agenturou"
+          cs: "YOLK – ukázka klinického portálu spravovaného agenturou"
           en: "YOLK – preview of an agency-managed clinic portal"
           de: "YOLK – Vorschau eines agenturbetreuten Klinikportals"
       - url: "https://itwebtech.cz/images/projects/yolk/unica_introduction.webp"
         type: gallery
         alt:
-          cs: "YOLK — vývoj na klinikových portálech – sekce 1"
+          cs: "YOLK — vývoj na klinických portálech – sekce 1"
           en: "YOLK — agency development on clinic portals – section 1"
           de: "YOLK — Agentur-Entwicklung auf Klinikportalen – Abschnitt 1"
       - url: "https://itwebtech.cz/images/projects/yolk/reproclinic_introduction.webp"
         type: gallery
         alt:
-          cs: "YOLK — vývoj na klinikových portálech – sekce 2"
+          cs: "YOLK — vývoj na klinických portálech – sekce 2"
           en: "YOLK — agency development on clinic portals – section 2"
           de: "YOLK — Agentur-Entwicklung auf Klinikportalen – Abschnitt 2"
     translations:
@@ -2169,7 +2169,7 @@ projects:
           - "Custom funkce nad rámec standardního WordPressu"
           - "Rychlá reakce na chyby a požadavky klientů agentury"
           - "5/5 hvězd v referenci YOLK"
-        meta_title: "YOLK — agenturní vývoj na klinikových portálech"
+        meta_title: "YOLK — agenturní vývoj na klinických portálech"
         meta_description: "Případová studie: dlouhodobý vývoj a údržba pro studio YOLK na rozsáhlých webech (unica.cz, reproclinic.com)."
       en:
         title: "YOLK — agency development on clinic portals"
@@ -2692,8 +2692,15 @@ projects:
     sort_order: 220
     tags: [aplikace, pdf, generator, vyroba, web-app]
     screenshots_source:
+      # OND-292: `hero-1` ukazuje týž formulář jako `gallery-1` (tam na
+      # notebooku, tady naplocho) — v galerii to byl viditelný duplikát.
+      # Role `thumbnail` ho z galerie vyřadí, ale nechá ho miniaturou karty
+      # (`portfolio_card_thumbnail()` jí dává přednost), takže se karta
+      # v /projekty nezmění. Explicitní `path` je nutný: bez něj by se
+      # jméno souboru odvodilo z typu na `thumbnail-1.jpg`.
       - url: "https://itwebtech.cz/images/projects/FLR/FRLcreator_main_page.jpg"
-        type: hero
+        path: "projects/frl-creator/hero-1.jpg"
+        type: thumbnail
         alt:
           cs: "FRL Creator – obrazovka generátoru regálových PDF štítků"
           en: "FRL Creator – screen of the shelf-label PDF generator"
