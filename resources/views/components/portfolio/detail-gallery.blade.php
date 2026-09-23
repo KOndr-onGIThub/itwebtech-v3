@@ -18,7 +18,11 @@
     vizuál, `rest` (ostatní bandy + karty v původním pořadí) až POD ní.
 --}}
 @php
-    $screens = collect($screenshots ?? []);
+    // OND-268: `type = 'thumbnail'` je snímek pořízený VÝHRADNĚ pro miniaturu
+    // karty projektu (`portfolio_card_thumbnail()`). Do galerie na detailu
+    // nepatří — jinak by se tentýž obrázek ukázal dvakrát. Obecný nástroj
+    // na kterýkoli další projekt, jehož první karta je špatná miniatura.
+    $screens = collect($screenshots ?? [])->reject(fn ($s) => $s->type === 'thumbnail');
 
     // Pořadí: hero první, pak gallery v DB pořadí.
     $ordered = $screens->sortBy(fn ($s) => $s->type === 'hero' ? 0 : 1)->values();

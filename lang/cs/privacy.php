@@ -32,6 +32,8 @@ return [
     // OND-284 — tělo stránky přepsáno do ich-formy (nález auditu OND-254).
     // Doplněn Microsoft Clarity, přílohy, IP/user agent, seznam příjemců,
     // právní základ a práva subjektu; odstraněno, co web nedělá.
+    // Konflikt s OND-266 (oprava uvozovek) vyřešen ve prospěch tohoto znění —
+    // odstavce, které OND-266 opravoval, tenhle přepis ruší celé.
     'content' =>'<p>Účinné od 23. září 2026</p>
 
 <p>Tenhle web provozuju já, Ondřej Kriška — Dunajovská 116, 691 81 Březí, IČO 19231407. Nemám tým ani obchodní oddělení, takže jsem zároveň jediný, kdo se k vašim údajům dostane. Napsat mi můžete kdykoli na <a href="mailto:ok@ondraweb.cz">ok@ondraweb.cz</a>.</p>

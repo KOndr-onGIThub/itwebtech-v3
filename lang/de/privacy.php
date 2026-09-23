@@ -32,6 +32,8 @@ return [
     // OND-284 — Text in die Ich-Form umgeschrieben (Audit-Befund OND-254).
     // Ergänzt: Microsoft Clarity, Anhänge, IP/User-Agent, Empfänger,
     // Rechtsgrundlage und Betroffenenrechte; entfernt, was die Website nicht tut.
+    // Konflikt mit OND-266 (Anführungszeichen) zugunsten dieser Fassung gelöst —
+    // die von OND-266 korrigierten Absätze entfallen hier vollständig.
     'content' =>'<p>Gültig ab 23. September 2026</p>
 
 <p>Diese Website betreibe ich, Ondřej Kriška — Dunajovská 116, 691 81 Březí, Tschechien, Ident.-Nr. 19231407. Ich habe weder ein Team noch eine Vertriebsabteilung, und damit bin ich auch der Einzige, der Ihre Daten je zu sehen bekommt. Schreiben Sie mir jederzeit an <a href="mailto:ok@ondraweb.cz">ok@ondraweb.cz</a>.</p>

@@ -119,13 +119,18 @@ Route::get('/projects',       fn() => redirect('/projekty', 301));
 Route::get('/projects/{any}', fn(string $any) => redirect('/projekty/' . $any, 301))->where('any', '.*');
 
 // OND-130 (B2 §1, klíčová direktiva 4): CS routing fix.
-// `/blog` musí 301 → `/jak-na-to` (default CS slug), aby byla CS landing
+// `/blog` musí 301 → `/zapisky` (default CS slug), aby byla CS landing
 // stránka konzistentní s ostatními CS slugy. Bez explicitního redirectu
 // by fallback `/{slug}` níže prohledal non-default mapy a poslal uživatele
 // na `/en/blog` (první match v dict order) — to je SEO + UX regrese.
 // EN i DE mají vlastní /{locale}/blog prefix, takže není konflikt.
-Route::get('/blog',           fn() => redirect('/jak-na-to', 301));
-Route::get('/blog/{any}',     fn(string $any) => redirect('/jak-na-to/' . $any, 301))->where('any', '.*');
+Route::get('/blog',           fn() => redirect('/zapisky', 301));
+Route::get('/blog/{any}',     fn(string $any) => redirect('/zapisky/' . $any, 301))->where('any', '.*');
+
+// OND-266: CS slug sekce se změnil `jak-na-to` → `zapisky` (Ondřej 23. 9.).
+// Staré adresy musí držet 301, jsou v indexu i v odkazech zvenčí.
+Route::get('/jak-na-to',       fn() => redirect('/zapisky', 301));
+Route::get('/jak-na-to/{any}', fn(string $any) => redirect('/zapisky/' . $any, 301))->where('any', '.*');
 
 /*
 |--------------------------------------------------------------------------

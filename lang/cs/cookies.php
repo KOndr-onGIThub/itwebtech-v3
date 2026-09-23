@@ -38,7 +38,12 @@ return [
         'heading' => 'Co měřím',
         'items'   => [
             'Návštěvnost a zdroje (odkud lidé přicházejí, kolik stránek shlédnou, jak dlouho zůstanou).',
-            'Interakci s primárními CTA — klik na „Získat cenovou nabídku“, telefonní číslo, otevření formuláře, odeslání poptávky.',
+            // OND-269 (audit OND-254): CTA „Získat cenovou nabídku“ na webu
+            // neexistuje — skutečné výzvy jsou „Napište mi, co potřebujete“,
+            // „Domluvit konzultaci“ a „Poslat poptávku“. Konkrétní znění se
+            // tu neuvádí schválně: právní text nemá zastarat pokaždé, když
+            // se přeformuluje tlačítko. Popsané je chování, ne popisek.
+            'Interakci s hlavními výzvami k akci — klik na tlačítko výzvy, na telefonní číslo, otevření formuláře, odeslání poptávky.',
             'Nahrávky relací (Clarity) — anonymizovaný video záznam pohybu kurzoru a kliků, aby šlo odhalit místa, kde návštěvník bloudí.',
         ],
     ],

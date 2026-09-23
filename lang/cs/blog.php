@@ -4,7 +4,8 @@ return [
 
     // OND-204 (OND-197 bod 11b): blog přepsán do Ondrova hlasu.
     // Rubrika „Jak na to" slibovala návody = obecný obsah, který má z webu
-    // zmizet. URL slug `jak-na-to` zůstává (SEO), mění se jen název rubriky.
+    // zmizet. OND-266: název rubriky i adresa sjednoceny na „Zápisky“ /
+    // `/zapisky`; ze starého `/jak-na-to` drží 301 (routes/web.php).
     'meta' => [
         'title'       => 'Zápisky — Ondřej Kriška',
         'description' => 'Píšu o tom, co při stavění webů a aplikací reálně řeším. Ceny, zadání, redesign, aplikace na míru.',
@@ -34,7 +35,7 @@ return [
     // a `sidebar_ad` odstraněny — nabídka auditu slibovala výsledek za klienta
     // a stránka měla tři výzvy k akci vedle sebe. Zůstává jedna, `cta` níž.
 
-    'back_to_blog' => '← Zpět na blog',
+    'back_to_blog' => '← Zpět na zápisky',
 
     // OND-130 P2 iter 8 — Article page-mark eyebrow + autor box.
     // OND-135 cleanup (2026-05-14): page_mark_index odebrán per sitewide

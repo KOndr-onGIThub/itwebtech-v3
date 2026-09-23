@@ -26,7 +26,9 @@ return [
         'privacy'  => 'zasady-ochrany-osobnich-udaju',
         'cookies'  => 'cookies',
         'projects' => 'projekty',
-        'blog'     => 'jak-na-to',
+        // OND-266: adresa sjednocená s názvem sekce (Ondřej 23. 9.).
+        // Staré `/jak-na-to` drží 301 v routes/web.php.
+        'blog'     => 'zapisky',
     ],
 
     'en' => [

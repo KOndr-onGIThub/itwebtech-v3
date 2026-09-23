@@ -71,7 +71,7 @@
 
     --color-fg-primary:  #F2F0EA;
     --color-fg-muted:    #9B9AA0;
-    --color-fg-faint:    #5C5C63;
+    --color-fg-decorative: #5C5C63;  /* OND-279: jen dekorace (linky, ordinály). Nikdy text s informací. */
 
     /* OND-231 F3 — ACID (hodnota musí zrcadlit :root
        ve foundation/design-system.css). */
@@ -205,7 +205,7 @@
 
     .landing-microcopy {
         margin-top: 0.875rem;
-        color: var(--color-muted);
+        color: var(--color-body);
         font-size: 0.9375rem;
         line-height: 1.7;
     }
@@ -704,7 +704,13 @@
 
     --color-heading:   #E2E8F0;
     --color-body:      #94A3B8;
-    --color-muted:     #5A6480;
+    /* OND-279: #5A6480 nesplní AA (4,5:1) na ŽÁDNÉM povrchu webu — nejhůř 2,43:1.
+       Token proto nedrží "tlumený text", ale "dekoraci": oddělovače, ikony,
+       které opakují to, co už říká text vedle nich. Text, který uživatel
+       potřebuje k rozhodnutí, patří na --color-body (nejhůř 5,58:1).
+       Třetí čitelný stupeň šedi se do palety nevejde — hierarchii nese
+       velikost, váha a umístění, ne další odstín. */
+    --color-decorative: #5A6480;
 }
 
 /* ============================================================
@@ -1148,7 +1154,7 @@
         font-size: 0.8125rem;
         font-weight: 600;
         letter-spacing: 0.03em;
-        color: var(--color-muted);
+        color: var(--color-body);
         border-radius: 6px;
         transition: color 0.15s, background-color 0.15s;
     }
@@ -2386,7 +2392,7 @@
     }
     .project-preview-card__type {
         font-size: 0.8125rem;
-        color: var(--color-muted);
+        color: var(--color-body);
         font-weight: 400;
     }
     .project-preview-card__cta {
@@ -2558,7 +2564,7 @@
         gap: 0.375rem;
         text-align: center;
         font-size: 0.8125rem;
-        /* OND-123: --color-muted (#5A6480) na #161A24 ≈ 3.3:1 → WCAG AA fail.
+        /* OND-123: --color-muted (dnes --color-decorative) (#5A6480) na #161A24 ≈ 3.3:1 → WCAG AA fail.
            --color-body (#94A3B8) ≈ 5.8:1 → PASS pro normální text. */
         color: var(--color-body);
     }
@@ -2628,7 +2634,7 @@
         font-weight: 700;
         letter-spacing: 0.09em;
         text-transform: uppercase;
-        color: var(--color-muted);
+        color: var(--color-body);
         margin-bottom: 0.25rem;
     }
     .contact-info dd {
@@ -2654,8 +2660,11 @@
     .contact-form__title {
         margin-bottom: .5rem;
     }
+    /* OND-279: --color-ink-500 (#64748B) dával 4,05:1 — těsně pod normou. Poslední
+       zbloudilý výskyt téhle vady; varianta .contact-form__thanks už na --color-body
+       dávno je. Perex nad formulářem je text, který vede k odeslání, ne dekorace. */
     .contact-form__subtitle {
-        color: var(--color-ink-500);
+        color: var(--color-body);
         font-size: .9375rem;
         margin-bottom: 1.75rem;
         line-height: 1.65;
@@ -2707,7 +2716,7 @@
     }
     .form-group input::placeholder,
     .form-group textarea::placeholder {
-        color: var(--color-muted);
+        color: var(--color-body);
     }
     .form-group textarea {
         resize: vertical;
@@ -2760,7 +2769,7 @@
     .form-group__hint {
         font-size: 0.8125rem;
         line-height: 1.5;
-        color: var(--color-muted);
+        color: var(--color-body);
         margin: 0;
     }
     /* `:not(:focus)` schválně — při psaní má přednost zlatý focus ring,
@@ -2843,7 +2852,7 @@
     }
 
     .form-file__icon {
-        color: var(--color-muted);
+        color: var(--color-decorative);
         width: 2rem;
         height: 2rem;
     }
@@ -2854,7 +2863,7 @@
     }
     .form-file__hint {
         font-size: 0.8125rem;
-        color: var(--color-muted);
+        color: var(--color-body);
     }
     .form-file__error {
         font-size: 0.8125rem;
@@ -2921,7 +2930,7 @@
        roztáhlo přes celou šířku položky — po výběru souboru na /kontakt svítil
        přes půl stránky obří ikona dokumentu. */
     .form-file__list-icon {
-        color: var(--color-muted);
+        color: var(--color-decorative);
         flex-shrink: 0;
         width: 1.125rem;
         height: 1.125rem;
@@ -2936,7 +2945,7 @@
         font-weight: 500;
     }
     .form-file__list-size {
-        color: var(--color-muted);
+        color: var(--color-body);
         white-space: nowrap;
         font-size: 0.8125rem;
     }
@@ -2944,7 +2953,7 @@
         background: none;
         border: none;
         cursor: pointer;
-        color: var(--color-muted);
+        color: var(--color-body);
         padding: 0.25rem;
         border-radius: 4px;
         line-height: 1;
@@ -3058,7 +3067,7 @@
 
     .pricing-tier__price-note {
         font-size: 0.8125rem;
-        color: var(--color-muted);
+        color: var(--color-body);
         margin-top: 0.25rem;
         margin-bottom: 0;
     }
@@ -3114,7 +3123,7 @@
     .pricing-note {
         text-align: center;
         font-size: 0.75rem;
-        color: var(--color-muted);
+        color: var(--color-body);
         margin-top: 1.25rem;
         letter-spacing: 0.01em;
         margin-inline: auto;
@@ -3233,7 +3242,7 @@
     .projects-preview-placeholder {
         padding: 4rem 1rem;
         text-align: center;
-        color: var(--color-muted);
+        color: var(--color-body);
         border: 1.5px dashed var(--border-subtle);
         border-radius: 1rem;
         font-size: 0.9375rem;
@@ -3664,6 +3673,223 @@
     }
 
     /* ============================================================
+       DOTYKOVÉ CÍLE ≥ 44 px (OND-266, bod 2)
+
+       Změřeno v prohlížeči přes getBoundingClientRect na 390×844,
+       šest stránek. Prvky níž měly výšku 19–35 px. Jde vždy o samostatné
+       cíle (patička, přepínač, checkbox) — odkazy uvnitř vět neřešíme,
+       ty z toku textu vytrhnout nejde a WCAG 2.5.8 je z požadavku
+       výslovně vyjímá.
+
+       Vzorec: `display: inline-flex` + `min-height: 44px`; tam, kde by
+       odsazení rozhodilo řádkování okolního textu, ho vrací záporná
+       svislá marže.
+       ============================================================ */
+
+    /* Patička — právní odkazy 21 px, telefon 21 px */
+    /* Odsazení schválně jen svislé — vodorovné by roztáhlo podtržení
+       odkazu za jeho text. */
+    .footer-bar__gdpr-link,
+    .footer-bar__phone {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.75rem;
+    }
+    .footer-bar__inner {
+        /* Odsazení odkazů si vlastní mezeru přineslo samo; původních
+           0,375rem by s ním na mobilu udělalo zbytečně vysokou patičku. */
+        gap: 0;
+    }
+    @media (min-width: 640px) {
+        .footer-bar__inner { gap: 0.75rem; }
+    }
+
+    /* Pre-footer navigace — 35 px */
+    .footer-prefooter__link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.75rem;
+    }
+
+    /* Hamburger v hlavičce — 40×40 */
+    .navbar__hamburger {
+        min-width: 2.75rem;
+        min-height: 2.75rem;
+    }
+
+    /* Tlačítka napříč webem — 40 px (padding 0,75rem + line-height 1) */
+    .btn {
+        min-height: 2.75rem;
+    }
+
+    /* Logo v hlavičce — klikací plocha 26 px podle výšky obrázku */
+    .navbar__logo {
+        min-height: 2.75rem;
+    }
+
+    /* Výběr souborů ve formulářích — 41 px */
+    .form-file__trigger {
+        min-height: 2.75rem;
+    }
+
+    /* Ceník, přepínač pásem — 80×31 */
+    .pcm-tab {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 2.75rem;
+    }
+
+    /* /kontakt — e-mail a telefon v kartě kontaktů 19 px */
+    .contact-info dd a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.75rem;
+    }
+
+    /* /kontakt — GDPR checkbox 16×16 (řádek labelu 43 px) */
+    .form-group--checkbox label {
+        min-height: 2.75rem;
+        padding-block: 0.125rem;
+    }
+    .form-group--checkbox input[type="checkbox"] {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-top: 0;
+    }
+
+    /* ============================================================
+       ARTICLE BODY — typografie článku (OND-266, bod 8)
+
+       Šablona článku neměla žádné typografické styly: `.article-body`,
+       `.article-content`, `.article-perex`, `.article-figure` ani
+       `.container-site--narrow` neexistovaly v CSS. Důsledky změřené
+       na produkci (1440 px):
+         • odstavec 1216 px při 16 px ≈ 152 znaků na řádek (norma 45–75)
+         • `p { margin: 0 }` z base vrstvy → odstavce slepené k sobě
+         • `a { text-decoration: none }` → odkazy v textu nerozeznatelné
+         • Tailwind preflight → `<ul>` bez odrážek a odsazení
+         • `.article-author` měl 760 px, text nad ním 1216 px → rozjeté
+
+       Míra (measure) je vedená přes `--article-measure` v `ch`, takže
+       drží počet znaků na řádek i kdyby se změnil stupeň písma.
+       `content-box` je tu schválně: max-width pak platí na text, ne
+       na text včetně paddingu.
+       ============================================================ */
+    .article-body {
+        --article-measure: 62ch;
+        color: var(--color-body);
+    }
+    .article-body .container-site--narrow {
+        box-sizing: content-box;
+        max-width: var(--article-measure);
+        margin-inline: auto;
+        padding-inline: clamp(1rem, 4.5vw, 2rem);
+    }
+
+    .article-perex,
+    .article-content,
+    .article-bonus {
+        font-size: 1.0625rem;
+        line-height: 1.75;
+        color: var(--color-body);
+    }
+    .article-perex {
+        font-size: 1.1875rem;
+        line-height: 1.65;
+        color: var(--color-heading);
+        margin-bottom: 2rem;
+    }
+
+    /* Vertikální rytmus — základní krok 1,25rem, nadpisy dostávají
+       výrazně větší mezeru nahoře než dole, aby patřily k textu pod
+       sebou a ne nad sebou. */
+    .article-perex p,
+    .article-content p,
+    .article-bonus p { margin-bottom: 1.25rem; }
+    .article-perex > :last-child,
+    .article-content > :last-child,
+    .article-bonus > :last-child { margin-bottom: 0; }
+
+    .article-content h2,
+    .article-bonus h2 {
+        font-size: 1.5rem;
+        line-height: 1.3;
+        font-weight: 700;
+        color: var(--color-heading);
+        margin-top: 2.75rem;
+        margin-bottom: 0.875rem;
+    }
+    .article-content h3,
+    .article-bonus h3 {
+        font-size: 1.125rem;
+        line-height: 1.4;
+        font-weight: 700;
+        color: var(--color-heading);
+        margin-top: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    .article-content > :first-child,
+    .article-bonus > :first-child { margin-top: 0; }
+
+    .article-content ul,
+    .article-content ol,
+    .article-bonus ul,
+    .article-bonus ol {
+        padding-left: 1.5rem;
+        margin-bottom: 1.25rem;
+        list-style-position: outside;
+    }
+    .article-content ul,
+    .article-bonus ul { list-style-type: disc; }
+    .article-content ol,
+    .article-bonus ol { list-style-type: decimal; }
+    .article-content li,
+    .article-bonus li { margin-bottom: 0.4375rem; }
+
+    .article-perex a,
+    .article-content a,
+    .article-bonus a {
+        color: var(--color-gold-500);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+    .article-perex a:hover,
+    .article-content a:hover,
+    .article-bonus a:hover { color: var(--color-gold-200); }
+
+    .article-perex strong,
+    .article-content strong,
+    .article-bonus strong {
+        color: var(--color-heading);
+        font-weight: 700;
+    }
+
+    .article-perex blockquote,
+    .article-content blockquote,
+    .article-bonus blockquote {
+        margin: 2rem 0;
+        padding: 0.25rem 0 0.25rem 1.25rem;
+        border-left: 3px solid var(--color-gold-500);
+        color: var(--color-heading);
+    }
+    .article-content blockquote p:last-child,
+    .article-bonus blockquote p:last-child { margin-bottom: 0; }
+
+    /* Obrázky sedí na míru textu — dřív byly zarovnané doleva na plnou
+       šířku 1280px kontejneru, zatímco text běžel pod nimi. */
+    .article-figure {
+        margin: 2.5rem 0;
+    }
+    .article-figure img,
+    .article-figure picture img {
+        width: 100%;
+        height: auto;
+        border-radius: 0.875rem;
+        border: 1px solid var(--border-subtle);
+    }
+
+    /* ============================================================
        ARTICLE AUTHOR BOX (OND-130 iter 8)
        — E-E-A-T signál pro Google + osobní podpis pro čtenáře.
        ============================================================ */
@@ -3803,7 +4029,7 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.08em;
-        color: var(--color-muted);
+        color: var(--color-body);
         background: var(--bg-elevated);
         border-top: 1.5px solid var(--border-subtle);
     }
@@ -3832,7 +4058,7 @@
         color: var(--color-ok);
     }
     .pricing-compare__no {
-        color: var(--color-muted);
+        color: var(--color-body);
         font-size: 1.1rem;
         font-weight: 700;
     }
@@ -3899,7 +4125,7 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.08em;
-        color: var(--color-muted);
+        color: var(--color-body);
         background: var(--bg-elevated);
         border-top: 1.5px solid var(--border-subtle);
     }
@@ -3928,7 +4154,7 @@
         min-width: 56px;
     }
     .pcm-value-wrap .pricing-compare__yes { color: var(--color-ok); }
-    .pcm-value-wrap .pricing-compare__no  { color: var(--color-muted); }
+    .pcm-value-wrap .pricing-compare__no  { color: var(--color-body); }
     .pcm-value-wrap .pricing-compare__val {
         font-size: 0.875rem;
         font-weight: 700;
@@ -4137,7 +4363,7 @@
     }
     .citation-inline__author span {
         font-size: 0.75rem;
-        color: var(--color-muted);
+        color: var(--color-body);
         display: block;
     }
 
@@ -4194,7 +4420,7 @@
         font-weight: 800;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: var(--color-muted);
+        color: var(--color-body);
     }
     .ai-compare__col--featured .ai-compare__label {
         color: var(--color-gold-500);
@@ -4230,9 +4456,11 @@
         flex-shrink: 0;
         margin-top: 1px;
     }
+    /* OND-279: ✕ je v porovnání JEDINÝ nositel informace „tohle tam není" —
+       opacita 0,6 na tlumené šedi z něj dělala 2,0:1. Že je „ne" tišší než
+       „ano", nese kontrast proti acidu, ne průhlednost. */
     .ai-compare__icon--no {
-        color: var(--color-muted);
-        opacity: 0.6;
+        color: var(--color-body);
     }
     .ai-compare__icon--yes {
         color: var(--color-gold-500);
@@ -4240,7 +4468,7 @@
 
     .ai-compare__note {
         font-size: 0.8125rem;
-        color: var(--color-muted);
+        color: var(--color-body);
         font-style: italic;
         margin: 0;
         line-height: 1.55;
@@ -4433,7 +4661,7 @@
         padding-top: 0.5rem;
     }
     .project-detail__internal {
-        color: var(--color-muted, var(--color-body));
+        color: var(--color-body);
         font-style: italic;
         margin: 0;
     }
@@ -4495,7 +4723,7 @@
         font-size: 0.875rem;
         font-weight: 600;
         letter-spacing: 0.04em;
-        /* OND-123: bumped from --color-muted (#5A6480) + 0.65 opacity → --color-body
+        /* OND-123: bumped from --color-muted (dnes --color-decorative) (#5A6480) + 0.65 opacity → --color-body
            (#94A3B8) + 0.9 opacity. WCAG AA na #101318 background: ~5.4:1 (bylo ~2.3:1). */
         color: var(--color-body);
         text-transform: uppercase;
@@ -4558,7 +4786,7 @@
     .step-note {
         margin-top: 1rem;
         font-size: 0.875rem;
-        color: var(--color-muted);
+        color: var(--color-body);
         font-style: italic;
         line-height: 1.6;
         padding: 0.75rem 1rem;
@@ -4698,7 +4926,7 @@
         font-size: 0.8125rem;
         text-transform: uppercase;
         letter-spacing: 0.06em;
-        color: var(--color-muted);
+        color: var(--color-body);
         font-weight: 500;
     }
     .home-projects-card__outcome {
@@ -4957,14 +5185,14 @@
     }
     .final-cta-subtext {
         font-size: 1rem;
-        color: var(--color-muted);
+        color: var(--color-body);
         margin-bottom: 2rem;
         text-align: center;
     }
     .final-cta-note {
         margin-top: 0.75rem;
         font-size: 0.875rem;
-        color: var(--color-muted);
+        color: var(--color-body);
         text-align: center;
     }
 
@@ -4987,7 +5215,7 @@
        INLINE MUTED TEXT
        ============================================================ */
     .text-body    { color: var(--color-body); }
-    .text-muted   { color: var(--color-muted); }
+    .text-muted   { color: var(--color-body); }
     .text-heading { color: var(--color-heading); }
     .text-gold    { color: var(--color-gold-500); }
 
@@ -5207,7 +5435,7 @@
         align-items: center;
         justify-content: center;
         gap: 0.875rem;
-        color: var(--color-muted);
+        color: var(--color-body);
         font-size: 0.9375rem;
         font-style: italic;
         text-align: center;
@@ -5232,7 +5460,7 @@
 
     .consult-modal-cta__note {
         font-size: 0.8125rem;
-        color: var(--color-muted);
+        color: var(--color-body);
     }
 
     /* Mobile adjustments — vertically centered, not bottom-sheet */
@@ -5278,7 +5506,8 @@
         align-items: center;
         gap: 0.4rem;
         padding: 0.5rem 1.125rem;
-        min-height: 40px;
+        /* OND-266 (2): 40 → 44 px, dotykový cíl. */
+        min-height: 2.75rem;
         background: transparent;
         border: 1px solid var(--border-subtle);
         border-radius: 999px;
@@ -5307,12 +5536,12 @@
     }
     .portfolio-filter__tab-count {
         font-size: 0.8125rem;
-        color: var(--color-muted);
+        color: var(--color-body);
     }
     .portfolio-filter__count {
         margin: 0;
         font-size: 0.8125rem;
-        color: var(--color-muted);
+        color: var(--color-body);
         display: inline-flex;
         gap: 0.35rem;
         align-items: baseline;
@@ -5407,7 +5636,7 @@
         color: var(--color-gold-500);
     }
     .portfolio-card__meta .portfolio-card__client {
-        color: var(--color-muted);
+        color: var(--color-body);
         text-transform: none;
         letter-spacing: 0;
     }
@@ -5485,7 +5714,7 @@
         margin-top: 0.5rem;
         padding: 0 0.25rem;
         font-size: 0.8125rem;
-        color: var(--color-muted);
+        color: var(--color-body);
     }
     .portfolio-detail-gallery__grid {
         display: grid;
@@ -5588,7 +5817,7 @@
         font-size: 1rem;
     }
     .portfolio-detail-body__empty {
-        color: var(--color-muted);
+        color: var(--color-body);
         font-style: italic;
     }
 
@@ -5611,7 +5840,7 @@
     .portfolio-detail-meta__row dt {
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        color: var(--color-muted);
+        color: var(--color-body);
         font-size: 0.75rem;
     }
     .portfolio-detail-meta__row dd {
@@ -5700,7 +5929,7 @@
     .social-proof-bar__item + .social-proof-bar__item::before {
         content: '•';
         margin-right: 0.75rem;
-        color: var(--color-muted, var(--color-ink-400));
+        color: var(--color-decorative);
         opacity: 0.6;
     }
     .social-proof-bar__stars {
@@ -5712,7 +5941,7 @@
         color: var(--color-heading);
     }
     .social-proof-bar__meta {
-        /* OND-123: --color-muted (#5A6480) na #101318 dává jen ~3.5:1 → WCAG AA fail.
+        /* OND-123: --color-muted (dnes --color-decorative) (#5A6480) na #101318 dává jen ~3.5:1 → WCAG AA fail.
            --color-body (#94A3B8) ≈ 5.9:1 → PASS pro normální text. */
         color: var(--color-body);
     }
@@ -5779,13 +6008,13 @@
     .inline-form__note {
         margin-top: 0.875rem;
         font-size: 0.875rem;
-        color: var(--color-ink-200, var(--color-muted));
+        color: var(--color-ink-200);
         line-height: 1.55;
     }
     .inline-form__privacy {
         margin-top: 0.875rem;
         font-size: 0.8125rem;
-        color: var(--color-muted, var(--color-ink-400));
+        color: var(--color-body);
         line-height: 1.5;
     }
     .inline-form__privacy a {
@@ -6185,7 +6414,7 @@
         top: 0.85em;
         width: 32px;
         height: 1px;
-        background: var(--color-fg-faint);
+        background: var(--color-fg-decorative);
     }
 
     /* ============================================================

@@ -76,35 +76,11 @@ return [
         ],
     ],
 
-    // OND-202 (kap. 9 bod 2 master promptu): ukázky práce jako hlavní obrazový
-    // materiál. Texty ze schválené sekce 2 dokumentu homepage-texty (OND-186).
-    // Popisky = fakta z živých webů (obor firmy), žádná vymyšlená čísla.
-    'showcase' => [
-        'heading' => 'Weby, které běží v praxi',
-        'intro'   => 'Tohle jsou živé projekty, na které se můžete podívat hned teď. Klikněte a projděte si je.',
-        'visit'   => 'Otevřít živý web',
-        'aria'    => 'Otevřít web :domain v novém okně',
-        'sites'   => [
-            [
-                'slug'   => 'barana',
-                'domain' => 'barana.cz',
-                'url'    => 'https://www.barana.cz/',
-                'desc'   => 'Bioklimatické pergoly, brány a ploty',
-            ],
-            [
-                'slug'   => 'zubniprovazek',
-                'domain' => 'zubniprovazek.cz',
-                'url'    => 'https://www.zubniprovazek.cz/',
-                'desc'   => 'Zubní ordinace pro děti i dospělé',
-            ],
-            [
-                'slug'   => 'pitarena',
-                'domain' => 'shop.pitarena.cz',
-                'url'    => 'https://shop.pitarena.cz/',
-                'desc'   => 'E-shop s motorkami a náhradními díly',
-            ],
-        ],
-    ],
+    // OND-269 (audit OND-254, nález 7): blok `showcase` („Weby, které běží
+    // v praxi" — tři dlaždice s odkazem na živý web) je zrušený. Dvě sekce
+    // projektů nad sebou říkaly totéž a BARANA i PitArena byly v obou.
+    // Slito do jedné sekce `portfolio` níž, která nese titulek odsud
+    // a doplnila si odkaz na živý web (`live_cta` / `live_aria`).
 
     // OND-201 (nález 5.7): první velká sekce homepage se definovala negací
     // konkurence („Co se opakuje u většiny webových projektů") a dva ze tří
@@ -128,6 +104,12 @@ return [
                 'text'    => 'Ten, kdo vám prodává web, ho nestaví. Ti, kdo ho staví, s vámi nemluví. Uprostřed se ztrácí kontext a záměr — a výsledek neodpovídá tomu, co jste chtěli.',
             ],
         ],
+        // OND-269 (audit OND-254, nález 7): ze zrušené sekce „Generátor versus
+        // váš byznys" (dva sloupce, osm odrážek) zbyly dvě věty. Argument je
+        // stejný jako u první položky výš („šablona vydávaná za řešení na
+        // míru"), takže patří sem, ne do vlastní sekce o čtyři obrazovky níž.
+        'ai_heading' => 'Šablona je hotová rychle. Poptávky tím rychle nepřijdou.',
+        'ai_text'    => 'Generátor naklikne layout, doplní texty i obrázky — nezjistí ale, komu prodáváte, proč si vás vybrat a kde se vám zákazník ztrácí. AI používám jako nástroj, rozhodnutí o tom, co má web říkat a v jakém pořadí, za vás neudělá.',
     ],
 
     'how_i_work' => [
@@ -164,35 +146,14 @@ return [
         ],
     ],
 
-    'ai' => [
-        'subheading' => 'Šablona je hotová rychle. Poptávky tím rychle nepřijdou.',
-        'heading'    => 'Generátor versus váš byznys',
-        'intro'      => 'Generátory dneška umí naklikat layout, doplnit texty i obrázky. Co neumí: zjistit, komu prodáváte, proč si vás vybrat a kde se vám zákazník ztrácí. Web, který má prodávat, začíná u toho druhého.',
-        'laik' => [
-            'label'   => 'Laik + AI',
-            'outcome' => 'Rychlý výsledek.',
-            'items'   => [
-                'Generický, neověřený, zaměnitelný',
-                'Bez výzkumu zákazníků a konkurence',
-                'Bez strategie, co má web říkat a v jakém pořadí',
-                'Hezky vypadající — identický s desítkami dalších',
-            ],
-            'note' => 'AI web dává smysl, když zkoušíte nápad bez závazku.',
-        ],
-        'expert' => [
-            'label'   => 'Odborník + AI',
-            'outcome' => 'Stejně rychlé tam, kde to dává smysl. A bez generického výsledku.',
-            'items'   => [
-                'Postavené na strategii, datech a vašich zákaznících',
-                'Kontrola a výsledek, za který někdo ručí',
-                'Obsah navržený tak, aby člověk zůstal a kontaktoval vás',
-                'Web, který se liší od konkurence — záměrně',
-            ],
-            'note' => 'Pokud provozujete byznys, je to rozdíl, který zákazníci poznají.',
-        ],
-        'closing' => 'AI používám jako nástroj — zkracuje rutinní práci. Rozhodnutí o tom, co má web říkat, komu a v jakém pořadí, ale za vás neudělá. Ta práce musí být hotová dřív, než se začne web stavět.',
-    ],
+    // OND-269 (audit OND-254, nález 7): sekce „Generátor versus váš byznys"
+    // (1 086 px desktop / 1 607 px mobil) je zrušená — board schválil škrt
+    // 22. 9. Zbyly z ní dvě věty v `problems.ai_heading` / `problems.ai_text`,
+    // kde stejný argument už stejně stál.
 
+    // OND-269: `toyota` už není samostatná sekce — vykresluje se uvnitř „Proč
+    // já" pod videem a bio. Titulek „18 let v Toyotě" dřív stál dvakrát
+    // (jednou tady, jednou v `why_me.bio`); z bio je proto Toyota vypuštěná.
     'toyota' => [
         'heading'      => '18 let v Toyotě. Pak jsem odešel.',
         'text'         => 'Automobilový průmysl mě naučil jedno: za špičkovým výsledkem stojí vždy stejné kroky. Analýza, návrh, testování, ověřování — a pak znovu. Ne zkratky, ne odhady. Principy, které fungují bez ohledu na obor.',
@@ -201,10 +162,16 @@ return [
         'quote_author' => 'Pavel Baudyš, ředitel řízení výroby, montáže a logistiky, Toyota Motor Manufacturing Czech Republic (2024)',
     ],
 
+    // OND-269: jediná sekce projektů na homepage (dřív `showcase` + `portfolio`).
+    // Titulek i intro pocházejí ze zrušeného `showcase` — mluví o živých webech,
+    // ne o „realizacích", a to je pro návštěvníka konkrétnější.
     'portfolio' => [
-        'heading'    => 'Realizované projekty',
+        'heading'    => 'Weby, které běží v praxi',
+        'intro'      => 'Tohle jsou živé projekty, na které se můžete podívat hned teď. U každého je i to, co klientovi přinesl.',
         'cta'        => 'Všechny projekty →',
         'detail_cta' => 'Více o projektu',
+        'live_cta'   => 'Otevřít živý web',
+        'live_aria'  => 'Otevřít web :client v novém okně',
         'cards' => [
             'pitarena' => [
                 'client'  => 'PitArena',
@@ -317,7 +284,9 @@ return [
         'video_aria' => 'Video: Ondřej Kriška — kdo jsem a jak stavím weby',
         'heading'   => 'Proč já',
         'photo_alt' => 'Ondřej Kriška — webový vývojář',
-        'bio'       => '18 let jsem v Toyotě řídil projekty, ve kterých nesměla padnout linka. Dnes ty samé principy — přesná specifikace, analýza, ověřování — používám pro webové projekty. Pracuji sám, mluvíte přímo se mnou od první konzultace po spuštění i dál.',
+        // OND-269: první věta („18 let jsem v Toyotě…") odsud vypadla —
+        // Toyota se hned pod tímhle odstavcem vypráví celá, v bloku `toyota`.
+        'bio'       => 'Pracuji sám. Mluvíte přímo se mnou od první konzultace po spuštění i dál — stejná přesná specifikace, analýza a ověřování u každého projektu.',
         'advantages' => [
             [
                 'heading' => 'Vlastní kód, žádné šablony',
@@ -346,19 +315,10 @@ return [
         'note'    => '',
     ],
 
-    'guarantee' => [
-        'heading' => 'Dvě věci, na které se můžete spolehnout.',
-        'items'   => [
-            [
-                'heading' => 'Cena dopředu',
-                'text'    => 'Dostanete specifikaci s přesnou cenou ještě před zahájením práce. Co je ve specifikaci, to je na faktuře. Bez vícenákladů, bez překvapení.',
-            ],
-            [
-                'heading' => 'Přímý kontakt vždy',
-                'text'    => 'Komunikujete přímo se mnou — ne s obchodníkem nebo koordinátorem. Zavolejte kdykoliv. V drtivé většině případů zvednu hned.',
-            ],
-        ],
-    ],
+    // OND-269 (audit OND-254, nález 7): sekce „Dvě věci, na které se můžete
+    // spolehnout." je zrušená — board schválil škrt 22. 9. Oba sliby
+    // („Cena dopředu", „Přímý kontakt") stály doslova podruhé; jediné znění
+    // zůstává v `why_me.advantages` 02 a 03.
 
     // OND-229 (F2 — důkazní vrstva, R3 plánu OND-226): sekce „Pod kapotou"
     // ukazuje řemeslo, které v kódu reálně je. Každé tvrzení je ověřitelné
@@ -416,14 +376,12 @@ return [
                 'question' => 'Jste jeden člověk. Co když onemocníte nebo skončíte?',
                 'answer'   => 'Rozumím — u zakázky za víc než sto tisíc je to ta nejdůležitější otázka. Web neběží na platformě, ze které byste nemohli odejít: je to vlastní kód na běžném webhostingu. Přístupy do administrace hostingu a na FTP můžete mít po celou dobu, stačí si o ně říct. Po doplacení projektu je kód váš — předám vám ho, kdykoli si o něj řeknete, a pokračovat na něm může kterýkoli vývojář; když bude potřeba, sepíšu k tomu i dokumentaci. Nepřetržitou pohotovost nedržím a nebudu tvrdit, že ano. Ručím za to, že u mě nic nezůstane zamčené.',
             ],
-            [
-                'key'      => 'price',
-                'question' => 'Kolik to bude stát?',
-                // OND-198 (nález 5.5): „cenová kotva výše" byl žargon; odkaz teď
-                // míří na skutečnou sekci. OND-198 (nález 5.4): vede Standard,
-                // nejlevnější pásmo je uvedené jako výjimka.
-                'answer'   => 'Většina projektů vychází mezi 55 a 150 tisíci korunami. Ceny najdete výš na této stránce v sekci „Kolik to bude stát?" a podrobně v ceníku — Standard 55 000 Kč, Custom od 95 000 Kč. Startovní pásmo za 25 000 Kč je výjimka pro živnostníky, ne standardní vstup. Přesnou cenu dostanete písemně po krátké konzultaci, na faktuře je pak přesně to, co je ve specifikaci.',
-            ],
+            // OND-269 (audit OND-254, nález 7): otázka „Kolik to bude stát?“
+            // odsud vypadla — stejný titulek i stejná čísla stojí o čtyři
+            // sekce výš v cenové kotvě (`price_anchor`) a v ceníku.
+            // OND-266 tu mezitím opravil rovné uvozovky v odpovědi na cenu;
+            // ta oprava zanikla se smazanou položkou, ne přetažením ze staré
+            // větve. Druhá oprava z OND-266 („bezúdržbové weby“) zůstává níž.
             [
                 'key'      => 'duration',
                 'question' => 'Jak dlouho to trvá?',
@@ -436,7 +394,7 @@ return [
             ],
             [
                 'key'      => 'maintenance-free',
-                'question' => 'Co jsou „bezúdržbové weby"?',
+                'question' => 'Co jsou „bezúdržbové weby“?',
                 'answer'   => 'Žádný WordPress, žádné pluginy, žádné měsíční bezpečnostní aktualizace. Web stojí na vlastním kódu — běží sám, nevyžaduje pravidelné opravy a nepadá kvůli kolizi šablon. Drobné změny obsahu řešíme přímo, bez ticketu.',
             ],
             // Archiv: další FAQ otázky se přesouvají mimo homepage (na /faq nebo /sluzby — mimo scope OND-121).

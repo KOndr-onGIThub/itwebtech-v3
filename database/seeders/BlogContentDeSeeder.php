@@ -27,9 +27,11 @@ use Illuminate\Support\Facades\DB;
  * z CS verze. Když se čísla v `lang/de/price.php` změní, je potřeba srovnat
  * i tenhle text.
  *
- * EN překlady: článek 3 a titulek/perex článku 6 přepsalo OND-267
- * (`BlogContentEnSeeder`). Zbylé tři články a tělo šestky jsou pořád ze
- * starého importu a s přepsanou CS verzí se nekryjí — řeší OND-275.
+ * EN překlady: od OND-275 jsou všechny publikované EN články v
+ * `BlogContentEnSeeder` a kryjí se s přepsanou CS verzí — článek 3 a
+ * titulek/description šestky přepsalo OND-267 (redline OND-262), články 4,
+ * 10, 13 a tělo šestky OND-275 (redline OND-274). Ze starého SQL importu
+ * už nežije žádná publikovaná EN verze.
  */
 class BlogContentDeSeeder extends Seeder
 {

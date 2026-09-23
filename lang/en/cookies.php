@@ -38,7 +38,11 @@ return [
         'heading' => 'What I measure',
         'items'   => [
             'Traffic and sources (where visitors come from, how many pages they view, how long they stay).',
-            'Interactions with primary CTAs — clicks on “Get a quote”, the phone number, opening the form, submitting an inquiry.',
+            // OND-269 (audit OND-254): the CTA “Get a quote” does not exist
+            // anywhere on the site. No button label is quoted here on
+            // purpose — a legal page should not go stale every time a
+            // button is reworded. What is described is the behaviour.
+            'Interactions with the main calls to action — clicks on the call-to-action button, the phone number, opening the form, submitting an inquiry.',
             'Session recordings (Clarity) — anonymised video capture of cursor movement and clicks so I can spot places where visitors get lost.',
         ],
     ],

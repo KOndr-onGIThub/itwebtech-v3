@@ -91,16 +91,13 @@
 
     var TARGETS = [
         '.pd-hero',                     /* podtržení v H1 → CTA */
-        '.pd-work',                     /* 02 — každá dlaždice zvlášť (kvůli mobilu) */
-        '.pd-issue',                    /* 03 — přejezd přes číslo, každý problém sám */
-        '.pd-services',                 /* 04 — tři svislé linky se staggerem, naráz */
-        '.pd-case',                     /* 05 — horní hrana vizuálu, každá případovka sama */
+        '.pd-case',                     /* 02 — horní hrana vizuálu, každá případovka sama */
+        '.pd-issue',                    /* 04 — přejezd přes číslo, každý problém sám */
+        '.pd-services',                 /* 05 — tři svislé linky se staggerem, naráz */
         '.pd-price__col--featured',     /* 06 — uzavřená smyčka */
         '.pd-hood',                     /* 08 — svislé linky zdola nahoru */
         '.pd-step',                     /* 09 — každý krok zvlášť */
-        '.pd-versus__col--mine',        /* 11 — levá hrana „mého" sloupce */
-        '.pd-promise',                  /* 13 — dva přejezdy přes číslo záruky */
-        '.pd-form__panel',              /* 15 — cíl stránky */
+        '.pd-form__panel',              /* 11 — cíl stránky */
 
         /* OND-251 — PODSTRÁNKY. Jediná položka. Není to výjimka ze seznamu,
            je to TENTÝŽ OBJEKT jako `.pd-form__panel` o řádek výš: poptávkový
@@ -115,12 +112,11 @@
         '.contact-form'
     ];
 
-    /* Kontejnery vs. jednotlivé položky: .pd-services, .pd-hood a .pd-promise
-       jsou obaly, protože jejich děti stojí VEDLE SEBE — do pásma dojedou
-       naráz a rytmus dělá stagger v CSS. .pd-issue, .pd-case, .pd-work
-       a .pd-step se pozorují po kusech, protože jdou (aspoň na mobilu)
-       pod sebou a společný obal by je odpálil naslepo. Stejná úvaha jako
-       u dlaždic v sekci 02. */
+    /* Kontejnery vs. jednotlivé položky: .pd-services a .pd-hood jsou obaly,
+       protože jejich děti stojí VEDLE SEBE — do pásma dojedou naráz a rytmus
+       dělá stagger v CSS. .pd-issue, .pd-case a .pd-step se pozorují po
+       kusech, protože jdou (aspoň na mobilu) pod sebou a společný obal by je
+       odpálil naslepo. */
 
     function armCharges() {
         if (reduce || !hasIO) return;   /* bez IO zůstane vše ve statickém stavu */

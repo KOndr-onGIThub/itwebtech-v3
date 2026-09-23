@@ -49,9 +49,16 @@ class EnsureArticlesSeededSeeder extends Seeder
         // Na existující DB dělá totéž migrace 2026_09_16_120000_seed_de_blog_content.
         $this->call(BlogContentDeSeeder::class);
 
-        // OND-267: EN texty jsou v dumpech pořád ze starého importu (jiná
-        // osnova než přepsaná CS/DE verze). Na existující DB dělá totéž
-        // migrace 2026_09_23_100300_ond267_en_blog_obsah.
+        // OND-267 + OND-275: EN texty jsou v dumpech pořád ze starého importu
+        // (jiná osnova než přepsaná CS/DE verze). Na existující DB dělají
+        // totéž migrace 2026_09_23_100300_ond267_en_blog_obsah
+        // a 2026_09_23_100400_ond275_en_blog_obsah.
         $this->call(BlogContentEnSeeder::class);
+
+        // OND-286: musí běžet až poslední. Dumpy i seedery výš nesou absolutní
+        // odkazy na `itwebtech.cz/jak-na-to/...`; tenhle seeder je uklízí nad
+        // hotovým obsahem. Na existující DB dělá totéž migrace
+        // 2026_09_23_110000_ond286_odkazy_na_starou_domenu.
+        $this->call(BlogLegacyDomainLinksSeeder::class);
     }
 }

@@ -5,7 +5,7 @@
 | Blog články (statická data)
 |--------------------------------------------------------------------------
 | Žádná DB — články se přidávají přidáním položky do pole 'items'.
-| Klíč = slug v URL /jak-na-to/{slug}.
+| Klíč = slug v URL /zapisky/{slug} (do OND-266 /jak-na-to, drží 301).
 |
 */
 

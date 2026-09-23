@@ -69,32 +69,12 @@ return [
     ],
 
     // OND-202: Arbeitsproben als primäres Bildmaterial (live Kunden-Websites).
-    'showcase' => [
-        'heading' => 'Websites, die in der Praxis laufen',
-        'intro'   => 'Das sind Live-Projekte, die Sie sich sofort ansehen können. Klicken Sie sich durch.',
-        'visit'   => 'Live-Website öffnen',
-        'aria'    => ':domain in neuem Fenster öffnen',
-        'sites'   => [
-            [
-                'slug'   => 'barana',
-                'domain' => 'barana.cz',
-                'url'    => 'https://www.barana.cz/',
-                'desc'   => 'Bioklimatische Pergolen, Tore und Zäune',
-            ],
-            [
-                'slug'   => 'zubniprovazek',
-                'domain' => 'zubniprovazek.cz',
-                'url'    => 'https://www.zubniprovazek.cz/',
-                'desc'   => 'Zahnarztpraxis für Kinder und Erwachsene',
-            ],
-            [
-                'slug'   => 'pitarena',
-                'domain' => 'shop.pitarena.cz',
-                'url'    => 'https://shop.pitarena.cz/',
-                'desc'   => 'E-Shop mit Pit-Bikes und Ersatzteilen',
-            ],
-        ],
-    ],
+    // OND-269 (Audit OND-254, Befund 7): Der Block `showcase` („Websites, die
+    // in der Praxis laufen" — drei Kacheln mit Link zur Live-Website) ist
+    // gestrichen. Zwei Projektsektionen sagten dasselbe, BARANA und PitArena
+    // standen in beiden. Zusammengelegt in die eine Sektion `portfolio`
+    // unten, die die Überschrift von hier übernommen hat und einen Link zur
+    // Live-Website bekam (`live_cta` / `live_aria`).
 
     // OND-201 (Befund 5.7): Der Abschnitt definierte sich über die Negation
     // der Konkurrenz und zwei von drei Punkten sagten dasselbe. Jetzt führt,
@@ -117,6 +97,12 @@ return [
                 'text'    => 'Die Person, die Ihnen die Website verkauft, baut sie nicht. Die Personen, die sie bauen, sprechen nicht mit Ihnen. Kontext und Absicht gehen in der Mitte verloren — und das Ergebnis entspricht nicht dem, was Sie wollten.',
             ],
         ],
+        // OND-269 (Audit OND-254, Befund 7): Rest der gestrichenen Sektion
+        // „Generator versus Ihr Geschäft". Dasselbe Argument wie im ersten
+        // Punkt oben („eine Vorlage, verkauft als Maßarbeit") — es gehört
+        // hierher, nicht in eine eigene Sektion vier Bildschirme weiter unten.
+        'ai_heading' => 'Eine Vorlage ist schnell fertig. Anfragen kommen davon nicht.',
+        'ai_text'    => 'Ein Generator klickt ein Layout zusammen und füllt Texte und Bilder ein — er findet aber nicht heraus, an wen Sie verkaufen, warum ein Kunde Sie wählen sollte und wo Interessenten abspringen. KI nutze ich als Werkzeug; die Entscheidung, was die Website sagen soll und in welcher Reihenfolge, trifft sie nicht für Sie.',
     ],
 
     'how_i_work' => [
@@ -153,35 +139,16 @@ return [
         ],
     ],
 
-    'ai' => [
-        'subheading' => 'Eine Vorlage ist schnell aufgebaut. Anfragen kommen davon nicht schneller.',
-        'heading'    => 'Generator gegen Ihr Geschäft',
-        'intro'      => 'Heutige Generatoren können ein Layout zusammenklicken und Texte und Bilder einfügen. Was sie nicht können: herausfinden, an wen Sie verkaufen, warum ein Kunde Sie wählen sollte oder wo Interessenten abspringen. Eine Website, die verkaufen soll, beginnt beim zweiten Teil.',
-        'laik' => [
-            'label'   => 'Laie + KI',
-            'outcome' => 'Schnelles Ergebnis.',
-            'items'   => [
-                'Generisch, unvalidiert, austauschbar',
-                'Ohne Kunden- und Wettbewerbsrecherche',
-                'Ohne Strategie, was die Website sagt und in welcher Reihenfolge',
-                'Hübsch aussehend — identisch mit Dutzenden anderen',
-            ],
-            'note' => 'Eine KI-Website ist sinnvoll, wenn Sie eine Idee ohne Verpflichtung testen.',
-        ],
-        'expert' => [
-            'label'   => 'Experte + KI',
-            'outcome' => 'Genauso schnell, wo es sinnvoll ist. Und ohne generisches Ergebnis.',
-            'items'   => [
-                'Gebaut auf Strategie, Daten und Ihren Kunden',
-                'Kontrolle und ein Ergebnis, für das jemand verantwortlich ist',
-                'Inhalte, die so gestaltet sind, dass Nutzer bleiben und Sie kontaktieren',
-                'Eine Website, die sich bewusst von der Konkurrenz unterscheidet',
-            ],
-            'note' => 'Wenn Sie ein Unternehmen führen, ist das ein Unterschied, den Ihre Kunden bemerken werden.',
-        ],
-        'closing' => 'Ich nutze KI als Werkzeug — sie verkürzt die Routinearbeit. Entscheidungen darüber, was die Website sagen soll, an wen und in welcher Reihenfolge, kann sie nicht für Sie treffen. Diese Arbeit muss erledigt sein, bevor die Website gebaut wird.',
-    ],
+    // OND-269 (Audit OND-254, Befund 7): Die Sektion „Generator versus Ihr
+    // Geschäft" (zwei Spalten, acht Stichpunkte) ist gestrichen — der Board
+    // hat den Schnitt am 22. 9. freigegeben. Übrig blieben zwei Sätze in
+    // `problems.ai_heading` / `problems.ai_text`, wo dasselbe Argument
+    // ohnehin schon stand.
 
+    // OND-269: `toyota` ist keine eigene Sektion mehr — der Block wird
+    // innerhalb von „Warum mit mir" unter Video und Bio ausgegeben. Die
+    // Überschrift „18 Jahre bei Toyota" stand zuvor zweimal auf der Seite
+    // (hier und in `why_me.bio`), deshalb ist Toyota aus der Bio raus.
     'toyota' => [
         'heading'      => '18 Jahre bei Toyota. Dann bin ich gegangen.',
         'text'         => 'Die Automobilindustrie hat mir eines beigebracht: Hinter jedem Spitzenergebnis stehen immer dieselben Schritte. Analyse, Design, Testen, Verifizieren — und dann wieder. Keine Abkürzungen, keine Schätzungen. Prinzipien, die unabhängig von der Branche funktionieren.',
@@ -190,10 +157,17 @@ return [
         'quote_author' => 'Pavel Baudyš, Direktor Produktion, Montage & Logistik, Toyota Motor Manufacturing Czech Republic (2024)',
     ],
 
+    // OND-269: die einzige Projektsektion der Startseite (früher `showcase`
+    // + `portfolio`). Überschrift und Intro stammen aus dem gestrichenen
+    // `showcase` — sie sprechen von laufenden Websites, und das ist für
+    // Besucher konkreter.
     'portfolio' => [
-        'heading'    => 'Umgesetzte Projekte',
+        'heading'    => 'Websites, die in der Praxis laufen',
+        'intro'      => 'Das sind Live-Projekte, die Sie sich sofort ansehen können. Bei jedem steht auch, was es dem Kunden gebracht hat.',
         'cta'        => 'Alle Projekte →',
         'detail_cta' => 'Projekt ansehen',
+        'live_cta'   => 'Live-Website öffnen',
+        'live_aria'  => 'Website von :client in neuem Fenster öffnen',
         'cards' => [
             'pitarena' => [
                 'client'  => 'PitArena',
@@ -299,7 +273,10 @@ return [
         'video_aria' => 'Video: Ondřej Kriška — wer ich bin und wie ich Websites baue',
         'heading'   => 'Warum mit mir',
         'photo_alt' => 'Ondřej Kriška — Webentwickler',
-        'bio'       => '18 Jahre lang habe ich bei Toyota Projekte geleitet, bei denen das Band nicht stehen durfte. Dieselben Prinzipien — präzise Spezifikation, Analyse, Verifikation — wende ich heute auf Web-Projekte an. Ich arbeite allein: Sie sprechen direkt mit mir — von der ersten Beratung bis zum Launch und darüber hinaus.',
+        // OND-269: Der erste Satz („18 Jahre lang habe ich bei Toyota…") ist
+        // hier raus — die Toyota-Geschichte steht direkt unter diesem Absatz
+        // vollständig im Block `toyota`.
+        'bio'       => 'Ich arbeite allein. Sie sprechen direkt mit mir — von der ersten Beratung bis zum Launch und darüber hinaus, mit derselben präzisen Spezifikation, Analyse und Verifikation bei jedem Projekt.',
         'advantages' => [
             [
                 'heading' => 'Eigener Code, keine Vorlagen',
@@ -325,19 +302,11 @@ return [
         'note'    => 'Aus dem Tschechischen übersetzt — die Originale stehen auf Google, Firmy.cz und Facebook.',
     ],
 
-    'guarantee' => [
-        'heading' => 'Zwei Dinge, auf die Sie sich verlassen können.',
-        'items'   => [
-            [
-                'heading' => 'Preis im Voraus',
-                'text'    => 'Sie erhalten eine Spezifikation mit einem genauen Preis, bevor die Arbeit beginnt. Was in der Spezifikation steht, steht auf der Rechnung. Keine Mehrkosten, keine Überraschungen.',
-            ],
-            [
-                'heading' => 'Direkter Kontakt immer',
-                'text'    => 'Sie kommunizieren direkt mit mir — nicht mit einem Verkäufer oder Koordinator. Rufen Sie jederzeit an. In den allermeisten Fällen nehme ich sofort ab.',
-            ],
-        ],
-    ],
+    // OND-269 (Audit OND-254, Befund 7): Die Sektion „Zwei Dinge, auf die Sie
+    // sich verlassen können." ist gestrichen — der Board hat den Schnitt am
+    // 22. 9. freigegeben. Beide Zusagen („Preis im Voraus", „Direkter
+    // Kontakt") standen wörtlich ein zweites Mal; die einzige verbleibende
+    // Fassung steht in `why_me.advantages` 02 und 03.
 
     // OND-229 (F2 — Beweisschicht): Abschnitt „Unter der Haube" + Live-Demo
     // der Design-Tokens. Jede Aussage ist im Repo überprüfbar; die Ladezeit
@@ -390,11 +359,10 @@ return [
                 'question' => 'Sie sind eine Person. Was, wenn Sie krank werden oder aufhören?',
                 'answer'   => 'Ein berechtigtes Bedenken — bei einem Projekt dieser Größe ist das die wichtigste Frage. Die Website läuft auf keiner Plattform, die Sie nicht verlassen könnten: Es ist eigener Code auf einem normalen Webhosting. Die Zugänge zur Hosting-Verwaltung und zum FTP können Sie die ganze Zeit haben, sagen Sie einfach Bescheid. Nach der vollständigen Bezahlung gehört der Code Ihnen — ich übergebe ihn, wann immer Sie darum bitten, und jeder Entwickler kann daran weiterarbeiten; wenn eine Dokumentation zur Übergabe nötig ist, schreibe ich sie. Eine Rund-um-die-Uhr-Bereitschaft halte ich nicht und werde das auch nicht behaupten. Wofür ich einstehe: Bei mir bleibt nichts eingeschlossen.',
             ],
-            [
-                'key'      => 'price',
-                'question' => 'Was kostet es?',
-                'answer'   => 'Orientierende Einstiegspreise finden Sie oben im Preisanker — Starter 1.000 €, Standard 2.200 €, Custom ab 3.800 €. Ein verbindliches Angebot erhalten Sie schriftlich nach einer kurzen Beratung. Auf der Rechnung steht genau das, was in der Spezifikation steht — Punkt für Punkt.',
-            ],
+            // OND-269 (Audit OND-254, Befund 7): Die Frage „Was kostet es?"
+            // ist hier raus — dieselbe Überschrift und dieselben Zahlen
+            // stehen vier Sektionen weiter oben im Preisanker
+            // (`price_anchor`) und in der Preisliste.
             [
                 'key'      => 'duration',
                 'question' => 'Wie lange dauert es?',
@@ -407,7 +375,7 @@ return [
             ],
             [
                 'key'      => 'maintenance-free',
-                'question' => 'Was bedeutet „wartungsfreie Website"?',
+                'question' => 'Was bedeutet „wartungsfreie Website“?',
                 'answer'   => 'Kein WordPress, keine Plugins, keine monatlichen Sicherheitsupdates. Die Website läuft auf eigenem Code — sie funktioniert von selbst, benötigt keine regelmäßigen Patches und fällt nicht durch Template-Konflikte aus. Kleine Inhaltsänderungen laufen direkt über mich, ohne Ticket.',
             ],
             // Archiv: weitere FAQ-Einträge wandern von der Homepage weg (nach /faq oder /sluzby — außerhalb des OND-121-Umfangs).

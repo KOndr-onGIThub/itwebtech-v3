@@ -127,7 +127,7 @@
         <figure class="article-figure">
             <x-responsive-image
                 path="articles/{{ $translation->img_mid }}"
-                alt=""
+                alt="{{ $translation->img_mid_alt ?? '' }}"
                 loading="lazy"
                 sizes="(max-width: 768px) 100vw, 760px"
             />
@@ -150,7 +150,7 @@
         <figure class="article-figure">
             <x-responsive-image
                 path="articles/{{ $translation->img_end }}"
-                alt=""
+                alt="{{ $translation->img_end_alt ?? '' }}"
                 loading="lazy"
                 sizes="(max-width: 768px) 100vw, 760px"
             />
