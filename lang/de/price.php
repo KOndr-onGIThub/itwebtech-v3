@@ -4,7 +4,7 @@ return [
 
     'meta' => [
         'title'       => 'Preise — Ondřej Kriška',
-        'description' => 'Unverbindliche Preise für Webseiten, Online-Shops und Webanwendungen. Klare Vorstellung Ihrer Investition vor dem ersten Gespräch.',
+        'description' => 'Unverbindliche Preise für Websites, Online-Shops und Webanwendungen. Klare Vorstellung Ihrer Investition vor dem ersten Gespräch.',
     ],
 
     'subheading' => 'Unverbindliche Preise',
@@ -39,7 +39,7 @@ return [
     'tiers' => [
         [
             'name'    => 'Standard',
-            'desc'    => 'Für Unternehmen, die ihre Webseite als bestes Verkaufswerkzeug nutzen möchten.',
+            'desc'    => 'Für Unternehmen, die ihre Website als bestes Verkaufswerkzeug nutzen möchten.',
             'price'   => '2.200 €',
             'popular' => true,
             'features' => [
@@ -86,14 +86,14 @@ return [
         ],
     ],
 
-    'note' => 'Kein Umsatzsteuerpflichtiger — die genannten Preise sind endgültig, es kommt nichts hinzu.',
+    'note' => 'Ich bin nicht umsatzsteuerpflichtig — die genannten Preise sind Endpreise, es kommt keine Mehrwertsteuer hinzu.',
 
     'guarantees' => [
         'heading' => 'Was in jedem Projekt enthalten ist',
         'items'   => [
             [
-                'title' => 'Wartungsfreie Webseiten',
-                'text'  => 'Kein WordPress, keine Drittanbieter-Plugins. Sparen Sie jährlich Tausende gegenüber WordPress — keine monatlichen Updates und keine Kosten für Sicherheits-Patches.',
+                'title' => 'Wartungsfreie Websites',
+                'text'  => 'Kein WordPress, keine Drittanbieter-Plugins. Sparen Sie jedes Jahr mehrere hundert Euro gegenüber WordPress — keine monatlichen Updates und keine Kosten für Sicherheits-Patches.',
             ],
             [
                 'title' => 'Festpreis ohne Überraschungen',
@@ -116,12 +116,12 @@ return [
         'items'   => [
             [
                 'name'  => 'SEO & Content-Marketing',
-                'price' => 'ab €180 / Mo.',
+                'price' => 'ab 180 € / Monat',
                 'desc'  => 'Keyword-Analyse, Content-Strategie, Leistungsüberwachung. Organische Sichtbarkeit, die auch ohne Werbebudget funktioniert.',
             ],
             [
                 'name'  => 'Social-Media-Management',
-                'price' => 'ab €400 / Mo.',
+                'price' => 'ab 400 € / Monat',
                 'desc'  => 'Content-Erstellung, Planung und Veröffentlichung. Konsistente Präsenz, die das Vertrauen der Kunden aufbaut.',
             ],
             [
@@ -131,7 +131,7 @@ return [
             ],
             [
                 'name'  => 'Grafikdesign & Branding',
-                'price' => 'ab €190',
+                'price' => 'ab 190 €',
                 'desc'  => 'Logo, visuelle Identität, Banner. Alles, was Sie für eine konsistente und einprägsame Markenpräsentation benötigen.',
             ],
         ],
@@ -153,7 +153,7 @@ return [
                 ],
             ],
             [
-                'label' => 'Webseiten-Funktionen',
+                'label' => 'Websites-Funktionen',
                 'rows'  => [
                     ['label' => 'Blog oder Galerie mit Bearbeitung', 'values' => [true, true, false]],
                     ['label' => 'Mehrsprachige Website', 'values' => [true, true, false]],

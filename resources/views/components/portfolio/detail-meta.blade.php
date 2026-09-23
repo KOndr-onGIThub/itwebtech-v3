@@ -9,6 +9,10 @@
         $categoryLabel = ucfirst($project->category);
     }
 
+    // OND-267: `duration` je jedna hodnota pro všechny jazyky, překlad proto
+    // jde přes lang slovník (fallback na syrovou hodnotu je v modelu).
+    $durationLabel = $project->durationLabel($locale);
+
     $liveHost = null;
     if ($project->live_url) {
         $liveHost = parse_url($project->live_url, PHP_URL_HOST) ?? $project->live_url;
@@ -32,10 +36,10 @@
             </div>
         @endif
 
-        @if ($project->duration)
+        @if ($durationLabel)
             <div class="portfolio-detail-meta__row">
                 <dt>{{ __('projects.detail.meta.duration') }}</dt>
-                <dd>{{ $project->duration }}</dd>
+                <dd>{{ $durationLabel }}</dd>
             </div>
         @endif
 

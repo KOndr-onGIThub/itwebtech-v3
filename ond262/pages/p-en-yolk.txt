@@ -1,0 +1,105 @@
+YOLK — agency development on clinic portals
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+CZ
+EN
+DE
+Book a consultation
+CZ
+EN
+DE
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+Book a consultation
+💬
+Enquiry
+← Back to projects
+Website
+·
+2025
+·
+YOLK Studio (Peter Vidlička)
+YOLK — agency development on clinic portals
+Agency-side development and maintenance on healthcare portals
+Book a consultation
+For YOLK studio I provide ongoing development and fixes on large client websites — the patient portal unica.cz and the reproductive clinic site reproclinic.com. The work includes seasonal updates, form changes, graphics tuning, and custom features that go beyond standard WordPress.
+Challenge
+The agency manages clients with large portals where any small broken piece directly hurts patient experience. The site needed reliable upkeep, seasonal updates to offers and questionnaires, and custom features that WordPress alone can't deliver.
+Solution
+I work as an external developer on specific tasks — seasonal changes, bug fixes, custom PHP/JS extensions, and form edits. Communication runs directly with the agency team; for the agency's clients the output is invisible in the good sense — everything just works.
+Result
+The agency gained a reliable technical partner for jobs that need experienced development. Review: "Ondra is a very reliable and skilled developer; cooperation has always gone well." (5/5)
+Client
+YOLK Studio (Peter Vidlička)
+Year
+2025
+Duration
+průběžná spolupráce
+Category
+Website
+Tech stack
+Website
+WordPress
+Work for an agency
+Custom development
+Upkeep and site changes
+More projects
+Website
+·
+2023
+·
+PitArena
+PitArena
+From zero to a brand, a website and online sales
+View project
+Website
+·
+2026
+·
+PitArena
+PitArena — online shop
+An online shop where customers find the part for their model and year
+View project
+Website
+·
+2026
+·
+BARANA
+BARANA
+Premium website for bioclimatic pergolas, ready for ad campaigns
+View project
+Want a similar result for your business?
+Book a consultation
+← Back to projects
+I help entrepreneurs succeed in the online world
+Book a free consultation
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+© 2026 ONDRAWEB — All rights reserved.
++420 728 697 712
+Privacy Policy
+Cookies
+Let's talk
+Free consultation — no commitment, no registration.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Pick a consultation slot
+Free. No commitment.
+Mind a few cookies?
+I only measure a few numbers about what works on the site. No data selling.
+See the cookie policy .
+Decline
+Accept all
+✕

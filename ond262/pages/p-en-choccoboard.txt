@@ -1,0 +1,106 @@
+Choccoboard — strategic dashboard for a praline maker
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+CZ
+EN
+DE
+Book a consultation
+CZ
+EN
+DE
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+Book a consultation
+💬
+Enquiry
+← Back to projects
+Web application
+·
+2024
+·
+Tradiční výroba pralinek, s.r.o.
+Choccoboard — strategic dashboard
+A BI dashboard that replaced 30 minutes of daily manual work
+Book a consultation
+Choccoboard is a web application for company management. It makes sales KPIs and key indicators available in real time from any device. Previously, management spent 30 minutes a day downloading and assembling data manually — no longer.
+Challenge
+Management needed an overview of sales and key indicators for daily decision-making. The reality: 30 minutes of manual work every day — downloading, gluing, checking. Besides the time lost, it limited how often someone actually looked at the numbers.
+Solution
+I built a secure authenticated dashboard with one overview screen for KPIs and flexible filtering (sales by shift, product type, period). It runs on the web, so it's accessible from anywhere — from the office, from production, or on mobile during a customer meeting.
+Result
+The 30-minute daily manual routine is gone. Management sees current numbers instantly whenever they decide. The client review highlights higher expertise, professionalism, and notes that "expectations were exceeded".
+Client
+Tradiční výroba pralinek, s.r.o.
+Year
+2024
+Duration
+několik týdnů
+Category
+Web application
+Tech stack
+Custom application
+Application in the browser
+All the numbers on one screen
+Making sense of company data
+Tracking key numbers
+Basis for management decisions
+More projects
+Web application
+·
+2021
+·
+Toyota Kolín
+HCMS — production information system
+An app that keeps the assembly line moving
+View project
+Web application
+·
+2023
+·
+Toyota Kolín
+Picker — logistics control system
+An app for picking parts from the warehouse to the assembly line
+View project
+Web application
+·
+2019
+·
+Toyota Kolín
+FRL Creator
+A PDF generator for shelf information sheets
+View project
+Want a similar result for your business?
+Book a consultation
+← Back to projects
+I help entrepreneurs succeed in the online world
+Book a free consultation
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+© 2026 ONDRAWEB — All rights reserved.
++420 728 697 712
+Privacy Policy
+Cookies
+Let's talk
+Free consultation — no commitment, no registration.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Pick a consultation slot
+Free. No commitment.
+Mind a few cookies?
+I only measure a few numbers about what works on the site. No data selling.
+See the cookie policy .
+Decline
+Accept all
+✕

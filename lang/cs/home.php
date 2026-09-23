@@ -340,6 +340,10 @@ return [
 
     'testimonials' => [
         'heading' => 'Co o spolupráci říkají moji klienti.',
+        // OND-267 (audit P1-1): v EN/DE jde o překlad českých originálů —
+        // bez téhle věty návštěvník originál na Google/Firmy.cz nedohledá.
+        // Česky poznámka nedává smysl, šablona prázdnou hodnotu nevykreslí.
+        'note'    => '',
     ],
 
     'guarantee' => [

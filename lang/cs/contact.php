@@ -17,6 +17,9 @@ return [
     'address_street'      => 'Dunajovská 116',
     'address_city'        => '691 81 Březí',
     'address_registration' => 'IČO 19231407, neplátce DPH',
+    // OND-267 (E-1): popisek byl natvrdo v šabloně, takže i německá mutace
+    // psala „E-mail" — německy se píše jen „E-Mail".
+    'email_label'         => 'E-mail',
     'phone_label'         => 'Telefon',
     'hours_label'         => 'Dostupnost',
     'open_hours'          => 'Ozvu se do 24 hodin v pracovní dny. O víkendech a svátcích nedržím pohotovost, ale nic mi nezapadne.',

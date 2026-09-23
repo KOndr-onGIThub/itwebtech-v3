@@ -88,7 +88,7 @@
                     </div>
 
                     <div>
-                        <dt>E-mail</dt>
+                        <dt>{{ __('contact.email_label') }}</dt>
                         <dd>
                             <a href="mailto:ok@ondraweb.cz">ok@ondraweb.cz</a>
                         </dd>

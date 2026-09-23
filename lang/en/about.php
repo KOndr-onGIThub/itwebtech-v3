@@ -21,7 +21,7 @@ return [
         ],
         [
             'heading' => 'Why I moved to web development',
-            'text'    => 'Programming was more enjoyable to me than anything else. I could see how much time and money a good application could save. I decided to do it full-time and for companies that do not have their own developers. Today I build websites as a sole trader.',
+            'text'    => 'I enjoyed programming more than anything else. I could see how much time and money a good application could save. I decided to do it full-time and for companies that do not have their own developers. Today I build websites as a sole trader.',
         ],
         [
             'heading' => 'How I work',

@@ -4,13 +4,13 @@ return [
 
     'meta' => [
         'title'       => 'Was ich gebaut habe | ONDRAWEB',
-        'description' => 'Webseiten, Onlineshops und Webanwendungen, die ich gebaut habe und die heute laufen. Bei jedem führt ein Link zur Live-Version, damit Sie es selbst prüfen können.',
+        'description' => 'Websites, Onlineshops und Webanwendungen, die ich gebaut habe und die heute laufen. Bei jedem führt ein Link zur Live-Version, damit Sie es selbst prüfen können.',
     ],
 
     'subheading'       => 'Realisierte',
     'heading'          => 'PROJEKTE',
     // OND-201 (Punkt 5): Intro nach Abschnitt 4 des Dokuments texty-podstranky (OND-186).
-    'intro'            => 'Hier finden Sie Webseiten, die ich gebaut habe und die heute laufen. Es sind keine Bilder in einer Galerie — jede lässt sich anklicken und live ansehen. Ich zeige lieber fertige Arbeit als Versprechen.',
+    'intro'            => 'Hier finden Sie Websites, die ich gebaut habe und die heute laufen. Es sind keine Bilder in einer Galerie — jede lässt sich anklicken und live ansehen. Ich zeige lieber fertige Arbeit als Versprechen.',
 
     // OND-135 P2 iter 6 — Plan §3.1 Hero (Page-Mark + Amber-Akzent).
     // OND-135 Bereinigung (2026-05-14): page_mark_index entfernt — Agency-
@@ -22,13 +22,13 @@ return [
     // Website kann, ein Live-Link, der Umfang. Keine erfundenen Zahlen.
     'hero' => [
         'page_mark_label' => 'PROJEKTE',
-        'upline'          => 'Live-Webseiten, keine Bilder in einer Galerie.',
+        'upline'          => 'Live-Websites, keine Bilder in einer Galerie.',
         'heading_html'    => 'Was ich<br><em>gebaut habe</em>.',
         'subline'         => 'Bei jedem Projekt steht, was die Website kann und in welchem Umfang ich sie gebaut habe. Der Link führt zur Live-Version — prüfen Sie es selbst.',
     ],
 
     'filter_all'       => 'Alle',
-    'filter_websites'  => 'Webseiten',
+    'filter_websites'  => 'Websites',
     'filter_webapps'   => 'Anwendungen',
     'filter_other'     => 'Sonstiges',
     'filter_aria'      => 'Projekte nach Kategorie filtern',
@@ -44,8 +44,8 @@ return [
         'heading'    => 'Das stecke ich in Projekte',
         'items'      => [
             ['title' => 'Expertise und Praxis',      'description' => 'Dank 18 Jahren Erfahrung bei Toyota habe ich einzigartige Erfahrung in der Prozessoptimierung und Webanwendungsentwicklung.'],
-            ['title' => 'Stabilität und Robustheit', 'description' => 'Ich baue keine Webseiten aus fremden Add-ons, die beim ersten Update kaputtgehen. Ich schreibe eigenen Code, der hält.'],
-            ['title' => 'Gründliches Testen',        'description' => 'Ich überlasse nichts dem Zufall. Ich teste Apps und Webseiten während der Entwicklung und danach.'],
+            ['title' => 'Stabilität und Robustheit', 'description' => 'Ich baue keine Websites aus fremden Add-ons, die beim ersten Update kaputtgehen. Ich schreibe eigenen Code, der hält.'],
+            ['title' => 'Gründliches Testen',        'description' => 'Ich überlasse nichts dem Zufall. Ich teste Apps und Websites während der Entwicklung und danach.'],
             ['title' => 'Geschwindigkeit und Design','description' => 'Priorität hat schnelles Laden und modernes Design für einen positiven ersten Eindruck.'],
             ['title' => 'Maßgeschneiderte Lösungen', 'description' => 'Jedes Projekt ist für mich einzigartig und ich suche immer die beste Lösung für jeden Kunden.'],
             ['title' => 'Liebe zum Detail',          'description' => 'Ich achte immer sehr auf Details, die für den Erfolg Ihres Projekts entscheidend sein können.'],
@@ -127,12 +127,12 @@ return [
         'subheading'    => 'Schnelle Einordnung',
         'heading'       => 'Lohnt sich die Umsetzung jetzt?',
         'items'         => [
-            'Ihre Webseite hat Traffic, aber Anfragen kommen unregelmäßig.',
+            'Ihre Website hat Traffic, aber Anfragen kommen unregelmäßig.',
             'Ihr Angebot ist unklar oder im Inhalt versteckt.',
             'Es fehlt ein klarer Ablauf nach dem Absenden einer Anfrage.',
             // OND-201 (Befund 5.1): „Business-Tool" versprach ein Ergebnis,
             // für das ich allein nicht einstehen kann.
-            'Sie wollen keine weitere „schöne Webseite“, sondern etwas, das auf der realen Arbeitsweise Ihrer Firma aufbaut.',
+            'Sie wollen keine weitere „schöne Website“, sondern etwas, das auf der realen Arbeitsweise Ihrer Firma aufbaut.',
         ],
         'cta_heading'   => 'Wenn 2+ Punkte passen, lohnt sich die Umsetzung jetzt.',
         'cta_text'      => 'Im Erstgespräch definieren wir den kürzesten Weg zu einer funktionierenden Lösung ohne unnötige Extras.',
@@ -169,9 +169,17 @@ return [
             'live_url' => 'Live-Seite',
             'tags'     => 'Technologien',
         ],
+        // OND-267: siehe lang/cs/projects.php — der tschechische DB-Wert ist der Schlüssel.
+        'duration'        => [
+            'ongoing_since'           => 'laufend, seit :year',
+            'weeks_few'               => 'einige Wochen',
+            'months_few'              => 'einige Monate',
+            'weeks_5'                 => '5 Wochen',
+            'months_few_still_running' => 'einige Monate, die Anwendung läuft bis heute',
+        ],
         'category_label'  => [
-            'website'     => 'Webseite',
-            'application' => 'Webanwendung',
+            'website'     => 'Website',
+            'application' => 'Anwendung',
             'other'       => 'Sonstiges',
         ],
     ],

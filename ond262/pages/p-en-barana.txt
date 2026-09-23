@@ -1,0 +1,108 @@
+BARANA — premium website for pergolas, fences & gates
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+CZ
+EN
+DE
+Book a consultation
+CZ
+EN
+DE
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+Book a consultation
+💬
+Enquiry
+← Back to projects
+Website
+·
+2026
+·
+BARANA
+BARANA
+Premium website for bioclimatic pergolas, ready for ad campaigns
+Visit live site
+Book a consultation
+BARANA sells bioclimatic pergolas, aluminium fences and gates — a considered purchase that takes time. The website's job is to shorten that thinking and convert it into an enquiry. I built a premium presentation site with a strong hierarchy plus a landing page wired up directly for paid campaigns.
+Challenge
+The client needed a site that visually stands up to premium competitors and still converts. It had to separate the product lines clearly, stay fast, and work as an entry point for Meta Ads and Google Ads — with no compromise on mobile.
+Solution
+The design uses minimalist typography, contrast, and a "headline → benefit → action" hierarchy. The main landing focuses on bioclimatic pergolas with a single conversion goal; service pages keep the same rhythm. Built so future reviews, references, and new content can scale in without breaking composition.
+Result
+BARANA now has a site they're confident pushing paid traffic to. Visitors understand the offer without picking up the phone, mobile is as fast as desktop, and the structure is ready for new product sections. It's a live tool for winning orders — not a digital business card.
+Client
+BARANA
+Year
+2026
+Duration
+5 týdnů
+Category
+Website
+Live site
+barana.cz
+Tech stack
+Website
+Standalone page for advertising
+Premium finish
+Paid advertising
+Designed for mobile first
+More projects
+Website
+·
+2023
+·
+PitArena
+PitArena
+From zero to a brand, a website and online sales
+View project
+Website
+·
+2026
+·
+PitArena
+PitArena — online shop
+An online shop where customers find the part for their model and year
+View project
+Website
+·
+2026
+·
+Nové interiéry — Petr Kroulík
+Nové interiéry
+A website that works like a first business meeting
+View project
+Want a similar result for your business?
+Book a consultation
+← Back to projects
+I help entrepreneurs succeed in the online world
+Book a free consultation
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+© 2026 ONDRAWEB — All rights reserved.
++420 728 697 712
+Privacy Policy
+Cookies
+Let's talk
+Free consultation — no commitment, no registration.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Pick a consultation slot
+Free. No commitment.
+Mind a few cookies?
+I only measure a few numbers about what works on the site. No data selling.
+See the cookie policy .
+Decline
+Accept all
+✕

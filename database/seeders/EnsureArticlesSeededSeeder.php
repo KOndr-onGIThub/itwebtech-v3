@@ -48,5 +48,10 @@ class EnsureArticlesSeededSeeder extends Seeder
         // /de/blog by bez tohohle zůstal prázdný (filtr z OND-217).
         // Na existující DB dělá totéž migrace 2026_09_16_120000_seed_de_blog_content.
         $this->call(BlogContentDeSeeder::class);
+
+        // OND-267: EN texty jsou v dumpech pořád ze starého importu (jiná
+        // osnova než přepsaná CS/DE verze). Na existující DB dělá totéž
+        // migrace 2026_09_23_100300_ond267_en_blog_obsah.
+        $this->call(BlogContentEnSeeder::class);
     }
 }

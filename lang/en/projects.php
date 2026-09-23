@@ -169,9 +169,17 @@ return [
             'live_url' => 'Live site',
             'tags'     => 'Tech stack',
         ],
+        // OND-267: see lang/cs/projects.php — the Czech DB value is the key.
+        'duration'        => [
+            'ongoing_since'           => 'ongoing, since :year',
+            'weeks_few'               => 'a few weeks',
+            'months_few'              => 'a few months',
+            'weeks_5'                 => '5 weeks',
+            'months_few_still_running' => 'a few months; the app is still running',
+        ],
         'category_label'  => [
             'website'     => 'Website',
-            'application' => 'Web application',
+            'application' => 'Application',
             'other'       => 'Other',
         ],
     ],

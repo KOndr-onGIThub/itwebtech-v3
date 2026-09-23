@@ -1,0 +1,67 @@
+Notizen — Ondřej Kriška
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+CZ
+EN
+DE
+Beratung vereinbaren
+CZ
+EN
+DE
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+Beratung vereinbaren
+💬
+Anfrage
+NOTIZEN
+Womit ich bei der Arbeit wirklich zu tun habe.
+Ich schreibe über das,
+was ich selbst mache.
+Keine allgemeinen Ratschläge. Nur Dinge aus echten Aufträgen: was es kostet, wie ein Briefing entsteht, wann ein Redesign Sinn ergibt.
+Wann ein Website-Relaunch Sinn ergibt und wann nicht
+Fünf Gründe, warum ein Website-Relaunch Sinn ergibt, und drei, warum nicht. Dazu, worauf Sie achten, damit danach der Traffic nicht einbricht.
+Lesen
+Was eine Website kostet und woraus sich der Preis ergibt
+In welchen Preisstufen ich Websites baue, was darin enthalten ist und was den Preis nach oben treibt. Damit Sie vorher wissen, ob wir zusammenpassen.
+Lesen
+Braucht Ihre Firma eine Website? Manchmal nicht
+Ich bin nicht unbefangen, ich baue Websites. Trotzdem gibt es Fälle, in denen eine Website nichts bringt. Welche das sind und was stattdessen hilft.
+Lesen
+Wann sich eine eigene Anwendung statt Excel lohnt
+Achtzehn Jahre habe ich in der Toyota-Logistik gearbeitet und dort Anwendungen für den Betrieb geschrieben. Woran Sie merken, dass Excel nicht mehr reicht.
+Lesen
+Neun Fragen, die Sie vor dem Website-Projekt klären
+Neun Fragen, die wir ohnehin beantworten müssen. Wenn Sie sie vorher durchgehen, sparen wir beide Zeit und Sie bekommen einen genaueren Preis.
+Lesen
+Ich helfe Unternehmern, in der Online-Welt erfolgreich zu sein
+Kostenlose Beratung vereinbaren
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+© 2026 ONDRAWEB — Alle Rechte vorbehalten.
++420 728 697 712
+Datenschutzerklärung
+Cookies
+Lassen Sie uns sprechen
+Kostenlose Beratung — unverbindlich, ohne Registrierung.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Beratungstermin auswählen
+Kostenlos. Unverbindlich.
+Darf ich ein paar Cookies setzen?
+Ich messe nur ein paar Zahlen darüber, was auf der Seite funktioniert. Kein Datenhandel.
+Details in den Richtlinien .
+Ablehnen
+Alle akzeptieren
+✕

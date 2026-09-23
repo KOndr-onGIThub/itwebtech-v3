@@ -1,0 +1,105 @@
+Excel Tools (VBA) — internal toolkit for Toyota Kolín
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+CZ
+EN
+DE
+Book a consultation
+CZ
+EN
+DE
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+Book a consultation
+💬
+Enquiry
+← Back to projects
+Web application
+·
+2020
+·
+Toyota Kolín
+Excel Tools (VBA)
+A suite of VBA tools that keep production running
+Book a consultation
+A suite of VBA applications built for Toyota Kolín's operational needs. It includes backup processes for parts delivery to the line, PDF generators, supply-planning visualisations, and an automated report mailer. Each tool solves a real day-to-day pain the team had been living with.
+Challenge
+Many subprocesses in production rely on Excel — and Excel on its own isn't enough for those tasks. The team needed an extension that automates routine work and still fits into the existing ecosystem people know and use.
+Solution
+Six internal applications: FLR Backup 1 (parameter-based CSV generator), FLR Backup 2 (step-by-step backup for parts delivery), Address Data (multi-source data consolidation), Kanban (PDF kanban generator), Process Combinations (supply plan visualisation across processes), and Report (Excel→PDF export with automatic e-mail and data masking).
+Result
+The team gained tools that take routine work off their minds and return it as a single button click. It saves time, cuts error rates, and — most importantly — removes the "only one person knows how" risk.
+Client
+Toyota Kolín
+Year
+2020
+Duration
+průběžně
+Category
+Web application
+Tech stack
+Custom application
+Manufacturing
+Excel macros
+Excel
+Manual work replaced by automation
+More projects
+Web application
+·
+2021
+·
+Toyota Kolín
+HCMS — production information system
+An app that keeps the assembly line moving
+View project
+Web application
+·
+2023
+·
+Toyota Kolín
+Picker — logistics control system
+An app for picking parts from the warehouse to the assembly line
+View project
+Web application
+·
+2024
+·
+Tradiční výroba pralinek, s.r.o.
+Choccoboard — strategic dashboard
+A BI dashboard that replaced 30 minutes of daily manual work
+View project
+Want a similar result for your business?
+Book a consultation
+← Back to projects
+I help entrepreneurs succeed in the online world
+Book a free consultation
+Home
+Projects
+Pricing
+Blog
+About
+Contact
+© 2026 ONDRAWEB — All rights reserved.
++420 728 697 712
+Privacy Policy
+Cookies
+Let's talk
+Free consultation — no commitment, no registration.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Pick a consultation slot
+Free. No commitment.
+Mind a few cookies?
+I only measure a few numbers about what works on the site. No data selling.
+See the cookie policy .
+Decline
+Accept all
+✕

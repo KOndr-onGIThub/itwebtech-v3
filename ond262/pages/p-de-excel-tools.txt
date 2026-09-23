@@ -1,0 +1,105 @@
+Excel Tools (VBA) — internes Toolkit für Toyota Kolín
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+CZ
+EN
+DE
+Beratung vereinbaren
+CZ
+EN
+DE
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+Beratung vereinbaren
+💬
+Anfrage
+← Zurück zu Projekten
+Webanwendung
+·
+2020
+·
+Toyota Kolín
+Excel Tools (VBA)
+Eine VBA-Toolkit-Suite, die die Produktion am Laufen hält
+Beratung buchen
+Eine Suite von VBA-Anwendungen für die operativen Anforderungen von Toyota Kolín. Sie enthält Backup-Prozesse für die Teilelieferung ans Band, PDF-Generatoren, Visuali- sierungen für die Lieferplanung und einen automatischen Report-Mailer. Jedes Tool löst eine konkrete tägliche Last des Teams.
+Herausforderung
+Viele Teilprozesse in der Produktion basieren auf Excel — und Excel allein reicht für diese Aufgaben nicht. Es brauchte eine Erweiterung, die Routinearbeit automatisiert und gleichzeitig ins bestehende Ökosystem passt, das die Mitarbeiter kennen.
+Lösung
+Sechs interne Anwendungen: FLR Backup 1 (parametergesteuerter CSV-Generator), FLR Backup 2 (schrittweises Backup für die Teilelieferung), Address Data (Datenkonsolidierung aus mehreren Quellen), Kanban (Kanban-PDF-Generator), Prozess- kombinationen (Lieferplan-Visualisierung über Prozesse) und Report (Excel→PDF-Export mit automatischer E-Mail und Datenmaskierung).
+Ergebnis
+Das Team hat Werkzeuge bekommen, die Routinearbeit aus dem Kopf nehmen und auf einen Knopfdruck zurückgeben. Das spart Zeit, senkt Fehlerquoten und beseitigt das „nur eine Person weiß, wie's geht"-Risiko.
+Kunde
+Toyota Kolín
+Jahr
+2020
+Dauer
+průběžně
+Kategorie
+Webanwendung
+Technologien
+Individuelle Anwendung
+Fertigung
+Excel-Makros
+Excel
+Handarbeit durch Automatik ersetzt
+Weitere Projekte
+Webanwendung
+·
+2021
+·
+Toyota Kolín
+HCMS — Produktions-Informationssystem
+Eine App, die das Montageband am Laufen hält
+Projekt anzeigen
+Webanwendung
+·
+2023
+·
+Toyota Kolín
+Picker — Logistik-Steuerungssystem
+Eine App für das Kommissionieren von Teilen vom Lager ans Band
+Projekt anzeigen
+Webanwendung
+·
+2024
+·
+Tradiční výroba pralinek, s.r.o.
+Choccoboard — strategisches Dashboard
+Ein BI-Dashboard, das 30 Minuten tägliche Handarbeit ersetzt
+Projekt anzeigen
+Möchten Sie ein ähnliches Ergebnis für Ihr Unternehmen?
+Beratung buchen
+← Zurück zu Projekten
+Ich helfe Unternehmern, in der Online-Welt erfolgreich zu sein
+Kostenlose Beratung vereinbaren
+Startseite
+Projekte
+Preisliste
+Blog
+Über mich
+Kontakt
+© 2026 ONDRAWEB — Alle Rechte vorbehalten.
++420 728 697 712
+Datenschutzerklärung
+Cookies
+Lassen Sie uns sprechen
+Kostenlose Beratung — unverbindlich, ohne Registrierung.
+{ if (!val) { $refs.video.pause(); $refs.video.currentTime = 0; playing = false; } })"
+>
+Beratungstermin auswählen
+Kostenlos. Unverbindlich.
+Darf ich ein paar Cookies setzen?
+Ich messe nur ein paar Zahlen darüber, was auf der Seite funktioniert. Kein Datenhandel.
+Details in den Richtlinien .
+Ablehnen
+Alle akzeptieren
+✕
