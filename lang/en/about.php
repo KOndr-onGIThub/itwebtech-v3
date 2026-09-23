@@ -28,10 +28,6 @@ return [
             'text'    => 'I am an experienced web developer. I write custom code from scratch. I do not build websites from page builders like WordPress, which are assembled from ready-made components by various authors and tend to break over time. The websites I deliver are maintenance-free. I do not use ready-made add-ons from third-party companies that need to be constantly updated and patched. That is the most common source of problems and downtime. I work alone. That means you speak directly with me from the first message through to launch. The code I write belongs to you. I can work for international clients. I speak and write Czech. I communicate in English in writing. German only in writing, with the help of translation.',
         ],
         [
-            'heading' => 'Where I am based',
-            'text'    => 'I am based in Březí near Břeclav. I invoice as Ondřej Kriška, company ID 19231407, Dunajovská 116, 691 81 Březí. Not VAT registered.',
-        ],
-        [
             'heading' => 'What I do not do',
             'text'    => 'I do not build the cheapest websites on the market. I do not promise how much your website will earn — that is not something I can influence. I only take on projects I can deliver properly. If I know I cannot help you at a reasonable price, I will say so upfront.',
         ],

@@ -28,10 +28,6 @@ return [
             'text'    => 'Ich bin ein erfahrener Webentwickler. Ich schreibe eigenen Code von Grund auf. Ich baue keine Websites mit Baukästen wie WordPress, die aus fertigen Komponenten verschiedener Autoren zusammengesetzt werden und mit der Zeit kaputt gehen. Die Websites, die ich liefere, sind wartungsfrei. Ich verwende keine fertigen Add-ons von Drittanbieter-Unternehmen, die ständig aktualisiert und gepatcht werden müssen. Das ist die häufigste Quelle von Problemen und Ausfallzeiten. Ich arbeite allein. Das bedeutet, Sie sprechen von der ersten Nachricht bis zur Veröffentlichung direkt mit mir. Der Code, den ich schreibe, gehört Ihnen. Ich kann auch für internationale Kunden arbeiten. Ich spreche und schreibe Tschechisch. Auf Englisch kommuniziere ich schriftlich. Auf Deutsch nur schriftlich, mit Hilfe von Übersetzung.',
         ],
         [
-            'heading' => 'Wo ich ansässig bin',
-            'text'    => 'Ich bin in Březí bei Břeclav ansässig. Ich stelle Rechnungen als Ondřej Kriška, Unternehmens-ID 19231407, Dunajovská 116, 691 81 Březí. Nicht umsatzsteuerpflichtig.',
-        ],
-        [
             'heading' => 'Was ich nicht mache',
             'text'    => 'Ich baue nicht die billigsten Websites auf dem Markt. Ich verspreche nicht, wie viel Ihre Website verdienen wird — das kann ich nicht beeinflussen. Ich nehme nur Aufträge an, die ich ordentlich ausführen kann. Wenn ich weiß, dass ich Ihnen zu einem vernünftigen Preis nicht helfen kann, sage ich das direkt.',
         ],
