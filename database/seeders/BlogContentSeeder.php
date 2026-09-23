@@ -208,9 +208,9 @@ class BlogContentSeeder extends Seeder
             // ----------------------------------------------------------------
             6 => [
                 'title'       => 'Kdy se firmě vyplatí aplikace na míru místo tabulky v Excelu',
-                'description' => 'Osmnáct let jsem pracoval v logistice Toyoty a psal tam aplikace do provozu. Píšu, podle čeho poznáte, že tabulka firmě přestala stačit.',
+                'description' => 'Excel firmě stačí, dokud v něm nepracuje víc lidí a dokud chyba nestojí peníze. Pět signálů, že tabulka došla na hranici, a výpočet, jestli se aplikace vyplatí.',
                 'perex'       => <<<'HTML'
-                    <blockquote><p>Osmnáct let jsem pracoval v Toyotě. Začínal jsem jako dělník v logistice a skončil jako starší specialista v projektovém týmu. Za tu dobu jsem viděl spoustu procesů, které běžely na tabulkách a papírech, a pár z nich jsem nahradil aplikací. Píšu, podle čeho poznáte, že jste v tom bodě taky.</p></blockquote>
+                    <blockquote><p>Osmnáct let jsem pracoval v Toyotě. Začínal jsem jako dělník v logistice a skončil jako senior specialista v projektovém týmu. Za tu dobu jsem viděl spoustu procesů, které běžely na tabulkách a papírech, a pár z nich jsem nahradil aplikací. Píšu, podle čeho poznáte, že jste v tom bodě taky.</p></blockquote>
                     HTML,
                 'content_1'   => <<<'HTML'
                     <h2>Tabulka není nepřítel</h2>
@@ -235,7 +235,7 @@ class BlogContentSeeder extends Seeder
                     <p>Naprogramoval jsem tam webovou aplikaci TSM, která nahradila část ruční práce v logistice. Postupně jsem do provozu zavedl i několik dalších aplikací.</p>
                     <p>Nešlo o efektní technologii. Šlo o to najít místo, kde se plýtvá časem, a to místo odstranit. Stejně přemýšlím i dnes, když pro firmu stavím aplikaci na míru.</p>
                     <h2>Jak si to spočítat sami</h2>
-                    <p>Vezměte činnost, která se dělá ručně. Kolik minut denně zabere? Kolikrát za měsíc se u ní stane chyba a co ta chyba stojí? Vynásobte to dvanácti měsíci. Když vám vyjde číslo v řádu desítek tisíc ročně, aplikace na míru se vrátí za pár let a pak už jen šetří. Když vyjde pár tisíc, nechte to být a kupte si radši pořádnou tabulku.</p>
+                    <p>Vezměte činnost, která se dělá ručně. Kolik minut denně zabere? Kolikrát za měsíc se u ní stane chyba a co ta chyba stojí? Vynásobte to dvanácti měsíci. Když vám vyjde číslo v řádu desítek tisíc ročně, aplikace na míru se vrátí za pár let a pak už jen šetří. Když vyjde pár tisíc, nechte to být a zůstaňte u tabulky.</p>
                     <p>Tenhle výpočet vám udělám zdarma při prvním hovoru. Když z něj vyjde, že se to nevyplatí, řeknu vám to.</p>
                     <h2>Co aplikace na míru je a co není</h2>
                     <p>Je to program postavený přesně na to, jak vaše firma pracuje. Evidence, objednávky, plánování, výkazy. Běží v prohlížeči, takže nic neinstalujete a dostanete se k ní i z telefonu.</p>
@@ -247,7 +247,7 @@ class BlogContentSeeder extends Seeder
             // 10 — Potřebuje firma web (slug beze změny)
             // ----------------------------------------------------------------
             10 => [
-                'title'       => 'Potřebuje vaše firma web? Někdy ne a řeknu vám kdy',
+                'title'       => 'Potřebuje vaše firma web? Někdy ne, a řeknu vám kdy',
                 'description' => 'Nejsem nestranný, weby dělám. Přesto existují situace, kdy vám web nepomůže. Píšu, které to jsou a co dělat místo toho.',
                 'perex'       => <<<'HTML'
                     <blockquote><p>Živím se stavěním webů, takže tenhle článek nepíšu nestranně a nebudu předstírat, že ano. Přesto znám případy, kdy web firmě nepomůže a peníze se dají utratit líp. Píšu na rovinu, které to jsou.</p></blockquote>
@@ -259,7 +259,7 @@ class BlogContentSeeder extends Seeder
                     <p><strong>Nemáte, kdo by zvedal telefon.</strong> Web, který přivede poptávky, na které nikdo neodpoví, je horší než žádný web. Zákazník si zapamatuje, že jste se neozvali.</p>
                     <p><strong>Hledáte zázrak.</strong> Web je nástroj, ne řešení. Když firma nemá jasno, co prodává a komu, web to nespraví. Jen to napíše větším písmem.</p>
                     <h2>Kdy web smysl má</h2>
-                    <p><strong>Lidé si vás ověřují, než zavolají.</strong> Tohle dnes dělá skoro každý. Když najdou jen profil na Firmy.cz z roku 2019, srovnávají vás dolů.</p>
+                    <p><strong>Lidé si vás ověřují, než zavolají.</strong> Tohle dnes dělá skoro každý. Když najdou jen profil na Firmy.cz z roku 2019, hraje to proti vám.</p>
                     <p><strong>Vysvětlujete pořád to samé.</strong> Když na každé schůzce opakujete, jak probíhá spolupráce a co je v ceně, web to vysvětlí za vás. Vy pak mluvíte s lidmi, kteří už to vědí.</p>
                     <p><strong>Konkurence vypadá líp, než pracuje.</strong> To je nepříjemné, ale rozhoduje to.</p>
                     <p><strong>Chcete jiné zakázky, než máte.</strong> Web je nejlevnější způsob, jak dát najevo, že děláte i větší a náročnější věci.</p>
@@ -292,7 +292,7 @@ class BlogContentSeeder extends Seeder
                     <p><strong>3. Web se rozpadá nebo padá.</strong> Typicky u stavebnic poskládaných z doplňků od různých autorů. Jedna aktualizace a nefunguje objednávkový formulář.</p>
                     <p><strong>4. Změnila se firma.</strong> Děláte něco jiného, něco jiného chcete prodávat, máte jinou cenovou hladinu. Web zůstal tam, kde jste byli před pěti lety.</p>
                     <p><strong>5. Weby lidí, se kterými soutěžíte, vypadají o třídu líp.</strong> Zákazník vás srovnává vedle sebe, ať chcete nebo ne.</p>
-                    <h2>Tři situace, kdy peníze nechte v kapse</h2>
+                    <h2>Tři situace, kdy peníze nechat v kapse</h2>
                     <p><strong>Web je starý dva roky a funguje.</strong> Stáří samo o sobě není důvod. Když se dá spravovat, je rychlý a lidé po něm najdou, co potřebují, nechte ho být.</p>
                     <p><strong>Nelíbí se vám, ale zákazníkům nevadí.</strong> Váš vkus a vkus vašeho zákazníka není totéž. Než do toho dáte sto tisíc, zeptejte se pěti klientů, co jim na webu chybělo.</p>
                     <p><strong>Skutečný problém je jinde.</strong> Když poptávky nechodí, protože jste o tři třídy dražší než okolí a nikde to nevysvětlujete, nový vzhled to nespraví.</p>
