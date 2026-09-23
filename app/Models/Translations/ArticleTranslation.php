@@ -25,6 +25,8 @@ class ArticleTranslation extends Model
         'img_preview',
         'img_main',
         'img_mid',
+        'img_mid_alt',
         'img_end',
+        'img_end_alt',
     ];
 }

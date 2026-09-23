@@ -379,6 +379,16 @@ projects:
           cs: "HCMS — informační systém pro výrobu – sekce 6"
           en: "HCMS — production information system – section 6"
           de: "HCMS — Produktions-Informationssystem – Abschnitt 6"
+      # OND-268: miniatura karty projektu. `portfolio_card_thumbnail()` dává
+      # `type: thumbnail` přednost; šablona detailu ho z galerie vynechává,
+      # takže se v galerii neobjeví podruhé. Bez něj se miniatura brala
+      # z první čtvercové karty = functions model (nečitelná šedozelená plocha).
+      - path: "projects/hcms/thumbnail-1.jpg"
+        type: thumbnail
+        alt:
+          cs: "HCMS – obrazovka Hot Call Management System pro závod Toyota"
+          en: "HCMS – Hot Call Management System screen for the Toyota plant"
+          de: "HCMS – Bildschirm des Hot Call Management System für das Toyota-Werk"
     translations:
       cs:
         title: "HCMS — informační systém pro výrobu"
@@ -701,9 +711,9 @@ projects:
       - url: "https://framerusercontent.com/images/E8KTFdQxsC4zPigZb2BCF6xZ1g.png"
         type: gallery
         alt:
-          cs: "Nové interiéry – sekce 4"
-          en: "Nové interiéry – section 4"
-          de: "Nové interiéry – Abschnitt 4"
+          cs: "Nové interiéry – pozvánka do showroomu v Říčanech"
+          en: "Nové interiéry – invitation to the showroom in Říčany"
+          de: "Nové interiéry – Einladung in den Showroom in Říčany"
       - url: "https://framerusercontent.com/images/p0LgiOAOHK7xGX1MFL5EV1l9yUo.png"
         type: gallery
         alt:
@@ -871,15 +881,15 @@ projects:
       - url: "https://framerusercontent.com/images/ts7VthxqIAmrSZgLfGLUxjliw.png"
         type: gallery
         alt:
-          cs: "Cyklocentrum Březí – sekce 4"
-          en: "Cyklocentrum Březí – section 4"
-          de: "Cyklocentrum Březí – Abschnitt 4"
+          cs: "Cyklo Centrum – domovská stránka půjčovny, prodeje a servisu kol"
+          en: "Cyklo Centrum – homepage of the bike rental, sales and service shop"
+          de: "Cyklo Centrum – Startseite von Fahrradverleih, -verkauf und -service"
       - url: "https://framerusercontent.com/images/YiOQN9VFcYx3ZtU82crjfRB2lw.webp"
         type: gallery
         alt:
-          cs: "Cyklocentrum Březí – sekce 5"
-          en: "Cyklocentrum Březí – section 5"
-          de: "Cyklocentrum Březí – Abschnitt 5"
+          cs: "Cyklo Centrum – ceník půjčovny kol na třech mobilních obrazovkách"
+          en: "Cyklo Centrum – bike rental price list on three mobile screens"
+          de: "Cyklo Centrum – Preisliste des Fahrradverleihs auf drei Mobilbildschirmen"
     translations:
       cs:
         title: "Cyklocentrum Březí"
@@ -1041,13 +1051,13 @@ projects:
           cs: "Realiťačky v Akci – sekce 4"
           en: "Realiťačky v Akci – section 4"
           de: "Realiťačky v Akci – Abschnitt 4"
-      - url: "https://itwebtech.cz/images/projects/realitackyvakci/realitackyvakci_05.webp"
-        type: gallery
-        alt:
-          cs: "Realiťačky v Akci – sekce 5"
-          en: "Realiťačky v Akci – section 5"
-          de: "Realiťačky v Akci – Abschnitt 5"
+      # OND-268 bod 6: `gallery-5` odstraněna. Byl to marketingový vizuál
+      # rezervačního a pokladního systému pro fitness („FitnessGym",
+      # permanentky, věrnostní body) — k tomuhle projektu nepatří a podle
+      # kontroly všech 101 snímků galerií (OND-260) ani k žádnému jinému.
+      # `path` u `gallery-6` drží číslování, aby ji seeder neposunul na 5.
       - url: "https://itwebtech.cz/images/projects/realitackyvakci/realitackyvakci_06.webp"
+        path: "projects/realitacky-v-akci/gallery-6.webp"
         type: gallery
         alt:
           cs: "Realiťačky v Akci – sekce 6"
@@ -1183,15 +1193,15 @@ projects:
       - url: "https://framerusercontent.com/images/04979nLksOVVZT5HBjnMKNzg0.png"
         type: hero
         alt:
-          cs: "Zubní Provázek – domovská stránka zubní ordinace s lokálním SEO"
-          en: "Zubní Provázek – homepage of the dental practice with local SEO"
-          de: "Zubní Provázek – Startseite der Zahnarztpraxis mit lokalem SEO"
+          cs: "Zubní Provázek – administrace webu: úprava ordinačních hodin"
+          en: "Zubní Provázek – site administration: editing the opening hours"
+          de: "Zubní Provázek – Website-Verwaltung: Bearbeitung der Sprechzeiten"
       - url: "https://framerusercontent.com/images/oHRxCrCbgpiR3s5r1s9OScGjmgE.png"
         type: gallery
         alt:
-          cs: "Zubní Provázek – sekce 1"
-          en: "Zubní Provázek – section 1"
-          de: "Zubní Provázek – Abschnitt 1"
+          cs: "Zubní Provázek – domovská stránka zubní ordinace"
+          en: "Zubní Provázek – homepage of the dental practice"
+          de: "Zubní Provázek – Startseite der Zahnarztpraxis"
       - url: "https://framerusercontent.com/images/Qz1O7nzK3WGd5dLTcedMU3Ihok.png"
         type: gallery
         alt:
@@ -1207,9 +1217,9 @@ projects:
       - url: "https://framerusercontent.com/images/Z93ZKiajg8sH7vlh2jyFmvjvhnY.png"
         type: gallery
         alt:
-          cs: "Zubní Provázek – sekce 4"
-          en: "Zubní Provázek – section 4"
-          de: "Zubní Provázek – Abschnitt 4"
+          cs: "Zubní Provázek – článek na blogu ordinace"
+          en: "Zubní Provázek – an article on the practice blog"
+          de: "Zubní Provázek – ein Artikel im Blog der Praxis"
       - url: "https://framerusercontent.com/images/zPHkujYnsVFlKP76UKAVcCXo.png"
         type: gallery
         alt:
@@ -1340,9 +1350,9 @@ projects:
       - url: "https://framerusercontent.com/images/BIf60XsCyeCTbYOiX9rKTeuU0.webp"
         type: hero
         alt:
-          cs: "VP Industry – domovská stránka průmyslového webu"
-          en: "VP Industry – homepage of the industrial website"
-          de: "VP Industry – Startseite der Industrie-Website"
+          cs: "VP Industry – katalog značících laserů na tabletu"
+          en: "VP Industry – catalogue of marking lasers on a tablet"
+          de: "VP Industry – Katalog der Markierlaser auf einem Tablet"
       - url: "https://framerusercontent.com/images/kCezUd7rLRv3PzcbPrUQK600N6Y.webp"
         type: gallery
         alt:
@@ -1352,9 +1362,9 @@ projects:
       - url: "https://framerusercontent.com/images/uiQvFy0kAI9J0CCdhXPs0PLfEr8.webp"
         type: gallery
         alt:
-          cs: "VP Industry – sekce 2"
-          en: "VP Industry – section 2"
-          de: "VP Industry – Abschnitt 2"
+          cs: "VP Industry – domovská stránka webu pro průmyslové značení"
+          en: "VP Industry – homepage of the industrial marking website"
+          de: "VP Industry – Startseite der Website für industrielle Kennzeichnung"
       - url: "https://framerusercontent.com/images/w4E0n0ywwDBuq9z8QyDwJTVH9To.webp"
         type: gallery
         alt:
@@ -1819,19 +1829,14 @@ projects:
           cs: "Josef Opa – sekce 1"
           en: "Josef Opa – section 1"
           de: "Josef Opa – Abschnitt 1"
-      - url: "https://itwebtech.cz/images/projects/josefopa/josefopa_00.webp"
-        type: gallery
-        alt:
-          cs: "Josef Opa – sekce 2"
-          en: "Josef Opa – section 2"
-          de: "Josef Opa – Abschnitt 2"
-      - url: "https://itwebtech.cz/images/projects/josefopa/josefopa_01.webp"
-        type: gallery
-        alt:
-          cs: "Josef Opa – sekce 3"
-          en: "Josef Opa – section 3"
-          de: "Josef Opa – Abschnitt 3"
+      # OND-268: `gallery-2` (josefopa_00) a `gallery-3` (josefopa_01) odstraněny.
+      # Po výměně hero za čistou bílou verzi mockupu byl `gallery-2` jeho
+      # doslovný duplikát; `gallery-3` byla mřížka klipartových maskotů
+      # s useknutými popisky. Soubory zůstávají v repu, jen je nic nereferencuje.
+      # `path` níž je explicitní schválně: seeder jinak čísluje podle pořadí
+      # v seznamu a `josefopa_02` by se přejmenovala na `gallery-2`.
       - url: "https://itwebtech.cz/images/projects/josefopa/josefopa_02.webp"
+        path: "projects/josefopa/gallery-4.webp"
         type: gallery
         alt:
           cs: "Josef Opa – sekce 4"
@@ -1979,6 +1984,25 @@ projects:
           cs: "VAN spedition – sekce 2"
           en: "VAN spedition – section 2"
           de: "VAN spedition – Abschnitt 2"
+      # OND-268: protějšek „po" k předchozímu „před". Vlastní snímek,
+      # žádné zdrojové `url` — proto explicitní `path`.
+      - path: "projects/vanspedition/gallery-3.webp"
+        type: gallery
+        alt:
+          cs: "VAN spedition – dnešní podoba webu, protějšek snímku původní verze"
+          en: "VAN spedition – the current website, counterpart to the shot of the old version"
+          de: "VAN spedition – die heutige Website als Gegenstück zur alten Version"
+      # OND-268: pojistka miniatury, ne nový obrázek — ukazuje na TÝŽ soubor
+      # jako hero. `portfolio_card_thumbnail()` bere první skoro čtvercový
+      # snímek dřív než hero, a „před" (`gallery-2`, starý červený web) je po
+      # doplnění na 1:1 přesně takový. Bez tohohle řádku by karta projektu
+      # v /projekty i v „Další projekty" ukazovala web, který jsme nahradili.
+      - path: "projects/vanspedition/hero-1.webp"
+        type: thumbnail
+        alt:
+          cs: "VAN spedition – domovská stránka mikrowebu logistické firmy"
+          en: "VAN spedition – homepage of the logistics company micro-site"
+          de: "VAN spedition – Startseite der Logistikunternehmens-Microsite"
     translations:
       cs:
         title: "VAN spedition"
@@ -2814,25 +2838,26 @@ projects:
           cs: "Excel Tools (VBA) – sekce 1"
           en: "Excel Tools (VBA) – section 1"
           de: "Excel Tools (VBA) – Abschnitt 1"
-      - url: "https://itwebtech.cz/images/projects/excel/address_data.jpg"
-        type: gallery
-        alt:
-          cs: "Excel Tools (VBA) – sekce 2"
-          en: "Excel Tools (VBA) – section 2"
-          de: "Excel Tools (VBA) – Abschnitt 2"
+      # OND-268: `gallery-2` (address_data) odstraněna rozhodnutím Ondřeje
+      # (22. 9. 22:37), bez náhrady. Nebyla to ukázka práce, ale interní návod
+      # s kurzorovými šipkami — a nesl adresářovou strukturu a názvy serverů
+      # klienta. `path` u zbylých tří je explicitní, aby je seeder nepřečísloval.
       - url: "https://itwebtech.cz/images/projects/excel/pdf_kanban.jpg"
+        path: "projects/excel-tools/gallery-3.jpg"
         type: gallery
         alt:
           cs: "Excel Tools (VBA) – sekce 3"
           en: "Excel Tools (VBA) – section 3"
           de: "Excel Tools (VBA) – Abschnitt 3"
       - url: "https://itwebtech.cz/images/projects/excel/process_combinations.jpg"
+        path: "projects/excel-tools/gallery-4.jpg"
         type: gallery
         alt:
           cs: "Excel Tools (VBA) – sekce 4"
           en: "Excel Tools (VBA) – section 4"
           de: "Excel Tools (VBA) – Abschnitt 4"
       - url: "https://itwebtech.cz/images/projects/excel/report.jpg"
+        path: "projects/excel-tools/gallery-5.jpg"
         type: gallery
         alt:
           cs: "Excel Tools (VBA) – sekce 5"
