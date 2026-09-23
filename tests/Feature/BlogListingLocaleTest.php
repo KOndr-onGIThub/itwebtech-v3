@@ -46,13 +46,57 @@ class BlogListingLocaleTest extends TestCase
 
     public function test_listing_shows_article_in_locale_with_active_slug(): void
     {
-        $this->get('/jak-na-to')
+        $this->get('/zapisky')
             ->assertOk()
-            ->assertSee('/jak-na-to/kolik-stoji-webove-stranky', false);
+            ->assertSee('/zapisky/kolik-stoji-webove-stranky', false);
 
         $this->get('/en/blog')
             ->assertOk()
             ->assertSee('/en/blog/how-much-does-a-website-cost', false);
+    }
+
+    /**
+     * OND-266: CS slug sekce se změnil `jak-na-to` → `zapisky` (Ondřej 23. 9.).
+     * Staré adresy jsou v indexu i v odkazech zvenčí, takže musí držet 301.
+     */
+    public function test_old_cs_blog_urls_redirect_permanently(): void
+    {
+        $this->get('/jak-na-to')->assertRedirect('/zapisky');
+        $this->get('/jak-na-to/kolik-stoji-webove-stranky')
+            ->assertRedirect('/zapisky/kolik-stoji-webove-stranky');
+
+        // `/blog` míří dál na default CS slug, ne na `/en/blog`.
+        $this->get('/blog')->assertRedirect('/zapisky');
+        $this->get('/blog/kolik-stoji-webove-stranky')
+            ->assertRedirect('/zapisky/kolik-stoji-webove-stranky');
+    }
+
+    /**
+     * OND-266: `/blog` nesmí vzniknout řetěz `/blog → /jak-na-to → /zapisky`.
+     * Test výš hlídá cíl prvního skoku; tenhle hlídá, že cíl je koncový —
+     * tedy že odpoví 200 a ne dalším redirectem.
+     */
+    public function test_old_urls_redirect_in_a_single_hop(): void
+    {
+        foreach (['/blog', '/jak-na-to'] as $old) {
+            $this->get($this->get($old)->headers->get('Location'))->assertOk();
+        }
+    }
+
+    /**
+     * OND-266: v sitemapě nesmí zůstat stará CS adresa sekce — jinak tam
+     * posíláme roboty na 301 a `/zapisky` nemá vlastní záznam.
+     */
+    public function test_sitemap_carries_new_cs_blog_url_only(): void
+    {
+        $xml = $this->get('/sitemap.xml')->assertOk()->getContent();
+
+        $this->assertStringNotContainsString('/jak-na-to', $xml);
+        $this->assertStringContainsString('/zapisky', $xml);
+        $this->assertStringContainsString('/zapisky/kolik-stoji-webove-stranky', $xml);
+
+        // EN/DE zůstávají na `/blog` — Ondřej řekl „v češtině".
+        $this->assertStringContainsString('/en/blog', $xml);
     }
 
     public function test_listing_hides_article_without_slug_in_current_locale(): void
@@ -71,13 +115,13 @@ class BlogListingLocaleTest extends TestCase
     public function test_every_link_in_listing_resolves(): void
     {
         // cs + en mají článek, de je po fixu prázdné
-        $expectedLinks = ['/jak-na-to' => 1, '/en/blog' => 1, '/de/blog' => 0];
+        $expectedLinks = ['/zapisky' => 1, '/en/blog' => 1, '/de/blog' => 0];
 
         foreach ($expectedLinks as $listing => $expectedCount) {
             $html = $this->get($listing)->assertOk()->getContent();
 
             // href je absolutní (lroute() vrací plnou URL), bereme path část
-            preg_match_all('#href="[^"]*?(/(?:jak-na-to|en/blog|de/blog)/[^"]+)"#', $html, $matches);
+            preg_match_all('#href="[^"]*?(/(?:zapisky|en/blog|de/blog)/[^"]+)"#', $html, $matches);
             $links = array_values(array_unique($matches[1]));
 
             $this->assertCount($expectedCount, $links, "Špatný počet odkazů na článek ve výpisu {$listing}");
@@ -112,7 +156,7 @@ class BlogListingLocaleTest extends TestCase
             'active'     => true,
         ]);
 
-        foreach (['/jak-na-to' => '/jak-na-to/kolik-stoji-webove-stranky', '/en/blog' => '/en/blog/how-much-does-a-website-cost', '/de/blog' => '/de/blog/was-kostet-eine-website'] as $listing => $detail) {
+        foreach (['/zapisky' => '/zapisky/kolik-stoji-webove-stranky', '/en/blog' => '/en/blog/how-much-does-a-website-cost', '/de/blog' => '/de/blog/was-kostet-eine-website'] as $listing => $detail) {
             $this->get($listing)
                 ->assertOk()
                 ->assertSee($detail, false);

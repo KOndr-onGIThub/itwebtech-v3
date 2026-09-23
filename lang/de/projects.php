@@ -89,7 +89,7 @@ return [
                     'Aufgeteilte Leistungen — bioklimatische Pergolen, Tore und Zäune, Planung nach Maß.',
                     'Galerie fertiger Projekte.',
                     'Anfrageformular und Kontakt.',
-                    'Abschnitt „Wie es abläuft".',
+                    'Abschnitt „Wie es abläuft“.',
                     'Klares, aufgeräumtes Design.',
                 ],
             ],
@@ -132,7 +132,7 @@ return [
             'Es fehlt ein klarer Ablauf nach dem Absenden einer Anfrage.',
             // OND-201 (Befund 5.1): „Business-Tool" versprach ein Ergebnis,
             // für das ich allein nicht einstehen kann.
-            'Sie wollen keine weitere „schöne Website", sondern etwas, das auf der realen Arbeitsweise Ihrer Firma aufbaut.',
+            'Sie wollen keine weitere „schöne Website“, sondern etwas, das auf der realen Arbeitsweise Ihrer Firma aufbaut.',
         ],
         'cta_heading'   => 'Wenn 2+ Punkte passen, lohnt sich die Umsetzung jetzt.',
         'cta_text'      => 'Im Erstgespräch definieren wir den kürzesten Weg zu einer funktionierenden Lösung ohne unnötige Extras.',

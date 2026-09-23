@@ -376,9 +376,12 @@ return [
                 'question' => 'Jste jeden člověk. Co když onemocníte nebo skončíte?',
                 'answer'   => 'Rozumím — u zakázky za víc než sto tisíc je to ta nejdůležitější otázka. Web neběží na platformě, ze které byste nemohli odejít: je to vlastní kód na běžném webhostingu. Přístupy do administrace hostingu a na FTP můžete mít po celou dobu, stačí si o ně říct. Po doplacení projektu je kód váš — předám vám ho, kdykoli si o něj řeknete, a pokračovat na něm může kterýkoli vývojář; když bude potřeba, sepíšu k tomu i dokumentaci. Nepřetržitou pohotovost nedržím a nebudu tvrdit, že ano. Ručím za to, že u mě nic nezůstane zamčené.',
             ],
-            // OND-269 (audit OND-254, nález 7): otázka „Kolik to bude stát?"
+            // OND-269 (audit OND-254, nález 7): otázka „Kolik to bude stát?“
             // odsud vypadla — stejný titulek i stejná čísla stojí o čtyři
             // sekce výš v cenové kotvě (`price_anchor`) a v ceníku.
+            // OND-266 tu mezitím opravil rovné uvozovky v odpovědi na cenu;
+            // ta oprava zanikla se smazanou položkou, ne přetažením ze staré
+            // větve. Druhá oprava z OND-266 („bezúdržbové weby“) zůstává níž.
             [
                 'key'      => 'duration',
                 'question' => 'Jak dlouho to trvá?',
@@ -391,7 +394,7 @@ return [
             ],
             [
                 'key'      => 'maintenance-free',
-                'question' => 'Co jsou „bezúdržbové weby"?',
+                'question' => 'Co jsou „bezúdržbové weby“?',
                 'answer'   => 'Žádný WordPress, žádné pluginy, žádné měsíční bezpečnostní aktualizace. Web stojí na vlastním kódu — běží sám, nevyžaduje pravidelné opravy a nepadá kvůli kolizi šablon. Drobné změny obsahu řešíme přímo, bez ticketu.',
             ],
             // Archiv: další FAQ otázky se přesouvají mimo homepage (na /faq nebo /sluzby — mimo scope OND-121).

@@ -34,7 +34,7 @@ return [
     // and `sidebar_ad` removed — the audit offer promised results on the
     // client's behalf and the page carried three CTAs side by side.
 
-    'back_to_blog' => '← Back to blog',
+    'back_to_blog' => '← Back to notes',
 
     // OND-130 P2 iter 8 — Article page-mark eyebrow + author box.
     // OND-135 cleanup (2026-05-14): page_mark_index removed per sitewide

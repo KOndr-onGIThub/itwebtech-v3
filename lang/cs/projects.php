@@ -90,7 +90,7 @@ return [
                     'Rozdělené služby — bioklimatické pergoly, brány a ploty, návrh na míru.',
                     'Galerie hotových realizací.',
                     'Poptávkový formulář a kontakt.',
-                    'Sekce „Jak to probíhá".',
+                    'Sekce „Jak to probíhá“.',
                     'Čistý přehledný design.',
                 ],
             ],
@@ -133,7 +133,7 @@ return [
             'Chybí jasný postup, co se stane po odeslání poptávky.',
             // OND-201 (nález 5.1): „nástroj, který vydělává" byl slib výsledku
             // za klienta — výdělek neovlivním sám.
-            'Nechcete další „hezký web", ale nástroj postavený na tom, jak vaše firma funguje.',
+            'Nechcete další „hezký web“, ale nástroj postavený na tom, jak vaše firma funguje.',
         ],
         'cta_heading'   => 'Pokud sedí 2 a více bodů, má smysl to řešit.',
         'cta_text'      => 'Během úvodní konzultace najdeme nejkratší cestu k funkčnímu řešení bez zbytečných funkcí navíc.',

@@ -27,7 +27,9 @@ class PortfolioTest extends TestCase
         $expectedCount = PortfolioProject::published()->count();
 
         // OND-208: 24. projekt je `pitarena-eshop` (shop.pitarena.cz).
-        $this->assertSame(24, $expectedCount, 'Seeder by měl vytvořit 24 publikovaných projektů.');
+        // OND-282: tři projekty (logo-realitacky, video-pitbike-akademie,
+        // animace-delejme) zůstávají v datasetu, ale nejsou publikované.
+        $this->assertSame(21, $expectedCount, 'Seeder by měl vytvořit 21 publikovaných projektů z 24 v datasetu.');
 
         $response = $this->get('/projekty');
 
@@ -89,8 +91,9 @@ class PortfolioTest extends TestCase
     public static function localizedSlugProvider(): array
     {
         // [cs slug, de slug, en slug]
+        // OND-282: `animace-delejme` tu byl taky, ale od odpublikování
+        // vrací 404 ve všech locale — pokrývá ho `unpublishedProjectProvider`.
         return [
-            'animace-delejme'     => ['animace-delejme', 'aufmerksamkeits-animation', 'attention-grabbing-animation'],
             'pitarena-cedule'     => ['pitarena-cedule', 'pitarena-werbeschild', 'pitarena-outdoor-sign'],
             'clanek-motorkari-cz' => ['clanek-motorkari-cz', 'artikel-motorkari-cz', 'article-motorkari-cz'],
             'pitarena-eshop'      => ['pitarena-eshop', 'pitarena-onlineshop', 'pitarena-online-shop'],
@@ -128,24 +131,24 @@ class PortfolioTest extends TestCase
 
     public function test_project_detail_hreflang_uses_localized_slugs(): void
     {
-        $response = $this->get('/de/projekte/aufmerksamkeits-animation');
+        $response = $this->get('/de/projekte/pitarena-werbeschild');
 
         $response->assertOk();
-        $response->assertSee('/projekty/animace-delejme', false);
-        $response->assertSee('/de/projekte/aufmerksamkeits-animation', false);
-        $response->assertSee('/en/projects/attention-grabbing-animation', false);
+        $response->assertSee('/projekty/pitarena-cedule', false);
+        $response->assertSee('/de/projekte/pitarena-werbeschild', false);
+        $response->assertSee('/en/projects/pitarena-outdoor-sign', false);
     }
 
     public function test_project_listing_links_to_localized_slug(): void
     {
         $this->get('/de/projekte')
             ->assertOk()
-            ->assertSee('/de/projekte/aufmerksamkeits-animation', false)
-            ->assertDontSee('/de/projekte/animace-delejme', false);
+            ->assertSee('/de/projekte/pitarena-werbeschild', false)
+            ->assertDontSee('/de/projekte/pitarena-cedule', false);
 
         $this->get('/projekty')
             ->assertOk()
-            ->assertSee('/projekty/animace-delejme', false);
+            ->assertSee('/projekty/pitarena-cedule', false);
     }
 
     public function test_sitemap_contains_localized_project_slugs(): void
@@ -153,9 +156,92 @@ class PortfolioTest extends TestCase
         $response = $this->get('/sitemap.xml');
 
         $response->assertOk();
-        $response->assertSee('/de/projekte/aufmerksamkeits-animation', false);
-        $response->assertSee('/en/projects/attention-grabbing-animation', false);
-        $response->assertDontSee('/de/projekte/animace-delejme', false);
+        $response->assertSee('/de/projekte/pitarena-werbeschild', false);
+        $response->assertSee('/en/projects/pitarena-outdoor-sign', false);
+        $response->assertDontSee('/de/projekte/pitarena-cedule', false);
+    }
+
+    /* ================================================================== */
+    /*  OND-282 — tři odpublikované projekty                              */
+    /* ================================================================== */
+
+    /**
+     * @return array<string, array{0: string, 1: array<int, string>}>
+     */
+    public static function unpublishedProjectProvider(): array
+    {
+        // [neutrální slug, všechny URL, na kterých projekt kdy byl]
+        return [
+            'logo-realitacky' => ['logo-realitacky', [
+                '/projekty/logo-realitacky',
+                '/en/projects/logo-realitacky',
+                '/de/projekte/logo-realitacky',
+            ]],
+            'video-pitbike-akademie' => ['video-pitbike-akademie', [
+                '/projekty/video-pitbike-akademie',
+                '/en/projects/video-pitbike-akademie',
+                '/de/projekte/video-pitbike-akademie',
+            ]],
+            'animace-delejme' => ['animace-delejme', [
+                '/projekty/animace-delejme',
+                '/en/projects/attention-grabbing-animation',
+                '/de/projekte/aufmerksamkeits-animation',
+            ]],
+        ];
+    }
+
+    /**
+     * Data zůstávají v DB — mazat se nesmí, jen odpublikovat.
+     *
+     * @param  array<int, string>  $urls
+     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('unpublishedProjectProvider')]
+    public function test_unpublished_project_stays_in_database(string $slug, array $urls): void
+    {
+        $project = PortfolioProject::where('slug', $slug)->first();
+
+        $this->assertNotNull($project, "Projekt `{$slug}` se nesmí mazat, jen odpublikovat.");
+        $this->assertNull($project->published_at, "Projekt `{$slug}` má být odpublikovaný.");
+        $this->assertTrue($project->translations()->exists(), "Překlady `{$slug}` mají zůstat.");
+    }
+
+    /**
+     * Detail je 404 ve všech locale — přímá URL nikam nevede.
+     *
+     * @param  array<int, string>  $urls
+     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('unpublishedProjectProvider')]
+    public function test_unpublished_project_detail_returns_404(string $slug, array $urls): void
+    {
+        foreach ($urls as $url) {
+            $this->get($url)->assertNotFound();
+        }
+    }
+
+    /**
+     * Na 404 nesmí vést žádný odkaz z webu: ani výpis, ani dlaždice
+     * „Další projekty" v detailu jiného projektu, ani homepage, ani sitemapa.
+     *
+     * @param  array<int, string>  $urls
+     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('unpublishedProjectProvider')]
+    public function test_nothing_on_the_site_links_to_unpublished_project(string $slug, array $urls): void
+    {
+        $pages = ['/', '/projekty', '/en/projects', '/de/projekte', '/sitemap.xml'];
+
+        // Detaily ostatních projektů ze stejné kategorie („Další projekty").
+        foreach (PortfolioProject::published()->where('category', 'other')->get() as $sibling) {
+            $pages[] = '/projekty/'.$sibling->slug;
+        }
+
+        foreach ($pages as $page) {
+            $response = $this->get($page);
+            $response->assertOk();
+
+            foreach ($urls as $url) {
+                $response->assertDontSee($url, false);
+            }
+        }
     }
 
     /**

@@ -87,7 +87,12 @@ class PortfolioSeeder extends Seeder
                 'duration'     => $row['duration'] ?? null,
                 'featured'     => (bool) ($row['featured'] ?? false),
                 'sort_order'   => (int) ($row['sort_order'] ?? 0),
-                'published_at' => $row['published_at'] ?? now(),
+                // OND-282: `?? now()` by explicitní `published_at: null`
+                // v YAMLu přepsalo zpátky na publikováno. Klíč v YAMLu
+                // je teď rozhodující — chybí = publikuj, `null` = neveřejné.
+                'published_at' => array_key_exists('published_at', $row)
+                    ? $row['published_at']
+                    : now(),
             ]
         );
 

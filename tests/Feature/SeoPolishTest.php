@@ -154,7 +154,7 @@ class SeoPolishTest extends TestCase
             'active'     => true,
         ]);
 
-        $response = $this->get('/jak-na-to/kolik-stoji-webove-stranky');
+        $response = $this->get('/zapisky/kolik-stoji-webove-stranky');
 
         $response->assertOk();
 

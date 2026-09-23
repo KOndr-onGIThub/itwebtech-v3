@@ -17,7 +17,7 @@ return [
     // Portfolio-Artefakt per CEO PR #78 Präzedenzfall (Home / Kontakt).
     'hero' => [
         'page_mark_label' => 'PREISE',
-        'upline'          => 'Kein „Auf Anfrage"-Versteckspiel.',
+        'upline'          => 'Kein „Auf Anfrage“-Versteckspiel.',
         // OND-198 (Befund 5.4): Standard führt die Subline an, nicht die günstigste Stufe.
         'heading_html'    => 'Drei Stufen,<br>ein <em>klarer Preis</em>.',
         'subline'         => 'Die Rechnung entspricht dem Angebot. Keine Mehrkosten ohne Ihr Wissen.',

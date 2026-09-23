@@ -270,6 +270,18 @@
         return !!modalEl;
     }
 
+    // OND-266 (6): dokud návštěvník nerozhodne o cookies, nesmí nad obsahem
+    // viset cookie lišta A spodní CTA lišta zároveň — na mobilu spolu zabraly
+    // 226 px z 844 (26,8 % obrazovky). Příznak na <html> schová spodní lištu
+    // a pustí cookie lištu až k dolní hraně. Nastavuje se hned, jak víme, že
+    // souhlas chybí — tedy dřív, než se lišta po 800 ms ukáže, aby uživatel
+    // neviděl obě naráz ani na okamžik.
+    function setConsentPending(pending) {
+        try {
+            document.documentElement.classList.toggle('cookie-pending', !!pending);
+        } catch (e) { /* swallow */ }
+    }
+
     function showModal() {
         if (!overlayEl) return;
         overlayEl.classList.remove('cookie-overlay--hiding');
@@ -285,6 +297,7 @@
 
     function hideModal(persist) {
         if (!overlayEl) return;
+        setConsentPending(false);
         overlayEl.classList.remove('cookie-overlay--visible');
         overlayEl.classList.add('cookie-overlay--hiding');
         overlayEl.setAttribute('aria-hidden', 'true');
@@ -418,6 +431,7 @@
         // Žádný consent → zobrazit modal s 800ms zpožděním (nepřebíjet LCP)
         if (!queryModal()) return;
         bindModalEvents();
+        setConsentPending(true);
         setTimeout(showModal, MODAL_DELAY_MS);
     }
 

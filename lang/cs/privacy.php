@@ -30,7 +30,7 @@ return [
     ],
 
     'content' =>'<p>Datum účinnosti: 6. května 2026</p>
-<p>Webové stránky (dále jen „služba") provozuje podnikatel Ondřej Kriška (dále jen „provozovatel" nebo „ONDRAWEB").</p>
+<p>Webové stránky (dále jen „služba“) provozuje podnikatel Ondřej Kriška (dále jen „provozovatel“ nebo „ONDRAWEB“).</p>
 <p>Tato stránka vás informuje o zásadách týkajících se shromažďování, používání a zpřístupňování osobních údajů, když používáte naši službu.</p>
 
 <h2>Shromažďování a používání informací</h2>

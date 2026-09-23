@@ -175,7 +175,7 @@
 .pd-note {
     font-family: var(--font-body);
     font-size: var(--text-body-sm);
-    color: var(--color-fg-faint);
+    color: var(--color-fg-muted);
     max-width: 48ch;
     margin: 0;
 }
@@ -300,7 +300,7 @@
     font-style: italic;
     font-size: var(--text-body-sm);
     line-height: var(--leading-relaxed);
-    color: var(--color-fg-faint);
+    color: var(--color-fg-muted);
 }
 .pd-issue blockquote footer {
     font-style: normal;
@@ -353,11 +353,13 @@
 .pd-price__col--featured { border-top: 2px solid var(--pd-accent); padding-top: var(--space-4); }
 
 /* --- Reference ---------------------------------------------- */
+/* OND-279: „Přeloženo z českých originálů na Google, Firmy.cz a Facebooku" je
+   údaj o původu recenzí — stejná třída jako .pd-testi__source, tedy informace. */
 .pd-testi__note {
     font-family: var(--font-body);
     font-size: var(--text-body-sm);
     line-height: var(--leading-relaxed);
-    color: var(--color-fg-faint);
+    color: var(--color-fg-muted);
     margin: calc(-1 * var(--space-3)) 0 var(--space-5);
     max-width: 58ch;
 }
@@ -376,7 +378,7 @@
     font-variation-settings: 'wght' 200;
     font-size: var(--text-h3);
     line-height: 1.1;
-    color: var(--color-fg-faint);
+    color: var(--color-fg-decorative);
 }
 .pd-testi__text {
     font-family: var(--font-body);
@@ -390,7 +392,7 @@
     font-size: var(--text-caption);
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--color-fg-faint);
+    color: var(--color-fg-muted);
 }
 
 /* ============================================================
@@ -502,7 +504,7 @@
     font-variation-settings: 'wght' 200;
     font-size: var(--text-h3);
     line-height: 1;
-    color: var(--color-fg-faint);
+    color: var(--color-fg-decorative);
     margin-bottom: var(--space-3);
 }
 .pd-case__client {
@@ -607,7 +609,7 @@
     font-variation-settings: 'wght' 200;
     font-size: var(--text-h3);
     line-height: 1.1;
-    color: var(--color-fg-faint);
+    color: var(--color-fg-decorative);
 }
 .pd-why__item h3 {
     font-family: var(--font-display);
@@ -712,7 +714,7 @@
     font-style: italic;
     font-size: var(--text-body-sm);
     line-height: var(--leading-relaxed);
-    color: var(--color-fg-faint);
+    color: var(--color-fg-muted);
     max-width: 62ch;
 }
 .pd-step__body blockquote footer {
@@ -726,7 +728,7 @@
     font-family: var(--font-body);
     font-size: var(--text-body-sm);
     line-height: var(--leading-relaxed);
-    color: var(--color-fg-faint);
+    color: var(--color-fg-muted);
     max-width: 62ch;
     margin: var(--space-3) 0 0;
 }
@@ -808,7 +810,7 @@
     font-style: italic;
     font-size: var(--text-body-sm);
     line-height: var(--leading-relaxed);
-    color: var(--color-fg-faint);
+    color: var(--color-fg-muted);
 }
 .pd-form__quote footer {
     font-style: normal;
@@ -844,7 +846,7 @@
     transition: border-color var(--duration-micro) var(--ease-out);
 }
 .pd-field input::placeholder,
-.pd-field textarea::placeholder { color: var(--color-fg-faint); }
+.pd-field textarea::placeholder { color: var(--color-fg-muted); }
 .pd-field input:focus,
 .pd-field textarea:focus {
     outline: none;
@@ -890,7 +892,7 @@
 .pd-form__privacy {
     font-family: var(--font-body);
     font-size: var(--text-caption);
-    color: var(--color-fg-faint);
+    color: var(--color-fg-muted);
     margin: var(--space-3) 0 0;
 }
 .pd-form__privacy a {
@@ -997,7 +999,7 @@
     font-family: var(--font-body);
     font-size: var(--text-body-sm);
     line-height: var(--leading-relaxed);
-    color: var(--color-fg-faint);
+    color: var(--color-fg-muted);
 }
 
 /* --- Reference: zdroj hodnocení jako datový štítek ---------- */
@@ -1008,7 +1010,7 @@
     border: 1px solid var(--color-border-mid);
     font-size: var(--text-caption);
     letter-spacing: 0.04em;
-    color: var(--color-fg-faint);
+    color: var(--color-fg-muted);
     white-space: nowrap;
 }
 

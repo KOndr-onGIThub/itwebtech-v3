@@ -209,7 +209,7 @@
             @if(config('contact.phone'))
             <a href="tel:{{ preg_replace('/\s+/', '', config('contact.phone')) }}" class="footer-bar__phone">{{ config('contact.phone') }}</a>
             @endif
-            <a href="{{ lroute('privacy') }}" class="footer-bar__gdpr-link">{{ __('layout.gdpr_form_link') }}</a>
+            <a href="{{ lroute('privacy') }}" class="footer-bar__gdpr-link">{{ __('layout.footer_privacy_link') }}</a>
             <a href="{{ lroute('cookies') }}" class="footer-bar__gdpr-link">{{ __('layout.cookies_link') }}</a>
         </div>
     </footer>

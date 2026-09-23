@@ -34,8 +34,8 @@ Per `config/slugs.php` + dynamické detail routy:
 | privacy | `/zasady-ochrany-osobnich-udaju` | `/en/privacy-policy` | `/de/datenschutz` |
 | projects | `/projekty` | `/en/projects` | `/de/projekte` |
 | project | `/projekty/{slug}` | `/en/projects/{slug}` | `/de/projekte/{slug}` |
-| blog | `/jak-na-to` | `/en/blog` | `/de/blog` |
-| article | `/jak-na-to/{slug}` | `/en/blog/{slug}` | `/de/blog/{slug}` |
+| blog | `/zapisky` | `/en/blog` | `/de/blog` |
+| article | `/zapisky/{slug}` | `/en/blog/{slug}` | `/de/blog/{slug}` |
 | cookies | `/cookies` | `/cookies` | `/cookies` |
 
 `/cookies` je per `routes/web.php` mimo localized group a nemá hreflang
