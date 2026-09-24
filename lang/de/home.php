@@ -127,10 +127,16 @@ return [
     // Verifizieren"), die neue sagt, was Ondřej dort wirklich getan hat.
     // Hier prüft der Besucher das Handwerk, deshalb spricht die Sektion
     // in Ondřejs Sprache.
+    // OND-318: `example` ist die deutsche Fassung des freigegebenen
+    // CS-Beispiels — keine wörtliche Übersetzung, sondern die Wörter, die
+    // die PitArena-Fallstudie auf Deutsch schon heute benutzt. Neu
+    // formuliert wird in OND-318, nicht hier. Die Positionszahl behält
+    // bewusst das deutsche Trennzeichen `4.551`.
     'toyota' => [
         'heading'      => '18 Jahre bei Toyota. Dann bin ich gegangen.',
         'text'         => 'Angefangen habe ich als Arbeiter in der Logistik, gegangen bin ich als leitender Spezialist im Projektteam. Achtzehn Jahre habe ich gesucht, wo in Produktion und Montage Zeit verloren geht, und dazu eine Firmenanwendung geschrieben, die Millionen Kronen gespart hat. In der Produktion können Sie sich nicht erlauben, dass etwas ausfällt. Dort habe ich gelernt: Software macht man richtig oder gar nicht.',
         'text_2'       => 'Websites baue ich genauso. Bevor ich die erste Zeile schreibe, will ich wissen, wie Anfragen bei Ihnen entstehen und was danach mit ihnen passiert. Erst danach entsteht die Seite. Sie merken es an der Spezifikation, die Sie bekommen, bevor ich anfange.',
+        'example'      => 'Beim Onlineshop von PitArena habe ich zuerst gefragt, wie dessen Kunden ein Teil auswählen. Ohne Modell und Baujahr kaufen sie blind und schicken zurück. Deshalb ist der Katalog nach 19 Motorradmodellen aufgeteilt — ein Klick aufs Modell, und von 4.551 Positionen bleiben nur die passenden.',
         'quote_text'   => 'Eine der größten Stärken von Ondřej ist sein starker Wunsch, sich zu entwickeln — nicht nur die Bedürfnisse der Kunden zu erfüllen, sondern ihre Erwartungen zu übertreffen.',
         'quote_author' => 'Pavel Baudyš, Direktor Produktion, Montage & Logistik, Toyota Motor Manufacturing Czech Republic (2024)',
     ],
