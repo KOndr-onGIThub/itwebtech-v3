@@ -125,10 +125,15 @@ return [
     // abstract principles ("analysis, design, testing, verification"); the
     // new one states what Ondřej actually did there. This is the section
     // where the visitor checks the craft, so it speaks in his voice.
+    // OND-318: `example` is the EN wording of the approved CS example — not
+    // a literal translation, it reuses the words the PitArena e-shop case
+    // study already uses in English. Rewrite it in OND-318, not here. The
+    // item count keeps the English separator `4,551` on purpose.
     'toyota' => [
         'heading'      => '18 years at Toyota. Then I left.',
         'text'         => 'I started as a labourer in logistics and left as a senior specialist in the project team. For eighteen years I looked for where production and assembly lose time, and I wrote an in-house application for it that saved millions of crowns. On a production line you cannot afford for something to go down. That is where I learned that software is either done properly or not at all.',
         'text_2'       => 'I build websites the same way. Before I write the first line I want to know how enquiries reach you and what happens to them next. Only then does the site take shape. You see it in the specification you get before I start working.',
+        'example'      => 'At the PitArena online shop I first asked how its customers choose a part. Without the model and year they buy blind and send it back. The catalogue is therefore split across 19 motorcycle models — one click narrows 4,551 items to those that fit.',
         'quote_text'   => 'One of Ondřej\'s greatest strengths is his strong desire to develop — not just meeting customer needs, but exceeding their expectations.',
         'quote_author' => 'Pavel Baudyš, Director of Manufacturing, Assembly & Logistics, Toyota Motor Manufacturing Czech Republic (2024)',
     ],
