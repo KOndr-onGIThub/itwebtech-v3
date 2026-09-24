@@ -1055,6 +1055,13 @@
     line-height: var(--leading-snug);
     color: var(--color-fg-primary);
 }
+.pd-origin__quote footer {
+    margin-top: var(--space-4);
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+}
 /* OND-315: citace Pavla Baudyše se sázela jako displejový nadpis —
    `--leading-snug` (1,2) na souvislé větě o 54 znacích na řádek — a bez horní
    mezery se lepila na odstavec nad sebou. Odstavce vedle ní mají 1,6.
@@ -1065,17 +1072,16 @@
    ale posunul citaci uvnitř jejího políčka, a vyšší řádkování by blok
    prodloužilo — obojí je pixelová změna na stránce, která je Ondrova
    srovnávací základna. Až lešení `/puvodni-homepage` půjde ven, scope
-   se zruší a pravidlo se vrátí do bloku výš. */
+   se zruší a pravidlo se vrátí do bloku výš.
+
+   Pravidlo stojí až pod `footer` schválně: OND-314 (PR #170) vkládá svoje
+   `#section-toyota .pd-origin__quote { max-width }` hned nad `footer`, a kdyby
+   oba bloky seděly na stejném místě, druhý z těch dvou PR by se do stagingu
+   nesloučil sám. Takhle se sloučí v libovolném pořadí. Specificita ani
+   vlastnosti se nekříží. */
 #section-toyota .pd-origin__quote {
     margin-top: var(--space-6);
     line-height: var(--leading-body);
-}
-.pd-origin__quote footer {
-    margin-top: var(--space-4);
-    font-family: var(--font-body);
-    font-size: var(--text-body-sm);
-    line-height: var(--leading-relaxed);
-    color: var(--color-fg-muted);
 }
 
 /* --- Reference: zdroj hodnocení jako datový štítek ---------- */
