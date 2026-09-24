@@ -176,10 +176,16 @@
      Bez JS zůstane řádek skrytý: nikdy neukazujeme číslo, které
      jsme nenaměřili.
      =================================================== --}}
-<section class="pd-strip" aria-label="{{ __('home.social_proof.rating_aria') }}">
+{{-- OND-315 (nález z OND-311): popis celé sekce byl „Hodnocení 5 z 5“, což
+     platilo jen pro první z pěti údajů — realizace, roky praxe, doba odpovědi
+     ani ocenění hodnocení nejsou. Sekce má teď popis na celý pruh a hodnocení
+     se popisuje u toho údaje, ke kterému patří: viditelné „5,0“ je pro čtečku
+     schované a nahrazuje ho úplné „Hodnocení 5 z 5“, takže nevidomý slyší
+     totéž, co vidí vidící, a navíc i tu stupnici. --}}
+<section class="pd-strip" aria-label="{{ __('home.social_proof.strip_aria') }}">
     <div class="container-site">
         <ul class="pd-strip__list">
-            <li><strong>{{ __('home.social_proof.rating_value') }}</strong> {{ __('home.social_proof.reviews') }}</li>
+            <li><strong aria-hidden="true">{{ __('home.social_proof.rating_value') }}</strong><span class="sr-only">{{ __('home.social_proof.rating_aria') }}</span> {{ __('home.social_proof.reviews') }}</li>
             <li><strong>{{ __('home.social_proof.projects') }}</strong></li>
             <li><strong>{{ __('home.social_proof.experience') }}</strong></li>
             <li>{{ __('home.social_proof.response') }}</li>

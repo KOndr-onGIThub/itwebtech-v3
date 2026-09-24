@@ -44,7 +44,11 @@ return [
     ],
 
     'social_proof' => [
+        // OND-315: `rating_aria` describes the rating alone, so it sits on that
+        // one figure — the strip also holds projects, years, reply time and an
+        // award. The landmark label for the whole strip is `strip_aria`.
         'rating_aria'  => '5 out of 5 rating',
+        'strip_aria'   => 'Numbers about my work',
         'clients_aria' => 'Clients',
         'rating_value' => '5.0',
         'reviews'      => '(21 reviews on Google + Firmy.cz)',

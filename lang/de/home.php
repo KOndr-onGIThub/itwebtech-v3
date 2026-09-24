@@ -44,7 +44,11 @@ return [
     ],
 
     'social_proof' => [
+        // OND-315: `rating_aria` beschreibt nur die Bewertung und steht darum
+        // an dieser einen Zahl — im Streifen stehen auch Projekte, Jahre,
+        // Antwortzeit und Auszeichnung. Landmark-Label: `strip_aria`.
         'rating_aria'  => 'Bewertung 5 von 5',
+        'strip_aria'   => 'Zahlen zu meiner Arbeit',
         'clients_aria' => 'Kunden',
         'rating_value' => '5,0',
         'reviews'      => '(21 Bewertungen auf Google + Firmy.cz)',
