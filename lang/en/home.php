@@ -82,8 +82,15 @@ return [
     // the client's situation. OND-310 supplies the EN wording, so the section
     // renders on /en/ too. It describes a situation, not a pain: the reader
     // nods along. No scare copy (spec chapter 0.5).
+    //
+    // OND-320 (variant G): the sentence is a fact about Ondřej — who writes
+    // to him — not a claim about the reader. Do not flip it back into the
+    // second person ("your website is falling behind"); the reader
+    // recognises themselves in it and nothing is put in their mouth.
+    // Keep it to one rendered line (`.pd-lead--wide`, 52ch): 70 characters
+    // fit, from roughly 74 it wraps.
     'situation' => [
-        'text' => 'You have more work coming in than a year ago, and the website is still the one you had then. Orders get copied into a spreadsheet by hand, and enquiries get answered in the evening from your phone. Or you are adding a new service, and you want it to look as good on the website as you are at delivering it.',
+        'text' => 'Most who write to me are doing well — the website stopped keeping up.',
     ],
 
     'how_i_work' => [

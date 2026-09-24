@@ -83,8 +83,15 @@ return [
     // Fassung, damit der Absatz auch auf /de/ erscheint. Er beschreibt eine
     // Situation, keinen Schmerz — der Leser nickt mit. Kein Schüren von
     // Angst (Zadání, Kapitel 0.5).
+    //
+    // OND-320 (Variante G): Der Satz ist eine Aussage über Ondřej — wer ihm
+    // schreibt — keine Behauptung über den Leser. Nicht in die zweite Person
+    // zurückdrehen und kein Possessiv „Ihre Website": großgeschrieben liest
+    // sich das als Anrede, also genau die Perspektive, die hier wegsollte.
+    // Der Absatz muss einzeilig bleiben (`.pd-lead--wide`, 52ch): 70 Zeichen
+    // passen, ab ~74 bricht die Zeile um.
     'situation' => [
-        'text' => 'Sie haben mehr Arbeit als vor einem Jahr, und die Website ist noch die von damals. Aufträge tragen Sie per Hand in eine Tabelle ein, und Anfragen beantworten Sie abends vom Handy. Oder Sie nehmen eine neue Leistung dazu und wollen, dass sie auf der Website so gut dasteht, wie Sie sie auch erbringen.',
+        'text' => 'Meist schreiben mir Leute, denen es gut läuft — nur die Website nicht.',
     ],
 
     'how_i_work' => [

@@ -88,8 +88,16 @@ return [
     // jedinou větou („Nepoužívám šablonu, kterou už má vaše konkurence.").
     // Místo něj stojí hned pod herem odstavec o situaci klienta — popis
     // stavu, u kterého klient kývne hlavou, bez nadpisu a bez tlačítka.
+    //
+    // OND-320 (varianta G, vybral Ondra): věta je fakt o Ondrovi — kdo mu
+    // píše — ne tvrzení o návštěvníkovi. Původní znění návštěvníkovi
+    // podsouvalo, jak vypadá jeho firma („máte víc práce", „přepisujete
+    // objednávky"). Nepřeklápět zpátky do druhé osoby a nestrašit; klient
+    // roste, nemá problém. Stejné pravidlo platí pro en i de. Odstavec se
+    // má vejít na jeden vykreslený řádek (`.pd-lead--wide`, 52 ch): 70 znaků
+    // projde, zhruba od 74 se zalomí.
     'situation' => [
-        'text' => 'Práce máte víc než loni a web zůstal tam, kde byl. Objednávky si přepisujete do tabulky a na dotazy odpovídáte večer z telefonu. Nebo přidáváte novou službu a chcete, aby na webu vypadala stejně dobře, jako ji umíte odvést.',
+        'text' => 'Nejčastěji mi píšou lidi, kterým se daří a web jim přestal stačit.',
     ],
 
     // OND-308: `cta_label` („Domluvit konzultaci") zrušený — vedl na
