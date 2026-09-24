@@ -17,7 +17,7 @@ return [
     'sections' => [
         [
             'heading' => 'Achtzehn Jahre bei Toyota',
-            'text'    => 'Ich habe achtzehn Jahre bei Toyota gearbeitet. Ich begann als Lagerarbeiter in der Logistik, wurde dann Teamleiter und schließlich Senior-Spezialist im Logistik-Projektteam. Meine Aufgabe war es, die Logistik in Abstimmung mit der Montage zu optimieren. In dieser Zeit habe ich die TSM-Webanwendung programmiert, die dem Unternehmen Einsparungen in Millionenhöhe (CZK) einbrachte. Ich habe auch mehrere weitere Webanwendungen in die Toyota-Umgebung eingeführt. Dort habe ich gelernt: Software wird ordentlich gemacht, oder gar nicht. In der Produktion kann man es sich nicht leisten, dass etwas ausfällt.',
+            'text'    => 'Ich habe achtzehn Jahre bei Toyota gearbeitet. Ich begann als Lagerarbeiter in der Logistik und wurde schließlich Senior-Spezialist im Logistik-Projektteam. Meine Aufgabe war es, die Logistik in Abstimmung mit der Montage zu optimieren. In dieser Zeit habe ich die TSM-Webanwendung programmiert, die dem Unternehmen Einsparungen in Millionenhöhe (CZK) einbrachte. Ich habe auch mehrere weitere Webanwendungen in die Toyota-Umgebung eingeführt. Dort habe ich gelernt: Software wird ordentlich gemacht, oder gar nicht. In der Produktion kann man es sich nicht leisten, dass etwas ausfällt.',
         ],
         [
             'heading' => 'Warum ich zur Webentwicklung gewechselt bin',
