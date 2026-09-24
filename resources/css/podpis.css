@@ -604,7 +604,11 @@
 /* OND-308: sekce „18 let v Toyotě". Text vlevo, portrétní video vpravo —
    pod zdrojem světla, které má sekce v hloubkové vrstvě zprava. Video je
    o dvě stě pixelů vyšší než text s citací, proto se text sází na střed
-   jeho výšky: jinak má sekce useknutý pravý sloupec a pod ním prázdno. */
+   jeho výšky: jinak má sekce useknutý pravý sloupec a pod ním prázdno.
+
+   OND-314: video odešlo do sekce 07, sekce 03 je textová a tyhle dva
+   selektory se nikde nevykreslují. NEMAZAT samostatně — jdou ven jedním
+   commitem spolu s úklidem lešení `/puvodni-homepage`. */
 .pd-toyota { display: grid; gap: var(--space-8); }
 @media (min-width: 900px) {
     .pd-toyota {
@@ -784,9 +788,40 @@
     color: var(--color-fg-primary);
     margin: 0;
 }
+/* OND-314: video z bývalé sekce „18 let v Toyotě" stojí vedle kroků.
+   Vpravo od textu kroků zbývalo na 1440 px 518 px prázdna a portrétní
+   video je 340 px široké — na desktopu tím stránka nenaroste, jen se zaplní
+   díra (naměřeno na 1440 px: 9 203 → 8 985 px). Pod 1200 px už volné místo
+   (338 px) na video s mezerou nestačí, proto se staví pod seznam a centruje
+   — tam stránka o video naroste (1199 px: 8 855 → 9 303 px).
+
+   Proč `align-items: end`: světlo v hloubkové vrstvě během sekce sestupuje
+   (`--pdd-spec` u `.pd-step__num` se stáčí ze 120° na 240°, viz hloubka.css).
+   Video zarovnané dolů stojí přesně tam, kam to světlo dojde — vedle
+   kroků 03–04 — místo aby plavalo uprostřed prázdna. */
+.pd-steps-layout { display: grid; gap: var(--space-8); }
+@media (min-width: 1200px) {
+    .pd-steps-layout {
+        grid-template-columns: 1fr auto;
+        gap: var(--space-9);
+        align-items: end;
+    }
+}
+.pd-steps__media {
+    border: 1px solid var(--color-border-soft);
+    max-width: 340px;
+}
+.pd-steps__media video { display: block; width: 100%; height: auto; }
+@media (max-width: 1199px) {
+    .pd-steps__media { justify-self: center; }
+}
+
 /* OND-308: pod kroky procesu už tlačítko není, zůstala jedna věta.
    Předěl a odsazení proto nese ona sama, ne obal `.pd-steps__cta`
-   (ten drží jen zmrazená /puvodni-homepage). */
+   (ten drží jen zmrazená /puvodni-homepage).
+   OND-314: sousedem té věty je teď `.pd-steps-layout`, ne samotný `<ol>` —
+   bez druhého selektoru by věta přišla o vlasovou linku i o odsazení. */
+.pd-steps-layout + .pd-steps__cta-intro,
 .pd-steps + .pd-steps__cta-intro {
     margin-top: var(--space-8);
     padding-top: var(--space-6);
@@ -1055,6 +1090,15 @@
     line-height: var(--leading-snug);
     color: var(--color-fg-primary);
 }
+/* OND-314: na nové homepage citaci po zrušení wrapperu `.pd-toyota` nedržela
+   šířku už žádná mřížka — řádek běžel přes celých 1216 px, tedy ~101 znaků.
+   Odstavce nad ní mají 62ch, což v jejich písmu dělá 704 px; citace je
+   v display písmu, kde 62ch = 744 px. Aby měl celý blok jednu míru, drží
+   se 58ch = 696 px (naměřeno po `document.fonts.ready`).
+   Scope `#section-toyota` je schválně: zmrazená /puvodni-homepage sází
+   tutéž třídu do mřížky `.pd-origin` a nesmí se pohnout ani o pixel. */
+#section-toyota .pd-origin__quote { max-width: 58ch; }
+
 .pd-origin__quote footer {
     margin-top: var(--space-4);
     font-family: var(--font-body);

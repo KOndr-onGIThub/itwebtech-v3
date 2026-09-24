@@ -142,9 +142,9 @@
 
 {{-- ===================================================
      03 — 18 LET V TOYOTĚ
-     Tady si klient ověřuje řemeslo, proto sem patří video
-     (mluví Ondra sám) i citace ředitele z Toyoty. Ta stojí
-     jen tady — v řadě referencí níž už Baudyš není.
+     Tady si klient ověřuje řemeslo. Nese ho citace ředitele
+     z Toyoty — ta stojí jen tady, v řadě referencí níž už
+     Baudyš není. Video se přestěhovalo do sekce 07 (OND-314).
      =================================================== --}}
 <section class="pd-section" id="section-toyota">
     <div class="container-site">
@@ -152,21 +152,18 @@
             <h2 class="pd-head__title">{{ __('home.toyota.heading') }}</h2>
         </header>
 
-        <div class="pd-toyota">
-            {{-- Text první: video je portrét a stojí vpravo, pod zdrojem
-                 světla, který má sekce v hloubkové vrstvě. --}}
-            <div class="pd-origin__text">
-                <p>{{ __('home.toyota.text') }}</p>
-                <p>{{ __('home.toyota.text_2') }}</p>
-                <blockquote class="pd-origin__quote">
-                    {{ __('home.toyota.quote_text') }}
-                    <footer>— {{ __('home.toyota.quote_author') }}</footer>
-                </blockquote>
-            </div>
-
-            <div class="pd-toyota__media">
-                <x-video-intro :ariaLabel="__('home.why_me.video_aria')" />
-            </div>
+        {{-- OND-314: video se odsud odstěhovalo do sekce 07 „Jak to probíhá".
+             Stálo 464 px pod hero fotkou — stejná bunda, stejné focení, dva
+             portréty pod sebou. Sekce zůstává textová, důkaz řemesla nese
+             citace Pavla Baudyše. Wrapper `.pd-toyota` tím zanikl, text má
+             vlastní max-width, takže se neroztekl. --}}
+        <div class="pd-origin__text">
+            <p>{{ __('home.toyota.text') }}</p>
+            <p>{{ __('home.toyota.text_2') }}</p>
+            <blockquote class="pd-origin__quote">
+                {{ __('home.toyota.quote_text') }}
+                <footer>— {{ __('home.toyota.quote_author') }}</footer>
+            </blockquote>
         </div>
     </div>
 </section>
@@ -345,26 +342,36 @@
             <h2 class="pd-head__title">{{ __('home.how_i_work.heading') }}</h2>
         </header>
 
-        <ol class="pd-steps">
-            @foreach (__('home.how_i_work.steps') as $i => $step)
-            <li class="pd-step">
-                <span class="pd-step__num" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
-                <div class="pd-step__body">
-                    <h3 class="pd-step__title">{{ $step['heading'] }}@if (!empty($step['time'])) <em>{{ $step['time'] }}</em>@endif</h3>
-                    <p class="pd-step__text">{{ $step['text'] }}</p>
-                    @if (!empty($step['quote_text']))
-                    <blockquote>
-                        {{ $step['quote_text'] }}
-                        <footer>— {{ $step['quote_author'] }}</footer>
-                    </blockquote>
-                    @endif
-                    @if (!empty($step['note']))
-                    <p class="pd-step__note">{{ $step['note'] }}</p>
-                    @endif
-                </div>
-            </li>
-            @endforeach
-        </ol>
+        {{-- OND-314: video stojí vedle kroků, ne pod nimi — vpravo od textu
+             zela na 1440 px díra 518 px široká. `<div>` nesmí dovnitř `<ol>`,
+             proto společný wrapper nad oběma. Dvousloupcová sazba až od
+             1200 px, níž se video staví pod seznam. --}}
+        <div class="pd-steps-layout">
+            <ol class="pd-steps">
+                @foreach (__('home.how_i_work.steps') as $i => $step)
+                <li class="pd-step">
+                    <span class="pd-step__num" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                    <div class="pd-step__body">
+                        <h3 class="pd-step__title">{{ $step['heading'] }}@if (!empty($step['time'])) <em>{{ $step['time'] }}</em>@endif</h3>
+                        <p class="pd-step__text">{{ $step['text'] }}</p>
+                        @if (!empty($step['quote_text']))
+                        <blockquote>
+                            {{ $step['quote_text'] }}
+                            <footer>— {{ $step['quote_author'] }}</footer>
+                        </blockquote>
+                        @endif
+                        @if (!empty($step['note']))
+                        <p class="pd-step__note">{{ $step['note'] }}</p>
+                        @endif
+                    </div>
+                </li>
+                @endforeach
+            </ol>
+
+            <div class="pd-steps__media">
+                <x-video-intro :ariaLabel="__('home.why_me.video_aria')" />
+            </div>
+        </div>
 
         <p class="pd-steps__cta-intro">{{ __('home.how_i_work.cta_intro') }}</p>
     </div>
