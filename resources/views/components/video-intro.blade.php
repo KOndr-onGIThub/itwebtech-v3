@@ -45,6 +45,15 @@
 <video
     {{ $attributes->class(['video-intro', $class]) }}
     controls
+    {{-- OND-314: z nativního panelu mizí položky, které na téhle stránce
+         nedávají smysl — stažení, rychlost přehrávání, odesílání na zařízení,
+         obraz v obraze.
+         POZOR: samotné kebab menu (tři tečky) tím NEZMIZÍ. Drží ho <track>
+         s titulky — Chrome nechává přepínač titulků právě v tom menu.
+         Naměřeno: s atributy a se stopou kebab je, bez stopy není.
+         Kdo ho bude chtít odstranit, musí sundat titulky (a11y), ne atributy. --}}
+    controlslist="nodownload noplaybackrate noremoteplayback"
+    disablepictureinpicture
     preload="metadata"
     playsinline
     @if ($posterUrl) poster="{{ $posterUrl }}" @endif
