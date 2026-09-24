@@ -48,7 +48,11 @@ return [
     ],
 
     'social_proof' => [
+        // OND-315: `rating_aria` popisuje jen hodnocení, proto sedí u toho
+        // jednoho údaje, ne na celé sekci — v pruhu jsou i realizace, praxe,
+        // doba odpovědi a ocenění. Landmark pruhu popisuje `strip_aria`.
         'rating_aria'  => 'Hodnocení 5 z 5',
+        'strip_aria'   => 'Čísla o mojí práci',
         // OND-231: řada log klientů má vlastní landmark label, aby čtečka
         // nečetla druhý blok pod stejným „Hodnocení 5 z 5".
         'clients_aria' => 'Klienti',
