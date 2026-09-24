@@ -56,7 +56,7 @@
         ->filter()
         ->values();
 
-    // Dva texty jsou na nové stránce nové a zatím existují jen česky —
+    // Tři texty jsou na nové stránce nové a zatím existují jen česky —
     // překlady jsou samostatná karta (S4). Dokud klíč v lang/{en,de}
     // není, blok se nevykreslí; jinak by stránka vypsala holý klíč.
     $situationText = \Illuminate\Support\Facades\Lang::has('home.situation.text')
@@ -64,6 +64,9 @@
         : null;
     $servicesSubheading = \Illuminate\Support\Facades\Lang::has('home.services.subheading')
         ? __('home.services.subheading')
+        : null;
+    $toyotaExample = \Illuminate\Support\Facades\Lang::has('home.toyota.example')
+        ? __('home.toyota.example')
         : null;
 @endphp
 
@@ -160,6 +163,9 @@
         <div class="pd-origin__text">
             <p>{{ __('home.toyota.text') }}</p>
             <p>{{ __('home.toyota.text_2') }}</p>
+            @if ($toyotaExample)
+                <p>{{ $toyotaExample }}</p>
+            @endif
             <blockquote class="pd-origin__quote">
                 {{ __('home.toyota.quote_text') }}
                 <footer>— {{ __('home.toyota.quote_author') }}</footer>
