@@ -88,7 +88,11 @@
      Fotka „tak jak je" přes pravou část, text v negativním
      prostoru vlevo, autogram. Tilt jen na hover zařízeních.
      =================================================== --}}
-<section class="pd-hero" id="pd-hero-tilt">
+{{-- OND-336: `pd-hero--hp` drží stažený svislý rytmus na mobilu jen tady.
+     Hero markup je totožný se zmrazenou kopií na /puvodni-homepage
+     (home-legacy.blade.php) — uvnitř sekce není na co scopovat, takže
+     rozdíl nese modifikátor na `<section>`. --}}
+<section class="pd-hero pd-hero--hp" id="pd-hero-tilt">
     <div class="pd-hero__photo" data-tilt>
         <x-responsive-image
             path="hero/hero-uvod.webp"
