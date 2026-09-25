@@ -224,18 +224,62 @@
 
    Nad 767 px, kde lišta neexistuje, se nemění nic. Scope `--hp` kvůli
    /puvodni-homepage, která nese stejný hero markup a má zůstat
-   srovnávací kopií. */
+   srovnávací kopií.
+
+   OND-341 — čísla níž jsou dotažená. Oprava OND-336 stačila jen na
+   češtinu: na 390×844 měla mezeru nad lištou 25,4 px, angličtina 7,5 px
+   a němčina −13,6 px (tlačítko pod lištou). Pravidlo je teď jedno číslo
+   pro všechny jazyky: **spodek `.pd-hero .pd-cta` je nejméně 24 px nad
+   horní hranou lišty**. Tři důvody, proč to nešlo dotáhnout textem:
+
+   - Německý podtitulek z OND-335 je o 30 znaků DELŠÍ než dnešní, ne
+     kratší — přidá pátý řádek a tlačítko posune o 28,8 px DOLŮ.
+   - Zmenšený nadpis z OND-333 němčina dostala, `.pd-heading--hp` je
+     jazykově neutrální.
+   - Německý popisek tlačítka potřebuje na jeden řádek 275 px; při 360 px
+     má sloupec 328 px, takže by musel mít vodorovnou výplň ≤ 12 px.
+
+   Zbyla tedy geometrie hera, tři kroky, všechny jen pod 767 px:
+
+   3. Svislý rytmus o další krok mřížky níž (24 → 16 px, čtyři mezery
+      = 32 px).
+
+   4. `max-height` fotky 30 → 24svh (na 844 px z 253 na 203 px). Je to
+      ta veličina, kterou lišta ukrajuje, takže strop patří sem, ne do
+      mezer mezi odstavci.
+
+   5. Vodorovná výplň tlačítka 26 → 20 px. Nejde o estetiku: nejdelší
+      popisek (německý) se tím na 390 px vejde na jeden řádek místo
+      dvou, což je dalších 26 px — a dvouřádkové tlačítko splývalo se
+      stejně zelenou spodní lištou.
+
+   Naměřeno po změně (mezera nad lištou, spodek `.pd-cta`, po odklepnutí
+   cookies):
+
+     viewport   cs      en      de
+     360×844   +45,6   +61,3   +35,3
+     390×844  +108,0   +90,1   +95,0
+     414×844  +108,0   +90,1   +95,0
+
+   Na obrazovkách nižších než ~820 px se tlačítko nad lištu nevejde ani
+   po téhle změně (360×800: de +1,9 px; 375×667: de −99 px). Text hera
+   sám o sobě má při 360 px 477 px a s hlavičkou 68 px a lištou 69 px
+   na fotku nezbývá; to je rozhodnutí o layoutu, ne o pixelech. */
 @media (max-width: 767px) {
     .pd-hero--hp .pd-hero__photo,
     .pd-hero--hp .pd-eyebrow,
     .pd-hero--hp .pd-heading,
     .pd-hero--hp .pd-sign {
-        margin-bottom: var(--space-5);
+        margin-bottom: var(--space-4);
     }
     .pd-hero--hp .pd-hero__photo img {
-        max-height: 30svh;
+        max-height: 24svh;
         object-fit: cover;
         object-position: 62% 20%;
+    }
+    .pd-hero--hp .pd-cta {
+        padding-left: 20px;
+        padding-right: 20px;
     }
 }
 
