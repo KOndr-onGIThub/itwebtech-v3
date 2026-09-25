@@ -19,19 +19,24 @@ return [
         // artefact, itwebtech has no „pages" hierarchy in hero context.
         // OND-198 (finding 5.1): the previous headline promised the client's
         // business result. Replaced with the approved hero copy (CS source of truth).
-        // OND-310: EN now follows the rebuilt CS hero (OND-307 / OND-308).
-        // The old headline led with "on my own code" — a technical term in
-        // the one place where the visitor decides whether to write at all.
-        // The custom code does not disappear, it moves down into the subline
-        // and into the "What I build" section.
+        // OND-333: EN follows the CS headline picked on OND-330 (path B) —
+        // three lines, each one a full verb antithesis in the first person,
+        // rendered in the smaller heading (`.pd-heading--hp` in podpis.css).
+        // Hard line breaks (`<br>`), because the three lines are three
+        // separate statements, not one sentence wrapped by the viewport.
+        // No `<em>` here — three antitheses have no single key word.
+        // Wording and per-line measurements come from OND-332.
         'upline'          => 'For businesses that are growing.',
-        'heading_html'    => 'A website that can <em>carry</em> what is going well for you.',
-        'subline'         => 'I am Ondřej Kriška. I build websites and applications on my own code and I do the work myself — from the first conversation to launch you deal with me and nobody else.',
+        'heading_html'    => 'I ask, not guess.<br>I quote, not estimate.<br>I deliver, not promise.',
+        // The semicolon carries weight: replacing it with "and" pushes the
+        // subline one line further on mobile and the CTA from 788 to 817 px.
+        // Re-measure before touching this sentence (OND-332).
+        'subline'         => 'I am Ondřej Kriška. I build websites and applications on my own code and work on them alone. I price the job before we start; my rating is 5.0 from 21 reviews.',
         'note'            => 'I\'ll get back to you within 24 hours on business days. No commitment, we just go through what makes sense.',
 
         // Backwards compat (fallback render).
         'eyebrow'       => 'Custom websites & web applications',
-        'heading'       => 'A website that can carry what is going well for you.',
+        'heading'       => 'I ask, not guess. I quote, not estimate. I deliver, not promise.',
         // OND-130 + OND-136: single primary CTA in hero, exact wording per spec.
         // OND-308: `cta_secondary` and `phone_label` removed — no reservations
         // since OND-303 and the phone number splits the decision in the hero.
