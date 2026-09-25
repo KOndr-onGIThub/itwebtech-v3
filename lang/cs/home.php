@@ -24,11 +24,16 @@ return [
         // OND-198 (nález 5.1): původní titulek „Web, který vám konečně vydělá."
         // sliboval výsledek za klienta. Nahrazen schválenou hero sekcí
         // z dokumentu homepage-texty (OND-186).
-        // OND-308: titulek je varianta A z dokumentu text-nova-homepage
-        // (OND-307) — pracovní verze, Ondřej ji red-linuje na živé stránce.
+        // OND-333: Ondřej vybral na OND-330 cestu B — variantu P ve
+        // zmenšeném nadpisu (52 px na desktopu, 33 px na mobilu, viz
+        // `.pd-heading--hp` v podpis.css). Tři řádky jsou tři samostatné
+        // slovesné protiklady, proto je zalomení tvrdé (`<br>`), ne
+        // ponechané na šířce okna. `<em>` (podtržení klíčového slova)
+        // v téhle variantě není — tři protiklady nemají jedno klíčové
+        // slovo a na nafocené variantě žádné podtržení nebylo.
         'upline'          => 'Pro firmy, které rostou.',
-        'heading_html'    => 'Web, který <em>unese</em> to, co se vám daří.',
-        'subline'         => 'Jsem Ondřej Kriška. Weby a aplikace stavím na vlastním kódu a pracuju na nich sám — od prvního rozhovoru po spuštění mluvíte jen se mnou.',
+        'heading_html'    => 'Ptám se, ne hádám.<br>Počítám, ne odhaduju.<br>Ručím, ne slibuju.',
+        'subline'         => 'Jsem Ondřej Kriška. Weby a aplikace stavím na vlastním kódu a pracuju na nich sám. Cenu spočítám před začátkem, hodnocení mám 5,0 z 21 recenzí.',
         'note'            => 'Ozvu se do 24 hodin v pracovní dny. Nezávazně proberu, co dává smysl.',
 
         // Backwards compat — staré klíče zachované pro non-hero spotřebitele
@@ -38,7 +43,7 @@ return [
         // od OND-303 a telefon v heru tříštil rozhodnutí hned pod hlavní
         // výzvou. Číslo zůstává v liště a ve spodní mobilní liště.
         'eyebrow'       => 'Weby a aplikace na míru',
-        'heading'       => 'Web, který unese to, co se vám daří.',
+        'heading'       => 'Ptám se, ne hádám. Počítám, ne odhaduju. Ručím, ne slibuju.',
         'cta_primary'   => 'Napište mi, co potřebujete',
     ],
 
