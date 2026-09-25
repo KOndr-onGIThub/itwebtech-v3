@@ -6,8 +6,8 @@ return [
     // der Konkurrenz definieren, und „kein WordPress" sagt jemandem nichts,
     // der nicht weiß, was WordPress ist (Prinzip 0).
     'meta' => [
-        'title'       => 'Websites und Webanwendungen nach Maß | ONDRAWEB',
-        'description' => 'Websites, Onlineshops und Webanwendungen nach Maß für kleine und mittlere Unternehmen. Eigener Code, genauer Preis im Voraus, und Sie sprechen direkt mit mir. Ich bin Ondřej Kriška.',
+        'title'       => 'Websites nach Maß, die tragen, was gut läuft | ONDRAWEB',
+        'description' => 'Websites, Onlineshops und Webanwendungen nach Maß. Ich baue alles selbst mit eigenem Code, den Preis nenne ich vorab. 5,0 aus 21 Bewertungen.',
     ],
 
     'hero' => [
