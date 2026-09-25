@@ -17,7 +17,7 @@ return [
     'sections' => [
         [
             'heading' => 'Eighteen years at Toyota',
-            'text'    => 'I worked at Toyota for eighteen years. I started as a logistics worker, progressed to team leader and then to senior specialist in the logistics project team. My role was to streamline logistics in coordination with assembly. During that time I programmed the TSM web application, which brought the company savings in the millions of CZK. I also introduced several other web applications into the Toyota environment. That is where I learned that software is done properly, or not at all. In manufacturing you cannot afford to have things fail.',
+            'text'    => 'I worked at Toyota for eighteen years. I started as a logistics worker and progressed to senior specialist in the logistics project team. My role was to streamline logistics in coordination with assembly. During that time I programmed the TSM web application, which brought the company savings in the millions of CZK. I also introduced several other web applications into the Toyota environment. That is where I learned that software is done properly, or not at all. In manufacturing you cannot afford to have things fail.',
         ],
         [
             'heading' => 'Why I moved to web development',

@@ -17,7 +17,7 @@ return [
     'sections' => [
         [
             'heading' => 'Osmnáct let v Toyotě',
-            'text'    => 'Osmnáct let jsem pracoval v Toyotě. Začínal jsem jako dělník v logistice. Postupně jsem se dostal na vedoucího týmu a pak na staršího specialistu v projektovém týmu logistiky. Mým úkolem bylo zefektivňovat logistiku v součinnosti s montáží. Během té doby jsem naprogramoval webovou aplikaci TSM, která firmě přinesla úsporu v řádu milionů korun. Do prostředí Toyoty jsem zavedl i několik dalších webových aplikací. Tam jsem se naučil, že software se dělá pořádně, nebo vůbec. Ve výrobě si nemůžete dovolit, aby vám něco spadlo.',
+            'text'    => 'Osmnáct let jsem pracoval v Toyotě. Začínal jsem jako dělník v logistice. Postupně jsem se dostal na staršího specialistu v projektovém týmu logistiky. Mým úkolem bylo zefektivňovat logistiku v součinnosti s montáží. Během té doby jsem naprogramoval webovou aplikaci TSM, která firmě přinesla úsporu v řádu milionů korun. Do prostředí Toyoty jsem zavedl i několik dalších webových aplikací. Tam jsem se naučil, že software se dělá pořádně, nebo vůbec. Ve výrobě si nemůžete dovolit, aby vám něco spadlo.',
         ],
         [
             'heading' => 'Proč jsem přešel k webům',
