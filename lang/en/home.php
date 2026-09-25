@@ -28,10 +28,13 @@ return [
         // Wording and per-line measurements come from OND-332.
         'upline'          => 'For businesses that are growing.',
         'heading_html'    => 'I ask, not guess.<br>I quote, not estimate.<br>I deliver, not promise.',
-        // The semicolon carries weight: replacing it with "and" pushes the
-        // subline one line further on mobile and the CTA from 788 to 817 px.
-        // Re-measure before touching this sentence (OND-332).
-        'subline'         => 'I am Ondřej Kriška. I build websites and applications on my own code and work on them alone. I price the job before we start; my rating is 5.0 from 21 reviews.',
+        // OND-341: the semicolon is gone. It only ever stood here because of
+        // geometry — spelling it out adds a fifth line on mobile (+28.8 px at
+        // 390×844) and at OND-332 the hero had no room for it. Since the hero
+        // geometry was fixed the CTA clears the bottom bar by 61 px even with
+        // the extra line, so the rule against semicolons inside a sentence
+        // (spec rule 5) wins. Re-measure before growing this sentence again.
+        'subline'         => 'I am Ondřej Kriška. I build websites and applications on my own code and work on them alone. I price the job before we start, and my rating is 5.0 from 21 reviews.',
         'note'            => 'I\'ll get back to you within 24 hours on business days. No commitment, we just go through what makes sense.',
 
         // Backwards compat (fallback render).
