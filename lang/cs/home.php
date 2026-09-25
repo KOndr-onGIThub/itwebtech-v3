@@ -7,8 +7,8 @@ return [
     // kdo nadává na konkurenci, a „WordPress" navíc neříká nic člověku,
     // který netuší, co to je (princip 0).
     'meta' => [
-        'title'       => 'Weby a aplikace na míru | ONDRAWEB',
-        'description' => 'Weby, e-shopy a webové aplikace na míru pro menší a střední firmy. Vlastní kód, přesná cena předem a jednáte přímo se mnou. Jsem Ondřej Kriška.',
+        'title'       => 'Weby na míru: cenu počítám, ne odhaduju | ONDRAWEB',
+        'description' => 'Weby, e-shopy a webové aplikace na míru. Cenu spočítám předem, stavím sám na vlastním kódu. 5,0 z 21 recenzí, odpověď do 24 hodin v pracovní dny.',
     ],
 
     'hero' => [

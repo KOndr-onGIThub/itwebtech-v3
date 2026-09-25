@@ -6,8 +6,8 @@ return [
     // negating competitors, and "no WordPress" says nothing to someone who
     // does not know what WordPress is (principle 0).
     'meta' => [
-        'title'       => 'Custom websites and web applications | ONDRAWEB',
-        'description' => 'Custom websites, online shops and web applications for small and mid-sized companies. Custom code, an exact price up front, and you deal with me directly. I am Ondřej Kriška.',
+        'title'       => 'Custom websites: I quote, not estimate | ONDRAWEB',
+        'description' => 'Custom websites, online shops and web applications. I quote the price up front and build everything myself on my own code. Rated 5.0 from 21 reviews.',
     ],
 
     'hero' => [
