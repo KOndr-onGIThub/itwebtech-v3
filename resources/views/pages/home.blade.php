@@ -102,7 +102,11 @@
         <div class="pd-hero__content">
             <p class="pd-eyebrow">{{ __('home.hero.page_mark_label') }} — {{ __('home.hero.upline') }}</p>
 
-            <h1 class="pd-heading">{!! __('home.hero.heading_html') !!}</h1>
+            {{-- OND-333: `pd-heading--hp` drží zmenšení (52/33 px) jen tady.
+                 Stará homepage na /puvodni-homepage má stejný hero markup
+                 a stejnou třídu `pd-heading` — modifikátor je jediné, co je
+                 od sebe odlišuje. --}}
+            <h1 class="pd-heading pd-heading--hp">{!! __('home.hero.heading_html') !!}</h1>
 
             <p class="pd-sub">{{ __('home.hero.subline') }}</p>
 

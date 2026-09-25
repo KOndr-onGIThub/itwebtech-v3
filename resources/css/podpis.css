@@ -97,6 +97,22 @@
     margin: 0 0 var(--space-6);
     max-width: 21ch;
 }
+/* OND-333 — zmenšený titulek platí JEN pro novou homepage.
+   Třídu `.pd-heading` nese i stará homepage na /puvodni-homepage
+   (home-legacy.blade.php), která tam stojí jako srovnávací vzorek
+   původního designu; globální zmenšení by z ní udělalo něco jiného.
+   Proto modifikátor na `<h1>`, ne přepis `.pd-heading`.
+
+   Strop 52 px je zároveň nejhorší případ, ne jen hodnota pro 1440 px:
+   sloupec H1 se nad `container-site` (1280 px) už nerozšiřuje — má
+   559 px na 1440 i na 1600 px — ale clamp by rostl dál. `3.61vw`
+   (52 / 1440) stropu dosáhne přesně na 1440 px a nad ním už písmo
+   neroste, takže se řádek nemá jak zlomit až na širokém monitoru.
+   Podlaha 33 px je nad hranicí 28,2 px, pod kterou by mobilní sloupec
+   začal řídit `max-width: 21ch` (355 px → 336 px). */
+.pd-heading--hp {
+    font-size: clamp(33px, 3.61vw, 52px);
+}
 /* Barva se v titulku objeví jen jako podtržení klíčového slova. */
 .pd-heading em {
     font-style: normal;
