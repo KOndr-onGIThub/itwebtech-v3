@@ -196,6 +196,49 @@
     margin: 0;
 }
 
+/* OND-336 — na mobilu hero sdílí obrazovku s fixní `.mobile-bottom-bar`
+   (69 px, `position: fixed; bottom: 0`). Spodní hrana použitelného
+   prostoru na 390×844 tím není 844 px, ale 774,6 px. Hlavní tlačítko
+   `.pd-cta` končilo v češtině na 788 px, tedy 13,4 px POD lištou.
+
+   Lišty si nešlo všimnout: dokud návštěvník nerozhodne o cookies, drží
+   ji `html.cookie-pending` na `display: none` (OND-266). První návštěva
+   lištu nemá, druhá ano — kdo testoval v anonymním okně, viděl vždycky
+   ten lepší stav.
+
+   Oprava má dvě části a titulku se netýká ani jedna — velikost i znění
+   jsou rozhodnuté v OND-330/OND-333:
+
+   1. Svislý rytmus hera je o jeden krok mřížky menší (32 → 24 px,
+      čtyři mezery = 32 px).
+
+   2. Fotka přestává řídit výšku hera šířkou obrazovky. Full-bleed
+      portrét v poměru 3:2 rostl s šířkou viewportu (390 px → 260 px
+      vysoký, 430 px → 287 px, 767 px → 511 px), takže čím širší
+      telefon, tím hlubší hero — ale místa nad lištou je pořád stejně.
+      `max-height: 30svh` váže výšku fotky na výšku obrazovky, tedy
+      na tu veličinu, o kterou se tady hraje. Na 844 px vyjde 253 px:
+      na referenčních 390 px je to oproti dnešku 7 px, na 430 px 34 px
+      a na 767 px 258 px. Ořez řeší `object-fit: cover` se stejným
+      `object-position`, jaký fotka má na desktopu od OND-231.
+
+   Nad 767 px, kde lišta neexistuje, se nemění nic. Scope `--hp` kvůli
+   /puvodni-homepage, která nese stejný hero markup a má zůstat
+   srovnávací kopií. */
+@media (max-width: 767px) {
+    .pd-hero--hp .pd-hero__photo,
+    .pd-hero--hp .pd-eyebrow,
+    .pd-hero--hp .pd-heading,
+    .pd-hero--hp .pd-sign {
+        margin-bottom: var(--space-5);
+    }
+    .pd-hero--hp .pd-hero__photo img {
+        max-height: 30svh;
+        object-fit: cover;
+        object-position: 62% 20%;
+    }
+}
+
 /* --- Sekce: sdílená hlava a rytmus -------------------------- */
 .pd-section {
     background: var(--color-bg-base);
