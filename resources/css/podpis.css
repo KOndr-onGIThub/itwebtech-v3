@@ -368,11 +368,17 @@
     color: var(--pd-accent);
     margin-left: var(--space-2);
 }
-.pd-price__value {
+/* OND-354: dřív `.pd-price__value` — cena („55 000 Kč"). Dnes rozsah
+   („do 12 stránek"). Cena z karet zmizela, drží ji jediné místo: prahové
+   číslo a rozpětí ve větě nad nimi. Rozsah je fráze, ne pětiznakové číslo,
+   takže na 46 px by se lámal do dvou i tří řádků a sloupce by přestaly
+   držet jednu linku; 32 px je největší stupeň, na kterém se nejdelší
+   varianta ze tří jazyků („ohne Umfangsgrenze") vejde na jeden řádek. */
+.pd-price__scope {
     font-family: var(--font-display);
     font-weight: 200;
     font-variation-settings: 'wght' 200;
-    font-size: clamp(30px, 3.2vw, 46px);
+    font-size: clamp(24px, 2.2vw, 32px);
     letter-spacing: var(--tracking-tight);
     color: var(--color-fg-primary);
     margin: 0 0 var(--space-4);

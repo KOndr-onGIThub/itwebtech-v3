@@ -253,32 +253,34 @@ return [
         // OND-198 (nález 5.4): očekávací věta musí padnout dřív než první číslo,
         // aby normou bylo pásmo 55–150 tis. Kč, ne nejlevnější vstup.
         // OND-198 (nález 5.5): „tiery" → „tři úrovně".
-        'intro'   => 'Většina projektů, které stavím, vychází mezi 55 a 150 tisíci korunami. Pokud hledáte web do dvaceti tisíc, nebudu pro vás ten správný dodavatel a řeknu vám to rovnou. Níž jsou orientační vstupní ceny tří úrovní — přesnou nabídku dostanete písemně po krátké konzultaci.',
-        // OND-130 (B2 §1, klíčová direktiva 2 + plán §3.6): pricing teaser
-        // sjednocen s /cenik — Standard 55 / Custom od 95 / Startovní 25 tis. Kč.
-        // OND-198 (nález 5.4): pořadí Standard → Custom → Startovní, nejlevnější
-        // pásmo je poslední a rámované jako výjimka. Standard je zvýrazněný.
+        // OND-354: forma ceny je prahové číslo a rozpětí, ne menu tří balíčků
+        // (Ondřej 26. 9. 2026 na OND-347, znění varianta 1). Tím zmizela
+        // odmítací věta „pokud hledáte web do dvaceti tisíc…" — spodní hranice
+        // 20 000 Kč ji nahradila a říká totéž bez odmítnutí.
+        'intro'   => 'Většina projektů, které stavím, vychází mezi 55 a 150 tisíci korunami. Nejmenší věc, kterou beru, je prezentační web do pěti stránek od 20 000 Kč — je to menší rozsah, ne odbytá práce. Přesnou cenu dostanete písemně po konzultaci.',
+        // OND-354: karty nesou ROZSAH, ne cenu, a jmenují se podle toho, co
+        // vzniká. „Standard / Custom / Startovní" byla jména políček v cenovém
+        // menu, které tahle karta ruší; bez čísel by neznamenala nic.
+        // Pořadí je podle rostoucího rozsahu, zvýrazněná je prostřední.
         // Service-typový rozklad (web vs. aplikace vs. e-shop) je v sekci „services".
         'featured_label' => 'Nejčastější volba',
         'items'   => [
             [
-                'title'    => 'Standard',
-                'price'    => '55 000 Kč',
+                'title'    => 'Prezentační web',
+                'scope'    => 'do 5 stránek',
+                'desc'     => 'Důvěryhodná online prezentace pro živnostníky a malé firmy.',
+                'featured' => false,
+            ],
+            [
+                'title'    => 'Firemní web',
+                'scope'    => 'do 12 stránek',
                 'desc'     => 'Vícejazyčný web s blogem, měřením konverzí a rezervačním systémem.',
                 'featured' => true,
             ],
             [
-                'title'    => 'Custom',
-                'price'    => 'od 95 000 Kč',
-                'desc'     => 'E-shop, webová aplikace nebo komplexní portál na míru.',
-                'featured' => false,
-            ],
-            [
-                'title'    => 'Startovní',
-                'price'    => '25 000 Kč',
-                // OND-308: omluvná věta („Výjimka, ne standardní vstup…")
-                // je pryč, úroveň i cena zůstávají.
-                'desc'     => 'Prezentační web do pěti stránek pro živnostníky.',
+                'title'    => 'Na míru',
+                'scope'    => 'bez omezení rozsahu',
+                'desc'     => 'E-shop, webová aplikace nebo komplexní portál.',
                 'featured' => false,
             ],
         ],

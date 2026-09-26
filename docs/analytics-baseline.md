@@ -49,9 +49,17 @@ locale regrese.
 
 ## Per-tier split (pricing)
 
-GA4 secondary dimension: `pricing_tier_shown` (`25` / `55` / `95`). Použij
-pro analýzu, který tier nejvíc rezonuje, a jestli redesign /cenik posunul
-distribuci viditelností tierů (např. „Standard" by měl dominovat).
+GA4 secondary dimension: `pricing_tier_shown` (`presentation` / `business` /
+`custom`). Použij pro analýzu, která úroveň nejvíc rezonuje, a jestli redesign
+/cenik posunul distribuci viditelností (očekávaně dominuje `business`).
+
+**Pozor na zlom v datech 26. 9. 2026 (OND-354).** Do té doby dimenze nesla
+číslo z ceny (`25` / `55` / `95` tisíc Kč) a úrovně se jmenovaly
+Standard / Custom / Startovní. Ceník od té doby cenové úrovně nemá — nese
+prahové číslo a rozpětí, úrovně se jmenují podle rozsahu a dimenze nese
+technický klíč. Mapování starých hodnot na nové: `55` → `business`,
+`95` → `custom`, `25` → `presentation`. Přes ten zlom se nedá segmentovat
+jedním filtrem.
 
 ## Definition of „úspěch"
 

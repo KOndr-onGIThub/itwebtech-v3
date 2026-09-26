@@ -188,7 +188,7 @@ Posílají se s **každým** eventem (GA4 event params + Plausible props):
 | Dimension | Hodnota | Zdroj |
 |---|---|---|
 | `page_lang` | `cs` / `en` / `de` | `window.__analyticsConfig.pageLang` (set v `partials/analytics.blade.php` ze `app()->getLocale()`) |
-| `pricing_tier_shown` | `25` / `55` / `95` | `data-analytics-props='{"pricing_tier_shown":"…"}'` na pricing-tier elementech (/cenik) |
+| `pricing_tier_shown` | `presentation` / `business` / `custom` | `data-analytics-props='{"pricing_tier_shown":"…"}'` na pricing-tier elementech (/cenik), zdroj je klíč `price.tiers[].key` |
 | `specific_event` | původní specific event jméno | automaticky doplněno do canonical aliasu (debug + drill-down) |
 
 V GA4 admin: Reports → Custom Definitions → Create custom dimension:

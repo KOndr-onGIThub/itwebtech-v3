@@ -239,29 +239,32 @@ return [
         'heading' => 'What will it cost?',
         // OND-198 (finding 5.4): expectation sentence before the first number.
         // OND-198 (finding 5.5): "tiers" → "three levels".
-        'intro'   => 'Most projects I build land between €2,200 and €6,000. If you are looking for a website under €800, I am not the right supplier for you and I will tell you so straight away. Below are indicative entry prices for three levels — you receive an exact written quote after a short consultation.',
-        // OND-136: 25 / 55 / 95 thousand CZK → EUR conversion (CEO-confirmed 1:25 anchor). One source of truth across the site.
-        // OND-198 (finding 5.4): order Standard → Custom → Starter; the cheapest
-        // band is last and framed as an exception. Standard is highlighted.
+        // OND-354: the price is a threshold plus a range, not a menu of three
+        // packages (Ondřej, 26 Sep 2026 on OND-347). The rejection sentence is
+        // gone with it. The CZK floor of 20,000 is DELIBERATELY not converted
+        // here: €800 buys a landing page in the German-speaking market, not a
+        // website, so EN/DE carry the range and "smaller scopes welcome" only.
+        'intro'   => 'Most projects I build land between €2,200 and €6,000. Smaller scopes are welcome too — the smallest thing I take on is a presentation site of up to five pages. You\'ll get the exact price in writing after a short consultation.',
+        // OND-354: cards carry SCOPE, not price, and are named after what gets
+        // built. Order is by growing scope, the middle one is highlighted.
         'featured_label' => 'Most common choice',
         'items'   => [
             [
-                'title'    => 'Standard',
-                'price'    => '€2,200',
-                'desc'     => 'Multilingual site with blog, conversion tracking and a booking system.',
+                'title'    => 'Presentation site',
+                'scope'    => 'up to 5 pages',
+                'desc'     => 'A credible online presence for sole traders and small businesses.',
+                'featured' => false,
+            ],
+            [
+                'title'    => 'Business site',
+                'scope'    => 'up to 12 pages',
+                'desc'     => 'A multilingual site with a blog, conversion tracking and a booking system.',
                 'featured' => true,
             ],
             [
                 'title'    => 'Custom',
-                'price'    => 'from €3,800',
-                'desc'     => 'E-shop, web application or a complex custom portal.',
-                'featured' => false,
-            ],
-            [
-                'title'    => 'Starter',
-                'price'    => '€1,000',
-                // OND-310: the apologetic sentence is gone (spec task 3.7).
-                'desc'     => 'A presentation website of up to five pages for sole traders.',
+                'scope'    => 'no scope limit',
+                'desc'     => 'An e-shop, a web application or a complex portal.',
                 'featured' => false,
             ],
         ],

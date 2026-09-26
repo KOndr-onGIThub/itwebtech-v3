@@ -237,29 +237,33 @@ return [
         'heading' => 'Was kostet es?',
         // OND-198 (Befund 5.4): Erwartungssatz vor der ersten Zahl.
         // OND-198 (Befund 5.5): „Tiers" → „drei Stufen".
-        'intro'   => 'Die meisten Projekte, die ich baue, liegen zwischen 2.200 und 6.000 €. Wenn Sie eine Website unter 800 € suchen, bin ich nicht der richtige Anbieter für Sie — und das sage ich Ihnen gleich. Unten finden Sie orientierende Einstiegspreise für drei Stufen — ein verbindliches Angebot erhalten Sie schriftlich nach einer kurzen Beratung.',
-        // OND-136: 25 / 55 / 95 Tausend CZK → EUR-Umrechnung (CEO-bestätigter 1:25-Anker). Eine Quelle der Wahrheit.
-        // OND-198 (Befund 5.4): Reihenfolge Standard → Custom → Starter; die
-        // günstigste Stufe steht zuletzt und wird als Ausnahme gerahmt.
+        // OND-354: Der Preis ist eine Untergrenze plus Spanne, kein Menü aus
+        // drei Paketen (Ondřej, 26. 9. 2026 auf OND-347). Der Ablehnungssatz
+        // ist damit weg. Die CZK-Untergrenze von 20.000 wird hier ABSICHTLICH
+        // nicht umgerechnet: 800 € kaufen im deutschsprachigen Markt eine
+        // Landingpage, keine Website — EN/DE tragen nur die Spanne.
+        'intro'   => 'Die meisten Projekte, die ich baue, liegen zwischen 2.200 und 6.000 €. Kleinere Umfänge mache ich auch — das Kleinste ist eine Präsentationswebsite mit bis zu fünf Seiten. Den genauen Preis erhalten Sie schriftlich nach einem kurzen Gespräch.',
+        // OND-354: Die Karten tragen den UMFANG, nicht den Preis, und heißen
+        // nach dem, was entsteht. Reihenfolge nach wachsendem Umfang, die
+        // mittlere ist hervorgehoben.
         'featured_label' => 'Häufigste Wahl',
         'items'   => [
             [
-                'title'    => 'Standard',
-                'price'    => '2.200 €',
-                'desc'     => 'Mehrsprachige Website mit Blog, Konversions-Tracking und Reservierungssystem.',
-                'featured' => true,
-            ],
-            [
-                'title'    => 'Custom',
-                'price'    => 'ab 3.800 €',
-                'desc'     => 'Online-Shop, Webanwendung oder ein komplexes Portal auf Maß.',
+                'title'    => 'Präsentationswebsite',
+                'scope'    => 'bis 5 Seiten',
+                'desc'     => 'Ein glaubwürdiger Online-Auftritt für Selbstständige und kleine Unternehmen.',
                 'featured' => false,
             ],
             [
-                'title'    => 'Starter',
-                'price'    => '1.000 €',
-                // OND-310: der entschuldigende Satz ist weg (Zadání, Aufgabe 3.7).
-                'desc'     => 'Präsentations-Website bis fünf Seiten für Selbstständige.',
+                'title'    => 'Firmenwebsite',
+                'scope'    => 'bis 12 Seiten',
+                'desc'     => 'Eine mehrsprachige Website mit Blog, Konversionsmessung und Buchungssystem.',
+                'featured' => true,
+            ],
+            [
+                'title'    => 'Individuell',
+                'scope'    => 'ohne Umfangsgrenze',
+                'desc'     => 'Ein Online-Shop, eine Webanwendung oder ein komplexes Portal.',
                 'featured' => false,
             ],
         ],
