@@ -48,19 +48,26 @@
     </div>
 </div>
 
-{{-- 1. Portfolio filter --}}
+{{-- 1. + 2. Portfolio filter a mřížka
+     OND-351: DB `portfolio_projects` je dnes prázdná, takže první obrazovka
+     stránky hlásila „Vše 0 · Stránky 0 …", „0 projektů zobrazeno" a prázdný
+     stav „Momentálně nejsou k dispozici žádné projekty." — a to na stránce,
+     která má odvedenou práci dokazovat. Když projekty nejsou, přeskočíme
+     filtr i mřížku a stránka začne rovnou případovkami. Až se DB naplní,
+     obojí se vrátí samo — žádný flag, jen podmínka. --}}
+@if ($portfolioProjects->isNotEmpty())
 <x-portfolio.filter
     :categories="['all', 'website', 'application', 'other']"
     :counts="$counts"
     target="portfolio-grid"
 />
 
-{{-- 2. Portfolio grid --}}
 <section class="section-wrapper section-wrapper--tight" data-reveal data-pdd="projects-grid">
     <div class="container-site">
         <x-portfolio.grid :projects="$portfolioProjects" :locale="$locale" />
     </div>
 </section>
+@endif
 
 {{-- 3. Případovky
      OND-201 (nález 5.2): dřív anonymní „snapshots" s vymyšlenými termíny.
