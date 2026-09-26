@@ -389,7 +389,7 @@
 
 /* --- Reference ---------------------------------------------- */
 /* OND-279: „Přeloženo z českých originálů na Google, Firmy.cz a Facebooku" je
-   údaj o původu recenzí — stejná třída jako .pd-testi__source, tedy informace. */
+   údaj o původu recenzí — stejná gramatika jako .pd-by__src, tedy informace. */
 .pd-testi__note {
     font-family: var(--font-body);
     font-size: var(--text-body-sm);
@@ -400,34 +400,139 @@
 }
 .pd-testi { display: grid; }
 @media (min-width: 1024px) { .pd-testi { grid-template-columns: 1fr 1fr; column-gap: var(--space-9); } }
+/* OND-353: mřížka `56px 1fr` zůstává, jen v levém sloupci stojí místo ordinálu
+   portrét (`.pd-by__face`). Řádkovou mezeru dělá `.pd-by__org`, proto tu
+   `row-gap: 0` — jinak by se sečetla s `gap` mřížky. */
 .pd-testi__item {
     border-top: 1px solid var(--color-border-soft);
     padding: var(--space-6) 0;
     display: grid;
     grid-template-columns: 56px 1fr;
-    gap: var(--space-4);
+    column-gap: var(--space-4);
+    row-gap: 0;
 }
-.pd-testi__num {
-    font-family: var(--font-display);
-    font-weight: 200;
-    font-variation-settings: 'wght' 200;
-    font-size: var(--text-h3);
-    line-height: 1.1;
-    color: var(--color-fg-decorative);
-}
+/* Podpis je přímo v mřížce položky: tvář do prvního sloupce, jméno s firmou
+   do druhého. Citace pak stojí pod jménem, ne pod tváří. */
+.pd-testi__item > .pd-by { display: contents; }
+.pd-testi__item > .pd-testi__text { grid-column: 2; }
 .pd-testi__text {
     font-family: var(--font-body);
     font-size: var(--text-body);
     line-height: var(--leading-body);
     color: var(--color-fg-primary);
     margin: 0 0 var(--space-3);
+    /* Visící otevírací uvozovka — optická hrana citace sedí na jméno nad ní. */
+    text-indent: -0.42em;
+    max-width: 62ch;
 }
-.pd-testi__meta {
+
+/* --- Podpis u citace (tvář, jméno, zdroj) — OND-353 --------- */
+/* Jedna komponenta pro všech sedm citací na stránce:
+   `resources/views/components/testimonial-by.blade.php`.
+   V sekci 09 stojí nad citací (56 px), u krátkých pull-quotes pod ní (40 px). */
+.pd-by {
+    --pd-by-size: 56px;
+    display: grid;
+    grid-template-columns: var(--pd-by-size) 1fr;
+    column-gap: var(--space-4);
+    align-items: start;
+    /* Pull-quotes jsou kurzívou a verzálkami; podpis si sazbu řídí sám. */
+    font-style: normal;
+    text-transform: none;
+    letter-spacing: 0;
+}
+/* `align-items: start` i tady: u dlouhé role se řádek firmy zalomí (na
+   390 px až na tři řádky, nejhůř Baudyš v EN) a centrování by tvář odsunulo
+   o 30 px pod jméno. Zarovnání na horní hranu drží tvář u jména vždycky. */
+.pd-by--40 {
+    --pd-by-size: 40px;
+    column-gap: var(--space-3);
+}
+.pd-by__face {
+    width: var(--pd-by-size);
+    height: var(--pd-by-size);
+    margin: 0;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border: 1px solid var(--color-border-soft);
+    background: var(--color-bg-elev-1);
+}
+.pd-by__face picture { display: block; width: 100%; height: 100%; }
+.pd-by__face img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    /* Srovná šestnáct různě nafocených snímků do jedné sazby. */
+    filter: grayscale(1) contrast(1.04) brightness(0.93);
+}
+/* Varianta bez fotky: týž čtverec, uvnitř monogram písmem ordinálu. */
+.pd-by__mono {
+    font-family: var(--font-display);
+    font-weight: 200;
+    font-variation-settings: 'wght' 200;
+    font-size: 19px;
+    letter-spacing: 0.06em;
+    color: var(--color-fg-decorative);
+}
+.pd-by__line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 10px;
+    margin: 0 0 2px;
+}
+.pd-by__name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-variation-settings: 'wght' 600;
+    font-size: 15px;
+    line-height: 1.3;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--color-fg-primary);
+}
+.pd-by__org {
+    display: block;
     font-family: var(--font-body);
     font-size: var(--text-caption);
-    letter-spacing: 0.1em;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-fg-muted);
+    margin: 0 0 14px;
+}
+/* Slot pro zdroj je jeden a viditelný — vlasový rámeček, jaký na téhle
+   stránce nesou datové štítky. Uvnitř buď značka, nebo slovo. */
+.pd-by__src {
+    display: inline-flex;
+    align-items: center;
+    height: 22px;
+    padding: 0 0.45em;
+    border: 1px solid var(--color-border-mid);
+    text-transform: none;
+}
+.pd-by__logo { display: block; width: auto; }
+.pd-by__logo--google   { height: 13px; filter: grayscale(1) brightness(1.75); }
+.pd-by__logo--facebook { height: 14px; filter: grayscale(1) brightness(1.9); }
+/* Firmy.cz nemá značku, jen logotyp v poměru 4,6 : 1 — pod ~24 px ztrácí
+   tvar písmen. Sází se proto písmem stránky; slot zůstává stejný. */
+.pd-by__src--word {
+    font-family: var(--font-body);
+    font-size: var(--text-caption);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: var(--color-fg-muted);
+}
+/* U pull-quotes stojí podpis pod citací a firma je poslední řádek bloku. */
+.pd-by--40 .pd-by__org { margin-bottom: 0; }
+
+@media (max-width: 767px) {
+    .pd-testi__item { grid-template-columns: 48px 1fr; }
+    .pd-testi__item .pd-by { --pd-by-size: 48px; }
+    .pd-by__mono { font-size: 16px; }
+    .pd-by__name { font-size: 14px; }
 }
 
 /* ============================================================
@@ -992,17 +1097,10 @@
     line-height: var(--leading-body);
 }
 
-/* --- Reference: zdroj hodnocení jako datový štítek ---------- */
-.pd-testi__source {
-    display: inline-block;
-    margin-left: var(--space-2);
-    padding: 0 0.4em;
-    border: 1px solid var(--color-border-mid);
-    font-size: var(--text-caption);
-    letter-spacing: 0.04em;
-    color: var(--color-fg-muted);
-    white-space: nowrap;
-}
+/* --- Reference: zdroj hodnocení jako datový štítek ----------
+   OND-353: `.pd-testi__source` zanikl. Štítek se zdrojem už nestojí jen
+   v sekci 09 pod textem, ale u všech sedmi citací vedle jména — nese ho
+   `.pd-by__src` výš v tomhle souboru se stejným vlasovým rámečkem. */
 
 /* ============================================================
    OND-231 F3 — chrom celého webu v ACID

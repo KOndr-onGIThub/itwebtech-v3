@@ -2,6 +2,11 @@
 
 return [
 
+    // OND-353: uvozovky kolem citací sází šablona, ne texty — aby se do
+    // `lang` nedostaly rovné ASCII " (opakovaná vada, viz lang/*/cookies.php
+    // jako zdroj pravdy). CS/DE mají „…“ (U+201E + U+201C), EN “…” (U+201C + U+201D).
+    'quote_marks' => ['open' => '„', 'close' => '“'],
+
     // OND-201 (nález 5.7): titulek se definoval negací konkurence („Žádné
     // šablony, žádný WordPress"). Zákazník s rozpočtem 150 tisíc nehledá,
     // kdo nadává na konkurenci, a „WordPress" navíc neříká nic člověku,
@@ -117,14 +122,14 @@ return [
                 'time'         => '60 min, do týdne',
                 'text'         => 'Napíšete mi přes formulář dole, co řešíte. Ozvu se nejpozději následující pracovní den a domluvíme se na hovoru nebo na schůzce. Mluvíte se mnou, ne s obchodníkem — zajímá mě, komu prodáváte, jak u vás vzniká poptávka a co má web udělat.',
                 'quote_text'   => 'Pan Kriška opravdu naslouchal mým potřebám a následně tyto informace zpracoval až do mé úplné spokojenosti.',
-                'quote_author' => 'Magda Pernicová, Realiťačky v akci',
+                'quote_ref'    => 'magda-pernicova',
             ],
             [
                 'heading'      => 'Specifikace',
                 'time'         => '2–5 dní',
                 'text'         => 'Dostanete písemně, co na webu bude, kolik stránek to má a kolik to bude stát. Co je ve specifikaci, to je na faktuře. Termín dodání odhaduju předem, ne zpětně.',
                 'quote_text'   => 'Důsledně analyzuje stav a chce poznat současné procesy. Shromažďuje požadavky od zákazníků a zjišťuje vize pro budoucnost.',
-                'quote_author' => 'Jan Stybor, vedoucí projektového oddělení, Toyota',
+                'quote_ref'    => 'jan-stybor',
                 'note'         => 'Termín je odhad, ne závazek. Schvalování a podklady z vaší strany jsou součástí práce a říkám to rovnou na začátku.',
             ],
             [
@@ -156,7 +161,7 @@ return [
         'text'         => 'Začínal jsem jako dělník v logistice a skončil jako starší specialista v projektovém týmu. Osmnáct let jsem hledal, kde se ve výrobě a montáži ztrácí čas, a napsal k tomu firemní aplikaci, která ušetřila miliony korun. Ve výrobě si nemůžete dovolit, aby vám něco spadlo. Tam jsem se naučil, že software se dělá pořádně, nebo vůbec.',
         'text_2'       => 'Weby dělám stejně. Než napíšu první řádek, chci vědět, jak u vás vzniká poptávka a co se s ní děje potom. Teprve podle toho stránka vznikne. Poznáte to na specifikaci, kterou dostanete dřív, než začnu pracovat.',
         'quote_text'   => 'Jednou z nejsilnějších stránek Ondry je velká chuť rozvíjet se — nejen uspokojení potřeb zákazníků, ale překonání jejich očekávání.',
-        'quote_author' => 'Pavel Baudyš, ředitel řízení výroby, montáže a logistiky, Toyota Motor Manufacturing Czech Republic (2024)',
+        'quote_ref'    => 'pavel-baudys',
     ],
 
     // OND-269: jediná sekce projektů na homepage (dřív `showcase` + `portfolio`).
@@ -390,7 +395,7 @@ return [
         'heading'         => 'Napište mi, co potřebujete',
         'description'     => 'Napište ve zkratce, co řešíte. Ozvu se nejpozději následující pracovní den a nezávazně probereme, co dává smysl. Když zjistím, že na sebe nepasujeme, řeknu vám to rovnou.',
         'quote_text'      => 'Jedná rychle a efektivně. Byl to pro mě velký rozdíl mezi předchozím IT dodavatelem.',
-        'quote_author'    => 'Ing. Ivo Štěpánek, J. K. fire and safety consulting',
+        'quote_ref'       => 'ivo-stepanek',
         'name'            => 'Jméno a příjmení',
         'email'           => 'E-mail',
         'phone'           => 'Telefon (nepovinný)',

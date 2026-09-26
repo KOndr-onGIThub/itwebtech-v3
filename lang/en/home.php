@@ -2,6 +2,11 @@
 
 return [
 
+    // OND-353: uvozovky kolem citací sází šablona, ne texty — aby se do
+    // `lang` nedostaly rovné ASCII " (opakovaná vada, viz lang/*/cookies.php
+    // jako zdroj pravdy). CS/DE mají „…“ (U+201E + U+201C), EN “…” (U+201C + U+201D).
+    'quote_marks' => ['open' => '“', 'close' => '”'],
+
     // OND-201 (finding 5.7): the page title must not define the business by
     // negating competitors, and "no WordPress" says nothing to someone who
     // does not know what WordPress is (principle 0).
@@ -110,14 +115,14 @@ return [
                 'time'         => '60 min, within a week',
                 'text'         => 'You write to me through the form below and tell me what you are dealing with. I get back to you by the next business day and we arrange a call or a meeting. You talk to me, not to a salesperson — I want to know who you sell to, how enquiries reach you today and what the website has to do.',
                 'quote_text'   => 'He really listened to what I needed and then turned it into something I am completely happy with.',
-                'quote_author' => 'Magda Pernicová, Realiťačky v akci',
+                'quote_ref'    => 'magda-pernicova',
             ],
             [
                 'heading'      => 'Specification',
                 'time'         => '2–5 days',
                 'text'         => 'You get it in writing: what will be on the website, how many pages it has and what it will cost. What is in the specification is what is on the invoice. I estimate the delivery date up front, not after the fact.',
                 'quote_text'   => 'He analyses the starting position thoroughly and wants to understand the existing processes. He gathers requirements from users and asks where things are heading.',
-                'quote_author' => 'Jan Stybor, Head of Project Department, Toyota',
+                'quote_ref'    => 'jan-stybor',
                 'note'         => 'The date is an estimate, not a commitment. Your approvals and your materials are part of the work, and I say so right at the start.',
             ],
             [
@@ -149,7 +154,7 @@ return [
         'text'         => 'I started as a labourer in logistics and left as a senior specialist in the project team. For eighteen years I looked for where production and assembly lose time, and I wrote an in-house application for it that saved millions of crowns. On a production line you cannot afford for something to go down. That is where I learned that software is either done properly or not at all.',
         'text_2'       => 'I build websites the same way. Before I write the first line I want to know how enquiries reach you and what happens to them next. Only then does the site take shape. You see it in the specification you get before I start working.',
         'quote_text'   => 'One of Ondřej\'s greatest strengths is his strong desire to develop — not just meeting customer needs, but exceeding their expectations.',
-        'quote_author' => 'Pavel Baudyš, Director of Manufacturing, Assembly & Logistics, Toyota Motor Manufacturing Czech Republic (2024)',
+        'quote_ref'    => 'pavel-baudys',
     ],
 
     // OND-269: the only projects section on the homepage (formerly `showcase`
@@ -344,12 +349,18 @@ return [
 
 
     // OND-201 (finding 5.8): the single closing call to action of the homepage.
+    // OND-309 opravila duplicitu jen v češtině: citace u formuláře byla
+    // Jaskmanická, jejíž recenze stojí o obrazovku výš v sekci „Co říkají
+    // klienti". EN/DE zůstaly pozadu. OND-353 přidává k citacím tvář, takže
+    // by se tu její portrét objevil dvakrát na jedné stránce — sjednoceno
+    // se `lang/cs` na Štěpánka. Věty jsou doslovně z `en/testimonials.php`,
+    // nejde o nový překlad.
     'inline_form' => [
         'eyebrow'         => 'Enquiry',
         'heading'         => 'Tell me what you need',
         'description'     => 'Describe briefly what you are dealing with. I\'ll get back to you by the next business day and we will go through what makes sense, with no obligation. If we turn out not to be a fit, I will tell you straight.',
-        'quote_text'      => 'Thanks to the individual approach, flexibility and professionalism, the result matches our expectations.',
-        'quote_author'    => 'Hana Jaskmanická, Executive Director, VP Industry',
+        'quote_text'      => 'He acts fast and efficiently. For me it was a big difference compared with my previous IT supplier.',
+        'quote_ref'       => 'ivo-stepanek',
         'name'            => 'Full name',
         'email'           => 'Email',
         'phone'           => 'Phone (optional)',

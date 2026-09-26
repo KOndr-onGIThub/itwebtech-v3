@@ -393,7 +393,8 @@
 
    Dvě různé rodiny číslic, každá dostane specular ve své vlastní barvě:
      (a) acidové — .pd-service__num, .pd-step__num
-     (b) tiché šedé — .pd-case__num, .pd-testi__num
+     (b) tiché šedé — .pd-case__num
+         (OND-353: `.pd-testi__num` zanikl, v jeho sloupci stojí portrét)
    Přebarvit (b) na acid by přidalo barvu tam, kde podle gramatiky webu
    být nemá. */
 .pd--depth .pd-step__num,
@@ -411,8 +412,7 @@
 
 /* Tiché šedé ordinály: specular jen přisvětlí náběžnou hranu k #9B9AA0,
    odvrácená strana zůstává na původním #5C5C63. Kontrast tím roste, ne klesá. */
-.pd--depth .pd-case__num,
-.pd--depth .pd-testi__num {
+.pd--depth .pd-case__num {
     background-image: linear-gradient(100deg,
         #9b9aa0 0%,
         #6f6f76 46%,
