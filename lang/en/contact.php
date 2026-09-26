@@ -19,7 +19,7 @@ return [
     'email_label'         => 'Email',
     'phone_label'         => 'Phone',
     'hours_label'         => 'Availability',
-    'open_hours'          => 'I\'ll get back to you within 24 hours on business days. I am not on call at weekends or on public holidays, but nothing gets lost.',
+    'open_hours'          => 'I\'ll get back to you by the next business day. Weekends and public holidays don\'t count, but nothing gets lost.',
     'cta_consultation'    => 'Write to me',
 
     'form_heading'        => 'Contact form',
@@ -67,7 +67,7 @@ return [
         'heading_html'    => 'No CRM,<br>no call centre — <em>just Ondřej</em>.',
         'eyebrow'         => 'You write to me directly',
         'heading'         => 'You write straight to me, Ondřej.',
-        'subline'         => 'I read your message personally. I\'ll get back to you within 24 hours on business days.',
+        'subline'         => 'I read your message personally. I\'ll get back to you by the next business day.',
         'photo_alt'       => 'Ondřej Kriška — author of this site and your contact person',
         'role_label'      => 'Developer, author of this site, your only contact',
     ],
@@ -77,8 +77,8 @@ return [
         'heading' => 'Three steps — no marketing funnel.',
         'steps'   => [
             [
-                'title' => 'I\'ll get back to you within 24 hours on business days',
-                'text'  => 'You get an email from me personally, not an automated confirmation. I am not on call at weekends or on public holidays — I will be back to you on the first business day.',
+                'title' => 'I\'ll get back to you by the next business day',
+                'text'  => 'You get an email from me personally, not an automated confirmation. Write on a Friday evening and you will hear from me on Monday.',
             ],
             [
                 'title' => 'We arrange a 30-minute call',
@@ -93,7 +93,7 @@ return [
 
     'thank_you' => [
         'heading'      => 'Done, your message arrived.',
-        'subline'      => 'Thank you. I read it personally and I\'ll get back to you within 24 hours on business days.',
+        'subline'      => 'Thank you. I read it personally and I\'ll get back to you by the next business day.',
         'next'         => 'In the meantime you can look through my projects or read the pricing.',
         'cta_projects' => 'Projects',
         'cta_price'    => 'Pricing',

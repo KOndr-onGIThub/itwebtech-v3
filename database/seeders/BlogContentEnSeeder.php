@@ -202,7 +202,7 @@ class BlogContentEnSeeder extends Seeder
                     <h2>When not to buy a website from me</h2>
                     <p>When your budget is under €800. When you need the site in a week. When you only want to fix an existing WordPress. I do none of those, and it is better you know now than after two meetings.</p>
                     <h2>How you get to an exact price</h2>
-                    <p>Write and tell me what you need. Briefly is fine. I will get back to you within 24 hours on business days and we will go through it. If it turns out that I can help, you get a specification with a specific price. If not, I will say so and I will not push anything on you.</p>
+                    <p>Write and tell me what you need. Briefly is fine. I will get back to you by the next business day and we will go through it. If it turns out that I can help, you get a specification with a specific price. If not, I will say so and I will not push anything on you.</p>
                     HTML,
             ],
 

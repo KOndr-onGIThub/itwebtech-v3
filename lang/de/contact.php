@@ -20,7 +20,7 @@ return [
     'email_label'         => 'E-Mail',
     'phone_label'         => 'Telefon',
     'hours_label'         => 'Verfügbarkeit',
-    'open_hours'          => 'Ich melde mich innerhalb von 24 Stunden an Arbeitstagen. An Wochenenden und Feiertagen halte ich keine Bereitschaft, aber nichts geht verloren.',
+    'open_hours'          => 'Ich melde mich spätestens am nächsten Arbeitstag. Wochenenden und Feiertage zählen nicht mit, aber nichts geht verloren.',
     'cta_consultation'    => 'Schreiben Sie mir',
 
     'form_heading'        => 'Kontaktformular',
@@ -68,7 +68,7 @@ return [
         'heading_html'    => 'Kein CRM,<br>kein Callcenter — <em>nur Ondřej</em>.',
         'eyebrow'         => 'Sie schreiben mir direkt',
         'heading'         => 'Sie schreiben direkt an mich, Ondřej.',
-        'subline'         => 'Ich lese Ihre Nachricht persönlich. Ich melde mich innerhalb von 24 Stunden an Arbeitstagen.',
+        'subline'         => 'Ich lese Ihre Nachricht persönlich. Ich melde mich spätestens am nächsten Arbeitstag.',
         'photo_alt'       => 'Ondřej Kriška — Autor dieser Website und Ihr Ansprechpartner',
         'role_label'      => 'Entwickler, Autor dieser Website, Ihr einziger Ansprechpartner',
     ],
@@ -78,8 +78,8 @@ return [
         'heading' => 'Drei Schritte — kein Marketing-Funnel.',
         'steps'   => [
             [
-                'title' => 'Ich melde mich innerhalb von 24 Stunden an Arbeitstagen',
-                'text'  => 'Sie erhalten eine E-Mail von mir persönlich, keine automatische Bestätigung. An Wochenenden und Feiertagen halte ich keine Bereitschaft — ich melde mich am ersten Arbeitstag.',
+                'title' => 'Ich melde mich spätestens am nächsten Arbeitstag',
+                'text'  => 'Sie erhalten eine E-Mail von mir persönlich, keine automatische Bestätigung. Wenn Sie am Freitagabend schreiben, melde ich mich am Montag.',
             ],
             [
                 'title' => 'Wir vereinbaren ein 30-minütiges Gespräch',
@@ -94,7 +94,7 @@ return [
 
     'thank_you' => [
         'heading'      => 'Fertig, die Nachricht ist angekommen.',
-        'subline'      => 'Danke. Ich lese sie persönlich und melde mich innerhalb von 24 Stunden an Arbeitstagen.',
+        'subline'      => 'Danke. Ich lese sie persönlich und melde mich spätestens am nächsten Arbeitstag.',
         'next'         => 'In der Zwischenzeit können Sie sich meine Projekte ansehen oder die Preise lesen.',
         'cta_projects' => 'Projekte',
         'cta_price'    => 'Preise',

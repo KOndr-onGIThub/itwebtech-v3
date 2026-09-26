@@ -55,7 +55,7 @@ return [
 
     'cta' => [
         'heading' => 'Dealing with a website or an application?',
-        'text'    => 'Tell me what you need. I\'ll get back to you within 24 hours on business days and tell you whether I can help.',
+        'text'    => 'Tell me what you need. I\'ll get back to you by the next business day and tell you whether I can help.',
         'primary' => 'Write to Ondřej',
     ],
 
