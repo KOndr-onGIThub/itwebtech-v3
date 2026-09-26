@@ -144,20 +144,17 @@ return [
         ],
     ],
 
-    // OND-308: Toyota je zpátky samostatnou sekcí — třetí na stránce, hned
-    // po odstavci o situaci klienta. Nese video, oba odstavce i citaci Pavla
-    // Baudyše; z řady referencí níž proto Baudyš mizí (stál by tam podruhé).
-    // OND-317: `example` je konkrétní ukázka z reálné zakázky — znění schválil
-    // CEO v OND-316 (dokument „Návrh textu", revize 2). Každý fakt je doložený
-    // z případovky `/projekty/pitarena-eshop` a z recenze Jana Stybora
-    // (`lang/cs/testimonials.php`). Nesahat bez OND-316: text se nepřepisuje
-    // tady, ale v dokumentu. En/de verze zatím nejsou — překlady jdou
-    // samostatnou dávkou, do té doby klíč visí jen v `cs`.
+    // OND-308: Toyota je samostatnou sekcí a nese citaci Pavla Baudyše;
+    // z řady referencí níž proto Baudyš mizí (stál by tam podruhé).
+    // OND-314: video se odsud odstěhovalo do sekce „Jak to probíhá".
+    // OND-344: sekce stojí nově šestá, za „Co stavím" — a klíč `example`
+    // (ukázka z e-shopu PitArena, zavedená v OND-316/OND-317) je pryč.
+    // Po přesunu stál kus nabídky uprostřed osobního příběhu; znovu ho
+    // nezavádět bez rozhodnutí na OND-344.
     'toyota' => [
-        'heading'      => '18 let v Toyotě. Pak jsem odešel.',
+        'heading'      => '18 let v Toyotě.',
         'text'         => 'Začínal jsem jako dělník v logistice a skončil jako starší specialista v projektovém týmu. Osmnáct let jsem hledal, kde se ve výrobě a montáži ztrácí čas, a napsal k tomu firemní aplikaci, která ušetřila miliony korun. Ve výrobě si nemůžete dovolit, aby vám něco spadlo. Tam jsem se naučil, že software se dělá pořádně, nebo vůbec.',
         'text_2'       => 'Weby dělám stejně. Než napíšu první řádek, chci vědět, jak u vás vzniká poptávka a co se s ní děje potom. Teprve podle toho stránka vznikne. Poznáte to na specifikaci, kterou dostanete dřív, než začnu pracovat.',
-        'example'      => 'U e-shopu PitArena jsem se nejdřív ptal, jak si jeho zákazníci vybírají díl. Bez modelu a ročníku nakupují naslepo a vracejí. Katalog je proto rozdělený podle 19 modelů motorek — člověk klikne na svůj model a ze 4 551 položek vidí jen ty, které sednou.',
         'quote_text'   => 'Jednou z nejsilnějších stránek Ondry je velká chuť rozvíjet se — nejen uspokojení potřeb zákazníků, ale překonání jejich očekávání.',
         'quote_author' => 'Pavel Baudyš, ředitel řízení výroby, montáže a logistiky, Toyota Motor Manufacturing Czech Republic (2024)',
     ],
