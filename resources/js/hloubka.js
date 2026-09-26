@@ -92,10 +92,8 @@
     var TARGETS = [
         '.pd-hero',                     /* podtržení v H1 → CTA */
         '.pd-case',                     /* 02 — horní hrana vizuálu, každá případovka sama */
-        '.pd-issue',                    /* 04 — přejezd přes číslo, každý problém sám */
         '.pd-services',                 /* 05 — tři svislé linky se staggerem, naráz */
         '.pd-price__col--featured',     /* 06 — uzavřená smyčka */
-        '.pd-hood',                     /* 08 — svislé linky zdola nahoru */
         '.pd-step',                     /* 09 — každý krok zvlášť */
         '.pd-form__panel',              /* 11 — cíl stránky */
 
@@ -112,11 +110,10 @@
         '.contact-form'
     ];
 
-    /* Kontejnery vs. jednotlivé položky: .pd-services a .pd-hood jsou obaly,
-       protože jejich děti stojí VEDLE SEBE — do pásma dojedou naráz a rytmus
-       dělá stagger v CSS. .pd-issue, .pd-case a .pd-step se pozorují po
-       kusech, protože jdou (aspoň na mobilu) pod sebou a společný obal by je
-       odpálil naslepo. */
+    /* Kontejnery vs. jednotlivé položky: .pd-services je obal, protože jeho
+       děti stojí VEDLE SEBE — do pásma dojedou naráz a rytmus dělá stagger
+       v CSS. .pd-case a .pd-step se pozorují po kusech, protože jdou (aspoň
+       na mobilu) pod sebou a společný obal by je odpálil naslepo. */
 
     function armCharges() {
         if (reduce || !hasIO) return;   /* bez IO zůstane vše ve statickém stavu */

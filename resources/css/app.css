@@ -5174,7 +5174,7 @@
         max-width: 340px;
     }
     /* OND-300: chování ve fullscreenu řeší nevrstvený blok na konci
-       tohoto souboru — musí přebít i `.pd-why__video video` z podpis.css. */
+       tohoto souboru — musí přebít i `.pd-steps__media video` z podpis.css. */
 
     /* ============================================================
        GUARANTEE SECTION
@@ -6562,7 +6562,7 @@
    Tenhle blok je ZÁMĚRNĚ mimo `@layer components`: `podpis.css` a
    `hloubka.css` se importují nevrstvené, a nevrstvená pravidla vyhrávají
    nad vrstvenými bez ohledu na specificitu. Uvnitř vrstvy by tedy
-   `.pd-why__video video { width: 100%; height: auto }` (podpis.css)
+   `.pd-steps__media video { width: 100%; height: auto }` (podpis.css)
    opravu na domovské stránce zase přebilo.
    ========================================================================== */
 .video-intro:fullscreen {

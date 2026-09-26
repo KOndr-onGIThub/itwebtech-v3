@@ -3,9 +3,9 @@
 
      Text pochází z dokumentu `text-nova-homepage` na OND-307, vizuální
      jazyk je pořád ACID z OND-231 (prefix tříd `pd-`, styly
-     v resources/css/podpis.css). Původní verze stránky žije zmrazená
-     na /puvodni-homepage — pages/home-legacy.blade.php, vlastní
-     lang/{cs,en,de}/home_legacy.php. Sem se z ní nic netahá a naopak.
+     v resources/css/podpis.css). Původní verze stránky byla po dobu
+     přestavby zmrazená na vlastní podstránce; Ondřej novou schválil
+     a lešení odešlo v OND-342.
 
      Gramatika ACID (beze změny):
        - barva je signální inkoust: existuje jen tam, kde je akce nebo důraz
@@ -75,12 +75,11 @@
      + resources/js/hloubka.js); sundání téhle jedné třídy vrátí stránku
      do původního stavu.
 
-     OND-308 — `pd--depth-home` tady schválně NENÍ. Ten scope drží pravidla
-     navázaná na POŘADÍ sekcí (`> section:nth-child(N)`) a dvakrát už se
+     OND-308 — sekce se adresují přes `id`, ne přes pořadí. Dřív na to byl
+     scope `pd--depth-home` s pravidly `> section:nth-child(N)` a dvakrát se
      stalo, že je po přeskládání stránky nikdo nepřečísloval a nasvícení
-     mířilo vedle. Nové sekce se adresují přes `id` — stejně jako ceník,
-     postup, reference a poptávka, které to tak měly vždycky. `pd--depth-home`
-     zůstává v CSS jen pro zmrazenou /puvodni-homepage a zmizí s ní. --}}
+     mířilo vedle. Scope zůstal naživu jen pro zmrazenou starou homepage
+     a s ní odešel v OND-342. --}}
 <div class="pd pd--depth">
 
 {{-- ===================================================
@@ -88,10 +87,10 @@
      Fotka „tak jak je" přes pravou část, text v negativním
      prostoru vlevo, autogram. Tilt jen na hover zařízeních.
      =================================================== --}}
-{{-- OND-336: `pd-hero--hp` drží stažený svislý rytmus na mobilu jen tady.
-     Hero markup je totožný se zmrazenou kopií na /puvodni-homepage
-     (home-legacy.blade.php) — uvnitř sekce není na co scopovat, takže
-     rozdíl nese modifikátor na `<section>`. --}}
+{{-- OND-336: `pd-hero--hp` drží stažený svislý rytmus na mobilu. Modifikátor
+     vznikl proti zmrazené kopii hera na staré homepage, se kterou byl
+     markup totožný; ta je od OND-342 pryč a `.pd-hero` dnes nese jen tahle
+     stránka, takže je modifikátor už jen pojistkou. --}}
 <section class="pd-hero pd-hero--hp" id="pd-hero-tilt">
     <div class="pd-hero__photo" data-tilt>
         <x-responsive-image
@@ -106,10 +105,9 @@
         <div class="pd-hero__content">
             <p class="pd-eyebrow">{{ __('home.hero.page_mark_label') }} — {{ __('home.hero.upline') }}</p>
 
-            {{-- OND-333: `pd-heading--hp` drží zmenšení (52/33 px) jen tady.
-                 Stará homepage na /puvodni-homepage má stejný hero markup
-                 a stejnou třídu `pd-heading` — modifikátor je jediné, co je
-                 od sebe odlišuje. --}}
+            {{-- OND-333: `pd-heading--hp` drží zmenšení (52/33 px). Vznikl
+                 proti zmrazené kopii staré homepage se stejným hero
+                 markupem; ta je od OND-342 pryč (viz komentář u sekce). --}}
             <h1 class="pd-heading pd-heading--hp">{!! __('home.hero.heading_html') !!}</h1>
 
             <p class="pd-sub">{{ __('home.hero.subline') }}</p>
