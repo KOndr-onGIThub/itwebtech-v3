@@ -13,9 +13,10 @@
        - žádný obsah nestartuje v opacity: 0 (tj. žádné `data-reveal`)
        - pohyb je přesný a účelový, ne dekorativní
 
-     Pořadí sekcí:
-       01 hero · 02 situace klienta · 03 18 let v Toyotě · 04 pruh čísel
-       05 tři projekty · 06 co stavím · 07 jak to probíhá · 08 ceny
+     Pořadí sekcí (OND-344 — Toyota se přesunula ze třetí pozice za „Co
+     stavím", pruh čísel se tím posunul o jednu nahoru):
+       01 hero · 02 situace klienta · 03 pruh čísel · 04 tři projekty
+       05 co stavím · 06 18 let v Toyotě · 07 jak to probíhá · 08 ceny
        09 reference a námitky · 10 poptávka
 
      DVĚ ODESÍLACÍ VÝZVY NA STRÁNCE, ne víc: hero → kotva formuláře,
@@ -47,7 +48,7 @@
 
 @php
     // OND-308: pořadí referencí. Baudyš z téhle řady zmizel úplně —
-    // jeho citace stojí nově v sekci 03 u Toyoty a dvakrát na jedné
+    // jeho citace stojí nově v sekci 06 u Toyoty a dvakrát na jedné
     // stránce být nemá. Feature flag `show_toyota_testimonial` tím
     // pro homepage ztratil smysl.
     $allTestimonials = collect(__('testimonials.items'));
@@ -64,9 +65,6 @@
         : null;
     $servicesSubheading = \Illuminate\Support\Facades\Lang::has('home.services.subheading')
         ? __('home.services.subheading')
-        : null;
-    $toyotaExample = \Illuminate\Support\Facades\Lang::has('home.toyota.example')
-        ? __('home.toyota.example')
         : null;
 @endphp
 
@@ -152,38 +150,7 @@
 @endif
 
 {{-- ===================================================
-     03 — 18 LET V TOYOTĚ
-     Tady si klient ověřuje řemeslo. Nese ho citace ředitele
-     z Toyoty — ta stojí jen tady, v řadě referencí níž už
-     Baudyš není. Video se přestěhovalo do sekce 07 (OND-314).
-     =================================================== --}}
-<section class="pd-section" id="section-toyota">
-    <div class="container-site">
-        <header class="pd-head">
-            <h2 class="pd-head__title">{{ __('home.toyota.heading') }}</h2>
-        </header>
-
-        {{-- OND-314: video se odsud odstěhovalo do sekce 07 „Jak to probíhá".
-             Stálo 464 px pod hero fotkou — stejná bunda, stejné focení, dva
-             portréty pod sebou. Sekce zůstává textová, důkaz řemesla nese
-             citace Pavla Baudyše. Wrapper `.pd-toyota` tím zanikl, text má
-             vlastní max-width, takže se neroztekl. --}}
-        <div class="pd-origin__text">
-            <p>{{ __('home.toyota.text') }}</p>
-            <p>{{ __('home.toyota.text_2') }}</p>
-            @if ($toyotaExample)
-                <p>{{ $toyotaExample }}</p>
-            @endif
-            <blockquote class="pd-origin__quote">
-                {{ __('home.toyota.quote_text') }}
-                <footer>— {{ __('home.toyota.quote_author') }}</footer>
-            </blockquote>
-        </div>
-    </div>
-</section>
-
-{{-- ===================================================
-     04 — PRUH ČÍSEL
+     03 — PRUH ČÍSEL
      OND-308: naměřený čas načtení se sem přestěhoval ze zrušené
      technické sekce „Pod kapotou". Je to jediné její tvrzení, které
      si návštěvník ověří sám na sobě — mezi ostatní čísla patří.
@@ -215,7 +182,7 @@
 </section>
 
 {{-- ===================================================
-     05 — TŘI PROJEKTY
+     04 — TŘI PROJEKTY
      Případovky z DB: `hero` snímek projektu (kurátorovaný preview
      banner), ne `portfolio_card_thumbnail()` — ten vybírá náhledovku
      do malé karty a na 58vw široké ploše z toho vycházely slabé
@@ -297,7 +264,7 @@
 @endif
 
 {{-- ===================================================
-     06 — CO STAVÍM
+     05 — CO STAVÍM
      Tři sloupce s vlasovými linkami, bez ikon a boxů —
      ikony jsou slovník šablon, sloupec unese titulek sám.
      =================================================== --}}
@@ -343,6 +310,41 @@
                 'contact_link' => '<a href="#' . __('home.anchors.poptavka') . '">' . e(__('home.services.secondary_inline_contact')) . '</a>',
             ]) !!}
         </p>
+    </div>
+</section>
+
+{{-- ===================================================
+     06 — 18 LET V TOYOTĚ
+     Tady si klient ověřuje řemeslo. Nese ho citace ředitele
+     z Toyoty — ta stojí jen tady, v řadě referencí níž už
+     Baudyš není. Video se přestěhovalo do sekce 07 (OND-314).
+
+     OND-344: sekce se přestěhovala ze třetí pozice sem, za „Co
+     stavím". Nahoře stránky odpovídala na otázku, kterou tam čtenář
+     ještě nemá — pochybnost o řemeslu přichází až po nabídce.
+     Doloženo recenzemi: Toyotu zmiňuje 1 z 16, dvanáct z 16 mluví
+     o tom, jak se s Ondrou pracuje. Tím se pruh čísel posunul
+     o pozici nahoru, na trojku.
+     =================================================== --}}
+<section class="pd-section" id="section-toyota">
+    <div class="container-site">
+        <header class="pd-head">
+            <h2 class="pd-head__title">{{ __('home.toyota.heading') }}</h2>
+        </header>
+
+        {{-- OND-314: video se odsud odstěhovalo do sekce 07 „Jak to probíhá".
+             Stálo 464 px pod hero fotkou — stejná bunda, stejné focení, dva
+             portréty pod sebou. Sekce zůstává textová, důkaz řemesla nese
+             citace Pavla Baudyše. Wrapper `.pd-toyota` tím zanikl, text má
+             vlastní max-width, takže se neroztekl. --}}
+        <div class="pd-origin__text">
+            <p>{{ __('home.toyota.text') }}</p>
+            <p>{{ __('home.toyota.text_2') }}</p>
+            <blockquote class="pd-origin__quote">
+                {{ __('home.toyota.quote_text') }}
+                <footer>— {{ __('home.toyota.quote_author') }}</footer>
+            </blockquote>
+        </div>
     </div>
 </section>
 
