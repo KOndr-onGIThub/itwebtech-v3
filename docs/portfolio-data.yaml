@@ -878,18 +878,25 @@ projects:
           cs: "Cyklocentrum Březí – sekce 3"
           en: "Cyklocentrum Březí – section 3"
           de: "Cyklocentrum Březí – Abschnitt 3"
+      # OND-363: alt popisuje LOKÁLNÍ soubor `projects/cyklocentrum/gallery-4.png`,
+      # ne obrázek na téhle `url`. OND-268 obsah obou souborů vyměnil, framer
+      # URL zůstaly u původních snímků — viz komentář u následující položky.
       - url: "https://framerusercontent.com/images/ts7VthxqIAmrSZgLfGLUxjliw.png"
         type: gallery
         alt:
-          cs: "Cyklo Centrum – domovská stránka půjčovny, prodeje a servisu kol"
-          en: "Cyklo Centrum – homepage of the bike rental, sales and service shop"
-          de: "Cyklo Centrum – Startseite von Fahrradverleih, -verkauf und -service"
+          cs: "Cyklocentrum Březí – domovská stránka a půjčovna kol na monitoru, tabletu a mobilu"
+          en: "Cyklocentrum Březí – homepage and bike rental page on a monitor, tablet and phone"
+          de: "Cyklocentrum Březí – Startseite und Fahrradverleih auf Monitor, Tablet und Smartphone"
+      # OND-363: alt popisuje LOKÁLNÍ soubor `projects/cyklocentrum/gallery-5.webp`
+      # (tři mobily s ceníkem půjčovny). Vzdálená `url` vede na jiný snímek —
+      # `portfolio:fetch-screenshots --force` by soubory přepsal zpět na framer
+      # verze a alt texty by přestaly sedět. Bez `--force` je příkaz no-op.
       - url: "https://framerusercontent.com/images/YiOQN9VFcYx3ZtU82crjfRB2lw.webp"
         type: gallery
         alt:
-          cs: "Cyklo Centrum – ceník půjčovny kol na třech mobilních obrazovkách"
-          en: "Cyklo Centrum – bike rental price list on three mobile screens"
-          de: "Cyklo Centrum – Preisliste des Fahrradverleihs auf drei Mobilbildschirmen"
+          cs: "Cyklocentrum Březí – ceník půjčovny, výlety po Pálavě a filtrování kol na třech mobilních obrazovkách"
+          en: "Cyklocentrum Březí – rental price list, Pálava trips and bike filtering on three mobile screens"
+          de: "Cyklocentrum Březí – Verleih-Preisliste, Pálava-Touren und Rad-Filter auf drei Mobilbildschirmen"
     translations:
       cs:
         title: "Cyklocentrum Březí"

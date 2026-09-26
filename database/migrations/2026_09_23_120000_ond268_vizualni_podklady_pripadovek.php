@@ -107,20 +107,23 @@ return new class extends Migration
      *      Výměnou lead snímku se ta nepravda stala zjevnou.
      */
     private const RETITLE = [
+        // OND-363: sjednoceno na obchodní jméno klienta „Cyklocentrum Březí".
+        // Na produkci už tahle migrace proběhla, takže je to jen srovnání
+        // repozitáře — data přepisuje `..._ond363_cyklocentrum_nazev_a_alt`.
         [
             'cyklocentrum', 'projects/cyklocentrum/gallery-4.png',
             [
-                'cs' => 'Cyklo Centrum – domovská stránka půjčovny, prodeje a servisu kol',
-                'en' => 'Cyklo Centrum – homepage of the bike rental, sales and service shop',
-                'de' => 'Cyklo Centrum – Startseite von Fahrradverleih, -verkauf und -service',
+                'cs' => 'Cyklocentrum Březí – domovská stránka a půjčovna kol na monitoru, tabletu a mobilu',
+                'en' => 'Cyklocentrum Březí – homepage and bike rental page on a monitor, tablet and phone',
+                'de' => 'Cyklocentrum Březí – Startseite und Fahrradverleih auf Monitor, Tablet und Smartphone',
             ],
         ],
         [
             'cyklocentrum', 'projects/cyklocentrum/gallery-5.webp',
             [
-                'cs' => 'Cyklo Centrum – ceník půjčovny kol na třech mobilních obrazovkách',
-                'en' => 'Cyklo Centrum – bike rental price list on three mobile screens',
-                'de' => 'Cyklo Centrum – Preisliste des Fahrradverleihs auf drei Mobilbildschirmen',
+                'cs' => 'Cyklocentrum Březí – ceník půjčovny, výlety po Pálavě a filtrování kol na třech mobilních obrazovkách',
+                'en' => 'Cyklocentrum Březí – rental price list, Pálava trips and bike filtering on three mobile screens',
+                'de' => 'Cyklocentrum Březí – Verleih-Preisliste, Pálava-Touren und Rad-Filter auf drei Mobilbildschirmen',
             ],
         ],
         [
