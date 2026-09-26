@@ -11,10 +11,6 @@
      a JSON klíč by byl zničený. PHP blok Blade neparsuje na direktivy. --}}
 @push('jsonld')
 @php
-    // OND-137 P4 §SEO bug-fix: locale → priceCurrency mapping, ať Service
-    // JSON-LD pro EN/DE nehlásí EUR magnitudu s priceCurrency=CZK.
-    $priceCurrency = ['cs' => 'CZK', 'en' => 'EUR', 'de' => 'EUR'][app()->getLocale()] ?? 'CZK';
-
     $breadcrumbLd = [
         '@context' => 'https://schema.org',
         '@type' => 'BreadcrumbList',
@@ -25,9 +21,13 @@
     ];
     $breadcrumbJson = json_encode($breadcrumbLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
+    // OND-354: `offers` z JSON-LD odešlo spolu s klíčem `price`. Úrovně už
+    // cenu nenesou — jediná cena na stránce je prahové číslo a rozpětí ve
+    // větě `price.intro`, a to není nabídka jedné úrovně. Vymýšlet číslo, aby
+    // structured data měla co hlásit, by znamenalo publikovat cenu, která na
+    // stránce nestojí. Rozsah se hlásí přes `areaServed` a `serviceType`.
     $serviceJsons = [];
     foreach (__('price.tiers') as $tier) {
-        $tierPriceNum = (int) preg_replace('/[^0-9]/', '', $tier['price']);
         $serviceLd = [
             '@context' => 'https://schema.org',
             '@type' => 'Service',
@@ -40,12 +40,6 @@
                 'url'  => url('/'),
             ],
             'areaServed' => ['CZ', 'SK', 'DE', 'AT'],
-            'offers' => [
-                '@type' => 'Offer',
-                'price' => $tierPriceNum,
-                'priceCurrency' => $priceCurrency,
-                'url' => lroute('price'),
-            ],
         ];
         $serviceJsons[] = json_encode($serviceLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     }
@@ -67,6 +61,17 @@
      pod nimi se propadá do stínu. Uzavřená smyčka z homepage (sekce 06) se sem
      VĚDOMĚ nepřenáší — doporučené pásmo je už označené čtyřikrát; rozbor je
      v §E4 hloubka.css. --}}
+
+{{-- OND-354 — POŘADÍ SEKCÍ JE TU SDĚLENÍ, NE ROZVRŽENÍ.
+     Do 26. 9. 2026 stálo na stránce: hero → ceny → srovnávací tabulka →
+     „Co je součástí každého projektu" → doplňky → výzva. Změřeno na živé
+     stránce: první číslo bylo 533 znaků od začátku obsahu, první hodnotový
+     argument o 2 753 znaků dál. Člověk tedy dostal cenu dřív než jediný důvod,
+     proč ji platit — a vedle ceny nestál ani jeden důkaz (nula recenzí, nula
+     případovek).
+
+     Dnešní pořadí to obrací: důkazy a hodnota stojí NAD cenami. Kdo tyhle
+     sekce přehazuje, mění tím argument stránky, ne její vzhled. --}}
 <div class="pd--depth pd--depth-sub">
 
 {{-- Page hero — OND-135 iter 5: plán §3.1 design DNA (page-mark + display + amber accent) --}}
@@ -86,26 +91,109 @@
     </div>
 </div>
 
+{{-- Důkazní pás — OND-354.
+     Do téhle karty stálo na `/cenik` nula recenzí, nula případovek a nula jmen
+     klientů: cena bez jediného dokladu, že ji někdo zaplatil a byl rád. Nic tu
+     není nově napsané — čísla i citace už na webu jsou, jen dosud nestály
+     tam, kde se rozhoduje o ceně.
+
+     Čísla jsou `home.social_proof` (lang/*/home.php se čte napříč webem).
+     `response` z homepage pruhu tu VĚDOMĚ není: pás má nést doklady, a slib
+     doby odpovědi je slib, ne doklad. Znění toho slibu navíc mění OND-345
+     napříč webem — tady by z něj vznikla druhá kopie. --}}
+@php
+    // Ty dvě recenze jsou vybrané, ne první dvě v poli: ze šestnácti jsou to
+    // jediné dvě, které mluví k ceně. Štěpánek je jediný, kdo Ondřeje srovnává
+    // s předchozím dodavatelem (na „je drahý" odpovídá člověk, který už
+    // někomu jinému zaplatil), Toman říká, že dostal víc, než čekal.
+    // Výběr je odůvodněný v dokumentu na OND-347, oddíl 4.2 — neměnit za jiné.
+    // Jména jsou v lang/{cs,en,de}/testimonials.php shodná, liší se jen text.
+    $proofTestimonials = collect(['Ing. Ivo Štěpánek', 'Rostislav Toman'])
+        ->map(fn ($name) => collect(__('testimonials.items'))->firstWhere('name', $name))
+        ->filter()
+        ->values();
+
+    // Stejná mapa jako na homepage — zdroj recenze je součást důkazu.
+    $sourceLabels = [
+        'google'   => 'Google',
+        'facebook' => 'Facebook',
+        'firmy_cz' => 'Firmy.cz',
+    ];
+@endphp
+<section class="section-wrapper section-alt" data-reveal data-pdd="price-proof">
+    <div class="container-site">
+
+        {{-- OND-315 (platí i tady): viditelné „5,0" je pro čtečku schované a
+             nahrazuje ho úplné „Hodnocení 5 z 5", aby nevidomý slyšel i tu
+             stupnici. Popis nese seznam, ne sekce — sekce drží i recenze. --}}
+        <ul class="pricing-proof__figures" aria-label="{{ __('home.social_proof.strip_aria') }}">
+            <li>
+                <strong aria-hidden="true">{{ __('home.social_proof.rating_value') }}</strong>
+                <span class="sr-only">{{ __('home.social_proof.rating_aria') }}</span>
+                {{ __('home.social_proof.reviews') }}
+            </li>
+            <li><strong>{{ __('home.social_proof.projects') }}</strong></li>
+            <li><strong>{{ __('home.social_proof.experience') }}</strong></li>
+            <li>{{ __('home.social_proof.award') }}</li>
+        </ul>
+
+        @if ($proofTestimonials->isNotEmpty())
+        <div class="pricing-proof__reviews" data-reveal-group>
+            @foreach ($proofTestimonials as $review)
+            <figure class="pricing-proof__review">
+                <blockquote>
+                    <p>{{ $review['text'] }}</p>
+                </blockquote>
+                <figcaption>
+                    {{ $review['name'] }} — {{ $review['company'] }}@if (filled($review['role'] ?? null)), {{ $review['role'] }}@endif
+                    @if (!empty($sourceLabels[$review['source'] ?? '']))
+                    <span class="pricing-proof__source">{{ $sourceLabels[$review['source']] }}</span>
+                    @endif
+                </figcaption>
+            </figure>
+            @endforeach
+        </div>
+        @endif
+
+    </div>
+</section>
+
+{{-- What's included — OND-354: text beze změny, posunuté NAD ceny.
+     Tohle je ten hodnotový argument, který byl dřív 2 753 znaků za prvním
+     číslem. Věta o době odpovědi v položce „Podpora i po spuštění" patří
+     OND-345, ne téhle kartě — nesahat na ni tady. --}}
+<section class="section-wrapper" data-reveal data-pdd="price-guarantees">
+    <div class="container-site">
+        <header class="section-header">
+            <h2>{{ __('price.guarantees.heading') }}</h2>
+        </header>
+
+        <div class="pricing-guarantees" data-reveal-group>
+            @foreach (__('price.guarantees.items') as $g)
+            <div class="pricing-guarantee">
+                <h3>{{ $g['title'] }}</h3>
+                <p>{{ $g['text'] }}</p>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
 {{-- Pricing tiers --}}
 <section class="section-wrapper" data-reveal data-pdd="price-tiers">
     <div class="container-site">
 
         {{-- OND-198 (nález 5.4): očekávací věta musí padnout dřív, než čtenář
-             uvidí první číslo. Pásma jsou v lang souboru seřazená
-             Standard → Custom → Startovní, nejlevnější je poslední. --}}
+             uvidí první číslo. OND-354: tahle věta je dnes jediné místo na
+             stránce, kde stojí cena — prahové číslo a rozpětí. Úrovně pod ní
+             nesou rozsah, ne cenovku. --}}
         <p class="pricing-expectation">{{ __('price.intro') }}</p>
 
         <div class="pricing-tiers" data-reveal-group>
             @foreach (__('price.tiers') as $tier)
-            @php
-                // OND-137 P4 §6: pricing_tier_shown custom dimension (25/55/95) —
-                // extrahované z tier['price'] (např. "25 000 Kč" → "25").
-                $tierShown = (int) preg_replace('/[^0-9]/', '', $tier['price']);
-                $tierShown = (string) (int) ($tierShown / 1000); // 25000 → "25"
-            @endphp
             <article class="pricing-tier {{ $tier['popular'] ? 'pricing-tier--featured' : '' }}"
                      data-analytics-view="pricing_tier_view"
-                     data-analytics-props='{"pricing_tier_shown":"{{ $tierShown }}"}'>
+                     data-analytics-props='{"pricing_tier_shown":"{{ $tier['key'] }}"}'>
 
                 @if ($tier['popular'])
                 <span class="pricing-tier__badge">{{ __('price.popular') }}</span>
@@ -114,8 +202,10 @@
                 <header class="pricing-tier__header">
                     <h2 class="pricing-tier__name">{{ $tier['name'] }}</h2>
                     <p class="pricing-tier__desc">{{ $tier['desc'] }}</p>
-                    <div class="pricing-tier__price">{{ $tier['price'] }}</div>
-                    <p class="pricing-tier__price-note">{{ __('price.price_note') }}</p>
+                    {{-- OND-354: dřív tady stála cena a pod ní „orientační cena".
+                         Dnes rozsah — úroveň se jmenuje podle toho, co vzniká,
+                         a rozsah je to, čím se od sebe úrovně reálně liší. --}}
+                    <div class="pricing-tier__scope">{{ $tier['scope'] }}</div>
                 </header>
 
                 <ul class="pricing-tier__features">
@@ -130,7 +220,7 @@
                 <a href="{{ lroute('contact') }}"
                    class="btn {{ $tier['popular'] ? 'btn-primary' : 'btn-secondary' }} pricing-tier__cta"
                    data-analytics="pricing_tier_cta_primary_click"
-                   data-analytics-props='{"pricing_tier_shown":"{{ $tierShown }}"}'>
+                   data-analytics-props='{"pricing_tier_shown":"{{ $tier['key'] }}"}'>
                     {{ $tier['cta'] }}
                     <x-icon.arrow-right class="w-4 h-4 shrink-0" />
                 </a>
@@ -139,142 +229,42 @@
             @endforeach
         </div>
 
+        {{-- OND-354: `entry_note` nahradilo omluvné „Výjimka, ne standardní
+             vstup." u nejnižší úrovně. Stojí pod mřížkou, ne v kartě: jsou to
+             čtyři věty a v kartě by rozhodily výšku všech tří sloupců. --}}
+        <p class="pricing-entry-note">{{ __('price.entry_note') }}</p>
+
         <p class="pricing-note">{{ __('price.note') }}</p>
 
     </div>
 </section>
 
-{{-- Feature comparison table --}}
-@php
-    $compareTiers  = __('price.compare.tiers');
-    $compareGroups = __('price.compare.groups');
-    $tierPrices    = array_column(__('price.tiers'), 'price');
-    // OND-198 (nález 5.4): zvýrazněný sloupec se odvozuje z příznaku `popular`,
-    // ne z pevného indexu 1 — pořadí pásem se změnilo (Standard je první).
-    $featuredIdx   = array_search(true, array_column(__('price.tiers'), 'popular'), true);
-    $featuredIdx   = $featuredIdx === false ? -1 : $featuredIdx;
-@endphp
+{{-- Co cenu zvedá a co snižuje — OND-354.
+     Tady stála srovnávací tabulka tří pojmenovaných pásem (desktop tabulka +
+     mobilní taby s cenou v hlavičce). Pásma zmizela, takže se tabulka neměla
+     o co opřít. Nová osa vysvětluje cenu bez cenovky. --}}
 <section class="section-wrapper section-alt" data-reveal data-pdd="price-compare">
     <div class="container-site">
         <header class="section-header">
             <h2>{{ __('price.compare.heading') }}</h2>
         </header>
 
-        {{-- DESKTOP: full 3-column table --}}
-        <div class="pricing-compare pricing-compare--desktop">
-            <table class="pricing-compare__table">
-                <thead>
-                    <tr>
-                        <th></th>
-                        @foreach ($compareTiers as $i => $tier)
-                        <th class="{{ $i === $featuredIdx ? 'is-featured' : '' }}">{{ $tier }}</th>
-                        @endforeach
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($compareGroups as $group)
-                    <tr class="pricing-compare__group-row">
-                        <td colspan="4">{{ $group['label'] }}</td>
-                    </tr>
-                    @foreach ($group['rows'] as $row)
-                    <tr>
-                        <td class="pricing-compare__feature">{{ $row['label'] }}</td>
-                        @foreach ($row['values'] as $vi => $val)
-                        <td class="{{ $vi === $featuredIdx ? 'is-featured' : '' }}">
-                            @if ($val === true)
-                                <span class="pricing-compare__yes">
-                                    <x-icon.circle-check-big class="w-4 h-4" />
-                                    <span class="sr-only">{{ __('price.compare.included') }}</span>
-                                </span>
-                            @elseif ($val === false)
-                                <span class="pricing-compare__no" aria-hidden="true">—</span>
-                                <span class="sr-only">{{ __('price.compare.not_included') }}</span>
-                            @else
-                                <span class="pricing-compare__val">{{ $val }}</span>
-                            @endif
-                        </td>
-                        @endforeach
-                    </tr>
+        <div class="pricing-factors" data-reveal-group>
+            @foreach (['up', 'down'] as $direction)
+            @php $group = __('price.compare.' . $direction); @endphp
+            <div class="pricing-factors__col pricing-factors__col--{{ $direction }}">
+                {{-- Jedna ikona pro obojí, dolní sloupec ji v CSS překlápí —
+                     šipka nahoru/dolů je jediné, co ty dva sloupce odlišuje
+                     beze slov. Je dekorace: směr říká i ten popisek vedle. --}}
+                <h3 class="pricing-factors__label">
+                    <x-icon.arrow-up class="w-4 h-4 shrink-0" aria-hidden="true" focusable="false" />
+                    {{ $group['label'] }}
+                </h3>
+                <ul class="pricing-factors__list">
+                    @foreach ($group['items'] as $item)
+                    <li>{{ $item }}</li>
                     @endforeach
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-
-        {{-- MOBILE: tab switcher + single column --}}
-        <div class="pricing-compare pricing-compare--mobile"
-             x-data="{ active: 0, prices: {{ json_encode($tierPrices) }} }"
-             x-cloak>
-
-            {{-- Tab header --}}
-            <div class="pcm-header">
-                <div class="pcm-tabs" role="tablist" aria-label="{{ __('price.compare.tabs_aria') }}">
-                    @foreach ($compareTiers as $i => $tier)
-                    <button class="pcm-tab"
-                            id="pcm-tab-{{ $i }}"
-                            :class="{ 'is-active': active === {{ $i }} }"
-                            @click="active = {{ $i }}"
-                            type="button"
-                            role="tab"
-                            aria-controls="pcm-panel"
-                            :aria-selected="(active === {{ $i }}).toString()"
-                            :tabindex="active === {{ $i }} ? 0 : -1">
-                        {{ $tier }}
-                    </button>
-                    @endforeach
-                </div>
-                <div class="pcm-price" x-text="prices[active]"></div>
-            </div>
-
-            {{-- Feature rows (single dynamic tabpanel labelled by the active tab). --}}
-            <div id="pcm-panel"
-                 role="tabpanel"
-                 :aria-labelledby="'pcm-tab-' + active"
-                 aria-live="polite">
-                @foreach ($compareGroups as $group)
-                <div class="pcm-group">{{ $group['label'] }}</div>
-                @foreach ($group['rows'] as $row)
-                <div class="pcm-row">
-                    <span class="pcm-feature">{{ $row['label'] }}</span>
-                    <span class="pcm-value-wrap">
-                        @foreach ($row['values'] as $vi => $val)
-                        <span x-show="active === {{ $vi }}">
-                            @if ($val === true)
-                                <span class="pricing-compare__yes">
-                                    <x-icon.circle-check-big class="w-4 h-4" aria-hidden="true" focusable="false" />
-                                    <span class="sr-only">{{ __('price.compare.included') }}</span>
-                                </span>
-                            @elseif ($val === false)
-                                <span class="pricing-compare__no" aria-hidden="true">—</span>
-                                <span class="sr-only">{{ __('price.compare.not_included') }}</span>
-                            @else
-                                <span class="pricing-compare__val">{{ $val }}</span>
-                            @endif
-                        </span>
-                        @endforeach
-                    </span>
-                </div>
-                @endforeach
-                @endforeach
-            </div>
-
-        </div>
-
-    </div>
-</section>
-
-{{-- What's included --}}
-<section class="section-wrapper" data-reveal data-pdd="price-guarantees">
-    <div class="container-site">
-        <header class="section-header">
-            <h2>{{ __('price.guarantees.heading') }}</h2>
-        </header>
-
-        <div class="pricing-guarantees" data-reveal-group>
-            @foreach (__('price.guarantees.items') as $g)
-            <div class="pricing-guarantee">
-                <h3>{{ $g['title'] }}</h3>
-                <p>{{ $g['text'] }}</p>
+                </ul>
             </div>
             @endforeach
         </div>
