@@ -927,7 +927,6 @@
     .pd-case__visual,
     .pd-faq__mark::before,
     .pd-faq__mark::after { transition: none; }
-    .pd-cta:hover,
 }
 
 /* ============================================================
