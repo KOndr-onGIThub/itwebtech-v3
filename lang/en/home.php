@@ -35,7 +35,7 @@ return [
         // the extra line, so the rule against semicolons inside a sentence
         // (spec rule 5) wins. Re-measure before growing this sentence again.
         'subline'         => 'I am Ondřej Kriška. I build websites and applications on my own code and work on them alone. I price the job before we start, and my rating is 5.0 from 21 reviews.',
-        'note'            => 'I\'ll get back to you within 24 hours on business days. No commitment, we just go through what makes sense.',
+        'note'            => 'I\'ll get back to you by the next business day. No commitment, we just go through what makes sense.',
 
         // Backwards compat (fallback render).
         'eyebrow'       => 'Custom websites & web applications',
@@ -62,7 +62,7 @@ return [
         'reviews'      => '(21 reviews on Google + Firmy.cz)',
         'projects'     => '23+ delivered projects',
         'experience'   => '18 years of experience',
-        'response'     => 'Reply within 24 hours on business days',
+        'response'     => 'Reply by the next business day',
         // OND-201 (finding 5.11): TOP firma 2025 award from Firmy.cz —
         // verifiable third-party proof that was missing on staging.
         'award'        => 'TOP firma 2025 on Firmy.cz',
@@ -108,7 +108,7 @@ return [
             [
                 'heading'      => 'Consultation',
                 'time'         => '60 min, within a week',
-                'text'         => 'You write to me through the form below and tell me what you are dealing with. I get back to you within 24 hours on business days and we arrange a call or a meeting. You talk to me, not to a salesperson — I want to know who you sell to, how enquiries reach you today and what the website has to do.',
+                'text'         => 'You write to me through the form below and tell me what you are dealing with. I get back to you by the next business day and we arrange a call or a meeting. You talk to me, not to a salesperson — I want to know who you sell to, how enquiries reach you today and what the website has to do.',
                 'quote_text'   => 'He really listened to what I needed and then turned it into something I am completely happy with.',
                 'quote_author' => 'Magda Pernicová, Realiťačky v akci',
             ],
@@ -348,7 +348,7 @@ return [
     'inline_form' => [
         'eyebrow'         => 'Enquiry',
         'heading'         => 'Tell me what you need',
-        'description'     => 'Describe briefly what you are dealing with. I\'ll get back to you within 24 hours on business days and we will go through what makes sense, with no obligation. If we turn out not to be a fit, I will tell you straight.',
+        'description'     => 'Describe briefly what you are dealing with. I\'ll get back to you by the next business day and we will go through what makes sense, with no obligation. If we turn out not to be a fit, I will tell you straight.',
         'quote_text'      => 'Thanks to the individual approach, flexibility and professionalism, the result matches our expectations.',
         'quote_author'    => 'Hana Jaskmanická, Executive Director, VP Industry',
         'name'            => 'Full name',

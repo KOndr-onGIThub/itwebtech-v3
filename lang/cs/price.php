@@ -108,7 +108,7 @@ return [
             ],
             [
                 'title' => 'Podpora i po spuštění',
-                'text'  => 'Ozvu se do 24 hodin v pracovní dny, i týdny a měsíce po předání projektu. Drobné úpravy a technické dotazy jsou samozřejmostí.',
+                'text'  => 'I týdny a měsíce po předání projektu se ozvu nejpozději následující pracovní den. Drobné úpravy a technické dotazy jsou samozřejmostí.',
             ],
         ],
     ],

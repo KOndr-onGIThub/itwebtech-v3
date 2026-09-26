@@ -105,7 +105,7 @@ return [
             ],
             [
                 'title' => 'Support after launch',
-                'text'  => 'I\'ll get back to you within 24 hours on business days, even weeks and months after project delivery. Minor adjustments and technical questions are always welcome.',
+                'text'  => 'Even weeks or months after your project is delivered, I\'ll still get back to you by the next business day. Minor adjustments and technical questions are always welcome.',
             ],
         ],
     ],

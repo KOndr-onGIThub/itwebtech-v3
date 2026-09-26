@@ -8,7 +8,7 @@ return [
     ],
 
     'subheading'          => 'Pomůžu vám',
-    'heading'             => 'Ozvu se do 24 hodin v pracovní dny',
+    'heading'             => 'Ozvu se nejpozději následující pracovní den',
     // OND-201 (nález 5.9): „Ondřej Kriška, Česká republika" byl signál
     // anonymního dodavatele. Plná adresa a IČO jsou veřejné údaje, zvyšují
     // důvěru i lokální viditelnost.
@@ -25,7 +25,7 @@ return [
     'email_label'         => 'E-mail',
     'phone_label'         => 'Telefon',
     'hours_label'         => 'Dostupnost',
-    'open_hours'          => 'Ozvu se do 24 hodin v pracovní dny. O víkendech a svátcích nedržím pohotovost, ale nic mi nezapadne.',
+    'open_hours'          => 'Ozvu se nejpozději následující pracovní den. Víkendy a svátky se nepočítají, ale nic mi nezapadne.',
     'cta_consultation'    => 'Napište mi',
 
     'form_heading'        => 'Kontaktní formulář',
@@ -78,7 +78,7 @@ return [
         'heading_html'    => 'Žádné CRM,<br>žádné call centrum — <em>jen Ondřej</em>.',
         'eyebrow'      => 'Píšete přímo mně',
         'heading'      => 'Píšete přímo mně, Ondřejovi.',
-        'subline'      => 'Vaši zprávu si přečtu osobně. Ozvu se do 24 hodin v pracovní dny.',
+        'subline'      => 'Vaši zprávu si přečtu osobně. Ozvu se nejpozději následující pracovní den.',
         'photo_alt'    => 'Ondřej Kriška — autor a kontaktní osoba',
         'role_label'   => 'Vývojář, autor webu, jediný kontakt',
     ],
@@ -89,8 +89,8 @@ return [
         'heading' => 'Tři kroky — žádný marketingový trychtýř.',
         'steps'   => [
             [
-                'title' => 'Ozvu se do 24 hodin v pracovní dny',
-                'text'  => 'Dorazí vám e-mail ode mě osobně, ne automatická potvrzovací zpráva. O víkendech a svátcích nedržím pohotovost — ozvu se první pracovní den.',
+                'title' => 'Ozvu se nejpozději následující pracovní den',
+                'text'  => 'Dorazí vám e-mail ode mě osobně, ne automatická potvrzovací zpráva. Když napíšete v pátek večer, ozvu se v pondělí.',
             ],
             [
                 'title' => 'Dohodneme 30 minut hovoru',
@@ -106,7 +106,7 @@ return [
     // Thank-you state — zobrazí se po úspěšném odeslání místo formuláře.
     'thank_you' => [
         'heading'  => 'Hotovo, zpráva dorazila.',
-        'subline'  => 'Děkuji. Přečtu si ji osobně a ozvu se do 24 hodin v pracovní dny.',
+        'subline'  => 'Děkuji. Přečtu si ji osobně a ozvu se nejpozději následující pracovní den.',
         'next'     => 'Mezitím se můžete podívat na realizované projekty nebo si přečíst ceník.',
         'cta_projects' => 'Realizované projekty',
         'cta_price'    => 'Ceník',

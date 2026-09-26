@@ -56,7 +56,7 @@ return [
 
     'cta' => [
         'heading' => 'Řešíte web nebo aplikaci?',
-        'text'    => 'Napište mi, co potřebujete. Ozvu se do 24 hodin v pracovní dny a řeknu vám, jestli vám můžu pomoct.',
+        'text'    => 'Napište mi, co potřebujete. Ozvu se nejpozději následující pracovní den a řeknu vám, jestli vám můžu pomoct.',
         'primary' => 'Napsat Ondrovi',
     ],
 

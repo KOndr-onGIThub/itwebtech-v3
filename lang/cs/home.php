@@ -8,7 +8,7 @@ return [
     // který netuší, co to je (princip 0).
     'meta' => [
         'title'       => 'Weby na míru: cenu počítám, ne odhaduju | ONDRAWEB',
-        'description' => 'Weby, e-shopy a webové aplikace na míru. Cenu spočítám předem, stavím sám na vlastním kódu. 5,0 z 21 recenzí, odpověď do 24 hodin v pracovní dny.',
+        'description' => 'Weby, e-shopy a webové aplikace na míru. Cenu spočítám předem, stavím sám na vlastním kódu. 5,0 z 21 recenzí, odpověď nejpozději následující pracovní den.',
     ],
 
     'hero' => [
@@ -34,7 +34,7 @@ return [
         'upline'          => 'Pro firmy, které rostou.',
         'heading_html'    => 'Ptám se, ne hádám.<br>Počítám, ne odhaduju.<br>Ručím, ne slibuju.',
         'subline'         => 'Jsem Ondřej Kriška. Weby a aplikace stavím na vlastním kódu a pracuju na nich sám. Cenu spočítám před začátkem, hodnocení mám 5,0 z 21 recenzí.',
-        'note'            => 'Ozvu se do 24 hodin v pracovní dny. Nezávazně proberu, co dává smysl.',
+        'note'            => 'Ozvu se nejpozději následující pracovní den. Nezávazně proberu, co dává smysl.',
 
         // Backwards compat — staré klíče zachované pro non-hero spotřebitele
         // (fallback render). Musí souhlasit s vybranou variantou titulku.
@@ -65,7 +65,7 @@ return [
         'reviews'      => '(21 recenzí Google + Firmy.cz)',
         'projects'     => '23+ realizací',
         'experience'   => '18 let praxe',
-        'response'     => 'Odpověď do 24 hodin v pracovní dny',
+        'response'     => 'Odpověď nejpozději následující pracovní den',
         // OND-201 (nález 5.11): ocenění TOP firma 2025 z Firmy.cz je ověřitelný
         // důkaz třetí strany, byl na obou starých webech a na stagingu chyběl.
         // Formulace podle sekce 2 dokumentu homepage-texty (OND-186).
@@ -115,7 +115,7 @@ return [
             [
                 'heading'      => 'Konzultace',
                 'time'         => '60 min, do týdne',
-                'text'         => 'Napíšete mi přes formulář dole, co řešíte. Ozvu se do 24 hodin v pracovní dny a domluvíme se na hovoru nebo na schůzce. Mluvíte se mnou, ne s obchodníkem — zajímá mě, komu prodáváte, jak u vás vzniká poptávka a co má web udělat.',
+                'text'         => 'Napíšete mi přes formulář dole, co řešíte. Ozvu se nejpozději následující pracovní den a domluvíme se na hovoru nebo na schůzce. Mluvíte se mnou, ne s obchodníkem — zajímá mě, komu prodáváte, jak u vás vzniká poptávka a co má web udělat.',
                 'quote_text'   => 'Pan Kriška opravdu naslouchal mým potřebám a následně tyto informace zpracoval až do mé úplné spokojenosti.',
                 'quote_author' => 'Magda Pernicová, Realiťačky v akci',
             ],
@@ -391,7 +391,7 @@ return [
     'inline_form' => [
         'eyebrow'         => 'Poptávka',
         'heading'         => 'Napište mi, co potřebujete',
-        'description'     => 'Napište ve zkratce, co řešíte. Ozvu se do 24 hodin v pracovní dny a nezávazně probereme, co dává smysl. Když zjistím, že na sebe nepasujeme, řeknu vám to rovnou.',
+        'description'     => 'Napište ve zkratce, co řešíte. Ozvu se nejpozději následující pracovní den a nezávazně probereme, co dává smysl. Když zjistím, že na sebe nepasujeme, řeknu vám to rovnou.',
         'quote_text'      => 'Jedná rychle a efektivně. Byl to pro mě velký rozdíl mezi předchozím IT dodavatelem.',
         'quote_author'    => 'Ing. Ivo Štěpánek, J. K. fire and safety consulting',
         'name'            => 'Jméno a příjmení',

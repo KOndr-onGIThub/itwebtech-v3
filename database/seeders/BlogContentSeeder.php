@@ -159,7 +159,7 @@ class BlogContentSeeder extends Seeder
                     <h2>Kdy ode mě web nekupujte</h2>
                     <p>Když máte rozpočet do dvaceti tisíc. Když potřebujete web do týdne. Když chcete jen opravit existující WordPress. Nic z toho nedělám a je lepší, když to víte teď, než po dvou schůzkách.</p>
                     <h2>Jak se dostanete k přesné ceně</h2>
-                    <p>Napište mi, co potřebujete. Klidně stručně. Ozvu se do 24 hodin v pracovní dny a probereme to. Když z toho vyjde, že vám můžu pomoct, dostanete specifikaci s konkrétní cenou. Když ne, řeknu vám to a nebudu vám nic tlačit.</p>
+                    <p>Napište mi, co potřebujete. Klidně stručně. Ozvu se nejpozději následující pracovní den a probereme to. Když z toho vyjde, že vám můžu pomoct, dostanete specifikaci s konkrétní cenou. Když ne, řeknu vám to a nebudu vám nic tlačit.</p>
                     HTML,
             ],
 

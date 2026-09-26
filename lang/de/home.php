@@ -27,7 +27,7 @@ return [
         'upline'          => 'Für Unternehmen, die wachsen.',
         'heading_html'    => 'Eine Website, die <em>trägt</em>, was bei Ihnen gut läuft.',
         'subline'         => 'Ich bin Ondřej Kriška. Websites und Anwendungen baue ich mit eigenem Code, und ich mache die Arbeit selbst — vom ersten Gespräch bis zum Start sprechen Sie nur mit mir.',
-        'note'            => 'Ich melde mich innerhalb von 24 Stunden an Arbeitstagen. Unverbindlich besprechen wir, was sinnvoll ist.',
+        'note'            => 'Ich melde mich spätestens am nächsten Arbeitstag. Unverbindlich besprechen wir, was sinnvoll ist.',
 
         // Backwards compat (fallback render).
         // OND-308: `cta_secondary` und `phone_label` entfernt — seit OND-303
@@ -54,7 +54,7 @@ return [
         'reviews'      => '(21 Bewertungen auf Google + Firmy.cz)',
         'projects'     => '23+ realisierte Projekte',
         'experience'   => '18 Jahre Erfahrung',
-        'response'     => 'Antwort innerhalb von 24 Stunden an Arbeitstagen',
+        'response'     => 'Antwort spätestens am nächsten Arbeitstag',
         // OND-201 (Befund 5.11): Auszeichnung TOP firma 2025 von Firmy.cz —
         // überprüfbarer Nachweis Dritter, der auf Staging fehlte.
         'award'        => 'TOP firma 2025 auf Firmy.cz',
@@ -101,7 +101,7 @@ return [
             [
                 'heading'      => 'Beratung',
                 'time'         => '60 Min., binnen einer Woche',
-                'text'         => 'Sie schreiben mir über das Formular unten, worum es geht. Ich melde mich innerhalb von 24 Stunden an Arbeitstagen und wir verabreden ein Telefonat oder ein Treffen. Sie sprechen mit mir, nicht mit einem Vertriebler — mich interessiert, an wen Sie verkaufen, wie Anfragen bei Ihnen entstehen und was die Website leisten soll.',
+                'text'         => 'Sie schreiben mir über das Formular unten, worum es geht. Ich melde mich spätestens am nächsten Arbeitstag und wir verabreden ein Telefonat oder ein Treffen. Sie sprechen mit mir, nicht mit einem Vertriebler — mich interessiert, an wen Sie verkaufen, wie Anfragen bei Ihnen entstehen und was die Website leisten soll.',
                 'quote_text'   => 'Er hat mir wirklich zugehört und daraus etwas gemacht, mit dem ich rundum zufrieden bin.',
                 'quote_author' => 'Magda Pernicová, Realiťačky v akci',
             ],
@@ -347,7 +347,7 @@ return [
     'inline_form' => [
         'eyebrow'         => 'Anfrage',
         'heading'         => 'Schreiben Sie mir, was Sie brauchen',
-        'description'     => 'Beschreiben Sie kurz, worum es geht. Ich melde mich innerhalb von 24 Stunden an Arbeitstagen und wir gehen unverbindlich durch, was Sinn ergibt. Wenn wir nicht zusammenpassen, sage ich es Ihnen geradeheraus.',
+        'description'     => 'Beschreiben Sie kurz, worum es geht. Ich melde mich spätestens am nächsten Arbeitstag und wir gehen unverbindlich durch, was Sinn ergibt. Wenn wir nicht zusammenpassen, sage ich es Ihnen geradeheraus.',
         'quote_text'      => 'Dank des individuellen Ansatzes, der Flexibilität und der Professionalität entspricht das Ergebnis unseren Vorstellungen.',
         'quote_author'    => 'Hana Jaskmanická, Geschäftsführerin, VP Industry',
         'name'            => 'Vor- und Nachname',
