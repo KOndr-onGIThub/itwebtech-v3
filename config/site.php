@@ -23,9 +23,15 @@ return [
     | Per OND-101: Toyota testimonial (Pavel Baudyš) is held back until the
     | client confirms publication consent. The slot is wired in code; data
     | only renders when SHOW_TOYOTA_TESTIMONIAL=true.
+    |
+    | Per OND-352: show_portfolio_section now defaults to TRUE. The OND-100
+    | hold-back is long over (screenshots shipped in OND-268), and a false
+    | default meant one missing env var on a config-cache rebuild would silently
+    | drop the homepage portfolio section. Set SHOW_PORTFOLIO_SECTION=false to
+    | hide it deliberately.
     */
     'features' => [
-        'show_portfolio_section'  => env('SHOW_PORTFOLIO_SECTION', false),
+        'show_portfolio_section'  => env('SHOW_PORTFOLIO_SECTION', true),
         'show_toyota_testimonial' => env('SHOW_TOYOTA_TESTIMONIAL', false),
     ],
 

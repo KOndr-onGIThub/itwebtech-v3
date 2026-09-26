@@ -12,6 +12,8 @@
 #     - php artisan db:seed --class=Database\\Seeders\\AdminUserSeeder --force
 #     - php artisan db:seed --class=Database\\Seeders\\EnsureArticlesSeededSeeder --force
 #       (idempotentní — jen pokud `articles` table je prázdná, viz OND-77)
+#     - php artisan db:seed --class=Database\\Seeders\\EnsurePortfolioSeededSeeder --force
+#       (idempotentní — jen pokud `portfolio_projects` je prázdná, viz OND-352)
 #
 #   NIKDY nevolat:
 #     - php artisan db:seed (bez --class) → spustí PortfolioSeeder a přepíše
@@ -63,6 +65,16 @@ fi
 echo "[laravel-deploy] Ensuring articles are seeded..."
 if ! php artisan db:seed --class="Database\\Seeders\\EnsureArticlesSeededSeeder" --force --no-interaction; then
     echo "[laravel-deploy] WARN: EnsureArticlesSeededSeeder failed, continuing boot anyway." >&2
+fi
+
+# OND-352: stejný guard pro portfolio. Bez něj se po vymazání DB (25. 9. 2026)
+# články i admin vrátily, ale projekty ne — homepage přišla o sekci „Weby, které
+# běží v praxi", /projekty o mřížku a /projekty/{slug} vracelo 404. No-op,
+# jakmile v `portfolio_projects` něco je, takže ruční úpravy z Filamentu
+# nepřepíše.
+echo "[laravel-deploy] Ensuring portfolio is seeded..."
+if ! php artisan db:seed --class="Database\\Seeders\\EnsurePortfolioSeededSeeder" --force --no-interaction; then
+    echo "[laravel-deploy] WARN: EnsurePortfolioSeededSeeder failed, continuing boot anyway." >&2
 fi
 
 echo "[laravel-deploy] Done."
