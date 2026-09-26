@@ -97,11 +97,12 @@
     margin: 0 0 var(--space-6);
     max-width: 21ch;
 }
-/* OND-333 — zmenšený titulek platí JEN pro novou homepage.
-   Třídu `.pd-heading` nese i stará homepage na /puvodni-homepage
-   (home-legacy.blade.php), která tam stojí jako srovnávací vzorek
-   původního designu; globální zmenšení by z ní udělalo něco jiného.
-   Proto modifikátor na `<h1>`, ne přepis `.pd-heading`.
+/* OND-333 — zmenšený titulek platí JEN pro domovskou stránku. Třídu
+   `.pd-heading` tehdy nesla i zmrazená kopie staré homepage, která
+   stála jako srovnávací vzorek původního designu; globální zmenšení by z ní
+   udělalo něco jiného, proto modifikátor na `<h1>` místo přepisu
+   `.pd-heading`. Kopie je od OND-342 smazaná a `.pd-heading` dnes nese jen
+   tenhle jeden `<h1>`, takže je modifikátor už jen pojistkou.
 
    Strop 52 px je zároveň nejhorší případ, ne jen hodnota pro 1440 px:
    sloupec H1 se nad `container-site` (1280 px) už nerozšiřuje — má
@@ -177,17 +178,6 @@
     background: var(--pd-accent-hover);
     transform: translateY(-1px);
 }
-.pd-phone.phone-cta {
-    font-family: var(--font-body);
-    font-size: var(--text-body-sm);
-    color: var(--color-fg-muted);
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-}
-.pd-phone.phone-cta:hover { color: var(--color-fg-primary); }
-
 .pd-note {
     font-family: var(--font-body);
     font-size: var(--text-body-sm);
@@ -222,9 +212,11 @@
       a na 767 px 258 px. Ořez řeší `object-fit: cover` se stejným
       `object-position`, jaký fotka má na desktopu od OND-231.
 
-   Nad 767 px, kde lišta neexistuje, se nemění nic. Scope `--hp` kvůli
-   /puvodni-homepage, která nese stejný hero markup a má zůstat
-   srovnávací kopií.
+   Nad 767 px, kde lišta neexistuje, se nemění nic. Scope `--hp` vznikl kvůli
+   zmrazené kopii hera na podstránce se starou homepage; nesla stejný markup a měla
+   zůstat srovnávací. Ta stránka je od OND-342 smazaná a `.pd-hero` dnes nese
+   jen domovská stránka (podstránky mají `page-hero`), takže je modifikátor
+   už jen pojistkou.
 
    OND-341 — čísla níž jsou dotažená. Oprava OND-336 stačila jen na
    češtinu: na 390×844 měla mezeru nad lištou 25,4 px, angličtina 7,5 px
@@ -353,71 +345,6 @@
     color: var(--pd-accent);
     margin-right: var(--space-6);
 }
-/* --- Metoda ------------------------------------------------- */
-.pd-avoid {
-    font-family: var(--font-body);
-    font-size: var(--text-eyebrow);
-    letter-spacing: var(--tracking-eyebrow);
-    text-transform: uppercase;
-    color: var(--pd-accent);
-    margin: 0 0 var(--space-2);
-}
-.pd-avoid-sub {
-    font-family: var(--font-body);
-    font-size: var(--text-body);
-    color: var(--color-fg-muted);
-    margin: 0 0 var(--space-7);
-}
-/* OND-269: dvě věty, které zbyly ze sekce „Generátor versus váš byznys",
-   stojí pod mřížkou problémů. Vlasová linka je oddělí, ať nevypadají jako
-   třetí položka mřížky. */
-.pd-avoid--second {
-    margin-top: var(--space-9);
-    padding-top: var(--space-7);
-    border-top: 1px solid var(--color-border-soft);
-}
-.pd-avoid--second + .pd-avoid-sub { margin-bottom: 0; max-width: 72ch; }
-.pd-issues { display: grid; gap: var(--space-7); }
-@media (min-width: 1024px) { .pd-issues { grid-template-columns: 1fr 1fr; gap: var(--space-9); } }
-.pd-issue { display: grid; grid-template-columns: 56px 1fr; gap: var(--space-4); }
-.pd-issue__num {
-    font-family: var(--font-display);
-    font-weight: 200;
-    font-variation-settings: 'wght' 200;
-    font-size: var(--text-h2);
-    line-height: 1;
-    color: var(--pd-accent);
-}
-.pd-issue h3 {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: var(--text-h4);
-    color: var(--color-fg-primary);
-    margin: 0 0 var(--space-3);
-}
-.pd-issue p {
-    font-family: var(--font-body);
-    font-size: var(--text-body);
-    line-height: var(--leading-body);
-    color: var(--color-fg-muted);
-    margin: 0 0 var(--space-3);
-}
-.pd-issue blockquote {
-    margin: var(--space-4) 0 0;
-    font-family: var(--font-body);
-    font-style: italic;
-    font-size: var(--text-body-sm);
-    line-height: var(--leading-relaxed);
-    color: var(--color-fg-muted);
-}
-.pd-issue blockquote footer {
-    font-style: normal;
-    font-size: var(--text-caption);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-top: var(--space-2);
-}
-
 /* --- Cenová kotva ------------------------------------------- */
 .pd-price { display: grid; gap: var(--space-7); }
 @media (min-width: 1024px) {
@@ -687,108 +614,9 @@
 }
 .pd-more__link:hover { color: var(--pd-accent); }
 
-/* --- 07 Proč já — video + tichá mřížka výhod ----------------- */
-.pd-why { display: grid; gap: var(--space-8); }
-@media (min-width: 1024px) {
-    .pd-why {
-        grid-template-columns: 5fr 7fr;
-        gap: var(--space-9);
-        align-items: start;
-    }
-}
-.pd-why__video,
-.pd-toyota__media {
-    border: 1px solid var(--color-border-soft);
-    max-width: 340px;
-}
-.pd-why__video video,
-.pd-toyota__media video { display: block; width: 100%; height: auto; }
-
-/* OND-308: sekce „18 let v Toyotě". Text vlevo, portrétní video vpravo —
-   pod zdrojem světla, které má sekce v hloubkové vrstvě zprava. Video je
-   o dvě stě pixelů vyšší než text s citací, proto se text sází na střed
-   jeho výšky: jinak má sekce useknutý pravý sloupec a pod ním prázdno.
-
-   OND-314: video odešlo do sekce 07, sekce 03 je textová a tyhle dva
-   selektory se nikde nevykreslují. NEMAZAT samostatně — jdou ven jedním
-   commitem spolu s úklidem lešení `/puvodni-homepage`. */
-.pd-toyota { display: grid; gap: var(--space-8); }
-@media (min-width: 900px) {
-    .pd-toyota {
-        grid-template-columns: 7fr 5fr;
-        gap: var(--space-9);
-        align-items: center;
-    }
-    .pd-toyota__media { justify-self: end; }
-}
-.pd-why__bio {
-    font-family: var(--font-body);
-    font-size: var(--text-body);
-    line-height: var(--leading-body);
-    color: var(--color-fg-muted);
-    max-width: 52ch;
-    margin: var(--space-5) 0 0;
-}
-.pd-why__grid { display: grid; }
-.pd-why__item {
-    border-top: 1px solid var(--color-border-soft);
-    padding: var(--space-5) 0;
-    display: grid;
-    grid-template-columns: 56px 1fr;
-    gap: var(--space-4);
-}
-.pd-why__num {
-    font-family: var(--font-display);
-    font-weight: 200;
-    font-variation-settings: 'wght' 200;
-    font-size: var(--text-h3);
-    line-height: 1.1;
-    color: var(--color-fg-decorative);
-}
-.pd-why__item h3 {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: var(--text-h4);
-    color: var(--color-fg-primary);
-    margin: 0 0 var(--space-2);
-}
-.pd-why__item p {
-    font-family: var(--font-body);
-    font-size: var(--text-body-sm);
-    line-height: var(--leading-relaxed);
-    color: var(--color-fg-muted);
-    margin: 0;
-}
-
-/* --- 08 Pod kapotou — fakta + naměřený čas ------------------- */
-.pd-hood { display: grid; gap: var(--space-6); }
-@media (min-width: 1024px) {
-    .pd-hood { grid-template-columns: repeat(3, 1fr); gap: 0; }
-    .pd-hood__fact { padding-right: var(--space-7); }
-    .pd-hood__fact + .pd-hood__fact {
-        border-left: 1px solid var(--color-border-soft);
-        padding-left: var(--space-7);
-    }
-}
-.pd-hood__fact h3 {
-    font-family: var(--font-body);
-    font-size: var(--text-body);
-    font-weight: 600;
-    color: var(--color-fg-primary);
-    margin: 0 0 var(--space-2);
-}
-.pd-hood__fact p {
-    font-family: var(--font-body);
-    font-size: var(--text-body-sm);
-    line-height: var(--leading-relaxed);
-    color: var(--color-fg-muted);
-    margin: 0;
-}
-/* OND-308: naměřený čas načtení stojí nově na konci pruhu čísel
-   (`.pd-strip__perf`). Sazbu si nese z původní sekce „Pod kapotou" —
-   ta žije už jen na zmrazené /puvodni-homepage a zmizí spolu s ní,
-   `.pd-hood__perf` se pak z téhle dvojice vyškrtne. */
-.pd-hood__perf,
+/* OND-308: naměřený čas načtení stojí na konci pruhu čísel
+   (`.pd-strip__perf`). Sazbu si nese z původní sekce „Pod kapotou",
+   která se sekcí i se svým `.pd-hood__perf` zmizela v OND-342. */
 .pd-strip__perf {
     font-family: var(--font-display);
     font-weight: 300;
@@ -800,7 +628,6 @@
     max-width: 40ch;
     margin: var(--space-8) 0 0;
 }
-.pd-hood__perf strong,
 .pd-strip__perf strong {
     font-weight: 700;
     color: var(--pd-accent);
@@ -874,14 +701,6 @@
     max-width: 62ch;
     margin: var(--space-3) 0 0;
 }
-.pd-steps__cta {
-    border-top: 1px solid var(--color-border-soft);
-    padding-top: var(--space-6);
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--space-5);
-}
 .pd-steps__cta-intro {
     font-family: var(--font-display);
     font-weight: 300;
@@ -921,7 +740,7 @@
 
 /* OND-308: pod kroky procesu už tlačítko není, zůstala jedna věta.
    Předěl a odsazení proto nese ona sama, ne obal `.pd-steps__cta`
-   (ten drží jen zmrazená /puvodni-homepage).
+   (ten zmizel v OND-342 spolu se starou homepage).
    OND-314: sousedem té věty je teď `.pd-steps-layout`, ne samotný `<ol>` —
    bez druhého selektoru by věta přišla o vlasovou linku i o odsazení. */
 .pd-steps-layout + .pd-steps__cta-intro,
@@ -1115,66 +934,7 @@
    OND-231 F3 — SITEWIDE: nové sekce homepage + zbytek webu
    ============================================================ */
 
-/* --- Klienti: tichá řada jmen a log pod social pásem -------- */
-.pd-clients {
-    background: var(--color-bg-base);
-    padding-block: var(--space-6);
-}
-.pd-clients__list {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--space-5) var(--space-8);
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-.pd-clients__item {
-    display: inline-flex;
-    align-items: center;
-    /* Loga i jména startují ztlumená a ožijí pod kurzorem — jsou to
-       důkazy, ne dekorace, a nesmí soutěžit s obsahem sekcí. */
-    opacity: 0.55;
-    transition: opacity var(--duration-macro) var(--ease-out);
-}
-.pd-clients__item:hover { opacity: 1; }
-.pd-clients__name {
-    font-family: var(--font-body);
-    font-size: var(--text-body-sm);
-    letter-spacing: 0.04em;
-    color: var(--color-fg-muted);
-    white-space: nowrap;
-}
-@media (prefers-reduced-motion: reduce) {
-    .pd-clients__item { transition: none; }
-}
-
 /* --- Odkud pocházejí principy ------------------------------- */
-/* OND-269: blok už nestojí ve vlastní sekci, ale uvnitř „Proč já" pod
-   videem a mřížkou výhod. Odděluje ho proto vlasová linka a vlastní
-   mezisoučtový titulek (h3), ne hlava sekce. */
-.pd-origin--nested {
-    margin-top: var(--space-9);
-    padding-top: var(--space-8);
-    border-top: 1px solid var(--color-border-soft);
-}
-.pd-origin__title {
-    grid-column: 1 / -1;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: var(--text-h3);
-    letter-spacing: var(--tracking-tight);
-    color: var(--color-fg-primary);
-    margin: 0;
-}
-.pd-origin {
-    display: grid;
-    gap: var(--space-7);
-    margin-top: var(--space-6);
-}
-@media (min-width: 900px) {
-    .pd-origin { grid-template-columns: 1.15fr 1fr; gap: var(--space-8); }
-}
 .pd-origin__text p {
     font-family: var(--font-body);
     font-size: var(--text-body-lg);
@@ -1198,8 +958,11 @@
    Odstavce nad ní mají 62ch, což v jejich písmu dělá 704 px; citace je
    v display písmu, kde 62ch = 744 px. Aby měl celý blok jednu míru, drží
    se 58ch = 696 px (naměřeno po `document.fonts.ready`).
-   Scope `#section-toyota` je schválně: zmrazená /puvodni-homepage sází
-   tutéž třídu do mřížky `.pd-origin` a nesmí se pohnout ani o pixel. */
+   Scope `#section-toyota` chránil zmrazenou kopii staré homepage, která
+   tutéž třídu sázela do mřížky `.pd-origin`. Kopie je od OND-342 pryč, takže
+   dnes je ten scope jen zbytečně přesný, ne nutný — `.pd-origin__quote` je
+   na celém webu jenom tady. Zrušení scope je čistě kosmetická úprava, a proto
+   se nedělalo v mazacím commitu: nesmí vzniknout ani pixel rozdílu. */
 #section-toyota .pd-origin__quote { max-width: 58ch; }
 
 .pd-origin__quote footer {
@@ -1213,13 +976,11 @@
    `--leading-snug` (1,2) na souvislé větě o 54 znacích na řádek — a bez horní
    mezery se lepila na odstavec nad sebou. Odstavce vedle ní mají 1,6.
 
-   Scope `#section-toyota` je schválně, ne zbytečná specificita: tutéž třídu
-   používá zmrazená `/puvodni-homepage`, kde citace stojí jako **položka
-   mřížky** `.pd-origin`. Tam by `margin-top` nezkolaboval s mezerou nad sebou,
-   ale posunul citaci uvnitř jejího políčka, a vyšší řádkování by blok
-   prodloužilo — obojí je pixelová změna na stránce, která je Ondrova
-   srovnávací základna. Až lešení `/puvodni-homepage` půjde ven, scope
-   se zruší a pravidlo se vrátí do bloku výš.
+   Scope `#section-toyota` vznikl proti zmrazené staré homepage, kde tatáž
+   citace stála jako **položka mřížky** `.pd-origin` — tam by `margin-top`
+   nezkolaboval s mezerou nad sebou a vyšší řádkování by blok prodloužilo.
+   Ta stránka je od OND-342 smazaná, takže scope už nic nechrání (viz
+   poznámka u `max-width` výš).
 
    Pravidlo stojí až pod `footer` schválně: OND-314 (PR #170) vkládá svoje
    `#section-toyota .pd-origin__quote { max-width }` hned nad `footer`, a kdyby

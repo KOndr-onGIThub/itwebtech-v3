@@ -50,4 +50,22 @@ class RobotsTest extends TestCase
         $this->assertMatchesRegularExpression('#Sitemap:\s+https://#', $body);
         $this->assertDoesNotMatchRegularExpression('#Sitemap:\s+http://#', $body);
     }
+
+    /**
+     * OND-342: `<meta name="robots">` byl do OND-306 přepisovatelný z view
+     * (proměnná `$robots`) kvůli `noindex` na zmrazené staré homepage. Ta
+     * stránka je pryč, mechanika taky a hodnota je zpátky natvrdo. Tenhle
+     * test hlídal indexovatelnost `/` už v mazaném HomeLegacyPageTest —
+     * přestěhoval se sem, aby se s lešením neztratil.
+     */
+    public function test_public_pages_are_indexable(): void
+    {
+        foreach (['/', '/en/', '/de/'] as $url) {
+            $this->assertStringContainsString(
+                '<meta name="robots" content="index, follow">',
+                $this->get($url)->getContent(),
+                "Stránka {$url} není indexovatelná."
+            );
+        }
+    }
 }
