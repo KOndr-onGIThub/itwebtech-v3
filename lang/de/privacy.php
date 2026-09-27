@@ -3,7 +3,7 @@
 return [
 
     'meta' => [
-        'title'       => 'Datenschutzerklärung — Ondřej Kriška',
+        'title'       => 'Datenschutzerklärung — Ondřej Kriška, ONDRAWEB',
         'description' => 'Informationen zur Verarbeitung personenbezogener Daten auf ondraweb.cz.',
     ],
 

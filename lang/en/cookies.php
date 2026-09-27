@@ -3,7 +3,7 @@
 return [
 
     'meta' => [
-        'title'       => 'Cookies and consent — ondraweb.cz',
+        'title'       => 'Cookies and consent — Ondřej Kriška, ONDRAWEB',
         'description' => 'Information about the cookies and analytics tools I use on ondraweb.cz, and how to revoke your consent at any time.',
     ],
 
