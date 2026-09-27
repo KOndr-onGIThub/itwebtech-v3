@@ -206,8 +206,12 @@ return [
 
     'cta' => [
         'heading' => 'Nejste si jistí, co přesně potřebujete?',
-        'desc'    => 'Konzultace je zdarma a nezávazná. Během 30 minut zjistím, co dává pro váš byznys smysl — a upřímně vám řeknu i to, jestli spolupráce smysl nemá.',
-        'btn'     => 'Domluvit konzultaci zdarma',
+        // OND-369: `desc` je podtitulek téže výzvy jako tlačítko, ne próza
+        // jinde v textu — proto z něj „zdarma“ padá spolu s popiskem. Ceník
+        // od OND-354 stojí na prahovém čísle; bezplatná schůzka vedle toho
+        // slibuje něco jiného. Nezávaznost i 30 minut zůstávají.
+        'desc'    => 'Konzultace je nezávazná. Během 30 minut zjistím, co dává pro váš byznys smysl — a upřímně vám řeknu i to, jestli spolupráce smysl nemá.',
+        'btn'     => 'Napsat poptávku',
     ],
 
 ];

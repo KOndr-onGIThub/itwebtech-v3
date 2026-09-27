@@ -12,8 +12,11 @@ return [
         'lang_switcher' => 'Sprachumschalter',
     ],
 
+    // OND-369: Überrest aus OND-307 — dieser Schlüssel wird nirgends
+    // ausgegeben (Header und Drawer nutzen `home.sticky.cta`). Wortlaut an
+    // den restlichen Web angeglichen, damit die alte Sprache nicht zurückkommt.
     'cta' => [
-        'contact' => 'Beratung vereinbaren',
+        'contact' => 'Anfrage schreiben',
     ],
 
     'footer' => [
@@ -23,7 +26,10 @@ return [
 
     'prefooter' => [
         'tagline'   => 'Websites und Anwendungen nach Maß. Direkt.',
-        'cta'       => 'Kostenlose Beratung vereinbaren',
+        // OND-369: Der Pre-Footer lud zur „kostenlosen Beratung“ ein, der
+        // restliche Web sagt seit OND-307 „Anfrage schreiben“. „Kostenlos“
+        // fällt weg — die Preisliste (OND-354) baut auf einer Schwelle auf.
+        'cta'       => 'Anfrage schreiben',
         'nav_label' => 'Footer-Navigation',
     ],
 

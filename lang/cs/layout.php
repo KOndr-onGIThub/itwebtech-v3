@@ -12,8 +12,11 @@ return [
         'lang_switcher' => 'Přepínač jazyků',
     ],
 
+    // OND-369: pozůstatek po OND-307 — klíč se nikde nevykresluje (hlavní
+    // tlačítko v hlavičce i v draweru bere `home.sticky.cta`). Znění
+    // sjednoceno se zbytkem webu, aby nešlo omylem nasadit starou řeč.
     'cta' => [
-        'contact' => 'Domluvit konzultaci',
+        'contact' => 'Napsat poptávku',
     ],
 
     'footer' => [
@@ -23,7 +26,10 @@ return [
 
     'prefooter' => [
         'tagline'   => 'Weby a aplikace na míru. Napřímo.',
-        'cta'       => 'Domluvit konzultaci zdarma',
+        // OND-369: předpatička zvala na „konzultaci zdarma“, zbytek webu
+        // od OND-307 říká „Napsat poptávku“. Slovo „zdarma“ jde pryč —
+        // ceník (OND-354) staví na prahovém čísle, ne na bezplatné schůzce.
+        'cta'       => 'Napsat poptávku',
         'nav_label' => 'Footer navigace',
     ],
 

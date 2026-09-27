@@ -12,8 +12,11 @@ return [
         'lang_switcher' => 'Language switcher',
     ],
 
+    // OND-369: leftover from OND-307 — this key is not rendered anywhere
+    // (header and drawer both use `home.sticky.cta`). Wording aligned with
+    // the rest of the site so the old promise cannot ship by accident.
     'cta' => [
-        'contact' => 'Book a consultation',
+        'contact' => 'Write an enquiry',
     ],
 
     'footer' => [
@@ -23,7 +26,10 @@ return [
 
     'prefooter' => [
         'tagline'   => 'Custom websites and applications. Direct.',
-        'cta'       => 'Book a free consultation',
+        // OND-369: the pre-footer invited to a "free consultation" while the
+        // rest of the site says "Write an enquiry" since OND-307. "Free" is
+        // dropped — pricing (OND-354) rests on a threshold number.
+        'cta'       => 'Write an enquiry',
         'nav_label' => 'Footer navigation',
     ],
 
