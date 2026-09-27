@@ -41,9 +41,31 @@ class PageController extends Controller
         return view('pages.contact');
     }
 
+    /**
+     * OND-359: u každé cenové úrovně stojí odkaz na reálnou případovku.
+     *
+     * Slugy jsou v `price.tiers[].proof.slug`, ale adresu nestavíme z nich —
+     * projekt si načteme a URL vezmeme z `detailUrl()`. Dvě věci se tím řeší
+     * naráz: odkaz na nepublikovaný nebo smazaný projekt se nevykreslí vůbec
+     * (místo aby vedl na 404 přímo z místa, kde se člověk rozhoduje o ceně)
+     * a lokalizovaný slug se použije sám, kdyby ho projekt dostal.
+     * Stejný princip jako prázdná mřížka na `/projekty` (OND-351): když data
+     * nejsou, prvek zmizí; až budou, vrátí se sám.
+     */
     public function price()
     {
-        return view('pages.price');
+        $proofSlugs = array_filter(array_column(
+            array_column(__('price.tiers'), 'proof'),
+            'slug'
+        ));
+
+        $tierProofs = PortfolioProject::published()
+            ->whereIn('slug', $proofSlugs)
+            ->with('translations')
+            ->get()
+            ->keyBy('slug');
+
+        return view('pages.price', compact('tierProofs'));
     }
 
     public function privacy()
