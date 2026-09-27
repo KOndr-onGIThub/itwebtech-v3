@@ -3102,6 +3102,28 @@
         color: var(--color-gold-500);
     }
 
+    /* OND-359: odkaz na případovku pod rozsahem. Není to CTA — to je dole
+       v kartě a nesmí o pozornost soupeřit. Proto velikost drobného textu
+       a jako zvýraznění jen barva a podtržení, které na hoveru zesílí.
+       Bez pohybu: pravidlo by patřilo i do reduced-motion bloku a hover
+       na tři slova ho nepotřebuje. */
+    .pricing-tier__proof {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        margin-top: 0.75rem;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: var(--color-accent);
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 0.2em;
+    }
+    .pricing-tier__proof:hover,
+    .pricing-tier__proof:focus-visible {
+        text-decoration-thickness: 2px;
+    }
+
     .pricing-tier__features {
         list-style: none;
         padding: 0;

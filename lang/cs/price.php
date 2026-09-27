@@ -36,6 +36,11 @@ return [
     'popular'   => 'Nejoblíbenější',
     'quotation' => 'Nezávazná poptávka',
 
+    // OND-359: uvození odkazu na případovku v kartě úrovně. Slovo „Případovka"
+    // drží stejné pojmenování jako `projects.snapshots.subheading` — ať je po
+    // kliknutí jasné, že člověk skončil tam, kam mířil.
+    'proof_intro' => 'Případovka',
+
     // OND-354: úrovně se jmenují podle ROZSAHU, ne podle cenové hladiny, a
     // cenu nenesou — klíč `price` je zrušený (a s ním i `price_note`
     // „orientační cena", které bez čísla nemá co popisovat). `key` je technický
@@ -44,6 +49,14 @@ return [
     // `home.faq.items[].key`. Názvy a `desc` jsou shodné s homepage kotvou
     // (`home.price_anchor.items`), featurelisty jsou beze změny.
     // Pořadí podle rostoucího rozsahu, doporučená je prostřední úroveň.
+    //
+    // OND-359: `proof` je odkaz na reálnou případovku — cena vysvětlená
+    // ukázkou, ne výčtem funkcí (zadání z dokumentu ke [OND-347], oddíl 4.3).
+    // `slug` je jazykově neutrální `portfolio_projects.slug`; žádný z těch tří
+    // projektů nemá lokalizovaný slug, takže adresa je ve všech jazycích stejná
+    // a `detailUrl()` ji poskládá s lokalizovaným prefixem (/projekty,
+    // /en/projects, /de/projekte). `label` drží titul, jaký nese hlavička
+    // případovky — člověk musí poznat, že klikl tam, kam mířil.
     'tiers' => [
         [
             'key'     => 'presentation',
@@ -58,6 +71,10 @@ return [
                 'Technické SEO',
                 'Optimalizace rychlosti načítání',
                 '14 dní podpory po spuštění',
+            ],
+            'proof' => [
+                'slug'  => 'vanspedition',
+                'label' => 'VAN spedition',
             ],
             'cta' => 'Chci nezávaznou nabídku',
         ],
@@ -76,6 +93,10 @@ return [
                 'Hosting a doména na 1 rok zdarma',
                 '1 měsíc podpory po spuštění',
             ],
+            'proof' => [
+                'slug'  => 'zubni-provazek',
+                'label' => 'Zubní Provázek',
+            ],
             'cta' => 'Chci nezávaznou nabídku',
         ],
         [
@@ -91,6 +112,10 @@ return [
                 'Pokročilá SEO strategie s reportingem',
                 'Integrace externích systémů',
                 '3 měsíce podpory po spuštění',
+            ],
+            'proof' => [
+                'slug'  => 'pitarena',
+                'label' => 'PitArena',
             ],
             'cta' => 'Chci nezávaznou nabídku',
         ],

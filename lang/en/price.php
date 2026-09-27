@@ -36,12 +36,24 @@ return [
     'popular'   => 'Most popular',
     'quotation' => 'Get a quote',
 
+    // OND-359: intro for the case-study link inside a level card. The wording
+    // matches `projects.snapshots.subheading` so the destination is no surprise.
+    'proof_intro' => 'Case study',
+
     // OND-354: levels are named after SCOPE, not a price band, and carry no
     // price — the `price` key is gone (and with it `price_note`, which had
     // nothing left to describe). `key` is a technical id for analytics
     // (dimension `pricing_tier_shown`, previously derived from the price
     // digits); it is never rendered. Names and `desc` match the homepage
     // anchor (`home.price_anchor.items`); feature lists are unchanged.
+    //
+    // OND-359: `proof` is a link to a real case study — the price explained by
+    // an example instead of a feature list (brief in the document on [OND-347],
+    // section 4.3). `slug` is the language-neutral `portfolio_projects.slug`;
+    // none of these three projects has a localised slug, so the address is the
+    // same in every language and `detailUrl()` prefixes it per locale
+    // (/projekty, /en/projects, /de/projekte). `label` repeats the title the
+    // case study itself carries in its heading.
     'tiers' => [
         [
             'key'     => 'presentation',
@@ -56,6 +68,10 @@ return [
                 'Technical SEO',
                 'Page speed optimisation',
                 '14 days of post-launch support',
+            ],
+            'proof' => [
+                'slug'  => 'vanspedition',
+                'label' => 'VAN spedition',
             ],
             'cta' => 'Get a free quote',
         ],
@@ -74,6 +90,10 @@ return [
                 'Hosting and domain for 1 year free',
                 '1 month of post-launch support',
             ],
+            'proof' => [
+                'slug'  => 'zubni-provazek',
+                'label' => 'Zubní Provázek',
+            ],
             'cta' => 'Get a free quote',
         ],
         [
@@ -89,6 +109,10 @@ return [
                 'Advanced SEO strategy with reporting',
                 'External system integrations',
                 '3 months of post-launch support',
+            ],
+            'proof' => [
+                'slug'  => 'pitarena',
+                'label' => 'PitArena',
             ],
             'cta' => 'Get a free quote',
         ],

@@ -37,6 +37,11 @@ return [
     'popular'   => 'Beliebteste Wahl',
     'quotation' => 'Angebot anfragen',
 
+    // OND-359: Einleitung des Case-Study-Links in der Stufenkarte. Die
+    // Bezeichnung ist dieselbe wie in `projects.snapshots.subheading`, damit
+    // klar ist, wo der Klick landet.
+    'proof_intro' => 'Case Study',
+
     // OND-354: Die Stufen heißen nach dem UMFANG, nicht nach einer Preisstufe,
     // und tragen keinen Preis — der Schlüssel `price` ist weg (und mit ihm
     // `price_note`, das ohne Zahl nichts zu beschreiben hätte). `key` ist eine
@@ -44,6 +49,14 @@ return [
     // den Preisziffern abgeleitet) und wird nie ausgegeben. Namen und `desc`
     // sind identisch mit dem Startseiten-Anker (`home.price_anchor.items`),
     // die Feature-Listen sind unverändert.
+    //
+    // OND-359: `proof` ist ein Link auf eine echte Case Study — der Preis über
+    // ein Beispiel erklärt statt über eine Feature-Liste (Auftrag im Dokument
+    // zu [OND-347], Abschnitt 4.3). `slug` ist der sprachneutrale
+    // `portfolio_projects.slug`; keines der drei Projekte hat einen
+    // lokalisierten Slug, die Adresse ist also in allen Sprachen gleich und
+    // `detailUrl()` setzt den Locale-Prefix davor (/projekty, /en/projects,
+    // /de/projekte). `label` trägt den Titel, der auch in der Case Study steht.
     'tiers' => [
         [
             'key'     => 'presentation',
@@ -58,6 +71,10 @@ return [
                 'Technische SEO',
                 'Seitengeschwindigkeits-Optimierung',
                 '14 Tage Support nach dem Launch',
+            ],
+            'proof' => [
+                'slug'  => 'vanspedition',
+                'label' => 'VAN spedition',
             ],
             'cta' => 'Unverbindliches Angebot anfordern',
         ],
@@ -76,6 +93,10 @@ return [
                 'Hosting und Domain für 1 Jahr kostenlos',
                 '1 Monat Support nach dem Launch',
             ],
+            'proof' => [
+                'slug'  => 'zubni-provazek',
+                'label' => 'Zubní Provázek',
+            ],
             'cta' => 'Unverbindliches Angebot anfordern',
         ],
         [
@@ -91,6 +112,10 @@ return [
                 'Erweiterte SEO-Strategie mit Reporting',
                 'Integration externer Systeme',
                 '3 Monate Support nach dem Launch',
+            ],
+            'proof' => [
+                'slug'  => 'pitarena',
+                'label' => 'PitArena',
             ],
             'cta' => 'Unverbindliches Angebot anfordern',
         ],
