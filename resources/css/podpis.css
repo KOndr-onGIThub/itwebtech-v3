@@ -687,13 +687,17 @@
     font-size: var(--text-body-sm);
     color: var(--color-fg-muted);
 }
-.pd-services__secondary a {
+/* OND-411: týž tichý odkaz nese i pokračování věty pod kroky
+   („…nebo si napřed přečtěte, co si připravit"). */
+.pd-services__secondary a,
+.pd-steps__cta-intro a {
     color: var(--color-fg-primary);
     text-decoration: underline;
     text-decoration-color: var(--pd-accent);
     text-underline-offset: 3px;
 }
-.pd-services__secondary a:hover { color: var(--pd-accent); }
+.pd-services__secondary a:hover,
+.pd-steps__cta-intro a:hover { color: var(--pd-accent); }
 
 /* --- 05 Případovky — dílo první, výsledek druhý -------------- */
 .pd-cases { display: grid; gap: var(--space-9); }

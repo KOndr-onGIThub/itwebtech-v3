@@ -364,6 +364,15 @@
                 @endif
             </blockquote>
         </div>
+
+        {{-- OND-411: tichá věta na stránku o mně, vzor `.pd-services__secondary`
+             z „Co stavím". Stojí mimo `.pd-origin__text` schválně — uvnitř by
+             ji `.pd-origin__text p` (0-1-1) přebil na velikost prózy. --}}
+        <p class="pd-services__secondary">
+            {!! __('home.toyota.more_inline', [
+                'about_link' => '<a href="' . lroute('about') . '">' . e(__('home.toyota.more_inline_about')) . '</a>',
+            ]) !!}
+        </p>
     </div>
 </section>
 
@@ -416,7 +425,12 @@
             </div>
         </div>
 
-        <p class="pd-steps__cta-intro">{{ __('home.how_i_work.cta_intro') }}</p>
+        {{-- OND-411: za „Pojďme rovnou ke kroku 1." pokračuje odkaz na článek
+             o přípravě. Slug je v lang, každý jazyk má svůj. --}}
+        <p class="pd-steps__cta-intro">{{ __('home.how_i_work.cta_intro') }}
+            {!! __('home.how_i_work.cta_more', [
+                'article_link' => '<a href="' . route(app()->getLocale() . '.article', ['slug' => __('home.how_i_work.cta_more_slug')]) . '">' . e(__('home.how_i_work.cta_more_article')) . '</a>',
+            ]) !!}</p>
     </div>
 </section>
 
@@ -514,6 +528,13 @@
                 </details>
                 @endforeach
             </div>
+
+            {{-- OND-411: tichá věta na výpis zápisků, vzor `.pd-services__secondary`. --}}
+            <p class="pd-services__secondary">
+                {!! __('home.faq.more_inline', [
+                    'blog_link' => '<a href="' . lroute('blog') . '">' . e(__('home.faq.more_inline_blog')) . '</a>',
+                ]) !!}
+            </p>
 
             <script type="application/ld+json">
             @php
