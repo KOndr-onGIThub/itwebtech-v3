@@ -147,6 +147,8 @@ return [
     // wieder einführen.
     'toyota' => [
         'heading'      => '18 Jahre bei Toyota.',
+        // Großbuchstaben macht CSS (`text-transform`), nicht dieser String.
+        'employer_label' => 'Ehemaliger Arbeitgeber',
         'text'         => 'Angefangen habe ich als Arbeiter in der Logistik, gegangen bin ich als leitender Spezialist im Projektteam. Achtzehn Jahre habe ich gesucht, wo in Produktion und Montage Zeit verloren geht, und dazu eine Firmenanwendung geschrieben, die Millionen Kronen gespart hat. In der Produktion können Sie sich nicht erlauben, dass etwas ausfällt. Dort habe ich gelernt: Software macht man richtig oder gar nicht.',
         'text_2'       => 'Websites baue ich genauso. Bevor ich die erste Zeile schreibe, will ich wissen, wie Anfragen bei Ihnen entstehen und was danach mit ihnen passiert. Erst danach entsteht die Seite. Sie merken es an der Spezifikation, die Sie bekommen, bevor ich anfange.',
         'quote_text'   => 'Eine der größten Stärken von Ondřej ist sein starker Wunsch, sich zu entwickeln — nicht nur die Bedürfnisse der Kunden zu erfüllen, sondern ihre Erwartungen zu übertreffen.',

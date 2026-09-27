@@ -158,6 +158,9 @@ return [
     // nezavádět bez rozhodnutí na OND-344.
     'toyota' => [
         'heading'      => '18 let v Toyotě.',
+        // Verzálky dělá CSS (`text-transform`), ne tenhle řetězec — verzálky
+        // zapsané v textu některé odečítače hláskují po písmenech.
+        'employer_label' => 'Bývalý zaměstnavatel',
         'text'         => 'Začínal jsem jako dělník v logistice a skončil jako starší specialista v projektovém týmu. Osmnáct let jsem hledal, kde se ve výrobě a montáži ztrácí čas, a napsal k tomu firemní aplikaci, která ušetřila miliony korun. Ve výrobě si nemůžete dovolit, aby vám něco spadlo. Tam jsem se naučil, že software se dělá pořádně, nebo vůbec.',
         'text_2'       => 'Weby dělám stejně. Než napíšu první řádek, chci vědět, jak u vás vzniká poptávka a co se s ní děje potom. Teprve podle toho stránka vznikne. Poznáte to na specifikaci, kterou dostanete dřív, než začnu pracovat.',
         'quote_text'   => 'Jednou z nejsilnějších stránek Ondry je velká chuť rozvíjet se — nejen uspokojení potřeb zákazníků, ale překonání jejich očekávání.',
