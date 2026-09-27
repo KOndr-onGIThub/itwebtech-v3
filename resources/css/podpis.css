@@ -1102,6 +1102,73 @@
     line-height: var(--leading-body);
 }
 
+/* OND-350 — logo bývalého zaměstnavatele v sekci „18 let v Toyotě".
+   Logo ochranné známky na webu, který prodává služby, se bez popisku
+   čte jako „tihle dva spolu nějak jsou". Popisek proto nese slovo
+   „zaměstnavatel" — jedno slovo vyloučí čtení „klient / partner"
+   spolehlivěji než jakákoli grafická úprava.
+
+   Typografie řádku je atribuční štítek, tedy stejná role jako `.pd-by__org`
+   (ř. 502) — malý verzálkový podtitulek v `--font-body` / `--text-caption` /
+   `--color-fg-muted`. Nový token se nezakládá. Zadání karty se odkazovalo na
+   `.pd-testi__meta`; ta v OND-353 (PR #188) zanikla a její roli převzalo
+   `.pd-by__org`. Jediný rozdíl je `letter-spacing`: tady 0,1em, u `.pd-by__org`
+   0,08em. Držím 0,1em, protože v tom byl návrh na OND-350 proměřený
+   a schválený — sjednocení obou štítků je samostatné rozhodnutí, ne vedlejší
+   efekt téhle karty.
+
+   Svislá vlasovka je `--color-border-soft`, stejně jako u ostatních
+   oddělovačů v tomhle souboru.
+
+   Logo je odbarvené na `--color-fg-muted`, tedy na přesně stejnou šedou
+   jako popisek: řádek se pak čte jako jeden objekt, ne jako barevný odznak
+   nalepený vedle textu. Značková červená #EB0A1E by na #0a0a0b řvala
+   a posunula řádek k pruhu klientských log.
+
+   Pozor na `margin-bottom`: tenhle `<p>` je dítě `.pd-origin__text`, takže
+   na něj sedí i `.pd-origin__text p { margin: 0 0 var(--space-5) }` (ř. 1048)
+   — a to je (0,1,1) proti (0,1,0), tedy specifičtější. Selektor je proto
+   psaný jako `.pd-origin__text .pd-origin__employer`, aby hodnota nebyla
+   jen zdánlivá. 24 px je zároveň mezera, se kterou byl návrh proměřený
+   (sekce 733 px na 1440 px v cs/en). */
+.pd-origin__employer {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.pd-origin__text .pd-origin__employer {
+    margin: 0 0 var(--space-5);
+}
+
+.pd-origin__employer img {
+    display: block;
+    flex: 0 0 auto;
+    height: 28px;
+    width: auto;
+}
+
+.pd-origin__employer span {
+    font-family: var(--font-body);
+    font-size: var(--text-caption);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-fg-muted);
+    padding-left: var(--space-4);
+    border-left: 1px solid var(--color-border-soft);
+}
+
+/* Na 390 px má nejdelší popisek („EHEMALIGER ARBEITGEBER") 256 px
+   v kontejneru 355 px. Rezerva na jeden řádek je tedy necelých 100 px. */
+@media (max-width: 480px) {
+    .pd-origin__employer { gap: var(--space-3); }
+    .pd-origin__employer img { height: 24px; }
+    .pd-origin__employer span {
+        padding-left: var(--space-3);
+        letter-spacing: 0.08em;
+    }
+}
+
 /* --- Reference: zdroj hodnocení jako datový štítek ----------
    OND-353: `.pd-testi__source` zanikl. Štítek se zdrojem už nestojí jen
    v sekci 09 pod textem, ale u všech sedmi citací vedle jména — nese ho

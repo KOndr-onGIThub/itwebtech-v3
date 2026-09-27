@@ -347,6 +347,15 @@
              citace Pavla Baudyše. Wrapper `.pd-toyota` tím zanikl, text má
              vlastní max-width, takže se neroztekl. --}}
         <div class="pd-origin__text">
+            {{-- OND-350: záznam o zaměstnání, ne logo partnera. Řádek stojí
+                 mezi titulkem a textem schválně — titulek „18 let v Toyotě."
+                 rámuje logo slovy dřív, než ho návštěvník uvidí, a popisek
+                 to hned potvrdí. Logo nesmí být v sekci samo. --}}
+            <p class="pd-origin__employer">
+                <img src="{{ asset_v('img/employment/toyota-mono.svg') }}"
+                     alt="Toyota" width="64" height="41">
+                <span>{{ __('home.toyota.employer_label') }}</span>
+            </p>
             <p>{{ __('home.toyota.text') }}</p>
             <p>{{ __('home.toyota.text_2') }}</p>
             <blockquote class="pd-origin__quote">
