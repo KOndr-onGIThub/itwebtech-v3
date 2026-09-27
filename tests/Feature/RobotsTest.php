@@ -2,11 +2,16 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\URL;
 use Tests\TestCase;
 
 class RobotsTest extends TestCase
 {
+    // OND-364: `/` čte `portfolio_projects` (OND-351), takže bez migrací hodí 500.
+    // Prázdná tabulka je pro tenhle test v pořádku — seedovat není potřeba.
+    use RefreshDatabase;
+
     public function test_robots_txt_returns_plain_text(): void
     {
         $response = $this->get('/robots.txt');
@@ -61,9 +66,17 @@ class RobotsTest extends TestCase
     public function test_public_pages_are_indexable(): void
     {
         foreach (['/', '/en/', '/de/'] as $url) {
+            $response = $this->get($url);
+
+            // OND-364: bez kontroly stavu je tenhle test lhář v obou směrech —
+            // s APP_DEBUG=true hlásí 500 jako chybějící meta tag, s APP_DEBUG=false
+            // 500 dokonce projde (errors/500.blade.php dědí layout, meta tam je).
+            // assertOk() si do zprávy vytáhne i výjimku z requestu.
+            $response->assertOk();
+
             $this->assertStringContainsString(
                 '<meta name="robots" content="index, follow">',
-                $this->get($url)->getContent(),
+                $response->getContent(),
                 "Stránka {$url} není indexovatelná."
             );
         }
