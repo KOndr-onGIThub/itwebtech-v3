@@ -38,7 +38,7 @@ return [
                 'Odpověď nejpozději následující pracovní den',
                 'Vlastní kód, ne stavebnice',
                 'Řešení na míru',
-                '21 recenzí, 5 z 5',
+                '26 hodnocení, 5 z 5',
             ],
         ],
     ],

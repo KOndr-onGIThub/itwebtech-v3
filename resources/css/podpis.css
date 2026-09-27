@@ -340,6 +340,22 @@
     color: var(--color-fg-muted);
 }
 .pd-strip__list strong { color: var(--color-fg-primary); font-weight: 600; }
+/* OND-397 (vstup V1): hodnocení v pruhu je odkaz na /recenze. Tiché
+   podtržení jako `.pd-case__live`, acid až při najetí — nové slovo
+   nepřibývá. Text je vysoký 17 px, neviditelný přesah z něj dělá cíl
+   ~44 px, aniž by se pohnula sazba. */
+.pd-strip__link {
+    position: relative;
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--color-border-mid);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+    transition: text-decoration-color var(--duration-micro) var(--ease-out);
+}
+.pd-strip__link::before { content: ''; position: absolute; inset: -12px -4px; }
+.pd-strip__link:hover,
+.pd-strip__link:focus-visible { text-decoration-color: var(--pd-accent); }
 .pd-strip__list li + li::before {
     content: '·';
     color: var(--pd-accent);
@@ -416,6 +432,11 @@
     grid-template-columns: 56px 1fr;
     column-gap: var(--space-4);
     row-gap: 0;
+    /* OND-397 (měření OND-396 §6c): ve dvousloupcové mřížce se položka
+       natáhne na výšku sousedky a vnitřní mřížka rozdělí volné místo do
+       svých řádků — citace pak „padá" pod jméno (na homepage Holcmann
+       13 px, na /recenze Kroulík 17 px). Výška položek se nemění. */
+    align-content: start;
 }
 /* Podpis je přímo v mřížce položky: tvář do prvního sloupce, jméno s firmou
    do druhého. Citace pak stojí pod jménem, ne pod tváří. */
@@ -1624,4 +1645,64 @@
     .pd-price--full { gap: var(--space-8); }
     .pd-price--full .pd-price__col--featured { border-top: 2px solid var(--pd-accent); padding-top: var(--space-4); }
     .pd-price__entry { margin-top: var(--space-8); }
+}
+
+/* ------------------------------------------------------------
+   OND-397 — /recenze (předloha OND-396 §6b, §6c).
+   Komponenty jsou z homepage (`.pd-testi`, `<x-testimonial-by>`)
+   a z /o-mne (`.pd-page-head`, `.pd-about-cta`); tady je jen to,
+   co navíc potřebuje stránka se čtyřmi skupinami recenzí.
+   ------------------------------------------------------------ */
+/* [OND-394 — do jeho nasazení jen pro /recenze] Stejné tři řádky jako
+   u /cenik výš: sekci otevírá nadpis a mezera, recenzi tvář nebo monogram,
+   skupinu nadpis. JAKMILE OND-394 NASADÍ BLOK A A C PLOŠNĚ, SMAZAT. */
+.pd--depth-sub > section[data-pdd^="reviews-"] { border-top-color: transparent; }
+.pd--depth-sub > section[data-pdd^="reviews-"]::before { content: none; }
+.pd--depth-sub > section[data-pdd="reviews-list"] .pd-testi__item { border-top-color: transparent; }
+
+/* Slot hlavy podstránky (základ OND-379 §2a) — tady dva odkazy na profily. */
+.pd-page-head__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-6);
+    margin: var(--space-5) 0 0;
+}
+
+/* Skupina = nadpis + mřížka. Nadpis patří ke svým kartám, proto bez spodní
+   mezery: odsazení dělá padding první karty (32 px). Mezera mezi skupinami
+   nepřeroste mezeru mezi sekcemi (OND-394, bod 1). */
+.pd-reviews__group > .pd-subsection__title { margin: 0; max-width: 32ch; }
+.pd-reviews__group + .pd-reviews__group { margin-top: var(--space-8); }        /* 32 + 64 = 96 < 113 */
+@media (min-width: 1024px) {
+    .pd-reviews__group + .pd-reviews__group { margin-top: var(--space-9); }    /* 32 + 96 = 128 < 203 */
+}
+
+/* Řádek odkazů pod citací: originál vždy, případovka když je. Tiché
+   `.pd-case__live` — 33 acidových podtržení by přebilo citace. */
+.pd-testi__item > .pd-testi__links {
+    grid-column: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+    margin: 0;
+}
+/* Cíl 44 px bez posunu sazby: neviditelná plocha kolem textového odkazu. */
+.pd-testi__links a,
+.pd-page-head__actions a { position: relative; }
+.pd-testi__links a::before,
+.pd-page-head__actions a::before { content: ''; position: absolute; inset: -12px -4px; }
+
+/* Dvojice (Cyklocentrum): dvě tváře nad jednou citací. Druhý podpis
+   odsadit, jinak se čtverce 56 px dotýkají. */
+.pd-testi__item > .pd-by + .pd-by > .pd-by__face,
+.pd-testi__item > .pd-by + .pd-by > .pd-by__text { margin-top: var(--space-3); }
+
+/* Mobil: citace a odkazy přes celou šířku. Ve sloupci vedle 48px tváře
+   měla citace 291 px (~33 znaků na řádek, pod pásmem 45–75); takhle 355 px.
+   Stejný nález jako kapitoly /o-mne (OND-365). Homepage má tři krátké
+   citace a zůstává, jak je. */
+@media (max-width: 767px) {
+    .pd-reviews .pd-testi__item > .pd-testi__text,
+    .pd-reviews .pd-testi__item > .pd-testi__links { grid-column: 1 / -1; }
+    .pd-reviews .pd-testi__item > .pd-testi__text { margin-top: var(--space-2); }
 }

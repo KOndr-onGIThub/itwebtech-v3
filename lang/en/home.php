@@ -12,7 +12,7 @@ return [
     // does not know what WordPress is (principle 0).
     'meta' => [
         'title'       => 'Custom websites: I quote, not estimate | ONDRAWEB',
-        'description' => 'Custom websites, online shops and web applications. I quote the price up front and build everything myself on my own code. Rated 5.0 from 21 reviews.',
+        'description' => 'Custom websites, online shops and web applications. I quote the price up front and build everything myself on my own code. Rated 5.0 from 26 ratings.',
     ],
 
     'hero' => [
@@ -39,7 +39,7 @@ return [
         // geometry was fixed the CTA clears the bottom bar by 61 px even with
         // the extra line, so the rule against semicolons inside a sentence
         // (spec rule 5) wins. Re-measure before growing this sentence again.
-        'subline'         => 'I am Ondřej Kriška. I build websites and applications on my own code and work on them alone. I price the job before we start, and my rating is 5.0 from 21 reviews.',
+        'subline'         => 'I am Ondřej Kriška. I build websites and applications on my own code and work on them alone. I price the job before we start, and I\'m rated 5.0 from 26 ratings on Google and Firmy.cz.',
         'note'            => 'I\'ll get back to you by the next business day. No commitment, we just go through what makes sense.',
 
         // Backwards compat (fallback render).
@@ -64,7 +64,7 @@ return [
         'strip_aria'   => 'Numbers about my work',
         'clients_aria' => 'Clients',
         'rating_value' => '5.0',
-        'reviews'      => '(21 reviews on Google + Firmy.cz)',
+        'reviews'      => '(26 ratings on Google and Firmy.cz)',
         'projects'     => '23+ delivered projects',
         'experience'   => '18 years of experience',
         'response'     => 'Reply by the next business day',

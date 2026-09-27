@@ -68,6 +68,41 @@ class PageController extends Controller
         return view('pages.price', compact('tierProofs'));
     }
 
+    /**
+     * OND-397: /recenze — všechny recenze ve čtyřech skupinách (předloha OND-396).
+     *
+     * `$groups` = skupina → kartičky, kartička = pole lidí (Cyklocentrum má dva
+     * se stejným textem). Seskupení je v `config/reviews.php`, data v
+     * `testimonials.php`; id, které v datech chybí, se přeskočí místo 500
+     * (úplnost hlídá test).
+     *
+     * „Více o projektu" vede jen na publikovanou případovku, stejně jako
+     * odkazy u cenových úrovní (OND-359): URL z `detailUrl()`, ne ze slugu.
+     */
+    public function reviews()
+    {
+        $testimonials = collect(__('testimonials.items'))->keyBy('id');
+
+        $groups = collect(config('reviews.groups'))
+            ->map(fn (array $refs) => collect($refs)
+                ->map(fn ($ref) => collect((array) $ref)
+                    ->map(fn (string $id) => $testimonials->get($id))
+                    ->filter()
+                    ->values()
+                    ->all())
+                ->filter()
+                ->values()
+                ->all());
+
+        $projects = PortfolioProject::published()
+            ->whereIn('slug', $testimonials->pluck('project')->filter()->unique()->values())
+            ->with('translations')
+            ->get()
+            ->keyBy('slug');
+
+        return view('pages.reviews', compact('groups', 'projects'));
+    }
+
     public function privacy()
     {
         return view('pages.privacy');

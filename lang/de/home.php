@@ -12,7 +12,7 @@ return [
     // der nicht weiß, was WordPress ist (Prinzip 0).
     'meta' => [
         'title'       => 'Websites nach Maß, die tragen, was gut läuft | ONDRAWEB',
-        'description' => 'Websites, Onlineshops und Webanwendungen nach Maß. Ich baue alles selbst mit eigenem Code, den Preis nenne ich vorab. 5,0 aus 21 Bewertungen.',
+        'description' => 'Websites, Onlineshops und Webanwendungen nach Maß. Ich baue alles selbst mit eigenem Code, den Preis nenne ich vorab. 5,0 aus 26 Bewertungen.',
     ],
 
     'hero' => [
@@ -56,7 +56,7 @@ return [
         'strip_aria'   => 'Zahlen zu meiner Arbeit',
         'clients_aria' => 'Kunden',
         'rating_value' => '5,0',
-        'reviews'      => '(21 Bewertungen auf Google + Firmy.cz)',
+        'reviews'      => '(26 Bewertungen auf Google und Firmy.cz)',
         'projects'     => '23+ realisierte Projekte',
         'experience'   => '18 Jahre Erfahrung',
         'response'     => 'Antwort spätestens am nächsten Arbeitstag',
