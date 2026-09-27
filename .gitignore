@@ -24,3 +24,6 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# OND-412: archiv starých webů leží mimo repo (viz README)
+/reference/
