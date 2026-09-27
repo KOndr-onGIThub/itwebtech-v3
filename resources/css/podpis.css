@@ -276,9 +276,18 @@
 }
 
 /* --- Sekce: sdílená hlava a rytmus -------------------------- */
+/* PRAVIDLO ODDĚLOVAČŮ (OND-394, přijato 27. 9. 2026; nasazeno OND-398):
+   sekce od sebe odděluje prostor, ne čára. Čára zůstává jen tam, kde nese
+   informaci — řádky FAQ, pole formuláře, rámeček přílohy, acidová linka
+   doporučeného sloupce ceníku (zvýraznění), čára nad patičkou.
+   Všude jinde je hrana PRŮHLEDNÁ, ne `border: 0`: 1px místo zůstane
+   a nic neposkočí. Mezi sekcemi musí být největší mezera na stránce
+   (obsah → obsah 203 px na 1440 / 113 px na 390); žádná vnitřní ji nesmí
+   přerůst. Kontrolní otázka pro další stránku: co by člověk ztratil,
+   kdyby tu čára nebyla? */
 .pd-section {
     background: var(--color-bg-base);
-    border-top: 1px solid var(--color-border-soft);
+    border-top: 1px solid transparent;
     padding-block: clamp(3.5rem, 7vw, 6.5rem);
 }
 .pd-head {
@@ -322,8 +331,9 @@
 .pd-situation { padding-block: clamp(2.5rem, 4.5vw, 4rem); }
 
 /* --- Social pás --------------------------------------------- */
+/* Věta o situaci a pruh čísel jsou jeden úvodní blok — bez čáry (OND-394 H2). */
 .pd-strip {
-    border-top: 1px solid var(--color-border-soft);
+    border-top: 1px solid transparent;
     padding-block: var(--space-6);
     background: var(--color-bg-base);
 }
@@ -361,12 +371,19 @@
     color: var(--pd-accent);
     margin-right: var(--space-6);
 }
+/* Na mobilu se pruh láme a tečka visí na začátku řádku jako odrážka, kterou
+   není. Mezeru mezi položkami nese `column-gap` (OND-394, blok G). */
+@media (max-width: 639px) {
+    .pd-strip__list li + li::before { content: none; }
+}
 /* --- Cenová kotva ------------------------------------------- */
 .pd-price { display: grid; gap: var(--space-7); }
 @media (min-width: 1024px) {
     .pd-price { grid-template-columns: repeat(3, 1fr); gap: 0; }
+    /* Bez svislice (OND-394 H16–17): pásma drží od sebe mezera
+       a svislice soupeřila s acidovou linkou doporučeného sloupce. */
     .pd-price__col + .pd-price__col {
-        border-left: 1px solid var(--color-border-soft);
+        border-left: 1px solid transparent;
         padding-left: var(--space-7);
     }
     .pd-price__col { padding-right: var(--space-7); }
@@ -424,9 +441,10 @@
 @media (min-width: 1024px) { .pd-testi { grid-template-columns: 1fr 1fr; column-gap: var(--space-9); } }
 /* OND-353: mřížka `56px 1fr` zůstává, jen v levém sloupci stojí místo ordinálu
    portrét (`.pd-by__face`). Řádkovou mezeru dělá `.pd-by__org`, proto tu
-   `row-gap: 0` — jinak by se sečetla s `gap` mřížky. */
+   `row-gap: 0` — jinak by se sečetla s `gap` mřížky.
+   OND-394 H18–20: bez linky nahoře — recenzi otevírá tvář nebo monogram. */
 .pd-testi__item {
-    border-top: 1px solid var(--color-border-soft);
+    border-top: 1px solid transparent;
     padding: var(--space-6) 0;
     display: grid;
     grid-template-columns: 56px 1fr;
@@ -596,13 +614,16 @@
    a důrazu. Žádné boxy, žádné ikony, žádná dekorace.
    ============================================================ */
 
-/* --- 04 Služby — tři sloupce s vlasovými linkami ------------- */
+/* --- 04 Služby — tři sloupce ---------------------------------- */
+/* OND-394 H27–28: statická svislice mezi sloupci pryč, sloupce otevírají
+   čísla 01–03. Náboj vrstvy B (`.pd-service + .pd-service::after`
+   v hloubka.css) kreslí vlastní 1px jádro a sjede po tom místě dál. */
 .pd-services { display: grid; gap: var(--space-7); }
 @media (min-width: 1024px) {
     .pd-services { grid-template-columns: repeat(3, 1fr); gap: 0; }
     .pd-service { padding-right: var(--space-7); }
     .pd-service + .pd-service {
-        border-left: 1px solid var(--color-border-soft);
+        border-left: 1px solid transparent;
         padding-left: var(--space-7);
     }
 }
@@ -762,6 +783,10 @@
     border-bottom-color: var(--pd-accent);
 }
 .pd-more { margin: var(--space-8) 0 0; }
+/* OND-398: pod recenzemi (OND-397) se `--space-8` sčítá se spodním odsazením
+   položky (32 px) — obsah → obsah vycházelo 115 px, víc než mezera mezi
+   sekcemi na mobilu (113 px, pravidlo OND-394 bod 1). */
+.pd-testi + .pd-more { margin-top: var(--space-7); }
 .pd-more__link {
     font-family: var(--font-body);
     font-size: var(--text-body);
@@ -796,8 +821,11 @@
 
 /* --- 09 Postup — kroky pod sebou, čas jako acid štítek ------- */
 .pd-steps { list-style: none; margin: 0; padding: 0; }
+/* OND-394 H10–13 / O3–O6 / K4–6: krok otevírá velké acidové číslo, linka
+   nad ním by říkala totéž podruhé. Na homepage ji na okamžik nakreslí náboj
+   `.pd-step::before` (hloubka.css), na podstránkách zbývá čistá mezera. */
 .pd-step {
-    border-top: 1px solid var(--color-border-soft);
+    border-top: 1px solid transparent;
     padding: var(--space-6) 0;
     display: grid;
     grid-template-columns: 56px 1fr;
@@ -898,25 +926,29 @@
 }
 
 /* OND-308: pod kroky procesu už tlačítko není, zůstala jedna věta.
-   Předěl a odsazení proto nese ona sama, ne obal `.pd-steps__cta`
+   Odsazení proto nese ona sama, ne obal `.pd-steps__cta`
    (ten zmizel v OND-342 spolu se starou homepage).
    OND-314: sousedem té věty je teď `.pd-steps-layout`, ne samotný `<ol>` —
-   bez druhého selektoru by věta přišla o vlasovou linku i o odsazení. */
+   bez druhého selektoru by věta přišla o odsazení.
+   OND-394 H14: čára přes celou šířku pod čarami kroků pryč i s `padding-top`
+   — mezera za posledním krokem klesne ze 128 na 96 px, pod mezeru mezi
+   sekcemi i na mobilu (113 px). */
 .pd-steps-layout + .pd-steps__cta-intro,
 .pd-steps + .pd-steps__cta-intro {
     margin-top: var(--space-8);
-    padding-top: var(--space-6);
-    border-top: 1px solid var(--color-border-soft);
+    border-top: 1px solid transparent;
 }
 
 /* --- Vnořený předěl uvnitř sekce ---------------------------- */
 /* OND-308: sekce „Reference a námitky" má dva poctivé nadpisy — citace
-   a pod nimi otázky. Druhou půlku odděluje vlasová linka a vlastní
-   mezisoučtový titulek (h3), ne hlava sekce. */
+   a pod nimi otázky. Druhou půlku odděluje mezera a vlastní mezisoučtový
+   titulek (h3), ne hlava sekce.
+   OND-394 H21: bez čáry (sendvič čára / nadpis / čára řádků FAQ) a menší
+   mezera — 96 + 64 px dělalo podsekci odděleněji než celé sekce na mobilu
+   (113 px). */
 .pd-subsection {
-    margin-top: var(--space-9);
-    padding-top: var(--space-8);
-    border-top: 1px solid var(--color-border-soft);
+    margin-top: var(--space-8);
+    border-top: 1px solid transparent;
 }
 .pd-subsection__title {
     font-family: var(--font-display);
@@ -1010,11 +1042,18 @@
     color: var(--color-fg-muted);
     margin-bottom: var(--space-2);
 }
+/* OND-398: rámeček pole je jediné, co ukazuje, kam se píše (pozadí je
+   průhledné), a podle pravidla OND-394 je to čára, která zůstává — takže
+   musí být vidět. WCAG 1.4.11 chce u hranice ovládacího prvku 3 : 1.
+   `--color-border-soft` dával na desce formuláře (#131316) 1,24 : 1,
+   `--color-fg-decorative` 2,80 : 1 — obojí pod hranicí. `--color-fg-muted`
+   je nejtmavší neutrál palety, který ji přejde (6,6 : 1 na desce, 7,1 : 1
+   na #0A0A0B). Fokus zůstává acidový, chyba červená — obojí se od šedé liší. */
 .pd-field input,
 .pd-field textarea {
     width: 100%;
     background: transparent;
-    border: 1px solid var(--color-border-soft);
+    border: 1px solid var(--color-fg-muted);
     border-radius: 0;
     color: var(--color-fg-primary);
     font-family: var(--font-body);
@@ -1165,8 +1204,8 @@
    a schválený — sjednocení obou štítků je samostatné rozhodnutí, ne vedlejší
    efekt téhle karty.
 
-   Svislá vlasovka je `--color-border-soft`, stejně jako u ostatních
-   oddělovačů v tomhle souboru.
+   Svislá vlasovka mezi logem a popiskem je od OND-394 průhledná: logo
+   a popisek v kapitálkách se liší samy, odsazení zůstává.
 
    Logo je odbarvené na `--color-fg-muted`, tedy na přesně stejnou šedou
    jako popisek: řádek se pak čte jako jeden objekt, ne jako barevný odznak
@@ -1203,7 +1242,7 @@
     text-transform: uppercase;
     color: var(--color-fg-muted);
     padding-left: var(--space-4);
-    border-left: 1px solid var(--color-border-soft);
+    border-left: 1px solid transparent;
 }
 
 /* Na 390 px má nejdelší popisek („EHEMALIGER ARBEITGEBER") 256 px
@@ -1511,12 +1550,10 @@
 /* Na 390 px se pruh zalomí tak, že řádek začíná „·" — tečka na začátku
    řádku vypadá jako odrážka, kterou není. Starý ceník to už jednou vyřešil
    sloupcem bez teček (`.pricing-proof__figures`, smazané v OND-393); tady
-   je totéž.
-   Hranice 640 px je táž jako v pravidle OND-394 (blok G), které tečky
-   na mobilu maže i na homepage. */
+   je totéž. Tečky na mobilu maže plošně `.pd-strip__list` výš (OND-394,
+   blok G); pás k tomu staví položky do sloupce. */
 @media (max-width: 639px) {
     .pd-section--band .pd-strip__list { flex-direction: column; gap: var(--space-2); }
-    .pd-section--band .pd-strip__list li + li::before { content: none; }
 }
 
 /* Body bez pořadí. Titulek a věta, žádný box,
@@ -1593,19 +1630,6 @@
 /* ------------------------------------------------------------
    OND-393 — háky jen pro /cenik.
    ------------------------------------------------------------ */
-/* [OND-394 — do jeho nasazení jen pro /cenik] Pravidlo „sekce dělí prostor,
-   ne čára" (OND-394, dokument oddelovace-pravidlo, blok A a C). Dokud neplatí
-   plošně, drží ho ceník sám, scoped na své `data-pdd`, aby se nedotklo /o-mne
-   ani /kontaktu. JAKMILE OND-394 NASADÍ BLOK A A C PLOŠNĚ, TYHLE TŘI ŘÁDKY
-   SMAZAT. Průhledná barva, ne `border: 0` — 1px místo zůstane, nic neposkočí.
-   - hrana sekce (border + odlesk `::before` z vrstvy A): sekci otevírá H2,
-     mezera 2× clamp(3.5rem, 7vw, 6.5rem) a vlastní kužel světla (`::after`,
-     ten zůstává);
-   - linka nad recenzí: recenzi otevírá tvář nebo monogram. */
-.pd--depth-sub > section[data-pdd^="price-"] { border-top-color: transparent; }
-.pd--depth-sub > section[data-pdd^="price-"]::before { content: none; }
-.pd--depth-sub > section[data-pdd="price-proof"] .pd-testi__item { border-top-color: transparent; }
-
 /* `.pd-price` z homepage je kotva: název,
    rozsah, věta. Ceník k tomu nese případovku, výčet a odkaz. Sloupce jsou
    flex, aby odkaz „Chci nezávaznou nabídku" stál ve všech třech na jedné
@@ -1628,12 +1652,10 @@
    ostatní nic — rozsahy by pak neseděly na jedné lince (na homepage je to
    18 px, u tří řádků textu nevadí; tady visí pod tím 20 řádků). Všechny
    sloupce dostanou tutéž linku, jen dva z nich průhlednou — není vidět.
-   Svislice mezi sloupci pryč (OND-394 H16–17): drží je mezera 2× --space-7
-   a svislice soupeřila s acidovou linkou doporučené úrovně. */
+   Svislice mezi sloupci je průhledná už v `.pd-price` (OND-394 H16–17). */
 @media (min-width: 1024px) {
     .pd-price--full .pd-price__col { border-top: 2px solid transparent; padding-top: var(--space-4); }
     .pd-price--full .pd-price__col--featured { border-top-color: var(--pd-accent); }
-    .pd-price--full .pd-price__col + .pd-price__col { border-left-color: transparent; }
 }
 /* Mobil: úrovně pod sebou oddělí mezera a název úrovně s rozsahem
    (verzálky + 24px tenké písmo — silnější předěl než linka). Acidová linka
