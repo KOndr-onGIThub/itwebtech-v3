@@ -2699,6 +2699,12 @@
         font-size: .9375rem;
         margin-bottom: 1.75rem;
         line-height: 1.65;
+        /* OND-371: delší perex („Dostanete nabídku…“) se na 900 a 540 px láme tak,
+           že druhý řádek zbyde 60–95 px široký — sirotek pod 20 % šířky sloupce.
+           `balance` rozdělí řádky rovnoměrně (CS 295/280, EN 279/299, DE 286/277)
+           a jednořádkové šířky nechá být. Neznámá hodnota = `wrap`, takže starší
+           prohlížeč se vrátí k dnešnímu stavu. Typografie: vertikální rytmus. */
+        text-wrap: balance;
     }
 
     /* ============================================================
