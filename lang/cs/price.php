@@ -10,7 +10,10 @@ return [
     'subheading' => 'Orientační ceny',
     'heading'    => 'Víte, do čeho jdete, ještě před první schůzkou.',
     // OND-198 (nález 5.4): očekávací věta musí padnout dřív než první číslo.
-    'intro'      => 'Většina projektů, které stavím, vychází mezi 55 a 150 tisíci korunami. Pokud hledáte web do dvaceti tisíc, nebudu pro vás ten správný dodavatel a řeknu vám to rovnou. Každý projekt je jiný — finální cenu znáte po bezplatné konzultaci. Tento přehled vám dá jasnou představu ještě před naší první schůzkou.',
+    // OND-354: prahové číslo a rozpětí místo menu tří balíčků (Ondřej 26. 9.
+    // 2026 na OND-347). Odmítací věta „pokud hledáte web do dvaceti tisíc…"
+    // je tím pryč — spodní hranice 20 000 Kč říká totéž bez odmítnutí.
+    'intro'      => 'Většina projektů vychází mezi 55 a 150 tisíci korunami. Nejmenší web, který stavím, je prezentace do pěti stránek od 20 000 Kč. Co na webu bude a kolik to bude stát, dostanete písemně před začátkem práce — a to číslo je i na faktuře.',
 
     // OND-135 P2 iter 5 — plán §3.1 hero (page-mark + amber accent).
     // OND-135 cleanup (2026-05-14): page_mark_index odebrán — agency-
@@ -18,8 +21,9 @@ return [
     'hero' => [
         'page_mark_label' => 'CENÍK',
         'upline'          => 'Žádné nabídky na vyžádání.',
-        // OND-198 (nález 5.4): v podnadpisu vede Standard, ne nejlevnější pásmo.
-        'heading_html'    => 'Tři pásma,<br>jedna <em>jasná cena</em>.',
+        // OND-354: „Tři pásma, jedna jasná cena" přestalo být pravda — pásma
+        // po téhle změně nejsou.
+        'heading_html'    => 'Kolik u mě stojí<br><em>web na míru</em>.',
         'subline'         => 'Cena na faktuře = cena ve specifikaci. Žádné vícenáklady bez vašeho vědomí.',
     ],
 
@@ -32,18 +36,36 @@ return [
     'popular'   => 'Nejoblíbenější',
     'quotation' => 'Nezávazná poptávka',
 
-    'price_note' => 'orientační cena',
-
-    // OND-130 (B2 §1, klíčová direktiva 2 + plán §3.6): sjednocená taxonomie
-    // Startovní / Standard / Custom — 25 / 55 / od 95 tis. Kč. Stejné
-    // ceny v homepage cenové kotvě (`home.price_anchor.items`) i v service
-    // 3-card kotvě (`home.services.primary.*`). Featurelisty zachovány,
-    // doladění obsahu řeší B3 (Content Writer) v rámci stejného PR.
+    // OND-354: úrovně se jmenují podle ROZSAHU, ne podle cenové hladiny, a
+    // cenu nenesou — klíč `price` je zrušený (a s ním i `price_note`
+    // „orientační cena", které bez čísla nemá co popisovat). `key` je technický
+    // identifikátor pro analytiku (dřív se posílalo číslo z ceny, dimenze
+    // `pricing_tier_shown`) — nikde se nevykresluje, stejný princip jako
+    // `home.faq.items[].key`. Názvy a `desc` jsou shodné s homepage kotvou
+    // (`home.price_anchor.items`), featurelisty jsou beze změny.
+    // Pořadí podle rostoucího rozsahu, doporučená je prostřední úroveň.
     'tiers' => [
         [
-            'name'    => 'Standard',
-            'desc'    => 'Pro firmy, které chtějí web jako svůj nejlepší obchodní nástroj.',
-            'price'   => '55 000 Kč',
+            'key'     => 'presentation',
+            'name'    => 'Prezentační web',
+            'scope'   => 'do 5 stránek',
+            'desc'    => 'Důvěryhodná online prezentace pro živnostníky a malé firmy.',
+            'popular' => false,
+            'features' => [
+                'Do 5 stránek na míru',
+                'Moderní responzivní design',
+                'Kontaktní formulář',
+                'Technické SEO',
+                'Optimalizace rychlosti načítání',
+                '14 dní podpory po spuštění',
+            ],
+            'cta' => 'Chci nezávaznou nabídku',
+        ],
+        [
+            'key'     => 'business',
+            'name'    => 'Firemní web',
+            'scope'   => 'do 12 stránek',
+            'desc'    => 'Vícejazyčný web s blogem, měřením konverzí a rezervačním systémem.',
             'popular' => true,
             'features' => [
                 'Do 12 stránek na míru',
@@ -57,9 +79,10 @@ return [
             'cta' => 'Chci nezávaznou nabídku',
         ],
         [
-            'name'    => 'Custom',
-            'desc'    => 'Pro náročné projekty bez kompromisů — e-shop, rezervace nebo webová aplikace.',
-            'price'   => 'od 95 000 Kč',
+            'key'     => 'custom',
+            'name'    => 'Na míru',
+            'scope'   => 'bez omezení rozsahu',
+            'desc'    => 'E-shop, webová aplikace nebo komplexní portál.',
             'popular' => false,
             'features' => [
                 'Neomezený rozsah projektu',
@@ -71,23 +94,11 @@ return [
             ],
             'cta' => 'Chci nezávaznou nabídku',
         ],
-        [
-            'name'    => 'Startovní',
-            // OND-198 (nález 5.4): nejlevnější pásmo je poslední a rámované jako výjimka.
-            'desc'    => 'Výjimka, ne standardní vstup. Pro živnostníky, kterým větší rozsah nedává smysl — důvěryhodná online prezentace do 5 stránek.',
-            'price'   => '25 000 Kč',
-            'popular' => false,
-            'features' => [
-                'Do 5 stránek na míru',
-                'Moderní responzivní design',
-                'Kontaktní formulář',
-                'Technické SEO',
-                'Optimalizace rychlosti načítání',
-                '14 dní podpory po spuštění',
-            ],
-            'cta' => 'Chci nezávaznou nabídku',
-        ],
     ],
+
+    // OND-354: nahrazuje omluvné „Výjimka, ne standardní vstup." u nejnižší
+    // úrovně. Neodmítá člověka, ale říká, co za ty peníze nepřijde.
+    'entry_note' => 'Za dvacet tisíc postavím web do pěti stránek. Bude rychlý, na telefonu se bude ovládat dobře a nebude na něm rozbitý odkaz na poptávku. Nečekejte od něj, že vám sám začne vozit zakázky — na to je potřeba víc práce, než se za tu cenu dá odvést. Ale hotový bude poctivě.',
 
     'note' => 'Nejsem plátce DPH — uvedené ceny jsou konečné, nic se k nim nepřičítá.',
 
@@ -140,49 +151,30 @@ return [
         ],
     ],
 
+    // OND-354: osa tabulky se mění. Dřív srovnávala tři pojmenovaná pásma —
+    // ta zmizela, takže se tabulka neměla o co opřít. Nová osa je „co cenu
+    // zvedá a co snižuje": nejběžnější způsob, jak cenu vysvětlit bez cenovky
+    // (14 z 26 dodavatelů v německojazyčném vzorku rešerše na OND-347).
     'compare' => [
-        'heading' => 'Co přesně dostanete',
-        // OND-130 sjednocená taxonomie — viz `tiers` výše.
-        'tiers'   => ['Standard', 'Custom', 'Startovní'],
-        'tabs_aria'     => 'Výběr cenové úrovně',
-        'included'      => 'Zahrnuto',
-        'not_included'  => 'Nezahrnuto',
-        'groups'  => [
-            [
-                'label' => 'Rozsah projektu',
-                'rows'  => [
-                    ['label' => 'Počet stránek', 'values' => ['do 12', 'bez omezení', 'do 5']],
-                    ['label' => 'Responzivní design', 'values' => [true, true, true]],
-                    ['label' => 'Kontaktní formulář', 'values' => [true, true, true]],
-                ],
+        'heading' => 'Co cenu zvedá a co snižuje',
+        'up'   => [
+            'label' => 'Zvedá cenu',
+            'items' => [
+                'Víc než pět stránek',
+                'Druhý a další jazyk',
+                'E-shop nebo rezervační systém',
+                'Vlastní administrace obsahu',
+                'Napojení na systémy, které už používáte',
+                'Texty a fotky, které je potřeba vytvořit',
             ],
-            [
-                'label' => 'Funkce webu',
-                'rows'  => [
-                    ['label' => 'Blog nebo galerie s editací', 'values' => [true, true, false]],
-                    ['label' => 'Vícejazyčný web', 'values' => [true, true, false]],
-                    ['label' => 'Rezervační systém', 'values' => ['volitelně', true, false]],
-                    ['label' => 'E-shop', 'values' => [false, true, false]],
-                    ['label' => 'Vlastní administrace', 'values' => [false, true, false]],
-                    ['label' => 'Integrace externích systémů', 'values' => [false, true, false]],
-                ],
-            ],
-            [
-                'label' => 'Marketing a výkon',
-                'rows'  => [
-                    ['label' => 'Technické SEO', 'values' => [true, true, true]],
-                    ['label' => 'Optimalizace rychlosti', 'values' => [true, true, true]],
-                    ['label' => 'Analytika a měření konverzí', 'values' => [true, true, false]],
-                    ['label' => 'Pokročilá SEO strategie', 'values' => [false, true, false]],
-                ],
-            ],
-            [
-                'label' => 'Servis a podpora',
-                'rows'  => [
-                    ['label' => 'Hosting a doména zdarma', 'values' => ['1 rok', '1 rok', false]],
-                    ['label' => 'Podpora po spuštění', 'values' => ['1 měsíc', '3 měsíce', '14 dní']],
-                    ['label' => 'Bezúdržbový provoz', 'values' => [true, true, true]],
-                ],
+        ],
+        'down' => [
+            'label' => 'Snižuje cenu',
+            'items' => [
+                'Texty a fotky máte připravené',
+                'Menší počet stránek',
+                'Jeden jazyk',
+                'Obsah si po zaškolení plníte sami',
             ],
         ],
     ],

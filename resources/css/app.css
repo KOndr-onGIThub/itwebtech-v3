@@ -3085,22 +3085,21 @@
         color: var(--color-body);
     }
 
-    .pricing-tier__price {
-        font-size: 2rem;
-        font-weight: 800;
+    /* OND-354: dřív `.pricing-tier__price` — cena, 2rem/800. Dnes rozsah.
+       Rozsah je fráze („bez omezení rozsahu"), ne číslo o pěti znacích, takže
+       na 2rem se láme do tří řádků a rozhodí výšku hlaviček. 1.375rem je
+       největší stupeň, na kterém se nejdelší varianta ze tří jazyků
+       („ohne Umfangsgrenze") vejde na jeden řádek v nejužším sloupci.
+       Zůstává dominantním prvkem hlavičky — nad ním je jen název úrovně. */
+    .pricing-tier__scope {
+        font-size: 1.375rem;
+        font-weight: 700;
         color: var(--color-heading);
-        letter-spacing: -0.04em;
-        line-height: 1.1;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
     }
-    .pricing-tier--featured .pricing-tier__price {
+    .pricing-tier--featured .pricing-tier__scope {
         color: var(--color-gold-500);
-    }
-
-    .pricing-tier__price-note {
-        font-size: 0.8125rem;
-        color: var(--color-body);
-        margin-top: 0.25rem;
-        margin-bottom: 0;
     }
 
     .pricing-tier__features {
@@ -3151,6 +3150,19 @@
         color: var(--color-body);
     }
 
+    /* OND-354: čtyři věty o tom, co za nejnižší rozsah přijde a co ne.
+       Není to poznámka pod čarou jako `.pricing-note` (DPH) — je to text,
+       který má někdo přečíst, takže drží velikost těla a šířku sloupce. */
+    .pricing-entry-note {
+        max-width: 62ch;
+        margin: 2rem auto 0;
+        padding-top: 1.5rem;
+        border-top: 1.5px solid var(--border-subtle);
+        font-size: 0.9375rem;
+        line-height: 1.65;
+        color: var(--color-body);
+    }
+
     .pricing-note {
         text-align: center;
         font-size: 0.75rem;
@@ -3159,6 +3171,88 @@
         letter-spacing: 0.01em;
         margin-inline: auto;
         max-width: 100%;
+    }
+
+    /* ============================================================
+       PRICING — důkazní pás nad cenami (OND-354)
+       ------------------------------------------------------------
+       Čísla a dvě recenze. Vědomě NENÍ to homepage `.pd-strip` /
+       `.pd-testi`: ten slovník patří k homepage paletě
+       (`--color-fg-*`, podpis.css) a na podstránce by přinesl jiné
+       pozadí i jiný odstín textu. Stejný obsah, místní jazyk.
+       ============================================================ */
+    /* Na mobilu sloupec bez oddělovačů. Vodorovný pruh s tečkami se do 390 px
+       nevejde a zalomí se tak, že další řádek začíná „·" — tečka jako první
+       znak řádku vypadá jako odrážka, kterou není. Oddělovač má smysl jen
+       tehdy, když údaje opravdu stojí vedle sebe. */
+    .pricing-proof__figures {
+        display: flex;
+        flex-direction: column;
+        gap: 0.375rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-size: 0.9375rem;
+        letter-spacing: 0.01em;
+        color: var(--color-body);
+    }
+    .pricing-proof__figures strong {
+        color: var(--color-heading);
+        font-weight: 700;
+    }
+    @media (min-width: 768px) {
+        .pricing-proof__figures {
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.75rem;
+        }
+        .pricing-proof__figures li + li::before {
+            content: '·';
+            color: var(--color-decorative);
+            margin-right: 1.75rem;
+        }
+    }
+
+    .pricing-proof__reviews {
+        display: grid;
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+    @media (min-width: 768px) {
+        .pricing-proof__reviews {
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+    }
+    .pricing-proof__review {
+        margin: 0;
+        padding-left: 1.25rem;
+        border-left: 2px solid var(--color-gold-500);
+    }
+    .pricing-proof__review blockquote {
+        margin: 0;
+    }
+    .pricing-proof__review blockquote p {
+        margin: 0;
+        font-size: 1.0625rem;
+        line-height: 1.6;
+        color: var(--color-heading);
+    }
+    .pricing-proof__review figcaption {
+        margin-top: 0.75rem;
+        font-size: 0.8125rem;
+        color: var(--color-body);
+    }
+    .pricing-proof__source {
+        margin-left: 0.5rem;
+        padding: 0.0625rem 0.375rem;
+        border: 1px solid var(--border-subtle);
+        border-radius: 0.25rem;
+        font-size: 0.6875rem;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        color: var(--color-body);
+        white-space: nowrap;
     }
 
     /* Price page CTA */
@@ -3763,13 +3857,8 @@
         min-height: 2.75rem;
     }
 
-    /* Ceník, přepínač pásem — 80×31 */
-    .pcm-tab {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 2.75rem;
-    }
+    /* OND-354: `.pcm-tab` (přepínač pásem v srovnávací tabulce na /cenik)
+       tady byl kvůli dotykové ploše. Tabulka i její taby jsou smazané. */
 
     /* /kontakt — e-mail a telefon v kartě kontaktů 19 px */
     .contact-info dd a {
@@ -4035,184 +4124,81 @@
     }
 
     /* ============================================================
-       PRICING — comparison table
-       ============================================================ */
-    [x-cloak] { display: none !important; }
+       PRICING — co cenu zvedá a co snižuje (OND-354)
+       ------------------------------------------------------------
+       Tady stála srovnávací tabulka tří pojmenovaných pásem: na
+       desktopu 4sloupcová tabulka, na mobilu Alpine přepínač tabů
+       s cenou v hlavičce (`.pricing-compare*`, `.pcm-*`). Pásma
+       zmizela s klíčem `price.tiers[].price`, takže tabulka neměla
+       osu — dva sloupce odrážek ji nahradily. Ty styly jsou smazané,
+       ne zakomentované; historie je v gitu.
 
-    .pricing-compare {
+       Blok obsahoval i `[x-cloak] { display: none !important }`. To pravidlo
+       s tabulkou nesouviselo (používá ho sticky CTA i mobilní menu) a byl to
+       DUPLIKÁT — identické pravidlo stojí v `@layer base` výš v tomhle
+       souboru. Zmizela tedy jen ta kopie.
+       ============================================================ */
+    .pricing-factors {
+        display: grid;
+        gap: 1.5rem;
+    }
+    @media (min-width: 768px) {
+        .pricing-factors {
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+    }
+    .pricing-factors__col {
         border-radius: 1rem;
         border: 1.5px solid var(--border-subtle);
         background: var(--bg-card);
-        overflow: hidden;
+        padding: 1.5rem;
     }
-
-    .pricing-compare--desktop {
-        display: none;
+    /* Dražší strana dostane o kousek víc kontrastu v rámu: je to ta,
+       kterou si člověk potřebuje projít, než pošle poptávku. */
+    .pricing-factors__col--up {
+        border-color: var(--border-emphasis);
     }
-    @media (min-width: 768px) {
-        .pricing-compare--desktop { display: block; }
-        .pricing-compare--mobile  { display: none !important; }
-    }
-
-    .pricing-compare__table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-    .pricing-compare__table thead th {
-        padding: 1.125rem 1rem;
-        text-align: center;
-        font-size: 0.9375rem;
+    .pricing-factors__label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0 0 1rem;
+        font-size: 1rem;
         font-weight: 700;
         color: var(--color-heading);
         letter-spacing: -0.01em;
-        border-bottom: 2px solid var(--border-subtle);
-        background: var(--bg-elevated);
     }
-    .pricing-compare__table thead th:first-child {
-        text-align: left;
-        width: 40%;
-    }
-    .pricing-compare__table thead th.is-featured {
+    .pricing-factors__label svg {
         color: var(--color-gold-500);
-        background: rgba(216, 255, 58, 0.06);
     }
-    .pricing-compare__group-row td {
-        padding: 1.25rem 1rem 0.5rem;
-        font-size: 0.75rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: var(--color-body);
-        background: var(--bg-elevated);
-        border-top: 1.5px solid var(--border-subtle);
+    /* Jedna ikona pro obojí — dolní sloupec ji překlápí. */
+    .pricing-factors__col--down .pricing-factors__label svg {
+        transform: rotate(180deg);
     }
-    .pricing-compare__table tbody tr:not(.pricing-compare__group-row) td {
-        padding: 0.8125rem 1rem;
-        text-align: center;
+    .pricing-factors__list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.625rem;
+    }
+    .pricing-factors__list li {
+        position: relative;
+        padding-left: 1rem;
         font-size: 0.9375rem;
+        line-height: 1.55;
         color: var(--color-body);
-        border-bottom: 1px solid var(--border-subtle);
     }
-    .pricing-compare__table tbody tr:last-child td {
-        border-bottom: none;
-    }
-    .pricing-compare__feature {
-        text-align: left !important;
-        color: var(--color-heading) !important;
-        font-weight: 500;
-    }
-    .pricing-compare__table tbody td.is-featured {
-        background: rgba(216, 255, 58, 0.04);
-    }
-    .pricing-compare__yes {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--color-ok);
-    }
-    .pricing-compare__no {
-        color: var(--color-body);
-        font-size: 1.1rem;
-        font-weight: 700;
-    }
-    .pricing-compare__val {
-        font-size: 0.875rem;
-        font-weight: 600;
-        color: var(--color-heading);
-    }
-    .pricing-compare__table tbody td.is-featured .pricing-compare__val {
-        color: var(--color-gold-500);
-    }
-
-    /* ============================================================
-       PRICING — mobile tab switcher
-       ============================================================ */
-    .pricing-compare--mobile {
-        overflow: hidden;
-    }
-    .pcm-header {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 0.5rem 0.75rem;
-        padding: 0.875rem 1rem;
-        border-bottom: 2px solid var(--border-subtle);
-        background: var(--bg-elevated);
-        border-radius: 1rem 1rem 0 0;
-    }
-    .pcm-tabs {
-        display: flex;
-        gap: 0.125rem;
-        background: rgba(255, 255, 255, 0.07);
-        border-radius: 999px;
-        padding: 0.1875rem;
-    }
-    .pcm-tab {
-        padding: 0.3125rem 0.75rem;
-        border-radius: 999px;
-        font-size: 0.8125rem;
-        font-weight: 600;
-        color: var(--color-body);
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        transition: background 0.18s, color 0.18s;
-        white-space: nowrap;
-    }
-    .pcm-tab.is-active {
+    .pricing-factors__list li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0.6em;
+        width: 5px;
+        height: 1.5px;
         background: var(--color-gold-500);
-        color: var(--color-ink-950);
-        box-shadow: 0 1px 8px var(--glow-gold);
-    }
-    .pcm-price {
-        font-size: 0.9375rem;
-        font-weight: 800;
-        color: var(--color-gold-500);
-        letter-spacing: -0.03em;
-        white-space: nowrap;
-        margin-left: auto;
-    }
-    .pcm-group {
-        padding: 1rem 1rem 0.375rem;
-        font-size: 0.6875rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: var(--color-body);
-        background: var(--bg-elevated);
-        border-top: 1.5px solid var(--border-subtle);
-    }
-    .pcm-row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        padding: 0.8125rem 1rem;
-        border-bottom: 1px solid var(--border-subtle);
-    }
-    .pcm-row:last-child {
-        border-bottom: none;
-    }
-    .pcm-feature {
-        font-size: 0.9375rem;
-        font-weight: 500;
-        color: var(--color-heading);
-        flex: 1;
-    }
-    .pcm-value-wrap {
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        min-width: 56px;
-    }
-    .pcm-value-wrap .pricing-compare__yes { color: var(--color-ok); }
-    .pcm-value-wrap .pricing-compare__no  { color: var(--color-body); }
-    .pcm-value-wrap .pricing-compare__val {
-        font-size: 0.875rem;
-        font-weight: 700;
-        color: var(--color-gold-500);
-        text-align: right;
     }
 
     /* ============================================================

@@ -399,8 +399,11 @@
 
 {{-- ===================================================
      08 — CENY
-     Pořadí pásem je dané lang souborem, zvýrazněné pásmo
+     Pořadí úrovní je dané lang souborem, zvýrazněná úroveň
      se řídí klíčem `featured`, ne pozicí v poli (OND-198/5.4).
+
+     OND-354: karty nesou `scope` (rozsah), ne `price`. Cenu drží
+     jediné místo — prahové číslo a rozpětí v `intro` nad nimi.
      =================================================== --}}
 <section class="pd-section" id="section-price" data-analytics-view="price_anchor_view">
     <div class="container-site">
@@ -413,7 +416,7 @@
             @foreach (__('home.price_anchor.items') as $item)
             <div class="pd-price__col {{ ($item['featured'] ?? false) ? 'pd-price__col--featured' : '' }}">
                 <h3 class="pd-price__title">{{ $item['title'] }}@if ($item['featured'] ?? false) <em>{{ __('home.price_anchor.featured_label') }}</em>@endif</h3>
-                <p class="pd-price__value">{{ $item['price'] }}</p>
+                <p class="pd-price__scope">{{ $item['scope'] }}</p>
                 <p class="pd-price__desc">{{ $item['desc'] }}</p>
             </div>
             @endforeach

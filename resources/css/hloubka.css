@@ -522,8 +522,9 @@
             rgba(255, 255, 255, 0.016) 46%,
             rgba(255, 255, 255, 0) 78%);
 }
-/* Cena je bílá typografie — specular je proto neutrální, ne acidový. */
-.pd--depth #section-price .pd-price__value {
+/* Rozsah je bílá typografie — specular je proto neutrální, ne acidový.
+   (OND-354: do 26. 9. 2026 tu stála cena, `.pd-price__value`.) */
+.pd--depth #section-price .pd-price__scope {
     background-image: linear-gradient(100deg, #ffffff 0%, #f2f0ea 38%, #9b9aa0 100%);
     -webkit-background-clip: text;
     background-clip: text;
@@ -1115,17 +1116,30 @@
             rgba(255, 255, 255, 0) 68%);
 }
 
-/* --- CENÍK — nejjasnější je pásmo, ne tabulka -----------------------------
-   Doporučené pásmo je v lang souboru PRVNÍ (`popular => true` u Standardu),
-   takže na desktopu stojí vlevo. Kužel je proto nad levou třetinou, ne
-   v ose — kdo srovnává ceny, má oko tažené k tomu, co doporučuju.
+/* --- CENÍK — nejjasnější je úroveň, ne to, co ji vysvětluje ---------------
+   OND-354 přerovnal stránku a s ní i světlo. Doporučená úroveň je v lang
+   souboru PROSTŘEDNÍ (`popular => true` u Firemního webu), ne první, takže
+   na desktopu stojí v ose stránky — kužel je proto nad středem, ne nad levou
+   třetinou jako do 26. 9. 2026. Pořadí úrovní se od té doby řídí rostoucím
+   rozsahem, ne cenou.
 
-   Srovnávací tabulka pod tím je servisní obsah, přesně jako FAQ na homepage:
-   je tam pro toho, kdo si chce ověřit detail, ne pro toho, kdo se rozhoduje.
-   Dostává proto výrazně míň světla než pásma nad ní. */
+   Rozklad „co cenu zvedá a co snižuje" pod tím je servisní obsah, přesně
+   jako FAQ na homepage: je tam pro toho, kdo si chce ověřit detail, ne pro
+   toho, kdo se rozhoduje. Dostává proto výrazně míň světla.
+
+   Důkazní pás nad cenami je pruh čísel a dvě recenze. Světlo dostává jen
+   tolik, aby se oddělil od hera — jeho práce je předat pozornost dál, ne si
+   ji podržet. Ceny pod ním zůstávají nejjasnějším místem stránky. */
+.pd--depth-sub > section[data-pdd="price-proof"] {
+    --pdd-wash:
+        radial-gradient(80% 50% at 50% -8%,
+            rgba(255, 255, 255, 0.024) 0%,
+            rgba(255, 255, 255, 0.007) 50%,
+            rgba(255, 255, 255, 0) 80%);
+}
 .pd--depth-sub > section[data-pdd="price-tiers"] {
     --pdd-wash:
-        radial-gradient(64% 66% at 26% -6%,
+        radial-gradient(64% 66% at 50% -6%,
             rgba(255, 255, 255, 0.056) 0%,
             rgba(255, 255, 255, 0.016) 46%,
             rgba(255, 255, 255, 0) 78%);

@@ -10,7 +10,11 @@ return [
     'subheading' => 'Unverbindliche Preise',
     'heading'    => 'Sie wissen, worauf Sie sich einlassen — schon vor unserem ersten Gespräch.',
     // OND-198 (Befund 5.4): der Erwartungssatz muss vor der ersten Zahl stehen.
-    'intro'      => 'Die meisten Projekte, die ich baue, liegen zwischen 2.200 und 6.000 €. Wenn Sie eine Website unter 800 € suchen, bin ich nicht der richtige Anbieter für Sie — und das sage ich Ihnen gleich. Jedes Projekt ist einzigartig — den genauen Preis erfahren Sie nach einer kostenlosen Beratung.',
+    // OND-354: Untergrenze plus Spanne statt Menü aus drei Paketen (Ondřej,
+    // 26. 9. 2026 auf OND-347); der Ablehnungssatz ist damit weg. Die
+    // CZK-Untergrenze (20.000) wird absichtlich NICHT umgerechnet — siehe
+    // lang/de/home.php.
+    'intro'      => 'Die meisten Projekte liegen zwischen 2.200 und 6.000 €. Das Kleinste, was ich baue, ist eine Präsentationswebsite mit bis zu fünf Seiten. Was auf der Website steht und was sie kostet, erhalten Sie schriftlich vor Arbeitsbeginn — und diese Zahl steht auch auf der Rechnung.',
 
     // OND-135 P2 iter 5 — Plan §3.1 Hero (Page-Mark + Amber-Akzent).
     // OND-135 Bereinigung (2026-05-14): page_mark_index entfernt — Agency-
@@ -18,8 +22,9 @@ return [
     'hero' => [
         'page_mark_label' => 'PREISE',
         'upline'          => 'Kein „Auf Anfrage“-Versteckspiel.',
-        // OND-198 (Befund 5.4): Standard führt die Subline an, nicht die günstigste Stufe.
-        'heading_html'    => 'Drei Stufen,<br>ein <em>klarer Preis</em>.',
+        // OND-354: „Drei Stufen, ein klarer Preis" stimmt nicht mehr — nach
+        // dieser Änderung gibt es keine Preisstufen.
+        'heading_html'    => 'Was eine individuelle<br><em>Website kostet</em>.',
         'subline'         => 'Die Rechnung entspricht dem Angebot. Keine Mehrkosten ohne Ihr Wissen.',
     ],
 
@@ -32,15 +37,35 @@ return [
     'popular'   => 'Beliebteste Wahl',
     'quotation' => 'Angebot anfragen',
 
-    'price_note' => 'unverbindlicher Preis',
-
-    // OND-136: Tier-Namen und Preise angeglichen an die CS-Taxonomie
-    // Startovní/Standard/Custom = 25/55/95 Tausend CZK → EUR-Umrechnung (CEO-bestätigter 1:25-Anker).
+    // OND-354: Die Stufen heißen nach dem UMFANG, nicht nach einer Preisstufe,
+    // und tragen keinen Preis — der Schlüssel `price` ist weg (und mit ihm
+    // `price_note`, das ohne Zahl nichts zu beschreiben hätte). `key` ist eine
+    // technische ID für Analytics (Dimension `pricing_tier_shown`, früher aus
+    // den Preisziffern abgeleitet) und wird nie ausgegeben. Namen und `desc`
+    // sind identisch mit dem Startseiten-Anker (`home.price_anchor.items`),
+    // die Feature-Listen sind unverändert.
     'tiers' => [
         [
-            'name'    => 'Standard',
-            'desc'    => 'Für Unternehmen, die ihre Website als bestes Verkaufswerkzeug nutzen möchten.',
-            'price'   => '2.200 €',
+            'key'     => 'presentation',
+            'name'    => 'Präsentationswebsite',
+            'scope'   => 'bis 5 Seiten',
+            'desc'    => 'Ein glaubwürdiger Online-Auftritt für Selbstständige und kleine Unternehmen.',
+            'popular' => false,
+            'features' => [
+                'Bis zu 5 individuelle Seiten',
+                'Modernes responsives Design',
+                'Kontaktformular',
+                'Technische SEO',
+                'Seitengeschwindigkeits-Optimierung',
+                '14 Tage Support nach dem Launch',
+            ],
+            'cta' => 'Unverbindliches Angebot anfordern',
+        ],
+        [
+            'key'     => 'business',
+            'name'    => 'Firmenwebsite',
+            'scope'   => 'bis 12 Seiten',
+            'desc'    => 'Eine mehrsprachige Website mit Blog, Konversionsmessung und Buchungssystem.',
             'popular' => true,
             'features' => [
                 'Bis zu 12 individuelle Seiten',
@@ -54,9 +79,10 @@ return [
             'cta' => 'Unverbindliches Angebot anfordern',
         ],
         [
-            'name'    => 'Custom',
-            'desc'    => 'Für anspruchsvolle Projekte ohne Kompromisse — Online-Shop, Buchungssystem oder Webanwendung.',
-            'price'   => 'ab 3.800 €',
+            'key'     => 'custom',
+            'name'    => 'Individuell',
+            'scope'   => 'ohne Umfangsgrenze',
+            'desc'    => 'Ein Online-Shop, eine Webanwendung oder ein komplexes Portal.',
             'popular' => false,
             'features' => [
                 'Unbegrenzter Projektumfang',
@@ -68,23 +94,11 @@ return [
             ],
             'cta' => 'Unverbindliches Angebot anfordern',
         ],
-        [
-            'name'    => 'Starter',
-            // OND-198 (Befund 5.4): günstigste Stufe steht zuletzt, gerahmt als Ausnahme.
-            'desc'    => 'Eine Ausnahme, kein Standard-Einstieg. Für Selbstständige, bei denen ein größerer Umfang keinen Sinn ergibt — glaubwürdige Online-Präsenz bis 5 Seiten.',
-            'price'   => '1.000 €',
-            'popular' => false,
-            'features' => [
-                'Bis zu 5 individuelle Seiten',
-                'Modernes responsives Design',
-                'Kontaktformular',
-                'Technische SEO',
-                'Seitengeschwindigkeits-Optimierung',
-                '14 Tage Support nach dem Launch',
-            ],
-            'cta' => 'Unverbindliches Angebot anfordern',
-        ],
     ],
+
+    // OND-354: ersetzt das entschuldigende „Eine Ausnahme, kein
+    // Standard-Einstieg." auf der niedrigsten Stufe.
+    'entry_note' => 'Die kleinste Website, die ich baue, hat bis zu fünf Seiten. Sie wird schnell sein, auf dem Handy sauber funktionieren, und kein Link zum Anfrageformular wird ins Leere führen. Erwarten Sie nicht, dass sie von allein Aufträge bringt — dafür braucht es mehr Arbeit, als der kleinste Umfang zulässt. Aber sie wird ordentlich gemacht.',
 
     'note' => 'Ich bin nicht umsatzsteuerpflichtig — die genannten Preise sind Endpreise, es kommt keine Mehrwertsteuer hinzu.',
 
@@ -137,48 +151,29 @@ return [
         ],
     ],
 
+    // OND-354: Die Achse der Tabelle ändert sich — früher verglich sie drei
+    // benannte Preisstufen, die es nicht mehr gibt. Begründung in
+    // lang/cs/price.php.
     'compare' => [
-        'heading' => 'Was Sie genau bekommen',
-        'tiers'   => ['Standard', 'Custom', 'Starter'],
-        'tabs_aria'     => 'Preisstufe auswählen',
-        'included'      => 'Enthalten',
-        'not_included'  => 'Nicht enthalten',
-        'groups'  => [
-            [
-                'label' => 'Projektumfang',
-                'rows'  => [
-                    ['label' => 'Anzahl der Seiten', 'values' => ['bis zu 12', 'unbegrenzt', 'bis zu 5']],
-                    ['label' => 'Responsives Design', 'values' => [true, true, true]],
-                    ['label' => 'Kontaktformular', 'values' => [true, true, true]],
-                ],
+        'heading' => 'Was den Preis erhöht und was ihn senkt',
+        'up'   => [
+            'label' => 'Erhöht den Preis',
+            'items' => [
+                'Mehr als fünf Seiten',
+                'Eine zweite und weitere Sprachen',
+                'Ein Online-Shop oder ein Buchungssystem',
+                'Eine eigene Inhaltsverwaltung',
+                'Anbindung an Systeme, die Sie bereits nutzen',
+                'Texte und Fotos, die erst erstellt werden müssen',
             ],
-            [
-                'label' => 'Websites-Funktionen',
-                'rows'  => [
-                    ['label' => 'Blog oder Galerie mit Bearbeitung', 'values' => [true, true, false]],
-                    ['label' => 'Mehrsprachige Website', 'values' => [true, true, false]],
-                    ['label' => 'Buchungssystem', 'values' => ['optional', true, false]],
-                    ['label' => 'Online-Shop', 'values' => [false, true, false]],
-                    ['label' => 'Eigene Verwaltung', 'values' => [false, true, false]],
-                    ['label' => 'Integration externer Systeme', 'values' => [false, true, false]],
-                ],
-            ],
-            [
-                'label' => 'Marketing & Leistung',
-                'rows'  => [
-                    ['label' => 'Technische SEO', 'values' => [true, true, true]],
-                    ['label' => 'Seitengeschwindigkeits-Optimierung', 'values' => [true, true, true]],
-                    ['label' => 'Analytics & Konversionsmessung', 'values' => [true, true, false]],
-                    ['label' => 'Erweiterte SEO-Strategie', 'values' => [false, true, false]],
-                ],
-            ],
-            [
-                'label' => 'Service & Support',
-                'rows'  => [
-                    ['label' => 'Kostenloses Hosting und Domain', 'values' => ['1 Jahr', '1 Jahr', false]],
-                    ['label' => 'Support nach dem Launch', 'values' => ['1 Monat', '3 Monate', '14 Tage']],
-                    ['label' => 'Wartungsfreier Betrieb', 'values' => [true, true, true]],
-                ],
+        ],
+        'down' => [
+            'label' => 'Senkt den Preis',
+            'items' => [
+                'Texte und Fotos liegen bereit',
+                'Weniger Seiten',
+                'Eine Sprache',
+                'Sie pflegen die Inhalte nach einer Einführung selbst',
             ],
         ],
     ],

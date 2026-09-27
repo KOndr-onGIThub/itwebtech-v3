@@ -10,7 +10,10 @@ return [
     'subheading' => 'Indicative pricing',
     'heading'    => 'You know what you\'re getting into before our first meeting.',
     // OND-198 (finding 5.4): the expectation sentence must land before the first number.
-    'intro'      => 'Most projects I build land between €2,200 and €6,000. If you are looking for a website under €800, I am not the right supplier for you and I will tell you so straight away. Every project is different — you\'ll get the final price after a free consultation. This overview gives you a clear idea before we even meet.',
+    // OND-354: threshold plus range instead of a menu of three packages
+    // (Ondřej, 26 Sep 2026 on OND-347); the rejection sentence is gone with it.
+    // The CZK floor (20,000) is deliberately NOT converted — see lang/en/home.php.
+    'intro'      => 'Most projects land between €2,200 and €6,000. The smallest site I build is a presentation site of up to five pages. What goes on the site and what it costs, you get in writing before I start — and that number is what the invoice says.',
 
     // OND-135 P2 iter 5 — plan §3.1 hero (page-mark + amber accent).
     // OND-135 cleanup (2026-05-14): page_mark_index removed — agency-
@@ -18,8 +21,9 @@ return [
     'hero' => [
         'page_mark_label' => 'PRICING',
         'upline'          => 'No "request a quote" mystery.',
-        // OND-198 (finding 5.4): Standard leads the subline, not the cheapest band.
-        'heading_html'    => 'Three levels,<br>one <em>clear price</em>.',
+        // OND-354: "Three levels, one clear price" stopped being true — after
+        // this change there are no price bands.
+        'heading_html'    => 'What a custom<br><em>website costs</em>.',
         'subline'         => 'The invoice matches the spec. No extra costs without your agreement.',
     ],
 
@@ -32,15 +36,34 @@ return [
     'popular'   => 'Most popular',
     'quotation' => 'Get a quote',
 
-    'price_note' => 'indicative price',
-
-    // OND-136: tier names and prices aligned with CS taxonomy
-    // Startovní/Standard/Custom = 25/55/95 thousand CZK → EUR conversion (CEO-confirmed 1:25 anchor).
+    // OND-354: levels are named after SCOPE, not a price band, and carry no
+    // price — the `price` key is gone (and with it `price_note`, which had
+    // nothing left to describe). `key` is a technical id for analytics
+    // (dimension `pricing_tier_shown`, previously derived from the price
+    // digits); it is never rendered. Names and `desc` match the homepage
+    // anchor (`home.price_anchor.items`); feature lists are unchanged.
     'tiers' => [
         [
-            'name'    => 'Standard',
-            'desc'    => 'For businesses that want their website to be their best sales tool.',
-            'price'   => '€2,200',
+            'key'     => 'presentation',
+            'name'    => 'Presentation site',
+            'scope'   => 'up to 5 pages',
+            'desc'    => 'A credible online presence for sole traders and small businesses.',
+            'popular' => false,
+            'features' => [
+                'Up to 5 custom pages',
+                'Modern responsive design',
+                'Contact form',
+                'Technical SEO',
+                'Page speed optimisation',
+                '14 days of post-launch support',
+            ],
+            'cta' => 'Get a free quote',
+        ],
+        [
+            'key'     => 'business',
+            'name'    => 'Business site',
+            'scope'   => 'up to 12 pages',
+            'desc'    => 'A multilingual site with a blog, conversion tracking and a booking system.',
             'popular' => true,
             'features' => [
                 'Up to 12 custom pages',
@@ -54,9 +77,10 @@ return [
             'cta' => 'Get a free quote',
         ],
         [
+            'key'     => 'custom',
             'name'    => 'Custom',
-            'desc'    => 'For demanding projects without compromise — e-shop, booking system or web application.',
-            'price'   => 'from €3,800',
+            'scope'   => 'no scope limit',
+            'desc'    => 'An e-shop, a web application or a complex portal.',
             'popular' => false,
             'features' => [
                 'Unlimited project scope',
@@ -68,23 +92,12 @@ return [
             ],
             'cta' => 'Get a free quote',
         ],
-        [
-            'name'    => 'Starter',
-            // OND-198 (finding 5.4): cheapest band is last and framed as an exception.
-            'desc'    => 'An exception, not the standard entry point. For sole traders where a larger scope makes no sense — a credible online presence up to 5 pages.',
-            'price'   => '€1,000',
-            'popular' => false,
-            'features' => [
-                'Up to 5 custom pages',
-                'Modern responsive design',
-                'Contact form',
-                'Technical SEO',
-                'Page speed optimisation',
-                '14 days of post-launch support',
-            ],
-            'cta' => 'Get a free quote',
-        ],
     ],
+
+    // OND-354: replaces the apologetic "An exception, not the standard entry
+    // point." on the lowest level. It does not turn the person away, it says
+    // what the money does not buy.
+    'entry_note' => 'The smallest site I build has up to five pages. It will be fast, it will work properly on a phone, and no link to your enquiry form will be broken. Don\'t expect it to start bringing in work on its own — that takes more work than the smallest scope allows. But it will be done properly.',
 
     'note' => 'I am not registered for VAT — the prices above are final, no VAT is added.',
 
@@ -137,48 +150,28 @@ return [
         ],
     ],
 
+    // OND-354: the table axis changes — it used to compare three named price
+    // bands, and those are gone. See lang/cs/price.php for the reasoning.
     'compare' => [
-        'heading' => 'What exactly you get',
-        'tiers'   => ['Standard', 'Custom', 'Starter'],
-        'tabs_aria'     => 'Select pricing level',
-        'included'      => 'Included',
-        'not_included'  => 'Not included',
-        'groups'  => [
-            [
-                'label' => 'Project scope',
-                'rows'  => [
-                    ['label' => 'Number of pages', 'values' => ['up to 12', 'unlimited', 'up to 5']],
-                    ['label' => 'Responsive design', 'values' => [true, true, true]],
-                    ['label' => 'Contact form', 'values' => [true, true, true]],
-                ],
+        'heading' => 'What raises the price and what lowers it',
+        'up'   => [
+            'label' => 'Raises the price',
+            'items' => [
+                'More than five pages',
+                'A second and further languages',
+                'An e-shop or a booking system',
+                'Your own content administration',
+                'Integration with systems you already use',
+                'Copy and photos that need to be created',
             ],
-            [
-                'label' => 'Website features',
-                'rows'  => [
-                    ['label' => 'Blog or gallery with editing', 'values' => [true, true, false]],
-                    ['label' => 'Multilingual website', 'values' => [true, true, false]],
-                    ['label' => 'Booking system', 'values' => ['optional', true, false]],
-                    ['label' => 'E-shop', 'values' => [false, true, false]],
-                    ['label' => 'Custom administration', 'values' => [false, true, false]],
-                    ['label' => 'External system integrations', 'values' => [false, true, false]],
-                ],
-            ],
-            [
-                'label' => 'Marketing & performance',
-                'rows'  => [
-                    ['label' => 'Technical SEO', 'values' => [true, true, true]],
-                    ['label' => 'Page speed optimisation', 'values' => [true, true, true]],
-                    ['label' => 'Analytics & conversion tracking', 'values' => [true, true, false]],
-                    ['label' => 'Advanced SEO strategy', 'values' => [false, true, false]],
-                ],
-            ],
-            [
-                'label' => 'Service & support',
-                'rows'  => [
-                    ['label' => 'Free hosting and domain', 'values' => ['1 year', '1 year', false]],
-                    ['label' => 'Post-launch support', 'values' => ['1 month', '3 months', '14 days']],
-                    ['label' => 'Maintenance-free operation', 'values' => [true, true, true]],
-                ],
+        ],
+        'down' => [
+            'label' => 'Lowers the price',
+            'items' => [
+                'Your copy and photos are ready',
+                'Fewer pages',
+                'One language',
+                'You fill in the content yourself after training',
             ],
         ],
     ],
