@@ -3,8 +3,10 @@
 @section('title', __('cookies.meta.title'))
 @section('description', __('cookies.meta.description'))
 
-{{-- OND-266 (5): `hide_prefooter` odebráno — právní stránky byly bez navigace
-     slepá ulička. Patička je teď stejná jako na /projekty, /cenik a /kontakt. --}}
+{{-- OND-266 (5): právní stránky nesmí být slepá ulička — bez navigace
+     z nich vedlo ven jen zpětné tlačítko. Od OND-387 nese navigaci
+     patička v `layouts/app.blade.php` na všech stránkách stejně; předpatička
+     i s prodejním tlačítkem je pryč, a sem ani žádné nepatří (§E). --}}
 
 @section('content')
 

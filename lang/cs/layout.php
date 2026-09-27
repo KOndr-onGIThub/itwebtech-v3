@@ -22,15 +22,11 @@ return [
     'footer' => [
         'rights'    => 'Všechna práva vyhrazena.',
         'developer' => 'Web vytvořil',
-    ],
-
-    'prefooter' => [
+        // OND-387: claim a navigace se přestěhovaly z předpatičky (zrušená,
+        // §3 základu podstránek). `prefooter.cta` a `prefooter.nav_label`
+        // s ní zanikly — tlačítko v patičce není.
         'tagline'   => 'Weby a aplikace na míru. Napřímo.',
-        // OND-369: předpatička zvala na „konzultaci zdarma“, zbytek webu
-        // od OND-307 říká „Napsat poptávku“. Slovo „zdarma“ jde pryč —
-        // ceník (OND-354) staví na prahovém čísle, ne na bezplatné schůzce.
-        'cta'       => 'Napsat poptávku',
-        'nav_label' => 'Footer navigace',
+        'nav_label' => 'Navigace v patičce',
     ],
 
     'modal' => [

@@ -2526,93 +2526,109 @@
     }
 
     /* ============================================================
-       PRE-FOOTER
-       ============================================================ */
-    .footer-prefooter {
-        background: var(--bg-surface);
-        border-top: 1px solid var(--border-subtle);
-        padding-block: 3rem;
-    }
+       PATIČKA — OND-387 (základ podstránek §3c)
+       Předpatička je zrušená; z ní sem přešla navigace a claim.
+       Dva řádky oddělené vlasovou linkou: navigace, pod ní značka +
+       claim vlevo a copyright / telefon / zásady / cookies vpravo.
 
-    .footer-prefooter__inner {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1.375rem;
-        text-align: center;
-    }
+       Jeden základ #0A0A0B, žádný pruh. Dřív se v posledních ~500 px
+       střídaly čtyři tóny: tělo #0C0E14 → předpatička #101318 →
+       patička #161A24 → acidové tlačítko. Tlačítko sem nepatří (§3b):
+       druhá kopie výzvy zlevní acid všude jinde.
 
-    .footer-prefooter__logo {
-        height: 24px;
-        width: auto;
-        opacity: 0.5;
-    }
-
-    .footer-prefooter__tagline {
-        font-size: 1rem;
-        color: var(--color-body);
-        max-width: 400px;
-        margin: 0;
-        line-height: 1.6;
-    }
-
-    .footer-prefooter__nav {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.125rem;
-    }
-
-    .footer-prefooter__link {
-        padding: 0.375rem 0.75rem;
-        font-size: 0.875rem;
-        color: var(--color-body);
-        border-radius: 6px;
-        transition: color 0.15s, background-color 0.15s;
-    }
-    .footer-prefooter__link:hover {
-        color: var(--color-heading);
-        background-color: rgba(255, 255, 255, 0.07);
-    }
-
-    /* ============================================================
-       FOOTER BAR
+       Kontrast (na #0A0A0B): odkazy navigace #F2F0EA ≈ 17 : 1,
+       claim a řádek 2 #9B9AA0 ≈ 7 : 1.
        ============================================================ */
     .footer-bar {
-        background: var(--bg-elevated);
-        border-top: 1px solid var(--border-subtle);
-        padding-block: 1.125rem;
+        background: var(--color-bg-base);
+        border-top: 1px solid var(--color-border-soft);
+        padding-block: 1.75rem 1.25rem;
     }
 
     .footer-bar__inner {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: 0.375rem;
-        text-align: center;
-        font-size: 0.8125rem;
-        /* OND-123: --color-muted (dnes --color-decorative) (#5A6480) na #161A24 ≈ 3.3:1 → WCAG AA fail.
-           --color-body (#94A3B8) ≈ 5.8:1 → PASS pro normální text. */
-        color: var(--color-body);
     }
-    @media (min-width: 640px) {
-        .footer-bar__inner {
+
+    /* Řádek 1 — navigace. Cíl ≥ 44 px na výšku (WCAG 2.5.8, viz blok
+       OND-231 níž); mezery mezi odkazy nese column-gap, ne padding,
+       aby acidová linka při najetí nebyla širší než text. */
+    .footer-bar__nav {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 2.5rem;
+        padding-bottom: 1.25rem;
+        border-bottom: 1px solid var(--color-border-soft);
+    }
+
+    .footer-bar__nav-link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.75rem;
+        font-size: 0.9375rem;
+        color: var(--color-fg-primary);
+        text-decoration: underline;
+        text-decoration-color: transparent;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 6px;
+        transition: text-decoration-color 0.15s;
+    }
+    .footer-bar__nav-link:hover,
+    .footer-bar__nav-link:focus-visible {
+        text-decoration-color: var(--color-accent);
+    }
+
+    /* Řádek 2 — značka + claim | právní řádek */
+    .footer-bar__base {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding-top: 1.5rem;
+    }
+    @media (min-width: 1024px) {
+        .footer-bar__base {
             flex-direction: row;
             justify-content: space-between;
+            align-items: flex-end;
+            gap: 2rem;
         }
     }
 
+    /* Logo na 100 % — dřívější 50% vodoznak v předpatičce odchází. */
+    .footer-bar__logo {
+        display: block;
+        height: 14px;
+        width: auto;
+    }
+
+    .footer-bar__tagline {
+        margin: 0.5rem 0 0;
+        font-size: 0.9375rem;
+        line-height: 1.6;
+        color: var(--color-fg-muted);
+    }
+
+    .footer-bar__meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        column-gap: 1.5rem;
+        font-size: 0.8125rem;
+        color: var(--color-fg-muted);
+    }
+
+    .footer-bar__phone,
     .footer-bar__gdpr-link {
-        /* OND-123: per matching .footer-bar__inner — viz výše. */
-        color: var(--color-body);
+        color: var(--color-fg-muted);
         text-decoration: underline;
-        text-decoration-color: rgba(148, 163, 184, 0.4);
-        text-underline-offset: 2px;
+        text-decoration-color: var(--color-border-mid);
+        text-underline-offset: 4px;
         transition: color 0.15s, text-decoration-color 0.15s;
     }
+    .footer-bar__phone:hover,
     .footer-bar__gdpr-link:hover {
-        color: var(--color-heading);
-        text-decoration-color: var(--color-heading);
+        color: var(--color-fg-primary);
+        text-decoration-color: var(--color-accent);
     }
 
     /* ============================================================
@@ -3848,21 +3864,7 @@
         align-items: center;
         min-height: 2.75rem;
     }
-    .footer-bar__inner {
-        /* Odsazení odkazů si vlastní mezeru přineslo samo; původních
-           0,375rem by s ním na mobilu udělalo zbytečně vysokou patičku. */
-        gap: 0;
-    }
-    @media (min-width: 640px) {
-        .footer-bar__inner { gap: 0.75rem; }
-    }
-
-    /* Pre-footer navigace — 35 px */
-    .footer-prefooter__link {
-        display: inline-flex;
-        align-items: center;
-        min-height: 2.75rem;
-    }
+    /* Navigace v patičce (OND-387) má 44 px přímo v `.footer-bar__nav-link`. */
 
     /* Hamburger v hlavičce — 40×40 */
     .navbar__hamburger {

@@ -22,14 +22,10 @@ return [
     'footer' => [
         'rights'    => 'All rights reserved.',
         'developer' => 'Website by',
-    ],
-
-    'prefooter' => [
+        // OND-387: claim and navigation moved here from the pre-footer, which
+        // is gone (subpage foundation §3). `prefooter.cta` and
+        // `prefooter.nav_label` went with it — the footer has no button.
         'tagline'   => 'Custom websites and applications. Direct.',
-        // OND-369: the pre-footer invited to a "free consultation" while the
-        // rest of the site says "Write an enquiry" since OND-307. "Free" is
-        // dropped — pricing (OND-354) rests on a threshold number.
-        'cta'       => 'Write an enquiry',
         'nav_label' => 'Footer navigation',
     ],
 

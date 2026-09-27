@@ -32,9 +32,6 @@
 
 @section('title', __('home.meta.title'))
 @section('description', __('home.meta.description'))
-{{-- Závěrečná výzva je poslední sekce stránky — generický prefooter
-     by za ní byl další CTA v řadě (nález OND-201/5.8). --}}
-@section('hide_prefooter', 'true')
 
 {{-- OND-145 P2 — preload display fontu (IBM Plex Sans Variable wght axis)
      pro hero LCP. Variable woff2 nese weights 100–700 v jednom souboru.

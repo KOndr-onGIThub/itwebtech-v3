@@ -22,14 +22,10 @@ return [
     'footer' => [
         'rights'    => 'Alle Rechte vorbehalten.',
         'developer' => 'Website von',
-    ],
-
-    'prefooter' => [
+        // OND-387: Claim und Navigation sind aus dem Pre-Footer hierher
+        // umgezogen; der Pre-Footer ist entfernt (Unterseiten-Grundlage §3).
+        // `prefooter.cta` und `prefooter.nav_label` entfallen — kein Button.
         'tagline'   => 'Websites und Anwendungen nach Maß. Direkt.',
-        // OND-369: Der Pre-Footer lud zur „kostenlosen Beratung“ ein, der
-        // restliche Web sagt seit OND-307 „Anfrage schreiben“. „Kostenlos“
-        // fällt weg — die Preisliste (OND-354) baut auf einer Schwelle auf.
-        'cta'       => 'Anfrage schreiben',
         'nav_label' => 'Footer-Navigation',
     ],
 
