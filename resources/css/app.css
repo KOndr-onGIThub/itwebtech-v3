@@ -2516,13 +2516,16 @@
 
     /* Řádek 1 — navigace. Cíl ≥ 44 px na výšku (WCAG 2.5.8, viz blok
        OND-231 níž); mezery mezi odkazy nese column-gap, ne padding,
-       aby acidová linka při najetí nebyla širší než text. */
+       aby acidová linka při najetí nebyla širší než text.
+       OND-394: bez čáry pod navigací — navigace (15 px, krémová) a právní
+       řádek (malý, tlumený) se liší samy. Jediná čára v patičce je ta nad
+       ní: tady končí obsah. Průhledná, ne `border: 0`, ať nic neposkočí. */
     .footer-bar__nav {
         display: flex;
         flex-wrap: wrap;
         column-gap: 2.5rem;
         padding-bottom: 1.25rem;
-        border-bottom: 1px solid var(--color-border-soft);
+        border-bottom: 1px solid transparent;
     }
 
     .footer-bar__nav-link {

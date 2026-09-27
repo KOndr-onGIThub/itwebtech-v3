@@ -87,8 +87,8 @@
      11  .pd-field (při fokusu)         ●        –      proud teče do políčka
 
    CO SCHVÁLNĚ NIC NEDOSTÁVÁ — a to je taky rozhodnutí
-     - dělítka sekcí (`.pd-section` border-top) — žádný přejezd. Tohle byla
-       ta „linka u každé sekce", která rušila.
+     - dělítka sekcí — žádný přejezd. Tohle byla ta „linka u každé sekce",
+       která rušila; od OND-394 (pravidlo oddělovačů) tam není ani statická.
      - 10 REFERENCE a 12 TOYOTA — dvě nejtišší místa stránky. Šest citací
        a jeden osobní odstavec; kdyby se tu taky něco rozsvěcovalo, přestane
        mít cenu, že se rozsvěcuje jinde. Tma mezi reflektory musí zůstat.
@@ -331,8 +331,8 @@
    --------------------------------------------------------------------------
    Amplituda: základ je #0A0A0B = rgb(10,10,11). Bílá s alfou a dá 10 + 245a.
    Strop je zhruba #131316 → alfa 0.038. Všechny washe se drží v 0.010–0.058.
-   Stávající linka #26262B odpovídá bílé s alfou ~0.114, odlesk na lince proto
-   pracuje v pásmu 0.02 (ve stínu) až 0.30 (v místě dopadu).
+   (Odlesk na dělítkách sekcí, který tu pracoval v pásmu 0.02–0.30, zrušilo
+   pravidlo oddělovačů OND-394 — hranu sekce nese mezera a tenhle svit.)
 
    Zdroj se sekci od sekce posouvá — při scrollu má člověk cítit, že obchází
    jeden osvětlený objekt. Nejjasnější jsou dvě místa, kde se rozhoduje:
@@ -415,36 +415,13 @@
     transition: opacity 1100ms var(--ease-out);
 }
 
-/* Odlesk na dělítku sekce se rozsvěcuje spolu s plochou — jinak by linka
-   svítila naplno nad ztlumenou sekcí a rozbila by iluzi jednoho zdroje. */
-.pd--depth .pd-section::before,
-.pd--depth .pd-strip::before {
-    opacity: var(--pdd-up);
-    transition: opacity 1100ms var(--ease-out);
-}
 
-/* Dělítko sekce: barva linky se nemění plošně, mění se její jas po délce.
-   1px místo musí zůstat, ať nic neposkočí. POZOR: tady žádný pohyb — tohle
-   je statický odlesk, ne přejezd. */
-.pd--depth .pd-section,
-.pd--depth .pd-strip {
-    border-top-color: transparent;
-}
-
-.pd--depth .pd-section::before,
-.pd--depth .pd-strip::before {
-    content: "";
-    position: absolute;
-    inset: -1px 0 auto 0;
-    height: 1px;
-    pointer-events: none;
-    z-index: 2;
-    background-image: var(--pdd-edge,
-        linear-gradient(90deg,
-            rgba(242, 240, 234, 0.02) 0%,
-            rgba(242, 240, 234, 0.26) 50%,
-            rgba(242, 240, 234, 0.02) 100%));
-}
+/* Dělítko sekce tu do OND-398 kreslilo statický odlesk (`::before` s jasem
+   po délce, `--pdd-edge` v každé sekci). Pravidlo oddělovačů OND-394 ho
+   ruší: horní hranu sekce dnes nese mezera, nadpis H2 a skok jasu tohohle
+   svitu (`::after` výš) — ten na hranici naměřeně dělá 4–12 úrovní, čára
+   nad ním byla „dvakrát totéž". Hrana `.pd-section` je průhledná
+   v podpis.css, 1px místo zůstává. */
 
 /* --- Specular na velkých číslech -------------------------------------------
    Světlo olízne číslici z jedné strany. Tmavý konec není nová barva — je to
@@ -509,11 +486,6 @@
    každému vizuálu jinou roli — jednou je u zdroje, jednou dál — a střídání
    layoutu tím dostane fyzikální důvod. */
 .pd--depth #section-projects {
-    --pdd-edge: linear-gradient(90deg,
-        rgba(242, 240, 234, 0) 0%,
-        rgba(242, 240, 234, 0.06) 44%,
-        rgba(242, 240, 234, 0.28) 82%,
-        rgba(242, 240, 234, 0.03) 100%);
     --pdd-wash:
         radial-gradient(72% 74% at 84% 0%,
             rgba(255, 255, 255, 0.046) 0%,
@@ -521,61 +493,26 @@
             rgba(255, 255, 255, 0) 78%);
 }
 
-/* --- CO STAVÍM — světlo shora, tři svislé linky různě nasvícené -----------
-   Svislé vlasové linky jsou jediné „hrany“ v sekci. Když je nasvítím různě
-   (prostřední nejsilněji), sloupce přestanou být tabulkou a dostanou hloubku
-   jako tři desky za sebou. Statické — nic tudy neprojíždí. */
+/* --- CO STAVÍM — světlo shora -------------------------------------------
+   Statické svislice mezi sloupci tu byly nasvícené různě (prostřední
+   nejsilněji). OND-394 H27–28 je ruší — sloupce otevírají čísla 01–03
+   a mezi nimi je 96 px. Po místě svislice dál sjíždí náboj vrstvy B
+   (`.pd-service + .pd-service::after`, §B níž), který kreslí vlastní jádro. */
 .pd--depth #section-services {
-    --pdd-edge: linear-gradient(90deg,
-        rgba(242, 240, 234, 0.03) 0%,
-        rgba(242, 240, 234, 0.27) 46%,
-        rgba(242, 240, 234, 0.03) 100%);
     --pdd-wash:
         radial-gradient(64% 70% at 48% -6%,
             rgba(255, 255, 255, 0.05) 0%,
             rgba(255, 255, 255, 0.012) 50%,
             rgba(255, 255, 255, 0) 80%);
 }
-@media (min-width: 1024px) {
-    .pd--depth #section-services .pd-service + .pd-service {
-        border-left-color: transparent;
-        position: relative;
-    }
-    .pd--depth #section-services .pd-service + .pd-service::before {
-        content: "";
-        position: absolute;
-        inset: 0 auto 0 -1px;
-        width: 1px;
-        pointer-events: none;
-        background-image: linear-gradient(180deg,
-            rgba(242, 240, 234, 0.24) 0%,
-            rgba(242, 240, 234, 0.09) 34%,
-            rgba(242, 240, 234, 0.02) 100%);
-    }
-    /* Prostřední předěl je nejblíž ose zdroje → nejjasnější. */
-    .pd--depth #section-services .pd-service:nth-child(2)::before {
-        background-image: linear-gradient(180deg,
-            rgba(242, 240, 234, 0.34) 0%,
-            rgba(242, 240, 234, 0.12) 34%,
-            rgba(242, 240, 234, 0.02) 100%);
-    }
-}
 
 /* --- 06 CENÍK — nejjasnější místo stránky ---------------------------------
    Sem se má člověk dívat. Zdroj je nejblíž, plocha má nejvyšší povolenou
-   amplitudu a doporučený sloupec stojí v kuželu světla. Jen tady a u formuláře
-   smí linka na krátkém úseku přejít do acidu — jsou to jediné dva „horké body“
-   nasvícení na celé stránce a obě jsou to místa, kde se rozhoduje. */
+   amplitudu a doporučený sloupec stojí v kuželu světla.
+   OND-394 H7: acidový odlesk na dělítku sekce („horký bod“) zmizel s dělítkem.
+   Ceník označuje doporučený sloupec a smyčka náboje; bez odlesku zůstává
+   jeho 2px linka jediným acidem v sekci. */
 .pd--depth #section-price {
-    --pdd-edge:
-        linear-gradient(90deg,
-            rgba(216, 255, 58, 0) 34%,
-            rgba(216, 255, 58, 0.30) 50%,
-            rgba(216, 255, 58, 0) 66%),
-        linear-gradient(90deg,
-            rgba(242, 240, 234, 0.02) 0%,
-            rgba(242, 240, 234, 0.30) 50%,
-            rgba(242, 240, 234, 0.02) 100%);
     --pdd-wash:
         radial-gradient(70% 60% at 50% -8%,
             rgba(255, 255, 255, 0.058) 0%,
@@ -596,11 +533,6 @@
    Osobní sekce s videem. Nejtišší místo horní půlky stránky: plocha jde
    o stupeň dolů a nic se v ní nerozsvěcuje. Tma mezi reflektory. */
 .pd--depth #section-toyota {
-    --pdd-edge: linear-gradient(90deg,
-        rgba(242, 240, 234, 0.01) 0%,
-        rgba(242, 240, 234, 0.08) 40%,
-        rgba(242, 240, 234, 0.26) 76%,
-        rgba(242, 240, 234, 0.04) 100%);
     --pdd-wash:
         radial-gradient(66% 78% at 78% 4%,
             rgba(255, 255, 255, 0.04) 0%,
@@ -610,13 +542,9 @@
 
 /* --- 09 POSTUP — světlo sestupuje po stránce ------------------------------
    Sekce je o čase a pohybu vpřed. Zdroj proto během sekce klesá: u kroku 01
-   je nahoře a odlesk na lince vlevo, u kroku 04 je dole a odlesk vpravo.
+   je nahoře a specular na číslici zleva, u kroku 04 je dole a zprava.
    Při scrollování to vypadá, že světlo jde s vámi. */
 .pd--depth #jak-pracuji {
-    --pdd-edge: linear-gradient(90deg,
-        rgba(242, 240, 234, 0.24) 0%,
-        rgba(242, 240, 234, 0.08) 40%,
-        rgba(242, 240, 234, 0) 84%);
     --pdd-wash:
         linear-gradient(162deg,
             rgba(255, 255, 255, 0.046) 0%,
@@ -630,24 +558,15 @@
 .pd--depth #jak-pracuji .pd-step:nth-child(4) .pd-step__num { --pdd-spec: linear-gradient(240deg, #e6ff70 0%, #d8ff3a 48%, rgba(216, 255, 58, 0.50) 100%); }
 
 /* --- 09 REFERENCE — světlo shora vlevo ------------------------------------
-   Citace pod sebou. Aby to nebyl jednolitý seznam, odlesk na linkách
-   položek slábne odshora dolů — stejně, jako slábne světlo se vzdáleností.
-   Hloubka bez zvýrazňování čehokoli obsahového.
-   OND-269: homepage vypisuje tři citace místo šesti, pravidlo pro pátou
-   a další položku je proto zrušené (na /o-mne se tenhle blok nepoužívá). */
+   Citace pod sebou. Slábnoucí linky nad položkami zrušilo OND-394 H18–20 —
+   recenzi otevírá tvář nebo monogram, silnější předěl než linka. */
 .pd--depth #section-testimonials {
-    --pdd-edge: linear-gradient(90deg,
-        rgba(242, 240, 234, 0.26) 0%,
-        rgba(242, 240, 234, 0.07) 44%,
-        rgba(242, 240, 234, 0) 86%);
     --pdd-wash:
         radial-gradient(66% 62% at 16% 0%,
             rgba(255, 255, 255, 0.042) 0%,
             rgba(255, 255, 255, 0.012) 46%,
             rgba(255, 255, 255, 0) 76%);
 }
-.pd--depth #section-testimonials .pd-testi__item            { border-top-color: rgba(242, 240, 234, 0.13); }
-.pd--depth #section-testimonials .pd-testi__item:nth-child(n + 3) { border-top-color: rgba(242, 240, 234, 0.09); }
 
 /* --- FAQ — světlo ubývá s délkou seznamu ----------------------------------
    FAQ je servisní obsah, nemá soutěžit s poptávkou pod ním. Linky otázek
@@ -656,16 +575,13 @@
 
    OND-308: na nové homepage je `#faq` vnořený blok uvnitř sekce
    „Reference a námitky", ne vlastní sekce. Slábnoucí linky otázek platí
-   dál; `--pdd-edge` / `--pdd-wash` níž spotřebuje jen `.pd-section::before`,
-   takže na `#faq` zůstávají bez účinku a svítí tam nasvícení celé sekce
-   (`#section-testimonials`). Deklarace tu zůstávají schválně: jsou to dvě
-   proměnné, ne pravidlo, které něco kreslí, a drží popis sekce pohromadě
-   pro případ, že se FAQ někdy vrátí do vlastní sekce. */
+   dál — řádky FAQ jsou hranice klikací plochy a podle pravidla oddělovačů
+   OND-394 zůstávají (H22–26). `--pdd-wash` níž spotřebuje jen svit sekce
+   (`> section::after`), takže na `#faq` zůstává bez účinku a svítí tam
+   nasvícení celé sekce (`#section-testimonials`). Deklarace tu zůstává
+   schválně: je to proměnná, ne pravidlo, které něco kreslí, a drží popis
+   sekce pohromadě pro případ, že se FAQ někdy vrátí do vlastní sekce. */
 .pd--depth #faq {
-    --pdd-edge: linear-gradient(90deg,
-        rgba(242, 240, 234, 0.03) 0%,
-        rgba(242, 240, 234, 0.22) 40%,
-        rgba(242, 240, 234, 0.02) 100%);
     --pdd-wash:
         radial-gradient(86% 42% at 38% -6%,
             rgba(255, 255, 255, 0.04) 0%,
@@ -679,19 +595,9 @@
 
 /* --- 11 POPTÁVKA — lampa zblízka nad papírem na stole ---------------------
    Poslední krok cesty. Zdroj je nejníž a nejblíž — panel formuláře je
-   nejjasnější plocha na stránce. Druhý (a poslední) acidový horký bod
-   na lince navazuje na ten z ceníku. */
+   nejjasnější plocha na stránce. Acidový odlesk na dělítku sekce zmizel
+   s dělítkem (OND-394 H9); acidovou hranu nese deska formuláře (§C). */
 .pd--depth #poptavka {
-    --pdd-edge:
-        linear-gradient(90deg,
-            rgba(216, 255, 58, 0) 52%,
-            rgba(216, 255, 58, 0.28) 70%,
-            rgba(216, 255, 58, 0) 88%),
-        linear-gradient(90deg,
-            rgba(242, 240, 234, 0.02) 0%,
-            rgba(242, 240, 234, 0.12) 34%,
-            rgba(242, 240, 234, 0.30) 70%,
-            rgba(242, 240, 234, 0.03) 100%);
     --pdd-wash:
         radial-gradient(56% 78% at 72% 4%,
             rgba(255, 255, 255, 0.058) 0%,
@@ -1485,9 +1391,7 @@
     .pd--depth .pd-faq__q::after,
     .pd--depth .pd-form__panel::after,
     .pd--depth .pd-field::after,
-    .pd--depth > section::after,
-    .pd--depth .pd-section::before,
-    .pd--depth .pd-strip::before {
+    .pd--depth > section::after {
         animation: none !important;
         transition: none !important;
     }
