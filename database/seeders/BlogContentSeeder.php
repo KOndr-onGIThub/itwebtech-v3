@@ -107,16 +107,17 @@ class BlogContentSeeder extends Seeder
     /**
      * Finální texty (dokument `blog-texty`, OND-203).
      *
-     * Cenová pásma v článku „Kolik stojí web" jsou srovnaná s `lang/cs/price.php`
-     * (Standard 55 000 · Custom od 95 000 · Startovní 25 000, nejlevnější poslední
-     * per OND-198 nález 5.4). Dokument uváděl jiná čísla; ceník je zdroj pravdy.
+     * Čísla v článku „Kolik stojí web" jsou převzatá z ceníku (`lang/cs/price.php`):
+     * rozpětí 55–150 tisíc a vstupní cena od 20 000 Kč, úrovně bez ceny
+     * (OND-347, nasazeno OND-389). Ceník je zdroj pravdy — když se změní,
+     * srovnat i tenhle text.
      *
      * Výzva k akci na konci článku se nepřidává do textu — detail článku už
      * renderuje jednu CTA sekci z lang souborů (`blog.cta.*`).
      *
      * @return array<int, array<string, string>>
      */
-    private function articles(): array
+    public function articles(): array
     {
         return [
 
@@ -125,9 +126,9 @@ class BlogContentSeeder extends Seeder
             // ----------------------------------------------------------------
             3 => [
                 'title'       => 'Kolik stojí web na míru a z čeho se ta cena skládá',
-                'description' => 'V jakých cenových pásmech weby dělám, co v nich je a co cenu zvedá. Ať víte předem, jestli se vejdu do vašeho rozpočtu.',
+                'description' => 'Kolik u mě stojí web, co v té ceně je a co ji zvedá nebo snižuje. Ať víte předem, jestli se vejdu do vašeho rozpočtu.',
                 'perex'       => <<<'HTML'
-                    <blockquote><p>Na cenu se mě lidé ptají jako na první věc a je to správná otázka. Jedno číslo vám ale nikdo poctivě říct nemůže. Web za pětadvacet tisíc a web za dvě stě tisíc jsou dvě různé věci. Napsal jsem proto na rovinu, v jakých pásmech dělám, co je v nich obsažené a co cenu posouvá nahoru.</p></blockquote>
+                    <blockquote><p>Na cenu se mě lidé ptají jako na první věc a je to správná otázka. Jedno číslo vám ale nikdo poctivě říct nemůže. Web za dvacet tisíc a web za sto padesát tisíc jsou dvě různé věci. Napsal jsem proto na rovinu, kolik u mě web stojí, co v té ceně je a co ji posouvá nahoru nebo dolů.</p></blockquote>
                     HTML,
                 'content_1'   => <<<'HTML'
                     <h2>Proč nemám jedno číslo</h2>
@@ -136,11 +137,12 @@ class BlogContentSeeder extends Seeder
                     <h2>Za co vlastně platíte</h2>
                     <p>Platíte můj čas a to, co s ním umím udělat. Nekupujete licenci k šabloně ani hodiny obchodníka, který vám web prodal a pak zmizel. Pracuju sám, takže v ceně není agenturní režie ani koordinátor, který mi přeposílá vaše e-maily.</p>
                     <p>Weby píšu vlastním kódem. Nestavím je z hotových stavebnic a cizích doplňků, které se musí pořád aktualizovat a časem se rozbijí. Je to dražší na začátku a levnější v čase, protože nemáte co opravovat.</p>
-                    <h2>Tři pásma, ve kterých dělám</h2>
-                    <p><strong>Standard — 55 000 Kč.</strong> Web do dvanácti stránek na míru. Máte v něm jednoduchou správu obsahu, takže si texty, fotky nebo reference měníte sami. Zvládne i další jazykovou verzi. Tohle si objednává většina firem.</p>
-                    <p><strong>Custom — od 95 000 Kč.</strong> E-shop, rezervační systém nebo aplikace na míru. Rozsah není daný dopředu, cena vychází z toho, co má web umět a na jaké systémy se napojuje.</p>
-                    <p><strong>Startovní — 25 000 Kč.</strong> Výjimka, ne standardní vstup. Prezentace do pěti stránek pro živnostníka, kterému větší rozsah nedává smysl.</p>
-                    <p>Nejsem plátce DPH. Cena, kterou vám řeknu, je konečná. Co přesně v jednotlivých pásmech je, máte rozepsané v <a href="/cenik">ceníku</a>.</p>
+                    <h2>Kolik to u mě vychází</h2>
+                    <p>Většina projektů vychází mezi 55 a 150 tisíci korunami. Nejmenší web, který stavím, je prezentace do pěti stránek od 20 000 Kč. Kolik bude stát ten váš, určuje hlavně rozsah.</p>
+                    <p><strong>Prezentační web — do pěti stránek.</strong> Pro živnostníky a malé firmy, kterým větší rozsah nedává smysl. Bude rychlý, na telefonu se bude ovládat dobře a nebude na něm rozbitý odkaz na poptávku. Nečekejte od něj, že vám sám začne vozit zakázky — na to je potřeba víc práce, než se za tu cenu dá odvést. Ale hotový bude poctivě.</p>
+                    <p><strong>Firemní web — do dvanácti stránek.</strong> Web na míru s jednoduchou správou obsahu, takže si texty, fotky nebo reference měníte sami. Zvládne i další jazykovou verzi. Tohle si objednává většina firem.</p>
+                    <p><strong>Na míru — bez omezení rozsahu.</strong> E-shop, rezervační systém nebo aplikace na míru. Rozsah není daný dopředu, cena vychází z toho, co má web umět a na jaké systémy se napojuje.</p>
+                    <p>Nejsem plátce DPH. Cena, kterou vám řeknu, je konečná. Co přesně je v jednotlivých úrovních, máte rozepsané v <a href="/cenik">ceníku</a>.</p>
                     HTML,
                 'content_mid' => <<<'HTML'
                     <blockquote><p>Cenu znáte předtím, než začnu pracovat. Ne až na faktuře.</p></blockquote>
@@ -153,11 +155,18 @@ class BlogContentSeeder extends Seeder
                     <li><strong>Obsah, který ještě neexistuje.</strong> Když nemáte fotky ani texty, musí se vyrobit. Domluvíme se předem, co zajistíte vy a co já, ať to není překvapení na faktuře.</li>
                     <li><strong>Rozsah, který roste za pochodu.</strong> Proto píšu specifikaci. Ať oba víme, kde je hranice.</li>
                     </ul>
+                    <h2>Co cenu sníží</h2>
+                    <ul>
+                    <li><strong>Texty a fotky máte připravené.</strong> Nic se nemusí vyrábět a můžu rovnou stavět.</li>
+                    <li><strong>Menší počet stránek.</strong> Méně práce, nižší cena.</li>
+                    <li><strong>Jeden jazyk.</strong> Jedna verze webu, kterou stačí postavit a spravovat.</li>
+                    <li><strong>Obsah si plníte sami.</strong> Ukážu vám, jak na to, a texty a fotky do webu vkládáte vy, ne já.</li>
+                    </ul>
                     <h2>Proč nejsem nejlevnější</h2>
                     <p>Protože nechci být. Web v šabloně za pár tisíc dává smysl, když potřebujete jen vizitku na internetu. Za tu cenu ho klidně mějte, řeknu vám to rovnou a nebudu vás přemlouvat.</p>
                     <p>Já stavím weby firmám, které web reálně používají v obchodu a chtějí ho mít pořádně. Za ten rozdíl dostanete řešení postavené na to, jak vaše firma funguje, a kód, který patří vám. Není zamčený u mě ani u žádné platformy, ze které byste nemohli odejít.</p>
                     <h2>Kdy ode mě web nekupujte</h2>
-                    <p>Když máte rozpočet do dvaceti tisíc. Když potřebujete web do týdne. Když chcete jen opravit existující WordPress. Nic z toho nedělám a je lepší, když to víte teď, než po dvou schůzkách.</p>
+                    <p>Když potřebujete web do týdne. Když chcete jen opravit existující WordPress. Ani jedno nedělám a je lepší, když to víte teď, než po dvou schůzkách.</p>
                     <h2>Jak se dostanete k přesné ceně</h2>
                     <p>Napište mi, co potřebujete. Klidně stručně. Ozvu se nejpozději následující pracovní den a probereme to. Když z toho vyjde, že vám můžu pomoct, dostanete specifikaci s konkrétní cenou. Když ne, řeknu vám to a nebudu vám nic tlačit.</p>
                     HTML,
