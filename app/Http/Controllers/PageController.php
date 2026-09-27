@@ -316,7 +316,24 @@ class PageController extends Controller
             }
         }
 
-        return view('pages.article', compact('article', 'translation', 'locale', 'hreflangs'));
+        // OND-406: závěr článku vede na DALŠÍ článek — následující publikovaný
+        // podle `position` (pořadí výpisu /zapisky), za posledním zase první.
+        // Stejný filtr jako blog(): jen články s aktivním slugem v této locale,
+        // jinak by odkaz vedl na /de/blog/{cs-slug} a 404.
+        $siblings = Article::where('published', true)
+            ->whereHas('slugs', fn ($query) => $query
+                ->where('locale', $locale)
+                ->where('active', true))
+            ->orderBy('position')
+            ->with(['translations', 'slugs'])
+            ->get()
+            ->values();
+        $index = $siblings->search(fn ($a) => $a->id === $article->id);
+        $next = ($index !== false && $siblings->count() > 1)
+            ? $siblings->get(($index + 1) % $siblings->count())
+            : null;
+
+        return view('pages.article', compact('article', 'translation', 'locale', 'hreflangs', 'next'));
     }
 
     /**
