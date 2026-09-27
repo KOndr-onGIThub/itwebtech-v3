@@ -1,3 +1,0 @@
-Sitemap: https://itwebtech.cz/sitemap.xml
-User-agent: *
-Disallow:
