@@ -86,7 +86,7 @@ return [
         [
             'id'       => 'rostislav-toman',
             'name'     => 'Rostislav Toman',
-            'company'  => 'Tradiční výroba pralinek, s.r.o.',
+            'company'  => 'Tradiční výroba pralinek',
             'role'     => 'manager',
             'image'    => 'rostislav_toman.jpeg',
             'initials' => 'RT',
