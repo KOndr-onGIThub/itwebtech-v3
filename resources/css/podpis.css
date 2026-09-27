@@ -2113,3 +2113,261 @@
 @media (prefers-reduced-motion: reduce) {
     .pd-next__link:hover .pd-next__arrow { transform: none; }
 }
+
+/* ------------------------------------------------------------
+   OND-406 — typografie dlouhého textu `.pd-prose`.
+   Homepage souvislý text nemá; tohle je jeho sazba v jazyce ACID.
+   Používá: detail článku, /zasady-ochrany-osobnich-udaju, /cookies.
+   Pokrývá: p, h2, h3, ul, ol, li, strong, a, blockquote, hr, code,
+   table, figure (`.pd-figure--prose`), br. K tomu úvodní odstavec
+   `.pd-prose__lead` a deska `.pd-aside` (bonus článku, shrnutí právních
+   stránek). Žádná čára kromě řádků tabulky (OND-394 §4).
+   ------------------------------------------------------------ */
+.pd-prose {
+    max-width: 37rem;
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--color-fg-primary);
+    overflow-wrap: break-word;
+}
+@media (min-width: 768px) {
+    .pd-prose { font-size: var(--text-body-lg); }
+}
+.pd-prose > * { margin: 0; }
+.pd-prose > * + * { margin-top: 1em; }
+.pd-prose p,
+.pd-prose li { text-wrap: pretty; }
+
+.pd-prose h2,
+.pd-prose h3 {
+    font-family: var(--font-display);
+    color: var(--color-fg-primary);
+    letter-spacing: var(--tracking-tight);
+    text-wrap: balance;
+}
+.pd-prose h2 {
+    font-weight: 700;
+    font-size: clamp(21px, 1.8vw, 26px);
+    line-height: 1.25;
+}
+.pd-prose h3 {
+    font-weight: 600;
+    font-size: var(--text-h4);
+    line-height: 1.3;
+}
+.pd-prose > * + h2 { margin-top: var(--space-7); }
+.pd-prose > * + h3 { margin-top: var(--space-6); }
+.pd-prose > h2 + *,
+.pd-prose > h3 + * { margin-top: var(--space-3); }
+@media (min-width: 768px) {
+    .pd-prose > * + h2 { margin-top: var(--space-8); }
+}
+
+.pd-prose ul,
+.pd-prose ol { padding-left: 1.5em; }
+/* Tailwind preflight nuluje `list-style` — bez tohohle zmizí čísla u `ol`. */
+.pd-prose ul { list-style-type: disc; }
+.pd-prose ol { list-style-type: decimal; }
+.pd-prose li + li { margin-top: 0.5em; }
+.pd-prose ul > li::marker { content: '\2013\00a0\00a0'; color: var(--color-fg-muted); }
+.pd-prose ol > li::marker {
+    color: var(--color-fg-muted);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.pd-prose strong,
+.pd-prose b { font-weight: 600; color: var(--color-fg-primary); }
+
+.pd-prose a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--pd-accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    transition: text-decoration-thickness var(--duration-micro) var(--ease-out);
+}
+.pd-prose a:hover { text-decoration-thickness: 2px; }
+.pd-prose a:focus-visible { outline: 2px solid var(--pd-accent); outline-offset: 2px; }
+
+/* Vytažená věta uprostřed textu. Nese ji velikost a písmo, ne svislá
+   čára vlevo: ta by byla druhá značka pro totéž. */
+.pd-prose blockquote {
+    margin-block: var(--space-7);
+    padding: 0;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(20px, 1.8vw, 24px);
+    line-height: 1.35;
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-fg-primary);
+    max-width: 30ch;
+}
+.pd-prose blockquote > * { margin: 0; }
+.pd-prose blockquote > * + * { margin-top: 0.75em; }
+
+/* Úvodní odstavec — Ondřejův hlas, první věc pod titulkem. V DB je
+   uložený jako `<blockquote>`, sazba vytažené věty se tu ruší. */
+.pd-prose__lead,
+.pd-prose .pd-prose__lead blockquote {
+    margin: 0;
+    max-width: none;
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-variation-settings: 'wght' 300;
+    font-size: clamp(19px, 1.7vw, 23px);
+    line-height: 1.5;
+    letter-spacing: 0;
+    color: var(--color-fg-primary);
+}
+.pd-prose__lead > * + * { margin-top: 0.75em; }
+
+/* `<hr>` = krátká čárka jako `.pd-eyebrow__sep`, ne čára přes šířku. */
+.pd-prose hr {
+    width: 24px;
+    height: 1px;
+    border: 0;
+    margin-block: var(--space-7);
+    background: var(--color-fg-muted);
+}
+
+.pd-prose code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.88em;
+    background: var(--color-bg-elev-1);
+    padding: 0.1em 0.35em;
+}
+
+/* Tabulka: řádkové linky zůstávají (páruje se po řádcích), svislé ne. */
+.pd-prose table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    font-variant-numeric: tabular-nums;
+}
+@media (max-width: 639px) {
+    .pd-prose table { display: block; overflow-x: auto; }
+}
+.pd-prose th {
+    text-align: left;
+    font-weight: 400;
+    font-size: var(--text-caption);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-fg-muted);
+}
+.pd-prose th,
+.pd-prose td {
+    padding: var(--space-3) var(--space-4) var(--space-3) 0;
+    border-bottom: 1px solid var(--color-border-soft);
+    vertical-align: top;
+}
+
+/* Obrázek v textu — `.pd-figure` (základ OND-379 §2b) na šířku sloupce
+   a v přirozeném poměru. Ořez 4:5 / 3:2 je psaný na portrét z /o-mne. */
+.pd-prose > .pd-figure--prose { margin-block: var(--space-7); max-width: none; }
+.pd-figure--prose img { aspect-ratio: auto; object-fit: initial; }
+@media (min-width: 640px) {
+    .pd-figure--prose img { aspect-ratio: auto; }
+}
+
+/* Deska — dodatek nebo shrnutí. Plocha, ne rámeček. (`.pd-note` je jméno
+   obsazené drobnou poznámkou na homepage a ceníku, proto `.pd-aside`.) */
+.pd-aside {
+    background: var(--color-bg-elev-1);
+    padding: var(--space-6) var(--space-5);
+    font-size: var(--text-body);
+}
+.pd-prose > .pd-aside { margin-block: var(--space-8) var(--space-7); }
+.pd-prose > .pd-aside:first-child { margin-top: 0; }
+.pd-aside > * { margin: 0; }
+.pd-aside > * + * { margin-top: 1em; }
+.pd-aside > .pd-eyebrow + * { margin-top: var(--space-4); }
+@media (min-width: 768px) {
+    .pd-aside { padding: var(--space-6); }
+}
+
+/* --- Článek: hlava, podpis ---------------------------------------- */
+/* Titulek a úvod jsou jedna věta: 48 px, ne mezera mezi sekcemi. */
+.pd-page-head--article { padding-bottom: var(--space-4); }
+.pd-page-head--article + .pd-article { padding-top: 0; }
+
+.pd-eyebrow__back {
+    position: relative;
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--duration-micro) var(--ease-out);
+}
+/* Cíl 44 px bez posunu sazby. */
+.pd-eyebrow__back::before { content: ''; position: absolute; inset: -16px -8px; }
+.pd-eyebrow__back:hover { color: var(--color-fg-primary); }
+.pd-eyebrow__back:focus-visible { outline: 2px solid var(--pd-accent); outline-offset: 4px; }
+
+/* Podpis — od textu ho dělí mezera, ne rámeček. */
+.pd-prose > .pd-author { margin-top: var(--space-9); }
+.pd-author .pd-eyebrow { margin-bottom: var(--space-4); }
+.pd-author__body {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    align-items: center;
+    gap: var(--space-4);
+}
+.pd-author__photo {
+    display: block;
+    width: 64px;
+    height: 64px;
+    overflow: hidden;
+    border: 1px solid var(--color-border-soft);
+}
+/* Zdroj 1080×810 na šířku, tvář je asi čtvrtina plochy — stejné
+   přiblížení jako dřív v kolečku (OND-297), jen ve čtverci. */
+.pd-author__photo img {
+    display: block;
+    width: 134px;
+    height: 100px;
+    max-width: none;
+    margin: -8px 0 0 -30px;
+}
+.pd-author__name {
+    margin: 0;
+    font-weight: 600;
+    font-size: var(--text-body);
+    color: var(--color-fg-primary);
+}
+.pd-author__role {
+    margin: var(--space-1) 0 0;
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+}
+.pd-author__bio {
+    margin: var(--space-4) 0 0;
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--color-fg-muted);
+    max-width: 56ch;
+}
+.pd-author__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-top: var(--space-2);
+    font-size: var(--text-body);
+    color: var(--color-fg-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--pd-accent);
+    text-underline-offset: 0.2em;
+}
+.pd-author__link:hover { text-decoration-thickness: 2px; }
+.pd-author__link:focus-visible { outline: 2px solid var(--pd-accent); outline-offset: 2px; }
+
+/* Titulek článku je dlouhá věta z DB (43–63 znaků). `balance` srovná
+   řádky, aby na konci nevisela jednopísmenná předložka („a z / čeho"). */
+.pd-heading--article { text-wrap: balance; }
+
+/* Tlačítko uvnitř textu (jen /cookies: „Odvolat souhlas"). `.pd-cta`
+   je psané na <a>; na <button> potřebuje srovnat písmo a rámeček. */
+.pd-prose button.pd-cta { border: 0; cursor: pointer; font: inherit; font-weight: 600; font-size: var(--text-body); }
+.pd-prose button.pd-cta:focus-visible { outline: 2px solid var(--pd-accent); outline-offset: 3px; }
