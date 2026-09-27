@@ -6,7 +6,7 @@ return [
     // The old "How to" framing promised generic tutorials — exactly the
     // content that is being removed. URL slug stays unchanged (SEO).
     'meta' => [
-        'title'       => 'Notes — Ondřej Kriška',
+        'title'       => 'Notes — Ondřej Kriška, ONDRAWEB',
         'description' => 'I write about what I actually deal with when building websites and applications. Pricing, briefs, redesigns, custom apps.',
     ],
 
