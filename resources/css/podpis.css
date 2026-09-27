@@ -1504,6 +1504,9 @@
 }
 .pd-form__panel .form-file__trigger,
 .pd-form__panel .form-file__list-item { border-style: solid; }
+/* OND-401: rámeček přílohy je čára, která zůstává (OND-394), tak jako pole
+   (OND-398) musí mít 3 : 1 — stejná barva jako `.pd-field`, přerušovaný dál. */
+.pd-form__panel .form-file { border-color: var(--color-fg-muted); }
 .pd-form__panel .form-file__trigger { color: var(--color-fg-primary); }
 .pd-form__panel .form-file:hover,
 .pd-form__panel .form-file.is-drag-over,
@@ -1675,13 +1678,6 @@
    a z /o-mne (`.pd-page-head`, `.pd-about-cta`); tady je jen to,
    co navíc potřebuje stránka se čtyřmi skupinami recenzí.
    ------------------------------------------------------------ */
-/* [OND-394 — do jeho nasazení jen pro /recenze] Stejné tři řádky jako
-   u /cenik výš: sekci otevírá nadpis a mezera, recenzi tvář nebo monogram,
-   skupinu nadpis. JAKMILE OND-394 NASADÍ BLOK A A C PLOŠNĚ, SMAZAT. */
-.pd--depth-sub > section[data-pdd^="reviews-"] { border-top-color: transparent; }
-.pd--depth-sub > section[data-pdd^="reviews-"]::before { content: none; }
-.pd--depth-sub > section[data-pdd="reviews-list"] .pd-testi__item { border-top-color: transparent; }
-
 /* Slot hlavy podstránky (základ OND-379 §2a) — tady dva odkazy na profily. */
 .pd-page-head__actions {
     display: flex;
