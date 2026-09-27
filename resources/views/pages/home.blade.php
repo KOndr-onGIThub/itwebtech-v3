@@ -52,10 +52,21 @@
     // stránce být nemá. Feature flag `show_toyota_testimonial` tím
     // pro homepage ztratil smysl.
     $allTestimonials = collect(__('testimonials.items'));
-    $homeTestimonials = collect(['Stanislav Holcmann', 'Rostislav Toman', 'Hana Jaskmanická'])
-        ->map(fn ($name) => $allTestimonials->firstWhere('name', $name))
+    $homeTestimonials = collect(['stanislav-holcmann', 'rostislav-toman', 'hana-jaskmanicka'])
+        ->map(fn ($id) => $allTestimonials->firstWhere('id', $id))
         ->filter()
         ->values();
+
+    // OND-353: citace u kroků, u Toyoty a u formuláře mívaly jméno opsané
+    // jako volný text (`quote_author`) ve třech jazycích zvlášť. Dnes drží
+    // `quote_ref` = `id` v `testimonials.php` a podpis se sází z jednoho
+    // místa. Chybějící ref = žádný podpis, ne holý klíč.
+    $personBy = fn (?string $ref) => $ref ? $allTestimonials->firstWhere('id', $ref) : null;
+
+    // Uvozovky jsou per-locale (CS/DE „…“, EN “…”) a sází je šablona,
+    // ne texty v `lang` — viz `home.quote_marks`.
+    $quoteOpen  = __('home.quote_marks.open');
+    $quoteClose = __('home.quote_marks.close');
 
     // Tři texty jsou na nové stránce nové a zatím existují jen česky —
     // překlady jsou samostatná karta (S4). Dokud klíč v lang/{en,de}
@@ -339,8 +350,10 @@
             <p>{{ __('home.toyota.text') }}</p>
             <p>{{ __('home.toyota.text_2') }}</p>
             <blockquote class="pd-origin__quote">
-                {{ __('home.toyota.quote_text') }}
-                <footer>— {{ __('home.toyota.quote_author') }}</footer>
+                {{ $quoteOpen }}{{ __('home.toyota.quote_text') }}{{ $quoteClose }}
+                @if ($toyotaPerson = $personBy(__('home.toyota.quote_ref')))
+                <footer><x-testimonial-by :person="$toyotaPerson" :size="40" /></footer>
+                @endif
             </blockquote>
         </div>
     </div>
@@ -376,8 +389,10 @@
                         <p class="pd-step__text">{{ $step['text'] }}</p>
                         @if (!empty($step['quote_text']))
                         <blockquote>
-                            {{ $step['quote_text'] }}
-                            <footer>— {{ $step['quote_author'] }}</footer>
+                            {{ $quoteOpen }}{{ $step['quote_text'] }}{{ $quoteClose }}
+                            @if ($stepPerson = $personBy($step['quote_ref'] ?? null))
+                            <footer><x-testimonial-by :person="$stepPerson" :size="40" /></footer>
+                            @endif
                         </blockquote>
                         @endif
                         @if (!empty($step['note']))
@@ -458,24 +473,13 @@
 
         <div class="pd-testi">
             @foreach ($homeTestimonials as $i => $review)
+            {{-- OND-353: ordinál `01/02/03` byl v levém sloupci dekorace, která
+                 čtenáři neříkala nic. Na jeho místě stojí portrét (nebo monogram)
+                 a mřížka `56px 1fr` zůstává na pixel stejná. Podpis je nad
+                 citací — první fixace oka padne na tvář a jméno, ne na text. --}}
             <article class="pd-testi__item">
-                <span class="pd-testi__num" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
-                <div>
-                    <p class="pd-testi__text">{{ $review['text'] }}</p>
-                    <p class="pd-testi__meta">
-                        {{ $review['name'] }} — {{ $review['company'] }}@if ($review['role']), {{ $review['role'] }}@endif
-                        @php
-                            $sourceLabels = [
-                                'google'   => 'Google',
-                                'facebook' => 'Facebook',
-                                'firmy_cz' => 'Firmy.cz',
-                            ];
-                        @endphp
-                        @if (!empty($sourceLabels[$review['source'] ?? '']))
-                        <span class="pd-testi__source">{{ $sourceLabels[$review['source']] }}</span>
-                        @endif
-                    </p>
-                </div>
+                <x-testimonial-by :person="$review" :size="56" />
+                <p class="pd-testi__text">{{ $quoteOpen }}{{ $review['text'] }}{{ $quoteClose }}</p>
             </article>
             @endforeach
         </div>
@@ -542,8 +546,10 @@
             <div class="pd-form__intro">
                 <p class="pd-intro">{{ __('home.inline_form.description') }}</p>
                 <blockquote class="pd-form__quote">
-                    {{ __('home.inline_form.quote_text') }}
-                    <footer>— {{ __('home.inline_form.quote_author') }}</footer>
+                    {{ $quoteOpen }}{{ __('home.inline_form.quote_text') }}{{ $quoteClose }}
+                    @if ($formPerson = $personBy(__('home.inline_form.quote_ref')))
+                    <footer><x-testimonial-by :person="$formPerson" :size="40" /></footer>
+                    @endif
                 </blockquote>
             </div>
 

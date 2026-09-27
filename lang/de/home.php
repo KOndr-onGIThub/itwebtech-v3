@@ -2,6 +2,11 @@
 
 return [
 
+    // OND-353: uvozovky kolem citací sází šablona, ne texty — aby se do
+    // `lang` nedostaly rovné ASCII " (opakovaná vada, viz lang/*/cookies.php
+    // jako zdroj pravdy). CS/DE mají „…“ (U+201E + U+201C), EN “…” (U+201C + U+201D).
+    'quote_marks' => ['open' => '„', 'close' => '“'],
+
     // OND-201 (Befund 5.7): Der Seitentitel darf sich nicht über die Negation
     // der Konkurrenz definieren, und „kein WordPress" sagt jemandem nichts,
     // der nicht weiß, was WordPress ist (Prinzip 0).
@@ -103,14 +108,14 @@ return [
                 'time'         => '60 Min., binnen einer Woche',
                 'text'         => 'Sie schreiben mir über das Formular unten, worum es geht. Ich melde mich spätestens am nächsten Arbeitstag und wir verabreden ein Telefonat oder ein Treffen. Sie sprechen mit mir, nicht mit einem Vertriebler — mich interessiert, an wen Sie verkaufen, wie Anfragen bei Ihnen entstehen und was die Website leisten soll.',
                 'quote_text'   => 'Er hat mir wirklich zugehört und daraus etwas gemacht, mit dem ich rundum zufrieden bin.',
-                'quote_author' => 'Magda Pernicová, Realiťačky v akci',
+                'quote_ref'    => 'magda-pernicova',
             ],
             [
                 'heading'      => 'Spezifikation',
                 'time'         => '2–5 Tage',
                 'text'         => 'Sie bekommen es schriftlich: was auf der Website steht, wie viele Seiten sie hat und was sie kostet. Was in der Spezifikation steht, steht auf der Rechnung. Den Liefertermin schätze ich vorher ein, nicht hinterher.',
                 'quote_text'   => 'Er analysiert die Ausgangslage gründlich und will die bestehenden Prozesse wirklich verstehen. Er sammelt die Anforderungen der Nutzer und fragt nach, wohin es gehen soll.',
-                'quote_author' => 'Jan Stybor, Leiter der Projektabteilung, Toyota',
+                'quote_ref'    => 'jan-stybor',
                 'note'         => 'Der Termin ist eine Schätzung, keine Verpflichtung. Freigaben und Unterlagen von Ihrer Seite gehören zur Arbeit, und ich sage das gleich am Anfang.',
             ],
             [
@@ -145,7 +150,7 @@ return [
         'text'         => 'Angefangen habe ich als Arbeiter in der Logistik, gegangen bin ich als leitender Spezialist im Projektteam. Achtzehn Jahre habe ich gesucht, wo in Produktion und Montage Zeit verloren geht, und dazu eine Firmenanwendung geschrieben, die Millionen Kronen gespart hat. In der Produktion können Sie sich nicht erlauben, dass etwas ausfällt. Dort habe ich gelernt: Software macht man richtig oder gar nicht.',
         'text_2'       => 'Websites baue ich genauso. Bevor ich die erste Zeile schreibe, will ich wissen, wie Anfragen bei Ihnen entstehen und was danach mit ihnen passiert. Erst danach entsteht die Seite. Sie merken es an der Spezifikation, die Sie bekommen, bevor ich anfange.',
         'quote_text'   => 'Eine der größten Stärken von Ondřej ist sein starker Wunsch, sich zu entwickeln — nicht nur die Bedürfnisse der Kunden zu erfüllen, sondern ihre Erwartungen zu übertreffen.',
-        'quote_author' => 'Pavel Baudyš, Direktor Produktion, Montage & Logistik, Toyota Motor Manufacturing Czech Republic (2024)',
+        'quote_ref'    => 'pavel-baudys',
     ],
 
     // OND-269: die einzige Projektsektion der Startseite (früher `showcase`
@@ -348,12 +353,18 @@ return [
 
 
     // OND-201 (Befund 5.8): die einzige abschließende Aufforderung der Homepage.
+    // OND-309 opravila duplicitu jen v češtině: citace u formuláře byla
+    // Jaskmanická, jejíž recenze stojí o obrazovku výš v sekci „Co říkají
+    // klienti". EN/DE zůstaly pozadu. OND-353 přidává k citacím tvář, takže
+    // by se tu její portrét objevil dvakrát na jedné stránce — sjednoceno
+    // se `lang/cs` na Štěpánka. Věty jsou doslovně z `de/testimonials.php`,
+    // nejde o nový překlad.
     'inline_form' => [
         'eyebrow'         => 'Anfrage',
         'heading'         => 'Schreiben Sie mir, was Sie brauchen',
         'description'     => 'Beschreiben Sie kurz, worum es geht. Ich melde mich spätestens am nächsten Arbeitstag und wir gehen unverbindlich durch, was Sinn ergibt. Wenn wir nicht zusammenpassen, sage ich es Ihnen geradeheraus.',
-        'quote_text'      => 'Dank des individuellen Ansatzes, der Flexibilität und der Professionalität entspricht das Ergebnis unseren Vorstellungen.',
-        'quote_author'    => 'Hana Jaskmanická, Geschäftsführerin, VP Industry',
+        'quote_text'      => 'Er handelt schnell und effizient. Für mich war das ein großer Unterschied zum vorherigen IT-Dienstleister.',
+        'quote_ref'       => 'ivo-stepanek',
         'name'            => 'Vor- und Nachname',
         'email'           => 'E-Mail',
         'phone'           => 'Telefon (optional)',
