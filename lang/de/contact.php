@@ -24,7 +24,11 @@ return [
     'cta_consultation'    => 'Schreiben Sie mir',
 
     'form_heading'        => 'Kontaktformular',
-    'form_subheading'     => 'Erhalten Sie ein kostenloses, unverbindliches Angebot oder senden Sie eine Anfrage',
+    // OND-371 — viz lang/cs/contact.php: „kostenlos“ jde pryč, termín odpovědi
+    // se neopakuje počtvrté, slovník drží krok 3 („Umfang, Termin, Preis“).
+    // Druhá věta je eliptická („oder eine Antwort“): plné „auf Ihre Frage“
+    // lámalo řádek se sirotkem „Ihre Frage.“ Takto 1 řádek, rezerva 45 px.
+    'form_subheading'     => 'Sie bekommen ein Angebot mit Umfang, Termin und Preis — oder eine Antwort.',
     'name'                => 'Vollständiger Name',
     'email'               => 'E-Mail-Adresse',
     'tel'                 => 'Telefon (optional)',
