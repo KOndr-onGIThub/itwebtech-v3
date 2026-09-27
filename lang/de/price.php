@@ -3,7 +3,7 @@
 return [
 
     'meta' => [
-        'title'       => 'Preise — Ondřej Kriška',
+        'title'       => 'Preise — Ondřej Kriška, ONDRAWEB',
         'description' => 'Unverbindliche Preise für Websites, Online-Shops und Webanwendungen. Klare Vorstellung Ihrer Investition vor dem ersten Gespräch.',
     ],
 
@@ -29,12 +29,14 @@ return [
     ],
 
     // Sticky CTA — durchgehend sichtbar, „der Preis verschwindet nie".
+    // OND-391: nevykresluje se (plovoucí tlačítko z /cenik odešlo, OND-393).
     'sticky_cta' => [
         'label' => 'Stufe wählen',
         'cta'   => 'Unverbindliches Angebot anfordern',
     ],
 
     'popular'   => 'Beliebteste Wahl',
+    // OND-391: `quotation` se nevykresluje (tlačítka u doplňků odešla, OND-393).
     'quotation' => 'Angebot anfragen',
 
     // OND-359: Einleitung des Case-Study-Links in der Stufenkarte. Die

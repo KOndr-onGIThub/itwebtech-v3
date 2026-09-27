@@ -1187,7 +1187,12 @@
 
    Důkazní pás nad cenami je pruh čísel a dvě recenze. Světlo dostává jen
    tolik, aby se oddělil od hera — jeho práce je předat pozornost dál, ne si
-   ji podržet. Ceny pod ním zůstávají nejjasnějším místem stránky. */
+   ji podržet. Ceny pod ním zůstávají nejjasnějším místem stránky.
+
+   OND-393: pás i rozklad „zvedá / snižuje" stály do převodu na šedém pruhu
+   `.section-alt`, všechny sekce pak na základu #0C0E14. Teď je celá stránka
+   na #0A0A0B bez pruhů. Amplitudy jsou kalibrované na ten starý stav a vědomě
+   se nemění — patří kartě poslední převáděné stránky (základ OND-379 §0). */
 .pd--depth-sub > section[data-pdd="price-proof"] {
     --pdd-wash:
         radial-gradient(80% 50% at 50% -8%,
@@ -1226,8 +1231,10 @@
             rgba(255, 255, 255, 0.014) 0%,
             rgba(255, 255, 255, 0) 70%);
 }
-/* Závěrečná výzva: jediné druhé rozsvícení na stránce. Pozadí je tu
-   #161A24 (světlejší než strop homepage), proto jen 0.034. */
+/* Závěrečná výzva: jediné druhé rozsvícení na stránce. Amplituda 0.034 je
+   kalibrovaná na dřívější pozadí #161A24 (`.section-cta`). Od OND-393 stojí
+   sekce na základu #0A0A0B; amplitudy se nemění — patří kartě poslední
+   převáděné stránky (základ OND-379 §0). */
 .pd--depth-sub > section[data-pdd="price-cta"] {
     --pdd-wash:
         radial-gradient(60% 80% at 50% -6%,
@@ -1420,33 +1427,27 @@
 
 
 /* ==========================================================================
-   E4. CENÍK — proč doporučené pásmo NEDOSTÁVÁ uzavřenou smyčku
+   E4. CENÍK — proč doporučená úroveň NEDOSTÁVÁ uzavřenou smyčku
    --------------------------------------------------------------------------
    Smyčka kolem `.pd-price__col--featured` je na homepage nejsilnější gesto
-   celé vrstby B, a zadání čekalo, že se sem přenese. Nepřenáší se, a je to
-   rozhodnutí, ne opomenutí:
+   celé vrstvy B. Na /cenik se nepřenáší.
 
-   Na homepage je doporučený sloupec HOLÝ — nemá kartu, jen 2px acid linku
-   nahoře. Smyčka tam kreslí jediný uzavřený obrys, který na stránce je,
-   a proto něco znamená.
+   Do OND-393 to ceník zdůvodňoval tím, že doporučené
+   pásmo je hotová karta (pozadí, acid rámeček, stín, odznak) a smyčka by jen
+   objela rámeček, který už tam je. S převodem do jazyka homepage (OND-391)
+   karta i rámeček, stín a odznak zmizely: doporučená úroveň je teď holý
+   sloupec `.pd-price` s 2px acid linkou nahoře a slovem „Nejoblíbenější"
+   u názvu — stejně jako na homepage.
 
-   Na /cenik je doporučené pásmo hotová karta: vlastní pozadí (#161A24),
-   acid rámeček dokola, vržený stín a navrch odznak „nejčastější volba“.
-   Je označené čtyřikrát dřív, než na něj cokoli přijede. Pátý obrys po
-   téže dráze, jakou už kreslí rámeček, nepřidá informaci — jen se po
-   existující lince svezme. Homepage si přesně tohle sama zakazuje v §C
-   („Čtvrté označení by z toho udělalo kartu“); tady by to byla táž chyba
-   o patro výš.
+   Smyčka sem přesto nepatří, ale z jiného důvodu: vrstva B (pohyb) je na
+   podstránkách vypnutá plošně — „PODSTRÁNKY: VRSTVA B VYPNUTÁ" nahoře
+   (OND-386, základ OND-379 §1c: „NE, i na /cenik"). Obal `.pd--depth-sub`
+   zhasíná aliasy, ze kterých smyčka kreslí, a `hloubka.js` v TARGETS pro
+   podstránky `.pd-price__col--featured` nemá.
 
-   Navíc: karta má `border-radius: 1rem`. Smyčka je složená ze čtyř rovných
-   pásů na hranách boxu, takže by se u každého rohu na ~16px ztratila pod
-   zaoblením. Čtyři výpadky v gestu, které stojí na tom, že je souvislé.
-
-   Rozhodnutí: na /cenik nese rozhodovací moment VRSTVA A — pásma dostávají
-   nejjasnější nasvícení na stránce (viz `data-pdd="price-tiers"` výš)
-   a všechno pod nimi se propadá do stínu. Pohyb se sem nepřidává.
-   Kdyby se někdy pásma přepsala na holé sloupce jako na homepage, smyčka
-   sem patřit začne — do té doby ne.
+   Rozhodovací moment na /cenik nese VRSTVA A — úrovně dostávají nejjasnější
+   nasvícení na stránce (viz `data-pdd="price-tiers"` výš) a všechno pod nimi
+   se propadá do stínu.
    ========================================================================== */
 
 

@@ -81,7 +81,7 @@ class Ond359PriceTierProofLinksTest extends TestCase
     {
         $body = $this->get('/cenik')->assertOk()->getContent();
 
-        $this->assertStringNotContainsString('pricing-tier__proof', $body);
+        $this->assertStringNotContainsString('pd-price__proof', $body);
         $this->assertStringNotContainsString(__('price.proof_intro') . ':', $body);
 
         // Zbytek karet zůstává — mizí odkaz, ne úroveň.

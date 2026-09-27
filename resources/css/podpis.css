@@ -1461,3 +1461,167 @@
 }
 .pd-form__panel .form-group--checkbox a:hover { color: var(--pd-accent); }
 .pd-form__panel .pd-alert { margin: var(--space-5) 0 0; }
+
+
+/* ------------------------------------------------------------
+   OND-393 — /cenik (návrh a měření OND-391). Sdílené komponenty:
+   `.pd-section--band`, `.pd-points`, `.pd-duo`, `.pd-rates`, `.pd-close`
+   a perex v hlavě `.pd-split`. Použije je beze změny /projekty (rozbor
+   OND-391 §6). `.pd-eyebrow__sep` a `.pd-split` přišly s /kontakt výš.
+   ------------------------------------------------------------ */
+/* Hlava `.pd-split` s perexem: perex patří
+   k titulku, ne k obsahu vpravo. Bez tohohle se na mobilu sečte
+   `--space-8` perexu s mezerou mřížky a vznikne 100px díra. */
+.pd-split > header .pd-head__title + .pd-intro { margin: var(--space-3) 0 0; }
+
+/* Závěrečná výzva podstránky: otázka vlevo,
+   věta a JEDINÉ acidové tlačítko stránky vpravo. Věta a tlačítko jsou jedna
+   výzva — `--space-8` pod `.pd-intro` je rozpojoval (táž úvaha jako
+   `.pd-about-cta` na /o-mne). /projekty: `projects-cta`. */
+.pd-close .pd-intro { margin-bottom: var(--space-6); }
+
+/* Pás: sekce, která předává pozornost dál, ne ji
+   drží. Kratší rytmus než `.pd-section` — týž, jaký homepage dává odstavci
+   o situaci klienta (`.pd-situation`), jen pod obecným jménem. /projekty:
+   pruh filtrů nad mřížkou. */
+.pd-section--band { padding-block: clamp(2.5rem, 4.5vw, 4rem); }
+/* Pruh čísel a pod ním citace — `.pd-strip__list` na homepage stojí sám. */
+.pd-strip__list + .pd-testi { margin-top: var(--space-6); }
+/* Na 390 px se pruh zalomí tak, že řádek začíná „·" — tečka na začátku
+   řádku vypadá jako odrážka, kterou není. Starý ceník to už jednou vyřešil
+   sloupcem bez teček (`.pricing-proof__figures`, smazané v OND-393); tady
+   je totéž.
+   Hranice 640 px je táž jako v pravidle OND-394 (blok G), které tečky
+   na mobilu maže i na homepage. */
+@media (max-width: 639px) {
+    .pd-section--band .pd-strip__list { flex-direction: column; gap: var(--space-2); }
+    .pd-section--band .pd-strip__list li + li::before { content: none; }
+}
+
+/* Body bez pořadí. Titulek a věta, žádný box,
+   žádná ikona, žádná čára (OND-394: bod otevírá tučný titulek, čára nad
+   ním by říkala totéž podruhé). Dva sloupce od 640 px. Kde se použije:
+   /cenik (co je součástí projektu), /projekty („Proč já", dnes `.why-grid`
+   s kartami). Pro číslovaný postup je `.pd-steps` — tohle je výčet. */
+.pd-points { display: grid; gap: var(--space-7) var(--space-7); }
+@media (min-width: 640px) { .pd-points { grid-template-columns: 1fr 1fr; } }
+.pd-point__title {
+    font-family: var(--font-display); font-weight: 700; font-size: var(--text-h4);
+    letter-spacing: var(--tracking-tight); color: var(--color-fg-primary); margin: 0 0 var(--space-2);
+}
+.pd-point__text {
+    font-family: var(--font-body); font-size: var(--text-body-sm); line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted); margin: 0; max-width: 46ch;
+}
+
+/* Dva protilehlé sloupce — „zvedá / snižuje",
+   „hodí se / nehodí se". Bez svislice mezi sloupci (OND-394): sloupec
+   otevírá štítek se šipkou a od souseda ho drží mezera. /projekty:
+   „Pro koho to je" (`.project-fit`). */
+.pd-duo { display: grid; gap: var(--space-7); }
+@media (min-width: 640px) { .pd-duo { grid-template-columns: 1fr 1fr; gap: var(--space-8); } }
+.pd-duo__label {
+    display: flex; align-items: center; gap: var(--space-2);
+    font-family: var(--font-body); font-size: var(--text-eyebrow); font-weight: 400;
+    letter-spacing: var(--tracking-eyebrow); text-transform: uppercase;
+    color: var(--color-fg-muted); margin: 0 0 var(--space-5);
+}
+.pd-duo__mark { width: 14px; height: 14px; flex: 0 0 auto; color: var(--pd-accent); }
+.pd-duo__col--down .pd-duo__mark { transform: rotate(180deg); }
+.pd-duo .pd-service__bullets { font-size: var(--text-body); }
+
+/* Řádkový ceník. Název nahoře, částka na pravé
+   ose, popis pod názvem. Částka je bílá a tenká jako rozsah v
+   `.pd-price__scope` — cena je údaj, ne akce, takže acid nedostane.
+   `tabular-nums`, aby číslice ve sloupci seděly pod sebou.
+   ČÁRA (OND-394 — jediná vodorovná čára, která na /cenik zůstává): jen MEZI
+   řádky a jen tam, kde částka stojí na pravé ose. Na 1440 px je mezi názvem
+   a jeho částkou ~420 px prázdna; linka vede oko po řádku, aby se částka
+   nespárovala se sousedním názvem. Nad prvním a pod posledním řádkem nic
+   není — tam není co párovat. Na mobilu stojí částka pod názvem, čára
+   by nic nenesla, takže tam není.
+   /projekty/{detail}: rozpis rozsahu, kdyby se tam někdy objevil. */
+.pd-rates { display: grid; }
+.pd-rate {
+    display: grid; grid-template-columns: 1fr auto; column-gap: var(--space-6); row-gap: var(--space-2);
+    align-items: baseline; padding: var(--space-5) 0;
+}
+.pd-rate:first-child { padding-top: 0; }
+.pd-rate:last-child { padding-bottom: 0; }
+@media (min-width: 560px) { .pd-rate + .pd-rate { border-top: 1px solid var(--color-border-soft); } }
+.pd-rate__name {
+    font-family: var(--font-display); font-weight: 700; font-size: var(--text-h4);
+    letter-spacing: var(--tracking-tight); color: var(--color-fg-primary); margin: 0;
+}
+.pd-rate__price {
+    font-family: var(--font-display); font-weight: 300; font-variation-settings: 'wght' 300;
+    font-size: var(--text-h4); font-variant-numeric: tabular-nums; white-space: nowrap;
+    color: var(--color-fg-primary); text-align: right; margin: 0;
+}
+.pd-rate__desc {
+    grid-column: 1 / -1; font-family: var(--font-body); font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed); color: var(--color-fg-muted); margin: 0; max-width: 58ch;
+}
+/* Na 390 px se „individuální nabídka" vedle názvu nevejde — částka jde
+   pod název, doleva, na tutéž osu jako popis. */
+@media (max-width: 559px) {
+    .pd-rate { grid-template-columns: 1fr; }
+    .pd-rate__price { text-align: left; }
+}
+
+/* ------------------------------------------------------------
+   OND-393 — háky jen pro /cenik.
+   ------------------------------------------------------------ */
+/* [OND-394 — do jeho nasazení jen pro /cenik] Pravidlo „sekce dělí prostor,
+   ne čára" (OND-394, dokument oddelovace-pravidlo, blok A a C). Dokud neplatí
+   plošně, drží ho ceník sám, scoped na své `data-pdd`, aby se nedotklo /o-mne
+   ani /kontaktu. JAKMILE OND-394 NASADÍ BLOK A A C PLOŠNĚ, TYHLE TŘI ŘÁDKY
+   SMAZAT. Průhledná barva, ne `border: 0` — 1px místo zůstane, nic neposkočí.
+   - hrana sekce (border + odlesk `::before` z vrstvy A): sekci otevírá H2,
+     mezera 2× clamp(3.5rem, 7vw, 6.5rem) a vlastní kužel světla (`::after`,
+     ten zůstává);
+   - linka nad recenzí: recenzi otevírá tvář nebo monogram. */
+.pd--depth-sub > section[data-pdd^="price-"] { border-top-color: transparent; }
+.pd--depth-sub > section[data-pdd^="price-"]::before { content: none; }
+.pd--depth-sub > section[data-pdd="price-proof"] .pd-testi__item { border-top-color: transparent; }
+
+/* `.pd-price` z homepage je kotva: název,
+   rozsah, věta. Ceník k tomu nese případovku, výčet a odkaz. Sloupce jsou
+   flex, aby odkaz „Chci nezávaznou nabídku" stál ve všech třech na jedné
+   lince i při různě dlouhém výčtu. */
+.pd-price__lead { margin-bottom: var(--space-8); }
+.pd-price--full .pd-price__col { display: flex; flex-direction: column; }
+.pd-price--full .pd-price__desc { margin-bottom: var(--space-4); }
+.pd-price__proof { margin: 0 0 var(--space-6); }
+.pd-price__features { margin-bottom: var(--space-6); }
+.pd-price__action { margin: auto 0 0; padding-top: var(--space-2); }
+/* Textové odkazy jsou vysoké 20 px. Neviditelný přesah dělá z každého
+   cíl 44 px na výšku, aniž by se pohnula linka pod textem (Fitts, WCAG
+   2.5.5). Sousední prvky jsou ≥ 24 px daleko, takže se cíle nepřekrývají. */
+.pd-price--full .pd-case__cta,
+.pd-price--full .pd-case__live { position: relative; }
+.pd-price--full .pd-case__cta::after,
+.pd-price--full .pd-case__live::after { content: ''; position: absolute; inset: -12px -6px; }
+.pd-price__entry { margin: var(--space-8) 0 var(--space-3); }
+/* Desktop: doporučený sloupec má 2px acid nahoře a `--space-4` pod ní,
+   ostatní nic — rozsahy by pak neseděly na jedné lince (na homepage je to
+   18 px, u tří řádků textu nevadí; tady visí pod tím 20 řádků). Všechny
+   sloupce dostanou tutéž linku, jen dva z nich průhlednou — není vidět.
+   Svislice mezi sloupci pryč (OND-394 H16–17): drží je mezera 2× --space-7
+   a svislice soupeřila s acidovou linkou doporučené úrovně. */
+@media (min-width: 1024px) {
+    .pd-price--full .pd-price__col { border-top: 2px solid transparent; padding-top: var(--space-4); }
+    .pd-price--full .pd-price__col--featured { border-top-color: var(--pd-accent); }
+    .pd-price--full .pd-price__col + .pd-price__col { border-left-color: transparent; }
+}
+/* Mobil: úrovně pod sebou oddělí mezera a název úrovně s rozsahem
+   (verzálky + 24px tenké písmo — silnější předěl než linka). Acidová linka
+   zůstává jen u doporučené: to je ZVÝRAZNĚNÍ, ne oddělovač (OND-394 H15). */
+@media (max-width: 1023px) {
+    /* --space-8, ne --space-9: 96 px + odsazení odkazu vycházelo 114 px, víc
+       než mezera mezi sekcemi na mobilu (113 px). Úrovně by pak vypadaly
+       odděleněji než celé sekce (OND-394, bod 1 pravidla). */
+    .pd-price--full { gap: var(--space-8); }
+    .pd-price--full .pd-price__col--featured { border-top: 2px solid var(--pd-accent); padding-top: var(--space-4); }
+    .pd-price__entry { margin-top: var(--space-8); }
+}

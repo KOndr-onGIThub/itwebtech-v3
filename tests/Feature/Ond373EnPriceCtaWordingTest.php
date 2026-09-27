@@ -81,18 +81,19 @@ class Ond373EnPriceCtaWordingTest extends TestCase
      * Druhá strana téhož: tlačítka se opravdu vykreslí a mluví rozhodnutým
      * zněním. Bez tohohle by test výš prošel i tak, že by tlačítka zmizela.
      *
-     * Čtyřikrát, protože čtyři jsou. Kdyby PR opravil jen karty a zapomněl na
-     * lepící lištu (ta se objeví až po odscrollování, tedy nejsnáz se přehlédne),
-     * spadne to právě tady.
+     * Třikrát, jedno u každé úrovně. Do OND-393 to bylo čtyřikrát (tři karty
+     * + lepící lišta); lepící lišta odešla s převodem ceníku do jazyka homepage
+     * (návrh OND-391 §5: na mobilu ležela přes spodní lištu i s telefonem).
+     * Klíč `price.sticky_cta.cta` zůstává v lang a blok 2 ho hlídá dál.
      */
-    public function test_all_four_english_buttons_speak_the_decided_wording(): void
+    public function test_every_english_tier_link_speaks_the_decided_wording(): void
     {
         $body = $this->get(self::PRICE_PAGES['en'])->assertOk()->getContent();
 
         $this->assertSame(
-            4,
+            3,
             substr_count($body, e(self::DECIDED_CTA['en'])),
-            'Na `/en/price` nestojí rozhodnuté znění 4× (tři karty + lepící lišta).',
+            'Na `/en/price` nestojí rozhodnuté znění 3× (u každé úrovně jednou).',
         );
     }
 

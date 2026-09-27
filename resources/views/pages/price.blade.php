@@ -56,51 +56,35 @@
 
 @section('content')
 
-{{-- OND-251 — vrstva hloubky ZAPNUTÁ: světlo ano, pohyb ne.
-     Rozhodovací stránka, takže pásma dostávají nejjasnější nasvícení a všechno
-     pod nimi se propadá do stínu. Uzavřená smyčka z homepage (sekce 06) se sem
-     VĚDOMĚ nepřenáší — doporučené pásmo je už označené čtyřikrát; rozbor je
-     v §E4 hloubka.css. --}}
+{{-- OND-393 (předloha OND-391) — /cenik v jazyce nové homepage, 3. z 9 podstránek.
+     Obal `.pd` nese tokeny ACID (základ OND-379 §0), `.pd--depth-sub`
+     vypíná vrstvu B (OND-386). Vrstva A zůstává: kužely v hloubka.css §E
+     jsou psané `.pd--depth-sub > section[data-pdd="price-*"]`, takže každá
+     sekce s `data-pdd` musí zůstat PŘÍMÝM dítětem tohohle obalu. --}}
 
 {{-- OND-354 — POŘADÍ SEKCÍ JE TU SDĚLENÍ, NE ROZVRŽENÍ.
-     Do 26. 9. 2026 stálo na stránce: hero → ceny → srovnávací tabulka →
-     „Co je součástí každého projektu" → doplňky → výzva. Změřeno na živé
-     stránce: první číslo bylo 533 znaků od začátku obsahu, první hodnotový
-     argument o 2 753 znaků dál. Člověk tedy dostal cenu dřív než jediný důvod,
-     proč ji platit — a vedle ceny nestál ani jeden důkaz (nula recenzí, nula
-     případovek).
+     Důkazy a hodnota stojí NAD cenami. Kdo tyhle sekce přehazuje, mění tím
+     argument stránky, ne její vzhled. OND-391 pořadí nemění. --}}
+<div class="pd pd--depth pd--depth-sub">
 
-     Dnešní pořadí to obrací: důkazy a hodnota stojí NAD cenami. Kdo tyhle
-     sekce přehazuje, mění tím argument stránky, ne její vzhled. --}}
-<div class="pd--depth pd--depth-sub">
-
-{{-- Page hero — OND-135 iter 5: plán §3.1 design DNA (page-mark + display + amber accent) --}}
-<div class="page-hero page-hero--price">
+{{-- Hlava — `.pd-page-head`, ne `.pd-hero` (základ §1c: jinak se zapne
+     náboj podtržení i přejezd po tlačítku). Dva řádky nad titulkem jsou jeden
+     `.pd-eyebrow`, oddělené vlasovou čárkou — stejně jako /kontakt. --}}
+<section class="pd-section pd-page-head">
     <div class="container-site">
-        {{-- OND-135 cleanup (2026-05-14): page_mark_index span odebrán jako
-             agency-portfolio artefakt (itwebtech nemá „pages" hierarchii) —
-             aplikováno per CEO PR #78 precedent (home) + PR #80 (kontakt). --}}
-        <p class="page-hero__page-mark">
-            <span class="page-hero__page-mark-label">{{ __('price.hero.page_mark_label') }}</span>
-        </p>
-        <p class="page-hero__upline">{{ __('price.hero.upline') }}</p>
-        <h1 class="page-hero__heading">
-            {!! __('price.hero.heading_html') !!}
-        </h1>
-        <p class="page-hero__subline">{{ __('price.hero.subline') }}</p>
+        <p class="pd-eyebrow">{{ __('price.hero.page_mark_label') }} <span class="pd-eyebrow__sep" aria-hidden="true"></span> {{ __('price.hero.upline') }}</p>
+        <h1 class="pd-heading pd-heading--sub">{!! __('price.hero.heading_html') !!}</h1>
+        <p class="pd-sub">{{ __('price.hero.subline') }}</p>
     </div>
-</div>
+</section>
 
-{{-- Důkazní pás — OND-354.
-     Do téhle karty stálo na `/cenik` nula recenzí, nula případovek a nula jmen
-     klientů: cena bez jediného dokladu, že ji někdo zaplatil a byl rád. Nic tu
-     není nově napsané — čísla i citace už na webu jsou, jen dosud nestály
-     tam, kde se rozhoduje o ceně.
+{{-- Důkazní pás — OND-354. Čísla jsou `home.social_proof` (lang/*/home.php
+     se čte napříč webem). `response` z homepage pruhu tu VĚDOMĚ není: pás má
+     nést doklady, a slib doby odpovědi je slib, ne doklad.
 
-     Čísla jsou `home.social_proof` (lang/*/home.php se čte napříč webem).
-     `response` z homepage pruhu tu VĚDOMĚ není: pás má nést doklady, a slib
-     doby odpovědi je slib, ne doklad. Znění toho slibu navíc mění OND-345
-     napříč webem — tady by z něj vznikla druhá kopie. --}}
+     OND-391: pruh je `.pd-strip__list` z homepage (sekce 03) a recenze jsou
+     `.pd-testi` z homepage (sekce 09) — týž člověk (Toman) teď vypadá na obou
+     stránkách stejně. Podpis kreslí sdílená `<x-testimonial-by>`. --}}
 @php
     // Ty dvě recenze jsou vybrané, ne první dvě v poli: ze šestnácti jsou to
     // jediné dvě, které mluví k ceně. Štěpánek je jediný, kdo Ondřeje srovnává
@@ -113,44 +97,28 @@
         ->filter()
         ->values();
 
-    // Stejná mapa jako na homepage — zdroj recenze je součást důkazu.
-    $sourceLabels = [
-        'google'   => 'Google',
-        'facebook' => 'Facebook',
-        'firmy_cz' => 'Firmy.cz',
-    ];
+    $quoteOpen  = __('home.quote_marks.open');
+    $quoteClose = __('home.quote_marks.close');
 @endphp
-<section class="section-wrapper section-alt" data-reveal data-pdd="price-proof">
+<section class="pd-section pd-section--band" data-pdd="price-proof">
     <div class="container-site">
 
         {{-- OND-315 (platí i tady): viditelné „5,0" je pro čtečku schované a
-             nahrazuje ho úplné „Hodnocení 5 z 5", aby nevidomý slyšel i tu
-             stupnici. Popis nese seznam, ne sekce — sekce drží i recenze. --}}
-        <ul class="pricing-proof__figures" aria-label="{{ __('home.social_proof.strip_aria') }}">
-            <li>
-                <strong aria-hidden="true">{{ __('home.social_proof.rating_value') }}</strong>
-                <span class="sr-only">{{ __('home.social_proof.rating_aria') }}</span>
-                {{ __('home.social_proof.reviews') }}
-            </li>
+             nahrazuje ho úplné „Hodnocení 5 z 5". --}}
+        <ul class="pd-strip__list" aria-label="{{ __('home.social_proof.strip_aria') }}">
+            <li><strong aria-hidden="true">{{ __('home.social_proof.rating_value') }}</strong><span class="sr-only">{{ __('home.social_proof.rating_aria') }}</span> {{ __('home.social_proof.reviews') }}</li>
             <li><strong>{{ __('home.social_proof.projects') }}</strong></li>
             <li><strong>{{ __('home.social_proof.experience') }}</strong></li>
             <li>{{ __('home.social_proof.award') }}</li>
         </ul>
 
         @if ($proofTestimonials->isNotEmpty())
-        <div class="pricing-proof__reviews" data-reveal-group>
+        <div class="pd-testi">
             @foreach ($proofTestimonials as $review)
-            <figure class="pricing-proof__review">
-                <blockquote>
-                    <p>{{ $review['text'] }}</p>
-                </blockquote>
-                <figcaption>
-                    {{ $review['name'] }} — {{ $review['company'] }}@if (filled($review['role'] ?? null)), {{ $review['role'] }}@endif
-                    @if (!empty($sourceLabels[$review['source'] ?? '']))
-                    <span class="pricing-proof__source">{{ $sourceLabels[$review['source']] }}</span>
-                    @endif
-                </figcaption>
-            </figure>
+            <article class="pd-testi__item">
+                <x-testimonial-by :person="$review" :size="56" />
+                <p class="pd-testi__text">{{ $quoteOpen }}{{ $review['text'] }}{{ $quoteClose }}</p>
+            </article>
             @endforeach
         </div>
         @endif
@@ -158,189 +126,170 @@
     </div>
 </section>
 
-{{-- What's included — OND-354: text beze změny, posunuté NAD ceny.
-     Tohle je ten hodnotový argument, který byl dřív 2 753 znaků za prvním
-     číslem. Věta o době odpovědi v položce „Podpora i po spuštění" patří
-     OND-345, ne téhle kartě — nesahat na ni tady. --}}
-<section class="section-wrapper" data-reveal data-pdd="price-guarantees">
+{{-- Co je součástí každého projektu — OND-354: posunuté NAD ceny.
+     OND-391: `.pd-split` (hlava vlevo, obsah vpravo — táž osa jako formulář
+     na /kontakt) + nová sdílená `.pd-points`: body bez pořadí, bez ikon,
+     oddělené vlasovou linkou. Věta o době odpovědi v „Podpora i po
+     spuštění" patří OND-345 — nesahat. --}}
+<section class="pd-section" data-pdd="price-guarantees">
     <div class="container-site">
-        <header class="section-header">
-            <h2>{{ __('price.guarantees.heading') }}</h2>
-        </header>
+        <div class="pd-split">
+            <header>
+                <h2 class="pd-head__title">{{ __('price.guarantees.heading') }}</h2>
+            </header>
 
-        <div class="pricing-guarantees" data-reveal-group>
-            @foreach (__('price.guarantees.items') as $g)
-            <div class="pricing-guarantee">
-                <h3>{{ $g['title'] }}</h3>
-                <p>{{ $g['text'] }}</p>
+            <div class="pd-points">
+                @foreach (__('price.guarantees.items') as $g)
+                <div class="pd-point">
+                    <h3 class="pd-point__title">{{ $g['title'] }}</h3>
+                    <p class="pd-point__text">{{ $g['text'] }}</p>
+                </div>
+                @endforeach
             </div>
-            @endforeach
         </div>
     </div>
 </section>
 
-{{-- Pricing tiers --}}
-<section class="section-wrapper" data-reveal data-pdd="price-tiers">
+{{-- Úrovně — `.pd-price` z homepage (sekce 08), rozšířená modifikátorem
+     `--full` o to, co homepage kotva nemá: případovku, výčet a tlačítko.
+
+     OND-198 (nález 5.4): očekávací věta musí padnout dřív, než čtenář
+     uvidí první číslo. OND-354: tahle věta je jediné místo na stránce, kde
+     stojí cena. OND-391: proto je to `.pd-lead` — největší text pod
+     titulkem. Úrovně pod ní nesou rozsah, ne cenovku. --}}
+<section class="pd-section" data-pdd="price-tiers">
     <div class="container-site">
 
-        {{-- OND-198 (nález 5.4): očekávací věta musí padnout dřív, než čtenář
-             uvidí první číslo. OND-354: tahle věta je dnes jediné místo na
-             stránce, kde stojí cena — prahové číslo a rozpětí. Úrovně pod ní
-             nesou rozsah, ne cenovku. --}}
-        <p class="pricing-expectation">{{ __('price.intro') }}</p>
+        <p class="pd-lead pd-lead--wide pd-price__lead">{{ __('price.intro') }}</p>
 
-        <div class="pricing-tiers" data-reveal-group>
+        <div class="pd-price pd-price--full">
             @foreach (__('price.tiers') as $tier)
-            <article class="pricing-tier {{ $tier['popular'] ? 'pricing-tier--featured' : '' }}"
+            {{-- Doporučená úroveň je označená dvakrát, jako na homepage:
+                 acidová linka nahoře a acidové slovo u názvu. Karta, rámeček,
+                 stín a acidové tlačítko odešly (hloubka.css §E4). --}}
+            <article class="pd-price__col {{ $tier['popular'] ? 'pd-price__col--featured' : '' }}"
                      data-analytics-view="pricing_tier_view"
                      data-analytics-props='{"pricing_tier_shown":"{{ $tier['key'] }}"}'>
 
-                @if ($tier['popular'])
-                <span class="pricing-tier__badge">{{ __('price.popular') }}</span>
+                <h2 class="pd-price__title">{{ $tier['name'] }}@if ($tier['popular']) <em>{{ __('price.popular') }}</em>@endif</h2>
+                {{-- OND-354: rozsah je to, čím se úrovně reálně liší — proto
+                     stojí hned pod názvem ve velikosti, kterou homepage dává
+                     rozsahu. Popis je až pod ním (pořadí homepage kotvy). --}}
+                <p class="pd-price__scope">{{ $tier['scope'] }}</p>
+                <p class="pd-price__desc">{{ $tier['desc'] }}</p>
+
+                {{-- OND-359: důkaz místo výčtu funkcí. `$tierProofs` drží jen
+                     publikované projekty, takže odkaz na 404 nevznikne. --}}
+                @php $proof = $tierProofs->get($tier['proof']['slug'] ?? null); @endphp
+                @if ($proof)
+                <p class="pd-price__proof">
+                    <a href="{{ $proof->detailUrl() }}" class="pd-case__live"
+                       data-analytics="pricing_tier_proof_click"
+                       data-analytics-props='{"pricing_tier_shown":"{{ $tier['key'] }}","project_slug":"{{ $proof->slug }}"}'>{{ __('price.proof_intro') }}: {{ $tier['proof']['label'] }}</a>
+                </p>
                 @endif
 
-                <header class="pricing-tier__header">
-                    <h2 class="pricing-tier__name">{{ $tier['name'] }}</h2>
-                    <p class="pricing-tier__desc">{{ $tier['desc'] }}</p>
-                    {{-- OND-354: dřív tady stála cena a pod ní „orientační cena".
-                         Dnes rozsah — úroveň se jmenuje podle toho, co vzniká,
-                         a rozsah je to, čím se od sebe úrovně reálně liší. --}}
-                    <div class="pricing-tier__scope">{{ $tier['scope'] }}</div>
-
-                    {{-- OND-359: důkaz místo výčtu funkcí — u rozsahu stojí
-                         odkaz na případovku, kterou si člověk může přečíst.
-                         `$tierProofs` drží jen publikované projekty, takže
-                         odkaz na 404 z ceníku nevznikne (viz PageController). --}}
-                    @php $proof = $tierProofs->get($tier['proof']['slug'] ?? null); @endphp
-                    @if ($proof)
-                    <a href="{{ $proof->detailUrl() }}" class="pricing-tier__proof"
-                       data-analytics="pricing_tier_proof_click"
-                       data-analytics-props='{"pricing_tier_shown":"{{ $tier['key'] }}","project_slug":"{{ $proof->slug }}"}'>
-                        {{ __('price.proof_intro') }}: {{ $tier['proof']['label'] }}
-                        <x-icon.arrow-right class="w-4 h-4 shrink-0" />
-                    </a>
-                    @endif
-                </header>
-
-                <ul class="pricing-tier__features">
+                <ul class="pd-service__bullets pd-price__features">
                     @foreach ($tier['features'] as $feature)
-                    <li>
-                        <x-icon.circle-check-big class="w-4 h-4 shrink-0" />
-                        <span>{{ $feature }}</span>
-                    </li>
+                    <li>{{ $feature }}</li>
                     @endforeach
                 </ul>
 
-                <a href="{{ lroute('contact') }}"
-                   class="btn {{ $tier['popular'] ? 'btn-primary' : 'btn-secondary' }} pricing-tier__cta"
-                   data-analytics="pricing_tier_cta_primary_click"
-                   data-analytics-props='{"pricing_tier_shown":"{{ $tier['key'] }}"}'>
-                    {{ $tier['cta'] }}
-                    <x-icon.arrow-right class="w-4 h-4 shrink-0" />
-                </a>
+                {{-- OND-391: tři stejná tlačítka „Chci nezávaznou nabídku"
+                     jsou tichý odkaz s acidovou linkou (`.pd-case__cta`),
+                     ne tři tlačítka. Analytika zůstává po úrovních. --}}
+                <p class="pd-price__action">
+                    <a href="{{ lroute('contact') }}" class="pd-case__cta"
+                       data-analytics="pricing_tier_cta_primary_click"
+                       data-analytics-props='{"pricing_tier_shown":"{{ $tier['key'] }}"}'>{{ $tier['cta'] }}</a>
+                </p>
 
             </article>
             @endforeach
         </div>
 
-        {{-- OND-354: `entry_note` nahradilo omluvné „Výjimka, ne standardní
-             vstup." u nejnižší úrovně. Stojí pod mřížkou, ne v kartě: jsou to
-             čtyři věty a v kartě by rozhodily výšku všech tří sloupců. --}}
-        <p class="pricing-entry-note">{{ __('price.entry_note') }}</p>
+        {{-- OND-354: `entry_note` stojí pod mřížkou, ne v kartě. --}}
+        <p class="pd-intro pd-price__entry">{{ __('price.entry_note') }}</p>
 
-        <p class="pricing-note">{{ __('price.note') }}</p>
+        <p class="pd-note">{{ __('price.note') }}</p>
 
     </div>
 </section>
 
-{{-- Co cenu zvedá a co snižuje — OND-354.
-     Tady stála srovnávací tabulka tří pojmenovaných pásem (desktop tabulka +
-     mobilní taby s cenou v hlavičce). Pásma zmizela, takže se tabulka neměla
-     o co opřít. Nová osa vysvětluje cenu bez cenovky. --}}
-<section class="section-wrapper section-alt" data-reveal data-pdd="price-compare">
+{{-- Co cenu zvedá a co snižuje — OND-354. OND-391: nová sdílená `.pd-duo`
+     (dva protilehlé sloupce s vlasovou linkou mezi nimi) a odrážka ACID
+     `.pd-service__bullets` z homepage. Jediné, co sloupce odlišuje beze slov,
+     je šipka; dolní sloupec ji v CSS překlápí. Je dekorace. --}}
+<section class="pd-section" data-pdd="price-compare">
     <div class="container-site">
-        <header class="section-header">
-            <h2>{{ __('price.compare.heading') }}</h2>
-        </header>
+        <div class="pd-split">
+            <header>
+                <h2 class="pd-head__title">{{ __('price.compare.heading') }}</h2>
+            </header>
 
-        <div class="pricing-factors" data-reveal-group>
-            @foreach (['up', 'down'] as $direction)
-            @php $group = __('price.compare.' . $direction); @endphp
-            <div class="pricing-factors__col pricing-factors__col--{{ $direction }}">
-                {{-- Jedna ikona pro obojí, dolní sloupec ji v CSS překlápí —
-                     šipka nahoru/dolů je jediné, co ty dva sloupce odlišuje
-                     beze slov. Je dekorace: směr říká i ten popisek vedle. --}}
-                <h3 class="pricing-factors__label">
-                    <x-icon.arrow-up class="w-4 h-4 shrink-0" aria-hidden="true" focusable="false" />
-                    {{ $group['label'] }}
-                </h3>
-                <ul class="pricing-factors__list">
-                    @foreach ($group['items'] as $item)
-                    <li>{{ $item }}</li>
-                    @endforeach
-                </ul>
+            <div class="pd-duo">
+                @foreach (['up', 'down'] as $direction)
+                @php $group = __('price.compare.' . $direction); @endphp
+                <div class="pd-duo__col pd-duo__col--{{ $direction }}">
+                    <h3 class="pd-duo__label">
+                        <x-icon.arrow-up class="pd-duo__mark" aria-hidden="true" focusable="false" />
+                        {{ $group['label'] }}
+                    </h3>
+                    <ul class="pd-service__bullets">
+                        @foreach ($group['items'] as $item)
+                        <li>{{ $item }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endforeach
             </div>
-            @endforeach
         </div>
     </div>
 </section>
 
-{{-- Addons --}}
-<section class="section-wrapper" data-reveal data-pdd="price-addons">
+{{-- Doplňky — nová sdílená `.pd-rates`: řádkový ceník, název a popis vlevo,
+     částka vpravo na jedné svislé ose. OND-391: čtyři stejná tlačítka
+     „Nezávazná poptávka" odešla — rozhodnutí o výzvách je v dokumentu
+     na OND-391, oddíl 5. Částky jsou lang řetězce beze změny. --}}
+<section class="pd-section" data-pdd="price-addons">
     <div class="container-site">
-        <header class="section-header">
-            <h2>{{ __('price.addons.heading') }}</h2>
-            <p class="section-header__desc">{{ __('price.addons.desc') }}</p>
-        </header>
+        <div class="pd-split">
+            <header>
+                <h2 class="pd-head__title">{{ __('price.addons.heading') }}</h2>
+                <p class="pd-intro">{{ __('price.addons.desc') }}</p>
+            </header>
 
-        <div class="pricing-addons" data-reveal-group>
-            @foreach (__('price.addons.items') as $addon)
-            <div class="pricing-addon">
-                <div class="pricing-addon__info">
-                    <h3>{{ $addon['name'] }}</h3>
-                    <p>{{ $addon['desc'] }}</p>
+            <div class="pd-rates">
+                @foreach (__('price.addons.items') as $addon)
+                <div class="pd-rate">
+                    <h3 class="pd-rate__name">{{ $addon['name'] }}</h3>
+                    <p class="pd-rate__price">{{ $addon['price'] }}</p>
+                    <p class="pd-rate__desc">{{ $addon['desc'] }}</p>
                 </div>
-                <div class="pricing-addon__price">{{ $addon['price'] }}</div>
-                <a href="{{ lroute('contact') }}" class="btn btn-secondary pricing-addon__cta">
-                    {{ __('price.quotation') }}
-                    <x-icon.arrow-right class="w-4 h-4 shrink-0" />
+                @endforeach
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- Závěr — jediná acidová výzva na stránce. Věta je otázka pro toho, kdo
+     se nerozhodl mezi úrovněmi; tlačítko `.pd-cta` z hera homepage.
+     Plovoucí `.price-sticky-cta` odešla: na mobilu ležela přes spodní lištu
+     (i přes telefon) a na desktopu opakovala tlačítko v navigaci. --}}
+<section class="pd-section pd-close" data-pdd="price-cta">
+    <div class="container-site">
+        <div class="pd-split">
+            <header>
+                <h2 class="pd-head__title">{{ __('price.cta.heading') }}</h2>
+            </header>
+
+            <div>
+                <p class="pd-intro">{{ __('price.cta.desc') }}</p>
+                <a href="{{ lroute('contact') }}" class="pd-cta">
+                    {{ __('price.cta.btn') }}
+                    <x-icon.arrow-right class="w-4 h-4 shrink-0 pd-cta__arrow" />
                 </a>
             </div>
-            @endforeach
-        </div>
-    </div>
-</section>
-
-{{-- Sticky CTA — plán „cena nikdy nezmizí" (OND-135 iter 5).
-     Zobrazí se po prvním scroll-passu hero, skryje se v final CTA sekci. --}}
-<aside class="price-sticky-cta"
-       x-data="{ visible: false }"
-       x-init="
-         const trigger = () => { visible = window.scrollY > 480 && window.scrollY < (document.body.scrollHeight - window.innerHeight - 320); };
-         trigger();
-         window.addEventListener('scroll', trigger, { passive: true });
-         window.addEventListener('resize', trigger, { passive: true });
-       "
-       x-show="visible"
-       x-transition.opacity.duration.300ms
-       x-cloak
-       aria-label="{{ __('price.sticky_cta.label') }}">
-    <a href="{{ lroute('contact') }}" class="price-sticky-cta__btn">
-        <span class="price-sticky-cta__label">{{ __('price.sticky_cta.cta') }}</span>
-        <x-icon.arrow-right class="w-4 h-4 shrink-0" />
-    </a>
-</aside>
-
-{{-- CTA --}}
-<section class="section-wrapper section-cta price-cta" data-reveal data-pdd="price-cta">
-    <div class="container-site">
-        <div class="price-cta__inner">
-            <h2 class="final-cta-heading">{{ __('price.cta.heading') }}</h2>
-            <p class="price-cta__desc">{{ __('price.cta.desc') }}</p>
-            <a href="{{ lroute('contact') }}" class="btn btn-primary">
-                {{ __('price.cta.btn') }}
-                <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-            </a>
         </div>
     </div>
 </section>

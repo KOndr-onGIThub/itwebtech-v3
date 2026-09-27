@@ -3,7 +3,7 @@
 return [
 
     'meta' => [
-        'title'       => 'Ceník — Ondřej Kriška',
+        'title'       => 'Ceník — Ondřej Kriška, ONDRAWEB',
         'description' => 'Orientační ceník webových stránek, e-shopů a webových aplikací. Jasná představa o investici ještě před první konzultací.',
     ],
 
@@ -28,12 +28,14 @@ return [
     ],
 
     // Sticky CTA — viditelné napříč scrollem, „cena nikdy nezmizí".
+    // OND-391: nevykresluje se (plovoucí tlačítko z /cenik odešlo, OND-393).
     'sticky_cta' => [
         'label' => 'Vyberte si pásmo',
         'cta'   => 'Chci nezávaznou nabídku',
     ],
 
     'popular'   => 'Nejoblíbenější',
+    // OND-391: `quotation` se nevykresluje (tlačítka u doplňků odešla, OND-393).
     'quotation' => 'Nezávazná poptávka',
 
     // OND-359: uvození odkazu na případovku v kartě úrovně. Slovo „Případovka"
