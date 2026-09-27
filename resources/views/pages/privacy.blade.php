@@ -14,44 +14,39 @@
      Totéž co u cookies: právní text, kde je čitelnost jediné kritérium.
      Rozbor v §E hloubka.css. --}}
 
-{{-- Page hero — OND-130 iter 8: plán §3.1 page-mark + Plex Sans display (post OND-145 swap). --}}
-<div class="page-hero page-hero--privacy">
+<div class="pd">
+
+{{-- Hlava — `.pd-page-head` (základ OND-379 §2a), vlevo jako všude. --}}
+<section class="pd-section pd-page-head">
     <div class="container-site">
-        {{-- OND-135 cleanup (2026-05-14): page_mark_index span odebrán jako
-             agency-portfolio artefakt per CEO PR #78/#80/#82/#83 precedent. --}}
-        <p class="page-hero__page-mark">
-            <span class="page-hero__page-mark-label">{{ __('privacy.hero.page_mark_label') }}</span>
-        </p>
-        <p class="page-hero__upline">{{ __('privacy.hero.upline') }}</p>
-        <h1 class="page-hero__heading">
-            {!! __('privacy.hero.heading_html') !!}
-        </h1>
-        <p class="page-hero__subline">{{ __('privacy.hero.subline') }}</p>
-    </div>
-</div>
-
-<section class="section-wrapper">
-    <div class="container-site">
-
-        {{-- TL;DR card — OND-130 iter 8: plain-language summary nad právním textem.
-             Sníží bounce ze stránky a respektuje, že většina návštěvníků hledá
-             rychlou odpověď. Detailní GDPR text následuje níž. --}}
-        <aside class="legal-tldr" data-reveal>
-            <p class="legal-tldr__eyebrow">{{ __('privacy.tldr.eyebrow') }}</p>
-            <ul class="legal-tldr__list">
-                @foreach (__('privacy.tldr.items') as $item)
-                <li>
-                    <x-icon.circle-check-big class="w-4 h-4 shrink-0" />
-                    <span>{{ $item }}</span>
-                </li>
-                @endforeach
-            </ul>
-        </aside>
-
-        <article class="prose-content">
-            {!! __('privacy.content') !!}
-        </article>
+        <p class="pd-eyebrow">{{ __('privacy.hero.page_mark_label') }} <span class="pd-eyebrow__sep" aria-hidden="true"></span> {{ __('privacy.hero.upline') }}</p>
+        <h1 class="pd-heading pd-heading--sub">{!! __('privacy.hero.heading_html') !!}</h1>
+        <p class="pd-sub">{{ __('privacy.hero.subline') }}</p>
     </div>
 </section>
+
+{{-- OND-408 — text ve `.pd-prose` z detailu článku (předloha OND-406 §4b).
+     Text beze změny, mění se jen obal. Shrnutí „V kostce" nese deska
+     `.pd-aside` (plocha, ne čára); ikony u bodů jsou pryč, odrážku dělá
+     pomlčka. `privacy.content` je jeden řetězec s `h2`/`h3` uvnitř, proto
+     se nečlení do `.pd-steps--chapters` — to by byla změna tvaru `lang/`. --}}
+<section class="pd-section">
+    <div class="container-site">
+        <div class="pd-prose">
+            <aside class="pd-aside">
+                <p class="pd-eyebrow">{{ __('privacy.tldr.eyebrow') }}</p>
+                <ul>
+                    @foreach (__('privacy.tldr.items') as $item)
+                    <li>{{ $item }}</li>
+                    @endforeach
+                </ul>
+            </aside>
+
+            {!! __('privacy.content') !!}
+        </div>
+    </div>
+</section>
+
+</div>
 
 @endsection

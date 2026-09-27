@@ -15,40 +15,35 @@
      to nedává — tahle stránka nemá co prodat, má být čitelná a nudná.
      Rozbor v §E hloubka.css. --}}
 
-{{-- Page hero — OND-130 iter 8: plán §3.1 page-mark + Plex Sans display (post OND-145 swap).
-     OND-168 (2026-05-22): localizován do EN/DE — všechny stringy přesunuty do
-     lang/{cs,en,de}/cookies.php a route přesunuta pod localized routes group
+{{-- OND-168 (2026-05-22): localizován do EN/DE — všechny stringy v
+     lang/{cs,en,de}/cookies.php, route pod localized routes group
      ({cs,en,de}.cookies). --}}
-<div class="page-hero page-hero--cookies">
+<div class="pd">
+
+{{-- Hlava — `.pd-page-head` (základ OND-379 §2a), vlevo jako všude. --}}
+<section class="pd-section pd-page-head">
     <div class="container-site">
-        <p class="page-hero__page-mark">
-            <span class="page-hero__page-mark-label">{{ __('cookies.hero.page_mark_label') }}</span>
-        </p>
-        <p class="page-hero__upline">{{ __('cookies.hero.upline') }}</p>
-        <h1 class="page-hero__heading">
-            {!! __('cookies.hero.heading_html') !!}
-        </h1>
-        <p class="page-hero__subline">{{ __('cookies.hero.subline') }}</p>
+        <p class="pd-eyebrow">{{ __('cookies.hero.page_mark_label') }} <span class="pd-eyebrow__sep" aria-hidden="true"></span> {{ __('cookies.hero.upline') }}</p>
+        <h1 class="pd-heading pd-heading--sub">{!! __('cookies.hero.heading_html') !!}</h1>
+        <p class="pd-sub">{{ __('cookies.hero.subline') }}</p>
     </div>
-</div>
+</section>
 
-<section class="section-wrapper">
+{{-- OND-408 — text ve `.pd-prose` z detailu článku (předloha OND-406 §4b).
+     Text beze změny, mění se jen obal. Tlačítko „Odvolat souhlas" je
+     funkční ovládání, ne prodejní výzva: dostalo `.pd-cta`, `onclick`
+     beze změny (volá `ItwebtechAnalytics.revokeConsent()` z cookies.js). --}}
+<section class="pd-section">
     <div class="container-site">
-
-        {{-- TL;DR card — OND-130 iter 8: plain-language summary nad detailem. --}}
-        <aside class="legal-tldr" data-reveal>
-            <p class="legal-tldr__eyebrow">{{ __('cookies.tldr.eyebrow') }}</p>
-            <ul class="legal-tldr__list">
-                @foreach (__('cookies.tldr.items') as $item)
-                <li>
-                    <x-icon.circle-check-big class="w-4 h-4 shrink-0" />
-                    <span>{!! $item !!}</span>
-                </li>
-                @endforeach
-            </ul>
-        </aside>
-
-        <article class="prose-content">
+        <div class="pd-prose">
+            <aside class="pd-aside">
+                <p class="pd-eyebrow">{{ __('cookies.tldr.eyebrow') }}</p>
+                <ul>
+                    @foreach (__('cookies.tldr.items') as $item)
+                    <li>{!! $item !!}</li>
+                    @endforeach
+                </ul>
+            </aside>
 
             <p>{!! __('cookies.intro') !!}</p>
 
@@ -78,7 +73,7 @@
             <p>{{ __('cookies.revoke.description') }}</p>
             <p>
                 <button type="button"
-                        class="btn btn-primary"
+                        class="pd-cta"
                         onclick="if (window.ItwebtechAnalytics) { window.ItwebtechAnalytics.revokeConsent(); location.reload(); }">
                     {{ __('cookies.revoke.button') }}
                 </button>
@@ -93,9 +88,10 @@
             <p>{!! __('cookies.controller.see_privacy_html', [
                 'link' => '<a href="' . lroute('privacy') . '">' . __('cookies.controller.see_privacy_link') . '</a>',
             ]) !!}</p>
-
-        </article>
+        </div>
     </div>
 </section>
+
+</div>
 
 @endsection
