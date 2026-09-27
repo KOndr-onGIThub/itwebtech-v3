@@ -89,26 +89,30 @@
        který se tímhle laděním odstraňoval.
        ====================================================================== */
 
-    var TARGETS = [
-        '.pd-hero',                     /* podtržení v H1 → CTA */
-        '.pd-case',                     /* 02 — horní hrana vizuálu, každá případovka sama */
-        '.pd-services',                 /* 05 — tři svislé linky se staggerem, naráz */
-        '.pd-price__col--featured',     /* 06 — uzavřená smyčka */
-        '.pd-step',                     /* 09 — každý krok zvlášť */
-        '.pd-form__panel',              /* 11 — cíl stránky */
+    /* OND-386 — PODSTRÁNKY mají vlastní, kratší seznam. Na nich je vrstva B
+       plošně vypnutá v CSS (`.pd--depth.pd--depth-sub`, §0 v hloubka.css)
+       s jedinou výjimkou pro scroll: poptávkový formulář. Pozorovat tam
+       kroky, případovky nebo ceník by jen zakládalo pozorovatele, které
+       nic nevykreslí — a navěšené `is-lit` by pustilo animaci naprázdno.
 
-        /* OND-251 — PODSTRÁNKY. Jediná položka. Není to výjimka ze seznamu,
-           je to TENTÝŽ OBJEKT jako `.pd-form__panel` o řádek výš: poptávkový
-           formulář. Na /kontakt se jmenuje `.contact-form`, protože podstránky
-           mají starší slovník tříd (viz §E v hloubka.css).
-
-           Všechno ostatní na podstránkách stojí na vrstvě A (nasvícení), která
-           se pouští z armLight() a žádný seznam nepotřebuje. Kdo sem bude chtít
-           přidat další řádek, ať si napřed přečte tabulku rozhodnutí v §E —
-           „na podstránkách se nic nehýbe kromě formuláře" je rozhodnutí, ne
-           nedodělek. */
-        '.contact-form'
-    ];
+       `.contact-form` a `.pd-form__panel` jsou TENTÝŽ OBJEKT: poptávkový
+       formulář. Na /kontakt se jmenuje `.contact-form`, protože podstránky
+       mají starší slovník tříd (viz §E v hloubka.css). Kdo sem bude chtít
+       přidat další řádek, ať si napřed přečte tabulku rozhodnutí v §E —
+       „na podstránkách se nic nehýbe kromě formuláře" je rozhodnutí, ne
+       nedodělek. */
+    var isSub = root.classList.contains('pd--depth-sub');
+    var TARGETS = isSub
+        /* §E: „na podstránkách se nic nehýbe kromě formuláře" */
+        ? ['.contact-form', '.pd-form__panel']
+        : [
+            '.pd-hero',                     /* podtržení v H1 → CTA */
+            '.pd-case',                     /* 02 — horní hrana vizuálu, každá případovka sama */
+            '.pd-services',                 /* 05 — tři svislé linky se staggerem, naráz */
+            '.pd-price__col--featured',     /* 06 — uzavřená smyčka */
+            '.pd-step',                     /* 09 — každý krok zvlášť */
+            '.pd-form__panel'               /* 11 — cíl stránky */
+        ];
 
     /* Kontejnery vs. jednotlivé položky: .pd-services je obal, protože jeho
        děti stojí VEDLE SEBE — do pásma dojedou naráz a rytmus dělá stagger
