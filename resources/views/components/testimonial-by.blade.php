@@ -25,6 +25,12 @@
 
     $source = $person['source'] ?? null;
     $logo   = $sourceLogos[$source] ?? null;
+
+    // OND-368: role patří jen k 56px variantě v sekci 09, kde na ni je místo.
+    // U 40px pull-quotes se „firma — role" láme na dva verzálkové řádky
+    // a přebije jméno nad sebou („TOYOTA — ŘEDITEL ŘÍZENÍ VÝROBY, MONTÁŽE
+    // A LOGISTIKY"). Tam nese informaci firma, role je balast.
+    $showRole = $size > 40 && !empty($person['role']);
 @endphp
 
 <div class="pd-by pd-by--{{ $size }}">
@@ -61,6 +67,6 @@
                 <span class="pd-by__src pd-by__src--word" title="Recenze na Firmy.cz">Firmy.cz</span>
             @endif
         </p>
-        <span class="pd-by__org">{{ $person['company'] }}@if (!empty($person['role'])) — {{ $person['role'] }}@endif</span>
+        <span class="pd-by__org">{{ $person['company'] }}@if ($showRole) — {{ $person['role'] }}@endif</span>
     </div>
 </div>
