@@ -1315,8 +1315,11 @@
 /* --- O MNĚ — měkké světlo zprava, na video --------------------------------
    Osobní stránka. Na homepage je osobní sekce (07 PROČ JÁ) vědomě úleva
    a světlo tam jde zprava na video; tady je to doslova totéž video ve stejné
-   pozici, takže i stejné světlo. Žádný pohyb — o sobě se nevykřikuje. */
-.pd--depth-sub > section[data-pdd="about-intro"] {
+   pozici, takže i stejné světlo. Žádný pohyb — o sobě se nevykřikuje.
+   OND-397: /recenze nese tytéž kužely (hlava / recenze / výzva), „světlo
+   ano, pohyb ne" platí i pro stránku, kde mluví klienti (předloha OND-396). */
+.pd--depth-sub > section[data-pdd="about-intro"],
+.pd--depth-sub > section[data-pdd="reviews-head"] {
     --pdd-wash:
         radial-gradient(66% 78% at 76% 2%,
             rgba(255, 255, 255, 0.042) 0%,
@@ -1340,14 +1343,16 @@
    hlava → vyprávění → výzva (L 0,0070 → 0,0056 → 0,0055). Zvednout
    amplitudu by vrátilo nejsvětlejší bod na životopis místo na tvář,
    což §E u osobní stránky nechce. */
-.pd--depth-sub > section[data-pdd="about-story"] {
+.pd--depth-sub > section[data-pdd="about-story"],
+.pd--depth-sub > section[data-pdd="reviews-list"] {
     --pdd-wash:
         radial-gradient(40% 76% at 28% 4%,
             rgba(255, 255, 255, 0.032) 0%,
             rgba(255, 255, 255, 0.009) 44%,
             rgba(255, 255, 255, 0) 74%);
 }
-.pd--depth-sub > section[data-pdd="about-cta"] {
+.pd--depth-sub > section[data-pdd="about-cta"],
+.pd--depth-sub > section[data-pdd="reviews-cta"] {
     --pdd-wash:
         radial-gradient(66% 62% at 50% -4%,
             rgba(255, 255, 255, 0.034) 0%,

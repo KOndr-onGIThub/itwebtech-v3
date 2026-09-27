@@ -44,6 +44,7 @@ Route::middleware(SetLocale::class)->group(function () use ($defaultLocale) {
     Route::get($s['projects'] . '/{url}', [PageController::class, 'project'])->name("{$defaultLocale}.project");
     Route::get($s['blog'],     [PageController::class, 'blog'])->name("{$defaultLocale}.blog");
     Route::get($s['blog'] . '/{slug}', [PageController::class, 'article'])->name("{$defaultLocale}.article");
+    Route::get($s['reviews'],  [PageController::class, 'reviews'])->name("{$defaultLocale}.reviews");
 });
 
 // Non-default locales — keep /{locale}/... prefix
@@ -63,6 +64,7 @@ foreach (array_slice($locales, 1) as $locale) {
             Route::get($s['projects'] . '/{url}', [PageController::class, 'project'])->name("{$locale}.project");
             Route::get($s['blog'],     [PageController::class, 'blog'])->name("{$locale}.blog");
             Route::get($s['blog'] . '/{slug}', [PageController::class, 'article'])->name("{$locale}.article");
+            Route::get($s['reviews'],  [PageController::class, 'reviews'])->name("{$locale}.reviews");
         });
 }
 

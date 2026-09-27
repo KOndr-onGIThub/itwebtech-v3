@@ -172,7 +172,9 @@
 <section class="pd-strip" aria-label="{{ __('home.social_proof.strip_aria') }}">
     <div class="container-site">
         <ul class="pd-strip__list">
-            <li><strong aria-hidden="true">{{ __('home.social_proof.rating_value') }}</strong><span class="sr-only">{{ __('home.social_proof.rating_aria') }}</span> {{ __('home.social_proof.reviews') }}</li>
+            {{-- OND-397 (vstup V1): číslo je přesně to, co si člověk chce ověřit,
+                 takže je odkazem samo — na /recenze, kde si ho sečte. --}}
+            <li><a href="{{ lroute('reviews') }}" class="pd-strip__link"><strong aria-hidden="true">{{ __('home.social_proof.rating_value') }}</strong><span class="sr-only">{{ __('home.social_proof.rating_aria') }}</span> {{ __('home.social_proof.reviews') }}</a></li>
             <li><strong>{{ __('home.social_proof.projects') }}</strong></li>
             <li><strong>{{ __('home.social_proof.experience') }}</strong></li>
             <li>{{ __('home.social_proof.response') }}</li>
@@ -489,6 +491,10 @@
             </article>
             @endforeach
         </div>
+
+        {{-- OND-397 (vstup V2): týž vzor jako „Všechny projekty →" pod projekty.
+             Bez čísla — 26 je v pruhu, tady by ho člověk sčítal proti kartičkám. --}}
+        <p class="pd-more"><a href="{{ lroute('reviews') }}" class="pd-more__link">{{ __('reviews.all') }}</a></p>
 
         <div class="pd-subsection" id="faq">
             <h3 class="pd-subsection__title">{{ __('home.faq.heading') }}</h3>

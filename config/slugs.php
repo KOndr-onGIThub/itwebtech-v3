@@ -29,6 +29,8 @@ return [
         // OND-266: adresa sjednocená s názvem sekce (Ondřej 23. 9.).
         // Staré `/jak-na-to` drží 301 v routes/web.php.
         'blog'     => 'zapisky',
+        // OND-397: `/recenze` je v indexu Googlu z Framer webu, proto vzniká.
+        'reviews'  => 'recenze',
     ],
 
     'en' => [
@@ -40,6 +42,7 @@ return [
         'cookies'  => 'cookies',
         'projects' => 'projects',
         'blog'     => 'blog',
+        'reviews'  => 'reviews',
     ],
 
     'de' => [
@@ -51,6 +54,7 @@ return [
         'cookies'  => 'cookies',
         'projects' => 'projekte',
         'blog'     => 'blog',
+        'reviews'  => 'bewertungen',
     ],
 
 ];

@@ -13,7 +13,7 @@ return [
     // který netuší, co to je (princip 0).
     'meta' => [
         'title'       => 'Weby na míru: cenu počítám, ne odhaduju | ONDRAWEB',
-        'description' => 'Weby, e-shopy a webové aplikace na míru. Cenu spočítám předem, stavím sám na vlastním kódu. 5,0 z 21 recenzí, odpověď nejpozději následující pracovní den.',
+        'description' => 'Weby, e-shopy a webové aplikace na míru. Cenu spočítám předem, stavím sám na vlastním kódu. 5,0 z 26 hodnocení, odpověď nejpozději následující pracovní den.',
     ],
 
     'hero' => [
@@ -38,7 +38,7 @@ return [
         // slovo a na nafocené variantě žádné podtržení nebylo.
         'upline'          => 'Pro firmy, které rostou.',
         'heading_html'    => 'Ptám se, ne hádám.<br>Počítám, ne odhaduju.<br>Ručím, ne slibuju.',
-        'subline'         => 'Jsem Ondřej Kriška. Weby a aplikace stavím na vlastním kódu a pracuju na nich sám. Cenu spočítám před začátkem, hodnocení mám 5,0 z 21 recenzí.',
+        'subline'         => 'Jsem Ondřej Kriška. Weby a aplikace stavím na vlastním kódu a pracuju na nich sám. Cenu spočítám před začátkem, na Googlu a Firmy.cz mám 5,0 z 26 hodnocení.',
         'note'            => 'Ozvu se nejpozději následující pracovní den. Nezávazně proberu, co dává smysl.',
 
         // Backwards compat — staré klíče zachované pro non-hero spotřebitele
@@ -67,7 +67,7 @@ return [
         // nečetla druhý blok pod stejným „Hodnocení 5 z 5".
         'clients_aria' => 'Klienti',
         'rating_value' => '5,0',
-        'reviews'      => '(21 recenzí Google + Firmy.cz)',
+        'reviews'      => '(26 hodnocení na Googlu a Firmy.cz)',
         'projects'     => '23+ realizací',
         'experience'   => '18 let praxe',
         'response'     => 'Odpověď nejpozději následující pracovní den',

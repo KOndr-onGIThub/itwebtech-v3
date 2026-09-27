@@ -12,6 +12,7 @@ return [
             'article'  => 0.6,
             'contact'  => 0.6,
             'price'    => 0.6,
+            'reviews'  => 0.6,
             'privacy'  => 0.4,
             'fallback' => 0.5,
         ],

@@ -4,11 +4,17 @@
 // Přeložené jsou všechny (ne jen zobrazené) — přepnutí feature flagu
 // show_toyota_testimonial nebo přeskládání pořadí nesmí vrátit češtinu.
 // Vlastní jména, firmy, `image` a `source` se nepřekládají.
+// OND-397: `url` = odkaz na originál (profil recenzenta na Googlu, profil
+// na Firmy.cz, u skrytých Google recenzí profil firmy — inventura OND-395).
+// `project` = slug případovky, když ji klient má. Obě pole se nepřekládají
+// a musí být ve všech třech souborech stejná (hlídá Ond397ReviewsPageTest).
+// Pořadí položek: Holcmann musí zůstat před YCF CUP (oba `pitarena`).
+// Seskupení na /recenze je v config/reviews.php, ne tady.
 
 return [
 
     'meta' => [
-        'total'  => 16,
+        'total'  => 22,
         'rating' => '5 z 5',
     ],
 
@@ -18,9 +24,10 @@ return [
             'name'     => 'Radka Láníková Ouředníková',
             'company'  => 'MAKOplast s.r.o.',
             'role'     => 'Geschäftsführerin',
-            'image'    => 'makoplast.png',   // public/img/testimonials/
+            'image'    => null,
             'initials' => 'RL',
             'source'   => 'firmy_cz',
+            'url'      => 'https://www.firmy.cz/detail/13470851-profesionalni-webove-stranky-a-aplikace-ondrej-kriska-brezi.html#hodnoceni',
             'text'     => 'Hervorragende Zusammenarbeit, professionelles Vorgehen, die Website war pünktlich fertig und genau so, wie wir sie uns vorgestellt hatten. Ich empfehle Herrn Kriška allen, die eine ordentliche Website wollen.',
         ],
         [
@@ -31,6 +38,7 @@ return [
             'image'    => null,
             'initials' => 'AH',
             'source'   => 'google',
+            'url'      => 'https://www.google.com/maps/contrib/106421265514180487960/reviews',
             'text'     => 'Ondřej Kriška ist klar zu empfehlen — für seine erfinderische, unverbrauchte Arbeitsweise, die mit einem flexiblen und professionellen Umgang mit dem Kunden Hand in Hand geht.',
         ],
         [
@@ -41,6 +49,8 @@ return [
             'image'    => 'michal_cvrcek.jpg',
             'initials' => 'MC',
             'source'   => 'google',
+            'url'      => 'https://www.google.com/maps/contrib/107357331291077036859/reviews',
+            'project'  => 'cyklocentrum',
             'text'     => 'Perfekte Zusammenarbeit. Ausgezeichnete Ideen und Herangehensweise. Schnell, entgegenkommend, hilfsbereit, professionell. Wärmstens empfohlen.',
         ],
         [
@@ -51,6 +61,7 @@ return [
             'image'    => null,
             'initials' => 'AP',
             'source'   => 'firmy_cz',
+            'url'      => 'https://www.firmy.cz/detail/13470851-profesionalni-webove-stranky-a-aplikace-ondrej-kriska-brezi.html#hodnoceni',
             'text'     => 'Danke an Ondra für die großartige Arbeit am Logo, damit es auf Firmentextilien verwendet werden kann. Alles lief schnell, präzise und innerhalb weniger Stunden. Klare Empfehlung.',
         ],
         [
@@ -61,6 +72,8 @@ return [
             'image'    => 'jana_vesela.jpg',
             'initials' => 'JV',
             'source'   => 'facebook',
+            'url'      => 'https://www.facebook.com/ondraweb',
+            'project'  => 'kemp-veselka',
             'text'     => '100 % zufrieden mit der Erstellung unserer Website. Schön und funktional. Wir können ihn wärmstens empfehlen.',
         ],
         [
@@ -71,6 +84,8 @@ return [
             'image'    => 'peter_vidlicka.jpeg',
             'initials' => 'PV',
             'source'   => 'google',
+            'url'      => 'https://www.google.com/maps/place/OndraWeb.cz+-+Ond%C5%99ej+Kri%C5%A1ka/@48.8205331,16.5665234,17z/data=!4m8!3m7!1s0x66be6e0a59ec45a7:0xcea91464a27623df!8m2!3d48.8205331!4d16.5665234!9m1!1b1!16s%2Fg%2F11ss5bkbsy',
+            'project'  => 'yolk',
             'text'     => 'Ondra ist ein sehr zuverlässiger und geschickter Entwickler, die Zusammenarbeit lief immer sehr gut.',
         ],
         [
@@ -81,17 +96,21 @@ return [
             'image'    => 'magda_pernicova.jpeg',
             'initials' => 'MP',
             'source'   => 'firmy_cz',
+            'url'      => 'https://www.firmy.cz/detail/13470851-profesionalni-webove-stranky-a-aplikace-ondrej-kriska-brezi.html#hodnoceni',
+            'project'  => 'realitacky-v-akci',
             'text'     => 'Professionell und zugleich menschlich und geduldig. Herr Kriška hat mir wirklich zugehört und daraus etwas gemacht, mit dem ich rundum zufrieden bin. Wärmste Empfehlung.',
         ],
         [
             'id'       => 'rostislav-toman',
             'name'     => 'Rostislav Toman',
-            'company'  => 'Tradiční výroba pralinek',
+            'company'  => 'BARANA',
             'role'     => 'Manager',
             'image'    => 'rostislav_toman.jpeg',
             'initials' => 'RT',
             'source'   => 'google',
-            'text'     => 'Ich schätze die hohe Fachkompetenz und Professionalität. Schritt für Schritt haben wir Erwartungen und Realität in Einklang gebracht und auf seinen Rat hin auch den Datenfluss optimiert. Ich habe in der Praxis erlebt, wie Erwartungen übertroffen werden. Von meiner Seite eine klare Empfehlung.',
+            'url'      => 'https://www.google.com/maps/contrib/106027346110288038103/reviews',
+            'project'  => 'barana',
+            'text'     => 'Ich habe schon zum zweiten Mal mit Ondra zusammengearbeitet und bin wieder rundum zufrieden. Schnelle Kommunikation, alles ist durchdacht, und das Ergebnis hat meine Erwartungen erneut übertroffen. Klare Empfehlung.',
         ],
         [
             'id'       => 'hana-jaskmanicka',
@@ -100,7 +119,9 @@ return [
             'role'     => 'geschäftsführende Direktorin',
             'image'    => 'Hana_Jaskmanicka.jpeg',
             'initials' => 'HJ',
-            'source'   => 'google',
+            'source'   => 'firmy_cz',
+            'url'      => 'https://www.firmy.cz/detail/13470851-profesionalni-webove-stranky-a-aplikace-ondrej-kriska-brezi.html#hodnoceni',
+            'project'  => 'vp-industry',
             'text'     => 'Wir wollten für unsere Firma eine gute Website, die sich von anderen unterscheidet. Durch die individuelle Herangehensweise, Flexibilität und Professionalität entspricht das Ergebnis genau unseren Vorstellungen. Wärmste Empfehlung.',
         ],
         [
@@ -111,6 +132,7 @@ return [
             'image'    => null,
             'initials' => 'IŠ',
             'source'   => 'google',
+            'url'      => 'https://www.google.com/maps/contrib/102940004971428150275/reviews',
             'text'     => 'Die Dienste von Ondřej Kriška empfehle ich wärmstens. Er handelt schnell und effizient. Für mich war das ein großer Unterschied zum vorherigen IT-Dienstleister. Gut, dass es in diesem Land solche Fachleute gibt.',
         ],
         [
@@ -121,6 +143,7 @@ return [
             'image'    => 'Vaclav-Pesice.png',
             'initials' => 'VP',
             'source'   => 'google',
+            'url'      => 'https://www.google.com/maps/contrib/117945978699024589045/reviews',
             'text'     => 'Die Zusammenarbeit mit Ondra ist großartig. Er versucht immer, das Maximum für seine Kunden herauszuholen. Er hat perfekte Arbeit geleistet. Er hat definitiv meine Empfehlung.',
         ],
         [
@@ -131,6 +154,7 @@ return [
             'image'    => 'Pavel_Baudys.jpg',
             'initials' => 'PB',
             'source'   => 'google',
+            'url'      => 'https://www.google.com/maps/place/OndraWeb.cz+-+Ond%C5%99ej+Kri%C5%A1ka/@48.8205331,16.5665234,17z/data=!4m8!3m7!1s0x66be6e0a59ec45a7:0xcea91464a27623df!8m2!3d48.8205331!4d16.5665234!9m1!1b1!16s%2Fg%2F11ss5bkbsy',
             'badge'    => 'Aus meiner Zeit bei Toyota',
             'text'     => 'Ich gebe diese Referenz für Ondřej Kriška gerne ab. Er hat 18 Jahre in unserem Unternehmen Toyota gearbeitet. Eine seiner größten Stärken ist der echte Wille, sich weiterzuentwickeln — das sieht man an seinen Ergebnissen.',
         ],
@@ -142,6 +166,8 @@ return [
             'image'    => null,
             'initials' => 'SH',
             'source'   => 'firmy_cz',
+            'url'      => 'https://www.firmy.cz/detail/13470851-profesionalni-webove-stranky-a-aplikace-ondrej-kriska-brezi.html#hodnoceni',
+            'project'  => 'pitarena',
             'text'     => 'Dieser Web-Meister baut unsere Seiten und ich kann ihn nur wärmstens empfehlen. Ausgezeichnete Kommunikation, saubere Arbeit, jede Menge erfinderische, praktische Ideen.',
         ],
         [
@@ -152,6 +178,8 @@ return [
             'image'    => null,
             'initials' => 'LS',
             'source'   => 'google',
+            'url'      => 'https://www.google.com/maps/contrib/107159267883857266720/reviews',
+            'project'  => 'elektro-srnak',
             'text'     => 'Schnell, hilfsbereit, entgegenkommend. Ein absolut perfekter Umgang. Ich kann ihn wärmstens empfehlen.',
         ],
         [
@@ -162,6 +190,8 @@ return [
             'image'    => 'Jaroslav-Zajic.jpg',
             'initials' => 'JZ',
             'source'   => 'firmy_cz',
+            'url'      => 'https://www.firmy.cz/detail/13470851-profesionalni-webove-stranky-a-aplikace-ondrej-kriska-brezi.html#hodnoceni',
+            'project'  => 'strechy-zajic',
             'text'     => 'Die Website sieht großartig aus und lässt sich intuitiv bedienen. Durch das proaktive Vorgehen und die fachliche Beratung war der ganze Prozess einfach. Ich komme sicher wieder. Empfehlenswert.',
         ],
         [
@@ -172,8 +202,80 @@ return [
             'image'    => null,
             'initials' => 'JS',
             'source'   => 'google',
+            'url'      => 'https://www.google.com/maps/place/OndraWeb.cz+-+Ond%C5%99ej+Kri%C5%A1ka/@48.8205331,16.5665234,17z/data=!4m8!3m7!1s0x66be6e0a59ec45a7:0xcea91464a27623df!8m2!3d48.8205331!4d16.5665234!9m1!1b1!16s%2Fg%2F11ss5bkbsy',
             'badge'    => 'Aus meiner Zeit bei Toyota',
             'text'     => 'Ich schätze seine professionelle Arbeitsweise. Bei der Entwicklung einer Anwendung analysiert er die Ausgangslage gründlich und will die bestehenden Prozesse wirklich verstehen. Er sammelt die Anforderungen der Nutzer und fragt nach, wohin es gehen soll. Daraus macht er einen Plan und stimmt die wichtigsten Meilensteine mit dem Kunden ab.',
+        ],
+        [
+            'id'       => 'kamil-travnik',
+            'name'     => 'Kamil Trávník',
+            'company'  => 'Vinařství KT',
+            'role'     => 'Winzer',
+            'image'    => null,
+            'initials' => 'KT',
+            'source'   => 'google',
+            // Profil recenzenta recenze veřejně neukazuje (ověřeno 27. 9.), vede se
+            // proto na profil firmy, kde je Trávníkova recenze mezi viditelnými.
+            'url'      => 'https://www.google.com/maps/place/OndraWeb.cz+-+Ond%C5%99ej+Kri%C5%A1ka/@48.8205331,16.5665234,17z/data=!4m8!3m7!1s0x66be6e0a59ec45a7:0xcea91464a27623df!8m2!3d48.8205331!4d16.5665234!9m1!1b1!16s%2Fg%2F11ss5bkbsy',
+            'text'     => 'Er geht auf jede Situation individuell ein und findet für jeden eine einfallsreiche Lösung. Ich kann ihn nur empfehlen.',
+        ],
+        [
+            'id'       => 'marie-mikova',
+            'name'     => 'Marie Miková',
+            'company'  => 'ZOOMORAVA s.r.o.',
+            'role'     => 'Viehhandel',
+            'image'    => null,
+            'initials' => 'MM',
+            'source'   => 'google',
+            'url'      => 'https://www.google.com/maps/contrib/113233375389599450412/reviews',
+            'text'     => 'Wir haben eine neue Firmenwebsite in Auftrag gegeben. Mit der Leistung sind wir sehr zufrieden, die Kommunikation war angenehm und entgegenkommend. Auch mit der Website sind wir zufrieden: Alles ist übersichtlich und erfüllt alle unsere Anforderungen.',
+        ],
+        [
+            'id'       => 'petr-kroulik',
+            'name'     => 'Petr Kroulík',
+            'company'  => 'Nové interiéry',
+            'role'     => 'Bodenbeläge und Innentüren',
+            'image'    => null,
+            'initials' => 'PK',
+            'source'   => 'google',
+            'url'      => 'https://www.google.com/maps/contrib/103886395370685308662/reviews',
+            'project'  => 'nove-interiery',
+            'text'     => 'Ich kann Herrn Kriška nur empfehlen. Ondra baut Ihnen wirklich eine Website — und glauben Sie mir, die Zusammenarbeit mit ihm ist eine Investition, die sich lohnt. Hier füllen nicht irgendwelche selbsternannten Webdesigner für horrende Summen nur eine Vorlage mit Inhalten.',
+        ],
+        [
+            'id'       => 'petr-knourek',
+            'name'     => 'Petr Kňourek',
+            'company'  => 'Cyklocentrum Březí',
+            'role'     => 'Fahrradverleih und -werkstatt',
+            'image'    => 'petr_knourek.jpg',
+            'initials' => 'PK',
+            'source'   => 'firmy_cz',
+            'url'      => 'https://www.firmy.cz/detail/13470851-profesionalni-webove-stranky-a-aplikace-ondrej-kriska-brezi.html#hodnoceni',
+            'project'  => 'cyklocentrum',
+            'text'     => 'Perfekte Zusammenarbeit. Ausgezeichnete Ideen und Herangehensweise. Schnell, entgegenkommend, hilfsbereit, professionell. Wärmstens empfohlen!',
+        ],
+        [
+            'id'       => 'roman-antos',
+            'name'     => 'Roman Antoš',
+            'company'  => 'Vinařství Antoš',
+            'role'     => 'Winzer',
+            'image'    => null,
+            'initials' => 'RA',
+            'source'   => 'google',
+            'url'      => 'https://www.google.com/maps/contrib/110948210586387826476/reviews',
+            'text'     => 'Sehr entgegenkommend und professionell. Ich kann ihn nur empfehlen.',
+        ],
+        [
+            'id'       => 'ycf-cup',
+            'name'     => 'YCF CUP',
+            'company'  => 'Pitbike-Rennserie',
+            'role'     => 'Veranstalter',
+            'image'    => null,
+            'initials' => 'YC',
+            'source'   => 'firmy_cz',
+            'url'      => 'https://www.firmy.cz/detail/13470851-profesionalni-webove-stranky-a-aplikace-ondrej-kriska-brezi.html#hodnoceni',
+            'project'  => 'pitarena',
+            'text'     => 'Ondra hat unsere Website ycf-cup betreut. Er hat sie vom vorherigen Betreuer übernommen und uns geholfen, sie zu verbessern. Vorher lief sie auf Webnode, wo wir 5.000 Kč im Jahr für nichts bezahlt haben. Deshalb haben wir beschlossen, sie neu aufzusetzen und alles mit der Website von PitArena zusammenzuführen, die komplett von Ondra stammt. So hat er uns Kosten gespart, und wir haben auch mehr Besucher. Außerdem hat er uns ein Anmeldeformular gebaut, das uns bei jedem Rennen viel Zeit spart. Klare Empfehlung!',
         ],
     ],
 
