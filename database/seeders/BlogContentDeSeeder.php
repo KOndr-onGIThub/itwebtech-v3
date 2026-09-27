@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\DB;
  * updateOrInsert. Opakované spuštění nic nerozbije.
  *
  * Pozn. k cenám v článku 3: DE verze uvádí eura podle `lang/de/price.php`
- * (Standard 2.200 € · Custom ab 3.800 € · Starter 1.000 €), ne přepočet korun
+ * (Spanne 3.500–8.000 €, Einstiegspreis ab 1.900 € — OND-389), ne přepočet korun
  * z CS verze. Když se čísla v `lang/de/price.php` změní, je potřeba srovnat
  * i tenhle text.
  *
@@ -157,7 +157,7 @@ class BlogContentDeSeeder extends Seeder
      *
      * @return array<int, array<string, string>>
      */
-    private function articles(): array
+    public function articles(): array
     {
         return [
 
@@ -167,9 +167,9 @@ class BlogContentDeSeeder extends Seeder
             // ----------------------------------------------------------------
             3 => [
                 'title'       => 'Was eine Website kostet und woraus sich der Preis ergibt',
-                'description' => 'In welchen Preisstufen ich Websites baue, was darin enthalten ist und was den Preis nach oben treibt. Damit Sie vorher wissen, ob wir zusammenpassen.',
+                'description' => 'Was eine Website bei mir kostet, was im Preis steckt und was ihn nach oben oder unten bewegt. Damit Sie vorher wissen, ob wir zusammenpassen.',
                 'perex'       => <<<'HTML'
-                    <blockquote><p>Der Preis ist die erste Frage, die mir Leute stellen, und das ist richtig so. Eine einzige Zahl kann Ihnen aber niemand seriös nennen. Eine Website für 1.000 € und eine für 8.000 € sind zwei verschiedene Dinge. Deshalb schreibe ich offen, in welchen Stufen ich arbeite, was darin steckt und was den Preis nach oben schiebt.</p></blockquote>
+                    <blockquote><p>Der Preis ist die erste Frage, die mir Leute stellen, und das ist richtig so. Eine einzige Zahl kann Ihnen aber niemand seriös nennen. Eine Website für 1.900 € und eine für 8.000 € sind zwei verschiedene Dinge. Deshalb schreibe ich offen, was eine Website bei mir kostet, was im Preis steckt und was ihn nach oben oder unten schiebt.</p></blockquote>
                     HTML,
                 'content_1'   => <<<'HTML'
                     <h2>Warum ich keine einzige Zahl habe</h2>
@@ -178,11 +178,12 @@ class BlogContentDeSeeder extends Seeder
                     <h2>Wofür Sie eigentlich bezahlen</h2>
                     <p>Sie bezahlen meine Zeit und das, was ich damit anzufangen weiß. Sie kaufen keine Lizenz für ein Template und keine Stunden eines Vertrieblers, der Ihnen die Website verkauft hat und dann verschwunden ist. Ich arbeite allein, im Preis stecken also kein Agentur-Overhead und kein Koordinator, der mir Ihre E-Mails weiterleitet.</p>
                     <p>Websites schreibe ich mit eigenem Code. Ich baue sie nicht aus Baukästen und fremden Plug-ins zusammen, die ständig aktualisiert werden müssen und irgendwann kaputtgehen. Das ist am Anfang teurer und mit der Zeit günstiger, weil Sie nichts zu reparieren haben.</p>
-                    <h2>Drei Stufen, in denen ich arbeite</h2>
-                    <p><strong>Standard — 2.200 €.</strong> Eine Website nach Maß bis zwölf Seiten. Mit einer einfachen Inhaltsverwaltung, sodass Sie Texte, Fotos oder Referenzen selbst ändern. Eine weitere Sprachversion ist möglich. Das bestellen die meisten Firmen.</p>
-                    <p><strong>Custom — ab 3.800 €.</strong> Onlineshop, Reservierungssystem oder eine Anwendung nach Maß. Der Umfang steht nicht vorher fest, der Preis ergibt sich daraus, was die Website können muss und an welche Systeme sie angebunden wird.</p>
-                    <p><strong>Starter — 1.000 €.</strong> Die Ausnahme, nicht der normale Einstieg. Eine Präsentation bis fünf Seiten für Selbstständige, bei denen ein größerer Umfang keinen Sinn ergibt.</p>
-                    <p>Ich bin nicht umsatzsteuerpflichtig. Der Preis, den ich Ihnen nenne, ist ein Endpreis — es kommt keine Mehrwertsteuer hinzu. Was genau in den einzelnen Stufen steckt, steht aufgeschlüsselt in der <a href="/de/preisliste">Preisliste</a>.</p>
+                    <h2>Was es bei mir kostet</h2>
+                    <p>Die meisten Projekte liegen zwischen 3.500 und 8.000 €. Das Kleinste, was ich baue, ist eine Präsentationswebsite mit bis zu fünf Seiten, ab 1.900 €. Was Ihre kostet, hängt vor allem vom Umfang ab.</p>
+                    <p><strong>Präsentationswebsite — bis fünf Seiten.</strong> Für Selbstständige und kleine Unternehmen, bei denen ein größerer Umfang keinen Sinn ergibt. Sie wird schnell sein, auf dem Handy sauber funktionieren, und kein Link zum Anfrageformular wird ins Leere führen. Erwarten Sie nicht, dass sie von allein Aufträge bringt — dafür braucht es mehr Arbeit, als der kleinste Umfang zulässt. Aber sie wird ordentlich gemacht.</p>
+                    <p><strong>Firmenwebsite — bis zwölf Seiten.</strong> Eine Website nach Maß mit einer einfachen Inhaltsverwaltung, sodass Sie Texte, Fotos oder Referenzen selbst ändern. Eine weitere Sprachversion ist möglich. Das bestellen die meisten Firmen.</p>
+                    <p><strong>Individuell — ohne Umfangsgrenze.</strong> Onlineshop, Reservierungssystem oder eine Anwendung nach Maß. Der Umfang steht nicht vorher fest, der Preis ergibt sich daraus, was die Website können muss und an welche Systeme sie angebunden wird.</p>
+                    <p>Ich bin nicht umsatzsteuerpflichtig. Der Preis, den ich Ihnen nenne, ist ein Endpreis — es kommt keine Mehrwertsteuer hinzu. Was genau jeweils enthalten ist, steht aufgeschlüsselt in der <a href="/de/preisliste">Preisliste</a>.</p>
                     HTML,
                 'content_mid' => <<<'HTML'
                     <blockquote><p>Sie kennen den Preis, bevor ich anfange zu arbeiten. Nicht erst auf der Rechnung.</p></blockquote>
@@ -195,11 +196,18 @@ class BlogContentDeSeeder extends Seeder
                     <li><strong>Inhalte, die es noch nicht gibt.</strong> Wenn Sie weder Fotos noch Texte haben, müssen sie erst entstehen. Wir klären vorher, was Sie beisteuern und was ich — damit es auf der Rechnung keine Überraschung gibt.</li>
                     <li><strong>Ein Umfang, der unterwegs wächst.</strong> Deshalb schreibe ich die Spezifikation. Damit wir beide wissen, wo die Grenze liegt.</li>
                     </ul>
+                    <h2>Was den Preis senkt</h2>
+                    <ul>
+                    <li><strong>Texte und Fotos liegen bereit.</strong> Es muss nichts erst entstehen, und ich kann gleich mit dem Bau anfangen.</li>
+                    <li><strong>Weniger Seiten.</strong> Weniger Arbeit, niedrigerer Preis.</li>
+                    <li><strong>Eine Sprache.</strong> Eine Version der Website, die gebaut und gepflegt werden muss.</li>
+                    <li><strong>Sie pflegen die Inhalte selbst.</strong> Ich zeige Ihnen, wie es geht, und Texte und Fotos stellen Sie statt mir auf die Website.</li>
+                    </ul>
                     <h2>Warum ich nicht der Günstigste bin</h2>
                     <p>Weil ich es nicht sein will. Eine Website aus dem Template für ein paar hundert Euro ergibt Sinn, wenn Sie nur eine Visitenkarte im Internet brauchen. Zu dem Preis können Sie sie ruhig haben, das sage ich Ihnen geradeheraus und werde Sie nicht umstimmen.</p>
                     <p>Ich baue Websites für Firmen, die ihre Website im Geschäft tatsächlich benutzen und sie ordentlich haben wollen. Für den Unterschied bekommen Sie eine Lösung, die darauf zugeschnitten ist, wie Ihre Firma arbeitet, und Code, der Ihnen gehört. Er ist weder bei mir eingesperrt noch bei einer Plattform, von der Sie nicht mehr wegkämen.</p>
                     <h2>Wann Sie keine Website bei mir kaufen sollten</h2>
-                    <p>Wenn Ihr Budget unter 800 € liegt. Wenn Sie die Website in einer Woche brauchen. Wenn Sie nur ein bestehendes WordPress reparieren wollen. Nichts davon mache ich, und es ist besser, Sie wissen es jetzt als nach zwei Terminen.</p>
+                    <p>Wenn Sie die Website in einer Woche brauchen. Wenn Sie nur ein bestehendes WordPress reparieren wollen. Beides mache ich nicht, und es ist besser, Sie wissen es jetzt als nach zwei Terminen.</p>
                     <h2>Wie Sie zum genauen Preis kommen</h2>
                     <p>Schreiben Sie mir, was Sie brauchen. Ruhig kurz. Ich melde mich spätestens am nächsten Arbeitstag und wir gehen es durch. Wenn dabei herauskommt, dass ich Ihnen helfen kann, bekommen Sie eine Spezifikation mit einem konkreten Preis. Wenn nicht, sage ich es Ihnen und dränge Ihnen nichts auf.</p>
                     HTML,

@@ -155,7 +155,7 @@ class BlogContentEnSeeder extends Seeder
      *
      * @return array<int, array<string, string>>
      */
-    private function articles(): array
+    public function articles(): array
     {
         return [
 
@@ -163,14 +163,14 @@ class BlogContentEnSeeder extends Seeder
             // 3 — Kolik stojí web → How much does a website cost
             // Slug `how-much-does-a-website-cost` zůstává — funkční SEO adresa.
             // Text zrcadlí aktuální CS/DE verzi odstavec po odstavci a čísla
-            // bere z `lang/en/price.php` (Standard €2,200 · Custom from €3,800
-            // · Starter €1,000). Když se ceny v lang změní, srovnat i tenhle text.
+            // bere z `lang/en/price.php` (rozpětí €3,500–€8,000, vstupní cena
+            // from €1,900 — OND-389). Když se ceny v lang změní, srovnat i tenhle text.
             // ----------------------------------------------------------------
             3 => [
                 'title'       => 'What a custom website costs and what goes into the price',
-                'description' => 'The price tiers I build websites in, what each one includes, and what pushes the price up. So you know up front whether I fit your budget.',
+                'description' => 'What a website costs with me, what the price includes, and what moves it up or down. So you know up front whether I fit your budget.',
                 'perex'       => <<<'HTML'
-                    <blockquote><p>Price is the first thing people ask me about, and it is the right question. But nobody can honestly give you a single number. A €1,000 website and an €8,000 website are two different things. So here it is straight: the tiers I work in, what is in them, and what pushes the price up.</p></blockquote>
+                    <blockquote><p>Price is the first thing people ask me about, and it is the right question. But nobody can honestly give you a single number. A €1,900 website and an €8,000 website are two different things. So here it is straight: what a website costs with me, what is in the price, and what moves it up or down.</p></blockquote>
                     HTML,
                 'content_1'   => <<<'HTML'
                     <h2>Why I do not have one number</h2>
@@ -179,11 +179,12 @@ class BlogContentEnSeeder extends Seeder
                     <h2>What you are actually paying for</h2>
                     <p>You are paying for my time and for what I know how to do with it. You are not buying a template licence, and you are not buying the hours of a salesperson who sold you the site and then disappeared. I work alone, so there is no agency overhead in the price and no coordinator forwarding me your emails.</p>
                     <p>I write websites in my own code. I do not assemble them from page builders and third-party plugins that need constant updating and eventually break. That costs more at the start and less over time, because there is nothing for you to repair.</p>
-                    <h2>The three tiers I work in</h2>
-                    <p><strong>Standard — €2,200.</strong> A custom website of up to twelve pages. It comes with simple content management, so you change texts, photos or references yourself. Another language version is possible. This is what most companies order.</p>
-                    <p><strong>Custom — from €3,800.</strong> An online shop, a booking system or a custom application. The scope is not fixed in advance; the price follows from what the site has to do and which systems it connects to.</p>
-                    <p><strong>Starter — €1,000.</strong> The exception, not the normal way in. A presentation site of up to five pages for a sole trader for whom a bigger scope makes no sense.</p>
-                    <p>I am not registered for VAT. The price I quote you is the final price. What exactly each tier includes is broken down on the <a href="/en/price">pricing page</a>.</p>
+                    <h2>What it comes to with me</h2>
+                    <p>Most projects land between €3,500 and €8,000. The smallest site I build is a presentation site of up to five pages, from €1,900. What yours will cost depends mainly on the scope.</p>
+                    <p><strong>Presentation site — up to five pages.</strong> For sole traders and small businesses for whom a bigger scope makes no sense. It will be fast, it will work properly on a phone, and no link to your enquiry form will be broken. Do not expect it to start bringing in work on its own — that takes more work than the smallest scope allows. But it will be done properly.</p>
+                    <p><strong>Business site — up to twelve pages.</strong> A custom website with simple content management, so you change texts, photos or references yourself. Another language version is possible. This is what most companies order.</p>
+                    <p><strong>Custom — no scope limit.</strong> An online shop, a booking system or a custom application. The scope is not fixed in advance; the price follows from what the site has to do and which systems it connects to.</p>
+                    <p>I am not registered for VAT. The price I quote you is the final price. What exactly each level includes is broken down on the <a href="/en/price">pricing page</a>.</p>
                     HTML,
                 'content_mid' => <<<'HTML'
                     <blockquote><p>You know the price before I start working. Not when the invoice arrives.</p></blockquote>
@@ -196,11 +197,18 @@ class BlogContentEnSeeder extends Seeder
                     <li><strong>Content that does not exist yet.</strong> If you have neither photos nor texts, they have to be made. We agree in advance what you supply and what I do, so there is no surprise on the invoice.</li>
                     <li><strong>Scope that grows as we go.</strong> That is why I write the specification. So we both know where the line is.</li>
                     </ul>
+                    <h2>What brings the price down</h2>
+                    <ul>
+                    <li><strong>Your copy and photos are ready.</strong> Nothing has to be made first, so I can start building straight away.</li>
+                    <li><strong>Fewer pages.</strong> Less work, lower price.</li>
+                    <li><strong>One language.</strong> One version of the website to build and maintain.</li>
+                    <li><strong>You fill in the content yourself.</strong> I show you how, and you put the texts and photos on the site instead of me.</li>
+                    </ul>
                     <h2>Why I am not the cheapest</h2>
                     <p>Because I do not want to be. A template site for a few hundred euros makes sense if all you need is a business card on the internet. At that price, go ahead and have one — I will tell you so straight and I will not try to change your mind.</p>
                     <p>I build websites for companies that actually use the site in their business and want it done properly. For the difference you get a solution built around the way your company works, and code that belongs to you. It is not locked up with me, and it is not locked up with a platform you could not leave.</p>
                     <h2>When not to buy a website from me</h2>
-                    <p>When your budget is under €800. When you need the site in a week. When you only want to fix an existing WordPress. I do none of those, and it is better you know now than after two meetings.</p>
+                    <p>When you need the site in a week. When you only want to fix an existing WordPress. I do neither, and it is better you know now than after two meetings.</p>
                     <h2>How you get to an exact price</h2>
                     <p>Write and tell me what you need. Briefly is fine. I will get back to you by the next business day and we will go through it. If it turns out that I can help, you get a specification with a specific price. If not, I will say so and I will not push anything on you.</p>
                     HTML,
