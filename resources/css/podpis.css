@@ -2012,3 +2012,104 @@
     max-width: 62ch;
     margin: var(--space-3) 0 0;
 }
+
+/* ------------------------------------------------------------
+   OND-404 — /zapisky (návrh). Žádná nová komponenta kromě
+   `.pd-next` (dvě cesty dál). Výpis je `.pd-works` z /projekty
+   s modifikátorem `--notes`, závěr `.pd-split` + `.pd-points`.
+   ------------------------------------------------------------ */
+
+/* Hlava a výpis jsou jedna věta („Píšu o tom, co sám dělám." → tady
+   je to). Ne 0 jako na /projekty: horní hrana sekce nese skok jasu
+   vrstvy A (hloubka.css, `blog-list`). Při nule padl přesně na horní
+   hranu prvního náhledu a četl se jako vlasová čára nad ním. 32 px ho
+   od obsahu oddělí; hlava → výpis je pořád 136 / 88 px, pod mezerou
+   mezi sekcemi (203 / 113). */
+.pd-page-head + section[data-pdd="blog-list"] { padding-top: var(--space-6); }
+
+/* --- Výpis článků: `.pd-works` v řádcích -------------------------
+   Pět článků, každý je otázka. Vybírá se podle titulku, ne podle
+   obrázku, proto jeden sloupec a titulek o stupeň větší než v katalogu
+   projektů. Náhled je čtverec (výřezy z OND-292 jsou čtvercové) vlevo,
+   text vedle něj v míře ~60 ch. Mezi řádky 64 px (jako mřížka projektů). */
+.pd-works--notes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 58rem;
+}
+.pd-works--notes .pd-work__visual { aspect-ratio: 1 / 1; }
+.pd-works--notes .pd-work__visual img { object-position: center; }
+
+@media (min-width: 640px) {
+    .pd-works--notes { grid-template-columns: minmax(0, 1fr); gap: var(--space-8); }
+    .pd-works--notes .pd-work__link {
+        grid-template-columns: 200px minmax(0, 1fr);
+        grid-template-rows: auto 1fr;
+        grid-template-areas: "v t" "v x";
+        column-gap: var(--space-7);
+    }
+    .pd-works--notes .pd-work__visual { grid-area: v; margin: 0; }
+    .pd-works--notes .pd-work__title {
+        grid-area: t;
+        font-size: var(--text-h3);
+        line-height: 1.2;
+        margin: 0 0 var(--space-3);
+        max-width: 30ch;
+    }
+    .pd-works--notes .pd-work__text {
+        grid-area: x;
+        font-size: var(--text-body);
+        max-width: 60ch;
+    }
+}
+@media (min-width: 1024px) {
+    .pd-works--notes { grid-template-columns: minmax(0, 1fr); }
+}
+/* Mobil (< 640): řádek katalogu z /projekty beze změny, jen bez meta
+   řádku — titulek vedle náhledu, věta pod oběma. */
+@media (max-width: 639px) {
+    .pd-works--notes .pd-work__link { grid-template-rows: auto; grid-template-areas: "v t" "x x"; }
+}
+
+/* --- Závěr: dvě cesty dál ----------------------------------------
+   Fáze 2 ještě nepíše poptávku. Místo acidového tlačítka dvě cesty,
+   každá s nadřádkem, titulkem a větou cílové stránky. Celá položka je
+   odkaz; afordanci nese šipka a podtržení titulku při najetí (sazba
+   `.pd-work__title`). Žádný rámeček, žádná čára. */
+/* Jeden sloupec: titulky cest jsou nadpisy cílových stránek a mají se
+   přečíst na jeden řádek (ve dvou sloupcích se „…web na / míru." lámal). */
+.pd-points--next { list-style: none; margin: 0; padding: 0; grid-template-columns: minmax(0, 1fr); }
+/* `block`, ne `grid`: `.pd-work__meta` si z mobilní mřížky katalogu nese
+   `grid-area: m` a v mřížce by se přestěhoval pod text. */
+.pd-next__link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    min-height: 44px;
+}
+.pd-next__link .pd-work__meta { display: block; }
+.pd-next__link .pd-point__title {
+    display: block;
+    font-size: var(--text-h3);
+    line-height: 1.2;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    transition: text-decoration-color var(--duration-micro) var(--ease-out);
+}
+.pd-next__arrow {
+    display: inline-block;
+    color: var(--pd-accent);
+    transition: transform var(--duration-micro) var(--ease-out);
+}
+.pd-next__link .pd-point__text { display: block; }
+.pd-next__link:hover .pd-point__title,
+.pd-next__link:focus-visible .pd-point__title { text-decoration-color: var(--pd-accent); }
+.pd-next__link:hover .pd-next__arrow { transform: translateX(4px); }
+.pd-next__link:focus-visible { outline: 2px solid var(--pd-accent); outline-offset: 6px; }
+@media (prefers-reduced-motion: reduce) {
+    .pd-next__link:hover .pd-next__arrow { transform: none; }
+}

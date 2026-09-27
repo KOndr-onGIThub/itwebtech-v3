@@ -189,4 +189,29 @@ class BlogListingLocaleTest extends TestCase
             ->assertOk()
             ->assertDontSee('/de/blog/entwurf', false);
     }
+
+    /**
+     * OND-405 (předloha OND-404): výpis ve slovníku nové homepage. Řádek je
+     * jeden odkaz (žádné „Přečíst"), stránka má jeden `<main>` a končí dvěma
+     * cestami dál (ceník, projekty) ve stejném jazyce, bez výzvy k poptávce.
+     */
+    public function test_listing_is_single_link_rows_with_two_routes_onward(): void
+    {
+        foreach (['cs' => '/zapisky', 'en' => '/en/blog'] as $locale => $listing) {
+            $html = $this->get($listing)->assertOk()->getContent();
+
+            $this->assertSame(1, substr_count($html, '<main'), "Vnořený <main> ve výpisu {$listing}");
+            $this->assertStringContainsString('<title>'.e(__('blog.meta.title', [], $locale)).'</title>', $html);
+            $this->assertStringContainsString('ONDRAWEB</title>', $html);
+
+            preg_match_all('#href="([^"]*/(?:zapisky|en/blog)/[^"]+)"#', $html, $m);
+            $this->assertCount(1, $m[1], "Článek má ve výpisu {$listing} víc odkazů než jeden řádek");
+            $this->assertStringNotContainsString(e(__('blog.read_more', [], $locale)), $html);
+
+            $this->assertStringContainsString('class="pd-works pd-works--notes"', $html);
+            foreach (['price', 'projects'] as $route) {
+                $this->assertStringContainsString('href="'.lroute($route, $locale).'" class="pd-next__link"', $html);
+            }
+        }
+    }
 }

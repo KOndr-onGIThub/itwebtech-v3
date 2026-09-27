@@ -6,7 +6,7 @@ return [
     // Die alte Rubrik „Wie geht das" versprach allgemeine Anleitungen — genau
     // der Inhalt, der verschwinden soll. URL-Slug bleibt unverändert (SEO).
     'meta' => [
-        'title'       => 'Notizen — Ondřej Kriška',
+        'title'       => 'Notizen — Ondřej Kriška, ONDRAWEB',
         'description' => 'Ich schreibe darüber, womit ich beim Bau von Websites und Anwendungen wirklich zu tun habe. Preise, Briefings, Redesign, Anwendungen nach Maß.',
     ],
 

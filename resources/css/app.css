@@ -3304,34 +3304,6 @@
         margin: 0;
     }
 
-    /* ============================================================
-       BLOG LAYOUT
-       ============================================================ */
-    .blog-layout {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 3rem;
-    }
-    /* OND-204: postranní nabídka odebrána, výpis článků je jednosloupcový
-       a vycentrovaný — bez tohoto by po aside zbyl prázdný 320px sloupec. */
-    @media (min-width: 1024px) {
-        .blog-layout {
-            grid-template-columns: minmax(0, 860px);
-            justify-content: center;
-        }
-    }
-
-    .blog-articles {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-
-    .blog-empty {
-        color: var(--color-body);
-        line-height: 1.65;
-    }
-
     /* OND-204: styly pro .blog-conversion-card (karty „Obsah v přípravě"
        a „audit webu zdarma"), .blog-sidebar a .sidebar-ad odebrány spolu
        s bloky v resources/views/pages/blog.blade.php. */

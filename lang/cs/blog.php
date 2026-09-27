@@ -7,7 +7,7 @@ return [
     // zmizet. OND-266: název rubriky i adresa sjednoceny na „Zápisky“ /
     // `/zapisky`; ze starého `/jak-na-to` drží 301 (routes/web.php).
     'meta' => [
-        'title'       => 'Zápisky — Ondřej Kriška',
+        'title'       => 'Zápisky — Ondřej Kriška, ONDRAWEB',
         'description' => 'Píšu o tom, co při stavění webů a aplikací reálně řeším. Ceny, zadání, redesign, aplikace na míru.',
     ],
 

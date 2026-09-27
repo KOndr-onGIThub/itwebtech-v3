@@ -1288,14 +1288,6 @@
    Žádné nové zaoblení, žádná nová barva: jen stín a přisvětlená horní hrana.
    ========================================================================== */
 
-/* Karty článků — leží na ploše. Hover si zvedá vlastní translateY
-   (app.css), stín se s ním protáhne, jako by se karta od plochy vzdálila. */
-.pd--depth-sub .blog-card {
-    box-shadow: 0 18px 28px -18px rgba(0, 0, 0, 0.95);
-}
-.pd--depth-sub .blog-card:hover {
-    box-shadow: 0 24px 34px -18px rgba(0, 0, 0, 1);
-}
 /* Video na „o mně“ — stejná fyzika jako vizuál případovky.
    OND-380: `.pd-figure` je orámovaný obrázek v textovém sloupci (portrét
    uprostřed vyprávění na /o-mne) — týž případ, tedy týž stín. */
