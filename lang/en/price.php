@@ -202,8 +202,12 @@ return [
 
     'cta' => [
         'heading' => 'Not sure what you need?',
-        'desc'    => 'The consultation is free and non-binding. In 30 minutes I will tell you what makes sense for your business — honestly, even if that means we should not work together.',
-        'btn'     => 'Book a free consultation',
+        // OND-369: `desc` is the sub-label of the same call to action as the
+        // button, not prose elsewhere — so "free" goes with the label. Pricing
+        // (OND-354) rests on a threshold number; a free meeting next to it
+        // promises something different. Non-binding and 30 minutes stay.
+        'desc'    => 'The consultation is non-binding. In 30 minutes I will tell you what makes sense for your business — honestly, even if that means we should not work together.',
+        'btn'     => 'Write an enquiry',
     ],
 
 ];

@@ -135,8 +135,10 @@ return [
             'You do not want another "nice website" but something built around how your company actually works.',
         ],
         'cta_heading'   => 'If 2+ points match, this is worth solving now.',
+        // OND-369: `cta_text` is prose about what happens — it stays.
+        // The button links to /contact, so it speaks like the header does.
         'cta_text'      => 'In the intro call, we define the shortest path to a working solution without unnecessary extras.',
-        'cta_primary'   => 'Book consultation',
+        'cta_primary'   => 'Write an enquiry',
         'cta_secondary' => 'See pricing first',
     ],
 
@@ -186,7 +188,8 @@ return [
 
     'cta' => [
         'heading' => 'Want a similar result for your business?',
-        'primary' => 'Book a consultation',
+        // OND-369: aligned with the header — the link points to /contact.
+        'primary' => 'Write an enquiry',
     ],
 
 ];

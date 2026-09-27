@@ -135,8 +135,10 @@ return [
             'Sie wollen keine weitere „schöne Website“, sondern etwas, das auf der realen Arbeitsweise Ihrer Firma aufbaut.',
         ],
         'cta_heading'   => 'Wenn 2+ Punkte passen, lohnt sich die Umsetzung jetzt.',
+        // OND-369: `cta_text` ist Prosa über den Ablauf — bleibt.
+        // Der Button führt auf /kontakt, spricht also wie der Header.
         'cta_text'      => 'Im Erstgespräch definieren wir den kürzesten Weg zu einer funktionierenden Lösung ohne unnötige Extras.',
-        'cta_primary'   => 'Beratung buchen',
+        'cta_primary'   => 'Anfrage schreiben',
         'cta_secondary' => 'Zuerst Preise ansehen',
     ],
 
@@ -186,7 +188,8 @@ return [
 
     'cta' => [
         'heading' => 'Möchten Sie ein ähnliches Ergebnis für Ihr Unternehmen?',
-        'primary' => 'Beratung buchen',
+        // OND-369: an den Header angeglichen — der Link zeigt auf /kontakt.
+        'primary' => 'Anfrage schreiben',
     ],
 
 ];

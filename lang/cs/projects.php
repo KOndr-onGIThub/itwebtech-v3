@@ -136,8 +136,10 @@ return [
             'Nechcete další „hezký web“, ale nástroj postavený na tom, jak vaše firma funguje.',
         ],
         'cta_heading'   => 'Pokud sedí 2 a více bodů, má smysl to řešit.',
+        // OND-369: `cta_text` je próza o tom, co se stane — zůstává.
+        // Popisek tlačítka vede na /kontakt, takže mluví stejně jako hlavička.
         'cta_text'      => 'Během úvodní konzultace najdeme nejkratší cestu k funkčnímu řešení bez zbytečných funkcí navíc.',
-        'cta_primary'   => 'Domluvit konzultaci',
+        'cta_primary'   => 'Napsat poptávku',
         'cta_secondary' => 'Nejdřív ceník',
     ],
 
@@ -197,7 +199,8 @@ return [
 
     'cta' => [
         'heading' => 'Chcete podobný výsledek pro váš byznys?',
-        'primary' => 'Domluvit konzultaci',
+        // OND-369: sjednoceno s hlavičkou — odkaz míří na /kontakt.
+        'primary' => 'Napsat poptávku',
     ],
 
 ];

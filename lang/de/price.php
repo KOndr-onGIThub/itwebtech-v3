@@ -205,8 +205,12 @@ return [
 
     'cta' => [
         'heading' => 'Nicht sicher, was Sie brauchen?',
-        'desc'    => 'Die Beratung ist kostenlos und unverbindlich. In 30 Minuten sage ich Ihnen, was für Ihr Unternehmen sinnvoll ist — ehrlich, auch wenn das bedeutet, dass wir nicht zusammenarbeiten sollten.',
-        'btn'     => 'Kostenlose Beratung buchen',
+        // OND-369: `desc` ist der Untertitel derselben Handlungsaufforderung
+        // wie der Button, keine Prosa an anderer Stelle — „kostenlos“ fällt
+        // also mit dem Label weg. Die Preisliste (OND-354) baut auf einer
+        // Schwelle auf. Unverbindlichkeit und 30 Minuten bleiben.
+        'desc'    => 'Die Beratung ist unverbindlich. In 30 Minuten sage ich Ihnen, was für Ihr Unternehmen sinnvoll ist — ehrlich, auch wenn das bedeutet, dass wir nicht zusammenarbeiten sollten.',
+        'btn'     => 'Anfrage schreiben',
     ],
 
 ];
