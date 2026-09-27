@@ -29,7 +29,16 @@ return [
     'cta_consultation'    => 'Napište mi',
 
     'form_heading'        => 'Kontaktní formulář',
-    'form_subheading'     => 'Získejte zdarma a nezávazně nabídku — nebo mi pošlete jakýkoli dotaz.',
+    // OND-371: řádek sliboval „zdarma a nezávazně“ — tedy nízkou cenu místo
+    // výsledku, přesně to, co OND-369 vyřadilo z CTA napříč webem. Teď slibuje,
+    // co člověk dostane. Termín odpovědi tu schválně NENÍ: „ozvu se nejpozději
+    // následující pracovní den“ stojí už 3× nad formulářem (hero.subline,
+    // open_hours, next_steps krok 1), čtvrté zopakování by byl šum.
+    // Formulace drží slovník kroku 3 („rozsahem, termínem a přesnou cenou“).
+    // Délka je záměrná: na 1440 sedí na jeden řádek s rezervou 33 px, na 390
+    // padá na dva řádky bez sirotka. Delší varianta („na jakýkoli dotaz“) měla
+    // rezervu 4 px — jedno přeteklé písmo a řádek se zlomí. Změřeno, ne odhad.
+    'form_subheading'     => 'Dostanete nabídku s rozsahem, termínem a cenou — nebo odpověď na váš dotaz.',
     'name'                => 'Celé jméno',
     'email'               => 'Email',
     'tel'                 => 'Telefon (nepovinný)',

@@ -23,7 +23,11 @@ return [
     'cta_consultation'    => 'Write to me',
 
     'form_heading'        => 'Contact form',
-    'form_subheading'     => 'Get a free, non-binding quote or send a query',
+    // OND-371 — viz lang/cs/contact.php: „free“ jde pryč, termín odpovědi se
+    // neopakuje počtvrté, slovník drží krok 3 („scope, timeline, exact price“).
+    // Bez členů („with scope, timeline and price“) kvůli délce: plná varianta
+    // se lámala na dva řádky se sirotkem „question.“ Takto 1 řádek, rezerva 30 px.
+    'form_subheading'     => 'You get a proposal with scope, timeline and price — or an answer to any question.',
     'name'                => 'Full Name',
     'email'               => 'Email Address',
     'tel'                 => 'Phone (optional)',
