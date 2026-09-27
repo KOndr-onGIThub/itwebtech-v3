@@ -96,35 +96,9 @@ class Ond369ContactCtaWordingTest extends TestCase
         );
     }
 
-    /**
-     * Druhá strana téhož: předpatička se na podstránkách vykresluje a mluví
-     * rozhodnutým slovníkem. Bez tohohle by test výš prošel i tak, že by
-     * tlačítko zmizelo — a na existenci předpatičky zadání sahat zakazuje
-     * (rozsah řeší OND-343).
-     */
-    public function test_the_prefooter_speaks_the_decided_vocabulary_on_subpages(): void
-    {
-        $this->seed(PortfolioSeeder::class);
-
-        foreach (self::PAGES as $locale => $paths) {
-            foreach ($paths as $path) {
-                $body = $this->get($path)->assertOk()->getContent();
-
-                // Homepage si předpatičku schovává (`hide_prefooter`), takže
-                // tam se tagline ani tlačítko nevykreslí — a nemá to hlídat
-                // tato karta.
-                if (! str_contains($body, e(trans('layout.prefooter.tagline', [], $locale)))) {
-                    continue;
-                }
-
-                $this->assertStringContainsString(
-                    e(self::DECIDED_CTA[$locale]),
-                    $body,
-                    "Předpatička na {$path} nemluví rozhodnutým slovníkem.",
-                );
-            }
-        }
-    }
+    // Druhá strana téhož — „předpatička mluví rozhodnutým slovníkem" — tu
+    // hlídal test, který OND-387 odebral spolu s předpatičkou. Tlačítko
+    // v patičce není; že se nevrátí, hlídá Ond387FooterNavigationTest.
 
     // ------------------------------------------------------------------
     // 2. lang/
@@ -133,7 +107,6 @@ class Ond369ContactCtaWordingTest extends TestCase
     public function test_every_unified_key_uses_the_decided_vocabulary(): void
     {
         $keys = [
-            'layout.prefooter.cta',
             'layout.cta.contact',
             'projects.fit.cta_primary',
             'projects.cta.primary',
