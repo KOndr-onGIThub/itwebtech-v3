@@ -30,7 +30,7 @@ return [
     // Sticky CTA — always-visible while scrolling, "price never disappears".
     'sticky_cta' => [
         'label' => 'Pick a level',
-        'cta'   => 'Get a free quote',
+        'cta'   => 'Get a no-obligation quote',
     ],
 
     'popular'   => 'Most popular',
@@ -73,7 +73,7 @@ return [
                 'slug'  => 'vanspedition',
                 'label' => 'VAN spedition',
             ],
-            'cta' => 'Get a free quote',
+            'cta' => 'Get a no-obligation quote',
         ],
         [
             'key'     => 'business',
@@ -94,7 +94,7 @@ return [
                 'slug'  => 'zubni-provazek',
                 'label' => 'Zubní Provázek',
             ],
-            'cta' => 'Get a free quote',
+            'cta' => 'Get a no-obligation quote',
         ],
         [
             'key'     => 'custom',
@@ -114,7 +114,7 @@ return [
                 'slug'  => 'pitarena',
                 'label' => 'PitArena',
             ],
-            'cta' => 'Get a free quote',
+            'cta' => 'Get a no-obligation quote',
         ],
     ],
 
