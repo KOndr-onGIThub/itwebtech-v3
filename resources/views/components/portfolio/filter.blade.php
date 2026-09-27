@@ -4,8 +4,14 @@
     'target'     => 'portfolio-grid',
 ])
 
+{{-- OND-399 — filtr ve slovníku ACID: textová tlačítka, ne pilulky.
+     Aktivní kategorie = bílý text + acidové podtržení (stav, ne ozdoba).
+     `role="group"` + `aria-pressed`: dřív `role="tab"` bez tabpanelu,
+     což čtečka ohlásila jako záložky, které nikam nevedou.
+     Kategorie s nulou se nevykreslí — tlačítko do prázdné mřížky je slepá
+     ulička. Počet „21 projektů zobrazeno" zůstává jen pro čtečku: vidící
+     ho má v aktivním tlačítku. --}}
 @php
-    // Mapování kategorií na existující i18n klíče (filter_*).
     $labelMap = [
         'all'         => 'projects.filter_all',
         'website'     => 'projects.filter_websites',
@@ -14,38 +20,31 @@
     ];
 @endphp
 
-<section
-    class="portfolio-filter"
-    x-data="portfolioFilter({{ Js::from(['target' => $target, 'categories' => $categories, 'counts' => $counts]) }})"
+<div
+    class="pd-filter"
+    role="group"
     aria-label="{{ __('projects.filter_aria') }}"
-    data-reveal
+    x-data="portfolioFilter({{ Js::from(['target' => $target, 'categories' => $categories, 'counts' => $counts]) }})"
 >
-    <div class="container-site portfolio-filter__inner">
-        <div role="tablist" aria-label="{{ __('projects.filter_aria') }}" class="portfolio-filter__tabs">
-            @foreach ($categories as $category)
-                @php
-                    $label = $labelMap[$category] ?? null;
-                    $count = $counts[$category] ?? 0;
-                @endphp
-                <button
-                    type="button"
-                    role="tab"
-                    class="portfolio-filter__tab"
-                    :class="active === '{{ $category }}' ? 'is-active' : ''"
-                    :aria-pressed="active === '{{ $category }}' ? 'true' : 'false'"
-                    aria-controls="{{ $target }}"
-                    @click="setActive('{{ $category }}')"
-                    data-category="{{ $category }}"
-                >
-                    <span>{{ $label ? __($label) : ucfirst($category) }}</span>
-                    <span class="portfolio-filter__tab-count" aria-hidden="true">{{ $count }}</span>
-                </button>
-            @endforeach
-        </div>
+    @foreach ($categories as $category)
+        @php
+            $count = $counts[$category] ?? 0;
+            $label = isset($labelMap[$category]) ? __($labelMap[$category]) : ucfirst($category);
+        @endphp
+        @continue($category !== 'all' && $count === 0)
+        <button
+            type="button"
+            class="pd-filter__btn"
+            aria-pressed="{{ $category === 'all' ? 'true' : 'false' }}"
+            :aria-pressed="active === '{{ $category }}' ? 'true' : 'false'"
+            aria-controls="{{ $target }}"
+            @click="setActive('{{ $category }}')"
+            data-category="{{ $category }}"
+        >
+            <span class="pd-filter__label">{{ $label }}</span>
+            <span class="pd-filter__count">{{ $count }}</span>
+        </button>
+    @endforeach
 
-        <p class="portfolio-filter__count" aria-live="polite">
-            <span x-text="visibleCount"></span>
-            <span class="portfolio-filter__count-label">{{ __('projects.count_label') }}</span>
-        </p>
-    </div>
-</section>
+    <p class="sr-only" aria-live="polite"><span x-text="visibleCount"></span> {{ __('projects.count_label') }}</p>
+</div>

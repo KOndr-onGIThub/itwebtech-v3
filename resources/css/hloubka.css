@@ -1312,6 +1312,15 @@
     .pd--depth-sub .pd-page-head__photo { box-shadow: 0 20px 32px -18px rgba(0, 0, 0, 0.95); }
 }
 
+/* Vrstva C (OND-400, předloha OND-399 §9b): náhled leží na nasvícené ploše stejně jako
+   vizuál případovky na homepage — přisvětlená horní hrana a kontaktní stín.
+   Nahrazuje stín `.pd--depth-sub .portfolio-card`. */
+.pd--depth .pd-work__visual {
+    border-top-color: rgba(242, 240, 234, 0.18);
+    box-shadow: 0 18px 28px -18px rgba(0, 0, 0, 0.95);
+}
+.pd--depth .pd-work__link:hover .pd-work__visual { border-top-color: var(--pd-accent); }
+
 
 /* ==========================================================================
    E3. KONTAKT — vrstva B a C na formuláři

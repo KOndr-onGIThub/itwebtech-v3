@@ -28,8 +28,11 @@ class Ond351ProjectsEmptyAndSitemapTest extends TestCase
 
         $this->assertStringNotContainsString(__('projects.empty'), $body);
         $this->assertStringNotContainsString('portfolio-grid__empty', $body);
-        $this->assertStringNotContainsString('class="portfolio-filter"', $body);
-        $this->assertStringNotContainsString('portfolio-filter__count', $body);
+        // OND-400: filtr a mřížka mají od převodu do slovníku ACID třídy
+        // `pd-filter` / `pd-works`. Negativní kontrola na staré `portfolio-*`
+        // by prošla vždycky, i kdyby se filtr na prázdné DB vykreslil.
+        $this->assertStringNotContainsString('class="pd-filter"', $body);
+        $this->assertStringNotContainsString('class="pd-works"', $body);
 
         // Zbytek stránky zůstává nedotčený — případovky se vykreslují dál.
         $this->assertStringContainsString(__('projects.snapshots.heading'), $body);
@@ -44,9 +47,14 @@ class Ond351ProjectsEmptyAndSitemapTest extends TestCase
 
         $body = $this->get('/projekty')->assertOk()->getContent();
 
-        $this->assertStringContainsString('class="portfolio-filter"', $body);
-        $this->assertStringContainsString('class="portfolio-card"', $body);
+        $this->assertStringContainsString('class="pd-filter"', $body);
+        $this->assertStringContainsString('class="pd-works"', $body);
+        $this->assertStringContainsString('class="pd-work"', $body);
         $this->assertStringNotContainsString(__('projects.empty'), $body);
+
+        // OND-399 §7: s plnou DB se „Čtyři projekty zblízka" nevykreslí —
+        // tři ze čtyř jsou v mřížce jako celý detail.
+        $this->assertStringNotContainsString(__('projects.snapshots.heading'), $body);
     }
 
     /**

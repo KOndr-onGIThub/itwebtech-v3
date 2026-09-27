@@ -3,7 +3,7 @@
 return [
 
     'meta' => [
-        'title'       => 'Co jsem postavil | ONDRAWEB',
+        'title'       => 'Projekty — Ondřej Kriška, ONDRAWEB',
         'description' => 'Weby, e-shopy a webové aplikace, které jsem postavil a které dnes běží. U každého je odkaz na živou verzi, takže si to můžete ověřit sami.',
     ],
 

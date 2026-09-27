@@ -24,157 +24,139 @@
 @endpush
 
 @section('content')
+{{-- ============================================================
+     OND-399 — /projekty ve slovníku nové homepage (4. z 9).
+     Obsah je z lang/*/projects.php beze změny, mění se slovník
+     a pořadí. Obal `pd` nese tokeny ACID, `pd--depth-sub` vypíná
+     vrstvu B. Kužely vrstvy A v hloubka.css §E jsou psané na
+     `section[data-pdd="projects-*"]` — sekce musí zůstat PŘÍMÝMI
+     dětmi obalu.
 
-{{-- OND-251 — vrstva hloubky ZAPNUTÁ: jen světlo a hmota, žádný pohyb.
-     Důkazová stránka. Náboj na každé dlaždici mřížky by byl přesně ta
-     „přeplácanost", kterou vrstva odstraňovala — karty místo toho dostávají
-     kontaktní stín, aby ležely na ploše. Rozbor v §E hloubka.css. --}}
-<div class="pd--depth pd--depth-sub">
+     POŘADÍ JE ARGUMENT: co jsem postavil → všechno, co jsem
+     postavil → jak to dělám → má to smysl pro vás? Katalog je
+     protagonista, všechno ostatní je pod ním.
+     ============================================================ --}}
+<div class="pd pd--depth pd--depth-sub">
 
-{{-- Page hero — OND-135 iter 6: plán §3.1 design DNA (page-mark + display + amber accent) --}}
-<div class="page-hero page-hero--projects">
+{{-- Hlava — `.pd-page-head` (základ OND-379 §2a). Dva řádky nad titulkem
+     jsou jeden `.pd-eyebrow` s vlasovou čárkou, stejně jako /kontakt a /cenik. --}}
+<section class="pd-section pd-page-head">
     <div class="container-site">
-        {{-- OND-135 cleanup (2026-05-14): page_mark_index span odebrán jako
-             agency-portfolio artefakt (itwebtech nemá „pages" hierarchii) —
-             aplikováno per CEO PR #78/#80/#82 precedent (home/kontakt/cenik). --}}
-        <p class="page-hero__page-mark">
-            <span class="page-hero__page-mark-label">{{ __('projects.hero.page_mark_label') }}</span>
-        </p>
-        <p class="page-hero__upline">{{ __('projects.hero.upline') }}</p>
-        <h1 class="page-hero__heading">
-            {!! __('projects.hero.heading_html') !!}
-        </h1>
-        <p class="page-hero__subline">{{ __('projects.hero.subline') }}</p>
-    </div>
-</div>
-
-{{-- 1. + 2. Portfolio filter a mřížka
-     OND-351: DB `portfolio_projects` je dnes prázdná, takže první obrazovka
-     stránky hlásila „Vše 0 · Stránky 0 …", „0 projektů zobrazeno" a prázdný
-     stav „Momentálně nejsou k dispozici žádné projekty." — a to na stránce,
-     která má odvedenou práci dokazovat. Když projekty nejsou, přeskočíme
-     filtr i mřížku a stránka začne rovnou případovkami. Až se DB naplní,
-     obojí se vrátí samo — žádný flag, jen podmínka. --}}
-@if ($portfolioProjects->isNotEmpty())
-<x-portfolio.filter
-    :categories="['all', 'website', 'application', 'other']"
-    :counts="$counts"
-    target="portfolio-grid"
-/>
-
-<section class="section-wrapper section-wrapper--tight" data-reveal data-pdd="projects-grid">
-    <div class="container-site">
-        <x-portfolio.grid :projects="$portfolioProjects" :locale="$locale" />
+        <p class="pd-eyebrow">{{ __('projects.hero.page_mark_label') }} <span class="pd-eyebrow__sep" aria-hidden="true"></span> {{ __('projects.hero.upline') }}</p>
+        <h1 class="pd-heading pd-heading--sub">{!! __('projects.hero.heading_html') !!}</h1>
+        <p class="pd-sub">{{ __('projects.hero.subline') }}</p>
     </div>
 </section>
-@endif
 
-{{-- 3. Případovky
-     OND-201 (nález 5.2): dřív anonymní „snapshots" s vymyšlenými termíny.
-     Nově skutečné případovky z dokumentu `pripadovky` (OND-186). Druhý
-     meta slot nese odkaz na živý web místo vymyšlené doby realizace —
-     u interních aplikací (Toyota TSM) je `url` null a odkaz se nevykreslí. --}}
-<section class="section-wrapper" data-reveal data-pdd="projects-cases">
+@if ($portfolioProjects->isNotEmpty())
+{{-- Katalog — filtr a mřížka `.pd-works` (nová sdílená komponenta, použije
+     ji i „Další projekty" na detailu). Sekce navazuje na hlavu bez horního
+     odsazení: titulek „Co jsem postavil." a katalog jsou jedna věta. --}}
+<section class="pd-section" data-pdd="projects-grid">
     <div class="container-site">
-        <header class="section-header">
-            <p class="section-subheading">{{ __('projects.snapshots.subheading') }}</p>
-            <h2>{{ __('projects.snapshots.heading') }}</h2>
-            <p class="section-header__desc">{{ __('projects.snapshots.desc') }}</p>
-        </header>
+        <x-portfolio.filter
+            :categories="['all', 'website', 'application', 'other']"
+            :counts="$counts"
+            target="portfolio-grid"
+        />
 
-        <div class="project-snapshots" data-reveal-group>
+        <div id="portfolio-grid" class="pd-works">
+            @foreach ($portfolioProjects as $portfolioProject)
+                <x-portfolio.work
+                    :project="$portfolioProject"
+                    :locale="$locale"
+                    :eager="$loop->index < 3"
+                />
+            @endforeach
+        </div>
+    </div>
+</section>
+@else
+{{-- Prázdná DB (OND-351): případovky z lang jsou jediný důkaz na stránce.
+     S plnou DB se nevykreslí — tři ze čtyř jsou v mřížce jako celý detail
+     a čtvrtou (Toyota) zastupují čtyři aplikace z Toyoty Kolín. --}}
+<section class="pd-section" data-pdd="projects-cases">
+    <div class="container-site">
+        <header class="pd-head">
+            <h2 class="pd-head__title">{{ __('projects.snapshots.heading') }}</h2>
+        </header>
+        <p class="pd-intro">{{ __('projects.snapshots.desc') }}</p>
+
+        <div class="pd-points pd-points--cases">
             @foreach (__('projects.snapshots.items') as $snapshot)
-            <article class="project-snapshot">
-                <div class="project-snapshot__meta">
-                    <span>{{ $snapshot['type'] }}</span>
-                    @if (!empty($snapshot['url']))
-                    <a href="{{ $snapshot['url'] }}" target="_blank" rel="noopener"
-                       data-analytics="case_study_live_click"
-                       data-analytics-props='{"domain":"{{ $snapshot['domain'] }}"}'>
-                        {{ $snapshot['domain'] }}
-                    </a>
-                    @endif
-                </div>
-                <h3>{{ $snapshot['title'] }}</h3>
-                <p>{{ $snapshot['summary'] }}</p>
-                <ul>
+            <article class="pd-point">
+                <p class="pd-work__meta">{{ $snapshot['type'] }}</p>
+                <h3 class="pd-point__title">{{ $snapshot['title'] }}</h3>
+                <p class="pd-point__text">{{ $snapshot['summary'] }}</p>
+                <ul class="pd-service__bullets">
                     @foreach ($snapshot['outcomes'] as $outcome)
-                    <li>
-                        <x-icon.circle-check-big class="w-4 h-4 shrink-0" />
-                        <span>{{ $outcome }}</span>
-                    </li>
+                    <li>{{ $outcome }}</li>
                     @endforeach
                 </ul>
+                @if (!empty($snapshot['url']))
+                <p class="pd-point__link">
+                    <a href="{{ $snapshot['url'] }}" class="pd-case__live" target="_blank" rel="noopener"
+                       data-analytics="case_study_live_click"
+                       data-analytics-props='{"domain":"{{ $snapshot['domain'] }}"}'>{{ $snapshot['domain'] }} &nearr;</a>
+                </p>
+                @endif
             </article>
             @endforeach
         </div>
     </div>
 </section>
+@endif
 
-{{-- 4. Project fit (existující) --}}
-<section class="section-wrapper section-alt" data-reveal data-pdd="projects-fit">
+{{-- Proč já — `.pd-points` z /cenik (OND-391 §6 ji sem předurčil). Nadpis
+     sekce je `why_me.subheading` („Takhle to dělám já"): `why_me.heading`
+     („Do projektů vkládám následující") je uvozovací věta s dvojtečkou,
+     která nic netvrdí. Obě jsou v lang, nic se nepřepisuje. --}}
+<section class="pd-section" data-pdd="projects-why">
     <div class="container-site">
-        <header class="section-header">
-            <p class="section-subheading">{{ __('projects.fit.subheading') }}</p>
-            <h2>{{ __('projects.fit.heading') }}</h2>
-        </header>
+        <div class="pd-split">
+            <header>
+                <h2 class="pd-head__title">{{ __('projects.why_me.subheading') }}</h2>
+            </header>
 
-        <div class="project-fit" data-reveal-group>
-            <ul class="project-fit__list">
-                @foreach (__('projects.fit.items') as $item)
-                <li>
-                    <x-icon.circle-check-big class="w-4 h-4 shrink-0" />
-                    <span>{{ $item }}</span>
-                </li>
-                @endforeach
-            </ul>
-
-            <aside class="project-fit__cta">
-                <h3>{{ __('projects.fit.cta_heading') }}</h3>
-                <p>{{ __('projects.fit.cta_text') }}</p>
-                <div class="project-fit__actions">
-                    <a href="{{ lroute('contact') }}" class="btn btn-primary">
-                        {{ __('projects.fit.cta_primary') }}
-                        <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-                    </a>
-                    <a href="{{ lroute('price') }}" class="btn btn-secondary">
-                        {{ __('projects.fit.cta_secondary') }}
-                    </a>
+            <div class="pd-points">
+                @foreach (__('projects.why_me.items') as $item)
+                <div class="pd-point">
+                    <h3 class="pd-point__title">{{ $item['title'] }}</h3>
+                    <p class="pd-point__text">{!! $item['description'] !!}</p>
                 </div>
-            </aside>
-        </div>
-    </div>
-</section>
-
-{{-- 5. Why me (existující) --}}
-<section class="section-wrapper" data-reveal data-pdd="projects-why">
-    <div class="container-site">
-        <header class="section-header">
-            <p class="section-subheading">{{ __('projects.why_me.subheading') }}</p>
-            <h2>{{ __('projects.why_me.heading') }}</h2>
-        </header>
-
-        <div class="why-grid" data-reveal-group>
-            @foreach (__('projects.why_me.items') as $item)
-            <div class="why-card">
-                <h3>{{ $item['title'] }}</h3>
-                <p>{!! $item['description'] !!}</p>
+                @endforeach
             </div>
-            @endforeach
         </div>
     </div>
 </section>
 
-{{-- 6. Final CTA --}}
-<section class="section-wrapper" data-reveal data-pdd="projects-cta">
+{{-- Závěr — `.pd-close` z /cenik. Dřív dvě sekce a tři tlačítka („Má to
+     smysl…" s dvěma a „Chcete podobný výsledek…" s jedním); kvalifikace
+     sama končí výzvou, takže je to jedna sekce a JEDINÉ acidové tlačítko.
+     „Nejdřív ceník" zůstává jako tichý odkaz. `projects.cta.heading`
+     tu odpadá — dál ho používá detail projektu. --}}
+<section class="pd-section pd-close" data-pdd="projects-cta">
     <div class="container-site">
-        <div class="cta-block">
-            <h2>{{ __('projects.cta.heading') }}</h2>
-            <div class="cta-block__actions">
-                <a href="{{ lroute('contact') }}" class="btn btn-primary">
-                    {{ __('projects.cta.primary') }}
-                    <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-                </a>
+        <div class="pd-split">
+            <header>
+                <h2 class="pd-head__title">{{ __('projects.fit.heading') }}</h2>
+            </header>
+
+            <div>
+                <ul class="pd-service__bullets">
+                    @foreach (__('projects.fit.items') as $item)
+                    <li>{{ $item }}</li>
+                    @endforeach
+                </ul>
+                <p class="pd-lead">{{ __('projects.fit.cta_heading') }}</p>
+                <p class="pd-intro">{{ __('projects.fit.cta_text') }}</p>
+                <div class="pd-actions">
+                    <a href="{{ lroute('contact') }}" class="pd-cta">
+                        {{ __('projects.fit.cta_primary') }}
+                        <x-icon.arrow-right class="w-4 h-4 shrink-0 pd-cta__arrow" />
+                    </a>
+                    <a href="{{ lroute('price') }}" class="pd-case__live">{{ __('projects.fit.cta_secondary') }}</a>
+                </div>
             </div>
         </div>
     </div>

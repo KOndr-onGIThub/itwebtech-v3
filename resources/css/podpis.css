@@ -1728,3 +1728,175 @@
     .pd-reviews .pd-testi__item > .pd-testi__links { grid-column: 1 / -1; }
     .pd-reviews .pd-testi__item > .pd-testi__text { margin-top: var(--space-2); }
 }
+
+/* ------------------------------------------------------------
+   OND-400 — /projekty (předloha OND-399 §9). Nové sdílené komponenty:
+   `.pd-filter` a `.pd-works` / `.pd-work` (mřížka realizací —
+   použije ji beze změny i „Další projekty" na detailu projektu).
+   Zbytek je z homepage, /cenik a /kontakt beze změny. Hrany sekcí
+   řeší plošné pravidlo oddělovačů výš (OND-398), scoped řádky
+   z předlohy proto odpadají.
+   ------------------------------------------------------------ */
+
+/* Hlava a katalog jsou jedna věta („Co jsem postavil." → tady je to).
+   Mezi nimi zůstane jen spodní odsazení hlavy (104 px @1440 / 56 @390),
+   ne dvojnásobek mezery mezi sekcemi. */
+.pd-page-head + section[data-pdd="projects-grid"] { padding-top: 0; }
+
+/* --- Filtr ---------------------------------------------------
+   Textová tlačítka. Aktivní = bílý text + 1px acid pod slovem (stejná
+   sazba jako `.pd-case__cta`). Počet je údaj, ne ozdoba: tabulkové
+   číslice, tlumený, tenčí řez. Cíl 44 px na výšku, řádek se na 390 px
+   zalomí, nic se neschová do vodorovného scrollu. */
+.pd-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--space-6);
+    margin: 0 0 var(--space-6);
+}
+.pd-filter__btn {
+    appearance: none;
+    background: none;
+    border: 0;
+    padding: 0;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    font-weight: 600;
+    color: var(--color-fg-muted);
+    cursor: pointer;
+    transition: color var(--duration-micro) var(--ease-out);
+}
+.pd-filter__label {
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: border-color var(--duration-micro) var(--ease-out);
+}
+.pd-filter__count {
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+}
+.pd-filter__btn:hover { color: var(--color-fg-primary); }
+.pd-filter__btn[aria-pressed="true"] { color: var(--color-fg-primary); }
+.pd-filter__btn[aria-pressed="true"] .pd-filter__label { border-bottom-color: var(--pd-accent); }
+.pd-filter__btn:focus-visible { outline: 2px solid var(--pd-accent); outline-offset: 4px; }
+
+/* --- Mřížka realizací ----------------------------------------
+   Homepage má tři velké `.pd-case` (dílo první, výsledek druhý). Katalog
+   potřebuje opak: hodně položek, rychlé porovnání. Proto stejná gramatika
+   (rám bez zaoblení, meta ve verzálkách, titulek display 700, věta tlumeně),
+   ale v mřížce 3 / 2 / 1 a bez výzvy u každé položky.
+   Mezi řádky 64 px, mezi sloupci 32 px: oko čte kartu shora dolů jako
+   celek a řádky od sebe odděluje víc vzduchu než sloupce (Gestalt, blízkost).
+   Žádná čára, žádný box, žádné pozadí karty. */
+.pd-works {
+    display: grid;
+    gap: var(--space-7) var(--space-6);
+}
+@media (min-width: 640px) {
+    .pd-works { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-8) var(--space-6); }
+}
+@media (min-width: 1024px) {
+    .pd-works { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.pd-work[data-filter-hidden="true"] { display: none; }
+
+.pd-work__link {
+    display: grid;
+    align-content: start;
+    color: inherit;
+    text-decoration: none;
+}
+.pd-work__link:focus-visible { outline: 2px solid var(--pd-accent); outline-offset: 6px; }
+
+/* Rám náhledu = `.pd-case__visual` v malém. 16:10 ořez shora — náhledy
+   jsou snímky webů, důležitá je horní část (hlavička, hero). */
+.pd-work__visual {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border: 1px solid var(--color-border-soft);
+    background: var(--color-bg-elev-1);
+    margin-bottom: var(--space-4);
+    transition: border-color var(--duration-micro) var(--ease-out);
+}
+.pd-work__visual picture,
+.pd-work__visual img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+.pd-work__meta {
+    font-family: var(--font-body);
+    font-size: var(--text-caption);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-fg-muted);
+    margin: 0 0 var(--space-2);
+}
+.pd-work__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-h4);
+    line-height: 1.25;
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-fg-primary);
+    margin: 0 0 var(--space-2);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    transition: text-decoration-color var(--duration-micro) var(--ease-out);
+}
+.pd-work__text {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+    margin: 0;
+    max-width: 46ch;
+}
+.pd-work__link:hover .pd-work__visual,
+.pd-work__link:focus-visible .pd-work__visual { border-color: var(--pd-accent); }
+.pd-work__link:hover .pd-work__title,
+.pd-work__link:focus-visible .pd-work__title { text-decoration-color: var(--pd-accent); }
+
+/* Mobil (< 640): katalog, ne galerie. Náhled 38 % vlevo, meta a titulek
+   vpravo, věta pod oběma přes celou šířku. 21 karet pod sebou s náhledem
+   přes celou šířku by bylo 21 obrazovek; takhle se dá seznam přečíst.
+   Velký náhled je o klik dál na detailu. */
+@media (max-width: 639px) {
+    .pd-work__link {
+        grid-template-columns: minmax(0, 38fr) minmax(0, 62fr);
+        grid-template-rows: auto 1fr;
+        grid-template-areas: "v m" "v t" "x x";
+        column-gap: var(--space-4);
+    }
+    .pd-work__visual { grid-area: v; margin: 0; align-self: start; }
+    .pd-work__meta { grid-area: m; }
+    .pd-work__title { grid-area: t; margin: 0; }
+    .pd-work__text { grid-area: x; margin-top: var(--space-3); }
+}
+
+
+/* --- Prázdná DB: případovky z lang ------------------------------
+   `.pd-points` z /cenik, meta řádek z `.pd-work`. Čtyři položky ve
+   dvou sloupcích, odrážky ACID pod větou, odkaz na živý web tiše. */
+.pd-points--cases .pd-point__text { margin-bottom: var(--space-4); max-width: 58ch; }
+.pd-points--cases .pd-service__bullets { margin: 0; }
+.pd-point__link { margin: var(--space-4) 0 0; }
+
+/* --- Závěr: kvalifikace + jediná výzva --------------------------- */
+.pd-close .pd-service__bullets { font-size: var(--text-body); margin: 0 0 var(--space-7); }
+.pd-close .pd-lead { margin-bottom: var(--space-3); }
+.pd-close .pd-actions { gap: var(--space-4) var(--space-7); margin: 0; }
+/* Tichý odkaz vedle tlačítka: cíl 44 px bez posunu sazby. */
+.pd-close .pd-case__live { position: relative; }
+.pd-close .pd-case__live::after { content: ''; position: absolute; inset: -12px -6px; }
+
+/* Mobil: čtyři kategorie na jeden řádek (cs/en 323 px z 342). */
+@media (max-width: 639px) { .pd-filter { gap: 0 var(--space-4); } }
