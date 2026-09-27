@@ -102,6 +102,10 @@ return [
     'how_i_work' => [
         'heading'   => 'In vier Schritten von der ersten Nachricht zur fertigen Website',
         'cta_intro' => 'Gleich zu Schritt 1.',
+        // OND-411: Fortsetzung von `cta_intro`; Slug ist der deutsche Artikel-Slug.
+        'cta_more'         => 'Oder erst zu den :article_link.',
+        'cta_more_article' => 'neun Fragen, die Sie vor dem Website-Projekt klären',
+        'cta_more_slug'    => 'vorbereitung-auf-die-neue-website',
         'steps'   => [
             [
                 'heading'      => 'Beratung',
@@ -154,6 +158,9 @@ return [
         'text_2'       => 'Websites baue ich genauso. Bevor ich die erste Zeile schreibe, will ich wissen, wie Anfragen bei Ihnen entstehen und was danach mit ihnen passiert. Erst danach entsteht die Seite. Sie merken es an der Spezifikation, die Sie bekommen, bevor ich anfange.',
         'quote_text'   => 'Eine der größten Stärken von Ondřej ist sein starker Wunsch, sich zu entwickeln — nicht nur die Bedürfnisse der Kunden zu erfüllen, sondern ihre Erwartungen zu übertreffen.',
         'quote_ref'    => 'pavel-baudys',
+        // OND-411: leiser Satz am Ende der Sektion, Muster wie `services.secondary_inline`.
+        'more_inline'       => 'Wie ich von der Werkshalle zu Websites gekommen bin, erzähle ich :about_link.',
+        'more_inline_about' => 'unter „Über mich“',
     ],
 
     // OND-269: die einzige Projektsektion der Startseite (früher `showcase`
@@ -311,6 +318,9 @@ return [
 
     'faq' => [
         'heading' => 'Was Sie mich am häufigsten fragen',
+        // OND-411: leiser Satz nach den Fragen, führt zur Notizen-Übersicht.
+        'more_inline'      => 'Was hier keinen Platz fand, beantworte ich :blog_link.',
+        'more_inline_blog' => 'in meinen Notizen',
         // `key` ist ein stabiler Slug für Analytics (data-faq-key) und JSON-LD; nicht lokalisieren.
         'items'   => [
             // OND-222 (Kapitel 6.3, Einwand 1): schwerwiegendster Einwand bei

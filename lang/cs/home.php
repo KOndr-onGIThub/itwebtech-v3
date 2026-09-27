@@ -116,6 +116,11 @@ return [
     'how_i_work' => [
         'heading'  => 'Od první zprávy ke spuštěnému webu ve čtyřech krocích',
         'cta_intro' => 'Pojďme rovnou ke kroku 1.',
+        // OND-411: pokračování `cta_intro` — odkaz na článek o přípravě.
+        // Slug je slug článku v tomhle jazyce (tabulka article_slugs).
+        'cta_more'         => 'Nebo si napřed přečtěte, :article_link.',
+        'cta_more_article' => 'co si připravit, než oslovíte vývojáře',
+        'cta_more_slug'    => 'jak-se-pripravit-na-novy-web',
         'steps'   => [
             [
                 'heading'      => 'Konzultace',
@@ -167,6 +172,10 @@ return [
         'text_2'       => 'Weby dělám stejně. Než napíšu první řádek, chci vědět, jak u vás vzniká poptávka a co se s ní děje potom. Teprve podle toho stránka vznikne. Poznáte to na specifikaci, kterou dostanete dřív, než začnu pracovat.',
         'quote_text'   => 'Jednou z nejsilnějších stránek Ondry je velká chuť rozvíjet se — nejen uspokojení potřeb zákazníků, ale překonání jejich očekávání.',
         'quote_ref'    => 'pavel-baudys',
+        // OND-411: tichá věta na konci sekce, vzor `services.secondary_inline`.
+        // Text odkazu zvlášť, aby šel escapovat; tečka stojí mimo odkaz.
+        'more_inline'       => 'Celou cestu z montážní haly k webům mám :about_link.',
+        'more_inline_about' => 'na stránce o mně',
     ],
 
     // OND-269: jediná sekce projektů na homepage (dřív `showcase` + `portfolio`).
@@ -339,6 +348,9 @@ return [
 
     'faq' => [
         'heading' => 'Na co se mě ptáte nejčastěji',
+        // OND-411: tichá věta za otázkami, vede na výpis zápisků.
+        'more_inline'      => 'Na to, co se sem nevešlo, odpovídám :blog_link.',
+        'more_inline_blog' => 'v zápiscích',
         // `key` je stabilní slug pro analytics (data-faq-key) a JSON-LD; ne lokalizovat.
         'items'   => [
             // OND-222 (kap. 6.3 bod 1): nejzávažnější námitka u zakázky za

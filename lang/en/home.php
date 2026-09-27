@@ -109,6 +109,10 @@ return [
     'how_i_work' => [
         'heading'   => 'From your first message to a launched website in four steps',
         'cta_intro' => 'Let\'s jump straight to step 1.',
+        // OND-411: continues `cta_intro`; slug is the English article slug.
+        'cta_more'         => 'Or, if you\'d rather get ready first: :article_link.',
+        'cta_more_article' => 'what to prepare before you contact a web developer',
+        'cta_more_slug'    => 'how-to-prepare-for-a-new-website',
         'steps'   => [
             [
                 'heading'      => 'Consultation',
@@ -158,6 +162,9 @@ return [
         'text_2'       => 'I build websites the same way. Before I write the first line I want to know how enquiries reach you and what happens to them next. Only then does the site take shape. You see it in the specification you get before I start working.',
         'quote_text'   => 'One of Ondřej\'s greatest strengths is his strong desire to develop — not just meeting customer needs, but exceeding their expectations.',
         'quote_ref'    => 'pavel-baudys',
+        // OND-411: quiet sentence closing the section, same pattern as `services.secondary_inline`.
+        'more_inline'       => 'The full story, from the factory floor to websites, is :about_link.',
+        'more_inline_about' => 'on my About page',
     ],
 
     // OND-269: the only projects section on the homepage (formerly `showcase`
@@ -312,6 +319,9 @@ return [
 
     'faq' => [
         'heading' => 'What you ask me most often',
+        // OND-411: quiet sentence after the questions, links to the Notes listing.
+        'more_inline'      => 'Whatever didn\'t fit here, I answer :blog_link.',
+        'more_inline_blog' => 'in my Notes',
         // `key` is a stable slug for analytics (data-faq-key) and JSON-LD; do not localize.
         'items'   => [
             // OND-222 (chapter 6.3, objection 1): the most serious objection on
