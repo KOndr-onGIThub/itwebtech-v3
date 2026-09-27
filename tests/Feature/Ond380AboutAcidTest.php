@@ -133,6 +133,15 @@ class Ond380AboutAcidTest extends TestCase
             @$dom->loadHTML($html);
             $xpath = new \DOMXPath($dom);
 
+            // Obal nese i samotné `pd` — na něm visí `--pd-accent` a základ
+            // #0A0A0B (podpis.css:18). Bez něj se nic nerozbije nahlas: číslice
+            // kapitol a tlačítko jen tiše ztratí acidovou barvu.
+            $this->assertSame(
+                1,
+                $xpath->query('//div[contains(concat(" ", normalize-space(@class), " "), " pd ") and contains(@class, "pd--depth-sub")]')->length,
+                "[$locale] obal vrstvy hloubky nemá třídu `pd` — komponenty si nepřitáhnou barvu"
+            );
+
             foreach (['about-intro', 'about-story', 'about-cta'] as $pdd) {
                 $direct = $xpath->query(
                     '//div[contains(@class,"pd--depth-sub")]/section[@data-pdd="'.$pdd.'"]'
