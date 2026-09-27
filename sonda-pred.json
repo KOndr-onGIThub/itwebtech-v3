@@ -1,0 +1,67 @@
+{
+  "home_animations": [
+    "pdd-loop @ div.pd-price__col.pd-price__col--featured.is-lit::after",
+    "pdd-run-x @ a.pd-case__visual::before",
+    "pdd-run-x @ a.pd-cta::after",
+    "pdd-run-x @ div.pd-form__panel.is-lit::after",
+    "pdd-run-x-rev @ a.pd-case__visual::before",
+    "pdd-run-x-rev @ li.pd-step.is-lit::before",
+    "pdd-run-y @ article.pd-service::after"
+  ],
+  "home_hover": {
+    ".pd-step::before:hover": "true linear-gradient(rgba(216, 255, 58, 0.4), rgba(216, 255, 58, 0.4))",
+    ".pd-faq__q::after:hover": "true linear-gradient(rgba(216, 255, 58, 0.22), rgba(216, 255, 58, 0.22))"
+  },
+  "omne_animations_1440": [],
+  "omne_static_1440": {
+    "heading_em_bg": "no em",
+    "step_count": 4,
+    "step_before": [
+      "none | radial-gradient(30% 100% at 12% 50%, rgba(216, 255, 58, 0.22) 0%, rgba(216, 255, 58, 0.07) 44%, rgba(216, 255, 58, 0) 100%), linear-gradient(270deg, rgba(216, 255, 58, 0) 0%, rgba(216, 255, 58, 0.1) 30%, rgba(216, 255, 58, 0.34) 58%, rgba(216, 255, 58, 0.72) 78%, rgb(242, 255, 168) 90%, rgba(230, 255, 112, 0.82) 96%, rgba(216, 255, 58, 0) 100%) | 15px",
+      "none | radial-gradient(30% 100% at 12% 50%, rgba(216, 255, 58, 0.22) 0%, rgba(216, 255, 58, 0.07) 44%, rgba(216, 255, 58, 0) 100%), linear-gradient(270deg, rgba(216, 255, 58, 0) 0%, rgba(216, 255, 58, 0.1) 30%, rgba(216, 255, 58, 0.34) 58%, rgba(216, 255, 58, 0.72) 78%, rgb(242, 255, 168) 90%, rgba(230, 255, 112, 0.82) 96%, rgba(216, 255, 58, 0) 100%) | 15px",
+      "none | radial-gradient(30% 100% at 12% 50%, rgba(216, 255, 58, 0.22) 0%, rgba(216, 255, 58, 0.07) 44%, rgba(216, 255, 58, 0) 100%), linear-gradient(270deg, rgba(216, 255, 58, 0) 0%, rgba(216, 255, 58, 0.1) 30%, rgba(216, 255, 58, 0.34) 58%, rgba(216, 255, 58, 0.72) 78%, rgb(242, 255, 168) 90%, rgba(230, 255, 112, 0.82) 96%, rgba(216, 255, 58, 0) 100%) | 15px",
+      "none | radial-gradient(30% 100% at 12% 50%, rgba(216, 255, 58, 0.22) 0%, rgba(216, 255, 58, 0.07) 44%, rgba(216, 255, 58, 0) 100%), linear-gradient(270deg, rgba(216, 255, 58, 0) 0%, rgba(216, 255, 58, 0.1) 30%, rgba(216, 255, 58, 0.34) 58%, rgba(216, 255, 58, 0.72) 78%, rgb(242, 255, 168) 90%, rgba(230, 255, 112, 0.82) 96%, rgba(216, 255, 58, 0) 100%) | 15px"
+    ],
+    "lit_steps": 4
+  },
+  "omne_synthetic_static_1440": {
+    "em_bg": "radial-gradient(30% 100% at 88% 50%, rgba(216, 255, 58, 0.22) 0%, rgba(216, 255, 58, 0.07) 44%, rgba(216, 255, 58, 0) 100%), linear-gradient(90deg, rgba(216, 255, 58, 0) 0%, rgba(216, 255, 58, 0.1) 30%, rgba(216, 255, 58, 0.34) 58%, rgba(216, 255, 58, 0.72) 78%, rgb(242, 255, 168) 90%, rgba(230, 255, 112, 0.82) 96%, rgba(216, 255, 58, 0) 100%), linear-gradient(rgb(216, 255, 58), rgb(216, 255, 58))",
+    "num_bg": "linear-gradient(100deg, rgba(242, 240, 234, 0) 30%, rgba(242, 240, 234, 0.35) 44%, rgb(255, 255, 255), rgba(242, 240, 234, 0.35) 60%, rgba(242, 240, 234, 0) 74%), linear-gradient(100deg, rgb(230, 255, 112) 0%, rgb(216, 255, 58) 40%, rgba(216, 255, 58, 0.46) 100%)"
+  },
+  "omne_hover_1440": {
+    ".pd-step::before:hover": "true linear-gradient(rgba(216, 255, 58, 0.4), rgba(216, 255, 58, 0.4))",
+    ".pd-faq__q": "n/a"
+  },
+  "omne_animations_390": [],
+  "omne_static_390": {
+    "heading_em_bg": "no em",
+    "step_count": 4,
+    "step_before": [
+      "none | radial-gradient(30% 100% at 12% 50%, rgba(216, 255, 58, 0.22) 0%, rgba(216, 255, 58, 0.07) 44%, rgba(216, 255, 58, 0) 100%), linear-gradient(270deg, rgba(216, 255, 58, 0) 0%, rgba(216, 255, 58, 0.1) 30%, rgba(216, 255, 58, 0.34) 58%, rgba(216, 255, 58, 0.72) 78%, rgb(242, 255, 168) 90%, rgba(230, 255, 112, 0.82) 96%, rgba(216, 255, 58, 0) 100%) | 15px",
+      "none | radial-gradient(30% 100% at 12% 50%, rgba(216, 255, 58, 0.22) 0%, rgba(216, 255, 58, 0.07) 44%, rgba(216, 255, 58, 0) 100%), linear-gradient(270deg, rgba(216, 255, 58, 0) 0%, rgba(216, 255, 58, 0.1) 30%, rgba(216, 255, 58, 0.34) 58%, rgba(216, 255, 58, 0.72) 78%, rgb(242, 255, 168) 90%, rgba(230, 255, 112, 0.82) 96%, rgba(216, 255, 58, 0) 100%) | 15px",
+      "none | radial-gradient(30% 100% at 12% 50%, rgba(216, 255, 58, 0.22) 0%, rgba(216, 255, 58, 0.07) 44%, rgba(216, 255, 58, 0) 100%), linear-gradient(270deg, rgba(216, 255, 58, 0) 0%, rgba(216, 255, 58, 0.1) 30%, rgba(216, 255, 58, 0.34) 58%, rgba(216, 255, 58, 0.72) 78%, rgb(242, 255, 168) 90%, rgba(230, 255, 112, 0.82) 96%, rgba(216, 255, 58, 0) 100%) | 15px",
+      "none | radial-gradient(30% 100% at 12% 50%, rgba(216, 255, 58, 0.22) 0%, rgba(216, 255, 58, 0.07) 44%, rgba(216, 255, 58, 0) 100%), linear-gradient(270deg, rgba(216, 255, 58, 0) 0%, rgba(216, 255, 58, 0.1) 30%, rgba(216, 255, 58, 0.34) 58%, rgba(216, 255, 58, 0.72) 78%, rgb(242, 255, 168) 90%, rgba(230, 255, 112, 0.82) 96%, rgba(216, 255, 58, 0) 100%) | 15px"
+    ],
+    "lit_steps": 4
+  },
+  "omne_synthetic_static_390": {
+    "em_bg": "radial-gradient(30% 100% at 88% 50%, rgba(216, 255, 58, 0.22) 0%, rgba(216, 255, 58, 0.07) 44%, rgba(216, 255, 58, 0) 100%), linear-gradient(90deg, rgba(216, 255, 58, 0) 0%, rgba(216, 255, 58, 0.1) 30%, rgba(216, 255, 58, 0.34) 58%, rgba(216, 255, 58, 0.72) 78%, rgb(242, 255, 168) 90%, rgba(230, 255, 112, 0.82) 96%, rgba(216, 255, 58, 0) 100%), linear-gradient(rgb(216, 255, 58), rgb(216, 255, 58))",
+    "num_bg": "linear-gradient(100deg, rgba(242, 240, 234, 0) 30%, rgba(242, 240, 234, 0.35) 44%, rgb(255, 255, 255), rgba(242, 240, 234, 0.35) 60%, rgba(242, 240, 234, 0) 74%), linear-gradient(100deg, rgb(230, 255, 112) 0%, rgb(216, 255, 58) 40%, rgba(216, 255, 58, 0.46) 100%)"
+  },
+  "omne_hover_390": "skip",
+  "kontakt_animations_scroll": [
+    "pdd-run-x @ div#kontaktni-formular.contact-form.is-lit::after"
+  ],
+  "kontakt_form_lit": "contact-form is-lit",
+  "kontakt_active": "name",
+  "kontakt_animations_focus": [
+    "pdd-run-x @ form-group::after"
+  ],
+  "kontakt_pseudo_bg": {
+    "desk_after": "radial-gradient(30% 100% at 88% 50%, rgba(216, 255, 58, 0.22) 0%, rgba(216, 255,",
+    "field_after": "radial-gradient(30% 100% at 88% 50%, rgba(216, 255, 58, 0.22) 0%, rgba(216, 255,"
+  },
+  "cenik_animations": [],
+  "cenik_featured": "pricing-tier pricing-tier--featured is-visible | border-top 1px rgba(216, 255, 58, 0.28) | border-left rgba(216, 255, 58, 0.28)",
+  "cenik_service_num": 0
+}
