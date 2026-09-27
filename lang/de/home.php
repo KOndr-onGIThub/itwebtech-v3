@@ -250,7 +250,7 @@ return [
         // ist damit weg. Die CZK-Untergrenze von 20.000 wird hier ABSICHTLICH
         // nicht umgerechnet: 800 € kaufen im deutschsprachigen Markt eine
         // Landingpage, keine Website — EN/DE tragen nur die Spanne.
-        'intro'   => 'Die meisten Projekte, die ich baue, liegen zwischen 2.200 und 6.000 €. Kleinere Umfänge mache ich auch — das Kleinste ist eine Präsentationswebsite mit bis zu fünf Seiten. Den genauen Preis erhalten Sie schriftlich nach einem kurzen Gespräch.',
+        'intro'   => 'Die meisten Projekte, die ich baue, liegen zwischen 3.500 und 8.000 €. Das Kleinste ist eine Präsentationswebsite mit bis zu fünf Seiten, ab 1.900 € — weniger Umfang, nicht weniger Qualität. Den genauen Preis erhalten Sie schriftlich nach einem kurzen Gespräch.',
         // OND-354: Die Karten tragen den UMFANG, nicht den Preis, und heißen
         // nach dem, was entsteht. Reihenfolge nach wachsendem Umfang, die
         // mittlere ist hervorgehoben.

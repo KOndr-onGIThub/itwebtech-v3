@@ -252,7 +252,7 @@ return [
         // gone with it. The CZK floor of 20,000 is DELIBERATELY not converted
         // here: €800 buys a landing page in the German-speaking market, not a
         // website, so EN/DE carry the range and "smaller scopes welcome" only.
-        'intro'   => 'Most projects I build land between €2,200 and €6,000. Smaller scopes are welcome too — the smallest thing I take on is a presentation site of up to five pages. You\'ll get the exact price in writing after a short consultation.',
+        'intro'   => 'Most projects I build land between €3,500 and €8,000. The smallest thing I take on is a presentation site of up to five pages, from €1,900 — a smaller scope, not a lower standard. You\'ll get the exact price in writing after a short consultation.',
         // OND-354: cards carry SCOPE, not price, and are named after what gets
         // built. Order is by growing scope, the middle one is highlighted.
         'featured_label' => 'Most common choice',

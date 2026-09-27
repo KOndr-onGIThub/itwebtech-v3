@@ -14,7 +14,7 @@ return [
     // 26. 9. 2026 auf OND-347); der Ablehnungssatz ist damit weg. Die
     // CZK-Untergrenze (20.000) wird absichtlich NICHT umgerechnet — siehe
     // lang/de/home.php.
-    'intro'      => 'Die meisten Projekte liegen zwischen 2.200 und 6.000 €. Das Kleinste, was ich baue, ist eine Präsentationswebsite mit bis zu fünf Seiten. Was auf der Website steht und was sie kostet, erhalten Sie schriftlich vor Arbeitsbeginn — und diese Zahl steht auch auf der Rechnung.',
+    'intro'      => 'Die meisten Projekte liegen zwischen 3.500 und 8.000 €. Das Kleinste, was ich baue, ist eine Präsentationswebsite mit bis zu fünf Seiten, ab 1.900 €. Was auf der Website steht und was sie kostet, erhalten Sie schriftlich vor Arbeitsbeginn — und diese Zahl steht auch auf der Rechnung.',
 
     // OND-135 P2 iter 5 — Plan §3.1 Hero (Page-Mark + Amber-Akzent).
     // OND-135 Bereinigung (2026-05-14): page_mark_index entfernt — Agency-
@@ -123,7 +123,7 @@ return [
 
     // OND-354: ersetzt das entschuldigende „Eine Ausnahme, kein
     // Standard-Einstieg." auf der niedrigsten Stufe.
-    'entry_note' => 'Die kleinste Website, die ich baue, hat bis zu fünf Seiten. Sie wird schnell sein, auf dem Handy sauber funktionieren, und kein Link zum Anfrageformular wird ins Leere führen. Erwarten Sie nicht, dass sie von allein Aufträge bringt — dafür braucht es mehr Arbeit, als der kleinste Umfang zulässt. Aber sie wird ordentlich gemacht.',
+    'entry_note' => 'Für 1.900 € baue ich Ihnen eine Website mit bis zu fünf Seiten. Sie wird schnell sein, auf dem Handy sauber funktionieren, und kein Link zum Anfrageformular wird ins Leere führen. Erwarten Sie nicht, dass sie von allein Aufträge bringt — dafür braucht es mehr Arbeit, als der kleinste Umfang zulässt. Aber sie wird ordentlich gemacht.',
 
     'note' => 'Ich bin nicht umsatzsteuerpflichtig — die genannten Preise sind Endpreise, es kommt keine Mehrwertsteuer hinzu.',
 
@@ -155,12 +155,12 @@ return [
         'items'   => [
             [
                 'name'  => 'SEO & Content-Marketing',
-                'price' => 'ab 180 € / Monat',
+                'price' => 'ab 490 € / Monat',
                 'desc'  => 'Keyword-Analyse, Content-Strategie, Leistungsüberwachung. Organische Sichtbarkeit, die auch ohne Werbebudget funktioniert.',
             ],
             [
                 'name'  => 'Social-Media-Management',
-                'price' => 'ab 400 € / Monat',
+                'price' => 'ab 590 € / Monat',
                 'desc'  => 'Content-Erstellung, Planung und Veröffentlichung. Konsistente Präsenz, die das Vertrauen der Kunden aufbaut.',
             ],
             [
@@ -170,7 +170,7 @@ return [
             ],
             [
                 'name'  => 'Grafikdesign & Branding',
-                'price' => 'ab 190 €',
+                'price' => 'ab 890 €',
                 'desc'  => 'Logo, visuelle Identität, Banner. Alles, was Sie für eine konsistente und einprägsame Markenpräsentation benötigen.',
             ],
         ],
