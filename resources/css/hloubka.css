@@ -125,7 +125,7 @@
        2. kolo: hlava je širší (78–95 % místo špičky na 93 %) a jasnější.
        Na sekci široké 1200 px z toho vychází svítící úsek ~100 px místo
        původních ~30 px. Ta „neviditelnost" byla přesně tohle. */
-    --pdd-run-right: linear-gradient(90deg,
+    --pdd-src-run-right: linear-gradient(90deg,
         rgba(216, 255, 58, 0) 0%,
         rgba(216, 255, 58, .10) 30%,
         rgba(216, 255, 58, .34) 58%,
@@ -133,7 +133,7 @@
         rgba(242, 255, 168, 1) 90%,
         rgba(230, 255, 112, .82) 96%,
         rgba(216, 255, 58, 0) 100%);
-    --pdd-run-left: linear-gradient(270deg,
+    --pdd-src-run-left: linear-gradient(270deg,
         rgba(216, 255, 58, 0) 0%,
         rgba(216, 255, 58, .10) 30%,
         rgba(216, 255, 58, .34) 58%,
@@ -141,7 +141,7 @@
         rgba(242, 255, 168, 1) 90%,
         rgba(230, 255, 112, .82) 96%,
         rgba(216, 255, 58, 0) 100%);
-    --pdd-run-down: linear-gradient(180deg,
+    --pdd-src-run-down: linear-gradient(180deg,
         rgba(216, 255, 58, 0) 0%,
         rgba(216, 255, 58, .10) 30%,
         rgba(216, 255, 58, .34) 58%,
@@ -149,7 +149,7 @@
         rgba(242, 255, 168, 1) 90%,
         rgba(230, 255, 112, .82) 96%,
         rgba(216, 255, 58, 0) 100%);
-    --pdd-run-up: linear-gradient(0deg,
+    --pdd-src-run-up: linear-gradient(0deg,
         rgba(216, 255, 58, 0) 0%,
         rgba(216, 255, 58, .10) 30%,
         rgba(216, 255, 58, .34) 58%,
@@ -167,18 +167,46 @@
        na hlavě. Kdyby měla jiný rozměr, procenta by se přepočítala jinak
        a záře by se od jádra odtrhla. Proto je pozice hlavy (88 %) napsaná
        uvnitř gradientu, ne v background-position. */
-    --pdd-glow-right: radial-gradient(30% 100% at 88% 50%,
+    --pdd-src-glow-right: radial-gradient(30% 100% at 88% 50%,
         rgba(216, 255, 58, .22) 0%,
         rgba(216, 255, 58, .07) 44%,
         rgba(216, 255, 58, 0) 100%);
-    --pdd-glow-left: radial-gradient(30% 100% at 12% 50%,
+    --pdd-src-glow-left: radial-gradient(30% 100% at 12% 50%,
         rgba(216, 255, 58, .22) 0%,
         rgba(216, 255, 58, .07) 44%,
         rgba(216, 255, 58, 0) 100%);
-    --pdd-glow-down: radial-gradient(100% 30% at 50% 88%,
+    --pdd-src-glow-down: radial-gradient(100% 30% at 50% 88%,
         rgba(216, 255, 58, .22) 0%,
         rgba(216, 255, 58, .07) 44%,
         rgba(216, 255, 58, 0) 100%);
+
+    /* ---- DVA LITERÁLY Z §B, přesunuté sem beze změny hodnot (OND-386).
+       SWEEP = bílý přejezd přes číslici služby (§B „PŘEJEZD PŘES ČÍSLO").
+       HINT  = acidová linka pod kurzorem u kroku (.40) a u otázky FAQ (.22).
+       Dva hinty, ne jeden: FAQ má schválně slabší náznak než krok a alias
+       je přejmenování, ne přeladění. */
+    --pdd-src-sweep: linear-gradient(100deg,
+        rgba(242, 240, 234, 0) 30%,
+        rgba(242, 240, 234, .35) 44%,
+        rgba(255, 255, 255, 1) 52%,
+        rgba(242, 240, 234, .35) 60%,
+        rgba(242, 240, 234, 0) 74%);
+    --pdd-src-hint: linear-gradient(rgba(216, 255, 58, .40), rgba(216, 255, 58, .40));
+    --pdd-src-hint-soft: linear-gradient(rgba(216, 255, 58, .22), rgba(216, 255, 58, .22));
+
+    /* ---- AKTIVNÍ ALIAS (OND-386). §B čte VÝHRADNĚ tyhle proměnné, nikdy
+       --pdd-src-*. Vypíná se alias, zdroj nikdy — viz „PODSTRÁNKY: VRSTVA B
+       VYPNUTÁ" hned pod tímhle blokem. */
+    --pdd-run-right: var(--pdd-src-run-right);
+    --pdd-run-left: var(--pdd-src-run-left);
+    --pdd-run-down: var(--pdd-src-run-down);
+    --pdd-run-up: var(--pdd-src-run-up);
+    --pdd-glow-right: var(--pdd-src-glow-right);
+    --pdd-glow-left: var(--pdd-src-glow-left);
+    --pdd-glow-down: var(--pdd-src-glow-down);
+    --pdd-sweep: var(--pdd-src-sweep);
+    --pdd-hint: var(--pdd-src-hint);
+    --pdd-hint-soft: var(--pdd-src-hint-soft);
 
     /* Šířka pásu, po kterém náboj jede, jako podíl délky linky.
        52 % místo původních 34 % — delší stopa se čte jako pohyb, kratší
@@ -189,6 +217,39 @@
 
     /* Světlo = --color-fg-primary jako RGB. Žádná nová barva. */
     --pdd-lit: 242, 240, 234;
+}
+
+/* ---- PODSTRÁNKY: VRSTVA B VYPNUTÁ (OND-386, přijatý základ OND-379 §1a) ---
+   Default deny: každý náboj v §B kreslí z aliasů výš, takže je stačí tady
+   zhasnout a nová komponenta portnutá na podstránku je vypnutá předem.
+   Vypíná se NÁBOJ, ne slovník — pseudo-elementy ze §0b zůstávají stát
+   (žádný posun sazby) a statické acidové vrstvy taky (podtržení v
+   `.pd-heading em`, gradient `.pd-service__num`), protože to nejsou aliasy.
+
+   Dvě třídy, ne jedna: (0,2,0) bije `.pd--depth` (0,1,0) bez ohledu na pořadí
+   řádků. Obal `pd--depth-sub` přidává vždy jen karta převáděné stránky. */
+.pd--depth.pd--depth-sub {
+    --pdd-run-right: none;  --pdd-run-left: none;
+    --pdd-run-down: none;   --pdd-run-up: none;
+    --pdd-glow-right: none; --pdd-glow-left: none; --pdd-glow-down: none;
+    --pdd-sweep: none;      --pdd-hint: none;     --pdd-hint-soft: none;
+}
+
+/* VÝJIMKA 1 — poptávkový formulář. §E: „kontakt … dostává doslova totéž".
+   Deska i políčko: bez náboje v políčku by výjimka byla půlka. */
+.pd--depth-sub .pd-form__panel,
+.pd--depth-sub .contact-form,
+.pd--depth-sub .pd-field {
+    --pdd-run-right: var(--pdd-src-run-right);
+    --pdd-glow-right: var(--pdd-src-glow-right);
+}
+
+/* VÝJIMKA 2 — FAQ, až se někam portne (dnes není na žádné podstránce).
+   Náboj tu nespouští scroll, ale klik — je to zpětná vazba na akci. */
+.pd--depth-sub .pd-faq {
+    --pdd-run-right: var(--pdd-src-run-right);
+    --pdd-glow-right: var(--pdd-src-glow-right);
+    --pdd-hint-soft: var(--pdd-src-hint-soft);
 }
 
 /* Náboj jede LINEÁRNĚ. Ověřeno na snímcích: s cubic-bezier(.2,.8,.2,1) má
@@ -717,12 +778,7 @@
    službami nejsou svislé linky, je to jediný náboj sekce (viz §B04 níž). */
 .pd--depth .pd-service__num {
     background-image:
-        linear-gradient(100deg,
-            rgba(242, 240, 234, 0) 30%,
-            rgba(242, 240, 234, .35) 44%,
-            rgba(255, 255, 255, 1) 52%,
-            rgba(242, 240, 234, .35) 60%,
-            rgba(242, 240, 234, 0) 74%),
+        var(--pdd-sweep),   /* bílý přejezd (§0) */
         var(--pdd-spec,
             linear-gradient(100deg,
                 #e6ff70 0%,
@@ -853,29 +909,11 @@
 .pd--depth .pd-step.is-lit::before {
     animation: pdd-run-x-rev 820ms linear 1 both;
 }
-/* OND-380 — DOČASNÝ MŮSTEK, MÁ ZMIZET V OND-386. Nevylepšovat, smazat.
-
-   Proč vznikl: pravidlo výš je scopované na `.pd--depth`, ne na domovskou
-   stránku, takže jakmile se `.pd-step` objeví na podstránce, náboj se zapne
-   sám — na /o-mne z toho byly tři svítící acidové linky přes celou šířku,
-   ačkoli §E té stránce vrstvu B vědomě NEDÁVÁ („osobní stránka, žádný pohyb").
-
-   Proč jen můstek: přijatý základ podstránek (OND-379, §1a) tenhle způsob
-   VÝSLOVNĚ ZAMÍTÁ. `content: none` vypíná celý pseudo-element, takže by
-   u jiných komponent vzalo i statické acidové vrstvy ze §0b, které s nábojem
-   nesouvisí. Rozhodnutý způsob je default deny přes alias `--pdd-src-*`
-   na `.pd--depth.pd--depth-sub` + dvě výjimky (formulář, FAQ).
-
-   Tady stojí jen proto, že OND-386 je blokovaná touhle kartou — sahá do týchž
-   dvou řádků. Až plošné vypnutí přistane, tenhle řádek je zbytečný: `.pd-step`
-   bude vypnutý proměnnými jako všechno ostatní. */
-.pd--depth.pd--depth-sub .pd-step::before { content: none; }
-
 /* hover: rozsvítí se jen linka toho kroku (jen skutečný kurzor, viz výše) */
 @media (hover: hover) and (pointer: fine) {
     .pd--depth .pd-step:hover::before {
         animation: none;
-        background-image: linear-gradient(rgba(216, 255, 58, .40), rgba(216, 255, 58, .40));
+        background-image: var(--pdd-hint);
         background-size: 100% 1px;
         background-position: 0 7px;
         transition: background-size var(--duration-micro) var(--ease-out);
@@ -899,7 +937,7 @@
 /* hover: jen slabý náznak té linky, bez běhu (jen skutečný kurzor, viz výše) */
 @media (hover: hover) and (pointer: fine) {
     .pd--depth .pd-faq__q:hover::after {
-        background-image: linear-gradient(rgba(216, 255, 58, .22), rgba(216, 255, 58, .22));
+        background-image: var(--pdd-hint-soft);
         background-size: 100% 1px;
         background-position: 0 7px;
         transition: background-size var(--duration-micro) var(--ease-out);
