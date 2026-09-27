@@ -193,9 +193,32 @@ Tyto checks vyžadují interactive Chrome session (Lighthouse, axe E2E, GA4 Debu
 
 ---
 
+## 9. Copy změny — zlom řádku se měří na 7 šířkách, ne na 2 ([OND-381](/OND/issues/OND-381))
+
+**Kdy se to pouští:** vždy, když se mění delší text v layoutu — perex, lead, podtitulek, CTA popisek. Ručně, před PR. Není to CI gate a nemá běžet automaticky — `POLICY-shared-host-builds.md`, stroj hostí i produkci.
+
+```bash
+# default = perex nad kontaktním formulářem, CS/EN/DE
+node scripts/typo-orphans.mjs
+
+# jiný element / jiné stránky / jiný práh
+node scripts/typo-orphans.mjs --sel '.pd-lead' --path '/,/en/,/de/' --min 25
+```
+
+**Proč 7 šířek.** [OND-371](/OND/issues/OND-371) proměřila nový perex na **1440 a 390 px**. Na obou to sedělo, karta se zavřela. Na **900 a 540 px** — tedy mezi měřenými body — dělal ten samý text sirotka o šířce 11–20 % sloupce, což musela dohánět [OND-377](/OND/issues/OND-377). Zlom řádku se nemění spojitě, mění se **skokem**, a ten skok umí padnout přesně do mezery mezi dvěma měřenými body. Sada je proto `1440 / 1024 / 900 / 640 / 540 / 390 / 320`.
+
+**Co znamená práh.** Skript změří skutečné řádkové boxy po `fonts.ready` na nasazeném buildu a u každé šířky vypíše šířku posledního řádku jako **procento šířky sloupce**. Poslední řádek **pod 20 % šířky sloupce = sirotek → neprochází.** Hodnota 100 % znamená jednořádkový text (sirotek nemůže vzniknout). Skript končí **nenulovým exit kódem**, když něco práh podleze nebo když se selektor na některé šířce nenajde.
+
+**Co s failem:** přeformulovat copy tak, aby poslední řádek nesl dost slov. `text-wrap: balance` sám nestačí — na `/kontakt` je zapnutý a sirotka z OND-371 nezabránil.
+
+**Referenční stav `/kontakt`** (ověřeno na nasazeném buildu, 2026-09-27): nejhorší poslední řádek **52 %** (`/de/kontakt` @ vw900, 277 z 528 px) → PASS.
+
+---
+
 ## Appendix A — Tooling
 
 - Functional matrix script: `/tmp/qa-matrix.py` (lokální, ne v repo — engineer follow-up commit `docs/qa-launch-runbook.md` + tento script jako `scripts/qa-matrix.py`)
+- Orphan detektor pro copy změny: `scripts/typo-orphans.mjs` ([OND-381](/OND/issues/OND-381), viz §9)
 - B4 static check: `scripts/b4-static-check.mjs` ([OND-132](/OND/issues/OND-132))
 - B4 full Lighthouse + axe: `scripts/b4-verify.sh`
 - Raw JSON dump z tohoto runu: `/tmp/qa-results.json` (lokální) + `/tmp/b4-static-report.json` (lokální)
