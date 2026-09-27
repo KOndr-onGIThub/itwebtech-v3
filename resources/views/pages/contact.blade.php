@@ -208,8 +208,9 @@
                                    @change="clearError('gdpr')"
                                    :aria-invalid="errors.gdpr ? 'true' : null"
                                    :aria-describedby="errors.gdpr ? 'gdpr-error' : null">
-                            {{ __('contact.agree') }}
-                            <a href="{{ lroute('privacy') }}">{{ __('contact.policy') }}</a>
+                            {{-- Text i odkaz musí být JEDEN flex item, jinak se z nich stanou
+                                 dva sloupce a každý se láme zvlášť (OND-374). --}}
+                            <span>{{ __('contact.agree') }}<a href="{{ lroute('privacy') }}">{{ __('contact.policy') }}</a></span>
                         </label>
                         <p class="form-group__error" id="gdpr-error" x-show="errors.gdpr" x-text="errors.gdpr" x-cloak></p>
                     </div>
