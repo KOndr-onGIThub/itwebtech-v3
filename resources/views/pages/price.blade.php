@@ -206,6 +206,20 @@
                          Dnes rozsah — úroveň se jmenuje podle toho, co vzniká,
                          a rozsah je to, čím se od sebe úrovně reálně liší. --}}
                     <div class="pricing-tier__scope">{{ $tier['scope'] }}</div>
+
+                    {{-- OND-359: důkaz místo výčtu funkcí — u rozsahu stojí
+                         odkaz na případovku, kterou si člověk může přečíst.
+                         `$tierProofs` drží jen publikované projekty, takže
+                         odkaz na 404 z ceníku nevznikne (viz PageController). --}}
+                    @php $proof = $tierProofs->get($tier['proof']['slug'] ?? null); @endphp
+                    @if ($proof)
+                    <a href="{{ $proof->detailUrl() }}" class="pricing-tier__proof"
+                       data-analytics="pricing_tier_proof_click"
+                       data-analytics-props='{"pricing_tier_shown":"{{ $tier['key'] }}","project_slug":"{{ $proof->slug }}"}'>
+                        {{ __('price.proof_intro') }}: {{ $tier['proof']['label'] }}
+                        <x-icon.arrow-right class="w-4 h-4 shrink-0" />
+                    </a>
+                    @endif
                 </header>
 
                 <ul class="pricing-tier__features">
