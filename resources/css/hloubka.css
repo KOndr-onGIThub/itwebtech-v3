@@ -853,14 +853,22 @@
 .pd--depth .pd-step.is-lit::before {
     animation: pdd-run-x-rev 820ms linear 1 both;
 }
-/* OND-380 — NÁLEZ o systému, ne o stránce: pravidlo výš je scopované na
-   `.pd--depth`, ne na domovskou stránku. Jakmile se `.pd-step` objeví
-   na podstránce, náboj se zapne sám — na /o-mne z toho byly tři svítící
-   acidové linky přes celou šířku, ačkoli §E té stránce vrstvu B vědomě
-   NEDÁVÁ („osobní stránka, žádný pohyb").
-   Platí o každé pd-komponentě, která má v §B svůj náboj (`.pd-service`,
-   `.pd-price__col`, hero) — než se pustí zbytek podstránek, má někdo projít
-   §B a rozhodnout u každého pravidla, jestli platí i mimo homepage. */
+/* OND-380 — DOČASNÝ MŮSTEK, MÁ ZMIZET V OND-386. Nevylepšovat, smazat.
+
+   Proč vznikl: pravidlo výš je scopované na `.pd--depth`, ne na domovskou
+   stránku, takže jakmile se `.pd-step` objeví na podstránce, náboj se zapne
+   sám — na /o-mne z toho byly tři svítící acidové linky přes celou šířku,
+   ačkoli §E té stránce vrstvu B vědomě NEDÁVÁ („osobní stránka, žádný pohyb").
+
+   Proč jen můstek: přijatý základ podstránek (OND-379, §1a) tenhle způsob
+   VÝSLOVNĚ ZAMÍTÁ. `content: none` vypíná celý pseudo-element, takže by
+   u jiných komponent vzalo i statické acidové vrstvy ze §0b, které s nábojem
+   nesouvisí. Rozhodnutý způsob je default deny přes alias `--pdd-src-*`
+   na `.pd--depth.pd--depth-sub` + dvě výjimky (formulář, FAQ).
+
+   Tady stojí jen proto, že OND-386 je blokovaná touhle kartou — sahá do týchž
+   dvou řádků. Až plošné vypnutí přistane, tenhle řádek je zbytečný: `.pd-step`
+   bude vypnutý proměnnými jako všechno ostatní. */
 .pd--depth.pd--depth-sub .pd-step::before { content: none; }
 
 /* hover: rozsvítí se jen linka toho kroku (jen skutečný kurzor, viz výše) */
