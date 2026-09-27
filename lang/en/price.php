@@ -3,7 +3,7 @@
 return [
 
     'meta' => [
-        'title'       => 'Pricing — Ondřej Kriška',
+        'title'       => 'Pricing — Ondřej Kriška, ONDRAWEB',
         'description' => 'Indicative pricing for websites, e-shops and web applications. Get a clear picture of your investment before the first consultation.',
     ],
 
@@ -28,12 +28,14 @@ return [
     ],
 
     // Sticky CTA — always-visible while scrolling, "price never disappears".
+    // OND-391: nevykresluje se (plovoucí tlačítko z /cenik odešlo, OND-393).
     'sticky_cta' => [
         'label' => 'Pick a level',
         'cta'   => 'Get a no-obligation quote',
     ],
 
     'popular'   => 'Most popular',
+    // OND-391: `quotation` se nevykresluje (tlačítka u doplňků odešla, OND-393).
     'quotation' => 'Get a quote',
 
     // OND-359: intro for the case-study link inside a level card. The wording
