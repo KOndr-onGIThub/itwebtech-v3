@@ -1896,3 +1896,119 @@
 
 /* Mobil: čtyři kategorie na jeden řádek (cs/en 323 px z 342). */
 @media (max-width: 639px) { .pd-filter { gap: 0 var(--space-4); } }
+
+
+/* ------------------------------------------------------------
+   OND-403 — detail projektu /projekty/{projekt} (předloha OND-402 §10a). Nové:
+   `.pd-story` (text + údaje), `.pd-gallery` (galerie bez protějšku
+   na homepage). Zbytek je sdílený beze změny: `.pd-page-head`,
+   `.pd-facts` (/kontakt), `.pd-testi__item` + `<x-testimonial-by>`
+   (/recenze), `.pd-works` (/projekty), `.pd-about-cta` (/o-mne).
+   Hrany sekcí řeší plošné pravidlo oddělovačů (OND-398).
+   ------------------------------------------------------------ */
+
+/* Hlava a hlavní vizuál jsou jedna věta („tady je to"). Mezi nimi zůstane
+   jen spodní odsazení hlavy (104 px @1440 / 56 @390), ne 2× mezera sekce. */
+.pd-page-head + .pd-gallery--lead { padding-top: 0; }
+
+/* --- Příběh: text na ose titulku, údaje jako marginálie ------------------
+   Levá hrana nadřádku, titulku, perexu i kapitol je jedna svislá osa.
+   Údaje stojí vpravo (4fr), na mobilu až za textem — jsou to poznámky
+   pod čarou, ne úvod. Dřív byly vpravo v šedém boxu s pilulkami. */
+.pd-story { display: grid; gap: var(--space-8); }
+@media (min-width: 1024px) {
+    .pd-story {
+        grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+        gap: var(--space-9);
+        align-items: start;
+    }
+}
+/* Perex = teze případovky. Sazba `.pd-case__outcome` z homepage (display
+   300), jen plnou barvou: je to první věta, kterou má člověk přečíst. */
+.pd-story__intro {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-variation-settings: 'wght' 300;
+    font-size: clamp(19px, 1.6vw, 22px);
+    line-height: 1.5;
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-fg-primary);
+    max-width: 46ch;
+    margin: 0;
+}
+/* Kapitoly Výzva / Řešení / Výsledek: nadpis `.pd-step__title`, text
+   `.pd-step__text` (62 ch). 48 px mezi kapitolami — víc než řádkování,
+   míň než mezera sekce (OND-394 bod 1). */
+.pd-story__chapter { margin-top: var(--space-7); }
+.pd-story__chapter .pd-step__title { margin-bottom: var(--space-2); }
+
+/* Recenze klienta hned za „Výsledkem": tvrzení → potvrzení od klienta.
+   Kartička z /recenze beze změny, jen bez spodního odsazení položky. */
+.pd-story__review { margin: var(--space-8) 0 0; padding: 0; }
+.pd-story__review blockquote { margin-inline: 0; }
+.pd-story__note {
+    grid-column: 2;
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+    max-width: 58ch;
+    margin: var(--space-3) 0 0;
+}
+@media (max-width: 767px) {
+    .pd-story__review > .pd-testi__text,
+    .pd-story__review > .pd-testi__links,
+    .pd-story__note { grid-column: 1 / -1; }
+    .pd-story__review > .pd-testi__text { margin-top: var(--space-2); }
+}
+
+/* --- Galerie ---------------------------------------------------------------
+   Rám `.pd-case__visual` z homepage: 1 px `--color-border-soft`, žádné
+   zaoblení, žádná šedá deska kolem. Geometrie (OND-202/265) beze změny:
+   band v přirozeném poměru, páry ve čtverci s `contain`, osamocená
+   dlaždice přes obě buňky. Rám se při najetí rozsvítí — obrázek se dá
+   otevřít ve zvětšení, a jinak by to nic neprozradilo. */
+.pd-gallery__band,
+.pd-gallery__item { margin: 0; }
+.pd-gallery__band,
+.pd-gallery__grid { margin-bottom: var(--space-6); }
+.pd-gallery__band:last-child,
+.pd-gallery__grid:last-child { margin-bottom: 0; }
+.pd-gallery__grid { display: grid; gap: var(--space-6); }
+@media (min-width: 640px) {
+    .pd-gallery__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.pd-gallery__frame {
+    border: 1px solid var(--color-border-soft);
+    background: var(--color-bg-elev-1);
+    overflow: hidden;
+    transition: border-color var(--duration-micro) var(--ease-out);
+}
+.pd-gallery__frame:hover { border-color: var(--pd-accent); }
+.pd-gallery__frame a:focus-visible { outline: 2px solid var(--pd-accent); outline-offset: -2px; }
+.pd-gallery__frame > a,
+.pd-gallery__frame picture { display: block; }
+.pd-gallery__band img { display: block; width: 100%; height: auto; }
+.pd-gallery__item .pd-gallery__frame { aspect-ratio: var(--shot-ratio, 1); }
+.pd-gallery__item .pd-gallery__frame > a,
+.pd-gallery__item .pd-gallery__frame picture { height: 100%; }
+.pd-gallery__item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+@media (min-width: 640px) {
+    .pd-gallery__item:not(.pd-gallery__item--alone):not(.pd-gallery__item--alone-band) .pd-gallery__frame { aspect-ratio: 1 / 1; }
+    .pd-gallery__item--alone,
+    .pd-gallery__item--alone-band { grid-column: 1 / -1; }
+    .pd-gallery__item--alone { width: calc(50% - var(--space-6) / 2); justify-self: center; }
+}
+.pd-gallery figcaption {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+    max-width: 62ch;
+    margin: var(--space-3) 0 0;
+}
