@@ -3,7 +3,7 @@
 return [
 
     'meta' => [
-        'title'       => 'Kontakt — Ondřej Kriška',
+        'title'       => 'Kontakt — Ondřej Kriška, ONDRAWEB',
         'description' => 'Zavolejte nebo napište a já se ozvu zpět. Kontaktní formulář, telefon a adresa.',
     ],
 
