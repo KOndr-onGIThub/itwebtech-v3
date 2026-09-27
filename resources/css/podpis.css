@@ -1220,3 +1220,81 @@
     border-radius: 0;
     box-shadow: none;
 }
+
+
+/* ============================================================
+   F. PODSTRÁNKY — slovník ACID mimo homepage
+   ------------------------------------------------------------
+   OND-380 (návrh a měření OND-365). Podstránky přebírají 14
+   komponent z homepage beze změny; tady je jen to, co homepage
+   nemá, protože sama žádnou „podstránku" neobsahuje.
+
+   Z toho je většina JEDNORÁZOVÁ a platí pro všech devět stránek
+   (`.pd-page-head`, `.pd-heading--sub`, `.pd-figure`); zbytek
+   jsou layoutové háky /o-mne.
+   ============================================================ */
+
+/* Hlava podstránky — vlevo, na základu, bez glow pruhu.
+   Nahrazuje `.page-hero` (#161A24 + zlatá elipsa + na střed):
+   to byla ta největší jediná věc, která podstránky prozrazovala.
+   `border-top: 0`, protože hlava je první sekce na stránce —
+   vlasová linka `.pd-section` by tu visela pod lištou.
+   68px = výška navbaru. */
+.pd-page-head {
+    border-top: 0;
+    padding-top: calc(68px + clamp(2.5rem, 5vw, 4.5rem));
+}
+/* O krok pod domovským titulkem (33–52 px). Podstránka není domovská
+   stránka a nemá jí konkurovat velikostí. */
+.pd-heading--sub { font-size: clamp(30px, 3.2vw, 46px); }
+
+.pd-page-head__grid { display: grid; gap: var(--space-7); }
+@media (min-width: 1024px) {
+    .pd-page-head__grid {
+        /* 300 px, ne 340: video 9:16 je při 340 px vysoké 605 px, text
+           kolem 340 px — díra pod textem byla 400 px. Při 300 px je video
+           533 px vysoké a díra 190 px. */
+        grid-template-columns: 1fr 300px;
+        gap: var(--space-9);
+        /* `start`, ne `center`: dřívější `.about-intro` centrovala třířádkový
+           odstavec proti vysokému videu a dělala tím 660px díru. */
+        align-items: start;
+    }
+}
+/* Centrování médií pod 1024 px už nese `.pd-steps__media` výš v tomhle
+   souboru (`@media (max-width: 1199px) { justify-self: center }`). */
+
+/* NÁLEZ (OND-365) — mřížka `56px 1fr` v `.pd-step` je psaná na krátké kroky
+   procesu. Kapitoly o mně jsou 4–5× delší: na 390 px zbývá textu 230 px,
+   tedy asi 30 znaků na řádek (pásmo čitelnosti je 45–75). Modifikátor staví
+   na mobilu číslici nad nadpis a vrací sloupci plnou míru (~45 ch). */
+@media (max-width: 767px) {
+    .pd-steps--chapters .pd-step {
+        grid-template-columns: 1fr;
+        gap: var(--space-2);
+    }
+}
+
+/* Věta a tlačítko jsou jedna výzva — `--space-8` mezi nimi je rozpojoval. */
+.pd-about-cta .pd-lead { margin-bottom: var(--space-6); }
+
+/* Orámované médium uvnitř textového sloupce — táž fyzika jako
+   `.pd-steps__media`: vlasová linka, žádné zaoblení, žádný blur.
+   Nahrazuje `.about-portrait__img` (zaoblení 20 px + blur stín).
+   Stín z vrstvy C je v hloubka.css §E2 vedle `.about-intro__video`. */
+.pd-figure {
+    margin: var(--space-6) 0 0;
+    max-width: 62ch;
+    border: 1px solid var(--color-border-soft);
+}
+.pd-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center 30%;
+}
+@media (min-width: 640px) {
+    .pd-figure img { aspect-ratio: 3 / 2; object-position: center 25%; }
+}

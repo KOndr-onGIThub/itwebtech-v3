@@ -853,6 +853,16 @@
 .pd--depth .pd-step.is-lit::before {
     animation: pdd-run-x-rev 820ms linear 1 both;
 }
+/* OND-380 — NÁLEZ o systému, ne o stránce: pravidlo výš je scopované na
+   `.pd--depth`, ne na domovskou stránku. Jakmile se `.pd-step` objeví
+   na podstránce, náboj se zapne sám — na /o-mne z toho byly tři svítící
+   acidové linky přes celou šířku, ačkoli §E té stránce vrstvu B vědomě
+   NEDÁVÁ („osobní stránka, žádný pohyb").
+   Platí o každé pd-komponentě, která má v §B svůj náboj (`.pd-service`,
+   `.pd-price__col`, hero) — než se pustí zbytek podstránek, má někdo projít
+   §B a rozhodnout u každého pravidla, jestli platí i mimo homepage. */
+.pd--depth.pd--depth-sub .pd-step::before { content: none; }
+
 /* hover: rozsvítí se jen linka toho kroku (jen skutečný kurzor, viz výše) */
 @media (hover: hover) and (pointer: fine) {
     .pd--depth .pd-step:hover::before {
@@ -1258,8 +1268,23 @@
             rgba(255, 255, 255, 0.012) 48%,
             rgba(255, 255, 255, 0) 78%);
 }
-/* Vyprávění: úzký kužel nad jedním sloupcem textu, pruh je navíc `alt`
-   (#101318), takže amplituda dolů. */
+/* Vyprávění: úzký kužel nad jedním sloupcem textu.
+   OND-380 — pruh `.section-alt` (#101318), kvůli kterému byla amplituda 0,032
+   stažená dolů, po převodu do ACID zmizel. ZMĚŘENO na vykreslené stránce
+   (1440 px, pixel na temeni kužele vs. dole v sekci, medián z 9 vzorků):
+
+     přínos kužele   před +7/255   po +7/255   (stejný — amplituda drží)
+     temeno sekce    před rgb(23,26,31)   po rgb(17,17,18)
+     základ sekce    před rgb(17,19,25)   po rgb(10,10,11)
+
+   Ten rozdíl nesla výhradně barva pruhu, ne kužel: bílý závoj o alfě 0,032
+   přidá na #101318 i na #0A0A0B stejných ~+7/255 (výška k bílé se mění
+   o 2,5 %). Amplituda proto ZŮSTÁVÁ na 0,032 — neoslabila se.
+   Co se změnilo, je pořadí: s pruhem bylo vyprávění nejsvětlejší místo
+   stránky (L 0,0102 > hlava 0,0092), bez něj jsou tři kužely sestupně
+   hlava → vyprávění → výzva (L 0,0070 → 0,0056 → 0,0055). Zvednout
+   amplitudu by vrátilo nejsvětlejší bod na životopis místo na tvář,
+   což §E u osobní stránky nechce. */
 .pd--depth-sub > section[data-pdd="about-story"] {
     --pdd-wash:
         radial-gradient(40% 76% at 28% 4%,
@@ -1307,9 +1332,12 @@
 .pd--depth-sub .blog-card:hover {
     box-shadow: 0 24px 34px -18px rgba(0, 0, 0, 1);
 }
-/* Portrét na kontaktu a video na „o mně“ — stejná fyzika jako vizuál případovky. */
+/* Portrét na kontaktu a video na „o mně“ — stejná fyzika jako vizuál případovky.
+   OND-380: `.pd-figure` je orámovaný obrázek v textovém sloupci (portrét
+   uprostřed vyprávění na /o-mne) — týž případ, tedy týž stín. */
 .pd--depth-sub .contact-info__photo-wrap,
-.pd--depth-sub .about-intro__video {
+.pd--depth-sub .about-intro__video,
+.pd--depth-sub .pd-figure {
     box-shadow: 0 20px 32px -18px rgba(0, 0, 0, 0.95);
 }
 
