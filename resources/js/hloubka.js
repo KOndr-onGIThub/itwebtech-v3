@@ -95,16 +95,15 @@
        kroky, případovky nebo ceník by jen zakládalo pozorovatele, které
        nic nevykreslí — a navěšené `is-lit` by pustilo animaci naprázdno.
 
-       `.contact-form` a `.pd-form__panel` jsou TENTÝŽ OBJEKT: poptávkový
-       formulář. Na /kontakt se jmenuje `.contact-form`, protože podstránky
-       mají starší slovník tříd (viz §E v hloubka.css). Kdo sem bude chtít
+       Poptávkový formulář je na /kontakt od OND-392 tentýž `.pd-form__panel`
+       jako na homepage (dřív kopie `.contact-form`). Kdo sem bude chtít
        přidat další řádek, ať si napřed přečte tabulku rozhodnutí v §E —
        „na podstránkách se nic nehýbe kromě formuláře" je rozhodnutí, ne
        nedodělek. */
     var isSub = root.classList.contains('pd--depth-sub');
     var TARGETS = isSub
         /* §E: „na podstránkách se nic nehýbe kromě formuláře" */
-        ? ['.contact-form', '.pd-form__panel']
+        ? ['.pd-form__panel']
         : [
             '.pd-hero',                     /* podtržení v H1 → CTA */
             '.pd-case',                     /* 02 — horní hrana vizuálu, každá případovka sama */

@@ -238,7 +238,6 @@
 /* VÝJIMKA 1 — poptávkový formulář. §E: „kontakt … dostává doslova totéž".
    Deska i políčko: bez náboje v políčku by výjimka byla půlka. */
 .pd--depth-sub .pd-form__panel,
-.pd--depth-sub .contact-form,
 .pd--depth-sub .pd-field {
     --pdd-run-right: var(--pdd-src-run-right);
     --pdd-glow-right: var(--pdd-src-glow-right);
@@ -1151,7 +1150,7 @@
 
 
 /* --- KONTAKT — zdroj stojí nad formulářem ---------------------------------
-   Obdoba sekce 15. Formulář je vpravo (desktop 260px + 1fr), takže kužel
+   Obdoba sekce 15. Formulář je vpravo (desktop `.pd-form` 5fr 7fr), takže kužel
    je mimo osu doprava — světlo dopadá na to, co se má vyplnit, ne na
    postranní kontaktní údaje. Nejvyšší amplituda na stránce; jinde už jen
    ubývá. */
@@ -1163,8 +1162,11 @@
             rgba(255, 255, 255, 0) 74%);
 }
 /* „Co se stane potom" — poslední pruh stránky, po rozhodnutí přichází úleva.
-   Pozadí je tu #131316, takže amplituda dolů. Odlesk odchází doleva, pryč
-   od formuláře: zdroj se vzdaluje. */
+   Pozadí bylo #131316 (pruh `--alt`), takže amplituda dolů. Odlesk odchází
+   doleva, pryč od formuláře: zdroj se vzdaluje.
+   OND-392: pruh po převodu zmizel a obě amplitudy na /kontakt jsou
+   kalibrované na starý základ #0C0E14. Nezvedají se — základ §0 to svěřuje
+   kartě poslední převáděné stránky (OND-390 §6). */
 .pd--depth-sub > section[data-pdd="contact-next"] {
     --pdd-wash:
         radial-gradient(64% 150% at 14% 50%,
@@ -1378,13 +1380,18 @@
 .pd--depth-sub .blog-card:hover {
     box-shadow: 0 24px 34px -18px rgba(0, 0, 0, 1);
 }
-/* Portrét na kontaktu a video na „o mně“ — stejná fyzika jako vizuál případovky.
+/* Video na „o mně“ — stejná fyzika jako vizuál případovky.
    OND-380: `.pd-figure` je orámovaný obrázek v textovém sloupci (portrét
    uprostřed vyprávění na /o-mne) — týž případ, tedy týž stín. */
-.pd--depth-sub .contact-info__photo-wrap,
 .pd--depth-sub .about-intro__video,
 .pd--depth-sub .pd-figure {
     box-shadow: 0 20px 32px -18px rgba(0, 0, 0, 0.95);
+}
+/* Portrét v hlavě /kontakt (OND-392, dřív `.contact-info__photo-wrap`).
+   Jen od 1024 px: pod 72px podpisem na mobilu by stín 20 px dolů byla
+   šmouha, ne podložka. */
+@media (min-width: 1024px) {
+    .pd--depth-sub .pd-page-head__photo { box-shadow: 0 20px 32px -18px rgba(0, 0, 0, 0.95); }
 }
 
 
@@ -1393,95 +1400,18 @@
    --------------------------------------------------------------------------
    Jediné místo na podstránkách, kde běží náboj. Důvod je věcný, ne
    estetický: je to TENTÝŽ OBJEKT jako `.pd-form__panel` v sekci 15 —
-   poptávkový formulář, cíl celé cesty. Kdyby se choval jinak než na
-   domovské stránce, byla by to nedůslednost, ne rozhodnutí.
+   poptávkový formulář, cíl celé cesty.
 
-   Přenáší se proto doslova celá trojice ze sekce 15:
-     deska (papír na stole) + trvale nabitá horní hrana + proud do políčka.
+   OND-392: od převodu /kontakt do slovníku ACID to už není kopie, ale
+   přímo `.pd-form__panel` a `.pd-field` z homepage. Deska, trvale nabitá
+   horní hrana i proud do políčka jsou tedy pravidla §B11 a §C beze změny
+   (výjimka 1 v §0 je na podstránce pouští). Dřívější kopie pro
+   `.contact-form` tu byla smazaná; zůstává jen ořez sekce.
 
-   GEOMETRIE: přesah -16px = přesně padding `.container-site` na mobilu
-   (clamp(1rem, …)), takže deska dojede k okraji okna a nic nepřeteče.
-   Od 768px je padding 2rem a panel má kolem sebe vzduch.
+   Deska mění barvu z `--bg-elevated` (#161A24) na `--color-bg-elev-1`
+   jako na homepage: #161A24 se zdůvodňoval namodralým základem #0C0E14,
+   a ten po přidání obalu `.pd` na stránce není.
    ========================================================================== */
-.pd--depth-sub .contact-form {
-    position: relative;
-    isolation: isolate;
-}
-.pd--depth-sub .contact-form::before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    inset: -20px -16px -24px -16px;
-    /* NE `--color-bg-elev-1` jako na homepage, ale `--bg-elevated`. Homepage
-       stojí na neutrální #0A0A0B, podstránky na namodralé #0C0E14 — neutrální
-       deska by na nich vyšla o odstín dozelena. `--bg-elevated` (#161A24) je
-       token, kterým si podstránky vyzdvihují plochy samy (CTA pruhy,
-       doporučené pásmo ceníku, page-hero), takže deska sedí do jejich rodiny.
-       Žádná nová barva ani tady. */
-    background: var(--bg-elevated);
-    /* Horní hrana papíru JE ta nabitá linka — jeden 1px, ne dva nad sebou. */
-    box-shadow:
-        inset 0 1px 0 rgba(216, 255, 58, 0.20),
-        0 30px 46px -28px rgba(0, 0, 0, 1);
-}
-@media (min-width: 768px) {
-    .pd--depth-sub .contact-form::before {
-        inset: -32px;
-    }
-}
-/* Náboj jede po hraně DESKY, ne po boxu formuláře — geometrie odpovídá
-   ::before výš: deska začíná na -20px (od 768px na -32px), jádro je uvnitř
-   15px pásu na y = 7px, takže pás musí začínat o 7px výš. */
-.pd--depth-sub .contact-form::after {
-    content: "";
-    position: absolute;
-    height: var(--pdd-bloom);
-    pointer-events: none;
-    background-repeat: no-repeat;
-    background-size: var(--pdd-band) var(--pdd-bloom), var(--pdd-band) 1px;
-    background-position-y: 0, 7px;
-    inset: -27px -16px auto -16px;
-    z-index: 1;
-    background-image: var(--pdd-glow-right), var(--pdd-run-right);
-    background-position-x: -115%;
-}
-.pd--depth-sub .contact-form.is-lit::after {
-    animation: pdd-run-x 1000ms linear 200ms 1 both;
-}
-@media (min-width: 768px) {
-    .pd--depth-sub .contact-form::after {
-        inset: -39px -32px auto -32px;
-    }
-}
-/* Proud pokračuje z desky do políčka, ve kterém se zrovna píše. Stávající
-   acid rámeček při fokusu zůstává beze změny — přístupnost se nezhoršuje.
-
-   `:has()` tu drží uzavřený seznam: náboj dostanou jen skupiny se SKUTEČNÝM
-   textovým polem. Bez toho by se rozsvítilo i zaškrtávátko souhlasu s GDPR
-   a skupina s odesílacím tlačítkem — tedy proud po lince, kterou nikdo
-   nevyplňuje. Prohlížeč bez `:has()` nedostane náboj vůbec; nic se nerozbije,
-   jen se tam nic nehne. */
-.pd--depth-sub .contact-form .form-group:has(input:not([type="checkbox"])),
-.pd--depth-sub .contact-form .form-group:has(textarea) {
-    position: relative;
-}
-.pd--depth-sub .contact-form .form-group:has(input:not([type="checkbox"]))::after,
-.pd--depth-sub .contact-form .form-group:has(textarea)::after {
-    content: "";
-    position: absolute;
-    height: var(--pdd-bloom);
-    pointer-events: none;
-    background-repeat: no-repeat;
-    background-size: var(--pdd-band) var(--pdd-bloom), var(--pdd-band) 1px;
-    background-position-y: 0, 7px;
-    inset: auto 0 -8px 0;
-    background-image: var(--pdd-glow-right), var(--pdd-run-right);
-    background-position-x: -115%;
-}
-.pd--depth-sub .contact-form .form-group:focus-within:has(input:not([type="checkbox"]))::after,
-.pd--depth-sub .contact-form .form-group:focus-within:has(textarea)::after {
-    animation: pdd-run-x 650ms linear 1 both;
-}
 /* Deska je širší než formulář; ať z ní na úzkém okně nevznikne vodorovný
    scroll. Totéž dělá `.pd--depth #poptavka` na homepage. */
 .pd--depth-sub > section[data-pdd="contact-form"] {
@@ -1551,11 +1481,7 @@
     .pd--depth .pd-field::after,
     .pd--depth > section::after,
     .pd--depth .pd-section::before,
-    .pd--depth .pd-strip::before,
-    /* OND-251 — podstránky: jediné dva pohyblivé prvky, oba na kontaktu (§E3) */
-    .pd--depth-sub .contact-form::after,
-    .pd--depth-sub .contact-form .form-group::after,
-    .pd--depth-sub .contact-form .form-group:has(textarea)::after {
+    .pd--depth .pd-strip::before {
         animation: none !important;
         transition: none !important;
     }

@@ -1298,3 +1298,166 @@
 @media (min-width: 640px) {
     .pd-figure img { aspect-ratio: 3 / 2; object-position: center 25%; }
 }
+
+
+/* ------------------------------------------------------------
+   OND-392 — /kontakt (návrh a měření OND-390). Sdílené komponenty:
+   homepage je nemá, další podstránky je použijí beze změny
+   (`.pd-eyebrow__sep` /cenik a /projekty, `.pd-split` /cenik,
+   `.pd-facts` pruh meta-údajů na /projekty/{detail}).
+   ------------------------------------------------------------ */
+/* Oddělovač v nadřádku. `.page-hero` měl dva
+   řádky nad titulkem (pořadové označení „KONTAKT" + „Píšete přímo mně.").
+   Základ OND-379 §2a je slučuje do jednoho `.pd-eyebrow`; vlasová čárka mezi
+   nimi je ten původní „page-mark" glyf. Stejnou anatomii mají /cenik
+   a /projekty — tam se použije beze změny. */
+.pd-eyebrow__sep {
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    margin: 0 0.9em;
+    vertical-align: middle;
+    background: currentColor;
+}
+
+/* Podtržené klíčové slovo se nelomí. Na 1440
+   i 390 px padal zlom mezi „jen" a „Ondřej" — podtržení se roztrhlo na dva
+   kusy na dvou řádcích a titulek ztratil pointu. Fráze v `<em>` jsou na
+   všech stránkách dvě až tři slova, takže nic nepřeteče. */
+.pd-heading--sub em { white-space: nowrap; }
+
+/* Kontext vlevo, obsah vpravo — táž osa jako
+   `.pd-form` (5fr 7fr, --space-9). Tři kroky pod sebou přes celou šířku
+   nechávaly na 1440 px vpravo přes 500 px prázdna a stránku natáhly o 120 px;
+   vedle hlavy sekce stojí kroky přesně pod deskou formuláře. Použije se
+   i na /cenik (záruky, doplňky), kde je táž anatomie hlava + seznam. */
+.pd-split { display: grid; gap: var(--space-5); }
+@media (min-width: 1024px) {
+    .pd-split { grid-template-columns: 5fr 7fr; gap: var(--space-9); }
+}
+
+/* Seznam údajů: popisek nad hodnotou. Homepage
+   žádný `<dl>` nemá. Použije se znovu na /projekty/{detail} (pruh
+   meta-údajů, základ OND-379 §2a). Popisek má sazbu `.pd-field label`,
+   odkaz sazbu `.pd-form__privacy a` — nic nového, jen jiné místo. */
+.pd-facts { display: grid; gap: var(--space-5); margin: 0; }
+.pd-facts dt {
+    font-family: var(--font-body);
+    font-size: var(--text-caption);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-fg-muted);
+    margin: 0 0 var(--space-1);
+}
+.pd-facts dd {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--color-fg-muted);
+    max-width: 40ch;
+    margin: 0;
+}
+.pd-facts a {
+    color: var(--color-fg-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--pd-accent);
+    text-underline-offset: 3px;
+}
+.pd-facts a:hover { color: var(--pd-accent); }
+
+/* ------------------------------------------------------------
+   OND-392 — háky jen pro /kontakt. Formulář je `.pd-form__panel`
+   z homepage beze změny (deska, nabitá hrana i proud z hloubka.css
+   §B11 a §C); tady je jen to, co homepage nepotřebuje.
+   ------------------------------------------------------------ */
+/* Tvář v hlavě stránky. Titulek slibuje
+   „jen Ondřej" — tvář hned vedle je důkaz toho slibu na jednom místě.
+   Desktop: portrét 300 px jako video na /o-mne (táž šířka sloupce
+   `.pd-page-head__grid`). Mobil: podpis 72 px + role, NE portrét přes celou
+   šířku — ten dnes odsouvá formulář o 440 px níž, a formulář je jediný
+   důvod, proč tu člověk je. */
+.pd-page-head__person {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    align-items: center;
+    gap: var(--space-4);
+}
+.pd-page-head__photo { border: 1px solid var(--color-border-soft); }
+.pd-page-head__photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center 22%;
+}
+.pd-page-head__role {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+    margin: 0;
+}
+@media (min-width: 1024px) {
+    .pd-page-head__person { display: block; }
+    .pd-page-head__photo img { aspect-ratio: 4 / 5; object-position: center 30%; }
+    .pd-page-head__role { margin-top: var(--space-3); }
+}
+
+/* Titulek uvnitř desky. Na homepage stojí
+   hlava sekce NAD deskou; tady je titulek součástí toho, co se po odeslání
+   vymění za poděkování (`x-show="!submitted"`), takže musí být uvnitř. */
+.pd-form__panel .pd-head__title { margin-bottom: var(--space-3); }
+.pd-form__panel .pd-intro { margin-bottom: var(--space-7); }
+/* Poděkování je jedna zpráva, ne tři bloky: věta, pokračování a dva odkazy
+   drží pohromadě. `.pd-actions` je řada tlačítek z hera homepage. */
+.pd-form__thanks .pd-intro { margin-bottom: var(--space-3); }
+.pd-form__thanks .pd-actions { margin-top: var(--space-6); }
+/* OND-392 — po odeslání `contactForm` roluje na kořen formuláře
+   (`$root.scrollIntoView`, block: start) a kotva „Napište mi" míří tamtéž.
+   Titulek poděkování stojí na horní hraně desky, takže bez odsazení ho
+   celý schová fixní lišta (68px) — poděkování by nikdo neviděl. Stará
+   `.contact-form__thanks` měla 40px vnitřní okraj a schovávala ho napůl.
+   Rezerva nad lištou = přesah desky `::before` (−32px od 768px). */
+#kontaktni-formular { scroll-margin-top: calc(68px + 2.5rem); }
+
+/* Validace. Homepage ukazuje chyby až po
+   reloadu ze serveru, /kontakt inline přes Alpine (OND-256/1) — a to
+   potřebuje červený rámeček u pole. Totéž, co dělalo
+   `.form-group input[aria-invalid]` v app.css; `:not(:focus)` schválně,
+   při psaní má přednost acid rámeček. */
+.pd-field input[aria-invalid="true"]:not(:focus),
+.pd-field textarea[aria-invalid="true"]:not(:focus) { border-color: #FF6157; }
+
+/* Přílohy a souhlas. Obě komponenty jsou
+   sdílené Blade komponenty (`x-form.file-drop`, `.form-group--checkbox`)
+   a jejich markup se NEMĚNÍ — přebarvují se jen uvnitř desky. Slovník ACID:
+   žádné zaoblení, žádná šedá výplň, acid jen při najetí. */
+.pd-form__panel .form-file-wrapper { margin: var(--space-5) 0 0; }
+.pd-form__panel .form-file,
+.pd-form__panel .form-file__trigger,
+.pd-form__panel .form-file__list-item {
+    border-radius: 0;
+    border: 1px dashed var(--color-border-soft);
+    background: transparent;
+}
+.pd-form__panel .form-file__trigger,
+.pd-form__panel .form-file__list-item { border-style: solid; }
+.pd-form__panel .form-file__trigger { color: var(--color-fg-primary); }
+.pd-form__panel .form-file:hover,
+.pd-form__panel .form-file.is-drag-over,
+.pd-form__panel .form-file__trigger:hover {
+    border-color: var(--pd-accent);
+    background: transparent;
+}
+.pd-form__panel .form-file__trigger:hover { color: var(--pd-accent); }
+.pd-form__panel .form-group--checkbox { margin: var(--space-5) 0 0; }
+.pd-form__panel .form-group--checkbox input { accent-color: var(--pd-accent); }
+.pd-form__panel .form-group--checkbox a {
+    color: var(--color-fg-muted);
+    text-decoration-color: var(--pd-accent);
+    text-underline-offset: 3px;
+}
+.pd-form__panel .form-group--checkbox a:hover { color: var(--pd-accent); }
+.pd-form__panel .pd-alert { margin: var(--space-5) 0 0; }
