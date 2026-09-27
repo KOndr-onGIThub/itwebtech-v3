@@ -1,44 +1,29 @@
 @props(['translation'])
 
+{{-- OND-402 — text případovky. Perex větším písmem (`.pd-story__intro`),
+     pak Výzva / Řešení / Výsledek jako tři kapitoly: nadpis h2 v sazbě
+     `.pd-step__title`, text v sazbě `.pd-step__text` (62 ch). Žádná
+     zlatá svislá čárka před nadpisem — kapitolu otevírá nadpis a mezera. --}}
 @php
     /** @var \App\Models\Portfolio\PortfolioProjectTranslation|null $translation */
-    $hasAny = $translation && (
-        filled($translation->description) ||
-        filled($translation->challenge) ||
-        filled($translation->solution) ||
-        filled($translation->result)
-    );
+    $chapters = array_filter([
+        'challenge' => $translation?->challenge,
+        'solution'  => $translation?->solution,
+        'result'    => $translation?->result,
+    ], 'filled');
 @endphp
 
-<div class="portfolio-detail-body">
-    @if ($translation?->description)
-        <div class="portfolio-detail-body__intro">
-            {!! nl2br(e($translation->description)) !!}
-        </div>
-    @endif
+@if (filled($translation?->description))
+    <p class="pd-story__intro">{!! nl2br(e($translation->description)) !!}</p>
+@endif
 
-    @if ($translation?->challenge)
-        <section class="portfolio-detail-body__section">
-            <h2>{{ __('projects.detail.challenge') }}</h2>
-            <div>{!! nl2br(e($translation->challenge)) !!}</div>
-        </section>
-    @endif
+@foreach ($chapters as $key => $text)
+    <div class="pd-story__chapter">
+        <h2 class="pd-step__title">{{ __('projects.detail.' . $key) }}</h2>
+        <p class="pd-step__text">{!! nl2br(e($text)) !!}</p>
+    </div>
+@endforeach
 
-    @if ($translation?->solution)
-        <section class="portfolio-detail-body__section">
-            <h2>{{ __('projects.detail.solution') }}</h2>
-            <div>{!! nl2br(e($translation->solution)) !!}</div>
-        </section>
-    @endif
-
-    @if ($translation?->result)
-        <section class="portfolio-detail-body__section">
-            <h2>{{ __('projects.detail.result') }}</h2>
-            <div>{!! nl2br(e($translation->result)) !!}</div>
-        </section>
-    @endif
-
-    @if (! $hasAny)
-        <p class="portfolio-detail-body__empty">{{ __('projects.detail.no_content') }}</p>
-    @endif
-</div>
+@if (blank($translation?->description) && ! $chapters)
+    <p class="pd-step__text">{{ __('projects.detail.no_content') }}</p>
+@endif

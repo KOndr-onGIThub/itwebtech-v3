@@ -4,6 +4,11 @@
 ])
 
 {{--
+    OND-402 — galerie ve slovníku ACID: `.pd-gallery`. Logika rolí (OND-202,
+    OND-265, OND-268) je BEZE ZMĚNY, mění se jen třídy a sazba: rám 1 px
+    `--color-border-soft` jako `.pd-case__visual` na homepage, žádné
+    zaoblení, žádná šedá deska. Rám nese `__frame`, popisek stojí pod ním.
+
     OND-202 (kurátorský layout po 2× zamítnuté kartě boardem):
 
     Každý snímek má roli určenou z poměru stran (screenshot_gallery_role):
@@ -53,17 +58,19 @@
 @endphp
 
 @if (in_array($part, ['lead', 'all']) && $lead)
-<section class="portfolio-detail-gallery portfolio-detail-gallery--lead section-wrapper" data-reveal>
+<section class="pd-section pd-gallery pd-gallery--lead" data-pdd="project-lead">
     <div class="container-site">
-        <figure class="portfolio-detail-gallery__band">
-            <x-portfolio.screenshot
-                :path="$lead->path"
-                :alt="$lead->translation()?->alt ?? ''"
-                sizes="(max-width: 1024px) 100vw, 1100px"
-                loading="eager"
-                fetchpriority="high"
-                :lightbox-gallery="'portfolio-screenshots'"
-            />
+        <figure class="pd-gallery__band">
+            <div class="pd-gallery__frame">
+                <x-portfolio.screenshot
+                    :path="$lead->path"
+                    :alt="$lead->translation()?->alt ?? ''"
+                    sizes="(max-width: 1024px) 100vw, 1216px"
+                    loading="eager"
+                    fetchpriority="high"
+                    :lightbox-gallery="'portfolio-screenshots'"
+                />
+            </div>
             @if ($lead->translation()?->caption)
                 <figcaption>{{ $lead->translation()->caption }}</figcaption>
             @endif
@@ -73,46 +80,47 @@
 @endif
 
 @if (in_array($part, ['rest', 'all']) && count($blocks))
-<section class="portfolio-detail-gallery section-wrapper" data-reveal>
+<section class="pd-section pd-gallery" data-pdd="project-gallery">
     <div class="container-site">
         @foreach ($blocks as $block)
             @if ($block['type'] === 'band')
-                <figure class="portfolio-detail-gallery__band">
-                    <x-portfolio.screenshot
-                        :path="$block['shot']->path"
-                        :alt="$block['shot']->translation()?->alt ?? ''"
-                        sizes="(max-width: 1024px) 100vw, 1100px"
-                        loading="lazy"
-                        :lightbox-gallery="'portfolio-screenshots'"
-                    />
+                <figure class="pd-gallery__band">
+                    <div class="pd-gallery__frame">
+                        <x-portfolio.screenshot
+                            :path="$block['shot']->path"
+                            :alt="$block['shot']->translation()?->alt ?? ''"
+                            sizes="(max-width: 1024px) 100vw, 1216px"
+                            loading="lazy"
+                            :lightbox-gallery="'portfolio-screenshots'"
+                        />
+                    </div>
                     @if ($block['shot']->translation()?->caption)
                         <figcaption>{{ $block['shot']->translation()->caption }}</figcaption>
                     @endif
                 </figure>
             @else
-                <div class="portfolio-detail-gallery__grid" data-reveal-group>
+                <div class="pd-gallery__grid">
                     @foreach ($block['items'] as $i => $shot)
                         @php
                             // OND-265: lichý počet dlaždic nechával v mřížce
-                            // prázdnou pravou buňku („černá díra", nález OND-254).
-                            // Poslední osamocená dlaždice proto jde přes obě
-                            // buňky: široký snímek v přirozeném poměru jako band,
-                            // čtvercový vycentrovaný v původní velikosti.
+                            // prázdnou pravou buňku. Poslední osamocená dlaždice
+                            // proto jde přes obě buňky: široký snímek jako band,
+                            // čtvercový vycentrovaný v šířce jedné buňky.
                             $isAlone = $i === count($block['items']) - 1 && $i % 2 === 0;
                             $ratio   = screenshot_tile_ratio($shot->path);
-                            $classes = 'portfolio-detail-gallery__item';
+                            $classes = 'pd-gallery__item';
                             if ($isAlone) {
                                 $classes .= $ratio >= 1.2
-                                    ? ' portfolio-detail-gallery__item--alone-band'
-                                    : ' portfolio-detail-gallery__item--alone';
+                                    ? ' pd-gallery__item--alone-band'
+                                    : ' pd-gallery__item--alone';
                             }
                         @endphp
                         <figure class="{{ $classes }}" style="--shot-ratio: {{ $ratio }}">
-                            <div class="portfolio-detail-gallery__frame">
+                            <div class="pd-gallery__frame">
                                 <x-portfolio.screenshot
                                     :path="$shot->path"
                                     :alt="$shot->translation()?->alt ?? ''"
-                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 540px"
+                                    sizes="(max-width: 639px) 100vw, (max-width: 1024px) 50vw, 592px"
                                     loading="lazy"
                                     :lightbox-gallery="'portfolio-screenshots'"
                                 />

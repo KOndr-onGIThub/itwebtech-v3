@@ -1,76 +1,39 @@
 @props(['project'])
 
+{{-- OND-402 — údaje o projektu jako `.pd-facts` (z /kontakt; základ OND-379
+     ji sem předurčil). Bez rámečku, bez pilulek: popisek nad hodnotou.
+     Kategorie a rok jsou v nadřádku hlavy a živý web v její akci, tady by
+     byly podruhé. Technologie jsou řádek textu, ne pilulky: sedm rámečků
+     o ničem neinformuje víc než čárka. --}}
 @php
     /** @var \App\Models\Portfolio\PortfolioProject $project */
     $locale = app()->getLocale();
-
-    $categoryLabel = __('projects.detail.category_label.' . $project->category);
-    if (str_starts_with($categoryLabel, 'projects.detail.category_label.')) {
-        $categoryLabel = ucfirst($project->category);
-    }
-
-    // OND-267: `duration` je jedna hodnota pro všechny jazyky, překlad proto
-    // jde přes lang slovník (fallback na syrovou hodnotu je v modelu).
+    // OND-267: `duration` je jedna hodnota pro všechny jazyky, překlad jde
+    // přes lang slovník (fallback na syrovou hodnotu je v modelu).
     $durationLabel = $project->durationLabel($locale);
-
-    $liveHost = null;
-    if ($project->live_url) {
-        $liveHost = parse_url($project->live_url, PHP_URL_HOST) ?? $project->live_url;
-        $liveHost = preg_replace('#^www\.#', '', $liveHost);
-    }
+    $tags = ($project->tags ?? collect())
+        ->map(fn ($tag) => $tag->translation($locale)?->name ?? $tag->slug)
+        ->filter();
 @endphp
 
-<aside class="portfolio-detail-meta">
-    <dl class="portfolio-detail-meta__list">
+<aside class="pd-story__facts">
+    <dl class="pd-facts">
         @if ($project->client_name)
-            <div class="portfolio-detail-meta__row">
+            <div>
                 <dt>{{ __('projects.detail.meta.client') }}</dt>
                 <dd>{{ $project->client_name }}</dd>
             </div>
         @endif
-
-        @if ($project->year)
-            <div class="portfolio-detail-meta__row">
-                <dt>{{ __('projects.detail.meta.year') }}</dt>
-                <dd>{{ $project->year }}</dd>
-            </div>
-        @endif
-
         @if ($durationLabel)
-            <div class="portfolio-detail-meta__row">
+            <div>
                 <dt>{{ __('projects.detail.meta.duration') }}</dt>
                 <dd>{{ $durationLabel }}</dd>
             </div>
         @endif
-
-        <div class="portfolio-detail-meta__row">
-            <dt>{{ __('projects.detail.meta.category') }}</dt>
-            <dd>{{ $categoryLabel }}</dd>
-        </div>
-
-        @if ($project->live_url)
-            <div class="portfolio-detail-meta__row">
-                <dt>{{ __('projects.detail.meta.live_url') }}</dt>
-                <dd>
-                    <a href="{{ $project->live_url }}" target="_blank" rel="noopener">
-                        {{ $liveHost }}
-                        <x-icon.arrow-right class="w-3 h-3 shrink-0 -rotate-45 inline-block align-middle" />
-                    </a>
-                </dd>
-            </div>
-        @endif
-
-        @if ($project->tags && $project->tags->count())
-            <div class="portfolio-detail-meta__row portfolio-detail-meta__row--tags">
+        @if ($tags->isNotEmpty())
+            <div>
                 <dt>{{ __('projects.detail.meta.tags') }}</dt>
-                <dd>
-                    <ul class="portfolio-detail-meta__tags">
-                        @foreach ($project->tags as $tag)
-                            @php $tagName = $tag->translation($locale)?->name ?? $tag->slug; @endphp
-                            <li>{{ $tagName }}</li>
-                        @endforeach
-                    </ul>
-                </dd>
+                <dd>{{ $tags->implode(', ') }}</dd>
             </div>
         @endif
     </dl>
