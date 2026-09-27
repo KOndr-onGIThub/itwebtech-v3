@@ -57,6 +57,52 @@ class RobotsTest extends TestCase
     }
 
     /**
+     * OND-384: routa `/robots.txt` existovala od OND-85, ale na produkci nikdy
+     * neběžela — vedle ní žil statický `public/robots.txt` a nginx statiku
+     * servíruje dřív, než request dojde do `index.php`. Živý web proto dál
+     * inzeroval hardcodovanou `Sitemap: https://ondraweb.cz/sitemap.xml`
+     * (dnes Framer, cizí web), zatímco testy nad HTTP kernelem svítily zeleně.
+     *
+     * Tenhle test je jediná pojistka, kterou test suite proti té konstelaci má:
+     * hlídá, že soubor nezmrtvolní routu znovu. Nemazat.
+     */
+    public function test_no_static_robots_txt_shadows_the_route(): void
+    {
+        $this->assertFileDoesNotExist(
+            public_path('robots.txt'),
+            'public/robots.txt by nginx přebil routu robots → Sitemap by se zafixovala na jednu doménu. '
+            .'Obsah patří do RobotsController, ne do statického souboru.'
+        );
+    }
+
+    /**
+     * OND-384: obsah statického souboru se přestěhoval do controlleru, takže
+     * `Disallow: /admin` musí přežít i po jeho smazání.
+     */
+    public function test_robots_txt_blocks_admin_panel(): void
+    {
+        $body = $this->get('/robots.txt')->assertOk()->getContent();
+
+        $this->assertStringContainsString('Disallow: /admin', $body);
+    }
+
+    /**
+     * OND-384: jádro opravy — `Sitemap:` se bere z aktuálního hostu, takže po
+     * cutoveru na ondraweb.cz se přepne sám. Žádná doména natvrdo.
+     */
+    public function test_robots_txt_sitemap_follows_the_request_host(): void
+    {
+        $body = $this->get('https://itwebtech.ondrejkriska.cz/robots.txt')
+            ->assertOk()
+            ->getContent();
+
+        $this->assertStringContainsString(
+            'Sitemap: https://itwebtech.ondrejkriska.cz/sitemap.xml',
+            $body
+        );
+    }
+
+    /**
      * OND-342: `<meta name="robots">` byl do OND-306 přepisovatelný z view
      * (proměnná `$robots`) kvůli `noindex` na zmrazené staré homepage. Ta
      * stránka je pryč, mechanika taky a hodnota je zpátky natvrdo. Tenhle
