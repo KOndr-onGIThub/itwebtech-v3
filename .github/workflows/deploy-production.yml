@@ -1,0 +1,207 @@
+# OND-459: nasazení produkce (ondraweb.cz + itwebtech.cz) na hosting Webglobe.
+#
+# Spouští se samo po každém sloučení do `main`. Ručně jde spustit v záložce
+# Actions → „Nasazení produkce (Webglobe)“ → Run workflow, buď jako běžné
+# nasazení, nebo jako návrat na předchozí verzi. Návod: docs/deploy-production.md.
+#
+# Build běží tady na runneru, na server jde hotová aplikace do nového
+# adresáře releases/<id>. Migrace, seedery, optimize a zkouška stránek
+# proběhnou v novém release a web se přepne až potom
+# (scripts/deploy/remote-deploy.sh). Když cokoli selže, běží dál předchozí verze.
+
+name: Nasazení produkce (Webglobe)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      action:
+        description: Co udělat
+        type: choice
+        options:
+          - deploy
+          - rollback
+        default: deploy
+
+# Dvě nasazení nikdy neběží přes sebe. Další počká, až doběhne předchozí.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  APP_DIR: ${{ vars.WEBGLOBE_APP_DIR || 'ondraweb' }}
+  WEB_ROOT: ${{ vars.WEBGLOBE_WEB_ROOT || 'www' }}
+  PHP_BIN: ${{ vars.WEBGLOBE_PHP_BIN || 'php8.4' }}
+  KEEP_RELEASES: '5'
+
+jobs:
+  deploy:
+    name: ${{ inputs.action == 'rollback' && 'Návrat na předchozí verzi' || 'Build a nasazení' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      MODE: ${{ inputs.action || 'deploy' }}
+      SSH_HOST: ${{ secrets.WEBGLOBE_SSH_HOST }}
+      SSH_USER: ${{ secrets.WEBGLOBE_SSH_USER }}
+      SSH_PORT: ${{ secrets.WEBGLOBE_SSH_PORT || '22' }}
+      SSH_KEY: ${{ secrets.WEBGLOBE_SSH_KEY }}
+      SSHPASS: ${{ secrets.WEBGLOBE_SSH_PASSWORD }}
+      SSH_KNOWN_HOSTS: ${{ secrets.WEBGLOBE_SSH_KNOWN_HOSTS }}
+
+    steps:
+      - name: Kontrola nastavení (GitHub Secrets)
+        run: |
+          missing=""
+          [ -n "$SSH_HOST" ] || missing="$missing WEBGLOBE_SSH_HOST"
+          [ -n "$SSH_USER" ] || missing="$missing WEBGLOBE_SSH_USER"
+          [ -n "$SSH_KEY$SSHPASS" ] || missing="$missing WEBGLOBE_SSH_PASSWORD(nebo WEBGLOBE_SSH_KEY)"
+          if [ -n "$missing" ]; then
+            echo "::error::Chybí GitHub Secrets:$missing. Doplň je podle docs/deploy-production.md (Settings → Secrets and variables → Actions)."
+            exit 1
+          fi
+
+      - name: Stažení kódu
+        if: env.MODE == 'deploy'
+        uses: actions/checkout@v4
+
+      - name: PHP 8.4 + Composer
+        if: env.MODE == 'deploy'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, intl, gd, zip, bcmath, exif, pdo_mysql
+          tools: composer:v2
+          coverage: none
+
+      - name: Composer závislosti (bez dev)
+        if: env.MODE == 'deploy'
+        run: composer install --no-dev --optimize-autoloader --prefer-dist --no-interaction --no-progress
+
+      - name: Node 22
+        if: env.MODE == 'deploy'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Build CSS a JS (Vite)
+        if: env.MODE == 'deploy'
+        run: |
+          # --include=dev: Vite a Tailwind jsou v devDependencies. Při
+          # NODE_ENV=production by je `npm ci` jinak tiše vynechal.
+          npm ci --include=dev --no-audit --no-fund
+          npm run build
+          test -f public/build/manifest.json || { echo "::error::Build nevytvořil public/build/manifest.json."; exit 1; }
+
+      - name: Připojení k serveru
+        run: |
+          mkdir -p ~/.ssh ~/bin
+          chmod 700 ~/.ssh
+          {
+            echo "Host webglobe"
+            echo "  HostName $SSH_HOST"
+            echo "  User $SSH_USER"
+            echo "  Port $SSH_PORT"
+            echo "  ConnectTimeout 20"
+            echo "  ServerAliveInterval 30"
+          } > ~/.ssh/config
+
+          if [ -n "$SSH_KNOWN_HOSTS" ]; then
+            printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+            echo "  StrictHostKeyChecking yes" >> ~/.ssh/config
+          else
+            echo "  StrictHostKeyChecking accept-new" >> ~/.ssh/config
+          fi
+
+          if [ -n "$SSH_KEY" ]; then
+            printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+            chmod 600 ~/.ssh/deploy_key
+            { echo "  IdentityFile ~/.ssh/deploy_key"; echo "  IdentitiesOnly yes"; } >> ~/.ssh/config
+            printf '#!/bin/sh\nexec ssh "$@"\n' > ~/bin/wssh
+          else
+            sudo apt-get install -y -qq sshpass >/dev/null
+            { echo "  PreferredAuthentications password,keyboard-interactive"; echo "  PubkeyAuthentication no"; } >> ~/.ssh/config
+            # Heslo čte sshpass z proměnné SSHPASS, do příkazové řádky se nedostane.
+            printf '#!/bin/sh\nexec sshpass -e ssh "$@"\n' > ~/bin/wssh
+          fi
+          chmod 700 ~/bin/wssh
+          echo "$HOME/bin" >> "$GITHUB_PATH"
+
+          # shellcheck disable=SC2016 # $(…) a $HOME se mají rozvinout až na serveru
+          if ! ~/bin/wssh webglobe 'echo "Připojeno jako $(whoami) na $(hostname), domovský adresář $HOME"'; then
+            echo "::error::Nepodařilo se připojit přes SSH na $SSH_HOST:$SSH_PORT jako $SSH_USER. Zkontroluj v administraci Webglobe, že je SSH zapnuté, heslo/klíč sedí a IP ochrana (GeoIP) nepovoluje jen Česko. Viz docs/deploy-production.md."
+            exit 1
+          fi
+
+      - name: Produkční .env (ze Secretu PRODUCTION_ENV)
+        if: env.MODE == 'deploy'
+        env:
+          PRODUCTION_ENV: ${{ secrets.PRODUCTION_ENV }}
+        run: |
+          if [ -z "$PRODUCTION_ENV" ]; then
+            echo "Secret PRODUCTION_ENV je prázdný, na serveru zůstává stávající $APP_DIR/shared/.env."
+            exit 0
+          fi
+          printf '%s\n' "$PRODUCTION_ENV" | wssh webglobe \
+            "umask 077 && mkdir -p '$APP_DIR/shared' && cat > '$APP_DIR/shared/.env.new' && mv -f '$APP_DIR/shared/.env.new' '$APP_DIR/shared/.env'"
+          echo ".env nahrán do $APP_DIR/shared/.env"
+
+      - name: Nahrání nového release
+        if: env.MODE == 'deploy'
+        run: |
+          RELEASE="$(date -u +%Y%m%d%H%M%S)-${GITHUB_SHA::7}"
+          echo "RELEASE=$RELEASE" >> "$GITHUB_ENV"
+          DEST="$APP_DIR/releases/$RELEASE"
+          wssh webglobe "mkdir -p '$DEST'"
+
+          # Co na server nejde: sdílené věci (storage, .env), vývojářské
+          # soubory a node_modules (build už je v public/build).
+          cat > /tmp/deploy-exclude <<'EOF'
+          /.git/
+          /.github/
+          /.devcontainer/
+          /node_modules/
+          /tests/
+          /reference/
+          /storage/
+          /.env
+          /.env.*
+          /public/storage
+          /public/hot
+          /.phpunit.cache/
+          EOF
+          sed -i 's/^ *//' /tmp/deploy-exclude
+
+          if wssh webglobe 'command -v rsync >/dev/null'; then
+            # --link-dest: soubory beze změny proti běžící verzi se na serveru
+            # jen nalinkují, nepřenášejí se ani nezabírají místo navíc.
+            rsync -a --stats --exclude-from=/tmp/deploy-exclude \
+              --link-dest=../../current/ -e wssh ./ "webglobe:$DEST/"
+          else
+            echo "rsync na serveru není, posílám přes tar."
+            # `./` na začátku = jen v kořeni projektu, ne třeba vendor/*/tests.
+            sed 's#^/#./#; s#/$##' /tmp/deploy-exclude > /tmp/deploy-exclude-tar
+            tar -czf - --exclude-from=/tmp/deploy-exclude-tar . \
+              | wssh webglobe "tar -xzf - -C '$DEST'"
+          fi
+
+      - name: Migrace, optimize, zkouška a přepnutí webu
+        if: env.MODE == 'deploy'
+        run: |
+          wssh webglobe "APP_DIR='$APP_DIR' WEB_ROOT='$WEB_ROOT' PHP_BIN='$PHP_BIN' KEEP_RELEASES='$KEEP_RELEASES' RELEASE='$RELEASE' \
+            bash '$APP_DIR/releases/$RELEASE/scripts/deploy/remote-deploy.sh' deploy"
+          {
+            echo "### Nasazeno"
+            echo "- release: \`$RELEASE\` (commit \`${GITHUB_SHA::7}\`)"
+            echo "- návrat zpět: Actions → Nasazení produkce (Webglobe) → Run workflow → \`rollback\`"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Návrat na předchozí verzi
+        if: env.MODE == 'rollback'
+        run: |
+          wssh webglobe "APP_DIR='$APP_DIR' bash '$APP_DIR/current/scripts/deploy/remote-deploy.sh' rollback"
+          echo "### Web vrácen na předchozí release" >> "$GITHUB_STEP_SUMMARY"

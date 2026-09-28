@@ -5,6 +5,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\RobotsController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Middleware\SetLocale;
+use App\Support\LegacyProjectRedirect;
 use Illuminate\Support\Facades\Route;
 
 require __DIR__.'/landing.php';
@@ -112,15 +113,8 @@ Route::get('/privacy-policy', fn() => redirect('/zasady-ochrany-osobnich-udaju',
 Route::get('/projects',       fn() => redirect('/projekty', 301));
 // OND-455: staré slugy z itwebtech.cz rovnou na dnešní případovku (jeden skok),
 // mapa v config/redirects.php. Neznámý slug jde dál na `/projekty/{slug}`.
-Route::get('/projects/{any}', function (string $any) {
-    $map = config('redirects.project_slugs');
-
-    if (! array_key_exists($any, $map)) {
-        return redirect('/projekty/' . $any, 301);
-    }
-
-    return redirect($map[$any] === null ? lroute('projects', 'cs') : route('cs.project', ['url' => $map[$any]]), 301);
-})->where('any', '.*');
+Route::get('/projects/{any}', fn(string $any) => LegacyProjectRedirect::for($any, 'cs')
+    ?? redirect('/projekty/' . $any, 301))->where('any', '.*');
 
 // OND-455: `/sluzby` z Framer sitemapy ondraweb.cz — samostatná stránka
 // služeb už není, služby jsou sekce na homepage.

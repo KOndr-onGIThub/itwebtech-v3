@@ -214,6 +214,14 @@ class PortfolioTest extends TestCase
     public function test_unpublished_project_detail_returns_404(string $slug, array $urls): void
     {
         foreach ($urls as $url) {
+            // OND-455: slug ze staré sitemapy jde do publikace dočasně (302)
+            // na výpis — Google ho zná, 404 tam být nesmí.
+            if (array_key_exists(basename($url), config('redirects.project_slugs'))) {
+                $this->get($url)->assertStatus(302);
+
+                continue;
+            }
+
             $this->get($url)->assertNotFound();
         }
     }

@@ -28,8 +28,12 @@ return [
     'legacy_hosts' => $csv((string) env('LEGACY_HOSTS', 'itwebtech.cz,www.itwebtech.cz,www.ondraweb.cz')),
 
     /*
-    | Staré slugy případovek → dnešní slug v `portfolio_projects.slug`.
-    | `null` = případovka na novém webu není, cíl je výpis `/projekty`.
+    | Staré slugy případovek → zamýšlený slug v `portfolio_projects.slug`.
+    | Pole = pořadí kandidátů: první publikovaný vyhrává. 301 jen na první
+    | (zamýšlený) cíl, na náhradu nebo na výpis `/projekty` jde dočasné 302.
+    | Když Ondřej případovku doplní a publikuje pod uvedeným slugem,
+    | přesměrování se přepne samo. Jiný slug = změnit tady jeden řádek.
+    | Viz App\Support\LegacyProjectRedirect.
     | Zdroj: sitemapy `itwebtech.cz` a `ondraweb.cz` + navigace starého webu,
     | slugy ověřené proti produkční DB 28. 9. 2026.
     */
@@ -41,13 +45,12 @@ return [
         'strechyzajic'             => 'strechy-zajic',
         'vpindustry'               => 'vp-industry',
         'pitarena-reklamni-cedule' => 'pitarena-cedule',
-        // Video k akademii (`video-pitbike-akademie`) není publikované.
-        'pitarena-akademie-202308' => 'pitarena',
-        // Nepublikované případovky.
-        'logo-realitacky'          => null,
-        'delejme-animace'          => null,
-        // ondraweb.cz/projekty/{slug}
-        'zoomorava'                => null,
+        // Dnes nepublikované (28. 9.) — do publikace 302 na náhradu/výpis.
+        'pitarena-akademie-202308' => ['video-pitbike-akademie', 'pitarena'],
+        'logo-realitacky'          => 'logo-realitacky',
+        'delejme-animace'          => 'animace-delejme',
+        // ondraweb.cz/projekty/{slug} — případovka zatím na novém webu není.
+        'zoomorava'                => 'zoomorava',
     ],
 
 ];

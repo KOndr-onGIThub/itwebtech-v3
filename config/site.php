@@ -14,6 +14,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Vyřazení z vyhledávačů (OND-459)
+    |--------------------------------------------------------------------------
+    | Testovací web (`itwebtech.ondrejkriska.cz`) nesmí jít do Googlu, jakmile
+    | běží ostrý web na ondraweb.cz. SEO_NOINDEX=true → robots.txt zakáže vše,
+    | každá odpověď dostane `X-Robots-Tag: noindex, nofollow` a meta robots
+    | se přepne na noindex. Na produkci nenastavovat.
+    */
+    'noindex' => (bool) env('SEO_NOINDEX', false),
+
+    /*
+    |--------------------------------------------------------------------------
     | Feature flags
     |--------------------------------------------------------------------------
     | Per OND-100: portfolio section on homepage stays hidden until 3 real
