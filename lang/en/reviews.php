@@ -6,12 +6,12 @@ return [
 
     'meta' => [
         'title'       => 'Reviews — Ondřej Kriška, ONDRAWEB',
-        'description' => 'Rated 5.0 from 26 ratings on Google and Firmy.cz. Every client review in one place, each with a link to the original.',
+        'description' => 'Rated 5.0 from 26 ratings on Google and Firmy.cz. What clients wrote about working together, every review with a link to the original.',
     ],
 
     'eyebrow'      => 'Reviews',
     'heading_html' => '5.0 from <em>26 ratings</em> on Google and Firmy.cz',
-    'intro'        => 'Every review in one place, each with a link to the original.',
+    'intro'        => 'What clients wrote about working together. Every review links to the original.',
 
     'profiles' => [
         'google'   => 'Google · :count ratings',

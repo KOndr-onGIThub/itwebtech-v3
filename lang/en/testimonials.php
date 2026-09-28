@@ -10,11 +10,15 @@
 // a musí být ve všech třech souborech stejná (hlídá Ond397ReviewsPageTest).
 // Pořadí položek: Holcmann musí zůstat před YCF CUP (oba `pitarena`).
 // Seskupení na /recenze je v config/reviews.php, ne tady.
+// OND-444 (B-10): `also` = tentýž člověk hodnotil i na druhé platformě.
+// Položka bez `text` = jen druhý odkaz na originál pod citátem; s `text`
+// = vlastní citát (Antoš má na Firmy.cz jiný text) se svým odkazem, sází
+// se nad hlavní citát (je novější). `source` a `url` se nepřekládají.
 
 return [
 
     'meta' => [
-        'total'  => 22,
+        'total'  => 23,
         'rating' => '5 z 5',
     ],
 
@@ -40,6 +44,9 @@ return [
             'source'   => 'google',
             'url'      => 'https://www.google.com/maps/contrib/106421265514180487960/reviews',
             'text'     => 'I would definitely recommend Ondřej Kriška for his inventive, fresh way of working, which goes hand in hand with a flexible and professional attitude towards the customer.',
+            'also'     => [
+                ['source' => 'firmy_cz', 'url' => 'https://www.firmy.cz/detail/13470851-profesionalni-webove-stranky-a-aplikace-ondrej-kriska-brezi.html#hodnoceni'],
+            ],
         ],
         [
             'id'       => 'michal-cvrcek',
@@ -111,6 +118,9 @@ return [
             'url'      => 'https://www.google.com/maps/contrib/106027346110288038103/reviews',
             'project'  => 'barana',
             'text'     => 'This was the second time I\'ve worked with Ondra, and once again I\'m completely satisfied. Quick communication, everything makes sense, and the result exceeded my expectations again. I can recommend him.',
+            'also'     => [
+                ['source' => 'firmy_cz', 'url' => 'https://www.firmy.cz/detail/13470851-profesionalni-webove-stranky-a-aplikace-ondrej-kriska-brezi.html#hodnoceni'],
+            ],
         ],
         [
             'id'       => 'hana-jaskmanicka',
@@ -241,6 +251,9 @@ return [
             'url'      => 'https://www.google.com/maps/contrib/103886395370685308662/reviews',
             'project'  => 'nove-interiery',
             'text'     => 'I can only recommend Mr Kriška. Ondra really will build you a website, and believe me, working with him is an investment that pays off. This isn\'t one of those cases where would-be web designers just fill a template with your content and charge an outrageous price for it.',
+            'also'     => [
+                ['source' => 'firmy_cz', 'url' => 'https://www.firmy.cz/detail/13470851-profesionalni-webove-stranky-a-aplikace-ondrej-kriska-brezi.html#hodnoceni'],
+            ],
         ],
         [
             'id'       => 'petr-knourek',
@@ -264,6 +277,24 @@ return [
             'source'   => 'google',
             'url'      => 'https://www.google.com/maps/contrib/110948210586387826476/reviews',
             'text'     => 'Very accommodating and professional. I can only recommend him.',
+            'also'     => [
+                [
+                    'source' => 'firmy_cz',
+                    'url'    => 'https://www.firmy.cz/detail/13470851-profesionalni-webove-stranky-a-aplikace-ondrej-kriska-brezi.html#hodnoceni',
+                    'text'   => 'A very professional and at the same time personal approach.',
+                ],
+            ],
+        ],
+        [
+            'id'       => 'radka-podana',
+            'name'     => 'Radka Podaná',
+            'company'  => '',
+            'role'     => '',
+            'image'    => null,
+            'initials' => 'RP',
+            'source'   => 'facebook',
+            'url'      => 'https://www.facebook.com/ondraweb/reviews',
+            'text'     => '100% reliable.',
         ],
         [
             'id'       => 'ycf-cup',

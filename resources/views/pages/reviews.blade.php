@@ -21,9 +21,11 @@
      jedna výzva.
 
      Číslo v H1 je totéž jako v pruhu na homepage (26 hodnocení
-     na Googlu a Firmy.cz). Kartiček je 21 (22 lidí) a to je
-     správně: čtyři lidé hodnotili na obou platformách, Veselá je
-     z Facebooku. Počet kartiček se proto na stránce nepíše.
+     na Googlu a Firmy.cz). Kartiček je 22 (23 lidí) a to je
+     správně: čtyři lidé hodnotili na obou platformách, Veselá
+     a Podaná jsou z Facebooku. Počet kartiček se proto na stránce
+     nepíše. Kdo hodnotil na obou platformách, má na kartičce oba
+     odkazy na originál (OND-444, B-10).
 
      Žádné `AggregateRating` ani `Review` v JSON-LD: recenze, které
      firma publikuje o sobě, Google ve výsledcích nezobrazí.
@@ -63,15 +65,29 @@
             <h2 class="pd-subsection__title">{{ __('reviews.groups.' . $groupKey) }}</h2>
             <div class="pd-testi">
                 @foreach ($cards as $people)
-                @php $lead = $people[0]; @endphp
+                @php
+                    $lead = $people[0];
+                    // OND-444 (B-10): `also` = tentýž člověk i na druhé platformě.
+                    // Bez textu jen přidá odkaz pod hlavní citát, s textem je to
+                    // vlastní citát se svým odkazem — nad hlavním, je novější.
+                    $also = collect($people)->flatMap(fn ($person) => $person['also'] ?? []);
+                    $ownQuotes = $also->filter(fn ($entry) => filled($entry['text'] ?? null));
+                    $leadLinks = collect($people)->concat($also->reject(fn ($entry) => filled($entry['text'] ?? null)));
+                @endphp
                 <article class="pd-testi__item" id="{{ $lead['id'] }}">
                     @foreach ($people as $person)
                     <x-testimonial-by :person="$person" :size="56" />
                     @endforeach
+                    @foreach ($ownQuotes as $quote)
+                    <p class="pd-testi__text">{{ $quoteOpen }}{{ $quote['text'] }}{{ $quoteClose }}</p>
+                    <p class="pd-testi__links">
+                        <a class="pd-case__live" href="{{ $quote['url'] }}" target="_blank" rel="noopener">{{ __('reviews.original.' . $quote['source']) }} ↗</a>
+                    </p>
+                    @endforeach
                     <p class="pd-testi__text">{{ $quoteOpen }}{{ $lead['text'] }}{{ $quoteClose }}</p>
                     <p class="pd-testi__links">
-                        @foreach ($people as $person)
-                        <a class="pd-case__live" href="{{ $person['url'] }}" target="_blank" rel="noopener">{{ __('reviews.original.' . $person['source']) }} ↗</a>
+                        @foreach ($leadLinks as $link)
+                        <a class="pd-case__live" href="{{ $link['url'] }}" target="_blank" rel="noopener">{{ __('reviews.original.' . $link['source']) }} ↗</a>
                         @endforeach
                         @if (!empty($lead['project']) && $projects->has($lead['project']))
                         <a class="pd-case__live" href="{{ $projects[$lead['project']]->detailUrl($locale) }}">{{ __('home.portfolio.detail_cta') }} →</a>
