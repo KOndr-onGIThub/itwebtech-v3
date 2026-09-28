@@ -7,6 +7,7 @@ return [
         'contact'  => 'Contact',
         'price'    => 'Pricing',
         'projects' => 'Projects',
+        'reviews'  => 'Reviews',
         'blog'     => 'Notes',
         'about'    => 'About',
         'lang_switcher' => 'Language switcher',

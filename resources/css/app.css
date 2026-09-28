@@ -1078,7 +1078,9 @@
         align-items: center;
         gap: 0.125rem;
     }
-    @media (min-width: 1024px) {
+    /* OND-442: menu až od 1200 px — pod tím se „O mně“ / „Über mich“
+       lámalo na dva řádky (cs 1030–1060, de 1040–1140 px). */
+    @media (min-width: 1200px) {
         .navbar__nav { display: flex; }
     }
 
@@ -1161,7 +1163,7 @@
     .navbar__hamburger:hover {
         background-color: rgba(255, 255, 255, 0.06);
     }
-    @media (min-width: 1024px) {
+    @media (min-width: 1200px) {
         .navbar__hamburger { display: none; }
     }
 

@@ -184,7 +184,7 @@
         <div class="container-site footer-bar__inner">
 
             <nav class="footer-bar__nav" aria-label="{{ __('layout.footer.nav_label') }}">
-                @foreach (['home', 'projects', 'price', 'blog', 'about', 'contact'] as $footerRoute)
+                @foreach (['home', 'projects', 'reviews', 'price', 'blog', 'about', 'contact'] as $footerRoute)
                     <a href="{{ lroute($footerRoute) }}"
                        class="footer-bar__nav-link"
                        @if(current_page() === $footerRoute) aria-current="page" @endif>{{ __('layout.nav.' . $footerRoute) }}</a>

@@ -7,6 +7,7 @@ return [
         'contact'  => 'Kontakt',
         'price'    => 'Preisliste',
         'projects' => 'Projekte',
+        'reviews'  => 'Bewertungen',
         'blog'     => 'Notizen',
         'about'    => 'Über mich',
         'lang_switcher' => 'Sprachumschalter',

@@ -7,6 +7,7 @@ return [
         'contact'  => 'Kontakt',
         'price'    => 'Ceník',
         'projects' => 'Projekty',
+        'reviews'  => 'Recenze',
         'blog'     => 'Zápisky',
         'about'    => 'O mně',
         'lang_switcher' => 'Přepínač jazyků',
