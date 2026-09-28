@@ -24,6 +24,9 @@ class PortfolioProject extends Model
         'live_url',
         'year',
         'duration',
+        // OND-449: B-09 datum řádku „Stav k …“ pod výsledkem, B-07b video pod galerií.
+        'result_as_of',
+        'demo_video',
         'featured',
         'sort_order',
         'published_at',
@@ -34,6 +37,7 @@ class PortfolioProject extends Model
         'sort_order' => 'integer',
         'year' => 'integer',
         'published_at' => 'datetime',
+        'result_as_of' => 'date',
     ];
 
     public function translations(): HasMany

@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 /**
- * OND-280: Past na spamboty na všech třech veřejných formulářích.
+ * OND-280: Past na spamboty na všech veřejných formulářích.
+ * OND-448 (B-01): homepage a /kontakt mají jeden formulář (`POST /contact`,
+ * `source` home / contact), `POST /poptavka` je pryč. Zbývá landing page.
  *
  * Dvě věci, které musí platit zároveň:
  *   1. Vyplněná past = nic se neuloží, nic neodejde, ale odpověď vypadá jako
@@ -30,19 +32,7 @@ class HoneypotTest extends TestCase
             'name'    => 'Jan Novák',
             'email'   => 'jan@example.com',
             'tel'     => '+420123456789',
-            'subject' => 'Poptávka webu',
             'message' => 'Dobrý den, mám zájem o web.',
-            'gdpr'    => '1',
-        ], $overrides);
-    }
-
-    private function homePayload(array $overrides = []): array
-    {
-        return array_merge([
-            'name'    => 'Jan Novák',
-            'email'   => 'jan@example.com',
-            'phone'   => '+420123456789',
-            'message' => 'Chtěl bych web.',
         ], $overrides);
     }
 
@@ -88,26 +78,23 @@ class HoneypotTest extends TestCase
     {
         Mail::fake();
 
-        $this->post('/poptavka', $this->homePayload($this->trap()))
-            ->assertSessionHas('home_lead_success', true)
-            ->assertSessionHasNoErrors();
+        // Homepage posílá týž formulář s `source=home` — odpověď musí vypadat
+        // stejně jako skutečný úspěch, včetně potvrzení s kroky.
+        $this->postJson('/contact', $this->contactPayload($this->trap() + ['source' => 'home']))
+            ->assertOk()
+            ->assertJson(['message' => __('contact.message_success')])
+            ->assertJsonPath('confirmation', fn ($html) => str_contains($html, 'pd-done__steps'));
 
-        $this->assertDatabaseCount('landing_leads', 0);
+        $this->assertDatabaseCount('contact_submissions', 0);
         Mail::assertNothingSent();
     }
 
-    public function test_faq_form_silently_drops_bot_submission(): void
+    public function test_removed_home_endpoint_is_gone(): void
     {
-        Mail::fake();
-
-        // FAQ mikroformulář musí ohlásit úspěch na svém místě, ne na poptávce —
-        // jinak by z odpovědi šlo poznat, že request skončil jinak než obvykle.
-        $this->post('/poptavka', $this->homePayload($this->trap() + ['source' => 'home.faq']))
-            ->assertSessionHas('faq_lead_success', true)
-            ->assertSessionHas('home_lead_target', 'faq');
+        $this->post('/poptavka', ['name' => 'X', 'email' => 'x@example.com', 'message' => 'Y'])
+            ->assertStatus(405);
 
         $this->assertDatabaseCount('landing_leads', 0);
-        Mail::assertNothingSent();
     }
 
     public function test_landing_form_silently_drops_bot_submission(): void
@@ -129,11 +116,11 @@ class HoneypotTest extends TestCase
     {
         Mail::fake();
 
-        $this->post('/poptavka', $this->homePayload([Honeypot::FIELD => '']))
-            ->assertSessionHas('home_lead_success', true);
+        $this->postJson('/contact', $this->contactPayload([Honeypot::FIELD => '', 'source' => 'home']))
+            ->assertOk();
 
-        $this->assertDatabaseCount('landing_leads', 1);
-        Mail::assertSent(LeadMessage::class);
+        $this->assertDatabaseCount('contact_submissions', 1);
+        Mail::assertSent(ContactMessage::class);
     }
 
     // --- 2) Skutečné odeslání projde beze změny ---
@@ -153,17 +140,14 @@ class HoneypotTest extends TestCase
     {
         Mail::fake();
 
-        $this->post('/poptavka', $this->homePayload())
-            ->assertSessionHas('home_lead_success', true);
+        $this->postJson('/contact', $this->contactPayload(['source' => 'home']))->assertOk();
         $this->post($this->landingUrl(), $this->landingPayload())
             ->assertSessionHas('landing_lead_success', true);
 
-        $this->assertDatabaseCount('landing_leads', 2);
-        $this->assertSame(
-            ['home.inline', 'landing.website-service'],
-            LandingLead::orderBy('id')->pluck('source')->all(),
-        );
-        Mail::assertSent(LeadMessage::class, 2);
+        $this->assertSame('home', ContactSubmission::first()->source);
+        $this->assertSame(['landing.website-service'], LandingLead::pluck('source')->all());
+        Mail::assertSent(ContactMessage::class, 1);
+        Mail::assertSent(LeadMessage::class, 1);
     }
 
     // --- 3) Pole je ve stránce a je schované ---

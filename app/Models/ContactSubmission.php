@@ -24,6 +24,7 @@ class ContactSubmission extends Model
         'message',
         'attachments',
         'locale',
+        'source',
         'mail_status',
         'mail_error',
         'ip_address',

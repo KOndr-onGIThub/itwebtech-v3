@@ -92,7 +92,7 @@ return [
     // v praxi" — tři dlaždice s odkazem na živý web) je zrušený. Dvě sekce
     // projektů nad sebou říkaly totéž a BARANA i PitArena byly v obou.
     // Slito do jedné sekce `portfolio` níž, která nese titulek odsud
-    // a doplnila si odkaz na živý web (`live_cta` / `live_aria`).
+    // a doplnila si odkaz na živý web (`live_cta` / `live_aria`; OND-449 B-05: zrušeno).
 
     // OND-308: blok `problems` („Jak weby stavím" / „Čemu se tím vyhnete" /
     // „Šablona je hotová rychle") je zrušený. Sekce se definovala negací
@@ -125,16 +125,16 @@ return [
         'cta_more_slug'    => 'jak-se-pripravit-na-novy-web',
         'steps'   => [
             [
-                'heading'      => 'Konzultace',
-                'time'         => '60 min, do týdne',
-                'text'         => 'Napíšete mi přes formulář dole, co řešíte. Ozvu se nejpozději následující pracovní den a domluvíme se na hovoru nebo na schůzce. Mluvíte se mnou, ne s obchodníkem — zajímá mě, komu prodáváte, jak u vás vzniká poptávka a co má web udělat.',
+                'heading'      => 'Úvodní hovor',
+                'time'         => 'asi 15 min',
+                'text'         => 'Napíšete mi přes formulář dole, co řešíte. Ozvu se nejpozději následující pracovní den a zavolám vám. Mluvíte se mnou, ne s obchodníkem. Zjistím, co má web udělat, a řeknu vám rovnou, jestli vám umím pomoct.',
                 'quote_text'   => 'Pan Kriška opravdu naslouchal mým potřebám a následně tyto informace zpracoval až do mé úplné spokojenosti.',
                 'quote_ref'    => 'magda-pernicova',
             ],
             [
                 'heading'      => 'Specifikace',
                 'time'         => '2–5 dní',
-                'text'         => 'Dostanete písemně, co na webu bude, kolik stránek to má a kolik to bude stát. Co je ve specifikaci, to je na faktuře. Termín dodání odhaduju předem, ne zpětně.',
+                'text'         => 'Když to dává smysl, sejdeme se nad detaily: komu prodáváte, jak u vás vzniká poptávka, co má web umět. Pak dostanete písemně, co na webu bude a kolik to bude stát. Co je ve specifikaci, to je na faktuře. Termín dodání odhaduju předem, ne zpětně.',
                 'quote_text'   => 'Důsledně analyzuje stav a chce poznat současné procesy. Shromažďuje požadavky od zákazníků a zjišťuje vize pro budoucnost.',
                 'quote_ref'    => 'jan-stybor',
                 'note'         => 'Termín je odhad, ne závazek. Schvalování a podklady z vaší strany jsou součástí práce a říkám to rovnou na začátku.',
@@ -188,8 +188,6 @@ return [
         'intro'      => 'Tohle jsou živé projekty, na které se můžete podívat hned teď. U každého je i to, co klientovi přinesl.',
         'cta'        => 'Všechny projekty →',
         'detail_cta' => 'Více o projektu',
-        'live_cta'   => 'Otevřít živý web',
-        'live_aria'  => 'Otevřít web :client v novém okně',
         // OND-440: lišta rámu se záznamem živého webu. Datum patří projektu
         // (config site.live_recordings), tady je jen jeho tvar pro jazyk.
         'live' => [
@@ -202,13 +200,13 @@ return [
         'cards' => [
             'pitarena' => [
                 'client'  => 'PitArena',
-                'outcome' => 'Tréninky bývají obsazené měsíce dopředu — rezervace, vouchery i registrace běží přes web bez ručního zásahu.',
+                'outcome' => 'Přes 15 000 návštěv z Googlu za 16 měsíců a vlastní registrace na závody s platbou online.',
             ],
             'barana' => [
                 'client'  => 'BARANA',
                 // OND-198 (nález 5.5): „landing page" / „Meta Ads / Google Ads"
                 // přepsáno do řeči klienta.
-                'outcome' => 'Samostatná stránka pro placenou reklamu — návštěvník chápe nabídku bez nutnosti volat.',
+                'outcome' => 'Web, který drahou pergolu vysvětlí bez dlouhého textu: návštěvník si sám natočí lamely a projde terasu od rána do zimy.',
             ],
             'nove-interiery' => [
                 'client'  => 'Nové interiéry',
@@ -287,7 +285,7 @@ return [
         // (Ondřej 26. 9. 2026 na OND-347, znění varianta 1). Tím zmizela
         // odmítací věta „pokud hledáte web do dvaceti tisíc…" — spodní hranice
         // 20 000 Kč ji nahradila a říká totéž bez odmítnutí.
-        'intro'   => 'Většina projektů, které stavím, vychází mezi 55 a 150 tisíci korunami. Nejmenší věc, kterou beru, je prezentační web do pěti stránek od 20 000 Kč — je to menší rozsah, ne odbytá práce. Přesnou cenu dostanete písemně po konzultaci.',
+        'intro'   => 'Většina projektů, které stavím, vychází mezi 55 a 150 tisíci korunami. Nejmenší věc, kterou beru, je jednoduchý prezentační web od 20 000 Kč — je to menší rozsah, ne odbytá práce. Přesnou cenu dostanete písemně ve specifikaci.',
         // OND-354: karty nesou ROZSAH, ne cenu, a jmenují se podle toho, co
         // vzniká. „Standard / Custom / Startovní" byla jména políček v cenovém
         // menu, které tahle karta ruší; bez čísel by neznamenala nic.
@@ -297,20 +295,20 @@ return [
         'items'   => [
             [
                 'title'    => 'Prezentační web',
-                'scope'    => 'do 5 stránek',
-                'desc'     => 'Důvěryhodná online prezentace pro živnostníky a malé firmy.',
+                'scope'    => 'Aby si vás zákazník ověřil',
+                'desc'     => 'Kdo jste, co děláte, jak vás zastihnout',
                 'featured' => false,
             ],
             [
                 'title'    => 'Firemní web',
-                'scope'    => 'do 12 stránek',
-                'desc'     => 'Vícejazyčný web s blogem, měřením konverzí a rezervačním systémem.',
+                'scope'    => 'Aby zákazník pochopil, proč právě vy',
+                'desc'     => 'Víc služeb, víc jazyků, reference i blog',
                 'featured' => true,
             ],
             [
-                'title'    => 'Na míru',
-                'scope'    => 'bez omezení rozsahu',
-                'desc'     => 'E-shop, webová aplikace nebo komplexní portál.',
+                'title'    => 'E-shop a aplikace',
+                'scope'    => 'Aby systém pracoval za vás',
+                'desc'     => 'E-shop, rezervace, napojení na vaše systémy',
                 'featured' => false,
             ],
         ],
@@ -388,7 +386,7 @@ return [
                 'key'      => 'duration',
                 'question' => 'Jak dlouho to trvá?',
                 // OND-308: „Detailní timing" → „Přesný časový plán".
-                'answer'   => 'Od první zprávy ke spuštěnému webu typicky 4 až 12 týdnů. Týden na konzultaci, dva až pět dní na specifikaci, tři až deset týdnů na tvorbu a spuštění do druhého dne po schválení. Přesný časový plán pro váš projekt sepíšu do specifikace.',
+                'answer'   => 'Od první zprávy ke spuštěnému webu typicky 4 až 12 týdnů. Úvodní hovor do pár dní, zhruba týden na podrobnou schůzku a specifikaci, tři až deset týdnů na tvorbu a spuštění do druhého dne po schválení. Přesný časový plán pro váš projekt sepíšu do specifikace.',
             ],
             [
                 'key'      => 'satisfaction',
@@ -430,12 +428,15 @@ return [
         'email'           => 'E-mail',
         'phone'           => 'Telefon (nepovinný)',
         'phone_hint'      => 'S číslem se ozvu rychleji.',
+        // OND-448 (B-01): přílohy jsou sbalené za tímhle textovým tlačítkem
+        // (před textem je `+`, vykresluje ho `<x-lead-form>`).
+        'attach_toggle'   => 'Přiložit soubory (nepovinné)',
         'message'         => 'Co potřebujete vyřešit?',
         'placeholders'    => [
             'name'    => 'Jan Novák',
             'email'   => 'jan@firma.cz',
             'phone'   => '+420 000 000 000',
-            'message' => 'Např. nový web pro výrobní firmu, 5–10 stran',
+            'message' => 'Např. nový web pro výrobní firmu, 5–10 stran — nebo jen napište, kdy vám mám zavolat',
         ],
         'submit'          => 'Poslat poptávku',
         'submitting'      => 'Odesílám…',
@@ -451,14 +452,13 @@ return [
             'reply'        => 'Ozvu se nejpozději :date, osobně na :email. Nic dalšího teď dělat nemusíte.',
             'steps_aria'   => 'Co bude dál',
             'steps'        => [
-                ['label' => 'Konzultace', 'text' => 'Do týdne si zavoláme nebo se sejdeme, asi na hodinu. Projdeme, co má web udělat.'],
-                ['label' => 'Specifikace', 'text' => 'Za 2–5 dní po konzultaci dostanete písemně, co na webu bude a kolik to bude stát.'],
-                ['label' => 'Rozhodnutí', 'text' => 'Rozhodujete se až nad hotovou specifikací. Do té doby vás nic nezavazuje.'],
+                ['label' => 'Úvodní hovor', 'text' => 'Zavolám vám, asi na 15 minut. Zjistím, co řešíte, a řeknu vám rovnou, jestli vám umím pomoct.'],
+                ['label' => 'Specifikace', 'text' => 'Když to dává smysl, projdeme spolu detaily a dostanete písemně, co na webu bude a kolik to bude stát.'],
+                ['label' => 'Rozhodnutí', 'text' => 'O realizaci se rozhodujete až nad hotovou specifikací.'],
             ],
             'more'         => 'Než se ozvu, můžete si přečíst, :article_link.',
             'more_article' => 'jak se připravit na nový web',
         ],
-        'error'           => 'Poptávku se teď nepodařilo uložit. Zkuste to prosím znovu.',
     ],
 
     // OND-308: `cta` slibovalo kalendář, který od OND-303 neexistuje.

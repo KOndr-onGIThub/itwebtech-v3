@@ -61,6 +61,11 @@ class PortfolioTagNamesMigrationTest extends TestCase
         $this->migration()->up();
 
         foreach (PortfolioTagNamesSeeder::NAMES as $slug => $names) {
+            // OND-449: `rezervace` a `kampane` už žádný projekt nemá, čerstvý
+            // seed je proto vůbec nezaloží (na produkci řádky zůstávají).
+            if (! DB::table('portfolio_tags')->where('slug', $slug)->exists()) {
+                continue;
+            }
             foreach ($names as $locale => $name) {
                 $this->assertSame($name, $this->tagName($slug, $locale), "Štítek {$slug}/{$locale}");
             }
@@ -85,8 +90,8 @@ class PortfolioTagNamesMigrationTest extends TestCase
         $this->assertNull($this->tagName('dlouhodoba-spoluprace', 'de'));
 
         // Štítky z OND-198 si své názvy nechávají.
-        $this->assertSame('Placená reklama', $this->tagName('kampane', 'cs'));
-        $this->assertSame('Bezahlte Werbung', $this->tagName('kampane', 'de'));
+        $this->assertSame('Samostatná stránka pro reklamu', $this->tagName('landing-page', 'cs'));
+        $this->assertSame('Eigenständige Seite für Werbung', $this->tagName('landing-page', 'de'));
     }
 
     private function migration(): Migration

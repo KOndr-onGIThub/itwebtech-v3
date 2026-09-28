@@ -2,6 +2,7 @@
     'screenshots',
     'part' => 'all', // 'lead' = jen hlavní celošířkový vizuál | 'rest' = zbytek | 'all' = obojí
     'transitionName' => null, // OND-438: jméno přechodu na rámu hlavního vizuálu (karta projektu → detail)
+    'project' => null, // OND-449 (B-07b): projekt s `demo_video` → video pod prvním blokem galerie
 ])
 
 {{--
@@ -36,7 +37,9 @@
     // Lead = první snímek s rolí wide (hlavní vizuál). Projekty se čtvercovým
     // hero (vp-industry, zubni-provazek) tak dostanou jako lead svůj wide
     // gallery mockup a čtvercové hero se zařadí mezi karty.
-    $lead = $ordered->first(fn ($s) => screenshot_gallery_role($s->path) === 'wide');
+    // OND-449 (B-06): tentýž helper vybírá obrázek karty na /projekty —
+    // karta a lead jsou vždy tentýž soubor, přechod jen zvětší obrázek.
+    $lead = portfolio_lead_image($screens);
     $rest = $ordered->reject(fn ($s) => $lead && $s->is($lead))->values();
 
     // Rest → sekvence bloků: běžící skupina karet se přeruší každým wide bandem.
@@ -92,9 +95,16 @@
 </section>
 @endif
 
-@if (in_array($part, ['rest', 'all']) && count($blocks))
+@php
+    // OND-449 (B-07b): video smyčka pod prvním blokem galerie (jen `rest`/`all`).
+    $showVideo = in_array($part, ['rest', 'all']) && filled($project?->demo_video);
+@endphp
+@if (in_array($part, ['rest', 'all']) && (count($blocks) || $showVideo))
 <section class="pd-section pd-gallery" data-pdd="project-gallery">
     <div class="container-site">
+        @if ($showVideo && ! count($blocks))
+            <x-portfolio.demo-video :project="$project" />
+        @endif
         @foreach ($blocks as $block)
             @if ($block['type'] === 'band')
                 <figure class="pd-gallery__band">
@@ -144,6 +154,9 @@
                         </figure>
                     @endforeach
                 </div>
+            @endif
+            @if ($loop->first && $showVideo)
+                <x-portfolio.demo-video :project="$project" />
             @endif
         @endforeach
     </div>

@@ -92,16 +92,22 @@ class Ond392ContactAcidTest extends TestCase
                 'address_label', 'address_name', 'address_street', 'address_city', 'address_registration',
                 'email_label', 'phone_label', 'hours_label', 'open_hours', 'cta_consultation',
                 'form_heading', 'form_subheading',
-                'name', 'email', 'tel', 'tel_hint', 'subject', 'message',
-                'agree', 'policy', 'send', 'sending',
+                // OND-448 (B-01): pole a tlačítko sdíleného `<x-lead-form>`
+                // jsou v `home.inline_form` (předmět a souhlas odešly).
+                'home.inline_form.name', 'home.inline_form.email', 'home.inline_form.phone',
+                'home.inline_form.phone_hint', 'home.inline_form.message',
+                'home.inline_form.attach_toggle', 'home.inline_form.submit', 'home.inline_form.submitting',
+                'home.inline_form.privacy_prefix', 'home.inline_form.privacy_link',
                 'next_steps.eyebrow', 'next_steps.heading',
             ];
             // OND-437: `hero.subline` nese `:date` (App\Support\ReplyDate), ne
-            // doslovný text; potvrzení po odeslání (`thank_you`) vykresluje až
-            // odpověď serveru, na stránce před odesláním není.
-            $expected = array_map(fn ($key) => $this->text($key === 'hero.subline'
-                ? ReplyDate::sentence('contact.hero.subline', ReplyDate::date())
-                : __('contact.'.$key)), $keys);
+            // doslovný text; potvrzení po odeslání vykresluje až odpověď
+            // serveru, na stránce před odesláním není.
+            $expected = array_map(fn ($key) => $this->text(match (true) {
+                $key === 'hero.subline'          => ReplyDate::sentence('contact.hero.subline', ReplyDate::date()),
+                str_starts_with($key, 'home.')   => __($key),
+                default                          => __('contact.'.$key),
+            }), $keys);
             foreach (__('contact.next_steps.steps') as $step) {
                 $expected[] = $step['title'];
                 $expected[] = $step['text'];
@@ -146,12 +152,13 @@ class Ond392ContactAcidTest extends TestCase
             // FormData nepošle a server buď past nevidí, nebo validuje prázdno.
             $form = mb_substr($main, mb_strpos($main, '<form '), mb_strpos($main, '</form>') - mb_strpos($main, '<form '));
 
-            $this->assertStringContainsString('id="contact-website-url"', $form, "[$locale] past na boty není ve formuláři");
+            $this->assertStringContainsString('id="lead-website-url"', $form, "[$locale] past na boty není ve formuláři");
             $this->assertStringContainsString('name="'.\App\Support\Honeypot::FIELD.'"', $form, "[$locale] past nemá jméno, podle kterého ji server pozná");
             $this->assertStringContainsString('fileDropZone(', $form, "[$locale] drop zóna příloh není ve formuláři");
             $this->assertStringContainsString('name="attachment[]"', $form, "[$locale] pole příloh není ve formuláři");
 
-            foreach (['name', 'email', 'tel', 'subject', 'message', 'gdpr'] as $field) {
+            // OND-448 (B-01): předmět a souhlas odešly, `source` říká místo.
+            foreach (['name', 'email', 'tel', 'message', 'locale', 'source'] as $field) {
                 $this->assertMatchesRegularExpression(
                     '/<(input|textarea)[^>]*\sname="'.$field.'"/',
                     $form,
@@ -192,8 +199,9 @@ class Ond392ContactAcidTest extends TestCase
                 $xpath->query('//section[@data-pdd="contact-form"]//div[contains(concat(" ", normalize-space(@class), " "), " pd-form__panel ")]')->length,
                 "[$locale] deska `.pd-form__panel` zmizela ze sekce formuláře — náboj nepoběží"
             );
+            // OND-448: jméno, e-mail, telefon, zpráva (předmět odešel).
             $this->assertGreaterThanOrEqual(
-                5,
+                4,
                 $xpath->query('//div[contains(concat(" ", normalize-space(@class), " "), " pd-field ")]')->length,
                 "[$locale] políčka nejsou `.pd-field` — proud do políčka nepoběží"
             );

@@ -28,6 +28,8 @@ return [
     'open_hours'          => 'Ozvu se nejpozději následující pracovní den. Víkendy a svátky se nepočítají, ale nic mi nezapadne.',
     'cta_consultation'    => 'Napište mi',
 
+    // OND-448 (B-01): pole, tlačítko, souhlas a potvrzení formuláře jsou od
+    // sjednocení v `home.inline_form` — /kontakt vykresluje týž `<x-lead-form>`.
     'form_heading'        => 'Kontaktní formulář',
     // OND-371: řádek sliboval „zdarma a nezávazně“ — tedy nízkou cenu místo
     // výsledku, přesně to, co OND-369 vyřadilo z CTA napříč webem. Teď slibuje,
@@ -38,21 +40,12 @@ return [
     // Délka je záměrná: na 1440 sedí na jeden řádek s rezervou 33 px, na 390
     // padá na dva řádky bez sirotka. Delší varianta („na jakýkoli dotaz“) měla
     // rezervu 4 px — jedno přeteklé písmo a řádek se zlomí. Změřeno, ne odhad.
-    'form_subheading'     => 'Dostanete nabídku s rozsahem, termínem a cenou — nebo odpověď na váš dotaz.',
-    'name'                => 'Celé jméno',
-    'email'               => 'Email',
-    'tel'                 => 'Telefon (nepovinný)',
-    'tel_hint'            => 'S číslem se ozvu rychleji.',
-    'subject'             => 'Předmět',
-    'message'             => 'Vaše zpráva',
-    'message_placeholder' => 'Stručně popište, co byste potřebovali — nebo jen napište, kdy vám mám zavolat…',
-    'agree'               => 'Souhlasím se zpracováním osobních údajů v souladu se ',
-    'policy'              => 'zásadami ochrany osobních údajů',
-    'send'                => 'Odeslat zprávu',
-    'sending'             => 'Odesílám...',
+    // OND-448 (B-02): nové znění nic neslibuje („řeknu vám, jestli vám můžu
+    // pomoct“). Změřeno 28. 9. 2026 v cs/en/de: 1440 jeden řádek, 390 dva bez
+    // sirotka (deska na /kontakt nemá limit 58ch, jinak by se de zlomilo).
+    'form_subheading'     => 'Napište, co řešíte. Ozvu se osobně a řeknu vám, jestli vám můžu pomoct.',
     'required'            => 'Vyplňte prosím toto pole.',
     'enter_valid_email'   => 'Vložte platnou emailovou adresu.',
-    'policy_not_agreed'   => 'Pro odeslání musíme mít váš souhlas se zpracováním údajů.',
     // OND-256/8 — texty upload widgetu. Dřív byly natvrdo anglicky
     // v propech `x-form.file-drop`.
     'upload' => [
@@ -102,22 +95,14 @@ return [
                 'text'  => 'Dorazí vám e-mail ode mě osobně, ne automatická potvrzovací zpráva. Když napíšete v pátek večer, ozvu se v pondělí.',
             ],
             [
-                'title' => 'Dohodneme 30 minut hovoru',
-                'text'  => 'Krátký telefonát nebo videohovor — zjistíme, jestli má spolupráce smysl. Bez prezentace, bez slidů, bez prodejního tlaku.',
+                'title' => 'Krátký úvodní hovor',
+                'text'  => 'Asi 15 minut po telefonu. Zjistím, co řešíte, a řeknu vám rovnou, jestli vám umím pomoct. Bez prezentace a bez prodejního tlaku.',
             ],
             [
-                'title' => 'Dostanete písemnou nabídku',
-                'text'  => 'Do týdne pošlu specifikaci s rozsahem, termínem a přesnou cenou. Co bude ve specifikaci, bude i na faktuře.',
+                'title' => 'Domluvíme další postup',
+                'text'  => 'Když to dává smysl, projdeme detaily a sepíšu specifikaci s rozsahem, termínem a přesnou cenou. Co bude ve specifikaci, bude i na faktuře.',
             ],
         ],
-    ],
-
-    // Thank-you state — zobrazí se po úspěšném odeslání místo formuláře.
-    'thank_you' => [
-        // OND-437: věta s datem a e-mailem je `home.inline_form.confirmation.reply`,
-        // odkaz na článek `…confirmation.more` — stejné znění jako na homepage.
-        'stamp'   => 'Zpráva dorazila · :received',
-        'heading' => 'Děkuju. Zpráva je u mě.',
     ],
 
     // Volitelné budget pole (sjednocené s home.inline_form a landing budgety).

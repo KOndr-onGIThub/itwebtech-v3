@@ -4,7 +4,7 @@ return [
 
     'meta' => [
         'title'       => 'Pricing — Ondřej Kriška, ONDRAWEB',
-        'description' => 'Indicative pricing for websites, e-shops and web applications. Get a clear picture of your investment before the first consultation.',
+        'description' => 'Indicative pricing for websites, e-shops and web applications. Get a clear picture of your investment before our first call.',
     ],
 
     'subheading' => 'Indicative pricing',
@@ -13,7 +13,7 @@ return [
     // OND-354: threshold plus range instead of a menu of three packages
     // (Ondřej, 26 Sep 2026 on OND-347); the rejection sentence is gone with it.
     // The CZK floor (20,000) is deliberately NOT converted — see lang/en/home.php.
-    'intro'      => 'Most projects land between €3,500 and €8,000. The smallest site I build is a presentation site of up to five pages, from €1,900. What goes on the site and what it costs, you get in writing before I start — and that number is what the invoice says.',
+    'intro'      => 'Most projects land between €3,500 and €8,000. The smallest thing I build is a simple presentation site, from €1,900. What goes on the site and what it costs, you get in writing before I start — and that number is what the invoice says.',
 
     // OND-135 P2 iter 5 — plan §3.1 hero (page-mark + amber accent).
     // OND-135 cleanup (2026-05-14): page_mark_index removed — agency-
@@ -31,12 +31,12 @@ return [
     // OND-391: nevykresluje se (plovoucí tlačítko z /cenik odešlo, OND-393).
     'sticky_cta' => [
         'label' => 'Pick a level',
-        'cta'   => 'Get a no-obligation quote',
+        'cta'   => 'Write an enquiry',
     ],
 
     'popular'   => 'Most popular',
     // OND-391: `quotation` se nevykresluje (tlačítka u doplňků odešla, OND-393).
-    'quotation' => 'Get a quote',
+    'quotation' => 'Enquiry',
 
     // OND-359: intro for the case-study link inside a level card. The wording
     // matches `projects.snapshots.subheading` so the destination is no surprise.
@@ -60,11 +60,11 @@ return [
         [
             'key'     => 'presentation',
             'name'    => 'Presentation site',
-            'scope'   => 'up to 5 pages',
-            'desc'    => 'A credible online presence for sole traders and small businesses.',
+            'scope'   => 'So customers can check you out',
+            'desc'    => 'Who you are, what you do, how to reach you',
             'popular' => false,
             'features' => [
-                'Up to 5 custom pages',
+                'Who you are, what you do and how to reach you, custom-built',
                 'Modern responsive design',
                 'Contact form',
                 'Technical SEO',
@@ -72,19 +72,19 @@ return [
                 '14 days of post-launch support',
             ],
             'proof' => [
-                'slug'  => 'vanspedition',
-                'label' => 'VAN spedition',
+                'slug'  => 'kemp-veselka',
+                'label' => 'Autokemp Veselka',
             ],
-            'cta' => 'Get a no-obligation quote',
+            'cta' => 'Write an enquiry',
         ],
         [
             'key'     => 'business',
             'name'    => 'Business site',
-            'scope'   => 'up to 12 pages',
-            'desc'    => 'A multilingual site with a blog, conversion tracking and a booking system.',
+            'scope'   => 'So customers see why it should be you',
+            'desc'    => 'More services, more languages, references and a blog',
             'popular' => true,
             'features' => [
-                'Up to 12 custom pages',
+                'A structure built on what your customers look for',
                 'Conversion-focused design',
                 'Blog or gallery with content editing',
                 'Multilingual website',
@@ -96,16 +96,16 @@ return [
                 'slug'  => 'zubni-provazek',
                 'label' => 'Zubní Provázek',
             ],
-            'cta' => 'Get a no-obligation quote',
+            'cta' => 'Write an enquiry',
         ],
         [
             'key'     => 'custom',
-            'name'    => 'Custom',
-            'scope'   => 'no scope limit',
-            'desc'    => 'An e-shop, a web application or a complex portal.',
+            'name'    => 'E-shops and applications',
+            'scope'   => 'So the system does the work for you',
+            'desc'    => 'E-shop, bookings, integration with your systems',
             'popular' => false,
             'features' => [
-                'Unlimited project scope',
+                'Scope set by what the system has to do',
                 'E-shop or booking system',
                 'Custom administration interface',
                 'Advanced SEO strategy with reporting',
@@ -113,23 +113,32 @@ return [
                 '3 months of post-launch support',
             ],
             'proof' => [
-                'slug'  => 'pitarena',
-                'label' => 'PitArena',
+                'slug'  => 'pitarena-eshop',
+                'label' => 'PitArena — online shop',
             ],
-            'cta' => 'Get a no-obligation quote',
+            'cta' => 'Write an enquiry',
         ],
     ],
+
+    // OND-448 (B-08): sentence right under the tiers (/cenik only, not on the homepage).
+    // The number of pages is never stated as a price or tier boundary.
+    'pages_note' => 'The price is not set by the number of pages but by how much the website has to explain and do. You get the exact scope and price in writing in the specification.',
 
     // OND-354: replaces the apologetic "An exception, not the standard entry
     // point." on the lowest level. It does not turn the person away, it says
     // what the money does not buy.
-    'entry_note' => 'For €1,900 I\'ll build you a site of up to five pages. It will be fast, it will work properly on a phone, and no link to your enquiry form will be broken. Don\'t expect it to start bringing in work on its own — that takes more work than the smallest scope allows. But it will be done properly.',
+    'entry_note' => 'For €1,900 I\'ll build you a simple presentation site. It will be fast, it will work properly on a phone, and no link to your enquiry form will be broken. Don\'t expect it to start bringing in work on its own — that takes more work than the smallest scope allows. But it will be done properly.',
 
     'note' => 'I am not registered for VAT — the prices above are final, no VAT is added.',
 
     'guarantees' => [
         'heading' => 'What is included in every project',
         'items'   => [
+            // OND-448 (B-08): Ondřej always writes the final copy from the client's answers.
+            [
+                'title' => 'I write the copy',
+                'text'  => 'You do not have to write anything. I ask you about what matters and write the copy for the whole website from your answers. Inspiration, say for your About page, is welcome.',
+            ],
             [
                 'title' => 'Maintenance-free websites',
                 'text'  => 'No WordPress, no third-party plugins. Save hundreds of euros a year compared to WordPress — no monthly updates and no security patching bills.',
@@ -183,19 +192,20 @@ return [
         'up'   => [
             'label' => 'Raises the price',
             'items' => [
-                'More than five pages',
+                'More services or products that need explaining clearly',
                 'A second and further languages',
-                'An e-shop or a booking system',
+                'An e-shop, bookings or online payments',
                 'Your own content administration',
                 'Integration with systems you already use',
-                'Copy and photos that need to be created',
+                'Photos that need to be taken or bought',
             ],
         ],
         'down' => [
             'label' => 'Lowers the price',
             'items' => [
-                'Your copy and photos are ready',
-                'Fewer pages',
+                'Complete, quick answers to my questions',
+                'One person on your side who makes the decisions',
+                'Photos you already have in good quality',
                 'One language',
                 'You fill in the content yourself after training',
             ],
@@ -207,8 +217,10 @@ return [
         // OND-369: `desc` is the sub-label of the same call to action as the
         // button, not prose elsewhere — so "free" goes with the label. Pricing
         // (OND-354) rests on a threshold number; a free meeting next to it
-        // promises something different. Non-binding and 30 minutes stay.
-        'desc'    => 'The consultation is non-binding. In 30 minutes I will tell you what makes sense for your business — honestly, even if that means we should not work together.',
+        // promises something different.
+        // OND-448 (B-02): the first step is an intro call (about 15 minutes), not
+        // a “consultation”; the site never promises a free or no-obligation quote.
+        'desc'    => 'A short intro call is enough, about 15 minutes. I find out what makes sense for your business and tell you honestly if working together does not.',
         'btn'     => 'Write an enquiry',
     ],
 

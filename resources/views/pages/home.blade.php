@@ -309,17 +309,9 @@
                                 data-analytics="project_card_click"
                                 data-analytics-props='{"slug":"{{ $project->slug }}"}'
                             >{{ __('home.portfolio.detail_cta') }} &rarr;</a>
-                            @if ($project->live_url)
-                            <a
-                                href="{{ $project->live_url }}"
-                                class="pd-case__live"
-                                target="_blank"
-                                rel="noopener"
-                                aria-label="{{ __('home.portfolio.live_aria', ['client' => $clientLabel]) }}"
-                                data-analytics="showcase_site_click"
-                                data-analytics-props='{"site":"{{ $project->slug }}"}'
-                            >{{ __('home.portfolio.live_cta') }} &nearr;</a>
-                            @endif
+                            {{-- OND-449 (B-05): odkaz „Otevřít živý web“ zrušen. Živý web tu
+                                 dokládá záznam, hlavní cesta vede na detail s kontextem
+                                 (odkaz na web je tam až za „Výsledkem“). --}}
                         </p>
                     </div>
                 </article>
@@ -621,13 +613,12 @@
 
 {{-- ===================================================
      10 — POPTÁVKA
-     Druhá a poslední výzva na stránce. Stejný endpoint, pole
-     i session handling jako dřív.
+     Druhá a poslední výzva na stránce.
 
-     OND-308: větve `session('faq_lead_success')` jsou pryč spolu
-     s blokem `faq_form`, který žádná šablona nevykreslovala.
-     Endpoint `source=home.faq` v HomeLeadController zůstává — dá
-     se trefit zvenčí a hlídá ho past na boty v HoneypotTest.
+     OND-448 (B-01): formulář je sdílený `<x-lead-form>` — tentýž jako na
+     /kontakt, odesílá se přes AJAX na `POST /contact` bez znovunačtení.
+     Dřívější `POST /poptavka` (session, přesměrování) je pryč. Potvrzení
+     na homepage nese i tři kroky „co bude dál“ (`source="home"`).
      =================================================== --}}
 <section class="pd-section" id="{{ __('home.anchors.poptavka') }}">
     <div class="container-site">
@@ -646,113 +637,7 @@
                 </blockquote>
             </div>
 
-            <div class="pd-form__panel">
-                {{-- OND-437 (návrh 2): po odeslání potvrzení MÍSTO formuláře, ne
-                     zelená hláška nad prázdným formulářem. Chybový stav níž se
-                     nemění. --}}
-                @if (session('home_lead_success'))
-                    @include('partials.lead-confirmation', [
-                        'stampKey'   => 'home.inline_form.confirmation.stamp',
-                        'headingKey' => 'home.inline_form.confirmation.heading',
-                        'headingTag' => 'h3',
-                        'email'      => (string) session('home_lead_email'),
-                        'receivedAt' => \Illuminate\Support\Carbon::parse(session('home_lead_received') ?? now()),
-                        'steps'      => true,
-                    ])
-                @else
-                @if ($errors->any())
-                    <div class="pd-alert pd-alert--error" role="alert">
-                        {{ $errors->first() }}
-                    </div>
-                @endif
-
-                <form
-                    method="POST"
-                    action="{{ route('home.lead.store') }}"
-                    novalidate
-                    x-data="{ submitting: false }"
-                    @submit="submitting = true; window.dispatchEvent(new CustomEvent('inline-form-submit-attempt'))"
-                >
-                    @csrf
-
-                    <x-form.honeypot id="lead-website-url" />
-
-                    <div class="pd-form__grid">
-                        <div class="pd-field">
-                            <label for="pd-lead-name">{{ __('home.inline_form.name') }} <span aria-hidden="true">*</span></label>
-                            <input
-                                type="text"
-                                id="pd-lead-name"
-                                name="name"
-                                value="{{ old('name') }}"
-                                required
-                                placeholder="{{ __('home.inline_form.placeholders.name') }}"
-                                autocomplete="name"
-                            >
-                            @error('name') <p class="pd-field__error">{{ $message }}</p> @enderror
-                        </div>
-
-                        <div class="pd-field">
-                            <label for="pd-lead-email">{{ __('home.inline_form.email') }} <span aria-hidden="true">*</span></label>
-                            <input
-                                type="email"
-                                id="pd-lead-email"
-                                name="email"
-                                value="{{ old('email') }}"
-                                required
-                                placeholder="{{ __('home.inline_form.placeholders.email') }}"
-                                autocomplete="email"
-                            >
-                            @error('email') <p class="pd-field__error">{{ $message }}</p> @enderror
-                        </div>
-
-                        <div class="pd-field pd-field--full">
-                            <label for="pd-lead-phone">{{ __('home.inline_form.phone') }}</label>
-                            <input
-                                type="tel"
-                                id="pd-lead-phone"
-                                name="phone"
-                                value="{{ old('phone') }}"
-                                placeholder="{{ __('home.inline_form.placeholders.phone') }}"
-                                autocomplete="tel"
-                                aria-describedby="pd-lead-phone-hint"
-                            >
-                            {{-- OND-256/4: pošťouchnutí — proč číslo vyplnit, když je nepovinné. --}}
-                            <p class="pd-field__hint" id="pd-lead-phone-hint">{{ __('home.inline_form.phone_hint') }}</p>
-                            @error('phone') <p class="pd-field__error">{{ $message }}</p> @enderror
-                        </div>
-
-                        <div class="pd-field pd-field--full">
-                            <label for="pd-lead-message">{{ __('home.inline_form.message') }} <span aria-hidden="true">*</span></label>
-                            <textarea
-                                id="pd-lead-message"
-                                name="message"
-                                rows="5"
-                                required
-                                placeholder="{{ __('home.inline_form.placeholders.message') }}"
-                            >{{ old('message') }}</textarea>
-                            @error('message') <p class="pd-field__error">{{ $message }}</p> @enderror
-                        </div>
-                    </div>
-
-                    <button
-                        type="submit"
-                        class="pd-cta pd-form__submit"
-                        :disabled="submitting"
-                        data-analytics="inline_form_submit_attempt"
-                    >
-                        <span x-show="!submitting">{{ __('home.inline_form.submit') }}</span>
-                        <span x-show="submitting" x-cloak>{{ __('home.inline_form.submitting') }}</span>
-                    </button>
-
-                    <p class="pd-form__note">{{ __('home.inline_form.note') }}</p>
-
-                    <p class="pd-form__privacy">
-                        {{ __('home.inline_form.privacy_prefix') }}<a href="{{ lroute('privacy') }}">{{ __('home.inline_form.privacy_link') }}</a>.
-                    </p>
-                </form>
-                @endif
-            </div>
+            <x-lead-form source="home" />
         </div>
     </div>
 </section>
@@ -828,19 +713,5 @@
         if (document.readyState === 'complete') { setTimeout(show, 0); }
         else { window.addEventListener('load', function () { setTimeout(show, 0); }); }
     })();
-
-    // Po submitu formuláře (redirect back()) doskrolovat k výsledku
-    // a ohlásit konverzi analytics vrstvě (viz resources/js/analytics.js).
-    // OND-437: po úspěchu jde na potvrzení i fokus (čtečka ho přečte).
-    document.addEventListener('DOMContentLoaded', function () {
-        @if ($errors->any() || session('home_lead_success'))
-        document.getElementById('{{ __('home.anchors.poptavka') }}')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        @endif
-
-        @if (session('home_lead_success'))
-        document.querySelector('[data-lead-confirmation]')?.focus({ preventScroll: true });
-        window.dispatchEvent(new CustomEvent('inline-form-submit-success'));
-        @endif
-    });
 </script>
 @endpush

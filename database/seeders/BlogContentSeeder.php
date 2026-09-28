@@ -146,10 +146,11 @@ class BlogContentSeeder extends Seeder
                     <p>Platíte můj čas a to, co s ním umím udělat. Nekupujete licenci k šabloně ani hodiny obchodníka, který vám web prodal a pak zmizel. Pracuju sám, takže v ceně není agenturní režie ani koordinátor, který mi přeposílá vaše e-maily.</p>
                     <p>Weby píšu vlastním kódem. Nestavím je z hotových stavebnic a cizích doplňků, které se musí pořád aktualizovat a časem se rozbijí. Je to dražší na začátku a levnější v čase, protože nemáte co opravovat.</p>
                     <h2>Kolik to u mě vychází</h2>
-                    <p>Většina projektů vychází mezi 55 a 150 tisíci korunami. Nejmenší web, který stavím, je prezentace do pěti stránek od 20 000 Kč. Kolik bude stát ten váš, určuje hlavně rozsah.</p>
-                    <p><strong>Prezentační web — do pěti stránek.</strong> Pro živnostníky a malé firmy, kterým větší rozsah nedává smysl. Bude rychlý, na telefonu se bude ovládat dobře a nebude na něm rozbitý odkaz na poptávku. Nečekejte od něj, že vám sám začne vozit zakázky — na to je potřeba víc práce, než se za tu cenu dá odvést. Ale hotový bude poctivě.</p>
-                    <p><strong>Firemní web — do dvanácti stránek.</strong> Web na míru s jednoduchou správou obsahu, takže si texty, fotky nebo reference měníte sami. Zvládne i další jazykovou verzi. Tohle si objednává většina firem.</p>
-                    <p><strong>Na míru — bez omezení rozsahu.</strong> E-shop, rezervační systém nebo aplikace na míru. Rozsah není daný dopředu, cena vychází z toho, co má web umět a na jaké systémy se napojuje.</p>
+                    <p>Většina projektů vychází mezi 55 a 150 tisíci korunami. Nejmenší věc, kterou stavím, je jednoduchý prezentační web od 20 000 Kč. Kolik bude stát ten váš, určuje hlavně to, kolik práce je potřeba, aby web dělal, co má.</p>
+                    <p><strong>Prezentační web — aby si vás zákazník ověřil.</strong> Kdo jste, co děláte a jak vás zastihnout. Pro živnostníky a malé firmy, kterým větší rozsah nedává smysl. Bude rychlý, na telefonu se bude ovládat dobře a nebude na něm rozbitý odkaz na poptávku. Nečekejte od něj, že vám sám začne vozit zakázky — na to je potřeba víc práce, než se za tu cenu dá odvést. Ale hotový bude poctivě.</p>
+                    <p><strong>Firemní web — aby zákazník pochopil, proč právě vy.</strong> Víc služeb, víc jazyků, reference i blog. Web na míru s jednoduchou správou obsahu, takže si texty, fotky nebo reference měníte sami. Tohle si objednává většina firem.</p>
+                    <p><strong>E-shop a aplikace — aby systém pracoval za vás.</strong> E-shop, rezervační systém nebo aplikace na míru. Rozsah není daný dopředu, cena vychází z toho, co má systém umět a na jaké systémy se napojuje.</p>
+                    <p>Počet stránek přitom o ceně nerozhoduje. Rozhoduje, kolik různých typů stránek web potřebuje. Blog je jeden typ: postavím ho jednou a je jedno, jestli na něm bude jeden článek, nebo sto. Vymyslet a napsat ty články je ale samostatná práce. Stejné je to s katalogem produktů nebo s referencemi. Web o jedné stránce tak může stát víc než web o pěti, když toho musí víc vysvětlit a umět.</p>
                     <p>Nejsem plátce DPH. Cena, kterou vám řeknu, je konečná. Co přesně je v jednotlivých úrovních, máte rozepsané v <a href="/cenik">ceníku</a>.</p>
                     HTML,
                 'content_mid' => <<<'HTML'
@@ -158,15 +159,17 @@ class BlogContentSeeder extends Seeder
                 'content_2'   => <<<'HTML'
                     <h2>Co cenu zvedne</h2>
                     <ul>
+                    <li><strong>Víc služeb nebo produktů, které je potřeba srozumitelně vysvětlit.</strong> Každou je potřeba promyslet a popsat tak, aby jí zákazník rozuměl.</li>
                     <li><strong>Napojení na systém, který už ve firmě používáte.</strong> Sklad, účetnictví, rezervace. Čím víc si dva systémy musí rozumět, tím víc práce to je.</li>
                     <li><strong>Další jazyky.</strong> Není to jen překlad textu. Je to další verze celého webu, kterou někdo musí spravovat.</li>
-                    <li><strong>Obsah, který ještě neexistuje.</strong> Když nemáte fotky ani texty, musí se vyrobit. Domluvíme se předem, co zajistíte vy a co já, ať to není překvapení na faktuře. Proč na obsahu záleží víc než na vzhledu, píšu v článku <a href="/zapisky/co-je-dulezitejsi-design-nebo-obsah-webovych-stranek">Design, nebo obsah?</a></li>
+                    <li><strong>Fotky, které ještě neexistují.</strong> Když je nemáte, musí se nafotit nebo nakoupit. Domluvíme se předem, co zajistíte vy a co já, ať to není překvapení na faktuře. Texty píšu já z vašich odpovědí, ty jsou součástí každého webu. Proč na obsahu záleží víc než na vzhledu, píšu v článku <a href="/zapisky/co-je-dulezitejsi-design-nebo-obsah-webovych-stranek">Design, nebo obsah?</a></li>
                     <li><strong>Rozsah, který roste za pochodu.</strong> Proto píšu specifikaci. Ať oba víme, kde je hranice.</li>
                     </ul>
                     <h2>Co cenu sníží</h2>
                     <ul>
-                    <li><strong>Texty a fotky máte připravené.</strong> Nic se nemusí vyrábět a můžu rovnou stavět.</li>
-                    <li><strong>Menší počet stránek.</strong> Méně práce, nižší cena.</li>
+                    <li><strong>Fotky, které už máte v dobré kvalitě.</strong> Nic se nemusí fotit ani kupovat.</li>
+                    <li><strong>Jeden člověk na vaší straně, který rozhoduje.</strong> Nečekáme na schválení od pěti lidí.</li>
+                    <li><strong>Úplné a rychlé odpovědi na moje otázky.</strong> Z nich píšu texty, a čím dřív je mám celé, tím míň času padne na doptávání.</li>
                     <li><strong>Jeden jazyk.</strong> Jedna verze webu, kterou stačí postavit a spravovat.</li>
                     <li><strong>Obsah si plníte sami.</strong> Ukážu vám, jak na to, a texty a fotky do webu vkládáte vy, ne já.</li>
                     </ul>
@@ -176,7 +179,7 @@ class BlogContentSeeder extends Seeder
                     <h2>Kdy ode mě web nekupujte</h2>
                     <p>Když potřebujete web do týdne. Když chcete jen opravit existující WordPress. Ani jedno nedělám a je lepší, když to víte teď, než po dvou schůzkách.</p>
                     <h2>Jak se dostanete k přesné ceně</h2>
-                    <p>Napište mi, co potřebujete. Klidně stručně. Ozvu se nejpozději následující pracovní den a probereme to. Když z toho vyjde, že vám můžu pomoct, dostanete specifikaci s konkrétní cenou. Když ne, řeknu vám to a nebudu vám nic tlačit.</p>
+                    <p>Napište mi, co potřebujete. Klidně stručně. Ozvu se nejpozději následující pracovní den a probereme to. Když z toho vyjde, že vám můžu pomoct, domluvíme se na specifikaci s konkrétní cenou. Když ne, řeknu vám to a nebudu vám nic tlačit.</p>
                     HTML,
             ],
 
@@ -210,13 +213,13 @@ class BlogContentSeeder extends Seeder
                     <h2>6. Kdo bude obsah spravovat</h2>
                     <p>Když si budete chtít měnit texty a fotky sami, přidám vám jednoduchou správu obsahu a ukážu vám, jak na to. Když nechcete, nemusíme ji stavět a ušetříte. Obojí je v pořádku, jen to potřebuju vědět předem.</p>
                     <h2>7. Co už máte</h2>
-                    <p>Logo, fotky, texty, přístupy k doméně a hostingu, e-shop s produkty v nějakém systému. Čím víc toho je, tím míň se toho musí vyrábět. Když máte hotovou <a href="/zapisky/zakladni-krok-pro-uspesny-webdesign-analyza-konkurence">analýzu konkurence</a> nebo <a href="/zapisky/jak-na-analyzu-klicovych-slov-krok-za-krokem">klíčových slov</a>, pošlete mi ji taky.</p>
+                    <p>Logo, fotky, přístupy k doméně a hostingu, e-shop s produkty v nějakém systému. Čím víc toho je, tím míň se toho musí vyrábět. Texty psát nemusíte, ty napíšu z vašich odpovědí na tyhle otázky. Když máte hotovou <a href="/zapisky/zakladni-krok-pro-uspesny-webdesign-analyza-konkurence">analýzu konkurence</a> nebo <a href="/zapisky/jak-na-analyzu-klicovych-slov-krok-za-krokem">klíčových slov</a>, pošlete mi ji taky.</p>
                     <h2>8. Jaký máte rozpočet</h2>
                     <p>Vím, že tuhle otázku nikdo nemá rád. Ptám se proto, abych vám rovnou řekl, jestli to za tu cenu umím. Když ne, řeknu to hned a nebudeme oba ztrácet čas.</p>
                     <h2>9. Do kdy to potřebujete</h2>
                     <p>Jestli máte pevný termín kvůli veletrhu nebo otevírání provozovny, řekněte mi ho hned. Podle toho poznám, jestli to stihnu.</p>
                     <h2>Co se stane potom</h2>
-                    <p>Z vašich odpovědí napíšu specifikaci. Je v ní popsané, co postavím, a cena, která platí. Teprve pak se rozhodujete, jestli do toho jdeme. Nic nepodepisujete dopředu.</p>
+                    <p>Z vašich odpovědí napíšu specifikaci. Je v ní popsané, co postavím, a cena, která platí. O realizaci se rozhodujete až nad hotovou specifikací.</p>
                     HTML,
             ],
 
@@ -253,7 +256,7 @@ class BlogContentSeeder extends Seeder
                     <p>Nešlo o efektní technologii. Šlo o to najít místo, kde se plýtvá časem, a to místo odstranit. Stejně přemýšlím i dnes, když pro firmu stavím aplikaci na míru.</p>
                     <h2>Jak si to spočítat sami</h2>
                     <p>Vezměte činnost, která se dělá ručně. Kolik minut denně zabere? Kolikrát za měsíc se u ní stane chyba a co ta chyba stojí? Vynásobte to dvanácti měsíci. Když vám vyjde číslo v řádu desítek tisíc ročně, aplikace na míru se vrátí za pár let a pak už jen šetří. Když vyjde pár tisíc, nechte to být a zůstaňte u tabulky.</p>
-                    <p>Tenhle výpočet vám udělám zdarma při prvním hovoru. Když z něj vyjde, že se to nevyplatí, řeknu vám to.</p>
+                    <p>Hrubý odhad vám řeknu už při úvodním hovoru. Když z něj vyjde, že se to nevyplatí, řeknu vám to.</p>
                     <h2>Co aplikace na míru je a co není</h2>
                     <p>Je to program postavený přesně na to, jak vaše firma pracuje. Evidence, objednávky, plánování, výkazy. Běží v prohlížeči, takže nic neinstalujete a dostanete se k ní i z telefonu.</p>
                     <p>Není to hotový systém, kterému se musíte přizpůsobit. To je ten hlavní rozdíl a taky důvod, proč to stojí víc než měsíční předplatné nějaké krabice.</p>
@@ -569,7 +572,7 @@ class BlogContentSeeder extends Seeder
                     <h2>Co to znamená pro váš nový web</h2>
                     <ul>
                     <li><strong>O obsahu začněte přemýšlet hned.</strong> Co o vás lidé nevědí a měli by? Na co se ptají pořád dokola? To je základ textů. Další otázky najdete v článku <a href="/zapisky/jak-se-pripravit-na-novy-web">Co si připravit, než oslovíte vývojáře webu</a>.</li>
-                    <li><strong>Počítejte s texty a fotkami v rozpočtu.</strong> Když je nemáte, musí se vyrobit. I to rozebírám v článku <a href="/zapisky/kolik-stoji-webove-stranky">Kolik stojí web na míru</a>.</li>
+                    <li><strong>Počítejte s fotkami v rozpočtu.</strong> Když je nemáte, musí se nafotit nebo koupit. Texty vám napíšu z vašich odpovědí. Co cenu zvedá a co snižuje, rozebírám v článku <a href="/zapisky/kolik-stoji-webove-stranky">Kolik stojí web na míru</a>.</li>
                     <li><strong>Design vybírejte podle obsahu, ne naopak.</strong> Web, který se vám líbí u cizí firmy, byl navržený pro její texty. Ne pro ty vaše.</li>
                     </ul>
                     <p>Hezký web, který nic neřekne, nikomu nepomůže. Užitečný web, který vypadá staře, přichází o lidi dřív, než si ho přečtou. Potřebujete obojí, jen ve správném pořadí. Co dalšího rozhoduje o tom, jestli web funguje, píšu v článku <a href="/zapisky/jak-vytvorit-uspesnou-webovou-stranku">Jak vytvořit úspěšnou webovou stránku</a>.</p>

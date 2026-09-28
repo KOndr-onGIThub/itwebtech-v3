@@ -27,7 +27,7 @@
     // Věta pod titulkem: subtitle → fallback zkrácené summary (jako dřív karta).
     $text = $t?->subtitle ?: ($t?->summary ? \Illuminate\Support\Str::limit($t->summary, 110) : null);
 
-    // Náhled: OND-202 — explicitní thumbnail, pak čtvercový detail, pak hero.
+    // Náhled: OND-449 (B-06) — tentýž soubor jako lead detailu, CSS z něj ořízne 16:10 shora.
     $hero = portfolio_card_thumbnail($project->screenshots ?? collect());
 
     $category = __('projects.detail.category_label.' . $project->category);

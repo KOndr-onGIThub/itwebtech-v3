@@ -30,11 +30,8 @@
      předlohy z OND-390. Obsah je NEDOTČENÝ, mění se jen slovník. Každý lang klíč, který
      stránka tiskla dřív, tiskne i teď — ve stejném znění a pořadí.
 
-     Formulář je doslovný protějšek sekce „Poptávka" z homepage:
-     `.pd-form` → `.pd-form__intro` + `.pd-form__panel` → `.pd-field`.
-     Funkce se NEMĚNÍ — honeypot, přílohy, odeslání přes Alpine
-     a stav po odeslání jsou na stejných místech, s týmiž atributy,
-     jmény polí i id (viz poznámky u každého z nich níž).
+     Formulář je od OND-448 (B-01) TÝŽ jako v sekci „Poptávka" na homepage:
+     sdílená komponenta `<x-lead-form>` (`.pd-form__panel` → `.pd-field`).
 
      `pd` přibylo k `pd--depth pd--depth-sub` (základ OND-379 §4 krok 1).
      Vrstva hloubky: sekce si drží `data-pdd="contact-form"`
@@ -127,141 +124,21 @@
                 </dl>
 
                 {{-- Kotva na formulář. Dřív acidová pilulka — teď terciální odkaz:
-                     acidové tlačítko je na stránce jedno, „Odeslat zprávu". --}}
+                     acidové tlačítko je na stránce jedno, „Poslat poptávku". --}}
                 <p class="pd-more">
                     <a href="#kontaktni-formular" class="pd-more__link">{{ __('contact.cta_consultation') }}</a>
                 </p>
             </aside>
 
-            {{-- FUNKCE — ODESLÁNÍ: `x-data="contactForm(…)"` a `id="kontaktni-formular"`
-                 zůstávají na kořeni formuláře, jen se třída `.contact-form` mění na
-                 `.pd-form__panel`. Tím dostane desku, nabitou hranu i proud do políčka
-                 z homepage (hloubka.css §B11, §C) — výjimka 1 ze základu je na
-                 `.pd-form__panel` napsaná už teď a hloubka.js ji na podstránce
-                 pozoruje. `$root.scrollIntoView` po odeslání míří sem. --}}
-            <div id="kontaktni-formular" class="pd-form__panel"
-                 x-data="contactForm({ genericError: @js(__('contact.message_error')) })">
-
-                {{-- FUNKCE — STAV PO ODESLÁNÍ: `x-show="submitted"` tady,
-                     `x-show="!submitted"` na titulku, perexu a formuláři níž.
-                     OND-437 (návrh 2): potvrzení vykreslí server
-                     (`partials.lead-confirmation`, pole `confirmation` v JSON
-                     odpovědi) — čas přijetí i e-mail zná až po odeslání. --}}
-                <div class="pd-form__thanks" x-show="submitted" x-cloak x-html="confirmation"></div>
-
+            {{-- OND-448 (B-01): sdílený `<x-lead-form>` — tentýž formulář jako
+                 na homepage (pole, chování, potvrzení). Předmět a zaškrtávací
+                 souhlas jsou pryč, přílohy sbalené. `id="kontaktni-formular"`
+                 drží kotvu „Napište mi“ a spodní lištu na mobilu. Titulek
+                 a perex jsou uvnitř: po odeslání je vymění potvrzení. --}}
+            <x-lead-form source="contact" id="kontaktni-formular" :note="false">
                 <h2 class="pd-head__title" x-show="!submitted">{{ __('contact.form_heading') }}</h2>
                 <p class="pd-intro" x-show="!submitted">{{ __('contact.form_subheading') }}</p>
-
-                {{-- FUNKCE — ODESLÁNÍ: `@submit.prevent="submit"`, `novalidate`,
-                     `x-ref="form"` beze změny. --}}
-                <form @submit.prevent="submit" novalidate x-show="!submitted" x-ref="form">
-                    @csrf
-
-                    {{-- FUNKCE — HONEYPOT: táž komponenta, totéž id. --}}
-                    <x-form.honeypot id="contact-website-url" />
-
-                    {{-- OND-437: `POST /contact` nemá jazyk v URL — potvrzení
-                         se vykreslí v jazyce stránky podle tohohle pole. --}}
-                    <input type="hidden" name="locale" value="{{ app()->getLocale() }}">
-
-                    {{-- Jména polí (`name`, `email`, `tel`, `subject`, `message`,
-                         `gdpr`, `attachment[]`) a id jsou beze změny — na nich stojí
-                         serverová validace i `errors.*` v contactForm. Homepage
-                         posílá telefon jako `phone`, tady zůstává `tel`. --}}
-                    <div class="pd-form__grid">
-                        <div class="pd-field pd-field--full">
-                            <label for="name">{{ __('contact.name') }} <span aria-hidden="true">*</span></label>
-                            <input type="text" id="name" name="name" required autocomplete="name"
-                                   placeholder="{{ __('contact.name') }}"
-                                   @input="clearError('name')"
-                                   :aria-invalid="errors.name ? 'true' : null"
-                                   :aria-describedby="errors.name ? 'name-error' : null">
-                            <p class="pd-field__error" id="name-error" x-show="errors.name" x-text="errors.name" x-cloak></p>
-                        </div>
-
-                        <div class="pd-field">
-                            <label for="email">{{ __('contact.email') }} <span aria-hidden="true">*</span></label>
-                            <input type="email" id="email" name="email" required autocomplete="email"
-                                   placeholder="vas@email.cz"
-                                   @input="clearError('email')"
-                                   :aria-invalid="errors.email ? 'true' : null"
-                                   :aria-describedby="errors.email ? 'email-error' : null">
-                            <p class="pd-field__error" id="email-error" x-show="errors.email" x-text="errors.email" x-cloak></p>
-                        </div>
-
-                        {{-- OND-256/4: telefon je nepovinný, pošťouchnutí pod polem
-                             říká, co člověk získá, když ho vyplní (rozhodnutí boardu). --}}
-                        <div class="pd-field">
-                            <label for="tel">{{ __('contact.tel') }}</label>
-                            <input type="tel" id="tel" name="tel" autocomplete="tel"
-                                   placeholder="+420 000 000 000"
-                                   @input="clearError('tel')"
-                                   :aria-invalid="errors.tel ? 'true' : null"
-                                   :aria-describedby="errors.tel ? 'tel-error' : 'tel-hint'">
-                            <p class="pd-field__hint" id="tel-hint">{{ __('contact.tel_hint') }}</p>
-                            <p class="pd-field__error" id="tel-error" x-show="errors.tel" x-text="errors.tel" x-cloak></p>
-                        </div>
-
-                        <div class="pd-field pd-field--full">
-                            <label for="subject">{{ __('contact.subject') }}</label>
-                            <input type="text" id="subject" name="subject"
-                                   placeholder="{{ __('contact.subject') }}"
-                                   @input="clearError('subject')"
-                                   :aria-invalid="errors.subject ? 'true' : null"
-                                   :aria-describedby="errors.subject ? 'subject-error' : null">
-                            <p class="pd-field__error" id="subject-error" x-show="errors.subject" x-text="errors.subject" x-cloak></p>
-                        </div>
-
-                        <div class="pd-field pd-field--full">
-                            <label for="message">{{ __('contact.message') }}</label>
-                            <textarea id="message" name="message" rows="5"
-                                      placeholder="{{ __('contact.message_placeholder') }}"
-                                      @input="clearError('message')"
-                                      :aria-invalid="errors.message ? 'true' : null"
-                                      :aria-describedby="errors.message ? 'message-error' : null"></textarea>
-                            <p class="pd-field__error" id="message-error" x-show="errors.message" x-text="errors.message" x-cloak></p>
-                        </div>
-                    </div>
-
-                    {{-- FUNKCE — PŘÍLOHY: táž komponenta, žádný prop se nemění.
-                         Mimo `.pd-field` schválně: proud do políčka patří jen
-                         textovým polím (dnes to hlídal `:has()` v hloubka.css §E3). --}}
-                    <x-form.file-drop />
-
-                    {{-- Souhlas zůstává na sdílené třídě `.form-group--checkbox`
-                         (landing page ji používá taky). Mimo `.pd-field` ze stejného
-                         důvodu jako přílohy: zaškrtávátko se nevyplňuje. --}}
-                    <div class="form-group form-group--checkbox">
-                        <label>
-                            <input type="checkbox" name="gdpr" required
-                                   @change="clearError('gdpr')"
-                                   :aria-invalid="errors.gdpr ? 'true' : null"
-                                   :aria-describedby="errors.gdpr ? 'gdpr-error' : null">
-                            {{-- Text i odkaz musí být JEDEN flex item (OND-374). --}}
-                            <span>{{ __('contact.agree') }}<a href="{{ lroute('privacy') }}">{{ __('contact.policy') }}</a></span>
-                        </label>
-                        <p class="pd-field__error" id="gdpr-error" x-show="errors.gdpr" x-text="errors.gdpr" x-cloak></p>
-                    </div>
-
-                    {{-- Pád bez 422 (500, výpadek sítě) — jediná souhrnná hláška.
-                         `x-ref="formError"` beze změny, jen `.form-alert` → `.pd-alert`. --}}
-                    <p class="pd-alert pd-alert--error" role="alert" x-ref="formError"
-                       x-show="formError" x-text="formError" x-cloak></p>
-
-                    <button type="submit" class="pd-cta pd-form__submit" :disabled="loading">
-                        <span class="btn__inner" x-show="!loading">
-                            {{ __('contact.send') }}
-                            <x-icon.arrow-right class="w-4 h-4 shrink-0 pd-cta__arrow" />
-                        </span>
-                        <span class="btn__inner" x-show="loading" x-cloak>
-                            <svg class="btn__spinner" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
-                            </svg>
-                            {{ __('contact.sending') ?? '...' }}
-                        </span>
-                    </button>
-                </form>
-            </div>
+            </x-lead-form>
         </div>
     </div>
 </section>

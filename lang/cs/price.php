@@ -4,7 +4,7 @@ return [
 
     'meta' => [
         'title'       => 'Ceník — Ondřej Kriška, ONDRAWEB',
-        'description' => 'Orientační ceník webových stránek, e-shopů a webových aplikací. Jasná představa o investici ještě před první konzultací.',
+        'description' => 'Orientační ceník webových stránek, e-shopů a webových aplikací. Jasná představa o investici ještě před prvním hovorem.',
     ],
 
     'subheading' => 'Orientační ceny',
@@ -13,7 +13,7 @@ return [
     // OND-354: prahové číslo a rozpětí místo menu tří balíčků (Ondřej 26. 9.
     // 2026 na OND-347). Odmítací věta „pokud hledáte web do dvaceti tisíc…"
     // je tím pryč — spodní hranice 20 000 Kč říká totéž bez odmítnutí.
-    'intro'      => 'Většina projektů vychází mezi 55 a 150 tisíci korunami. Nejmenší web, který stavím, je prezentace do pěti stránek od 20 000 Kč. Co na webu bude a kolik to bude stát, dostanete písemně před začátkem práce — a to číslo je i na faktuře.',
+    'intro'      => 'Většina projektů vychází mezi 55 a 150 tisíci korunami. Nejmenší věc, kterou stavím, je jednoduchý prezentační web od 20 000 Kč. Co na webu bude a kolik to bude stát, dostanete písemně před začátkem práce — a to číslo je i na faktuře.',
 
     // OND-135 P2 iter 5 — plán §3.1 hero (page-mark + amber accent).
     // OND-135 cleanup (2026-05-14): page_mark_index odebrán — agency-
@@ -31,12 +31,12 @@ return [
     // OND-391: nevykresluje se (plovoucí tlačítko z /cenik odešlo, OND-393).
     'sticky_cta' => [
         'label' => 'Vyberte si pásmo',
-        'cta'   => 'Chci nezávaznou nabídku',
+        'cta'   => 'Napsat poptávku',
     ],
 
     'popular'   => 'Nejoblíbenější',
     // OND-391: `quotation` se nevykresluje (tlačítka u doplňků odešla, OND-393).
-    'quotation' => 'Nezávazná poptávka',
+    'quotation' => 'Poptávka',
 
     // OND-359: uvození odkazu na případovku v kartě úrovně. Slovo „Případovka"
     // drží stejné pojmenování jako `projects.snapshots.subheading` — ať je po
@@ -54,20 +54,20 @@ return [
     //
     // OND-359: `proof` je odkaz na reálnou případovku — cena vysvětlená
     // ukázkou, ne výčtem funkcí (zadání z dokumentu ke [OND-347], oddíl 4.3).
-    // `slug` je jazykově neutrální `portfolio_projects.slug`; žádný z těch tří
-    // projektů nemá lokalizovaný slug, takže adresa je ve všech jazycích stejná
-    // a `detailUrl()` ji poskládá s lokalizovaným prefixem (/projekty,
-    // /en/projects, /de/projekte). `label` drží titul, jaký nese hlavička
+    // `slug` je jazykově neutrální `portfolio_projects.slug`; `detailUrl()`
+    // z něj poskládá adresu s lokalizovaným prefixem (/projekty, /en/projects,
+    // /de/projekte) i lokalizovaným slugem, pokud ho projekt má (OND-448:
+    // `pitarena-eshop` → en `pitarena-online-shop`, de `pitarena-onlineshop`). `label` drží titul, jaký nese hlavička
     // případovky — člověk musí poznat, že klikl tam, kam mířil.
     'tiers' => [
         [
             'key'     => 'presentation',
             'name'    => 'Prezentační web',
-            'scope'   => 'do 5 stránek',
-            'desc'    => 'Důvěryhodná online prezentace pro živnostníky a malé firmy.',
+            'scope'   => 'Aby si vás zákazník ověřil',
+            'desc'    => 'Kdo jste, co děláte, jak vás zastihnout',
             'popular' => false,
             'features' => [
-                'Do 5 stránek na míru',
+                'Kdo jste, co děláte a jak vás zastihnout, na míru',
                 'Moderní responzivní design',
                 'Kontaktní formulář',
                 'Technické SEO',
@@ -75,19 +75,19 @@ return [
                 '14 dní podpory po spuštění',
             ],
             'proof' => [
-                'slug'  => 'vanspedition',
-                'label' => 'VAN spedition',
+                'slug'  => 'kemp-veselka',
+                'label' => 'Autokemp Veselka',
             ],
-            'cta' => 'Chci nezávaznou nabídku',
+            'cta' => 'Napsat poptávku',
         ],
         [
             'key'     => 'business',
             'name'    => 'Firemní web',
-            'scope'   => 'do 12 stránek',
-            'desc'    => 'Vícejazyčný web s blogem, měřením konverzí a rezervačním systémem.',
+            'scope'   => 'Aby zákazník pochopil, proč právě vy',
+            'desc'    => 'Víc služeb, víc jazyků, reference i blog',
             'popular' => true,
             'features' => [
-                'Do 12 stránek na míru',
+                'Struktura postavená na tom, co vaši zákazníci hledají',
                 'Konverzní design zaměřený na výsledky',
                 'Blog nebo galerie s editací obsahu',
                 'Vícejazyčný web',
@@ -99,16 +99,16 @@ return [
                 'slug'  => 'zubni-provazek',
                 'label' => 'Zubní Provázek',
             ],
-            'cta' => 'Chci nezávaznou nabídku',
+            'cta' => 'Napsat poptávku',
         ],
         [
             'key'     => 'custom',
-            'name'    => 'Na míru',
-            'scope'   => 'bez omezení rozsahu',
-            'desc'    => 'E-shop, webová aplikace nebo komplexní portál.',
+            'name'    => 'E-shop a aplikace',
+            'scope'   => 'Aby systém pracoval za vás',
+            'desc'    => 'E-shop, rezervace, napojení na vaše systémy',
             'popular' => false,
             'features' => [
-                'Neomezený rozsah projektu',
+                'Rozsah podle toho, co má systém umět',
                 'E-shop nebo rezervační systém',
                 'Vlastní administrační rozhraní',
                 'Pokročilá SEO strategie s reportingem',
@@ -116,22 +116,31 @@ return [
                 '3 měsíce podpory po spuštění',
             ],
             'proof' => [
-                'slug'  => 'pitarena',
-                'label' => 'PitArena',
+                'slug'  => 'pitarena-eshop',
+                'label' => 'PitArena — e-shop',
             ],
-            'cta' => 'Chci nezávaznou nabídku',
+            'cta' => 'Napsat poptávku',
         ],
     ],
 
+    // OND-448 (B-08): věta hned pod balíčky (jen /cenik, na homepage ne).
+    // Počet stránek se nikde neuvádí jako hranice ceny ani balíčku.
+    'pages_note' => 'Cenu neurčuje počet stránek, ale kolik toho má web vysvětlit a umět. Přesný rozsah i cenu máte písemně ve specifikaci.',
+
     // OND-354: nahrazuje omluvné „Výjimka, ne standardní vstup." u nejnižší
     // úrovně. Neodmítá člověka, ale říká, co za ty peníze nepřijde.
-    'entry_note' => 'Za dvacet tisíc postavím web do pěti stránek. Bude rychlý, na telefonu se bude ovládat dobře a nebude na něm rozbitý odkaz na poptávku. Nečekejte od něj, že vám sám začne vozit zakázky — na to je potřeba víc práce, než se za tu cenu dá odvést. Ale hotový bude poctivě.',
+    'entry_note' => 'Za dvacet tisíc postavím jednoduchý prezentační web. Bude rychlý, na telefonu se bude ovládat dobře a nebude na něm rozbitý odkaz na poptávku. Nečekejte od něj, že vám sám začne vozit zakázky — na to je potřeba víc práce, než se za tu cenu dá odvést. Ale hotový bude poctivě.',
 
     'note' => 'Nejsem plátce DPH — uvedené ceny jsou konečné, nic se k nim nepřičítá.',
 
     'guarantees' => [
         'heading' => 'Co je součástí každého projektu',
         'items'   => [
+            // OND-448 (B-08): finální texty píše vždy Ondřej z odpovědí klienta.
+            [
+                'title' => 'Texty píšu já',
+                'text'  => 'Nemusíte nic psát. Zeptám se vás na to podstatné a z vašich odpovědí napíšu texty celého webu. Inspirace, třeba do stránky o vás, je vítaná.',
+            ],
             [
                 'title' => 'Bezúdržbové weby',
                 'text'  => 'Žádný WordPress, žádné pluginy třetích stran. Ušetříte tisíce ročně oproti WordPressu — bez měsíčních aktualizací a bezpečnostních záplat.',
@@ -187,19 +196,20 @@ return [
         'up'   => [
             'label' => 'Zvedá cenu',
             'items' => [
-                'Víc než pět stránek',
+                'Víc služeb nebo produktů, které je potřeba srozumitelně vysvětlit',
                 'Druhý a další jazyk',
-                'E-shop nebo rezervační systém',
+                'E-shop, rezervace nebo online platby',
                 'Vlastní administrace obsahu',
                 'Napojení na systémy, které už používáte',
-                'Texty a fotky, které je potřeba vytvořit',
+                'Fotky, které je potřeba nafotit nebo nakoupit',
             ],
         ],
         'down' => [
             'label' => 'Snižuje cenu',
             'items' => [
-                'Texty a fotky máte připravené',
-                'Menší počet stránek',
+                'Úplné a rychlé odpovědi na moje otázky',
+                'Jeden člověk na vaší straně, který rozhoduje',
+                'Fotky, které už máte v dobré kvalitě',
                 'Jeden jazyk',
                 'Obsah si po zaškolení plníte sami',
             ],
@@ -211,8 +221,10 @@ return [
         // OND-369: `desc` je podtitulek téže výzvy jako tlačítko, ne próza
         // jinde v textu — proto z něj „zdarma“ padá spolu s popiskem. Ceník
         // od OND-354 stojí na prahovém čísle; bezplatná schůzka vedle toho
-        // slibuje něco jiného. Nezávaznost i 30 minut zůstávají.
-        'desc'    => 'Konzultace je nezávazná. Během 30 minut zjistím, co dává pro váš byznys smysl — a upřímně vám řeknu i to, jestli spolupráce smysl nemá.',
+        // slibuje něco jiného.
+        // OND-448 (B-02): první krok je úvodní hovor (asi 15 minut), ne
+        // „konzultace“; web nikde neslibuje nezávaznou ani bezplatnou nabídku.
+        'desc'    => 'Stačí krátký úvodní hovor, asi 15 minut. Zjistím, co dává pro váš byznys smysl, a upřímně vám řeknu i to, jestli spolupráce smysl nemá.',
         'btn'     => 'Napsat poptávku',
     ],
 

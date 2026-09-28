@@ -29,14 +29,25 @@ class ContactMessage extends Mailable
 
     public function envelope(): Envelope
     {
+        // OND-448: předmět formulář už nemá, starší záznamy ho mít můžou.
         $subject = $this->submission->subject
             ? 'Nová poptávka: '.$this->submission->subject
-            : 'Nová zpráva z kontaktního formuláře';
+            : 'Nová poptávka z webu ('.self::sourceLabel($this->submission->source).')';
 
         return new Envelope(
             subject: $subject,
             replyTo: [new Address($this->submission->email, $this->submission->name)],
         );
+    }
+
+    /** OND-448: `home` / `contact` → místo na webu, odkud poptávka přišla. */
+    public static function sourceLabel(?string $source): string
+    {
+        return match ($source) {
+            'home'    => 'homepage',
+            'contact' => '/kontakt',
+            default   => 'web',
+        };
     }
 
     public function content(): Content

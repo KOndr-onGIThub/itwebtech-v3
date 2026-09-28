@@ -138,7 +138,7 @@ return [
         'cta_heading'   => 'Pokud sedí 2 a více bodů, má smysl to řešit.',
         // OND-369: `cta_text` je próza o tom, co se stane — zůstává.
         // Popisek tlačítka vede na /kontakt, takže mluví stejně jako hlavička.
-        'cta_text'      => 'Během úvodní konzultace najdeme nejkratší cestu k funkčnímu řešení bez zbytečných funkcí navíc.',
+        'cta_text'      => 'Už při krátkém úvodním hovoru poznáme, jestli a jak vám můžu pomoct, bez zbytečných funkcí navíc.',
         'cta_primary'   => 'Napsat poptávku',
         'cta_secondary' => 'Nejdřív ceník',
     ],
@@ -164,6 +164,13 @@ return [
         'no_content'      => 'K tomuto projektu zatím není dostupný podrobný popis.',
         'related_heading' => 'Další projekty',
         'visit_live'      => 'Navštívit web',
+        // OND-449 (B-05): blok za „Výsledkem“; věta z `live_hint` v DB, prázdná = default.
+        'live_heading'      => 'Vyzkoušejte si to naživo',
+        'live_hint_default' => 'Web si můžete projít sami, otevře se v novém okně.',
+        // OND-449 (B-09): řádek pod výsledkem, jen když je vyplněné `result_as_of` i `result_source`.
+        // Ve formátu data jsou nezlomitelné mezery (U+00A0), datum se nesmí rozdělit na dva řádky.
+        'result_source'      => 'Stav k :date. Zdroj: :source.',
+        'result_date_format' => 'j. n. Y',
         'meta'            => [
             'client'   => 'Klient',
             'year'     => 'Rok',

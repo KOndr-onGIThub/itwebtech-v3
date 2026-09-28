@@ -53,6 +53,8 @@ class LeadsRecent extends Command
                 'tel'         => $l->tel,
                 'subject'     => $l->subject,
                 'locale'      => $l->locale,
+                // OND-448: `home` / `contact` — odkud poptávka přišla.
+                'source'      => $l->source,
                 'mail_status' => $l->mail_status,
                 'mail_error'  => $l->mail_error,
                 // OND-264: ať je na jeden pohled vidět, jestli přílohy dorazily.
@@ -70,12 +72,13 @@ class LeadsRecent extends Command
         }
 
         $this->table(
-            ['ID', 'Jméno', 'E-mail', 'Předmět', 'Lang', 'Mail', 'Přílohy', 'Vytvořeno'],
+            ['ID', 'Jméno', 'E-mail', 'Předmět', 'Odkud', 'Lang', 'Mail', 'Přílohy', 'Vytvořeno'],
             $leads->map(fn (ContactSubmission $l) => [
                 $l->id,
                 \Illuminate\Support\Str::limit($l->name, 20),
                 \Illuminate\Support\Str::limit($l->email, 28),
                 \Illuminate\Support\Str::limit($l->subject ?? '—', 28),
+                $l->source ?? '—',
                 $l->locale ?? '—',
                 $l->mail_status,
                 count($l->attachments ?? []) ?: '—',

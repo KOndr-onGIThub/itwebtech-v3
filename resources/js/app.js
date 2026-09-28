@@ -5,6 +5,8 @@ import './analytics';
 import './hloubka';
 // OND-440 — záznamy živých webů v případovkách. Sám se vypne bez `[data-live]`.
 import './live-recordings';
+// OND-449 — video smyčky na detailu projektu. Sám se vypne bez `[data-demo-video]`.
+import './demo-videos';
 import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;
@@ -52,6 +54,9 @@ Alpine.data('fileDropZone', ({
     error: '',
 
     init() {
+        // OND-448: formulář drží přílohy rozbalené, dokud je vybraný soubor.
+        this.$watch('files', (files) => this.$dispatch('file-drop:files', files.length));
+
         // contactForm dispatches this event after successful submit
         this.$el.addEventListener('file-drop:reset', () => {
             this.files = [];
@@ -138,15 +143,35 @@ Alpine.data('fileDropZone', ({
 // Contact / inquiry form — async submit s inline chybami
 // ---------------------------------------------------------------------------
 // OND-256/1: dřív se chyby ukazovaly v anglickém SweetAlert2 modálu
-// („Submission error" / „Close"). Teď stejný vzor jako inline formulář na
-// homepage — česká hláška pod polem, kterého se týká. `genericError` je
-// přeložený text pro pád, který nemá 422 payload (500, výpadek sítě).
-Alpine.data('contactForm', ({ genericError = '' } = {}) => ({
+// („Submission error" / „Close"). Teď hláška pod polem, kterého se týká.
+// `genericError` je přeložený text pro pád, který nemá 422 payload (500,
+// výpadek sítě).
+// OND-448 (B-01): jediný poptávkový formulář webu (`<x-lead-form>`) — homepage
+// i /kontakt. `source` (`home` / `contact`) rozliší místo v analytice.
+Alpine.data('contactForm', ({ genericError = '', source = 'contact' } = {}) => ({
     loading: false,
     submitted: false,
     confirmation: '',
     errors: {},
     formError: '',
+    // Přílohy: sbalené za textovým tlačítkem. S vybraným souborem (hlásí
+    // `fileDropZone` přes `file-drop:files`) nebo s chybou příloh ze serveru
+    // zůstanou rozbalené, ať člověk nepřijde o přehled, co posílá.
+    attachOpen: false,
+    attachFiles: 0,
+    attachError: false,
+
+    toggleAttachments() {
+        if (this.attachOpen) {
+            if (this.attachFiles === 0 && !this.attachError) this.attachOpen = false;
+            return;
+        }
+        this.attachOpen = true;
+        // `x-show` zónu ukáže až v dalším snímku, skrytý prvek fokus nevezme.
+        this.$nextTick(() => requestAnimationFrame(() => {
+            this.$refs.attachments?.querySelector('.form-file__trigger')?.focus();
+        }));
+    },
 
     // Chyba u pole zmizí, jakmile ho uživatel začne opravovat.
     clearError(field) {
@@ -159,16 +184,25 @@ Alpine.data('contactForm', ({ genericError = '' } = {}) => ({
     async submit() {
         const form = this.$refs.form;
         const data = new FormData(form);
+        const detail = { form_source: source };
         this.loading = true;
         this.errors = {};
         this.formError = '';
+
+        // Záloha ke klik delegátu na tlačítku — Enter v poli odešle formulář
+        // bez kliknutí. analytics.js dvojí hlášení v jednom okamžiku sloučí.
+        window.dispatchEvent(new CustomEvent('inline-form-submit-attempt', { detail }));
 
         try {
             const response = await window.axios.post('/contact', data);
 
             // OND-137 P4 §6: analytics form_submit event (Jack §6) — dispatch
             // CustomEvent který analytics.js přemapuje na canonical `form_submit`.
-            window.dispatchEvent(new CustomEvent('contact-form-submit-success'));
+            // OND-448: názvy událostí zůstávají podle místa, ať měření navazuje.
+            window.dispatchEvent(new CustomEvent(
+                source === 'home' ? 'inline-form-submit-success' : 'contact-form-submit-success',
+                { detail },
+            ));
 
             // OND-136: in-DOM thank-you state replaces the form on success.
             // OND-437: potvrzení vykreslil server (`confirmation` v odpovědi).
@@ -211,6 +245,8 @@ Alpine.data('contactForm', ({ genericError = '' } = {}) => ({
                     .find(([field]) => field === 'attachment' || field.startsWith('attachment.'));
 
                 if (attachmentError) {
+                    this.attachOpen = true;
+                    this.attachError = true;
                     form.querySelectorAll('[x-data]').forEach(el => {
                         el.dispatchEvent(new CustomEvent('file-drop:error', { detail: attachmentError[1] }));
                     });

@@ -240,27 +240,46 @@ if (!function_exists('screenshot_tile_ratio')) {
     }
 }
 
+if (!function_exists('portfolio_lead_image')) {
+    /**
+     * OND-449 (B-06): hlavní obrázek projektu — JEDEN pro kartu (/projekty,
+     * „Další projekty“) i pro lead detailu. Přechod karta → detail slibuje
+     * „tatáž věc zblízka“; když karta brala první čtvercový snímek a detail
+     * první široký, obsah se při přechodu vyměnil (9 z 21 projektů).
+     *
+     * Pravidlo detailu (OND-202/265) zůstává: první široký snímek (poměr
+     * ≥ 1,5), `hero` má přednost. Karta z něj bere ořez 16:10 shora.
+     * Čtvercový snímek jako lead nikdy — přes celou šířku by přebil hero
+     * (past OND-268). Řádky `thumbnail` jsou jen záloha pro projekt bez
+     * širokého snímku (dnes žádný).
+     *
+     * @param \Illuminate\Support\Collection|iterable|null $screens
+     */
+    function portfolio_lead_image($screens)
+    {
+        $screens = collect($screens ?? []);
+        $ordered = $screens->reject(fn ($s) => $s->type === 'thumbnail')
+            ->sortBy(fn ($s) => $s->type === 'hero' ? 0 : 1)
+            ->values();
+
+        return $ordered->first(fn ($s) => screenshot_gallery_role($s->path) === 'wide');
+    }
+}
+
 if (!function_exists('portfolio_card_thumbnail')) {
     /**
-     * OND-202: výběr náhledovky do malé karty (výpis projektů, homepage).
-     * Wide 3-device mockup je v malé kartě nečitelný (zadání boardu) —
-     * preferujeme explicitní `thumbnail`, pak první čtvercový snímek
-     * (detailní záběr jednoho zařízení), teprve pak hero/první.
+     * Náhled do karty projektu. OND-449 (B-06): = `portfolio_lead_image()`,
+     * tentýž soubor jako lead detailu. Bez širokého snímku záloha z dřívějška:
+     * explicitní `thumbnail`, pak `hero`, pak první.
      *
-     * OND-265: „čtvercový" se zpřísnil z `role === 'card'` (cokoli pod 1.5)
-     * na skutečně čtvercový. Volnější pravidlo bralo jako náhledovku první
-     * lepší snímek pod 1.5 a vyrábělo nesmyslné miniatury: HCMS dostal
-     * functions-model diagram (1760×1191), picker mobilní obrazovku
-     * a vanspedition screenshot STARÉHO webu klienta. Bez čtvercového snímku
-     * je lepší `hero` (preview banner projektu).
-     *
-     * @param \Illuminate\Support\Collection $screens
+     * @param \Illuminate\Support\Collection|iterable|null $screens
      */
     function portfolio_card_thumbnail($screens)
     {
         $screens = collect($screens ?? []);
-        return $screens->firstWhere('type', 'thumbnail')
-            ?? $screens->first(static fn ($s) => screenshot_is_square_ish($s->path))
+
+        return portfolio_lead_image($screens)
+            ?? $screens->firstWhere('type', 'thumbnail')
             ?? $screens->firstWhere('type', 'hero')
             ?? $screens->first();
     }
@@ -295,6 +314,17 @@ if (!function_exists('responsive_image_srcsets')) {
         static $cache = [];
         if (isset($cache[$path])) {
             return $cache[$path];
+        }
+
+        // OND-449 (B-06): přesná mapa „zdrojová cesta → varianty“, kterou
+        // zapisuje build (plugin `image-variants` ve vite.config.js). Glob podle
+        // basename níž u obrázků projektů nefunguje — `hero-1`, `gallery-2` …
+        // sdílí 20+ projektů, glob vrátí stovky souborů a spadne do Alpine
+        // fallbacku. Lead detailu se pak dosazoval až skriptem a obrázek karty
+        // při přechodu přejel do prázdného rámu.
+        $exact = responsive_image_variant_map()[$path] ?? null;
+        if (is_array($exact)) {
+            return $cache[$path] = responsive_image_srcsets_from_files($exact);
         }
 
         $basename = pathinfo($path, PATHINFO_FILENAME);
@@ -361,6 +391,70 @@ if (!function_exists('responsive_image_srcsets')) {
         $largest = explode(' ', (string) $largest)[0];
 
         return $cache[$path] = [
+            'avif'     => implode(', ', $variants['avif']),
+            'webp'     => implode(', ', $variants['webp']),
+            'fallback' => $fallback,
+            'largest'  => $largest,
+        ];
+    }
+}
+
+if (!function_exists('responsive_image_variant_map')) {
+    /**
+     * OND-449: `public/build/image-variants.json` z buildu —
+     * `{ "projects/barana/hero-1.png": ["assets/hero-1-….avif", "assets/hero-1-….webp", …] }`
+     * v pořadí, v jakém je vrací `import.meta.glob` v resources/js/app.js
+     * (šířky 320 → 1536, u každé AVIF a WebP). Bez buildu prázdná mapa.
+     *
+     * @return array<string, list<string>>
+     */
+    function responsive_image_variant_map(): array
+    {
+        static $map = null;
+        if ($map === null) {
+            $file = public_path('build/image-variants.json');
+            $map = is_file($file) ? (json_decode((string) file_get_contents($file), true) ?: []) : [];
+        }
+
+        return $map;
+    }
+}
+
+if (!function_exists('responsive_image_srcsets_from_files')) {
+    /**
+     * OND-449: srcset z přesného seznamu variant (viz `responsive_image_variant_map()`).
+     * N-tá varianta formátu = N-tá šířka ze seznamu. Menší zdroj než 1536 px dá
+     * u větších šířek tentýž soubor (Vite ho sloučí) — ten se vypíše jednou,
+     * s nejmenší šířkou, stejně jako to dělá Alpine fallback.
+     *
+     * @param  list<string>  $files
+     * @return array{avif:string,webp:string,fallback:string,largest:string}|null
+     */
+    function responsive_image_srcsets_from_files(array $files): ?array
+    {
+        $widthList = [320, 480, 640, 768, 960, 1280, 1536];
+        $variants = ['avif' => [], 'webp' => []];
+        $seen = [];
+        $index = ['avif' => 0, 'webp' => 0];
+        foreach ($files as $file) {
+            $format = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+            if (! isset($variants[$format])) {
+                continue;
+            }
+            $width = $widthList[$index[$format]++] ?? end($widthList);
+            if (isset($seen[$file])) {
+                continue;
+            }
+            $seen[$file] = true;
+            $variants[$format][] = asset('build/' . ltrim($file, '/')) . ' ' . $width . 'w';
+        }
+        if (! $variants['avif'] && ! $variants['webp']) {
+            return null;
+        }
+        $fallback = explode(' ', $variants['webp'][0] ?? $variants['avif'][0])[0];
+        $largest = explode(' ', (string) (end($variants['webp']) ?: end($variants['avif'])))[0];
+
+        return [
             'avif'     => implode(', ', $variants['avif']),
             'webp'     => implode(', ', $variants['webp']),
             'fallback' => $fallback,

@@ -22,6 +22,9 @@ class PortfolioProjectTranslation extends Model
         'challenge',
         'solution',
         'result',
+        // OND-449: B-09 zdroj výsledku, B-05 věta „co si na živém webu vyzkoušet“.
+        'result_source',
+        'live_hint',
         'meta_title',
         'meta_description',
         'og_image',

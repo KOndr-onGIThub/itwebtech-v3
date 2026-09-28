@@ -14,7 +14,7 @@ return [
     // 26. 9. 2026 auf OND-347); der Ablehnungssatz ist damit weg. Die
     // CZK-Untergrenze (20.000) wird absichtlich NICHT umgerechnet — siehe
     // lang/de/home.php.
-    'intro'      => 'Die meisten Projekte liegen zwischen 3.500 und 8.000 €. Das Kleinste, was ich baue, ist eine Präsentationswebsite mit bis zu fünf Seiten, ab 1.900 €. Was auf der Website steht und was sie kostet, erhalten Sie schriftlich vor Arbeitsbeginn — und diese Zahl steht auch auf der Rechnung.',
+    'intro'      => 'Die meisten Projekte liegen zwischen 3.500 und 8.000 €. Das Kleinste, was ich baue, ist eine einfache Präsentationswebsite ab 1.900 €. Was auf der Website steht und was sie kostet, erhalten Sie schriftlich vor Arbeitsbeginn — und diese Zahl steht auch auf der Rechnung.',
 
     // OND-135 P2 iter 5 — Plan §3.1 Hero (Page-Mark + Amber-Akzent).
     // OND-135 Bereinigung (2026-05-14): page_mark_index entfernt — Agency-
@@ -32,12 +32,12 @@ return [
     // OND-391: nevykresluje se (plovoucí tlačítko z /cenik odešlo, OND-393).
     'sticky_cta' => [
         'label' => 'Stufe wählen',
-        'cta'   => 'Unverbindliches Angebot anfordern',
+        'cta'   => 'Anfrage schreiben',
     ],
 
     'popular'   => 'Beliebteste Wahl',
     // OND-391: `quotation` se nevykresluje (tlačítka u doplňků odešla, OND-393).
-    'quotation' => 'Angebot anfragen',
+    'quotation' => 'Anfrage',
 
     // OND-359: Einleitung des Case-Study-Links in der Stufenkarte. Die
     // Bezeichnung ist dieselbe wie in `projects.snapshots.subheading`, damit
@@ -63,11 +63,11 @@ return [
         [
             'key'     => 'presentation',
             'name'    => 'Präsentationswebsite',
-            'scope'   => 'bis 5 Seiten',
-            'desc'    => 'Ein glaubwürdiger Online-Auftritt für Selbstständige und kleine Unternehmen.',
+            'scope'   => 'Damit Kunden Sie prüfen können',
+            'desc'    => 'Wer Sie sind, was Sie tun, wie man Sie erreicht',
             'popular' => false,
             'features' => [
-                'Bis zu 5 individuelle Seiten',
+                'Wer Sie sind, was Sie tun und wie man Sie erreicht, individuell umgesetzt',
                 'Modernes responsives Design',
                 'Kontaktformular',
                 'Technische SEO',
@@ -75,19 +75,19 @@ return [
                 '14 Tage Support nach dem Launch',
             ],
             'proof' => [
-                'slug'  => 'vanspedition',
-                'label' => 'VAN spedition',
+                'slug'  => 'kemp-veselka',
+                'label' => 'Autokemp Veselka',
             ],
-            'cta' => 'Unverbindliches Angebot anfordern',
+            'cta' => 'Anfrage schreiben',
         ],
         [
             'key'     => 'business',
             'name'    => 'Firmenwebsite',
-            'scope'   => 'bis 12 Seiten',
-            'desc'    => 'Eine mehrsprachige Website mit Blog, Konversionsmessung und Buchungssystem.',
+            'scope'   => 'Damit Kunden verstehen, warum gerade Sie',
+            'desc'    => 'Mehr Leistungen, mehr Sprachen, Referenzen und Blog',
             'popular' => true,
             'features' => [
-                'Bis zu 12 individuelle Seiten',
+                'Eine Struktur, die darauf aufbaut, wonach Ihre Kunden suchen',
                 'Konversionsorientiertes Design',
                 'Blog oder Galerie mit Inhaltsverwaltung',
                 'Mehrsprachige Website',
@@ -99,16 +99,16 @@ return [
                 'slug'  => 'zubni-provazek',
                 'label' => 'Zubní Provázek',
             ],
-            'cta' => 'Unverbindliches Angebot anfordern',
+            'cta' => 'Anfrage schreiben',
         ],
         [
             'key'     => 'custom',
-            'name'    => 'Individuell',
-            'scope'   => 'ohne Umfangsgrenze',
-            'desc'    => 'Ein Online-Shop, eine Webanwendung oder ein komplexes Portal.',
+            'name'    => 'Online-Shops und Anwendungen',
+            'scope'   => 'Damit das System für Sie arbeitet',
+            'desc'    => 'Online-Shop, Buchungen, Anbindung an Ihre Systeme',
             'popular' => false,
             'features' => [
-                'Unbegrenzter Projektumfang',
+                'Umfang danach, was das System können muss',
                 'Online-Shop oder Buchungssystem',
                 'Eigenes Verwaltungsinterface',
                 'Erweiterte SEO-Strategie mit Reporting',
@@ -116,22 +116,31 @@ return [
                 '3 Monate Support nach dem Launch',
             ],
             'proof' => [
-                'slug'  => 'pitarena',
-                'label' => 'PitArena',
+                'slug'  => 'pitarena-eshop',
+                'label' => 'PitArena — Onlineshop',
             ],
-            'cta' => 'Unverbindliches Angebot anfordern',
+            'cta' => 'Anfrage schreiben',
         ],
     ],
 
+    // OND-448 (B-08): Satz direkt unter den Stufen (nur /cenik, nicht auf der Startseite).
+    // Die Seitenzahl wird nirgends als Preis- oder Stufengrenze genannt.
+    'pages_note' => 'Den Preis bestimmt nicht die Seitenzahl, sondern wie viel die Website erklären und können muss. Den genauen Umfang und Preis haben Sie schriftlich in der Spezifikation.',
+
     // OND-354: ersetzt das entschuldigende „Eine Ausnahme, kein
     // Standard-Einstieg." auf der niedrigsten Stufe.
-    'entry_note' => 'Für 1.900 € baue ich Ihnen eine Website mit bis zu fünf Seiten. Sie wird schnell sein, auf dem Handy sauber funktionieren, und kein Link zum Anfrageformular wird ins Leere führen. Erwarten Sie nicht, dass sie von allein Aufträge bringt — dafür braucht es mehr Arbeit, als der kleinste Umfang zulässt. Aber sie wird ordentlich gemacht.',
+    'entry_note' => 'Für 1.900 € baue ich Ihnen eine einfache Präsentationswebsite. Sie wird schnell sein, auf dem Handy sauber funktionieren, und kein Link zum Anfrageformular wird ins Leere führen. Erwarten Sie nicht, dass sie von allein Aufträge bringt — dafür braucht es mehr Arbeit, als der kleinste Umfang zulässt. Aber sie wird ordentlich gemacht.',
 
     'note' => 'Ich bin nicht umsatzsteuerpflichtig — die genannten Preise sind Endpreise, es kommt keine Mehrwertsteuer hinzu.',
 
     'guarantees' => [
         'heading' => 'Was in jedem Projekt enthalten ist',
         'items'   => [
+            // OND-448 (B-08): Die finalen Texte schreibt immer Ondřej aus den Antworten des Kunden.
+            [
+                'title' => 'Die Texte schreibe ich',
+                'text'  => 'Sie müssen nichts schreiben. Ich frage Sie nach dem Wesentlichen und schreibe aus Ihren Antworten die Texte der ganzen Website. Anregungen, etwa für die Seite über Sie, sind willkommen.',
+            ],
             [
                 'title' => 'Wartungsfreie Websites',
                 'text'  => 'Kein WordPress, keine Drittanbieter-Plugins. Sparen Sie jedes Jahr mehrere hundert Euro gegenüber WordPress — keine monatlichen Updates und keine Kosten für Sicherheits-Patches.',
@@ -186,19 +195,20 @@ return [
         'up'   => [
             'label' => 'Erhöht den Preis',
             'items' => [
-                'Mehr als fünf Seiten',
+                'Mehr Leistungen oder Produkte, die verständlich erklärt werden müssen',
                 'Eine zweite und weitere Sprachen',
-                'Ein Online-Shop oder ein Buchungssystem',
+                'Ein Online-Shop, Buchungen oder Online-Zahlungen',
                 'Eine eigene Inhaltsverwaltung',
                 'Anbindung an Systeme, die Sie bereits nutzen',
-                'Texte und Fotos, die erst erstellt werden müssen',
+                'Fotos, die erst gemacht oder gekauft werden müssen',
             ],
         ],
         'down' => [
             'label' => 'Senkt den Preis',
             'items' => [
-                'Texte und Fotos liegen bereit',
-                'Weniger Seiten',
+                'Vollständige und schnelle Antworten auf meine Fragen',
+                'Eine Person auf Ihrer Seite, die entscheidet',
+                'Fotos, die Sie bereits in guter Qualität haben',
                 'Eine Sprache',
                 'Sie pflegen die Inhalte nach einer Einführung selbst',
             ],
@@ -210,8 +220,10 @@ return [
         // OND-369: `desc` ist der Untertitel derselben Handlungsaufforderung
         // wie der Button, keine Prosa an anderer Stelle — „kostenlos“ fällt
         // also mit dem Label weg. Die Preisliste (OND-354) baut auf einer
-        // Schwelle auf. Unverbindlichkeit und 30 Minuten bleiben.
-        'desc'    => 'Die Beratung ist unverbindlich. In 30 Minuten sage ich Ihnen, was für Ihr Unternehmen sinnvoll ist — ehrlich, auch wenn das bedeutet, dass wir nicht zusammenarbeiten sollten.',
+        // Schwelle auf.
+        // OND-448 (B-02): Der erste Schritt ist ein Erstgespräch (ca. 15 Minuten),
+        // keine „Beratung“; nirgends ein kostenloses oder unverbindliches Angebot.
+        'desc'    => 'Ein kurzes Erstgespräch genügt, etwa 15 Minuten. Ich kläre, was für Ihr Unternehmen sinnvoll ist, und sage Ihnen ehrlich auch, wenn eine Zusammenarbeit keinen Sinn ergibt.',
         'btn'     => 'Anfrage schreiben',
     ],
 

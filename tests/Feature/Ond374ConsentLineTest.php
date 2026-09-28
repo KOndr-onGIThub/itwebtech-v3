@@ -14,6 +14,9 @@ use Tests\TestCase;
  * zel `gap`. Angličtina a němčina defekt neukazovaly jen proto, že se jim to
  * náhodou vešlo na jeden řádek.
  *
+ * OND-448 (B-01): na /kontakt zaškrtávátko odešlo (bloky 1–3 teď hlídají, že se
+ * nevrátí). Na landing page zůstává a blok 4 platí dál.
+ *
  * Testuje se struktura, ne vizuál — na tu se to dá zachytit v PHP:
  *  1. Za `<input>` stojí v labelu **právě jeden** element a je to `<span>`,
  *     který drží text i odkaz. Tohle je vlastní oprava.
@@ -34,68 +37,35 @@ class Ond374ConsentLineTest extends TestCase
     ];
 
     // ------------------------------------------------------------------
-    // 1. + 3. Struktura labelu na /kontakt
+    // 1.–3. OND-448 (B-01): zaškrtávací souhlas z poptávkového formuláře
+    // (homepage i /kontakt) odešel. Zprávu zpracovávám kvůli jednání
+    // o smlouvě (čl. 6 odst. 1 písm. b GDPR), souhlas k tomu není potřeba.
+    // Místo něj stojí pod tlačítkem informační věta s odkazem na zásady.
     // ------------------------------------------------------------------
 
-    /**
-     * Jádro opravy. Obsah labelu za `<input>` musí být jeden jediný `<span>` —
-     * jakýkoli holý textový uzel vedle něj by se ve flexu stal dalším sloupcem.
-     */
-    public function test_consent_label_wraps_text_and_link_in_one_element_in_every_locale(): void
+    public function test_lead_form_has_no_consent_checkbox_but_links_the_privacy_policy(): void
     {
-        foreach (self::CONTACT_PAGES as $locale => $path) {
-            $inner = $this->consentLabelInner($this->get($path)->assertOk()->getContent(), $path);
+        $pages = self::CONTACT_PAGES + ['cs-home' => '/', 'en-home' => '/en/', 'de-home' => '/de/'];
 
-            $this->assertMatchesRegularExpression(
-                '~^<span>.*</span>$~s',
-                $inner,
-                "`{$path}` ({$locale}): obsah labelu za checkboxem není jeden `<span>`, ".
-                "takže text a odkaz jsou pořád dva flex itemy:\n{$inner}",
-            );
-
-            $this->assertStringContainsString(
-                e(trans('contact.policy', [], $locale)),
-                $inner,
-                "`{$path}` ({$locale}): odkaz na zásady ze řádku souhlasu zmizel.",
-            );
-        }
-    }
-
-    /**
-     * Protějšek bloku 1: `<span>` sice může existovat, ale s nalámaným
-     * whitespace mezi textem a odkazem. `contact.agree` končí mezerou, takže
-     * mezi koncem věty a `<a` smí stát právě jedna.
-     */
-    public function test_exactly_one_space_separates_the_sentence_from_the_link(): void
-    {
-        foreach (self::CONTACT_PAGES as $locale => $path) {
-            $inner = $this->consentLabelInner($this->get($path)->assertOk()->getContent(), $path);
-
-            $this->assertStringContainsString(
-                e(rtrim(trans('contact.agree', [], $locale))).' <a',
-                $inner,
-                "`{$path}` ({$locale}): mezi větou a odkazem není právě jedna mezera ".
-                "— v šabloně přibyl nový řádek nebo odsazení:\n{$inner}",
-            );
-        }
-    }
-
-    /**
-     * Ze zadání důležitější než samotný zlom: `<input>` zůstává uvnitř
-     * `<label>`, takže klik na text checkbox přepíná i po přeobalení.
-     */
-    public function test_checkbox_stays_inside_the_label_so_clicking_the_text_toggles_it(): void
-    {
-        foreach (self::CONTACT_PAGES as $locale => $path) {
+        foreach ($pages as $key => $path) {
+            $locale = substr($key, 0, 2);
             $body = $this->get($path)->assertOk()->getContent();
+            $panel = substr($body, strpos($body, 'class="pd-form__panel"'));
+            $panel = substr($panel, 0, strpos($panel, '</form>'));
 
-            $this->assertMatchesRegularExpression(
-                '~<label>\s*<input[^>]*name="gdpr"[^>]*>~',
-                $body,
-                "`{$path}` ({$locale}): checkbox už není prvním dítětem `<label>` ".
-                'a klik na text ho nemusí přepnout.',
+            $this->assertStringNotContainsString('name="gdpr"', $panel, "`{$path}`: zaškrtávátko se souhlasem zůstalo.");
+            $this->assertStringNotContainsString('type="checkbox"', $panel, "`{$path}`: ve formuláři je checkbox.");
+            $this->assertStringContainsString(
+                e(trans('home.inline_form.privacy_prefix', [], $locale)).'<a href="'.e($this->privacyUrl($locale)).'">'.e(trans('home.inline_form.privacy_link', [], $locale)).'</a>.',
+                $panel,
+                "`{$path}` ({$locale}): chybí informační věta s odkazem na zásady.",
             );
         }
+    }
+
+    private function privacyUrl(string $locale): string
+    {
+        return route($locale.'.privacy');
     }
 
     // ------------------------------------------------------------------

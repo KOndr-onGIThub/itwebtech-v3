@@ -81,7 +81,7 @@ return [
     // gestrichen. Zwei Projektsektionen sagten dasselbe, BARANA und PitArena
     // standen in beiden. Zusammengelegt in die eine Sektion `portfolio`
     // unten, die die Überschrift von hier übernommen hat und einen Link zur
-    // Live-Website bekam (`live_cta` / `live_aria`).
+    // Live-Website bekam (`live_cta` / `live_aria`; OND-449 B-05: zrušeno).
 
     // OND-308: Der Block `problems` ist weg — die neue Startseite definiert
     // sich nicht mehr über die Negation der Konkurrenz. An seiner Stelle steht
@@ -109,16 +109,16 @@ return [
         'cta_more_slug'    => 'vorbereitung-auf-die-neue-website',
         'steps'   => [
             [
-                'heading'      => 'Beratung',
-                'time'         => '60 Min., binnen einer Woche',
-                'text'         => 'Sie schreiben mir über das Formular unten, worum es geht. Ich melde mich spätestens am nächsten Arbeitstag und wir verabreden ein Telefonat oder ein Treffen. Sie sprechen mit mir, nicht mit einem Vertriebler — mich interessiert, an wen Sie verkaufen, wie Anfragen bei Ihnen entstehen und was die Website leisten soll.',
+                'heading'      => 'Erstgespräch',
+                'time'         => 'ca. 15 Min.',
+                'text'         => 'Sie schreiben mir über das Formular unten, worum es geht. Ich melde mich spätestens am nächsten Arbeitstag und rufe Sie an. Sie sprechen mit mir, nicht mit einem Vertriebler. Ich kläre, was die Website leisten soll, und sage Ihnen gleich, ob ich Ihnen helfen kann.',
                 'quote_text'   => 'Er hat mir wirklich zugehört und daraus etwas gemacht, mit dem ich rundum zufrieden bin.',
                 'quote_ref'    => 'magda-pernicova',
             ],
             [
                 'heading'      => 'Spezifikation',
                 'time'         => '2–5 Tage',
-                'text'         => 'Sie bekommen es schriftlich: was auf der Website steht, wie viele Seiten sie hat und was sie kostet. Was in der Spezifikation steht, steht auf der Rechnung. Den Liefertermin schätze ich vorher ein, nicht hinterher.',
+                'text'         => 'Wenn es Sinn ergibt, setzen wir uns an die Details: an wen Sie verkaufen, wie Anfragen bei Ihnen entstehen, was die Website können soll. Danach bekommen Sie schriftlich, was auf der Website steht und was sie kostet. Was in der Spezifikation steht, steht auf der Rechnung. Den Liefertermin schätze ich vorher ein, nicht hinterher.',
                 'quote_text'   => 'Er analysiert die Ausgangslage gründlich und will die bestehenden Prozesse wirklich verstehen. Er sammelt die Anforderungen der Nutzer und fragt nach, wohin es gehen soll.',
                 'quote_ref'    => 'jan-stybor',
                 'note'         => 'Der Termin ist eine Schätzung, keine Verpflichtung. Freigaben und Unterlagen von Ihrer Seite gehören zur Arbeit, und ich sage das gleich am Anfang.',
@@ -173,8 +173,6 @@ return [
         'intro'      => 'Das sind Live-Projekte, die Sie sich sofort ansehen können. Bei jedem steht auch, was es dem Kunden gebracht hat.',
         'cta'        => 'Alle Projekte →',
         'detail_cta' => 'Projekt ansehen',
-        'live_cta'   => 'Live-Website öffnen',
-        'live_aria'  => 'Website von :client in neuem Fenster öffnen',
         // OND-440: Leiste des Rahmens mit der Aufnahme der Live-Website. Das Datum
         // gehört zum Projekt (config site.live_recordings), hier nur sein Format.
         'live' => [
@@ -187,12 +185,12 @@ return [
         'cards' => [
             'pitarena' => [
                 'client'  => 'PitArena',
-                'outcome' => 'Trainingsplätze sind Monate im Voraus ausgebucht — Buchungen, Gutscheine und Event-Anmeldungen laufen ohne manuellen Eingriff über das Web.',
+                'outcome' => 'Über 15.000 Besuche aus Google in 16 Monaten und eine eigene Rennanmeldung mit Online-Zahlung.',
             ],
             'barana' => [
                 'client'  => 'BARANA',
                 // OND-198 (Befund 5.5): Werbeplattform-Jargon in Kundensprache umgeschrieben.
-                'outcome' => 'Eine eigenständige Seite für bezahlte Werbung — Besucher verstehen das Angebot ohne Anruf.',
+                'outcome' => 'Eine Website, die eine teure Pergola ohne lange Texte erklärt: Besucher stellen die Lamellen selbst ein und erleben die Terrasse vom Morgen bis in den Winter.',
             ],
             'nove-interiery' => [
                 'client'  => 'Nové interiéry',
@@ -267,7 +265,7 @@ return [
         // ist damit weg. Die CZK-Untergrenze von 20.000 wird hier ABSICHTLICH
         // nicht umgerechnet: 800 € kaufen im deutschsprachigen Markt eine
         // Landingpage, keine Website — EN/DE tragen nur die Spanne.
-        'intro'   => 'Die meisten Projekte, die ich baue, liegen zwischen 3.500 und 8.000 €. Das Kleinste ist eine Präsentationswebsite mit bis zu fünf Seiten, ab 1.900 € — weniger Umfang, nicht weniger Qualität. Den genauen Preis erhalten Sie schriftlich nach einem kurzen Gespräch.',
+        'intro'   => 'Die meisten Projekte, die ich baue, liegen zwischen 3.500 und 8.000 €. Das Kleinste ist eine einfache Präsentationswebsite ab 1.900 € — weniger Umfang, nicht weniger Qualität. Den genauen Preis erhalten Sie schriftlich in der Spezifikation.',
         // OND-354: Die Karten tragen den UMFANG, nicht den Preis, und heißen
         // nach dem, was entsteht. Reihenfolge nach wachsendem Umfang, die
         // mittlere ist hervorgehoben.
@@ -275,20 +273,20 @@ return [
         'items'   => [
             [
                 'title'    => 'Präsentationswebsite',
-                'scope'    => 'bis 5 Seiten',
-                'desc'     => 'Ein glaubwürdiger Online-Auftritt für Selbstständige und kleine Unternehmen.',
+                'scope'    => 'Damit Kunden Sie prüfen können',
+                'desc'     => 'Wer Sie sind, was Sie tun, wie man Sie erreicht',
                 'featured' => false,
             ],
             [
                 'title'    => 'Firmenwebsite',
-                'scope'    => 'bis 12 Seiten',
-                'desc'     => 'Eine mehrsprachige Website mit Blog, Konversionsmessung und Buchungssystem.',
+                'scope'    => 'Damit Kunden verstehen, warum gerade Sie',
+                'desc'     => 'Mehr Leistungen, mehr Sprachen, Referenzen und Blog',
                 'featured' => true,
             ],
             [
-                'title'    => 'Individuell',
-                'scope'    => 'ohne Umfangsgrenze',
-                'desc'     => 'Ein Online-Shop, eine Webanwendung oder ein komplexes Portal.',
+                'title'    => 'Online-Shops und Anwendungen',
+                'scope'    => 'Damit das System für Sie arbeitet',
+                'desc'     => 'Online-Shop, Buchungen, Anbindung an Ihre Systeme',
                 'featured' => false,
             ],
         ],
@@ -354,7 +352,7 @@ return [
             [
                 'key'      => 'duration',
                 'question' => 'Wie lange dauert es?',
-                'answer'   => 'Von der ersten Nachricht bis zum Launch typischerweise 4–12 Wochen — eine Woche Beratung, 2–5 Tage für die Spezifikation, 3–10 Wochen Umsetzung und Launch bis zum nächsten Werktag nach Freigabe. Den genauen Zeitplan für Ihr Projekt halte ich in der Spezifikation fest.',
+                'answer'   => 'Von der ersten Nachricht bis zum Launch typischerweise 4–12 Wochen — ein Erstgespräch innerhalb weniger Tage, etwa eine Woche für ein ausführliches Treffen und die Spezifikation, 3–10 Wochen Umsetzung und Launch bis zum nächsten Werktag nach Freigabe. Den genauen Zeitplan für Ihr Projekt halte ich in der Spezifikation fest.',
             ],
             [
                 'key'      => 'satisfaction',
@@ -392,12 +390,15 @@ return [
         'email'           => 'E-Mail',
         'phone'           => 'Telefon (optional)',
         'phone_hint'      => 'Mit Nummer melde ich mich schneller.',
+        // Anhänge sind hinter diesem Textbutton eingeklappt (OND-448, B-01);
+        // das vorangestellte `+` rendert `<x-lead-form>`.
+        'attach_toggle'   => 'Dateien hinzufügen (optional)',
         'message'         => 'Was möchten Sie lösen?',
         'placeholders'    => [
             'name'    => 'Max Mustermann',
             'email'   => 'max@firma.de',
             'phone'   => '+420 000 000 000',
-            'message' => 'Z. B. neue Website für ein produzierendes Unternehmen, 5–10 Seiten',
+            'message' => 'Z. B. neue Website für ein produzierendes Unternehmen, 5–10 Seiten — oder schreiben Sie, wann ich Sie anrufen soll',
         ],
         'submit'          => 'Anfrage senden',
         'submitting'      => 'Wird gesendet…',
@@ -413,14 +414,13 @@ return [
             'reply'        => 'Ich antworte spätestens am :date persönlich an :email. Mehr müssen Sie jetzt nicht tun.',
             'steps_aria'   => 'Wie es weitergeht',
             'steps'        => [
-                ['label' => 'Beratung', 'text' => 'Innerhalb einer Woche telefonieren wir oder treffen uns, etwa eine Stunde, und gehen durch, was die Website leisten soll.'],
-                ['label' => 'Spezifikation', 'text' => '2–5 Tage nach der Beratung bekommen Sie schriftlich, was auf der Website steht und was sie kostet.'],
-                ['label' => 'Entscheidung', 'text' => 'Sie entscheiden erst, wenn die fertige Spezifikation vor Ihnen liegt. Bis dahin verpflichtet Sie nichts.'],
+                ['label' => 'Erstgespräch', 'text' => 'Ich rufe Sie an, für etwa 15 Minuten. Ich kläre, worum es geht, und sage Ihnen gleich, ob ich Ihnen helfen kann.'],
+                ['label' => 'Spezifikation', 'text' => 'Wenn es Sinn ergibt, gehen wir die Details gemeinsam durch, und Sie bekommen schriftlich, was auf der Website steht und was sie kostet.'],
+                ['label' => 'Entscheidung', 'text' => 'Über die Umsetzung entscheiden Sie erst, wenn die fertige Spezifikation vor Ihnen liegt.'],
             ],
             'more'         => 'Bis ich mich melde, können Sie nachlesen, :article_link.',
             'more_article' => 'welche neun Fragen Sie vor dem Website-Projekt klären sollten',
         ],
-        'error'           => 'Die Anfrage konnte gerade nicht gespeichert werden. Bitte versuchen Sie es erneut.',
     ],
 
     // OND-308: `cta` versprach einen Kalender, den es seit OND-303 nicht
