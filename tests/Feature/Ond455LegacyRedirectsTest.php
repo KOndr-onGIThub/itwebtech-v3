@@ -19,7 +19,7 @@ class Ond455LegacyRedirectsTest extends TestCase
 
     private const CANONICAL = 'ondraweb.cz';
 
-    /** Stará cesta → cíl. Deset adres ze zadání + `delejme-animace` z navigace itwebtech.cz. */
+    /** Stará cesta → cíl. Deset adres ze zadání + `delejme-animace` z navigace itwebtech.cz + Framer `/dekuji`. */
     private const LEGACY_PATHS = [
         '/sluzby'                            => '/#section-services',
         '/projekty/zoomorava'                => '/projekty',
@@ -32,6 +32,19 @@ class Ond455LegacyRedirectsTest extends TestCase
         '/projects/strechyzajic'             => '/projekty/strechy-zajic',
         '/projects/vpindustry'               => '/projekty/vp-industry',
         '/projects/delejme-animace'          => '/projekty',
+        '/dekuji'                            => '/',
+    ];
+
+    /**
+     * Celá tabulka stránek Framer webu `ondraweb.cz` (routy z jeho skriptů
+     * + CMS slugy ze sitemapy, 28. 9. 2026). Framer web zanikne, žádná
+     * z těch adres nesmí na novém webu skončit na 404.
+     */
+    private const FRAMER_PATHS = [
+        '/', '/kontakt', '/sluzby', '/projekty', '/recenze', '/dekuji',
+        '/projekty/barana', '/projekty/nove-interiery', '/projekty/zoomorava',
+        '/projekty/zubni-provazek', '/projekty/cyklocentrum', '/projekty/kemp-veselka',
+        '/projekty/pitarena', '/projekty/vp-industry', '/projekty/strechy-zajic',
     ];
 
     protected function setUp(): void
@@ -114,7 +127,8 @@ class Ond455LegacyRedirectsTest extends TestCase
         foreach (self::LEGACY_PATHS as $old => $target) {
             $response = $this->get($old);
             $response->assertStatus(301);
-            $this->assertSame(url($target), $response->headers->get('Location'), $old);
+            // `url('/')` vrací host bez koncového lomítka, redirect na homepage s ním.
+            $this->assertSame(rtrim(url($target), '/'), rtrim($response->headers->get('Location'), '/'), $old);
 
             $this->get($target)->assertOk();
         }
@@ -129,6 +143,18 @@ class Ond455LegacyRedirectsTest extends TestCase
 
             $response->assertOk();
             $this->assertLessThanOrEqual(2, $hops, $old);
+        }
+    }
+
+    public function test_every_framer_page_ends_on_200_within_one_hop(): void
+    {
+        $this->enableCanonicalHost();
+
+        foreach (self::FRAMER_PATHS as $old) {
+            [$response, $hops] = $this->follow('https://ondraweb.cz'.$old);
+
+            $response->assertOk();
+            $this->assertLessThanOrEqual(1, $hops, $old);
         }
     }
 
