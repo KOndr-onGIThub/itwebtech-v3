@@ -3,12 +3,12 @@
 return [
 
     'meta' => [
-        'title'       => 'Kontakt — Ondřej Kriška',
+        'title'       => 'Kontakt — Ondřej Kriška, ONDRAWEB',
         'description' => 'Zavolejte nebo napište a já se ozvu zpět. Kontaktní formulář, telefon a adresa.',
     ],
 
     'subheading'          => 'Pomůžu vám',
-    'heading'             => 'Ozvu se do 24 hodin v pracovní dny',
+    'heading'             => 'Ozvu se nejpozději následující pracovní den',
     // OND-201 (nález 5.9): „Ondřej Kriška, Česká republika" byl signál
     // anonymního dodavatele. Plná adresa a IČO jsou veřejné údaje, zvyšují
     // důvěru i lokální viditelnost.
@@ -25,25 +25,27 @@ return [
     'email_label'         => 'E-mail',
     'phone_label'         => 'Telefon',
     'hours_label'         => 'Dostupnost',
-    'open_hours'          => 'Ozvu se do 24 hodin v pracovní dny. O víkendech a svátcích nedržím pohotovost, ale nic mi nezapadne.',
+    'open_hours'          => 'Ozvu se nejpozději následující pracovní den. Víkendy a svátky se nepočítají, ale nic mi nezapadne.',
     'cta_consultation'    => 'Napište mi',
 
+    // OND-448 (B-01): pole, tlačítko, souhlas a potvrzení formuláře jsou od
+    // sjednocení v `home.inline_form` — /kontakt vykresluje týž `<x-lead-form>`.
     'form_heading'        => 'Kontaktní formulář',
-    'form_subheading'     => 'Získejte zdarma a nezávazně nabídku — nebo mi pošlete jakýkoli dotaz.',
-    'name'                => 'Celé jméno',
-    'email'               => 'Email',
-    'tel'                 => 'Telefon (nepovinný)',
-    'tel_hint'            => 'S číslem se ozvu rychleji.',
-    'subject'             => 'Předmět',
-    'message'             => 'Vaše zpráva',
-    'message_placeholder' => 'Stručně popište, co byste potřebovali — nebo jen napište, kdy vám mám zavolat…',
-    'agree'               => 'Souhlasím se zpracováním osobních údajů v souladu se ',
-    'policy'              => 'zásadami ochrany osobních údajů',
-    'send'                => 'Odeslat zprávu',
-    'sending'             => 'Odesílám...',
+    // OND-371: řádek sliboval „zdarma a nezávazně“ — tedy nízkou cenu místo
+    // výsledku, přesně to, co OND-369 vyřadilo z CTA napříč webem. Teď slibuje,
+    // co člověk dostane. Termín odpovědi tu schválně NENÍ: „ozvu se nejpozději
+    // následující pracovní den“ stojí už 3× nad formulářem (hero.subline,
+    // open_hours, next_steps krok 1), čtvrté zopakování by byl šum.
+    // Formulace drží slovník kroku 3 („rozsahem, termínem a přesnou cenou“).
+    // Délka je záměrná: na 1440 sedí na jeden řádek s rezervou 33 px, na 390
+    // padá na dva řádky bez sirotka. Delší varianta („na jakýkoli dotaz“) měla
+    // rezervu 4 px — jedno přeteklé písmo a řádek se zlomí. Změřeno, ne odhad.
+    // OND-448 (B-02): nové znění nic neslibuje („řeknu vám, jestli vám můžu
+    // pomoct“). Změřeno 28. 9. 2026 v cs/en/de: 1440 jeden řádek, 390 dva bez
+    // sirotka (deska na /kontakt nemá limit 58ch, jinak by se de zlomilo).
+    'form_subheading'     => 'Napište, co řešíte. Ozvu se osobně a řeknu vám, jestli vám můžu pomoct.',
     'required'            => 'Vyplňte prosím toto pole.',
     'enter_valid_email'   => 'Vložte platnou emailovou adresu.',
-    'policy_not_agreed'   => 'Pro odeslání musíme mít váš souhlas se zpracováním údajů.',
     // OND-256/8 — texty upload widgetu. Dřív byly natvrdo anglicky
     // v propech `x-form.file-drop`.
     'upload' => [
@@ -78,7 +80,7 @@ return [
         'heading_html'    => 'Žádné CRM,<br>žádné call centrum — <em>jen Ondřej</em>.',
         'eyebrow'      => 'Píšete přímo mně',
         'heading'      => 'Píšete přímo mně, Ondřejovi.',
-        'subline'      => 'Vaši zprávu si přečtu osobně. Ozvu se do 24 hodin v pracovní dny.',
+        'subline'      => 'Vaši zprávu si přečtu osobně. Když mi napíšete dnes, ozvu se nejpozději :date.',
         'photo_alt'    => 'Ondřej Kriška — autor a kontaktní osoba',
         'role_label'   => 'Vývojář, autor webu, jediný kontakt',
     ],
@@ -89,27 +91,18 @@ return [
         'heading' => 'Tři kroky — žádný marketingový trychtýř.',
         'steps'   => [
             [
-                'title' => 'Ozvu se do 24 hodin v pracovní dny',
-                'text'  => 'Dorazí vám e-mail ode mě osobně, ne automatická potvrzovací zpráva. O víkendech a svátcích nedržím pohotovost — ozvu se první pracovní den.',
+                'title' => 'Ozvu se nejpozději následující pracovní den',
+                'text'  => 'Dorazí vám e-mail ode mě osobně, ne automatická potvrzovací zpráva. Když napíšete v pátek večer, ozvu se v pondělí.',
             ],
             [
-                'title' => 'Dohodneme 30 minut hovoru',
-                'text'  => 'Krátký telefonát nebo videohovor — zjistíme, jestli má spolupráce smysl. Bez prezentace, bez slidů, bez prodejního tlaku.',
+                'title' => 'Krátký úvodní hovor',
+                'text'  => 'Asi 15 minut po telefonu. Zjistím, co řešíte, a řeknu vám rovnou, jestli vám umím pomoct. Bez prezentace a bez prodejního tlaku.',
             ],
             [
-                'title' => 'Dostanete písemnou nabídku',
-                'text'  => 'Do týdne pošlu specifikaci s rozsahem, termínem a přesnou cenou. Co bude ve specifikaci, bude i na faktuře.',
+                'title' => 'Domluvíme další postup',
+                'text'  => 'Když to dává smysl, projdeme detaily a sepíšu specifikaci s rozsahem, termínem a přesnou cenou. Co bude ve specifikaci, bude i na faktuře.',
             ],
         ],
-    ],
-
-    // Thank-you state — zobrazí se po úspěšném odeslání místo formuláře.
-    'thank_you' => [
-        'heading'  => 'Hotovo, zpráva dorazila.',
-        'subline'  => 'Děkuji. Přečtu si ji osobně a ozvu se do 24 hodin v pracovní dny.',
-        'next'     => 'Mezitím se můžete podívat na realizované projekty nebo si přečíst ceník.',
-        'cta_projects' => 'Realizované projekty',
-        'cta_price'    => 'Ceník',
     ],
 
     // Volitelné budget pole (sjednocené s home.inline_form a landing budgety).

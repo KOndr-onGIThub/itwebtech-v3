@@ -205,8 +205,11 @@ class Ond294GalleryFixesTest extends TestCase
         $this->assertFileExists(resource_path('img/'.self::THUMB_PATH));
 
         // Administrace ordinačních hodin (`hero-1`) musí zůstat mimo kartu.
+        // OND-449 (B-06): karta = lead detailu (`gallery-1`, web ordinace);
+        // řádek `thumbnail` zůstává jen jako záloha.
         $project = \App\Models\Portfolio\PortfolioProject::where('slug', self::THUMB_SLUG)->firstOrFail();
-        $this->assertSame(self::THUMB_PATH, portfolio_card_thumbnail($project->screenshots)->path);
+        $this->assertSame('projects/zubni-provazek/gallery-1.png', portfolio_card_thumbnail($project->screenshots)->path);
+        $this->assertSame(portfolio_lead_image($project->screenshots)->path, portfolio_card_thumbnail($project->screenshots)->path);
 
         $alts = DB::table('portfolio_project_screenshot_translations')
             ->where('screenshot_id', $thumb->id)

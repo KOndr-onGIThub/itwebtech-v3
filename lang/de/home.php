@@ -2,15 +2,19 @@
 
 return [
 
+    // OND-353: uvozovky kolem citací sází šablona, ne texty — aby se do
+    // `lang` nedostaly rovné ASCII " (opakovaná vada, viz lang/*/cookies.php
+    // jako zdroj pravdy). CS/DE mají „…“ (U+201E + U+201C), EN “…” (U+201C + U+201D).
+    'quote_marks' => ['open' => '„', 'close' => '“'],
+
     // OND-201 (Befund 5.7): Der Seitentitel darf sich nicht über die Negation
     // der Konkurrenz definieren, und „kein WordPress" sagt jemandem nichts,
     // der nicht weiß, was WordPress ist (Prinzip 0).
     'meta' => [
-        'title'       => 'Websites und Webanwendungen nach Maß | ONDRAWEB',
-        'description' => 'Websites, Onlineshops und Webanwendungen nach Maß für kleine und mittlere Unternehmen. Eigener Code, genauer Preis im Voraus, und Sie sprechen direkt mit mir. Ich bin Ondřej Kriška.',
+        'title'       => 'Websites nach Maß, die tragen, was gut läuft | ONDRAWEB',
+        'description' => 'Websites, Onlineshops und Webanwendungen nach Maß. Ich baue alles selbst mit eigenem Code, den Preis nenne ich vorab. 5,0 aus 26 Bewertungen.',
     ],
 
-    // TODO (OND-136 P3): final DE tone polish — Content Writer scope.
     'hero' => [
         // OND-127 P0 incident hotfix (2026-05-14) — Plagiat-Strings entfernt.
         // Placeholder copy aus meta description = pre-redesign safe copy.
@@ -20,25 +24,25 @@ return [
         // Artefakt, itwebtech hat im Hero-Kontext keine „pages" Hierarchie.
         // OND-198 (Befund 5.1): die alte Überschrift versprach das Geschäfts-
         // ergebnis des Kunden. Ersetzt durch den freigegebenen Hero-Text (CS = Quelle).
-        'upline'          => 'Für Unternehmen, die den Unterschied erkennen.',
-        'heading_html'    => 'Websites und Anwendungen <em>nach Maß</em>.<br>Ich baue sie selbst, mit eigenem Code.',
-        'subline'         => 'Ich bin Ondřej Kriška, erfahrener Entwickler. Sie arbeiten direkt mit mir — ohne Agentur, ohne Zwischenhändler. Ich baue Websites so, dass sie jahrelang laufen und Sie nicht mit Wartung aufhalten.',
-        'note'            => 'Ich melde mich innerhalb von 24 Stunden an Arbeitstagen. Unverbindlich besprechen wir, was sinnvoll ist.',
+        // OND-310: DE folgt jetzt dem neu geschriebenen CS-Hero (OND-307 /
+        // OND-308). Die alte Überschrift führte mit „eigenem Code" — ein
+        // technischer Begriff an genau der Stelle, an der der Besucher
+        // entscheidet, ob er überhaupt schreibt. Der eigene Code verschwindet
+        // nicht, er rutscht in die Subline und in „Was ich baue".
+        'upline'          => 'Für Unternehmen, die wachsen.',
+        'heading_html'    => 'Eine Website, die <em>trägt</em>, was bei Ihnen gut läuft.',
+        'subline'         => 'Ich bin Ondřej Kriška. Websites und Anwendungen baue ich mit eigenem Code, und ich mache die Arbeit selbst — vom ersten Gespräch bis zum Start sprechen Sie nur mit mir.',
+        // OND-437 (Vorschlag 1 aus OND-429): ein konkreter Tag statt „am
+        // nächsten Arbeitstag“. `:date` setzt App\Support\ReplyDate ein.
+        'note'            => 'Schreiben Sie mir heute, dann melde ich mich spätestens am :date. Unverbindlich besprechen wir, was sinnvoll ist.',
 
-        // Backwards compat (consultation modal, fallback render).
+        // Backwards compat (fallback render).
+        // OND-308: `cta_secondary` und `phone_label` entfernt — seit OND-303
+        // gibt es keine Reservierungen, und die Telefonnummer zersplittert
+        // die Entscheidung direkt unter dem Haupt-CTA.
         'eyebrow'       => 'Maßgeschneiderte Websites & Webanwendungen',
-        'heading'       => 'Websites und Anwendungen nach Maß. Ich baue sie selbst, mit eigenem Code.',
+        'heading'       => 'Eine Website, die trägt, was bei Ihnen gut läuft.',
         'cta_primary'   => 'Schreiben Sie mir, was Sie brauchen',
-        'cta_secondary' => '30-Min-Beratung vereinbaren',
-        'phone_label'   => 'oder anrufen:',
-    ],
-
-    'modal' => [
-        'title'             => 'Lassen Sie uns sprechen',
-        'subtitle'          => 'Kostenlose Beratung — unverbindlich, ohne Registrierung.',
-        'calendly_btn'      => 'Beratungstermin auswählen',
-        'cta_note'          => 'Kostenlos. Unverbindlich.',
-        'play_btn'          => 'Video abspielen',
     ],
 
     'anchors' => [
@@ -47,13 +51,16 @@ return [
     ],
 
     'social_proof' => [
+        // OND-315: `rating_aria` beschreibt nur die Bewertung und steht darum
+        // an dieser einen Zahl — im Streifen stehen auch Projekte, Jahre
+        // und Auszeichnung (Antwortzeit entfernt in OND-437). Landmark-Label: `strip_aria`.
         'rating_aria'  => 'Bewertung 5 von 5',
+        'strip_aria'   => 'Zahlen zu meiner Arbeit',
         'clients_aria' => 'Kunden',
         'rating_value' => '5,0',
-        'reviews'      => '(21 Bewertungen auf Google + Firmy.cz)',
+        'reviews'      => '(26 Bewertungen auf Google und Firmy.cz)',
         'projects'     => '23+ realisierte Projekte',
         'experience'   => '18 Jahre Erfahrung',
-        'response'     => 'Antwort innerhalb von 24 Stunden an Arbeitstagen',
         // OND-201 (Befund 5.11): Auszeichnung TOP firma 2025 von Firmy.cz —
         // überprüfbarer Nachweis Dritter, der auf Staging fehlte.
         'award'        => 'TOP firma 2025 auf Firmy.cz',
@@ -74,87 +81,87 @@ return [
     // gestrichen. Zwei Projektsektionen sagten dasselbe, BARANA und PitArena
     // standen in beiden. Zusammengelegt in die eine Sektion `portfolio`
     // unten, die die Überschrift von hier übernommen hat und einen Link zur
-    // Live-Website bekam (`live_cta` / `live_aria`).
+    // Live-Website bekam (`live_cta` / `live_aria`; OND-449 B-05: zrušeno).
 
-    // OND-201 (Befund 5.7): Der Abschnitt definierte sich über die Negation
-    // der Konkurrenz und zwei von drei Punkten sagten dasselbe. Jetzt führt,
-    // was ich tue (`lead`), die Abgrenzung ist kurz und die doppelten
-    // Punkte sind zu einem zusammengeführt.
-    'problems' => [
-        'heading'            => 'Wie ich Websites baue',
-        'lead'               => 'Jedes Projekt beginnt mit dem Verständnis Ihres Unternehmens. Ich schreibe eigenen Code von Grund auf, damit die Website dem folgt, wie Ihre Firma tatsächlich arbeitet. Sie sprechen direkt mit mir — von der ersten Nachricht bis zum Launch und darüber hinaus.',
-        'transition_heading' => 'Was Sie sich damit ersparen',
-        'transition_text'    => 'Die zwei Dinge, die ich bei Web-Projekten am häufigsten sehe.',
-        'items' => [
-            [
-                'heading'      => 'Eine Vorlage als individuelle Lösung verkauft',
-                'text'         => 'Ein Anbieter verwendet ein Layout, das er schon fünfmal genutzt hat, und fügt Ihren Text und Ihr Logo ein. Das Ergebnis wirkt professionell — bis Sie die Website der Konkurrenz öffnen und dieselben Abschnitte und dieselben Worte finden. Dazu hält die Plattform Sie in einem monatlichen Abonnement, das Sie nicht mitnehmen können.',
-                'quote_text'   => 'Ganz anders als die Möchtegern-Webdesigner, die für überhöhte Preise einfach Vorlagen mit Inhalten befüllen.',
-                'quote_author' => 'Petr Kroulík, Nové Interiéry s.r.o.',
-            ],
-            [
-                'heading' => 'Sie sprechen nie mit der Person, die die Website erstellt',
-                'text'    => 'Die Person, die Ihnen die Website verkauft, baut sie nicht. Die Personen, die sie bauen, sprechen nicht mit Ihnen. Kontext und Absicht gehen in der Mitte verloren — und das Ergebnis entspricht nicht dem, was Sie wollten.',
-            ],
-        ],
-        // OND-269 (Audit OND-254, Befund 7): Rest der gestrichenen Sektion
-        // „Generator versus Ihr Geschäft". Dasselbe Argument wie im ersten
-        // Punkt oben („eine Vorlage, verkauft als Maßarbeit") — es gehört
-        // hierher, nicht in eine eigene Sektion vier Bildschirme weiter unten.
-        'ai_heading' => 'Eine Vorlage ist schnell fertig. Anfragen kommen davon nicht.',
-        'ai_text'    => 'Ein Generator klickt ein Layout zusammen und füllt Texte und Bilder ein — er findet aber nicht heraus, an wen Sie verkaufen, warum ein Kunde Sie wählen sollte und wo Interessenten abspringen. KI nutze ich als Werkzeug; die Entscheidung, was die Website sagen soll und in welcher Reihenfolge, trifft sie nicht für Sie.',
+    // OND-308: Der Block `problems` ist weg — die neue Startseite definiert
+    // sich nicht mehr über die Negation der Konkurrenz. An seiner Stelle steht
+    // ein Absatz zur Situation des Kunden. OND-310 liefert die deutsche
+    // Fassung, damit der Absatz auch auf /de/ erscheint. Er beschreibt eine
+    // Situation, keinen Schmerz — der Leser nickt mit. Kein Schüren von
+    // Angst (Zadání, Kapitel 0.5).
+    //
+    // OND-320 (Variante G): Der Satz ist eine Aussage über Ondřej — wer ihm
+    // schreibt — keine Behauptung über den Leser. Nicht in die zweite Person
+    // zurückdrehen und kein Possessiv „Ihre Website": großgeschrieben liest
+    // sich das als Anrede, also genau die Perspektive, die hier wegsollte.
+    // Der Absatz muss einzeilig bleiben (`.pd-lead--wide`, 52ch): 70 Zeichen
+    // passen, ab ~74 bricht die Zeile um.
+    'situation' => [
+        'text' => 'Meist schreiben mir Leute, denen es gut läuft — nur die Website nicht.',
     ],
 
     'how_i_work' => [
-        'heading'   => 'Von der ersten Nachricht zur veröffentlichten Website — 4 klare Schritte.',
+        'heading'   => 'In vier Schritten von der ersten Nachricht zur fertigen Website',
         'cta_intro' => 'Gleich zu Schritt 1.',
-        'cta_label' => 'Beratung vereinbaren',
+        // OND-411: Fortsetzung von `cta_intro`; Slug ist der deutsche Artikel-Slug.
+        'cta_more'         => 'Oder erst zu den :article_link.',
+        'cta_more_article' => 'neun Fragen, die Sie vor dem Website-Projekt klären',
+        'cta_more_slug'    => 'vorbereitung-auf-die-neue-website',
         'steps'   => [
             [
-                'heading'      => 'Beratung',
-                'time'         => '60 Min., binnen einer Woche',
-                'text'         => 'Ich beginne mit einem Gespräch, nicht mit einem Formular. Ich muss Ihr Unternehmen und Ihre Kunden verstehen — und wissen, was die Website wirklich leisten soll: Kontakte bringen, ein Produkt verkaufen oder Vertrauen aufbauen.',
+                'heading'      => 'Erstgespräch',
+                'time'         => 'ca. 15 Min.',
+                'text'         => 'Sie schreiben mir über das Formular unten, worum es geht. Ich melde mich spätestens am nächsten Arbeitstag und rufe Sie an. Sie sprechen mit mir, nicht mit einem Vertriebler. Ich kläre, was die Website leisten soll, und sage Ihnen gleich, ob ich Ihnen helfen kann.',
                 'quote_text'   => 'Er hat mir wirklich zugehört und daraus etwas gemacht, mit dem ich rundum zufrieden bin.',
-                'quote_author' => 'Magda Pernicová, Realiťačky v akci',
+                'quote_ref'    => 'magda-pernicova',
             ],
             [
                 'heading'      => 'Spezifikation',
                 'time'         => '2–5 Tage',
-                'text'         => 'Bevor ich mit der Arbeit beginne, erhalten Sie eine schriftliche Spezifikation: was auf der Website sein wird, wie viele Seiten, welche Technologie und was es kostet. Keine Überraschungen auf der Rechnung. Den Liefertermin schätze ich realistisch ein — immer im Voraus, nie rückwirkend.',
+                'text'         => 'Wenn es Sinn ergibt, setzen wir uns an die Details: an wen Sie verkaufen, wie Anfragen bei Ihnen entstehen, was die Website können soll. Danach bekommen Sie schriftlich, was auf der Website steht und was sie kostet. Was in der Spezifikation steht, steht auf der Rechnung. Den Liefertermin schätze ich vorher ein, nicht hinterher.',
                 'quote_text'   => 'Er analysiert die Ausgangslage gründlich und will die bestehenden Prozesse wirklich verstehen. Er sammelt die Anforderungen der Nutzer und fragt nach, wohin es gehen soll.',
-                'quote_author' => 'Jan Stybor, Leiter der Projektabteilung, Toyota',
-                'note'         => 'Hinweis zu Terminen: Eine Website entsteht nicht nur auf meiner Seite. Genehmigungen, Unterlagen vom Kunden und Feedback sind Teil des Prozesses. Der Termin ist daher immer eine Schätzung, keine Verpflichtung — und ich sage das offen von Anfang an.',
+                'quote_ref'    => 'jan-stybor',
+                'note'         => 'Der Termin ist eine Schätzung, keine Verpflichtung. Freigaben und Unterlagen von Ihrer Seite gehören zur Arbeit, und ich sage das gleich am Anfang.',
             ],
             [
                 'heading' => 'Umsetzung',
                 'time'    => '3–10 Wochen',
-                'text'    => 'Ich halte Sie über den Fortschritt informiert und beziehe Sie in wichtige Entscheidungen ein. Das Ergebnis entspricht dem, was Sie sich gewünscht haben — weil ich nicht bis zum Ende des Projekts warte, um das herauszufinden.',
+                'text'    => 'Ich schreibe eigenen Code, deshalb richtet sich die Website nach Ihrem Unternehmen und nicht nach einem fertigen Layout. Zwischendurch schicke ich Ansichten und frage bei den Entscheidungen nach, die sich lohnen, gemeinsam zu treffen. Am Ende erfahren Sie nicht erst, ob es passt — Sie wissen es die ganze Zeit.',
             ],
             [
                 'heading' => 'Launch und Support',
                 'time'    => 'bis zum nächsten Werktag',
-                'text'    => 'Nach Ihrer Freigabe geht die Website in der Regel innerhalb eines Arbeitstages live. Nach dem Launch bleibe ich für Sie erreichbar — kleine Anpassungen, technische Fragen und Analytics-Hilfe laufen direkt über mich, ohne Ticket und ohne Warten.',
+                'text'    => 'Nach Ihrer Freigabe geht die Website in der Regel innerhalb eines Arbeitstages online. Danach gibt es daran nichts zu pflegen — sie hat keine Zusatzmodule, die monatliche Updates erzwingen, deshalb kommt in zwei Jahren keine Rechnung für die Reparatur von etwas, das von selbst kaputtgegangen ist. Kleine Änderungen und Fragen nach dem Start klären Sie direkt mit mir.',
                 'note'    => 'Launch innerhalb von 1 Arbeitstag nach Freigabe.',
             ],
         ],
     ],
 
-    // OND-269 (Audit OND-254, Befund 7): Die Sektion „Generator versus Ihr
-    // Geschäft" (zwei Spalten, acht Stichpunkte) ist gestrichen — der Board
-    // hat den Schnitt am 22. 9. freigegeben. Übrig blieben zwei Sätze in
-    // `problems.ai_heading` / `problems.ai_text`, wo dasselbe Argument
-    // ohnehin schon stand.
-
-    // OND-269: `toyota` ist keine eigene Sektion mehr — der Block wird
-    // innerhalb von „Warum mit mir" unter Video und Bio ausgegeben. Die
-    // Überschrift „18 Jahre bei Toyota" stand zuvor zweimal auf der Seite
-    // (hier und in `why_me.bio`), deshalb ist Toyota aus der Bio raus.
+    // OND-308: `toyota` ist eine eigene Sektion und trägt das Zitat von
+    // Pavel Baudyš.
+    // OND-314: das Video ist von hier nach „Wie es abläuft" umgezogen.
+    // OND-310: der deutsche Text folgt dem neu geschriebenen CS. Die alte
+    // Fassung nannte abstrakte Prinzipien („Analyse, Design, Testen,
+    // Verifizieren"), die neue sagt, was Ondřej dort wirklich getan hat.
+    // Hier prüft der Besucher das Handwerk, deshalb spricht die Sektion
+    // in Ondřejs Sprache.
+    // OND-344: die Sektion steht jetzt an sechster Stelle, hinter „Was ich
+    // baue" — und der Schlüssel `example` (das PitArena-Beispiel aus
+    // OND-318) ist weg. Nach dem Umzug stand ein Stück Angebot mitten in
+    // einer persönlichen Geschichte. Nicht ohne Entscheidung auf OND-344
+    // wieder einführen.
     'toyota' => [
-        'heading'      => '18 Jahre bei Toyota. Dann bin ich gegangen.',
-        'text'         => 'Die Automobilindustrie hat mir eines beigebracht: Hinter jedem Spitzenergebnis stehen immer dieselben Schritte. Analyse, Design, Testen, Verifizieren — und dann wieder. Keine Abkürzungen, keine Schätzungen. Prinzipien, die unabhängig von der Branche funktionieren.',
-        'text_2'       => 'Diese Prinzipien wende ich jetzt auf jedes Web-Projekt an. Sie werden es bei der ersten Beratung merken, in der Spezifikation, die Sie vor Arbeitsbeginn erhalten — und im Ergebnis.',
+        'heading'      => '18 Jahre bei Toyota.',
+        // Großbuchstaben macht CSS (`text-transform`), nicht dieser String.
+        'employer_label' => 'Ehemaliger Arbeitgeber',
+        // U+2060 (Word Joiner) nach dem Strich hält die Jahresspanne zusammen.
+        'text'         => 'Angefangen habe ich als Arbeiter in der Logistik, gegangen bin ich als leitender Spezialist im Projektteam. Achtzehn Jahre (2005–⁠2023) habe ich gesucht, wo in Produktion und Montage Zeit verloren geht, und dazu eine Firmenanwendung geschrieben, die Millionen Kronen gespart hat. In der Produktion können Sie sich nicht erlauben, dass etwas ausfällt. Dort habe ich gelernt: Software macht man richtig oder gar nicht.',
+        'text_2'       => 'Websites baue ich genauso. Bevor ich die erste Zeile schreibe, will ich wissen, wie Anfragen bei Ihnen entstehen und was danach mit ihnen passiert. Erst danach entsteht die Seite. Sie merken es an der Spezifikation, die Sie bekommen, bevor ich anfange.',
         'quote_text'   => 'Eine der größten Stärken von Ondřej ist sein starker Wunsch, sich zu entwickeln — nicht nur die Bedürfnisse der Kunden zu erfüllen, sondern ihre Erwartungen zu übertreffen.',
-        'quote_author' => 'Pavel Baudyš, Direktor Produktion, Montage & Logistik, Toyota Motor Manufacturing Czech Republic (2024)',
+        'quote_ref'    => 'pavel-baudys',
+        // OND-411: leiser Satz am Ende der Sektion, Muster wie `services.secondary_inline`.
+        'more_inline'       => 'Wie ich von der Werkshalle zu Websites gekommen bin, erzähle ich :about_link.',
+        'more_inline_about' => 'unter „Über mich“',
     ],
 
     // OND-269: die einzige Projektsektion der Startseite (früher `showcase`
@@ -166,17 +173,24 @@ return [
         'intro'      => 'Das sind Live-Projekte, die Sie sich sofort ansehen können. Bei jedem steht auch, was es dem Kunden gebracht hat.',
         'cta'        => 'Alle Projekte →',
         'detail_cta' => 'Projekt ansehen',
-        'live_cta'   => 'Live-Website öffnen',
-        'live_aria'  => 'Website von :client in neuem Fenster öffnen',
+        // OND-440: Leiste des Rahmens mit der Aufnahme der Live-Website. Das Datum
+        // gehört zum Projekt (config site.live_recordings), hier nur sein Format.
+        'live' => [
+            'kind'        => 'Live-Website',
+            'recorded'    => 'aufgenommen am :date',
+            'date_format' => 'd.m.Y',
+            'pause'       => 'Aufnahme anhalten',
+            'play'        => 'Aufnahme abspielen',
+        ],
         'cards' => [
             'pitarena' => [
                 'client'  => 'PitArena',
-                'outcome' => 'Trainingsplätze sind Monate im Voraus ausgebucht — Buchungen, Gutscheine und Event-Anmeldungen laufen ohne manuellen Eingriff über das Web.',
+                'outcome' => 'Über 15.000 Besuche aus Google in 16 Monaten und eine eigene Rennanmeldung mit Online-Zahlung.',
             ],
             'barana' => [
                 'client'  => 'BARANA',
                 // OND-198 (Befund 5.5): Werbeplattform-Jargon in Kundensprache umgeschrieben.
-                'outcome' => 'Eine eigenständige Seite für bezahlte Werbung — Besucher verstehen das Angebot ohne Anruf.',
+                'outcome' => 'Eine Website, die eine teure Pergola ohne lange Texte erklärt: Besucher stellen die Lamellen selbst ein und erleben die Terrasse vom Morgen bis in den Winter.',
             ],
             'nove-interiery' => [
                 'client'  => 'Nové interiéry',
@@ -186,7 +200,9 @@ return [
     ],
 
     'services' => [
-        'heading_primary'  => 'Was ich baue — Websites, Anwendungen und Online-Shops auf Maß',
+        'heading_primary'  => 'Was ich baue',
+        // OND-310: der Hinweis auf eigenen Code wandert aus dem Hero hierher.
+        'subheading'       => 'Ich schreibe eigenen Code. Ich verwende keine Vorlage, die Ihre Konkurrenz schon hat.',
         'heading_other'    => 'Weitere Services',
         'secondary_inline' => 'Ich biete auch SEO, Grafikdesign und Social-Media-Betreuung — :pricing_link oder :contact_link.',
         'secondary_inline_pricing' => 'mehr in der Preisliste',
@@ -197,29 +213,32 @@ return [
                 'title'       => 'Maßgeschneiderte Websites',
                 // OND-198 (Befund 5.1): „und Kunden bringt" war ein Versprechen
                 // des Kundenergebnisses — ersetzt durch das, wofür ich einstehe.
-                'description' => 'Eine Präsentations-Website, die sich von schablonenhaften Wettbewerbern abhebt und verständlich erklärt, was Sie tun und worin Sie sich unterscheiden.',
+                'description' => 'Eine Website, die erklärt, was Sie tun und warum man sich für Sie entscheidet. Sie richtet sich nach Ihrem Unternehmen, nicht nach einem fertigen Layout.',
+                // OND-310 (Zadání, Aufgabe 3.9): eine Aufzählung ist jetzt ein
+                // Paar — zuerst der Satz des Kunden, darunter der technische
+                // Zusatz.
                 'bullets'     => [
-                    'Eigener Code — kein WordPress, keine Vorlagen',
-                    'Konversionsorientierte Struktur passend zu Ihrem Geschäft',
-                    'Wartungsfreier Betrieb und schnelle Ladezeiten',
+                    ['Die gleiche Website finden Sie nicht eine Straße weiter.', 'Ich schreibe eigenen Code und verwende keine Vorlagen.'],
+                    ['Die Seiten kommen in der Reihenfolge, in der Ihr Kunde wirklich entscheidet.', 'Die Struktur entwerfe ich danach, wie Anfragen bei Ihnen entstehen.'],
+                    ['In zwei Jahren kommt keine Rechnung für die Reparatur von etwas, das von selbst kaputtgegangen ist.', 'Die Website läuft nicht auf Zusatzmodulen, die monatliche Updates erzwingen.'],
                 ],
             ],
             'aplikace' => [
                 'title'       => 'Webanwendungen',
                 'description' => 'Interne Systeme, Kundenportale und Verwaltungstools — zugeschnitten auf die Art, wie Ihr Betrieb tatsächlich arbeitet.',
                 'bullets'     => [
-                    'Prozessdesign vor der ersten Codezeile',
-                    'Integration in Ihre bestehenden Werkzeuge',
-                    'Eigene Administration ohne monatliche Lizenzgebühren',
+                    ['Bevor ich zu schreiben anfange, gehen wir durch, wie es bei Ihnen heute läuft.', 'Der Prozessentwurf entsteht vor der ersten Zeile Code.'],
+                    ['Aufträge gibt die Website selbst dorthin weiter, wo Sie sie schon erfassen. Niemand tippt etwas ab.', 'Ich verbinde sie mit den Werkzeugen, die Sie nutzen.'],
+                    ['Die Verwaltung gehört Ihnen und Sie zahlen nicht jeden Monat dafür.', 'Keine Lizenzen pro Nutzer und keine pro Datensatz.'],
                 ],
             ],
             'eshop' => [
                 'title'       => 'Online-Shops',
-                'description' => 'Ein Online-Shop, der zu Ihrem Produkt passt — ohne monatliche Gebühren für Plugins und Vorlagen.',
+                'description' => 'Ein Online-Shop, der auf Ihrem Sortiment aufbaut und darauf, wie Sie es verkaufen.',
                 'bullets'     => [
-                    'Kasse und Katalog passend zu Ihrem Sortiment',
-                    'Anbindung an Buchhaltung, Versanddienstleister und Zahlungsanbieter',
-                    'Keine monatlichen Plattform-Gebühren',
+                    ['Kasse und Katalog passen zu dem, was Sie wirklich verkaufen.', 'Ich entwerfe sie nach Ihrem Sortiment, nicht nach einer Vorlage.'],
+                    ['Jeden Auftrag gibt die Website selbst an die Buchhaltung, an den Versanddienstleister und an das Bezahlsystem weiter.', 'Die Anbindungen erledige ich beim Bauen, nicht nach dem Start.'],
+                    ['Niemand kassiert Miete dafür, dass Ihr Shop überhaupt online ist.', 'Keine monatlichen Gebühren für eine Plattform oder für Zusatzmodule.'],
                 ],
             ],
         ],
@@ -241,93 +260,57 @@ return [
         'heading' => 'Was kostet es?',
         // OND-198 (Befund 5.4): Erwartungssatz vor der ersten Zahl.
         // OND-198 (Befund 5.5): „Tiers" → „drei Stufen".
-        'intro'   => 'Die meisten Projekte, die ich baue, liegen zwischen 2.200 und 6.000 €. Wenn Sie eine Website unter 800 € suchen, bin ich nicht der richtige Anbieter für Sie — und das sage ich Ihnen gleich. Unten finden Sie orientierende Einstiegspreise für drei Stufen — ein verbindliches Angebot erhalten Sie schriftlich nach einer kurzen Beratung.',
-        // OND-136: 25 / 55 / 95 Tausend CZK → EUR-Umrechnung (CEO-bestätigter 1:25-Anker). Eine Quelle der Wahrheit.
-        // OND-198 (Befund 5.4): Reihenfolge Standard → Custom → Starter; die
-        // günstigste Stufe steht zuletzt und wird als Ausnahme gerahmt.
+        // OND-354: Der Preis ist eine Untergrenze plus Spanne, kein Menü aus
+        // drei Paketen (Ondřej, 26. 9. 2026 auf OND-347). Der Ablehnungssatz
+        // ist damit weg. Die CZK-Untergrenze von 20.000 wird hier ABSICHTLICH
+        // nicht umgerechnet: 800 € kaufen im deutschsprachigen Markt eine
+        // Landingpage, keine Website — EN/DE tragen nur die Spanne.
+        'intro'   => 'Die meisten Projekte, die ich baue, liegen zwischen 3.500 und 8.000 €. Das Kleinste ist eine einfache Präsentationswebsite ab 1.900 € — weniger Umfang, nicht weniger Qualität. Den genauen Preis erhalten Sie schriftlich in der Spezifikation.',
+        // OND-354: Die Karten tragen den UMFANG, nicht den Preis, und heißen
+        // nach dem, was entsteht. Reihenfolge nach wachsendem Umfang, die
+        // mittlere ist hervorgehoben.
         'featured_label' => 'Häufigste Wahl',
         'items'   => [
             [
-                'title'    => 'Standard',
-                'price'    => '2.200 €',
-                'desc'     => 'Mehrsprachige Website mit Blog, Konversions-Tracking und Reservierungssystem.',
-                'featured' => true,
-            ],
-            [
-                'title'    => 'Custom',
-                'price'    => 'ab 3.800 €',
-                'desc'     => 'Online-Shop, Webanwendung oder ein komplexes Portal auf Maß.',
+                'title'    => 'Präsentationswebsite',
+                'scope'    => 'Damit Kunden Sie prüfen können',
+                'desc'     => 'Wer Sie sind, was Sie tun, wie man Sie erreicht',
                 'featured' => false,
             ],
             [
-                'title'    => 'Starter',
-                'price'    => '1.000 €',
-                'desc'     => 'Eine Ausnahme, kein Standard-Einstieg: Präsentations-Website bis 5 Seiten für Selbstständige. Ich nehme sie nur an, wo ein größerer Umfang keinen Sinn ergibt.',
+                'title'    => 'Firmenwebsite',
+                'scope'    => 'Damit Kunden verstehen, warum gerade Sie',
+                'desc'     => 'Mehr Leistungen, mehr Sprachen, Referenzen und Blog',
+                'featured' => true,
+            ],
+            [
+                'title'    => 'Online-Shops und Anwendungen',
+                'scope'    => 'Damit das System für Sie arbeitet',
+                'desc'     => 'Online-Shop, Buchungen, Anbindung an Ihre Systeme',
                 'featured' => false,
             ],
         ],
         'cta' => 'Detaillierte Preisliste →',
     ],
 
+    // OND-308: Übrig sind nur die beiden Beschriftungen für den Screenreader —
+    // Video und Foto gehören zum Toyota-Abschnitt. `heading`, `bio` und die
+    // vier `advantages` sind auf der neuen Startseite nicht mehr da.
     'why_me' => [
         'video_aria' => 'Video: Ondřej Kriška — wer ich bin und wie ich Websites baue',
-        'heading'   => 'Warum mit mir',
         'photo_alt' => 'Ondřej Kriška — Webentwickler',
-        // OND-269: Der erste Satz („18 Jahre lang habe ich bei Toyota…") ist
-        // hier raus — die Toyota-Geschichte steht direkt unter diesem Absatz
-        // vollständig im Block `toyota`.
-        'bio'       => 'Ich arbeite allein. Sie sprechen direkt mit mir — von der ersten Beratung bis zum Launch und darüber hinaus, mit derselben präzisen Spezifikation, Analyse und Verifikation bei jedem Projekt.',
-        'advantages' => [
-            [
-                'heading' => 'Eigener Code, keine Vorlagen',
-                'text'    => 'Ich baue passend zu Ihrem Unternehmen — nicht aus einer Vorlage, die Ihre Konkurrenz bereits verwendet.',
-            ],
-            [
-                'heading' => 'Preis im Voraus',
-                'text'    => 'Sie erhalten eine Spezifikation mit genauem Preis, bevor die Arbeit beginnt. Was in der Spezifikation steht, steht auf der Rechnung.',
-            ],
-            [
-                'heading' => 'Direkter Kontakt',
-                'text'    => 'Sie kommunizieren direkt mit mir — ohne Verkäufer, Koordinator und Ticket-System.',
-            ],
-            [
-                'heading' => 'Gebaut, damit es hält',
-                'text'    => 'Wartungsfreier Betrieb ohne WordPress-Updates und Plugins — keine monatlichen Sicherheits-Patches.',
-            ],
-        ],
     ],
 
     'testimonials' => [
-        'heading' => 'Was meine Kunden über die Zusammenarbeit sagen.',
+        'heading' => 'Was meine Kunden sagen',
         'note'    => 'Aus dem Tschechischen übersetzt — die Originale stehen auf Google, Firmy.cz und Facebook.',
     ],
 
-    // OND-269 (Audit OND-254, Befund 7): Die Sektion „Zwei Dinge, auf die Sie
-    // sich verlassen können." ist gestrichen — der Board hat den Schnitt am
-    // 22. 9. freigegeben. Beide Zusagen („Preis im Voraus", „Direkter
-    // Kontakt") standen wörtlich ein zweites Mal; die einzige verbleibende
-    // Fassung steht in `why_me.advantages` 02 und 03.
-
-    // OND-229 (F2 — Beweisschicht): Abschnitt „Unter der Haube" + Live-Demo
-    // der Design-Tokens. Jede Aussage ist im Repo überprüfbar; die Ladezeit
-    // misst die Performance API im Browser des Besuchers.
+    // OND-308: Der technische Abschnitt „Unter der Haube" ist weg. Geblieben
+    // ist die gemessene Ladezeit, jetzt im Zahlenstreifen — die einzige
+    // Aussage, die der Besucher an sich selbst überprüft. Die Performance API
+    // misst im Browser des Besuchers; wir nennen nie eine ungemessene Zahl.
     'craft' => [
-        'heading' => 'Unter der Haube',
-        'intro'   => 'Die Website, die ich für Sie baue, sieht auch von innen so aus. Das sind keine Marketingsätze — alles unten lässt sich direkt auf dieser Seite überprüfen.',
-        'facts'   => [
-            [
-                'heading' => 'Eigener Code',
-                'text'    => 'Kein WordPress, kein Page-Builder, keine Plattform. Die Seite ist maßgeschrieben und läuft ohne Plugins, die monatliche Updates bräuchten.',
-            ],
-            [
-                'heading' => 'Bilder nach Maß für Ihr Display',
-                'text'    => 'Jedes Bild existiert hier in sieben Größen und im sparsamen AVIF-Format. Ihr Browser hat nur die geladen, die Ihr Display wirklich braucht.',
-            ],
-            [
-                'heading' => 'Design mit System',
-                'text'    => 'Farben, Schrift und Abstände steuert keine Vorlage, sondern ein eigenes System von Variablen. Deshalb wirkt nichts fehl am Platz — und deshalb können Sie es unten selbst ausprobieren.',
-            ],
-        ],
         'perf_prefix' => 'Diese Seite wurde für Sie in',
         'perf_suffix' => 'geladen — gemessen gerade eben, in Ihrem Browser.',
     ],
@@ -342,7 +325,10 @@ return [
     // `inline_form` unten, das Kundenzitat ist dorthin umgezogen.
 
     'faq' => [
-        'heading' => 'Häufige Fragen',
+        'heading' => 'Was Sie mich am häufigsten fragen',
+        // OND-411: leiser Satz nach den Fragen, führt zur Notizen-Übersicht.
+        'more_inline'      => 'Was hier keinen Platz fand, beantworte ich :blog_link.',
+        'more_inline_blog' => 'in meinen Notizen',
         // `key` ist ein stabiler Slug für Analytics (data-faq-key) und JSON-LD; nicht lokalisieren.
         'items'   => [
             // OND-222 (Kapitel 6.3, Einwand 1): schwerwiegendster Einwand bei
@@ -366,7 +352,7 @@ return [
             [
                 'key'      => 'duration',
                 'question' => 'Wie lange dauert es?',
-                'answer'   => 'Von der ersten Nachricht bis zum Launch typischerweise 4–12 Wochen — eine Woche Beratung, 2–5 Tage für die Spezifikation, 3–10 Wochen Umsetzung und Launch bis zum nächsten Werktag nach Freigabe. Den detaillierten Zeitplan für Ihr Projekt halte ich in der Spezifikation fest.',
+                'answer'   => 'Von der ersten Nachricht bis zum Launch typischerweise 4–12 Wochen — ein Erstgespräch innerhalb weniger Tage, etwa eine Woche für ein ausführliches Treffen und die Spezifikation, 3–10 Wochen Umsetzung und Launch bis zum nächsten Werktag nach Freigabe. Den genauen Zeitplan für Ihr Projekt halte ich in der Spezifikation fest.',
             ],
             [
                 'key'      => 'satisfaction',
@@ -375,62 +361,88 @@ return [
             ],
             [
                 'key'      => 'maintenance-free',
-                'question' => 'Was bedeutet „wartungsfreie Website“?',
-                'answer'   => 'Kein WordPress, keine Plugins, keine monatlichen Sicherheitsupdates. Die Website läuft auf eigenem Code — sie funktioniert von selbst, benötigt keine regelmäßigen Patches und fällt nicht durch Template-Konflikte aus. Kleine Inhaltsänderungen laufen direkt über mich, ohne Ticket.',
+                // OND-310: die alte Frage fragte, was „wartungsfrei" bedeutet —
+                // das ist mein Wort, nicht das des Kunden, und die Antwort nannte
+                // fremde Technik. Das hier ist die Frage, die sich der Kunde
+                // selbst stellt.
+                'question' => 'Braucht die Website regelmäßige Wartung?',
+                'answer'   => 'Nein. Sie steht nicht auf einer fertigen Plattform mit Zusatzmodulen, die jeden Monat aktualisiert werden müssen, also kann darin nichts von selbst kaputtgehen. Wenn Sie Inhalte ändern oder eine Seite ergänzen wollen, schreiben Sie mir und ich mache das.',
             ],
             // Archiv: weitere FAQ-Einträge wandern von der Homepage weg (nach /faq oder /sluzby — außerhalb des OND-121-Umfangs).
         ],
     ],
 
-    'faq_form' => [
-        'eyebrow'     => 'Andere Frage?',
-        'heading'     => 'Schreiben Sie sie direkt.',
-        'description' => 'Ich greife sie auf und melde mich innerhalb von 24 Stunden an Arbeitstagen. Kein Verkaufsdruck.',
-        'name'        => 'Name',
-        'email'       => 'E-Mail',
-        'message'     => 'Ihre Frage',
-        'placeholders' => [
-            'name'    => 'Max Mustermann',
-            'email'   => 'max@firma.de',
-            'message' => 'Z. B. Schaffen Sie es bis zum Quartalsende?',
-        ],
-        'submit'      => 'Frage senden',
-        'submitting'  => 'Wird gesendet…',
-        'success'     => 'Danke, die Frage ist eingegangen. Ich melde mich so schnell wie möglich.',
-    ],
 
     // OND-201 (Befund 5.8): die einzige abschließende Aufforderung der Homepage.
+    // OND-309 opravila duplicitu jen v češtině: citace u formuláře byla
+    // Jaskmanická, jejíž recenze stojí o obrazovku výš v sekci „Co říkají
+    // klienti". EN/DE zůstaly pozadu. OND-353 přidává k citacím tvář, takže
+    // by se tu její portrét objevil dvakrát na jedné stránce — sjednoceno
+    // se `lang/cs` na Štěpánka. Věty jsou doslovně z `de/testimonials.php`,
+    // nejde o nový překlad.
     'inline_form' => [
         'eyebrow'         => 'Anfrage',
         'heading'         => 'Schreiben Sie mir, was Sie brauchen',
-        'description'     => 'Beschreiben Sie kurz, worum es geht. Ich melde mich innerhalb von 24 Stunden an Arbeitstagen und wir gehen unverbindlich durch, was Sinn ergibt. Wenn wir nicht zusammenpassen, sage ich es Ihnen geradeheraus.',
-        'quote_text'      => 'Dank des individuellen Ansatzes, der Flexibilität und der Professionalität entspricht das Ergebnis unseren Vorstellungen.',
-        'quote_author'    => 'Hana Jaskmanická, Geschäftsführerin, VP Industry',
+        'description'     => 'Beschreiben Sie kurz, worum es geht. Wenn Sie heute absenden, melde ich mich spätestens am :date und wir gehen unverbindlich durch, was Sinn ergibt. Falls wir nicht zusammenpassen, sage ich es Ihnen geradeheraus.',
+        'quote_text'      => 'Er handelt schnell und effizient. Für mich war das ein großer Unterschied zum vorherigen IT-Dienstleister.',
+        'quote_ref'       => 'ivo-stepanek',
         'name'            => 'Vor- und Nachname',
         'email'           => 'E-Mail',
         'phone'           => 'Telefon (optional)',
         'phone_hint'      => 'Mit Nummer melde ich mich schneller.',
+        // Anhänge sind hinter diesem Textbutton eingeklappt (OND-448, B-01);
+        // das vorangestellte `+` rendert `<x-lead-form>`.
+        'attach_toggle'   => 'Dateien hinzufügen (optional)',
         'message'         => 'Was möchten Sie lösen?',
         'placeholders'    => [
             'name'    => 'Max Mustermann',
             'email'   => 'max@firma.de',
             'phone'   => '+420 000 000 000',
-            'message' => 'Z. B. neue Website für ein produzierendes Unternehmen, 5–10 Seiten',
+            'message' => 'Z. B. neue Website für ein produzierendes Unternehmen, 5–10 Seiten — oder schreiben Sie, wann ich Sie anrufen soll',
         ],
         'submit'          => 'Anfrage senden',
         'submitting'      => 'Wird gesendet…',
         'note'            => 'Oder schreiben Sie mir an ok@ondraweb.cz. Ich antworte persönlich, nicht über einen Formular-Roboter.',
         'privacy_prefix'  => 'Mit dem Absenden stimmen Sie der Verarbeitung personenbezogener Daten gemäß den ',
         'privacy_link'    => 'Datenschutzrichtlinien zu',
-        'success'         => 'Danke, die Anfrage ist eingegangen. Ich melde mich so schnell wie möglich.',
-        'error'           => 'Die Anfrage konnte gerade nicht gespeichert werden. Bitte versuchen Sie es erneut.',
+        // OND-437 (Vorschlag 2 aus OND-429): Bestätigung statt Formular nach dem
+        // Absenden. `:received` = Zeitpunkt der Speicherung, `:date` = ReplyDate,
+        // `:email` aus dem Formular. /kontakt liest `reply`, `more`, `more_article` mit.
+        'confirmation' => [
+            'stamp'        => 'Anfrage eingegangen · :received',
+            'heading'      => 'Danke. Ihre Anfrage ist bei mir.',
+            'reply'        => 'Ich antworte spätestens am :date persönlich an :email. Mehr müssen Sie jetzt nicht tun.',
+            'steps_aria'   => 'Wie es weitergeht',
+            'steps'        => [
+                ['label' => 'Erstgespräch', 'text' => 'Ich rufe Sie an, für etwa 15 Minuten. Ich kläre, worum es geht, und sage Ihnen gleich, ob ich Ihnen helfen kann.'],
+                ['label' => 'Spezifikation', 'text' => 'Wenn es Sinn ergibt, gehen wir die Details gemeinsam durch, und Sie bekommen schriftlich, was auf der Website steht und was sie kostet.'],
+                ['label' => 'Entscheidung', 'text' => 'Über die Umsetzung entscheiden Sie erst, wenn die fertige Spezifikation vor Ihnen liegt.'],
+            ],
+            'more'         => 'Bis ich mich melde, können Sie nachlesen, :article_link.',
+            'more_article' => 'welche neun Fragen Sie vor dem Website-Projekt klären sollten',
+        ],
     ],
 
-    // TODO: review pro DE — copy podle CS varianty A (OND-100)
+    // OND-308: `cta` versprach einen Kalender, den es seit OND-303 nicht
+    // mehr gibt. Das Linkziel bleibt, nur die Beschriftung ändert sich.
     'sticky' => [
-        'cta'    => 'Beratung vereinbaren',
+        'cta'    => 'Anfrage schreiben',
         'mobile' => 'Anfrage',
         'phone'  => 'Anrufen',
     ],
 
+    // OND-437: wie der Antworttag (`:date`) und der Eingang (`:received`) geschrieben
+    // werden. Setzt App\Support\ReplyDate in Europe/Prague ein. Schlüssel 1–5 =
+    // Montag–Freitag, ein Wochenende kommt nie vor.
+    'reply_date' => [
+        'weekdays' => [
+            1 => 'Montag',
+            2 => 'Dienstag',
+            3 => 'Mittwoch',
+            4 => 'Donnerstag',
+            5 => 'Freitag',
+        ],
+        'date'     => ':weekday, :day.:month.',
+        'received' => ':day.:month., :time Uhr',
+    ],
 ];

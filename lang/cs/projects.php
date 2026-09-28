@@ -3,7 +3,7 @@
 return [
 
     'meta' => [
-        'title'       => 'Co jsem postavil | ONDRAWEB',
+        'title'       => 'Projekty — Ondřej Kriška, ONDRAWEB',
         'description' => 'Weby, e-shopy a webové aplikace, které jsem postavil a které dnes běží. U každého je odkaz na živou verzi, takže si to můžete ověřit sami.',
     ],
 
@@ -136,8 +136,10 @@ return [
             'Nechcete další „hezký web“, ale nástroj postavený na tom, jak vaše firma funguje.',
         ],
         'cta_heading'   => 'Pokud sedí 2 a více bodů, má smysl to řešit.',
-        'cta_text'      => 'Během úvodní konzultace najdeme nejkratší cestu k funkčnímu řešení bez zbytečných funkcí navíc.',
-        'cta_primary'   => 'Domluvit konzultaci',
+        // OND-369: `cta_text` je próza o tom, co se stane — zůstává.
+        // Popisek tlačítka vede na /kontakt, takže mluví stejně jako hlavička.
+        'cta_text'      => 'Už při krátkém úvodním hovoru poznáme, jestli a jak vám můžu pomoct, bez zbytečných funkcí navíc.',
+        'cta_primary'   => 'Napsat poptávku',
         'cta_secondary' => 'Nejdřív ceník',
     ],
 
@@ -162,6 +164,13 @@ return [
         'no_content'      => 'K tomuto projektu zatím není dostupný podrobný popis.',
         'related_heading' => 'Další projekty',
         'visit_live'      => 'Navštívit web',
+        // OND-449 (B-05): blok za „Výsledkem“; věta z `live_hint` v DB, prázdná = default.
+        'live_heading'      => 'Vyzkoušejte si to naživo',
+        'live_hint_default' => 'Web si můžete projít sami, otevře se v novém okně.',
+        // OND-449 (B-09): řádek pod výsledkem, jen když je vyplněné `result_as_of` i `result_source`.
+        // Ve formátu data jsou nezlomitelné mezery (U+00A0), datum se nesmí rozdělit na dva řádky.
+        'result_source'      => 'Stav k :date. Zdroj: :source.',
+        'result_date_format' => 'j. n. Y',
         'meta'            => [
             'client'   => 'Klient',
             'year'     => 'Rok',
@@ -197,7 +206,8 @@ return [
 
     'cta' => [
         'heading' => 'Chcete podobný výsledek pro váš byznys?',
-        'primary' => 'Domluvit konzultaci',
+        // OND-369: sjednoceno s hlavičkou — odkaz míří na /kontakt.
+        'primary' => 'Napsat poptávku',
     ],
 
 ];

@@ -25,58 +25,78 @@
 
 @section('content')
 
-{{-- OND-251 — vrstva hloubky ZAPNUTÁ, v plném rozsahu (světlo + proud + hmota).
-     Kontakt je rozhodovací stránka a formulář je tentýž objekt jako sekce 15
-     na domovské stránce, takže dostává doslova totéž: desku, nabitou horní
-     hranu a proud do políčka. Rozhodnutí a jeho důvod jsou v §E hloubka.css.
-     Sekce se adresují přes `data-pdd`, nikdy přes pořadí. --}}
-<div class="pd--depth pd--depth-sub">
+{{-- ============================================================
+     OND-392 — /kontakt v jazyce nové homepage (2. z 9), podle
+     předlohy z OND-390. Obsah je NEDOTČENÝ, mění se jen slovník. Každý lang klíč, který
+     stránka tiskla dřív, tiskne i teď — ve stejném znění a pořadí.
 
-{{-- Page hero — OND-135 iter 4: plán §3.1 design DNA (page-mark + display italic + amber accent) --}}
-<div class="page-hero page-hero--contact">
+     Formulář je od OND-448 (B-01) TÝŽ jako v sekci „Poptávka" na homepage:
+     sdílená komponenta `<x-lead-form>` (`.pd-form__panel` → `.pd-field`).
+
+     `pd` přibylo k `pd--depth pd--depth-sub` (základ OND-379 §4 krok 1).
+     Vrstva hloubky: sekce si drží `data-pdd="contact-form"`
+     a `data-pdd="contact-next"` jako PŘÍMÉ děti obalu — kužely v §E
+     hloubka.css jsou psané `.pd--depth-sub > section[data-pdd="…"]`.
+
+     CSS stránky je v podpis.css §F (sdílené komponenty + háky
+     /kontakt), stín portrétu v hloubka.css §E2.
+     ============================================================ --}}
+
+<div class="pd pd--depth pd--depth-sub">
+
+{{-- ===================================================
+     01 — KDO TO JE
+     Titulek slibuje „jen Ondřej", tvář stojí hned vedle.
+     Na 1440 px nahrazuje portrét díru vpravo od titulku
+     (dnešní hero je text na střed a 600 px prázdna).
+     Hlava se jmenuje `.pd-page-head`, NIKDY `.pd-hero`
+     (podmínka základu OND-379 §1c).
+     =================================================== --}}
+<section class="pd-section pd-page-head">
     <div class="container-site">
-        {{-- OND-135 cleanup (2026-05-14): page_mark_index span odebrán jako
-             agency-portfolio artefakt (itwebtech nemá „pages" hierarchii) —
-             aplikováno per CEO PR #78 precedent na home. Label zachován. --}}
-        <p class="page-hero__page-mark">
-            <span class="page-hero__page-mark-label">{{ __('contact.hero.page_mark_label') }}</span>
-        </p>
-        <p class="page-hero__upline">{{ __('contact.hero.upline') }}</p>
-        <h1 class="page-hero__heading">
-            {!! __('contact.hero.heading_html') !!}
-        </h1>
-        <p class="page-hero__subline">{{ __('contact.hero.subline') }}</p>
-    </div>
-</div>
+        <div class="pd-page-head__grid">
+            <div class="pd-page-head__text">
+                <p class="pd-eyebrow">{{ __('contact.hero.page_mark_label') }}<span class="pd-eyebrow__sep" aria-hidden="true"></span>{{ __('contact.hero.upline') }}</p>
+                <h1 class="pd-heading pd-heading--sub">{!! __('contact.hero.heading_html') !!}</h1>
+                {{-- OND-437 (návrh 1): konkrétní den odpovědi, viz App\Support\ReplyDate. --}}
+                <p class="pd-sub">{!! \App\Support\ReplyDate::sentence('contact.hero.subline', \App\Support\ReplyDate::date()) !!}</p>
+            </div>
 
-<section class="section-wrapper" data-pdd="contact-form">
-    <div class="container-site">
-
-        <div class="contact-layout">
-
-            {{-- Contact info --}}
-            <aside class="contact-info">
-
-                <div class="contact-info__photo-wrap">
+            {{-- Kontaktní stín vrstvy C: `.pd-page-head__photo` v hloubka.css §E2
+                 místo dnešního `.contact-info__photo-wrap`. --}}
+            <figure class="pd-page-head__person">
+                <div class="pd-page-head__photo">
                     <picture>
-                        <source srcset="{{ asset_v('img/about/ondrej_kriska_preview.webp') }}" type="image/webp">
+                        <source srcset="{{ asset_v('img/about/ondrej_kriska_2026_preview.webp') }}" type="image/webp">
                         <img
-                            src="{{ asset_v('img/about/ondrej_kriska.jpg') }}"
+                            src="{{ asset_v('img/about/ondrej_kriska_2026.jpg') }}"
                             alt="{{ __('contact.hero.photo_alt') }}"
-                            class="contact-info__photo"
-                            loading="lazy"
                             width="260"
-                            height="300"
+                            height="325"
                         >
                     </picture>
-                    <p class="contact-info__role">{{ __('contact.hero.role_label') }}</p>
                 </div>
+                <figcaption class="pd-page-head__role">{{ __('contact.hero.role_label') }}</figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
 
-                <dl>
-                    {{-- OND-201 (nález 5.9): dřív „Ondřej Kriška / Česká
-                         republika" — signál anonymního dodavatele. Nově plná
-                         fakturační adresa a IČO z lang souboru (OSVČ, jde
-                         o veřejné údaje). --}}
+{{-- ===================================================
+     02 — POPTÁVKA
+     Doslovný protějšek sekce „Poptávka" z homepage. Vlevo
+     údaje (telefon je rovnocenná cesta — rozhodnutí boardu
+     „formulář + telefon"), vpravo deska s formulářem.
+     =================================================== --}}
+<section class="pd-section" data-pdd="contact-form">
+    <div class="container-site">
+        <div class="pd-form">
+
+            <aside class="pd-form__intro">
+                {{-- OND-201 (nález 5.9): plná fakturační adresa a IČO z lang
+                     souboru (OSVČ, veřejné údaje). OND-256/7: telefon z configu,
+                     jedno místo pravdy. --}}
+                <dl class="pd-facts">
                     <div>
                         <dt>{{ __('contact.address_label') }}</dt>
                         <dd>
@@ -89,19 +109,12 @@
 
                     <div>
                         <dt>{{ __('contact.email_label') }}</dt>
-                        <dd>
-                            <a href="mailto:ok@ondraweb.cz">ok@ondraweb.cz</a>
-                        </dd>
+                        <dd><a href="mailto:ok@ondraweb.cz">ok@ondraweb.cz</a></dd>
                     </div>
 
-                    {{-- OND-256/7: telefon byl na /kontakt jen v config/contact.php,
-                         na stránce chyběl úplně. Číslo bere z configu, ať je
-                         jedno místo pravdy. --}}
                     <div>
                         <dt>{{ __('contact.phone_label') }}</dt>
-                        <dd>
-                            <a href="tel:{{ preg_replace('/\s+/', '', config('contact.phone')) }}">{{ config('contact.phone') }}</a>
-                        </dd>
+                        <dd><a href="tel:{{ preg_replace('/\s+/', '', config('contact.phone')) }}">{{ config('contact.phone') }}</a></dd>
                     </div>
 
                     <div>
@@ -110,149 +123,53 @@
                     </div>
                 </dl>
 
-                <a href="#kontaktni-formular" class="btn btn-primary contact-info__cta">
-                    {{ __('contact.cta_consultation') }}
-                </a>
+                {{-- Kotva na formulář. Dřív acidová pilulka — teď terciální odkaz:
+                     acidové tlačítko je na stránce jedno, „Poslat poptávku". --}}
+                <p class="pd-more">
+                    <a href="#kontaktni-formular" class="pd-more__link">{{ __('contact.cta_consultation') }}</a>
+                </p>
             </aside>
 
-            {{-- Contact form --}}
-            {{-- OND-256/1: chyby se ukazují inline pod polem (stejný vzor jako
-                 formulář na homepage), ne v anglickém modálu. `genericError`
-                 je hláška pro pád bez 422 payloadu. --}}
-            <div id="kontaktni-formular" class="contact-form"
-                 x-data="contactForm({ genericError: @js(__('contact.message_error')) })">
-
-                {{-- Thank-you state — replaces the form on success (OND-136). --}}
-                <div class="contact-form__thanks" x-show="submitted" x-cloak>
-                    <h2 class="contact-form__title">{{ __('contact.thank_you.heading') }}</h2>
-                    <p class="contact-form__subtitle">{{ __('contact.thank_you.subline') }}</p>
-                    <p class="contact-form__thanks-next">{{ __('contact.thank_you.next') }}</p>
-                    <div class="contact-form__thanks-ctas">
-                        <a href="{{ lroute('projects') }}" class="btn btn-secondary">
-                            {{ __('contact.thank_you.cta_projects') }}
-                        </a>
-                        <a href="{{ lroute('price') }}" class="btn btn-secondary">
-                            {{ __('contact.thank_you.cta_price') }}
-                        </a>
-                    </div>
-                </div>
-
-                <h2 class="contact-form__title" x-show="!submitted">{{ __('contact.form_heading') }}</h2>
-                <p class="contact-form__subtitle" x-show="!submitted">{{ __('contact.form_subheading') }}</p>
-
-                <form @submit.prevent="submit" novalidate x-show="!submitted" x-ref="form">
-                    @csrf
-
-                    <x-form.honeypot id="contact-website-url" />
-
-                    <div class="form-group">
-                        <label for="name">{{ __('contact.name') }} <span aria-hidden="true">*</span></label>
-                        <input type="text" id="name" name="name" required autocomplete="name"
-                               placeholder="{{ __('contact.name') }}"
-                               @input="clearError('name')"
-                               :aria-invalid="errors.name ? 'true' : null"
-                               :aria-describedby="errors.name ? 'name-error' : null">
-                        <p class="form-group__error" id="name-error" x-show="errors.name" x-text="errors.name" x-cloak></p>
-                    </div>
-
-                    <div class="form-row-2col">
-                        <div class="form-group form-group--inline">
-                            <label for="email">{{ __('contact.email') }} <span aria-hidden="true">*</span></label>
-                            <input type="email" id="email" name="email" required autocomplete="email"
-                                   placeholder="vas@email.cz"
-                                   @input="clearError('email')"
-                                   :aria-invalid="errors.email ? 'true' : null"
-                                   :aria-describedby="errors.email ? 'email-error' : null">
-                            <p class="form-group__error" id="email-error" x-show="errors.email" x-text="errors.email" x-cloak></p>
-                        </div>
-                        {{-- OND-256/4: telefon je nepovinný (backend ho tak validoval
-                             odjakživa, hvězdička v labelu lhala). Pošťouchnutí pod
-                             polem říká, co uživatel získá, když ho vyplní. --}}
-                        <div class="form-group form-group--inline">
-                            <label for="tel">{{ __('contact.tel') }}</label>
-                            <input type="tel" id="tel" name="tel" autocomplete="tel"
-                                   placeholder="+420 000 000 000"
-                                   @input="clearError('tel')"
-                                   :aria-invalid="errors.tel ? 'true' : null"
-                                   :aria-describedby="errors.tel ? 'tel-error' : 'tel-hint'">
-                            <p class="form-group__hint" id="tel-hint">{{ __('contact.tel_hint') }}</p>
-                            <p class="form-group__error" id="tel-error" x-show="errors.tel" x-text="errors.tel" x-cloak></p>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="subject">{{ __('contact.subject') }}</label>
-                        <input type="text" id="subject" name="subject"
-                               placeholder="{{ __('contact.subject') }}"
-                               @input="clearError('subject')"
-                               :aria-invalid="errors.subject ? 'true' : null"
-                               :aria-describedby="errors.subject ? 'subject-error' : null">
-                        <p class="form-group__error" id="subject-error" x-show="errors.subject" x-text="errors.subject" x-cloak></p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="message">{{ __('contact.message') }}</label>
-                        <textarea id="message" name="message" rows="5"
-                                  placeholder="{{ __('contact.message_placeholder') }}"
-                                  @input="clearError('message')"
-                                  :aria-invalid="errors.message ? 'true' : null"
-                                  :aria-describedby="errors.message ? 'message-error' : null"></textarea>
-                        <p class="form-group__error" id="message-error" x-show="errors.message" x-text="errors.message" x-cloak></p>
-                    </div>
-
-                    <x-form.file-drop />
-
-                    <div class="form-group form-group--checkbox">
-                        <label>
-                            <input type="checkbox" name="gdpr" required
-                                   @change="clearError('gdpr')"
-                                   :aria-invalid="errors.gdpr ? 'true' : null"
-                                   :aria-describedby="errors.gdpr ? 'gdpr-error' : null">
-                            {{ __('contact.agree') }}
-                            <a href="{{ lroute('privacy') }}">{{ __('contact.policy') }}</a>
-                        </label>
-                        <p class="form-group__error" id="gdpr-error" x-show="errors.gdpr" x-text="errors.gdpr" x-cloak></p>
-                    </div>
-
-                    {{-- Pád bez 422 (500, výpadek sítě) — jediná souhrnná hláška. --}}
-                    <p class="form-alert form-alert--error" role="alert" x-ref="formError"
-                       x-show="formError" x-text="formError" x-cloak></p>
-
-                    <div class="form-group form-group--inline">
-                        <button type="submit" class="btn btn-primary btn-block" :disabled="loading">
-                            <span class="btn__inner" x-show="!loading">
-                                {{ __('contact.send') }}
-                                <x-icon.arrow-right class="w-4 h-4 shrink-0" />
-                            </span>
-                            <span class="btn__inner" x-show="loading" x-cloak>
-                                <svg class="btn__spinner" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                    <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
-                                </svg>
-                                {{ __('contact.sending') ?? '...' }}
-                            </span>
-                        </button>
-                    </div>
-                </form>
-            </div>
+            {{-- OND-448 (B-01): sdílený `<x-lead-form>` — tentýž formulář jako
+                 na homepage (pole, chování, potvrzení). Předmět a zaškrtávací
+                 souhlas jsou pryč, přílohy sbalené. `id="kontaktni-formular"`
+                 drží kotvu „Napište mi“ a spodní lištu na mobilu. Titulek
+                 a perex jsou uvnitř: po odeslání je vymění potvrzení. --}}
+            <x-lead-form source="contact" id="kontaktni-formular" :note="false">
+                <h2 class="pd-head__title" x-show="!submitted">{{ __('contact.form_heading') }}</h2>
+                <p class="pd-intro" x-show="!submitted">{{ __('contact.form_subheading') }}</p>
+            </x-lead-form>
         </div>
     </div>
 </section>
 
-{{-- 3-step „Co se stane potom" — OND-136 next_steps --}}
-<section class="section-wrapper section-wrapper--alt next-steps" data-pdd="contact-next">
+{{-- ===================================================
+     03 — CO SE STANE POTOM
+     Základní `.pd-steps`, NE `--chapters`: tři krátké kroky,
+     přesně to, na co je mřížka 56px 1fr psaná (základ §2c).
+     Náboj `.pd-step::before` je na podstránce vypnutý plošně
+     (hloubka.css §0, OND-386) — tady se nic nehýbe.
+     =================================================== --}}
+<section class="pd-section" data-pdd="contact-next">
     <div class="container-site">
-        <p class="section-subheading">{{ __('contact.next_steps.eyebrow') }}</p>
-        <h2 class="section-heading">{{ __('contact.next_steps.heading') }}</h2>
+        <div class="pd-split">
+            <header>
+                <p class="pd-eyebrow">{{ __('contact.next_steps.eyebrow') }}</p>
+                <h2 class="pd-head__title">{{ __('contact.next_steps.heading') }}</h2>
+            </header>
 
-        <ol class="next-steps__list">
-            @foreach (__('contact.next_steps.steps') as $i => $step)
-                <li class="next-steps__item">
-                    <span class="next-steps__index" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
-                    <h3 class="next-steps__title">{{ $step['title'] }}</h3>
-                    <p class="next-steps__text">{{ $step['text'] }}</p>
-                </li>
-            @endforeach
-        </ol>
+            <ol class="pd-steps">
+                @foreach (__('contact.next_steps.steps') as $i => $step)
+                    <li class="pd-step">
+                        <span class="pd-step__num" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                        <div class="pd-step__body">
+                            <h3 class="pd-step__title">{{ $step['title'] }}</h3>
+                            <p class="pd-step__text">{{ $step['text'] }}</p>
+                        </div>
+                    </li>
+                @endforeach
+            </ol>
+        </div>
     </div>
 </section>
 

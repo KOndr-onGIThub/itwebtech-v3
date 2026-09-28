@@ -1,3 +1,0 @@
-Sitemap: https://pitarena.cz/sitemap.xml
-User-agent: *
-Disallow:

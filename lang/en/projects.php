@@ -3,7 +3,7 @@
 return [
 
     'meta' => [
-        'title'       => 'What I have built | ONDRAWEB',
+        'title'       => 'Projects — Ondřej Kriška, ONDRAWEB',
         'description' => 'Websites, online shops and web applications I have built and that are running today. Each one links to the live version, so you can check it yourself.',
     ],
 
@@ -135,8 +135,10 @@ return [
             'You do not want another "nice website" but something built around how your company actually works.',
         ],
         'cta_heading'   => 'If 2+ points match, this is worth solving now.',
-        'cta_text'      => 'In the intro call, we define the shortest path to a working solution without unnecessary extras.',
-        'cta_primary'   => 'Book consultation',
+        // OND-369: `cta_text` is prose about what happens — it stays.
+        // The button links to /contact, so it speaks like the header does.
+        'cta_text'      => 'A short intro call is enough to see whether and how I can help, without unnecessary extras.',
+        'cta_primary'   => 'Write an enquiry',
         'cta_secondary' => 'See pricing first',
     ],
 
@@ -161,6 +163,13 @@ return [
         'no_content'      => 'A detailed write-up for this project is not available yet.',
         'related_heading' => 'More projects',
         'visit_live'      => 'Visit live site',
+        // OND-449 (B-05): blok za „Výsledkem“; věta z `live_hint` v DB, prázdná = default.
+        'live_heading'      => 'Try it live',
+        'live_hint_default' => 'You can explore the website yourself; it opens in a new window.',
+        // OND-449 (B-09): řádek pod výsledkem, jen když je vyplněné `result_as_of` i `result_source`.
+        // Ve formátu data jsou nezlomitelné mezery (U+00A0), datum se nesmí rozdělit na dva řádky.
+        'result_source'      => 'As of :date. Source: :source.',
+        'result_date_format' => 'j F Y',
         'meta'            => [
             'client'   => 'Client',
             'year'     => 'Year',
@@ -186,7 +195,8 @@ return [
 
     'cta' => [
         'heading' => 'Want a similar result for your business?',
-        'primary' => 'Book a consultation',
+        // OND-369: aligned with the header — the link points to /contact.
+        'primary' => 'Write an enquiry',
     ],
 
 ];

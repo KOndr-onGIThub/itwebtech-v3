@@ -481,6 +481,16 @@ v setup flow — středu žádných ručních kroků není.
 
 ---
 
+## Archiv starých webů (`reference/`)
+
+Složka `reference/` (staré weby `pitarena`, `itwebtech`, `barana`, ~497 MB)
+už není v repu (OND-412), protože si ji kopírovala každá worktree. Kód webu
+ji nepoužívá. Jedna sdílená kopie jen ke čtení leží na serveru v
+`/home/paperclip/workspaces/itwebtech/reference-shared/`. Historie zůstává
+v gitu: `git log -- reference`.
+
+---
+
 ## Údržba starteru
 
 Pokud v starteru něco změníš (nová ikona, CSS komponenta, JS utilita...), poznamenej to sem:

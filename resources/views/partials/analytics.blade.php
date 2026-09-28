@@ -66,7 +66,7 @@
 
             // Default consent state (Consent Mode v2) — GA4 ví, že do
             // `bootGA4()` updatu má všechno denied. Pro analytics_storage to
-            // bootGA4() přepne na „granted".
+            // bootGA4() přepne na „granted“.
             window.gtag('consent', 'default', {
                 analytics_storage: 'denied',
                 ad_storage: 'denied',

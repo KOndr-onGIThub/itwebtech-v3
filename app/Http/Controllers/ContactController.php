@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\SetLocale;
 use App\Mail\ContactMessage;
 use App\Models\ContactSubmission;
 use App\Support\Honeypot;
+use Carbon\CarbonInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -31,14 +33,30 @@ class ContactController extends Controller
      *      tiché: zaloguje se a zapíše se do `mail_status`/`mail_error`.
      *   3. Klientovi vrátíme úspěch jen když je lead bezpečně uložen — i když
      *      e-mail selže. Lead nikdy nezávisí jen na e-mailu.
+     *
+     * OND-448 (B-01): jediný poptávkový formulář webu. Posílá ho homepage
+     * i /kontakt (`<x-lead-form>`), liší se jen skrytým polem `source`.
      */
     public function send(Request $request): JsonResponse
     {
+        // OND-448: `POST /contact` nemá jazyk v URL, SetLocale tu nastaví cs.
+        // Jazyk stránky nese skryté pole `locale` a musí platit UŽ PŘED
+        // validací — jinak by chybové hlášky na /en a /de byly česky.
+        $locale = $request->input('locale');
+
+        if (in_array($locale, SetLocale::NON_DEFAULT_LOCALES, true)) {
+            App::setLocale($locale);
+        }
+
+        $source = $this->source($request);
+
         // OND-280: Past na boty. Musí být před validací — bot nesmí z odpovědi
         // poznat vůbec nic, ani že mu něco chybí. Vrací se stejný úspěch jako
         // při skutečném odeslání, ale nic se neuloží ani neodešle.
-        if (Honeypot::tripped($request, 'contact')) {
-            return response()->json(['message' => __('contact.message_success')]);
+        if (Honeypot::tripped($request, $source)) {
+            $email = $request->input('email');
+
+            return $this->success($source, is_string($email) ? $email : '', now());
         }
 
         $limits     = config('contact.uploads');
@@ -48,9 +66,10 @@ class ContactController extends Controller
             'name'         => 'required|string|max:255',
             'email'        => 'required|email|max:255',
             'tel'          => 'nullable|string|max:50',
-            'subject'      => 'nullable|string|max:255',
-            'message'      => 'nullable|string|max:5000',
-            'gdpr'         => 'required|accepted',
+            // OND-448 (B-01): předmět a zaškrtávací souhlas jsou pryč, zpráva
+            // je povinná (jako dřív na homepage). Souhlas není potřeba — zprávu
+            // zpracovávám kvůli jednání o smlouvě, čl. 6 odst. 1 písm. b GDPR.
+            'message'      => 'required|string|max:5000',
             // OND-264: přílohy se do teď nevalidovaly ani nečetly — mlčky se zahazovaly.
             'attachment'   => ['nullable', 'array', 'max:'.$limits['max_files']],
             'attachment.*' => ['file', 'max:'.($limits['max_file_mb'] * 1024), 'mimes:'.$extensions],
@@ -101,10 +120,10 @@ class ContactController extends Controller
                 'name'        => $data['name'],
                 'email'       => $data['email'],
                 'tel'         => $data['tel'] ?? null,
-                'subject'     => $data['subject'] ?? null,
-                'message'     => $data['message'] ?? null,
+                'message'     => $data['message'],
                 'attachments' => $attachments ?: null,
                 'locale'      => App::getLocale(),
+                'source'      => $source,
                 'mail_status' => ContactSubmission::MAIL_PENDING,
                 'ip_address'  => $request->ip(),
                 'user_agent'  => $request->userAgent(),
@@ -157,7 +176,43 @@ class ContactController extends Controller
         }
 
         // 3) Lead je uložen → klient dostane úspěch (nezávisle na stavu e-mailu).
-        return response()->json(['message' => __('contact.message_success')]);
+        return $this->success($source, $submission->email, $submission->created_at ?? now());
+    }
+
+    /**
+     * OND-448: odkud formulář přišel. Čte se ještě před validací (kvůli pasti
+     * na boty), proto jen whitelist — cokoli jiného je `contact`.
+     */
+    private function source(Request $request): string
+    {
+        return $request->input('source') === 'home' ? 'home' : 'contact';
+    }
+
+    /**
+     * OND-437 (návrh 2 z OND-429): úspěch nese i potvrzení vykreslené
+     * serverem (čas přijetí, den odpovědi, e-mail) — `contactForm` ho jen
+     * vloží místo formuláře. Sdílené s pastí na boty, ať se odpovědi neliší.
+     *
+     * OND-448: znění je na obou místech stejné. Kroky „co bude dál“ jen na
+     * homepage — /kontakt má pod formulářem vlastní „Co se stane potom“.
+     * Na homepage nad deskou stojí h2 sekce, na /kontakt potvrzení nahrazuje
+     * h2 formuláře.
+     */
+    private function success(string $source, string $email, CarbonInterface $receivedAt): JsonResponse
+    {
+        $isHome = $source === 'home';
+
+        return response()->json([
+            'message'      => __('contact.message_success'),
+            'confirmation' => view('partials.lead-confirmation', [
+                'stampKey'   => 'home.inline_form.confirmation.stamp',
+                'headingKey' => 'home.inline_form.confirmation.heading',
+                'headingTag' => $isHome ? 'h3' : 'h2',
+                'email'      => $email,
+                'receivedAt' => $receivedAt,
+                'steps'      => $isHome,
+            ])->render(),
+        ]);
     }
 
     /**

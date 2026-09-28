@@ -11,12 +11,14 @@
  *                                         (IntersectionObserver, ≥40% nebo 600px)
  *   data-analytics-props='{"k":"v"}'     → volitelné props (JSON na elementu)
  *
- * Speciální eventy (server-side):
- *   inline_form_submit_success → emitnuto z home.blade.php přes
- *                                CustomEvent('inline-form-submit-success'),
- *                                který se dispatchne, pokud session
- *                                obsahuje `home_lead_success` (úspěšný POST).
+ * Speciální eventy:
+ *   inline_form_submit_success → poptávka z homepage odeslána; emituje
+ *                                `contactForm` (app.js) přes
+ *                                CustomEvent('inline-form-submit-success')
+ *                                po úspěšném AJAX POST (OND-448).
  */
+
+import { whenActivated } from './prerender';
 
 const DEBUG = false; // zapnout pro console.log diagnostiku
 
@@ -155,25 +157,28 @@ function bindFaq() {
 }
 
 // ───────────────────────────────────────────────────────────────────────────
-// Server-side success → inline_form_submit_success
-// home.blade.php dispatchne `inline-form-submit-success` po úspěšném POST.
+// Úspěch formuláře → inline_form_submit_success / contact_form_submit_success
+// OND-448: obojí dispatchne `contactForm` (app.js) po úspěšném AJAX POST.
 // ───────────────────────────────────────────────────────────────────────────
 function bindFormSuccess() {
-    window.addEventListener('inline-form-submit-success', () => {
-        dispatch('inline_form_submit_success');
+    // OND-448: jeden formulář na homepage i /kontakt — `detail.form_source`
+    // (`home` / `contact`) jde do props, ať jde místo v měření rozlišit.
+    const props = (e) => (e?.detail && typeof e.detail === 'object' ? e.detail : {});
+    window.addEventListener('inline-form-submit-success', (e) => {
+        dispatch('inline_form_submit_success', props(e));
     });
     // FAQ mikro-formulář (OND-121 T18) — server-side success.
     window.addEventListener('faq-form-submit-success', () => {
         dispatch('faq_form_submit_success');
     });
     // OND-137 P4 §6: kontaktní formulář — JS dispatchne po úspěšném axios POST.
-    window.addEventListener('contact-form-submit-success', () => {
-        dispatch('contact_form_submit_success');
+    window.addEventListener('contact-form-submit-success', (e) => {
+        dispatch('contact_form_submit_success', props(e));
     });
     // Záloha kromě click delegate na submit tlačítku — Enter v textovém poli
     // může v některých prohlížečích vyvolat submit bez synthesized click.
-    window.addEventListener('inline-form-submit-attempt', () => {
-        dispatch('inline_form_submit_attempt');
+    window.addEventListener('inline-form-submit-attempt', (e) => {
+        dispatch('inline_form_submit_attempt', props(e));
     });
 }
 
@@ -182,10 +187,15 @@ function bindFormSuccess() {
 // ───────────────────────────────────────────────────────────────────────────
 function boot() {
     if (!isEnabled()) return;
-    bindClicks();
-    bindViews();
-    bindFaq();
-    bindFormSuccess();
+    // OND-438: v přednačtené stránce až po jejím otevření — jinak by
+    // `data-analytics-view` (např. case_study_view na detailu) odešel
+    // z návštěvy, která se nekonala.
+    whenActivated(() => {
+        bindClicks();
+        bindViews();
+        bindFaq();
+        bindFormSuccess();
+    });
 }
 
 if (document.readyState === 'loading') {

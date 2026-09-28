@@ -27,7 +27,7 @@ class Ond256MigrationsTest extends TestCase
     /**
      * Opravy z bodu 9: slug => [pole, typo, správně].
      *
-     * Migrace jich má šest, tady je jich pět. Chybí `josefopa.challenge`
+     * Migrace jich má šest, tady jsou čtyři. Chybí `josefopa.challenge`
      * („visačku" → „vizitku"): vlna 2 (OND-267, redline OND-261 položka jo-1)
      * tu větu nahradila celou — místo „Klient potřeboval vizitku stavební
      * firmy, která bude působit…" tam dnes stojí „Klient potřeboval, aby jeho
@@ -37,10 +37,13 @@ class Ond256MigrationsTest extends TestCase
      * Záměrně se tím **nemění migrace ani data** — migrace 2026_09_22_110000
      * na produkci proběhla ještě nad starým zněním a je podmíněná, takže dnes
      * je její šestá položka trvale no-op. Zdrojem pravdy je redline, ne test.
+     *
+     * Stejně dopadl `barana.description` („premiové“ → „prémiové“): OND-449
+     * (B-04) přepsal celý perex BARANY, věta „Postavil jsem prémiové…“ v něm
+     * už není.
      */
     private const TYPO_FIXES = [
         'clanek-motorkari-cz' => ['result', 'motopotálu', 'motoportálu'],
-        'barana'              => ['description', 'Postavil jsem premiové', 'Postavil jsem prémiové'],
         'frl-creator'         => ['challenge', 'chybovo a se zbytečnou', 'chybově a se zbytečnou'],
         'choccoboard'         => ['solution', 'se k ní dostaneš odkudkoli', 'se k ní dostanete odkudkoli'],
         'nove-interiery'      => ['result', 'si zákazníci dopředu vědomí, jak', 'zákazníci dopředu vědí, jak'],
@@ -95,13 +98,13 @@ class Ond256MigrationsTest extends TestCase
         $this->revertToTypos();
 
         // Ruční úprava z Filamentu — původní věta už v DB nestojí.
-        $this->setTranslationField('barana', 'description', 'Ručně přepsaný text bez překlepu.');
+        $this->setTranslationField('frl-creator', 'challenge', 'Ručně přepsaný text bez překlepu.');
 
         $this->typoMigration()->up();
 
         $this->assertSame(
             'Ručně přepsaný text bez překlepu.',
-            $this->translationField('barana', 'description'),
+            $this->translationField('frl-creator', 'challenge'),
         );
     }
 

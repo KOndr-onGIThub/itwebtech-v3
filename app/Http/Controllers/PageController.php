@@ -41,9 +41,66 @@ class PageController extends Controller
         return view('pages.contact');
     }
 
+    /**
+     * OND-359: u každé cenové úrovně stojí odkaz na reálnou případovku.
+     *
+     * Slugy jsou v `price.tiers[].proof.slug`, ale adresu nestavíme z nich —
+     * projekt si načteme a URL vezmeme z `detailUrl()`. Dvě věci se tím řeší
+     * naráz: odkaz na nepublikovaný nebo smazaný projekt se nevykreslí vůbec
+     * (místo aby vedl na 404 přímo z místa, kde se člověk rozhoduje o ceně)
+     * a lokalizovaný slug se použije sám, kdyby ho projekt dostal.
+     * Stejný princip jako prázdná mřížka na `/projekty` (OND-351): když data
+     * nejsou, prvek zmizí; až budou, vrátí se sám.
+     */
     public function price()
     {
-        return view('pages.price');
+        $proofSlugs = array_filter(array_column(
+            array_column(__('price.tiers'), 'proof'),
+            'slug'
+        ));
+
+        $tierProofs = PortfolioProject::published()
+            ->whereIn('slug', $proofSlugs)
+            ->with('translations')
+            ->get()
+            ->keyBy('slug');
+
+        return view('pages.price', compact('tierProofs'));
+    }
+
+    /**
+     * OND-397: /recenze — všechny recenze ve čtyřech skupinách (předloha OND-396).
+     *
+     * `$groups` = skupina → kartičky, kartička = pole lidí (Cyklocentrum má dva
+     * se stejným textem). Seskupení je v `config/reviews.php`, data v
+     * `testimonials.php`; id, které v datech chybí, se přeskočí místo 500
+     * (úplnost hlídá test).
+     *
+     * „Více o projektu" vede jen na publikovanou případovku, stejně jako
+     * odkazy u cenových úrovní (OND-359): URL z `detailUrl()`, ne ze slugu.
+     */
+    public function reviews()
+    {
+        $testimonials = collect(__('testimonials.items'))->keyBy('id');
+
+        $groups = collect(config('reviews.groups'))
+            ->map(fn (array $refs) => collect($refs)
+                ->map(fn ($ref) => collect((array) $ref)
+                    ->map(fn (string $id) => $testimonials->get($id))
+                    ->filter()
+                    ->values()
+                    ->all())
+                ->filter()
+                ->values()
+                ->all());
+
+        $projects = PortfolioProject::published()
+            ->whereIn('slug', $testimonials->pluck('project')->filter()->unique()->values())
+            ->with('translations')
+            ->get()
+            ->keyBy('slug');
+
+        return view('pages.reviews', compact('groups', 'projects'));
     }
 
     public function privacy()
@@ -259,7 +316,24 @@ class PageController extends Controller
             }
         }
 
-        return view('pages.article', compact('article', 'translation', 'locale', 'hreflangs'));
+        // OND-406: závěr článku vede na DALŠÍ článek — následující publikovaný
+        // podle `position` (pořadí výpisu /zapisky), za posledním zase první.
+        // Stejný filtr jako blog(): jen články s aktivním slugem v této locale,
+        // jinak by odkaz vedl na /de/blog/{cs-slug} a 404.
+        $siblings = Article::where('published', true)
+            ->whereHas('slugs', fn ($query) => $query
+                ->where('locale', $locale)
+                ->where('active', true))
+            ->orderBy('position')
+            ->with(['translations', 'slugs'])
+            ->get()
+            ->values();
+        $index = $siblings->search(fn ($a) => $a->id === $article->id);
+        $next = ($index !== false && $siblings->count() > 1)
+            ? $siblings->get(($index + 1) % $siblings->count())
+            : null;
+
+        return view('pages.article', compact('article', 'translation', 'locale', 'hreflangs', 'next'));
     }
 
     /**
@@ -269,13 +343,12 @@ class PageController extends Controller
      * adresa vést. Co v mapě není, jde na výpis blogu. Mapuje se na id,
      * ne na slug, aby přesměrování sedělo i v EN/DE verzi webu.
      *
-     * Zdroj: dokument `blog-texty` (OND-203), tabulka „Mapa přesměrování".
-     * 4 = „Co si připravit, než oslovíte vývojáře webu".
+     * Zdroj: dokument `clanky-cs` (OND-421). Články 7 a 11 jsou od OND-432
+     * znovu publikované, stažený zůstává jen 8 — je sloučený do 11, které
+     * řeší stejnou otázku.
      */
     private const REMOVED_ARTICLE_REDIRECTS = [
-        7  => 4,  // Design nebo obsah?
-        8  => 4,  // Web, který převádí návštěvníky na zákazníky
-        11 => 4,  // Jak vytvořit úspěšnou webovou stránku
+        8 => 11,  // Web, který převádí návštěvníky → Jak vytvořit úspěšnou webovou stránku
     ];
 
     /**

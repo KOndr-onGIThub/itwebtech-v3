@@ -97,6 +97,23 @@
     margin: 0 0 var(--space-6);
     max-width: 21ch;
 }
+/* OND-333 — zmenšený titulek platí JEN pro domovskou stránku. Třídu
+   `.pd-heading` tehdy nesla i zmrazená kopie staré homepage, která
+   stála jako srovnávací vzorek původního designu; globální zmenšení by z ní
+   udělalo něco jiného, proto modifikátor na `<h1>` místo přepisu
+   `.pd-heading`. Kopie je od OND-342 smazaná a `.pd-heading` dnes nese jen
+   tenhle jeden `<h1>`, takže je modifikátor už jen pojistkou.
+
+   Strop 52 px je zároveň nejhorší případ, ne jen hodnota pro 1440 px:
+   sloupec H1 se nad `container-site` (1280 px) už nerozšiřuje — má
+   559 px na 1440 i na 1600 px — ale clamp by rostl dál. `3.61vw`
+   (52 / 1440) stropu dosáhne přesně na 1440 px a nad ním už písmo
+   neroste, takže se řádek nemá jak zlomit až na širokém monitoru.
+   Podlaha 33 px je nad hranicí 28,2 px, pod kterou by mobilní sloupec
+   začal řídit `max-width: 21ch` (355 px → 336 px). */
+.pd-heading--hp {
+    font-size: clamp(33px, 3.61vw, 52px);
+}
 /* Barva se v titulku objeví jen jako podtržení klíčového slova. */
 .pd-heading em {
     font-style: normal;
@@ -161,17 +178,6 @@
     background: var(--pd-accent-hover);
     transform: translateY(-1px);
 }
-.pd-phone.phone-cta {
-    font-family: var(--font-body);
-    font-size: var(--text-body-sm);
-    color: var(--color-fg-muted);
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-}
-.pd-phone.phone-cta:hover { color: var(--color-fg-primary); }
-
 .pd-note {
     font-family: var(--font-body);
     font-size: var(--text-body-sm);
@@ -180,10 +186,108 @@
     margin: 0;
 }
 
+/* OND-336 — na mobilu hero sdílí obrazovku s fixní `.mobile-bottom-bar`
+   (69 px, `position: fixed; bottom: 0`). Spodní hrana použitelného
+   prostoru na 390×844 tím není 844 px, ale 774,6 px. Hlavní tlačítko
+   `.pd-cta` končilo v češtině na 788 px, tedy 13,4 px POD lištou.
+
+   Lišty si nešlo všimnout: dokud návštěvník nerozhodne o cookies, drží
+   ji `html.cookie-pending` na `display: none` (OND-266). První návštěva
+   lištu nemá, druhá ano — kdo testoval v anonymním okně, viděl vždycky
+   ten lepší stav.
+
+   Oprava má dvě části a titulku se netýká ani jedna — velikost i znění
+   jsou rozhodnuté v OND-330/OND-333:
+
+   1. Svislý rytmus hera je o jeden krok mřížky menší (32 → 24 px,
+      čtyři mezery = 32 px).
+
+   2. Fotka přestává řídit výšku hera šířkou obrazovky. Full-bleed
+      portrét v poměru 3:2 rostl s šířkou viewportu (390 px → 260 px
+      vysoký, 430 px → 287 px, 767 px → 511 px), takže čím širší
+      telefon, tím hlubší hero — ale místa nad lištou je pořád stejně.
+      `max-height: 30svh` váže výšku fotky na výšku obrazovky, tedy
+      na tu veličinu, o kterou se tady hraje. Na 844 px vyjde 253 px:
+      na referenčních 390 px je to oproti dnešku 7 px, na 430 px 34 px
+      a na 767 px 258 px. Ořez řeší `object-fit: cover` se stejným
+      `object-position`, jaký fotka má na desktopu od OND-231.
+
+   Nad 767 px, kde lišta neexistuje, se nemění nic. Scope `--hp` vznikl kvůli
+   zmrazené kopii hera na podstránce se starou homepage; nesla stejný markup a měla
+   zůstat srovnávací. Ta stránka je od OND-342 smazaná a `.pd-hero` dnes nese
+   jen domovská stránka (podstránky mají `page-hero`), takže je modifikátor
+   už jen pojistkou.
+
+   OND-341 — čísla níž jsou dotažená. Oprava OND-336 stačila jen na
+   češtinu: na 390×844 měla mezeru nad lištou 25,4 px, angličtina 7,5 px
+   a němčina −13,6 px (tlačítko pod lištou). Pravidlo je teď jedno číslo
+   pro všechny jazyky: **spodek `.pd-hero .pd-cta` je nejméně 24 px nad
+   horní hranou lišty**. Tři důvody, proč to nešlo dotáhnout textem:
+
+   - Německý podtitulek z OND-335 je o 30 znaků DELŠÍ než dnešní, ne
+     kratší — přidá pátý řádek a tlačítko posune o 28,8 px DOLŮ.
+   - Zmenšený nadpis z OND-333 němčina dostala, `.pd-heading--hp` je
+     jazykově neutrální.
+   - Německý popisek tlačítka potřebuje na jeden řádek 275 px; při 360 px
+     má sloupec 328 px, takže by musel mít vodorovnou výplň ≤ 12 px.
+
+   Zbyla tedy geometrie hera, tři kroky, všechny jen pod 767 px:
+
+   3. Svislý rytmus o další krok mřížky níž (24 → 16 px, čtyři mezery
+      = 32 px).
+
+   4. `max-height` fotky 30 → 24svh (na 844 px z 253 na 203 px). Je to
+      ta veličina, kterou lišta ukrajuje, takže strop patří sem, ne do
+      mezer mezi odstavci.
+
+   5. Vodorovná výplň tlačítka 26 → 20 px. Nejde o estetiku: nejdelší
+      popisek (německý) se tím na 390 px vejde na jeden řádek místo
+      dvou, což je dalších 26 px — a dvouřádkové tlačítko splývalo se
+      stejně zelenou spodní lištou.
+
+   Naměřeno po změně (mezera nad lištou, spodek `.pd-cta`, po odklepnutí
+   cookies):
+
+     viewport   cs      en      de
+     360×844   +45,6   +61,3   +35,3
+     390×844  +108,0   +90,1   +95,0
+     414×844  +108,0   +90,1   +95,0
+
+   Na obrazovkách nižších než ~820 px se tlačítko nad lištu nevejde ani
+   po téhle změně (360×800: de +1,9 px; 375×667: de −99 px). Text hera
+   sám o sobě má při 360 px 477 px a s hlavičkou 68 px a lištou 69 px
+   na fotku nezbývá; to je rozhodnutí o layoutu, ne o pixelech. */
+@media (max-width: 767px) {
+    .pd-hero--hp .pd-hero__photo,
+    .pd-hero--hp .pd-eyebrow,
+    .pd-hero--hp .pd-heading,
+    .pd-hero--hp .pd-sign {
+        margin-bottom: var(--space-4);
+    }
+    .pd-hero--hp .pd-hero__photo img {
+        max-height: 24svh;
+        object-fit: cover;
+        object-position: 62% 20%;
+    }
+    .pd-hero--hp .pd-cta {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
 /* --- Sekce: sdílená hlava a rytmus -------------------------- */
+/* PRAVIDLO ODDĚLOVAČŮ (OND-394, přijato 27. 9. 2026; nasazeno OND-398):
+   sekce od sebe odděluje prostor, ne čára. Čára zůstává jen tam, kde nese
+   informaci — řádky FAQ, pole formuláře, rámeček přílohy, acidová linka
+   doporučeného sloupce ceníku (zvýraznění), čára nad patičkou.
+   Všude jinde je hrana PRŮHLEDNÁ, ne `border: 0`: 1px místo zůstane
+   a nic neposkočí. Mezi sekcemi musí být největší mezera na stránce
+   (obsah → obsah 203 px na 1440 / 113 px na 390); žádná vnitřní ji nesmí
+   přerůst. Kontrolní otázka pro další stránku: co by člověk ztratil,
+   kdyby tu čára nebyla? */
 .pd-section {
     background: var(--color-bg-base);
-    border-top: 1px solid var(--color-border-soft);
+    border-top: 1px solid transparent;
     padding-block: clamp(3.5rem, 7vw, 6.5rem);
 }
 .pd-head {
@@ -220,10 +324,16 @@
     max-width: 36ch;
     margin: 0 0 var(--space-8);
 }
+/* OND-308: odstavec o situaci klienta jsou tři věty, ne heslo — na 36 ch
+   by z nich byl sloupec o osmi řádcích. Sekce kolem něj má zkrácené
+   odsazení: plná výška sekce by z jednoho odstavce udělala prázdný pás. */
+.pd-lead--wide { max-width: 52ch; margin-bottom: 0; }
+.pd-situation { padding-block: clamp(2.5rem, 4.5vw, 4rem); }
 
 /* --- Social pás --------------------------------------------- */
+/* Věta o situaci a pruh čísel jsou jeden úvodní blok — bez čáry (OND-394 H2). */
 .pd-strip {
-    border-top: 1px solid var(--color-border-soft);
+    border-top: 1px solid transparent;
     padding-block: var(--space-6);
     background: var(--color-bg-base);
 }
@@ -240,82 +350,40 @@
     color: var(--color-fg-muted);
 }
 .pd-strip__list strong { color: var(--color-fg-primary); font-weight: 600; }
+/* OND-397 (vstup V1): hodnocení v pruhu je odkaz na /recenze. Tiché
+   podtržení jako `.pd-case__live`, acid až při najetí — nové slovo
+   nepřibývá. Text je vysoký 17 px, neviditelný přesah z něj dělá cíl
+   ~44 px, aniž by se pohnula sazba. */
+.pd-strip__link {
+    position: relative;
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--color-border-mid);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+    transition: text-decoration-color var(--duration-micro) var(--ease-out);
+}
+.pd-strip__link::before { content: ''; position: absolute; inset: -12px -4px; }
+.pd-strip__link:hover,
+.pd-strip__link:focus-visible { text-decoration-color: var(--pd-accent); }
 .pd-strip__list li + li::before {
     content: '·';
     color: var(--pd-accent);
     margin-right: var(--space-6);
 }
-/* --- Metoda ------------------------------------------------- */
-.pd-avoid {
-    font-family: var(--font-body);
-    font-size: var(--text-eyebrow);
-    letter-spacing: var(--tracking-eyebrow);
-    text-transform: uppercase;
-    color: var(--pd-accent);
-    margin: 0 0 var(--space-2);
+/* Na mobilu se pruh láme a tečka visí na začátku řádku jako odrážka, kterou
+   není. Mezeru mezi položkami nese `column-gap` (OND-394, blok G). */
+@media (max-width: 639px) {
+    .pd-strip__list li + li::before { content: none; }
 }
-.pd-avoid-sub {
-    font-family: var(--font-body);
-    font-size: var(--text-body);
-    color: var(--color-fg-muted);
-    margin: 0 0 var(--space-7);
-}
-/* OND-269: dvě věty, které zbyly ze sekce „Generátor versus váš byznys",
-   stojí pod mřížkou problémů. Vlasová linka je oddělí, ať nevypadají jako
-   třetí položka mřížky. */
-.pd-avoid--second {
-    margin-top: var(--space-9);
-    padding-top: var(--space-7);
-    border-top: 1px solid var(--color-border-soft);
-}
-.pd-avoid--second + .pd-avoid-sub { margin-bottom: 0; max-width: 72ch; }
-.pd-issues { display: grid; gap: var(--space-7); }
-@media (min-width: 1024px) { .pd-issues { grid-template-columns: 1fr 1fr; gap: var(--space-9); } }
-.pd-issue { display: grid; grid-template-columns: 56px 1fr; gap: var(--space-4); }
-.pd-issue__num {
-    font-family: var(--font-display);
-    font-weight: 200;
-    font-variation-settings: 'wght' 200;
-    font-size: var(--text-h2);
-    line-height: 1;
-    color: var(--pd-accent);
-}
-.pd-issue h3 {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: var(--text-h4);
-    color: var(--color-fg-primary);
-    margin: 0 0 var(--space-3);
-}
-.pd-issue p {
-    font-family: var(--font-body);
-    font-size: var(--text-body);
-    line-height: var(--leading-body);
-    color: var(--color-fg-muted);
-    margin: 0 0 var(--space-3);
-}
-.pd-issue blockquote {
-    margin: var(--space-4) 0 0;
-    font-family: var(--font-body);
-    font-style: italic;
-    font-size: var(--text-body-sm);
-    line-height: var(--leading-relaxed);
-    color: var(--color-fg-muted);
-}
-.pd-issue blockquote footer {
-    font-style: normal;
-    font-size: var(--text-caption);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-top: var(--space-2);
-}
-
 /* --- Cenová kotva ------------------------------------------- */
 .pd-price { display: grid; gap: var(--space-7); }
 @media (min-width: 1024px) {
     .pd-price { grid-template-columns: repeat(3, 1fr); gap: 0; }
+    /* Bez svislice (OND-394 H16–17): pásma drží od sebe mezera
+       a svislice soupeřila s acidovou linkou doporučeného sloupce. */
     .pd-price__col + .pd-price__col {
-        border-left: 1px solid var(--color-border-soft);
+        border-left: 1px solid transparent;
         padding-left: var(--space-7);
     }
     .pd-price__col { padding-right: var(--space-7); }
@@ -333,20 +401,40 @@
     color: var(--pd-accent);
     margin-left: var(--space-2);
 }
-.pd-price__value {
+/* OND-354: dřív `.pd-price__value` — cena („55 000 Kč"). Dnes rozsah
+   („do 12 stránek"). Cena z karet zmizela, drží ji jediné místo: prahové
+   číslo a rozpětí ve větě nad nimi. Rozsah je fráze, ne pětiznakové číslo,
+   takže na 46 px by se lámal do dvou i tří řádků a sloupce by přestaly
+   držet jednu linku; 32 px je největší stupeň, na kterém se nejdelší
+   varianta ze tří jazyků („ohne Umfangsgrenze") vejde na jeden řádek. */
+.pd-price__scope {
     font-family: var(--font-display);
     font-weight: 200;
     font-variation-settings: 'wght' 200;
-    font-size: clamp(30px, 3.2vw, 46px);
+    font-size: clamp(24px, 2.2vw, 32px);
+    line-height: 1.15;
     letter-spacing: var(--tracking-tight);
+    text-wrap: balance;
     color: var(--color-fg-primary);
     margin: 0 0 var(--space-4);
+}
+/* OND-448 (B-08): rozsah je teď claim („Aby zákazník pochopil, proč právě
+   vy“) a láme se do dvou řádků. Těsné řádkování drží dvojřádek jako jeden
+   celek a rezerva dvou řádků ve třech sloupcích srovná podtituly pod ním na
+   jednu linku (náhled CEO na OND-441, 28. 9. 2026). */
+@media (min-width: 1024px) {
+    .pd-price__scope { min-height: 2.3em; }
+    /* Němčina je delší: claim Firemního webu má tři řádky a dva podtituly
+       dva — rezerva o řádek víc, ať podtituly a případovky stojí na linkách. */
+    :lang(de) .pd-price__scope { min-height: 3.45em; }
+    :lang(de) .pd-price__desc { min-height: calc(2em * 1.5); }
 }
 .pd-price__desc {
     font-family: var(--font-body);
     font-size: var(--text-body-sm);
     line-height: var(--leading-relaxed);
     color: var(--color-fg-muted);
+    text-wrap: pretty;
     margin: 0;
 }
 /* Doporučené pásmo jen vlasovou linkou nahoře — žádná plocha. */
@@ -354,7 +442,7 @@
 
 /* --- Reference ---------------------------------------------- */
 /* OND-279: „Přeloženo z českých originálů na Google, Firmy.cz a Facebooku" je
-   údaj o původu recenzí — stejná třída jako .pd-testi__source, tedy informace. */
+   údaj o původu recenzí — stejná gramatika jako .pd-by__src, tedy informace. */
 .pd-testi__note {
     font-family: var(--font-body);
     font-size: var(--text-body-sm);
@@ -365,34 +453,176 @@
 }
 .pd-testi { display: grid; }
 @media (min-width: 1024px) { .pd-testi { grid-template-columns: 1fr 1fr; column-gap: var(--space-9); } }
+/* OND-353: mřížka `56px 1fr` zůstává, jen v levém sloupci stojí místo ordinálu
+   portrét (`.pd-by__face`). Řádkovou mezeru dělá `.pd-by__org`, proto tu
+   `row-gap: 0` — jinak by se sečetla s `gap` mřížky.
+   OND-394 H18–20: bez linky nahoře — recenzi otevírá tvář nebo monogram. */
 .pd-testi__item {
-    border-top: 1px solid var(--color-border-soft);
+    border-top: 1px solid transparent;
     padding: var(--space-6) 0;
     display: grid;
     grid-template-columns: 56px 1fr;
-    gap: var(--space-4);
+    column-gap: var(--space-4);
+    row-gap: 0;
+    /* OND-397 (měření OND-396 §6c): ve dvousloupcové mřížce se položka
+       natáhne na výšku sousedky a vnitřní mřížka rozdělí volné místo do
+       svých řádků — citace pak „padá" pod jméno (na homepage Holcmann
+       13 px, na /recenze Kroulík 17 px). Výška položek se nemění. */
+    align-content: start;
 }
-.pd-testi__num {
-    font-family: var(--font-display);
-    font-weight: 200;
-    font-variation-settings: 'wght' 200;
-    font-size: var(--text-h3);
-    line-height: 1.1;
-    color: var(--color-fg-decorative);
-}
+/* Podpis je přímo v mřížce položky: tvář do prvního sloupce, jméno s firmou
+   do druhého. Citace pak stojí pod jménem, ne pod tváří. */
+.pd-testi__item > .pd-by { display: contents; }
+.pd-testi__item > .pd-testi__text { grid-column: 2; }
 .pd-testi__text {
     font-family: var(--font-body);
     font-size: var(--text-body);
     line-height: var(--leading-body);
     color: var(--color-fg-primary);
     margin: 0 0 var(--space-3);
+    /* Visící otevírací uvozovka — optická hrana citace sedí na jméno nad ní. */
+    text-indent: -0.42em;
+    max-width: 62ch;
 }
-.pd-testi__meta {
+
+/* --- Podpis u citace (tvář, jméno, zdroj) — OND-353 --------- */
+/* Jedna komponenta pro všech sedm citací na stránce:
+   `resources/views/components/testimonial-by.blade.php`.
+   V sekci 09 stojí nad citací (56 px), u krátkých pull-quotes pod ní (40 px). */
+.pd-by {
+    --pd-by-size: 56px;
+    display: grid;
+    grid-template-columns: var(--pd-by-size) 1fr;
+    column-gap: var(--space-4);
+    align-items: start;
+    /* Pull-quotes jsou kurzívou a verzálkami; podpis si sazbu řídí sám. */
+    font-style: normal;
+    text-transform: none;
+    letter-spacing: 0;
+    /* OND-368: i základní sazbu, ať nezávisí na tom, do čeho je komponenta
+       vložená. `.pd-by__src` má padding v `em`, takže bez tohohle řádku byl
+       štítek zdroje v každé ze sedmi citací jinak široký (18px kontext
+       v Toyotě, 16px v sekci 09, 12px u kroků). */
     font-family: var(--font-body);
     font-size: var(--text-caption);
-    letter-spacing: 0.1em;
+    line-height: 1.5;
+}
+/* `align-items: start` i tady: u dlouhé role se řádek firmy zalomí (na
+   390 px až na tři řádky, nejhůř Baudyš v EN) a centrování by tvář odsunulo
+   o 30 px pod jméno. Zarovnání na horní hranu drží tvář u jména vždycky. */
+.pd-by--40 {
+    --pd-by-size: 40px;
+    column-gap: var(--space-3);
+}
+.pd-by__face {
+    width: var(--pd-by-size);
+    height: var(--pd-by-size);
+    margin: 0;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    /* OND-368: `--color-border-soft` (#26262B) dává na pozadí #0A0A0B kontrast
+       1,31 : 1. U světlých portrétů hranu drží sama fotka, u tmavých (Baudyš —
+       tmavá bunda a k tomu `brightness(.93)` níž) čtverec žádnou čitelnou hranu
+       neměl. `--color-border-mid` (#3A3A41 = 1,75 : 1) je týž token, jaký nese
+       slot se zdrojem `.pd-by__src` hned vedle, takže nevzniká nová hodnota. */
+    border: 1px solid var(--color-border-mid);
+    background: var(--color-bg-elev-1);
+}
+.pd-by__face picture { display: block; width: 100%; height: 100%; }
+.pd-by__face img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    /* Srovná šestnáct různě nafocených snímků do jedné sazby. */
+    filter: grayscale(1) contrast(1.04) brightness(0.93);
+}
+/* Varianta bez fotky: týž čtverec, uvnitř monogram písmem ordinálu. */
+.pd-by__mono {
+    font-family: var(--font-display);
+    font-weight: 200;
+    font-variation-settings: 'wght' 200;
+    font-size: 19px;
+    letter-spacing: 0.06em;
+    color: var(--color-fg-decorative);
+}
+/* OND-368 — dvoutřídní selektor (0-2-0) schválně. `.pd-by__line` je `<p>`,
+   takže ho v Toyotě přebíjela próza sekce: `.pd-origin__text p` (0-1-1) mu
+   dala `margin-bottom: var(--space-5)`, `font-size: var(--text-body-lg)`
+   a `max-width: 62ch`. Naměřeno na produkci (1440×900, getBoundingClientRect):
+   mezera mezi spodní hranou jména a horní hranou firmy 25,3 px proti 3,3 px
+   na zbylých šesti místech — 24 px z té marginy plus 1,25 px z vycentrování
+   jména (19,5 px) v řádku vysokém 22 px.
+   S `line-height` to nesouviselo: `.pd-by__line` je flex kontejner, řádkový
+   box si nedělá, a 22 px mu dává `.pd-by__src`.
+   Reset patří ke komponentě, ne do sekce — `.pd-by` se sází na sedm míst
+   a osmé přijde. */
+.pd-by .pd-by__line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 10px;
+    margin: 0 0 2px;
+    max-width: none;
+    font-family: var(--font-body);
+    font-size: var(--text-caption);
+    line-height: 1.5;
+}
+.pd-by__name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-variation-settings: 'wght' 600;
+    font-size: 15px;
+    line-height: 1.3;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--color-fg-primary);
+}
+.pd-by__org {
+    display: block;
+    font-family: var(--font-body);
+    font-size: var(--text-caption);
+    line-height: 1.5;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-fg-muted);
+    margin: 0 0 14px;
+}
+/* Slot pro zdroj je jeden a viditelný — vlasový rámeček, jaký na téhle
+   stránce nesou datové štítky. Uvnitř buď značka, nebo slovo. */
+.pd-by__src {
+    display: inline-flex;
+    align-items: center;
+    height: 22px;
+    padding: 0 0.45em;
+    border: 1px solid var(--color-border-mid);
+    text-transform: none;
+}
+.pd-by__logo { display: block; width: auto; }
+.pd-by__logo--google   { height: 13px; filter: grayscale(1) brightness(1.75); }
+.pd-by__logo--facebook { height: 14px; filter: grayscale(1) brightness(1.9); }
+/* Firmy.cz nemá značku, jen logotyp v poměru 4,6 : 1 — pod ~24 px ztrácí
+   tvar písmen. Sází se proto písmem stránky; slot zůstává stejný. */
+.pd-by__src--word {
+    font-family: var(--font-body);
+    font-size: var(--text-caption);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: var(--color-fg-muted);
+}
+/* OND-444: bez firmy (recenze z Facebooku) je v podpisu jen jméno. Ke
+   středu tváře, ne k její horní hraně — jinak pod ním zeje místo po řádku,
+   který chybí. */
+.pd-by__text--bare { align-self: center; }
+/* U pull-quotes stojí podpis pod citací a firma je poslední řádek bloku. */
+.pd-by--40 .pd-by__org { margin-bottom: 0; }
+
+@media (max-width: 767px) {
+    .pd-testi__item { grid-template-columns: 48px 1fr; }
+    .pd-testi__item .pd-by { --pd-by-size: 48px; }
+    .pd-by__mono { font-size: 16px; }
+    .pd-by__name { font-size: 14px; }
 }
 
 /* ============================================================
@@ -402,13 +632,16 @@
    a důrazu. Žádné boxy, žádné ikony, žádná dekorace.
    ============================================================ */
 
-/* --- 04 Služby — tři sloupce s vlasovými linkami ------------- */
+/* --- 04 Služby — tři sloupce ---------------------------------- */
+/* OND-394 H27–28: statická svislice mezi sloupci pryč, sloupce otevírají
+   čísla 01–03. Náboj vrstvy B (`.pd-service + .pd-service::after`
+   v hloubka.css) kreslí vlastní 1px jádro a sjede po tom místě dál. */
 .pd-services { display: grid; gap: var(--space-7); }
 @media (min-width: 1024px) {
     .pd-services { grid-template-columns: repeat(3, 1fr); gap: 0; }
     .pd-service { padding-right: var(--space-7); }
     .pd-service + .pd-service {
-        border-left: 1px solid var(--color-border-soft);
+        border-left: 1px solid transparent;
         padding-left: var(--space-7);
     }
 }
@@ -460,19 +693,29 @@
     height: 1px;
     background: var(--pd-accent);
 }
+/* OND-308: odrážka má dvě části — hlavní větu v jazyce klienta a pod ní
+   technický doplněk. Hierarchii nese barva, ne velikost: doplněk zůstává
+   na stejném stupni písma, aby byl pořád čitelný (--color-fg-decorative
+   je na text s informací příliš tmavý, viz design-system.css). */
+.pd-service__bullet-main { display: block; color: var(--color-fg-primary); }
+.pd-service__bullet-note { display: block; margin-top: 2px; }
 .pd-services__secondary {
     margin: var(--space-8) 0 0;
     font-family: var(--font-body);
     font-size: var(--text-body-sm);
     color: var(--color-fg-muted);
 }
-.pd-services__secondary a {
+/* OND-411: týž tichý odkaz nese i pokračování věty pod kroky
+   („…nebo si napřed přečtěte, co si připravit"). */
+.pd-services__secondary a,
+.pd-steps__cta-intro a {
     color: var(--color-fg-primary);
     text-decoration: underline;
     text-decoration-color: var(--pd-accent);
     text-underline-offset: 3px;
 }
-.pd-services__secondary a:hover { color: var(--pd-accent); }
+.pd-services__secondary a:hover,
+.pd-steps__cta-intro a:hover { color: var(--pd-accent); }
 
 /* --- 05 Případovky — dílo první, výsledek druhý -------------- */
 .pd-cases { display: grid; gap: var(--space-9); }
@@ -497,6 +740,91 @@
 .pd-case__visual img { display: block; width: 100%; height: auto; }
 .pd-case__visual:hover,
 .pd-case__visual:focus-visible { border-color: var(--pd-accent); }
+
+/* OND-440 (návrh 4, specifikace OND-439) · Záznamy živých webů v případovkách.
+   Rám = lišta s adresou + obrazovka. Nic víc: žádné „semafory“ prohlížeče,
+   žádný rámeček zařízení. Lišta říká jen dvě fakta — kde to běží a kdy
+   jsme to nahráli. Chování (kdy se stáhne, co hraje) je v live-recordings.js.
+   Stojí za pravidly `.pd-case__visual` výš, aby `display` i `img` přebilo pořadím. */
+.pd-live { display: flex; flex-direction: column; }
+.pd-live__bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3, 12px);
+    height: 32px;
+    padding: 0 4px 0 12px;
+    background: var(--color-bg-elev-1);
+    border-bottom: 1px solid var(--color-border-soft);
+    font-family: var(--font-body);
+    font-size: var(--text-caption);
+    line-height: 1;
+    white-space: nowrap;
+}
+.pd-live__url {
+    color: var(--color-fg-primary);
+    font-weight: 600;
+}
+.pd-live__meta {
+    margin-left: auto;
+    color: var(--color-fg-muted);
+    font-variant-numeric: tabular-nums;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.pd-live__kind { display: none; }             /* telefon: jen „nahráno <datum>“ */
+.pd-live__toggle {
+    position: relative;
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: none;
+    color: var(--color-fg-muted);
+    cursor: pointer;
+}
+.pd-live__toggle::after { content: ''; position: absolute; inset: -8px; }   /* cíl 44 × 44 px */
+.pd-live__toggle:hover { color: var(--color-fg-primary); }
+.pd-live__toggle:focus-visible { outline: 2px solid var(--pd-accent); outline-offset: 0; }
+.pd-live__toggle svg { width: 12px; height: 12px; }
+.pd-live__toggle .pd-live__i-play { display: none; }
+.pd-live__toggle[aria-pressed="true"] .pd-live__i-play { display: block; }
+.pd-live__toggle[aria-pressed="true"] .pd-live__i-pause { display: none; }
+.pd-live--still .pd-live__toggle { display: none; }   /* omezený pohyb / Save-Data: není co zastavovat */
+
+/* CLS 0: výšku drží poměr stran obrazovky + pevná lišta, ne plakát. */
+.pd-live__screen {
+    position: relative;
+    display: block;
+    aspect-ratio: 390 / 488;                  /* telefon: mobilní záznam 4 : 5 */
+    background: var(--color-bg-elev-1);
+    overflow: hidden;
+}
+.pd-live__screen img,
+.pd-live__screen video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+.pd-live__screen video { opacity: 0; transition: opacity 200ms var(--ease-out, ease-out); }
+.pd-live__screen video.is-ready { opacity: 1; }
+@media (min-width: 768px) {
+    .pd-live__bar { height: 36px; padding-left: 14px; }
+    .pd-live__kind { display: inline; }
+    .pd-live__screen { aspect-ratio: 16 / 9; }  /* tablet a počítač: počítačový záznam */
+}
+/* Rám už není odkaz, takže akcent drží i fokus uvnitř (obrazovka, pauza). */
+.pd-case__visual.pd-live:has(:focus-visible) { border-color: var(--pd-accent); }
+@media (prefers-reduced-motion: reduce) {
+    .pd-live__screen video,
+    .pd-live__toggle { display: none; }
+}
 .pd-case__num {
     display: block;
     font-family: var(--font-display);
@@ -562,6 +890,10 @@
     border-bottom-color: var(--pd-accent);
 }
 .pd-more { margin: var(--space-8) 0 0; }
+/* OND-398: pod recenzemi (OND-397) se `--space-8` sčítá se spodním odsazením
+   položky (32 px) — obsah → obsah vycházelo 115 px, víc než mezera mezi
+   sekcemi na mobilu (113 px, pravidlo OND-394 bod 1). */
+.pd-testi + .pd-more { margin-top: var(--space-7); }
 .pd-more__link {
     font-family: var(--font-body);
     font-size: var(--text-body);
@@ -573,84 +905,10 @@
 }
 .pd-more__link:hover { color: var(--pd-accent); }
 
-/* --- 07 Proč já — video + tichá mřížka výhod ----------------- */
-.pd-why { display: grid; gap: var(--space-8); }
-@media (min-width: 1024px) {
-    .pd-why {
-        grid-template-columns: 5fr 7fr;
-        gap: var(--space-9);
-        align-items: start;
-    }
-}
-.pd-why__video {
-    border: 1px solid var(--color-border-soft);
-    max-width: 340px;
-}
-.pd-why__video video { display: block; width: 100%; height: auto; }
-.pd-why__bio {
-    font-family: var(--font-body);
-    font-size: var(--text-body);
-    line-height: var(--leading-body);
-    color: var(--color-fg-muted);
-    max-width: 52ch;
-    margin: var(--space-5) 0 0;
-}
-.pd-why__grid { display: grid; }
-.pd-why__item {
-    border-top: 1px solid var(--color-border-soft);
-    padding: var(--space-5) 0;
-    display: grid;
-    grid-template-columns: 56px 1fr;
-    gap: var(--space-4);
-}
-.pd-why__num {
-    font-family: var(--font-display);
-    font-weight: 200;
-    font-variation-settings: 'wght' 200;
-    font-size: var(--text-h3);
-    line-height: 1.1;
-    color: var(--color-fg-decorative);
-}
-.pd-why__item h3 {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: var(--text-h4);
-    color: var(--color-fg-primary);
-    margin: 0 0 var(--space-2);
-}
-.pd-why__item p {
-    font-family: var(--font-body);
-    font-size: var(--text-body-sm);
-    line-height: var(--leading-relaxed);
-    color: var(--color-fg-muted);
-    margin: 0;
-}
-
-/* --- 08 Pod kapotou — fakta + naměřený čas ------------------- */
-.pd-hood { display: grid; gap: var(--space-6); }
-@media (min-width: 1024px) {
-    .pd-hood { grid-template-columns: repeat(3, 1fr); gap: 0; }
-    .pd-hood__fact { padding-right: var(--space-7); }
-    .pd-hood__fact + .pd-hood__fact {
-        border-left: 1px solid var(--color-border-soft);
-        padding-left: var(--space-7);
-    }
-}
-.pd-hood__fact h3 {
-    font-family: var(--font-body);
-    font-size: var(--text-body);
-    font-weight: 600;
-    color: var(--color-fg-primary);
-    margin: 0 0 var(--space-2);
-}
-.pd-hood__fact p {
-    font-family: var(--font-body);
-    font-size: var(--text-body-sm);
-    line-height: var(--leading-relaxed);
-    color: var(--color-fg-muted);
-    margin: 0;
-}
-.pd-hood__perf {
+/* OND-308: naměřený čas načtení stojí na konci pruhu čísel
+   (`.pd-strip__perf`). Sazbu si nese z původní sekce „Pod kapotou",
+   která se sekcí i se svým `.pd-hood__perf` zmizela v OND-342. */
+.pd-strip__perf {
     font-family: var(--font-display);
     font-weight: 300;
     font-variation-settings: 'wght' 300;
@@ -661,15 +919,20 @@
     max-width: 40ch;
     margin: var(--space-8) 0 0;
 }
-.pd-hood__perf strong {
+.pd-strip__perf strong {
     font-weight: 700;
     color: var(--pd-accent);
 }
+/* V pruhu čísel stojí věta hned pod řádkem údajů, ne pod mřížkou faktů. */
+.pd-strip__perf { margin-top: var(--space-5); }
 
 /* --- 09 Postup — kroky pod sebou, čas jako acid štítek ------- */
 .pd-steps { list-style: none; margin: 0; padding: 0; }
+/* OND-394 H10–13 / O3–O6 / K4–6: krok otevírá velké acidové číslo, linka
+   nad ním by říkala totéž podruhé. Na homepage ji na okamžik nakreslí náboj
+   `.pd-step::before` (hloubka.css), na podstránkách zbývá čistá mezera. */
 .pd-step {
-    border-top: 1px solid var(--color-border-soft);
+    border-top: 1px solid transparent;
     padding: var(--space-6) 0;
     display: grid;
     grid-template-columns: 56px 1fr;
@@ -732,14 +995,6 @@
     max-width: 62ch;
     margin: var(--space-3) 0 0;
 }
-.pd-steps__cta {
-    border-top: 1px solid var(--color-border-soft);
-    padding-top: var(--space-6);
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--space-5);
-}
 .pd-steps__cta-intro {
     font-family: var(--font-display);
     font-weight: 300;
@@ -748,6 +1003,67 @@
     letter-spacing: var(--tracking-tight);
     color: var(--color-fg-primary);
     margin: 0;
+}
+/* OND-314: video z bývalé sekce „18 let v Toyotě" stojí vedle kroků.
+   Vpravo od textu kroků zbývalo na 1440 px 518 px prázdna a portrétní
+   video je 340 px široké — na desktopu tím stránka nenaroste, jen se zaplní
+   díra (naměřeno na 1440 px: 9 203 → 8 985 px). Pod 1200 px už volné místo
+   (338 px) na video s mezerou nestačí, proto se staví pod seznam a centruje
+   — tam stránka o video naroste (1199 px: 8 855 → 9 303 px).
+
+   Proč `align-items: end`: světlo v hloubkové vrstvě během sekce sestupuje
+   (`--pdd-spec` u `.pd-step__num` se stáčí ze 120° na 240°, viz hloubka.css).
+   Video zarovnané dolů stojí přesně tam, kam to světlo dojde — vedle
+   kroků 03–04 — místo aby plavalo uprostřed prázdna. */
+.pd-steps-layout { display: grid; gap: var(--space-8); }
+@media (min-width: 1200px) {
+    .pd-steps-layout {
+        grid-template-columns: 1fr auto;
+        gap: var(--space-9);
+        align-items: end;
+    }
+}
+.pd-steps__media {
+    border: 1px solid var(--color-border-soft);
+    max-width: 340px;
+}
+.pd-steps__media video { display: block; width: 100%; height: auto; }
+@media (max-width: 1199px) {
+    .pd-steps__media { justify-self: center; }
+}
+
+/* OND-308: pod kroky procesu už tlačítko není, zůstala jedna věta.
+   Odsazení proto nese ona sama, ne obal `.pd-steps__cta`
+   (ten zmizel v OND-342 spolu se starou homepage).
+   OND-314: sousedem té věty je teď `.pd-steps-layout`, ne samotný `<ol>` —
+   bez druhého selektoru by věta přišla o odsazení.
+   OND-394 H14: čára přes celou šířku pod čarami kroků pryč i s `padding-top`
+   — mezera za posledním krokem klesne ze 128 na 96 px, pod mezeru mezi
+   sekcemi i na mobilu (113 px). */
+.pd-steps-layout + .pd-steps__cta-intro,
+.pd-steps + .pd-steps__cta-intro {
+    margin-top: var(--space-8);
+    border-top: 1px solid transparent;
+}
+
+/* --- Vnořený předěl uvnitř sekce ---------------------------- */
+/* OND-308: sekce „Reference a námitky" má dva poctivé nadpisy — citace
+   a pod nimi otázky. Druhou půlku odděluje mezera a vlastní mezisoučtový
+   titulek (h3), ne hlava sekce.
+   OND-394 H21: bez čáry (sendvič čára / nadpis / čára řádků FAQ) a menší
+   mezera — 96 + 64 px dělalo podsekci odděleněji než celé sekce na mobilu
+   (113 px). */
+.pd-subsection {
+    margin-top: var(--space-8);
+    border-top: 1px solid transparent;
+}
+.pd-subsection__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-h3);
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-fg-primary);
+    margin: 0 0 var(--space-6);
 }
 
 /* --- 11 FAQ — details/summary s acid křížkem ----------------- */
@@ -833,11 +1149,18 @@
     color: var(--color-fg-muted);
     margin-bottom: var(--space-2);
 }
+/* OND-398: rámeček pole je jediné, co ukazuje, kam se píše (pozadí je
+   průhledné), a podle pravidla OND-394 je to čára, která zůstává — takže
+   musí být vidět. WCAG 1.4.11 chce u hranice ovládacího prvku 3 : 1.
+   `--color-border-soft` dával na desce formuláře (#131316) 1,24 : 1,
+   `--color-fg-decorative` 2,80 : 1 — obojí pod hranicí. `--color-fg-muted`
+   je nejtmavší neutrál palety, který ji přejde (6,6 : 1 na desce, 7,1 : 1
+   na #0A0A0B). Fokus zůstává acidový, chyba červená — obojí se od šedé liší. */
 .pd-field input,
 .pd-field textarea {
     width: 100%;
     background: transparent;
-    border: 1px solid var(--color-border-soft);
+    border: 1px solid var(--color-fg-muted);
     border-radius: 0;
     color: var(--color-fg-primary);
     font-family: var(--font-body);
@@ -873,8 +1196,88 @@
     padding: var(--space-4);
     margin-bottom: var(--space-5);
 }
-.pd-alert--success { border-color: rgba(16, 185, 129, 0.5); color: #6EE7B7; }
 .pd-alert--error { border-color: rgba(255, 97, 87, 0.6); color: #FFB4AE; }
+/* OND-437 (návrh 1): den odpovědi ve větě — bílý, zbytek věty tlumený.
+   `nowrap`, ať se „Donnerstag, 29.10." nerozlomí na dva řádky. */
+.pd-date {
+    color: var(--color-fg-primary);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* OND-437 (návrh 2): potvrzení po odeslání místo formuláře
+   (`partials/lead-confirmation`). Jen barvy, které web už má — zelená
+   `.pd-alert--success` (#6EE7B7) byla jediná zelená na webu a odešla. */
+.pd-done {
+    display: grid;
+    gap: var(--space-5);
+}
+/* Fokus sem posílá skript (čtečka potvrzení přečte), ne uživatel —
+   blok není ovládací prvek, rámeček by jen rušil. */
+.pd-done:focus,
+.pd-done:focus-visible { outline: none; }
+.pd-done .pd-eyebrow { margin: 0; }
+.pd-done__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(var(--text-h3), 3vw, 34px);
+    line-height: 1.15;
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-fg-primary);
+    margin: 0;
+}
+.pd-done__lead {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--color-fg-muted);
+    max-width: 44ch;
+    margin: 0;
+}
+.pd-done__steps {
+    list-style: none;
+    display: grid;
+    gap: var(--space-4);
+    margin: var(--space-2) 0 0;
+    padding: 0;
+}
+.pd-done__steps li {
+    display: grid;
+    grid-template-columns: 8.5em 1fr;
+    gap: var(--space-4);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border-soft);
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+}
+.pd-done__steps b { color: var(--color-fg-primary); font-weight: 500; }
+.pd-done__steps li:first-child b { color: var(--pd-accent); }
+.pd-done .pd-sign { margin: var(--space-2) 0 0; }
+.pd-done__more {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+    margin: 0;
+}
+.pd-done__more a {
+    color: var(--color-fg-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--pd-accent);
+    text-underline-offset: 3px;
+}
+@media (max-width: 640px) {
+    .pd-done__steps li { grid-template-columns: 1fr; gap: var(--space-1); }
+}
+/* Spodní mobilní lišta po odeslání: schová ji `contactForm` (třída
+   `is-lead-sent` na <body>). Odsazení pro ni už není potřeba. */
+@media (max-width: 767px) {
+    .is-lead-sent .mobile-bottom-bar { display: none; }
+    body.is-lead-sent { padding-bottom: 0; }
+}
+
 .pd-form__submit {
     border: 0;
     cursor: pointer;
@@ -909,73 +1312,13 @@
     .pd-case__visual,
     .pd-faq__mark::before,
     .pd-faq__mark::after { transition: none; }
-    .pd-cta:hover,
 }
 
 /* ============================================================
    OND-231 F3 — SITEWIDE: nové sekce homepage + zbytek webu
    ============================================================ */
 
-/* --- Klienti: tichá řada jmen a log pod social pásem -------- */
-.pd-clients {
-    background: var(--color-bg-base);
-    padding-block: var(--space-6);
-}
-.pd-clients__list {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--space-5) var(--space-8);
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-.pd-clients__item {
-    display: inline-flex;
-    align-items: center;
-    /* Loga i jména startují ztlumená a ožijí pod kurzorem — jsou to
-       důkazy, ne dekorace, a nesmí soutěžit s obsahem sekcí. */
-    opacity: 0.55;
-    transition: opacity var(--duration-macro) var(--ease-out);
-}
-.pd-clients__item:hover { opacity: 1; }
-.pd-clients__name {
-    font-family: var(--font-body);
-    font-size: var(--text-body-sm);
-    letter-spacing: 0.04em;
-    color: var(--color-fg-muted);
-    white-space: nowrap;
-}
-@media (prefers-reduced-motion: reduce) {
-    .pd-clients__item { transition: none; }
-}
-
 /* --- Odkud pocházejí principy ------------------------------- */
-/* OND-269: blok už nestojí ve vlastní sekci, ale uvnitř „Proč já" pod
-   videem a mřížkou výhod. Odděluje ho proto vlasová linka a vlastní
-   mezisoučtový titulek (h3), ne hlava sekce. */
-.pd-origin--nested {
-    margin-top: var(--space-9);
-    padding-top: var(--space-8);
-    border-top: 1px solid var(--color-border-soft);
-}
-.pd-origin__title {
-    grid-column: 1 / -1;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: var(--text-h3);
-    letter-spacing: var(--tracking-tight);
-    color: var(--color-fg-primary);
-    margin: 0;
-}
-.pd-origin {
-    display: grid;
-    gap: var(--space-7);
-    margin-top: var(--space-6);
-}
-@media (min-width: 900px) {
-    .pd-origin { grid-template-columns: 1.15fr 1fr; gap: var(--space-8); }
-}
 .pd-origin__text p {
     font-family: var(--font-body);
     font-size: var(--text-body-lg);
@@ -994,6 +1337,18 @@
     line-height: var(--leading-snug);
     color: var(--color-fg-primary);
 }
+/* OND-314: na nové homepage citaci po zrušení wrapperu `.pd-toyota` nedržela
+   šířku už žádná mřížka — řádek běžel přes celých 1216 px, tedy ~101 znaků.
+   Odstavce nad ní mají 62ch, což v jejich písmu dělá 704 px; citace je
+   v display písmu, kde 62ch = 744 px. Aby měl celý blok jednu míru, drží
+   se 58ch = 696 px (naměřeno po `document.fonts.ready`).
+   Scope `#section-toyota` chránil zmrazenou kopii staré homepage, která
+   tutéž třídu sázela do mřížky `.pd-origin`. Kopie je od OND-342 pryč, takže
+   dnes je ten scope jen zbytečně přesný, ne nutný — `.pd-origin__quote` je
+   na celém webu jenom tady. Zrušení scope je čistě kosmetická úprava, a proto
+   se nedělalo v mazacím commitu: nesmí vzniknout ani pixel rozdílu. */
+#section-toyota .pd-origin__quote { max-width: 58ch; }
+
 .pd-origin__quote footer {
     margin-top: var(--space-4);
     font-family: var(--font-body);
@@ -1001,18 +1356,97 @@
     line-height: var(--leading-relaxed);
     color: var(--color-fg-muted);
 }
+/* OND-315: citace Pavla Baudyše se sázela jako displejový nadpis —
+   `--leading-snug` (1,2) na souvislé větě o 54 znacích na řádek — a bez horní
+   mezery se lepila na odstavec nad sebou. Odstavce vedle ní mají 1,6.
 
-/* --- Reference: zdroj hodnocení jako datový štítek ---------- */
-.pd-testi__source {
-    display: inline-block;
-    margin-left: var(--space-2);
-    padding: 0 0.4em;
-    border: 1px solid var(--color-border-mid);
-    font-size: var(--text-caption);
-    letter-spacing: 0.04em;
-    color: var(--color-fg-muted);
-    white-space: nowrap;
+   Scope `#section-toyota` vznikl proti zmrazené staré homepage, kde tatáž
+   citace stála jako **položka mřížky** `.pd-origin` — tam by `margin-top`
+   nezkolaboval s mezerou nad sebou a vyšší řádkování by blok prodloužilo.
+   Ta stránka je od OND-342 smazaná, takže scope už nic nechrání (viz
+   poznámka u `max-width` výš).
+
+   Pravidlo stojí až pod `footer` schválně: OND-314 (PR #170) vkládá svoje
+   `#section-toyota .pd-origin__quote { max-width }` hned nad `footer`, a kdyby
+   oba bloky seděly na stejném místě, druhý z těch dvou PR by se do stagingu
+   nesloučil sám. Takhle se sloučí v libovolném pořadí. Specificita ani
+   vlastnosti se nekříží. */
+#section-toyota .pd-origin__quote {
+    margin-top: var(--space-6);
+    line-height: var(--leading-body);
 }
+
+/* OND-350 — logo bývalého zaměstnavatele v sekci „18 let v Toyotě".
+   Logo ochranné známky na webu, který prodává služby, se bez popisku
+   čte jako „tihle dva spolu nějak jsou". Popisek proto nese slovo
+   „zaměstnavatel" — jedno slovo vyloučí čtení „klient / partner"
+   spolehlivěji než jakákoli grafická úprava.
+
+   Typografie řádku je atribuční štítek, tedy stejná role jako `.pd-by__org`
+   (ř. 502) — malý verzálkový podtitulek v `--font-body` / `--text-caption` /
+   `--color-fg-muted`. Nový token se nezakládá. Zadání karty se odkazovalo na
+   `.pd-testi__meta`; ta v OND-353 (PR #188) zanikla a její roli převzalo
+   `.pd-by__org`. Jediný rozdíl je `letter-spacing`: tady 0,1em, u `.pd-by__org`
+   0,08em. Držím 0,1em, protože v tom byl návrh na OND-350 proměřený
+   a schválený — sjednocení obou štítků je samostatné rozhodnutí, ne vedlejší
+   efekt téhle karty.
+
+   Svislá vlasovka mezi logem a popiskem je od OND-394 průhledná: logo
+   a popisek v kapitálkách se liší samy, odsazení zůstává.
+
+   Logo je odbarvené na `--color-fg-muted`, tedy na přesně stejnou šedou
+   jako popisek: řádek se pak čte jako jeden objekt, ne jako barevný odznak
+   nalepený vedle textu. Značková červená #EB0A1E by na #0a0a0b řvala
+   a posunula řádek k pruhu klientských log.
+
+   Pozor na `margin-bottom`: tenhle `<p>` je dítě `.pd-origin__text`, takže
+   na něj sedí i `.pd-origin__text p { margin: 0 0 var(--space-5) }` (ř. 1048)
+   — a to je (0,1,1) proti (0,1,0), tedy specifičtější. Selektor je proto
+   psaný jako `.pd-origin__text .pd-origin__employer`, aby hodnota nebyla
+   jen zdánlivá. 24 px je zároveň mezera, se kterou byl návrh proměřený
+   (sekce 733 px na 1440 px v cs/en). */
+.pd-origin__employer {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.pd-origin__text .pd-origin__employer {
+    margin: 0 0 var(--space-5);
+}
+
+.pd-origin__employer img {
+    display: block;
+    flex: 0 0 auto;
+    height: 28px;
+    width: auto;
+}
+
+.pd-origin__employer span {
+    font-family: var(--font-body);
+    font-size: var(--text-caption);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-fg-muted);
+    padding-left: var(--space-4);
+    border-left: 1px solid transparent;
+}
+
+/* Na 390 px má nejdelší popisek („EHEMALIGER ARBEITGEBER") 256 px
+   v kontejneru 355 px. Rezerva na jeden řádek je tedy necelých 100 px. */
+@media (max-width: 480px) {
+    .pd-origin__employer { gap: var(--space-3); }
+    .pd-origin__employer img { height: 24px; }
+    .pd-origin__employer span {
+        padding-left: var(--space-3);
+        letter-spacing: 0.08em;
+    }
+}
+
+/* --- Reference: zdroj hodnocení jako datový štítek ----------
+   OND-353: `.pd-testi__source` zanikl. Štítek se zdrojem už nestojí jen
+   v sekci 09 pod textem, ale u všech sedmi citací vedle jména — nese ho
+   `.pd-by__src` výš v tomhle souboru se stejným vlasovým rámečkem. */
 
 /* ============================================================
    OND-231 F3 — chrom celého webu v ACID
@@ -1032,4 +1466,1193 @@
 .mobile-bottom-bar__primary {
     border-radius: 0;
     box-shadow: none;
+}
+
+
+/* ============================================================
+   F. PODSTRÁNKY — slovník ACID mimo homepage
+   ------------------------------------------------------------
+   OND-380 (návrh a měření OND-365). Podstránky přebírají 14
+   komponent z homepage beze změny; tady je jen to, co homepage
+   nemá, protože sama žádnou „podstránku" neobsahuje.
+
+   Z toho je většina JEDNORÁZOVÁ a platí pro všech devět stránek
+   (`.pd-page-head`, `.pd-heading--sub`, `.pd-figure`); zbytek
+   jsou layoutové háky /o-mne.
+   ============================================================ */
+
+/* Hlava podstránky — vlevo, na základu, bez glow pruhu.
+   Nahrazuje `.page-hero` (#161A24 + zlatá elipsa + na střed):
+   to byla ta největší jediná věc, která podstránky prozrazovala.
+   `border-top: 0`, protože hlava je první sekce na stránce —
+   vlasová linka `.pd-section` by tu visela pod lištou.
+   68px = výška navbaru. */
+.pd-page-head {
+    border-top: 0;
+    padding-top: calc(68px + clamp(2.5rem, 5vw, 4.5rem));
+}
+/* O krok pod domovským titulkem (33–52 px). Podstránka není domovská
+   stránka a nemá jí konkurovat velikostí. */
+.pd-heading--sub { font-size: clamp(30px, 3.2vw, 46px); }
+
+.pd-page-head__grid { display: grid; gap: var(--space-7); }
+@media (min-width: 1024px) {
+    .pd-page-head__grid {
+        /* 300 px, ne 340: video 9:16 je při 340 px vysoké 605 px, text
+           kolem 340 px — díra pod textem byla 400 px. Při 300 px je video
+           533 px vysoké a díra 190 px. */
+        grid-template-columns: 1fr 300px;
+        gap: var(--space-9);
+        /* `start`, ne `center`: dřívější `.about-intro` centrovala třířádkový
+           odstavec proti vysokému videu a dělala tím 660px díru. */
+        align-items: start;
+    }
+}
+/* Centrování médií pod 1024 px už nese `.pd-steps__media` výš v tomhle
+   souboru (`@media (max-width: 1199px) { justify-self: center }`). */
+
+/* NÁLEZ (OND-365) — mřížka `56px 1fr` v `.pd-step` je psaná na krátké kroky
+   procesu. Kapitoly o mně jsou 4–5× delší: na 390 px zbývá textu 230 px,
+   tedy asi 30 znaků na řádek (pásmo čitelnosti je 45–75). Modifikátor staví
+   na mobilu číslici nad nadpis a vrací sloupci plnou míru (~45 ch). */
+@media (max-width: 767px) {
+    .pd-steps--chapters .pd-step {
+        grid-template-columns: 1fr;
+        gap: var(--space-2);
+    }
+}
+
+/* Věta a tlačítko jsou jedna výzva — `--space-8` mezi nimi je rozpojoval. */
+.pd-about-cta .pd-lead { margin-bottom: var(--space-6); }
+
+/* Orámované médium uvnitř textového sloupce — táž fyzika jako
+   `.pd-steps__media`: vlasová linka, žádné zaoblení, žádný blur.
+   Nahrazuje `.about-portrait__img` (zaoblení 20 px + blur stín).
+   Stín z vrstvy C je v hloubka.css §E2 vedle `.about-intro__video`. */
+.pd-figure {
+    margin: var(--space-6) 0 0;
+    max-width: 62ch;
+    border: 1px solid var(--color-border-soft);
+}
+.pd-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center 30%;
+}
+@media (min-width: 640px) {
+    .pd-figure img { aspect-ratio: 3 / 2; object-position: center 25%; }
+}
+
+
+/* ------------------------------------------------------------
+   OND-392 — /kontakt (návrh a měření OND-390). Sdílené komponenty:
+   homepage je nemá, další podstránky je použijí beze změny
+   (`.pd-eyebrow__sep` /cenik a /projekty, `.pd-split` /cenik,
+   `.pd-facts` pruh meta-údajů na /projekty/{detail}).
+   ------------------------------------------------------------ */
+/* Oddělovač v nadřádku. `.page-hero` měl dva
+   řádky nad titulkem (pořadové označení „KONTAKT" + „Píšete přímo mně.").
+   Základ OND-379 §2a je slučuje do jednoho `.pd-eyebrow`; vlasová čárka mezi
+   nimi je ten původní „page-mark" glyf. Stejnou anatomii mají /cenik
+   a /projekty — tam se použije beze změny. */
+.pd-eyebrow__sep {
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    margin: 0 0.9em;
+    vertical-align: middle;
+    background: currentColor;
+}
+
+/* Podtržené klíčové slovo se nelomí. Na 1440
+   i 390 px padal zlom mezi „jen" a „Ondřej" — podtržení se roztrhlo na dva
+   kusy na dvou řádcích a titulek ztratil pointu. Fráze v `<em>` jsou na
+   všech stránkách dvě až tři slova, takže nic nepřeteče. */
+.pd-heading--sub em { white-space: nowrap; }
+
+/* Kontext vlevo, obsah vpravo — táž osa jako
+   `.pd-form` (5fr 7fr, --space-9). Tři kroky pod sebou přes celou šířku
+   nechávaly na 1440 px vpravo přes 500 px prázdna a stránku natáhly o 120 px;
+   vedle hlavy sekce stojí kroky přesně pod deskou formuláře. Použije se
+   i na /cenik (záruky, doplňky), kde je táž anatomie hlava + seznam. */
+.pd-split { display: grid; gap: var(--space-5); }
+@media (min-width: 1024px) {
+    .pd-split { grid-template-columns: 5fr 7fr; gap: var(--space-9); }
+}
+
+/* Seznam údajů: popisek nad hodnotou. Homepage
+   žádný `<dl>` nemá. Použije se znovu na /projekty/{detail} (pruh
+   meta-údajů, základ OND-379 §2a). Popisek má sazbu `.pd-field label`,
+   odkaz sazbu `.pd-form__privacy a` — nic nového, jen jiné místo. */
+.pd-facts { display: grid; gap: var(--space-5); margin: 0; }
+.pd-facts dt {
+    font-family: var(--font-body);
+    font-size: var(--text-caption);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-fg-muted);
+    margin: 0 0 var(--space-1);
+}
+.pd-facts dd {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--color-fg-muted);
+    max-width: 40ch;
+    margin: 0;
+}
+.pd-facts a {
+    color: var(--color-fg-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--pd-accent);
+    text-underline-offset: 3px;
+}
+.pd-facts a:hover { color: var(--pd-accent); }
+
+/* ------------------------------------------------------------
+   OND-392 — háky jen pro /kontakt. Formulář je `.pd-form__panel`
+   z homepage beze změny (deska, nabitá hrana i proud z hloubka.css
+   §B11 a §C); tady je jen to, co homepage nepotřebuje.
+   ------------------------------------------------------------ */
+/* Tvář v hlavě stránky. Titulek slibuje
+   „jen Ondřej" — tvář hned vedle je důkaz toho slibu na jednom místě.
+   Desktop: portrét 300 px jako video na /o-mne (táž šířka sloupce
+   `.pd-page-head__grid`). Mobil: podpis 72 px + role, NE portrét přes celou
+   šířku — ten dnes odsouvá formulář o 440 px níž, a formulář je jediný
+   důvod, proč tu člověk je. */
+.pd-page-head__person {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    align-items: center;
+    gap: var(--space-4);
+}
+.pd-page-head__photo { border: 1px solid var(--color-border-soft); }
+.pd-page-head__photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center 22%;
+}
+.pd-page-head__role {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+    margin: 0;
+}
+@media (min-width: 1024px) {
+    .pd-page-head__person { display: block; }
+    .pd-page-head__photo img { aspect-ratio: 4 / 5; object-position: center 30%; }
+    .pd-page-head__role { margin-top: var(--space-3); }
+}
+
+/* Titulek uvnitř desky. Na homepage stojí
+   hlava sekce NAD deskou; tady je titulek součástí toho, co se po odeslání
+   vymění za poděkování (`x-show="!submitted"`), takže musí být uvnitř. */
+.pd-form__panel .pd-head__title { margin-bottom: var(--space-3); }
+.pd-form__panel .pd-intro { margin-bottom: var(--space-7); }
+/* OND-448 (B-02): podtitulek formuláře má na 1440 stát na jednom řádku
+   (OND-371). Německé znění (77 znaků) se do 58ch nevejde a zalomilo by se
+   se sirotkem „kann.“. Šířku drží deska sama (~650 px), limit čtení tu
+   netřeba — je to jediná věta. */
+.pd-form__panel .pd-intro { max-width: none; }
+/* OND-392 — po odeslání `contactForm` roluje na kořen formuláře
+   (`$root.scrollIntoView`, block: start) a kotva „Napište mi" míří tamtéž.
+   Titulek poděkování stojí na horní hraně desky, takže bez odsazení ho
+   celý schová fixní lišta (68px) — poděkování by nikdo neviděl. Stará
+   `.contact-form__thanks` měla 40px vnitřní okraj a schovávala ho napůl.
+   Rezerva nad lištou = přesah desky `::before` (−32px od 768px). */
+/* OND-448: formulář je sdílený (`<x-lead-form>`), totéž platí na homepage. */
+.pd-form__panel { scroll-margin-top: calc(68px + 2.5rem); }
+
+/* Validace. Chyby se ukazují inline přes Alpine (OND-256/1; od OND-448
+   i na homepage) — a to potřebuje červený rámeček u pole. Totéž, co dělalo
+   `.form-group input[aria-invalid]` v app.css; `:not(:focus)` schválně,
+   při psaní má přednost acid rámeček. */
+.pd-field input[aria-invalid="true"]:not(:focus),
+.pd-field textarea[aria-invalid="true"]:not(:focus) { border-color: #FF6157; }
+
+/* Přílohy. `x-form.file-drop` je sdílená Blade komponenta
+   a její markup se NEMĚNÍ — přebarvuje se jen uvnitř desky. Slovník ACID:
+   žádné zaoblení, žádná šedá výplň, acid jen při najetí.
+   OND-448 (B-01): zóna je sbalená za textovým tlačítkem `.pd-attach__toggle`
+   (sazba odkazu `.pd-form__privacy a`, ne acidové tlačítko). Na 390 px
+   musí sbalený stav zabrat jeden řádek. Zaškrtávací souhlas odešel. */
+.pd-attach { margin: var(--space-5) 0 0; }
+.pd-attach__toggle {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    gap: var(--space-2);
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    color: var(--color-fg-muted);
+}
+.pd-attach__label {
+    text-decoration: underline;
+    text-decoration-color: var(--pd-accent);
+    text-underline-offset: 3px;
+}
+.pd-attach__toggle:hover,
+.pd-attach__toggle[aria-expanded="true"] { color: var(--color-fg-primary); }
+.pd-attach__toggle:focus-visible { outline: 2px solid var(--pd-accent); outline-offset: 2px; }
+.pd-form__panel .form-file-wrapper { margin: var(--space-2) 0 0; }
+.pd-form__panel .form-file,
+.pd-form__panel .form-file__trigger,
+.pd-form__panel .form-file__list-item {
+    border-radius: 0;
+    border: 1px dashed var(--color-border-soft);
+    background: transparent;
+}
+.pd-form__panel .form-file__trigger,
+.pd-form__panel .form-file__list-item { border-style: solid; }
+/* OND-401: rámeček přílohy je čára, která zůstává (OND-394), tak jako pole
+   (OND-398) musí mít 3 : 1 — stejná barva jako `.pd-field`, přerušovaný dál. */
+.pd-form__panel .form-file { border-color: var(--color-fg-muted); }
+.pd-form__panel .form-file__trigger { color: var(--color-fg-primary); }
+.pd-form__panel .form-file:hover,
+.pd-form__panel .form-file.is-drag-over,
+.pd-form__panel .form-file__trigger:hover {
+    border-color: var(--pd-accent);
+    background: transparent;
+}
+.pd-form__panel .form-file__trigger:hover { color: var(--pd-accent); }
+.pd-form__panel .pd-alert { margin: var(--space-5) 0 0; }
+
+
+/* ------------------------------------------------------------
+   OND-393 — /cenik (návrh a měření OND-391). Sdílené komponenty:
+   `.pd-section--band`, `.pd-points`, `.pd-duo`, `.pd-rates`, `.pd-close`
+   a perex v hlavě `.pd-split`. Použije je beze změny /projekty (rozbor
+   OND-391 §6). `.pd-eyebrow__sep` a `.pd-split` přišly s /kontakt výš.
+   ------------------------------------------------------------ */
+/* Hlava `.pd-split` s perexem: perex patří
+   k titulku, ne k obsahu vpravo. Bez tohohle se na mobilu sečte
+   `--space-8` perexu s mezerou mřížky a vznikne 100px díra. */
+.pd-split > header .pd-head__title + .pd-intro { margin: var(--space-3) 0 0; }
+
+/* Závěrečná výzva podstránky: otázka vlevo,
+   věta a JEDINÉ acidové tlačítko stránky vpravo. Věta a tlačítko jsou jedna
+   výzva — `--space-8` pod `.pd-intro` je rozpojoval (táž úvaha jako
+   `.pd-about-cta` na /o-mne). /projekty: `projects-cta`. */
+.pd-close .pd-intro { margin-bottom: var(--space-6); }
+
+/* Pás: sekce, která předává pozornost dál, ne ji
+   drží. Kratší rytmus než `.pd-section` — týž, jaký homepage dává odstavci
+   o situaci klienta (`.pd-situation`), jen pod obecným jménem. /projekty:
+   pruh filtrů nad mřížkou. */
+.pd-section--band { padding-block: clamp(2.5rem, 4.5vw, 4rem); }
+/* Pruh čísel a pod ním citace — `.pd-strip__list` na homepage stojí sám. */
+.pd-strip__list + .pd-testi { margin-top: var(--space-6); }
+/* Na 390 px se pruh zalomí tak, že řádek začíná „·" — tečka na začátku
+   řádku vypadá jako odrážka, kterou není. Starý ceník to už jednou vyřešil
+   sloupcem bez teček (`.pricing-proof__figures`, smazané v OND-393); tady
+   je totéž. Tečky na mobilu maže plošně `.pd-strip__list` výš (OND-394,
+   blok G); pás k tomu staví položky do sloupce. */
+@media (max-width: 639px) {
+    .pd-section--band .pd-strip__list { flex-direction: column; gap: var(--space-2); }
+}
+
+/* Body bez pořadí. Titulek a věta, žádný box,
+   žádná ikona, žádná čára (OND-394: bod otevírá tučný titulek, čára nad
+   ním by říkala totéž podruhé). Dva sloupce od 640 px. Kde se použije:
+   /cenik (co je součástí projektu), /projekty („Proč já", dnes `.why-grid`
+   s kartami). Pro číslovaný postup je `.pd-steps` — tohle je výčet. */
+.pd-points { display: grid; gap: var(--space-7) var(--space-7); }
+@media (min-width: 640px) { .pd-points { grid-template-columns: 1fr 1fr; } }
+.pd-point__title {
+    font-family: var(--font-display); font-weight: 700; font-size: var(--text-h4);
+    letter-spacing: var(--tracking-tight); color: var(--color-fg-primary); margin: 0 0 var(--space-2);
+}
+.pd-point__text {
+    font-family: var(--font-body); font-size: var(--text-body-sm); line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted); margin: 0; max-width: 46ch;
+}
+
+/* Dva protilehlé sloupce — „zvedá / snižuje",
+   „hodí se / nehodí se". Bez svislice mezi sloupci (OND-394): sloupec
+   otevírá štítek se šipkou a od souseda ho drží mezera. /projekty:
+   „Pro koho to je" (`.project-fit`). */
+.pd-duo { display: grid; gap: var(--space-7); }
+@media (min-width: 640px) { .pd-duo { grid-template-columns: 1fr 1fr; gap: var(--space-8); } }
+.pd-duo__label {
+    display: flex; align-items: center; gap: var(--space-2);
+    font-family: var(--font-body); font-size: var(--text-eyebrow); font-weight: 400;
+    letter-spacing: var(--tracking-eyebrow); text-transform: uppercase;
+    color: var(--color-fg-muted); margin: 0 0 var(--space-5);
+}
+.pd-duo__mark { width: 14px; height: 14px; flex: 0 0 auto; color: var(--pd-accent); }
+.pd-duo__col--down .pd-duo__mark { transform: rotate(180deg); }
+.pd-duo .pd-service__bullets { font-size: var(--text-body); }
+
+/* Řádkový ceník. Název nahoře, částka na pravé
+   ose, popis pod názvem. Částka je bílá a tenká jako rozsah v
+   `.pd-price__scope` — cena je údaj, ne akce, takže acid nedostane.
+   `tabular-nums`, aby číslice ve sloupci seděly pod sebou.
+   ČÁRA (OND-394 — jediná vodorovná čára, která na /cenik zůstává): jen MEZI
+   řádky a jen tam, kde částka stojí na pravé ose. Na 1440 px je mezi názvem
+   a jeho částkou ~420 px prázdna; linka vede oko po řádku, aby se částka
+   nespárovala se sousedním názvem. Nad prvním a pod posledním řádkem nic
+   není — tam není co párovat. Na mobilu stojí částka pod názvem, čára
+   by nic nenesla, takže tam není.
+   /projekty/{detail}: rozpis rozsahu, kdyby se tam někdy objevil. */
+.pd-rates { display: grid; }
+.pd-rate {
+    display: grid; grid-template-columns: 1fr auto; column-gap: var(--space-6); row-gap: var(--space-2);
+    align-items: baseline; padding: var(--space-5) 0;
+}
+.pd-rate:first-child { padding-top: 0; }
+.pd-rate:last-child { padding-bottom: 0; }
+@media (min-width: 560px) { .pd-rate + .pd-rate { border-top: 1px solid var(--color-border-soft); } }
+.pd-rate__name {
+    font-family: var(--font-display); font-weight: 700; font-size: var(--text-h4);
+    letter-spacing: var(--tracking-tight); color: var(--color-fg-primary); margin: 0;
+}
+.pd-rate__price {
+    font-family: var(--font-display); font-weight: 300; font-variation-settings: 'wght' 300;
+    font-size: var(--text-h4); font-variant-numeric: tabular-nums; white-space: nowrap;
+    color: var(--color-fg-primary); text-align: right; margin: 0;
+}
+.pd-rate__desc {
+    grid-column: 1 / -1; font-family: var(--font-body); font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed); color: var(--color-fg-muted); margin: 0; max-width: 58ch;
+}
+/* Na 390 px se „individuální nabídka" vedle názvu nevejde — částka jde
+   pod název, doleva, na tutéž osu jako popis. */
+@media (max-width: 559px) {
+    .pd-rate { grid-template-columns: 1fr; }
+    .pd-rate__price { text-align: left; }
+}
+
+/* ------------------------------------------------------------
+   OND-393 — háky jen pro /cenik.
+   ------------------------------------------------------------ */
+/* `.pd-price` z homepage je kotva: název,
+   rozsah, věta. Ceník k tomu nese případovku, výčet a odkaz. Sloupce jsou
+   flex, aby odkaz „Chci nezávaznou nabídku" stál ve všech třech na jedné
+   lince i při různě dlouhém výčtu. */
+.pd-price__lead { margin-bottom: var(--space-8); }
+.pd-price--full .pd-price__col { display: flex; flex-direction: column; }
+.pd-price--full .pd-price__desc { margin-bottom: var(--space-4); }
+.pd-price__proof { margin: 0 0 var(--space-6); }
+.pd-price__features { margin-bottom: var(--space-6); }
+.pd-price__action { margin: auto 0 0; padding-top: var(--space-2); }
+/* Textové odkazy jsou vysoké 20 px. Neviditelný přesah dělá z každého
+   cíl 44 px na výšku, aniž by se pohnula linka pod textem (Fitts, WCAG
+   2.5.5). Sousední prvky jsou ≥ 24 px daleko, takže se cíle nepřekrývají. */
+.pd-price--full .pd-case__cta,
+.pd-price--full .pd-case__live { position: relative; }
+.pd-price--full .pd-case__cta::after,
+.pd-price--full .pd-case__live::after { content: ''; position: absolute; inset: -12px -6px; }
+/* OND-448 (B-08): „Cenu neurčuje počet stránek…“ hned pod balíčky. */
+.pd-price__pages { margin: var(--space-8) 0 0; }
+.pd-price__entry { margin: var(--space-8) 0 var(--space-3); }
+/* Desktop: doporučený sloupec má 2px acid nahoře a `--space-4` pod ní,
+   ostatní nic — rozsahy by pak neseděly na jedné lince (na homepage je to
+   18 px, u tří řádků textu nevadí; tady visí pod tím 20 řádků). Všechny
+   sloupce dostanou tutéž linku, jen dva z nich průhlednou — není vidět.
+   Svislice mezi sloupci je průhledná už v `.pd-price` (OND-394 H16–17). */
+@media (min-width: 1024px) {
+    .pd-price--full .pd-price__col { border-top: 2px solid transparent; padding-top: var(--space-4); }
+    .pd-price--full .pd-price__col--featured { border-top-color: var(--pd-accent); }
+}
+/* Mobil: úrovně pod sebou oddělí mezera a název úrovně s rozsahem
+   (verzálky + 24px tenké písmo — silnější předěl než linka). Acidová linka
+   zůstává jen u doporučené: to je ZVÝRAZNĚNÍ, ne oddělovač (OND-394 H15). */
+@media (max-width: 1023px) {
+    /* --space-8, ne --space-9: 96 px + odsazení odkazu vycházelo 114 px, víc
+       než mezera mezi sekcemi na mobilu (113 px). Úrovně by pak vypadaly
+       odděleněji než celé sekce (OND-394, bod 1 pravidla). */
+    .pd-price--full { gap: var(--space-8); }
+    .pd-price--full .pd-price__col--featured { border-top: 2px solid var(--pd-accent); padding-top: var(--space-4); }
+    .pd-price__entry { margin-top: var(--space-8); }
+}
+
+/* ------------------------------------------------------------
+   OND-397 — /recenze (předloha OND-396 §6b, §6c).
+   Komponenty jsou z homepage (`.pd-testi`, `<x-testimonial-by>`)
+   a z /o-mne (`.pd-page-head`, `.pd-about-cta`); tady je jen to,
+   co navíc potřebuje stránka se čtyřmi skupinami recenzí.
+   ------------------------------------------------------------ */
+/* Slot hlavy podstránky (základ OND-379 §2a) — tady dva odkazy na profily. */
+.pd-page-head__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-6);
+    margin: var(--space-5) 0 0;
+}
+
+/* Skupina = nadpis + mřížka. Nadpis patří ke svým kartám, proto bez spodní
+   mezery: odsazení dělá padding první karty (32 px). Mezera mezi skupinami
+   nepřeroste mezeru mezi sekcemi (OND-394, bod 1). */
+.pd-reviews__group > .pd-subsection__title { margin: 0; max-width: 32ch; }
+.pd-reviews__group + .pd-reviews__group { margin-top: var(--space-8); }        /* 32 + 64 = 96 < 113 */
+@media (min-width: 1024px) {
+    .pd-reviews__group + .pd-reviews__group { margin-top: var(--space-9); }    /* 32 + 96 = 128 < 203 */
+}
+
+/* Řádek odkazů pod citací: originál vždy, případovka když je. Tiché
+   `.pd-case__live` — 33 acidových podtržení by přebilo citace. */
+.pd-testi__item > .pd-testi__links {
+    grid-column: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+    margin: 0;
+}
+/* Cíl 44 px bez posunu sazby: neviditelná plocha kolem textového odkazu. */
+.pd-testi__links a,
+.pd-page-head__actions a { position: relative; }
+.pd-testi__links a::before,
+.pd-page-head__actions a::before { content: ''; position: absolute; inset: -12px -4px; }
+
+/* Dvojice (Cyklocentrum): dvě tváře nad jednou citací. Druhý podpis
+   odsadit, jinak se čtverce 56 px dotýkají. */
+.pd-testi__item > .pd-by + .pd-by > .pd-by__face,
+.pd-testi__item > .pd-by + .pd-by > .pd-by__text { margin-top: var(--space-3); }
+
+/* OND-444: jeden člověk, dva citáty z různých platforem (Antoš). Druhý
+   citát odsadit od odkazů prvního, ať je vidět, který odkaz patří ke kterému.
+   Čtyři třídy, aby to přebilo i mobilní `margin-top` citace níž. */
+.pd-reviews .pd-testi__item > .pd-testi__links + .pd-testi__text { margin-top: var(--space-5); }
+
+/* Mobil: citace a odkazy přes celou šířku. Ve sloupci vedle 48px tváře
+   měla citace 291 px (~33 znaků na řádek, pod pásmem 45–75); takhle 355 px.
+   Stejný nález jako kapitoly /o-mne (OND-365). Homepage má tři krátké
+   citace a zůstává, jak je. */
+@media (max-width: 767px) {
+    .pd-reviews .pd-testi__item > .pd-testi__text,
+    .pd-reviews .pd-testi__item > .pd-testi__links { grid-column: 1 / -1; }
+    .pd-reviews .pd-testi__item > .pd-testi__text { margin-top: var(--space-2); }
+}
+
+/* ------------------------------------------------------------
+   OND-400 — /projekty (předloha OND-399 §9). Nové sdílené komponenty:
+   `.pd-filter` a `.pd-works` / `.pd-work` (mřížka realizací —
+   použije ji beze změny i „Další projekty" na detailu projektu).
+   Zbytek je z homepage, /cenik a /kontakt beze změny. Hrany sekcí
+   řeší plošné pravidlo oddělovačů výš (OND-398), scoped řádky
+   z předlohy proto odpadají.
+   ------------------------------------------------------------ */
+
+/* Hlava a katalog jsou jedna věta („Co jsem postavil." → tady je to).
+   Mezi nimi zůstane jen spodní odsazení hlavy (104 px @1440 / 56 @390),
+   ne dvojnásobek mezery mezi sekcemi. */
+.pd-page-head + section[data-pdd="projects-grid"] { padding-top: 0; }
+
+/* --- Filtr ---------------------------------------------------
+   Textová tlačítka. Aktivní = bílý text + 1px acid pod slovem (stejná
+   sazba jako `.pd-case__cta`). Počet je údaj, ne ozdoba: tabulkové
+   číslice, tlumený, tenčí řez. Cíl 44 px na výšku, řádek se na 390 px
+   zalomí, nic se neschová do vodorovného scrollu. */
+.pd-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--space-6);
+    margin: 0 0 var(--space-6);
+}
+.pd-filter__btn {
+    appearance: none;
+    background: none;
+    border: 0;
+    padding: 0;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    font-weight: 600;
+    color: var(--color-fg-muted);
+    cursor: pointer;
+    transition: color var(--duration-micro) var(--ease-out);
+}
+.pd-filter__label {
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: border-color var(--duration-micro) var(--ease-out);
+}
+.pd-filter__count {
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+}
+.pd-filter__btn:hover { color: var(--color-fg-primary); }
+.pd-filter__btn[aria-pressed="true"] { color: var(--color-fg-primary); }
+.pd-filter__btn[aria-pressed="true"] .pd-filter__label { border-bottom-color: var(--pd-accent); }
+.pd-filter__btn:focus-visible { outline: 2px solid var(--pd-accent); outline-offset: 4px; }
+
+/* --- Mřížka realizací ----------------------------------------
+   Homepage má tři velké `.pd-case` (dílo první, výsledek druhý). Katalog
+   potřebuje opak: hodně položek, rychlé porovnání. Proto stejná gramatika
+   (rám bez zaoblení, meta ve verzálkách, titulek display 700, věta tlumeně),
+   ale v mřížce 3 / 2 / 1 a bez výzvy u každé položky.
+   Mezi řádky 64 px, mezi sloupci 32 px: oko čte kartu shora dolů jako
+   celek a řádky od sebe odděluje víc vzduchu než sloupce (Gestalt, blízkost).
+   Žádná čára, žádný box, žádné pozadí karty. */
+.pd-works {
+    display: grid;
+    gap: var(--space-7) var(--space-6);
+}
+@media (min-width: 640px) {
+    .pd-works { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-8) var(--space-6); }
+}
+@media (min-width: 1024px) {
+    .pd-works { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.pd-work[data-filter-hidden="true"] { display: none; }
+
+.pd-work__link {
+    display: grid;
+    align-content: start;
+    color: inherit;
+    text-decoration: none;
+}
+.pd-work__link:focus-visible { outline: 2px solid var(--pd-accent); outline-offset: 6px; }
+
+/* Rám náhledu = `.pd-case__visual` v malém. 16:10 ořez shora — náhledy
+   jsou snímky webů, důležitá je horní část (hlavička, hero). */
+.pd-work__visual {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border: 1px solid var(--color-border-soft);
+    background: var(--color-bg-elev-1);
+    margin-bottom: var(--space-4);
+    transition: border-color var(--duration-micro) var(--ease-out);
+}
+.pd-work__visual picture,
+.pd-work__visual img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+.pd-work__meta {
+    font-family: var(--font-body);
+    font-size: var(--text-caption);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-fg-muted);
+    margin: 0 0 var(--space-2);
+}
+.pd-work__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-h4);
+    line-height: 1.25;
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-fg-primary);
+    margin: 0 0 var(--space-2);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    transition: text-decoration-color var(--duration-micro) var(--ease-out);
+}
+.pd-work__text {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+    margin: 0;
+    max-width: 46ch;
+}
+.pd-work__link:hover .pd-work__visual,
+.pd-work__link:focus-visible .pd-work__visual { border-color: var(--pd-accent); }
+.pd-work__link:hover .pd-work__title,
+.pd-work__link:focus-visible .pd-work__title { text-decoration-color: var(--pd-accent); }
+
+/* Mobil (< 640): katalog, ne galerie. Náhled 38 % vlevo, meta a titulek
+   vpravo, věta pod oběma přes celou šířku. 21 karet pod sebou s náhledem
+   přes celou šířku by bylo 21 obrazovek; takhle se dá seznam přečíst.
+   Velký náhled je o klik dál na detailu. */
+@media (max-width: 639px) {
+    .pd-work__link {
+        grid-template-columns: minmax(0, 38fr) minmax(0, 62fr);
+        grid-template-rows: auto 1fr;
+        grid-template-areas: "v m" "v t" "x x";
+        column-gap: var(--space-4);
+    }
+    .pd-work__visual { grid-area: v; margin: 0; align-self: start; }
+    .pd-work__meta { grid-area: m; }
+    .pd-work__title { grid-area: t; margin: 0; }
+    .pd-work__text { grid-area: x; margin-top: var(--space-3); }
+}
+
+
+/* --- Prázdná DB: případovky z lang ------------------------------
+   `.pd-points` z /cenik, meta řádek z `.pd-work`. Čtyři položky ve
+   dvou sloupcích, odrážky ACID pod větou, odkaz na živý web tiše. */
+.pd-points--cases .pd-point__text { margin-bottom: var(--space-4); max-width: 58ch; }
+.pd-points--cases .pd-service__bullets { margin: 0; }
+.pd-point__link { margin: var(--space-4) 0 0; }
+
+/* --- Závěr: kvalifikace + jediná výzva --------------------------- */
+.pd-close .pd-service__bullets { font-size: var(--text-body); margin: 0 0 var(--space-7); }
+.pd-close .pd-lead { margin-bottom: var(--space-3); }
+.pd-close .pd-actions { gap: var(--space-4) var(--space-7); margin: 0; }
+/* Tichý odkaz vedle tlačítka: cíl 44 px bez posunu sazby. */
+.pd-close .pd-case__live { position: relative; }
+.pd-close .pd-case__live::after { content: ''; position: absolute; inset: -12px -6px; }
+
+/* Mobil: čtyři kategorie na jeden řádek (cs/en 323 px z 342). */
+@media (max-width: 639px) { .pd-filter { gap: 0 var(--space-4); } }
+
+
+/* ------------------------------------------------------------
+   OND-403 — detail projektu /projekty/{projekt} (předloha OND-402 §10a). Nové:
+   `.pd-story` (text + údaje), `.pd-gallery` (galerie bez protějšku
+   na homepage). Zbytek je sdílený beze změny: `.pd-page-head`,
+   `.pd-facts` (/kontakt), `.pd-testi__item` + `<x-testimonial-by>`
+   (/recenze), `.pd-works` (/projekty), `.pd-about-cta` (/o-mne).
+   Hrany sekcí řeší plošné pravidlo oddělovačů (OND-398).
+   ------------------------------------------------------------ */
+
+/* Hlava a hlavní vizuál jsou jedna věta („tady je to"). Mezi nimi zůstane
+   jen spodní odsazení hlavy (104 px @1440 / 56 @390), ne 2× mezera sekce. */
+.pd-page-head + .pd-gallery--lead { padding-top: 0; }
+
+/* --- Příběh: text na ose titulku, údaje jako marginálie ------------------
+   Levá hrana nadřádku, titulku, perexu i kapitol je jedna svislá osa.
+   Údaje stojí vpravo (4fr), na mobilu až za textem — jsou to poznámky
+   pod čarou, ne úvod. Dřív byly vpravo v šedém boxu s pilulkami. */
+.pd-story { display: grid; gap: var(--space-8); }
+@media (min-width: 1024px) {
+    .pd-story {
+        grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+        gap: var(--space-9);
+        align-items: start;
+    }
+}
+/* Perex = teze případovky. Sazba `.pd-case__outcome` z homepage (display
+   300), jen plnou barvou: je to první věta, kterou má člověk přečíst. */
+.pd-story__intro {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-variation-settings: 'wght' 300;
+    font-size: clamp(19px, 1.6vw, 22px);
+    line-height: 1.5;
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-fg-primary);
+    max-width: 46ch;
+    margin: 0;
+}
+/* Kapitoly Výzva / Řešení / Výsledek: nadpis `.pd-step__title`, text
+   `.pd-step__text` (62 ch). 48 px mezi kapitolami — víc než řádkování,
+   míň než mezera sekce (OND-394 bod 1). */
+.pd-story__chapter { margin-top: var(--space-7); }
+.pd-story__chapter .pd-step__title { margin-bottom: var(--space-2); }
+
+/* Recenze klienta hned za „Výsledkem": tvrzení → potvrzení od klienta.
+   Kartička z /recenze beze změny, jen bez spodního odsazení položky. */
+.pd-story__review { margin: var(--space-8) 0 0; padding: 0; }
+.pd-story__review blockquote { margin-inline: 0; }
+.pd-story__note {
+    grid-column: 2;
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+    max-width: 58ch;
+    margin: var(--space-3) 0 0;
+}
+@media (max-width: 767px) {
+    .pd-story__review > .pd-testi__text,
+    .pd-story__review > .pd-testi__links,
+    .pd-story__note { grid-column: 1 / -1; }
+    .pd-story__review > .pd-testi__text { margin-top: var(--space-2); }
+}
+
+/* --- Galerie ---------------------------------------------------------------
+   Rám `.pd-case__visual` z homepage: 1 px `--color-border-soft`, žádné
+   zaoblení, žádná šedá deska kolem. Geometrie (OND-202/265) beze změny:
+   band v přirozeném poměru, páry ve čtverci s `contain`, osamocená
+   dlaždice přes obě buňky. Rám se při najetí rozsvítí — obrázek se dá
+   otevřít ve zvětšení, a jinak by to nic neprozradilo. */
+.pd-gallery__band,
+.pd-gallery__item { margin: 0; }
+.pd-gallery__band,
+.pd-gallery__grid { margin-bottom: var(--space-6); }
+.pd-gallery__band:last-child,
+.pd-gallery__grid:last-child { margin-bottom: 0; }
+.pd-gallery__grid { display: grid; gap: var(--space-6); }
+@media (min-width: 640px) {
+    .pd-gallery__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.pd-gallery__frame {
+    border: 1px solid var(--color-border-soft);
+    background: var(--color-bg-elev-1);
+    overflow: hidden;
+    transition: border-color var(--duration-micro) var(--ease-out);
+}
+.pd-gallery__frame:hover { border-color: var(--pd-accent); }
+.pd-gallery__frame a:focus-visible { outline: 2px solid var(--pd-accent); outline-offset: -2px; }
+.pd-gallery__frame > a,
+.pd-gallery__frame picture { display: block; }
+.pd-gallery__band img { display: block; width: 100%; height: auto; }
+.pd-gallery__item .pd-gallery__frame { aspect-ratio: var(--shot-ratio, 1); }
+.pd-gallery__item .pd-gallery__frame > a,
+.pd-gallery__item .pd-gallery__frame picture { height: 100%; }
+.pd-gallery__item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+@media (min-width: 640px) {
+    .pd-gallery__item:not(.pd-gallery__item--alone):not(.pd-gallery__item--alone-band) .pd-gallery__frame { aspect-ratio: 1 / 1; }
+    .pd-gallery__item--alone,
+    .pd-gallery__item--alone-band { grid-column: 1 / -1; }
+    .pd-gallery__item--alone { width: calc(50% - var(--space-6) / 2); justify-self: center; }
+}
+.pd-gallery figcaption {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+    max-width: 62ch;
+    margin: var(--space-3) 0 0;
+}
+
+/* ------------------------------------------------------------
+   OND-404 — /zapisky (návrh). Žádná nová komponenta kromě
+   `.pd-next` (dvě cesty dál). Výpis je `.pd-works` z /projekty
+   s modifikátorem `--notes`, závěr `.pd-split` + `.pd-points`.
+   ------------------------------------------------------------ */
+
+/* Hlava a výpis jsou jedna věta („Píšu o tom, co sám dělám." → tady
+   je to). Ne 0 jako na /projekty: horní hrana sekce nese skok jasu
+   vrstvy A (hloubka.css, `blog-list`). Při nule padl přesně na horní
+   hranu prvního náhledu a četl se jako vlasová čára nad ním. 32 px ho
+   od obsahu oddělí; hlava → výpis je pořád 136 / 88 px, pod mezerou
+   mezi sekcemi (203 / 113). */
+.pd-page-head + section[data-pdd="blog-list"] { padding-top: var(--space-6); }
+
+/* --- Výpis článků: `.pd-works` v řádcích -------------------------
+   Pět článků, každý je otázka. Vybírá se podle titulku, ne podle
+   obrázku, proto jeden sloupec a titulek o stupeň větší než v katalogu
+   projektů. Náhled je čtverec (výřezy z OND-292 jsou čtvercové) vlevo,
+   text vedle něj v míře ~60 ch. Mezi řádky 64 px (jako mřížka projektů). */
+.pd-works--notes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 58rem;
+}
+.pd-works--notes .pd-work__visual { aspect-ratio: 1 / 1; }
+.pd-works--notes .pd-work__visual img { object-position: center; }
+
+@media (min-width: 640px) {
+    .pd-works--notes { grid-template-columns: minmax(0, 1fr); gap: var(--space-8); }
+    .pd-works--notes .pd-work__link {
+        grid-template-columns: 200px minmax(0, 1fr);
+        grid-template-rows: auto 1fr;
+        grid-template-areas: "v t" "v x";
+        column-gap: var(--space-7);
+    }
+    .pd-works--notes .pd-work__visual { grid-area: v; margin: 0; }
+    .pd-works--notes .pd-work__title {
+        grid-area: t;
+        font-size: var(--text-h3);
+        line-height: 1.2;
+        margin: 0 0 var(--space-3);
+        max-width: 30ch;
+    }
+    .pd-works--notes .pd-work__text {
+        grid-area: x;
+        font-size: var(--text-body);
+        max-width: 60ch;
+    }
+}
+@media (min-width: 1024px) {
+    .pd-works--notes { grid-template-columns: minmax(0, 1fr); }
+}
+/* Mobil (< 640): řádek katalogu z /projekty beze změny, jen bez meta
+   řádku — titulek vedle náhledu, věta pod oběma. */
+@media (max-width: 639px) {
+    .pd-works--notes .pd-work__link { grid-template-rows: auto; grid-template-areas: "v t" "x x"; }
+}
+
+/* --- Závěr: dvě cesty dál ----------------------------------------
+   Fáze 2 ještě nepíše poptávku. Místo acidového tlačítka dvě cesty,
+   každá s nadřádkem, titulkem a větou cílové stránky. Celá položka je
+   odkaz; afordanci nese šipka a podtržení titulku při najetí (sazba
+   `.pd-work__title`). Žádný rámeček, žádná čára. */
+/* Jeden sloupec: titulky cest jsou nadpisy cílových stránek a mají se
+   přečíst na jeden řádek (ve dvou sloupcích se „…web na / míru." lámal). */
+.pd-points--next { list-style: none; margin: 0; padding: 0; grid-template-columns: minmax(0, 1fr); }
+/* `block`, ne `grid`: `.pd-work__meta` si z mobilní mřížky katalogu nese
+   `grid-area: m` a v mřížce by se přestěhoval pod text. */
+.pd-next__link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    min-height: 44px;
+}
+.pd-next__link .pd-work__meta { display: block; }
+.pd-next__link .pd-point__title {
+    display: block;
+    font-size: var(--text-h3);
+    line-height: 1.2;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    transition: text-decoration-color var(--duration-micro) var(--ease-out);
+}
+.pd-next__arrow {
+    display: inline-block;
+    color: var(--pd-accent);
+    transition: transform var(--duration-micro) var(--ease-out);
+}
+.pd-next__link .pd-point__text { display: block; }
+.pd-next__link:hover .pd-point__title,
+.pd-next__link:focus-visible .pd-point__title { text-decoration-color: var(--pd-accent); }
+.pd-next__link:hover .pd-next__arrow { transform: translateX(4px); }
+.pd-next__link:focus-visible { outline: 2px solid var(--pd-accent); outline-offset: 6px; }
+@media (prefers-reduced-motion: reduce) {
+    .pd-next__link:hover .pd-next__arrow { transform: none; }
+}
+
+/* ------------------------------------------------------------
+   OND-406 — typografie dlouhého textu `.pd-prose`.
+   Homepage souvislý text nemá; tohle je jeho sazba v jazyce ACID.
+   Používá: detail článku, /zasady-ochrany-osobnich-udaju, /cookies.
+   Pokrývá: p, h2, h3, ul, ol, li, strong, a, blockquote, hr, code,
+   table, figure (`.pd-figure--prose`), br. K tomu úvodní odstavec
+   `.pd-prose__lead` a deska `.pd-aside` (bonus článku, shrnutí právních
+   stránek). Žádná čára kromě řádků tabulky (OND-394 §4).
+   ------------------------------------------------------------ */
+.pd-prose {
+    max-width: 37rem;
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--color-fg-primary);
+    overflow-wrap: break-word;
+}
+@media (min-width: 768px) {
+    .pd-prose { font-size: var(--text-body-lg); }
+}
+.pd-prose > * { margin: 0; }
+.pd-prose > * + * { margin-top: 1em; }
+.pd-prose p,
+.pd-prose li { text-wrap: pretty; }
+
+.pd-prose h2,
+.pd-prose h3 {
+    font-family: var(--font-display);
+    color: var(--color-fg-primary);
+    letter-spacing: var(--tracking-tight);
+    text-wrap: balance;
+}
+.pd-prose h2 {
+    font-weight: 700;
+    font-size: clamp(21px, 1.8vw, 26px);
+    line-height: 1.25;
+}
+.pd-prose h3 {
+    font-weight: 600;
+    font-size: var(--text-h4);
+    line-height: 1.3;
+}
+.pd-prose > * + h2 { margin-top: var(--space-7); }
+.pd-prose > * + h3 { margin-top: var(--space-6); }
+.pd-prose > h2 + *,
+.pd-prose > h3 + * { margin-top: var(--space-3); }
+@media (min-width: 768px) {
+    .pd-prose > * + h2 { margin-top: var(--space-8); }
+}
+
+.pd-prose ul,
+.pd-prose ol { padding-left: 1.5em; }
+/* Tailwind preflight nuluje `list-style` — bez tohohle zmizí čísla u `ol`. */
+.pd-prose ul { list-style-type: disc; }
+.pd-prose ol { list-style-type: decimal; }
+.pd-prose li + li { margin-top: 0.5em; }
+.pd-prose ul > li::marker { content: '\2013\00a0\00a0'; color: var(--color-fg-muted); }
+.pd-prose ol > li::marker {
+    color: var(--color-fg-muted);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.pd-prose strong,
+.pd-prose b { font-weight: 600; color: var(--color-fg-primary); }
+
+.pd-prose a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--pd-accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    transition: text-decoration-thickness var(--duration-micro) var(--ease-out);
+}
+.pd-prose a:hover { text-decoration-thickness: 2px; }
+.pd-prose a:focus-visible { outline: 2px solid var(--pd-accent); outline-offset: 2px; }
+
+/* Vytažená věta uprostřed textu. Nese ji velikost a písmo, ne svislá
+   čára vlevo: ta by byla druhá značka pro totéž. */
+.pd-prose blockquote {
+    margin-block: var(--space-7);
+    padding: 0;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(20px, 1.8vw, 24px);
+    line-height: 1.35;
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-fg-primary);
+    max-width: 30ch;
+}
+.pd-prose blockquote > * { margin: 0; }
+.pd-prose blockquote > * + * { margin-top: 0.75em; }
+
+/* Úvodní odstavec — Ondřejův hlas, první věc pod titulkem. V DB je
+   uložený jako `<blockquote>`, sazba vytažené věty se tu ruší. */
+.pd-prose__lead,
+.pd-prose .pd-prose__lead blockquote {
+    margin: 0;
+    max-width: none;
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-variation-settings: 'wght' 300;
+    font-size: clamp(19px, 1.7vw, 23px);
+    line-height: 1.5;
+    letter-spacing: 0;
+    color: var(--color-fg-primary);
+}
+.pd-prose__lead > * + * { margin-top: 0.75em; }
+
+/* `<hr>` = krátká čárka jako `.pd-eyebrow__sep`, ne čára přes šířku. */
+.pd-prose hr {
+    width: 24px;
+    height: 1px;
+    border: 0;
+    margin-block: var(--space-7);
+    background: var(--color-fg-muted);
+}
+
+.pd-prose code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.88em;
+    background: var(--color-bg-elev-1);
+    padding: 0.1em 0.35em;
+}
+
+/* Tabulka: řádkové linky zůstávají (páruje se po řádcích), svislé ne. */
+.pd-prose table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    font-variant-numeric: tabular-nums;
+}
+@media (max-width: 639px) {
+    .pd-prose table { display: block; overflow-x: auto; }
+}
+.pd-prose th {
+    text-align: left;
+    font-weight: 400;
+    font-size: var(--text-caption);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-fg-muted);
+}
+.pd-prose th,
+.pd-prose td {
+    padding: var(--space-3) var(--space-4) var(--space-3) 0;
+    border-bottom: 1px solid var(--color-border-soft);
+    vertical-align: top;
+}
+
+/* Obrázek v textu — `.pd-figure` (základ OND-379 §2b) na šířku sloupce
+   a v přirozeném poměru. Ořez 4:5 / 3:2 je psaný na portrét z /o-mne. */
+.pd-prose > .pd-figure--prose { margin-block: var(--space-7); max-width: none; }
+.pd-figure--prose img { aspect-ratio: auto; object-fit: initial; }
+@media (min-width: 640px) {
+    .pd-figure--prose img { aspect-ratio: auto; }
+}
+
+/* Deska — dodatek nebo shrnutí. Plocha, ne rámeček. (`.pd-note` je jméno
+   obsazené drobnou poznámkou na homepage a ceníku, proto `.pd-aside`.) */
+.pd-aside {
+    background: var(--color-bg-elev-1);
+    padding: var(--space-6) var(--space-5);
+    font-size: var(--text-body);
+}
+.pd-prose > .pd-aside { margin-block: var(--space-8) var(--space-7); }
+.pd-prose > .pd-aside:first-child { margin-top: 0; }
+.pd-aside > * { margin: 0; }
+.pd-aside > * + * { margin-top: 1em; }
+.pd-aside > .pd-eyebrow + * { margin-top: var(--space-4); }
+@media (min-width: 768px) {
+    .pd-aside { padding: var(--space-6); }
+}
+
+/* --- Článek: hlava, podpis ---------------------------------------- */
+/* Titulek a úvod jsou jedna věta: 48 px, ne mezera mezi sekcemi. */
+.pd-page-head--article { padding-bottom: var(--space-4); }
+.pd-page-head--article + .pd-article { padding-top: 0; }
+
+/* OND-419 — na desktopu je článek jeden čtecí sloupec na střed: hlava,
+   tělo i závěr „Řešíte web…" na stejné ose. Dřív stál 37rem sloupec vlevo
+   v 1280px kontejneru a napravo zůstávalo 736 px prázdna (1440 px).
+   Šířka 41rem = 71–72 znaků na řádek (průměr plných řádků, pět článků,
+   po `fonts.ready`); 37rem dávalo 64–66. Užší je kontejner, ne text:
+   `max-width` + 2 × `padding-inline` (od 1024 px vždy 2rem), centruje
+   `margin-inline: auto` z `.container-site`. Právní stránky (`.pd-prose`
+   bez `.pd-article`) a mobil se nemění. */
+@media (min-width: 1024px) {
+    .pd-page-head--article > .container-site,
+    .pd-article > .container-site,
+    .pd-next[data-pdd="article-next"] > .container-site { max-width: calc(41rem + 4rem); }
+    .pd-article .pd-prose { max-width: none; }
+    /* Závěr ve sloupci 656 px: dva sloupce 5fr/7fr by titulky cest lámaly,
+       proto nadpis nad seznamem — stejně jako na mobilu. */
+    .pd-next[data-pdd="article-next"] .pd-split { grid-template-columns: minmax(0, 1fr); gap: var(--space-5); }
+}
+
+.pd-eyebrow__back {
+    position: relative;
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--duration-micro) var(--ease-out);
+}
+/* Cíl 44 px bez posunu sazby. */
+.pd-eyebrow__back::before { content: ''; position: absolute; inset: -16px -8px; }
+.pd-eyebrow__back:hover { color: var(--color-fg-primary); }
+.pd-eyebrow__back:focus-visible { outline: 2px solid var(--pd-accent); outline-offset: 4px; }
+
+/* Podpis — od textu ho dělí mezera, ne rámeček. */
+.pd-prose > .pd-author { margin-top: var(--space-9); }
+.pd-author .pd-eyebrow { margin-bottom: var(--space-4); }
+.pd-author__body {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    align-items: center;
+    gap: var(--space-4);
+}
+.pd-author__photo {
+    display: block;
+    width: 64px;
+    height: 64px;
+    overflow: hidden;
+    border: 1px solid var(--color-border-soft);
+}
+/* Zdroj 1080×810 na šířku, tvář je asi čtvrtina plochy — stejné
+   přiblížení jako dřív v kolečku (OND-297), jen ve čtverci. */
+.pd-author__photo img {
+    display: block;
+    width: 134px;
+    height: 100px;
+    max-width: none;
+    margin: -8px 0 0 -30px;
+}
+.pd-author__name {
+    margin: 0;
+    font-weight: 600;
+    font-size: var(--text-body);
+    color: var(--color-fg-primary);
+}
+.pd-author__role {
+    margin: var(--space-1) 0 0;
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+}
+.pd-author__bio {
+    margin: var(--space-4) 0 0;
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--color-fg-muted);
+    max-width: 56ch;
+}
+.pd-author__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-top: var(--space-2);
+    font-size: var(--text-body);
+    color: var(--color-fg-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--pd-accent);
+    text-underline-offset: 0.2em;
+}
+.pd-author__link:hover { text-decoration-thickness: 2px; }
+.pd-author__link:focus-visible { outline: 2px solid var(--pd-accent); outline-offset: 2px; }
+
+/* Titulek článku je dlouhá věta z DB (43–63 znaků). `balance` srovná
+   řádky, aby na konci nevisela jednopísmenná předložka („a z / čeho"). */
+.pd-heading--article { text-wrap: balance; }
+
+/* Tlačítko uvnitř textu (jen /cookies: „Odvolat souhlas"). `.pd-cta`
+   je psané na <a>; na <button> potřebuje srovnat písmo a rámeček. */
+.pd-prose button.pd-cta { border: 0; cursor: pointer; font: inherit; font-weight: 600; font-size: var(--text-body); }
+.pd-prose button.pd-cta:focus-visible { outline: 2px solid var(--pd-accent); outline-offset: 3px; }
+
+/* ------------------------------------------------------------
+   OND-449 — detail projektu: zdroj výsledku (B-09), blok „Vyzkoušejte
+   si to naživo“ (B-05) a video smyčka pod prvním blokem galerie (B-07b).
+   ------------------------------------------------------------ */
+/* „Stav k … Zdroj: …“ — malým písmem hned pod textem výsledku. */
+.pd-story__source {
+    font-family: var(--font-body);
+    font-size: var(--text-caption);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+    max-width: 62ch;
+    margin: var(--space-2) 0 0;
+}
+/* Odkaz na živý web až za příběhem: věta, co si tam zkusit, pak tichý
+   odkaz v sazbě `.pd-case__cta` (acid podtržení), jako dřív v hlavě. */
+.pd-story__live { margin-top: var(--space-7); }
+.pd-story__live .pd-step__text { margin-bottom: var(--space-3); }
+.pd-story__live .pd-case__cta { position: relative; }
+.pd-story__live .pd-case__cta::before { content: ''; position: absolute; inset: -12px -4px; }   /* cíl 44 px */
+
+/* Video: rám galerie, poměr drží obrazovka (CLS 0) — telefon 4 : 5, jinak 16 : 9.
+   Plakát je pod videem, video se prolne až ve chvíli, kdy opravdu hraje. */
+.pd-demo__screen {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: var(--color-bg-elev-1);
+}
+@media (min-width: 768px) {
+    .pd-demo__screen { aspect-ratio: 16 / 9; }
+}
+.pd-demo__screen picture,
+.pd-demo__screen img,
+.pd-demo__screen video {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.pd-demo__screen video { opacity: 0; transition: opacity 200ms var(--ease-out, ease-out); }
+.pd-demo__screen video.is-ready { opacity: 1; }
+.pd-demo__toggle {
+    position: absolute;
+    top: var(--space-3);                      /* dole na telefonu zakrývalo posuvník ukázky */
+    right: var(--space-3);
+    background: color-mix(in srgb, var(--color-bg-elev-1) 80%, transparent);
+    color: var(--color-fg-primary);
+}
+.pd-demo--still .pd-demo__toggle { display: none; }
+@media (prefers-reduced-motion: reduce) {
+    .pd-demo__screen video,
+    .pd-demo__toggle { display: none; }
 }

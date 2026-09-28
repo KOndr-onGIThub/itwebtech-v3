@@ -6,7 +6,7 @@ return [
     // Die alte Rubrik „Wie geht das" versprach allgemeine Anleitungen — genau
     // der Inhalt, der verschwinden soll. URL-Slug bleibt unverändert (SEO).
     'meta' => [
-        'title'       => 'Notizen — Ondřej Kriška',
+        'title'       => 'Notizen — Ondřej Kriška, ONDRAWEB',
         'description' => 'Ich schreibe darüber, womit ich beim Bau von Websites und Anwendungen wirklich zu tun habe. Preise, Briefings, Redesign, Anwendungen nach Maß.',
     ],
 
@@ -55,7 +55,7 @@ return [
 
     'cta' => [
         'heading' => 'Geht es um eine Website oder eine Anwendung?',
-        'text'    => 'Schreiben Sie mir, was Sie brauchen. Ich melde mich innerhalb von 24 Stunden an Arbeitstagen und sage Ihnen, ob ich helfen kann.',
+        'text'    => 'Schreiben Sie mir, was Sie brauchen. Ich melde mich spätestens am nächsten Arbeitstag und sage Ihnen, ob ich helfen kann.',
         'primary' => 'Ondřej schreiben',
     ],
 

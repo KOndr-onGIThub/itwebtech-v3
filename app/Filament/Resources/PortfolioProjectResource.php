@@ -101,6 +101,17 @@ class PortfolioProjectResource extends Resource
                     ->label('Doba realizace')
                     ->maxLength(191)
                     ->placeholder('např. 3 měsíce'),
+                // OND-449 (B-09): datum řádku „Stav k …“ pod výsledkem; zdroj je v překladech.
+                Forms\Components\DatePicker::make('result_as_of')
+                    ->label('Výsledek platí k datu')
+                    ->helperText('Řádek „Stav k … Zdroj: …“ pod výsledkem se ukáže, jen když je vyplněné datum i zdroj v překladu.'),
+                // OND-449 (B-07b): video smyčka pod prvním blokem galerie.
+                Forms\Components\TextInput::make('demo_video')
+                    ->label('Video pod galerií')
+                    ->maxLength(191)
+                    ->alphaDash()
+                    ->placeholder('např. barana-demo')
+                    ->helperText('Základ jména v public/videos/portfolio/: {jméno}.mp4|.webm, {jméno}-mobile.mp4|.webm, {jméno}-poster.jpg, {jméno}-mobile-poster.jpg. Prázdné = bez videa.'),
                 Forms\Components\Toggle::make('is_published')
                     ->label('Publikováno')
                     ->dehydrated(false)
@@ -231,6 +242,18 @@ class PortfolioProjectResource extends Resource
                 Forms\Components\Textarea::make("$key.result")
                     ->label('Výsledek')
                     ->rows(6)
+                    ->columnSpanFull(),
+                // OND-449 (B-09): zdroj čísel ve výsledku, bez tečky na konci.
+                Forms\Components\TextInput::make("$key.result_source")
+                    ->label('Zdroj výsledku')
+                    ->maxLength(255)
+                    ->placeholder('např. Collabim (pozice), Google Search Console')
+                    ->columnSpanFull(),
+                // OND-449 (B-05): věta nad odkazem na živý web.
+                Forms\Components\Textarea::make("$key.live_hint")
+                    ->label('Co si na živém webu vyzkoušet')
+                    ->rows(2)
+                    ->helperText('Jedna věta nad odkazem „Navštívit web“. Prázdné = obecná věta.')
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make("$key.meta_title")
                     ->label('Meta title')
@@ -499,6 +522,8 @@ class PortfolioProjectResource extends Resource
                 'challenge'        => $tr?->challenge,
                 'solution'         => $tr?->solution,
                 'result'           => $tr?->result,
+                'result_source'    => $tr?->result_source,
+                'live_hint'        => $tr?->live_hint,
                 'meta_title'       => $tr?->meta_title,
                 'meta_description' => $tr?->meta_description,
             ];
@@ -637,6 +662,8 @@ class PortfolioProjectResource extends Resource
                     'challenge'        => $row['challenge'] ?? null,
                     'solution'         => $row['solution'] ?? null,
                     'result'           => $row['result'] ?? null,
+                    'result_source'    => filled($row['result_source'] ?? null) ? $row['result_source'] : null,
+                    'live_hint'        => filled($row['live_hint'] ?? null) ? $row['live_hint'] : null,
                     'meta_title'       => $row['meta_title'] ?? null,
                     'meta_description' => $row['meta_description'] ?? null,
                 ],

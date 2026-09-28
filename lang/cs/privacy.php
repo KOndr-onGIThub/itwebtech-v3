@@ -3,7 +3,7 @@
 return [
 
     'meta' => [
-        'title'       => 'Zásady ochrany osobních údajů — Ondřej Kriška',
+        'title'       => 'Zásady ochrany osobních údajů — Ondřej Kriška, ONDRAWEB',
         'description' => 'Informace o zpracování osobních údajů na webu ondraweb.cz.',
     ],
 
@@ -34,7 +34,7 @@ return [
     // právní základ a práva subjektu; odstraněno, co web nedělá.
     // Konflikt s OND-266 (oprava uvozovek) vyřešen ve prospěch tohoto znění —
     // odstavce, které OND-266 opravoval, tenhle přepis ruší celé.
-    'content' =>'<p>Účinné od 23. září 2026</p>
+    'content' =>'<p>Účinné od 29. září 2026</p>
 
 <p>Tenhle web provozuju já, Ondřej Kriška — Dunajovská 116, 691 81 Březí, IČO 19231407. Nemám tým ani obchodní oddělení, takže jsem zároveň jediný, kdo se k vašim údajům dostane. Napsat mi můžete kdykoli na <a href="mailto:ok@ondraweb.cz">ok@ondraweb.cz</a>.</p>
 
@@ -75,7 +75,7 @@ return [
 
 <h3>Ať to má i tu formální stránku</h3>
 <ul>
-<li>Zprávu z formuláře zpracovávám proto, abych mohl <strong>jednat o spolupráci</strong>, o kterou jste mě požádali (čl. 6 odst. 1 písm. b GDPR), a na základě <strong>souhlasu</strong>, který zaškrtáváte u formuláře (čl. 6 odst. 1 písm. a).</li>
+<li>Zprávu z formuláře zpracovávám proto, abych mohl <strong>jednat o spolupráci</strong>, o kterou jste mě požádali (čl. 6 odst. 1 písm. b GDPR).</li>
 <li>Faktury a smlouvy si nechávám proto, že mi to <strong>ukládá zákon</strong> (čl. 6 odst. 1 písm. c).</li>
 <li>IP adresu u odeslané zprávy držím na základě <strong>oprávněného zájmu</strong> ubránit formulář před zneužitím (čl. 6 odst. 1 písm. f).</li>
 <li>Analytiku zapínám jen s <strong>vaším souhlasem</strong> (čl. 6 odst. 1 písm. a), a ten můžete kdykoli vzít zpět.</li>

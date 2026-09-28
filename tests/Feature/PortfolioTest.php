@@ -37,7 +37,7 @@ class PortfolioTest extends TestCase
 
         // Každý projekt má v gridu vlastní kartu s data-category atributem.
         $body = $response->getContent();
-        $cardCount = substr_count($body, 'class="portfolio-card"');
+        $cardCount = substr_count($body, 'class="pd-work"');
 
         $this->assertSame(
             $expectedCount,

@@ -1,0 +1,82 @@
+/* ==========================================================================
+   OND-438 — PŘECHODY MEZI STRÁNKAMI (návrh 3 z OND-429)
+   ==========================================================================
+   Klik na projekt (homepage, /projekty) → obrázek a název projektu plynule
+   přejedou na své místo v hlavě detailu, lišty stojí. Čisté CSS, žádná
+   knihovna a žádný skript (cross-document View Transitions).
+
+   Kdo to umí: Chrome/Edge 126+, Safari 18.2+. Firefox pravidlo ignoruje
+   a stránka se vymění naráz jako dřív. `prefers-reduced-motion: reduce`
+   → přechod se nezapne vůbec.
+
+   JMÉNA MUSÍ BÝT NA STRÁNCE UNIKÁTNÍ. Při dvou stejných jménech prohlížeč
+   přechod tiše vzdá (žádná chyba, stránka se jen vymění naráz). Jména
+   dvojic projekt → detail proto skládá Blade ze slugu projektu
+   (`project_transition_name()` v app/helpers.php) a píše je do `style`
+   karty a hlavy detailu. Karty „Další projekty" na detailu jméno nenesou
+   (`<x-portfolio.work :transition="false">`) — jinak by se spárovaly
+   s kartami na stránce, odkud člověk přišel, a odletěly by z obrazovky.
+   Nová šablona s kartou projektu = zkontrolovat, že slug není na stránce
+   dvakrát (hlídá tests/Feature/Ond438PageTransitionsTest.php).
+   ========================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+    @view-transition {
+        navigation: auto;
+    }
+}
+
+/* Lišty dostanou vlastní vrstvu, takže se neprolínají s obsahem a stojí.
+   Bez jména spodní lišta „Poptávka" na telefonu během přechodu ztmavla. */
+.navbar { view-transition-name: site-nav; }
+.mobile-bottom-bar { view-transition-name: site-bottom-bar; }
+
+/* Dvojice projekt → detail. Jméno je v `style`, tady třída a sazba. */
+.pd-case__visual,
+.pd-work__visual,
+.pd-gallery--lead .pd-gallery__frame {
+    view-transition-class: project-img;
+}
+/* Titulek se snímá jen v šířce textu. Přes celou šířku sloupce by se
+   při zvětšení na H1 roztáhl i text (poměr šířek sloupců ≠ poměr písma).
+   Na zarovnání vlevo a na zalomení to nic nemění. */
+.pd-case__client,
+.pd-work__title,
+[data-pdd="project-head"] .pd-heading {
+    view-transition-class: project-title;
+    width: fit-content;
+}
+
+/* Rám hlavního vizuálu detailu drží poměr stran snímku (`--lead-ratio`
+   z Blade), i když obrázek ještě nedorazil — jinak by do něj obrázek
+   z karty přejel, dokud má výšku 2 px. `content-box`: poměr platí pro
+   plochu obrázku, rámeček 1 px je navíc (jako dosud). */
+.pd-gallery--lead .pd-gallery__frame {
+    box-sizing: content-box;
+    aspect-ratio: var(--lead-ratio, auto);
+}
+
+/* Časování — 0,55 s pro pohyb, stránka pod ním se prolne rychleji. */
+::view-transition-group(*) {
+    animation-duration: 0.55s;
+    animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 0.3s;
+}
+/* Pojmenované prvky bez protějšku (ostatní karty na výpisu) mizí a
+   objevují se spolu se stránkou, ne pomaleji než ona. */
+::view-transition-old(*):only-child,
+::view-transition-new(*):only-child {
+    animation-duration: 0.3s;
+}
+/* Náhled na /projekty je 16:10, hlavní vizuál detailu je širší — bez
+   ořezu by se obrázek při přechodu deformoval. */
+::view-transition-old(.project-img),
+::view-transition-new(.project-img) {
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    overflow: clip;
+}

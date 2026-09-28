@@ -11,10 +11,6 @@
      a JSON klíč by byl zničený. PHP blok Blade neparsuje na direktivy. --}}
 @push('jsonld')
 @php
-    // OND-137 P4 §SEO bug-fix: locale → priceCurrency mapping, ať Service
-    // JSON-LD pro EN/DE nehlásí EUR magnitudu s priceCurrency=CZK.
-    $priceCurrency = ['cs' => 'CZK', 'en' => 'EUR', 'de' => 'EUR'][app()->getLocale()] ?? 'CZK';
-
     $breadcrumbLd = [
         '@context' => 'https://schema.org',
         '@type' => 'BreadcrumbList',
@@ -25,9 +21,13 @@
     ];
     $breadcrumbJson = json_encode($breadcrumbLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
+    // OND-354: `offers` z JSON-LD odešlo spolu s klíčem `price`. Úrovně už
+    // cenu nenesou — jediná cena na stránce je prahové číslo a rozpětí ve
+    // větě `price.intro`, a to není nabídka jedné úrovně. Vymýšlet číslo, aby
+    // structured data měla co hlásit, by znamenalo publikovat cenu, která na
+    // stránce nestojí. Rozsah se hlásí přes `areaServed` a `serviceType`.
     $serviceJsons = [];
     foreach (__('price.tiers') as $tier) {
-        $tierPriceNum = (int) preg_replace('/[^0-9]/', '', $tier['price']);
         $serviceLd = [
             '@context' => 'https://schema.org',
             '@type' => 'Service',
@@ -40,12 +40,6 @@
                 'url'  => url('/'),
             ],
             'areaServed' => ['CZ', 'SK', 'DE', 'AT'],
-            'offers' => [
-                '@type' => 'Offer',
-                'price' => $tierPriceNum,
-                'priceCurrency' => $priceCurrency,
-                'url' => lroute('price'),
-            ],
         ];
         $serviceJsons[] = json_encode($serviceLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     }
@@ -62,281 +56,247 @@
 
 @section('content')
 
-{{-- OND-251 — vrstva hloubky ZAPNUTÁ: světlo ano, pohyb ne.
-     Rozhodovací stránka, takže pásma dostávají nejjasnější nasvícení a všechno
-     pod nimi se propadá do stínu. Uzavřená smyčka z homepage (sekce 06) se sem
-     VĚDOMĚ nepřenáší — doporučené pásmo je už označené čtyřikrát; rozbor je
-     v §E4 hloubka.css. --}}
-<div class="pd--depth pd--depth-sub">
+{{-- OND-393 (předloha OND-391) — /cenik v jazyce nové homepage, 3. z 9 podstránek.
+     Obal `.pd` nese tokeny ACID (základ OND-379 §0), `.pd--depth-sub`
+     vypíná vrstvu B (OND-386). Vrstva A zůstává: kužely v hloubka.css §E
+     jsou psané `.pd--depth-sub > section[data-pdd="price-*"]`, takže každá
+     sekce s `data-pdd` musí zůstat PŘÍMÝM dítětem tohohle obalu. --}}
 
-{{-- Page hero — OND-135 iter 5: plán §3.1 design DNA (page-mark + display + amber accent) --}}
-<div class="page-hero page-hero--price">
+{{-- OND-354 — POŘADÍ SEKCÍ JE TU SDĚLENÍ, NE ROZVRŽENÍ.
+     Důkazy a hodnota stojí NAD cenami. Kdo tyhle sekce přehazuje, mění tím
+     argument stránky, ne její vzhled. OND-391 pořadí nemění. --}}
+<div class="pd pd--depth pd--depth-sub">
+
+{{-- Hlava — `.pd-page-head`, ne `.pd-hero` (základ §1c: jinak se zapne
+     náboj podtržení i přejezd po tlačítku). Dva řádky nad titulkem jsou jeden
+     `.pd-eyebrow`, oddělené vlasovou čárkou — stejně jako /kontakt. --}}
+<section class="pd-section pd-page-head">
     <div class="container-site">
-        {{-- OND-135 cleanup (2026-05-14): page_mark_index span odebrán jako
-             agency-portfolio artefakt (itwebtech nemá „pages" hierarchii) —
-             aplikováno per CEO PR #78 precedent (home) + PR #80 (kontakt). --}}
-        <p class="page-hero__page-mark">
-            <span class="page-hero__page-mark-label">{{ __('price.hero.page_mark_label') }}</span>
-        </p>
-        <p class="page-hero__upline">{{ __('price.hero.upline') }}</p>
-        <h1 class="page-hero__heading">
-            {!! __('price.hero.heading_html') !!}
-        </h1>
-        <p class="page-hero__subline">{{ __('price.hero.subline') }}</p>
+        <p class="pd-eyebrow">{{ __('price.hero.page_mark_label') }} <span class="pd-eyebrow__sep" aria-hidden="true"></span> {{ __('price.hero.upline') }}</p>
+        <h1 class="pd-heading pd-heading--sub">{!! __('price.hero.heading_html') !!}</h1>
+        <p class="pd-sub">{{ __('price.hero.subline') }}</p>
     </div>
-</div>
+</section>
 
-{{-- Pricing tiers --}}
-<section class="section-wrapper" data-reveal data-pdd="price-tiers">
+{{-- Důkazní pás — OND-354. Čísla jsou `home.social_proof` (lang/*/home.php
+     se čte napříč webem). `response` z homepage pruhu tu VĚDOMĚ není: pás má
+     nést doklady, a slib doby odpovědi je slib, ne doklad.
+
+     OND-391: pruh je `.pd-strip__list` z homepage (sekce 03) a recenze jsou
+     `.pd-testi` z homepage (sekce 09) — týž člověk (Toman) teď vypadá na obou
+     stránkách stejně. Podpis kreslí sdílená `<x-testimonial-by>`. --}}
+@php
+    // Ty dvě recenze jsou vybrané, ne první dvě v poli: ze šestnácti jsou to
+    // jediné dvě, které mluví k ceně. Štěpánek je jediný, kdo Ondřeje srovnává
+    // s předchozím dodavatelem (na „je drahý" odpovídá člověk, který už
+    // někomu jinému zaplatil), Toman říká, že dostal víc, než čekal.
+    // Výběr je odůvodněný v dokumentu na OND-347, oddíl 4.2 — neměnit za jiné.
+    // Jména jsou v lang/{cs,en,de}/testimonials.php shodná, liší se jen text.
+    $proofTestimonials = collect(['Ing. Ivo Štěpánek', 'Rostislav Toman'])
+        ->map(fn ($name) => collect(__('testimonials.items'))->firstWhere('name', $name))
+        ->filter()
+        ->values();
+
+    $quoteOpen  = __('home.quote_marks.open');
+    $quoteClose = __('home.quote_marks.close');
+@endphp
+<section class="pd-section pd-section--band" data-pdd="price-proof">
     <div class="container-site">
 
-        {{-- OND-198 (nález 5.4): očekávací věta musí padnout dřív, než čtenář
-             uvidí první číslo. Pásma jsou v lang souboru seřazená
-             Standard → Custom → Startovní, nejlevnější je poslední. --}}
-        <p class="pricing-expectation">{{ __('price.intro') }}</p>
+        {{-- OND-315 (platí i tady): viditelné „5,0" je pro čtečku schované a
+             nahrazuje ho úplné „Hodnocení 5 z 5". --}}
+        <ul class="pd-strip__list" aria-label="{{ __('home.social_proof.strip_aria') }}">
+            <li><strong aria-hidden="true">{{ __('home.social_proof.rating_value') }}</strong><span class="sr-only">{{ __('home.social_proof.rating_aria') }}</span> {{ __('home.social_proof.reviews') }}</li>
+            <li><strong>{{ __('home.social_proof.projects') }}</strong></li>
+            <li><strong>{{ __('home.social_proof.experience') }}</strong></li>
+            <li>{{ __('home.social_proof.award') }}</li>
+        </ul>
 
-        <div class="pricing-tiers" data-reveal-group>
+        @if ($proofTestimonials->isNotEmpty())
+        <div class="pd-testi">
+            @foreach ($proofTestimonials as $review)
+            <article class="pd-testi__item">
+                <x-testimonial-by :person="$review" :size="56" />
+                <p class="pd-testi__text">{{ $quoteOpen }}{{ $review['text'] }}{{ $quoteClose }}</p>
+            </article>
+            @endforeach
+        </div>
+        @endif
+
+    </div>
+</section>
+
+{{-- Co je součástí každého projektu — OND-354: posunuté NAD ceny.
+     OND-391: `.pd-split` (hlava vlevo, obsah vpravo — táž osa jako formulář
+     na /kontakt) + nová sdílená `.pd-points`: body bez pořadí, bez ikon,
+     oddělené vlasovou linkou. Věta o době odpovědi v „Podpora i po
+     spuštění" patří OND-345 — nesahat. --}}
+<section class="pd-section" data-pdd="price-guarantees">
+    <div class="container-site">
+        <div class="pd-split">
+            <header>
+                <h2 class="pd-head__title">{{ __('price.guarantees.heading') }}</h2>
+            </header>
+
+            <div class="pd-points">
+                @foreach (__('price.guarantees.items') as $g)
+                <div class="pd-point">
+                    <h3 class="pd-point__title">{{ $g['title'] }}</h3>
+                    <p class="pd-point__text">{{ $g['text'] }}</p>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- Úrovně — `.pd-price` z homepage (sekce 08), rozšířená modifikátorem
+     `--full` o to, co homepage kotva nemá: případovku, výčet a tlačítko.
+
+     OND-198 (nález 5.4): očekávací věta musí padnout dřív, než čtenář
+     uvidí první číslo. OND-354: tahle věta je jediné místo na stránce, kde
+     stojí cena. OND-391: proto je to `.pd-lead` — největší text pod
+     titulkem. Úrovně pod ní nesou rozsah, ne cenovku. --}}
+<section class="pd-section" data-pdd="price-tiers">
+    <div class="container-site">
+
+        <p class="pd-lead pd-lead--wide pd-price__lead">{{ __('price.intro') }}</p>
+
+        <div class="pd-price pd-price--full">
             @foreach (__('price.tiers') as $tier)
-            @php
-                // OND-137 P4 §6: pricing_tier_shown custom dimension (25/55/95) —
-                // extrahované z tier['price'] (např. "25 000 Kč" → "25").
-                $tierShown = (int) preg_replace('/[^0-9]/', '', $tier['price']);
-                $tierShown = (string) (int) ($tierShown / 1000); // 25000 → "25"
-            @endphp
-            <article class="pricing-tier {{ $tier['popular'] ? 'pricing-tier--featured' : '' }}"
+            {{-- Doporučená úroveň je označená dvakrát, jako na homepage:
+                 acidová linka nahoře a acidové slovo u názvu. Karta, rámeček,
+                 stín a acidové tlačítko odešly (hloubka.css §E4). --}}
+            <article class="pd-price__col {{ $tier['popular'] ? 'pd-price__col--featured' : '' }}"
                      data-analytics-view="pricing_tier_view"
-                     data-analytics-props='{"pricing_tier_shown":"{{ $tierShown }}"}'>
+                     data-analytics-props='{"pricing_tier_shown":"{{ $tier['key'] }}"}'>
 
-                @if ($tier['popular'])
-                <span class="pricing-tier__badge">{{ __('price.popular') }}</span>
+                <h2 class="pd-price__title">{{ $tier['name'] }}@if ($tier['popular']) <em>{{ __('price.popular') }}</em>@endif</h2>
+                {{-- OND-354: rozsah je to, čím se úrovně reálně liší — proto
+                     stojí hned pod názvem ve velikosti, kterou homepage dává
+                     rozsahu. Popis je až pod ním (pořadí homepage kotvy).
+                     OND-448 (B-08): název je malý štítek, `scope` je claim
+                     („Aby si vás zákazník ověřil"), `desc` jeden tlumený
+                     podtitul — počet stránek z karet zmizel. --}}
+                <p class="pd-price__scope">{{ $tier['scope'] }}</p>
+                <p class="pd-price__desc">{{ $tier['desc'] }}</p>
+
+                {{-- OND-359: důkaz místo výčtu funkcí. `$tierProofs` drží jen
+                     publikované projekty, takže odkaz na 404 nevznikne. --}}
+                @php $proof = $tierProofs->get($tier['proof']['slug'] ?? null); @endphp
+                @if ($proof)
+                <p class="pd-price__proof">
+                    <a href="{{ $proof->detailUrl() }}" class="pd-case__live"
+                       data-analytics="pricing_tier_proof_click"
+                       data-analytics-props='{"pricing_tier_shown":"{{ $tier['key'] }}","project_slug":"{{ $proof->slug }}"}'>{{ __('price.proof_intro') }}: {{ $tier['proof']['label'] }}</a>
+                </p>
                 @endif
 
-                <header class="pricing-tier__header">
-                    <h2 class="pricing-tier__name">{{ $tier['name'] }}</h2>
-                    <p class="pricing-tier__desc">{{ $tier['desc'] }}</p>
-                    <div class="pricing-tier__price">{{ $tier['price'] }}</div>
-                    <p class="pricing-tier__price-note">{{ __('price.price_note') }}</p>
-                </header>
-
-                <ul class="pricing-tier__features">
+                <ul class="pd-service__bullets pd-price__features">
                     @foreach ($tier['features'] as $feature)
-                    <li>
-                        <x-icon.circle-check-big class="w-4 h-4 shrink-0" />
-                        <span>{{ $feature }}</span>
-                    </li>
+                    <li>{{ $feature }}</li>
                     @endforeach
                 </ul>
 
-                <a href="{{ lroute('contact') }}"
-                   class="btn {{ $tier['popular'] ? 'btn-primary' : 'btn-secondary' }} pricing-tier__cta"
-                   data-analytics="pricing_tier_cta_primary_click"
-                   data-analytics-props='{"pricing_tier_shown":"{{ $tierShown }}"}'>
-                    {{ $tier['cta'] }}
-                    <x-icon.arrow-right class="w-4 h-4 shrink-0" />
-                </a>
+                {{-- OND-391: tři stejná tlačítka (od OND-448 „Napsat poptávku")
+                     jsou tichý odkaz s acidovou linkou (`.pd-case__cta`),
+                     ne tři tlačítka. Analytika zůstává po úrovních. --}}
+                <p class="pd-price__action">
+                    <a href="{{ lroute('contact') }}" class="pd-case__cta"
+                       data-analytics="pricing_tier_cta_primary_click"
+                       data-analytics-props='{"pricing_tier_shown":"{{ $tier['key'] }}"}'>{{ $tier['cta'] }}</a>
+                </p>
 
             </article>
             @endforeach
         </div>
 
-        <p class="pricing-note">{{ __('price.note') }}</p>
+        {{-- OND-448 (B-08): cenu neurčuje počet stránek — tichá věta hned pod
+             balíčky, jen tady (homepage kotva nese jen dlaždice). --}}
+        <p class="pd-note pd-price__pages">{{ __('price.pages_note') }}</p>
+
+        {{-- OND-354: `entry_note` stojí pod mřížkou, ne v kartě. --}}
+        <p class="pd-intro pd-price__entry">{{ __('price.entry_note') }}</p>
+
+        <p class="pd-note">{{ __('price.note') }}</p>
 
     </div>
 </section>
 
-{{-- Feature comparison table --}}
-@php
-    $compareTiers  = __('price.compare.tiers');
-    $compareGroups = __('price.compare.groups');
-    $tierPrices    = array_column(__('price.tiers'), 'price');
-    // OND-198 (nález 5.4): zvýrazněný sloupec se odvozuje z příznaku `popular`,
-    // ne z pevného indexu 1 — pořadí pásem se změnilo (Standard je první).
-    $featuredIdx   = array_search(true, array_column(__('price.tiers'), 'popular'), true);
-    $featuredIdx   = $featuredIdx === false ? -1 : $featuredIdx;
-@endphp
-<section class="section-wrapper section-alt" data-reveal data-pdd="price-compare">
+{{-- Co cenu zvedá a co snižuje — OND-354. OND-391: nová sdílená `.pd-duo`
+     (dva protilehlé sloupce s vlasovou linkou mezi nimi) a odrážka ACID
+     `.pd-service__bullets` z homepage. Jediné, co sloupce odlišuje beze slov,
+     je šipka; dolní sloupec ji v CSS překlápí. Je dekorace. --}}
+<section class="pd-section" data-pdd="price-compare">
     <div class="container-site">
-        <header class="section-header">
-            <h2>{{ __('price.compare.heading') }}</h2>
-        </header>
+        <div class="pd-split">
+            <header>
+                <h2 class="pd-head__title">{{ __('price.compare.heading') }}</h2>
+            </header>
 
-        {{-- DESKTOP: full 3-column table --}}
-        <div class="pricing-compare pricing-compare--desktop">
-            <table class="pricing-compare__table">
-                <thead>
-                    <tr>
-                        <th></th>
-                        @foreach ($compareTiers as $i => $tier)
-                        <th class="{{ $i === $featuredIdx ? 'is-featured' : '' }}">{{ $tier }}</th>
+            <div class="pd-duo">
+                @foreach (['up', 'down'] as $direction)
+                @php $group = __('price.compare.' . $direction); @endphp
+                <div class="pd-duo__col pd-duo__col--{{ $direction }}">
+                    <h3 class="pd-duo__label">
+                        <x-icon.arrow-up class="pd-duo__mark" aria-hidden="true" focusable="false" />
+                        {{ $group['label'] }}
+                    </h3>
+                    <ul class="pd-service__bullets">
+                        @foreach ($group['items'] as $item)
+                        <li>{{ $item }}</li>
                         @endforeach
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($compareGroups as $group)
-                    <tr class="pricing-compare__group-row">
-                        <td colspan="4">{{ $group['label'] }}</td>
-                    </tr>
-                    @foreach ($group['rows'] as $row)
-                    <tr>
-                        <td class="pricing-compare__feature">{{ $row['label'] }}</td>
-                        @foreach ($row['values'] as $vi => $val)
-                        <td class="{{ $vi === $featuredIdx ? 'is-featured' : '' }}">
-                            @if ($val === true)
-                                <span class="pricing-compare__yes">
-                                    <x-icon.circle-check-big class="w-4 h-4" />
-                                    <span class="sr-only">{{ __('price.compare.included') }}</span>
-                                </span>
-                            @elseif ($val === false)
-                                <span class="pricing-compare__no" aria-hidden="true">—</span>
-                                <span class="sr-only">{{ __('price.compare.not_included') }}</span>
-                            @else
-                                <span class="pricing-compare__val">{{ $val }}</span>
-                            @endif
-                        </td>
-                        @endforeach
-                    </tr>
-                    @endforeach
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-
-        {{-- MOBILE: tab switcher + single column --}}
-        <div class="pricing-compare pricing-compare--mobile"
-             x-data="{ active: 0, prices: {{ json_encode($tierPrices) }} }"
-             x-cloak>
-
-            {{-- Tab header --}}
-            <div class="pcm-header">
-                <div class="pcm-tabs" role="tablist" aria-label="{{ __('price.compare.tabs_aria') }}">
-                    @foreach ($compareTiers as $i => $tier)
-                    <button class="pcm-tab"
-                            id="pcm-tab-{{ $i }}"
-                            :class="{ 'is-active': active === {{ $i }} }"
-                            @click="active = {{ $i }}"
-                            type="button"
-                            role="tab"
-                            aria-controls="pcm-panel"
-                            :aria-selected="(active === {{ $i }}).toString()"
-                            :tabindex="active === {{ $i }} ? 0 : -1">
-                        {{ $tier }}
-                    </button>
-                    @endforeach
-                </div>
-                <div class="pcm-price" x-text="prices[active]"></div>
-            </div>
-
-            {{-- Feature rows (single dynamic tabpanel labelled by the active tab). --}}
-            <div id="pcm-panel"
-                 role="tabpanel"
-                 :aria-labelledby="'pcm-tab-' + active"
-                 aria-live="polite">
-                @foreach ($compareGroups as $group)
-                <div class="pcm-group">{{ $group['label'] }}</div>
-                @foreach ($group['rows'] as $row)
-                <div class="pcm-row">
-                    <span class="pcm-feature">{{ $row['label'] }}</span>
-                    <span class="pcm-value-wrap">
-                        @foreach ($row['values'] as $vi => $val)
-                        <span x-show="active === {{ $vi }}">
-                            @if ($val === true)
-                                <span class="pricing-compare__yes">
-                                    <x-icon.circle-check-big class="w-4 h-4" aria-hidden="true" focusable="false" />
-                                    <span class="sr-only">{{ __('price.compare.included') }}</span>
-                                </span>
-                            @elseif ($val === false)
-                                <span class="pricing-compare__no" aria-hidden="true">—</span>
-                                <span class="sr-only">{{ __('price.compare.not_included') }}</span>
-                            @else
-                                <span class="pricing-compare__val">{{ $val }}</span>
-                            @endif
-                        </span>
-                        @endforeach
-                    </span>
+                    </ul>
                 </div>
                 @endforeach
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- Doplňky — nová sdílená `.pd-rates`: řádkový ceník, název a popis vlevo,
+     částka vpravo na jedné svislé ose. OND-391: čtyři stejná tlačítka
+     „Nezávazná poptávka" odešla — rozhodnutí o výzvách je v dokumentu
+     na OND-391, oddíl 5. Částky jsou lang řetězce beze změny. --}}
+<section class="pd-section" data-pdd="price-addons">
+    <div class="container-site">
+        <div class="pd-split">
+            <header>
+                <h2 class="pd-head__title">{{ __('price.addons.heading') }}</h2>
+                <p class="pd-intro">{{ __('price.addons.desc') }}</p>
+            </header>
+
+            <div class="pd-rates">
+                @foreach (__('price.addons.items') as $addon)
+                <div class="pd-rate">
+                    <h3 class="pd-rate__name">{{ $addon['name'] }}</h3>
+                    <p class="pd-rate__price">{{ $addon['price'] }}</p>
+                    <p class="pd-rate__desc">{{ $addon['desc'] }}</p>
+                </div>
                 @endforeach
             </div>
-
-        </div>
-
-    </div>
-</section>
-
-{{-- What's included --}}
-<section class="section-wrapper" data-reveal data-pdd="price-guarantees">
-    <div class="container-site">
-        <header class="section-header">
-            <h2>{{ __('price.guarantees.heading') }}</h2>
-        </header>
-
-        <div class="pricing-guarantees" data-reveal-group>
-            @foreach (__('price.guarantees.items') as $g)
-            <div class="pricing-guarantee">
-                <h3>{{ $g['title'] }}</h3>
-                <p>{{ $g['text'] }}</p>
-            </div>
-            @endforeach
         </div>
     </div>
 </section>
 
-{{-- Addons --}}
-<section class="section-wrapper" data-reveal data-pdd="price-addons">
+{{-- Závěr — jediná acidová výzva na stránce. Věta je otázka pro toho, kdo
+     se nerozhodl mezi úrovněmi; tlačítko `.pd-cta` z hera homepage.
+     Plovoucí `.price-sticky-cta` odešla: na mobilu ležela přes spodní lištu
+     (i přes telefon) a na desktopu opakovala tlačítko v navigaci. --}}
+<section class="pd-section pd-close" data-pdd="price-cta">
     <div class="container-site">
-        <header class="section-header">
-            <h2>{{ __('price.addons.heading') }}</h2>
-            <p class="section-header__desc">{{ __('price.addons.desc') }}</p>
-        </header>
+        <div class="pd-split">
+            <header>
+                <h2 class="pd-head__title">{{ __('price.cta.heading') }}</h2>
+            </header>
 
-        <div class="pricing-addons" data-reveal-group>
-            @foreach (__('price.addons.items') as $addon)
-            <div class="pricing-addon">
-                <div class="pricing-addon__info">
-                    <h3>{{ $addon['name'] }}</h3>
-                    <p>{{ $addon['desc'] }}</p>
-                </div>
-                <div class="pricing-addon__price">{{ $addon['price'] }}</div>
-                <a href="{{ lroute('contact') }}" class="btn btn-secondary pricing-addon__cta">
-                    {{ __('price.quotation') }}
-                    <x-icon.arrow-right class="w-4 h-4 shrink-0" />
+            <div>
+                <p class="pd-intro">{{ __('price.cta.desc') }}</p>
+                <a href="{{ lroute('contact') }}" class="pd-cta">
+                    {{ __('price.cta.btn') }}
+                    <x-icon.arrow-right class="w-4 h-4 shrink-0 pd-cta__arrow" />
                 </a>
             </div>
-            @endforeach
-        </div>
-    </div>
-</section>
-
-{{-- Sticky CTA — plán „cena nikdy nezmizí" (OND-135 iter 5).
-     Zobrazí se po prvním scroll-passu hero, skryje se v final CTA sekci. --}}
-<aside class="price-sticky-cta"
-       x-data="{ visible: false }"
-       x-init="
-         const trigger = () => { visible = window.scrollY > 480 && window.scrollY < (document.body.scrollHeight - window.innerHeight - 320); };
-         trigger();
-         window.addEventListener('scroll', trigger, { passive: true });
-         window.addEventListener('resize', trigger, { passive: true });
-       "
-       x-show="visible"
-       x-transition.opacity.duration.300ms
-       x-cloak
-       aria-label="{{ __('price.sticky_cta.label') }}">
-    <a href="{{ lroute('contact') }}" class="price-sticky-cta__btn">
-        <span class="price-sticky-cta__label">{{ __('price.sticky_cta.cta') }}</span>
-        <x-icon.arrow-right class="w-4 h-4 shrink-0" />
-    </a>
-</aside>
-
-{{-- CTA --}}
-<section class="section-wrapper section-cta price-cta" data-reveal data-pdd="price-cta">
-    <div class="container-site">
-        <div class="price-cta__inner">
-            <h2 class="final-cta-heading">{{ __('price.cta.heading') }}</h2>
-            <p class="price-cta__desc">{{ __('price.cta.desc') }}</p>
-            <a href="{{ lroute('contact') }}" class="btn btn-primary">
-                {{ __('price.cta.btn') }}
-                <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-            </a>
         </div>
     </div>
 </section>

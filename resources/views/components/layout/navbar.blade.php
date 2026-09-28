@@ -2,15 +2,26 @@
 @php
     $locale      = app()->getLocale();
     $currentPage = current_page();
+    // OND-442: horní menu nemá „Úvod“ (na úvod vede logo), místo něj „Recenze“
+    // hned za „Projekty“. Drawer „Úvod“ ponechává — na mobilu je logo malé.
     $navItems = [
-        ['route' => 'home',     'label' => __('layout.nav.home')],
         ['route' => 'projects', 'label' => __('layout.nav.projects')],
+        ['route' => 'reviews',  'label' => __('layout.nav.reviews')],
         ['route' => 'price',    'label' => __('layout.nav.price')],
         ['route' => 'blog',     'label' => __('layout.nav.blog')],
         ['route' => 'about',    'label' => __('layout.nav.about')],
         ['route' => 'contact',  'label' => __('layout.nav.contact')],
     ];
+    $drawerItems = array_merge(
+        [['route' => 'home', 'label' => __('layout.nav.home')]],
+        $navItems,
+    );
     $langLabels = ['cs' => 'CZ', 'en' => 'EN', 'de' => 'DE'];
+    // OND-303: CTA „Domluvit konzultaci" vede vždy na formulář poptávky —
+    // na homepage kotvou v rámci stránky, jinde na /kontakt.
+    $ctaHref = $currentPage === 'home'
+        ? '#' . __('home.anchors.poptavka')
+        : lroute('contact');
 @endphp
 
 <div x-data="{ open: false }">
@@ -54,14 +65,13 @@
 
                 <x-phone-cta class="navbar__phone" />
 
-                <button
-                    type="button"
+                <a
+                    href="{{ $ctaHref }}"
                     class="btn btn-primary navbar__cta"
-                    @click="$dispatch('open-consultation-modal')"
                     data-analytics="sticky_cta_click"
                 >
                     {{ __('home.sticky.cta') }}
-                </button>
+                </a>
 
                 <button class="navbar__hamburger"
                         @click="open = true"
@@ -125,7 +135,7 @@
         </div>
 
         <nav class="drawer__nav">
-            @foreach ($navItems as $item)
+            @foreach ($drawerItems as $item)
                 @php
                     $isActive = $currentPage === $item['route']
                         || str_starts_with($currentPage, $item['route'] . '.');
@@ -138,14 +148,14 @@
             @endforeach
 
             <div class="drawer__cta">
-                <button
-                    type="button"
+                <a
+                    href="{{ $ctaHref }}"
                     class="btn btn-primary"
-                    @click="open = false; $dispatch('open-consultation-modal')"
+                    @click="open = false"
                     data-analytics="sticky_cta_click"
                 >
                     {{ __('home.sticky.cta') }}
-                </button>
+                </a>
                 <x-phone-cta class="drawer__phone" />
             </div>
         </nav>

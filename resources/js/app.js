@@ -3,6 +3,10 @@ import './cookies';
 import './analytics';
 // OND-246 — hloubka. Sám se vypne, když na stránce není `.pd--depth`.
 import './hloubka';
+// OND-440 — záznamy živých webů v případovkách. Sám se vypne bez `[data-live]`.
+import './live-recordings';
+// OND-449 — video smyčky na detailu projektu. Sám se vypne bez `[data-demo-video]`.
+import './demo-videos';
 import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;
@@ -50,6 +54,9 @@ Alpine.data('fileDropZone', ({
     error: '',
 
     init() {
+        // OND-448: formulář drží přílohy rozbalené, dokud je vybraný soubor.
+        this.$watch('files', (files) => this.$dispatch('file-drop:files', files.length));
+
         // contactForm dispatches this event after successful submit
         this.$el.addEventListener('file-drop:reset', () => {
             this.files = [];
@@ -136,14 +143,35 @@ Alpine.data('fileDropZone', ({
 // Contact / inquiry form — async submit s inline chybami
 // ---------------------------------------------------------------------------
 // OND-256/1: dřív se chyby ukazovaly v anglickém SweetAlert2 modálu
-// („Submission error" / „Close"). Teď stejný vzor jako inline formulář na
-// homepage — česká hláška pod polem, kterého se týká. `genericError` je
-// přeložený text pro pád, který nemá 422 payload (500, výpadek sítě).
-Alpine.data('contactForm', ({ genericError = '' } = {}) => ({
+// („Submission error" / „Close"). Teď hláška pod polem, kterého se týká.
+// `genericError` je přeložený text pro pád, který nemá 422 payload (500,
+// výpadek sítě).
+// OND-448 (B-01): jediný poptávkový formulář webu (`<x-lead-form>`) — homepage
+// i /kontakt. `source` (`home` / `contact`) rozliší místo v analytice.
+Alpine.data('contactForm', ({ genericError = '', source = 'contact' } = {}) => ({
     loading: false,
     submitted: false,
+    confirmation: '',
     errors: {},
     formError: '',
+    // Přílohy: sbalené za textovým tlačítkem. S vybraným souborem (hlásí
+    // `fileDropZone` přes `file-drop:files`) nebo s chybou příloh ze serveru
+    // zůstanou rozbalené, ať člověk nepřijde o přehled, co posílá.
+    attachOpen: false,
+    attachFiles: 0,
+    attachError: false,
+
+    toggleAttachments() {
+        if (this.attachOpen) {
+            if (this.attachFiles === 0 && !this.attachError) this.attachOpen = false;
+            return;
+        }
+        this.attachOpen = true;
+        // `x-show` zónu ukáže až v dalším snímku, skrytý prvek fokus nevezme.
+        this.$nextTick(() => requestAnimationFrame(() => {
+            this.$refs.attachments?.querySelector('.form-file__trigger')?.focus();
+        }));
+    },
 
     // Chyba u pole zmizí, jakmile ho uživatel začne opravovat.
     clearError(field) {
@@ -156,27 +184,46 @@ Alpine.data('contactForm', ({ genericError = '' } = {}) => ({
     async submit() {
         const form = this.$refs.form;
         const data = new FormData(form);
+        const detail = { form_source: source };
         this.loading = true;
         this.errors = {};
         this.formError = '';
 
+        // Záloha ke klik delegátu na tlačítku — Enter v poli odešle formulář
+        // bez kliknutí. analytics.js dvojí hlášení v jednom okamžiku sloučí.
+        window.dispatchEvent(new CustomEvent('inline-form-submit-attempt', { detail }));
+
         try {
-            await window.axios.post('/contact', data);
+            const response = await window.axios.post('/contact', data);
 
             // OND-137 P4 §6: analytics form_submit event (Jack §6) — dispatch
             // CustomEvent který analytics.js přemapuje na canonical `form_submit`.
-            window.dispatchEvent(new CustomEvent('contact-form-submit-success'));
+            // OND-448: názvy událostí zůstávají podle místa, ať měření navazuje.
+            window.dispatchEvent(new CustomEvent(
+                source === 'home' ? 'inline-form-submit-success' : 'contact-form-submit-success',
+                { detail },
+            ));
 
             // OND-136: in-DOM thank-you state replaces the form on success.
+            // OND-437: potvrzení vykreslil server (`confirmation` v odpovědi).
+            this.confirmation = response.data?.confirmation ?? '';
             this.submitted = true;
+            // Spodní mobilní lišta s poptávkou po odeslání zmizí (podpis.css).
+            document.body.classList.add('is-lead-sent');
             form.reset();
             // Notify all file drop zones to reset their state
             form.querySelectorAll('[x-data]').forEach(el => {
                 el.dispatchEvent(new CustomEvent('file-drop:reset'));
             });
             // Scroll the thanks block into view for visibility.
+            // OND-437: fokus na potvrzení (`role="status"`), ať ho čtečka přečte.
+            // `x-show` blok zobrazí až v dalším snímku (requestAnimationFrame),
+            // na skrytý prvek by fokus nepřešel — proto až v rAF.
             this.$nextTick(() => {
                 this.$root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                requestAnimationFrame(() => {
+                    this.$root.querySelector('[data-lead-confirmation]')?.focus({ preventScroll: true });
+                });
             });
 
         } catch (err) {
@@ -198,6 +245,8 @@ Alpine.data('contactForm', ({ genericError = '' } = {}) => ({
                     .find(([field]) => field === 'attachment' || field.startsWith('attachment.'));
 
                 if (attachmentError) {
+                    this.attachOpen = true;
+                    this.attachError = true;
                     form.querySelectorAll('[x-data]').forEach(el => {
                         el.dispatchEvent(new CustomEvent('file-drop:error', { detail: attachmentError[1] }));
                     });
@@ -222,30 +271,6 @@ Alpine.data('contactForm', ({ genericError = '' } = {}) => ({
         if (!first) return;
         first.focus({ preventScroll: true });
         first.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    },
-}));
-
-// ---------------------------------------------------------------------------
-// Consultation modal — Calendly CTA
-// ---------------------------------------------------------------------------
-// OND-258: video z modálu je pryč, takže zmizel i jeho stav (videoReady/playing).
-Alpine.data('consultationModal', () => ({
-    open: false,
-
-    openModal() {
-        this.open = true;
-        // Prevent body scroll
-        document.body.style.overflow = 'hidden';
-        // Focus the dialog on next tick
-        this.$nextTick(() => {
-            const dialog = this.$el.querySelector('[role="dialog"]');
-            if (dialog) dialog.focus({ preventScroll: true });
-        });
-    },
-
-    closeModal() {
-        this.open = false;
-        document.body.style.overflow = '';
     },
 }));
 
@@ -536,38 +561,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
 });
 
-// ---------------------------------------------------------------------------
-// Reservanto widget — patch missing href on vendor-injected <a> (OND-123)
-// ---------------------------------------------------------------------------
-// Reservanto vendor skript injektuje <a class="reservanto-button …"> bez href,
-// PSI „Odkazy nelze procházet" → SEO score 92 → fail (cíl ≥ 95).
-//
-// Vendor skript přidá vlastní click handler s preventDefault → uživatelský
-// klik otevře modal, ne href. Cíl: dodat crawler-readable href + no-JS fallback.
-// Direct URL přichází z data-direct-url na wrapperu (config/site.booking).
-document.addEventListener('DOMContentLoaded', () => {
-    const widgets = document.querySelectorAll('.reservanto-widget');
-    if (!widgets.length) return;
-
-    const patchAnchors = () => {
-        widgets.forEach(widget => {
-            const href = widget.dataset.directUrl;
-            if (!href) return;
-            widget.querySelectorAll('a:not([href])').forEach(a => {
-                a.setAttribute('href', href);
-                a.setAttribute('rel', 'noopener');
-                a.setAttribute('target', '_blank');
-            });
-        });
-    };
-
-    // Vendor skript je `defer`, takže může injektovat <a> až po DOMContentLoaded.
-    // MutationObserver na každém widget kontejneru zachytí přidání <a> i pozdější
-    // re-rendery (např. když Reservanto resize-uje).
-    const observer = new MutationObserver(patchAnchors);
-    widgets.forEach(widget => {
-        observer.observe(widget, { childList: true, subtree: true });
-    });
-    // První pass — kdyby už byly injektnuté (race po defer scriptu)
-    patchAnchors();
-});

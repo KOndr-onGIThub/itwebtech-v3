@@ -7,23 +7,26 @@ return [
         'contact'  => 'Contact',
         'price'    => 'Pricing',
         'projects' => 'Projects',
+        'reviews'  => 'Reviews',
         'blog'     => 'Notes',
         'about'    => 'About',
         'lang_switcher' => 'Language switcher',
     ],
 
+    // OND-369: leftover from OND-307 — this key is not rendered anywhere
+    // (header and drawer both use `home.sticky.cta`). Wording aligned with
+    // the rest of the site so the old promise cannot ship by accident.
     'cta' => [
-        'contact' => 'Book a consultation',
+        'contact' => 'Write an enquiry',
     ],
 
     'footer' => [
         'rights'    => 'All rights reserved.',
         'developer' => 'Website by',
-    ],
-
-    'prefooter' => [
+        // OND-387: claim and navigation moved here from the pre-footer, which
+        // is gone (subpage foundation §3). `prefooter.cta` and
+        // `prefooter.nav_label` went with it — the footer has no button.
         'tagline'   => 'Custom websites and applications. Direct.',
-        'cta'       => 'Book a free consultation',
         'nav_label' => 'Footer navigation',
     ],
 

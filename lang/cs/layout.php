@@ -7,24 +7,27 @@ return [
         'contact'  => 'Kontakt',
         'price'    => 'Ceník',
         'projects' => 'Projekty',
+        'reviews'  => 'Recenze',
         'blog'     => 'Zápisky',
         'about'    => 'O mně',
         'lang_switcher' => 'Přepínač jazyků',
     ],
 
+    // OND-369: pozůstatek po OND-307 — klíč se nikde nevykresluje (hlavní
+    // tlačítko v hlavičce i v draweru bere `home.sticky.cta`). Znění
+    // sjednoceno se zbytkem webu, aby nešlo omylem nasadit starou řeč.
     'cta' => [
-        'contact' => 'Domluvit konzultaci',
+        'contact' => 'Napsat poptávku',
     ],
 
     'footer' => [
         'rights'    => 'Všechna práva vyhrazena.',
         'developer' => 'Web vytvořil',
-    ],
-
-    'prefooter' => [
+        // OND-387: claim a navigace se přestěhovaly z předpatičky (zrušená,
+        // §3 základu podstránek). `prefooter.cta` a `prefooter.nav_label`
+        // s ní zanikly — tlačítko v patičce není.
         'tagline'   => 'Weby a aplikace na míru. Napřímo.',
-        'cta'       => 'Domluvit konzultaci zdarma',
-        'nav_label' => 'Footer navigace',
+        'nav_label' => 'Navigace v patičce',
     ],
 
     'modal' => [

@@ -7,23 +7,26 @@ return [
         'contact'  => 'Kontakt',
         'price'    => 'Preisliste',
         'projects' => 'Projekte',
+        'reviews'  => 'Bewertungen',
         'blog'     => 'Notizen',
         'about'    => 'Über mich',
         'lang_switcher' => 'Sprachumschalter',
     ],
 
+    // OND-369: Überrest aus OND-307 — dieser Schlüssel wird nirgends
+    // ausgegeben (Header und Drawer nutzen `home.sticky.cta`). Wortlaut an
+    // den restlichen Web angeglichen, damit die alte Sprache nicht zurückkommt.
     'cta' => [
-        'contact' => 'Beratung vereinbaren',
+        'contact' => 'Anfrage schreiben',
     ],
 
     'footer' => [
         'rights'    => 'Alle Rechte vorbehalten.',
         'developer' => 'Website von',
-    ],
-
-    'prefooter' => [
+        // OND-387: Claim und Navigation sind aus dem Pre-Footer hierher
+        // umgezogen; der Pre-Footer ist entfernt (Unterseiten-Grundlage §3).
+        // `prefooter.cta` und `prefooter.nav_label` entfallen — kein Button.
         'tagline'   => 'Websites und Anwendungen nach Maß. Direkt.',
-        'cta'       => 'Kostenlose Beratung vereinbaren',
         'nav_label' => 'Footer-Navigation',
     ],
 

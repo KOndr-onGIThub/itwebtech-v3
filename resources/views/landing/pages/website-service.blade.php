@@ -322,8 +322,8 @@
                     <div class="form-group form-group--checkbox">
                         <label>
                             <input type="checkbox" name="gdpr" value="1" @checked(old('gdpr')) required>
-                            {{ __('landing.form.privacy_prefix') }}
-                            <a href="{{ lroute('privacy') }}">{{ __('landing.form.privacy_link') }}</a>
+                            {{-- Stejný flex-item defekt jako na /kontakt (OND-374). --}}
+                            <span>{{ __('landing.form.privacy_prefix') }}<a href="{{ lroute('privacy') }}">{{ __('landing.form.privacy_link') }}</a></span>
                         </label>
                         @error('gdpr') <p class="landing-field-error">{{ $message }}</p> @enderror
                     </div>

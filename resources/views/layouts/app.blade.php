@@ -135,6 +135,9 @@
     @stack('preloads')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    {{-- OND-438: přednačtení detailu projektu a hlavních podstránek. --}}
+    @include('partials.speculation-rules')
+
     {{-- Analytics (OND-122) — Plausible / GA4 / Clarity, řízeno přes
          config/site.php (ANALYTICS_ENABLED + provider envs). --}}
     @include('partials.analytics')
@@ -143,11 +146,21 @@
 
     <x-layout.navbar :hreflangs="$hreflangs ?? []" />
 
-    {{-- Mobile bottom bar (OND-100, T06) — viditelná akce na mobilu --}}
+    {{-- Mobile bottom bar (OND-100, T06) — viditelná akce na mobilu.
+         OND-437: po odeslání poptávky zmizí — výzva „Poptávka" pod potvrzením
+         by zvala poslat ji znovu. OND-448: formulář se odesílá bez
+         znovunačtení, takže třídu `is-lead-sent` na <body> přidá `contactForm`
+         (podpis.css lištu schová a vrátí odsazení).
+         OND-448 (B-01): lišta vede k formuláři, který je nejblíž — na homepage
+         na sekci „Poptávka", na /kontakt na formulář na téže stránce, jinde na
+         /kontakt (stejně jako tlačítko v menu). Dřív vedla z podstránek na
+         homepage, i z /kontakt pryč od formuláře. --}}
     @php
-        $stickyPoptavkaHref = current_page() === 'home'
-            ? '#' . __('home.anchors.poptavka')
-            : lroute('home') . '#' . __('home.anchors.poptavka');
+        $stickyPoptavkaHref = match (current_page()) {
+            'home'    => '#' . __('home.anchors.poptavka'),
+            'contact' => '#kontaktni-formular',
+            default   => lroute('contact'),
+        };
     @endphp
     <div class="mobile-bottom-bar" role="region" aria-label="{{ __('home.sticky.cta') }}">
         <a
@@ -155,7 +168,6 @@
             class="mobile-bottom-bar__primary"
             data-analytics="sticky_cta_click"
         >
-            <span aria-hidden="true" class="mobile-bottom-bar__icon">💬</span>
             <span>{{ __('home.sticky.mobile') }}</span>
         </a>
         <x-phone-cta class="mobile-bottom-bar__phone" />
@@ -165,65 +177,53 @@
         @yield('content')
     </main>
 
-    {{-- PRE-FOOTER CTA — hide by adding @section('hide_prefooter') true @endsection on a page --}}
-    @unless(View::hasSection('hide_prefooter'))
-    <div class="footer-prefooter">
-        <div class="container-site footer-prefooter__inner">
-
-            <img
-                src="{{ asset_v('img/logo/logo_main_svg.svg') }}"
-                alt="{{ config('app.name') }}"
-                class="footer-prefooter__logo"
-                width="220" height="26"
-                loading="lazy"
-                decoding="async"
-            >
-
-            <p class="footer-prefooter__tagline">
-                {{ __('layout.prefooter.tagline') }}
-            </p>
-
-            <a href="{{ lroute('contact') }}" class="btn btn-primary">
-                {{ __('layout.prefooter.cta') }}
-                <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-            </a>
-
-            <nav class="footer-prefooter__nav" aria-label="{{ __('layout.prefooter.nav_label') }}">
-                <a href="{{ lroute('home') }}"     class="footer-prefooter__link">{{ __('layout.nav.home') }}</a>
-                <a href="{{ lroute('projects') }}" class="footer-prefooter__link">{{ __('layout.nav.projects') }}</a>
-                <a href="{{ lroute('price') }}"    class="footer-prefooter__link">{{ __('layout.nav.price') }}</a>
-                <a href="{{ lroute('blog') }}"     class="footer-prefooter__link">{{ __('layout.nav.blog') }}</a>
-                <a href="{{ lroute('about') }}"    class="footer-prefooter__link">{{ __('layout.nav.about') }}</a>
-                <a href="{{ lroute('contact') }}"  class="footer-prefooter__link">{{ __('layout.nav.contact') }}</a>
-            </nav>
-
-        </div>
-    </div>
-    @endunless
-
-    {{-- FOOTER BAR --}}
+    {{-- PATIČKA — OND-387 (základ podstránek §3c)
+         Předpatička (logo na 50 %, claim, tlačítko „Napsat poptávku", navigace)
+         je zrušená. Tlačítko bylo druhou až třetí kopií výzvy, kterou má
+         stránka nad sebou, a na /kontakt odkazovalo samo na sebe; homepage
+         si ji proto schovávala už od OND-201/5.8. Užitečná z ní byla jen
+         navigace a claim — ty jsou teď tady. Právní stránky (OND-266) tím
+         o cestu ven nepřicházejí: navigace je v patičce na každé stránce.
+         Žádné tlačítko sem nepatří (§3b). --}}
     <footer class="footer-bar">
         <div class="container-site footer-bar__inner">
-            <span>&copy; {{ date('Y') }} {{ config('app.name') }} — {{ __('layout.footer.rights') }}</span>
-            {{-- Telefon má default v config/contact.php; přebije ho env CONTACT_PHONE. --}}
-            @if(config('contact.phone'))
-            <a href="tel:{{ preg_replace('/\s+/', '', config('contact.phone')) }}" class="footer-bar__phone">{{ config('contact.phone') }}</a>
-            @endif
-            <a href="{{ lroute('privacy') }}" class="footer-bar__gdpr-link">{{ __('layout.footer_privacy_link') }}</a>
-            <a href="{{ lroute('cookies') }}" class="footer-bar__gdpr-link">{{ __('layout.cookies_link') }}</a>
+
+            <nav class="footer-bar__nav" aria-label="{{ __('layout.footer.nav_label') }}">
+                @foreach (['home', 'projects', 'reviews', 'price', 'blog', 'about', 'contact'] as $footerRoute)
+                    <a href="{{ lroute($footerRoute) }}"
+                       class="footer-bar__nav-link"
+                       @if(current_page() === $footerRoute) aria-current="page" @endif>{{ __('layout.nav.' . $footerRoute) }}</a>
+                @endforeach
+            </nav>
+
+            <div class="footer-bar__base">
+                <div class="footer-bar__brand">
+                    <img
+                        src="{{ asset_v('img/logo/logo_main_svg.svg') }}"
+                        alt="{{ config('app.name') }}"
+                        class="footer-bar__logo"
+                        width="119" height="14"
+                        loading="lazy"
+                        decoding="async"
+                    >
+                    <p class="footer-bar__tagline">{{ __('layout.footer.tagline') }}</p>
+                </div>
+
+                <div class="footer-bar__meta">
+                    <span>&copy; {{ date('Y') }} {{ config('app.name') }} — {{ __('layout.footer.rights') }}</span>
+                    {{-- Telefon má default v config/contact.php; přebije ho env CONTACT_PHONE. --}}
+                    @if(config('contact.phone'))
+                    <a href="tel:{{ preg_replace('/\s+/', '', config('contact.phone')) }}" class="footer-bar__phone">{{ config('contact.phone') }}</a>
+                    @endif
+                    <a href="{{ lroute('privacy') }}" class="footer-bar__gdpr-link">{{ __('layout.footer_privacy_link') }}</a>
+                    <a href="{{ lroute('cookies') }}" class="footer-bar__gdpr-link">{{ __('layout.cookies_link') }}</a>
+                </div>
+            </div>
+
         </div>
     </footer>
 
     @stack('scripts')
-
-    {{-- Consultation modal — video + Calendly CTA --}}
-    <x-consultation-modal />
-
-    {{-- Booking widget (Reservanto) — sekundární CTA, OND-116 (T15) --}}
-    @if (config('site.booking.enabled'))
-        <script defer id="reservanto-widget-script" type="text/javascript"
-                src="{{ config('site.booking.script_url') }}"></script>
-    @endif
 
     {{-- Cookie consent modal (OND-125) — gating pro GA4 + Microsoft Clarity.
          Renderuje se jen pokud je ANALYTICS_ENABLED=true a aspoň jeden

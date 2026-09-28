@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
-@section('title', $translation?->meta_title ?? $translation?->title ?? config('app.name'))
+{{-- Titulek podle vzoru podstránek `<Stránka> — Ondřej Kriška, ONDRAWEB`.
+     „Stránka" je tu `meta_title` z DB (ručně psaný titulek pro vyhledávač),
+     fallback `title`. DB se nemění, jen se k ní přidá podpis. --}}
+@section('title', ($translation?->meta_title ?: ($translation?->title ?? $project->slug)) . ' — Ondřej Kriška, ONDRAWEB')
 @section('description', $translation?->meta_description ?? $translation?->summary ?? '')
 
 {{-- OND-137 P4 §SEO: BreadcrumbList JSON-LD pro detail projektu.
@@ -24,74 +27,81 @@
 </script>
 @endpush
 
+@php
+    // Recenze klienta u jeho případovky (OND-402, V3 z OND-396): první položka
+    // z `testimonials.php`, jejíž `project` je slug tohohle projektu. Pořadí
+    // v souboru rozhoduje: Cvrček je před Kňourkem (Cyklocentrum, stejný text),
+    // Holcmann před YCF CUP (PitArena). Bez recenze se blok nevykreslí.
+    $review = collect(__('testimonials.items'))
+        ->first(fn ($t) => ($t['project'] ?? null) === $project->slug);
+@endphp
+
 @section('content')
+{{-- ============================================================
+     OND-402 — detail projektu ve slovníku nové homepage (5. z 9).
+     Texty jsou z DB (`portfolio_project_translations`) beze změny,
+     mění se slovník a pořadí. Obal `pd` nese tokeny ACID,
+     `pd--depth-sub` vypíná vrstvu B. Kužely vrstvy A v hloubka.css §E
+     jsou psané na `section[data-pdd="project-*"]` — sekce musí zůstat
+     PŘÍMÝMI dětmi obalu.
 
-{{-- OND-251 — vrstva hloubky ZAPNUTÁ: jen světlo a hmota.
-     Detail jedné realizace = jeden dokument pod lampou, stejná role jako
-     sekce 12 na homepage. Nejužší kužel na webu, okolí skoro černé. --}}
-<div class="pd--depth pd--depth-sub">
+     POŘADÍ JE ARGUMENT: co to je → jak to vypadá → s čím klient
+     přišel, co jsem udělal, co to přineslo → co na to říká klient →
+     zblízka → co dalšího → chcete totéž? Jedno acidové tlačítko na konci.
+     ============================================================ --}}
+<div class="pd pd--depth pd--depth-sub">
 
-{{-- 1. Detail hero — OND-137 P4 §6: case_study_view event (Jack §6) na
-     hero sekci přes IntersectionObserver (data-analytics-view). --}}
-<div data-analytics-view="case_study_view"
-     data-analytics-props='{"slug":"{{ $project->slug }}"}'>
-    <x-portfolio.detail-hero :project="$project" :translation="$translation" />
-</div>
+<x-portfolio.detail-hero :project="$project" :translation="$translation" />
 
-{{-- 2. Hlavní vizuál (OND-202: kurátorské role — první wide snímek
-     na celou šířku; podpůrné karty až POD textem případovky, aby se
-     text střídal s obrázky místo dvou oddělených bloků). --}}
-<x-portfolio.detail-gallery :screenshots="$project->screenshots" part="lead" />
+{{-- Hlavní vizuál navazuje na hlavu bez horního odsazení: titulek a obrázek
+     jsou jedna věta („tady je to"). --}}
+<x-portfolio.detail-gallery :screenshots="$project->screenshots" part="lead"
+    :transition-name="project_transition_name($project->slug, 'img')" />
 
-{{-- 3+4. Body + meta --}}
-<section class="section-wrapper portfolio-detail-body-wrapper" data-reveal data-pdd="project-body">
+<section class="pd-section" data-pdd="project-body">
     <div class="container-site">
-        <div class="portfolio-detail-body-wrapper__grid">
-            <div class="portfolio-detail-body-wrapper__main">
-                <x-portfolio.detail-body :translation="$translation" />
+        <div class="pd-story">
+            <div class="pd-story__main">
+                <x-portfolio.detail-body :translation="$translation" :project="$project" />
+
+                @if ($review)
+                    <x-portfolio.client-review :person="$review" />
+                @endif
             </div>
-            <div class="portfolio-detail-body-wrapper__side">
-                <x-portfolio.detail-meta :project="$project" />
-            </div>
+            <x-portfolio.detail-meta :project="$project" />
         </div>
     </div>
 </section>
 
-{{-- 4b. Podpůrná galerie (OND-202: zbylé snímky — wide bandy + páry
-     čtvercových karet v jednotném výřezu). --}}
-<x-portfolio.detail-gallery :screenshots="$project->screenshots" part="rest" />
+<x-portfolio.detail-gallery :screenshots="$project->screenshots" part="rest" :project="$project" />
 
-{{-- 5. Related projects --}}
 @if ($relatedProjects && $relatedProjects->count())
-<section class="section-wrapper section-alt portfolio-related" data-reveal data-pdd="project-related">
+{{-- Další projekty — mřížka `.pd-works` z /projekty beze změny (OND-399 §5). --}}
+<section class="pd-section" data-pdd="project-related">
     <div class="container-site">
-        <header class="section-header section-header--left">
-            <h2>{{ __('projects.detail.related_heading') }}</h2>
+        <header class="pd-head">
+            <h2 class="pd-head__title">{{ __('projects.detail.related_heading') }}</h2>
         </header>
-        <div class="portfolio-grid" data-reveal-group>
+        <div class="pd-works">
             @foreach ($relatedProjects as $portfolioProject)
-                <x-portfolio.card :project="$portfolioProject" :locale="$locale" />
+                <x-portfolio.work :project="$portfolioProject" :locale="$locale" :transition="false" />
             @endforeach
         </div>
+        <p class="pd-more"><a href="{{ lroute('projects') }}" class="pd-more__link">{{ __('home.portfolio.cta') }}</a></p>
     </div>
 </section>
 @endif
 
-{{-- 6. Final CTA --}}
-<section class="section-wrapper" data-reveal>
+{{-- Závěr — `.pd-about-cta` z /o-mne a /recenze: věta a JEDINÉ acidové
+     tlačítko stránky. Dřív tu vedle stálo „← Zpět na projekty" jako druhé
+     tlačítko; cestu do katalogu nese „Všechny projekty →" o sekci výš. --}}
+<section class="pd-section pd-about-cta" data-pdd="project-cta">
     <div class="container-site">
-        <div class="cta-block">
-            <h2>{{ __('projects.cta.heading') }}</h2>
-            <div class="cta-block__actions">
-                <a href="{{ lroute('contact') }}" class="btn btn-primary">
-                    {{ __('projects.cta.primary') }}
-                    <x-icon.arrow-right class="w-4 h-4 shrink-0 -rotate-45" />
-                </a>
-                <a href="{{ lroute('projects') }}" class="btn btn-secondary">
-                    {{ __('projects.back_to_projects') }}
-                </a>
-            </div>
-        </div>
+        <h2 class="pd-lead">{{ __('projects.cta.heading') }}</h2>
+        <a href="{{ lroute('contact') }}" class="pd-cta">
+            {{ __('projects.cta.primary') }}
+            <x-icon.arrow-right class="w-4 h-4 shrink-0 pd-cta__arrow" />
+        </a>
     </div>
 </section>
 

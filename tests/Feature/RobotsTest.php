@@ -2,11 +2,16 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\URL;
 use Tests\TestCase;
 
 class RobotsTest extends TestCase
 {
+    // OND-364: `/` čte `portfolio_projects` (OND-351), takže bez migrací hodí 500.
+    // Prázdná tabulka je pro tenhle test v pořádku — seedovat není potřeba.
+    use RefreshDatabase;
+
     public function test_robots_txt_returns_plain_text(): void
     {
         $response = $this->get('/robots.txt');
@@ -49,5 +54,77 @@ class RobotsTest extends TestCase
         // Najít řádek "Sitemap: ..."
         $this->assertMatchesRegularExpression('#Sitemap:\s+https://#', $body);
         $this->assertDoesNotMatchRegularExpression('#Sitemap:\s+http://#', $body);
+    }
+
+    /**
+     * OND-384: routa `/robots.txt` existovala od OND-85, ale na produkci nikdy
+     * neběžela — vedle ní žil statický `public/robots.txt` a nginx statiku
+     * servíruje dřív, než request dojde do `index.php`. Živý web proto dál
+     * inzeroval hardcodovanou `Sitemap: https://ondraweb.cz/sitemap.xml`
+     * (dnes Framer, cizí web), zatímco testy nad HTTP kernelem svítily zeleně.
+     *
+     * Tenhle test je jediná pojistka, kterou test suite proti té konstelaci má:
+     * hlídá, že soubor nezmrtvolní routu znovu. Nemazat.
+     */
+    public function test_no_static_robots_txt_shadows_the_route(): void
+    {
+        $this->assertFileDoesNotExist(
+            public_path('robots.txt'),
+            'public/robots.txt by nginx přebil routu robots → Sitemap by se zafixovala na jednu doménu. '
+            .'Obsah patří do RobotsController, ne do statického souboru.'
+        );
+    }
+
+    /**
+     * OND-384: obsah statického souboru se přestěhoval do controlleru, takže
+     * `Disallow: /admin` musí přežít i po jeho smazání.
+     */
+    public function test_robots_txt_blocks_admin_panel(): void
+    {
+        $body = $this->get('/robots.txt')->assertOk()->getContent();
+
+        $this->assertStringContainsString('Disallow: /admin', $body);
+    }
+
+    /**
+     * OND-384: jádro opravy — `Sitemap:` se bere z aktuálního hostu, takže po
+     * cutoveru na ondraweb.cz se přepne sám. Žádná doména natvrdo.
+     */
+    public function test_robots_txt_sitemap_follows_the_request_host(): void
+    {
+        $body = $this->get('https://itwebtech.ondrejkriska.cz/robots.txt')
+            ->assertOk()
+            ->getContent();
+
+        $this->assertStringContainsString(
+            'Sitemap: https://itwebtech.ondrejkriska.cz/sitemap.xml',
+            $body
+        );
+    }
+
+    /**
+     * OND-342: `<meta name="robots">` byl do OND-306 přepisovatelný z view
+     * (proměnná `$robots`) kvůli `noindex` na zmrazené staré homepage. Ta
+     * stránka je pryč, mechanika taky a hodnota je zpátky natvrdo. Tenhle
+     * test hlídal indexovatelnost `/` už v mazaném HomeLegacyPageTest —
+     * přestěhoval se sem, aby se s lešením neztratil.
+     */
+    public function test_public_pages_are_indexable(): void
+    {
+        foreach (['/', '/en/', '/de/'] as $url) {
+            $response = $this->get($url);
+
+            // OND-364: bez kontroly stavu je tenhle test lhář v obou směrech —
+            // s APP_DEBUG=true hlásí 500 jako chybějící meta tag, s APP_DEBUG=false
+            // 500 dokonce projde (errors/500.blade.php dědí layout, meta tam je).
+            // assertOk() si do zprávy vytáhne i výjimku z requestu.
+            $response->assertOk();
+
+            $this->assertStringContainsString(
+                '<meta name="robots" content="index, follow">',
+                $response->getContent(),
+                "Stránka {$url} není indexovatelná."
+            );
+        }
     }
 }

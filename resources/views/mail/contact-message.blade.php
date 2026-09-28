@@ -1,14 +1,16 @@
 @component('mail::message')
-# Nová zpráva z kontaktního formuláře
+# Nová poptávka z webu
 
-Přišla nová zpráva z webu {{ config('app.name') }} (`/kontakt`).
+Přišla nová poptávka z webu {{ config('app.name') }} (formulář: {{ \App\Mail\ContactMessage::sourceLabel($submission->source) }}).
 
 | Údaj | Hodnota |
 |---|---|
 | Jméno | {{ $submission->name }} |
 | E-mail | {{ $submission->email }} |
 | Telefon | {{ $submission->tel ?? '—' }} |
-| Předmět | {{ $submission->subject ?? '—' }} |
+@if ($submission->subject)
+| Předmět | {{ $submission->subject }} |
+@endif
 | Jazyk | {{ $submission->locale ?? '—' }} |
 | Čas | {{ $submission->created_at?->format('d.m.Y H:i:s') ?? now()->format('d.m.Y H:i:s') }} |
 | Lead ID | #{{ $submission->id }} |

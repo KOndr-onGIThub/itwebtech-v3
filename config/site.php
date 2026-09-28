@@ -23,31 +23,32 @@ return [
     | Per OND-101: Toyota testimonial (Pavel Baudyš) is held back until the
     | client confirms publication consent. The slot is wired in code; data
     | only renders when SHOW_TOYOTA_TESTIMONIAL=true.
+    |
+    | Per OND-352: show_portfolio_section now defaults to TRUE. The OND-100
+    | hold-back is long over (screenshots shipped in OND-268), and a false
+    | default meant one missing env var on a config-cache rebuild would silently
+    | drop the homepage portfolio section. Set SHOW_PORTFOLIO_SECTION=false to
+    | hide it deliberately.
     */
     'features' => [
-        'show_portfolio_section'  => env('SHOW_PORTFOLIO_SECTION', false),
+        'show_portfolio_section'  => env('SHOW_PORTFOLIO_SECTION', true),
         'show_toyota_testimonial' => env('SHOW_TOYOTA_TESTIMONIAL', false),
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | Booking widget (Reservanto)
+    | Záznamy živých webů v případovkách na homepage (OND-440, návrh 4)
     |--------------------------------------------------------------------------
-    | Per OND-102 (A3) / OND-116 (T15): sekundární CTA „Domluvit konzultaci"
-    | používá Reservanto widget napojený na existující CEO účet (15-min ZDARMA
-    | slot). Vypnutí: nastavit SITE_BOOKING_ENABLED=false.
+    | Klíč = slug projektu. Soubory leží v public/video/projekty/
+    | (`<slug>-desktop|mobile.webm|mp4|webp`), specifikace na OND-439.
+    | `recorded_at` se ukazuje v liště rámu — při přenahrání (zhruba jednou
+    | za čtvrt roku) se mění jen tady. Projekt, který tu chybí, zůstane
+    | u screenshotu.
     */
-    'booking' => [
-        'enabled'     => env('SITE_BOOKING_ENABLED', true),
-        'provider'    => env('SITE_BOOKING_PROVIDER', 'reservanto'),
-        'widget_id'   => env('SITE_BOOKING_WIDGET_ID', '20854'),
-        'resource_id' => env('SITE_BOOKING_RESOURCE_ID', '32112'),
-        'cta_text'    => env('SITE_BOOKING_CTA_TEXT', '15 min. konzultace ZDARMA'),
-        'script_url'  => 'https://booking.reservanto.cz/Script/reservanto-script.js?id=20854',
-        // OND-123: crawler-readable direct URL. Vendor skript injektuje <a> bez
-        // href → PSI SEO „Odkazy nelze procházet" → cíl ≥ 95 fail. JS patchne
-        // vendor anchor touhle URL (vendor click handler i tak otevře modal).
-        'direct_url'  => env('SITE_BOOKING_DIRECT_URL', 'https://booking.reservanto.cz/?Widget=20854'),
+    'live_recordings' => [
+        'pitarena'       => ['host' => 'pitarena.cz',      'recorded_at' => '2026-09-28'],
+        'barana'         => ['host' => 'barana.cz',        'recorded_at' => '2026-09-28'],
+        'nove-interiery' => ['host' => 'noveinteriery.cz', 'recorded_at' => '2026-09-28'],
     ],
 
     /*

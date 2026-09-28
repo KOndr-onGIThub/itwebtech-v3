@@ -3,7 +3,7 @@
 return [
 
     'meta' => [
-        'title'       => 'Privacy Policy — Ondřej Kriška',
+        'title'       => 'Privacy Policy — Ondřej Kriška, ONDRAWEB',
         'description' => 'Information about the processing of personal data on ondraweb.cz.',
     ],
 
@@ -32,7 +32,7 @@ return [
     // OND-284 — body rewritten into first person (audit finding OND-254).
     // Added Microsoft Clarity, attachments, IP/user agent, recipients,
     // legal basis and data subject rights; removed what the site does not do.
-    'content' =>'<p>Effective from 23 September 2026</p>
+    'content' =>'<p>Effective from 29 September 2026</p>
 
 <p>This website is run by me, Ondřej Kriška — Dunajovská 116, 691 81 Březí, Czech Republic, company ID 19231407. I have no team and no sales department, which also means I am the only person who ever sees your data. You can write to me any time at <a href="mailto:ok@ondraweb.cz">ok@ondraweb.cz</a>.</p>
 
@@ -73,7 +73,7 @@ return [
 
 <h3>And now the formal side of it</h3>
 <ul>
-<li>I process your message so that I can <strong>take steps towards the cooperation</strong> you asked me about (Art. 6(1)(b) GDPR) and on the basis of the <strong>consent</strong> you tick next to the form (Art. 6(1)(a)).</li>
+<li>I process your message so that I can <strong>take steps towards the cooperation</strong> you asked me about (Art. 6(1)(b) GDPR).</li>
 <li>I keep invoices and contracts because the <strong>law requires me to</strong> (Art. 6(1)(c)).</li>
 <li>I hold the IP address attached to a message on the basis of my <strong>legitimate interest</strong> in protecting the form from abuse (Art. 6(1)(f)).</li>
 <li>I switch analytics on only with <strong>your consent</strong> (Art. 6(1)(a)), and you can withdraw it at any time.</li>

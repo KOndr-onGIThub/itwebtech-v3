@@ -3,7 +3,7 @@
 return [
 
     'meta' => [
-        'title'       => 'Was ich gebaut habe | ONDRAWEB',
+        'title'       => 'Projekte — Ondřej Kriška, ONDRAWEB',
         'description' => 'Websites, Onlineshops und Webanwendungen, die ich gebaut habe und die heute laufen. Bei jedem führt ein Link zur Live-Version, damit Sie es selbst prüfen können.',
     ],
 
@@ -135,8 +135,10 @@ return [
             'Sie wollen keine weitere „schöne Website“, sondern etwas, das auf der realen Arbeitsweise Ihrer Firma aufbaut.',
         ],
         'cta_heading'   => 'Wenn 2+ Punkte passen, lohnt sich die Umsetzung jetzt.',
-        'cta_text'      => 'Im Erstgespräch definieren wir den kürzesten Weg zu einer funktionierenden Lösung ohne unnötige Extras.',
-        'cta_primary'   => 'Beratung buchen',
+        // OND-369: `cta_text` ist Prosa über den Ablauf — bleibt.
+        // Der Button führt auf /kontakt, spricht also wie der Header.
+        'cta_text'      => 'Schon im kurzen Erstgespräch sehen wir, ob und wie ich Ihnen helfen kann, ohne unnötige Extras.',
+        'cta_primary'   => 'Anfrage schreiben',
         'cta_secondary' => 'Zuerst Preise ansehen',
     ],
 
@@ -161,6 +163,12 @@ return [
         'no_content'      => 'Eine ausführliche Beschreibung zu diesem Projekt ist noch nicht verfügbar.',
         'related_heading' => 'Weitere Projekte',
         'visit_live'      => 'Live-Seite besuchen',
+        // OND-449 (B-05): blok za „Výsledkem“; věta z `live_hint` v DB, prázdná = default.
+        'live_heading'      => 'Live ausprobieren',
+        'live_hint_default' => 'Sie können die Website selbst durchgehen, sie öffnet sich in einem neuen Fenster.',
+        // OND-449 (B-09): řádek pod výsledkem, jen když je vyplněné `result_as_of` i `result_source`.
+        'result_source'      => 'Stand: :date. Quelle: :source.',
+        'result_date_format' => 'd.m.Y',
         'meta'            => [
             'client'   => 'Kunde',
             'year'     => 'Jahr',
@@ -186,7 +194,8 @@ return [
 
     'cta' => [
         'heading' => 'Möchten Sie ein ähnliches Ergebnis für Ihr Unternehmen?',
-        'primary' => 'Beratung buchen',
+        // OND-369: an den Header angeglichen — der Link zeigt auf /kontakt.
+        'primary' => 'Anfrage schreiben',
     ],
 
 ];

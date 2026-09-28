@@ -3,7 +3,7 @@
 return [
 
     'meta' => [
-        'title'       => 'Kontakt — Ondřej Kriška',
+        'title'       => 'Kontakt — Ondřej Kriška, ONDRAWEB',
         'description' => 'Rufen Sie an oder schreiben Sie und ich melde mich zurück. Kontaktformular, Telefon und Adresse.',
     ],
 
@@ -20,25 +20,19 @@ return [
     'email_label'         => 'E-Mail',
     'phone_label'         => 'Telefon',
     'hours_label'         => 'Verfügbarkeit',
-    'open_hours'          => 'Ich melde mich innerhalb von 24 Stunden an Arbeitstagen. An Wochenenden und Feiertagen halte ich keine Bereitschaft, aber nichts geht verloren.',
+    'open_hours'          => 'Ich melde mich spätestens am nächsten Arbeitstag. Wochenenden und Feiertage zählen nicht mit, aber nichts geht verloren.',
     'cta_consultation'    => 'Schreiben Sie mir',
 
+    // OND-448 (B-01): Felder, Button, Datenschutzhinweis und Bestätigung des Formulars
+    // stehen seit der Vereinheitlichung in `home.inline_form` — /kontakt rendert dasselbe `<x-lead-form>`.
     'form_heading'        => 'Kontaktformular',
-    'form_subheading'     => 'Erhalten Sie ein kostenloses, unverbindliches Angebot oder senden Sie eine Anfrage',
-    'name'                => 'Vollständiger Name',
-    'email'               => 'E-Mail-Adresse',
-    'tel'                 => 'Telefon (optional)',
-    'tel_hint'            => 'Mit Nummer melde ich mich schneller.',
-    'subject'             => 'Betreff',
-    'message'             => 'Ihre Nachricht',
-    'message_placeholder' => 'Beschreiben Sie kurz, was Sie benötigen, oder schreiben Sie, wann ich Sie anrufen soll ...',
-    'agree'               => 'Ich stimme der Verarbeitung meiner Daten gemäß der ',
-    'policy'              => 'Datenschutzerklärung',
-    'send'                => 'Nachricht senden',
-    'sending'             => 'Wird gesendet...',
+    // OND-371 — viz lang/cs/contact.php: „kostenlos“ jde pryč, termín odpovědi
+    // se neopakuje počtvrté, slovník drží krok 3 („Umfang, Termin, Preis“).
+    // Druhá věta je eliptická („oder eine Antwort“): plné „auf Ihre Frage“
+    // lámalo řádek se sirotkem „Ihre Frage.“ Takto 1 řádek, rezerva 45 px.
+    'form_subheading'     => 'Worum geht es? Ich melde mich persönlich und sage Ihnen, ob ich helfen kann.',
     'required'            => 'Bitte füllen Sie dieses Feld aus.',
     'enter_valid_email'   => 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
-    'policy_not_agreed'   => 'Sie haben der Datenschutzerklärung nicht zugestimmt.',
     'upload' => [
         'label'            => 'Dateien hinzufügen',
         'drag_text'        => '— oder hierher ziehen',
@@ -68,7 +62,7 @@ return [
         'heading_html'    => 'Kein CRM,<br>kein Callcenter — <em>nur Ondřej</em>.',
         'eyebrow'         => 'Sie schreiben mir direkt',
         'heading'         => 'Sie schreiben direkt an mich, Ondřej.',
-        'subline'         => 'Ich lese Ihre Nachricht persönlich. Ich melde mich innerhalb von 24 Stunden an Arbeitstagen.',
+        'subline'         => 'Ich lese Ihre Nachricht persönlich. Schreiben Sie mir heute, dann melde ich mich spätestens am :date.',
         'photo_alt'       => 'Ondřej Kriška — Autor dieser Website und Ihr Ansprechpartner',
         'role_label'      => 'Entwickler, Autor dieser Website, Ihr einziger Ansprechpartner',
     ],
@@ -78,26 +72,18 @@ return [
         'heading' => 'Drei Schritte — kein Marketing-Funnel.',
         'steps'   => [
             [
-                'title' => 'Ich melde mich innerhalb von 24 Stunden an Arbeitstagen',
-                'text'  => 'Sie erhalten eine E-Mail von mir persönlich, keine automatische Bestätigung. An Wochenenden und Feiertagen halte ich keine Bereitschaft — ich melde mich am ersten Arbeitstag.',
+                'title' => 'Ich melde mich spätestens am nächsten Arbeitstag',
+                'text'  => 'Sie erhalten eine E-Mail von mir persönlich, keine automatische Bestätigung. Wenn Sie am Freitagabend schreiben, melde ich mich am Montag.',
             ],
             [
-                'title' => 'Wir vereinbaren ein 30-minütiges Gespräch',
-                'text'  => 'Ein kurzes Telefon- oder Videogespräch — wir klären, ob eine Zusammenarbeit Sinn ergibt. Ohne Präsentation, ohne Folien, ohne Verkaufsdruck.',
+                'title' => 'Ein kurzes Erstgespräch',
+                'text'  => 'Etwa 15 Minuten am Telefon. Ich kläre, worum es geht, und sage Ihnen gleich, ob ich Ihnen helfen kann. Ohne Präsentation und ohne Verkaufsdruck.',
             ],
             [
-                'title' => 'Sie bekommen ein schriftliches Angebot',
-                'text'  => 'Innerhalb einer Woche schicke ich eine Spezifikation mit Umfang, Termin und genauem Preis. Was in der Spezifikation steht, steht auch auf der Rechnung.',
+                'title' => 'Wir vereinbaren das weitere Vorgehen',
+                'text'  => 'Wenn es Sinn ergibt, gehen wir die Details durch und ich schreibe eine Spezifikation mit Umfang, Termin und genauem Preis. Was in der Spezifikation steht, steht auch auf der Rechnung.',
             ],
         ],
-    ],
-
-    'thank_you' => [
-        'heading'      => 'Fertig, die Nachricht ist angekommen.',
-        'subline'      => 'Danke. Ich lese sie persönlich und melde mich innerhalb von 24 Stunden an Arbeitstagen.',
-        'next'         => 'In der Zwischenzeit können Sie sich meine Projekte ansehen oder die Preise lesen.',
-        'cta_projects' => 'Projekte',
-        'cta_price'    => 'Preise',
     ],
 
     'budget_label'   => 'Orientierendes Budget (optional)',

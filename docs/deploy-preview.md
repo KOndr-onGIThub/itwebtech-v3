@@ -175,6 +175,15 @@ Preview URL **nesmí** skončit v Googlu. Dva nezávislé guardy:
    `public/robots.preview.txt` (`Disallow: /`) a v Coolify build commandu
    přepsat `public/robots.txt` symbolicky pokud `APP_ENV=staging`.
 
+   > ⚠️ **OND-384**: `public/robots.txt` už neexistuje — `robots.txt` generuje
+   > `RobotsController` (routa) a nginx statiku servíruje **dřív** než Laravel.
+   > Vytvořením toho souboru se routa zastíní a `Sitemap:` se zafixuje na jednu
+   > doménu; přesně tak se stalo, že jsme crawlery posílali na Framerovu
+   > sitemapu. Test `RobotsTest::test_no_static_robots_txt_shadows_the_route`
+   > to failne. Preview `Disallow: /` řeš proto v controlleru (podmínka na
+   > `APP_ENV`/`APP_PREVIEW_NOINDEX`), ne statickým souborem — nebo si vystač
+   > s hlavičkou `X-Robots-Tag` z bodu 1, která je na tohle dostatečná.
+
 Pokud `APP_PREVIEW_NOINDEX=true` v env, middleware `app/Http/Middleware`
 emituje meta tag `<meta name="robots" content="noindex">` (TODO: implementace
 v rámci OND-141 follow-up tasku, pokud Jack potvrdí, že preview-per-branch
