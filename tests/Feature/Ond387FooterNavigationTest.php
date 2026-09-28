@@ -13,8 +13,8 @@ use Tests\TestCase;
  * podstránek, OND-379).
  *
  * Tři tvrzení, každé se dá porušit jinak:
- *  1. Na všech deseti stránkách (homepage + devět podstránek) ve všech třech
- *     jazycích je v patičce navigace se šesti odkazy a claim — a žádná
+ *  1. Na všech jedenácti stránkách (homepage + deset podstránek) ve všech třech
+ *     jazycích je v patičce navigace se sedmi odkazy a claim — a žádná
  *     předpatička ani tlačítko. Právní stránky jsou v seznamu schválně:
  *     OND-266 jim předpatičku přidal kvůli navigaci, a ta nesmí zmizet s ní.
  *  2. Navigace mluví jazykem stránky — aria-label i popisky z vlastního
@@ -27,7 +27,8 @@ class Ond387FooterNavigationTest extends TestCase
 {
     use RefreshDatabase;
 
-    private const NAV = ['home', 'projects', 'price', 'blog', 'about', 'contact'];
+    // OND-442: „Recenze“ za „Projekty“.
+    private const NAV = ['home', 'projects', 'reviews', 'price', 'blog', 'about', 'contact'];
 
     private const ARTICLE_SLUGS = [
         'cs' => 'kolik-stoji-webove-stranky',
@@ -64,7 +65,7 @@ class Ond387FooterNavigationTest extends TestCase
     private function pages(string $locale): array
     {
         $pages = [];
-        foreach (['home', 'about', 'contact', 'price', 'projects', 'blog', 'privacy', 'cookies'] as $name) {
+        foreach (['home', 'about', 'contact', 'price', 'projects', 'reviews', 'blog', 'privacy', 'cookies'] as $name) {
             $pages[$name] = lroute($name, $locale);
         }
         // `pitarena` je značka — slug je jazyk-neutrální ve všech locale.
@@ -112,7 +113,7 @@ class Ond387FooterNavigationTest extends TestCase
                 $this->assertSame(
                     array_map(fn ($r) => [lroute($r, $locale), trans("layout.nav.{$r}", [], $locale)], self::NAV),
                     array_map(fn ($l) => [html_entity_decode($l[1]), html_entity_decode($l[2])], $links),
-                    "Navigace v patičce na {$where} nemá šest odkazů ve správném pořadí a jazyce.",
+                    "Navigace v patičce na {$where} nemá sedm odkazů ve správném pořadí a jazyce.",
                 );
 
                 $this->assertStringContainsString(
