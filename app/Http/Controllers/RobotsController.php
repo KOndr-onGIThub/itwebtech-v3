@@ -26,6 +26,14 @@ class RobotsController extends Controller
      */
     public function __invoke(): Response
     {
+        // OND-459: testovací web (SEO_NOINDEX=true) zakáže vyhledávačům vše
+        // a sitemapu neinzeruje.
+        if (config('site.noindex')) {
+            return response("User-agent: *\nDisallow: /\n", 200, [
+                'Content-Type' => 'text/plain; charset=UTF-8',
+            ]);
+        }
+
         $sitemapUrl = route('sitemap');
 
         $body = <<<TXT
