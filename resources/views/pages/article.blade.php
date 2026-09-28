@@ -106,7 +106,7 @@
                     path="articles/{{ $translation->img_main }}"
                     alt="{{ $translation->title }}"
                     loading="lazy"
-                    sizes="(max-width: 767px) 100vw, 640px"
+                    sizes="(max-width: 767px) 100vw, 656px"
                 />
             </figure>
             @endif
@@ -119,7 +119,7 @@
                     path="articles/{{ $translation->img_mid }}"
                     alt="{{ $translation->img_mid_alt ?? '' }}"
                     loading="lazy"
-                    sizes="(max-width: 767px) 100vw, 640px"
+                    sizes="(max-width: 767px) 100vw, 656px"
                 />
             </figure>
             @endif
@@ -134,7 +134,7 @@
                     path="articles/{{ $translation->img_end }}"
                     alt="{{ $translation->img_end_alt ?? '' }}"
                     loading="lazy"
-                    sizes="(max-width: 767px) 100vw, 640px"
+                    sizes="(max-width: 767px) 100vw, 656px"
                 />
             </figure>
             @endif

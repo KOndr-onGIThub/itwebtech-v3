@@ -2298,6 +2298,24 @@
 .pd-page-head--article { padding-bottom: var(--space-4); }
 .pd-page-head--article + .pd-article { padding-top: 0; }
 
+/* OND-419 — na desktopu je článek jeden čtecí sloupec na střed: hlava,
+   tělo i závěr „Řešíte web…" na stejné ose. Dřív stál 37rem sloupec vlevo
+   v 1280px kontejneru a napravo zůstávalo 736 px prázdna (1440 px).
+   Šířka 41rem = 71–72 znaků na řádek (průměr plných řádků, pět článků,
+   po `fonts.ready`); 37rem dávalo 64–66. Užší je kontejner, ne text:
+   `max-width` + 2 × `padding-inline` (od 1024 px vždy 2rem), centruje
+   `margin-inline: auto` z `.container-site`. Právní stránky (`.pd-prose`
+   bez `.pd-article`) a mobil se nemění. */
+@media (min-width: 1024px) {
+    .pd-page-head--article > .container-site,
+    .pd-article > .container-site,
+    .pd-next[data-pdd="article-next"] > .container-site { max-width: calc(41rem + 4rem); }
+    .pd-article .pd-prose { max-width: none; }
+    /* Závěr ve sloupci 656 px: dva sloupce 5fr/7fr by titulky cest lámaly,
+       proto nadpis nad seznamem — stejně jako na mobilu. */
+    .pd-next[data-pdd="article-next"] .pd-split { grid-template-columns: minmax(0, 1fr); gap: var(--space-5); }
+}
+
 .pd-eyebrow__back {
     position: relative;
     color: inherit;
