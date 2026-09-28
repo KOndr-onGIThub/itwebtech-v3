@@ -75,8 +75,8 @@ class Ond449PortfolioTest extends TestCase
     public function test_result_source_line_sits_right_under_the_result_only_when_filled(): void
     {
         $expected = [
-            'cs' => 'Stav k 28. 9. 2026. Zdroj: Collabim (pozice), Google Search Console (návštěvy 16. 5. 2025 – 13. 9. 2026).',
-            'en' => 'As of 28 September 2026. Source: Collabim (rankings), Google Search Console (visits 16 May 2025 – 13 September 2026).',
+            'cs' => 'Stav k 28. 9. 2026. Zdroj: Collabim (pozice), Google Search Console (návštěvy 16. 5. 2025 – 13. 9. 2026).',
+            'en' => 'As of 28 September 2026. Source: Collabim (rankings), Google Search Console (visits 16 May 2025 – 13 September 2026).',
             'de' => 'Stand: 28.09.2026. Quelle: Collabim (Positionen), Google Search Console (Besuche 16.05.2025 – 13.09.2026).',
         ];
         $project = PortfolioProject::where('slug', 'pitarena')->firstOrFail();

@@ -1493,8 +1493,8 @@ return new class extends Migration
         'pitarena' => [
             'as_of' => '2026-09-28',
             'source' => [
-                'cs' => 'Collabim (pozice), Google Search Console (návštěvy 16. 5. 2025 – 13. 9. 2026)',
-                'en' => 'Collabim (rankings), Google Search Console (visits 16 May 2025 – 13 September 2026)',
+                'cs' => 'Collabim (pozice), Google Search Console (návštěvy 16. 5. 2025 – 13. 9. 2026)',
+                'en' => 'Collabim (rankings), Google Search Console (visits 16 May 2025 – 13 September 2026)',
                 'de' => 'Collabim (Positionen), Google Search Console (Besuche 16.05.2025 – 13.09.2026)',
             ],
         ],

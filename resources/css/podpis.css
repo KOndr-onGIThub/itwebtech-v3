@@ -2646,8 +2646,8 @@
 .pd-demo__screen video.is-ready { opacity: 1; }
 .pd-demo__toggle {
     position: absolute;
+    top: var(--space-3);                      /* dole na telefonu zakrývalo posuvník ukázky */
     right: var(--space-3);
-    bottom: var(--space-3);
     background: color-mix(in srgb, var(--color-bg-elev-1) 80%, transparent);
     color: var(--color-fg-primary);
 }

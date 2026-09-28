@@ -167,8 +167,9 @@ return [
         'live_heading'      => 'Try it live',
         'live_hint_default' => 'You can explore the website yourself; it opens in a new window.',
         // OND-449 (B-09): řádek pod výsledkem, jen když je vyplněné `result_as_of` i `result_source`.
+        // Ve formátu data jsou nezlomitelné mezery (U+00A0), datum se nesmí rozdělit na dva řádky.
         'result_source'      => 'As of :date. Source: :source.',
-        'result_date_format' => 'j F Y',
+        'result_date_format' => 'j F Y',
         'meta'            => [
             'client'   => 'Client',
             'year'     => 'Year',

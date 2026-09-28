@@ -83,7 +83,7 @@ projects:
         solution: "Navrhl jsem značku a postavil na míru web s nabídkou programů (akademie, zájmový kroužek, kempy a MX soustředění), půjčovnou, servisem a průvodci pro rodiče. Poukazy na jízdu vedou do e-shopu PitArena, který jsem postavil zvlášť. Když se web chytil, převedli jsme na něj i závody YCF Cup ze samostatného webu na Webnode. Tam byla přihláška a platba dva nepropojené kroky, výsledky jen v PDF a pronájem vycházel zhruba na 5 000 Kč ročně. Dnes má seriál vlastní systém: registrace s výpočtem ceny a platbou online, rezervace startovních čísel, správa objednávky přes odkaz v e-mailu, průběžné pořadí po každém závodě a profily více než 150 jezdců."
         result: "Na hledání „motokros pro děti“ a „motocross pro děti“ je web v Google první už od prvního roku a drží se tam dodnes. První je i na „ycf cup“ a „závody pitbike“, v Google i na Seznamu. Z Googlu na web přišlo přes 15 000 návštěv za 16 měsíců. Přihlášky, platby i výsledky závodů jsou na jednom místě pod značkou PitArena. Spolupráce pokračuje dodnes."
         live_hint: "Projděte si výsledky a profily jezdců YCF Cup."
-        result_source: "Collabim (pozice), Google Search Console (návštěvy 16. 5. 2025 – 13. 9. 2026)"
+        result_source: "Collabim (pozice), Google Search Console (návštěvy 16. 5. 2025 – 13. 9. 2026)"
         outcomes:
           - "Vlastní registrace na závody s platbou online"
           - "Programy, půjčovna, servis a průvodci pro rodiče na jednom webu"
@@ -99,7 +99,7 @@ projects:
         solution: "I designed the brand and built a custom website with the programmes (academy, youth club, camps and MX training weeks), rentals, service and guides for parents. Ride vouchers lead to the PitArena online shop, which I built separately. Once the site took off, we also moved the YCF Cup races onto it from a separate website on Webnode. There, registration and payment were two unconnected steps, results were only available as PDFs and the subscription came to roughly CZK 5,000 a year. Today the series has its own system: registration with price calculation and online payment, start number reservations, order management through a link in the e-mail, standings updated after every race and profiles of more than 150 riders."
         result: "For the searches “motokros pro děti” and “motocross pro děti” (Czech for “motocross for kids”), the site has been first on Google since its first year and still is today. It is also first for “ycf cup” and “závody pitbike” (pitbike races), on Google and on the Czech search engine Seznam. Google sent over 15,000 visits to the site in 16 months. Registrations, payments and race results are all in one place under the PitArena brand. The partnership continues today."
         live_hint: "Browse the YCF Cup results and rider profiles. The site is in Czech."
-        result_source: "Collabim (rankings), Google Search Console (visits 16 May 2025 – 13 September 2026)"
+        result_source: "Collabim (rankings), Google Search Console (visits 16 May 2025 – 13 September 2026)"
         outcomes:
           - "Its own race registration with online payment"
           - "Programmes, rentals, service and guides for parents on one website"
