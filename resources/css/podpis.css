@@ -366,6 +366,20 @@
     margin-right: var(--space-2);
 }
 .pd-situation__text { margin: var(--space-1) 0 var(--space-2); max-width: 46ch; }
+/* Mobil: věta a odkaz tečou v jednom odstavci. Odkaz na vlastním řádku
+   přidával ke každé položce řádek navíc a seznam vycházel na 390 px
+   o 340–381 px vyšší; rozpočet zadání je ~260 px. */
+@media (max-width: 1023px) {
+    .pd-situation__cases { margin-top: var(--space-5); gap: var(--space-4); }
+    .pd-situation__case { font-size: var(--text-body-sm); line-height: 1.45; }
+    .pd-situation__text { display: inline; }
+}
+/* Odkaz se nelámí: za větou stojí celý, nebo celý na dalším řádku
+   (osamělé „Jak“ na konci řádku četlo jako chyba). Nejdelší, en, má
+   ~330 px; pod 380 px by přetekl, tam se radši zalomí. */
+@media (min-width: 380px) and (max-width: 1023px) {
+    .pd-situation__link { white-space: nowrap; }
+}
 /* Text odkazu je vysoký ~17 px; neviditelný přesah z něj dělá cíl ~44 px
    jako u `.pd-strip__link`, sazba se nepohne. */
 .pd-situation__link { position: relative; }
