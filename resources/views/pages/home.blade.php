@@ -146,14 +146,36 @@
 
 {{-- ===================================================
      02 — SITUACE KLIENTA
-     Odstavec, ne sekce: bez nadpisu, bez tlačítka, tři věty.
-     Popis stavu, u kterého člověk kývne hlavou — proto tu není
-     ani jedna věta o tom, co tím ztrácí.
+     Odstavec, ne sekce: bez nadpisu, bez tlačítka. Jedna věta o tom,
+     kdo mi píše, a pod ní (OND-457, B-11 z OND-441) tři skutečné
+     příklady z portfolia jako doklad: jméno, obor, stav „před“ a odkaz
+     na případovku s výsledkem a recenzí. Bez obrázků (ty jsou v 04),
+     bez čar a podkladů (OND-394). Příklady chystá PageController::home;
+     pod dva publikované projekty se seznam nevykreslí vůbec.
+     Odkazy nemají `view-transition-name` (pravidla OND-438: related
+     odkazy beze jména).
      =================================================== --}}
 @if ($situationText)
 <section class="pd-section pd-situation">
     <div class="container-site">
         <p class="pd-lead pd-lead--wide">{{ $situationText }}</p>
+        @if (($situationCases ?? collect())->isNotEmpty())
+        <ul class="pd-situation__cases">
+            @foreach ($situationCases as $case)
+            <li class="pd-situation__case">
+                <p class="pd-situation__who"><strong class="pd-situation__name">{{ $case['name'] }}</strong> <span class="pd-situation__field">{{ $case['field'] }}</span></p>
+                <p class="pd-situation__text">{{ $case['text'] }}</p>
+                <a
+                    href="{{ $case['href'] }}"
+                    class="pd-case__cta pd-situation__link"
+                    aria-label="{{ __('home.situation.cases_link_aria', ['name' => $case['name']]) }}"
+                    data-analytics="situation_case_click"
+                    data-analytics-props='{"slug":"{{ $case['slug'] }}"}'
+                >{{ __('home.situation.cases_link') }}</a>
+            </li>
+            @endforeach
+        </ul>
+        @endif
     </div>
 </section>
 @endif

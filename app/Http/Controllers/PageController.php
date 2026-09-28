@@ -26,9 +26,34 @@ class PageController extends Controller
                 ->values();
         }
 
+        // OND-457 (B-11): tři příklady pod větou o klientech (`home.situation.cases`).
+        // Stejný princip jako odkazy u cenových úrovní (OND-359): projekt se
+        // načte jedním dotazem, adresa jde z `detailUrl()` a nepublikovaný
+        // nebo chybějící projekt se nevykreslí. Pod dva příklady zmizí celý
+        // seznam — jeden osamělý příklad by působil jako výjimka, ne vzorek.
+        $situationCases = collect();
+        $caseItems = __('home.situation.cases');
+
+        if (is_array($caseItems)) {
+            $caseProjects = PortfolioProject::published()
+                ->whereIn('slug', array_column($caseItems, 'slug'))
+                ->with('translations')
+                ->get()
+                ->keyBy('slug');
+
+            $situationCases = collect($caseItems)
+                ->filter(fn (array $case) => $caseProjects->has($case['slug']))
+                ->map(fn (array $case) => $case + ['href' => $caseProjects[$case['slug']]->detailUrl()])
+                ->values();
+
+            if ($situationCases->count() < 2) {
+                $situationCases = collect();
+            }
+        }
+
         // OND-231 (F3): prototypové větvení `?podpis=a|b|c|d` z OND-227 je pryč.
         // Vítězná varianta D („Studio" / ACID) je od F3 rovnou `pages.home`.
-        return view('pages.home', compact('featuredHomeProjects'));
+        return view('pages.home', compact('featuredHomeProjects', 'situationCases'));
     }
 
     public function about()
