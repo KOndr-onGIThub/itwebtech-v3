@@ -35,7 +35,7 @@
     <meta name="twitter:title"       content="{!! $metaTitle !!}">
     <meta name="twitter:description" content="{!! $metaDesc !!}">
     <meta name="twitter:image"       content="{{ $ogImage }}">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="{{ config('site.noindex') ? 'noindex, nofollow' : 'index, follow' }}">
     @php
         // OND-162 F4: canonical pro home musí mít trailing slash (web serveruje
         // `/` a `/en/`), aby seděla s hreflang URL z lroute('home', ...).

@@ -11,7 +11,7 @@
     <title>{!! $metaTitle !!}</title>
     <meta name="description" content="{!! $metaDesc !!}">
     <meta name="color-scheme" content="only dark">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="{{ config('site.noindex') ? 'noindex, nofollow' : 'index, follow' }}">
     <link rel="canonical" href="{{ url()->current() }}">
 
     <meta property="og:type" content="website">
