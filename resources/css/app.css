@@ -9,6 +9,8 @@
 /* OND-246 — hloubka (světlo / proud / vyzdvižení). Všechna pravidla jsou
    scopnutá pod `.pd--depth`, což je zatím jen domovská stránka. */
 @import './hloubka.css';
+/* OND-438 — plynulý přechod mezi stránkami (projekt → detail). */
+@import './prechody.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';

@@ -18,6 +18,8 @@
  *                                obsahuje `home_lead_success` (úspěšný POST).
  */
 
+import { whenActivated } from './prerender';
+
 const DEBUG = false; // zapnout pro console.log diagnostiku
 
 // Dedupe: stejný event jméno (bez props) nepošleme 2× během DEDUPE_MS okna.
@@ -182,10 +184,15 @@ function bindFormSuccess() {
 // ───────────────────────────────────────────────────────────────────────────
 function boot() {
     if (!isEnabled()) return;
-    bindClicks();
-    bindViews();
-    bindFaq();
-    bindFormSuccess();
+    // OND-438: v přednačtené stránce až po jejím otevření — jinak by
+    // `data-analytics-view` (např. case_study_view na detailu) odešel
+    // z návštěvy, která se nekonala.
+    whenActivated(() => {
+        bindClicks();
+        bindViews();
+        bindFaq();
+        bindFormSuccess();
+    });
 }
 
 if (document.readyState === 'loading') {

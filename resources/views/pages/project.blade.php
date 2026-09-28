@@ -55,7 +55,8 @@
 
 {{-- Hlavní vizuál navazuje na hlavu bez horního odsazení: titulek a obrázek
      jsou jedna věta („tady je to"). --}}
-<x-portfolio.detail-gallery :screenshots="$project->screenshots" part="lead" />
+<x-portfolio.detail-gallery :screenshots="$project->screenshots" part="lead"
+    :transition-name="project_transition_name($project->slug, 'img')" />
 
 <section class="pd-section" data-pdd="project-body">
     <div class="container-site">
@@ -83,7 +84,7 @@
         </header>
         <div class="pd-works">
             @foreach ($relatedProjects as $portfolioProject)
-                <x-portfolio.work :project="$portfolioProject" :locale="$locale" />
+                <x-portfolio.work :project="$portfolioProject" :locale="$locale" :transition="false" />
             @endforeach
         </div>
         <p class="pd-more"><a href="{{ lroute('projects') }}" class="pd-more__link">{{ __('home.portfolio.cta') }}</a></p>

@@ -45,7 +45,7 @@ class Ond403ProjectDetailTest extends TestCase
                 $label = "{$project->slug} ({$locale})";
 
                 $this->assertStringContainsString(
-                    '<h1 class="pd-heading pd-heading--sub">' . e($translation?->title ?? $project->slug) . '</h1>',
+                    '<h1 class="pd-heading pd-heading--sub" style="view-transition-name: ' . project_transition_name($project->slug, 'title') . '">' . e($translation?->title ?? $project->slug) . '</h1>',
                     $body,
                     "H1 {$label}."
                 );

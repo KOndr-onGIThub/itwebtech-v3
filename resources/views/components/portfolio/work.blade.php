@@ -2,6 +2,10 @@
     'project',
     'locale' => null,
     'eager'  => false,
+    // OND-438: náhled a titulek nesou jméno pro přechod do detailu. V „Další
+    // projekty" na detailu vypnuté — jinak by se karty spárovaly s kartami
+    // stránky, ze které člověk přišel, a při přechodu odletěly dolů z obrazovky.
+    'transition' => true,
 ])
 
 {{-- ============================================================
@@ -50,7 +54,7 @@
        aria-label="{{ $title }} — {{ __('projects.view_project') }}"
        data-analytics="project_card_click"
        data-analytics-props='{"slug":"{{ $project->slug }}"}'>
-        <div class="pd-work__visual">
+        <div class="pd-work__visual"@if ($transition) style="view-transition-name: {{ project_transition_name($project->slug, 'img') }}"@endif>
             @if ($hero)
                 <x-portfolio.screenshot
                     :path="$hero->path"
@@ -64,7 +68,7 @@
         <p class="pd-work__meta">
             {{ $category }}@if ($project->year) · {{ $project->year }}@endif @if ($showBrand)· {{ $brand }}@endif
         </p>
-        <h3 class="pd-work__title">{{ $title }}</h3>
+        <h3 class="pd-work__title"@if ($transition) style="view-transition-name: {{ project_transition_name($project->slug, 'title') }}"@endif>{{ $title }}</h3>
         @if ($text)
             <p class="pd-work__text">{{ $text }}</p>
         @endif
