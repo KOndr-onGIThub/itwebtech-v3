@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\DB;
  *         `excel-tools/gallery-3` („#VALUE!“).
  *   B-07b BARANA: nové snímky mají stejné cesty jako staré (`hero-1`, `gallery-1..3`),
  *         plakát je teď `gallery-4.png`, `gallery-5` z galerie pryč. Tady se mění jen
- *         popisky a mazání řádku; video zapíná sloupec `demo_video`.
+ *         popisky a mazání řádku; video zapíná sloupec `demo_video` (BARANA
+ *         a Kemp Veselka, galerie Veselky beze změny).
  *   B-09  PitArena: `result_as_of` + `result_source` (řádek „Stav k …“ pod výsledkem).
  *
  * Každá změna se provede, jen když v DB stojí přesně původní hodnota z produkce
@@ -38,7 +39,8 @@ return new class extends Migration
 
     /** Video pod prvním blokem galerie (B-07b): slug => základ jména v public/videos/portfolio */
     private const DEMO_VIDEOS = [
-        'barana' => 'barana-demo',
+        'barana'       => 'barana-demo',
+        'kemp-veselka' => 'kemp-veselka-demo',   // případovka balíčku „Prezentační web“ na /cenik (B-08)
     ];
 
     /** B-06: choccoboard — lead přehodit z přihlášení (`hero-1`) na přehled (`gallery-1`). */

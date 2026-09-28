@@ -192,6 +192,18 @@ class Ond449PortfolioTest extends TestCase
         $gallery = substr($flat, strpos($flat, 'data-pdd="project-gallery"'));
         $this->assertMatchesRegularExpression('#^[^>]*> <div class="container-site"> <figure class="pd-gallery__band">.*?</figure> <figure class="pd-gallery__band pd-demo" data-demo-video>#s', $gallery);
 
+        // Kemp Veselka (případovka ceníku): video pod prvním blokem galerie, galerie beze změny.
+        $veselka = $this->flat($this->get('/projekty/kemp-veselka')->assertOk()->getContent());
+        $this->assertSame(1, substr_count($veselka, 'data-demo-video'));
+        foreach (['kemp-veselka-demo.webm', 'kemp-veselka-demo.mp4', 'kemp-veselka-demo-mobile.webm', 'kemp-veselka-demo-mobile.mp4', 'kemp-veselka-demo-poster.jpg', 'kemp-veselka-demo-mobile-poster.jpg'] as $file) {
+            $this->assertStringContainsString('/videos/portfolio/' . $file . '?v=', $veselka, $file);
+        }
+        // První blok galerie = trojice karet (poslední je logo), video za ním, před pásem gallery-4.
+        $video = strpos($veselka, 'data-demo-video');
+        $this->assertGreaterThan(strpos($veselka, 'alt="Nové logo autokempu"'), $video);
+        $this->assertLessThan(strpos($veselka, 'projects/kemp-veselka/gallery-4') ?: strpos($veselka, 'Autokemp Veselka – sekce 4'), $video);
+        $this->assertSame(6, DB::table('portfolio_project_screenshots')->where('project_id', PortfolioProject::where('slug', 'kemp-veselka')->value('id'))->count());
+
         // Video je jen tam, kde ho zapínají data.
         $this->assertStringNotContainsString('data-demo-video', $this->get('/projekty/pitarena')->getContent());
         PortfolioProject::where('slug', 'barana')->update(['demo_video' => null]);

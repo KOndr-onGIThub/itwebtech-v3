@@ -1419,6 +1419,7 @@ projects:
     live_url: https://kempveselka.cz/
     year: 2024
     duration: "několik týdnů"
+    demo_video: kemp-veselka-demo
     featured: false
     sort_order: 90
     tags: [web, redesign, branding, logo, single-page, ubytovani]
