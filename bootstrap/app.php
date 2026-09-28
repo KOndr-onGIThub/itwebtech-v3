@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\RedirectLegacyHost;
 use App\Http\Middleware\SetLocale;
 use Bepsvpt\SecureHeaders\SecureHeadersMiddleware;
 use Illuminate\Foundation\Application;
@@ -28,6 +29,10 @@ return Application::configure(basePath: dirname(__DIR__))
             | Request::HEADER_X_FORWARDED_PROTO
             | Request::HEADER_X_FORWARDED_AWS_ELB
         );
+
+        // OND-455: staré domény → 301 na kanonický host. Za trustProxies
+        // (host z X-Forwarded-Host), ale pořád před routováním.
+        $middleware->append(RedirectLegacyHost::class);
 
         // Globální security headers (HSTS, X-Frame-Options, X-Content-Type-Options,
         // Referrer-Policy, Permissions-Policy, …). Override defaultů v config/secure-headers.php.
