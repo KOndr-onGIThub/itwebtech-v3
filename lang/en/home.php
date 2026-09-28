@@ -103,8 +103,23 @@ return [
     // recognises themselves in it and nothing is put in their mouth.
     // Keep it to one rendered line (`.pd-lead--wide`, 52ch): 70 characters
     // fit, from roughly 74 it wraps.
+    //
+    // OND-457 (B-11 from OND-441): three real portfolio examples below the
+    // sentence. Wording by the Content Writer (document `texty` on OND-456);
+    // each line describes only the "before" state from the case study's
+    // Challenge section. `slug` points at the project in the DB, the URL comes
+    // from `detailUrl()`; an unpublished project is skipped and with fewer than
+    // two examples the whole list disappears (PageController::home).
+    // `name` is not translated. Key shape is identical in all three locales.
     'situation' => [
-        'text' => 'Most who write to me are doing well — the website stopped keeping up.',
+        'text'  => 'Most who write to me are doing well — the website stopped keeping up.',
+        'cases' => [
+            ['slug' => 'cyklocentrum', 'name' => 'Cyklocentrum Březí', 'field' => 'bike rental and service',         'text' => 'They were well regarded offline, and the old site hurt that.'],
+            ['slug' => 'vp-industry',  'name' => 'VP Industry',        'field' => 'industrial marking manufacturer', 'text' => 'They wanted long-term growth, and the old site wasn\'t up to it.'],
+            ['slug' => 'kemp-veselka', 'name' => 'Autokemp Veselka',   'field' => 'family campsite',                 'text' => 'Guests decide on the go, and the old site wasn\'t mobile-ready.'],
+        ],
+        'cases_link'      => 'How it turned out and what the client says →',
+        'cases_link_aria' => 'How it turned out and what the client says: :name case study',
     ],
 
     'how_i_work' => [

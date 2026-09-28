@@ -96,8 +96,23 @@ return [
     // sich das als Anrede, also genau die Perspektive, die hier wegsollte.
     // Der Absatz muss einzeilig bleiben (`.pd-lead--wide`, 52ch): 70 Zeichen
     // passen, ab ~74 bricht die Zeile um.
+    //
+    // OND-457 (B-11 aus OND-441): drei echte Beispiele aus dem Portfolio unter
+    // dem Satz. Wortlaut vom Content Writer (Dokument `texty` auf OND-456);
+    // jede Zeile beschreibt nur den Zustand „vorher“ aus der Herausforderung
+    // der Case Study. `slug` zeigt auf das Projekt in der DB, die URL liefert
+    // `detailUrl()`; ein unveröffentlichtes Projekt entfällt, unter zwei
+    // Beispielen entfällt die ganze Liste (PageController::home).
+    // `name` wird nicht übersetzt. Die Schlüssel sind in allen drei Sprachen gleich.
     'situation' => [
-        'text' => 'Meist schreiben mir Leute, denen es gut läuft — nur die Website nicht.',
+        'text'  => 'Meist schreiben mir Leute, denen es gut läuft — nur die Website nicht.',
+        'cases' => [
+            ['slug' => 'cyklocentrum', 'name' => 'Cyklocentrum Březí', 'field' => 'Fahrradverleih und Service', 'text' => 'Offline hatten sie einen guten Ruf, die alte Website schadete ihm.'],
+            ['slug' => 'vp-industry',  'name' => 'VP Industry',        'field' => 'Industriekennzeichnung',     'text' => 'Sie wollten langfristig wachsen, die alte Website reichte dafür nicht.'],
+            ['slug' => 'kemp-veselka', 'name' => 'Autokemp Veselka',   'field' => 'Familien-Campingplatz',      'text' => 'Gäste entscheiden am Handy, die alte Website war nicht mobiltauglich.'],
+        ],
+        'cases_link'      => 'Wie es ausging und was der Kunde sagt →',
+        'cases_link_aria' => 'Wie es ausging und was der Kunde sagt: Case Study :name',
     ],
 
     'how_i_work' => [

@@ -108,8 +108,22 @@ return [
     // roste, nemá problém. Stejné pravidlo platí pro en i de. Odstavec se
     // má vejít na jeden vykreslený řádek (`.pd-lead--wide`, 52 ch): 70 znaků
     // projde, zhruba od 74 se zalomí.
+    //
+    // OND-457 (B-11 z OND-441): pod větou stojí tři skutečné příklady z portfolia.
+    // Znění dodal Content Writer (dokument `texty` na OND-456), věty popisují
+    // jen stav „před“ podle sekce „Výzva“ dané případovky. `slug` míří na
+    // projekt v DB, adresu skládá `detailUrl()`; nepublikovaný projekt se
+    // nevykreslí a pod dva příklady zmizí celý seznam (PageController::home).
+    // `name` se nepřekládá. Tvar klíčů je ve všech třech jazycích stejný.
     'situation' => [
-        'text' => 'Nejčastěji mi píšou lidi, kterým se daří a web jim přestal stačit.',
+        'text'  => 'Nejčastěji mi píšou lidi, kterým se daří a web jim přestal stačit.',
+        'cases' => [
+            ['slug' => 'cyklocentrum', 'name' => 'Cyklocentrum Březí', 'field' => 'půjčovna a servis kol',        'text' => 'Dobrou pověst měli mezi lidmi, starý web jim ji kazil.'],
+            ['slug' => 'vp-industry',  'name' => 'VP Industry',        'field' => 'výrobce průmyslového značení', 'text' => 'Chtěli dlouhodobě růst a starý web na to nestačil.'],
+            ['slug' => 'kemp-veselka', 'name' => 'Autokemp Veselka',   'field' => 'rodinný kemp',                 'text' => 'Hosté se rozhodují v mobilu, starý web se na něj nehodil.'],
+        ],
+        'cases_link'      => 'Jak to dopadlo a co říká klient →',
+        'cases_link_aria' => 'Jak to dopadlo a co říká klient: případovka :name',
     ],
 
     // OND-308: `cta_label` („Domluvit konzultaci") zrušený — vedl na
