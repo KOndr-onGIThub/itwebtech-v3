@@ -32,7 +32,9 @@ return [
         'upline'          => 'Für Unternehmen, die wachsen.',
         'heading_html'    => 'Eine Website, die <em>trägt</em>, was bei Ihnen gut läuft.',
         'subline'         => 'Ich bin Ondřej Kriška. Websites und Anwendungen baue ich mit eigenem Code, und ich mache die Arbeit selbst — vom ersten Gespräch bis zum Start sprechen Sie nur mit mir.',
-        'note'            => 'Ich melde mich spätestens am nächsten Arbeitstag. Unverbindlich besprechen wir, was sinnvoll ist.',
+        // OND-437 (Vorschlag 1 aus OND-429): ein konkreter Tag statt „am
+        // nächsten Arbeitstag“. `:date` setzt App\Support\ReplyDate ein.
+        'note'            => 'Schreiben Sie mir heute, dann melde ich mich spätestens am :date. Unverbindlich besprechen wir, was sinnvoll ist.',
 
         // Backwards compat (fallback render).
         // OND-308: `cta_secondary` und `phone_label` entfernt — seit OND-303
@@ -50,8 +52,8 @@ return [
 
     'social_proof' => [
         // OND-315: `rating_aria` beschreibt nur die Bewertung und steht darum
-        // an dieser einen Zahl — im Streifen stehen auch Projekte, Jahre,
-        // Antwortzeit und Auszeichnung. Landmark-Label: `strip_aria`.
+        // an dieser einen Zahl — im Streifen stehen auch Projekte, Jahre
+        // und Auszeichnung (Antwortzeit entfernt in OND-437). Landmark-Label: `strip_aria`.
         'rating_aria'  => 'Bewertung 5 von 5',
         'strip_aria'   => 'Zahlen zu meiner Arbeit',
         'clients_aria' => 'Kunden',
@@ -59,7 +61,6 @@ return [
         'reviews'      => '(26 Bewertungen auf Google und Firmy.cz)',
         'projects'     => '23+ realisierte Projekte',
         'experience'   => '18 Jahre Erfahrung',
-        'response'     => 'Antwort spätestens am nächsten Arbeitstag',
         // OND-201 (Befund 5.11): Auszeichnung TOP firma 2025 von Firmy.cz —
         // überprüfbarer Nachweis Dritter, der auf Staging fehlte.
         'award'        => 'TOP firma 2025 auf Firmy.cz',
@@ -375,7 +376,7 @@ return [
     'inline_form' => [
         'eyebrow'         => 'Anfrage',
         'heading'         => 'Schreiben Sie mir, was Sie brauchen',
-        'description'     => 'Beschreiben Sie kurz, worum es geht. Ich melde mich spätestens am nächsten Arbeitstag und wir gehen unverbindlich durch, was Sinn ergibt. Wenn wir nicht zusammenpassen, sage ich es Ihnen geradeheraus.',
+        'description'     => 'Beschreiben Sie kurz, worum es geht. Wenn Sie heute absenden, melde ich mich spätestens am :date und wir gehen unverbindlich durch, was Sinn ergibt. Falls wir nicht zusammenpassen, sage ich es Ihnen geradeheraus.',
         'quote_text'      => 'Er handelt schnell und effizient. Für mich war das ein großer Unterschied zum vorherigen IT-Dienstleister.',
         'quote_ref'       => 'ivo-stepanek',
         'name'            => 'Vor- und Nachname',
@@ -394,7 +395,22 @@ return [
         'note'            => 'Oder schreiben Sie mir an ok@ondraweb.cz. Ich antworte persönlich, nicht über einen Formular-Roboter.',
         'privacy_prefix'  => 'Mit dem Absenden stimmen Sie der Verarbeitung personenbezogener Daten gemäß den ',
         'privacy_link'    => 'Datenschutzrichtlinien zu',
-        'success'         => 'Danke, die Anfrage ist eingegangen. Ich melde mich so schnell wie möglich.',
+        // OND-437 (Vorschlag 2 aus OND-429): Bestätigung statt Formular nach dem
+        // Absenden. `:received` = Zeitpunkt der Speicherung, `:date` = ReplyDate,
+        // `:email` aus dem Formular. /kontakt liest `reply`, `more`, `more_article` mit.
+        'confirmation' => [
+            'stamp'        => 'Anfrage eingegangen · :received',
+            'heading'      => 'Danke. Ihre Anfrage ist bei mir.',
+            'reply'        => 'Ich antworte spätestens am :date persönlich an :email. Mehr müssen Sie jetzt nicht tun.',
+            'steps_aria'   => 'Wie es weitergeht',
+            'steps'        => [
+                ['label' => 'Beratung', 'text' => 'Innerhalb einer Woche telefonieren wir oder treffen uns, etwa eine Stunde, und gehen durch, was die Website leisten soll.'],
+                ['label' => 'Spezifikation', 'text' => '2–5 Tage nach der Beratung bekommen Sie schriftlich, was auf der Website steht und was sie kostet.'],
+                ['label' => 'Entscheidung', 'text' => 'Sie entscheiden erst, wenn die fertige Spezifikation vor Ihnen liegt. Bis dahin verpflichtet Sie nichts.'],
+            ],
+            'more'         => 'Bis ich mich melde, können Sie nachlesen, :article_link.',
+            'more_article' => 'welche neun Fragen Sie vor dem Website-Projekt klären sollten',
+        ],
         'error'           => 'Die Anfrage konnte gerade nicht gespeichert werden. Bitte versuchen Sie es erneut.',
     ],
 
@@ -406,4 +422,18 @@ return [
         'phone'  => 'Anrufen',
     ],
 
+    // OND-437: wie der Antworttag (`:date`) und der Eingang (`:received`) geschrieben
+    // werden. Setzt App\Support\ReplyDate in Europe/Prague ein. Schlüssel 1–5 =
+    // Montag–Freitag, ein Wochenende kommt nie vor.
+    'reply_date' => [
+        'weekdays' => [
+            1 => 'Montag',
+            2 => 'Dienstag',
+            3 => 'Mittwoch',
+            4 => 'Donnerstag',
+            5 => 'Freitag',
+        ],
+        'date'     => ':weekday, :day.:month.',
+        'received' => ':day.:month., :time Uhr',
+    ],
 ];

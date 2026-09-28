@@ -40,7 +40,9 @@ return [
         // the extra line, so the rule against semicolons inside a sentence
         // (spec rule 5) wins. Re-measure before growing this sentence again.
         'subline'         => 'I am Ondřej Kriška. I build websites and applications on my own code and work on them alone. I price the job before we start, and I\'m rated 5.0 from 26 ratings on Google and Firmy.cz.',
-        'note'            => 'I\'ll get back to you by the next business day. No commitment, we just go through what makes sense.',
+        // OND-437 (proposal 1 of OND-429): a concrete day replaces "the next
+        // business day". `:date` is filled in by App\Support\ReplyDate.
+        'note'            => 'Write to me today and I\'ll get back to you by :date. No commitment, we just go through what makes sense.',
 
         // Backwards compat (fallback render).
         'eyebrow'       => 'Custom websites & web applications',
@@ -58,8 +60,8 @@ return [
 
     'social_proof' => [
         // OND-315: `rating_aria` describes the rating alone, so it sits on that
-        // one figure — the strip also holds projects, years, reply time and an
-        // award. The landmark label for the whole strip is `strip_aria`.
+        // one figure — the strip also holds projects, years and an award
+        // (reply time left the strip in OND-437). The landmark label for the whole strip is `strip_aria`.
         'rating_aria'  => '5 out of 5 rating',
         'strip_aria'   => 'Numbers about my work',
         'clients_aria' => 'Clients',
@@ -67,7 +69,6 @@ return [
         'reviews'      => '(26 ratings on Google and Firmy.cz)',
         'projects'     => '23+ delivered projects',
         'experience'   => '18 years of experience',
-        'response'     => 'Reply by the next business day',
         // OND-201 (finding 5.11): TOP firma 2025 award from Firmy.cz —
         // verifiable third-party proof that was missing on staging.
         'award'        => 'TOP firma 2025 on Firmy.cz',
@@ -374,7 +375,7 @@ return [
     'inline_form' => [
         'eyebrow'         => 'Enquiry',
         'heading'         => 'Tell me what you need',
-        'description'     => 'Describe briefly what you are dealing with. I\'ll get back to you by the next business day and we will go through what makes sense, with no obligation. If we turn out not to be a fit, I will tell you straight.',
+        'description'     => 'Describe briefly what you are dealing with. If you send it today, I\'ll get back to you by :date and we will go through what makes sense, with no obligation. If we turn out not to be a fit, I will tell you straight.',
         'quote_text'      => 'He acts fast and efficiently. For me it was a big difference compared with my previous IT supplier.',
         'quote_ref'       => 'ivo-stepanek',
         'name'            => 'Full name',
@@ -393,7 +394,22 @@ return [
         'note'            => 'Or email me at ok@ondraweb.cz. I reply personally, not through a form robot.',
         'privacy_prefix'  => 'By submitting you agree to processing of personal data in line with the ',
         'privacy_link'    => 'privacy policy',
-        'success'         => 'Thanks, the enquiry has arrived. I\'ll get back to you as soon as possible.',
+        // OND-437 (proposal 2 of OND-429): confirmation replaces the form after
+        // submit. `:received` = time the enquiry was stored, `:date` = ReplyDate,
+        // `:email` from the form. /contact reads `reply`, `more` and `more_article` too.
+        'confirmation' => [
+            'stamp'        => 'Enquiry received · :received',
+            'heading'      => 'Thank you. Your enquiry is with me.',
+            'reply'        => 'I\'ll get back to you personally at :email by :date. There is nothing else you need to do now.',
+            'steps_aria'   => 'What happens next',
+            'steps'        => [
+                ['label' => 'Consultation', 'text' => 'Within a week we talk on the phone or meet, for about an hour, and go through what the website has to do.'],
+                ['label' => 'Specification', 'text' => '2–5 days after the consultation you get it in writing: what will be on the website and what it will cost.'],
+                ['label' => 'Decision', 'text' => 'You decide once the finished specification is in front of you. Until then nothing commits you.'],
+            ],
+            'more'         => 'Before I get back to you, you can read :article_link.',
+            'more_article' => 'how to prepare for a new website',
+        ],
         'error'           => 'The enquiry could not be saved right now. Please try again.',
     ],
 
@@ -405,4 +421,18 @@ return [
         'phone'  => 'Call',
     ],
 
+    // OND-437: how the reply day (`:date`) and time received (`:received`) are
+    // written. Filled in by App\Support\ReplyDate in Europe/Prague. Keys 1–5 =
+    // Monday–Friday, a weekend never comes out. Spaces inside the date are U+00A0.
+    'reply_date' => [
+        'weekdays' => [
+            1 => 'Monday',
+            2 => 'Tuesday',
+            3 => 'Wednesday',
+            4 => 'Thursday',
+            5 => 'Friday',
+        ],
+        'date'     => ':weekday :day :month_name',
+        'received' => ':day :month_name, :time Prague time',
+    ],
 ];

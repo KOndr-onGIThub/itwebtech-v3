@@ -142,6 +142,7 @@ Alpine.data('fileDropZone', ({
 Alpine.data('contactForm', ({ genericError = '' } = {}) => ({
     loading: false,
     submitted: false,
+    confirmation: '',
     errors: {},
     formError: '',
 
@@ -161,22 +162,32 @@ Alpine.data('contactForm', ({ genericError = '' } = {}) => ({
         this.formError = '';
 
         try {
-            await window.axios.post('/contact', data);
+            const response = await window.axios.post('/contact', data);
 
             // OND-137 P4 §6: analytics form_submit event (Jack §6) — dispatch
             // CustomEvent který analytics.js přemapuje na canonical `form_submit`.
             window.dispatchEvent(new CustomEvent('contact-form-submit-success'));
 
             // OND-136: in-DOM thank-you state replaces the form on success.
+            // OND-437: potvrzení vykreslil server (`confirmation` v odpovědi).
+            this.confirmation = response.data?.confirmation ?? '';
             this.submitted = true;
+            // Spodní mobilní lišta s poptávkou po odeslání zmizí (podpis.css).
+            document.body.classList.add('is-lead-sent');
             form.reset();
             // Notify all file drop zones to reset their state
             form.querySelectorAll('[x-data]').forEach(el => {
                 el.dispatchEvent(new CustomEvent('file-drop:reset'));
             });
             // Scroll the thanks block into view for visibility.
+            // OND-437: fokus na potvrzení (`role="status"`), ať ho čtečka přečte.
+            // `x-show` blok zobrazí až v dalším snímku (requestAnimationFrame),
+            // na skrytý prvek by fokus nepřešel — proto až v rAF.
             this.$nextTick(() => {
                 this.$root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                requestAnimationFrame(() => {
+                    this.$root.querySelector('[data-lead-confirmation]')?.focus({ preventScroll: true });
+                });
             });
 
         } catch (err) {

@@ -136,7 +136,10 @@
                     <x-icon.arrow-right class="w-4 h-4 shrink-0 pd-cta__arrow" />
                 </a>
             </div>
-            <p class="pd-note">{{ __('home.hero.note') }}</p>
+            {{-- OND-437 (návrh 1): konkrétní den odpovědi místo lhůty, spočítaný
+                 při vykreslení (App\Support\ReplyDate). Text se escapuje,
+                 datum dostane `<strong class="pd-date">`. --}}
+            <p class="pd-note">{!! \App\Support\ReplyDate::sentence('home.hero.note', \App\Support\ReplyDate::date()) !!}</p>
         </div>
     </div>
 </section>
@@ -177,7 +180,6 @@
             <li><a href="{{ lroute('reviews') }}" class="pd-strip__link"><strong aria-hidden="true">{{ __('home.social_proof.rating_value') }}</strong><span class="sr-only">{{ __('home.social_proof.rating_aria') }}</span> {{ __('home.social_proof.reviews') }}</a></li>
             <li><strong>{{ __('home.social_proof.projects') }}</strong></li>
             <li><strong>{{ __('home.social_proof.experience') }}</strong></li>
-            <li>{{ __('home.social_proof.response') }}</li>
             <li>{{ __('home.social_proof.award') }}</li>
         </ul>
 
@@ -578,7 +580,7 @@
 
         <div class="pd-form">
             <div class="pd-form__intro">
-                <p class="pd-intro">{{ __('home.inline_form.description') }}</p>
+                <p class="pd-intro">{!! \App\Support\ReplyDate::sentence('home.inline_form.description', \App\Support\ReplyDate::date()) !!}</p>
                 <blockquote class="pd-form__quote">
                     {{ $quoteOpen }}{{ __('home.inline_form.quote_text') }}{{ $quoteClose }}
                     @if ($formPerson = $personBy(__('home.inline_form.quote_ref')))
@@ -588,12 +590,19 @@
             </div>
 
             <div class="pd-form__panel">
+                {{-- OND-437 (návrh 2): po odeslání potvrzení MÍSTO formuláře, ne
+                     zelená hláška nad prázdným formulářem. Chybový stav níž se
+                     nemění. --}}
                 @if (session('home_lead_success'))
-                    <div class="pd-alert pd-alert--success" role="status">
-                        {{ __('home.inline_form.success') }}
-                    </div>
-                @endif
-
+                    @include('partials.lead-confirmation', [
+                        'stampKey'   => 'home.inline_form.confirmation.stamp',
+                        'headingKey' => 'home.inline_form.confirmation.heading',
+                        'headingTag' => 'h3',
+                        'email'      => (string) session('home_lead_email'),
+                        'receivedAt' => \Illuminate\Support\Carbon::parse(session('home_lead_received') ?? now()),
+                        'steps'      => true,
+                    ])
+                @else
                 @if ($errors->any())
                     <div class="pd-alert pd-alert--error" role="alert">
                         {{ $errors->first() }}
@@ -685,6 +694,7 @@
                         {{ __('home.inline_form.privacy_prefix') }}<a href="{{ lroute('privacy') }}">{{ __('home.inline_form.privacy_link') }}</a>.
                     </p>
                 </form>
+                @endif
             </div>
         </div>
     </div>
@@ -764,12 +774,14 @@
 
     // Po submitu formuláře (redirect back()) doskrolovat k výsledku
     // a ohlásit konverzi analytics vrstvě (viz resources/js/analytics.js).
+    // OND-437: po úspěchu jde na potvrzení i fokus (čtečka ho přečte).
     document.addEventListener('DOMContentLoaded', function () {
         @if ($errors->any() || session('home_lead_success'))
         document.getElementById('{{ __('home.anchors.poptavka') }}')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         @endif
 
         @if (session('home_lead_success'))
+        document.querySelector('[data-lead-confirmation]')?.focus({ preventScroll: true });
         window.dispatchEvent(new CustomEvent('inline-form-submit-success'));
         @endif
     });

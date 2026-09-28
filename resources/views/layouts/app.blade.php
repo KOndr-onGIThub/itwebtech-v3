@@ -142,11 +142,15 @@
          config/site.php (ANALYTICS_ENABLED + provider envs). --}}
     @include('partials.analytics')
 </head>
-<body class="min-h-screen flex flex-col">
+<body @class(['min-h-screen flex flex-col', 'is-lead-sent' => session('home_lead_success')])>
 
     <x-layout.navbar :hreflangs="$hreflangs ?? []" />
 
-    {{-- Mobile bottom bar (OND-100, T06) — viditelná akce na mobilu --}}
+    {{-- Mobile bottom bar (OND-100, T06) — viditelná akce na mobilu.
+         OND-437: na odpovědi po odeslání poptávky se nevykresluje — výzva
+         „Poptávka" pod potvrzením by zvala poslat ji znovu. `is-lead-sent`
+         na <body> vrací odsazení pro lištu (podpis.css). --}}
+    @unless (session('home_lead_success'))
     @php
         $stickyPoptavkaHref = current_page() === 'home'
             ? '#' . __('home.anchors.poptavka')
@@ -158,11 +162,11 @@
             class="mobile-bottom-bar__primary"
             data-analytics="sticky_cta_click"
         >
-            <span aria-hidden="true" class="mobile-bottom-bar__icon">💬</span>
             <span>{{ __('home.sticky.mobile') }}</span>
         </a>
         <x-phone-cta class="mobile-bottom-bar__phone" />
     </div>
+    @endunless
 
     <main class="site-main">
         @yield('content')

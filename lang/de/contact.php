@@ -72,7 +72,7 @@ return [
         'heading_html'    => 'Kein CRM,<br>kein Callcenter — <em>nur Ondřej</em>.',
         'eyebrow'         => 'Sie schreiben mir direkt',
         'heading'         => 'Sie schreiben direkt an mich, Ondřej.',
-        'subline'         => 'Ich lese Ihre Nachricht persönlich. Ich melde mich spätestens am nächsten Arbeitstag.',
+        'subline'         => 'Ich lese Ihre Nachricht persönlich. Schreiben Sie mir heute, dann melde ich mich spätestens am :date.',
         'photo_alt'       => 'Ondřej Kriška — Autor dieser Website und Ihr Ansprechpartner',
         'role_label'      => 'Entwickler, Autor dieser Website, Ihr einziger Ansprechpartner',
     ],
@@ -97,11 +97,10 @@ return [
     ],
 
     'thank_you' => [
-        'heading'      => 'Fertig, die Nachricht ist angekommen.',
-        'subline'      => 'Danke. Ich lese sie persönlich und melde mich spätestens am nächsten Arbeitstag.',
-        'next'         => 'In der Zwischenzeit können Sie sich meine Projekte ansehen oder die Preise lesen.',
-        'cta_projects' => 'Projekte',
-        'cta_price'    => 'Preise',
+        // OND-437: Der Satz mit Datum und E-Mail ist `home.inline_form.confirmation.reply`,
+        // der Artikel-Link `…confirmation.more` — gleicher Wortlaut wie auf der Startseite.
+        'stamp'   => 'Nachricht eingegangen · :received',
+        'heading' => 'Danke. Ihre Nachricht ist bei mir.',
     ],
 
     'budget_label'   => 'Orientierendes Budget (optional)',
