@@ -21,18 +21,19 @@ class Ond455LegacyRedirectsTest extends TestCase
 
     /** Stará cesta → cíl. Deset adres ze zadání + `delejme-animace` z navigace itwebtech.cz + Framer `/dekuji`. */
     private const LEGACY_PATHS = [
-        '/sluzby'                            => '/#section-services',
-        '/projekty/zoomorava'                => '/projekty',
-        '/projects/clanek-na-motorkari-cz'   => '/projekty/clanek-motorkari-cz',
-        '/projects/FRLcreator'               => '/projekty/frl-creator',
-        '/projects/kempveselka'              => '/projekty/kemp-veselka',
-        '/projects/logo-realitacky'          => '/projekty',
-        '/projects/pitarena-akademie-202308' => '/projekty/pitarena',
-        '/projects/pitarena-reklamni-cedule' => '/projekty/pitarena-cedule',
-        '/projects/strechyzajic'             => '/projekty/strechy-zajic',
-        '/projects/vpindustry'               => '/projekty/vp-industry',
-        '/projects/delejme-animace'          => '/projekty',
-        '/dekuji'                            => '/',
+        '/sluzby'                            => ['/#section-services', 301],
+        // Případovka zatím na webu není → dočasně (302) na výpis.
+        '/projekty/zoomorava'                => ['/projekty', 302],
+        '/projects/clanek-na-motorkari-cz'   => ['/projekty/clanek-motorkari-cz', 301],
+        '/projects/FRLcreator'               => ['/projekty/frl-creator', 301],
+        '/projects/kempveselka'              => ['/projekty/kemp-veselka', 301],
+        '/projects/logo-realitacky'          => ['/projekty', 302],
+        '/projects/pitarena-akademie-202308' => ['/projekty/pitarena', 302],
+        '/projects/pitarena-reklamni-cedule' => ['/projekty/pitarena-cedule', 301],
+        '/projects/strechyzajic'             => ['/projekty/strechy-zajic', 301],
+        '/projects/vpindustry'               => ['/projekty/vp-industry', 301],
+        '/projects/delejme-animace'          => ['/projekty', 302],
+        '/dekuji'                            => ['/', 301],
     ];
 
     /**
@@ -124,9 +125,9 @@ class Ond455LegacyRedirectsTest extends TestCase
 
     public function test_legacy_paths_redirect_in_one_hop_to_existing_page(): void
     {
-        foreach (self::LEGACY_PATHS as $old => $target) {
+        foreach (self::LEGACY_PATHS as $old => [$target, $status]) {
             $response = $this->get($old);
-            $response->assertStatus(301);
+            $response->assertStatus($status);
             // `url('/')` vrací host bez koncového lomítka, redirect na homepage s ním.
             $this->assertSame(rtrim(url($target), '/'), rtrim($response->headers->get('Location'), '/'), $old);
 
@@ -163,13 +164,42 @@ class Ond455LegacyRedirectsTest extends TestCase
         $this->get('/contact')->assertStatus(301)->assertRedirect(url('/kontakt'));
     }
 
-    public function test_every_mapped_project_target_is_published(): void
+    /**
+     * Ondřej 28. 9.: případovku (např. zoomorava) může doplnit později.
+     * Po publikaci pod slugem z mapy se přesměrování přepne samo na 301
+     * na případovku — bez změny kódu. Do té doby 302, které si prohlížeč
+     * nezapamatuje.
+     */
+    public function test_redirect_switches_to_project_once_it_is_published(): void
     {
-        foreach (array_filter(config('redirects.project_slugs')) as $old => $slug) {
-            $this->assertTrue(
-                PortfolioProject::published()->where('slug', $slug)->exists(),
-                "{$old} → {$slug} není publikovaná případovka"
-            );
+        // Ondřej doplní zoomoravu (tady: existující řádek dostane její slug).
+        $project = PortfolioProject::where('slug', 'logo-realitacky')->firstOrFail();
+        $project->update(['slug' => 'zoomorava']);
+
+        // Koncept: pořád dočasně na výpis, ne 404.
+        $this->get('/projekty/zoomorava')->assertStatus(302)->assertRedirect(url('/projekty'));
+
+        $project->update(['published_at' => now()->subMinute()]);
+
+        $this->get('/projekty/zoomorava')->assertOk();
+
+        // Totéž pro staré adresy itwebtech.cz: zamýšlený cíl má přednost před náhradou.
+        PortfolioProject::where('slug', 'video-pitbike-akademie')->update(['published_at' => now()->subMinute()]);
+        $this->get('/projects/pitarena-akademie-202308')
+            ->assertStatus(301)
+            ->assertRedirect(url('/projekty/video-pitbike-akademie'));
+    }
+
+    public function test_every_mapped_target_is_a_known_project(): void
+    {
+        foreach (config('redirects.project_slugs') as $old => $slugs) {
+            foreach ((array) $slugs as $slug) {
+                // `zoomorava` v DB zatím není, ostatní ano (publikované i ne).
+                if ($slug === 'zoomorava') {
+                    continue;
+                }
+                $this->assertTrue(PortfolioProject::where('slug', $slug)->exists(), "{$old} → {$slug} v DB není");
+            }
         }
     }
 

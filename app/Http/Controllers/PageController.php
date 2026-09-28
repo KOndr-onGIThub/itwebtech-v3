@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Portfolio\PortfolioProject;
 use App\Models\Slugs\ArticleSlug;
+use App\Support\LegacyProjectRedirect;
 use Illuminate\Support\Facades\App;
 
 class PageController extends Controller
@@ -165,13 +166,9 @@ class PageController extends Controller
 
         if (! $project) {
             // OND-455: starý slug z itwebtech.cz / ondraweb.cz → dnešní
-            // případovka, nebo výpis, když případovka na webu není.
-            // Slug, který v DB je (jen nepublikovaný), zůstává 404.
-            $map = config('redirects.project_slugs');
-            if (array_key_exists($url, $map) && ! PortfolioProject::where('slug', $url)->exists()) {
-                return $map[$url] === null
-                    ? redirect(lroute('projects', $locale), 301)
-                    : redirect()->route("{$locale}.project", ['url' => $map[$url]], 301);
+            // případovka, dokud není publikovaná, dočasně na výpis.
+            if ($redirect = LegacyProjectRedirect::for($url, $locale)) {
+                return $redirect;
             }
 
             abort(404);
