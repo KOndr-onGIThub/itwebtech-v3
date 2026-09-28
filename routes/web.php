@@ -125,6 +125,9 @@ Route::get('/projects/{any}', function (string $any) {
 // OND-455: `/sluzby` z Framer sitemapy ondraweb.cz — samostatná stránka
 // služeb už není, služby jsou sekce na homepage.
 Route::get('/sluzby', fn() => redirect(lroute('home', 'cs') . '#section-services', 301));
+// `/dekuji` = Framer stránka po odeslání formuláře (v sitemapě není, v tabulce
+// stránek Framer webu ano). Nový web děkuje přímo ve formuláři.
+Route::get('/dekuji', fn() => redirect(lroute('home', 'cs'), 301));
 
 // OND-130 (B2 §1, klíčová direktiva 4): CS routing fix.
 // `/blog` musí 301 → `/zapisky` (default CS slug), aby byla CS landing
