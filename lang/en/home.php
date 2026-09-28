@@ -178,6 +178,15 @@ return [
         'detail_cta' => 'See the project',
         'live_cta'   => 'Open the live site',
         'live_aria'  => 'Open the :client website in a new window',
+        // OND-440: bar of the live-site recording frame. The date belongs to
+        // the project (config site.live_recordings); only its format lives here.
+        'live' => [
+            'kind'        => 'live site',
+            'recorded'    => 'recorded :date',
+            'date_format' => 'j M Y',
+            'pause'       => 'Pause recording',
+            'play'        => 'Play recording',
+        ],
         'cards' => [
             'pitarena' => [
                 'client'  => 'PitArena',

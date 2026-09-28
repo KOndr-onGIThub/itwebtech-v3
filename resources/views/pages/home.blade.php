@@ -220,8 +220,64 @@
                     $screens = $project->screenshots ?? collect();
                     $hero = $screens->firstWhere('type', 'hero') ?? portfolio_card_thumbnail($screens);
                     $detailHref = $project->detailUrl();
+                    // OND-440 (návrh 4): místo screenshotu tichý záznam živého webu.
+                    // V HTML není žádný <source> — zdroje doplní live-recordings.js
+                    // až při přiblížení, takže se při načtení video nestahuje.
+                    $rec = config('site.live_recordings.' . $project->slug);
+                    if ($rec) {
+                        $recBase = "video/projekty/{$project->slug}";
+                        $recSources = [];
+                        foreach (['desktop', 'mobile'] as $variant) {
+                            $recSources[$variant] = [
+                                [asset_v("{$recBase}-{$variant}.webm"), 'video/webm; codecs="av01.0.05M.08"'],
+                                [asset_v("{$recBase}-{$variant}.mp4"), 'video/mp4; codecs="avc1.640028"'],
+                            ];
+                        }
+                        $recDate = \Illuminate\Support\Carbon::parse($rec['recorded_at'])
+                            ->format(__('home.portfolio.live.date_format'));
+                    }
                 @endphp
                 <article class="pd-case">
+                    @if ($rec)
+                    <div class="pd-case__visual pd-live" data-live="{{ json_encode($recSources, JSON_UNESCAPED_SLASHES) }}">
+                        <div class="pd-live__bar">
+                            <span class="pd-live__url">{{ $rec['host'] }}</span>
+                            <span class="pd-live__meta"><span class="pd-live__kind">{{ __('home.portfolio.live.kind') }} · </span>{{ __('home.portfolio.live.recorded', ['date' => $recDate]) }}</span>
+                            <button
+                                type="button"
+                                class="pd-live__toggle"
+                                aria-pressed="false"
+                                aria-label="{{ __('home.portfolio.live.pause') }}"
+                                data-label-pause="{{ __('home.portfolio.live.pause') }}"
+                                data-label-play="{{ __('home.portfolio.live.play') }}"
+                            >
+                                <svg class="pd-live__i-pause" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 1.5h2.5v9H2.5zM7 1.5h2.5v9H7z" fill="currentColor"/></svg>
+                                <svg class="pd-live__i-play" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.5l7 4.5-7 4.5z" fill="currentColor"/></svg>
+                            </button>
+                        </div>
+                        <a
+                            href="{{ $detailHref }}"
+                            class="pd-live__screen"
+                            aria-label="{{ $clientLabel }} — {{ __('home.portfolio.detail_cta') }}"
+                            data-analytics="project_card_click"
+                            data-analytics-props='{"slug":"{{ $project->slug }}"}'
+                        >
+                            <picture>
+                                {{-- Plakát = první snímek záznamu. Stahuje se při načtení jako dnešní screenshot,
+                                     proto má počítačová varianta i menší šířky: na 768 px by jinak plný 1280w
+                                     plakát přidal ~75 kB proti dnešku. --}}
+                                <source
+                                    media="(min-width: 768px)"
+                                    srcset="{{ asset_v("{$recBase}-desktop-768.webp") }} 768w, {{ asset_v("{$recBase}-desktop-960.webp") }} 960w, {{ asset_v("{$recBase}-desktop.webp") }} 1280w"
+                                    sizes="(min-width: 1024px) 58vw, 100vw"
+                                    width="1280" height="720"
+                                >
+                                <img src="{{ asset_v("{$recBase}-mobile.webp") }}" width="780" height="976" alt="" loading="lazy" decoding="async">
+                            </picture>
+                            <video muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" disablepictureinpicture disableremoteplayback></video>
+                        </a>
+                    </div>
+                    @else
                     <a
                         href="{{ $detailHref }}"
                         class="pd-case__visual"
@@ -239,6 +295,7 @@
                             />
                         @endif
                     </a>
+                    @endif
                     <div class="pd-case__body">
                         <span class="pd-case__num" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
                         <h3 class="pd-case__client" style="view-transition-name: {{ project_transition_name($project->slug, 'title') }}">{{ $clientLabel }}</h3>

@@ -190,6 +190,15 @@ return [
         'detail_cta' => 'Více o projektu',
         'live_cta'   => 'Otevřít živý web',
         'live_aria'  => 'Otevřít web :client v novém okně',
+        // OND-440: lišta rámu se záznamem živého webu. Datum patří projektu
+        // (config site.live_recordings), tady je jen jeho tvar pro jazyk.
+        'live' => [
+            'kind'        => 'živý web',
+            'recorded'    => 'nahráno :date',
+            'date_format' => 'j. n. Y',
+            'pause'       => 'Zastavit záznam',
+            'play'        => 'Spustit záznam',
+        ],
         'cards' => [
             'pitarena' => [
                 'client'  => 'PitArena',

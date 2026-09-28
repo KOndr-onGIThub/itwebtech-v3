@@ -37,6 +37,22 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Záznamy živých webů v případovkách na homepage (OND-440, návrh 4)
+    |--------------------------------------------------------------------------
+    | Klíč = slug projektu. Soubory leží v public/video/projekty/
+    | (`<slug>-desktop|mobile.webm|mp4|webp`), specifikace na OND-439.
+    | `recorded_at` se ukazuje v liště rámu — při přenahrání (zhruba jednou
+    | za čtvrt roku) se mění jen tady. Projekt, který tu chybí, zůstane
+    | u screenshotu.
+    */
+    'live_recordings' => [
+        'pitarena'       => ['host' => 'pitarena.cz',      'recorded_at' => '2026-09-28'],
+        'barana'         => ['host' => 'barana.cz',        'recorded_at' => '2026-09-28'],
+        'nove-interiery' => ['host' => 'noveinteriery.cz', 'recorded_at' => '2026-09-28'],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Analytics (OND-122)
     |--------------------------------------------------------------------------
     | Měřicí stack pro homepage (per plán §9): Plausible (preferované, GDPR-OK)
