@@ -329,6 +329,61 @@
    odsazení: plná výška sekce by z jednoho odstavce udělala prázdný pás. */
 .pd-lead--wide { max-width: 52ch; margin-bottom: 0; }
 .pd-situation { padding-block: clamp(2.5rem, 4.5vw, 4rem); }
+/* OND-457 (B-11 z OND-441): pod větou tři příklady z portfolia. Doklad,
+   ne další sekce — proto drobná sazba jako podpisy citací (`.pd-by__name`)
+   a `.pd-note`, žádná čára, rámeček ani podklad (OND-394) a žádné obrázky
+   (ty má sekce 04). Na desktopu tři sloupce s mezerou jako `.pd-services`
+   a `.pd-testi` (96 px), na mobilu pod sebou. Odkaz je `.pd-case__cta`,
+   tedy stejný textový odkaz jako u projektů v sekci 04. */
+.pd-situation__cases {
+    list-style: none;
+    margin: var(--space-6) 0 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-5);
+}
+@media (min-width: 1024px) {
+    .pd-situation__cases { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--space-9); }
+}
+.pd-situation__who,
+.pd-situation__text {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    line-height: 1.45;
+    color: var(--color-fg-muted);
+    margin: 0;
+}
+.pd-situation__name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-variation-settings: 'wght' 600;
+    font-size: 15px;
+    color: var(--color-fg-primary);
+}
+.pd-situation__field::before {
+    content: '·';
+    content: '·' / '';
+    margin-right: var(--space-2);
+}
+.pd-situation__text { margin: var(--space-1) 0 var(--space-2); max-width: 46ch; }
+/* Mobil: věta a odkaz tečou v jednom odstavci. Odkaz na vlastním řádku
+   přidával ke každé položce řádek navíc a seznam vycházel na 390 px
+   o 340–381 px vyšší; rozpočet zadání je ~260 px. */
+@media (max-width: 1023px) {
+    .pd-situation__cases { margin-top: var(--space-5); gap: var(--space-4); }
+    .pd-situation__case { font-size: var(--text-body-sm); line-height: 1.45; }
+    .pd-situation__text { display: inline; }
+}
+/* Odkaz se nelámí: za větou stojí celý, nebo celý na dalším řádku
+   (osamělé „Jak“ na konci řádku četlo jako chyba). Nejdelší, en, má
+   ~330 px; pod 380 px by přetekl, tam se radši zalomí. */
+@media (min-width: 380px) and (max-width: 1023px) {
+    .pd-situation__link { white-space: nowrap; }
+}
+/* Text odkazu je vysoký ~17 px; neviditelný přesah z něj dělá cíl ~44 px
+   jako u `.pd-strip__link`, sazba se nepohne. */
+.pd-situation__link { position: relative; }
+.pd-situation__link::before { content: ''; position: absolute; inset: -12px -4px; }
 
 /* --- Social pás --------------------------------------------- */
 /* Věta o situaci a pruh čísel jsou jeden úvodní blok — bez čáry (OND-394 H2). */
