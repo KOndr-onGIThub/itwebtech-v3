@@ -343,13 +343,12 @@ class PageController extends Controller
      * adresa vést. Co v mapě není, jde na výpis blogu. Mapuje se na id,
      * ne na slug, aby přesměrování sedělo i v EN/DE verzi webu.
      *
-     * Zdroj: dokument `blog-texty` (OND-203), tabulka „Mapa přesměrování".
-     * 4 = „Co si připravit, než oslovíte vývojáře webu".
+     * Zdroj: dokument `clanky-cs` (OND-421). Články 7 a 11 jsou od OND-432
+     * znovu publikované, stažený zůstává jen 8 — je sloučený do 11, které
+     * řeší stejnou otázku.
      */
     private const REMOVED_ARTICLE_REDIRECTS = [
-        7  => 4,  // Design nebo obsah?
-        8  => 4,  // Web, který převádí návštěvníky na zákazníky
-        11 => 4,  // Jak vytvořit úspěšnou webovou stránku
+        8 => 11,  // Web, který převádí návštěvníky → Jak vytvořit úspěšnou webovou stránku
     ];
 
     /**
