@@ -189,20 +189,17 @@ class PortfolioSeeder extends Seeder
             ]);
 
             // Překlady screenshotu (alt/caption) — alt MUST být neprázdný (a11y).
-            // Hero má v YAMLu specifické popisy; gallery šablonu z titulku projektu.
+            // Popisek bere YAML; alt je zároveň titulek v lightboxu.
             $altSource = is_array($shot['alt'] ?? null) ? $shot['alt'] : [];
             $captionSource = is_array($shot['caption'] ?? null) ? $shot['caption'] : [];
             foreach (self::SUPPORTED_LOCALES as $locale) {
                 $alt = trim((string) ($altSource[$locale] ?? ''));
                 if ($alt === '') {
                     // Fallback z titulku projektu, aby alt nikdy nebyl prázdný.
-                    $title = $row['translations'][$locale]['title']
+                    // OND-454: bez „sekce N“ — v lightboxu nic neříká (B-07).
+                    $alt = $row['translations'][$locale]['title']
                         ?? $row['translations']['cs']['title']
                         ?? $slug;
-                    $label = self::sectionLabel($locale);
-                    $alt = $type === 'hero'
-                        ? $title
-                        : sprintf('%s – %s %d', $title, $label, $n);
                 }
                 PortfolioProjectScreenshotTranslation::create([
                     'screenshot_id' => $screenshot->id,
@@ -244,14 +241,5 @@ class PortfolioSeeder extends Seeder
     private function humanizeSlug(string $slug): string
     {
         return ucfirst(str_replace('-', ' ', $slug));
-    }
-
-    private static function sectionLabel(string $locale): string
-    {
-        return match ($locale) {
-            'en' => 'section',
-            'de' => 'Abschnitt',
-            default => 'sekce',
-        };
     }
 }
