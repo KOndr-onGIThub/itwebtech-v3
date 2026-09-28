@@ -62,7 +62,7 @@
     <div class="container-site">
         <div class="pd-story">
             <div class="pd-story__main">
-                <x-portfolio.detail-body :translation="$translation" />
+                <x-portfolio.detail-body :translation="$translation" :project="$project" />
 
                 @if ($review)
                     <x-portfolio.client-review :person="$review" />
@@ -73,7 +73,7 @@
     </div>
 </section>
 
-<x-portfolio.detail-gallery :screenshots="$project->screenshots" part="rest" />
+<x-portfolio.detail-gallery :screenshots="$project->screenshots" part="rest" :project="$project" />
 
 @if ($relatedProjects && $relatedProjects->count())
 {{-- Další projekty — mřížka `.pd-works` z /projekty beze změny (OND-399 §5). --}}

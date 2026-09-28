@@ -2600,3 +2600,59 @@
    je psané na <a>; na <button> potřebuje srovnat písmo a rámeček. */
 .pd-prose button.pd-cta { border: 0; cursor: pointer; font: inherit; font-weight: 600; font-size: var(--text-body); }
 .pd-prose button.pd-cta:focus-visible { outline: 2px solid var(--pd-accent); outline-offset: 3px; }
+
+/* ------------------------------------------------------------
+   OND-449 — detail projektu: zdroj výsledku (B-09), blok „Vyzkoušejte
+   si to naživo“ (B-05) a video smyčka pod prvním blokem galerie (B-07b).
+   ------------------------------------------------------------ */
+/* „Stav k … Zdroj: …“ — malým písmem hned pod textem výsledku. */
+.pd-story__source {
+    font-family: var(--font-body);
+    font-size: var(--text-caption);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+    max-width: 62ch;
+    margin: var(--space-2) 0 0;
+}
+/* Odkaz na živý web až za příběhem: věta, co si tam zkusit, pak tichý
+   odkaz v sazbě `.pd-case__cta` (acid podtržení), jako dřív v hlavě. */
+.pd-story__live { margin-top: var(--space-7); }
+.pd-story__live .pd-step__text { margin-bottom: var(--space-3); }
+.pd-story__live .pd-case__cta { position: relative; }
+.pd-story__live .pd-case__cta::before { content: ''; position: absolute; inset: -12px -4px; }   /* cíl 44 px */
+
+/* Video: rám galerie, poměr drží obrazovka (CLS 0) — telefon 4 : 5, jinak 16 : 9.
+   Plakát je pod videem, video se prolne až ve chvíli, kdy opravdu hraje. */
+.pd-demo__screen {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: var(--color-bg-elev-1);
+}
+@media (min-width: 768px) {
+    .pd-demo__screen { aspect-ratio: 16 / 9; }
+}
+.pd-demo__screen picture,
+.pd-demo__screen img,
+.pd-demo__screen video {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.pd-demo__screen video { opacity: 0; transition: opacity 200ms var(--ease-out, ease-out); }
+.pd-demo__screen video.is-ready { opacity: 1; }
+.pd-demo__toggle {
+    position: absolute;
+    right: var(--space-3);
+    bottom: var(--space-3);
+    background: color-mix(in srgb, var(--color-bg-elev-1) 80%, transparent);
+    color: var(--color-fg-primary);
+}
+.pd-demo--still .pd-demo__toggle { display: none; }
+@media (prefers-reduced-motion: reduce) {
+    .pd-demo__screen video,
+    .pd-demo__toggle { display: none; }
+}

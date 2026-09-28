@@ -163,6 +163,12 @@ return [
         'no_content'      => 'A detailed write-up for this project is not available yet.',
         'related_heading' => 'More projects',
         'visit_live'      => 'Visit live site',
+        // OND-449 (B-05): blok za „Výsledkem“; věta z `live_hint` v DB, prázdná = default.
+        'live_heading'      => 'Try it live',
+        'live_hint_default' => 'You can explore the website yourself; it opens in a new window.',
+        // OND-449 (B-09): řádek pod výsledkem, jen když je vyplněné `result_as_of` i `result_source`.
+        'result_source'      => 'As of :date. Source: :source.',
+        'result_date_format' => 'j F Y',
         'meta'            => [
             'client'   => 'Client',
             'year'     => 'Year',

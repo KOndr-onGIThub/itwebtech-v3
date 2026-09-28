@@ -5,6 +5,8 @@ import './analytics';
 import './hloubka';
 // OND-440 — záznamy živých webů v případovkách. Sám se vypne bez `[data-live]`.
 import './live-recordings';
+// OND-449 — video smyčky na detailu projektu. Sám se vypne bez `[data-demo-video]`.
+import './demo-videos';
 import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;

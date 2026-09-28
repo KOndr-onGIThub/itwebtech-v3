@@ -309,17 +309,9 @@
                                 data-analytics="project_card_click"
                                 data-analytics-props='{"slug":"{{ $project->slug }}"}'
                             >{{ __('home.portfolio.detail_cta') }} &rarr;</a>
-                            @if ($project->live_url)
-                            <a
-                                href="{{ $project->live_url }}"
-                                class="pd-case__live"
-                                target="_blank"
-                                rel="noopener"
-                                aria-label="{{ __('home.portfolio.live_aria', ['client' => $clientLabel]) }}"
-                                data-analytics="showcase_site_click"
-                                data-analytics-props='{"site":"{{ $project->slug }}"}'
-                            >{{ __('home.portfolio.live_cta') }} &nearr;</a>
-                            @endif
+                            {{-- OND-449 (B-05): odkaz „Otevřít živý web“ zrušen. Živý web tu
+                                 dokládá záznam, hlavní cesta vede na detail s kontextem
+                                 (odkaz na web je tam až za „Výsledkem“). --}}
                         </p>
                     </div>
                 </article>

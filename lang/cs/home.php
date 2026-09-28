@@ -92,7 +92,7 @@ return [
     // v praxi" — tři dlaždice s odkazem na živý web) je zrušený. Dvě sekce
     // projektů nad sebou říkaly totéž a BARANA i PitArena byly v obou.
     // Slito do jedné sekce `portfolio` níž, která nese titulek odsud
-    // a doplnila si odkaz na živý web (`live_cta` / `live_aria`).
+    // a doplnila si odkaz na živý web (`live_cta` / `live_aria`; OND-449 B-05: zrušeno).
 
     // OND-308: blok `problems` („Jak weby stavím" / „Čemu se tím vyhnete" /
     // „Šablona je hotová rychle") je zrušený. Sekce se definovala negací
@@ -188,8 +188,6 @@ return [
         'intro'      => 'Tohle jsou živé projekty, na které se můžete podívat hned teď. U každého je i to, co klientovi přinesl.',
         'cta'        => 'Všechny projekty →',
         'detail_cta' => 'Více o projektu',
-        'live_cta'   => 'Otevřít živý web',
-        'live_aria'  => 'Otevřít web :client v novém okně',
         // OND-440: lišta rámu se záznamem živého webu. Datum patří projektu
         // (config site.live_recordings), tady je jen jeho tvar pro jazyk.
         'live' => [
@@ -202,13 +200,13 @@ return [
         'cards' => [
             'pitarena' => [
                 'client'  => 'PitArena',
-                'outcome' => 'Tréninky bývají obsazené měsíce dopředu — rezervace, vouchery i registrace běží přes web bez ručního zásahu.',
+                'outcome' => 'Přes 15 000 návštěv z Googlu za 16 měsíců a vlastní registrace na závody s platbou online.',
             ],
             'barana' => [
                 'client'  => 'BARANA',
                 // OND-198 (nález 5.5): „landing page" / „Meta Ads / Google Ads"
                 // přepsáno do řeči klienta.
-                'outcome' => 'Samostatná stránka pro placenou reklamu — návštěvník chápe nabídku bez nutnosti volat.',
+                'outcome' => 'Web, který drahou pergolu vysvětlí bez dlouhého textu: návštěvník si sám natočí lamely a projde terasu od rána do zimy.',
             ],
             'nove-interiery' => [
                 'client'  => 'Nové interiéry',

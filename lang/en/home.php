@@ -89,7 +89,7 @@ return [
     // gone. Two project sections said the same thing and BARANA and PitArena
     // were in both. Merged into the single `portfolio` section below, which
     // took over the heading from here and gained a link to the live site
-    // (`live_cta` / `live_aria`).
+    // (`live_cta` / `live_aria`; OND-449 B-05: zrušeno).
 
     // OND-308: the `problems` block is gone — the rebuilt homepage does not
     // define itself by negating competitors. In its place sits a paragraph on
@@ -176,8 +176,6 @@ return [
         'intro'      => 'These are live projects you can open right now. Each one also says what it did for the client.',
         'cta'        => 'All projects →',
         'detail_cta' => 'See the project',
-        'live_cta'   => 'Open the live site',
-        'live_aria'  => 'Open the :client website in a new window',
         // OND-440: bar of the live-site recording frame. The date belongs to
         // the project (config site.live_recordings); only its format lives here.
         'live' => [
@@ -190,12 +188,12 @@ return [
         'cards' => [
             'pitarena' => [
                 'client'  => 'PitArena',
-                'outcome' => 'Training slots are booked months ahead — bookings, vouchers and event sign-ups all run through the web without manual handling.',
+                'outcome' => 'Over 15,000 visits from Google in 16 months and its own race registration with online payment.',
             ],
             'barana' => [
                 'client'  => 'BARANA',
                 // OND-198 (finding 5.5): ad-platform jargon rewritten in client language.
-                'outcome' => 'A standalone page built for paid advertising — visitors grasp the offer without picking up the phone.',
+                'outcome' => 'A website that explains an expensive pergola without long text: visitors tilt the louvres themselves and see the terrace from morning to winter.',
             ],
             'nove-interiery' => [
                 'client'  => 'Nové interiéry',

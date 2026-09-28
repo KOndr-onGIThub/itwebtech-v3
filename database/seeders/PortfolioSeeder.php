@@ -85,6 +85,9 @@ class PortfolioSeeder extends Seeder
                 'live_url'     => $row['live_url'] ?? null,
                 'year'         => $row['year'] ?? null,
                 'duration'     => $row['duration'] ?? null,
+                // OND-449: B-09 datum výsledku, B-07b video pod galerií.
+                'result_as_of' => $row['result_as_of'] ?? null,
+                'demo_video'   => $row['demo_video'] ?? null,
                 'featured'     => (bool) ($row['featured'] ?? false),
                 'sort_order'   => (int) ($row['sort_order'] ?? 0),
                 // OND-282: `?? now()` by explicitní `published_at: null`
@@ -116,6 +119,8 @@ class PortfolioSeeder extends Seeder
                 'challenge'        => $tr['challenge'] ?? null,
                 'solution'         => $tr['solution'] ?? null,
                 'result'           => $tr['result'] ?? null,
+                'result_source'    => $tr['result_source'] ?? null,
+                'live_hint'        => $tr['live_hint'] ?? null,
                 'meta_title'       => $tr['meta_title'] ?? null,
                 'meta_description' => $tr['meta_description'] ?? null,
             ]);

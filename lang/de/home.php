@@ -81,7 +81,7 @@ return [
     // gestrichen. Zwei Projektsektionen sagten dasselbe, BARANA und PitArena
     // standen in beiden. Zusammengelegt in die eine Sektion `portfolio`
     // unten, die die Überschrift von hier übernommen hat und einen Link zur
-    // Live-Website bekam (`live_cta` / `live_aria`).
+    // Live-Website bekam (`live_cta` / `live_aria`; OND-449 B-05: zrušeno).
 
     // OND-308: Der Block `problems` ist weg — die neue Startseite definiert
     // sich nicht mehr über die Negation der Konkurrenz. An seiner Stelle steht
@@ -173,8 +173,6 @@ return [
         'intro'      => 'Das sind Live-Projekte, die Sie sich sofort ansehen können. Bei jedem steht auch, was es dem Kunden gebracht hat.',
         'cta'        => 'Alle Projekte →',
         'detail_cta' => 'Projekt ansehen',
-        'live_cta'   => 'Live-Website öffnen',
-        'live_aria'  => 'Website von :client in neuem Fenster öffnen',
         // OND-440: Leiste des Rahmens mit der Aufnahme der Live-Website. Das Datum
         // gehört zum Projekt (config site.live_recordings), hier nur sein Format.
         'live' => [
@@ -187,12 +185,12 @@ return [
         'cards' => [
             'pitarena' => [
                 'client'  => 'PitArena',
-                'outcome' => 'Trainingsplätze sind Monate im Voraus ausgebucht — Buchungen, Gutscheine und Event-Anmeldungen laufen ohne manuellen Eingriff über das Web.',
+                'outcome' => 'Über 15.000 Besuche aus Google in 16 Monaten und eine eigene Rennanmeldung mit Online-Zahlung.',
             ],
             'barana' => [
                 'client'  => 'BARANA',
                 // OND-198 (Befund 5.5): Werbeplattform-Jargon in Kundensprache umgeschrieben.
-                'outcome' => 'Eine eigenständige Seite für bezahlte Werbung — Besucher verstehen das Angebot ohne Anruf.',
+                'outcome' => 'Eine Website, die eine teure Pergola ohne lange Texte erklärt: Besucher stellen die Lamellen selbst ein und erleben die Terrasse vom Morgen bis in den Winter.',
             ],
             'nove-interiery' => [
                 'client'  => 'Nové interiéry',

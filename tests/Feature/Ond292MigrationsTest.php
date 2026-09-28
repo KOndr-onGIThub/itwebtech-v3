@@ -72,10 +72,10 @@ class Ond292MigrationsTest extends TestCase
 
         $this->migration()->up();
 
-        // `portfolio_card_thumbnail()` dává `thumbnail` přednost před hero,
-        // takže miniatura karty v /projekty i v „Dalších projektech" zůstává
-        // na témže souboru. Kdyby se změnila, vypadne z karty branding Toyoty.
-        $this->assertSame(self::FRL_HERO, $before);
+        // Miniatura karty v /projekty i v „Dalších projektech" zůstává na témže
+        // souboru. OND-449 (B-06): karta = lead detailu, tedy první široký
+        // snímek (`gallery-1`), ne čtvercový `hero-1` — ten je jen záloha.
+        $this->assertSame('projects/frl-creator/gallery-1.jpg', $before);
         $this->assertSame($before, portfolio_card_thumbnail($this->frlScreens())?->path);
     }
 
