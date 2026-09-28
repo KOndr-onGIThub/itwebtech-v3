@@ -35,6 +35,7 @@ return [
         'working' => [
             'ivo-stepanek', 'adela-polaskova', 'radka-lanikova-ourednikova',
             'vaclav-pesice', 'peter-vidlicka', 'lukas-srnak', 'roman-antos',
+            'radka-podana',
         ],
         'toyota' => ['jan-stybor', 'pavel-baudys'],
     ],

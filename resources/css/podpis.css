@@ -597,6 +597,10 @@
     line-height: 1;
     color: var(--color-fg-muted);
 }
+/* OND-444: bez firmy (recenze z Facebooku) je v podpisu jen jméno. Ke
+   středu tváře, ne k její horní hraně — jinak pod ním zeje místo po řádku,
+   který chybí. */
+.pd-by__text--bare { align-self: center; }
 /* U pull-quotes stojí podpis pod citací a firma je poslední řádek bloku. */
 .pd-by--40 .pd-by__org { margin-bottom: 0; }
 
@@ -1879,6 +1883,11 @@
    odsadit, jinak se čtverce 56 px dotýkají. */
 .pd-testi__item > .pd-by + .pd-by > .pd-by__face,
 .pd-testi__item > .pd-by + .pd-by > .pd-by__text { margin-top: var(--space-3); }
+
+/* OND-444: jeden člověk, dva citáty z různých platforem (Antoš). Druhý
+   citát odsadit od odkazů prvního, ať je vidět, který odkaz patří ke kterému.
+   Čtyři třídy, aby to přebilo i mobilní `margin-top` citace níž. */
+.pd-reviews .pd-testi__item > .pd-testi__links + .pd-testi__text { margin-top: var(--space-5); }
 
 /* Mobil: citace a odkazy přes celou šířku. Ve sloupci vedle 48px tváře
    měla citace 291 px (~33 znaků na řádek, pod pásmem 45–75); takhle 355 px.

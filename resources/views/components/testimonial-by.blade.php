@@ -31,6 +31,7 @@
     // a přebije jméno nad sebou („TOYOTA — ŘEDITEL ŘÍZENÍ VÝROBY, MONTÁŽE
     // A LOGISTIKY"). Tam nese informaci firma, role je balast.
     $showRole = $size > 40 && !empty($person['role']);
+    $org = implode(' — ', array_filter([$person['company'] ?? '', $showRole ? $person['role'] : '']));
 @endphp
 
 <div class="pd-by pd-by--{{ $size }}">
@@ -47,7 +48,7 @@
         @endif
     </figure>
 
-    <div class="pd-by__text">
+    <div @class(['pd-by__text', 'pd-by__text--bare' => $org === ''])>
         <p class="pd-by__line">
             <span class="pd-by__name">{{ $person['name'] }}</span>
             @if ($logo)
@@ -67,6 +68,10 @@
                 <span class="pd-by__src pd-by__src--word" title="Recenze na Firmy.cz">Firmy.cz</span>
             @endif
         </p>
-        <span class="pd-by__org">{{ $person['company'] }}@if ($showRole) — {{ $person['role'] }}@endif</span>
+        {{-- OND-444: recenze z Facebooku může být bez firmy — pak bez řádku,
+             ne prázdný řádek nebo osiřelá pomlčka. --}}
+        @if ($org !== '')
+        <span class="pd-by__org">{{ $org }}</span>
+        @endif
     </div>
 </div>

@@ -9,12 +9,12 @@ return [
 
     'meta' => [
         'title'       => 'Recenze — Ondřej Kriška, ONDRAWEB',
-        'description' => '5,0 z 26 hodnocení na Googlu a Firmy.cz. Všechny recenze klientů na jednom místě, u každé odkaz na originál.',
+        'description' => '5,0 z 26 hodnocení na Googlu a Firmy.cz. Co o spolupráci napsali klienti, u každé recenze odkaz na originál.',
     ],
 
     'eyebrow'      => 'Recenze',
     'heading_html' => '5,0 z <em>26 hodnocení</em> na Googlu a Firmy.cz',
-    'intro'        => 'Všechny recenze na jednom místě. U každé je odkaz na originál.',
+    'intro'        => 'Co o spolupráci napsali klienti. U každé recenze je odkaz na originál.',
 
     'profiles' => [
         'google'   => 'Google · :count hodnocení',
