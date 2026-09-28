@@ -142,19 +142,25 @@
          config/site.php (ANALYTICS_ENABLED + provider envs). --}}
     @include('partials.analytics')
 </head>
-<body @class(['min-h-screen flex flex-col', 'is-lead-sent' => session('home_lead_success')])>
+<body class="min-h-screen flex flex-col">
 
     <x-layout.navbar :hreflangs="$hreflangs ?? []" />
 
     {{-- Mobile bottom bar (OND-100, T06) — viditelná akce na mobilu.
-         OND-437: na odpovědi po odeslání poptávky se nevykresluje — výzva
-         „Poptávka" pod potvrzením by zvala poslat ji znovu. `is-lead-sent`
-         na <body> vrací odsazení pro lištu (podpis.css). --}}
-    @unless (session('home_lead_success'))
+         OND-437: po odeslání poptávky zmizí — výzva „Poptávka" pod potvrzením
+         by zvala poslat ji znovu. OND-448: formulář se odesílá bez
+         znovunačtení, takže třídu `is-lead-sent` na <body> přidá `contactForm`
+         (podpis.css lištu schová a vrátí odsazení).
+         OND-448 (B-01): lišta vede k formuláři, který je nejblíž — na homepage
+         na sekci „Poptávka", na /kontakt na formulář na téže stránce, jinde na
+         /kontakt (stejně jako tlačítko v menu). Dřív vedla z podstránek na
+         homepage, i z /kontakt pryč od formuláře. --}}
     @php
-        $stickyPoptavkaHref = current_page() === 'home'
-            ? '#' . __('home.anchors.poptavka')
-            : lroute('home') . '#' . __('home.anchors.poptavka');
+        $stickyPoptavkaHref = match (current_page()) {
+            'home'    => '#' . __('home.anchors.poptavka'),
+            'contact' => '#kontaktni-formular',
+            default   => lroute('contact'),
+        };
     @endphp
     <div class="mobile-bottom-bar" role="region" aria-label="{{ __('home.sticky.cta') }}">
         <a
@@ -166,7 +172,6 @@
         </a>
         <x-phone-cta class="mobile-bottom-bar__phone" />
     </div>
-    @endunless
 
     <main class="site-main">
         @yield('content')

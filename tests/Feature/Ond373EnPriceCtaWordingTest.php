@@ -25,14 +25,14 @@ class Ond373EnPriceCtaWordingTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * Rozhodnuté znění. Přesný protějšek cs „nezávaznou nabídku" a de
-     * „Unverbindliches Angebot" — nevymýšlí se nový slovník, překládá se ten,
-     * který už v cs a de rozhodnutý je.
+     * Rozhodnuté znění. OND-448 (B-02): „nezávaznou nabídku“ board 28. 9. 2026
+     * zrušil (web nesmí slibovat nezávaznou nabídku) — tlačítka mluví jako
+     * zbytek webu (konvence OND-369, `price.cta.btn`).
      */
     private const DECIDED_CTA = [
-        'cs' => 'Chci nezávaznou nabídku',
-        'en' => 'Get a no-obligation quote',
-        'de' => 'Unverbindliches Angebot anfordern',
+        'cs' => 'Napsat poptávku',
+        'en' => 'Write an enquiry',
+        'de' => 'Anfrage schreiben',
     ];
 
     /** Všechny čtyři slovy: tři cenové úrovně a lepící lišta. */
@@ -92,7 +92,7 @@ class Ond373EnPriceCtaWordingTest extends TestCase
 
         $this->assertSame(
             3,
-            substr_count($body, e(self::DECIDED_CTA['en'])),
+            preg_match_all('~data-analytics="pricing_tier_cta_primary_click"[^>]*>'.preg_quote(e(self::DECIDED_CTA['en']), '~').'</a>~', $body),
             'Na `/en/price` nestojí rozhodnuté znění 3× (u každé úrovně jednou).',
         );
     }
@@ -137,13 +137,13 @@ class Ond373EnPriceCtaWordingTest extends TestCase
     }
 
     /**
-     * `price.quotation` je druhotné tlačítko, kde se en a de shodují, že
-     * nezávaznost nepatří. Zadání to označuje za nesoulad, který se neopravuje
-     * — bez téhle kotvy by ho někdo „dokončil" spolu s kartami.
+     * `price.quotation` se nevykresluje (OND-393). OND-448 (B-02): i tak
+     * nesmí nést „nezávaznou“ — fulltextová kontrola lang by na něm padala.
      */
-    public function test_the_secondary_quotation_button_is_left_alone(): void
+    public function test_the_unrendered_quotation_key_promises_no_obligation_nowhere(): void
     {
-        $this->assertSame('Get a quote', trans('price.quotation', [], 'en'));
-        $this->assertSame('Angebot anfragen', trans('price.quotation', [], 'de'));
+        $this->assertSame('Poptávka', trans('price.quotation', [], 'cs'));
+        $this->assertSame('Enquiry', trans('price.quotation', [], 'en'));
+        $this->assertSame('Anfrage', trans('price.quotation', [], 'de'));
     }
 }

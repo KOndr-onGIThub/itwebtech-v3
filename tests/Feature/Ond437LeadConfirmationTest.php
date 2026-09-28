@@ -47,52 +47,40 @@ class Ond437LeadConfirmationTest extends TestCase
         return array_merge([
             'name'    => 'Jan Novák',
             'email'   => 'jan@firma.cz',
-            'phone'   => '',
+            'tel'     => '',
             'message' => 'Chtěl bych nový web.',
         ], $overrides);
     }
 
     // ------------------------------------------------------------------
-    // Návrh 2 — homepage po odeslání
+    // Návrh 2 — potvrzení po odeslání. OND-448 (B-01): homepage i /kontakt
+    // posílají týž formulář přes AJAX na `POST /contact`; potvrzení vykreslí
+    // server do JSON a `contactForm` ho vloží místo formuláře.
     // ------------------------------------------------------------------
 
-    public function test_homepage_renders_confirmation_instead_of_form_after_submit(): void
+    public function test_home_submit_returns_confirmation_with_steps_in_the_page_language(): void
     {
-        foreach (self::HOMES as $locale => $url) {
-            $html = $this->from($url)
-                ->followingRedirects()
-                ->post('/poptavka', $this->leadPayload())
+        foreach (array_keys(self::HOMES) as $locale) {
+            $html = $this->postJson('/contact', $this->leadPayload(['locale' => $locale, 'source' => 'home']))
                 ->assertOk()
-                ->getContent();
+                ->json('confirmation');
 
             [$date, $received] = self::EXPECTED[$locale];
-            $panel = $this->panelOf($html);
 
             // Potvrzení: štítek s časem, nadpis, den odpovědi, e-mail, kroky, článek.
-            $this->assertStringContainsString('role="status"', $panel, "[$locale]");
-            $this->assertStringContainsString('data-lead-confirmation', $panel, "[$locale]");
-            $this->assertStringContainsString(e(__('home.inline_form.confirmation.stamp', ['received' => $received], $locale)), $panel, "[$locale] štítek");
-            $this->assertStringContainsString(e(__('home.inline_form.confirmation.heading', [], $locale)), $panel, "[$locale] nadpis");
-            $this->assertStringContainsString('<strong class="pd-date">'.$date.'</strong>', $panel, "[$locale] den odpovědi");
-            $this->assertStringContainsString('jan@firma.cz', $panel, "[$locale] e-mail");
+            $this->assertStringContainsString('role="status"', $html, "[$locale]");
+            $this->assertStringContainsString('data-lead-confirmation', $html, "[$locale]");
+            $this->assertStringContainsString(e(__('home.inline_form.confirmation.stamp', ['received' => $received], $locale)), $html, "[$locale] štítek");
+            $this->assertStringContainsString('<h3 class="pd-done__title">'.e(__('home.inline_form.confirmation.heading', [], $locale)).'</h3>', $html, "[$locale] nadpis h3 pod h2 sekce");
+            $this->assertStringContainsString('<strong class="pd-date">'.$date.'</strong>', $html, "[$locale] den odpovědi");
+            $this->assertStringContainsString('jan@firma.cz', $html, "[$locale] e-mail");
+            $this->assertStringContainsString('pd-done__steps', $html, "[$locale] kroky");
             foreach (__('home.inline_form.confirmation.steps', [], $locale) as $step) {
-                $this->assertStringContainsString(e($step['label']), $panel, "[$locale] krok");
+                $this->assertStringContainsString(e($step['label']), $html, "[$locale] krok");
+                $this->assertStringContainsString(e($step['text']), $html, "[$locale] krok");
             }
             $slug = __('home.how_i_work.cta_more_slug', [], $locale);
-            $this->assertStringContainsString(route("{$locale}.article", ['slug' => $slug]), $panel, "[$locale] odkaz na článek");
-
-            // Formulář ani stará zelená hláška se nevykreslí.
-            $this->assertStringNotContainsString('<form', $panel, "[$locale] formulář zůstal");
-            $this->assertStringNotContainsString('pd-alert--success', $html, "[$locale]");
-
-            // Spodní mobilní lišta s poptávkou se na téhle odpovědi nevykresluje.
-            $this->assertStringNotContainsString('class="mobile-bottom-bar"', $html, "[$locale] lišta");
-            $this->assertMatchesRegularExpression('/<body class="[^"]*\bis-lead-sent\b/', $html, "[$locale]");
-
-            // Fokus po přesměrování míří na potvrzení.
-            $this->assertStringContainsString("document.querySelector('[data-lead-confirmation]')?.focus(", $html, "[$locale] fokus");
-
-            $this->flushSession();
+            $this->assertStringContainsString(route("{$locale}.article", ['slug' => $slug]), $html, "[$locale] odkaz na článek");
         }
     }
 
@@ -100,49 +88,35 @@ class Ond437LeadConfirmationTest extends TestCase
     {
         // Past na boty vrací totéž co úspěch — i s e-mailem z formuláře, který
         // prošel bez validace. Musí se escapovat.
-        $html = $this->from('/')
-            ->followingRedirects()
-            ->post('/poptavka', $this->leadPayload(['email' => '<script>x</script>', 'website_url' => 'bot']))
+        $html = $this->postJson('/contact', $this->leadPayload(['email' => '<script>x</script>', 'website_url' => 'bot', 'source' => 'home']))
             ->assertOk()
-            ->getContent();
+            ->json('confirmation');
 
-        $panel = $this->panelOf($html);
-        $this->assertStringContainsString('&lt;script&gt;x&lt;/script&gt;', $panel);
-        $this->assertStringNotContainsString('<script>x', $panel);
+        $this->assertStringContainsString('&lt;script&gt;x&lt;/script&gt;', $html);
+        $this->assertStringNotContainsString('<script>x', $html);
     }
 
-    public function test_validation_error_state_still_shows_the_form(): void
+    public function test_validation_error_returns_field_errors_and_no_confirmation(): void
     {
-        $html = $this->from('/')
-            ->followingRedirects()
-            ->post('/poptavka', $this->leadPayload(['email' => '']))
-            ->assertOk()
-            ->getContent();
-
-        $panel = $this->panelOf($html);
-        $this->assertStringContainsString('pd-alert pd-alert--error', $panel);
-        $this->assertStringContainsString('<form', $panel);
-        $this->assertStringNotContainsString('data-lead-confirmation', $panel);
-        $this->assertStringContainsString('class="mobile-bottom-bar"', $html);
+        $this->postJson('/contact', $this->leadPayload(['email' => '', 'source' => 'home']))
+            ->assertStatus(422)
+            ->assertJsonValidationErrors(['email'])
+            ->assertJsonMissingPath('confirmation');
     }
-
-    // ------------------------------------------------------------------
-    // Návrh 2 — /kontakt (Alpine, bez přesměrování)
-    // ------------------------------------------------------------------
 
     public function test_contact_endpoint_returns_confirmation_in_the_page_language(): void
     {
         foreach (array_keys(self::CONTACTS) as $locale) {
-            $json = $this->postJson('/contact', [
-                'name' => 'Jan Novák', 'email' => 'jan@firma.cz', 'gdpr' => '1', 'locale' => $locale,
-            ])->assertOk()->json();
+            $html = $this->postJson('/contact', $this->leadPayload(['locale' => $locale, 'source' => 'contact']))
+                ->assertOk()
+                ->json('confirmation');
 
             [$date, $received] = self::EXPECTED[$locale];
-            $html = $json['confirmation'];
 
+            // Stejné znění jako na homepage (B-01), jen bez kroků a s h2.
             $this->assertStringContainsString('role="status"', $html, "[$locale]");
-            $this->assertStringContainsString(e(__('contact.thank_you.stamp', ['received' => $received], $locale)), $html, "[$locale] štítek");
-            $this->assertStringContainsString(e(__('contact.thank_you.heading', [], $locale)), $html, "[$locale] nadpis");
+            $this->assertStringContainsString(e(__('home.inline_form.confirmation.stamp', ['received' => $received], $locale)), $html, "[$locale] štítek");
+            $this->assertStringContainsString('<h2 class="pd-done__title">'.e(__('home.inline_form.confirmation.heading', [], $locale)).'</h2>', $html, "[$locale] nadpis");
             $this->assertStringContainsString('<strong class="pd-date">'.$date.'</strong>', $html, "[$locale] den odpovědi");
             $this->assertStringContainsString('jan@firma.cz', $html, "[$locale] e-mail");
             // /kontakt má pod formulářem vlastní „Co se stane potom" — kroky tu nejsou.
@@ -150,15 +124,34 @@ class Ond437LeadConfirmationTest extends TestCase
         }
     }
 
-    public function test_contact_page_swaps_form_for_server_confirmation(): void
+    public function test_both_pages_swap_the_shared_form_for_server_confirmation(): void
     {
-        foreach (self::CONTACTS as $locale => $url) {
-            $html = $this->get($url)->assertOk()->getContent();
+        foreach (['home' => self::HOMES, 'contact' => self::CONTACTS] as $source => $urls) {
+            foreach ($urls as $locale => $url) {
+                $html = $this->get($url)->assertOk()->getContent();
 
-            $this->assertStringContainsString('<div class="pd-form__thanks" x-show="submitted" x-cloak x-html="confirmation"></div>', $html, "[$locale]");
-            $this->assertStringContainsString('<input type="hidden" name="locale" value="'.$locale.'">', $html, "[$locale]");
-            $this->assertStringContainsString('<strong class="pd-date">'.self::EXPECTED[$locale][0].'</strong>', $html, "[$locale] den v úvodu");
+                $this->assertStringContainsString('<div class="pd-form__thanks" x-show="submitted" x-cloak x-html="confirmation"></div>', $html, "[$source $locale]");
+                $this->assertStringContainsString('<input type="hidden" name="locale" value="'.$locale.'">', $html, "[$source $locale]");
+                $this->assertStringContainsString('<input type="hidden" name="source" value="'.$source.'">', $html, "[$source $locale]");
+                $this->assertStringContainsString("source: '$source'", $html, "[$source $locale] contactForm zná místo");
+                $this->assertStringNotContainsString('action="', $this->between($html, 'class="pd-form__panel"', '</form>'), "[$source $locale] žádný klasický POST");
+            }
         }
+    }
+
+    /**
+     * OND-448 (B-01): lišta vede k formuláři, který je nejblíž — homepage na
+     * sekci „Poptávka“, /kontakt na formulář na téže stránce, jinde na /kontakt.
+     * Po odeslání ji schová `contactForm` (třída `is-lead-sent`), server nic.
+     */
+    public function test_mobile_bar_points_to_the_nearest_form(): void
+    {
+        $bar = fn (string $url) => $this->between($this->get($url)->assertOk()->getContent(), '<div class="mobile-bottom-bar"', '</div>');
+
+        $this->assertStringContainsString('href="#'.__('home.anchors.poptavka').'"', $bar('/'));
+        $this->assertStringContainsString('href="#kontaktni-formular"', $bar('/kontakt'));
+        $this->assertStringContainsString('href="'.lroute('contact').'"', $bar('/cenik'));
+        $this->assertStringContainsString('href="'.route('en.contact').'"', $bar('/en/price'));
     }
 
     // ------------------------------------------------------------------
@@ -188,11 +181,6 @@ class Ond437LeadConfirmationTest extends TestCase
             $this->assertStringNotContainsString('💬', $html, "[$locale] emoji");
             $this->assertStringContainsString('class="mobile-bottom-bar"', $html, "[$locale] lišta před odesláním");
         }
-    }
-
-    private function panelOf(string $html): string
-    {
-        return $this->between($html, '<div class="pd-form__panel">', '</section>');
     }
 
     private function between(string $html, string $from, string $to): string

@@ -195,10 +195,11 @@ class BlogContentEnSeeder extends Seeder
                     <p>You are paying for my time and for what I know how to do with it. You are not buying a template licence, and you are not buying the hours of a salesperson who sold you the site and then disappeared. I work alone, so there is no agency overhead in the price and no coordinator forwarding me your emails.</p>
                     <p>I write websites in my own code. I do not assemble them from page builders and third-party plugins that need constant updating and eventually break. That costs more at the start and less over time, because there is nothing for you to repair.</p>
                     <h2>What it comes to with me</h2>
-                    <p>Most projects land between €3,500 and €8,000. The smallest site I build is a presentation site of up to five pages, from €1,900. What yours will cost depends mainly on the scope.</p>
-                    <p><strong>Presentation site — up to five pages.</strong> For sole traders and small businesses for whom a bigger scope makes no sense. It will be fast, it will work properly on a phone, and no link to your enquiry form will be broken. Do not expect it to start bringing in work on its own — that takes more work than the smallest scope allows. But it will be done properly.</p>
-                    <p><strong>Business site — up to twelve pages.</strong> A custom website with simple content management, so you change texts, photos or references yourself. Another language version is possible. This is what most companies order.</p>
-                    <p><strong>Custom — no scope limit.</strong> An online shop, a booking system or a custom application. The scope is not fixed in advance; the price follows from what the site has to do and which systems it connects to.</p>
+                    <p>Most projects land between €3,500 and €8,000. The smallest thing I build is a simple presentation site, from €1,900. What yours will cost depends mainly on how much work it takes for the site to do its job.</p>
+                    <p><strong>Presentation site — so customers can check you out.</strong> Who you are, what you do and how to reach you. For sole traders and small businesses for whom a bigger scope makes no sense. It will be fast, it will work properly on a phone, and no link to your enquiry form will be broken. Do not expect it to start bringing in work on its own — that takes more work than the smallest scope allows. But it will be done properly.</p>
+                    <p><strong>Business site — so customers see why it should be you.</strong> More services, more languages, references and a blog. A custom website with simple content management, so you change texts, photos or references yourself. This is what most companies order.</p>
+                    <p><strong>E-shops and applications — so the system does the work for you.</strong> An online shop, a booking system or a custom application. The scope is not fixed in advance; the price follows from what the system has to do and which systems it connects to.</p>
+                    <p>The number of pages does not decide the price. What matters is how many different kinds of page the site needs. A blog is one kind: I build it once, and it makes no difference whether it ends up with one article or a hundred. Coming up with and writing those articles is separate work, though. The same goes for a product catalogue or references. So a one-page site can cost more than a five-page one if it has more to explain and do.</p>
                     <p>I am not registered for VAT. The price I quote you is the final price. What exactly each level includes is broken down on the <a href="/en/price">pricing page</a>.</p>
                     HTML,
                 'content_mid' => <<<'HTML'
@@ -207,15 +208,17 @@ class BlogContentEnSeeder extends Seeder
                 'content_2'   => <<<'HTML'
                     <h2>What pushes the price up</h2>
                     <ul>
+                    <li><strong>More services or products that need explaining clearly.</strong> Each one has to be thought through and described so that customers understand it.</li>
                     <li><strong>A connection to a system you already use in the company.</strong> Stock, accounting, bookings. The more two systems have to understand each other, the more work it is.</li>
                     <li><strong>More languages.</strong> It is not just translating text. It is another version of the whole website that someone has to maintain.</li>
-                    <li><strong>Content that does not exist yet.</strong> If you have neither photos nor texts, they have to be made. We agree in advance what you supply and what I do, so there is no surprise on the invoice. I write about why content matters more than looks in the article <a href="/en/blog/which-is-more-important-design-or-content">Design or content?</a></li>
+                    <li><strong>Photos that do not exist yet.</strong> If you do not have them, they have to be taken or bought. We agree in advance what you supply and what I do, so there is no surprise on the invoice. I write the copy myself from your answers; that is part of every website. I write about why content matters more than looks in the article <a href="/en/blog/which-is-more-important-design-or-content">Design or content?</a></li>
                     <li><strong>Scope that grows as we go.</strong> That is why I write the specification. So we both know where the line is.</li>
                     </ul>
                     <h2>What brings the price down</h2>
                     <ul>
-                    <li><strong>Your copy and photos are ready.</strong> Nothing has to be made first, so I can start building straight away.</li>
-                    <li><strong>Fewer pages.</strong> Less work, lower price.</li>
+                    <li><strong>Photos you already have in good quality.</strong> Nothing needs to be shot or bought.</li>
+                    <li><strong>One person on your side who makes the decisions.</strong> We do not wait for five people to sign off.</li>
+                    <li><strong>Complete, quick answers to my questions.</strong> I write the copy from them, and the sooner I have them in full, the less time goes on follow-up questions.</li>
                     <li><strong>One language.</strong> One version of the website to build and maintain.</li>
                     <li><strong>You fill in the content yourself.</strong> I show you how, and you put the texts and photos on the site instead of me.</li>
                     </ul>
@@ -225,7 +228,7 @@ class BlogContentEnSeeder extends Seeder
                     <h2>When not to buy a website from me</h2>
                     <p>When you need the site in a week. When you only want to fix an existing WordPress. I do neither, and it is better you know now than after two meetings.</p>
                     <h2>How you get to an exact price</h2>
-                    <p>Write and tell me what you need. Briefly is fine. I will get back to you by the next business day and we will go through it. If it turns out that I can help, you get a specification with a specific price. If not, I will say so and I will not push anything on you.</p>
+                    <p>Write and tell me what you need. Briefly is fine. I will get back to you by the next business day and we will go through it. If it turns out that I can help, we agree on a specification with a specific price. If not, I will say so and I will not push anything on you.</p>
                     HTML,
             ],
 
@@ -264,13 +267,13 @@ class BlogContentEnSeeder extends Seeder
                     <h2>6. Who will manage the content</h2>
                     <p>If you want to change texts and photos yourself, I will build you simple content management and show you how it works. If you do not, we do not have to build it and you save money. Either is fine, I just need to know in advance.</p>
                     <h2>7. What you already have</h2>
-                    <p>A logo, photos, texts, access to the domain and the hosting, a shop with products in some system. The more of it there is, the less has to be made from scratch. If you have a finished <a href="/en/blog/website-competitor-analysis">competitor analysis</a> or <a href="/en/blog/how-to-do-keyword-research-step-by-step">keyword research</a>, send me that too.</p>
+                    <p>A logo, photos, access to the domain and the hosting, a shop with products in some system. The more of it there is, the less has to be made from scratch. You do not have to write the texts; I write them from your answers to these questions. If you have a finished <a href="/en/blog/website-competitor-analysis">competitor analysis</a> or <a href="/en/blog/how-to-do-keyword-research-step-by-step">keyword research</a>, send me that too.</p>
                     <h2>8. What your budget is</h2>
                     <p>I know nobody likes this question. I ask it so that I can tell you straight away whether I can do it for that price. If I cannot, I say so immediately and neither of us wastes time.</p>
                     <h2>9. When you need it by</h2>
                     <p>If you have a fixed date because of a trade fair or an opening, tell me right at the start. That is how I know whether I can make it.</p>
                     <h2>What happens next</h2>
-                    <p>From your answers I write a specification. It says what I will build and a price that holds. Only then do you decide whether we go ahead. You sign nothing up front.</p>
+                    <p>From your answers I write a specification. It says what I will build and a price that holds. You decide on the build only once the finished specification is in front of you.</p>
                     HTML,
             ],
 
@@ -311,7 +314,7 @@ class BlogContentEnSeeder extends Seeder
                     <p>None of it was about spectacular technology. It was about finding the place where time was being wasted and removing that place. I think the same way today when I build a custom application for a company.</p>
                     <h2>How to do the sums yourself</h2>
                     <p>Take an activity that is done by hand. How many minutes a day does it take? How often a month does a mistake happen with it, and what does that mistake cost? Multiply it by twelve months. If you end up with a number in the thousands of euros a year, a custom application pays for itself in a few years and after that it only saves. If you end up with a few hundred euros, leave it alone and buy yourself a decent spreadsheet instead.</p>
-                    <p>I will do this calculation for you free of charge on our first call. If it comes out that it is not worth it, I will tell you.</p>
+                    <p>I can give you a rough estimate as early as our intro call. If it comes out that it is not worth it, I will tell you.</p>
                     <h2>What a custom application is and what it is not</h2>
                     <p>It is a program built around exactly how your company works. Records, orders, planning, reports. It runs in a browser, so you install nothing and you can get to it from your phone too.</p>
                     <p>It is not an off-the-shelf system that you have to adapt to. That is the main difference, and also the reason it costs more than a monthly subscription to something in a box.</p>
@@ -632,7 +635,7 @@ class BlogContentEnSeeder extends Seeder
                     <h2>What it means for your new website</h2>
                     <ul>
                     <li><strong>Start thinking about content right away.</strong> What do people not know about you and should? What do they keep asking? That is the basis of the texts. More questions are in the article <a href="/en/blog/how-to-prepare-for-a-new-website">What to prepare before you contact a web developer</a>.</li>
-                    <li><strong>Include texts and photos in the budget.</strong> If you do not have them, they have to be made. I go into that in the article <a href="/en/blog/how-much-does-a-website-cost">What a custom website costs</a> too.</li>
+                    <li><strong>Include photos in the budget.</strong> If you do not have them, they have to be taken or bought. I write the texts for you from your answers. What pushes the price up or down is in the article <a href="/en/blog/how-much-does-a-website-cost">What a custom website costs</a>.</li>
                     <li><strong>Choose the design to suit the content, not the other way round.</strong> A website you like at another company was designed for their texts. Not for yours.</li>
                     </ul>
                     <p>A nice website that says nothing helps nobody. A useful website that looks old loses people before they read it. You need both, just in the right order. I write about what else a website has to get right to work in the article <a href="/en/blog/how-to-create-a-successful-website">How to create a successful website</a>.</p>

@@ -137,7 +137,7 @@ return [
         'cta_heading'   => 'If 2+ points match, this is worth solving now.',
         // OND-369: `cta_text` is prose about what happens — it stays.
         // The button links to /contact, so it speaks like the header does.
-        'cta_text'      => 'In the intro call, we define the shortest path to a working solution without unnecessary extras.',
+        'cta_text'      => 'A short intro call is enough to see whether and how I can help, without unnecessary extras.',
         'cta_primary'   => 'Write an enquiry',
         'cta_secondary' => 'See pricing first',
     ],

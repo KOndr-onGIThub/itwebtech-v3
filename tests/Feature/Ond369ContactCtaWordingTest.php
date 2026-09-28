@@ -132,22 +132,25 @@ class Ond369ContactCtaWordingTest extends TestCase
     // ------------------------------------------------------------------
 
     /**
-     * Věty, které o konzultaci mluví jako o kroku v procesu, nejsou výzva ke
+     * Věty, které o prvním kroku mluví jako o kroku v procesu, nejsou výzva ke
      * kontaktu a zadání je nechává být. Hlídáme je, aby je příští plošný
      * replace nesmazal s nimi.
+     *
+     * OND-448 (B-02): první krok je „úvodní hovor“ (asi 15 minut), slovo
+     * konzultace z webu odešlo.
      */
-    public function test_prose_about_the_consultation_is_left_alone(): void
+    public function test_prose_about_the_intro_call_is_left_alone(): void
     {
         $prose = [
             'projects.fit.cta_text' => [
-                'cs' => 'úvodní konzultace',
+                'cs' => 'úvodním hovoru',
                 'en' => 'intro call',
                 'de' => 'Erstgespräch',
             ],
             'price.cta.desc' => [
-                'cs' => 'Během 30 minut',
-                'en' => 'In 30 minutes',
-                'de' => 'In 30 Minuten',
+                'cs' => 'úvodní hovor, asi 15 minut',
+                'en' => 'intro call is enough, about 15 minutes',
+                'de' => 'Erstgespräch genügt, etwa 15 Minuten',
             ],
         ];
 
@@ -163,23 +166,26 @@ class Ond369ContactCtaWordingTest extends TestCase
     }
 
     /**
-     * `price.cta.desc` je podtitulek téže výzvy jako tlačítko, proto z něj
-     * „zdarma" padá — ale nezávaznost je jiný slib a ta zůstává.
+     * OND-448 (B-02): web o ceně specifikace mlčí, ale nikde neslibuje, že je
+     * první krok nebo nabídka nezávazná či zdarma. (Do OND-448 tu test naopak
+     * hlídal „Konzultace je nezávazná.“ — board to 28. 9. 2026 zrušil.)
      */
-    public function test_the_price_cta_still_promises_a_non_binding_consultation(): void
+    public function test_the_price_cta_promises_neither_a_consultation_nor_no_obligation(): void
     {
-        $expected = [
-            'cs' => 'Konzultace je nezávazná.',
-            'en' => 'The consultation is non-binding.',
-            'de' => 'Die Beratung ist unverbindlich.',
+        $retired = [
+            'cs' => ['onzultac', 'nezávazn', '30 minut'],
+            'en' => ['onsultation', 'non-binding', 'no-obligation', '30 minutes'],
+            'de' => ['Beratung', 'unverbindlich', '30 Minuten'],
         ];
 
-        foreach ($expected as $locale => $sentence) {
-            $this->assertStringContainsString(
-                $sentence,
-                trans('price.cta.desc', [], $locale),
-                "Slib nezávaznosti chybí v `lang/{$locale}/price.php` (cta.desc).",
-            );
+        foreach ($retired as $locale => $words) {
+            foreach ($words as $word) {
+                $this->assertStringNotContainsString(
+                    $word,
+                    trans('price.cta.desc', [], $locale),
+                    "`price.cta.desc` (`{$locale}`) pořád obsahuje „{$word}“.",
+                );
+            }
         }
     }
 }

@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\HomeLeadController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RobotsController;
 use App\Http\Controllers\SitemapController;
@@ -73,6 +72,8 @@ foreach (array_slice($locales, 1) as $locale) {
 | Contact form POST — universal endpoint (used by Alpine.js axios call)
 |--------------------------------------------------------------------------
 | Posts to /contact regardless of locale. CSRF protected.
+| OND-448 (B-01): jediný poptávkový formulář webu — homepage i /kontakt.
+| Dřívější `POST /poptavka` (HomeLeadController → `landing_leads`) je pryč.
 | SetLocale middleware runs so že validační hlášky se přeloží podle URL
 | segmentu (defaultně cs) — bez něj Laravel padne na config('app.locale').
 */
@@ -87,18 +88,6 @@ foreach (array_slice($locales, 1) as $locale) {
 Route::post('/contact', [ContactController::class, 'send'])
     ->middleware([SetLocale::class, 'throttle:8,1'])
     ->name('contact.send');
-
-/*
-|--------------------------------------------------------------------------
-| Homepage inline lead POST — persists do `landing_leads` (source=home.inline)
-|--------------------------------------------------------------------------
-| SetLocale middleware musí běžet i na POST, jinak `Request::validate()`
-| čte locale z config('app.locale') a vrací EN hlášky bez ohledu na
-| existující lang/cs/validation.php (OND-100 QA blocker).
-*/
-Route::post('/poptavka', [HomeLeadController::class, 'store'])
-    ->middleware([SetLocale::class, 'throttle:8,1'])
-    ->name('home.lead.store');
 
 /*
 |--------------------------------------------------------------------------

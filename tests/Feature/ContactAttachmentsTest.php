@@ -25,9 +25,7 @@ class ContactAttachmentsTest extends TestCase
             'name'    => 'Jan Novák',
             'email'   => 'jan@example.com',
             'tel'     => '+420123456789',
-            'subject' => 'Poptávka webu',
             'message' => 'Dobrý den, posílám podklady.',
-            'gdpr'    => '1',
         ], $overrides);
     }
 
@@ -37,12 +35,37 @@ class ContactAttachmentsTest extends TestCase
      */
     public function test_contact_page_renders_the_upload_widget_with_config_limits(): void
     {
-        $response = $this->get('/kontakt');
+        // OND-448 (B-01): přílohy má i formulář na homepage (sdílený `<x-lead-form>`).
+        foreach (['/kontakt', '/'] as $url) {
+            $response = $this->get($url);
 
-        $response->assertOk();
-        $response->assertSee('name="attachment[]"', false);
-        $response->assertSee('maxFiles: '.config('contact.uploads.max_files'), false);
-        $response->assertSee('fileDropZone(', false);
+            $response->assertOk();
+            $response->assertSee('name="attachment[]"', false);
+            $response->assertSee('maxFiles: '.config('contact.uploads.max_files'), false);
+            $response->assertSee('fileDropZone(', false);
+        }
+    }
+
+    /**
+     * OND-448 (B-01): přílohy jsou ve výchozím stavu sbalené — vidět je jen
+     * textové tlačítko s `aria-expanded="false"`, zóna je schovaná (`x-show`),
+     * ale v DOMu zůstává, protože její `<input type="file">` nese soubory.
+     */
+    public function test_attachments_are_collapsed_behind_a_text_toggle_on_both_forms(): void
+    {
+        foreach (['cs' => ['/kontakt', '/'], 'en' => ['/en/contact', '/en/'], 'de' => ['/de/kontakt', '/de/']] as $locale => $urls) {
+            foreach ($urls as $url) {
+                $html = $this->get($url)->assertOk()->getContent();
+
+                $this->assertMatchesRegularExpression(
+                    '~<button type="button" class="pd-attach__toggle"\s+aria-controls="lead-attachments"\s+aria-expanded="false"\s+:aria-expanded="attachOpen \? \'true\' : \'false\'"~',
+                    $html,
+                    "[$url] chybí sbalovací tlačítko příloh",
+                );
+                $this->assertStringContainsString(e(__('home.inline_form.attach_toggle', [], $locale)), $html, "[$url] popisek tlačítka");
+                $this->assertStringContainsString('<div id="lead-attachments" x-show="attachOpen" x-cloak', $html, "[$url] zóna není sbalená");
+            }
+        }
     }
 
     public function test_attachments_are_stored_and_linked_to_the_lead(): void

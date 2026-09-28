@@ -23,26 +23,16 @@ return [
     'open_hours'          => 'Ich melde mich spätestens am nächsten Arbeitstag. Wochenenden und Feiertage zählen nicht mit, aber nichts geht verloren.',
     'cta_consultation'    => 'Schreiben Sie mir',
 
+    // OND-448 (B-01): Felder, Button, Datenschutzhinweis und Bestätigung des Formulars
+    // stehen seit der Vereinheitlichung in `home.inline_form` — /kontakt rendert dasselbe `<x-lead-form>`.
     'form_heading'        => 'Kontaktformular',
     // OND-371 — viz lang/cs/contact.php: „kostenlos“ jde pryč, termín odpovědi
     // se neopakuje počtvrté, slovník drží krok 3 („Umfang, Termin, Preis“).
     // Druhá věta je eliptická („oder eine Antwort“): plné „auf Ihre Frage“
     // lámalo řádek se sirotkem „Ihre Frage.“ Takto 1 řádek, rezerva 45 px.
-    'form_subheading'     => 'Sie bekommen ein Angebot mit Umfang, Termin und Preis — oder eine Antwort.',
-    'name'                => 'Vollständiger Name',
-    'email'               => 'E-Mail-Adresse',
-    'tel'                 => 'Telefon (optional)',
-    'tel_hint'            => 'Mit Nummer melde ich mich schneller.',
-    'subject'             => 'Betreff',
-    'message'             => 'Ihre Nachricht',
-    'message_placeholder' => 'Beschreiben Sie kurz, was Sie benötigen, oder schreiben Sie, wann ich Sie anrufen soll ...',
-    'agree'               => 'Ich stimme der Verarbeitung meiner Daten gemäß der ',
-    'policy'              => 'Datenschutzerklärung',
-    'send'                => 'Nachricht senden',
-    'sending'             => 'Wird gesendet...',
+    'form_subheading'     => 'Worum geht es? Ich melde mich persönlich und sage Ihnen, ob ich helfen kann.',
     'required'            => 'Bitte füllen Sie dieses Feld aus.',
     'enter_valid_email'   => 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
-    'policy_not_agreed'   => 'Sie haben der Datenschutzerklärung nicht zugestimmt.',
     'upload' => [
         'label'            => 'Dateien hinzufügen',
         'drag_text'        => '— oder hierher ziehen',
@@ -86,21 +76,14 @@ return [
                 'text'  => 'Sie erhalten eine E-Mail von mir persönlich, keine automatische Bestätigung. Wenn Sie am Freitagabend schreiben, melde ich mich am Montag.',
             ],
             [
-                'title' => 'Wir vereinbaren ein 30-minütiges Gespräch',
-                'text'  => 'Ein kurzes Telefon- oder Videogespräch — wir klären, ob eine Zusammenarbeit Sinn ergibt. Ohne Präsentation, ohne Folien, ohne Verkaufsdruck.',
+                'title' => 'Ein kurzes Erstgespräch',
+                'text'  => 'Etwa 15 Minuten am Telefon. Ich kläre, worum es geht, und sage Ihnen gleich, ob ich Ihnen helfen kann. Ohne Präsentation und ohne Verkaufsdruck.',
             ],
             [
-                'title' => 'Sie bekommen ein schriftliches Angebot',
-                'text'  => 'Innerhalb einer Woche schicke ich eine Spezifikation mit Umfang, Termin und genauem Preis. Was in der Spezifikation steht, steht auch auf der Rechnung.',
+                'title' => 'Wir vereinbaren das weitere Vorgehen',
+                'text'  => 'Wenn es Sinn ergibt, gehen wir die Details durch und ich schreibe eine Spezifikation mit Umfang, Termin und genauem Preis. Was in der Spezifikation steht, steht auch auf der Rechnung.',
             ],
         ],
-    ],
-
-    'thank_you' => [
-        // OND-437: Der Satz mit Datum und E-Mail ist `home.inline_form.confirmation.reply`,
-        // der Artikel-Link `…confirmation.more` — gleicher Wortlaut wie auf der Startseite.
-        'stamp'   => 'Nachricht eingegangen · :received',
-        'heading' => 'Danke. Ihre Nachricht ist bei mir.',
     ],
 
     'budget_label'   => 'Orientierendes Budget (optional)',

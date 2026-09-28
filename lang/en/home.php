@@ -116,16 +116,16 @@ return [
         'cta_more_slug'    => 'how-to-prepare-for-a-new-website',
         'steps'   => [
             [
-                'heading'      => 'Consultation',
-                'time'         => '60 min, within a week',
-                'text'         => 'You write to me through the form below and tell me what you are dealing with. I get back to you by the next business day and we arrange a call or a meeting. You talk to me, not to a salesperson — I want to know who you sell to, how enquiries reach you today and what the website has to do.',
+                'heading'      => 'Intro call',
+                'time'         => 'about 15 min',
+                'text'         => 'You write to me through the form below and tell me what you are dealing with. I get back to you by the next business day and give you a call. You talk to me, not to a salesperson. I find out what the website has to do and tell you straight whether I can help.',
                 'quote_text'   => 'He really listened to what I needed and then turned it into something I am completely happy with.',
                 'quote_ref'    => 'magda-pernicova',
             ],
             [
                 'heading'      => 'Specification',
                 'time'         => '2–5 days',
-                'text'         => 'You get it in writing: what will be on the website, how many pages it has and what it will cost. What is in the specification is what is on the invoice. I estimate the delivery date up front, not after the fact.',
+                'text'         => 'If it makes sense, we sit down over the details: who you sell to, how enquiries reach you, what the website has to do. Then you get it in writing: what will be on the website and what it will cost. What is in the specification is what is on the invoice. I estimate the delivery date up front, not after the fact.',
                 'quote_text'   => 'He analyses the starting position thoroughly and wants to understand the existing processes. He gathers requirements from users and asks where things are heading.',
                 'quote_ref'    => 'jan-stybor',
                 'note'         => 'The date is an estimate, not a commitment. Your approvals and your materials are part of the work, and I say so right at the start.',
@@ -269,27 +269,27 @@ return [
         // gone with it. The CZK floor of 20,000 is DELIBERATELY not converted
         // here: €800 buys a landing page in the German-speaking market, not a
         // website, so EN/DE carry the range and "smaller scopes welcome" only.
-        'intro'   => 'Most projects I build land between €3,500 and €8,000. The smallest thing I take on is a presentation site of up to five pages, from €1,900 — a smaller scope, not a lower standard. You\'ll get the exact price in writing after a short consultation.',
+        'intro'   => 'Most projects I build land between €3,500 and €8,000. The smallest thing I take on is a simple presentation site, from €1,900 — a smaller scope, not a lower standard. You get the exact price in writing in the specification.',
         // OND-354: cards carry SCOPE, not price, and are named after what gets
         // built. Order is by growing scope, the middle one is highlighted.
         'featured_label' => 'Most common choice',
         'items'   => [
             [
                 'title'    => 'Presentation site',
-                'scope'    => 'up to 5 pages',
-                'desc'     => 'A credible online presence for sole traders and small businesses.',
+                'scope'    => 'So customers can check you out',
+                'desc'     => 'Who you are, what you do, how to reach you',
                 'featured' => false,
             ],
             [
                 'title'    => 'Business site',
-                'scope'    => 'up to 12 pages',
-                'desc'     => 'A multilingual site with a blog, conversion tracking and a booking system.',
+                'scope'    => 'So customers see why it should be you',
+                'desc'     => 'More services, more languages, references and a blog',
                 'featured' => true,
             ],
             [
-                'title'    => 'Custom',
-                'scope'    => 'no scope limit',
-                'desc'     => 'An e-shop, a web application or a complex portal.',
+                'title'    => 'E-shops and applications',
+                'scope'    => 'So the system does the work for you',
+                'desc'     => 'E-shop, bookings, integration with your systems',
                 'featured' => false,
             ],
         ],
@@ -354,7 +354,7 @@ return [
             [
                 'key'      => 'duration',
                 'question' => 'How long does it take?',
-                'answer'   => 'From first message to a launched site typically 4–12 weeks — a week for consultation, 2–5 days for the specification, 3–10 weeks for the build, and launch by the next business day after approval. I put the exact timeline for your project into the specification.',
+                'answer'   => 'From first message to a launched site typically 4–12 weeks — an intro call within a few days, roughly a week for a detailed meeting and the specification, 3–10 weeks for the build, and launch by the next business day after approval. I put the exact timeline for your project into the specification.',
             ],
             [
                 'key'      => 'satisfaction',
@@ -391,12 +391,15 @@ return [
         'email'           => 'Email',
         'phone'           => 'Phone (optional)',
         'phone_hint'      => 'Leave a number and I can get back to you faster.',
+        // Attachments are collapsed behind this text button (OND-448, B-01);
+        // `<x-lead-form>` renders the leading `+`.
+        'attach_toggle'   => 'Add attachments (optional)',
         'message'         => 'What do you need solved?',
         'placeholders'    => [
             'name'    => 'John Smith',
             'email'   => 'john@company.com',
             'phone'   => '+420 000 000 000',
-            'message' => 'E.g. a new website for a manufacturing company, 5–10 pages',
+            'message' => 'E.g. a new website for a manufacturing company, 5–10 pages — or just write when I should call you',
         ],
         'submit'          => 'Send enquiry',
         'submitting'      => 'Sending…',
@@ -412,14 +415,13 @@ return [
             'reply'        => 'I\'ll get back to you personally at :email by :date. There is nothing else you need to do now.',
             'steps_aria'   => 'What happens next',
             'steps'        => [
-                ['label' => 'Consultation', 'text' => 'Within a week we talk on the phone or meet, for about an hour, and go through what the website has to do.'],
-                ['label' => 'Specification', 'text' => '2–5 days after the consultation you get it in writing: what will be on the website and what it will cost.'],
-                ['label' => 'Decision', 'text' => 'You decide once the finished specification is in front of you. Until then nothing commits you.'],
+                ['label' => 'Intro call', 'text' => 'I call you, for about 15 minutes. I find out what you are dealing with and tell you straight whether I can help.'],
+                ['label' => 'Specification', 'text' => 'If it makes sense, we go through the details together and you get it in writing: what will be on the website and what it will cost.'],
+                ['label' => 'Decision', 'text' => 'You decide on the build only once the finished specification is in front of you.'],
             ],
             'more'         => 'Before I get back to you, you can read :article_link.',
             'more_article' => 'how to prepare for a new website',
         ],
-        'error'           => 'The enquiry could not be saved right now. Please try again.',
     ],
 
     // OND-308: `cta` promised a calendar that no longer exists (OND-303).

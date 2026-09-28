@@ -412,15 +412,29 @@
     font-weight: 200;
     font-variation-settings: 'wght' 200;
     font-size: clamp(24px, 2.2vw, 32px);
+    line-height: 1.15;
     letter-spacing: var(--tracking-tight);
+    text-wrap: balance;
     color: var(--color-fg-primary);
     margin: 0 0 var(--space-4);
+}
+/* OND-448 (B-08): rozsah je teď claim („Aby zákazník pochopil, proč právě
+   vy“) a láme se do dvou řádků. Těsné řádkování drží dvojřádek jako jeden
+   celek a rezerva dvou řádků ve třech sloupcích srovná podtituly pod ním na
+   jednu linku (náhled CEO na OND-441, 28. 9. 2026). */
+@media (min-width: 1024px) {
+    .pd-price__scope { min-height: 2.3em; }
+    /* Němčina je delší: claim Firemního webu má tři řádky a dva podtituly
+       dva — rezerva o řádek víc, ať podtituly a případovky stojí na linkách. */
+    :lang(de) .pd-price__scope { min-height: 3.45em; }
+    :lang(de) .pd-price__desc { min-height: calc(2em * 1.5); }
 }
 .pd-price__desc {
     font-family: var(--font-body);
     font-size: var(--text-body-sm);
     line-height: var(--leading-relaxed);
     color: var(--color-fg-muted);
+    text-wrap: pretty;
     margin: 0;
 }
 /* Doporučené pásmo jen vlasovou linkou nahoře — žádná plocha. */
@@ -1257,8 +1271,8 @@
 @media (max-width: 640px) {
     .pd-done__steps li { grid-template-columns: 1fr; gap: var(--space-1); }
 }
-/* Spodní mobilní lišta po odeslání: na homepage se nevykreslí vůbec,
-   na /kontakt ji schová `contactForm`. Odsazení pro ni už není potřeba. */
+/* Spodní mobilní lišta po odeslání: schová ji `contactForm` (třída
+   `is-lead-sent` na <body>). Odsazení pro ni už není potřeba. */
 @media (max-width: 767px) {
     .is-lead-sent .mobile-bottom-bar { display: none; }
     body.is-lead-sent { padding-bottom: 0; }
@@ -1643,27 +1657,56 @@
    vymění za poděkování (`x-show="!submitted"`), takže musí být uvnitř. */
 .pd-form__panel .pd-head__title { margin-bottom: var(--space-3); }
 .pd-form__panel .pd-intro { margin-bottom: var(--space-7); }
+/* OND-448 (B-02): podtitulek formuláře má na 1440 stát na jednom řádku
+   (OND-371). Německé znění (77 znaků) se do 58ch nevejde a zalomilo by se
+   se sirotkem „kann.“. Šířku drží deska sama (~650 px), limit čtení tu
+   netřeba — je to jediná věta. */
+.pd-form__panel .pd-intro { max-width: none; }
 /* OND-392 — po odeslání `contactForm` roluje na kořen formuláře
    (`$root.scrollIntoView`, block: start) a kotva „Napište mi" míří tamtéž.
    Titulek poděkování stojí na horní hraně desky, takže bez odsazení ho
    celý schová fixní lišta (68px) — poděkování by nikdo neviděl. Stará
    `.contact-form__thanks` měla 40px vnitřní okraj a schovávala ho napůl.
    Rezerva nad lištou = přesah desky `::before` (−32px od 768px). */
-#kontaktni-formular { scroll-margin-top: calc(68px + 2.5rem); }
+/* OND-448: formulář je sdílený (`<x-lead-form>`), totéž platí na homepage. */
+.pd-form__panel { scroll-margin-top: calc(68px + 2.5rem); }
 
-/* Validace. Homepage ukazuje chyby až po
-   reloadu ze serveru, /kontakt inline přes Alpine (OND-256/1) — a to
-   potřebuje červený rámeček u pole. Totéž, co dělalo
+/* Validace. Chyby se ukazují inline přes Alpine (OND-256/1; od OND-448
+   i na homepage) — a to potřebuje červený rámeček u pole. Totéž, co dělalo
    `.form-group input[aria-invalid]` v app.css; `:not(:focus)` schválně,
    při psaní má přednost acid rámeček. */
 .pd-field input[aria-invalid="true"]:not(:focus),
 .pd-field textarea[aria-invalid="true"]:not(:focus) { border-color: #FF6157; }
 
-/* Přílohy a souhlas. Obě komponenty jsou
-   sdílené Blade komponenty (`x-form.file-drop`, `.form-group--checkbox`)
-   a jejich markup se NEMĚNÍ — přebarvují se jen uvnitř desky. Slovník ACID:
-   žádné zaoblení, žádná šedá výplň, acid jen při najetí. */
-.pd-form__panel .form-file-wrapper { margin: var(--space-5) 0 0; }
+/* Přílohy. `x-form.file-drop` je sdílená Blade komponenta
+   a její markup se NEMĚNÍ — přebarvuje se jen uvnitř desky. Slovník ACID:
+   žádné zaoblení, žádná šedá výplň, acid jen při najetí.
+   OND-448 (B-01): zóna je sbalená za textovým tlačítkem `.pd-attach__toggle`
+   (sazba odkazu `.pd-form__privacy a`, ne acidové tlačítko). Na 390 px
+   musí sbalený stav zabrat jeden řádek. Zaškrtávací souhlas odešel. */
+.pd-attach { margin: var(--space-5) 0 0; }
+.pd-attach__toggle {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    gap: var(--space-2);
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    color: var(--color-fg-muted);
+}
+.pd-attach__label {
+    text-decoration: underline;
+    text-decoration-color: var(--pd-accent);
+    text-underline-offset: 3px;
+}
+.pd-attach__toggle:hover,
+.pd-attach__toggle[aria-expanded="true"] { color: var(--color-fg-primary); }
+.pd-attach__toggle:focus-visible { outline: 2px solid var(--pd-accent); outline-offset: 2px; }
+.pd-form__panel .form-file-wrapper { margin: var(--space-2) 0 0; }
 .pd-form__panel .form-file,
 .pd-form__panel .form-file__trigger,
 .pd-form__panel .form-file__list-item {
@@ -1684,14 +1727,6 @@
     background: transparent;
 }
 .pd-form__panel .form-file__trigger:hover { color: var(--pd-accent); }
-.pd-form__panel .form-group--checkbox { margin: var(--space-5) 0 0; }
-.pd-form__panel .form-group--checkbox input { accent-color: var(--pd-accent); }
-.pd-form__panel .form-group--checkbox a {
-    color: var(--color-fg-muted);
-    text-decoration-color: var(--pd-accent);
-    text-underline-offset: 3px;
-}
-.pd-form__panel .form-group--checkbox a:hover { color: var(--pd-accent); }
 .pd-form__panel .pd-alert { margin: var(--space-5) 0 0; }
 
 
@@ -1819,6 +1854,8 @@
 .pd-price--full .pd-case__live { position: relative; }
 .pd-price--full .pd-case__cta::after,
 .pd-price--full .pd-case__live::after { content: ''; position: absolute; inset: -12px -6px; }
+/* OND-448 (B-08): „Cenu neurčuje počet stránek…“ hned pod balíčky. */
+.pd-price__pages { margin: var(--space-8) 0 0; }
 .pd-price__entry { margin: var(--space-8) 0 var(--space-3); }
 /* Desktop: doporučený sloupec má 2px acid nahoře a `--space-4` pod ní,
    ostatní nic — rozsahy by pak neseděly na jedné lince (na homepage je to

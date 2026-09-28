@@ -191,10 +191,11 @@ class BlogContentDeSeeder extends Seeder
                     <p>Sie bezahlen meine Zeit und das, was ich damit anzufangen weiß. Sie kaufen keine Lizenz für ein Template und keine Stunden eines Vertrieblers, der Ihnen die Website verkauft hat und dann verschwunden ist. Ich arbeite allein, im Preis stecken also kein Agentur-Overhead und kein Koordinator, der mir Ihre E-Mails weiterleitet.</p>
                     <p>Websites schreibe ich mit eigenem Code. Ich baue sie nicht aus Baukästen und fremden Plug-ins zusammen, die ständig aktualisiert werden müssen und irgendwann kaputtgehen. Das ist am Anfang teurer und mit der Zeit günstiger, weil Sie nichts zu reparieren haben.</p>
                     <h2>Was es bei mir kostet</h2>
-                    <p>Die meisten Projekte liegen zwischen 3.500 und 8.000 €. Das Kleinste, was ich baue, ist eine Präsentationswebsite mit bis zu fünf Seiten, ab 1.900 €. Was Ihre kostet, hängt vor allem vom Umfang ab.</p>
-                    <p><strong>Präsentationswebsite — bis fünf Seiten.</strong> Für Selbstständige und kleine Unternehmen, bei denen ein größerer Umfang keinen Sinn ergibt. Sie wird schnell sein, auf dem Handy sauber funktionieren, und kein Link zum Anfrageformular wird ins Leere führen. Erwarten Sie nicht, dass sie von allein Aufträge bringt — dafür braucht es mehr Arbeit, als der kleinste Umfang zulässt. Aber sie wird ordentlich gemacht.</p>
-                    <p><strong>Firmenwebsite — bis zwölf Seiten.</strong> Eine Website nach Maß mit einer einfachen Inhaltsverwaltung, sodass Sie Texte, Fotos oder Referenzen selbst ändern. Eine weitere Sprachversion ist möglich. Das bestellen die meisten Firmen.</p>
-                    <p><strong>Individuell — ohne Umfangsgrenze.</strong> Onlineshop, Reservierungssystem oder eine Anwendung nach Maß. Der Umfang steht nicht vorher fest, der Preis ergibt sich daraus, was die Website können muss und an welche Systeme sie angebunden wird.</p>
+                    <p>Die meisten Projekte liegen zwischen 3.500 und 8.000 €. Das Kleinste, was ich baue, ist eine einfache Präsentationswebsite ab 1.900 €. Was Ihre kostet, hängt vor allem davon ab, wie viel Arbeit nötig ist, damit die Website tut, was sie soll.</p>
+                    <p><strong>Präsentationswebsite — damit Kunden Sie prüfen können.</strong> Wer Sie sind, was Sie tun und wie man Sie erreicht. Für Selbstständige und kleine Unternehmen, bei denen ein größerer Umfang keinen Sinn ergibt. Sie wird schnell sein, auf dem Handy sauber funktionieren, und kein Link zum Anfrageformular wird ins Leere führen. Erwarten Sie nicht, dass sie von allein Aufträge bringt — dafür braucht es mehr Arbeit, als der kleinste Umfang zulässt. Aber sie wird ordentlich gemacht.</p>
+                    <p><strong>Firmenwebsite — damit Kunden verstehen, warum gerade Sie.</strong> Mehr Leistungen, mehr Sprachen, Referenzen und Blog. Eine Website nach Maß mit einer einfachen Inhaltsverwaltung, sodass Sie Texte, Fotos oder Referenzen selbst ändern. Das bestellen die meisten Firmen.</p>
+                    <p><strong>Online-Shops und Anwendungen — damit das System für Sie arbeitet.</strong> Onlineshop, Reservierungssystem oder eine Anwendung nach Maß. Der Umfang steht nicht vorher fest, der Preis ergibt sich daraus, was das System können muss und an welche Systeme es angebunden wird.</p>
+                    <p>Die Zahl der Seiten entscheidet dabei nicht über den Preis. Entscheidend ist, wie viele verschiedene Arten von Seiten die Website braucht. Ein Blog ist eine Art: Ich baue ihn einmal, und es ist egal, ob darauf ein Artikel steht oder hundert. Die Artikel zu planen und zu schreiben ist aber eigene Arbeit. Genauso ist es mit einem Produktkatalog oder mit Referenzen. Eine Website mit einer Seite kann deshalb mehr kosten als eine mit fünf, wenn sie mehr erklären und können muss.</p>
                     <p>Ich bin nicht umsatzsteuerpflichtig. Der Preis, den ich Ihnen nenne, ist ein Endpreis — es kommt keine Mehrwertsteuer hinzu. Was genau jeweils enthalten ist, steht aufgeschlüsselt in der <a href="/de/preisliste">Preisliste</a>.</p>
                     HTML,
                 'content_mid' => <<<'HTML'
@@ -203,15 +204,17 @@ class BlogContentDeSeeder extends Seeder
                 'content_2'   => <<<'HTML'
                     <h2>Was den Preis nach oben treibt</h2>
                     <ul>
+                    <li><strong>Mehr Leistungen oder Produkte, die verständlich erklärt werden müssen.</strong> Jede davon muss durchdacht und so beschrieben werden, dass Kunden sie verstehen.</li>
                     <li><strong>Anbindung an ein System, das Sie in der Firma schon nutzen.</strong> Lager, Buchhaltung, Reservierungen. Je mehr sich zwei Systeme verstehen müssen, desto mehr Arbeit ist es.</li>
                     <li><strong>Weitere Sprachen.</strong> Das ist nicht nur eine Textübersetzung. Es ist eine weitere Version der ganzen Website, die jemand pflegen muss.</li>
-                    <li><strong>Inhalte, die es noch nicht gibt.</strong> Wenn Sie weder Fotos noch Texte haben, müssen sie erst entstehen. Wir klären vorher, was Sie beisteuern und was ich — damit es auf der Rechnung keine Überraschung gibt. Warum der Inhalt wichtiger ist als das Aussehen, schreibe ich im Artikel <a href="/de/blog/design-oder-inhalt">Design oder Inhalt?</a></li>
+                    <li><strong>Fotos, die es noch nicht gibt.</strong> Wenn Sie keine haben, müssen sie erst gemacht oder gekauft werden. Wir klären vorher, was Sie beisteuern und was ich — damit es auf der Rechnung keine Überraschung gibt. Die Texte schreibe ich selbst aus Ihren Antworten, sie gehören zu jeder Website. Warum der Inhalt wichtiger ist als das Aussehen, schreibe ich im Artikel <a href="/de/blog/design-oder-inhalt">Design oder Inhalt?</a></li>
                     <li><strong>Ein Umfang, der unterwegs wächst.</strong> Deshalb schreibe ich die Spezifikation. Damit wir beide wissen, wo die Grenze liegt.</li>
                     </ul>
                     <h2>Was den Preis senkt</h2>
                     <ul>
-                    <li><strong>Texte und Fotos liegen bereit.</strong> Es muss nichts erst entstehen, und ich kann gleich mit dem Bau anfangen.</li>
-                    <li><strong>Weniger Seiten.</strong> Weniger Arbeit, niedrigerer Preis.</li>
+                    <li><strong>Fotos, die Sie bereits in guter Qualität haben.</strong> Nichts muss erst fotografiert oder gekauft werden.</li>
+                    <li><strong>Eine Person auf Ihrer Seite, die entscheidet.</strong> Wir warten nicht auf die Freigabe von fünf Leuten.</li>
+                    <li><strong>Vollständige und schnelle Antworten auf meine Fragen.</strong> Aus ihnen schreibe ich die Texte, und je früher ich sie vollständig habe, desto weniger Zeit geht für Rückfragen drauf.</li>
                     <li><strong>Eine Sprache.</strong> Eine Version der Website, die gebaut und gepflegt werden muss.</li>
                     <li><strong>Sie pflegen die Inhalte selbst.</strong> Ich zeige Ihnen, wie es geht, und Texte und Fotos stellen Sie statt mir auf die Website.</li>
                     </ul>
@@ -221,7 +224,7 @@ class BlogContentDeSeeder extends Seeder
                     <h2>Wann Sie keine Website bei mir kaufen sollten</h2>
                     <p>Wenn Sie die Website in einer Woche brauchen. Wenn Sie nur ein bestehendes WordPress reparieren wollen. Beides mache ich nicht, und es ist besser, Sie wissen es jetzt als nach zwei Terminen.</p>
                     <h2>Wie Sie zum genauen Preis kommen</h2>
-                    <p>Schreiben Sie mir, was Sie brauchen. Ruhig kurz. Ich melde mich spätestens am nächsten Arbeitstag und wir gehen es durch. Wenn dabei herauskommt, dass ich Ihnen helfen kann, bekommen Sie eine Spezifikation mit einem konkreten Preis. Wenn nicht, sage ich es Ihnen und dränge Ihnen nichts auf.</p>
+                    <p>Schreiben Sie mir, was Sie brauchen. Ruhig kurz. Ich melde mich spätestens am nächsten Arbeitstag und wir gehen es durch. Wenn dabei herauskommt, dass ich Ihnen helfen kann, vereinbaren wir eine Spezifikation mit einem konkreten Preis. Wenn nicht, sage ich es Ihnen und dränge Ihnen nichts auf.</p>
                     HTML,
             ],
 
@@ -256,13 +259,13 @@ class BlogContentDeSeeder extends Seeder
                     <h2>6. Wer wird die Inhalte pflegen</h2>
                     <p>Wenn Sie Texte und Fotos selbst ändern wollen, baue ich Ihnen eine einfache Inhaltsverwaltung ein und zeige Ihnen, wie es geht. Wenn nicht, müssen wir sie nicht bauen und Sie sparen. Beides ist in Ordnung, ich muss es nur vorher wissen.</p>
                     <h2>7. Was Sie schon haben</h2>
-                    <p>Logo, Fotos, Texte, Zugänge zu Domain und Hosting, einen Shop mit Produkten in irgendeinem System. Je mehr davon vorhanden ist, desto weniger muss erst hergestellt werden. Wenn Sie eine fertige <a href="/de/blog/wettbewerbsanalyse-website">Wettbewerbsanalyse</a> oder <a href="/de/blog/keyword-recherche-schritt-fuer-schritt">Keyword-Recherche</a> haben, schicken Sie sie mir auch.</p>
+                    <p>Logo, Fotos, Zugänge zu Domain und Hosting, einen Shop mit Produkten in irgendeinem System. Je mehr davon vorhanden ist, desto weniger muss erst hergestellt werden. Texte müssen Sie nicht schreiben, die schreibe ich aus Ihren Antworten auf diese Fragen. Wenn Sie eine fertige <a href="/de/blog/wettbewerbsanalyse-website">Wettbewerbsanalyse</a> oder <a href="/de/blog/keyword-recherche-schritt-fuer-schritt">Keyword-Recherche</a> haben, schicken Sie sie mir auch.</p>
                     <h2>8. Welches Budget haben Sie</h2>
                     <p>Ich weiß, diese Frage mag niemand. Ich stelle sie, um Ihnen gleich sagen zu können, ob ich es zu diesem Preis kann. Wenn nicht, sage ich es sofort und wir verlieren beide keine Zeit.</p>
                     <h2>9. Bis wann brauchen Sie es</h2>
                     <p>Wenn Sie wegen einer Messe oder einer Eröffnung einen festen Termin haben, nennen Sie ihn mir gleich. Daran erkenne ich, ob ich es schaffe.</p>
                     <h2>Was danach passiert</h2>
-                    <p>Aus Ihren Antworten schreibe ich eine Spezifikation. Darin steht, was ich baue, und ein Preis, der gilt. Erst dann entscheiden Sie, ob wir es machen. Sie unterschreiben nichts im Voraus.</p>
+                    <p>Aus Ihren Antworten schreibe ich eine Spezifikation. Darin steht, was ich baue, und ein Preis, der gilt. Über die Umsetzung entscheiden Sie erst, wenn die fertige Spezifikation vor Ihnen liegt.</p>
                     HTML,
             ],
 
@@ -300,7 +303,7 @@ class BlogContentDeSeeder extends Seeder
                     <p>Es ging dabei nicht um spektakuläre Technologie. Es ging darum, die Stelle zu finden, an der Zeit verschwendet wird, und diese Stelle zu beseitigen. Genauso denke ich auch heute, wenn ich für eine Firma eine Anwendung nach Maß baue.</p>
                     <h2>Wie Sie es selbst nachrechnen</h2>
                     <p>Nehmen Sie eine Tätigkeit, die von Hand erledigt wird. Wie viele Minuten am Tag kostet sie? Wie oft im Monat passiert dabei ein Fehler und was kostet dieser Fehler? Multiplizieren Sie es mit zwölf Monaten. Wenn eine Zahl im Bereich von mehreren tausend Euro pro Jahr herauskommt, rechnet sich eine Anwendung nach Maß in ein paar Jahren und spart danach nur noch. Wenn ein paar hundert Euro herauskommen, lassen Sie es und kaufen Sie sich lieber eine ordentliche Tabelle.</p>
-                    <p>Diese Rechnung mache ich Ihnen beim ersten Gespräch kostenlos. Wenn dabei herauskommt, dass es sich nicht lohnt, sage ich es Ihnen.</p>
+                    <p>Eine grobe Schätzung nenne ich Ihnen schon im Erstgespräch. Wenn dabei herauskommt, dass es sich nicht lohnt, sage ich es Ihnen.</p>
                     <h2>Was eine Anwendung nach Maß ist und was nicht</h2>
                     <p>Es ist ein Programm, das genau darauf gebaut ist, wie Ihre Firma arbeitet. Erfassung, Bestellungen, Planung, Auswertungen. Es läuft im Browser, Sie installieren also nichts und kommen auch vom Handy daran.</p>
                     <p>Es ist kein fertiges System, an das Sie sich anpassen müssen. Das ist der wesentliche Unterschied und auch der Grund, warum es mehr kostet als ein Monatsabo für eine Standardsoftware.</p>
@@ -624,7 +627,7 @@ class BlogContentDeSeeder extends Seeder
                     <h2>Was das für Ihre neue Website heißt</h2>
                     <ul>
                     <li><strong>Denken Sie gleich über den Inhalt nach.</strong> Was wissen die Leute über Sie nicht und sollten es wissen? Wonach fragen sie immer wieder? Das ist die Grundlage der Texte. Weitere Fragen finden Sie im Artikel <a href="/de/blog/vorbereitung-auf-die-neue-website">Neun Fragen, die Sie vor dem Website-Projekt klären</a>.</li>
-                    <li><strong>Rechnen Sie Texte und Fotos ins Budget ein.</strong> Wenn Sie sie nicht haben, müssen sie erst entstehen. Auch darum geht es im Artikel <a href="/de/blog/was-kostet-eine-website">Was eine Website kostet</a>.</li>
+                    <li><strong>Rechnen Sie Fotos ins Budget ein.</strong> Wenn Sie keine haben, müssen sie erst gemacht oder gekauft werden. Die Texte schreibe ich Ihnen aus Ihren Antworten. Was den Preis erhöht und was ihn senkt, steht im Artikel <a href="/de/blog/was-kostet-eine-website">Was eine Website kostet</a>.</li>
                     <li><strong>Wählen Sie das Design nach dem Inhalt, nicht umgekehrt.</strong> Eine Website, die Ihnen bei einer anderen Firma gefällt, wurde für deren Texte entworfen. Nicht für Ihre.</li>
                     </ul>
                     <p>Eine schöne Website, die nichts sagt, hilft niemandem. Eine nützliche Website, die alt aussieht, verliert die Leute, bevor sie sie lesen. Sie brauchen beides, nur in der richtigen Reihenfolge. Was eine Website sonst noch erfüllen muss, damit sie funktioniert, schreibe ich im Artikel <a href="/de/blog/erfolgreiche-website-erstellen">Erfolgreiche Website erstellen</a>.</p>

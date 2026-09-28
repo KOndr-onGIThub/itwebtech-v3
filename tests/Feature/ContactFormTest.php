@@ -10,6 +10,10 @@ use Tests\TestCase;
 
 /**
  * OND-173: Kontaktní formulář musí lead uložit do DB a odeslat notifikaci.
+ *
+ * OND-448 (B-01): `POST /contact` je jediný poptávkový formulář webu
+ * (homepage i /kontakt). Bez předmětu a bez zaškrtávacího souhlasu, zpráva
+ * je povinná, `source` rozliší místo a chyby jsou v jazyce stránky.
  */
 class ContactFormTest extends TestCase
 {
@@ -21,9 +25,8 @@ class ContactFormTest extends TestCase
             'name'    => 'Jan Novák',
             'email'   => 'jan@example.com',
             'tel'     => '+420123456789',
-            'subject' => 'Poptávka webu',
             'message' => 'Dobrý den, mám zájem o web.',
-            'gdpr'    => '1',
+            'source'  => 'contact',
         ], $overrides);
     }
 
@@ -59,16 +62,63 @@ class ContactFormTest extends TestCase
         $this->assertSame(ContactSubmission::MAIL_FAILED, ContactSubmission::first()->mail_status);
     }
 
-    public function test_validation_rejects_missing_gdpr_and_email(): void
+    public function test_validation_requires_message_and_valid_email_but_no_consent(): void
     {
         $response = $this->postJson('/contact', $this->validPayload([
-            'gdpr'  => null,
-            'email' => 'neni-email',
+            'message' => '',
+            'email'   => 'neni-email',
         ]));
 
         $response->assertStatus(422)
-            ->assertJsonValidationErrors(['gdpr', 'email']);
+            ->assertJsonValidationErrors(['message', 'email'])
+            ->assertJsonMissingValidationErrors(['gdpr', 'subject']);
 
         $this->assertDatabaseCount('contact_submissions', 0);
+    }
+
+    public function test_source_is_stored_and_unknown_source_falls_back_to_contact(): void
+    {
+        Mail::fake();
+
+        $this->postJson('/contact', $this->validPayload(['source' => 'home', 'email' => 'a@example.com']))->assertOk();
+        $this->postJson('/contact', $this->validPayload(['source' => 'contact', 'email' => 'b@example.com']))->assertOk();
+        $this->postJson('/contact', $this->validPayload(['source' => 'nesmysl', 'email' => 'c@example.com']))->assertOk();
+
+        $this->assertSame(
+            ['a@example.com' => 'home', 'b@example.com' => 'contact', 'c@example.com' => 'contact'],
+            ContactSubmission::orderBy('id')->pluck('source', 'email')->all(),
+        );
+        $this->assertNull(ContactSubmission::first()->subject);
+
+        Mail::assertSent(ContactMessage::class, fn (ContactMessage $mail) => $mail->submission->source === 'home'
+            && str_contains($mail->envelope()->subject, 'homepage'));
+    }
+
+    /**
+     * `POST /contact` nemá jazyk v URL. Jazyk stránky nese pole `locale`
+     * a musí platit už pro validaci — dřív byly hlášky vždycky česky.
+     */
+    public function test_validation_messages_follow_the_page_language(): void
+    {
+        $expected = [
+            'cs' => 'Pole zpráva je povinné.',
+            'en' => 'The message field is required.',
+            'de' => 'Das Feld Nachricht ist erforderlich.',
+        ];
+
+        foreach ($expected as $locale => $message) {
+            $this->postJson('/contact', $this->validPayload(['message' => '', 'locale' => $locale]))
+                ->assertStatus(422)
+                ->assertJsonPath('errors.message.0', $message);
+        }
+    }
+
+    public function test_stored_locale_is_the_page_language(): void
+    {
+        Mail::fake();
+
+        $this->postJson('/contact', $this->validPayload(['locale' => 'de']))->assertOk();
+
+        $this->assertSame('de', ContactSubmission::first()->locale);
     }
 }

@@ -27,6 +27,20 @@ class Ond359PriceTierProofLinksTest extends TestCase
     ];
 
     /**
+     * OND-448 (B-08): `pitarena-eshop` (balíček „E-shop a aplikace“) má
+     * v en/de lokalizovaný slug (OND-209). Šablona ho skládá přes
+     * `detailUrl()`, test ho musí znát taky.
+     */
+    private const LOCALIZED_SLUGS = [
+        'pitarena-eshop' => ['en' => 'pitarena-online-shop', 'de' => 'pitarena-onlineshop'],
+    ];
+
+    private function slugFor(string $slug, string $locale): string
+    {
+        return self::LOCALIZED_SLUGS[$slug][$locale] ?? $slug;
+    }
+
+    /**
      * U každé úrovně stojí odkaz s očekávaným popiskem a cílem — ve všech
      * třech jazycích. Adresa se skládá z jazykového prefixu a slugu.
      */
@@ -43,7 +57,7 @@ class Ond359PriceTierProofLinksTest extends TestCase
             foreach ($tiers as $tier) {
                 $this->assertArrayHasKey('proof', $tier, "Úroveň `{$tier['key']}` v `{$locale}` nemá `proof`.");
 
-                $href  = $paths['project'] . '/' . $tier['proof']['slug'];
+                $href  = $paths['project'] . '/' . $this->slugFor($tier['proof']['slug'], $locale);
                 $label = trans('price.proof_intro', [], $locale) . ': ' . $tier['proof']['label'];
 
                 $this->assertStringContainsString('href="' . url($href) . '"', $body,
@@ -65,7 +79,7 @@ class Ond359PriceTierProofLinksTest extends TestCase
 
         foreach (self::PRICE_PATHS as $locale => $paths) {
             foreach (trans('price.tiers', [], $locale) as $tier) {
-                $url = $paths['project'] . '/' . $tier['proof']['slug'];
+                $url = $paths['project'] . '/' . $this->slugFor($tier['proof']['slug'], $locale);
 
                 $this->get($url)->assertOk();
             }

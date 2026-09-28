@@ -34,7 +34,7 @@ return [
     // Rechtsgrundlage und Betroffenenrechte; entfernt, was die Website nicht tut.
     // Konflikt mit OND-266 (Anführungszeichen) zugunsten dieser Fassung gelöst —
     // die von OND-266 korrigierten Absätze entfallen hier vollständig.
-    'content' =>'<p>Gültig ab 23. September 2026</p>
+    'content' =>'<p>Gültig ab 29. September 2026</p>
 
 <p>Diese Website betreibe ich, Ondřej Kriška — Dunajovská 116, 691 81 Březí, Tschechien, Ident.-Nr. 19231407. Ich habe weder ein Team noch eine Vertriebsabteilung, und damit bin ich auch der Einzige, der Ihre Daten je zu sehen bekommt. Schreiben Sie mir jederzeit an <a href="mailto:ok@ondraweb.cz">ok@ondraweb.cz</a>.</p>
 
@@ -75,7 +75,7 @@ return [
 
 <h3>Und jetzt die formale Seite</h3>
 <ul>
-<li>Ihre Nachricht verarbeite ich, um die <strong>Zusammenarbeit anbahnen</strong> zu können, nach der Sie gefragt haben (Art. 6 Abs. 1 lit. b DSGVO), und auf Grundlage der <strong>Einwilligung</strong>, die Sie neben dem Formular ankreuzen (Art. 6 Abs. 1 lit. a).</li>
+<li>Ihre Nachricht verarbeite ich, um die <strong>Zusammenarbeit anbahnen</strong> zu können, nach der Sie gefragt haben (Art. 6 Abs. 1 lit. b DSGVO).</li>
 <li>Rechnungen und Verträge bewahre ich auf, weil das <strong>Gesetz</strong> es mir vorschreibt (Art. 6 Abs. 1 lit. c).</li>
 <li>Die IP-Adresse zu einer abgeschickten Nachricht halte ich auf Grundlage meines <strong>berechtigten Interesses</strong>, das Formular vor Missbrauch zu schützen (Art. 6 Abs. 1 lit. f).</li>
 <li>Die Analyse schalte ich nur mit <strong>Ihrer Einwilligung</strong> ein (Art. 6 Abs. 1 lit. a), und die können Sie jederzeit widerrufen.</li>

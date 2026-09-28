@@ -174,7 +174,10 @@
                 <h2 class="pd-price__title">{{ $tier['name'] }}@if ($tier['popular']) <em>{{ __('price.popular') }}</em>@endif</h2>
                 {{-- OND-354: rozsah je to, čím se úrovně reálně liší — proto
                      stojí hned pod názvem ve velikosti, kterou homepage dává
-                     rozsahu. Popis je až pod ním (pořadí homepage kotvy). --}}
+                     rozsahu. Popis je až pod ním (pořadí homepage kotvy).
+                     OND-448 (B-08): název je malý štítek, `scope` je claim
+                     („Aby si vás zákazník ověřil"), `desc` jeden tlumený
+                     podtitul — počet stránek z karet zmizel. --}}
                 <p class="pd-price__scope">{{ $tier['scope'] }}</p>
                 <p class="pd-price__desc">{{ $tier['desc'] }}</p>
 
@@ -195,7 +198,7 @@
                     @endforeach
                 </ul>
 
-                {{-- OND-391: tři stejná tlačítka „Chci nezávaznou nabídku"
+                {{-- OND-391: tři stejná tlačítka (od OND-448 „Napsat poptávku")
                      jsou tichý odkaz s acidovou linkou (`.pd-case__cta`),
                      ne tři tlačítka. Analytika zůstává po úrovních. --}}
                 <p class="pd-price__action">
@@ -207,6 +210,10 @@
             </article>
             @endforeach
         </div>
+
+        {{-- OND-448 (B-08): cenu neurčuje počet stránek — tichá věta hned pod
+             balíčky, jen tady (homepage kotva nese jen dlaždice). --}}
+        <p class="pd-note pd-price__pages">{{ __('price.pages_note') }}</p>
 
         {{-- OND-354: `entry_note` stojí pod mřížkou, ne v kartě. --}}
         <p class="pd-intro pd-price__entry">{{ __('price.entry_note') }}</p>

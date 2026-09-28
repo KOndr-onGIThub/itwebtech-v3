@@ -138,7 +138,7 @@ return [
         'cta_heading'   => 'Pokud sedí 2 a více bodů, má smysl to řešit.',
         // OND-369: `cta_text` je próza o tom, co se stane — zůstává.
         // Popisek tlačítka vede na /kontakt, takže mluví stejně jako hlavička.
-        'cta_text'      => 'Během úvodní konzultace najdeme nejkratší cestu k funkčnímu řešení bez zbytečných funkcí navíc.',
+        'cta_text'      => 'Už při krátkém úvodním hovoru poznáme, jestli a jak vám můžu pomoct, bez zbytečných funkcí navíc.',
         'cta_primary'   => 'Napsat poptávku',
         'cta_secondary' => 'Nejdřív ceník',
     ],
