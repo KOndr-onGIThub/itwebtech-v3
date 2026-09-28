@@ -1,6 +1,7 @@
 @props([
     'screenshots',
     'part' => 'all', // 'lead' = jen hlavní celošířkový vizuál | 'rest' = zbytek | 'all' = obojí
+    'transitionName' => null, // OND-438: jméno přechodu na rámu hlavního vizuálu (karta projektu → detail)
 ])
 
 {{--
@@ -58,10 +59,22 @@
 @endphp
 
 @if (in_array($part, ['lead', 'all']) && $lead)
+@php
+    // OND-438: obrázek sem dosazuje až Alpine (sdílený basename `hero-1`,
+    // viz responsive_image_srcsets()), takže do té doby měl rám výšku 2 px.
+    // Obrázek z karty projektu pak při přechodu přejel do zploštělého rámu
+    // a stránka pod ním poskočila. Poměr stran ze souboru drží rám od
+    // prvního vykreslení ve správné výšce.
+    $leadDims = screenshot_dimensions_any($lead->path);
+    $leadStyle = collect([
+        $transitionName ? "view-transition-name: {$transitionName}" : null,
+        $leadDims ? "--lead-ratio: {$leadDims['width']} / {$leadDims['height']}" : null,
+    ])->filter()->implode('; ');
+@endphp
 <section class="pd-section pd-gallery pd-gallery--lead" data-pdd="project-lead">
     <div class="container-site">
         <figure class="pd-gallery__band">
-            <div class="pd-gallery__frame">
+            <div class="pd-gallery__frame"@if ($leadStyle !== '') style="{{ $leadStyle }}"@endif>
                 <x-portfolio.screenshot
                     :path="$lead->path"
                     :alt="$lead->translation()?->alt ?? ''"

@@ -426,3 +426,23 @@ if (!function_exists('current_page')) {
         return $dotPos !== false ? substr($name, $dotPos + 1) : 'home';
     }
 }
+
+if (!function_exists('project_transition_name')) {
+    /**
+     * OND-438 — jméno pro přechod mezi stránkami (`view-transition-name`)
+     * u karty projektu a v hlavě jeho detailu. Obrázek a titulek karty musí
+     * nést STEJNÉ jméno jako hlavní vizuál a H1 detailu, jinak se nespárují.
+     *
+     * Jméno je složené ze slugu, protože musí být na stránce unikátní: při
+     * dvou stejných jménech prohlížeč přechod tiše vzdá (žádná chyba, jen se
+     * stránka vymění naráz). Ze slugu nechává jen znaky platné v CSS
+     * identifikátoru.
+     *
+     *   project_transition_name('pitarena', 'img')   → project-img-pitarena
+     *   project_transition_name('pitarena', 'title') → project-title-pitarena
+     */
+    function project_transition_name(string $slug, string $part): string
+    {
+        return 'project-' . $part . '-' . preg_replace('/[^a-z0-9-]+/', '-', strtolower($slug));
+    }
+}

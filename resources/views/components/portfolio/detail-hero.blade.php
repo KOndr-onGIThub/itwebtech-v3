@@ -26,7 +26,7 @@
          data-analytics-props='{"slug":"{{ $project->slug }}"}'>
     <div class="container-site">
         <p class="pd-eyebrow">{{ $categoryLabel }}@if ($project->year) <span class="pd-eyebrow__sep" aria-hidden="true"></span> {{ $project->year }}@endif</p>
-        <h1 class="pd-heading pd-heading--sub">{{ $translation?->title ?? $project->slug }}</h1>
+        <h1 class="pd-heading pd-heading--sub" style="view-transition-name: {{ project_transition_name($project->slug, 'title') }}">{{ $translation?->title ?? $project->slug }}</h1>
         @if ($sub)
             <p class="pd-sub">{{ $sub }}</p>
         @endif

@@ -223,6 +223,7 @@
                     <a
                         href="{{ $detailHref }}"
                         class="pd-case__visual"
+                        style="view-transition-name: {{ project_transition_name($project->slug, 'img') }}"
                         aria-label="{{ $clientLabel }} — {{ __('home.portfolio.detail_cta') }}"
                         data-analytics="project_card_click"
                         data-analytics-props='{"slug":"{{ $project->slug }}"}'
@@ -238,7 +239,7 @@
                     </a>
                     <div class="pd-case__body">
                         <span class="pd-case__num" aria-hidden="true">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
-                        <h3 class="pd-case__client">{{ $clientLabel }}</h3>
+                        <h3 class="pd-case__client" style="view-transition-name: {{ project_transition_name($project->slug, 'title') }}">{{ $clientLabel }}</h3>
                         @if ($outcome)
                         <p class="pd-case__outcome">{{ $outcome }}</p>
                         @endif

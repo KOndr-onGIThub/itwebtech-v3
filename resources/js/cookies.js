@@ -28,6 +28,8 @@
  *   };
  */
 
+import { whenActivated } from './prerender';
+
 (function () {
     'use strict';
 
@@ -411,8 +413,11 @@
         setAnalyticsDisabled(!consent || consent.status !== 'accepted');
 
         if (consent && consent.status === 'accepted') {
-            bootGA4();
-            bootClarity();
+            // OND-438: v přednačtené stránce až po jejím otevření.
+            whenActivated(function () {
+                bootGA4();
+                bootClarity();
+            });
             // Modal nezobrazujeme — pokud byl v DOM, ponech ho skrytý
             var existing = document.getElementById('cookie-overlay');
             if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
