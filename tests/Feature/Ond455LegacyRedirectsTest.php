@@ -1,0 +1,177 @@
+<?php
+
+namespace Tests\Feature;
+
+use App\Models\Portfolio\PortfolioProject;
+use Database\Seeders\PortfolioSeeder;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\TestResponse;
+use Tests\TestCase;
+
+/**
+ * OND-455 — přechod na ondraweb.cz: staré domény 301 na kanonický host
+ * a staré adresy z sitemap `itwebtech.cz` a `ondraweb.cz` (Framer) nesmí
+ * po skocích skončit na 404.
+ */
+class Ond455LegacyRedirectsTest extends TestCase
+{
+    use RefreshDatabase;
+
+    private const CANONICAL = 'ondraweb.cz';
+
+    /** Stará cesta → cíl. Deset adres ze zadání + `delejme-animace` z navigace itwebtech.cz. */
+    private const LEGACY_PATHS = [
+        '/sluzby'                            => '/#section-services',
+        '/projekty/zoomorava'                => '/projekty',
+        '/projects/clanek-na-motorkari-cz'   => '/projekty/clanek-motorkari-cz',
+        '/projects/FRLcreator'               => '/projekty/frl-creator',
+        '/projects/kempveselka'              => '/projekty/kemp-veselka',
+        '/projects/logo-realitacky'          => '/projekty',
+        '/projects/pitarena-akademie-202308' => '/projekty/pitarena',
+        '/projects/pitarena-reklamni-cedule' => '/projekty/pitarena-cedule',
+        '/projects/strechyzajic'             => '/projekty/strechy-zajic',
+        '/projects/vpindustry'               => '/projekty/vp-industry',
+        '/projects/delejme-animace'          => '/projekty',
+    ];
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->seed(PortfolioSeeder::class);
+    }
+
+    // ------------------------------------------------------------------
+    // 1. Staré domény
+    // ------------------------------------------------------------------
+
+    public function test_legacy_host_redirects_to_canonical_with_path_and_query(): void
+    {
+        $this->enableCanonicalHost();
+
+        foreach (['itwebtech.cz', 'www.itwebtech.cz', 'www.ondraweb.cz'] as $host) {
+            $this->get("http://{$host}/projekty/kemp-veselka?utm_source=x&a=1")
+                ->assertStatus(301)
+                ->assertHeader('Location', 'https://ondraweb.cz/projekty/kemp-veselka?utm_source=x&a=1');
+
+            $this->get("https://{$host}/")
+                ->assertStatus(301)
+                ->assertHeader('Location', 'https://ondraweb.cz/');
+        }
+    }
+
+    public function test_canonical_host_is_served(): void
+    {
+        $this->enableCanonicalHost();
+
+        $this->get('https://ondraweb.cz/projekty')->assertOk();
+        $this->get('https://ondraweb.cz/')->assertOk();
+    }
+
+    public function test_health_check_and_contact_post_are_not_redirected(): void
+    {
+        $this->enableCanonicalHost();
+
+        // Health check kontejneru jde na localhost/127.0.0.1.
+        $this->get('http://localhost/up')->assertOk();
+        $this->get('http://127.0.0.1/up')->assertOk();
+
+        // Prázdný formulář na kanonickém hostu = validace, ne přesměrování.
+        $this->postJson('https://ondraweb.cz/contact', [])->assertStatus(422);
+    }
+
+    public function test_empty_canonical_host_disables_redirect(): void
+    {
+        config([
+            'redirects.canonical_host' => '',
+            'redirects.legacy_hosts' => ['itwebtech.cz', 'www.itwebtech.cz', 'www.ondraweb.cz'],
+        ]);
+
+        $this->get('https://itwebtech.cz/projekty')->assertOk();
+    }
+
+    public function test_unlisted_host_is_not_redirected(): void
+    {
+        $this->enableCanonicalHost();
+
+        // Subdoménu si CEO přidá do env až po stabilizaci.
+        $this->get('https://itwebtech.ondrejkriska.cz/projekty')->assertOk();
+    }
+
+    public function test_default_legacy_hosts_do_not_include_subdomain(): void
+    {
+        $hosts = require base_path('config/redirects.php');
+
+        $this->assertSame(['itwebtech.cz', 'www.itwebtech.cz', 'www.ondraweb.cz'], $hosts['legacy_hosts']);
+    }
+
+    // ------------------------------------------------------------------
+    // 2. Staré cesty
+    // ------------------------------------------------------------------
+
+    public function test_legacy_paths_redirect_in_one_hop_to_existing_page(): void
+    {
+        foreach (self::LEGACY_PATHS as $old => $target) {
+            $response = $this->get($old);
+            $response->assertStatus(301);
+            $this->assertSame(url($target), $response->headers->get('Location'), $old);
+
+            $this->get($target)->assertOk();
+        }
+    }
+
+    public function test_legacy_paths_on_legacy_host_end_on_200_within_two_hops(): void
+    {
+        $this->enableCanonicalHost();
+
+        foreach (array_keys(self::LEGACY_PATHS) as $old) {
+            [$response, $hops] = $this->follow('https://itwebtech.cz'.$old);
+
+            $response->assertOk();
+            $this->assertLessThanOrEqual(2, $hops, $old);
+        }
+    }
+
+    public function test_old_contact_goes_to_czech_contact(): void
+    {
+        $this->get('/contact')->assertStatus(301)->assertRedirect(url('/kontakt'));
+    }
+
+    public function test_every_mapped_project_target_is_published(): void
+    {
+        foreach (array_filter(config('redirects.project_slugs')) as $old => $slug) {
+            $this->assertTrue(
+                PortfolioProject::published()->where('slug', $slug)->exists(),
+                "{$old} → {$slug} není publikovaná případovka"
+            );
+        }
+    }
+
+    public function test_unknown_old_project_slug_still_goes_to_projekty(): void
+    {
+        $this->get('/projects/josefopa')->assertRedirect(url('/projekty/josefopa'));
+        $this->get('/projekty/neexistuje')->assertNotFound();
+    }
+
+    private function enableCanonicalHost(): void
+    {
+        config([
+            'redirects.canonical_host' => self::CANONICAL,
+            'redirects.legacy_hosts' => ['itwebtech.cz', 'www.itwebtech.cz', 'www.ondraweb.cz'],
+        ]);
+    }
+
+    /** @return array{TestResponse, int} */
+    private function follow(string $url): array
+    {
+        $hops = 0;
+        $response = $this->get($url);
+
+        while ($response->isRedirect() && $hops < 5) {
+            $hops++;
+            $response = $this->get($response->headers->get('Location'));
+        }
+
+        return [$response, $hops];
+    }
+}
