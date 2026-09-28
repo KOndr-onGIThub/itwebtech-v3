@@ -174,6 +174,15 @@ return [
         'detail_cta' => 'Projekt ansehen',
         'live_cta'   => 'Live-Website öffnen',
         'live_aria'  => 'Website von :client in neuem Fenster öffnen',
+        // OND-440: Leiste des Rahmens mit der Aufnahme der Live-Website. Das Datum
+        // gehört zum Projekt (config site.live_recordings), hier nur sein Format.
+        'live' => [
+            'kind'        => 'Live-Website',
+            'recorded'    => 'aufgenommen am :date',
+            'date_format' => 'd.m.Y',
+            'pause'       => 'Aufnahme anhalten',
+            'play'        => 'Aufnahme abspielen',
+        ],
         'cards' => [
             'pitarena' => [
                 'client'  => 'PitArena',
