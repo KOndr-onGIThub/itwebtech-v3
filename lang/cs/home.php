@@ -39,7 +39,10 @@ return [
         'upline'          => 'Pro firmy, které rostou.',
         'heading_html'    => 'Ptám se, ne hádám.<br>Počítám, ne odhaduju.<br>Ručím, ne slibuju.',
         'subline'         => 'Jsem Ondřej Kriška. Weby a aplikace stavím na vlastním kódu a pracuju na nich sám. Cenu spočítám před začátkem, na Googlu a Firmy.cz mám 5,0 z 26 hodnocení.',
-        'note'            => 'Ozvu se nejpozději následující pracovní den. Nezávazně proberu, co dává smysl.',
+        // OND-437 (návrh 1 z OND-429): „následující pracovní den“ nahrazuje
+        // konkrétní den. `:date` dosadí App\Support\ReplyDate a obalí ho
+        // do <strong>; nezlomitelné mezery (U+00A0) jsou přímo ve `reply_date`.
+        'note'            => 'Když mi napíšete dnes, ozvu se nejpozději :date. Nezávazně proberu, co dává smysl.',
 
         // Backwards compat — staré klíče zachované pro non-hero spotřebitele
         // (fallback render). Musí souhlasit s vybranou variantou titulku.
@@ -59,8 +62,8 @@ return [
 
     'social_proof' => [
         // OND-315: `rating_aria` popisuje jen hodnocení, proto sedí u toho
-        // jednoho údaje, ne na celé sekci — v pruhu jsou i realizace, praxe,
-        // doba odpovědi a ocenění. Landmark pruhu popisuje `strip_aria`.
+        // jednoho údaje, ne na celé sekci — v pruhu jsou i realizace, praxe
+        // a ocenění (doba odpovědi z pruhu odešla v OND-437). Landmark pruhu popisuje `strip_aria`.
         'rating_aria'  => 'Hodnocení 5 z 5',
         'strip_aria'   => 'Čísla o mojí práci',
         // OND-231: řada log klientů má vlastní landmark label, aby čtečka
@@ -70,7 +73,6 @@ return [
         'reviews'      => '(26 hodnocení na Googlu a Firmy.cz)',
         'projects'     => '23+ realizací',
         'experience'   => '18 let praxe',
-        'response'     => 'Odpověď nejpozději následující pracovní den',
         // OND-201 (nález 5.11): ocenění TOP firma 2025 z Firmy.cz je ověřitelný
         // důkaz třetí strany, byl na obou starých webech a na stagingu chyběl.
         // Formulace podle sekce 2 dokumentu homepage-texty (OND-186).
@@ -412,7 +414,7 @@ return [
     'inline_form' => [
         'eyebrow'         => 'Poptávka',
         'heading'         => 'Napište mi, co potřebujete',
-        'description'     => 'Napište ve zkratce, co řešíte. Ozvu se nejpozději následující pracovní den a nezávazně probereme, co dává smysl. Když zjistím, že na sebe nepasujeme, řeknu vám to rovnou.',
+        'description'     => 'Napište ve zkratce, co řešíte. Když to odešlete dnes, ozvu se nejpozději :date a nezávazně probereme, co dává smysl. Pokud zjistím, že na sebe nepasujeme, řeknu vám to rovnou.',
         'quote_text'      => 'Jedná rychle a efektivně. Byl to pro mě velký rozdíl mezi předchozím IT dodavatelem.',
         'quote_ref'       => 'ivo-stepanek',
         'name'            => 'Jméno a příjmení',
@@ -431,7 +433,22 @@ return [
         'note'            => 'Nebo mi napište na ok@ondraweb.cz. Ozvu se osobně, ne přes formulářového robota.',
         'privacy_prefix'  => 'Odesláním souhlasíte se zpracováním osobních údajů v souladu se ',
         'privacy_link'    => 'zásadami ochrany osobních údajů',
-        'success'         => 'Děkuji, poptávka dorazila. Ozvu se co nejdříve.',
+        // OND-437 (návrh 2 z OND-429): potvrzení po odeslání místo formuláře.
+        // `:received` = čas uložení poptávky, `:date` = ReplyDate, `:email`
+        // z formuláře. `reply`, `more` a `more_article` čte i /kontakt.
+        'confirmation' => [
+            'stamp'        => 'Poptávka dorazila · :received',
+            'heading'      => 'Děkuju. Poptávka je u mě.',
+            'reply'        => 'Ozvu se nejpozději :date, osobně na :email. Nic dalšího teď dělat nemusíte.',
+            'steps_aria'   => 'Co bude dál',
+            'steps'        => [
+                ['label' => 'Konzultace', 'text' => 'Do týdne si zavoláme nebo se sejdeme, asi na hodinu. Projdeme, co má web udělat.'],
+                ['label' => 'Specifikace', 'text' => 'Za 2–5 dní po konzultaci dostanete písemně, co na webu bude a kolik to bude stát.'],
+                ['label' => 'Rozhodnutí', 'text' => 'Rozhodujete se až nad hotovou specifikací. Do té doby vás nic nezavazuje.'],
+            ],
+            'more'         => 'Než se ozvu, můžete si přečíst, :article_link.',
+            'more_article' => 'jak se připravit na nový web',
+        ],
         'error'           => 'Poptávku se teď nepodařilo uložit. Zkuste to prosím znovu.',
     ],
 
@@ -444,4 +461,18 @@ return [
         'phone'   => 'Zavolat',
     ],
 
+    // OND-437: jak se píše den odpovědi (`:date`) a čas přijetí (`:received`).
+    // Dosazuje App\Support\ReplyDate v Europe/Prague. Klíč 1–5 = pondělí–pátek,
+    // víkend nikdy nenastane. Mezery uvnitř data jsou nezlomitelné (U+00A0).
+    'reply_date' => [
+        'weekdays' => [
+            1 => 'v pondělí',
+            2 => 'v úterý',
+            3 => 've středu',
+            4 => 've čtvrtek',
+            5 => 'v pátek',
+        ],
+        'date'     => ':weekday :day. :month.',
+        'received' => ':day. :month., :time',
+    ],
 ];

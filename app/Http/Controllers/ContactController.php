@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\SetLocale;
 use App\Mail\ContactMessage;
 use App\Models\ContactSubmission;
 use App\Support\Honeypot;
+use Carbon\CarbonInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -38,7 +40,9 @@ class ContactController extends Controller
         // poznat vůbec nic, ani že mu něco chybí. Vrací se stejný úspěch jako
         // při skutečném odeslání, ale nic se neuloží ani neodešle.
         if (Honeypot::tripped($request, 'contact')) {
-            return response()->json(['message' => __('contact.message_success')]);
+            $email = $request->input('email');
+
+            return $this->success($request, is_string($email) ? $email : '', now());
         }
 
         $limits     = config('contact.uploads');
@@ -157,7 +161,37 @@ class ContactController extends Controller
         }
 
         // 3) Lead je uložen → klient dostane úspěch (nezávisle na stavu e-mailu).
-        return response()->json(['message' => __('contact.message_success')]);
+        return $this->success($request, $submission->email, $submission->created_at ?? now());
+    }
+
+    /**
+     * OND-437 (návrh 2 z OND-429): úspěch nese i potvrzení vykreslené
+     * serverem (čas přijetí, den odpovědi, e-mail) — `contactForm` ho jen
+     * vloží místo formuláře. Sdílené s pastí na boty, ať se odpovědi neliší.
+     *
+     * `POST /contact` nemá v URL jazyk, SetLocale tu vždycky nastaví cs.
+     * Jazyk potvrzení proto posílá formulář ve skrytém poli `locale`
+     * (validace a uložený `locale` se tím nemění).
+     */
+    private function success(Request $request, string $email, CarbonInterface $receivedAt): JsonResponse
+    {
+        $locale = $request->input('locale');
+
+        if (in_array($locale, SetLocale::NON_DEFAULT_LOCALES, true)) {
+            App::setLocale($locale);
+        }
+
+        return response()->json([
+            'message'      => __('contact.message_success'),
+            'confirmation' => view('partials.lead-confirmation', [
+                'stampKey'   => 'contact.thank_you.stamp',
+                'headingKey' => 'contact.thank_you.heading',
+                'headingTag' => 'h2',
+                'email'      => $email,
+                'receivedAt' => $receivedAt,
+                'steps'      => false,
+            ])->render(),
+        ]);
     }
 
     /**

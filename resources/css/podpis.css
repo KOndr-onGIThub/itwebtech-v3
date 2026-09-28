@@ -1093,8 +1093,88 @@
     padding: var(--space-4);
     margin-bottom: var(--space-5);
 }
-.pd-alert--success { border-color: rgba(16, 185, 129, 0.5); color: #6EE7B7; }
 .pd-alert--error { border-color: rgba(255, 97, 87, 0.6); color: #FFB4AE; }
+/* OND-437 (návrh 1): den odpovědi ve větě — bílý, zbytek věty tlumený.
+   `nowrap`, ať se „Donnerstag, 29.10." nerozlomí na dva řádky. */
+.pd-date {
+    color: var(--color-fg-primary);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* OND-437 (návrh 2): potvrzení po odeslání místo formuláře
+   (`partials/lead-confirmation`). Jen barvy, které web už má — zelená
+   `.pd-alert--success` (#6EE7B7) byla jediná zelená na webu a odešla. */
+.pd-done {
+    display: grid;
+    gap: var(--space-5);
+}
+/* Fokus sem posílá skript (čtečka potvrzení přečte), ne uživatel —
+   blok není ovládací prvek, rámeček by jen rušil. */
+.pd-done:focus,
+.pd-done:focus-visible { outline: none; }
+.pd-done .pd-eyebrow { margin: 0; }
+.pd-done__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(var(--text-h3), 3vw, 34px);
+    line-height: 1.15;
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-fg-primary);
+    margin: 0;
+}
+.pd-done__lead {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--color-fg-muted);
+    max-width: 44ch;
+    margin: 0;
+}
+.pd-done__steps {
+    list-style: none;
+    display: grid;
+    gap: var(--space-4);
+    margin: var(--space-2) 0 0;
+    padding: 0;
+}
+.pd-done__steps li {
+    display: grid;
+    grid-template-columns: 8.5em 1fr;
+    gap: var(--space-4);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border-soft);
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+}
+.pd-done__steps b { color: var(--color-fg-primary); font-weight: 500; }
+.pd-done__steps li:first-child b { color: var(--pd-accent); }
+.pd-done .pd-sign { margin: var(--space-2) 0 0; }
+.pd-done__more {
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-fg-muted);
+    margin: 0;
+}
+.pd-done__more a {
+    color: var(--color-fg-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--pd-accent);
+    text-underline-offset: 3px;
+}
+@media (max-width: 640px) {
+    .pd-done__steps li { grid-template-columns: 1fr; gap: var(--space-1); }
+}
+/* Spodní mobilní lišta po odeslání: na homepage se nevykreslí vůbec,
+   na /kontakt ji schová `contactForm`. Odsazení pro ni už není potřeba. */
+@media (max-width: 767px) {
+    .is-lead-sent .mobile-bottom-bar { display: none; }
+    body.is-lead-sent { padding-bottom: 0; }
+}
+
 .pd-form__submit {
     border: 0;
     cursor: pointer;
@@ -1474,10 +1554,6 @@
    vymění za poděkování (`x-show="!submitted"`), takže musí být uvnitř. */
 .pd-form__panel .pd-head__title { margin-bottom: var(--space-3); }
 .pd-form__panel .pd-intro { margin-bottom: var(--space-7); }
-/* Poděkování je jedna zpráva, ne tři bloky: věta, pokračování a dva odkazy
-   drží pohromadě. `.pd-actions` je řada tlačítek z hera homepage. */
-.pd-form__thanks .pd-intro { margin-bottom: var(--space-3); }
-.pd-form__thanks .pd-actions { margin-top: var(--space-6); }
 /* OND-392 — po odeslání `contactForm` roluje na kořen formuláře
    (`$root.scrollIntoView`, block: start) a kotva „Napište mi" míří tamtéž.
    Titulek poděkování stojí na horní hraně desky, takže bez odsazení ho

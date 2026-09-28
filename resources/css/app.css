@@ -4743,10 +4743,6 @@
         background: var(--color-gold-600);
         color: #0F172A;
     }
-    .mobile-bottom-bar__icon {
-        font-size: 1.1rem;
-        line-height: 1;
-    }
     .mobile-bottom-bar__phone {
         flex: 0 0 auto;
         padding: 0.625rem 0.875rem;

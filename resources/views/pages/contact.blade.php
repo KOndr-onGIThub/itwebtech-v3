@@ -61,7 +61,8 @@
             <div class="pd-page-head__text">
                 <p class="pd-eyebrow">{{ __('contact.hero.page_mark_label') }}<span class="pd-eyebrow__sep" aria-hidden="true"></span>{{ __('contact.hero.upline') }}</p>
                 <h1 class="pd-heading pd-heading--sub">{!! __('contact.hero.heading_html') !!}</h1>
-                <p class="pd-sub">{{ __('contact.hero.subline') }}</p>
+                {{-- OND-437 (návrh 1): konkrétní den odpovědi, viz App\Support\ReplyDate. --}}
+                <p class="pd-sub">{!! \App\Support\ReplyDate::sentence('contact.hero.subline', \App\Support\ReplyDate::date()) !!}</p>
             </div>
 
             {{-- Kontaktní stín vrstvy C: `.pd-page-head__photo` v hloubka.css §E2
@@ -142,16 +143,11 @@
                  x-data="contactForm({ genericError: @js(__('contact.message_error')) })">
 
                 {{-- FUNKCE — STAV PO ODESLÁNÍ: `x-show="submitted"` tady,
-                     `x-show="!submitted"` na titulku, perexu a formuláři níž. --}}
-                <div class="pd-form__thanks" x-show="submitted" x-cloak>
-                    <h2 class="pd-head__title">{{ __('contact.thank_you.heading') }}</h2>
-                    <p class="pd-intro">{{ __('contact.thank_you.subline') }}</p>
-                    <p class="pd-form__note">{{ __('contact.thank_you.next') }}</p>
-                    <div class="pd-actions">
-                        <a href="{{ lroute('projects') }}" class="pd-more__link">{{ __('contact.thank_you.cta_projects') }}</a>
-                        <a href="{{ lroute('price') }}" class="pd-more__link">{{ __('contact.thank_you.cta_price') }}</a>
-                    </div>
-                </div>
+                     `x-show="!submitted"` na titulku, perexu a formuláři níž.
+                     OND-437 (návrh 2): potvrzení vykreslí server
+                     (`partials.lead-confirmation`, pole `confirmation` v JSON
+                     odpovědi) — čas přijetí i e-mail zná až po odeslání. --}}
+                <div class="pd-form__thanks" x-show="submitted" x-cloak x-html="confirmation"></div>
 
                 <h2 class="pd-head__title" x-show="!submitted">{{ __('contact.form_heading') }}</h2>
                 <p class="pd-intro" x-show="!submitted">{{ __('contact.form_subheading') }}</p>
@@ -163,6 +159,10 @@
 
                     {{-- FUNKCE — HONEYPOT: táž komponenta, totéž id. --}}
                     <x-form.honeypot id="contact-website-url" />
+
+                    {{-- OND-437: `POST /contact` nemá jazyk v URL — potvrzení
+                         se vykreslí v jazyce stránky podle tohohle pole. --}}
+                    <input type="hidden" name="locale" value="{{ app()->getLocale() }}">
 
                     {{-- Jména polí (`name`, `email`, `tel`, `subject`, `message`,
                          `gdpr`, `attachment[]`) a id jsou beze změny — na nich stojí

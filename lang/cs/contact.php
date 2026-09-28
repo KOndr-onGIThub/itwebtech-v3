@@ -87,7 +87,7 @@ return [
         'heading_html'    => 'Žádné CRM,<br>žádné call centrum — <em>jen Ondřej</em>.',
         'eyebrow'      => 'Píšete přímo mně',
         'heading'      => 'Píšete přímo mně, Ondřejovi.',
-        'subline'      => 'Vaši zprávu si přečtu osobně. Ozvu se nejpozději následující pracovní den.',
+        'subline'      => 'Vaši zprávu si přečtu osobně. Když mi napíšete dnes, ozvu se nejpozději :date.',
         'photo_alt'    => 'Ondřej Kriška — autor a kontaktní osoba',
         'role_label'   => 'Vývojář, autor webu, jediný kontakt',
     ],
@@ -114,11 +114,10 @@ return [
 
     // Thank-you state — zobrazí se po úspěšném odeslání místo formuláře.
     'thank_you' => [
-        'heading'  => 'Hotovo, zpráva dorazila.',
-        'subline'  => 'Děkuji. Přečtu si ji osobně a ozvu se nejpozději následující pracovní den.',
-        'next'     => 'Mezitím se můžete podívat na realizované projekty nebo si přečíst ceník.',
-        'cta_projects' => 'Realizované projekty',
-        'cta_price'    => 'Ceník',
+        // OND-437: věta s datem a e-mailem je `home.inline_form.confirmation.reply`,
+        // odkaz na článek `…confirmation.more` — stejné znění jako na homepage.
+        'stamp'   => 'Zpráva dorazila · :received',
+        'heading' => 'Děkuju. Zpráva je u mě.',
     ],
 
     // Volitelné budget pole (sjednocené s home.inline_form a landing budgety).

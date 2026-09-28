@@ -74,10 +74,12 @@ class Ond345ResponsePromiseTest extends TestCase
         ];
 
         foreach ($expected as $locale => $sentence) {
+            // OND-437: `hero.subline` místo lhůty píše konkrétní den (`:date`,
+            // App\Support\ReplyDate). Pravidlo zůstává v `open_hours`.
             $this->assertStringContainsString(
-                $sentence,
+                ':date',
                 __('contact.hero.subline', [], $locale),
-                "Nový slib chybí v `lang/{$locale}/contact.php` (hero.subline).",
+                "Den odpovědi chybí v `lang/{$locale}/contact.php` (hero.subline).",
             );
 
             $this->assertStringContainsString(

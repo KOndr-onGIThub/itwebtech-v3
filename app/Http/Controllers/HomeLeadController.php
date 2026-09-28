@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\LandingLead;
 use App\Support\Honeypot;
 use App\Support\LeadMailer;
+use Carbon\CarbonInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Throwable;
@@ -17,7 +18,11 @@ class HomeLeadController extends Controller
         // `source` se tu čte ještě nezvalidovaný — používá se jen na to, který
         // formulář ohlásí úspěch, nikam se neukládá.
         if (Honeypot::tripped($request, (string) $request->input('source', 'home.inline'))) {
-            return $this->success($request->input('source') === 'home.faq');
+            return $this->success(
+                $request->input('source') === 'home.faq',
+                is_string($request->input('email')) ? $request->input('email') : '',
+                now(),
+            );
         }
 
         $data = $request->validate([
@@ -60,17 +65,22 @@ class HomeLeadController extends Controller
         // odpověď uživateli, lead je bezpečně uložený.
         LeadMailer::notify($lead);
 
-        return $this->success($isFaq);
+        return $this->success($isFaq, $lead->email, $lead->created_at ?? now());
     }
 
     /**
      * Úspěšná odpověď. Sdílená schválně: past na boty musí vracet přesně to
      * samé co skutečné odeslání, jinak by šlo z odpovědi poznat, že sklapla.
+     *
+     * OND-437: potvrzení na homepage ukazuje čas přijetí a e-mail, na který
+     * přijde odpověď — oboje jde do flash session jen na příští request.
      */
-    private function success(bool $isFaq): RedirectResponse
+    private function success(bool $isFaq, string $email, CarbonInterface $receivedAt): RedirectResponse
     {
         return back()
             ->with($isFaq ? 'faq_lead_success' : 'home_lead_success', true)
+            ->with('home_lead_email', $email)
+            ->with('home_lead_received', $receivedAt->toIso8601String())
             ->with('home_lead_target', $isFaq ? 'faq' : 'poptavka');
     }
 }

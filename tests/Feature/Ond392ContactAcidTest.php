@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Support\ReplyDate;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -90,13 +91,17 @@ class Ond392ContactAcidTest extends TestCase
                 'hero.page_mark_label', 'hero.upline', 'hero.heading_html', 'hero.subline', 'hero.role_label',
                 'address_label', 'address_name', 'address_street', 'address_city', 'address_registration',
                 'email_label', 'phone_label', 'hours_label', 'open_hours', 'cta_consultation',
-                'thank_you.heading', 'thank_you.subline', 'thank_you.next', 'thank_you.cta_projects', 'thank_you.cta_price',
                 'form_heading', 'form_subheading',
                 'name', 'email', 'tel', 'tel_hint', 'subject', 'message',
                 'agree', 'policy', 'send', 'sending',
                 'next_steps.eyebrow', 'next_steps.heading',
             ];
-            $expected = array_map(fn ($key) => $this->text(__('contact.'.$key)), $keys);
+            // OND-437: `hero.subline` nese `:date` (App\Support\ReplyDate), ne
+            // doslovný text; potvrzení po odeslání (`thank_you`) vykresluje až
+            // odpověď serveru, na stránce před odesláním není.
+            $expected = array_map(fn ($key) => $this->text($key === 'hero.subline'
+                ? ReplyDate::sentence('contact.hero.subline', ReplyDate::date())
+                : __('contact.'.$key)), $keys);
             foreach (__('contact.next_steps.steps') as $step) {
                 $expected[] = $step['title'];
                 $expected[] = $step['text'];
