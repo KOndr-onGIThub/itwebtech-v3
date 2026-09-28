@@ -105,9 +105,26 @@ Route::get("/{$defaultLocale}/{path?}", function (string $path = '') {
 
 // Legacy redirects from original site (English URLs → Czech)
 Route::get('/price',          fn() => redirect('/cenik', 301));
+// OND-455: starý web byl česky; bez tohohle chytí `/contact` záchytná routa
+// a pošle ho na `/en/contact`. POST /contact (formulář) je jiná routa.
+Route::get('/contact',        fn() => redirect('/kontakt', 301));
 Route::get('/privacy-policy', fn() => redirect('/zasady-ochrany-osobnich-udaju', 301));
 Route::get('/projects',       fn() => redirect('/projekty', 301));
-Route::get('/projects/{any}', fn(string $any) => redirect('/projekty/' . $any, 301))->where('any', '.*');
+// OND-455: staré slugy z itwebtech.cz rovnou na dnešní případovku (jeden skok),
+// mapa v config/redirects.php. Neznámý slug jde dál na `/projekty/{slug}`.
+Route::get('/projects/{any}', function (string $any) {
+    $map = config('redirects.project_slugs');
+
+    if (! array_key_exists($any, $map)) {
+        return redirect('/projekty/' . $any, 301);
+    }
+
+    return redirect($map[$any] === null ? lroute('projects', 'cs') : route('cs.project', ['url' => $map[$any]]), 301);
+})->where('any', '.*');
+
+// OND-455: `/sluzby` z Framer sitemapy ondraweb.cz — samostatná stránka
+// služeb už není, služby jsou sekce na homepage.
+Route::get('/sluzby', fn() => redirect(lroute('home', 'cs') . '#section-services', 301));
 
 // OND-130 (B2 §1, klíčová direktiva 4): CS routing fix.
 // `/blog` musí 301 → `/zapisky` (default CS slug), aby byla CS landing
