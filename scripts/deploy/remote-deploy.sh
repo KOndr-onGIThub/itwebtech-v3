@@ -11,7 +11,8 @@
 # Rozložení na serveru:
 #
 #   $APP_DIR/releases/<id>/        jednotlivá nasazení (build z Actions)
-#   $APP_DIR/shared/.env           produkční konfigurace, sdílená všemi release
+#   $APP_DIR/shared/.env           produkční konfigurace, sdílená všemi release;
+#                                  žije jen na serveru, nasazení ji nemění
 #   $APP_DIR/shared/storage/       nahrané soubory, logy, cache, sdílené
 #   $APP_DIR/current               symlink na aktivní release
 #   $WEB_ROOT                      symlink na $APP_DIR/current/public (web root domény)
@@ -118,7 +119,7 @@ deploy() {
     # Webserver může běžet pod jiným uživatelem než SSH, musí adresáři projít.
     chmod 755 "$BASE" "$BASE/shared" "$BASE/releases"
     [ -s "$BASE/shared/.env" ] \
-        || fail "Chybí $BASE/shared/.env. Vyplň GitHub Secret PRODUCTION_ENV (viz docs/deploy-production.md) a spusť nasazení znovu."
+        || fail "Chybí $BASE/shared/.env. Založ ji na serveru podle vzoru v docs/deploy-production.md a spusť nasazení znovu."
     grep -q '^APP_KEY=base64:' "$BASE/shared/.env" \
         || fail "V .env chybí APP_KEY. Musí být stejný jako na Coolify, jinak přestane fungovat dvoufázové přihlášení do administrace."
 

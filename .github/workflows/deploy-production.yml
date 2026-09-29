@@ -71,14 +71,13 @@ jobs:
       JUMP_HOST_KEY: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG9Cw4EBBl7uaUBqg7kUqYqZYLUrMEWh8PZ4qtxRBpLR
 
     steps:
+      # Produkční .env žije jen na serveru (app/shared/.env), workflow ji
+      # nenahrává ani nepřepisuje. Secret PRODUCTION_ENV se nepoužívá (OND-461).
       - name: Kontrola nastavení (GitHub Secrets)
-        env:
-          PRODUCTION_ENV: ${{ secrets.PRODUCTION_ENV }}
         run: |
           missing=""
-          [ -n "$SSH_KEY$SSHPASS" ] || missing="$missing WEBGLOBE_SSH_PASSWORD"
+          [ -n "$SSH_KEY$SSHPASS" ] || missing="$missing WEBGLOBE_SSH_PASSWORD(nebo WEBGLOBE_SSH_KEY)"
           [ -n "$JUMP_KEY" ] || missing="$missing DEPLOY_JUMP_KEY"
-          if [ "$MODE" = deploy ] && [ -z "$PRODUCTION_ENV" ]; then missing="$missing PRODUCTION_ENV"; fi
           if [ -n "$missing" ]; then
             echo "::error::Chybí GitHub Secrets:$missing. Doplň je podle docs/deploy-production.md (Settings → Secrets and variables → Actions)."
             exit 1
@@ -183,26 +182,6 @@ jobs:
             echo "::error::Nepodařilo se připojit přes náš server $JUMP_HOST na $SSH_HOST:$SSH_PORT jako $SSH_USER. Connection timed out nebo open failed = SSH na Webglobe je vypnuté (hodinová WebSSH vypršela, je potřeba Permanentní SSH konzole). Permission denied = špatné heslo ve WEBGLOBE_SSH_PASSWORD. Unknown command: bash = na serveru chybí bash. Viz docs/deploy-production.md."
             exit 1
           fi
-
-      - name: Produkční .env (ze Secretu PRODUCTION_ENV)
-        if: env.MODE == 'deploy'
-        env:
-          PRODUCTION_ENV: ${{ secrets.PRODUCTION_ENV }}
-        run: |
-          # Obsah jde jako base64 uvnitř skriptu: stdin patří skriptu pro bash
-          # a base64 nemá znaky, které by cokoli rozbily.
-          {
-            echo "set -euo pipefail"
-            # Adresáře s běžnými právy, Apache jimi musí projít k webu.
-            # Jen soubor .env je čitelný pouze pro vlastníka.
-            echo "mkdir -p '$APP_DIR/shared'"
-            echo "umask 077"
-            echo "base64 -d > '$APP_DIR/shared/.env.new' <<'ENV_EOF'"
-            printf '%s\n' "$PRODUCTION_ENV" | base64
-            echo "ENV_EOF"
-            echo "mv -f '$APP_DIR/shared/.env.new' '$APP_DIR/shared/.env'"
-          } | rbash
-          echo ".env nahrán do $APP_DIR/shared/.env"
 
       - name: Nahrání nového release
         if: env.MODE == 'deploy'

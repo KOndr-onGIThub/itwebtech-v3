@@ -42,7 +42,7 @@ Přihlášení: <https://admin.webglobe.cz>, hosting domény `itwebtech.cz`.
    povede DNS.
 4. **Databáze.** Hosting → Databáze → založ novou databázi (MariaDB nebo MySQL,
    nejnovější nabízená verze). Opiš si **název databáze**, **uživatele**
-   a **heslo**. Budou potřeba v kroku B. Jako server databáze použij
+   a **heslo**. Patří do `.env` na serveru (vzor v části B). Jako server databáze použij
    **`db.dw142.webglobe.com`**, ne `c-mariadb` z administrace. `c-mariadb`
    zná jen web, SSH ho nenajde. `db.dw142.webglobe.com` ze SSH funguje
    (ověřeno 29. 9.).
@@ -67,18 +67,19 @@ New repository secret**. Založ tyhle:
 | `WEBGLOBE_SSH_PASSWORD` | heslo SSH účtu (ne FTP!) | krok A5, „Copy password“ |
 | `WEBGLOBE_SSH_PORT` | `20001` | krok A5, stránka WebSSH |
 | `DEPLOY_JUMP_KEY` | klíč pro spojení přes náš server | pošle CEO v kartě OND-459 |
-| `PRODUCTION_ENV` | celá produkční konfigurace, vzor je níže | vzor + hodnoty z Coolify a z kroku A4 |
 
 Adresu serveru zadávat nemusíš, nasazení ji má v sobě.
-Secret `WEBGLOBE_SSH_HOST`, pokud ho máš z dřívějška, se už nepoužívá a můžeš
-ho smazat.
+Secrety `WEBGLOBE_SSH_HOST` a `PRODUCTION_ENV`, pokud je máš z dřívějška, se
+už nepoužívají a můžeš je smazat.
 
-Nic dalšího není potřeba. Změnu konfigurace později uděláš úpravou
-`PRODUCTION_ENV` a novým nasazením (část F).
+Nic dalšího není potřeba. **Produkční konfigurace (`.env`) žije jen na
+serveru** v `/home/html/ondraweb.cz/app/shared/.env`. Nasazení ji nenahrává
+ani nepřepisuje. Jak ji změnit, je v části F.
 
-### Vzor `PRODUCTION_ENV`
+### Vzor `.env` (reference)
 
-Zkopíruj celý blok do hodnoty secretu a doplň místa označená `‹…›`.
+Takhle vypadá `/home/html/ondraweb.cz/app/shared/.env`. Na serveru už je
+(29. 9. ji založil CEO), vzor slouží jen pro kontrolu nebo nové založení.
 Hodnoty „z Coolify“ najdeš v Coolify u aplikace v záložce **Environment
 Variables** a zkopíruješ je beze změny.
 
@@ -271,12 +272,26 @@ curl -sI https://itwebtech.ondrejkriska.cz/ | grep -i x-robots-tag
   běží dál v předchozí verzi a červená hláška v logu říká proč.
 - **Návrat na předchozí verzi:** Actions → „Nasazení produkce (Webglobe)“ →
   Run workflow → akce `rollback`. Každé spuštění vrátí web o jednu verzi zpět.
+  Změny v databázi (migrace) se nevracejí.
 - **Žluté upozornění po nasazení** („…/up vrací HTTP … místo 200“): nová verze
   je přepnutá, ale web zvenku neodpovídá. Otevři web, a když je rozbitý,
   spusť `rollback`.
-  Změny v databázi (migrace) se nevracejí.
-- **Změna konfigurace** (heslo k poště apod.): upravit secret `PRODUCTION_ENV`
-  a spustit Run workflow s akcí `deploy`.
+- **Změna konfigurace** (heslo k poště apod.): `.env` se mění jen na serveru
+  přes SSH. Úprava jde přes kopii, ať se živý soubor nikdy nepřepisuje
+  napůl:
+
+  ```sh
+  bash
+  cd /home/html/ondraweb.cz/app/shared
+  cp -p .env .env.new
+  nano .env.new          # nebo vi; uprav hodnoty
+  mv -f .env.new .env
+  ```
+
+  (První řádek `bash`: přihlašovací shell na Webglobe je fish.) Konfigurace
+  je v cache, proto potom spusť nasazení: Actions → „Nasazení produkce
+  (Webglobe)“ → Run workflow → akce `deploy`. Nová verze si `.env` načte
+  znovu.
 
 ---
 
@@ -295,7 +310,7 @@ spustí bez potíží.
 
 **Databáze:** ze SSH je dosažitelná přes `db.dw142.webglobe.com` (ověřil CEO
 29. 9.: `migrate`, seedery i `smoke.php` přes SSH nad produkční databází
-prošly). Proto `DB_HOST=db.dw142.webglobe.com` v `PRODUCTION_ENV`.
+prošly). Proto `DB_HOST=db.dw142.webglobe.com` v `shared/.env`.
 `c-mariadb` z administrace SSH v DNS nenajde.
 
 **Rozložení na serveru** (absolutní cesty, ne v domovském adresáři SSH účtu
@@ -303,7 +318,7 @@ prošly). Proto `DB_HOST=db.dw142.webglobe.com` v `PRODUCTION_ENV`.
 
 ```
 /home/html/ondraweb.cz/app/releases/<UTC čas>-<commit>/   jednotlivé verze, drží se posledních 5
-/home/html/ondraweb.cz/app/shared/.env                    z PRODUCTION_ENV, přepisuje se při každém nasazení
+/home/html/ondraweb.cz/app/shared/.env                    produkční konfigurace, jen na serveru, nasazení ji nemění
 /home/html/ondraweb.cz/app/shared/storage/                nahrané soubory, logy (storage/logs), cache
 /home/html/ondraweb.cz/app/current -> releases/<id>       aktivní verze
 /home/html/ondraweb.cz/public_html -> app/current/public  webový adresář (doc root) domény
