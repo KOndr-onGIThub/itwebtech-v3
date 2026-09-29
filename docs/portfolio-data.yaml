@@ -268,37 +268,29 @@ projects:
           cs: "HCMS – přehledová obrazovka informačního systému pro výrobu"
           en: "HCMS – overview screen of the production information system"
           de: "HCMS – Übersichtsbildschirm des Produktions-Informationssystems"
-      - url: "https://itwebtech.cz/images/projects/HCMS/HCMS__main_page_full.jpg"
-        type: gallery
-        alt:
-          cs: "Obrazovka pro zadání volání v plné velikosti: díl, dodavatel, zásoby a dnešní historie"
-          en: "The call entry screen at full size: part, supplier, stock and today’s history"
-          de: "Die Rufmaske in voller Größe: Teil, Lieferant, Bestände und heutiger Verlauf"
       - url: "https://itwebtech.cz/images/projects/HCMS/hcms_tablet_screen.jpg"
+        path: "projects/hcms/gallery-2.jpg"
         type: gallery
         alt:
           cs: "Tablet pro zásobovače: fronta volání se Start a Konec"
           en: "Tablet for material handlers: call queue with Start and End"
           de: "Tablet für die Materialversorgung: Rufwarteschlange mit Start und Ende"
       - url: "https://itwebtech.cz/images/projects/HCMS/HCMS_domain_model.jpg"
+        path: "projects/hcms/gallery-3.jpg"
         type: gallery
         alt:
           cs: "Návrh datového modelu před vývojem"
           en: "Data model designed before development"
           de: "Datenmodell, entworfen vor der Entwicklung"
-      - url: "https://itwebtech.cz/images/projects/HCMS/HCMS_functions_model.jpg"
-        type: gallery
-        alt:
-          cs: "Soupis funkčních požadavků na systém"
-          en: "List of the system’s functional requirements"
-          de: "Liste der funktionalen Anforderungen an das System"
       - url: "https://itwebtech.cz/images/projects/HCMS/HCMS_usecases.jpg"
+        path: "projects/hcms/gallery-5.jpg"
         type: gallery
         alt:
           cs: "Kdo co v systému dělá: případy užití podle rolí"
           en: "Who does what in the system: use cases by role"
           de: "Wer was im System tut: Anwendungsfälle nach Rollen"
       - url: "https://itwebtech.cz/images/projects/HCMS/HCMS_history.jpg"
+        path: "projects/hcms/gallery-6.jpg"
         type: gallery
         alt:
           cs: "Historie přes 126 000 volání s filtrem a exportem"
@@ -720,19 +712,8 @@ projects:
           cs: "Rozcestník služeb: půjčovna, nová kola, servis, bazar"
           en: "Service overview: rentals, new bikes, repairs, second-hand"
           de: "Wegweiser zu den Leistungen: Verleih, neue Räder, Service, Gebrauchtmarkt"
-      - url: "https://framerusercontent.com/images/mdhkU4BB2eFV0bKpPwpLEjaBdSk.png"
-        type: gallery
-        alt:
-          cs: "„Proč právě my?“ na mobilu na šířku: tři důvody, proč přijet právě sem"
-          en: "“Why us?” on a phone in landscape: three reasons to come here"
-          de: "„Warum gerade wir?“ auf dem Handy im Querformat: drei Gründe, genau hierher zu kommen"
-      - url: "https://framerusercontent.com/images/q33eBpkdy6UjBsgRFe1XNR5L4.png"
-        type: gallery
-        alt:
-          cs: "„Naše hodnoty“ na notebooku: fotka z vyjížďky a tři hodnoty týmu"
-          en: "“Our values” on a laptop: a photo from a ride and the team’s three values"
-          de: "„Unsere Werte“ auf dem Notebook: Foto von einer Radtour und drei Werte des Teams"
       - url: "https://framerusercontent.com/images/S3eyrA6b49qVwlh7vBsz987c.png"
+        path: "projects/cyklocentrum/gallery-3.png"
         type: gallery
         alt:
           cs: "Prodej kol s cenami, slevami a tlačítky Zavolat a Navigovat"
@@ -742,6 +723,7 @@ projects:
       # ne obrázek na téhle `url`. OND-268 obsah obou souborů vyměnil, framer
       # URL zůstaly u původních snímků — viz komentář u následující položky.
       - url: "https://framerusercontent.com/images/ts7VthxqIAmrSZgLfGLUxjliw.png"
+        path: "projects/cyklocentrum/gallery-4.png"
         type: gallery
         alt:
           cs: "Cyklocentrum Březí – domovská stránka a půjčovna kol na monitoru, tabletu a mobilu"
@@ -752,6 +734,7 @@ projects:
       # `portfolio:fetch-screenshots --force` by soubory přepsal zpět na framer
       # verze a alt texty by přestaly sedět. Bez `--force` je příkaz no-op.
       - url: "https://framerusercontent.com/images/YiOQN9VFcYx3ZtU82crjfRB2lw.webp"
+        path: "projects/cyklocentrum/gallery-5.webp"
         type: gallery
         alt:
           cs: "Cyklocentrum Březí – ceník půjčovny, výlety po Pálavě a filtrování kol na třech mobilních obrazovkách"
@@ -1063,19 +1046,15 @@ projects:
           cs: "Zubní Provázek – web ordinace na tabletu, logo a tým v ordinaci"
           en: "Zubní Provázek – the practice website on a tablet, logo and the team"
           de: "Zubní Provázek – Praxis-Website auf dem Tablet, Logo und das Team"
-      - url: "https://framerusercontent.com/images/WyrWv7O1Lhq9i3sbk9NAq0ZD0WM.png"
-        type: gallery
-        alt:
-          cs: "Článek „Rady rodičům“ na mobilu: kdy začít chodit s dítětem k zubaři"
-          en: "The “Advice for parents” article on a phone: when to start taking a child to the dentist"
-          de: "Der Artikel „Tipps für Eltern“ auf dem Handy: ab wann man mit dem Kind zum Zahnarzt geht"
       - url: "https://framerusercontent.com/images/Z93ZKiajg8sH7vlh2jyFmvjvhnY.png"
+        path: "projects/zubni-provazek/gallery-4.png"
         type: gallery
         alt:
           cs: "Zubní Provázek – článek na blogu ordinace"
           en: "Zubní Provázek – an article on the practice blog"
           de: "Zubní Provázek – ein Artikel im Blog der Praxis"
       - url: "https://framerusercontent.com/images/zPHkujYnsVFlKP76UKAVcCXo.png"
+        path: "projects/zubni-provazek/gallery-5.png"
         type: gallery
         alt:
           cs: "Zubní Provázek – informace pro pacienty a ordinační doba na notebooku"
@@ -1400,18 +1379,6 @@ projects:
           cs: "Nové logo autokempu"
           en: "New logo for the campsite"
           de: "Neues Logo des Campingplatzes"
-      - url: "https://framerusercontent.com/images/RzJeHMMwnyKGAIpMg5xXvTgvbc.webp"
-        type: gallery
-        alt:
-          cs: "Rezervace po telefonu: sekce „Pro rezervaci volejte“ s číslem jako tlačítkem"
-          en: "Booking by phone: the “Call to book” section with the number as a button"
-          de: "Buchung per Telefon: der Bereich „Zum Buchen anrufen“ mit der Nummer als Button"
-      - url: "https://framerusercontent.com/images/ZhbP3lZ1vLywzZANqLtvBGrEb8.webp"
-        type: gallery
-        alt:
-          cs: "Nabídka ubytování zabalená jako dárek: chatky, karavany a stanování s tlačítky Rezervovat a Ceník"
-          en: "The accommodation offer wrapped as a gift: cabins, caravans and tents with Book and Price list buttons"
-          de: "Das Unterkunftsangebot als Geschenk verpackt: Hütten, Wohnmobile und Zelte mit den Buttons Buchen und Preisliste"
     translations:
       cs:
         title: "Autokemp Veselka"
@@ -2240,25 +2207,15 @@ projects:
           cs: "Obrazovka skladníka a rychlé hlášení problému"
           en: "Warehouse operator screen with quick problem reporting"
           de: "Bildschirm für Lagermitarbeiter mit schneller Problemmeldung"
-      - url: "https://itwebtech.cz/images/projects/picker/picker_main_page_h.jpg"
-        type: gallery
-        alt:
-          cs: "Obrazovka skladníka na výšku: díl, regál, počet kusů a odpočet"
-          en: "The warehouse operator screen in portrait: part, rack, quantity and countdown"
-          de: "Bildschirm für Lagermitarbeiter im Hochformat: Teil, Regal, Stückzahl und Countdown"
       - url: "https://itwebtech.cz/images/projects/picker/picker_TLscreen.jpg"
+        path: "projects/picker/gallery-3.jpg"
         type: gallery
         alt:
           cs: "Přehled pro vedoucího: kdo pracuje a kde je problém"
           en: "Supervisor overview: who is working and where the problem is"
           de: "Übersicht für Teamleiter: wer arbeitet und wo es hakt"
-      - url: "https://itwebtech.cz/images/projects/picker/picker_call_abn.jpg"
-        type: gallery
-        alt:
-          cs: "Hlášení problému: díl nenalezen, poškozený díl nebo box, vlastní zpráva"
-          en: "Reporting a problem: part not found, damaged part or box, custom message"
-          de: "Problem melden: Teil nicht gefunden, Teil oder Box beschädigt, eigene Nachricht"
       - url: "https://itwebtech.cz/images/projects/picker/picker_processMaster.jpg"
+        path: "projects/picker/gallery-5.jpg"
         type: gallery
         alt:
           cs: "Nastavení procesů v administraci"
@@ -2698,13 +2655,6 @@ projects:
           cs: "Záložní postup krok za krokem, když hlavní systém nejede"
           en: "Step-by-step backup procedure for when the main system is down"
           de: "Notfallablauf Schritt für Schritt, wenn das Hauptsystem ausfällt"
-      - url: "https://itwebtech.cz/images/projects/excel/process_combinations.jpg"
-        path: "projects/excel-tools/gallery-4.jpg"
-        type: gallery
-        alt:
-          cs: "Kontrolní přehled linek, který odhalí chybějící kombinaci kurzu a druhu"
-          en: "Line-by-line check that reveals a missing route and type combination"
-          de: "Prüfübersicht je Linie, die eine fehlende Kombination aus Route und Art aufdeckt"
       # OND-294 bod 2: přes grafy Head count a Absence jsou nalepené černé
       # bloky. Board u OND-268 rozhodl interní podklady v galerii nechat,
       # o podobě anonymizačních masek nerozhodoval — obrázek proto zůstává

@@ -67,14 +67,19 @@ class PortfolioFetchScreenshots extends Command
 
                 $ext = $this->extensionFromUrl($url);
                 $filename = "{$type}-{$n}.{$ext}";
-                $target = "{$dir}/{$filename}";
+                // OND-468: pevná `path` v YAML má přednost stejně jako v PortfolioSeeder.
+                // Po vyřazení snímku z galerie by jinak `--force` stáhl další snímek
+                // pod číslo toho vyřazeného a přepsal jiný soubor.
+                $target = ! empty($shot['path'])
+                    ? resource_path("img/{$shot['path']}")
+                    : "{$dir}/{$filename}";
 
                 if (! $force && is_file($target) && filesize($target) > 0) {
                     $totalSkipped++;
                     continue;
                 }
 
-                $this->line("  ↓ {$slug}/{$filename}  ←  {$url}");
+                $this->line("  ↓ {$slug}/" . basename($target) . "  ←  {$url}");
                 $ok = $this->download($url, $target);
                 if ($ok) {
                     $totalDownloaded++;
