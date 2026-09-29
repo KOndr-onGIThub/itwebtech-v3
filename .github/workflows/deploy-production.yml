@@ -45,7 +45,10 @@ jobs:
     timeout-minutes: 30
     env:
       MODE: ${{ inputs.action || 'deploy' }}
-      SSH_HOST: ${{ secrets.WEBGLOBE_SSH_HOST }}
+      # Adresa serveru dw142.webglobe.com není tajná, proto je přímo tady.
+      # Secret WEBGLOBE_SSH_HOST se už nečte (hodnota z administrace typu
+      # „ftp.ondraweb.cz“ v DNS neexistuje).
+      SSH_HOST: 62.109.154.42
       SSH_USER: ${{ secrets.WEBGLOBE_SSH_USER }}
       SSH_PORT: ${{ secrets.WEBGLOBE_SSH_PORT || '22' }}
       SSH_KEY: ${{ secrets.WEBGLOBE_SSH_KEY }}
@@ -56,7 +59,6 @@ jobs:
       - name: Kontrola nastavení (GitHub Secrets)
         run: |
           missing=""
-          [ -n "$SSH_HOST" ] || missing="$missing WEBGLOBE_SSH_HOST"
           [ -n "$SSH_USER" ] || missing="$missing WEBGLOBE_SSH_USER"
           [ -n "$SSH_KEY$SSHPASS" ] || missing="$missing WEBGLOBE_SSH_PASSWORD(nebo WEBGLOBE_SSH_KEY)"
           if [ -n "$missing" ]; then
@@ -99,6 +101,9 @@ jobs:
 
       - name: Připojení k serveru
         run: |
+          # Mezery a konce řádků navíc z vloženého Secretu by přihlášení rozbily.
+          SSH_USER="$(printf '%s' "$SSH_USER" | tr -d '[:space:]')"
+          echo "Připojuji se na $SSH_HOST:$SSH_PORT (jméno má ${#SSH_USER} znaků)."
           mkdir -p ~/.ssh ~/bin
           chmod 700 ~/.ssh
           {
