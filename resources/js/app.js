@@ -7,6 +7,8 @@ import './hloubka';
 import './live-recordings';
 // OND-449 — video smyčky na detailu projektu. Sám se vypne bez `[data-demo-video]`.
 import './demo-videos';
+// OND-471 — prototypy přehledu /projekty (?v=1|2|3). Sám se vypne mimo ně.
+import './projekty';
 import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;

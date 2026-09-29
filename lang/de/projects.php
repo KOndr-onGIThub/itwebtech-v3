@@ -198,4 +198,49 @@ return [
         'primary' => 'Anfrage schreiben',
     ],
 
+    // OND-471 — Prototypen der Übersicht `?v=1|2|3`. Nur der Gewinner bleibt.
+    'catalog' => [
+        'count' => ['one' => ':n Projekt', 'other' => ':n Projekte'],
+        'cta'   => 'Schreiben Sie mir, was Sie brauchen',
+
+        'sentence' => [
+            'aria'       => 'Wählen Sie, was Sie brauchen und für welche Branche. Die Projekte ordnen sich danach.',
+            'lead'       => 'Ich brauche',
+            'joiner'     => 'für',
+            'what_label' => 'Was Sie brauchen',
+            'for_label'  => 'Für welche Branche',
+            'what' => [
+                'all'         => 'irgendetwas',
+                'website'     => 'eine Website',
+                'application' => 'eine Anwendung nach Maß',
+                'other'       => 'Grafik oder einen Artikel',
+            ],
+            'for' => [
+                'all'     => 'jede Branche',
+                'remeslo' => 'Handwerk und Bau',
+                'vyroba'  => 'Produktion und Logistik',
+                'sluzby'  => 'Gesundheit, Immobilien und Unterkunft',
+                'sport'   => 'Sport und Freizeit',
+            ],
+            'match' => ':n von :total passen.',
+            'none'  => 'Genau das habe ich noch nicht im Portfolio. Die nächstliegenden Arbeiten stehen unten.',
+            'rest'  => 'Weitere Projekte',
+        ],
+
+        'index' => [
+            'search_label' => 'Projekte durchsuchen',
+            'placeholder'  => 'Branche, Kunde, Funktion…',
+            'try'          => 'Zum Beispiel',
+            'suggestions'  => ['Onlineshop', 'Toyota', 'Buchung', 'Logo', 'Fertigung'],
+            'none'         => 'So etwas habe ich nicht im Portfolio.',
+            'clear'        => 'Suche löschen',
+        ],
+
+        'show' => [
+            'open'    => 'Fallstudie öffnen',
+            'live'    => 'Live-Website',
+            'preview' => 'Vorschau: :title',
+        ],
+    ],
+
 ];

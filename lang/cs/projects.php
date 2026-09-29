@@ -210,4 +210,50 @@ return [
         'primary' => 'Napsat poptávku',
     ],
 
+    // OND-471 — prototypy přehledu `?v=1|2|3`. Po výběru zůstane jen vítěz.
+    'catalog' => [
+        // Počty: klíče podle Intl.PluralRules (cs: one / few / other).
+        'count' => ['one' => ':n projekt', 'few' => ':n projekty', 'other' => ':n projektů'],
+        'cta'   => 'Napsat, co potřebujete',
+
+        'sentence' => [
+            'aria'       => 'Vyberte, co potřebujete a pro jaký obor. Projekty se podle toho seřadí.',
+            'lead'       => 'Potřebuju',
+            'joiner'     => 'pro',
+            'what_label' => 'Co potřebujete',
+            'for_label'  => 'Pro jaký obor',
+            'what' => [
+                'all'         => 'cokoli',
+                'website'     => 'web',
+                'application' => 'aplikaci na míru',
+                'other'       => 'grafiku nebo článek',
+            ],
+            'for' => [
+                'all'     => 'jakýkoli obor',
+                'remeslo' => 'řemeslo a stavby',
+                'vyroba'  => 'výrobu a logistiku',
+                'sluzby'  => 'zdraví, reality a ubytování',
+                'sport'   => 'sport a volný čas',
+            ],
+            'match' => 'Sedí :n z :total.',
+            'none'  => 'Přesně tohle v portfoliu zatím nemám. Nejbližší práce jsou níž.',
+            'rest'  => 'Další projekty',
+        ],
+
+        'index' => [
+            'search_label' => 'Hledat v projektech',
+            'placeholder'  => 'Obor, klient, funkce…',
+            'try'          => 'Zkuste',
+            'suggestions'  => ['e-shop', 'Toyota', 'rezervace', 'logo', 'výroba'],
+            'none'         => 'Nic takového v portfoliu nemám.',
+            'clear'        => 'Zrušit hledání',
+        ],
+
+        'show' => [
+            'open'    => 'Otevřít případovku',
+            'live'    => 'Živý web',
+            'preview' => 'Náhled: :title',
+        ],
+    ],
+
 ];

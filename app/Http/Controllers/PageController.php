@@ -148,8 +148,13 @@ class PageController extends Controller
     {
         $locale = App::getLocale();
 
+        // OND-471 — prototypy přehledu `?v=1|2|3` (věta / rejstřík / vitrína).
+        // Bez parametru beze změny. Po výběru varianty zůstane jen vítěz.
+        $variant = (int) request()->query('v', 0);
+        $variant = in_array($variant, [1, 2, 3], true) ? $variant : 0;
+
         $portfolioProjects = PortfolioProject::published()
-            ->with(['translations', 'screenshots', 'tags.translations'])
+            ->with(['translations', 'screenshots', 'tags.translations', 'outcomes.translations'])
             ->orderBy('sort_order')
             ->orderByDesc('year')
             ->get();
@@ -162,7 +167,13 @@ class PageController extends Controller
             'other'       => $portfolioProjects->where('category', 'other')->count(),
         ];
 
-        return view('pages.projects', compact('portfolioProjects', 'locale', 'counts'));
+        // Obor → projekty (config/portfolio.php). Slug může být ve dvou oborech.
+        $sectors = collect(config('portfolio.sectors', []))
+            ->map(fn (array $slugs) => array_values(array_intersect($slugs, $portfolioProjects->pluck('slug')->all())))
+            ->filter()
+            ->all();
+
+        return view('pages.projects', compact('portfolioProjects', 'locale', 'counts', 'variant', 'sectors'));
     }
 
     public function project(string $url)

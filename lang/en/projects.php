@@ -199,4 +199,49 @@ return [
         'primary' => 'Write an enquiry',
     ],
 
+    // OND-471 — overview prototypes `?v=1|2|3`. Only the winner stays.
+    'catalog' => [
+        'count' => ['one' => ':n project', 'other' => ':n projects'],
+        'cta'   => 'Tell me what you need',
+
+        'sentence' => [
+            'aria'       => 'Choose what you need and for which field. The projects re-order to match.',
+            'lead'       => 'I need',
+            'joiner'     => 'for',
+            'what_label' => 'What you need',
+            'for_label'  => 'Which field',
+            'what' => [
+                'all'         => 'anything',
+                'website'     => 'a website',
+                'application' => 'a custom app',
+                'other'       => 'design or an article',
+            ],
+            'for' => [
+                'all'     => 'any field',
+                'remeslo' => 'trades and construction',
+                'vyroba'  => 'manufacturing and logistics',
+                'sluzby'  => 'health, property and hospitality',
+                'sport'   => 'sport and leisure',
+            ],
+            'match' => ':n of :total match.',
+            'none'  => 'Nothing exactly like this in the portfolio yet. The closest work is below.',
+            'rest'  => 'Other projects',
+        ],
+
+        'index' => [
+            'search_label' => 'Search projects',
+            'placeholder'  => 'Field, client, feature…',
+            'try'          => 'Try',
+            'suggestions'  => ['online shop', 'Toyota', 'booking', 'logo', 'manufacturing'],
+            'none'         => 'Nothing like that in the portfolio.',
+            'clear'        => 'Clear search',
+        ],
+
+        'show' => [
+            'open'    => 'Open the case study',
+            'live'    => 'Live site',
+            'preview' => 'Preview: :title',
+        ],
+    ],
+
 ];

@@ -54,6 +54,14 @@
      odsazení: titulek „Co jsem postavil." a katalog jsou jedna věta. --}}
 <section class="pd-section" data-pdd="projects-grid">
     <div class="container-site">
+        {{-- OND-471 — prototypy `?v=1|2|3`; bez parametru původní filtr. --}}
+        @if ($variant === 1)
+            <x-portfolio.catalog.sentence :projects="$portfolioProjects" :locale="$locale" :sectors="$sectors" :counts="$counts" />
+        @elseif ($variant === 2)
+            <x-portfolio.catalog.index :projects="$portfolioProjects" :locale="$locale" :sectors="$sectors" />
+        @elseif ($variant === 3)
+            <x-portfolio.catalog.showcase :projects="$portfolioProjects" :locale="$locale" :sectors="$sectors" :counts="$counts" />
+        @else
         <x-portfolio.filter
             :categories="['all', 'website', 'application', 'other']"
             :counts="$counts"
@@ -69,6 +77,7 @@
                 />
             @endforeach
         </div>
+        @endif
     </div>
 </section>
 @else
