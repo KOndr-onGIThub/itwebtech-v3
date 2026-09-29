@@ -8,17 +8,22 @@
 #   remote-deploy.sh deploy     připraví nový release a přepne na něj web
 #   remote-deploy.sh rollback   přepne web o jeden release zpět
 #
-# Rozložení na serveru (vše v domovském adresáři SSH účtu):
+# Rozložení na serveru:
 #
-#   $APP_DIR/releases/<id>/   jednotlivá nasazení (build z Actions)
-#   $APP_DIR/shared/.env      produkční konfigurace, sdílená všemi release
-#   $APP_DIR/shared/storage/  nahrané soubory, logy, cache, sdílené
-#   $APP_DIR/current          symlink na aktivní release
-#   $WEB_ROOT                 symlink na $APP_DIR/current/public (web root hostingu)
+#   $APP_DIR/releases/<id>/        jednotlivá nasazení (build z Actions)
+#   $APP_DIR/shared/.env           produkční konfigurace, sdílená všemi release;
+#                                  žije jen na serveru, nasazení ji nemění
+#   $APP_DIR/shared/storage/       nahrané soubory, logy, cache, sdílené
+#   $APP_DIR/current               symlink na aktivní release
+#   $WEB_ROOT                      symlink na $APP_DIR/current/public (web root domény)
 #
-# Pořadí je schválně: migrace, seedery, optimize a zkouška stránek proběhnou
-# v novém release ještě PŘED přepnutím. Když cokoli selže, skript skončí
-# chybou, `current` se nepřepne a návštěvníci dál vidí předchozí verzi.
+# Databáze je ze SSH dosažitelná přes DB_HOST=db.dw142.webglobe.com (ne
+# c-mariadb, ten zná jen web). Ověřil CEO 29. 9. (OND-461), migrace i seedery
+# proto běží přímo tady přes SSH.
+#
+# Pořadí je schválně: všechno proběhne v novém release ještě PŘED přepnutím.
+# Když cokoli selže, skript skončí chybou, `current` se nepřepne a návštěvníci
+# dál vidí předchozí verzi.
 #
 # Pozor na hardlinky: rsync --link-dest sdílí nezměněné soubory mezi release.
 # Soubor v release se proto nikdy nesmí přepsat na místě (`> soubor`,
@@ -32,14 +37,16 @@
 set -euo pipefail
 
 MODE="${1:-deploy}"
-APP_DIR="${APP_DIR:-ondraweb}"
-WEB_ROOT="${WEB_ROOT:-www}"
+APP_DIR="${APP_DIR:-/home/html/ondraweb.cz/app}"
+WEB_ROOT="${WEB_ROOT:-/home/html/ondraweb.cz/public_html}"
+WEB_URL="${WEB_URL:-https://ondraweb.cz}"
 PHP_BIN="${PHP_BIN:-php8.4}"
 KEEP_RELEASES="${KEEP_RELEASES:-5}"
 
 cd "$HOME"
 case "$APP_DIR" in /*) BASE="$APP_DIR" ;; *) BASE="$HOME/$APP_DIR" ;; esac
 case "$WEB_ROOT" in /*) WEB="$WEB_ROOT" ;; *) WEB="$HOME/$WEB_ROOT" ;; esac
+WEB_URL="${WEB_URL%/}"
 
 step() { printf '\n==> %s\n' "$*"; }
 fail() {
@@ -89,7 +96,7 @@ deploy() {
 
     step "Kontrola PHP ($PHP_BIN)"
     command -v "$PHP_BIN" >/dev/null 2>&1 \
-        || fail "Na serveru chybí příkaz $PHP_BIN. Nastav v administraci Webglobe PHP 8.4, nebo uprav proměnnou PHP_BIN ve workflow."
+        || fail "Na serveru chybí příkaz $PHP_BIN. Uprav proměnnou WEBGLOBE_PHP_BIN ve workflow."
     "$PHP_BIN" -r 'exit(version_compare(PHP_VERSION, "8.4.0", ">=") ? 0 : 1);' \
         || fail "$PHP_BIN je verze $("$PHP_BIN" -r 'echo PHP_VERSION;'), aplikace potřebuje PHP 8.4."
     local missing
@@ -109,8 +116,10 @@ deploy() {
              "$BASE/shared/storage/framework/sessions" \
              "$BASE/shared/storage/framework/views" \
              "$BASE/shared/storage/logs"
+    # Webserver může běžet pod jiným uživatelem než SSH, musí adresáři projít.
+    chmod 755 "$BASE" "$BASE/shared" "$BASE/releases"
     [ -s "$BASE/shared/.env" ] \
-        || fail "Chybí $BASE/shared/.env. Vyplň GitHub Secret PRODUCTION_ENV (viz docs/deploy-production.md) a spusť nasazení znovu."
+        || fail "Chybí $BASE/shared/.env. Založ ji na serveru podle vzoru v docs/deploy-production.md a spusť nasazení znovu."
     grep -q '^APP_KEY=base64:' "$BASE/shared/.env" \
         || fail "V .env chybí APP_KEY. Musí být stejný jako na Coolify, jinak přestane fungovat dvoufázové přihlášení do administrace."
 
@@ -146,12 +155,17 @@ deploy() {
         || fail "Nový release nevrací stránky. Web se nepřepnul a běží předchozí verze. Detail v $BASE/shared/storage/logs/."
 
     step "Přepnutí webu na $RELEASE"
+    # Release, který běží teď, dostane značku taky. První release na serveru
+    # nahrál CEO ručně (29. 9.) a bez značky by se na něj nešlo vrátit.
+    if [ -L "$BASE/current" ] && [ -d "$BASE/current/" ]; then
+        touch "$BASE/current/.deployed"
+    fi
     touch "$rel/.deployed"
     switch_link "releases/$RELEASE" "$BASE/current"
 
-    # Web root hostingu (`www`) musí ukazovat na current/public. Při prvním
-    # nasazení je to ještě skutečný adresář se starým webem itwebtech.cz. Ten
-    # se jen přejmenuje (nic se nemaže), takže jde kdykoli vrátit.
+    # Web root domény musí ukazovat na current/public. Při prvním nasazení je
+    # to ještě skutečný adresář s výchozím obsahem od Webglobe. Ten se jen
+    # přejmenuje (nic se nemaže), takže jde kdykoli vrátit.
     if [ -L "$WEB" ]; then
         if [ "$(readlink "$WEB")" != "$BASE/current/public" ]; then
             switch_link "$BASE/current/public" "$WEB"
@@ -167,6 +181,16 @@ deploy() {
     fi
     echo "$WEB -> $(readlink "$WEB")"
     echo "$BASE/current -> $(readlink "$BASE/current")"
+
+    # Kontrola zvenku přes skutečný web (PHP webu může být jiné než PHP v SSH).
+    # Jen upozornění: web se nevrací, návrat je ruční `rollback`.
+    local code
+    code="$(curl -sS -o /dev/null --max-time 30 -w '%{http_code}' "$WEB_URL/up" 2>/dev/null || true)"
+    if [ "$code" = 200 ]; then
+        echo "$WEB_URL/up -> 200"
+    else
+        printf '::warning::%s\n' "Nasazeno, ale $WEB_URL/up vrací HTTP ${code:-000} místo 200. Zkontroluj web. Když je rozbitý: Actions → Nasazení produkce (Webglobe) → Run workflow → rollback. Časté příčiny: web neběží na PHP 8.4 (Hosting → Web → PHP nastavení), doména nemíří na tento hosting." >&2
+    fi
 
     step "Úklid starých release (ponechávám posledních $KEEP_RELEASES)"
     local active old
