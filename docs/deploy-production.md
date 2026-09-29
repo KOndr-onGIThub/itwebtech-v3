@@ -40,11 +40,13 @@ Přihlášení: <https://admin.webglobe.cz>, hosting domény `itwebtech.cz`.
    `www.ondraweb.cz`, `itwebtech.cz`, `www.itwebtech.cz`) certifikát
    Let's Encrypt. Pro `ondraweb.cz` to půjde až ve chvíli, kdy na Webglobe
    povede DNS.
-   **`www.ondraweb.cz`** (stav 29. 9.): hosting ho už obsluhuje a aplikace ho
-   přesměruje 301 na `https://ondraweb.cz` se stejnou cestou. Chybí jen
-   DNS záznam (Domény → DNS → DNS záznamy → Nový DNS záznam: jméno `www`,
-   typ A, hodnota `62.109.154.42`) a potom certifikát Let's Encrypt,
-   který kromě `ondraweb.cz` pokrývá i `www.ondraweb.cz`.
+   **`www.ondraweb.cz`** (funguje od 29. 9.): DNS záznam `www` typu A na
+   `62.109.154.42`, aplikace ho přesměruje 301 na `https://ondraweb.cz` se
+   stejnou cestou. Dvě zkušenosti z 29. 9.: (1) záznam `www` byl v administraci,
+   ale DNS servery Webglobe ho nevydávaly; pomohlo ho smazat a založit znovu.
+   (2) Let's Encrypt od Webglobe přidá `www` do certifikátu sám, ale jen když
+   `www` už v DNS existuje ve chvíli vystavení. Jinak je potřeba certifikát
+   smazat a vystavit znovu (Domény → SSL certifikát).
 4. **Databáze.** Hosting → Databáze → založ novou databázi (MariaDB nebo MySQL,
    nejnovější nabízená verze). Opiš si **název databáze**, **uživatele**
    a **heslo**. Patří do `.env` na serveru (vzor v části B). Jako server databáze použij
