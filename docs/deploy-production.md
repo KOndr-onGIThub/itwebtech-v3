@@ -43,28 +43,30 @@ Přihlášení: <https://admin.webglobe.cz>, hosting domény `itwebtech.cz`.
    nejnovější nabízená verze). Opiš si čtyři údaje: **server** (např.
    `c-mariadb`), **název databáze**, **uživatele** a **heslo**. Budou potřeba
    v kroku B.
-5. **SSH přístup.** Hosting → FTP a soubory → FTP účty. Opiš si **FTP login**.
-   U tlačítka „Upravit“ nastav heslo, pokud ho neznáš. GitHub se přihlašuje stejným účtem přes SSH. Pokud administrace nabízí
-   zapnutí SSH, zapni ho **natrvalo**.
-   Pozor: „WebSSH“ (konzole v prohlížeči) se zapíná jen na hodinu. To je jiná
-   věc a automatickému nasazení nestačí. Když administrace umožní SSH zapnout
-   jen dočasně, napiš to CEO, bez trvalého SSH automatické nasazení nepojede.
-6. **IP ochrana a GeoIP.** U stejného FTP účtu (Upravit → „IP ochrana + GeoIP“)
-   nesmí být přístup omezený jen na Českou republiku. GitHub se připojuje
-   ze serverů v zahraničí.
+5. **SSH přístup.** SSH má jen multihosting a má **vlastní účet, jiný než FTP**.
+   Hosting → FTP a soubory → WebSSH. Tam je server `dw142.webglobe.com`,
+   port `20001`, jméno `ssh-608671` a heslo (tlačítko „Copy password“).
+   Zdarma se WebSSH zapíná jen na hodinu, pak se samo vypne. Automatické
+   nasazení potřebuje **Permanentní SSH konzoli** (306 Kč/rok bez DPH).
+   Když si ji objednáš, zkontroluj, jestli se heslo nezměnilo.
+6. **IP ochrana a GeoIP.** Webglobe zahazuje spojení z části serverů na
+   internetu, mezi nimi i z GitHubu. Nastavením v administraci se to obejít nedá,
+   proto nasazení chodí přes náš server (secret `DEPLOY_JUMP_KEY` v kroku B).
 
 ## B. GitHub Secrets (jednou)
 
 Na GitHubu v repozitáři: **Settings → Secrets and variables → Actions →
-New repository secret**. Založ tyhle tři:
+New repository secret**. Založ tyhle:
 
 | Název | Co do něj vložit | Odkud |
 |---|---|---|
-| `WEBGLOBE_SSH_USER` | přihlašovací jméno | krok A5, „FTP login“ |
-| `WEBGLOBE_SSH_PASSWORD` | heslo FTP účtu | krok A5 |
+| `WEBGLOBE_SSH_USER` | `ssh-608671` | krok A5, stránka WebSSH |
+| `WEBGLOBE_SSH_PASSWORD` | heslo SSH účtu (ne FTP!) | krok A5, „Copy password“ |
+| `WEBGLOBE_SSH_PORT` | `20001` | krok A5, stránka WebSSH |
+| `DEPLOY_JUMP_KEY` | klíč pro spojení přes náš server | pošle CEO v kartě OND-459 |
 | `PRODUCTION_ENV` | celá produkční konfigurace, vzor je níže | vzor + hodnoty z Coolify a z kroku A4 |
 
-Adresu serveru (`62.109.154.42`) zadávat nemusíš, nasazení ji má v sobě.
+Adresu serveru zadávat nemusíš, nasazení ji má v sobě.
 Secret `WEBGLOBE_SSH_HOST`, pokud ho máš z dřívějška, se už nepoužívá a můžeš
 ho smazat.
 
@@ -295,9 +297,22 @@ Variables), jen když se Webglobe liší od předpokladu:
 | `WEBGLOBE_APP_DIR` | `ondraweb` | aplikace má ležet jinde |
 | `WEBGLOBE_PHP_BIN` | `php8.4` | PHP 8.4 je na serveru pod jiným příkazem |
 
-**Volitelné secrets:** `WEBGLOBE_SSH_PORT` (když SSH neběží na 22),
-`WEBGLOBE_SSH_KEY` (místo hesla), `WEBGLOBE_SSH_KNOWN_HOSTS` (otisk serveru,
-výstup `ssh-keyscan <host>`. Bez něj se otisk přijme při každém běhu).
+**Volitelné secrets:** `WEBGLOBE_SSH_KEY` (místo hesla),
+`WEBGLOBE_SSH_KNOWN_HOSTS` (otisk serveru, výstup `ssh-keyscan <host>`. Bez
+něj se otisk přijme při každém běhu).
+
+**Spojení přes náš server.** 62.109.154.42 zahazuje spojení z části adres
+(29. 9. změřeno ze 40 míst přes check-host.net: stejné sítě neprojdou ani na
+20001, ani na 443). Runner GitHubu skončil `Connection timed out` na portu 22
+i 20001, náš server přes IPv4 taky. Přes IPv6 se náš server na
+`dw142.webglobe.com:20001` dostane. Když je vyplněný `DEPLOY_JUMP_KEY`,
+workflow použije `ProxyJump` přes `paperclip@46.224.218.19` (otisk serveru je
+ve workflow). Klíč je v `~paperclip/.ssh/authorized_keys` omezený na
+`restrict,port-forwarding,permitopen="dw142.webglobe.com:20001",permitlisten="127.0.0.1:1",command="/bin/false"`,
+takže neotevře shell ani spojení jinam. Soukromá část je na našem serveru
+v `~paperclip/.ssh/ond459-jump-key`. Pozor na zkoušky se špatným heslem:
+opakované neúspěšné přihlášení může Webglobe vyhodnotit jako útok a adresu
+zablokovat.
 
 **Když hosting nedovolí nahradit `www` odkazem** (nasazení skončí hláškou
 „Nejde přejmenovat“ / „Nejde vytvořit symlink“): v administraci nastav

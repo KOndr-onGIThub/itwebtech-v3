@@ -54,6 +54,15 @@ jobs:
       SSH_KEY: ${{ secrets.WEBGLOBE_SSH_KEY }}
       SSHPASS: ${{ secrets.WEBGLOBE_SSH_PASSWORD }}
       SSH_KNOWN_HOSTS: ${{ secrets.WEBGLOBE_SSH_KNOWN_HOSTS }}
+      # Webglobe zahazuje spojení z části serverů na internetu, včetně GitHubu
+      # (29. 9. timeout na všech portech, i na 443). Když je vyplněný secret
+      # DEPLOY_JUMP_KEY, jde spojení přes náš server, který se na Webglobe
+      # dostane přes IPv6. Klíč smí na našem serveru jen otevřít spojení na
+      # dw142.webglobe.com:20001, nic jiného (authorized_keys: permitopen).
+      JUMP_KEY: ${{ secrets.DEPLOY_JUMP_KEY }}
+      JUMP_HOST: 46.224.218.19
+      JUMP_USER: paperclip
+      JUMP_HOST_KEY: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG9Cw4EBBl7uaUBqg7kUqYqZYLUrMEWh8PZ4qtxRBpLR
 
     steps:
       - name: Kontrola nastavení (GitHub Secrets)
@@ -103,9 +112,34 @@ jobs:
         run: |
           # Mezery a konce řádků navíc z vloženého Secretu by přihlášení rozbily.
           SSH_USER="$(printf '%s' "$SSH_USER" | tr -d '[:space:]')"
-          echo "Připojuji se na $SSH_HOST:$SSH_PORT (jméno má ${#SSH_USER} znaků)."
+          SSH_PORT="$(printf '%s' "$SSH_PORT" | tr -d '[:space:]')"
           mkdir -p ~/.ssh ~/bin
           chmod 700 ~/.ssh
+          : > ~/.ssh/config
+          VIA=""
+          if [ -n "$JUMP_KEY" ]; then
+            printf '%s\n' "$JUMP_KEY" > ~/.ssh/jump_key
+            chmod 600 ~/.ssh/jump_key
+            echo "$JUMP_HOST $JUMP_HOST_KEY" > ~/.ssh/known_hosts_jump
+            # Blok pro náš server musí být první, řádky přidané níž patří
+            # k bloku webglobe. BatchMode: když klíč neprojde, nic se
+            # nezkouší heslem.
+            {
+              echo "Host jump"
+              echo "  HostName $JUMP_HOST"
+              echo "  User $JUMP_USER"
+              echo "  IdentityFile ~/.ssh/jump_key"
+              echo "  IdentitiesOnly yes"
+              echo "  BatchMode yes"
+              echo "  UserKnownHostsFile ~/.ssh/known_hosts_jump"
+              echo "  StrictHostKeyChecking yes"
+              echo "  ConnectTimeout 20"
+            } >> ~/.ssh/config
+            # Náš server pustí jen přesně tuhle adresu, ne IP.
+            SSH_HOST=dw142.webglobe.com
+            VIA=" přes náš server $JUMP_HOST"
+          fi
+          echo "Připojuji se na $SSH_HOST:$SSH_PORT$VIA (jméno má ${#SSH_USER} znaků)."
           {
             echo "Host webglobe"
             echo "  HostName $SSH_HOST"
@@ -113,7 +147,8 @@ jobs:
             echo "  Port $SSH_PORT"
             echo "  ConnectTimeout 20"
             echo "  ServerAliveInterval 30"
-          } > ~/.ssh/config
+            if [ -n "$JUMP_KEY" ]; then echo "  ProxyJump jump"; fi
+          } >> ~/.ssh/config
 
           if [ -n "$SSH_KNOWN_HOSTS" ]; then
             printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
@@ -138,7 +173,11 @@ jobs:
 
           # shellcheck disable=SC2016 # $(…) a $HOME se mají rozvinout až na serveru
           if ! ~/bin/wssh webglobe 'echo "Připojeno jako $(whoami) na $(hostname), domovský adresář $HOME"'; then
-            echo "::error::Nepodařilo se připojit přes SSH na $SSH_HOST:$SSH_PORT jako $SSH_USER. Zkontroluj v administraci Webglobe, že je SSH zapnuté, heslo/klíč sedí a IP ochrana (GeoIP) nepovoluje jen Česko. Viz docs/deploy-production.md."
+            if [ -z "$JUMP_KEY" ]; then
+              echo "::error::Nepodařilo se připojit přes SSH na $SSH_HOST:$SSH_PORT jako $SSH_USER. Při „Connection timed out“ Webglobe zahodil spojení z GitHubu: vlož secret DEPLOY_JUMP_KEY (spojení pak půjde přes náš server). Jinak zkontroluj heslo a že je WebSSH zapnuté. Viz docs/deploy-production.md."
+            else
+              echo "::error::Nepodařilo se připojit přes náš server $JUMP_HOST na $SSH_HOST:$SSH_PORT jako $SSH_USER. „Connection timed out“ nebo „open failed“ = WebSSH na Webglobe je vypnuté (hodinová konzole vypršela). „Permission denied“ = špatné heslo ve WEBGLOBE_SSH_PASSWORD. Viz docs/deploy-production.md."
+            fi
             exit 1
           fi
 
