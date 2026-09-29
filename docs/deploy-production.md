@@ -40,6 +40,11 @@ Přihlášení: <https://admin.webglobe.cz>, hosting domény `itwebtech.cz`.
    `www.ondraweb.cz`, `itwebtech.cz`, `www.itwebtech.cz`) certifikát
    Let's Encrypt. Pro `ondraweb.cz` to půjde až ve chvíli, kdy na Webglobe
    povede DNS.
+   **`www.ondraweb.cz`** (stav 29. 9.): hosting ho už obsluhuje a aplikace ho
+   přesměruje 301 na `https://ondraweb.cz` se stejnou cestou. Chybí jen
+   DNS záznam (Domény → DNS → DNS záznamy → Nový DNS záznam: jméno `www`,
+   typ A, hodnota `62.109.154.42`) a potom certifikát Let's Encrypt,
+   který kromě `ondraweb.cz` pokrývá i `www.ondraweb.cz`.
 4. **Databáze.** Hosting → Databáze → založ novou databázi (MariaDB nebo MySQL,
    nejnovější nabízená verze). Opiš si **název databáze**, **uživatele**
    a **heslo**. Patří do `.env` na serveru (vzor v části B). Jako server databáze použij
@@ -292,6 +297,19 @@ curl -sI https://itwebtech.ondrejkriska.cz/ | grep -i x-robots-tag
   je v cache, proto potom spusť nasazení: Actions → „Nasazení produkce
   (Webglobe)“ → Run workflow → akce `deploy`. Nová verze si `.env` načte
   znovu.
+- **Změna hesla k databázi:** nejdřív v administraci Webglobe (Hosting →
+  Databáze, uživatel `ondraweb_adminik`), hned potom v SSH konzoli:
+
+  ```sh
+  bash /home/html/ondraweb.cz/app/current/scripts/deploy/change-db-password.sh
+  ```
+
+  Skript si heslo vyžádá (při psaní se nezobrazuje), nejdřív ho vyzkouší
+  proti databázi a teprve pak ho zapíše do `.env`, obnoví cache konfigurace
+  (i ve starších verzích kvůli `rollback`) a vyzkouší stránky. Když databáze
+  heslo nepřijme, `.env` nezmění. Nasazení spouštět není potřeba. Web je bez
+  databáze jen mezi uložením hesla v administraci a doběhnutím skriptu.
+  Heslo nikam nevkládej ani neposílej, stačí ho mít ve schránce.
 
 ---
 
@@ -299,7 +317,9 @@ curl -sI https://itwebtech.ondrejkriska.cz/ | grep -i x-robots-tag
 
 Soubory: `.github/workflows/deploy-production.yml` (build na GitHubu, SSH
 přes náš server, nahrání), `scripts/deploy/remote-deploy.sh` (kroky na
-serveru), `scripts/deploy/smoke.php` (zkouška stránek nové verze).
+serveru), `scripts/deploy/smoke.php` (zkouška stránek nové verze),
+`scripts/deploy/change-db-password.sh` (výměna hesla k databázi, spouští se
+ručně, viz F).
 
 **Přihlašovací shell na Webglobe je `fish`, ne bash.** Workflow proto na
 server neposílá příkazy přímo přes `ssh host "…"` (fish nezná třeba `$(...)`).
