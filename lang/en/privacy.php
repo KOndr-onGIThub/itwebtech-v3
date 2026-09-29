@@ -92,7 +92,7 @@ return [
 <h2>Who else gets to your data</h2>
 <p>I do not sell it and I do not pass it to anyone for marketing. A handful of companies do have technical access to it, because the site and my mailbox run on their services:</p>
 <ul>
-<li><strong>Hetzner</strong> (Germany) — the server the site and the database run on.</li>
+<li><strong>Webglobe</strong> (Czech Republic) — the server the site and the database run on.</li>
 <li><strong>Seznam.cz</strong> — runs the ok@ondraweb.cz mailbox that your inquiries arrive in.</li>
 <li><strong>Google</strong> — Google Analytics, and only if you allow measurement.</li>
 <li><strong>Microsoft</strong> — Clarity, and only if you allow measurement.</li>
