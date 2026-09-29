@@ -63,8 +63,8 @@
                     <option value="{{ $key }}">{{ __('projects.catalog.sentence.for.' . $key) }}</option>
                 @endforeach
             </select>
-            <span class="pd-intent__value" aria-hidden="true">{{ __('projects.catalog.sentence.for.all') }}</span>
-        </span><span class="pd-intent__dot">.</span>
+            <span class="pd-intent__value" aria-hidden="true">{{ __('projects.catalog.sentence.for.all') }}</span>{{-- Tečka uvnitř slotu: za inline-blokem by se u dlouhé volby (de, mobil) zalomila na samostatný řádek. --}}<span class="pd-intent__dot">.</span>
+        </span>
     </p>
     <p class="pd-intent__status">
         <span role="status" data-intent-status>{{ str_replace(':n', $total, $i18n['count']['other']) }}</span>
