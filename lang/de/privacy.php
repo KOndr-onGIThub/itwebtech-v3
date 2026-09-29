@@ -94,7 +94,7 @@ return [
 <h2>Wer sonst noch an Ihre Daten kommt</h2>
 <p>Ich verkaufe sie nicht und gebe sie an niemanden für Marketing weiter. Technischen Zugang haben allerdings einige Unternehmen, auf deren Diensten die Website und mein Postfach laufen:</p>
 <ul>
-<li><strong>Hetzner</strong> (Deutschland) — der Server, auf dem Website und Datenbank laufen.</li>
+<li><strong>Webglobe</strong> (Tschechien) — der Server, auf dem Website und Datenbank laufen.</li>
 <li><strong>Seznam.cz</strong> — betreibt das Postfach ok@ondraweb.cz, in dem Ihre Anfragen ankommen.</li>
 <li><strong>Google</strong> — Google Analytics, und nur wenn Sie die Messung erlauben.</li>
 <li><strong>Microsoft</strong> — Clarity, und nur wenn Sie die Messung erlauben.</li>
