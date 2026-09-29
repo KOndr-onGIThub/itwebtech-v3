@@ -134,8 +134,13 @@ function initIntent(form) {
 // pointer, klávesa, kolečko, dotyk, fokus i změna výběru.
 // Stav, který by změnil počet řádků věty, se přeskočí — mřížka pod větou
 // se tak nikdy neposune (žádný layout shift).
+//
+// Kroky: napřed DEMO_STEPS, pak ostatní kombinace (ty, co mění obě slova,
+// dřív). Na úzkém mobilu a v de pevná trojice výšku nedrží, náhradní
+// kombinace ano (OND-474).
 // ---------------------------------------------------------------------------
 const DEMO_KEY = 'pd-intent-demo';
+const DEMO_MAX = 3;
 const DEMO_STEPS = [
     { co: 'website', pro: 'all' },
     { co: 'website', pro: 'vyroba' },
@@ -163,10 +168,12 @@ function initDemo(form, sentence, selects, valueOf, mirror) {
 
     let timer = 0;
     let running = false;
+    let stopped = false;
     let observer = null;
     const events = ['pointerdown', 'keydown', 'wheel', 'touchstart'];
 
     const stop = () => {
+        stopped = true;
         clearTimeout(timer);
         observer?.disconnect();
         events.forEach((e) => document.removeEventListener(e, stop, true));
@@ -180,16 +187,31 @@ function initDemo(form, sentence, selects, valueOf, mirror) {
     // Fokus na slovo věty (i bez klávesy, např. z čtečky) ukázku taky ukončí.
     form.addEventListener('focusin', stop, { once: true });
 
+    // Kandidáti v pořadí preference, bez duplicit a bez výchozího „all × all“.
+    const candidates = () => {
+        const values = (sel) => [...sel.options].map((o) => o.value);
+        const combos = values(co).flatMap((c) => values(pro).map((p) => ({ co: c, pro: p })))
+            .filter((s) => s.co !== 'all' || s.pro !== 'all');
+        const both = (s) => s.co !== 'all' && s.pro !== 'all';
+        const preferred = DEMO_STEPS.filter((s) => label(co, s.co) && label(pro, s.pro));
+        const key = (s) => `${s.co}|${s.pro}`;
+        const taken = new Set(preferred.map(key));
+        const rest = combos.filter((s) => !taken.has(key(s)));
+        return [...preferred, ...rest.filter(both), ...rest.filter((s) => !both(s))];
+    };
+
     const run = () => {
+        if (stopped) return;
         // Jen kroky, které nezmění výšku věty (počet řádků) — změří se
         // synchronně v jednom snímku a vrátí zpět, nic se nevykreslí.
         const base = sentence.offsetHeight;
-        const steps = DEMO_STEPS.filter((s) => label(co, s.co) && label(pro, s.pro)).filter((s) => {
+        const steps = [];
+        for (const s of candidates()) {
+            if (steps.length === DEMO_MAX) break;
             show(s, false);
-            const same = sentence.offsetHeight === base;
-            selects.forEach(mirror);
-            return same;
-        });
+            if (sentence.offsetHeight === base) steps.push(s);
+        }
+        selects.forEach(mirror);
         if (!steps.length) return stop();
 
         try { sessionStorage.setItem(DEMO_KEY, '1'); } catch { /* soukromý režim */ }
@@ -208,8 +230,10 @@ function initDemo(form, sentence, selects, valueOf, mirror) {
         if (!entries.some((e) => e.isIntersecting)) return;
         observer.disconnect();
         observer = null;
-        if (document.visibilityState === 'visible') run();
-        else stop();
+        if (document.visibilityState !== 'visible') return stop();
+        // Měřit až s načteným písmem — s náhradním se věta láme jinak
+        // a vybraný krok by pak výšku změnil (OND-474).
+        document.fonts.ready.then(run);
     }, { threshold: 1 });
     observer.observe(sentence);
 
