@@ -5,6 +5,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\RobotsController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Middleware\SetLocale;
+use App\Support\LegacyArticleRedirect;
 use App\Support\LegacyProjectRedirect;
 use Illuminate\Support\Facades\Route;
 
@@ -111,6 +112,11 @@ Route::get('/price',          fn() => redirect('/cenik', 301));
 Route::get('/contact',        fn() => redirect('/kontakt', 301));
 Route::get('/privacy-policy', fn() => redirect('/zasady-ochrany-osobnich-udaju', 301));
 Route::get('/projects',       fn() => redirect('/projekty', 301));
+// OND-466: zbylé adresy starého itwebtech.cz. Bez nich `/about` chytí záchytná
+// routa a pošle na `/en/about`, `/reference` a `/servis` skončí na 404.
+Route::get('/about',          fn() => redirect(lroute('about', 'cs'), 301));
+Route::get('/reference',      fn() => redirect(lroute('projects', 'cs'), 301));
+Route::get('/servis',         fn() => redirect(lroute('home', 'cs') . '#section-services', 301));
 // OND-455: staré slugy z itwebtech.cz rovnou na dnešní případovku (jeden skok),
 // mapa v config/redirects.php. Neznámý slug jde dál na `/projekty/{slug}`.
 Route::get('/projects/{any}', fn(string $any) => LegacyProjectRedirect::for($any, 'cs')
@@ -130,12 +136,16 @@ Route::get('/dekuji', fn() => redirect(lroute('home', 'cs'), 301));
 // na `/en/blog` (první match v dict order) — to je SEO + UX regrese.
 // EN i DE mají vlastní /{locale}/blog prefix, takže není konflikt.
 Route::get('/blog',           fn() => redirect('/zapisky', 301));
-Route::get('/blog/{any}',     fn(string $any) => redirect('/zapisky/' . $any, 301))->where('any', '.*');
+Route::get('/blog/{any}',     fn(string $any) => LegacyArticleRedirect::for($any, 'cs')
+    ?? redirect('/zapisky/' . $any, 301))->where('any', '.*');
 
 // OND-266: CS slug sekce se změnil `jak-na-to` → `zapisky` (Ondřej 23. 9.).
 // Staré adresy musí držet 301, jsou v indexu i v odkazech zvenčí.
+// OND-466: slug se vyhodnotí hned tady (starý slug, stažený článek), aby
+// vedl na konečný článek jedním skokem. Neznámý slug jde dál beze změny.
 Route::get('/jak-na-to',       fn() => redirect('/zapisky', 301));
-Route::get('/jak-na-to/{any}', fn(string $any) => redirect('/zapisky/' . $any, 301))->where('any', '.*');
+Route::get('/jak-na-to/{any}', fn(string $any) => LegacyArticleRedirect::for($any, 'cs')
+    ?? redirect('/zapisky/' . $any, 301))->where('any', '.*');
 
 /*
 |--------------------------------------------------------------------------
