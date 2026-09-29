@@ -25,7 +25,8 @@ Kdo co dělá:
 
 Přihlášení: <https://admin.webglobe.cz>, hosting domény `itwebtech.cz`.
 
-1. **PHP 8.4.** V nastavení hostingu (Hosting → Web → PHP) zvol verzi **8.4**.
+1. **PHP 8.4.** Hosting → Web → PHP nastavení → verze **8.4** (od 29. 9.
+   nastaveno, web běží na 8.4.24).
    Ve stejném místě zkontroluj limity pro nahrávání souborů. Formulář bere
    přílohy do 10 MB, dohromady do 20 MB, takže nastav aspoň
    `upload_max_filesize` = **20M** a `post_max_size` = **32M**, pokud je tam méně.
@@ -40,9 +41,11 @@ Přihlášení: <https://admin.webglobe.cz>, hosting domény `itwebtech.cz`.
    Let's Encrypt. Pro `ondraweb.cz` to půjde až ve chvíli, kdy na Webglobe
    povede DNS.
 4. **Databáze.** Hosting → Databáze → založ novou databázi (MariaDB nebo MySQL,
-   nejnovější nabízená verze). Opiš si čtyři údaje: **server** (např.
-   `c-mariadb`), **název databáze**, **uživatele** a **heslo**. Budou potřeba
-   v kroku B.
+   nejnovější nabízená verze). Opiš si **název databáze**, **uživatele**
+   a **heslo**. Budou potřeba v kroku B. Jako server databáze použij
+   **`db.dw142.webglobe.com`**, ne `c-mariadb` z administrace. `c-mariadb`
+   zná jen web, SSH ho nenajde. `db.dw142.webglobe.com` ze SSH funguje
+   (ověřeno 29. 9.).
 5. **SSH přístup.** SSH má jen multihosting a má **vlastní účet, jiný než FTP**.
    Hosting → FTP a soubory → WebSSH. Tam je server `dw142.webglobe.com`,
    port `20001`, jméno `ssh-608671` a heslo (tlačítko „Copy password“).
@@ -99,7 +102,9 @@ LOG_STACK=daily
 LOG_LEVEL=warning
 
 DB_CONNECTION=mysql
-DB_HOST=‹server z kroku A4, např. c-mariadb›
+# db.dw142.webglobe.com, ne c-mariadb: na c-mariadb se nedostane SSH, a tím
+# ani migrace při nasazení.
+DB_HOST=db.dw142.webglobe.com
 DB_PORT=3306
 DB_DATABASE=‹název databáze z kroku A4›
 DB_USERNAME=‹uživatel z kroku A4›
@@ -159,6 +164,8 @@ soukromý klíč na serveru nezůstane.
 </details>
 
 ## C. Přesun dat z testovacího webu (CEO, jednou)
+
+**Hotovo 29. 9.** Postup zůstává pro případ, že by se přesun opakoval.
 
 Obsah (články, případovky, administrátor, poptávky) je dnes v databázi na
 Coolify. Přenáší se **celá** databáze včetně tabulky `migrations`, jinak by
@@ -231,17 +238,15 @@ Předpoklad: části A a B jsou hotové a workflow už je ve větvi `main`
 3. Počkej na zelenou fajfku (několik minut). V logu kroku „Migrace, optimize,
    zkouška a přepnutí webu“ je vidět, že stránky nové verze vrátily `OK 200`.
 
-Co se při prvním nasazení stane se starým webem: dosavadní obsah webového
-adresáře `/home/html/ondraweb.cz/public_html` se **přejmenuje** na
-`public_html.pred-ondraweb-<datum>`. Nic se nemaže. Místo něj vznikne odkaz
-na nový web.
+Stav serveru: první verzi nahrál CEO 29. 9. ručně
+(`/home/html/ondraweb.cz/app/releases/20260929024516-bff0683`, `current`
+a `public_html` už jsou odkazy). První nasazení z GitHubu tedy vytvoří druhou
+verzi a přepne na ni. Na ruční verzi se jde vrátit akcí `rollback`.
 
-Nasazení navíc krátce (jen po dobu HTTP volání) přidá do web rootu odkaz
-`_deploy` na sdílený adresář `shared/deploy-hook` — databáze je z Webglobe
-SSH nedosažitelná (OND-461), migrace a seedery proto spouští samotný web
-přes jednorázový PHP soubor s náhodným jménem a tokenem. Soubor i odkaz
-zase zmizí, jakmile volání skončí; při prvním nasazení, kdy `_deploy` ještě
-neexistuje v aktuálním web rootu, ho skript sám přidá.
+Na čistém serveru (kdyby se hosting zakládal znovu) se dosavadní obsah
+webového adresáře `/home/html/ondraweb.cz/public_html` při prvním nasazení
+**přejmenuje** na `public_html.pred-ondraweb-<datum>`. Nic se nemaže. Místo
+něj vznikne odkaz na nový web.
 
 Pořadí kolem DNS: jakmile první nasazení doběhne, `itwebtech.cz` začne
 přesměrovávat na `ondraweb.cz`. DNS `ondraweb.cz` proto přepni na Webglobe
@@ -266,6 +271,9 @@ curl -sI https://itwebtech.ondrejkriska.cz/ | grep -i x-robots-tag
   běží dál v předchozí verzi a červená hláška v logu říká proč.
 - **Návrat na předchozí verzi:** Actions → „Nasazení produkce (Webglobe)“ →
   Run workflow → akce `rollback`. Každé spuštění vrátí web o jednu verzi zpět.
+- **Žluté upozornění po nasazení** („…/up vrací HTTP … místo 200“): nová verze
+  je přepnutá, ale web zvenku neodpovídá. Otevři web, a když je rozbitý,
+  spusť `rollback`.
   Změny v databázi (migrace) se nevracejí.
 - **Změna konfigurace** (heslo k poště apod.): upravit secret `PRODUCTION_ENV`
   a spustit Run workflow s akcí `deploy`.
@@ -276,47 +284,41 @@ curl -sI https://itwebtech.ondrejkriska.cz/ | grep -i x-robots-tag
 
 Soubory: `.github/workflows/deploy-production.yml` (build na GitHubu, SSH
 přes náš server, nahrání), `scripts/deploy/remote-deploy.sh` (kroky na
-serveru přes SSH), `scripts/deploy/web-hook.php` (kroky, co potřebují
-databázi — spouští je samotný PHP web, ne SSH, viz OND-461 níž).
+serveru), `scripts/deploy/smoke.php` (zkouška stránek nové verze).
 
 **Přihlašovací shell na Webglobe je `fish`, ne bash.** Workflow proto na
-server nikdy neposílá příkaz přímo přes `ssh host "…"` (fish by syntaxi typu
-`$(...)`, `[[ ]]` nebo `export X=Y` nemusel rozumět nebo se choval jinak).
-Místo toho jde vše přes pomocníka `rbash`, který se přihlásí a rovnou spustí
-`bash -s` se skriptem na standardním vstupu — na serveru tak vždy běží bash,
-bez ohledu na přihlašovací shell účtu.
+server neposílá příkazy přímo přes `ssh host "…"` (fish nezná třeba `$(...)`).
+Všechno jde přes pomocníka `rbash` = `ssh webglobe bash -s` se skriptem na
+standardním vstupu. Fish dostane jen `bash -s`, skript pak běží v bashi.
+Výjimka je `rsync`: vzdálený `rsync --server …` jsou jen argumenty, fish je
+spustí bez potíží.
 
-**Databáze na Webglobe není z SSH kontejneru dosažitelná** (ověřeno 29. 9.,
-OND-461), zatímco PHP-FPM (samotný web) se k ní dostane. Vše, co čte nebo
-píše do databáze — `migrate`, tři seedery, zkouška stránek přes plný HTTP
-kernel — proto neběží přes SSH, ale přes krátkodobý web-hook: `remote-deploy.sh`
-nahraje do `shared/deploy-hook/` PHP soubor s náhodným jménem a tokenem
-(ověřuje se přes `hash_equals`, žádné přesměrování se nesleduje), zpřístupní
-ho na webu přes symlink `public/_deploy`, zavolá ho `curl`em s tokenem v
-hlavičce a hned po odpovědi smaže — soubor se navíc maže i sám při prvním
-běhu. Přes SSH běží jen to, co databázi nepotřebuje: kontrola PHP a rozšíření,
-propojení `storage` a `.env`, `storage:link`, `optimize`.
+**Databáze:** ze SSH je dosažitelná přes `db.dw142.webglobe.com` (ověřil CEO
+29. 9.: `migrate`, seedery i `smoke.php` přes SSH nad produkční databází
+prošly). Proto `DB_HOST=db.dw142.webglobe.com` v `PRODUCTION_ENV`.
+`c-mariadb` z administrace SSH v DNS nenajde.
 
-**Rozložení na serveru** (absolutní cesty, ne v domovském adresáři SSH účtu):
+**Rozložení na serveru** (absolutní cesty, ne v domovském adresáři SSH účtu
+`/home/html/multi_608671`):
 
 ```
 /home/html/ondraweb.cz/app/releases/<UTC čas>-<commit>/   jednotlivé verze, drží se posledních 5
 /home/html/ondraweb.cz/app/shared/.env                    z PRODUCTION_ENV, přepisuje se při každém nasazení
 /home/html/ondraweb.cz/app/shared/storage/                nahrané soubory, logy (storage/logs), cache
-/home/html/ondraweb.cz/app/shared/deploy-hook/            jednorázové soubory pro migrace/seedery/zkoušku (mažou se hned po použití)
 /home/html/ondraweb.cz/app/current -> releases/<id>       aktivní verze
 /home/html/ondraweb.cz/public_html -> app/current/public  webový adresář (doc root) domény
 ```
 
-**Průběh nasazení na serveru:** kontrola PHP 8.4 CLI a rozšíření (přes SSH)
-→ propojení `storage` a `.env` (SSH) → `storage:link` a `optimize` (SSH) →
-web-hook: `migrate --force`, seedery `AdminUserSeeder`,
-`EnsureArticlesSeededSeeder`, `EnsurePortfolioSeededSeeder`, zkouška `/up`,
-`/`, `/en/`, `/de/`, `/projekty`, `/zapisky`, `/robots.txt`, `/sitemap.xml`
-přímo přes HTTP kernel nového release, vše spuštěné PHP-FPM webem přes
-jednorázový soubor → přepnutí `current` a `public_html` → úklid starých
-verzí. Selže-li cokoli před přepnutím, web zůstane na předchozí verzi.
-Verze, která nikdy neběžela, se při `rollback` přeskočí.
+**Průběh nasazení na serveru:** kontrola PHP 8.4 a rozšíření → propojení
+`storage` a `.env` → `migrate --force` → seedery `AdminUserSeeder`,
+`EnsureArticlesSeededSeeder`, `EnsurePortfolioSeededSeeder` → `storage:link`,
+`optimize` → zkouška `/up`, `/`, `/en/`, `/de/`, `/projekty`, `/zapisky`,
+`/robots.txt`, `/sitemap.xml` přímo přes HTTP kernel nového release → přepnutí
+`current` a `public_html` → kontrola `WEBGLOBE_WEB_URL/up` přes skutečný web
+(jen upozornění) → úklid starých verzí. Selže-li cokoli před přepnutím, web
+zůstane na předchozí verzi. Verze, která nikdy neběžela, se při `rollback`
+přeskočí. Verze, ze které se přepíná, dostane značku `.deployed` taky (týká se
+ruční první verze od CEO).
 
 **Volitelné proměnné** (Settings → Secrets and variables → Actions →
 Variables), jen když se Webglobe liší od předpokladu:
@@ -325,7 +327,7 @@ Variables), jen když se Webglobe liší od předpokladu:
 |---|---|---|
 | `WEBGLOBE_WEB_ROOT` | `/home/html/ondraweb.cz/public_html` | doc root domény je jinde |
 | `WEBGLOBE_APP_DIR` | `/home/html/ondraweb.cz/app` | aplikace má ležet jinde |
-| `WEBGLOBE_WEB_URL` | `https://ondraweb.cz` | web-hook má odpovídat na jiné adrese (bez přesměrování) |
+| `WEBGLOBE_WEB_URL` | `https://ondraweb.cz` | kontrola po přepnutí má jít na jinou adresu |
 | `WEBGLOBE_PHP_BIN` | `php8.4` | PHP 8.4 je na serveru pod jiným příkazem |
 | `WEBGLOBE_SSH_USER` | `ssh-608671` | SSH účet se změnil |
 | `WEBGLOBE_SSH_PORT` | `20001` | port WebSSH se změnil |
@@ -358,16 +360,13 @@ hláškou „Nejde přejmenovat“ / „Nejde vytvořit symlink“): v administr
 nastav kořenový adresář domén na `app/current/public`, pokud to jde, a
 proměnnou `WEBGLOBE_WEB_ROOT` na nepoužívanou cestu.
 
-**Co je ověřené přímo na produkci (WebSSH, 29. 9., OND-461):** SSH
-uživatel/host/port, že přihlašovací shell je fish, absolutní cesty doc rootu
-a app adresáře, že SSH kontejner nedosáhne na databázi a PHP-FPM ano, že na
-SSH je php8.4, rsync, composer, git, curl a `curl https://ondraweb.cz/`
-vrací 200.
+**Co je ověřené přímo na produkci (WebSSH, 29. 9., OND-461, CEO):** SSH
+uživatel/host/port, přihlašovací shell fish, absolutní cesty doc rootu
+a aplikace, `public_html` jako odkaz web obslouží, databáze ze SSH přes
+`db.dw142.webglobe.com`, na SSH je `php8.4`, `rsync`, `composer`, `git`,
+`curl`. Web běží na PHP 8.4.24.
 
-**Co ověřuje jen simulace v tomto repozitáři, ne živý server** (viz
-`scripts/deploy/local-sim/`, pokud existuje ve větvi, jinak historii commitu
-OND-461): že `rbash`/`bash -s` wrapper přežije fish login shell, že
-`web-hook.php` spustí migrace/seedery/zkoušku přes HTTP a že
-`remote-deploy.sh` doběhne deploy i rollback nad kontejnerem, který
-databázi nevidí přes SSH, ale web ano. Živé nasazení na Webglobe (permanentní
-SSH konzole, skutečná fish, skutečná GeoIP ochrana) dělá CEO samostatně.
+**Co ověřuje jen lokální simulace (mimo repozitář, popis v OND-461):** celé
+workflow proti kontejneru s fish jako přihlašovacím shellem, přes náš server,
+z výchozího stavu s ruční první verzí: nasazení, druhé nasazení, `rollback`
+až na ruční verzi. Živé nasazení na Webglobe dělá CEO.

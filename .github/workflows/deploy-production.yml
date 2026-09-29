@@ -5,10 +5,9 @@
 # nasazení, nebo jako návrat na předchozí verzi. Návod: docs/deploy-production.md.
 #
 # Build běží tady na runneru, na server jde hotová aplikace do nového
-# adresáře releases/<id>. Optimize (přes SSH), migrace, seedery a zkouška
-# stránek (přes web, databáze jinak není vidět) proběhnou v novém release a web
-# se přepne až potom (scripts/deploy/remote-deploy.sh). Když cokoli selže, běží
-# dál předchozí verze.
+# adresáře releases/<id>. Migrace, seedery, optimize a zkouška stránek
+# proběhnou v novém release a web se přepne až potom
+# (scripts/deploy/remote-deploy.sh). Když cokoli selže, běží dál předchozí verze.
 #
 # Přihlašovací shell na Webglobe je fish, ne bash (OND-461). Každý příkaz na
 # serveru proto jde přes `rbash` = `ssh webglobe bash -s` se skriptem na stdin.
@@ -178,7 +177,7 @@ jobs:
           # shellcheck disable=SC2016 # $(…) a $HOME se mají rozvinout až na serveru
           if ! rbash <<'EOF'
           echo "Připojeno jako $(whoami) na $(hostname), domovský adresář $HOME, bash $BASH_VERSION"
-          for c in rsync curl; do command -v "$c" >/dev/null || { echo "Na serveru chybí $c." >&2; exit 1; }; done
+          command -v rsync >/dev/null || { echo "Na serveru chybí rsync." >&2; exit 1; }
           EOF
           then
             echo "::error::Nepodařilo se připojit přes náš server $JUMP_HOST na $SSH_HOST:$SSH_PORT jako $SSH_USER. Connection timed out nebo open failed = SSH na Webglobe je vypnuté (hodinová WebSSH vypršela, je potřeba Permanentní SSH konzole). Permission denied = špatné heslo ve WEBGLOBE_SSH_PASSWORD. Unknown command: bash = na serveru chybí bash. Viz docs/deploy-production.md."
