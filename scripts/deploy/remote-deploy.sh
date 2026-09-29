@@ -8,17 +8,25 @@
 #   remote-deploy.sh deploy     připraví nový release a přepne na něj web
 #   remote-deploy.sh rollback   přepne web o jeden release zpět
 #
-# Rozložení na serveru (vše v domovském adresáři SSH účtu):
+# Rozložení na serveru:
 #
-#   $APP_DIR/releases/<id>/   jednotlivá nasazení (build z Actions)
-#   $APP_DIR/shared/.env      produkční konfigurace, sdílená všemi release
-#   $APP_DIR/shared/storage/  nahrané soubory, logy, cache, sdílené
-#   $APP_DIR/current          symlink na aktivní release
-#   $WEB_ROOT                 symlink na $APP_DIR/current/public (web root hostingu)
+#   $APP_DIR/releases/<id>/        jednotlivá nasazení (build z Actions)
+#   $APP_DIR/shared/.env           produkční konfigurace, sdílená všemi release
+#   $APP_DIR/shared/storage/       nahrané soubory, logy, cache, sdílené
+#   $APP_DIR/shared/deploy-hook/   jednorázové soubory pro kroky s databází
+#   $APP_DIR/current               symlink na aktivní release
+#   $WEB_ROOT                      symlink na $APP_DIR/current/public (web root domény)
 #
-# Pořadí je schválně: migrace, seedery, optimize a zkouška stránek proběhnou
-# v novém release ještě PŘED přepnutím. Když cokoli selže, skript skončí
-# chybou, `current` se nepřepne a návštěvníci dál vidí předchozí verzi.
+# Databáze je na Webglobe dosažitelná jen z PHP webu, ne ze SSH (OND-461,
+# ověřeno 29. 9.). Migrace, seedery a zkouška stránek proto běží přes web:
+# skript nahraje do shared/deploy-hook jednorázový PHP soubor s náhodným
+# jménem a tokenem, zavolá ho curlem a hned ho smaže. Soubor nabootuje NOVÝ
+# release (scripts/deploy/web-hook.php). Přes SSH běží jen to, co databázi
+# nepotřebuje: kontrola PHP, propojení storage a .env, storage:link, optimize.
+#
+# Pořadí je schválně: všechno proběhne v novém release ještě PŘED přepnutím.
+# Když cokoli selže, skript skončí chybou, `current` se nepřepne a návštěvníci
+# dál vidí předchozí verzi.
 #
 # Pozor na hardlinky: rsync --link-dest sdílí nezměněné soubory mezi release.
 # Soubor v release se proto nikdy nesmí přepsat na místě (`> soubor`,
@@ -32,14 +40,20 @@
 set -euo pipefail
 
 MODE="${1:-deploy}"
-APP_DIR="${APP_DIR:-ondraweb}"
-WEB_ROOT="${WEB_ROOT:-www}"
+APP_DIR="${APP_DIR:-/home/html/ondraweb.cz/app}"
+WEB_ROOT="${WEB_ROOT:-/home/html/ondraweb.cz/public_html}"
+WEB_URL="${WEB_URL:-https://ondraweb.cz}"
 PHP_BIN="${PHP_BIN:-php8.4}"
 KEEP_RELEASES="${KEEP_RELEASES:-5}"
 
 cd "$HOME"
 case "$APP_DIR" in /*) BASE="$APP_DIR" ;; *) BASE="$HOME/$APP_DIR" ;; esac
 case "$WEB_ROOT" in /*) WEB="$WEB_ROOT" ;; *) WEB="$HOME/$WEB_ROOT" ;; esac
+WEB_URL="${WEB_URL%/}"
+
+# Jednorázový soubor pro web se smaže vždy, i když nasazení spadne.
+HOOK_FILE=""
+trap '[ -z "$HOOK_FILE" ] || rm -f "$HOOK_FILE"' EXIT
 
 step() { printf '\n==> %s\n' "$*"; }
 fail() {
@@ -82,14 +96,94 @@ rollback() {
     echo "Web teď běží z release $previous. Migrace databáze se NEVRACEJÍ."
 }
 
+# Migrace, seedery a zkouška stránek v PHP webu (tam, kde je vidět databáze).
+run_web_hook() {
+    local rel="$1"
+    local hook_dir="$BASE/shared/deploy-hook"
+
+    # Cesta se vkládá do PHP souboru, proto jen bezpečné znaky.
+    [[ "$rel" =~ ^[A-Za-z0-9._/-]+$ ]] || fail "Cesta $rel obsahuje nečekané znaky, nasazení přes web ji neumí."
+
+    mkdir -p "$hook_dir"
+    chmod 711 "$hook_dir"
+    [ -e "$hook_dir/index.html" ] || : > "$hook_dir/index.html"
+
+    # Adresář musí být vidět z webu pod /_deploy/. Nový release ho dostane
+    # rovnou. Web ale teď obsluhuje předchozí release (nebo při prvním
+    # nasazení původní obsah web rootu), proto odkaz přidáme i tam.
+    ln -sfn "$hook_dir" "$rel/public/_deploy"
+    local served
+    served="$(readlink -f "$WEB" 2>/dev/null || true)"
+    if [ -z "$served" ] || [ ! -d "$served" ]; then
+        fail "Web root $WEB neexistuje. Zkontroluj proměnnou WEBGLOBE_WEB_ROOT (docs/deploy-production.md)."
+    fi
+    if [ ! -e "$served/_deploy" ]; then
+        ln -s "$hook_dir" "$served/_deploy" \
+            || fail "Do web rootu $served nejde přidat odkaz _deploy. Nasazení přes web nemá kde běžet."
+    fi
+
+    local name token
+    name="$("$PHP_BIN" -r 'echo bin2hex(random_bytes(24));')"
+    token="$("$PHP_BIN" -r 'echo bin2hex(random_bytes(32));')"
+    HOOK_FILE="$hook_dir/$name.php"
+
+    # Tenhle soubor musí jít spustit i na starém PHP 7.4, aby web na špatné
+    # verzi vrátil srozumitelnou hlášku místo chyby syntaxe.
+    (umask 022 && cat > "$HOOK_FILE") <<PHP
+<?php
+// OND-461: jednorázový soubor z scripts/deploy/remote-deploy.sh, po použití se maže.
+if (!isset(\$_SERVER['HTTP_X_DEPLOY_TOKEN']) || !hash_equals('$token', (string) \$_SERVER['HTTP_X_DEPLOY_TOKEN'])) {
+    http_response_code(404);
+    exit;
+}
+@unlink(__FILE__);
+header('Content-Type: text/plain; charset=utf-8');
+header('Cache-Control: no-store');
+if (PHP_VERSION_ID < 80400) {
+    echo "CHYBA: web běží na PHP " . PHP_VERSION . ", aplikace potřebuje PHP 8.4.\n";
+    echo "Přepni PHP v administraci Webglobe: Hosting → Web → PHP nastavení → 8.4. Pak nasazení spusť znovu.\n";
+    exit;
+}
+\$release = '$rel';
+if (!is_file(\$release . '/scripts/deploy/web-hook.php')) {
+    echo "CHYBA: web nevidí nový release na cestě \$release.\n";
+    echo "Web (PHP-FPM) a SSH vidí soubory pod jinými cestami. Uprav WEBGLOBE_APP_DIR na cestu, kterou vidí web.\n";
+    exit;
+}
+require \$release . '/scripts/deploy/web-hook.php';
+PHP
+
+    local url="$WEB_URL/_deploy/$name.php" log code
+    log="$(mktemp)"
+    echo "Volám $WEB_URL/_deploy/<jednorázový soubor>.php"
+    # Bez -L: přesměrování by poslalo token jinam.
+    code="$(curl -sS --max-time 900 -H "X-Deploy-Token: $token" -o "$log" -w '%{http_code}' "$url" || true)"
+    cat "$log"
+    rm -f "$HOOK_FILE"
+    HOOK_FILE=""
+
+    if grep -qx 'DEPLOY_HOOK_OK' "$log"; then
+        rm -f "$log"
+        return 0
+    fi
+    rm -f "$log"
+    case "$code" in
+        200) fail "Migrace, seedery nebo zkouška stránek přes web selhaly (výpis výše). Web se nepřepnul a běží předchozí verze." ;;
+        000) fail "Server se nedovolal na $WEB_URL (curl bez odpovědi). Web se nepřepnul. Zkontroluj, že doména míří na tento hosting, nebo nastav proměnnou WEBGLOBE_WEB_URL." ;;
+        3*) fail "$WEB_URL přesměrovává (HTTP $code), nasazení přes web potřebuje adresu, která odpoví přímo. Nastav proměnnou WEBGLOBE_WEB_URL. Web se nepřepnul." ;;
+        404) fail "Web na $WEB_URL nenašel jednorázový soubor (HTTP 404). Doména neobsluhuje web root $WEB, nebo nesleduje odkaz _deploy. Web se nepřepnul." ;;
+        *) fail "Nasazení přes web vrátilo HTTP $code (výpis výše). Web se nepřepnul a běží předchozí verze." ;;
+    esac
+}
+
 deploy() {
     : "${RELEASE:?RELEASE musí být nastavené (id adresáře v releases/)}"
     local rel="$BASE/releases/$RELEASE"
     [ -d "$rel" ] || fail "Release $rel neexistuje, nahrání z Actions neproběhlo."
 
-    step "Kontrola PHP ($PHP_BIN)"
+    step "Kontrola PHP pro příkazy přes SSH ($PHP_BIN)"
     command -v "$PHP_BIN" >/dev/null 2>&1 \
-        || fail "Na serveru chybí příkaz $PHP_BIN. Nastav v administraci Webglobe PHP 8.4, nebo uprav proměnnou PHP_BIN ve workflow."
+        || fail "Na serveru chybí příkaz $PHP_BIN. Uprav proměnnou WEBGLOBE_PHP_BIN ve workflow."
     "$PHP_BIN" -r 'exit(version_compare(PHP_VERSION, "8.4.0", ">=") ? 0 : 1);' \
         || fail "$PHP_BIN je verze $("$PHP_BIN" -r 'echo PHP_VERSION;'), aplikace potřebuje PHP 8.4."
     local missing
@@ -101,6 +195,7 @@ deploy() {
     ')"
     [ -z "$missing" ] || fail "PHP na serveru nemá rozšíření: $missing"
     "$PHP_BIN" -v | head -1
+    command -v curl >/dev/null 2>&1 || fail "Na serveru chybí curl, nasazení přes web ho potřebuje."
 
     step "Sdílené soubory ($BASE/shared)"
     mkdir -p "$BASE/shared/storage/app/public" \
@@ -109,13 +204,15 @@ deploy() {
              "$BASE/shared/storage/framework/sessions" \
              "$BASE/shared/storage/framework/views" \
              "$BASE/shared/storage/logs"
+    # Webserver může běžet pod jiným uživatelem než SSH, musí adresáři projít.
+    chmod 755 "$BASE" "$BASE/shared" "$BASE/releases"
     [ -s "$BASE/shared/.env" ] \
         || fail "Chybí $BASE/shared/.env. Vyplň GitHub Secret PRODUCTION_ENV (viz docs/deploy-production.md) a spusť nasazení znovu."
     grep -q '^APP_KEY=base64:' "$BASE/shared/.env" \
         || fail "V .env chybí APP_KEY. Musí být stejný jako na Coolify, jinak přestane fungovat dvoufázové přihlášení do administrace."
 
     step "Propojení release $RELEASE se sdílenými soubory"
-    rm -rf "$rel/storage" "$rel/.env" "$rel/public/storage" "$rel/public/hot"
+    rm -rf "$rel/storage" "$rel/.env" "$rel/public/storage" "$rel/public/hot" "$rel/public/_deploy"
     ln -s "$BASE/shared/storage" "$rel/storage"
     ln -s "$BASE/shared/.env" "$rel/.env"
     mkdir -p "$rel/bootstrap/cache"
@@ -126,32 +223,22 @@ deploy() {
     cd "$rel"
     local artisan=("$PHP_BIN" artisan --no-interaction)
 
-    step "Migrace databáze"
-    "${artisan[@]}" migrate --force || fail "Migrace selhaly. Web se nepřepnul a běží předchozí verze."
-
-    step "Seedery (idempotentní, stejné jako na Coolify)"
-    local seeder
-    for seeder in AdminUserSeeder EnsureArticlesSeededSeeder EnsurePortfolioSeededSeeder; do
-        echo "-- $seeder"
-        "${artisan[@]}" db:seed --class="Database\\Seeders\\$seeder" --force \
-            || fail "Seeder $seeder selhal. Web se nepřepnul a běží předchozí verze."
-    done
-
-    step "storage:link a optimize"
+    # Databázi nepotřebují. config:cache uloží absolutní cesty ze SSH, web je
+    # vidí stejně (/home/html/ondraweb.cz/…), web-hook.php to hned ověří.
+    step "storage:link a optimize (přes SSH)"
     "${artisan[@]}" storage:link
     "${artisan[@]}" optimize || fail "artisan optimize selhal. Web se nepřepnul a běží předchozí verze."
 
-    step "Zkouška stránek nového release (před přepnutím)"
-    "$PHP_BIN" scripts/deploy/smoke.php "$rel" \
-        || fail "Nový release nevrací stránky. Web se nepřepnul a běží předchozí verze. Detail v $BASE/shared/storage/logs/."
+    step "Migrace, seedery a zkouška stránek nového release (přes web, před přepnutím)"
+    run_web_hook "$rel"
 
     step "Přepnutí webu na $RELEASE"
     touch "$rel/.deployed"
     switch_link "releases/$RELEASE" "$BASE/current"
 
-    # Web root hostingu (`www`) musí ukazovat na current/public. Při prvním
-    # nasazení je to ještě skutečný adresář se starým webem itwebtech.cz. Ten
-    # se jen přejmenuje (nic se nemaže), takže jde kdykoli vrátit.
+    # Web root domény musí ukazovat na current/public. Při prvním nasazení je
+    # to ještě skutečný adresář s výchozím obsahem od Webglobe. Ten se jen
+    # přejmenuje (nic se nemaže), takže jde kdykoli vrátit.
     if [ -L "$WEB" ]; then
         if [ "$(readlink "$WEB")" != "$BASE/current/public" ]; then
             switch_link "$BASE/current/public" "$WEB"

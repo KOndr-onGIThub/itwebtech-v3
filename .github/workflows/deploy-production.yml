@@ -5,9 +5,13 @@
 # nasazení, nebo jako návrat na předchozí verzi. Návod: docs/deploy-production.md.
 #
 # Build běží tady na runneru, na server jde hotová aplikace do nového
-# adresáře releases/<id>. Migrace, seedery, optimize a zkouška stránek
-# proběhnou v novém release a web se přepne až potom
-# (scripts/deploy/remote-deploy.sh). Když cokoli selže, běží dál předchozí verze.
+# adresáře releases/<id>. Optimize (přes SSH), migrace, seedery a zkouška
+# stránek (přes web, databáze jinak není vidět) proběhnou v novém release a web
+# se přepne až potom (scripts/deploy/remote-deploy.sh). Když cokoli selže, běží
+# dál předchozí verze.
+#
+# Přihlašovací shell na Webglobe je fish, ne bash (OND-461). Každý příkaz na
+# serveru proto jde přes `rbash` = `ssh webglobe bash -s` se skriptem na stdin.
 
 name: Nasazení produkce (Webglobe)
 
@@ -32,9 +36,12 @@ concurrency:
 permissions:
   contents: read
 
+# Výchozí hodnoty změřil CEO na serveru 29. 9. (OND-461). Variables je smí
+# přebít, ale nemusí existovat.
 env:
-  APP_DIR: ${{ vars.WEBGLOBE_APP_DIR || 'ondraweb' }}
-  WEB_ROOT: ${{ vars.WEBGLOBE_WEB_ROOT || 'www' }}
+  APP_DIR: ${{ vars.WEBGLOBE_APP_DIR || '/home/html/ondraweb.cz/app' }}
+  WEB_ROOT: ${{ vars.WEBGLOBE_WEB_ROOT || '/home/html/ondraweb.cz/public_html' }}
+  WEB_URL: ${{ vars.WEBGLOBE_WEB_URL || 'https://ondraweb.cz' }}
   PHP_BIN: ${{ vars.WEBGLOBE_PHP_BIN || 'php8.4' }}
   KEEP_RELEASES: '5'
 
@@ -45,20 +52,20 @@ jobs:
     timeout-minutes: 30
     env:
       MODE: ${{ inputs.action || 'deploy' }}
-      # Adresa serveru dw142.webglobe.com není tajná, proto je přímo tady.
-      # Secret WEBGLOBE_SSH_HOST se už nečte (hodnota z administrace typu
-      # „ftp.ondraweb.cz“ v DNS neexistuje).
-      SSH_HOST: 62.109.154.42
-      SSH_USER: ${{ secrets.WEBGLOBE_SSH_USER }}
-      SSH_PORT: ${{ secrets.WEBGLOBE_SSH_PORT || '22' }}
+      # Adresa serveru není tajná, proto je přímo tady. Náš server (níž)
+      # pustí spojení jen na přesně tenhle název a port.
+      SSH_HOST: dw142.webglobe.com
+      SSH_USER: ${{ secrets.WEBGLOBE_SSH_USER || vars.WEBGLOBE_SSH_USER || 'ssh-608671' }}
+      SSH_PORT: ${{ secrets.WEBGLOBE_SSH_PORT || vars.WEBGLOBE_SSH_PORT || '20001' }}
       SSH_KEY: ${{ secrets.WEBGLOBE_SSH_KEY }}
       SSHPASS: ${{ secrets.WEBGLOBE_SSH_PASSWORD }}
       SSH_KNOWN_HOSTS: ${{ secrets.WEBGLOBE_SSH_KNOWN_HOSTS }}
       # Webglobe zahazuje spojení z části serverů na internetu, včetně GitHubu
-      # (29. 9. timeout na všech portech, i na 443). Když je vyplněný secret
-      # DEPLOY_JUMP_KEY, jde spojení přes náš server, který se na Webglobe
-      # dostane přes IPv6. Klíč smí na našem serveru jen otevřít spojení na
-      # dw142.webglobe.com:20001, nic jiného (authorized_keys: permitopen).
+      # (29. 9. timeout na všech portech, i na 443). Spojení proto jde přes náš
+      # server, který se na Webglobe dostane přes IPv6. Klíč smí na našem
+      # serveru jen otevřít spojení na dw142.webglobe.com:20001, nic jiného
+      # (authorized_keys: permitopen). Otisk JUMP_HOST_KEY ověřen z runneru
+      # GitHubu 29. 9. (OND-461).
       JUMP_KEY: ${{ secrets.DEPLOY_JUMP_KEY }}
       JUMP_HOST: 46.224.218.19
       JUMP_USER: paperclip
@@ -66,10 +73,13 @@ jobs:
 
     steps:
       - name: Kontrola nastavení (GitHub Secrets)
+        env:
+          PRODUCTION_ENV: ${{ secrets.PRODUCTION_ENV }}
         run: |
           missing=""
-          [ -n "$SSH_USER" ] || missing="$missing WEBGLOBE_SSH_USER"
-          [ -n "$SSH_KEY$SSHPASS" ] || missing="$missing WEBGLOBE_SSH_PASSWORD(nebo WEBGLOBE_SSH_KEY)"
+          [ -n "$SSH_KEY$SSHPASS" ] || missing="$missing WEBGLOBE_SSH_PASSWORD"
+          [ -n "$JUMP_KEY" ] || missing="$missing DEPLOY_JUMP_KEY"
+          if [ "$MODE" = deploy ] && [ -z "$PRODUCTION_ENV" ]; then missing="$missing PRODUCTION_ENV"; fi
           if [ -n "$missing" ]; then
             echo "::error::Chybí GitHub Secrets:$missing. Doplň je podle docs/deploy-production.md (Settings → Secrets and variables → Actions)."
             exit 1
@@ -111,44 +121,34 @@ jobs:
       - name: Připojení k serveru
         run: |
           # Mezery a konce řádků navíc z vloženého Secretu by přihlášení rozbily.
+          SSH_HOST="$(printf '%s' "$SSH_HOST" | tr -d '[:space:]')"
           SSH_USER="$(printf '%s' "$SSH_USER" | tr -d '[:space:]')"
           SSH_PORT="$(printf '%s' "$SSH_PORT" | tr -d '[:space:]')"
           mkdir -p ~/.ssh ~/bin
           chmod 700 ~/.ssh
-          : > ~/.ssh/config
-          VIA=""
-          if [ -n "$JUMP_KEY" ]; then
-            printf '%s\n' "$JUMP_KEY" > ~/.ssh/jump_key
-            chmod 600 ~/.ssh/jump_key
-            echo "$JUMP_HOST $JUMP_HOST_KEY" > ~/.ssh/known_hosts_jump
-            # Blok pro náš server musí být první, řádky přidané níž patří
-            # k bloku webglobe. BatchMode: když klíč neprojde, nic se
-            # nezkouší heslem.
-            {
-              echo "Host jump"
-              echo "  HostName $JUMP_HOST"
-              echo "  User $JUMP_USER"
-              echo "  IdentityFile ~/.ssh/jump_key"
-              echo "  IdentitiesOnly yes"
-              echo "  BatchMode yes"
-              echo "  UserKnownHostsFile ~/.ssh/known_hosts_jump"
-              echo "  StrictHostKeyChecking yes"
-              echo "  ConnectTimeout 20"
-            } >> ~/.ssh/config
-            # Náš server pustí jen přesně tuhle adresu, ne IP.
-            SSH_HOST=dw142.webglobe.com
-            VIA=" přes náš server $JUMP_HOST"
-          fi
-          echo "Připojuji se na $SSH_HOST:$SSH_PORT$VIA (jméno má ${#SSH_USER} znaků)."
+          printf '%s\n' "$JUMP_KEY" > ~/.ssh/jump_key
+          chmod 600 ~/.ssh/jump_key
+          echo "$JUMP_HOST $JUMP_HOST_KEY" > ~/.ssh/known_hosts_jump
+          # BatchMode u našeho serveru: když klíč neprojde, nic se nezkouší heslem.
           {
+            echo "Host jump"
+            echo "  HostName $JUMP_HOST"
+            echo "  User $JUMP_USER"
+            echo "  IdentityFile ~/.ssh/jump_key"
+            echo "  IdentitiesOnly yes"
+            echo "  BatchMode yes"
+            echo "  UserKnownHostsFile ~/.ssh/known_hosts_jump"
+            echo "  StrictHostKeyChecking yes"
+            echo "  ConnectTimeout 20"
             echo "Host webglobe"
             echo "  HostName $SSH_HOST"
             echo "  User $SSH_USER"
             echo "  Port $SSH_PORT"
+            echo "  ProxyJump jump"
             echo "  ConnectTimeout 20"
             echo "  ServerAliveInterval 30"
-            if [ -n "$JUMP_KEY" ]; then echo "  ProxyJump jump"; fi
-          } >> ~/.ssh/config
+          } > ~/.ssh/config
+          echo "Připojuji se na $SSH_HOST:$SSH_PORT přes náš server $JUMP_HOST (jméno má ${#SSH_USER} znaků)."
 
           if [ -n "$SSH_KNOWN_HOSTS" ]; then
             printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
@@ -163,21 +163,25 @@ jobs:
             { echo "  IdentityFile ~/.ssh/deploy_key"; echo "  IdentitiesOnly yes"; } >> ~/.ssh/config
             printf '#!/bin/sh\nexec ssh "$@"\n' > ~/bin/wssh
           else
-            sudo apt-get install -y -qq sshpass >/dev/null
+            if ! command -v sshpass >/dev/null; then sudo apt-get install -y -qq sshpass >/dev/null; fi
             { echo "  PreferredAuthentications password,keyboard-interactive"; echo "  PubkeyAuthentication no"; } >> ~/.ssh/config
             # Heslo čte sshpass z proměnné SSHPASS, do příkazové řádky se nedostane.
             printf '#!/bin/sh\nexec sshpass -e ssh "$@"\n' > ~/bin/wssh
           fi
-          chmod 700 ~/bin/wssh
+          # rbash: skript ze stdin spustí na serveru bash. Přihlašovací shell
+          # (fish) dostane jen `bash -s`, žádnou syntaxi, které by nerozuměl.
+          printf '#!/bin/sh\nexec wssh webglobe bash -s\n' > ~/bin/rbash
+          chmod 700 ~/bin/wssh ~/bin/rbash
           echo "$HOME/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/bin:$PATH"
 
           # shellcheck disable=SC2016 # $(…) a $HOME se mají rozvinout až na serveru
-          if ! ~/bin/wssh webglobe 'echo "Připojeno jako $(whoami) na $(hostname), domovský adresář $HOME"'; then
-            if [ -z "$JUMP_KEY" ]; then
-              echo "::error::Nepodařilo se připojit přes SSH na $SSH_HOST:$SSH_PORT jako $SSH_USER. Při „Connection timed out“ Webglobe zahodil spojení z GitHubu: vlož secret DEPLOY_JUMP_KEY (spojení pak půjde přes náš server). Jinak zkontroluj heslo a že je WebSSH zapnuté. Viz docs/deploy-production.md."
-            else
-              echo "::error::Nepodařilo se připojit přes náš server $JUMP_HOST na $SSH_HOST:$SSH_PORT jako $SSH_USER. „Connection timed out“ nebo „open failed“ = WebSSH na Webglobe je vypnuté (hodinová konzole vypršela). „Permission denied“ = špatné heslo ve WEBGLOBE_SSH_PASSWORD. Viz docs/deploy-production.md."
-            fi
+          if ! rbash <<'EOF'
+          echo "Připojeno jako $(whoami) na $(hostname), domovský adresář $HOME, bash $BASH_VERSION"
+          for c in rsync curl; do command -v "$c" >/dev/null || { echo "Na serveru chybí $c." >&2; exit 1; }; done
+          EOF
+          then
+            echo "::error::Nepodařilo se připojit přes náš server $JUMP_HOST na $SSH_HOST:$SSH_PORT jako $SSH_USER. Connection timed out nebo open failed = SSH na Webglobe je vypnuté (hodinová WebSSH vypršela, je potřeba Permanentní SSH konzole). Permission denied = špatné heslo ve WEBGLOBE_SSH_PASSWORD. Unknown command: bash = na serveru chybí bash. Viz docs/deploy-production.md."
             exit 1
           fi
 
@@ -186,12 +190,19 @@ jobs:
         env:
           PRODUCTION_ENV: ${{ secrets.PRODUCTION_ENV }}
         run: |
-          if [ -z "$PRODUCTION_ENV" ]; then
-            echo "Secret PRODUCTION_ENV je prázdný, na serveru zůstává stávající $APP_DIR/shared/.env."
-            exit 0
-          fi
-          printf '%s\n' "$PRODUCTION_ENV" | wssh webglobe \
-            "umask 077 && mkdir -p '$APP_DIR/shared' && cat > '$APP_DIR/shared/.env.new' && mv -f '$APP_DIR/shared/.env.new' '$APP_DIR/shared/.env'"
+          # Obsah jde jako base64 uvnitř skriptu: stdin patří skriptu pro bash
+          # a base64 nemá znaky, které by cokoli rozbily.
+          {
+            echo "set -euo pipefail"
+            # Adresáře s běžnými právy, Apache jimi musí projít k webu.
+            # Jen soubor .env je čitelný pouze pro vlastníka.
+            echo "mkdir -p '$APP_DIR/shared'"
+            echo "umask 077"
+            echo "base64 -d > '$APP_DIR/shared/.env.new' <<'ENV_EOF'"
+            printf '%s\n' "$PRODUCTION_ENV" | base64
+            echo "ENV_EOF"
+            echo "mv -f '$APP_DIR/shared/.env.new' '$APP_DIR/shared/.env'"
+          } | rbash
           echo ".env nahrán do $APP_DIR/shared/.env"
 
       - name: Nahrání nového release
@@ -200,7 +211,7 @@ jobs:
           RELEASE="$(date -u +%Y%m%d%H%M%S)-${GITHUB_SHA::7}"
           echo "RELEASE=$RELEASE" >> "$GITHUB_ENV"
           DEST="$APP_DIR/releases/$RELEASE"
-          wssh webglobe "mkdir -p '$DEST'"
+          echo "mkdir -p '$DEST'" | rbash
 
           # Co na server nejde: sdílené věci (storage, .env), vývojářské
           # soubory a node_modules (build už je v public/build).
@@ -220,24 +231,19 @@ jobs:
           EOF
           sed -i 's/^ *//' /tmp/deploy-exclude
 
-          if wssh webglobe 'command -v rsync >/dev/null'; then
-            # --link-dest: soubory beze změny proti běžící verzi se na serveru
-            # jen nalinkují, nepřenášejí se ani nezabírají místo navíc.
-            rsync -a --stats --exclude-from=/tmp/deploy-exclude \
-              --link-dest=../../current/ -e wssh ./ "webglobe:$DEST/"
-          else
-            echo "rsync na serveru není, posílám přes tar."
-            # `./` na začátku = jen v kořeni projektu, ne třeba vendor/*/tests.
-            sed 's#^/#./#; s#/$##' /tmp/deploy-exclude > /tmp/deploy-exclude-tar
-            tar -czf - --exclude-from=/tmp/deploy-exclude-tar . \
-              | wssh webglobe "tar -xzf - -C '$DEST'"
-          fi
+          # --link-dest: soubory beze změny proti běžící verzi se na serveru
+          # jen nalinkují, nepřenášejí se ani nezabírají místo navíc. Vzdálený
+          # `rsync --server …` spustí fish bez potíží, jsou to jen argumenty.
+          rsync -a --stats --exclude-from=/tmp/deploy-exclude \
+            --link-dest=../../current/ -e wssh ./ "webglobe:$DEST/"
 
       - name: Migrace, optimize, zkouška a přepnutí webu
         if: env.MODE == 'deploy'
         run: |
-          wssh webglobe "APP_DIR='$APP_DIR' WEB_ROOT='$WEB_ROOT' PHP_BIN='$PHP_BIN' KEEP_RELEASES='$KEEP_RELEASES' RELEASE='$RELEASE' \
-            bash '$APP_DIR/releases/$RELEASE/scripts/deploy/remote-deploy.sh' deploy"
+          rbash <<EOF
+          export APP_DIR='$APP_DIR' WEB_ROOT='$WEB_ROOT' WEB_URL='$WEB_URL' PHP_BIN='$PHP_BIN' KEEP_RELEASES='$KEEP_RELEASES' RELEASE='$RELEASE'
+          exec bash '$APP_DIR/releases/$RELEASE/scripts/deploy/remote-deploy.sh' deploy </dev/null
+          EOF
           {
             echo "### Nasazeno"
             echo "- release: \`$RELEASE\` (commit \`${GITHUB_SHA::7}\`)"
@@ -247,5 +253,8 @@ jobs:
       - name: Návrat na předchozí verzi
         if: env.MODE == 'rollback'
         run: |
-          wssh webglobe "APP_DIR='$APP_DIR' bash '$APP_DIR/current/scripts/deploy/remote-deploy.sh' rollback"
+          rbash <<EOF
+          export APP_DIR='$APP_DIR'
+          exec bash '$APP_DIR/current/scripts/deploy/remote-deploy.sh' rollback </dev/null
+          EOF
           echo "### Web vrácen na předchozí release" >> "$GITHUB_STEP_SUMMARY"
