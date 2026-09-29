@@ -19,7 +19,7 @@ class Ond455LegacyRedirectsTest extends TestCase
 
     private const CANONICAL = 'ondraweb.cz';
 
-    /** Stará cesta → cíl. Deset adres ze zadání + `delejme-animace` z navigace itwebtech.cz + Framer `/dekuji`. */
+    /** Stará cesta → cíl. Deset adres ze zadání + `delejme-animace` z navigace itwebtech.cz + Framer `/dekuji` + tři z OND-466. */
     private const LEGACY_PATHS = [
         '/sluzby'                            => ['/#section-services', 301],
         // Případovka zatím na webu není → dočasně (302) na výpis.
@@ -34,6 +34,10 @@ class Ond455LegacyRedirectsTest extends TestCase
         '/projects/vpindustry'               => ['/projekty/vp-industry', 301],
         '/projects/delejme-animace'          => ['/projekty', 302],
         '/dekuji'                            => ['/', 301],
+        // OND-466: zbylé adresy starého itwebtech.cz (QA na OND-465).
+        '/about'                             => ['/o-mne', 301],
+        '/reference'                         => ['/projekty', 301],
+        '/servis'                            => ['/#section-services', 301],
     ];
 
     /**

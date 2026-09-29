@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Portfolio\PortfolioProject;
 use App\Models\Slugs\ArticleSlug;
+use App\Support\LegacyArticleRedirect;
 use App\Support\LegacyProjectRedirect;
 use Illuminate\Support\Facades\App;
 
@@ -319,7 +320,7 @@ class PageController extends Controller
             ->first();
 
         if (! $article) {
-            return $this->redirectRemovedArticle($slugRecord->article_id, $locale);
+            return LegacyArticleRedirect::removed($slugRecord->article_id, $locale);
         }
 
         // Aktivní slug pro aktuální locale — bez fallbacku na cs, protože
@@ -366,43 +367,5 @@ class PageController extends Controller
             : null;
 
         return view('pages.article', compact('article', 'translation', 'locale', 'hreflangs', 'next'));
-    }
-
-    /**
-     * OND-204: mapa přesměrování pro články stažené z blogu (published = 0).
-     *
-     * Klíč = id staženého článku, hodnota = id článku, na který má stará
-     * adresa vést. Co v mapě není, jde na výpis blogu. Mapuje se na id,
-     * ne na slug, aby přesměrování sedělo i v EN/DE verzi webu.
-     *
-     * Zdroj: dokument `clanky-cs` (OND-421). Články 7 a 11 jsou od OND-432
-     * znovu publikované, stažený zůstává jen 8 — je sloučený do 11, které
-     * řeší stejnou otázku.
-     */
-    private const REMOVED_ARTICLE_REDIRECTS = [
-        8 => 11,  // Web, který převádí návštěvníky → Jak vytvořit úspěšnou webovou stránku
-    ];
-
-    /**
-     * Stažený článek: adresa zůstává funkční a 301 vede na nejbližší
-     * relevantní stránku. Nikdy 404 — staré adresy mají odkazy zvenčí.
-     */
-    private function redirectRemovedArticle(int $articleId, string $locale)
-    {
-        $targetId = self::REMOVED_ARTICLE_REDIRECTS[$articleId] ?? null;
-
-        if ($targetId) {
-            $targetSlug = Article::where('id', $targetId)
-                ->where('published', true)
-                ->with('slugs')
-                ->first()
-                ?->slug($locale);
-
-            if ($targetSlug) {
-                return redirect()->route("{$locale}.article", ['slug' => $targetSlug], 301);
-            }
-        }
-
-        return redirect()->to(lroute('blog', $locale), 301);
     }
 }
