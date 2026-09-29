@@ -141,6 +141,7 @@ function initIntent(form) {
 // ---------------------------------------------------------------------------
 const DEMO_KEY = 'pd-intent-demo';
 const DEMO_MAX = 3;
+const DEMO_MIN = 2;
 const DEMO_STEPS = [
     { co: 'website', pro: 'all' },
     { co: 'website', pro: 'vyroba' },
@@ -204,13 +205,23 @@ function initDemo(form, sentence, selects, valueOf, mirror) {
         if (stopped) return;
         // Jen kroky, které nezmění výšku věty (počet řádků) — změří se
         // synchronně v jednom snímku a vrátí zpět, nic se nevykreslí.
+        // Přednost mají kroky, kde části věty (sloty i spojka) zůstanou
+        // na svých řádcích: přeskok slova na jiný řádek je velký posun
+        // i při stejné výšce (de na mobilu CLS 0,067, OND-475). Když
+        // takové nejsou aspoň dva (en 320/340 px), doplní se tím, co drží výšku.
         const base = sentence.offsetHeight;
-        const steps = [];
+        const lines = () => [...sentence.children].map((el) => el.getBoundingClientRect().top);
+        const baseLines = lines();
+        const inPlace = [];
+        const sameHeight = [];
         for (const s of candidates()) {
-            if (steps.length === DEMO_MAX) break;
+            if (inPlace.length === DEMO_MAX) break;
             show(s, false);
-            if (sentence.offsetHeight === base) steps.push(s);
+            if (sentence.offsetHeight !== base) continue;
+            if (lines().every((top, i) => Math.abs(top - baseLines[i]) < 1)) inPlace.push(s);
+            else sameHeight.push(s);
         }
+        const steps = inPlace.length >= DEMO_MIN ? inPlace : [...inPlace, ...sameHeight].slice(0, DEMO_MIN);
         selects.forEach(mirror);
         if (!steps.length) return stop();
 
