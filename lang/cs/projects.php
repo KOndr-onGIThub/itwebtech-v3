@@ -27,13 +27,6 @@ return [
         'subline'         => 'U každého projektu je napsané, co web umí a v jakém rozsahu jsem ho postavil. Odkaz vede na živou verzi — ověřte si to sami.',
     ],
 
-    'filter_all'       => 'Vše',
-    'filter_websites'  => 'Stránky',
-    'filter_webapps'   => 'Aplikace',
-    'filter_other'     => 'Ostatní',
-    'filter_aria'      => 'Filtr projektů podle kategorie',
-    'count_label'      => 'projektů zobrazeno',
-
     'info_client'      => 'Klient',
     'info_date'        => 'Kdy',
     'info_categories'  => 'Kategorie',
@@ -210,7 +203,7 @@ return [
         'primary' => 'Napsat poptávku',
     ],
 
-    // OND-471 — prototypy přehledu `?v=1|2|3`. Po výběru zůstane jen vítěz.
+    // OND-470 — přehled /projekty jako věta „Potřebuju [web] pro [obor].“
     'catalog' => [
         // Počty: klíče podle Intl.PluralRules (cs: one / few / other).
         'count' => ['one' => ':n projekt', 'few' => ':n projekty', 'other' => ':n projektů'],
@@ -223,13 +216,13 @@ return [
             'what_label' => 'Co potřebujete',
             'for_label'  => 'Pro jaký obor',
             'what' => [
-                'all'         => 'cokoli',
+                'all'         => 'web nebo aplikaci',
                 'website'     => 'web',
                 'application' => 'aplikaci na míru',
                 'other'       => 'grafiku nebo článek',
             ],
             'for' => [
-                'all'     => 'jakýkoli obor',
+                'all'     => 'svou firmu',
                 'remeslo' => 'řemeslo a stavby',
                 'vyroba'  => 'výrobu a logistiku',
                 'sluzby'  => 'zdraví, reality a ubytování',
@@ -238,21 +231,6 @@ return [
             'match' => 'Sedí :n z :total.',
             'none'  => 'Přesně tohle v portfoliu zatím nemám. Nejbližší práce jsou níž.',
             'rest'  => 'Další projekty',
-        ],
-
-        'index' => [
-            'search_label' => 'Hledat v projektech',
-            'placeholder'  => 'Obor, klient, funkce…',
-            'try'          => 'Zkuste',
-            'suggestions'  => ['e-shop', 'Toyota', 'rezervace', 'logo', 'výroba'],
-            'none'         => 'Nic takového v portfoliu nemám.',
-            'clear'        => 'Zrušit hledání',
-        ],
-
-        'show' => [
-            'open'    => 'Otevřít případovku',
-            'live'    => 'Živý web',
-            'preview' => 'Náhled: :title',
         ],
     ],
 

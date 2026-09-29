@@ -11,7 +11,7 @@
 @import './hloubka.css';
 /* OND-438 — plynulý přechod mezi stránkami (projekt → detail). */
 @import './prechody.css';
-/* OND-471 — prototypy přehledu /projekty (?v=1|2|3). */
+/* OND-470 — věta nad přehledem /projekty. */
 @import './projekty.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';

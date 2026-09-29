@@ -7,7 +7,7 @@ import './hloubka';
 import './live-recordings';
 // OND-449 — video smyčky na detailu projektu. Sám se vypne bez `[data-demo-video]`.
 import './demo-videos';
-// OND-471 — prototypy přehledu /projekty (?v=1|2|3). Sám se vypne mimo ně.
+// OND-470 — věta nad přehledem /projekty. Sám se vypne mimo ni.
 import './projekty';
 import Alpine from 'alpinejs';
 
@@ -273,39 +273,6 @@ Alpine.data('contactForm', ({ genericError = '', source = 'contact' } = {}) => (
         if (!first) return;
         first.focus({ preventScroll: true });
         first.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    },
-}));
-
-// ---------------------------------------------------------------------------
-// Portfolio filter — client-side filter pro listing /projekty
-// ---------------------------------------------------------------------------
-Alpine.data('portfolioFilter', ({ target = 'portfolio-grid', categories = [], counts = {} } = {}) => ({
-    active: 'all',
-    target,
-    categories,
-    counts,
-    visibleCount: counts.all ?? 0,
-
-    init() {
-        this.applyFilter();
-    },
-
-    setActive(category) {
-        this.active = category;
-        this.visibleCount = this.counts[category] ?? 0;
-        this.applyFilter();
-    },
-
-    applyFilter() {
-        const grid = document.getElementById(this.target);
-        if (!grid) return;
-
-        const cards = grid.querySelectorAll('[data-category]');
-        cards.forEach(card => {
-            const cat = card.dataset.category;
-            const visible = this.active === 'all' || cat === this.active;
-            card.dataset.filterHidden = visible ? 'false' : 'true';
-        });
     },
 }));
 

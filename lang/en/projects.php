@@ -27,13 +27,6 @@ return [
         'subline'         => 'For every project you can read what the site does and the scope I built it in. The link goes to the live version — check it yourself.',
     ],
 
-    'filter_all'       => 'All',
-    'filter_websites'  => 'Websites',
-    'filter_webapps'   => 'Web apps',
-    'filter_other'     => 'Others',
-    'filter_aria'      => 'Filter projects by category',
-    'count_label'      => 'projects shown',
-
     'info_client'      => 'Client',
     'info_date'        => 'Date',
     'info_categories'  => 'Categories',
@@ -199,8 +192,9 @@ return [
         'primary' => 'Write an enquiry',
     ],
 
-    // OND-471 — overview prototypes `?v=1|2|3`. Only the winner stays.
+    // OND-470 — /projects overview as a sentence "I need [a website] for [a field]."
     'catalog' => [
+        // Counts: keys follow Intl.PluralRules (en: one / other).
         'count' => ['one' => ':n project', 'other' => ':n projects'],
         'cta'   => 'Tell me what you need',
 
@@ -211,13 +205,13 @@ return [
             'what_label' => 'What you need',
             'for_label'  => 'Which field',
             'what' => [
-                'all'         => 'anything',
+                'all'         => 'a website or an app',
                 'website'     => 'a website',
                 'application' => 'a custom app',
                 'other'       => 'design or an article',
             ],
             'for' => [
-                'all'     => 'any field',
+                'all'     => 'my business',
                 'remeslo' => 'trades and construction',
                 'vyroba'  => 'manufacturing and logistics',
                 'sluzby'  => 'health, property and hospitality',
@@ -226,21 +220,6 @@ return [
             'match' => ':n of :total match.',
             'none'  => 'Nothing exactly like this in the portfolio yet. The closest work is below.',
             'rest'  => 'Other projects',
-        ],
-
-        'index' => [
-            'search_label' => 'Search projects',
-            'placeholder'  => 'Field, client, feature…',
-            'try'          => 'Try',
-            'suggestions'  => ['online shop', 'Toyota', 'booking', 'logo', 'manufacturing'],
-            'none'         => 'Nothing like that in the portfolio.',
-            'clear'        => 'Clear search',
-        ],
-
-        'show' => [
-            'open'    => 'Open the case study',
-            'live'    => 'Live site',
-            'preview' => 'Preview: :title',
         ],
     ],
 

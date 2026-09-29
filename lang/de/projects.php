@@ -27,13 +27,6 @@ return [
         'subline'         => 'Bei jedem Projekt steht, was die Website kann und in welchem Umfang ich sie gebaut habe. Der Link führt zur Live-Version — prüfen Sie es selbst.',
     ],
 
-    'filter_all'       => 'Alle',
-    'filter_websites'  => 'Websites',
-    'filter_webapps'   => 'Anwendungen',
-    'filter_other'     => 'Sonstiges',
-    'filter_aria'      => 'Projekte nach Kategorie filtern',
-    'count_label'      => 'Projekte angezeigt',
-
     'info_client'      => 'Kunde',
     'info_date'        => 'Datum',
     'info_categories'  => 'Kategorien',
@@ -198,8 +191,9 @@ return [
         'primary' => 'Anfrage schreiben',
     ],
 
-    // OND-471 — Prototypen der Übersicht `?v=1|2|3`. Nur der Gewinner bleibt.
+    // OND-470 — Übersicht /projekte als Satz „Ich brauche [eine Website] für [eine Branche].“
     'catalog' => [
+        // Anzahl: Schlüssel nach Intl.PluralRules (de: one / other).
         'count' => ['one' => ':n Projekt', 'other' => ':n Projekte'],
         'cta'   => 'Schreiben Sie mir, was Sie brauchen',
 
@@ -210,13 +204,13 @@ return [
             'what_label' => 'Was Sie brauchen',
             'for_label'  => 'Für welche Branche',
             'what' => [
-                'all'         => 'irgendetwas',
+                'all'         => 'eine Website oder App',
                 'website'     => 'eine Website',
                 'application' => 'eine Anwendung nach Maß',
                 'other'       => 'Grafik oder einen Artikel',
             ],
             'for' => [
-                'all'     => 'jede Branche',
+                'all'     => 'mein Unternehmen',
                 'remeslo' => 'Handwerk und Bau',
                 'vyroba'  => 'Produktion und Logistik',
                 'sluzby'  => 'Gesundheit, Immobilien und Unterkunft',
@@ -225,21 +219,6 @@ return [
             'match' => ':n von :total passen.',
             'none'  => 'Genau das habe ich noch nicht im Portfolio. Die nächstliegenden Arbeiten stehen unten.',
             'rest'  => 'Weitere Projekte',
-        ],
-
-        'index' => [
-            'search_label' => 'Projekte durchsuchen',
-            'placeholder'  => 'Branche, Kunde, Funktion…',
-            'try'          => 'Zum Beispiel',
-            'suggestions'  => ['Onlineshop', 'Toyota', 'Buchung', 'Logo', 'Fertigung'],
-            'none'         => 'So etwas habe ich nicht im Portfolio.',
-            'clear'        => 'Suche löschen',
-        ],
-
-        'show' => [
-            'open'    => 'Fallstudie öffnen',
-            'live'    => 'Live-Website',
-            'preview' => 'Vorschau: :title',
         ],
     ],
 

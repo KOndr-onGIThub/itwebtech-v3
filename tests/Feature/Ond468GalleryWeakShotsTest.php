@@ -66,6 +66,10 @@ class Ond468GalleryWeakShotsTest extends TestCase
     {
         foreach (self::PROJECTS as $slug => [, $after, $removed]) {
             $project = PortfolioProject::where('slug', $slug)->firstOrFail();
+            // OND-470: odpublikovaný projekt (článek na Motorkáři) detail nemá.
+            if ($project->published_at === null) {
+                continue;
+            }
             $alts = DB::table('portfolio_project_screenshots as s')
                 ->join('portfolio_project_screenshot_translations as t', 't.screenshot_id', '=', 's.id')
                 ->where('s.project_id', $project->id)->where('s.type', '!=', 'thumbnail')

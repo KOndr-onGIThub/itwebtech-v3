@@ -29,7 +29,9 @@ class PortfolioTest extends TestCase
         // OND-208: 24. projekt je `pitarena-eshop` (shop.pitarena.cz).
         // OND-282: tři projekty (logo-realitacky, video-pitbike-akademie,
         // animace-delejme) zůstávají v datasetu, ale nejsou publikované.
-        $this->assertSame(21, $expectedCount, 'Seeder by měl vytvořit 21 publikovaných projektů z 24 v datasetu.');
+        // OND-470: další čtyři (yolk, elektro-srnak, clanek-motorkari-cz,
+        // pitarena-cedule) taky.
+        $this->assertSame(17, $expectedCount, 'Seeder by měl vytvořit 17 publikovaných projektů z 24 v datasetu.');
 
         $response = $this->get('/projekty');
 
@@ -93,9 +95,8 @@ class PortfolioTest extends TestCase
         // [cs slug, de slug, en slug]
         // OND-282: `animace-delejme` tu byl taky, ale od odpublikování
         // vrací 404 ve všech locale — pokrývá ho `unpublishedProjectProvider`.
+        // OND-470: totéž `pitarena-cedule` a `clanek-motorkari-cz`.
         return [
-            'pitarena-cedule'     => ['pitarena-cedule', 'pitarena-werbeschild', 'pitarena-outdoor-sign'],
-            'clanek-motorkari-cz' => ['clanek-motorkari-cz', 'artikel-motorkari-cz', 'article-motorkari-cz'],
             'pitarena-eshop'      => ['pitarena-eshop', 'pitarena-onlineshop', 'pitarena-online-shop'],
         ];
     }
@@ -131,24 +132,24 @@ class PortfolioTest extends TestCase
 
     public function test_project_detail_hreflang_uses_localized_slugs(): void
     {
-        $response = $this->get('/de/projekte/pitarena-werbeschild');
+        $response = $this->get('/de/projekte/pitarena-onlineshop');
 
         $response->assertOk();
-        $response->assertSee('/projekty/pitarena-cedule', false);
-        $response->assertSee('/de/projekte/pitarena-werbeschild', false);
-        $response->assertSee('/en/projects/pitarena-outdoor-sign', false);
+        $response->assertSee('/projekty/pitarena-eshop', false);
+        $response->assertSee('/de/projekte/pitarena-onlineshop', false);
+        $response->assertSee('/en/projects/pitarena-online-shop', false);
     }
 
     public function test_project_listing_links_to_localized_slug(): void
     {
         $this->get('/de/projekte')
             ->assertOk()
-            ->assertSee('/de/projekte/pitarena-werbeschild', false)
-            ->assertDontSee('/de/projekte/pitarena-cedule', false);
+            ->assertSee('/de/projekte/pitarena-onlineshop', false)
+            ->assertDontSee('/de/projekte/pitarena-eshop', false);
 
         $this->get('/projekty')
             ->assertOk()
-            ->assertSee('/projekty/pitarena-cedule', false);
+            ->assertSee('/projekty/pitarena-eshop', false);
     }
 
     public function test_sitemap_contains_localized_project_slugs(): void
@@ -156,9 +157,9 @@ class PortfolioTest extends TestCase
         $response = $this->get('/sitemap.xml');
 
         $response->assertOk();
-        $response->assertSee('/de/projekte/pitarena-werbeschild', false);
-        $response->assertSee('/en/projects/pitarena-outdoor-sign', false);
-        $response->assertDontSee('/de/projekte/pitarena-cedule', false);
+        $response->assertSee('/de/projekte/pitarena-onlineshop', false);
+        $response->assertSee('/en/projects/pitarena-online-shop', false);
+        $response->assertDontSee('/de/projekte/pitarena-eshop', false);
     }
 
     /* ================================================================== */
@@ -186,6 +187,27 @@ class PortfolioTest extends TestCase
                 '/projekty/animace-delejme',
                 '/en/projects/attention-grabbing-animation',
                 '/de/projekte/aufmerksamkeits-animation',
+            ]],
+            // OND-470
+            'yolk' => ['yolk', [
+                '/projekty/yolk',
+                '/en/projects/yolk',
+                '/de/projekte/yolk',
+            ]],
+            'elektro-srnak' => ['elektro-srnak', [
+                '/projekty/elektro-srnak',
+                '/en/projects/elektro-srnak',
+                '/de/projekte/elektro-srnak',
+            ]],
+            'clanek-motorkari-cz' => ['clanek-motorkari-cz', [
+                '/projekty/clanek-motorkari-cz',
+                '/en/projects/article-motorkari-cz',
+                '/de/projekte/artikel-motorkari-cz',
+            ]],
+            'pitarena-cedule' => ['pitarena-cedule', [
+                '/projekty/pitarena-cedule',
+                '/en/projects/pitarena-outdoor-sign',
+                '/de/projekte/pitarena-werbeschild',
             ]],
         ];
     }

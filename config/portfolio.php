@@ -2,13 +2,14 @@
 
 /*
 |--------------------------------------------------------------------------
-| Obory realizací (OND-471)
+| Obory realizací (OND-470, návrh OND-471)
 |--------------------------------------------------------------------------
-| „Pro koho“ ve větě nad přehledem /projekty (`?v=1`). Štítky oboru
+| „Pro koho“ ve větě nad přehledem /projekty. Štítky oboru
 | v DB má jen polovina projektů, proto ruční mapa slugů. Projekt může
 | být ve dvou oborech. Nepublikované slugy se ignorují; obor bez
 | jediného publikovaného projektu se nevykreslí.
-| Popisky jsou v lang/{cs,en,de}/projects.php → `sentence.for.*`.
+| Popisky jsou v lang/{cs,en,de}/projects.php → `catalog.sentence.for.*`.
+| Nový projekt = doplnit jeho slug sem, jinak ho věta najde jen podle druhu.
 */
 
 return [

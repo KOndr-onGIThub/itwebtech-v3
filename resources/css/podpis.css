@@ -1993,7 +1993,7 @@
 
 /* ------------------------------------------------------------
    OND-400 — /projekty (předloha OND-399 §9). Nové sdílené komponenty:
-   `.pd-filter` a `.pd-works` / `.pd-work` (mřížka realizací —
+   `.pd-works` / `.pd-work` (mřížka realizací —
    použije ji beze změny i „Další projekty" na detailu projektu).
    Zbytek je z homepage, /cenik a /kontakt beze změny. Hrany sekcí
    řeší plošné pravidlo oddělovačů výš (OND-398), scoped řádky
@@ -2005,46 +2005,7 @@
    ne dvojnásobek mezery mezi sekcemi. */
 .pd-page-head + section[data-pdd="projects-grid"] { padding-top: 0; }
 
-/* --- Filtr ---------------------------------------------------
-   Textová tlačítka. Aktivní = bílý text + 1px acid pod slovem (stejná
-   sazba jako `.pd-case__cta`). Počet je údaj, ne ozdoba: tabulkové
-   číslice, tlumený, tenčí řez. Cíl 44 px na výšku, řádek se na 390 px
-   zalomí, nic se neschová do vodorovného scrollu. */
-.pd-filter {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 var(--space-6);
-    margin: 0 0 var(--space-6);
-}
-.pd-filter__btn {
-    appearance: none;
-    background: none;
-    border: 0;
-    padding: 0;
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    font-family: var(--font-body);
-    font-size: var(--text-body-sm);
-    font-weight: 600;
-    color: var(--color-fg-muted);
-    cursor: pointer;
-    transition: color var(--duration-micro) var(--ease-out);
-}
-.pd-filter__label {
-    border-bottom: 1px solid transparent;
-    padding-bottom: 2px;
-    transition: border-color var(--duration-micro) var(--ease-out);
-}
-.pd-filter__count {
-    font-weight: 400;
-    font-variant-numeric: tabular-nums;
-}
-.pd-filter__btn:hover { color: var(--color-fg-primary); }
-.pd-filter__btn[aria-pressed="true"] { color: var(--color-fg-primary); }
-.pd-filter__btn[aria-pressed="true"] .pd-filter__label { border-bottom-color: var(--pd-accent); }
-.pd-filter__btn:focus-visible { outline: 2px solid var(--pd-accent); outline-offset: 4px; }
+/* Filtr nad mřížkou je od OND-470 věta — resources/css/projekty.css. */
 
 /* --- Mřížka realizací ----------------------------------------
    Homepage má tři velké `.pd-case` (dílo první, výsledek druhý). Katalog
@@ -2064,7 +2025,6 @@
 @media (min-width: 1024px) {
     .pd-works { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
-.pd-work[data-filter-hidden="true"] { display: none; }
 
 .pd-work__link {
     display: grid;
@@ -2160,8 +2120,6 @@
 .pd-close .pd-case__live { position: relative; }
 .pd-close .pd-case__live::after { content: ''; position: absolute; inset: -12px -6px; }
 
-/* Mobil: čtyři kategorie na jeden řádek (cs/en 323 px z 342). */
-@media (max-width: 639px) { .pd-filter { gap: 0 var(--space-4); } }
 
 
 /* ------------------------------------------------------------

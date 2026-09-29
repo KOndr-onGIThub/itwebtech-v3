@@ -51,20 +51,24 @@ class Ond400ProjectsPageTest extends TestCase
         }
     }
 
-    public function test_filter_counts_match_rendered_cards(): void
+    /**
+     * OND-470: filtr je věta. Nabízí jen druhy, za kterými je aspoň jedna
+     * karta, a výchozí počet v hlášce sedí s mřížkou.
+     */
+    public function test_sentence_options_match_rendered_cards(): void
     {
         $body = $this->get('/projekty')->assertOk()->getContent();
 
         preg_match_all('/<article class="pd-work" data-category="([a-z]+)"/', $body, $m);
         $byCategory = array_count_values($m[1]);
 
-        preg_match_all('/data-category="([a-z]+)"\s*>\s*<span class="pd-filter__label">[^<]*<\/span>\s*<span class="pd-filter__count">(\d+)<\/span>/', $body, $f, PREG_SET_ORDER);
-        $this->assertNotEmpty($f, 'Filtr se nevykreslil.');
+        preg_match('/<select id="intent-co".*?<\/select>/s', $body, $select);
+        $this->assertNotEmpty($select, 'Věta se nevykreslila.');
+        preg_match_all('/<option value="([a-z]+)"/', $select[0], $options);
 
-        foreach ($f as [, $category, $count]) {
-            $expected = $category === 'all' ? count($m[1]) : ($byCategory[$category] ?? 0);
-            $this->assertSame($expected, (int) $count, "Počet ve filtru „{$category}\".");
-            $this->assertGreaterThan(0, (int) $count, "Kategorie s nulou se nemá vykreslit ({$category}).");
+        foreach (array_slice($options[1], 1) as $category) {
+            $this->assertGreaterThan(0, $byCategory[$category] ?? 0, "Volba bez karet ({$category}).");
         }
+        $this->assertStringContainsString('data-total="' . count($m[1]) . '"', $body);
     }
 }

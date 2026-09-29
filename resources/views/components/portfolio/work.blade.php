@@ -49,7 +49,7 @@
         ?: __('projects.card.thumbnail_alt', ['project' => $title]);
 @endphp
 
-<article {{ $attributes->merge(['class' => 'pd-work']) }} data-category="{{ $project->category }}" data-filter-hidden="false">
+<article class="pd-work" data-category="{{ $project->category }}" {{ $attributes }}>
     <a href="{{ $project->detailUrl($locale) }}" class="pd-work__link"
        aria-label="{{ $title }} — {{ __('projects.view_project') }}"
        data-analytics="project_card_click"
