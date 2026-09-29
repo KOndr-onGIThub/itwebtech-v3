@@ -198,11 +198,11 @@ class Ond449PortfolioTest extends TestCase
         foreach (['kemp-veselka-demo.webm', 'kemp-veselka-demo.mp4', 'kemp-veselka-demo-mobile.webm', 'kemp-veselka-demo-mobile.mp4', 'kemp-veselka-demo-poster.jpg', 'kemp-veselka-demo-mobile-poster.jpg'] as $file) {
             $this->assertStringContainsString('/videos/portfolio/' . $file . '?v=', $veselka, $file);
         }
-        // První blok galerie = trojice karet (poslední je logo), video za ním, před pásem gallery-4.
+        // První blok galerie = trojice karet (poslední je logo), video za ním.
+        // OND-468: `gallery-4` a `gallery-5` jsou z galerie pryč, video galerii uzavírá.
         $video = strpos($veselka, 'data-demo-video');
         $this->assertGreaterThan(strpos($veselka, 'alt="Nové logo autokempu"'), $video);
-        $this->assertLessThan(strpos($veselka, 'projects/kemp-veselka/gallery-4') ?: strpos($veselka, 'Autokemp Veselka – sekce 4'), $video);
-        $this->assertSame(6, DB::table('portfolio_project_screenshots')->where('project_id', PortfolioProject::where('slug', 'kemp-veselka')->value('id'))->count());
+        $this->assertSame(4, DB::table('portfolio_project_screenshots')->where('project_id', PortfolioProject::where('slug', 'kemp-veselka')->value('id'))->count());
 
         // Video je jen tam, kde ho zapínají data.
         $this->assertStringNotContainsString('data-demo-video', $this->get('/projekty/pitarena')->getContent());

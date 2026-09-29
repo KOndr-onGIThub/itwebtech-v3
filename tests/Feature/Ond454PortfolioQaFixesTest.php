@@ -156,7 +156,8 @@ class Ond454PortfolioQaFixesTest extends TestCase
         $this->assertNull($cyklo->result_as_of);
         $this->assertNull($cyklo->translation('de')->result_source);
         $this->assertStringContainsString('von 16,8 auf 8,6', $cyklo->translation('de')->result);
-        $this->assertSame(33, DB::table('portfolio_project_screenshot_translations')
+        // 11 snímků × 3 jazyky; 10 z nich OND-468 z galerie vyřadilo, zbývá 1.
+        $this->assertSame(3, DB::table('portfolio_project_screenshot_translations')
             ->get()->filter(fn ($r) => preg_match('/(sekce|section|Abschnitt) \d/u', $r->alt))->count());
 
         $migration->up();
