@@ -130,7 +130,8 @@ function initIntent(form) {
 // mřížka, URL ani hlášení pro čtečku se nemění (slova jsou `aria-hidden`).
 //
 // Nespustí se: s `prefers-reduced-motion`, s výběrem z URL, podruhé
-// v téže relaci (návrat z detailu). Zastaví se při jakékoli interakci.
+// v téže relaci (návrat z detailu). Zastaví ji jakákoli interakce:
+// pointer, klávesa, kolečko, dotyk, fokus i změna výběru.
 // Stav, který by změnil počet řádků věty, se přeskočí — mřížka pod větou
 // se tak nikdy neposune (žádný layout shift).
 // ---------------------------------------------------------------------------
@@ -176,6 +177,8 @@ function initDemo(form, sentence, selects, valueOf, mirror) {
         }
     };
     events.forEach((e) => document.addEventListener(e, stop, { capture: true, passive: true }));
+    // Fokus na slovo věty (i bez klávesy, např. z čtečky) ukázku taky ukončí.
+    form.addEventListener('focusin', stop, { once: true });
 
     const run = () => {
         // Jen kroky, které nezmění výšku věty (počet řádků) — změří se
