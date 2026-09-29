@@ -43,9 +43,8 @@ Přihlášení: <https://admin.webglobe.cz>, hosting domény `itwebtech.cz`.
    nejnovější nabízená verze). Opiš si čtyři údaje: **server** (např.
    `c-mariadb`), **název databáze**, **uživatele** a **heslo**. Budou potřeba
    v kroku B.
-5. **SSH přístup.** Hosting → FTP a soubory → FTP účty. Opiš si **FTP login**
-   a **FTP host**. U tlačítka „Upravit“ nastav heslo, pokud ho neznáš.
-   GitHub se přihlašuje stejným účtem přes SSH. Pokud administrace nabízí
+5. **SSH přístup.** Hosting → FTP a soubory → FTP účty. Opiš si **FTP login**.
+   U tlačítka „Upravit“ nastav heslo, pokud ho neznáš. GitHub se přihlašuje stejným účtem přes SSH. Pokud administrace nabízí
    zapnutí SSH, zapni ho **natrvalo**.
    Pozor: „WebSSH“ (konzole v prohlížeči) se zapíná jen na hodinu. To je jiná
    věc a automatickému nasazení nestačí. Když administrace umožní SSH zapnout
@@ -57,14 +56,17 @@ Přihlášení: <https://admin.webglobe.cz>, hosting domény `itwebtech.cz`.
 ## B. GitHub Secrets (jednou)
 
 Na GitHubu v repozitáři: **Settings → Secrets and variables → Actions →
-New repository secret**. Založ tyhle čtyři:
+New repository secret**. Založ tyhle tři:
 
 | Název | Co do něj vložit | Odkud |
 |---|---|---|
-| `WEBGLOBE_SSH_HOST` | adresa serveru, např. `ftp.itwebtech.cz` | krok A5, „FTP host“ |
 | `WEBGLOBE_SSH_USER` | přihlašovací jméno | krok A5, „FTP login“ |
 | `WEBGLOBE_SSH_PASSWORD` | heslo FTP účtu | krok A5 |
 | `PRODUCTION_ENV` | celá produkční konfigurace, vzor je níže | vzor + hodnoty z Coolify a z kroku A4 |
+
+Adresu serveru (`62.109.154.42`) zadávat nemusíš, nasazení ji má v sobě.
+Secret `WEBGLOBE_SSH_HOST`, pokud ho máš z dřívějška, se už nepoužívá a můžeš
+ho smazat.
 
 Nic dalšího není potřeba. Změnu konfigurace později uděláš úpravou
 `PRODUCTION_ENV` a novým nasazením (část F).
