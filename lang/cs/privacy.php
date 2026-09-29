@@ -94,7 +94,7 @@ return [
 <h2>Kdo se k vašim údajům ještě dostane</h2>
 <p>Neprodávám je a nepředávám je nikomu pro marketing. Technicky se k nim ale dostane pár firem, na jejichž službách web a moje pošta stojí:</p>
 <ul>
-<li><strong>Hetzner</strong> (Německo) — server, na kterém web i databáze běží.</li>
+<li><strong>Webglobe</strong> (Česko) — server, na kterém web i databáze běží.</li>
 <li><strong>Seznam.cz</strong> — provozuje schránku ok@ondraweb.cz, do které mi poptávky chodí.</li>
 <li><strong>Google</strong> — Google Analytics, a jen pokud měření povolíte.</li>
 <li><strong>Microsoft</strong> — Clarity, a jen pokud měření povolíte.</li>
