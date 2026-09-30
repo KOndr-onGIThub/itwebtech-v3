@@ -1,0 +1,123 @@
+/* ============================================================
+   OND-470 — věta nad přehledem /projekty (vítězná varianta V1
+   z OND-471): „Potřebuju [web ▾] pro [obor ▾].“ Nahradila záložky.
+   Jen stávající tokeny (ACID akcent, `--color-*`, `--space-*`).
+   Pohyb: jednorázové přechody při změně stavu, žádná vazba na scroll.
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   Pevná slova věty jsou tlumená, proměnná slova jasná s acidovým
+   podtržením: oko hned vidí, na co se dá sáhnout (signifier).
+   ------------------------------------------------------------ */
+.pd-intent { margin: 0 0 var(--space-8); }
+/* Bez JS se věta nevykreslí (ovládání by nefungovalo) a mřížka je celá.
+   `html.js` nastaví inline skript v hlavičce ještě před prvním vykreslením,
+   takže se věta neobjeví dodatečně a mřížku neodsune. */
+html:not(.js) .pd-intent { display: none; }
+
+.pd-intent__sentence {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(26px, 3.6vw, 48px);
+    line-height: 1.18;
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-fg-muted);
+    margin: 0;
+    max-width: 24ch;
+    text-wrap: balance;
+}
+.pd-intent__slot {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    vertical-align: baseline;
+}
+.pd-intent__value {
+    color: var(--color-fg-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--pd-accent);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.14em;
+    transition: color var(--duration-micro) var(--ease-out);
+}
+/* Šipka: „tady se dá vybrat". Kreslená rámečkem, ne ikonou. */
+.pd-intent__value::after {
+    content: '';
+    display: inline-block;
+    width: 0.3em;
+    height: 0.3em;
+    margin: 0 0.12em 0 0.3em;
+    border-right: 2px solid var(--pd-accent);
+    border-bottom: 2px solid var(--pd-accent);
+    transform: translateY(-0.22em) rotate(45deg);
+}
+/* Nativní select přes celé slovo: výběr na mobilu je systémový,
+   klávesnice a čtečka fungují bez jediného řádku JS. */
+.pd-intent__select {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    appearance: none;
+    font-size: 16px;
+    border: 0;
+}
+.pd-intent__slot:hover .pd-intent__value { color: var(--pd-accent); }
+/* Rámeček fokusu jen při ovládání klávesnicí: po klepnutí prstem nebo
+   myší (`data-input="pointer"`, projekty.js) zůstane věta čistá. */
+.pd-intent:not([data-input="pointer"]) .pd-intent__slot:has(.pd-intent__select:focus-visible) .pd-intent__value {
+    outline: 2px solid var(--pd-accent);
+    outline-offset: 6px;
+}
+.pd-intent__dot { color: var(--color-fg-primary); }
+
+.pd-intent__status {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-2) var(--space-6);
+    margin: var(--space-5) 0 0;
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    color: var(--color-fg-primary);
+    min-height: 1.6em;
+}
+
+/* Přeskládaná mřížka: zbytek zůstává, jen ustoupí. */
+.pd-works[data-intent-grid] .pd-work {
+    transition: opacity var(--duration-macro) var(--ease-out);
+}
+.pd-works[data-intent-grid] .pd-work__visual img {
+    transition: filter var(--duration-macro) var(--ease-out);
+}
+.pd-works[data-intent-grid] .pd-work[data-intent="rest"] { opacity: 0.45; }
+.pd-works[data-intent-grid] .pd-work[data-intent="rest"] .pd-work__visual img { filter: grayscale(1); }
+.pd-works[data-intent-grid] .pd-work[data-intent="rest"]:hover,
+.pd-works[data-intent-grid] .pd-work[data-intent="rest"]:focus-within { opacity: 1; }
+.pd-works[data-intent-grid] .pd-work[data-intent="rest"]:hover .pd-work__visual img,
+.pd-works[data-intent-grid] .pd-work[data-intent="rest"]:focus-within .pd-work__visual img { filter: none; }
+
+.pd-works__rest {
+    grid-column: 1 / -1;
+    margin: var(--space-4) 0 0;
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-border-soft);
+    font-family: var(--font-body);
+    font-size: var(--text-caption);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-fg-muted);
+}
+
+/* Ukázka věty při prvním zobrazení (projekty.js): měnící se slova svítí
+   akcentem, ať je vidět, na co se dá sáhnout. */
+.pd-intent.is-demo .pd-intent__value { color: var(--pd-accent); }
+
+@media (prefers-reduced-motion: reduce) {
+    .pd-intent__value,
+    .pd-works[data-intent-grid] .pd-work,
+    .pd-works[data-intent-grid] .pd-work__visual img { transition: none; }
+}
