@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Article;
 use App\Models\Portfolio\PortfolioProject;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
@@ -17,13 +18,6 @@ class SitemapGenerator
      * @var array<int, string>
      */
     protected array $locales = ['cs', 'en', 'de'];
-
-    /**
-     * Statické pojmenované routes, které mají {locale}.{page} variantu.
-     *
-     * @var array<int, string>
-     */
-    protected array $staticPages = ['home', 'about', 'contact', 'price', 'privacy', 'cookies', 'projects', 'blog', 'reviews'];
 
     /**
      * Vygeneruje sitemap XML jako string.
@@ -51,7 +45,52 @@ class SitemapGenerator
             $this->addUrl($sitemap, $entry, $overrides, $excluded);
         }
 
-        return $sitemap->render();
+        return $this->withStylesheet($sitemap->render());
+    }
+
+    /**
+     * OND-485: odkaz na XSL styl hned za XML deklarací. Prohlížeč pak sitemapu
+     * ukáže jako tabulku, Google instrukci ignoruje a čte `<url>` jako dřív.
+     */
+    protected function withStylesheet(string $xml): string
+    {
+        $pi = '<?xml-stylesheet type="text/xsl" href="' . e(route('sitemap.xsl', [], false)) . '"?>';
+
+        return preg_replace('/^(<\?xml[^>]*\?>)\s*/', "$1\n{$pi}\n", $xml, 1) ?? $xml;
+    }
+
+    /**
+     * Statické stránky = pojmenované GET routy `{locale}.{page}` bez parametrů.
+     *
+     * OND-485: dřív tu byl seznam natvrdo a nová stránka se do sitemapy
+     * dostala, jen když ji sem někdo dopsal. Teď stačí přidat routu do
+     * routes/web.php. Pořadí podle výchozí locale (cs), ostatní locale jen
+     * doplní stránky, které cs nemá.
+     *
+     * @return array<int, string>
+     */
+    public function staticPages(): array
+    {
+        $pattern = '/^(' . implode('|', array_map('preg_quote', $this->locales)) . ')\.([A-Za-z0-9_-]+)$/';
+        $pages   = [];
+
+        foreach ($this->locales as $locale) {
+            foreach (Route::getRoutes()->getRoutes() as $route) {
+                $name = $route->getName();
+
+                if ($name === null
+                    || ! preg_match($pattern, $name, $m)
+                    || $m[1] !== $locale
+                    || ! in_array('GET', $route->methods(), true)
+                    || $route->parameterNames() !== []) {
+                    continue;
+                }
+
+                $pages[$m[2]] = true;
+            }
+        }
+
+        return array_keys($pages);
     }
 
     /**
@@ -72,10 +111,12 @@ class SitemapGenerator
         $entries = [];
 
         // Pro každou kombinaci locale × page spočítej alternates jednou.
-        foreach ($this->staticPages as $page) {
+        foreach ($this->staticPages() as $page) {
             $alternates = [];
             foreach ($this->locales as $locale) {
-                $alternates[$locale] = $this->resolveStaticUrl($page, $locale);
+                if (Route::has("{$locale}.{$page}")) {
+                    $alternates[$locale] = $this->resolveStaticUrl($page, $locale);
+                }
             }
 
             foreach ($this->locales as $locale) {
@@ -344,10 +385,13 @@ class SitemapGenerator
 
     /**
      * Resolve URL pro statickou stránku v daném locale.
+     *
+     * OND-485: přes lroute(), stejně jako canonical v layouts/app.blade.php —
+     * home je `/en/` s lomítkem, `route()` by vrátil `/en` bez něj.
      */
     protected function resolveStaticUrl(string $page, string $locale): string
     {
-        return route("{$locale}.{$page}");
+        return lroute($page, $locale);
     }
 
     protected function defaultPriority(string $page): float
