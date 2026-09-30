@@ -17,6 +17,8 @@ require __DIR__.'/landing.php';
 |--------------------------------------------------------------------------
 */
 Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
+// OND-485: XSL styl, díky kterému sitemapu prohlížeč ukáže jako tabulku.
+Route::get('/sitemap.xsl', [SitemapController::class, 'stylesheet'])->name('sitemap.xsl');
 Route::get('/robots.txt', RobotsController::class)->name('robots');
 
 /*
