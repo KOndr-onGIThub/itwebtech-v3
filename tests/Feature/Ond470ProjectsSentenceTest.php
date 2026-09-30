@@ -78,6 +78,33 @@ class Ond470ProjectsSentenceTest extends TestCase
         }
     }
 
+    /**
+     * OND-478 — nápověda pro první návštěvu je jen bublina (varianta A):
+     * skrytá do spuštění z projekty.js, čtečce nic navíc. Prototypové
+     * varianty B/C a přepínač `?napoveda` na stránce nezůstaly.
+     * OND-477 — zvýrazněná část H1 na /projekty je bez podtržení
+     * (`pd-heading--plain`): podtržení tu znamená jen „dá se kliknout“.
+     */
+    public function test_first_visit_hint_is_single_bubble_and_heading_is_plain(): void
+    {
+        foreach (self::PATHS as $locale => $path) {
+            $body = $this->get($path . '?napoveda=b')->assertOk()->getContent();
+            $bubble = '<span class="pd-intent__bubble" data-intent-hint aria-hidden="true" hidden>'
+                . e(__('projects.catalog.sentence.hint', [], $locale)) . '</span>';
+
+            $this->assertSame(1, substr_count($body, 'data-intent-hint'), "Jediná nápověda ({$locale}).");
+            $this->assertStringContainsString($bubble, $body, "Bublina {$locale}.");
+            $this->assertLessThanOrEqual(35, mb_strlen(__('projects.catalog.sentence.hint', [], $locale)), "Text bubliny {$locale} se musí vejít na 320 px.");
+            $this->assertStringNotContainsString('pd-intent__line', $body);
+            $this->assertStringNotContainsString('pd-intent__hand', $body);
+            $this->assertStringNotContainsString('data-hint=', $body);
+            $this->assertStringContainsString('<h1 class="pd-heading pd-heading--sub pd-heading--plain">', $body, "H1 bez podtržení {$locale}.");
+        }
+
+        // Jinde se H1 nemění.
+        $this->assertStringNotContainsString('pd-heading--plain', $this->get('/cenik')->assertOk()->getContent());
+    }
+
     public function test_query_state_does_not_change_canonical_or_markup(): void
     {
         $plain = $this->get('/projekty')->assertOk()->getContent();

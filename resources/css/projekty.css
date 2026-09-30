@@ -40,9 +40,8 @@ html:not(.js) .pd-intent { display: none; }
     text-decoration-thickness: 2px;
     text-underline-offset: 0.14em;
     transition: color var(--duration-micro) var(--ease-out);
-    /* Klik musí vždy dostat select pod ním. Šipka (`transform`) i slovo
-       během ukázky věty (animace `transform`) se kreslí nad průhledným
-       selectem a klik by jinak zachytily samy (OND-477). */
+    /* Klik musí vždy dostat select pod ním. Šipka (`transform`) se kreslí
+       nad průhledným selectem a klik by jinak zachytila sama (OND-477). */
     pointer-events: none;
 }
 /* Šipka: „tady se dá vybrat". Kreslená rámečkem, ne ikonou. */
@@ -116,12 +115,72 @@ html:not(.js) .pd-intent { display: none; }
     color: var(--color-fg-muted);
 }
 
-/* Ukázka věty při prvním zobrazení (projekty.js): měnící se slova svítí
-   akcentem, ať je vidět, na co se dá sáhnout. */
-.pd-intent.is-demo .pd-intent__value { color: var(--pd-accent); }
-
 @media (prefers-reduced-motion: reduce) {
     .pd-intent__value,
     .pd-works[data-intent-grid] .pd-work,
     .pd-works[data-intent-grid] .pd-work__visual img { transition: none; }
+}
+
+/* ------------------------------------------------------------
+   OND-478 — nápověda pro první návštěvu (projekty.js): bublina nad
+   prvním slovem. Absolutně ve volném místě nad větou, nic neodsune.
+   ------------------------------------------------------------ */
+.pd-intent { position: relative; }
+.pd-intent__bubble {
+    position: absolute;
+    left: var(--hint-left, 0);
+    bottom: calc(100% + var(--space-3));
+    z-index: 2;
+    width: max-content;
+    max-width: 100%;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-md);
+    background: var(--pd-accent);
+    color: var(--pd-accent-on);
+    font-family: var(--font-body);
+    font-size: var(--text-body-sm);
+    font-weight: 600;
+    line-height: 1.35;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--duration-macro) var(--ease-out), visibility 0s linear var(--duration-macro);
+}
+.pd-intent__bubble.is-on {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity var(--duration-macro) var(--ease-out), visibility 0s;
+    animation: pd-hint-rise var(--duration-macro) var(--ease-out);
+}
+.pd-intent__bubble.is-gone {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--duration-micro) var(--ease-out), visibility 0s linear var(--duration-micro);
+}
+/* Šipka míří na začátek prvního slova (`--hint-arrow`, projekty.js). */
+.pd-intent__bubble::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: var(--hint-arrow, 28px);
+    margin-left: -7px;
+    border: 7px solid transparent;
+    border-top-color: var(--pd-accent);
+}
+@keyframes pd-hint-rise { from { transform: translateY(6px); } }
+
+@media (prefers-reduced-motion: reduce) {
+    .pd-intent__bubble.is-on { animation: none; }
+}
+
+/* ------------------------------------------------------------
+   Podtržení v nadpisu /projekty (OND-477): acidové podtržení tu
+   znamená jen „dá se kliknout“ (slova ve větě). Zvýrazněná část H1
+   si nechá barvu a řez, podtržení ztratí. Vypíná obě vrstvy:
+   `text-decoration` (podpis.css) i pruh v pozadí (hloubka.css,
+   i jeho variantu pro reduced-motion). Jen tahle stránka.
+   ------------------------------------------------------------ */
+.pd-page-head .pd-heading.pd-heading--plain em {
+    text-decoration: none;
+    background-image: none;
 }

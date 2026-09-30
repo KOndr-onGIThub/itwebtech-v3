@@ -222,6 +222,8 @@ return [
             'match' => ':n of :total match.',
             'none'  => 'Nothing exactly like this in the portfolio yet. The closest work is below.',
             'rest'  => 'Other projects',
+            // OND-478 — bublina nad větou při první návštěvě (do ~35 znaků, de na 320 px).
+            'hint'  => 'Pick what you need here.',
         ],
     ],
 

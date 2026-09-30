@@ -221,6 +221,8 @@ return [
             'match' => ':n von :total passen.',
             'none'  => 'Genau das habe ich noch nicht im Portfolio. Die nächstliegenden Arbeiten stehen unten.',
             'rest'  => 'Weitere Projekte',
+            // OND-478 — bublina nad větou při první návštěvě (do ~35 znaků, de na 320 px).
+            'hint'  => 'Hier wählen Sie, was Sie brauchen.',
         ],
     ],
 

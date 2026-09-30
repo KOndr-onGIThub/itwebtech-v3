@@ -233,6 +233,8 @@ return [
             'match' => 'Sedí :n z :total.',
             'none'  => 'Přesně tohle v portfoliu zatím nemám. Nejbližší práce jsou níž.',
             'rest'  => 'Další projekty',
+            // OND-478 — bublina nad větou při první návštěvě (do ~35 znaků, de na 320 px).
+            'hint'  => 'Tady si vyberte, co potřebujete.',
         ],
     ],
 
