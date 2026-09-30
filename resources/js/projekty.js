@@ -421,7 +421,9 @@ function initPicker(form, sel, i18n, onOpen) {
 // S výběrem z URL se neukáže vůbec. Čtečka nic navíc nečte (`aria-hidden`).
 // `prefers-reduced-motion`: bublina se jen objeví, bez vyjetí (CSS).
 // ---------------------------------------------------------------------------
-const HINT_KEY = 'pd-intent-hint';
+// Klíč `pd-intent-used` (dřív `pd-intent-hint`, zapsaný už ukázáním):
+// staré „jen viděl“ po nasazení nikomu bublinu neschová.
+const HINT_KEY = 'pd-intent-used';
 const HINT_AFTER = 1500;
 const HINT_IDLE = 600;
 
