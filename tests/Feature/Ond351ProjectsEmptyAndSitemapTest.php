@@ -28,10 +28,10 @@ class Ond351ProjectsEmptyAndSitemapTest extends TestCase
 
         $this->assertStringNotContainsString(__('projects.empty'), $body);
         $this->assertStringNotContainsString('portfolio-grid__empty', $body);
-        // OND-400: filtr a mřížka mají od převodu do slovníku ACID třídy
-        // `pd-filter` / `pd-works`. Negativní kontrola na staré `portfolio-*`
-        // by prošla vždycky, i kdyby se filtr na prázdné DB vykreslil.
-        $this->assertStringNotContainsString('class="pd-filter"', $body);
+        // OND-400: mřížka má od převodu do slovníku ACID třídu `pd-works`,
+        // filtr je od OND-470 věta `pd-intent`. Negativní kontrola na staré
+        // `portfolio-*` by prošla vždycky, i kdyby se filtr vykreslil.
+        $this->assertStringNotContainsString('class="pd-intent"', $body);
         $this->assertStringNotContainsString('class="pd-works"', $body);
 
         // Zbytek stránky zůstává nedotčený — případovky se vykreslují dál.
@@ -47,7 +47,7 @@ class Ond351ProjectsEmptyAndSitemapTest extends TestCase
 
         $body = $this->get('/projekty')->assertOk()->getContent();
 
-        $this->assertStringContainsString('class="pd-filter"', $body);
+        $this->assertStringContainsString('class="pd-intent"', $body);
         $this->assertStringContainsString('class="pd-works"', $body);
         $this->assertStringContainsString('class="pd-work"', $body);
         $this->assertStringNotContainsString(__('projects.empty'), $body);

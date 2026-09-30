@@ -4,7 +4,9 @@
 # 24 projektů po deduplikaci: 14 webů, 5 aplikací, 5 ostatní
 # OND-282: tři z nich (logo-realitacky, video-pitbike-akademie, animace-delejme)
 # mají `published_at: null` — v datasetu zůstávají, na web se nedostanou.
-# Publikovaných je tedy 21: 14 webů, 5 aplikací, 2 ostatní.
+# OND-470: další čtyři (yolk, elektro-srnak, clanek-motorkari-cz, pitarena-cedule)
+# mají taky `published_at: null`.
+# Publikovaných je tedy 17: 12 webů, 5 aplikací.
 # Schéma odpovídá návrhu z OND-60 (portfolio_projects + *_translations + *_screenshots)
 # Engineer ve fázi 2: stáhne obrázky z `screenshots_source[].url`, uloží do
 # `resources/img/projects/{slug}/...`, pole `path` v DB doplní podle vlastní
@@ -1920,6 +1922,9 @@ projects:
     duration: "průběžně od 2025"
     featured: false
     sort_order: 130
+    # OND-470: CEO rozhodl (29. 9.), že projekt nabídku nedokládá — na webu
+    # nebude. Data zůstávají. Zpět = smazat tenhle řádek (nebo přepínač v adminu).
+    published_at: null
     tags: [web, wordpress, agenturni-spoluprace, vyvoj, udrzba]
     screenshots_source:
       - url: "https://itwebtech.cz/images/projects/yolk/yolk_preview.jpg"
@@ -2056,6 +2061,9 @@ projects:
     year: 2023
     featured: false
     sort_order: 140
+    # OND-470: CEO rozhodl (29. 9.), že projekt nabídku nedokládá — na webu
+    # nebude. Data zůstávají. Zpět = smazat tenhle řádek (nebo přepínač v adminu).
+    published_at: null
     tags: [web, mikroweb, vizitka, seo, lokalni-podnikani]
     screenshots_source:
       - url: "https://itwebtech.cz/images/projects/elektro-srnak/elektro_srnak_preview.jpg"
@@ -2791,6 +2799,9 @@ projects:
     year: 2024
     featured: false
     sort_order: 300
+    # OND-470: CEO rozhodl (29. 9.), že projekt nabídku nedokládá — na webu
+    # nebude. Data zůstávají. Zpět = smazat tenhle řádek (nebo přepínač v adminu).
+    published_at: null
     tags: [obsah, content-marketing, copywriting, pr, motocykly]
     screenshots_source:
       - url: "https://itwebtech.cz/images/projects/pitarena/clanek_motorkari_cz.jpg"
@@ -3165,6 +3176,9 @@ projects:
     year: 2023
     featured: false
     sort_order: 330
+    # OND-470: CEO rozhodl (29. 9.), že projekt nabídku nedokládá — na webu
+    # nebude. Data zůstávají. Zpět = smazat tenhle řádek (nebo přepínač v adminu).
+    published_at: null
     tags: [tisk, signage, design, velkoformat]
     screenshots_source:
       - url: "https://itwebtech.cz/images/projects/pitarena/pitarena_cedule.jpg"

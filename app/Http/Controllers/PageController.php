@@ -154,7 +154,7 @@ class PageController extends Controller
             ->orderByDesc('year')
             ->get();
 
-        // Počty pro filtry kategorií
+        // Počty pro větu nad přehledem (OND-470): druh s nulou se nenabídne.
         $counts = [
             'all'         => $portfolioProjects->count(),
             'website'     => $portfolioProjects->where('category', 'website')->count(),
@@ -162,7 +162,14 @@ class PageController extends Controller
             'other'       => $portfolioProjects->where('category', 'other')->count(),
         ];
 
-        return view('pages.projects', compact('portfolioProjects', 'locale', 'counts'));
+        // OND-470: obor → publikované slugy (config/portfolio.php). Slug může
+        // být ve dvou oborech, obor bez publikovaného projektu vypadne.
+        $sectors = collect(config('portfolio.sectors', []))
+            ->map(fn (array $slugs) => array_values(array_intersect($slugs, $portfolioProjects->pluck('slug')->all())))
+            ->filter()
+            ->all();
+
+        return view('pages.projects', compact('portfolioProjects', 'locale', 'counts', 'sectors'));
     }
 
     public function project(string $url)

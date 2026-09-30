@@ -95,8 +95,9 @@ class Ond403ProjectDetailTest extends TestCase
             }
         }
 
-        // Předloha OND-402 §4a: recenzi svého klienta má 10 případovek.
-        $this->assertSame(10 * count(self::LOCALES), $withReview);
+        // Předloha OND-402 §4a: recenzi svého klienta mělo 10 případovek.
+        // OND-470 odpublikoval YOLK a Elektro Srnák — veřejných zbývá 8.
+        $this->assertSame(8 * count(self::LOCALES), $withReview);
     }
 
     public function test_review_order_picks_owner_over_second_voice(): void

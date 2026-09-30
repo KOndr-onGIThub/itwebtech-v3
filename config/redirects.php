@@ -39,18 +39,29 @@ return [
     */
     'project_slugs' => [
         // itwebtech.cz/projects/{slug}
-        'clanek-na-motorkari-cz'   => 'clanek-motorkari-cz',
+        'clanek-na-motorkari-cz'   => ['clanek-motorkari-cz', 'pitarena'],
         'FRLcreator'               => 'frl-creator',
         'kempveselka'              => 'kemp-veselka',
         'strechyzajic'             => 'strechy-zajic',
         'vpindustry'               => 'vp-industry',
-        'pitarena-reklamni-cedule' => 'pitarena-cedule',
+        'pitarena-reklamni-cedule' => ['pitarena-cedule', 'pitarena'],
         // Dnes nepublikované (28. 9.) — do publikace 302 na náhradu/výpis.
         'pitarena-akademie-202308' => ['video-pitbike-akademie', 'pitarena'],
         'logo-realitacky'          => 'logo-realitacky',
         'delejme-animace'          => 'animace-delejme',
         // ondraweb.cz/projekty/{slug} — případovka zatím na novém webu není.
         'zoomorava'                => 'zoomorava',
+        // OND-470 (29. 9.): odpublikované — itwebtech.cz/projects/{slug}
+        // i dnešní /projekty/{slug} (a EN/DE slugy) do publikace 302 na
+        // náhradu/výpis, ne 404. Cedule i článek byly pro PitArenu.
+        'yolk'                     => 'yolk',
+        'elektro-srnak'            => 'elektro-srnak',
+        'clanek-motorkari-cz'      => ['clanek-motorkari-cz', 'pitarena'],
+        'article-motorkari-cz'     => ['clanek-motorkari-cz', 'pitarena'],
+        'artikel-motorkari-cz'     => ['clanek-motorkari-cz', 'pitarena'],
+        'pitarena-cedule'          => ['pitarena-cedule', 'pitarena'],
+        'pitarena-outdoor-sign'    => ['pitarena-cedule', 'pitarena'],
+        'pitarena-werbeschild'     => ['pitarena-cedule', 'pitarena'],
     ],
 
 ];

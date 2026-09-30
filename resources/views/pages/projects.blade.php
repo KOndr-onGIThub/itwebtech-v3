@@ -49,25 +49,29 @@
 </section>
 
 @if ($portfolioProjects->isNotEmpty())
-{{-- Katalog — filtr a mřížka `.pd-works` (nová sdílená komponenta, použije
-     ji i „Další projekty" na detailu). Sekce navazuje na hlavu bez horního
-     odsazení: titulek „Co jsem postavil." a katalog jsou jedna věta. --}}
+{{-- Katalog — věta nad mřížkou (OND-470) a mřížka `.pd-works` (sdílená
+     komponenta, použije ji i „Další projekty" na detailu). Sekce navazuje
+     na hlavu bez horního odsazení: titulek „Co jsem postavil." a katalog
+     jsou jedna věta. Všechny publikované projekty jsou v HTML jako odkazy;
+     věta je jen přeskládá. --}}
 <section class="pd-section" data-pdd="projects-grid">
     <div class="container-site">
         <x-portfolio.filter
-            :categories="['all', 'website', 'application', 'other']"
+            :sectors="$sectors"
             :counts="$counts"
             target="portfolio-grid"
         />
 
-        <div id="portfolio-grid" class="pd-works">
+        <div id="portfolio-grid" class="pd-works" data-intent-grid>
             @foreach ($portfolioProjects as $portfolioProject)
                 <x-portfolio.work
                     :project="$portfolioProject"
                     :locale="$locale"
                     :eager="$loop->index < 3"
+                    data-sectors="{{ implode(' ', array_keys(array_filter($sectors, fn ($slugs) => in_array($portfolioProject->slug, $slugs, true)))) }}"
                 />
             @endforeach
+            <p class="pd-works__rest" data-intent-rest hidden>{{ __('projects.catalog.sentence.rest') }}</p>
         </div>
     </div>
 </section>

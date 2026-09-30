@@ -24,12 +24,16 @@ class Ond455LegacyRedirectsTest extends TestCase
         '/sluzby'                            => ['/#section-services', 301],
         // Případovka zatím na webu není → dočasně (302) na výpis.
         '/projekty/zoomorava'                => ['/projekty', 302],
-        '/projects/clanek-na-motorkari-cz'   => ['/projekty/clanek-motorkari-cz', 301],
+        // OND-470: článek a cedule odpublikované → dočasně na PitArenu.
+        '/projects/clanek-na-motorkari-cz'   => ['/projekty/pitarena', 302],
         '/projects/FRLcreator'               => ['/projekty/frl-creator', 301],
         '/projects/kempveselka'              => ['/projekty/kemp-veselka', 301],
         '/projects/logo-realitacky'          => ['/projekty', 302],
         '/projects/pitarena-akademie-202308' => ['/projekty/pitarena', 302],
-        '/projects/pitarena-reklamni-cedule' => ['/projekty/pitarena-cedule', 301],
+        '/projects/pitarena-reklamni-cedule' => ['/projekty/pitarena', 302],
+        // OND-470: odpublikované, stejný slug jako na starém webu → výpis.
+        '/projects/yolk'                     => ['/projekty', 302],
+        '/projects/elektro-srnak'            => ['/projekty', 302],
         '/projects/strechyzajic'             => ['/projekty/strechy-zajic', 301],
         '/projects/vpindustry'               => ['/projekty/vp-industry', 301],
         '/projects/delejme-animace'          => ['/projekty', 302],

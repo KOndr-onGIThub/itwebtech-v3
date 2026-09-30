@@ -27,13 +27,6 @@ return [
         'subline'         => 'Bei jedem Projekt steht, was die Website kann und in welchem Umfang ich sie gebaut habe. Der Link führt zur Live-Version — prüfen Sie es selbst.',
     ],
 
-    'filter_all'       => 'Alle',
-    'filter_websites'  => 'Websites',
-    'filter_webapps'   => 'Anwendungen',
-    'filter_other'     => 'Sonstiges',
-    'filter_aria'      => 'Projekte nach Kategorie filtern',
-    'count_label'      => 'Projekte angezeigt',
-
     'info_client'      => 'Kunde',
     'info_date'        => 'Datum',
     'info_categories'  => 'Kategorien',
@@ -196,6 +189,37 @@ return [
         'heading' => 'Möchten Sie ein ähnliches Ergebnis für Ihr Unternehmen?',
         // OND-369: an den Header angeglichen — der Link zeigt auf /kontakt.
         'primary' => 'Anfrage schreiben',
+    ],
+
+    // OND-470 — Übersicht /projekte als Satz „Ich brauche [eine Website] für [eine Branche].“
+    'catalog' => [
+        // Anzahl: Schlüssel nach Intl.PluralRules (de: one / other).
+        'count' => ['one' => ':n Projekt', 'other' => ':n Projekte'],
+        'cta'   => 'Schreiben Sie mir, was Sie brauchen',
+
+        'sentence' => [
+            'aria'       => 'Wählen Sie, was Sie brauchen und für welche Branche. Die Projekte ordnen sich danach.',
+            'lead'       => 'Ich brauche',
+            'joiner'     => 'für',
+            'what_label' => 'Was Sie brauchen',
+            'for_label'  => 'Für welche Branche',
+            'what' => [
+                'all'         => 'eine Website oder App',
+                'website'     => 'eine Website',
+                'application' => 'eine Anwendung nach Maß',
+                'other'       => 'Grafik oder einen Artikel',
+            ],
+            'for' => [
+                'all'     => 'mein Unternehmen',
+                'remeslo' => 'Handwerk und Bau',
+                'vyroba'  => 'Produktion und Logistik',
+                'sluzby'  => 'Gesundheit, Immobilien und Unterkunft',
+                'sport'   => 'Sport und Freizeit',
+            ],
+            'match' => ':n von :total passen.',
+            'none'  => 'Genau das habe ich noch nicht im Portfolio. Die nächstliegenden Arbeiten stehen unten.',
+            'rest'  => 'Weitere Projekte',
+        ],
     ],
 
 ];
