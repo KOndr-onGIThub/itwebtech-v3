@@ -51,8 +51,8 @@
 @if ($portfolioProjects->isNotEmpty())
 {{-- Katalog — věta nad mřížkou (OND-470) a mřížka `.pd-works` (sdílená
      komponenta, použije ji i „Další projekty" na detailu). Sekce navazuje
-     na hlavu bez horního odsazení: titulek „Co jsem postavil." a katalog
-     jsou jedna věta. Všechny publikované projekty jsou v HTML jako odkazy;
+     na hlavu bez horního odsazení: titulek hlavy a katalog jsou jedna
+     věta. Všechny publikované projekty jsou v HTML jako odkazy;
      věta je jen přeskládá. --}}
 <section class="pd-section" data-pdd="projects-grid">
     <div class="container-site">
