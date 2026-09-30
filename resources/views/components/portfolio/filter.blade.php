@@ -9,9 +9,12 @@
      „Potřebuju [web] pro [výrobu a logistiku].“ Nahradil záložky
      Vše / Weby / Aplikace / Ostatní (vítězná varianta V1 z OND-471).
 
-     Dvě nativní `<select>` uvnitř věty: klávesnice, čtečka i výběr
-     na mobilu fungují samy od sebe. Viditelné slovo je zrcadlo
-     vybrané volby; select leží průhledně přes něj.
+     Zdrojem pravdy jsou dvě nativní `<select>` uvnitř věty; viditelné
+     slovo je zrcadlo vybrané volby. Na dotyku (`pointer: coarse`) leží
+     select průhledně přes slovo a otevře systémový výběr telefonu.
+     Na počítači kreslí seznam ve stylu webu JS (OND-482, ARIA
+     combobox + listbox) a select jen drží hodnotu. Popisky `<label>`
+     slouží oběma cestám (combobox je čte přes `aria-labelledby`).
 
      Nic se neschovává. Shody se přesunou nahoru (FLIP, jednorázově
      při změně, žádný výpočet na snímek), zbytek zůstane pod
@@ -47,7 +50,7 @@
     <p class="pd-intent__sentence">
         <span>{{ __('projects.catalog.sentence.lead') }}</span>
         <span class="pd-intent__slot">
-            <label class="sr-only" for="intent-co">{{ __('projects.catalog.sentence.what_label') }}</label>
+            <label class="sr-only" id="intent-co-label" for="intent-co">{{ __('projects.catalog.sentence.what_label') }}</label>
             <select id="intent-co" name="co" class="pd-intent__select" aria-controls="{{ $target }}">
                 @foreach ($whatKeys as $key)
                     <option value="{{ $key }}">{{ __('projects.catalog.sentence.what.' . $key) }}</option>
@@ -57,7 +60,7 @@
         </span>
         <span>{{ __('projects.catalog.sentence.joiner') }}</span>
         <span class="pd-intent__slot">
-            <label class="sr-only" for="intent-pro">{{ __('projects.catalog.sentence.for_label') }}</label>
+            <label class="sr-only" id="intent-pro-label" for="intent-pro">{{ __('projects.catalog.sentence.for_label') }}</label>
             <select id="intent-pro" name="pro" class="pd-intent__select" aria-controls="{{ $target }}">
                 @foreach ($forKeys as $key)
                     <option value="{{ $key }}">{{ __('projects.catalog.sentence.for.' . $key) }}</option>

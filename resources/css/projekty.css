@@ -184,3 +184,115 @@ html:not(.js) .pd-intent { display: none; }
     text-decoration: none;
     background-image: none;
 }
+
+/* ------------------------------------------------------------
+   OND-482 — rozbalovací seznam ve větě (projekty.js `initPicker`).
+   Jen na počítači (`data-picker="custom"`, ne `pointer: coarse`); na dotyku
+   zůstává systémový výběr telefonu přes průhledný select.
+
+   Seznam mluví jazykem věty: vybraná volba má stejné acidové podtržení
+   jako slovo ve větě, aktivní (myš i klávesnice, vždy jen jedna) má
+   acidový text jako slovo pod myší. Počet vpravo, tlumeně, tabulkové
+   číslice. Volba s 0 projekty je tlumená, přeškrtnutá a nedá se vybrat.
+   Absolutně pod slovem: nic se neodsune (CLS 0).
+   ------------------------------------------------------------ */
+.pd-intent[data-picker="custom"] .pd-intent__select { pointer-events: none; }
+.pd-intent[data-picker="custom"] .pd-intent__value {
+    pointer-events: auto;
+    cursor: pointer;
+    border-radius: 2px;
+}
+.pd-intent[data-picker="custom"] .pd-intent__slot { cursor: pointer; }
+.pd-intent__value:focus { outline: none; }
+.pd-intent:not([data-input="pointer"]) .pd-intent__value:focus-visible {
+    outline: 2px solid var(--pd-accent);
+    outline-offset: 6px;
+}
+/* Otevřeno: slovo svítí a šipka se otočí nahoru. */
+.pd-intent__value[aria-expanded="true"] { color: var(--pd-accent); }
+.pd-intent__value::after { transition: transform var(--duration-micro) var(--ease-out); }
+.pd-intent__value[aria-expanded="true"]::after { transform: translateY(0.02em) rotate(225deg); }
+
+.pd-intent__list {
+    position: absolute;
+    top: calc(100% + var(--space-2));
+    /* Text položek začíná přesně pod začátkem slova ve větě
+       (odsazení seznamu + položky + rámeček). */
+    left: calc(-1 * (var(--space-2) + var(--space-4) + 1px));
+    z-index: 30;
+    display: block;
+    box-sizing: border-box;
+    width: max-content;
+    min-width: max(16rem, var(--list-min, 0px));
+    max-width: min(30rem, calc(100vw - 2 * var(--space-4)));
+    padding: var(--space-2);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    transform: translateX(var(--list-x, 0px));
+    background: var(--color-bg-elev-1);
+    border: 1px solid var(--color-border-mid);
+    border-radius: var(--radius-md);
+    box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.7);
+    /* Reset typografie věty (48px display, tlumená barva, balance). */
+    font-family: var(--font-body);
+    font-size: var(--text-body-lg);
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: normal;
+    text-wrap: wrap;
+    color: var(--color-fg-primary);
+    cursor: default;
+}
+.pd-intent__list[hidden] { display: none; }
+.pd-intent__list.is-up {
+    top: auto;
+    bottom: calc(100% + var(--space-2));
+}
+.pd-intent__list.is-open { animation: pd-list-in var(--duration-micro) var(--ease-out); }
+.pd-intent__list.is-up.is-open { animation-name: pd-list-in-up; }
+@keyframes pd-list-in { from { opacity: 0; transform: translate(var(--list-x, 0px), -4px); } }
+@keyframes pd-list-in-up { from { opacity: 0; transform: translate(var(--list-x, 0px), 4px); } }
+
+.pd-intent__option {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-6);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+}
+.pd-intent__option-label {
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.22em;
+}
+.pd-intent__option-count {
+    flex: none;
+    font-variant-numeric: tabular-nums;
+    font-size: var(--text-body-sm);
+    color: var(--color-fg-muted);
+}
+.pd-intent__option[aria-selected="true"] .pd-intent__option-label {
+    text-decoration-color: var(--pd-accent);
+}
+.pd-intent__option.is-active { background: var(--color-bg-elev-2); }
+.pd-intent__option.is-active .pd-intent__option-label { color: var(--pd-accent); }
+/* 0 projektů: na první pohled nevybíratelné (přeškrtnuté jako vyprodaná
+   velikost v e-shopu), ale čitelné. Text i počet ~4:1 k ploše seznamu. */
+.pd-intent__option[aria-disabled="true"] {
+    cursor: not-allowed;
+    color: color-mix(in srgb, var(--color-fg-muted) 70%, var(--color-bg-elev-1));
+}
+.pd-intent__option[aria-disabled="true"] .pd-intent__option-label {
+    text-decoration-line: line-through;
+    text-decoration-color: currentColor;
+    text-decoration-thickness: 1px;
+}
+.pd-intent__option[aria-disabled="true"] .pd-intent__option-count { color: inherit; }
+
+@media (prefers-reduced-motion: reduce) {
+    .pd-intent__list.is-open { animation: none; }
+    .pd-intent__value::after { transition: none; }
+}
