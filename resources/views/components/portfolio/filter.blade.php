@@ -37,12 +37,16 @@
         'match' => __('projects.catalog.sentence.match'),
         'none'  => __('projects.catalog.sentence.none'),
     ];
+    // OND-478 — prototyp nápovědy pro první návštěvu: ?napoveda=a|b|c.
+    // Bez parametru zůstává dnešní ukázka věty (pro srovnání).
+    $hint = in_array(request()->query('napoveda'), ['a', 'b', 'c'], true) ? request()->query('napoveda') : 'demo';
 @endphp
 
 <form class="pd-intent" data-intent
       aria-label="{{ __('projects.catalog.sentence.aria') }}"
       data-total="{{ $total }}"
       data-target="{{ $target }}"
+      data-hint="{{ $hint }}"
       data-i18n="{{ json_encode($i18n, JSON_UNESCAPED_UNICODE) }}">
     <p class="pd-intent__sentence">
         <span>{{ __('projects.catalog.sentence.lead') }}</span>
@@ -69,5 +73,18 @@
     <p class="pd-intent__status">
         <span role="status" data-intent-status>{{ str_replace(':n', $total, $i18n['count']['other']) }}</span>
         <a href="{{ lroute('contact') }}" class="pd-case__live" data-intent-cta hidden>{{ __('projects.catalog.cta') }} &rarr;</a>
+        @if ($hint === 'b')
+            {{-- B: tichý řádek pod větou. Čtečka ho nečte — selecty mají vlastní popisky. --}}
+            <span class="pd-intent__line" data-intent-hint aria-hidden="true">{{ __('projects.catalog.sentence.hint.line') }}</span>
+        @endif
     </p>
+    @if ($hint === 'a')
+        {{-- A: bublina nad prvním slovem. Absolutně, nic neodsune. --}}
+        <span class="pd-intent__bubble" data-intent-hint aria-hidden="true" hidden>{{ __('projects.catalog.sentence.hint.bubble') }}</span>
+    @elseif ($hint === 'c')
+        {{-- C: ruka ukáže klepnutí na první slovo a zůstane u něj. --}}
+        <span class="pd-intent__hand" data-intent-hint aria-hidden="true" hidden>
+            <svg viewBox="0 0 24 24" width="40" height="40"><path d="M9 11.5V4.2a1.7 1.7 0 0 1 3.4 0v6.3l.1-1.2a1.6 1.6 0 0 1 3.2.2v1.3a1.6 1.6 0 0 1 3.2.3v1.1a1.5 1.5 0 0 1 3 .3v4.3c0 3.4-2.6 6.2-6 6.2h-1.6a6 6 0 0 1-4.6-2.2l-3.6-4.4a1.6 1.6 0 0 1 2.4-2.1z"/></svg>
+        </span>
+    @endif
 </form>

@@ -112,7 +112,9 @@ function initIntent(form) {
     document.addEventListener('pointerdown', setInput('pointer'), { capture: true, passive: true });
     document.addEventListener('keydown', setInput('keyboard'), { capture: true, passive: true });
 
-    const stopDemo = initDemo(form, sentence, selects, valueOf, mirror);
+    const stopDemo = form.dataset.hint === 'demo'
+        ? initDemo(form, sentence, selects, valueOf, mirror)
+        : initHint(form, sentence, selects);
 
     selects.forEach((sel) => {
         mirror(sel);
@@ -245,7 +247,175 @@ function initDemo(form, sentence, selects, valueOf, mirror) {
         // Měřit až s načteným písmem — s náhradním se věta láme jinak
         // a vybraný krok by pak výšku změnil (OND-474).
         document.fonts.ready.then(run);
-    }, { threshold: 1 });
+    // Spodní okraj: na mobilu přes spodek okna leží lišta „Poptávka“,
+    // věta pod ní se nepočítá jako viditelná.
+    }, { threshold: 1, rootMargin: '0px 0px -88px 0px' });
+    observer.observe(sentence);
+
+    return stop;
+}
+
+// ---------------------------------------------------------------------------
+// OND-478 — nápověda pro první návštěvu (prototyp, `?napoveda=a|b|c`).
+// Nahrazuje ukázku věty: přepisování slov vypadalo jako dekorativní
+// rotující nadpis, ne jako ovládání.
+//
+//   a — bublina nad prvním slovem „Tady si vyberte, co potřebujete.“
+//       Klepnutí na ni otevře výběr.
+//   b — tichý řádek pod větou „↑ Podtržená slova můžete změnit.“
+//       Místo má rezervované od načtení, jen se rozsvítí.
+//   c — ruka jednou ukáže klepnutí na obě slova a odejde.
+//
+// Společné: a a c se spustí, až je celá věta v okně, stránka je otevřená
+// aspoň HINT_AFTER (a 1,5 s, c 3 s) a scroll stojí HINT_IDLE — na mobilu, kde je věta níž,
+// tedy až když k ní návštěvník dojede a zastaví se. Nápověda je absolutně
+// nad obsahem nebo v rezervovaném místě: nic se neposune (CLS 0).
+// Zmizí po první interakci s větou (dotyk, klik, fokus, změna, Esc)
+// a v téže relaci se už neukáže ani po návratu z detailu. Čtečka nic
+// navíc nečte (`aria-hidden`), selecty mají vlastní popisky.
+// `prefers-reduced-motion`: a i b se jen objeví, c se nepohne — ruka
+// se na chvíli ukáže u prvního slova a zmizí.
+// ---------------------------------------------------------------------------
+const HINT_KEY = 'pd-intent-hint';
+// Nejdřív od načtení: bublina čeká, ruka se pohybuje — ta až po přečtení hlavy.
+const HINT_AFTER = { a: 1500, c: 3000 };
+const HINT_IDLE = 600;
+
+function initHint(form, sentence, selects) {
+    const variant = form.dataset.hint;
+    const hint = form.querySelector('[data-intent-hint]');
+    const key = `${HINT_KEY}-${variant}`;
+    const noop = () => {};
+    let seen = false;
+    try { seen = sessionStorage.getItem(key) === '1'; } catch { /* soukromý režim */ }
+    if (!hint || seen || selects.some((s) => s.value !== 'all')) return noop;
+
+    const slots = [...form.querySelectorAll('.pd-intent__slot')];
+    let done = false;
+    let shown = false;
+    let timer = 0;
+    let observer = null;
+    let inView = false;
+    let lastScroll = 0;
+    const t0 = performance.now();
+
+    const onScroll = () => { lastScroll = performance.now(); schedule(); };
+    const onKey = (e) => { if (e.key === 'Escape') stop(); };
+    const onPointer = (e) => { if (!hint.contains(e.target)) stop(); };
+
+    const stop = () => {
+        if (done) return;
+        done = true;
+        clearTimeout(timer);
+        observer?.disconnect();
+        removeEventListener('scroll', onScroll);
+        removeEventListener('resize', place);
+        form.removeEventListener('pointerdown', onPointer, true);
+        form.removeEventListener('focusin', stop);
+        document.removeEventListener('keydown', onKey);
+        hint.getAnimations().forEach((a) => a.cancel());
+        slots.forEach((s) => s.classList.remove('is-tapped'));
+        hint.classList.add('is-gone');
+    };
+
+    // Bublina: šipka míří na začátek prvního slova, bublina se vejde do šířky.
+    function place() {
+        if (variant !== 'a') return;
+        const f = form.getBoundingClientRect();
+        const w = slots[0].querySelector('.pd-intent__value').getBoundingClientRect();
+        const target = w.left - f.left + Math.min(w.width / 2, 40);
+        const left = Math.max(0, Math.min(target - 28, f.width - hint.offsetWidth));
+        hint.style.setProperty('--hint-left', `${left}px`);
+        hint.style.setProperty('--hint-arrow', `${target - left}px`);
+    }
+
+    const show = () => {
+        if (done || shown) return;
+        shown = true;
+        observer?.disconnect();
+        removeEventListener('scroll', onScroll);
+        try { sessionStorage.setItem(key, '1'); } catch { /* soukromý režim */ }
+        hint.hidden = false;
+        place();
+        hint.classList.add('is-on');
+        if (variant === 'a') addEventListener('resize', place, { passive: true });
+        if (variant === 'c') playHand().then(stop, noop);
+    };
+
+    // Ruka: bod doteku = špička prstu (vlevo nahoře v ikoně).
+    const TIP_X = 18;
+    const TIP_Y = 4;
+    const tapPoint = (slot) => {
+        const f = form.getBoundingClientRect();
+        const v = slot.querySelector('.pd-intent__value').getBoundingClientRect();
+        return { x: v.left - f.left + Math.min(v.width / 2, 72) - TIP_X, y: v.top - f.top + v.height * 0.62 - TIP_Y };
+    };
+    const at = (p, scale = 1) => `translate(${p.x}px, ${p.y}px) scale(${scale})`;
+    const wait = (ms) => new Promise((res) => { timer = setTimeout(res, ms); });
+    async function playHand() {
+        const [a, b] = slots.map(tapPoint);
+        if (reduceMotion()) {
+            hint.style.transform = at(a);
+            await wait(3000);
+            return;
+        }
+        const move = (from, to, ms) => hint.animate([{ transform: at(from) }, { transform: at(to) }], { duration: ms, easing: 'cubic-bezier(0.45, 0, 0.2, 1)', fill: 'forwards' }).finished;
+        const tap = async (p, slot) => {
+            await hint.animate([{ transform: at(p) }, { transform: at(p, 0.86) }, { transform: at(p) }], { duration: 360, easing: 'ease-in-out', fill: 'forwards' }).finished;
+            slot.classList.add('is-tapped');
+            await wait(900);
+            slot.classList.remove('is-tapped');
+        };
+        const start = { x: a.x + 56, y: a.y + 64 };
+        hint.style.transform = at(start);
+        await hint.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, fill: 'forwards' }).finished;
+        await move(start, a, 900);
+        await tap(a, slots[0]);
+        await move(a, b, 1000);
+        await tap(b, slots[1]);
+        await move(b, { x: b.x + 40, y: b.y + 48 }, 500);
+    }
+
+    const schedule = () => {
+        clearTimeout(timer);
+        if (!inView || done || shown) return;
+        const now = performance.now();
+        const ms = Math.max(HINT_IDLE - (now - lastScroll), (HINT_AFTER[variant] ?? 0) - (now - t0), 0);
+        timer = setTimeout(() => {
+            if (!inView || document.visibilityState !== 'visible') return;
+            if (performance.now() - lastScroll < HINT_IDLE - 20) return schedule();
+            document.fonts.ready.then(show);
+        }, ms);
+    };
+
+    form.addEventListener('pointerdown', onPointer, { capture: true, passive: true });
+    form.addEventListener('focusin', stop);
+    document.addEventListener('keydown', onKey);
+
+    if (variant === 'a') {
+        // Bublina dělá, co říká: klepnutí otevře první výběr.
+        hint.addEventListener('click', () => {
+            stop();
+            const sel = selects[0];
+            sel.focus({ preventScroll: true });
+            try { sel.showPicker(); } catch { /* starší prohlížeč: stačí fokus */ }
+        });
+    }
+
+    if (variant === 'b') {
+        // Řádek je statický text v rezervovaném místě — bez čekání.
+        show();
+        return stop;
+    }
+
+    if (!('IntersectionObserver' in window)) return stop;
+    addEventListener('scroll', onScroll, { passive: true });
+    observer = new IntersectionObserver((entries) => {
+        inView = entries[entries.length - 1].isIntersecting;
+        schedule();
+    // Spodní okraj: na mobilu přes spodek okna leží lišta „Poptávka“,
+    // věta pod ní se nepočítá jako viditelná.
+    }, { threshold: 1, rootMargin: '0px 0px -88px 0px' });
     observer.observe(sentence);
 
     return stop;

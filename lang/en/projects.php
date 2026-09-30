@@ -220,6 +220,11 @@ return [
             'match' => ':n of :total match.',
             'none'  => 'Nothing exactly like this in the portfolio yet. The closest work is below.',
             'rest'  => 'Other projects',
+            // OND-478 — prototyp nápovědy pro první návštěvu (A bublina, B řádek).
+            'hint' => [
+                'bubble' => 'Pick what you need here.',
+                'line'   => '↑ You can change the underlined words.',
+            ],
         ],
     ],
 

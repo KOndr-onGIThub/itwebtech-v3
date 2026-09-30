@@ -231,6 +231,11 @@ return [
             'match' => 'Sedí :n z :total.',
             'none'  => 'Přesně tohle v portfoliu zatím nemám. Nejbližší práce jsou níž.',
             'rest'  => 'Další projekty',
+            // OND-478 — prototyp nápovědy pro první návštěvu (A bublina, B řádek).
+            'hint' => [
+                'bubble' => 'Tady si vyberte, co potřebujete.',
+                'line'   => '↑ Podtržená slova můžete změnit.',
+            ],
         ],
     ],
 

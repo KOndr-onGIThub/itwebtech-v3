@@ -219,6 +219,11 @@ return [
             'match' => ':n von :total passen.',
             'none'  => 'Genau das habe ich noch nicht im Portfolio. Die nächstliegenden Arbeiten stehen unten.',
             'rest'  => 'Weitere Projekte',
+            // OND-478 — prototyp nápovědy pro první návštěvu (A bublina, B řádek).
+            'hint' => [
+                'bubble' => 'Hier wählen Sie, was Sie brauchen.',
+                'line'   => '↑ Die unterstrichenen Wörter lassen sich ändern.',
+            ],
         ],
     ],
 
