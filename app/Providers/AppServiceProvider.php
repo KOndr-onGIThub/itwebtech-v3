@@ -5,6 +5,13 @@ namespace App\Providers;
 use App\Listeners\LogAdminLoginToAuditTrail;
 use App\Listeners\NotifyOnFailedAdminLogins;
 use App\Listeners\ResetTwoFactorChallengeOnLogin;
+use App\Models\Article;
+use App\Models\Portfolio\PortfolioProject;
+use App\Models\Portfolio\PortfolioProjectTranslation;
+use App\Models\SitemapEntry;
+use App\Models\SitemapOverride;
+use App\Models\Slugs\ArticleSlug;
+use App\Observers\FlushSitemapCache;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Event;
@@ -36,5 +43,19 @@ class AppServiceProvider extends ServiceProvider
         Event::listen(Login::class, ResetTwoFactorChallengeOnLogin::class);
         Event::listen(Login::class, LogAdminLoginToAuditTrail::class);
         Event::listen(Failed::class, NotifyOnFailedAdminLogins::class);
+
+        // OND-485: změna článku, projektu nebo ručního záznamu sitemapy
+        // hned zahodí její cache (jinak by nový článek čekal až 10 minut).
+        // Překlad projektu nese lokalizovaný slug, slug článku jeho adresu.
+        foreach ([
+            Article::class,
+            ArticleSlug::class,
+            PortfolioProject::class,
+            PortfolioProjectTranslation::class,
+            SitemapEntry::class,
+            SitemapOverride::class,
+        ] as $model) {
+            $model::observe(FlushSitemapCache::class);
+        }
     }
 }
