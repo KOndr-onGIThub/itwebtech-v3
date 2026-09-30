@@ -193,7 +193,7 @@ html:not(.js) .pd-intent { display: none; }
    Seznam mluví jazykem věty: vybraná volba má stejné acidové podtržení
    jako slovo ve větě, aktivní (myš i klávesnice, vždy jen jedna) má
    acidový text jako slovo pod myší. Počet vpravo, tlumeně, tabulkové
-   číslice. Volba s 0 projekty je tlumená a nedá se vybrat.
+   číslice. Volba s 0 projekty je tlumená, přeškrtnutá a nedá se vybrat.
    Absolutně pod slovem: nic se neodsune (CLS 0).
    ------------------------------------------------------------ */
 .pd-intent[data-picker="custom"] .pd-intent__select { pointer-events: none; }
@@ -279,8 +279,18 @@ html:not(.js) .pd-intent { display: none; }
 }
 .pd-intent__option.is-active { background: var(--color-bg-elev-2); }
 .pd-intent__option.is-active .pd-intent__option-label { color: var(--pd-accent); }
-.pd-intent__option[aria-disabled="true"] { cursor: default; }
-.pd-intent__option[aria-disabled="true"] .pd-intent__option-label { color: var(--color-fg-muted); }
+/* 0 projektů: na první pohled nevybíratelné (přeškrtnuté jako vyprodaná
+   velikost v e-shopu), ale čitelné. Text i počet ~4:1 k ploše seznamu. */
+.pd-intent__option[aria-disabled="true"] {
+    cursor: not-allowed;
+    color: color-mix(in srgb, var(--color-fg-muted) 70%, var(--color-bg-elev-1));
+}
+.pd-intent__option[aria-disabled="true"] .pd-intent__option-label {
+    text-decoration-line: line-through;
+    text-decoration-color: currentColor;
+    text-decoration-thickness: 1px;
+}
+.pd-intent__option[aria-disabled="true"] .pd-intent__option-count { color: inherit; }
 
 @media (prefers-reduced-motion: reduce) {
     .pd-intent__list.is-open { animation: none; }

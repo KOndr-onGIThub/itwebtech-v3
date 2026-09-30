@@ -105,6 +105,33 @@ class Ond470ProjectsSentenceTest extends TestCase
         $this->assertStringNotContainsString('pd-heading--plain', $this->get('/cenik')->assertOk()->getContent());
     }
 
+    /**
+     * OND-482/483 — na počítači kreslí seznam JS (ARIA combobox), zdrojem
+     * pravdy zůstávají oba `<select>`. Combobox i listbox čtou popisek přes
+     * `aria-labelledby`, proto popisky nesou id rovnou v HTML. Bublina je
+     * v HTML skrytá, spouští ji až skript.
+     */
+    public function test_selects_carry_labels_with_ids_and_bubble(): void
+    {
+        foreach (self::PATHS as $locale => $path) {
+            $body = $this->get($path)->assertOk()->getContent();
+
+            foreach (['co' => 'what_label', 'pro' => 'for_label'] as $name => $key) {
+                $label = '<label class="sr-only" id="intent-' . $name . '-label" for="intent-' . $name . '">'
+                    . e(__('projects.catalog.sentence.' . $key, [], $locale)) . '</label>';
+                $this->assertSame(1, substr_count($body, 'id="intent-' . $name . '-label"'), "Jedno id popisku {$name} ({$locale}).");
+                $this->assertStringContainsString($label, $body, "Popisek {$name} ({$locale}).");
+                $this->assertMatchesRegularExpression(
+                    '/<select id="intent-' . $name . '" name="' . $name . '" class="pd-intent__select"[^>]*>\s*<option value="all">/',
+                    $body,
+                    "Select {$name} ({$locale})."
+                );
+            }
+
+            $this->assertStringContainsString('<span class="pd-intent__bubble" data-intent-hint aria-hidden="true" hidden>', $body, "Bublina {$locale}.");
+        }
+    }
+
     public function test_query_state_does_not_change_canonical_or_markup(): void
     {
         $plain = $this->get('/projekty')->assertOk()->getContent();

@@ -5,8 +5,8 @@
 // Žádná knihovna, žádná smyčka na snímek, nic navázaného na scroll:
 //   - změna výběru přeskládá karty v DOM (shody nahoru) a jednou je
 //     dorovná FLIPem,
-//   - při první návštěvě se nad větou jednou ukáže bublina s nápovědou
-//     a zmizí při jakékoli interakci s větou.
+//   - dokud návštěvník větu nepoužije, ukáže se nad ní (nejvýš jednou
+//     za načtení) bublina s nápovědou; zmizí při jakékoli interakci.
 // `prefers-reduced-motion` = bez FLIPu, bublina se jen objeví.
 // ---------------------------------------------------------------------------
 
@@ -141,14 +141,16 @@ function initIntent(form) {
 
     // OND-482 — vlastní seznam na počítači (myš, touchpad, klávesnice). Na dotyku
     // zůstává systémový výběr telefonu. Zdroj pravdy je pořád `<select>`.
-    const pickers = selects.map((sel) => initPicker(form, sel, i18n));
+    // Otevření seznamu (i systémového na dotyku) = věta je použitá.
+    let hintUsed = () => {};
+    const pickers = selects.map((sel) => initPicker(form, sel, i18n, () => hintUsed()));
     const openFirst = () => pickers[0].open();
 
-    const stopHint = initHint(form, sentence, selects, openFirst);
+    hintUsed = initHint(form, sentence, selects, openFirst);
 
     selects.forEach((sel) => {
         mirror(sel);
-        sel.addEventListener('change', () => { stopHint(); mirror(sel); apply(true); });
+        sel.addEventListener('change', () => { hintUsed(); mirror(sel); apply(true); });
     });
 
     form.addEventListener('submit', (e) => e.preventDefault());
@@ -179,14 +181,13 @@ const GAP = 8;      // mezera slovo–seznam (= --space-2)
 const EDGE = 16;    // odstup od okraje okna
 const fold = (t) => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 
-function initPicker(form, sel, i18n) {
+function initPicker(form, sel, i18n, onOpen) {
     const slot = sel.parentElement;
     const word = slot.querySelector('.pd-intent__value');
     const label = slot.querySelector('label');
     // Systémový výběr jen na dotyku. `pointer: none` (klávesnice bez myši,
     // některé headless prohlížeče) dostane vlastní seznam taky.
     const coarse = window.matchMedia('(pointer: coarse)');
-    label.id ||= `${sel.id}-label`;
 
     const list = document.createElement('span');
     list.className = 'pd-intent__list';
@@ -267,6 +268,7 @@ function initPicker(form, sel, i18n) {
     }
 
     function open(to) {
+        onOpen();
         if (!custom) {
             sel.focus({ preventScroll: true });
             try { sel.showPicker(); } catch { /* bez showPicker u selectu: stačí fokus */ }
@@ -367,6 +369,9 @@ function initPicker(form, sel, i18n) {
     });
     document.addEventListener('pointerdown', (e) => { if (isOpen() && !slot.contains(e.target)) close(); }, true);
     word.addEventListener('blur', close);
+    // Dotyk: klepnutí na průhledný select otevře systémový výběr a dá mu
+    // fokus. Posun prstem přes slovo fokus nedá, takže se nepočítá.
+    sel.addEventListener('focus', () => { if (!custom && form.dataset.input === 'pointer') onOpen(); });
 
     // Režim podle hlavního ukazatele; přepne se i za běhu (tablet s myší).
     function setMode(on) {
@@ -408,22 +413,30 @@ function initPicker(form, sel, i18n) {
 // a celá bublina je vidět pod navbarem (OND-481).
 // Na mobilu, kde je věta níž, tedy až když k ní návštěvník dojede
 // a zastaví se. Bublina je absolutně nad větou: nic se neposune (CLS 0).
-// Zmizí po první interakci s větou (dotyk, klik, fokus, změna, Esc)
-// a v téže relaci se už neukáže ani po návratu z detailu. S výběrem
-// z URL se neukáže vůbec. Čtečka nic navíc nečte (`aria-hidden`).
+// Zmizí po první interakci s větou (dotyk, klik, fokus, změna, Esc).
+// Spotřebuje se (`sessionStorage`, jen pro tuhle záložku) až tím, že
+// návštěvník větu opravdu použije: klepne na bublinu, otevře seznam
+// nebo změní výběr. Kdo ji jen viděl, uvidí ji při dalším načtení
+// znovu (obnovení, návrat z detailu), pokaždé nejvýš jednou.
+// S výběrem z URL se neukáže vůbec. Čtečka nic navíc nečte (`aria-hidden`).
 // `prefers-reduced-motion`: bublina se jen objeví, bez vyjetí (CSS).
 // ---------------------------------------------------------------------------
 const HINT_KEY = 'pd-intent-hint';
 const HINT_AFTER = 1500;
 const HINT_IDLE = 600;
 
+// Vrací `used()`: věta je použitá, bublina zmizí a v téže záložce se
+// už neukáže. Zapíše se i tehdy, když se bublina tentokrát nespustila
+// (třeba výběr z URL), ať se neukáže po návratu na čistou adresu.
 function initHint(form, sentence, selects, openFirst) {
     const hint = form.querySelector('[data-intent-hint]');
-    const noop = () => {};
-    let seen = false;
-    try { seen = sessionStorage.getItem(HINT_KEY) === '1'; } catch { /* soukromý režim */ }
-    if (!hint || seen || selects.some((s) => s.value !== 'all')) return noop;
-    if (!('IntersectionObserver' in window)) return noop;
+    const consume = () => {
+        try { sessionStorage.setItem(HINT_KEY, '1'); } catch { /* soukromý režim */ }
+    };
+    let used = false;
+    try { used = sessionStorage.getItem(HINT_KEY) === '1'; } catch { /* soukromý režim */ }
+    if (!hint || used || selects.some((s) => s.value !== 'all')) return consume;
+    if (!('IntersectionObserver' in window)) return consume;
 
     const word = form.querySelector('.pd-intent__value');
     let done = false;
@@ -461,8 +474,8 @@ function initHint(form, sentence, selects, openFirst) {
     }
 
     // OND-481: bublina leží nad větou, takže ji může krýt navbar nebo být
-    // nad oknem, i když je věta celá vidět. Spotřebuje relaci, jen když
-    // je celá v okně pod navbarem a nad lištou „Poptávka“. Navbar se
+    // nad oknem, i když je věta celá vidět. Ukáže se, jen když je celá
+    // v okně pod navbarem a nad lištou „Poptávka“. Navbar se
     // vysouvá 0,3 s: platí přísnější z jeho aktuální a cílové spodní hrany.
     const nav = document.querySelector('.navbar');
     const bar = document.querySelector('.mobile-bottom-bar');
@@ -479,12 +492,11 @@ function initHint(form, sentence, selects, openFirst) {
         if (done || shown) return;
         hint.hidden = false;
         place();
-        // Nevejde se: nic se nespotřebuje, počká se na další zastavení scrollu.
+        // Nevejde se: počká se na další zastavení scrollu.
         if (!fits()) { hint.hidden = true; return; }
         shown = true;
         observer.disconnect();
         removeEventListener('scroll', onScroll);
-        try { sessionStorage.setItem(HINT_KEY, '1'); } catch { /* soukromý režim */ }
         hint.classList.add('is-on');
         addEventListener('resize', place, { passive: true });
     };
@@ -516,11 +528,12 @@ function initHint(form, sentence, selects, openFirst) {
 
     // Bublina dělá, co říká: klepnutí otevře první výběr.
     hint.addEventListener('click', () => {
+        consume();
         stop();
         openFirst();
     });
 
-    return stop;
+    return () => { consume(); stop(); };
 }
 
 const run = () => {
