@@ -40,6 +40,10 @@ html:not(.js) .pd-intent { display: none; }
     text-decoration-thickness: 2px;
     text-underline-offset: 0.14em;
     transition: color var(--duration-micro) var(--ease-out);
+    /* Klik musí vždy dostat select pod ním. Šipka (`transform`) i slovo
+       během ukázky věty (animace `transform`) se kreslí nad průhledným
+       selectem a klik by jinak zachytily samy (OND-477). */
+    pointer-events: none;
 }
 /* Šipka: „tady se dá vybrat". Kreslená rámečkem, ne ikonou. */
 .pd-intent__value::after {
