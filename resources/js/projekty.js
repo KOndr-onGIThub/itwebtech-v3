@@ -130,7 +130,8 @@ function initIntent(form) {
 // vypadala jako dekorativní rotující nadpis, ne jako ovládání.
 //
 // Spustí se, až je celá věta v okně nad lištou „Poptávka“ (spodních
-// 88 px), stránka je otevřená aspoň HINT_AFTER a scroll stojí HINT_IDLE.
+// 88 px), stránka je otevřená aspoň HINT_AFTER a scroll stojí HINT_IDLE
+// a celá bublina je vidět pod navbarem (OND-481).
 // Na mobilu, kde je věta níž, tedy až když k ní návštěvník dojede
 // a zastaví se. Bublina je absolutně nad větou: nic se neposune (CLS 0).
 // Zmizí po první interakci s větou (dotyk, klik, fokus, změna, Esc)
@@ -185,14 +186,31 @@ function initHint(form, sentence, selects) {
         hint.style.setProperty('--hint-arrow', `${target - left}px`);
     }
 
+    // OND-481: bublina leží nad větou, takže ji může krýt navbar nebo být
+    // nad oknem, i když je věta celá vidět. Spotřebuje relaci, jen když
+    // je celá v okně pod navbarem a nad lištou „Poptávka“. Navbar se
+    // vysouvá 0,3 s: platí přísnější z jeho aktuální a cílové spodní hrany.
+    const nav = document.querySelector('.navbar');
+    const bar = document.querySelector('.mobile-bottom-bar');
+    function fits() {
+        const r = hint.getBoundingClientRect();
+        const top = nav ? Math.max(nav.getBoundingClientRect().bottom, nav.classList.contains('is-hidden') ? 0 : nav.offsetHeight) : 0;
+        const b = bar ? bar.getBoundingClientRect() : null;
+        const bottom = b && b.height ? b.top : innerHeight;
+        return r.height > 0 && r.top >= Math.max(top, 0) && r.bottom <= bottom
+            && r.left >= 0 && r.right <= document.documentElement.clientWidth;
+    }
+
     const show = () => {
         if (done || shown) return;
+        hint.hidden = false;
+        place();
+        // Nevejde se: nic se nespotřebuje, počká se na další zastavení scrollu.
+        if (!fits()) { hint.hidden = true; return; }
         shown = true;
         observer.disconnect();
         removeEventListener('scroll', onScroll);
         try { sessionStorage.setItem(HINT_KEY, '1'); } catch { /* soukromý režim */ }
-        hint.hidden = false;
-        place();
         hint.classList.add('is-on');
         addEventListener('resize', place, { passive: true });
     };
