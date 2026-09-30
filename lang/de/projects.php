@@ -20,11 +20,13 @@ return [
     // Absätze weiter selbst brach, weil harte Zahlen nicht für alle Projekte
     // vorliegen. Umformuliert auf Nachweise, die wir belegen können: was die
     // Website kann, ein Live-Link, der Umfang. Keine erfundenen Zahlen.
+    // OND-479 (Variante A): Die H1 spricht den Besucher an, die Subline zeigt die
+    // Bandbreite (Branchen mit Projekt auf der Seite) und den nächsten Schritt. „Ausgewählte Arbeiten“ = nicht alles.
     'hero' => [
         'page_mark_label' => 'PROJEKTE',
-        'upline'          => 'Live-Websites, keine Bilder in einer Galerie.',
-        'heading_html'    => 'Was ich<br><em>gebaut habe</em>.',
-        'subline'         => 'Bei jedem Projekt steht, was die Website kann und in welchem Umfang ich sie gebaut habe. Der Link führt zur Live-Version — prüfen Sie es selbst.',
+        'upline'          => 'Ausgewählte Arbeiten für echte Unternehmen.',
+        'heading_html'    => 'Was ich für Sie<br><em>bauen könnte</em>.',
+        'subline'         => 'Websites und Anwendungen für einen Dachdecker, eine Zahnarztpraxis, einen Campingplatz und ein Autowerk. Wählen Sie die Branche, die Ihrer am nächsten kommt, sehen Sie sich die Websites live an und schreiben Sie mir.',
     ],
 
     'info_client'      => 'Kunde',
@@ -219,6 +221,8 @@ return [
             'match' => ':n von :total passen.',
             'none'  => 'Genau das habe ich noch nicht im Portfolio. Die nächstliegenden Arbeiten stehen unten.',
             'rest'  => 'Weitere Projekte',
+            // OND-478 — bublina nad větou při první návštěvě (do ~35 znaků, de na 320 px).
+            'hint'  => 'Hier wählen Sie, was Sie brauchen.',
         ],
     ],
 

@@ -20,11 +20,13 @@ return [
     // odstavce níž sama porušila, protože tvrdá čísla nemáme u všech projektů.
     // Slib je přeformulovaný na důkaz, který doložit umíme: co web umí,
     // živý odkaz, rozsah. Žádná vymyšlená čísla.
+    // OND-479 (varianta A): H1 mluví o návštěvníkovi, podtitul ukazuje záběr
+    // (obory s projektem na stránce) a krok „co dál“. „Vybraná práce“ = není to vše.
     'hero' => [
         'page_mark_label' => 'REALIZACE',
-        'upline'          => 'Živé weby, ne obrázky v galerii.',
-        'heading_html'    => 'Co jsem<br><em>postavil</em>.',
-        'subline'         => 'U každého projektu je napsané, co web umí a v jakém rozsahu jsem ho postavil. Odkaz vede na živou verzi — ověřte si to sami.',
+        'upline'          => 'Vybraná práce pro skutečné firmy.',
+        'heading_html'    => 'Co by šlo<br><em>udělat i u vás</em>.',
+        'subline'         => 'Weby a aplikace, které jsem postavil pro pokrývače, zubní ordinaci, kemp i automobilku. Vyberte obor, který je tomu vašemu nejblíž, proklikejte si živé weby a napište mi, co řešíte.',
     ],
 
     'info_client'      => 'Klient',
@@ -231,6 +233,8 @@ return [
             'match' => 'Sedí :n z :total.',
             'none'  => 'Přesně tohle v portfoliu zatím nemám. Nejbližší práce jsou níž.',
             'rest'  => 'Další projekty',
+            // OND-478 — bublina nad větou při první návštěvě (do ~35 znaků, de na 320 px).
+            'hint'  => 'Tady si vyberte, co potřebujete.',
         ],
     ],
 

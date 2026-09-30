@@ -70,4 +70,7 @@
         <span role="status" data-intent-status>{{ str_replace(':n', $total, $i18n['count']['other']) }}</span>
         <a href="{{ lroute('contact') }}" class="pd-case__live" data-intent-cta hidden>{{ __('projects.catalog.cta') }} &rarr;</a>
     </p>
+    {{-- OND-478 — nápověda pro první návštěvu: bublina nad prvním slovem.
+         Absolutně, nic neodsune. Čtečka ji nečte, selecty mají vlastní popisky. --}}
+    <span class="pd-intent__bubble" data-intent-hint aria-hidden="true" hidden>{{ __('projects.catalog.sentence.hint') }}</span>
 </form>

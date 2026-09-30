@@ -5,9 +5,9 @@
 // Žádná knihovna, žádná smyčka na snímek, nic navázaného na scroll:
 //   - změna výběru přeskládá karty v DOM (shody nahoru) a jednou je
 //     dorovná FLIPem,
-//   - ukázka věty při prvním zobrazení jen přepisuje dvě slova v časovači
-//     a zastaví se při jakékoli interakci.
-// `prefers-reduced-motion` = bez FLIPu a bez ukázky.
+//   - při první návštěvě se nad větou jednou ukáže bublina s nápovědou
+//     a zmizí při jakékoli interakci s větou.
+// `prefers-reduced-motion` = bez FLIPu, bublina se jen objeví.
 // ---------------------------------------------------------------------------
 
 const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -112,11 +112,11 @@ function initIntent(form) {
     document.addEventListener('pointerdown', setInput('pointer'), { capture: true, passive: true });
     document.addEventListener('keydown', setInput('keyboard'), { capture: true, passive: true });
 
-    const stopDemo = initDemo(form, sentence, selects, valueOf, mirror);
+    const stopHint = initHint(form, sentence, selects);
 
     selects.forEach((sel) => {
         mirror(sel);
-        sel.addEventListener('change', () => { stopDemo(); mirror(sel); apply(true); });
+        sel.addEventListener('change', () => { stopHint(); mirror(sel); apply(true); });
     });
 
     form.addEventListener('submit', (e) => e.preventDefault());
@@ -124,129 +124,129 @@ function initIntent(form) {
 }
 
 // ---------------------------------------------------------------------------
-// Ukázka věty (OND-470, rozhodnutí CEO): jednou při prvním zobrazení věta
-// sama projde pár možností a vrátí se na výchozí znění — návštěvník hned
-// vidí, že slova jsou ovládání. Mění jen viditelný text dvou slov; výběr,
-// mřížka, URL ani hlášení pro čtečku se nemění (slova jsou `aria-hidden`).
+// OND-478 — nápověda pro první návštěvu: bublina nad prvním slovem
+// „Tady si vyberte, co potřebujete.“ Klepnutí na ni otevře výběr.
+// Nahradila ukázku věty (OND-470): slova, která se sama přepisují,
+// vypadala jako dekorativní rotující nadpis, ne jako ovládání.
 //
-// Nespustí se: s `prefers-reduced-motion`, s výběrem z URL, podruhé
-// v téže relaci (návrat z detailu). Zastaví ji jakákoli interakce:
-// pointer, klávesa, kolečko, dotyk, fokus i změna výběru.
-// Stav, který by změnil počet řádků věty, se přeskočí — mřížka pod větou
-// se tak nikdy neposune (žádný layout shift).
-//
-// Kroky: napřed DEMO_STEPS, pak ostatní kombinace (ty, co mění obě slova,
-// dřív). Na úzkém mobilu a v de pevná trojice výšku nedrží, náhradní
-// kombinace ano (OND-474).
+// Spustí se, až je celá věta v okně nad lištou „Poptávka“ (spodních
+// 88 px), stránka je otevřená aspoň HINT_AFTER a scroll stojí HINT_IDLE
+// a celá bublina je vidět pod navbarem (OND-481).
+// Na mobilu, kde je věta níž, tedy až když k ní návštěvník dojede
+// a zastaví se. Bublina je absolutně nad větou: nic se neposune (CLS 0).
+// Zmizí po první interakci s větou (dotyk, klik, fokus, změna, Esc)
+// a v téže relaci se už neukáže ani po návratu z detailu. S výběrem
+// z URL se neukáže vůbec. Čtečka nic navíc nečte (`aria-hidden`).
+// `prefers-reduced-motion`: bublina se jen objeví, bez vyjetí (CSS).
 // ---------------------------------------------------------------------------
-const DEMO_KEY = 'pd-intent-demo';
-const DEMO_MAX = 3;
-const DEMO_MIN = 2;
-const DEMO_STEPS = [
-    { co: 'website', pro: 'all' },
-    { co: 'website', pro: 'vyroba' },
-    { co: 'application', pro: 'vyroba' },
-];
+const HINT_KEY = 'pd-intent-hint';
+const HINT_AFTER = 1500;
+const HINT_IDLE = 600;
 
-function initDemo(form, sentence, selects, valueOf, mirror) {
+function initHint(form, sentence, selects) {
+    const hint = form.querySelector('[data-intent-hint]');
     const noop = () => {};
     let seen = false;
-    try { seen = sessionStorage.getItem(DEMO_KEY) === '1'; } catch { /* soukromý režim */ }
-    if (seen || reduceMotion() || selects.some((s) => s.value !== 'all')) return noop;
+    try { seen = sessionStorage.getItem(HINT_KEY) === '1'; } catch { /* soukromý režim */ }
+    if (!hint || seen || selects.some((s) => s.value !== 'all')) return noop;
     if (!('IntersectionObserver' in window)) return noop;
 
-    const [co, pro] = selects;
-    const label = (sel, value) => [...sel.options].find((o) => o.value === value)?.textContent;
-    const show = (state, fade) => {
-        [[co, state.co], [pro, state.pro]].forEach(([sel, value]) => {
-            const el = valueOf(sel);
-            const text = label(sel, value);
-            if (!text || el.textContent === text) return;
-            el.textContent = text;
-            if (fade) el.animate([{ opacity: 0, transform: 'translateY(0.12em)' }, { opacity: 1, transform: 'none' }], { duration: 260, easing: 'ease-out' });
-        });
-    };
-
+    const word = form.querySelector('.pd-intent__value');
+    let done = false;
+    let shown = false;
     let timer = 0;
-    let running = false;
-    let stopped = false;
-    let observer = null;
-    const events = ['pointerdown', 'keydown', 'wheel', 'touchstart'];
+    let inView = false;
+    let lastScroll = 0;
+    const t0 = performance.now();
+
+    const onScroll = () => { lastScroll = performance.now(); schedule(); };
+    const onKey = (e) => { if (e.key === 'Escape') stop(); };
+    const onPointer = (e) => { if (!hint.contains(e.target)) stop(); };
 
     const stop = () => {
-        stopped = true;
+        if (done) return;
+        done = true;
         clearTimeout(timer);
-        observer?.disconnect();
-        events.forEach((e) => document.removeEventListener(e, stop, true));
-        if (running) {
-            running = false;
-            form.classList.remove('is-demo');
-            selects.forEach(mirror);
-        }
-    };
-    events.forEach((e) => document.addEventListener(e, stop, { capture: true, passive: true }));
-    // Fokus na slovo věty (i bez klávesy, např. z čtečky) ukázku taky ukončí.
-    form.addEventListener('focusin', stop, { once: true });
-
-    // Kandidáti v pořadí preference, bez duplicit a bez výchozího „all × all“.
-    const candidates = () => {
-        const values = (sel) => [...sel.options].map((o) => o.value);
-        const combos = values(co).flatMap((c) => values(pro).map((p) => ({ co: c, pro: p })))
-            .filter((s) => s.co !== 'all' || s.pro !== 'all');
-        const both = (s) => s.co !== 'all' && s.pro !== 'all';
-        const preferred = DEMO_STEPS.filter((s) => label(co, s.co) && label(pro, s.pro));
-        const key = (s) => `${s.co}|${s.pro}`;
-        const taken = new Set(preferred.map(key));
-        const rest = combos.filter((s) => !taken.has(key(s)));
-        return [...preferred, ...rest.filter(both), ...rest.filter((s) => !both(s))];
-    };
-
-    const run = () => {
-        if (stopped) return;
-        // Jen kroky, které nezmění výšku věty (počet řádků) — změří se
-        // synchronně v jednom snímku a vrátí zpět, nic se nevykreslí.
-        // Přednost mají kroky, kde části věty (sloty i spojka) zůstanou
-        // na svých řádcích: přeskok slova na jiný řádek je velký posun
-        // i při stejné výšce (de na mobilu CLS 0,067, OND-475). Když
-        // takové nejsou aspoň dva (en 320/340 px), doplní se tím, co drží výšku.
-        const base = sentence.offsetHeight;
-        const lines = () => [...sentence.children].map((el) => el.getBoundingClientRect().top);
-        const baseLines = lines();
-        const inPlace = [];
-        const sameHeight = [];
-        for (const s of candidates()) {
-            if (inPlace.length === DEMO_MAX) break;
-            show(s, false);
-            if (sentence.offsetHeight !== base) continue;
-            if (lines().every((top, i) => Math.abs(top - baseLines[i]) < 1)) inPlace.push(s);
-            else sameHeight.push(s);
-        }
-        const steps = inPlace.length >= DEMO_MIN ? inPlace : [...inPlace, ...sameHeight].slice(0, DEMO_MIN);
-        selects.forEach(mirror);
-        if (!steps.length) return stop();
-
-        try { sessionStorage.setItem(DEMO_KEY, '1'); } catch { /* soukromý režim */ }
-        running = true;
-        form.classList.add('is-demo');
-        const queue = [...steps, { co: 'all', pro: 'all' }];
-        const next = () => {
-            show(queue.shift(), true);
-            if (queue.length) timer = setTimeout(next, 1300);
-            else timer = setTimeout(stop, 600);
-        };
-        timer = setTimeout(next, 700);
-    };
-
-    observer = new IntersectionObserver((entries) => {
-        if (!entries.some((e) => e.isIntersecting)) return;
         observer.disconnect();
-        observer = null;
-        if (document.visibilityState !== 'visible') return stop();
-        // Měřit až s načteným písmem — s náhradním se věta láme jinak
-        // a vybraný krok by pak výšku změnil (OND-474).
-        document.fonts.ready.then(run);
-    }, { threshold: 1 });
+        removeEventListener('scroll', onScroll);
+        removeEventListener('resize', place);
+        form.removeEventListener('pointerdown', onPointer, true);
+        form.removeEventListener('focusin', stop);
+        document.removeEventListener('keydown', onKey);
+        hint.classList.add('is-gone');
+    };
+
+    // Šipka míří na začátek prvního slova, bublina se vejde do šířky.
+    function place() {
+        const f = form.getBoundingClientRect();
+        const w = word.getBoundingClientRect();
+        const target = w.left - f.left + Math.min(w.width / 2, 40);
+        const left = Math.max(0, Math.min(target - 28, f.width - hint.offsetWidth));
+        hint.style.setProperty('--hint-left', `${left}px`);
+        hint.style.setProperty('--hint-arrow', `${target - left}px`);
+    }
+
+    // OND-481: bublina leží nad větou, takže ji může krýt navbar nebo být
+    // nad oknem, i když je věta celá vidět. Spotřebuje relaci, jen když
+    // je celá v okně pod navbarem a nad lištou „Poptávka“. Navbar se
+    // vysouvá 0,3 s: platí přísnější z jeho aktuální a cílové spodní hrany.
+    const nav = document.querySelector('.navbar');
+    const bar = document.querySelector('.mobile-bottom-bar');
+    function fits() {
+        const r = hint.getBoundingClientRect();
+        const top = nav ? Math.max(nav.getBoundingClientRect().bottom, nav.classList.contains('is-hidden') ? 0 : nav.offsetHeight) : 0;
+        const b = bar ? bar.getBoundingClientRect() : null;
+        const bottom = b && b.height ? b.top : innerHeight;
+        return r.height > 0 && r.top >= Math.max(top, 0) && r.bottom <= bottom
+            && r.left >= 0 && r.right <= document.documentElement.clientWidth;
+    }
+
+    const show = () => {
+        if (done || shown) return;
+        hint.hidden = false;
+        place();
+        // Nevejde se: nic se nespotřebuje, počká se na další zastavení scrollu.
+        if (!fits()) { hint.hidden = true; return; }
+        shown = true;
+        observer.disconnect();
+        removeEventListener('scroll', onScroll);
+        try { sessionStorage.setItem(HINT_KEY, '1'); } catch { /* soukromý režim */ }
+        hint.classList.add('is-on');
+        addEventListener('resize', place, { passive: true });
+    };
+
+    const schedule = () => {
+        clearTimeout(timer);
+        if (!inView || done || shown) return;
+        const now = performance.now();
+        const ms = Math.max(HINT_IDLE - (now - lastScroll), HINT_AFTER - (now - t0), 0);
+        timer = setTimeout(() => {
+            if (!inView || document.visibilityState !== 'visible') return;
+            if (performance.now() - lastScroll < HINT_IDLE - 20) return schedule();
+            document.fonts.ready.then(show);
+        }, ms);
+    };
+
+    addEventListener('scroll', onScroll, { passive: true });
+    const observer = new IntersectionObserver((entries) => {
+        inView = entries[entries.length - 1].isIntersecting;
+        schedule();
+    // Spodní okraj: na mobilu přes spodek okna leží lišta „Poptávka“,
+    // věta pod ní se nepočítá jako viditelná.
+    }, { threshold: 1, rootMargin: '0px 0px -88px 0px' });
     observer.observe(sentence);
+
+    form.addEventListener('pointerdown', onPointer, { capture: true, passive: true });
+    form.addEventListener('focusin', stop);
+    document.addEventListener('keydown', onKey);
+
+    // Bublina dělá, co říká: klepnutí otevře první výběr.
+    hint.addEventListener('click', () => {
+        stop();
+        const sel = selects[0];
+        sel.focus({ preventScroll: true });
+        try { sel.showPicker(); } catch { /* prohlížeč bez showPicker u selectu: stačí fokus */ }
+    });
 
     return stop;
 }
