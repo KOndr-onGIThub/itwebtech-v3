@@ -20,11 +20,13 @@ return [
     // paragraphs below, because hard numbers are not available for every
     // project. Reworded to proof that can actually be shown: what the site
     // does, a live link, the scope. No invented numbers.
+    // OND-479 (option A): the H1 speaks to the visitor, the subline shows the
+    // range (fields with a project on the page) and the next step. "Selected work" = not everything.
     'hero' => [
         'page_mark_label' => 'PROJECTS',
-        'upline'          => 'Live websites, not pictures in a gallery.',
-        'heading_html'    => 'What I have<br><em>built</em>.',
-        'subline'         => 'For every project you can read what the site does and the scope I built it in. The link goes to the live version — check it yourself.',
+        'upline'          => 'Selected work for real businesses.',
+        'heading_html'    => 'What I could<br><em>build for you</em>.',
+        'subline'         => 'Websites and apps I\'ve built for a roofer, a dental practice, a campsite and a car plant. Pick the field closest to yours, click through the live sites and tell me what you\'re working on.',
     ],
 
     'info_client'      => 'Client',
@@ -220,6 +222,8 @@ return [
             'match' => ':n of :total match.',
             'none'  => 'Nothing exactly like this in the portfolio yet. The closest work is below.',
             'rest'  => 'Other projects',
+            // OND-478 — bublina nad větou při první návštěvě (do ~35 znaků, de na 320 px).
+            'hint'  => 'Pick what you need here.',
         ],
     ],
 

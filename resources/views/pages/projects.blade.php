@@ -43,7 +43,7 @@
 <section class="pd-section pd-page-head">
     <div class="container-site">
         <p class="pd-eyebrow">{{ __('projects.hero.page_mark_label') }} <span class="pd-eyebrow__sep" aria-hidden="true"></span> {{ __('projects.hero.upline') }}</p>
-        <h1 class="pd-heading pd-heading--sub">{!! __('projects.hero.heading_html') !!}</h1>
+        <h1 class="pd-heading pd-heading--sub pd-heading--plain">{!! __('projects.hero.heading_html') !!}</h1>
         <p class="pd-sub">{{ __('projects.hero.subline') }}</p>
     </div>
 </section>
@@ -51,8 +51,8 @@
 @if ($portfolioProjects->isNotEmpty())
 {{-- Katalog — věta nad mřížkou (OND-470) a mřížka `.pd-works` (sdílená
      komponenta, použije ji i „Další projekty" na detailu). Sekce navazuje
-     na hlavu bez horního odsazení: titulek „Co jsem postavil." a katalog
-     jsou jedna věta. Všechny publikované projekty jsou v HTML jako odkazy;
+     na hlavu bez horního odsazení: titulek hlavy a katalog jsou jedna
+     věta. Všechny publikované projekty jsou v HTML jako odkazy;
      věta je jen přeskládá. --}}
 <section class="pd-section" data-pdd="projects-grid">
     <div class="container-site">
