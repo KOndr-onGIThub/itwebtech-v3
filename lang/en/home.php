@@ -61,13 +61,15 @@ return [
 
     'social_proof' => [
         // OND-315: `rating_aria` describes the rating alone, so it sits on that
-        // one figure — the strip also holds projects, years and an award
+        // one figure — the strip also holds scope of work, Toyota and an award
         // (reply time left the strip in OND-437). The landmark label for the whole strip is `strip_aria`.
         'rating_aria'  => 'Rated 5.0',
         'strip_aria'   => 'Numbers about my work',
         'clients_aria' => 'Clients',
         'rating_value' => '5.0',
         'reviews'      => 'out of 5 on Google and Firmy.cz',
+        // OND-506: no number on purpose (no "23+").
+        'scope'        => 'Dozens of websites, apps and smaller jobs',
         'experience'   => '18 years at Toyota',
         // OND-201 (finding 5.11): TOP firma 2025 award from Firmy.cz —
         // verifiable third-party proof that was missing on staging.

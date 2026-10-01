@@ -176,12 +176,44 @@ class Ond437LeadConfirmationTest extends TestCase
 
             $strip = $this->between($html, '<ul class="pd-strip__list">', '</ul>');
             $this->assertStringNotContainsString($old[$locale], $strip, "[$locale] pruh");
-            // OND-490 (bod 9): „23+ realizací“ z pruhu pryč → 3 položky.
-            $this->assertSame(3, substr_count($strip, '<li>'), "[$locale] pruh má 3 položky");
+            // OND-490 (bod 9): „23+ realizací“ z pruhu pryč; OND-506 přidal
+            // údaj o rozsahu bez čísla → 4 položky.
+            $this->assertSame(4, substr_count($strip, '<li>'), "[$locale] pruh má 4 položky");
             $this->assertStringNotContainsString('23+', $strip, "[$locale] pruh");
 
             $this->assertStringNotContainsString('💬', $html, "[$locale] emoji");
             $this->assertStringContainsString('class="mobile-bottom-bar"', $html, "[$locale] lišta před odesláním");
+        }
+    }
+
+    /**
+     * OND-506: údaj schválený na OND-495 (soupis rev. 4, sekce 2a) stojí v pruhu
+     * na HP i na /cenik, hned za hodnocením. Texty natvrdo, ne přes `__()`,
+     * aby test chytil i změnu v `lang/`. Žádné číslo („23+“) se nevrací.
+     */
+    public function test_strip_shows_scope_of_work_without_a_number_on_home_and_price(): void
+    {
+        $scope = [
+            'cs' => 'Desítky webů, aplikací i menších zakázek',
+            'en' => 'Dozens of websites, apps and smaller jobs',
+            'de' => 'Dutzende Websites, Apps und kleinere Aufträge',
+        ];
+        $prices = ['cs' => '/cenik', 'en' => '/en/price', 'de' => '/de/preisliste'];
+
+        foreach (['home' => self::HOMES, 'price' => $prices] as $page => $urls) {
+            foreach ($urls as $locale => $url) {
+                $html = $this->get($url)->assertOk()->getContent();
+                $strip = $this->between($html, 'class="pd-strip__list"', '</ul>');
+
+                $this->assertSame(4, substr_count($strip, '<li>'), "[$page/$locale] pruh má 4 položky");
+                $this->assertStringContainsString('<li><strong>'.e($scope[$locale]).'</strong></li>', $strip, "[$page/$locale] údaj o rozsahu");
+                $this->assertStringNotContainsString('23+', $strip, "[$page/$locale] pruh");
+
+                // Pořadí: hodnocení → rozsah → Toyota → ocenění.
+                $at = strpos($strip, e($scope[$locale]));
+                $this->assertGreaterThan(strpos($strip, 'sr-only'), $at, "[$page/$locale] za hodnocením");
+                $this->assertLessThan(strpos($strip, 'Toyot'), $at, "[$page/$locale] před Toyotou");
+            }
         }
     }
 

@@ -405,6 +405,9 @@
     color: var(--color-fg-muted);
 }
 .pd-strip__list strong { color: var(--color-fg-primary); font-weight: 600; }
+/* OND-506: německý údaj o rozsahu se na 360 px nevejde na řádek a bez
+   vyvážení by na druhém zůstalo jen „Aufträge" — čte se jako další položka. */
+.pd-strip__list li { text-wrap: balance; }
 /* OND-397 (vstup V1): hodnocení v pruhu je odkaz na /recenze. Tiché
    podtržení jako `.pd-case__live`, acid až při najetí — nové slovo
    nepřibývá. Text je vysoký 17 px, neviditelný přesah z něj dělá cíl

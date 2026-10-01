@@ -107,6 +107,7 @@
              nahrazuje ho úplné „Hodnocení 5 z 5". --}}
         <ul class="pd-strip__list" aria-label="{{ __('home.social_proof.strip_aria') }}">
             <li><strong aria-hidden="true">{{ __('home.social_proof.rating_value') }}</strong><span class="sr-only">{{ __('home.social_proof.rating_aria') }}</span> {{ __('home.social_proof.reviews') }}</li>
+            <li><strong>{{ __('home.social_proof.scope') }}</strong></li>
             <li><strong>{{ __('home.social_proof.experience') }}</strong></li>
             <li>{{ __('home.social_proof.award') }}</li>
         </ul>
