@@ -146,8 +146,8 @@ class Ond470ProjectsSentenceTest extends TestCase
 
     public function test_four_projects_are_unpublished_everywhere(): void
     {
-        // OND-501: 18. publikovaný projekt `vinarstvi-antos`.
-        $this->assertSame(18, PortfolioProject::published()->count());
+        // OND-501: 18. publikovaný projekt `vinarstvi-antos`, OND-503: 21.
+        $this->assertSame(21, PortfolioProject::published()->count());
 
         foreach (self::UNPUBLISHED as $slug) {
             $project = PortfolioProject::where('slug', $slug)->firstOrFail();

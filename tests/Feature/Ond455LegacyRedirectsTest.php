@@ -22,8 +22,8 @@ class Ond455LegacyRedirectsTest extends TestCase
     /** Stará cesta → cíl. Deset adres ze zadání + `delejme-animace` z navigace itwebtech.cz + Framer `/dekuji` + tři z OND-466. */
     private const LEGACY_PATHS = [
         '/sluzby'                            => ['/#section-services', 301],
-        // Případovka zatím na webu není → dočasně (302) na výpis.
-        '/projekty/zoomorava'                => ['/projekty', 302],
+        // OND-503: `/projekty/zoomorava` je publikovaná případovka (200 bez
+        // skoku), hlídá ji test_published_zoomorava_is_served_without_redirect.
         // OND-470: článek a cedule odpublikované → dočasně na PitArenu.
         '/projects/clanek-na-motorkari-cz'   => ['/projekty/pitarena', 302],
         '/projects/FRLcreator'               => ['/projekty/frl-creator', 301],
@@ -173,18 +173,36 @@ class Ond455LegacyRedirectsTest extends TestCase
     }
 
     /**
-     * Ondřej 28. 9.: případovku (např. zoomorava) může doplnit později.
-     * Po publikaci pod slugem z mapy se přesměrování přepne samo na 301
-     * na případovku — bez změny kódu. Do té doby 302, které si prohlížeč
-     * nezapamatuje.
+     * OND-503: stará Framer adresa `/projekty/zoomorava` je dnes přímo
+     * případovka — 200 bez přesměrování, ve všech jazycích, i ze staré
+     * domény itwebtech.cz (jeden skok na kanonický host, žádná smyčka).
+     */
+    public function test_published_zoomorava_is_served_without_redirect(): void
+    {
+        foreach (['/projekty/zoomorava', '/en/projects/zoomorava', '/de/projekte/zoomorava'] as $path) {
+            $this->get($path)->assertOk()->assertSee('ZOOMORAVA');
+        }
+
+        $this->get('/projects/zoomorava')->assertStatus(301)->assertRedirect(url('/projekty/zoomorava'));
+
+        $this->enableCanonicalHost();
+        [$response, $hops] = $this->follow('https://itwebtech.cz/projekty/zoomorava');
+        $response->assertOk();
+        $this->assertSame(1, $hops);
+    }
+
+    /**
+     * Ondřej 28. 9.: případovku může doplnit později. Po publikaci pod slugem
+     * z mapy se přesměrování přepne samo na 301 na případovku — bez změny
+     * kódu. Do té doby 302, které si prohlížeč nezapamatuje.
      */
     public function test_redirect_switches_to_project_once_it_is_published(): void
     {
-        // Ondřej doplní zoomoravu (tady: existující řádek dostane její slug).
-        $project = PortfolioProject::where('slug', 'logo-realitacky')->firstOrFail();
-        $project->update(['slug' => 'zoomorava']);
+        // OND-503: zoomorava publikovaná; po odpublikování (koncept) zase
+        // dočasně na výpis, ne 404 a ne smyčka sama na sebe.
+        $project = PortfolioProject::where('slug', 'zoomorava')->firstOrFail();
+        $project->update(['published_at' => null]);
 
-        // Koncept: pořád dočasně na výpis, ne 404.
         $this->get('/projekty/zoomorava')->assertStatus(302)->assertRedirect(url('/projekty'));
 
         $project->update(['published_at' => now()->subMinute()]);
@@ -202,10 +220,7 @@ class Ond455LegacyRedirectsTest extends TestCase
     {
         foreach (config('redirects.project_slugs') as $old => $slugs) {
             foreach ((array) $slugs as $slug) {
-                // `zoomorava` v DB zatím není, ostatní ano (publikované i ne).
-                if ($slug === 'zoomorava') {
-                    continue;
-                }
+                // OND-503: i `zoomorava` už v DB je (publikované i ne).
                 $this->assertTrue(PortfolioProject::where('slug', $slug)->exists(), "{$old} → {$slug} v DB není");
             }
         }

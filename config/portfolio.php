@@ -15,8 +15,8 @@
 return [
 
     'sectors' => [
-        'remeslo' => ['strechy-zajic', 'josefopa', 'elektro-srnak', 'nove-interiery', 'barana'],
-        'vyroba'  => ['hcms', 'picker', 'frl-creator', 'excel-tools', 'choccoboard', 'vp-industry', 'vanspedition'],
+        'remeslo' => ['strechy-zajic', 'josefopa', 'elektro-srnak', 'nove-interiery', 'barana', 'exhot'],
+        'vyroba'  => ['hcms', 'picker', 'frl-creator', 'excel-tools', 'choccoboard', 'vp-industry', 'vanspedition', 'zoomorava', 'makoplast'],
         'sluzby'  => ['zubni-provazek', 'realitacky-v-akci', 'kemp-veselka', 'yolk', 'vinarstvi-antos'],
         'sport'   => ['pitarena', 'pitarena-eshop', 'clanek-motorkari-cz', 'pitarena-cedule', 'cyklocentrum', 'kemp-veselka'],
     ],
