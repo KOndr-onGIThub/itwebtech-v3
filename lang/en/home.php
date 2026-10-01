@@ -115,7 +115,7 @@ return [
         'text'  => 'Most who write to me are doing well — the website stopped keeping up.',
         'cases' => [
             ['slug' => 'cyklocentrum', 'name' => 'Cyklocentrum Březí', 'field' => 'bike rental and service',         'text' => 'Their previous developer spent a year on the site and never finished it.'],
-            ['slug' => 'zubni-provazek', 'name' => 'Zubní Provázek',  'field' => 'dental practice',                 'text' => 'Patients had to phone to ask about prices; the old site didn\'t list them.'],
+            ['slug' => 'vinarstvi-antos', 'name' => 'Vinařství Antoš', 'field' => 'family winery and guesthouse', 'text' => 'They offered cellar tastings, but the old site barely mentioned them.'],
             ['slug' => 'kemp-veselka', 'name' => 'Autokemp Veselka',   'field' => 'family campsite',                 'text' => 'Guests decide on the go, and the old site wasn\'t mobile-ready.'],
         ],
         'cases_link'      => 'How it turned out →',

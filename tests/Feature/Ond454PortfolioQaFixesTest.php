@@ -35,8 +35,8 @@ class Ond454PortfolioQaFixesTest extends TestCase
     public function test_no_detail_has_section_n_captions_or_average_position(): void
     {
         $projects = PortfolioProject::published()->get();
-        // OND-470: 21 → 17 (čtyři projekty odpublikované).
-        $this->assertCount(17, $projects);
+        // OND-470: 21 → 17 (čtyři projekty odpublikované), OND-501: +vinarstvi-antos.
+        $this->assertCount(18, $projects);
 
         foreach ($projects as $project) {
             foreach (self::LOCALES as $locale) {

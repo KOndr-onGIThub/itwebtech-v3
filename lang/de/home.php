@@ -108,7 +108,7 @@ return [
         'text'  => 'Meist schreiben mir Leute, denen es gut läuft — nur die Website nicht.',
         'cases' => [
             ['slug' => 'cyklocentrum', 'name' => 'Cyklocentrum Březí', 'field' => 'Fahrradverleih und Service', 'text' => 'Der vorherige Entwickler arbeitete ein Jahr an der Website und wurde nie fertig.'],
-            ['slug' => 'zubni-provazek', 'name' => 'Zubní Provázek',  'field' => 'Zahnarztpraxis',             'text' => 'Patienten mussten nach Preisen telefonisch fragen, die alte Website nannte sie nicht.'],
+            ['slug' => 'vinarstvi-antos', 'name' => 'Vinařství Antoš', 'field' => 'Familienweingut mit Pension', 'text' => 'Sie boten Kellerverkostungen an, die alte Website erwähnte sie kaum.'],
             ['slug' => 'kemp-veselka', 'name' => 'Autokemp Veselka',   'field' => 'Familien-Campingplatz',      'text' => 'Gäste entscheiden am Handy, die alte Website war nicht mobiltauglich.'],
         ],
         'cases_link'      => 'Wie es ausging →',
