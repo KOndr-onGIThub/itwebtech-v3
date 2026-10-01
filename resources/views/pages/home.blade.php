@@ -200,6 +200,7 @@
             {{-- OND-397 (vstup V1): číslo je přesně to, co si člověk chce ověřit,
                  takže je odkazem samo — na /recenze, kde si ho sečte. --}}
             <li><a href="{{ lroute('reviews') }}" class="pd-strip__link"><strong aria-hidden="true">{{ __('home.social_proof.rating_value') }}</strong><span class="sr-only">{{ __('home.social_proof.rating_aria') }}</span> {{ __('home.social_proof.reviews') }}</a></li>
+            <li><strong>{{ __('home.social_proof.scope') }}</strong></li>
             <li><strong>{{ __('home.social_proof.experience') }}</strong></li>
             <li>{{ __('home.social_proof.award') }}</li>
         </ul>

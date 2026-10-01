@@ -85,7 +85,7 @@ class Ond393PriceAcidTest extends TestCase
             $expected = array_map(fn ($key) => $this->text(__($key)), [
                 'price.hero.page_mark_label', 'price.hero.upline', 'price.hero.heading_html', 'price.hero.subline',
                 'home.social_proof.rating_aria', 'home.social_proof.reviews',
-                'home.social_proof.experience', 'home.social_proof.award',
+                'home.social_proof.scope', 'home.social_proof.experience', 'home.social_proof.award',
                 'price.guarantees.heading',
             ]);
             foreach (__('price.guarantees.items') as $g) {
