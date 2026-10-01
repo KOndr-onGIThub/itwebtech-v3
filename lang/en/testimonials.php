@@ -276,6 +276,7 @@ return [
             'initials' => 'RA',
             'source'   => 'google',
             'url'      => 'https://www.google.com/maps/contrib/110948210586387826476/reviews',
+            'project'  => 'vinarstvi-antos',
             'text'     => 'Very accommodating and professional. I can only recommend him.',
             'also'     => [
                 [

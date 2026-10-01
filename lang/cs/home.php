@@ -121,7 +121,7 @@ return [
         'text'  => 'Nejčastěji mi píšou lidi, kterým se daří a web jim přestal stačit.',
         'cases' => [
             ['slug' => 'cyklocentrum', 'name' => 'Cyklocentrum Březí', 'field' => 'půjčovna a servis kol',        'text' => 'Předchozí vývojář na jejich webu rok pracoval a nedokončil ho.'],
-            ['slug' => 'zubni-provazek', 'name' => 'Zubní Provázek',  'field' => 'zubní ordinace',               'text' => 'Pacienti se na ceny ptali po telefonu, starý web je neuváděl.'],
+            ['slug' => 'vinarstvi-antos', 'name' => 'Vinařství Antoš', 'field' => 'rodinné vinařství a penzion', 'text' => 'Degustace ve sklepě nabízeli, starý web o nich skoro nepsal.'],
             ['slug' => 'kemp-veselka', 'name' => 'Autokemp Veselka',   'field' => 'rodinný kemp',                 'text' => 'Hosté se rozhodují v mobilu, starý web se na něj nehodil.'],
         ],
         'cases_link'      => 'Jak to dopadlo →',

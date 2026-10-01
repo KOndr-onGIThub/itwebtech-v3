@@ -26,7 +26,7 @@ class Ond490TextFixesTest extends TestCase
 
     /** url => [nová znění, která na stránce musí být] */
     private const PRESENT = [
-        '/'               => ['Jsem Ondra Kriška', 'Nezávazně probereme', '&mdash; Ondra Kriška', 'Zubní Provázek',
+        '/'               => ['Jsem Ondra Kriška', 'Nezávazně probereme', '&mdash; Ondra Kriška', 'Vinařství Antoš',
             'Ať je zakázka velká, nebo malá', 'Když uvidím, že vám pomoct neumím',
             '<a href="mailto:ok@ondraweb.cz">ok@ondraweb.cz</a>'],
         '/o-mne'          => ['Jmenuju se Ondra Kriška', 'Mluvím česky, písemně se domluvíme v jakémkoli jazyce.',
