@@ -27,7 +27,9 @@ return [
         'secondary_cta' => 'Zobrazit orientační ceny',
         'microcopy' => 'Ozvu se nejpozději následující pracovní den. Bez tlaku, bez obchodníka, přímo s člověkem, který bude web řešit.',
         'chips' => [
-            '18 let zkušeností',
+            // OND-497: „18 let zkušeností“ → „18 let v Toyotě“, stejně jako pruh
+            // na úvodní stránce (OND-496, Ondřej 1. 10. na OND-490).
+            '18 let v Toyotě',
             'Přímá spolupráce',
             'Od základu, bez údržby',
             'Většina projektů 55–150 tis. Kč',
