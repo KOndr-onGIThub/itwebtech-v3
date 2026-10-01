@@ -13,7 +13,7 @@ return [
     // OND-354: prahové číslo a rozpětí místo menu tří balíčků (Ondřej 26. 9.
     // 2026 na OND-347). Odmítací věta „pokud hledáte web do dvaceti tisíc…"
     // je tím pryč — spodní hranice 20 000 Kč říká totéž bez odmítnutí.
-    'intro'      => 'Většina projektů vychází mezi 55 a 150 tisíci korunami. Nejmenší věc, kterou stavím, je jednoduchý prezentační web od 20 000 Kč. Co na webu bude a kolik to bude stát, dostanete písemně před začátkem práce — a to číslo je i na faktuře.',
+    'intro'      => 'Většina projektů vychází mezi 55 a 150 tisíci korunami. Nejmenší věc, kterou stavím, je prezentační web od 20 000 Kč. Co na webu bude a kolik to bude stát, dostanete písemně před začátkem práce — a to číslo je i na faktuře.',
 
     // OND-135 P2 iter 5 — plán §3.1 hero (page-mark + amber accent).
     // OND-135 cleanup (2026-05-14): page_mark_index odebrán — agency-
@@ -129,7 +129,7 @@ return [
 
     // OND-354: nahrazuje omluvné „Výjimka, ne standardní vstup." u nejnižší
     // úrovně. Neodmítá člověka, ale říká, co za ty peníze nepřijde.
-    'entry_note' => 'Za dvacet tisíc postavím jednoduchý prezentační web. Bude rychlý, na telefonu se bude ovládat dobře a nebude na něm rozbitý odkaz na poptávku. Nečekejte od něj, že vám sám začne vozit zakázky — na to je potřeba víc práce, než se za tu cenu dá odvést. Ale hotový bude poctivě.',
+    'entry_note' => 'Za dvacet tisíc postavím prezentační web. Bude rychlý a na telefonu se bude ovládat dobře. Nečekejte od něj, že vám sám začne vozit zakázky — na to je potřeba víc práce, než se za tu cenu dá odvést. Ale hotový bude poctivě.',
 
     'note' => 'Nejsem plátce DPH — uvedené ceny jsou konečné, nic se k nim nepřičítá.',
 
@@ -182,7 +182,7 @@ return [
             [
                 'name'  => 'Grafický design a branding',
                 'price' => 'od 4 800 Kč',
-                'desc'  => 'Logo, vizuální identita, bannery. Vše co potřebujete pro konzistentní a zapamatovatelnou prezentaci značky.',
+                'desc'  => 'Logo, vizuální identita, bannery. Vše, co potřebujete pro konzistentní a zapamatovatelnou prezentaci značky.',
             ],
         ],
     ],
@@ -207,11 +207,12 @@ return [
         'down' => [
             'label' => 'Snižuje cenu',
             'items' => [
-                'Úplné a rychlé odpovědi na moje otázky',
                 'Jeden člověk na vaší straně, který rozhoduje',
+                'Rychlá domluva nad podklady',
+                'Na webu jen to, co zákazníky opravdu zajímá',
                 'Fotky, které už máte v dobré kvalitě',
+                'Logo a firemní barvy, které už máte',
                 'Jeden jazyk',
-                'Obsah si po zaškolení plníte sami',
             ],
         ],
     ],

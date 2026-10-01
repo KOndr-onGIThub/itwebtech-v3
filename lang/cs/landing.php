@@ -8,7 +8,7 @@ return [
     // co WordPress je, to neříká nic; princip 0).
     'meta' => [
         'title' => 'Webové stránky na míru pro podnikatele a firmy | ONDRAWEB',
-        'description' => 'Tvorba webových stránek na míru na vlastním kódu, bez pravidelné údržby. Přímá spolupráce s vývojářem a odpověď nejpozději následující pracovní den.',
+        'description' => 'Tvorba webových stránek na míru, programovaných od základu, bez pravidelné údržby. Přímá spolupráce s vývojářem a odpověď nejpozději následující pracovní den.',
         'schema_name' => 'Tvorba webových stránek na míru',
     ],
 
@@ -21,7 +21,7 @@ return [
     // WordPressu" a kotvily cenu na 25 tisících (nález 5.4).
     'hero' => [
         'eyebrow' => 'Webové stránky na míru pro menší a střední firmy',
-        'title' => 'Web na míru, postavený na vlastním kódu.',
+        'title' => 'Web na míru, programovaný od základu.',
         'description' => 'Vytvořím vám web, který rychle vysvětlí, co nabízíte, proč si vybrat právě vás a jak udělat další krok. Bez hotových stavebnic, bez zbytečných komplikací a bez přehazování mezi obchodníkem, grafikem a vývojářem.',
         'primary_cta' => 'Chci nezávaznou konzultaci',
         'secondary_cta' => 'Zobrazit orientační ceny',
@@ -29,16 +29,16 @@ return [
         'chips' => [
             '18 let zkušeností',
             'Přímá spolupráce',
-            'Vlastní kód bez údržby',
+            'Od základu, bez údržby',
             'Většina projektů 55–150 tis. Kč',
         ],
         'trust' => [
             'title' => 'Rychlé ověřitelné body',
             'items' => [
                 'Odpověď nejpozději následující pracovní den',
-                'Vlastní kód, ne stavebnice',
+                'Programováno od základu, ne stavebnice',
                 'Řešení na míru',
-                '26 hodnocení, 5 z 5',
+                'Hodnocení 5,0 z 5',
             ],
         ],
     ],
@@ -95,7 +95,7 @@ return [
             // OND-201 (nález 5.4): normou je pásmo 55–150 tisíc, ne nejlevnější vstup.
             'Orientační ceny máte předem. Většina projektů vychází mezi 55 a 150 tisíci korunami.',
             // OND-201 (nález 5.5): žargon přepsaný do řeči klienta.
-            'Weby stavím na vlastním kódu, bez hotových doplňků od cizích firem.',
+            'Weby programuju od základu, bez hotových doplňků od cizích firem.',
         ],
     ],
 
@@ -194,7 +194,7 @@ return [
                 // nestavíte na WordPressu?", tedy vymezení proti konkurenci
                 // v žargonu. Nově vede to, na čem web stavím.
                 'question' => 'Na čem web stavíte?',
-                'answer' => 'Na vlastním kódu, který píšu od základu. Nepoužívám hotové stavebnice skládané z doplňků od různých autorů — u nich vzniká závislost na pravidelných aktualizacích a průběžné údržbě. Web na míru je stabilnější, rychlejší a dlouhodobě předvídatelnější z hlediska provozu i nákladů.',
+                'answer' => 'Programuju ho od základu. Nepoužívám hotové stavebnice skládané z doplňků od různých autorů — u nich vzniká závislost na pravidelných aktualizacích a průběžné údržbě. Web na míru je stabilnější, rychlejší a dlouhodobě předvídatelnější z hlediska provozu i nákladů.',
             ],
             [
                 'question' => 'Co když ještě nemám připravené texty nebo zadání?',
@@ -245,7 +245,7 @@ return [
 
     'footer' => [
         // OND-201 (nález 5.5): žargon „bez WordPressu" pryč.
-        'copy' => 'Tvorba webových stránek na míru na vlastním kódu, bez zbytečné údržby. Přímá spolupráce, jasný proces a důraz na poptávky.',
+        'copy' => 'Tvorba webových stránek na míru, programovaných od základu, bez zbytečné údržby. Přímá spolupráce, jasný proces a důraz na poptávky.',
         'privacy' => 'Ochrana osobních údajů',
     ],
 

@@ -176,7 +176,9 @@ class Ond437LeadConfirmationTest extends TestCase
 
             $strip = $this->between($html, '<ul class="pd-strip__list">', '</ul>');
             $this->assertStringNotContainsString($old[$locale], $strip, "[$locale] pruh");
-            $this->assertSame(4, substr_count($strip, '<li>'), "[$locale] pruh má 4 položky");
+            // OND-490 (bod 9): „23+ realizací“ z pruhu pryč → 3 položky.
+            $this->assertSame(3, substr_count($strip, '<li>'), "[$locale] pruh má 3 položky");
+            $this->assertStringNotContainsString('23+', $strip, "[$locale] pruh");
 
             $this->assertStringNotContainsString('💬', $html, "[$locale] emoji");
             $this->assertStringContainsString('class="mobile-bottom-bar"', $html, "[$locale] lišta před odesláním");

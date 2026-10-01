@@ -83,7 +83,7 @@ projects:
         description: "PitArena startovala bez webu, značky i bez prvního zákazníka. Postavil jsem značku a web s programy, půjčovnou, servisem a vlastním systémem pro závody YCF Cup: registrace, platby, výsledky a profily jezdců. Od roku 2023 web dál rozvíjím spolu s majitelem."
         challenge: "Klient otevíral nové motokrosové centrum. Žádný web, žádná značka, nula zákazníků. Důvěru bylo potřeba vybudovat dřív, než se areál otevřel, a rodičům srozumitelně vysvětlit, jak s motokrosem u dětí začít."
         solution: "Navrhl jsem značku a postavil na míru web s nabídkou programů (akademie, zájmový kroužek, kempy a MX soustředění), půjčovnou, servisem a průvodci pro rodiče. Poukazy na jízdu vedou do e-shopu PitArena, který jsem postavil zvlášť. Když se web chytil, převedli jsme na něj i závody YCF Cup ze samostatného webu na Webnode. Tam byla přihláška a platba dva nepropojené kroky, výsledky jen v PDF a pronájem vycházel zhruba na 5 000 Kč ročně. Dnes má seriál vlastní systém: registrace s výpočtem ceny a platbou online, rezervace startovních čísel, správa objednávky přes odkaz v e-mailu, průběžné pořadí po každém závodě a profily více než 150 jezdců."
-        result: "Na hledání „motokros pro děti“ a „motocross pro děti“ je web v Google první už od prvního roku a drží se tam dodnes. První je i na „ycf cup“ a „závody pitbike“, v Google i na Seznamu. Z Googlu na web přišlo přes 15 000 návštěv za 16 měsíců. Přihlášky, platby i výsledky závodů jsou na jednom místě pod značkou PitArena. Spolupráce pokračuje dodnes."
+        result: "Na hledání „motokros pro děti“ a „motocross pro děti“ je web v Googlu první už od prvního roku a drží se tam dodnes. První je i na „ycf cup“ a „závody pitbike“, v Googlu i na Seznamu. Z Googlu na web přišlo přes 15 000 návštěv za 16 měsíců. Přihlášky, platby i výsledky závodů jsou na jednom místě pod značkou PitArena. Spolupráce pokračuje dodnes."
         live_hint: "Projděte si výsledky a profily jezdců YCF Cup."
         result_source: "Collabim (pozice), Google Search Console (návštěvy 16. 5. 2025 – 13. 9. 2026)"
         outcomes:
@@ -322,17 +322,17 @@ projects:
         challenge: >-
           Když výrobní lince chybí díl, počítá se každá minuta — stojící
           linka znamená přímou ztrátu. Logistika do té doby řešila krizovky
-          z hlavy a předávala instrukce ústně. Bylo potřeba systém, který
-          v reálném čase ukáže, kde díl je, kdo ho má dovézt a v jakém
-          pořadí pracovníci postupují, aby zásah proběhl spolehlivě i pod
-          tlakem.
+          z hlavy a předávala instrukce ústně. Byl potřeba systém, který v
+          reálném čase ukáže, kde díl je, kdo ho má dovézt a v jakém pořadí
+          pracovníci postupují, aby zásah proběhl spolehlivě i pod tlakem.
         solution: >-
           Po analýze procesů přímo na hale jsem zmapoval, co všechno se při
           výpadku dílu děje a kdo v tom hraje jakou roli, a z toho postavil
-          webovou aplikaci — tabletové rozhraní pro operátory, desktopový přehled
-          pro vedoucí. Aplikace vede člověka krok za krokem, eviduje stav, udržuje
-          historii a umí předávat úkoly mezi směnami. Zkušenost z 18 let přímo v
-          Toyotě se promítla do detailů, které se z venku nedají odhadnout.
+          webovou aplikaci — tabletové rozhraní pro operátory, desktopový
+          přehled pro vedoucí. Aplikace vede člověka krok za krokem, eviduje
+          stav, udržuje historii a umí předávat úkoly mezi směnami.
+          Zkušenost z 18 let přímo v Toyotě se promítla do detailů, které se
+          zvenku nedají odhadnout.
         result: >-
           Klient uvádí roční úsporu nejméně 3 milionů Kč — odpovídající
           jednomu pracovníkovi na směnu napříč třemi směnami. V obdobích
@@ -582,12 +582,11 @@ projects:
           Cílem nebylo „mít hezký web“, ale aby web fungoval jako první
           obchodní schůzka.
         challenge: >-
-          Původní web vypadal jako levný katalog. Klienti hledající
-          prémiový showroom z něj odcházeli, návštěvy končily bez
-          poptávky a klient sám přiznával, že kvalitu jeho služby ten
-          web nepřesvědčivě podává. Bylo potřeba weby ostatních
-          (typicky šablony a katalogové weby) jasně přebít a získat
-          klientův důvěryhodný hlas.
+          Původní web vypadal jako levný katalog. Klienti hledající prémiový
+          showroom z něj odcházeli, návštěvy končily bez poptávky a klient
+          sám přiznával, že ten web jeho službu nepodává přesvědčivě. Bylo
+          potřeba jasně se odlišit od webů konkurence, typicky šablon a
+          katalogů, a dát klientovi důvěryhodný hlas.
         solution: >-
           Web vede zákazníka od inspirace ke konkrétní akci. Šíře řešení (podlahy,
           dveře, interiéry) je čitelná, ale nezahlcuje. Texty bez žargonu říkají,
@@ -754,11 +753,10 @@ projects:
           jsem náhradu znovu od nuly — analýza, struktura, copy, SEO,
           správa produktů a externí propagace.
         challenge: >-
-          Předchozí webař rok něco stavěl, ale výsledek poškozoval
-          dobrou pověst, kterou si klient budoval offline. Lidé
-          dokonce volali, jestli ještě podnik funguje. Záchrana
-          starého webu nedávala smysl — bylo levnější a bezpečnější
-          udělat ho znovu pořádně.
+          Předchozí webař rok něco stavěl, ale výsledek poškozoval dobrou
+          pověst, kterou si klient budoval offline. Lidé dokonce volali,
+          jestli ještě podnik funguje. Opravovat rozpracovaný web nedávalo
+          smysl — bylo levnější a bezpečnější udělat ho znovu pořádně.
         solution: >-
           Začal jsem analýzou klientova podnikání a pohledem na domácí i zahraniční
           konkurenci. Navrhl jsem strukturu, copy a vlastní design, vše ručně
@@ -766,7 +764,7 @@ projects:
           (klient si sám aktualizuje sortiment), Google Maps profil a propagační
           článek na Kudy z nudy. Web teď odpovídá kvalitě servisu, který nabízí.
         result: "Na dotazy jako „cyklocentrum březí“ nebo „půjčovna kol březí“ je web v Googlu na první pozici. Z Googlu přichází víc než polovina veškeré návštěvnosti — 1 780 z 3 149 návštěv. Klient potvrzuje, že má konečně prezentaci, za kterou se nemusí stydět. Návštěvník rychle najde, co se dá nechat opravit, co se dá půjčit a jak se s klientem spojit."
-        live_hint: "Otevřete si na mobilu kolo z nabídky: cena i tlačítka pro zavolání a navigaci jsou hned po ruce."
+        live_hint: "Otevřete si na mobilu kolo z nabídky. Cena i tlačítka pro zavolání a navigaci jsou hned po ruce."
         result_source: "Google Search Console (pozice 16. 5. 2025 – 13. 9. 2026), Google Analytics (návštěvy 1. 1. – 16. 9. 2026)"
         outcomes:
           - "První nové zákazníky web přivedl během dnů od spuštění"
@@ -905,11 +903,11 @@ projects:
         subtitle: "Web realitky, který si klient sám spravuje"
         summary: "Vlastní web pro realitní makléřku — žádný WordPress, žádné měsíční poplatky. Online rezervace schůzek, nemovitosti i blog si klient spravuje sám."
         description: >-
-          Magda Pernicová Novotná dělá realitky lidsky a chtěla web,
-          který tomu odpovídá. Postavil jsem vlastní řešení bez závislosti
-          na šablonách a měsíčních poplatcích — s online rezervací schůzek,
-          správou nemovitostí, blogem a brandingem postaveným ze stejného
-          ducha jako její práce.
+          Magda Pernicová Novotná dělá realitky lidsky a chtěla web, který
+          tomu odpovídá. Postavil jsem vlastní řešení bez závislosti na
+          šablonách a měsíčních poplatcích — s online rezervací schůzek,
+          správou nemovitostí, blogem a brandingem ve stejném duchu jako
+          její práce.
         challenge: >-
           Makléřka potřebovala web, který nebude jen „WordPress vizitka“ a nebude
           generovat měsíční náklady. Web měl působit profesionálně, ale lidsky, a
@@ -917,19 +915,19 @@ projects:
           kvalitní fotky a klientka neuměla webové systémy — řešení muselo být
           sebevysvětlující.
         solution: >-
-          Web je naprogramovaný od základu, bez šablonového CMS. Klient
-          má admin pro nemovitosti, poptávky a blog, takže si všechno
-          aktualizuje sám. Doplnil jsem rezervační systém přes Reservanto,
-          dva úvodní blogové články a stockovou fotku tam, kde
-          chyběly vlastní snímky. Branding, klíčová slova a SEO struktura
-          dotvořily konzistentní celek.
+          Web je naprogramovaný od základu, bez šablonového CMS. Klientka má
+          administraci pro nemovitosti, poptávky a blog, takže si všechno
+          aktualizuje sama. Doplnil jsem rezervační systém přes Reservanto,
+          dva úvodní blogové články a stockovou fotku tam, kde chyběly
+          vlastní snímky. Branding, klíčová slova a SEO struktura dotvořily
+          konzistentní celek.
         result: >-
           Klientka má web, který jí slouží 24/7 a nestojí ji nic
           měsíčního. Odkazuje na něj v komunikaci, sama přidává
           nemovitosti i články. V referenci píše o profesionálním
           a zároveň lidském přístupu a o tom, že jsem skutečně poslouchal,
           co potřebuje.
-        live_hint: "Otevřete si kteroukoli nabídku nemovitosti: galerie, parametry a formulář pro prohlídku nebo splátky jsou na jednom místě."
+        live_hint: "Otevřete si kteroukoli nabídku nemovitosti. Galerie, parametry a formulář pro prohlídku nebo splátky jsou na jednom místě."
         outcomes:
           - "Vlastní web bez šablon a měsíčních poplatků"
           - "Online rezervace schůzek přes Reservanto"
@@ -1090,8 +1088,8 @@ projects:
           pacientům odpovědi na základní otázky. Postavil jsem redesign
           s důrazem na čitelné informace, ceny, FAQ a lokální vyhledávání.
         challenge: >-
-          Web vypadal nedůvěryhodně, na mobilu se špatně používal,
-          chyběly informace o cenách a ošetřeních a v Google se prakticky
+          Web vypadal nedůvěryhodně, na mobilu se špatně používal, chyběly
+          informace o cenách a ošetřeních a v Googlu se prakticky
           neobjevoval. Pro lékařskou praxi je přitom první dojem klíčový —
           většina pacientů si ordinaci najde právě na webu.
         solution: >-
@@ -1233,115 +1231,99 @@ projects:
     translations:
       cs:
         title: "VP Industry"
-        subtitle: "Web připravený růst, jakmile klient zapne obsah"
-        summary: "Redesign webu výrobce průmyslového značení a automatizací — postavený s konkurenční analýzou, SEO základem a strukturou připravenou na obsahovou kampaň."
+        subtitle: "Přehledné produktové stránky pro výrobce průmyslového značení"
+        summary: "Redesign webu výrobce průmyslového značení a automatizací — s analýzou konkurence a klíčových slov, produktovými stránkami a technickým SEO."
         description: >-
-          VP Industry vyrábí průmyslové značení a automatizace. Cíl
-          redesignu byl jasný: dostat web do stavu, který organicky
-          roste, jakmile firma přidá obsah. Připravil jsem konkurenční
-          analýzu, klíčová slova, copy i strukturu — technický základ
-          je dnes hotový.
+          VP Industry vyrábí průmyslové značení a automatizace. Postavil
+          jsem jí nový web. Připravil jsem analýzu konkurence a klíčových
+          slov, texty i strukturu a web je technicky hotový.
         challenge: >-
-          Klient chtěl web, který umožní dlouhodobý organický růst —
-          ne marketingovou kampaň na pár měsíců. Bylo potřeba pochopit
-          konkurenci, definovat klíčová slova, postavit obsahovou
-          strukturu a webovou architekturu, která tomuhle růstu
-          neudělá překážku.
+          Klient chtěl kvalitní web, který se odliší od konkurence. Bylo
+          potřeba pochopit, jak se prezentují ostatní výrobci, zjistit,
+          jakými slovy zákazníci produkty hledají, a podle toho postavit
+          strukturu webu.
         solution: >-
-          Začal jsem analýzou konkurence a mapováním klíčových slov. Web má detailní
-          produktové stránky s technickými specifikacemi, ukázkovými videi a
-          případovými studiemi. SEO je technicky správně, analytika napojená a
-          struktura počítá s budoucími články. Vše připravené, aby kampaň jen sedla
-          na hotový základ.
+          Začal jsem analýzou konkurence a mapováním klíčových slov. Web má
+          podrobné produktové stránky s technickými parametry, ukázkovými
+          videi a případovými studiemi. Technické SEO je nastavené správně a
+          analytika je napojená.
         result: >-
-          Klient dostal web, který je technicky hotový: produktové stránky s
-          parametry a videi, správně nastavené SEO, napojenou analytiku a
-          strukturu, která unese další články bez přestavby. Obsahovou a
-          kampaňovou fázi zatím odložil — až ji zapne, nic se nebude muset
-          předělávat.
+          Klient dostal technicky hotový web s produktovými stránkami,
+          parametry a videi, se správně nastaveným SEO a napojenou
+          analytikou. Výkonná ředitelka v referenci píše, že výsledek
+          odpovídá jejich představám.
         live_hint: "Otevřete produktovou stránku Značení laserem s parametry a ukázkovými videi."
         outcomes:
           - "Konkurenční a klíčová analýza jako základ struktury"
           - "Detailní produktové stránky s technickou specifikací"
-          - "SEO struktura a indexace připravená na růst"
+          - "Technické SEO a indexace nastavené správně"
           - "Analytika nasazena pro měření vývoje"
-          - "Připraveno pro obsahovou a kampaňovou fázi, kterou klient zatím odložil"
         meta_title: "VP Industry — redesign webu pro průmyslové značení"
-        meta_description: "Případová studie: redesign webu VP Industry s konkurenční analýzou, klíčovými slovy a SEO základem připraveným na obsahovou kampaň."
+        meta_description: "Případová studie: redesign webu VP Industry s analýzou konkurence a klíčových slov, produktovými stránkami a technickým SEO."
       en:
         title: "VP Industry"
-        subtitle: "A site built to grow the moment content kicks in"
-        summary: "Redesign for a manufacturer of industrial marking and automation — built with competitor analysis, SEO foundations and a content-ready structure."
+        subtitle: "Clear product pages for an industrial marking manufacturer"
+        summary: "Redesign for a manufacturer of industrial marking and automation — with competitor and keyword research, product pages and technical SEO."
         description: >-
-          VP Industry makes industrial marking and automation systems.
-          The redesign goal was clear: take the site to a state where
-          it grows organically the moment the company starts producing
-          content. Competitor analysis, keywords, copy and structure
-          are now in place — the technical foundation is done.
+          VP Industry makes industrial marking and automation systems. I
+          built them a new website: competitor and keyword research, copy
+          and structure, and a site that is technically complete.
         challenge: >-
-          The client wanted a site set up for long-term organic growth, not a
-          few-month marketing burst. The job was to understand the competitive
-          landscape, define keywords, and build content and architecture that would
-          not block that growth.
+          The client wanted a high-quality website that stands apart from
+          the competition. The job was to understand how other manufacturers
+          present themselves, find the words customers use to search for the
+          products, and build the site structure around that.
         solution: >-
-          I started with competitor research and keyword mapping. The site has
-          detailed product pages with technical specs, sample videos and case
-          studies. SEO is technically clean, analytics is in place, and the
-          structure assumes future articles. The infrastructure is ready — a content
-          campaign can drop straight onto it.
+          I started with competitor research and keyword mapping. The site
+          has detailed product pages with technical specs, sample videos and
+          case studies. Technical SEO is set up properly and analytics is in
+          place.
         result: >-
-          The site is technically ready to grow; what's missing is the
-          active content and campaign work the client has paused for
-          now. The organic-growth potential is wired in and waiting
-          for the next phase. That's the honest outcome — I delivered
-          what was scoped, and I'm clear about what remains.
+          The client got a technically complete website with product pages,
+          specs and videos, properly set-up SEO and connected analytics. In
+          her reference, the managing director writes that the result
+          matches what they had in mind.
         live_hint: "Open the laser marking product page with its specifications and demo videos. The site is in Czech."
         outcomes:
           - "Competitor and keyword analysis as a structural base"
           - "Detailed product pages with technical specifications"
-          - "SEO structure and indexing ready to grow"
+          - "Technical SEO and indexing set up properly"
           - "Analytics deployed to measure progress"
-          - "Ready for the content/campaign phase the client paused"
         meta_title: "VP Industry — industrial marking website redesign"
-        meta_description: "Case study: VP Industry website redesign with competitor analysis, keyword research, and an SEO foundation ready for a content campaign."
+        meta_description: "Case study: VP Industry website redesign with competitor and keyword research, product pages and technical SEO."
       de:
         title: "VP Industry"
-        subtitle: "Eine Website, die zu wachsen beginnt, sobald Content kommt"
-        summary: "Redesign für einen Hersteller industrieller Kennzeichnung und Automatisierung — mit Wettbewerbsanalyse, SEO-Fundament und content-fähiger Struktur."
+        subtitle: "Übersichtliche Produktseiten für einen Hersteller von Industriekennzeichnung"
+        summary: "Redesign für einen Hersteller industrieller Kennzeichnung und Automatisierung — mit Wettbewerbs- und Keyword-Analyse, Produktseiten und technischem SEO."
         description: >-
-          VP Industry fertigt industrielle Kennzeichnung und Automatisierung.
-          Ziel des Redesigns: die Site in einen Zustand bringen, in dem
-          sie organisch wächst, sobald das Unternehmen Content
-          produziert. Wettbewerbsanalyse, Keywords, Texte und Struktur
-          stehen — das technische Fundament ist fertig.
+          VP Industry fertigt industrielle Kennzeichnung und
+          Automatisierung. Ich habe für das Unternehmen eine neue Website
+          gebaut: Wettbewerbs- und Keyword-Analyse, Texte und Struktur,
+          technisch fertig.
         challenge: >-
-          Der Kunde wollte eine Site für langfristiges organisches
-          Wachstum, keine kurzfristige Kampagne. Es ging darum, den
-          Wettbewerb zu verstehen, Keywords festzulegen und eine
-          Content-Architektur aufzubauen, die diesem Wachstum nicht
-          im Weg steht.
+          Der Kunde wollte eine hochwertige Website, die sich von der
+          Konkurrenz abhebt. Es ging darum zu verstehen, wie sich andere
+          Hersteller präsentieren, herauszufinden, mit welchen Begriffen
+          Kunden nach den Produkten suchen, und danach die Struktur der
+          Website aufzubauen.
         solution: >-
-          Ich startete mit Wettbewerbs- und Keyword-Recherche. Die Site hat
-          detaillierte Produktseiten mit technischen Specs, Videos und Case Studies.
-          SEO ist technisch sauber, Analytics läuft, und die Struktur rechnet mit
-          zukünftigen Artikeln. Die Infrastruktur ist bereit — eine Content-Kampagne
-          kann direkt aufsetzen.
+          Ich startete mit Wettbewerbs- und Keyword-Recherche. Die Website
+          hat detaillierte Produktseiten mit technischen Daten, Videos und
+          Case Studies. Das technische SEO ist sauber eingerichtet,
+          Analytics läuft.
         result: >-
-          Technisch ist die Site bereit zu wachsen; was fehlt, ist die
-          aktive Content- und Kampagnenarbeit, die der Kunde derzeit
-          ausgesetzt hat. Das organische Wachstumspotenzial ist
-          verdrahtet und wartet auf die nächste Phase. Ein ehrliches
-          Ergebnis: Ich liefere, was beauftragt war, und benenne
-          offen, was noch ansteht.
+          Der Kunde hat eine technisch fertige Website mit Produktseiten,
+          Parametern und Videos, sauber eingerichtetem SEO und angebundener
+          Analytics. Die Geschäftsführerin schreibt in ihrer Referenz, dass
+          das Ergebnis ihren Vorstellungen entspricht.
         live_hint: "Öffnen Sie die Produktseite zur Laserkennzeichnung mit Parametern und Demovideos. Die Website ist auf Tschechisch."
         outcomes:
           - "Wettbewerbs- und Keyword-Analyse als strukturelle Basis"
           - "Detaillierte Produktseiten mit technischen Specs"
-          - "SEO-Struktur und Indexierung wachstumsbereit"
+          - "Technisches SEO und Indexierung sauber eingerichtet"
           - "Analytics für Fortschrittsmessung aufgesetzt"
-          - "Bereit für die pausierte Content-/Kampagnen-Phase"
         meta_title: "VP Industry — Redesign der Website für Industriekennzeichnung"
-        meta_description: "Case Study: Redesign der VP-Industry-Website mit Wettbewerbsanalyse, Keyword-Recherche und SEO-Fundament für eine Content-Kampagne."
+        meta_description: "Case Study: Redesign der VP-Industry-Website mit Wettbewerbs- und Keyword-Analyse, Produktseiten und technischem SEO."
 
   # ----------------------------------------------------------------------
   # 9) Autokemp Veselka — moderní jednostránkový web kempu
@@ -1391,8 +1373,8 @@ projects:
           atmosféra. Redesign měl tu atmosféru přenést na web a usnadnit
           lidem rozhodnutí přijet — bez složité navigace a kostrbatých
           formulářů.
-        challenge: "Původní web byl zastaralý, špatně organizovaný a nevhodný pro mobil. Pro kemp, kam se lidé typicky rozhodují cestou nebo na mobilu, to znamenalo zbytečnou ztrátu rezervací. Bylo potřeba jasně ukázat ubytování, dovést člověka bez hledání k telefonu pro rezervaci a udržet atmosféru rodinného kempu."
-        solution: "Jednostránkový moderní web s prioritou na mobil. Jasná informace o ubytování a fotky v atmosféře místa. U chatek, karavanů i stanování je tlačítko Rezervovat, které vede rovnou k telefonnímu číslu, a na mobilu stačí na číslo klepnout. K tomu logo, které kempu předtím chybělo. Rychlost načítání jsem hlídal kvůli prvotnímu dojmu na mobilní data."
+        challenge: "Původní web byl zastaralý, špatně organizovaný a nevhodný pro mobil. Pro kemp, o kterém se lidé typicky rozhodují cestou nebo v mobilu, to znamenalo zbytečnou ztrátu rezervací. Bylo potřeba jasně ukázat ubytování, dovést člověka bez hledání k telefonu pro rezervaci a udržet atmosféru rodinného kempu."
+        solution: "Jednostránkový moderní web s prioritou na mobil. Jasná informace o ubytování a fotky v atmosféře místa. U chatek, karavanů i stanování je tlačítko Rezervovat, které vede rovnou k telefonnímu číslu, a na mobilu stačí na číslo klepnout. K tomu logo, které kempu předtím chybělo. Rychlost načítání jsem hlídal, aby web udělal dobrý první dojem i na mobilních datech."
         result: "Klientka mluví o vyšším zájmu od spuštění a o tom, že „moderní vzhled webu budí důvěru a profesionální dojem“. Web teď funguje jako tichý prodejce ubytování — člověk najde, co potřebuje, vidí, jak to vypadá, a tlačítko Rezervovat ho dovede rovnou k telefonu."
         live_hint: "Projděte si chatky, místa pro karavany i stanování a tipy na výlety v okolí."
         outcomes:
@@ -1813,10 +1795,9 @@ projects:
         summary: "Drobný profesionální web spediční firmy — představení, klíčové výhody, kontakt. Žádný balast, vše podstatné v dohledu."
         description: >-
           VAN spedition potřebovala jednoduchou, ale profesionální
-          prezentaci. Mikroweb postavený na nezbytných sekcích —
-          představení firmy, služby, výhody, kontakt — bez zbytečného
-          balastu, který by zákazníka zdržoval od jediné akce, která
-          dává smysl: ozvat se.
+          prezentaci. Mikroweb postavený na nezbytných sekcích — představení
+          firmy, služby, výhody, kontakt — bez zbytečného balastu. Zákazníka
+          nic nezdržuje od toho, aby se ozval.
         challenge: >-
           Pro spediční firmu nemá smysl obsáhlý web s dvaceti podstránkami.
           Zákazníci spedice potřebují rychle vědět, co firma umí, kdo za ní stojí
@@ -1832,7 +1813,7 @@ projects:
           jako důvěryhodný odkaz v komunikaci a usnadňuje první
           kontakt. Reference 5/5 hvězd potvrzuje, že přístup „dělat
           maximum pro klienta“ tady fungoval.
-        live_hint: "Celý web je jedna stránka: zkuste, jak rychle najdete cenu zásilky a kontakt."
+        live_hint: "Celý web je jedna stránka. Zkuste, jak rychle najdete cenu zásilky a kontakt."
         outcomes:
           - "Mikroweb postavený jen z nezbytných sekcí"
           - "Vše podstatné dostupné z jedné stránky"
@@ -2241,10 +2222,11 @@ projects:
           operace a vedoucímu týmu nabízí přehled v reálném čase.
           Postaveno pro běh ve výrobním prostředí.
         challenge: >-
-          Vychystávání dílů musí běžet rychle a bez chyb — chyba znamená vrácení k
-          regálu, zpoždění a stojící linku. Klasický papír s checklistem v Toyotě
-          tempo neudržel a navíc neumožňoval vedoucím vidět, co se právě děje.
-          Bylo potřeba systém, který pracovníka vede a vedoucímu dává přehled.
+          Vychystávání dílů musí běžet rychle a bez chyb — chyba znamená
+          vrácení k regálu, zpoždění a stojící linku. Klasický papír s
+          checklistem v Toyotě tempo neudržel a navíc neumožňoval vedoucím
+          vidět, co se právě děje. Byl potřeba systém, který pracovníka vede
+          a vedoucímu dává přehled.
         solution: >-
           Webová aplikace s rozhraním pro pracovníky (instrukce, ruční navigace,
           čtečka kódů, časomíra), přehledovou obrazovkou pro vedoucího a
@@ -2400,26 +2382,26 @@ projects:
         subtitle: "Přehled prodejních čísel, který nahradil 30 minut ruční práce denně"
         summary: "Webový dashboard pro vedení tradičního výrobce pralinek — prodejní KPI a klíčové ukazatele dostupné okamžitě, místo 30 minut ručního stahování dat."
         description: >-
-          Choccoboard je webová aplikace pro vedení firmy: ukazuje aktuální
-          prodejní čísla a další klíčové ukazatele z jakéhokoli zařízení. Dříve
-          management trávil 30 minut denně ručním stahováním a skládáním dat — to
-          už není potřeba.
+          Choccoboard je webová aplikace pro vedení firmy. Ukazuje aktuální
+          prodejní čísla a další klíčové ukazatele z jakéhokoli zařízení.
+          Dříve management trávil 30 minut denně ručním stahováním a
+          skládáním dat — to už není potřeba.
         challenge: >-
           Vedení firmy potřebovalo přehled o prodejích a klíčových
-          ukazatelích pro denní rozhodování. Realita: každý den
-          30 minut manuální práce — stažení, slepení, kontrola.
-          Kromě časové ztráty to limitovalo i to, jak často se vůbec
-          člověk na čísla mohl podívat.
+          ukazatelích pro denní rozhodování. Ve skutečnosti to každý den
+          znamenalo 30 minut ruční práce — stáhnout, slepit, zkontrolovat.
+          Kromě ztráty času to omezovalo i to, jak často se člověk vůbec
+          mohl na čísla podívat.
         solution: >-
           Postavil jsem zabezpečený dashboard s autentizací, jednou přehledovou
           obrazovkou s hlavními čísly a filtrováním (tržby podle směny, typu
           produktu, období). Aplikace běží na webu, takže se k ní dostanete
           odkudkoli — z kanceláře, z výroby i z mobilu při schůzce u zákazníka.
         result: >-
-          Manuální 30 minutová denní rutina je pryč. Vedení vidí
-          aktuální čísla okamžitě, kdykoli se rozhodují. Klient
-          v referenci píše o vyšší odbornosti, profesionalitě a
-          o tom, že byla „překonána očekávání“.
+          Třicetiminutová ruční práce každý den je pryč. Vedení vidí
+          aktuální čísla okamžitě, kdykoli se rozhoduje. Klient v referenci
+          píše o vyšší odbornosti, profesionalitě a o tom, že byla
+          „překonána očekávání“.
         outcomes:
           - "Eliminace 30 minut ruční práce denně"
           - "Reálný čas dostupný z webu i mobilu"
@@ -2541,17 +2523,16 @@ projects:
         subtitle: "Štítky do regálů, které se samy poskládají z aktuálních dat"
         summary: "Aplikace pro Toyotu Kolín, která dynamicky generuje regálové informační listy v PDF — uživatel zadá parametry, systém připraví výstup pro tisk."
         description: >-
-          FRL Creator je aplikace, která pro Toyotu Kolín generuje
-          regálové informační listy ve formátu PDF na základě
-          proměnných dat. Uživatel zadá období, importuje data,
-          ověří správnost a vybere skupinu listů — výstup je hotový
-          PDF k tisku.
+          FRL Creator je aplikace, která pro Toyotu Kolín generuje regálové
+          informační listy ve formátu PDF na základě proměnných dat.
+          Uživatel zadá období, importuje data, ověří správnost a vybere
+          skupinu listů — výstupem je hotové PDF k tisku.
         challenge: >-
-          Tvorba regálových štítků se dělala ručně — tedy zdlouhavě,
-          chybově a se zbytečnou závislostí na konkrétním člověku.
-          Bylo potřeba systém, který vstupuje do procesu jako
-          spolehlivý spoluhráč: přijme parametry, importuje aktuální
-          data a vygeneruje konzistentní PDF k tisku.
+          Tvorba regálových štítků se dělala ručně — tedy zdlouhavě, chybově
+          a se zbytečnou závislostí na konkrétním člověku. Byl potřeba
+          systém, který vstoupí do procesu jako spolehlivý spoluhráč. Přijme
+          parametry, importuje aktuální data a vygeneruje konzistentní PDF k
+          tisku.
         solution: >-
           Webová aplikace s rozhraním pro zadávání parametrů, importem externích
           dat, validací a generováním PDF výstupů. Před vývojem proběhla analýza

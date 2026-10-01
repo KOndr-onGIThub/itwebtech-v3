@@ -13,7 +13,7 @@ return [
     // OND-354: threshold plus range instead of a menu of three packages
     // (Ondřej, 26 Sep 2026 on OND-347); the rejection sentence is gone with it.
     // The CZK floor (20,000) is deliberately NOT converted — see lang/en/home.php.
-    'intro'      => 'Most projects land between €3,500 and €8,000. The smallest thing I build is a simple presentation site, from €1,900. What goes on the site and what it costs, you get in writing before I start — and that number is what the invoice says.',
+    'intro'      => 'Most projects land between €3,500 and €8,000. The smallest thing I build is a presentation site, from €1,900. What goes on the site and what it costs, you get in writing before I start — and that number is what the invoice says.',
 
     // OND-135 P2 iter 5 — plan §3.1 hero (page-mark + amber accent).
     // OND-135 cleanup (2026-05-14): page_mark_index removed — agency-
@@ -127,7 +127,7 @@ return [
     // OND-354: replaces the apologetic "An exception, not the standard entry
     // point." on the lowest level. It does not turn the person away, it says
     // what the money does not buy.
-    'entry_note' => 'For €1,900 I\'ll build you a simple presentation site. It will be fast, it will work properly on a phone, and no link to your enquiry form will be broken. Don\'t expect it to start bringing in work on its own — that takes more work than the smallest scope allows. But it will be done properly.',
+    'entry_note' => 'For €1,900 I\'ll build you a presentation site. It will be fast and it will work properly on a phone. Don\'t expect it to start bringing in work on its own — that takes more work than the smallest scope allows. But it will be done properly.',
 
     'note' => 'I am not registered for VAT — the prices above are final, no VAT is added.',
 
@@ -203,11 +203,12 @@ return [
         'down' => [
             'label' => 'Lowers the price',
             'items' => [
-                'Complete, quick answers to my questions',
                 'One person on your side who makes the decisions',
+                'Quick back-and-forth on materials',
+                'Only what your customers really need on the site',
                 'Photos you already have in good quality',
+                'A logo and brand colours you already have',
                 'One language',
-                'You fill in the content yourself after training',
             ],
         ],
     ],

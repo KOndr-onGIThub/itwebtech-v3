@@ -33,7 +33,7 @@
     @endif
 
     <p class="pd-sign">
-        &mdash; Ondřej Kriška
+        &mdash; {{ __('home.inline_form.confirmation.signature') }}
         <svg class="pd-sign__mark" viewBox="0 0 220 60" fill="none" aria-hidden="true">
             <path d="M4 40C16 12 28 8 34 26C40 44 46 20 54 18C62 16 60 38 70 38C82 38 84 10 96 10C110 10 104 44 118 44C136 44 132 14 150 14C166 14 158 34 172 30C182 27 184 16 194 16C202 16 200 26 210 24"
                   stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>

@@ -26,7 +26,7 @@ return [
         'page_mark_label' => 'PROJEKTE',
         'upline'          => 'Ausgewählte Arbeiten für echte Unternehmen.',
         'heading_html'    => 'Was ich für Sie<br><em>bauen könnte</em>.',
-        'subline'         => 'Websites und Anwendungen für einen Dachdecker, eine Zahnarztpraxis, einen Campingplatz und ein Autowerk. Wählen Sie die Branche, die Ihrer am nächsten kommt, sehen Sie sich die Websites live an und schreiben Sie mir.',
+        'subline'         => 'Websites und Anwendungen für Immobilienmaklerinnen, eine Zahnarztpraxis, ein Autowerk und weitere. Wählen Sie die Branche, die Ihrer am nächsten kommt, sehen Sie sich die Websites live an und schreiben Sie mir.',
     ],
 
     'info_client'      => 'Kunde',
@@ -39,7 +39,7 @@ return [
         'heading'    => 'Das stecke ich in Projekte',
         'items'      => [
             ['title' => 'Expertise und Praxis',      'description' => 'Dank 18 Jahren Erfahrung bei Toyota habe ich einzigartige Erfahrung in der Prozessoptimierung und Webanwendungsentwicklung.'],
-            ['title' => 'Stabilität und Robustheit', 'description' => 'Ich baue keine Websites aus fremden Add-ons, die beim ersten Update kaputtgehen. Ich schreibe eigenen Code, der hält.'],
+            ['title' => 'Stabilität und Robustheit', 'description' => 'Ich baue keine Websites aus fremden Add-ons, die beim ersten Update kaputtgehen. Ich programmiere von Grund auf, damit es hält.'],
             ['title' => 'Gründliches Testen',        'description' => 'Ich überlasse nichts dem Zufall. Ich teste Apps und Websites während der Entwicklung und danach.'],
             ['title' => 'Geschwindigkeit und Design','description' => 'Priorität hat schnelles Laden und modernes Design für einen positiven ersten Eindruck.'],
             ['title' => 'Maßgeschneiderte Lösungen', 'description' => 'Jedes Projekt ist für mich einzigartig und ich suche immer die beste Lösung für jeden Kunden.'],
@@ -122,9 +122,11 @@ return [
         'subheading'    => 'Schnelle Einordnung',
         'heading'       => 'Lohnt sich die Umsetzung jetzt?',
         'items'         => [
-            'Ihre Website hat Traffic, aber Anfragen kommen unregelmäßig.',
-            'Ihr Angebot ist unklar oder im Inhalt versteckt.',
-            'Es fehlt ein klarer Ablauf nach dem Absenden einer Anfrage.',
+            'Ihre Website hat Besucher, aber Anfragen kommen nur ab und zu.',
+            'Kunden fragen Sie nach Dingen, die sie auf Ihrer Website finden sollten.',
+            'Auf dem Handy ist Ihre Website schlecht lesbar oder schwer zu bedienen.',
+            'Ihre Website zeigt nicht mehr, was Sie heute anbieten und zu welchem Preis.',
+            'Jede kleine Änderung an der Website müssen Sie beauftragen und darauf warten.',
             // OND-201 (Befund 5.1): „Business-Tool" versprach ein Ergebnis,
             // für das ich allein nicht einstehen kann.
             'Sie wollen keine weitere „schöne Website“, sondern etwas, das auf der realen Arbeitsweise Ihrer Firma aufbaut.',

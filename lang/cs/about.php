@@ -4,12 +4,12 @@ return [
 
     'meta' => [
         'title'       => 'O mně — Ondřej Kriška, ONDRAWEB',
-        'description' => 'Jmenuju se Ondřej Kriška. Stavím weby a webové aplikace na vlastním kódu. Pracuju sám a s klientem jednám napřímo.',
+        'description' => 'Jmenuju se Ondra Kriška. Weby a webové aplikace programuju od základu. Pracuju sám a s klientem jednám napřímo.',
     ],
 
     'subheading' => 'O mně',
     'heading'    => 'Kdo vám web postaví',
-    'intro'      => 'Jmenuju se Ondřej Kriška. Stavím weby a webové aplikace na vlastním kódu. Pracuju sám a s klientem jednám napřímo. Žádný obchodník, žádný koordinátor mezi námi.',
+    'intro'      => 'Jmenuju se Ondra Kriška. Weby a webové aplikace programuju od základu. Pracuju sám a s klientem jednám napřímo. Žádný obchodník, žádný koordinátor mezi námi.',
 
     'portrait_alt' => 'Portrét Ondřeje Krišky',
     'video_aria' => 'Video: Ondřej Kriška — kdo jsem a jak stavím weby',
@@ -25,11 +25,11 @@ return [
         ],
         [
             'heading' => 'Jak pracuju',
-            'text'    => 'Jsem zkušený programátor webů. Píšu vlastní kód od základu. Nestavím weby ze stavebnic typu WordPress, které se skládají z hotových dílů od různých autorů a časem se rozbíjejí. Weby, které dodávám, jsou bezúdržbové. Nepoužívám hotové doplňky od cizích firem, které se musí pořád aktualizovat a opravovat. To bývá nejčastější zdroj problémů a výpadků. Pracuju sám. To znamená, že mluvíte přímo se mnou od první zprávy až po spuštění. Kód, který napíšu, patří vám. Umím pracovat i pro zahraničí. Mluvím a píšu česky. Anglicky komunikuju písemně. Německy jen písemně, s pomocí překladu.',
+            'text'    => 'Jsem zkušený programátor webů. Každý web programuju od základu. Nestavím weby ze stavebnic typu WordPress, které se skládají z hotových dílů od různých autorů a časem se rozbíjejí. Weby, které dodávám, jsou bezúdržbové. Nepoužívám hotové doplňky od cizích firem, které se musí pořád aktualizovat a opravovat. To bývá nejčastější zdroj problémů a výpadků. Pracuju sám. To znamená, že mluvíte přímo se mnou od první zprávy až po spuštění. Kód, který napíšu, patří vám, a pokračovat na něm může i jiný vývojář. Umím pracovat i pro zahraničí. Mluvím česky, písemně se domluvíme v jakémkoli jazyce.',
         ],
         [
             'heading' => 'Co nedělám',
-            'text'    => 'Nedělám nejlevnější weby na trhu. Neslibuju, kolik vám web vydělá, to nemám jak ovlivnit. Beru jen zakázky, které odvedu pořádně. Když vím, že vám za rozumnou cenu nepomůžu, řeknu to rovnou.',
+            'text'    => 'Nedělám nejlevnější weby na trhu. Neslibuju, kolik vám web vydělá, protože to ovlivňuje víc věcí než samotný web. Beru jen zakázky, které odvedu pořádně. Když vím, že vám za rozumnou cenu nepomůžu, řeknu to rovnou.',
         ],
     ],
 

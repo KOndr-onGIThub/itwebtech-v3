@@ -1,24 +1,24 @@
 <?php
 
 // OND-397 — /recenze (předloha OND-396 §7). Texty recenzí jsou
-// v testimonials.php, seskupení a počty na profilech v config/reviews.php.
-// Číslo 26 = Google 14 + Firmy.cz 12 (inventura OND-395), totéž jako
+// v testimonials.php, seskupení a odkazy na profily v config/reviews.php.
+// OND-490 (bod 5): počet hodnocení se nepíše, jen „5,0 z 5“ — totéž jako
 // v pruhu na homepage (`home.social_proof.reviews`).
 
 return [
 
     'meta' => [
         'title'       => 'Recenze — Ondřej Kriška, ONDRAWEB',
-        'description' => '5,0 z 26 hodnocení na Googlu a Firmy.cz. Co o spolupráci napsali klienti, u každé recenze odkaz na originál.',
+        'description' => 'Hodnocení 5,0 z 5 na Googlu a Firmy.cz. Co o spolupráci napsali klienti, u každé recenze odkaz na originál.',
     ],
 
     'eyebrow'      => 'Recenze',
-    'heading_html' => '5,0 z <em>26 hodnocení</em> na Googlu a Firmy.cz',
+    'heading_html' => '<em>5,0 z 5</em> na Googlu a Firmy.cz',
     'intro'        => 'Co o spolupráci napsali klienti. U každé recenze je odkaz na originál.',
 
     'profiles' => [
-        'google'   => 'Google · :count hodnocení',
-        'firmy_cz' => 'Firmy.cz · :count hodnocení',
+        'google'   => 'Hodnocení na Googlu',
+        'firmy_cz' => 'Hodnocení na Firmy.cz',
     ],
 
     // Nadpisy jsou otázky ve třetí osobě, ne tvrzení (předloha §3).

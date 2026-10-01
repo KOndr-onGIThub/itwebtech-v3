@@ -189,10 +189,10 @@ class BlogContentDeSeeder extends Seeder
                     <p>Ich mache es so: Zuerst gehen wir durch, was Sie brauchen. Dann schreibe ich Ihnen eine Spezifikation, in der schwarz auf weiß steht, was ich baue und zu welchem Preis. Dieser Preis gilt. Die Rechnung am Ende entspricht der Spezifikation vom Anfang. Wenn Sie unterwegs merken, dass Sie etwas zusätzlich wollen, nenne ich Ihnen den Preis vorher und Sie entscheiden.</p>
                     <h2>Wofür Sie eigentlich bezahlen</h2>
                     <p>Sie bezahlen meine Zeit und das, was ich damit anzufangen weiß. Sie kaufen keine Lizenz für ein Template und keine Stunden eines Vertrieblers, der Ihnen die Website verkauft hat und dann verschwunden ist. Ich arbeite allein, im Preis stecken also kein Agentur-Overhead und kein Koordinator, der mir Ihre E-Mails weiterleitet.</p>
-                    <p>Websites schreibe ich mit eigenem Code. Ich baue sie nicht aus Baukästen und fremden Plug-ins zusammen, die ständig aktualisiert werden müssen und irgendwann kaputtgehen. Das ist am Anfang teurer und mit der Zeit günstiger, weil Sie nichts zu reparieren haben.</p>
+                    <p>Websites programmiere ich von Grund auf. Ich baue sie nicht aus Baukästen und fremden Plug-ins zusammen, die ständig aktualisiert werden müssen und irgendwann kaputtgehen. Das ist am Anfang teurer und mit der Zeit günstiger, weil Sie nichts zu reparieren haben.</p>
                     <h2>Was es bei mir kostet</h2>
-                    <p>Die meisten Projekte liegen zwischen 3.500 und 8.000 €. Das Kleinste, was ich baue, ist eine einfache Präsentationswebsite ab 1.900 €. Was Ihre kostet, hängt vor allem davon ab, wie viel Arbeit nötig ist, damit die Website tut, was sie soll.</p>
-                    <p><strong>Präsentationswebsite — damit Kunden Sie prüfen können.</strong> Wer Sie sind, was Sie tun und wie man Sie erreicht. Für Selbstständige und kleine Unternehmen, bei denen ein größerer Umfang keinen Sinn ergibt. Sie wird schnell sein, auf dem Handy sauber funktionieren, und kein Link zum Anfrageformular wird ins Leere führen. Erwarten Sie nicht, dass sie von allein Aufträge bringt — dafür braucht es mehr Arbeit, als der kleinste Umfang zulässt. Aber sie wird ordentlich gemacht.</p>
+                    <p>Die meisten Projekte liegen zwischen 3.500 und 8.000 €. Das Kleinste, was ich baue, ist eine Präsentationswebsite ab 1.900 €. Was Ihre kostet, hängt vor allem davon ab, wie viel Arbeit nötig ist, damit die Website tut, was sie soll.</p>
+                    <p><strong>Präsentationswebsite — damit Kunden Sie prüfen können.</strong> Wer Sie sind, was Sie tun und wie man Sie erreicht. Für Selbstständige und kleine Unternehmen, bei denen ein größerer Umfang keinen Sinn ergibt. Sie wird schnell sein und auf dem Handy sauber funktionieren. Erwarten Sie nicht, dass sie von allein Aufträge bringt — dafür braucht es mehr Arbeit, als der kleinste Umfang zulässt. Aber sie wird ordentlich gemacht.</p>
                     <p><strong>Firmenwebsite — damit Kunden verstehen, warum gerade Sie.</strong> Mehr Leistungen, mehr Sprachen, Referenzen und Blog. Eine Website nach Maß mit einer einfachen Inhaltsverwaltung, sodass Sie Texte, Fotos oder Referenzen selbst ändern. Das bestellen die meisten Firmen.</p>
                     <p><strong>Online-Shops und Anwendungen — damit das System für Sie arbeitet.</strong> Onlineshop, Reservierungssystem oder eine Anwendung nach Maß. Der Umfang steht nicht vorher fest, der Preis ergibt sich daraus, was das System können muss und an welche Systeme es angebunden wird.</p>
                     <p>Die Zahl der Seiten entscheidet dabei nicht über den Preis. Entscheidend ist, wie viele verschiedene Arten von Seiten die Website braucht. Ein Blog ist eine Art: Ich baue ihn einmal, und es ist egal, ob darauf ein Artikel steht oder hundert. Die Artikel zu planen und zu schreiben ist aber eigene Arbeit. Genauso ist es mit einem Produktkatalog oder mit Referenzen. Eine Website mit einer Seite kann deshalb mehr kosten als eine mit fünf, wenn sie mehr erklären und können muss.</p>
@@ -212,11 +212,12 @@ class BlogContentDeSeeder extends Seeder
                     </ul>
                     <h2>Was den Preis senkt</h2>
                     <ul>
-                    <li><strong>Fotos, die Sie bereits in guter Qualität haben.</strong> Nichts muss erst fotografiert oder gekauft werden.</li>
                     <li><strong>Eine Person auf Ihrer Seite, die entscheidet.</strong> Wir warten nicht auf die Freigabe von fünf Leuten.</li>
-                    <li><strong>Vollständige und schnelle Antworten auf meine Fragen.</strong> Aus ihnen schreibe ich die Texte, und je früher ich sie vollständig habe, desto weniger Zeit geht für Rückfragen drauf.</li>
+                    <li><strong>Schnelle Abstimmung bei den Unterlagen.</strong> Die Texte schreibe ich aus Ihren Antworten. Je schneller wir uns abstimmen, desto weniger Zeit geht für Warten und Rückfragen drauf.</li>
+                    <li><strong>Auf der Website nur das, was Ihre Kunden wirklich brauchen.</strong> Die Website muss nicht alles, was Sie tun, bis ins letzte Detail beschreiben. Es reicht, worauf Kunden ihre Entscheidung stützen. Das kostet weniger und liest sich besser.</li>
+                    <li><strong>Fotos, die Sie bereits in guter Qualität haben.</strong> Nichts muss erst fotografiert oder gekauft werden.</li>
+                    <li><strong>Logo und Firmenfarben, die Sie schon haben.</strong> Das Aussehen der Website muss nicht bei null entworfen werden.</li>
                     <li><strong>Eine Sprache.</strong> Eine Version der Website, die gebaut und gepflegt werden muss.</li>
-                    <li><strong>Sie pflegen die Inhalte selbst.</strong> Ich zeige Ihnen, wie es geht, und Texte und Fotos stellen Sie statt mir auf die Website.</li>
                     </ul>
                     <h2>Warum ich nicht der Günstigste bin</h2>
                     <p>Weil ich es nicht sein will. Eine Website aus dem Template für ein paar hundert Euro ergibt Sinn, wenn Sie nur eine Visitenkarte im Internet brauchen. Zu dem Preis können Sie sie ruhig haben, das sage ich Ihnen geradeheraus und werde Sie nicht umstimmen.</p>
@@ -337,7 +338,7 @@ class BlogContentDeSeeder extends Seeder
                     HTML,
                 'content_2'   => <<<'HTML'
                     <h2>Was eine Website nicht kann</h2>
-                    <p>Ich verspreche Ihnen nicht, wie viele Anfragen sie bringt. Ich habe keinen Einfluss darauf, wie die Nachfrage in Ihrer Branche aussieht, welchen Preis Sie haben und wie schnell Sie antworten. Wer Ihnen diese Zahl verspricht, rät.</p>
+                    <p>Ich verspreche Ihnen nicht, wie viele Anfragen sie bringt. Das hängt von der Nachfrage in Ihrer Branche ab, von Ihren Preisen und davon, wie schnell Sie antworten. Wer Ihnen diese Zahl verspricht, rät.</p>
                     <p>Was ich beeinflussen kann, ist die Arbeit, die ich abliefere. Dass die Website schnell und verständlich ist, auf dem Handy gut aussieht und dass in zwei Jahren nichts daran auseinanderfällt.</p>
                     <h2>Bevor Sie sich entscheiden</h2>
                     <p>Versuchen Sie, eine Frage zu beantworten. Wenn morgen ein Mensch auf Ihre Website käme, der noch nie von Ihnen gehört hat — würde er in zehn Sekunden verstehen, was Sie machen und ob es etwas für ihn ist? Wenn nicht, liegt dort das Problem, und es spielt keine Rolle, ob Sie eine Website haben oder nicht. Was eine Website sonst noch erfüllen muss, damit sie funktioniert, schreibe ich im Artikel <a href="/de/blog/erfolgreiche-website-erstellen">Erfolgreiche Website erstellen</a>.</p>
@@ -357,7 +358,7 @@ class BlogContentDeSeeder extends Seeder
                 'content_1'   => <<<'HTML'
                     <h2>Fünf Gründe, warum ein Relaunch Sinn ergibt</h2>
                     <p><strong>1. Die Website lässt sich nicht pflegen.</strong> Eine geänderte Telefonnummer bedeutet, jemandem zu schreiben, der sich in einer Woche meldet. Das allein ist einen Relaunch wert.</p>
-                    <p><strong>2. Auf dem Handy ist sie unbrauchbar.</strong> Die meisten Menschen schauen heute vom Handy auf eine Website. Wenn sie dort zoomen und seitwärts schieben müssen, gehen sie weg.</p>
+                    <p><strong>2. Auf dem Handy ist sie unbrauchbar.</strong> Etwa die Hälfte der Menschen schaut heute vom Handy auf eine Website. Wenn sie dort zoomen und seitwärts schieben müssen, gehen sie weg.</p>
                     <p><strong>3. Die Website fällt auseinander oder stürzt ab.</strong> Typisch bei Baukästen, die aus Plug-ins verschiedener Autoren zusammengesteckt sind. Ein Update und das Bestellformular funktioniert nicht mehr.</p>
                     <p><strong>4. Die Firma hat sich verändert.</strong> Sie machen etwas anderes, wollen etwas anderes verkaufen, liegen in einer anderen Preisklasse. Die Website ist dort geblieben, wo Sie vor fünf Jahren waren.</p>
                     <p><strong>5. Die Websites Ihrer Mitbewerber sehen eine Klasse besser aus.</strong> Der Kunde vergleicht Sie nebeneinander, ob Sie wollen oder nicht. Wie Sie sich die Mitbewerber gründlich ansehen, beschreibe ich im Artikel über die <a href="/de/blog/wettbewerbsanalyse-website">Wettbewerbsanalyse</a>.</p>
@@ -377,7 +378,7 @@ class BlogContentDeSeeder extends Seeder
                     <p><strong>Niemand übernimmt die Inhalte.</strong> Referenzen, Fotos von Umsetzungen, Dokumente zum Herunterladen. Es ist meistens mehr, als man erwartet.</p>
                     <h2>Wie ich an einen Relaunch herangehe</h2>
                     <p>Zuerst schaue ich, was auf der alten Website funktioniert, und das behalte ich. Dann gehen wir durch, was die Website tun soll und wem sie es sagen soll. Erst danach geht es darum, wie sie aussehen wird. Die Seitenadressen regle ich vor dem Start, nicht danach.</p>
-                    <p>Den Code schreibe ich selbst, ohne fertige Plug-ins fremder Autoren. Genau die sind meistens der Grund, warum eine Website nach einiger Zeit auseinanderfällt und neu gemacht werden muss.</p>
+                    <p>Jede Website programmiere ich von Grund auf, ohne fertige Plug-ins fremder Autoren. Genau die sind meistens der Grund, warum eine Website nach einiger Zeit auseinanderfällt und neu gemacht werden muss.</p>
                     HTML,
             ],
 

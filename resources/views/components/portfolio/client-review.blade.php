@@ -7,7 +7,7 @@
      V en/de je citace překlad — pod odkazy proto stojí stávající poznámka
      `home.testimonials.note`, stejně jako na /recenze a na homepage.
      „Všechna hodnocení →" vede na začátek /recenze, ne na kotvu: člověk má
-     nejdřív vidět číslo (26 hodnocení), pak hledat jméno. --}}
+     nejdřív vidět číslo (5,0 z 5), pak hledat jméno. --}}
 <figure class="pd-testi__item pd-story__review">
     <x-testimonial-by :person="$person" :size="56" />
     <blockquote class="pd-testi__text">{{ __('home.quote_marks.open') }}{{ $person['text'] }}{{ __('home.quote_marks.close') }}</blockquote>

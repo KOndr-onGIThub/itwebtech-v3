@@ -20,8 +20,8 @@
      odkazy na oba profily → recenze seskupené podle otázky →
      jedna výzva.
 
-     Číslo v H1 je totéž jako v pruhu na homepage (26 hodnocení
-     na Googlu a Firmy.cz). Kartiček je 22 (23 lidí) a to je
+     Číslo v H1 je totéž jako v pruhu na homepage (5,0 z 5 na Googlu
+     a Firmy.cz, OND-490 bez počtu hodnocení). Kartiček je 22 (23 lidí) a to je
      správně: čtyři lidé hodnotili na obou platformách, Veselá
      a Podaná jsou z Facebooku. Počet kartiček se proto na stránce
      nepíše. Kdo hodnotil na obou platformách, má na kartičce oba
