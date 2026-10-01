@@ -26,7 +26,7 @@ return [
         'page_mark_label' => 'PROJECTS',
         'upline'          => 'Selected work for real businesses.',
         'heading_html'    => 'What I could<br><em>build for you</em>.',
-        'subline'         => 'Websites and apps I\'ve built for a roofer, a dental practice, a campsite and a car plant. Pick the field closest to yours, click through the live sites and tell me what you\'re working on.',
+        'subline'         => 'Websites and apps I\'ve built for real-estate agents, a dental practice, a car plant and others. Pick the field closest to yours, click through the live sites and tell me what you\'re working on.',
     ],
 
     'info_client'      => 'Client',
@@ -39,7 +39,7 @@ return [
         'heading'    => 'I put the following into projects',
         'items'      => [
             ['title' => 'Expertise and practice',  'description' => 'Thanks to 18 years of experience at Toyota, I have unique expertise in process optimisation and web application development.'],
-            ['title' => 'Stability and robustness','description' => 'I don\'t build websites from third-party add-ons that break with the next update. I write my own code that holds up.'],
+            ['title' => 'Stability and robustness','description' => 'I don\'t build websites from third-party add-ons that break with the next update. I build from scratch, so it holds up.'],
             ['title' => 'Thorough testing',        'description' => 'I leave nothing to chance. I test apps and websites during development and after completion.'],
             ['title' => 'Speed and design',        'description' => 'Fast loading and modern design come first — they ensure a positive first impression and a pleasant user experience.'],
             ['title' => 'Customised solutions',    'description' => 'Every project is unique to me and I always look for the best solution adapted to each client\'s specific needs and goals.'],
@@ -122,9 +122,11 @@ return [
         'subheading'    => 'Quick qualification',
         'heading'       => 'Does it make sense to solve now?',
         'items'         => [
-            'Your website has traffic but inquiries are inconsistent.',
-            'Your service offer is unclear or buried in content.',
-            'There is no clear next step after inquiry submission.',
+            'Your website gets visitors, but enquiries only come in now and then.',
+            'Customers keep asking you things they should be able to find on your website.',
+            'Your website is hard to read or use on a phone.',
+            'Your website no longer matches what you offer today and at what price.',
+            'Every small change to your website means ordering it and waiting.',
             // OND-201 (finding 5.1): "a business tool" implied a result I
             // cannot deliver on the client's behalf.
             'You do not want another "nice website" but something built around how your company actually works.',

@@ -144,13 +144,13 @@ class BlogContentSeeder extends Seeder
                     <p>Dělám to tak, že si nejdřív projdeme, co potřebujete. Pak vám napíšu specifikaci, kde je černé na bílém, co postavím a za kolik. Ta cena platí. Faktura na konci odpovídá specifikaci na začátku. Když v průběhu zjistíte, že chcete něco navíc, řeknu vám cenu dopředu a rozhodnete se vy.</p>
                     <h2>Za co vlastně platíte</h2>
                     <p>Platíte můj čas a to, co s ním umím udělat. Nekupujete licenci k šabloně ani hodiny obchodníka, který vám web prodal a pak zmizel. Pracuju sám, takže v ceně není agenturní režie ani koordinátor, který mi přeposílá vaše e-maily.</p>
-                    <p>Weby píšu vlastním kódem. Nestavím je z hotových stavebnic a cizích doplňků, které se musí pořád aktualizovat a časem se rozbijí. Je to dražší na začátku a levnější v čase, protože nemáte co opravovat.</p>
+                    <p>Weby programuju od základu. Nestavím je z hotových stavebnic a cizích doplňků, které se musí pořád aktualizovat a časem se rozbijí. Je to dražší na začátku a levnější v čase, protože nemáte co opravovat.</p>
                     <h2>Kolik to u mě vychází</h2>
-                    <p>Většina projektů vychází mezi 55 a 150 tisíci korunami. Nejmenší věc, kterou stavím, je jednoduchý prezentační web od 20 000 Kč. Kolik bude stát ten váš, určuje hlavně to, kolik práce je potřeba, aby web dělal, co má.</p>
-                    <p><strong>Prezentační web — aby si vás zákazník ověřil.</strong> Kdo jste, co děláte a jak vás zastihnout. Pro živnostníky a malé firmy, kterým větší rozsah nedává smysl. Bude rychlý, na telefonu se bude ovládat dobře a nebude na něm rozbitý odkaz na poptávku. Nečekejte od něj, že vám sám začne vozit zakázky — na to je potřeba víc práce, než se za tu cenu dá odvést. Ale hotový bude poctivě.</p>
+                    <p>Většina projektů vychází mezi 55 a 150 tisíci korunami. Nejmenší věc, kterou stavím, je prezentační web od 20 000 Kč. Kolik bude stát ten váš, určuje hlavně to, kolik práce je potřeba, aby web dělal, co má.</p>
+                    <p><strong>Prezentační web — aby si vás zákazník ověřil.</strong> Kdo jste, co děláte a jak vás zastihnout. Pro živnostníky a malé firmy, kterým větší rozsah nedává smysl. Bude rychlý a na telefonu se bude ovládat dobře. Nečekejte od něj, že vám sám začne vozit zakázky — na to je potřeba víc práce, než se za tu cenu dá odvést. Ale hotový bude poctivě.</p>
                     <p><strong>Firemní web — aby zákazník pochopil, proč právě vy.</strong> Víc služeb, víc jazyků, reference i blog. Web na míru s jednoduchou správou obsahu, takže si texty, fotky nebo reference měníte sami. Tohle si objednává většina firem.</p>
                     <p><strong>E-shop a aplikace — aby systém pracoval za vás.</strong> E-shop, rezervační systém nebo aplikace na míru. Rozsah není daný dopředu, cena vychází z toho, co má systém umět a na jaké systémy se napojuje.</p>
-                    <p>Počet stránek přitom o ceně nerozhoduje. Rozhoduje, kolik různých typů stránek web potřebuje. Blog je jeden typ: postavím ho jednou a je jedno, jestli na něm bude jeden článek, nebo sto. Vymyslet a napsat ty články je ale samostatná práce. Stejné je to s katalogem produktů nebo s referencemi. Web o jedné stránce tak může stát víc než web o pěti, když toho musí víc vysvětlit a umět.</p>
+                    <p>Počet stránek přitom o ceně nerozhoduje. Rozhoduje, kolik různých typů stránek web potřebuje. Blog je jeden typ. Postavím ho jednou a je jedno, jestli na něm bude jeden článek, nebo sto. Vymyslet a napsat ty články je ale samostatná práce. Stejné je to s katalogem produktů nebo s referencemi. Web o jedné stránce tak může stát víc než web o pěti, když toho musí víc vysvětlit a umět.</p>
                     <p>Nejsem plátce DPH. Cena, kterou vám řeknu, je konečná. Co přesně je v jednotlivých úrovních, máte rozepsané v <a href="/cenik">ceníku</a>.</p>
                     HTML,
                 'content_mid' => <<<'HTML'
@@ -167,11 +167,12 @@ class BlogContentSeeder extends Seeder
                     </ul>
                     <h2>Co cenu sníží</h2>
                     <ul>
-                    <li><strong>Fotky, které už máte v dobré kvalitě.</strong> Nic se nemusí fotit ani kupovat.</li>
                     <li><strong>Jeden člověk na vaší straně, který rozhoduje.</strong> Nečekáme na schválení od pěti lidí.</li>
-                    <li><strong>Úplné a rychlé odpovědi na moje otázky.</strong> Z nich píšu texty, a čím dřív je mám celé, tím míň času padne na doptávání.</li>
+                    <li><strong>Rychlá domluva nad podklady.</strong> Z vašich odpovědí píšu texty. Čím rychleji se domluvíme, tím míň času padne na čekání a doptávání.</li>
+                    <li><strong>Na webu jen to, co zákazníky opravdu zajímá.</strong> Web nemusí popsat všechno, co děláte, do posledního detailu. Stačí to, podle čeho se zákazník rozhoduje. Je to levnější a líp se to čte.</li>
+                    <li><strong>Fotky, které už máte v dobré kvalitě.</strong> Nic se nemusí fotit ani kupovat.</li>
+                    <li><strong>Logo a firemní barvy, které už máte.</strong> Vzhled webu se nemusí navrhovat od nuly.</li>
                     <li><strong>Jeden jazyk.</strong> Jedna verze webu, kterou stačí postavit a spravovat.</li>
-                    <li><strong>Obsah si plníte sami.</strong> Ukážu vám, jak na to, a texty a fotky do webu vkládáte vy, ne já.</li>
                     </ul>
                     <h2>Proč nejsem nejlevnější</h2>
                     <p>Protože nechci být. Web v šabloně za pár tisíc dává smysl, když potřebujete jen vizitku na internetu. Za tu cenu ho klidně mějte, řeknu vám to rovnou a nebudu vás přemlouvat.</p>
@@ -289,7 +290,7 @@ class BlogContentSeeder extends Seeder
                     HTML,
                 'content_2'   => <<<'HTML'
                     <h2>Co web nedokáže</h2>
-                    <p>Neslíbím vám, kolik poptávek přinese. Nemám jak ovlivnit, co je ve vašem oboru za poptávku, jakou máte cenu a jak rychle odpovídáte. Kdokoli vám tohle číslo slíbí, hádá.</p>
+                    <p>Neslíbím vám, kolik poptávek přinese. Záleží na tom, kolik lidí ve vašem oboru poptává, jakou máte cenu a jak rychle odpovídáte. Kdokoli vám tohle číslo slíbí, hádá.</p>
                     <p>Co ovlivnit můžu, je práce, kterou odvedu. Že web bude rychlý, srozumitelný, bude dobře vypadat na telefonu, a že se v něm za dva roky nebude nic rozpadat.</p>
                     <h2>Než se rozhodnete</h2>
                     <p>Zkuste si odpovědět na jednu otázku. Kdyby na váš web přišel zítra člověk, který o vás nikdy neslyšel, pochopil by do deseti vteřin, co děláte a jestli je to pro něj? Když ne, tam je ten problém, a je jedno, jestli web máte nebo ne. Co dalšího musí web splnit, aby fungoval, píšu v článku <a href="/zapisky/jak-vytvorit-uspesnou-webovou-stranku">Jak vytvořit úspěšnou webovou stránku</a>.</p>
@@ -308,7 +309,7 @@ class BlogContentSeeder extends Seeder
                 'content_1'   => <<<'HTML'
                     <h2>Pět důvodů, kdy redesign dává smysl</h2>
                     <p><strong>1. Web nejde spravovat.</strong> Změna telefonního čísla znamená napsat někomu, kdo se ozve za týden. Tohle samo o sobě stojí za předělání.</p>
-                    <p><strong>2. Na telefonu je to k nepoužití.</strong> Většina lidí se dnes dívá na web z telefonu. Když se na něm musí zvětšovat a posouvat do stran, odejdou.</p>
+                    <p><strong>2. Na telefonu je to k nepoužití.</strong> Zhruba polovina lidí se dnes dívá na web z telefonu. Když se na něm musí zvětšovat a posouvat do stran, odejdou.</p>
                     <p><strong>3. Web se rozpadá nebo padá.</strong> Typicky u stavebnic poskládaných z doplňků od různých autorů. Jedna aktualizace a nefunguje objednávkový formulář.</p>
                     <p><strong>4. Změnila se firma.</strong> Děláte něco jiného, něco jiného chcete prodávat, máte jinou cenovou hladinu. Web zůstal tam, kde jste byli před pěti lety.</p>
                     <p><strong>5. Weby lidí, se kterými soutěžíte, vypadají o třídu líp.</strong> Zákazník vás srovnává vedle sebe, ať chcete nebo ne. Jak se na ně podívat pořádně, popisuju v článku o <a href="/zapisky/zakladni-krok-pro-uspesny-webdesign-analyza-konkurence">analýze konkurence</a>.</p>
@@ -322,13 +323,13 @@ class BlogContentSeeder extends Seeder
                     HTML,
                 'content_2'   => <<<'HTML'
                     <h2>Co se u redesignu nejčastěji pokazí</h2>
-                    <p><strong>Zahodí se adresy stránek.</strong> Nový web má jinou strukturu a staré adresy přestanou fungovat. Vyhledávače i odkazy z cizích webů najednou vedou do prázdna. Řešení je jednoduché a dělá se před spuštěním: stará adresa musí trvale přesměrovávat na tu novou. Chci, abyste to po komkoli, kdo vám web dělá, vyžadovali. Proč jsou pozice ve vyhledávání tak cenné, vysvětluju v článku <a href="/zapisky/co-je-seo-a-proc-je-tak-dulezite">Co je SEO</a>.</p>
+                    <p><strong>Zahodí se adresy stránek.</strong> Nový web má jinou strukturu a staré adresy přestanou fungovat. Vyhledávače i odkazy z cizích webů najednou vedou do prázdna. Řešení je jednoduché a dělá se před spuštěním. Stará adresa musí trvale přesměrovávat na tu novou. Chci, abyste to po komkoli, kdo vám web dělá, vyžadovali. Proč jsou pozice ve vyhledávání tak cenné, vysvětluju v článku <a href="/zapisky/co-je-seo-a-proc-je-tak-dulezite">Co je SEO</a>.</p>
                     <p><strong>Předělá se jen vzhled.</strong> Texty se překopírují jedna ku jedné, včetně těch, kterým nikdo nerozuměl. Web pak vypadá nově a funguje stejně špatně. Proč je obsah důležitější než vzhled, píšu v článku <a href="/zapisky/co-je-dulezitejsi-design-nebo-obsah-webovych-stranek">Design, nebo obsah?</a></p>
                     <p><strong>Zmizí věci, které fungovaly.</strong> Někdy má starý web stránku, na kterou chodí půlka návštěvnosti. Než se něco maže, je potřeba se podívat do statistik.</p>
                     <p><strong>Nikdo nepřevezme obsah.</strong> Reference, fotky z realizací, dokumenty ke stažení. Bývá toho víc, než se čeká.</p>
                     <h2>Jak k redesignu přistupuju já</h2>
                     <p>Nejdřív se podívám, co na starém webu funguje, a to zachovám. Pak projdeme, co má web dělat a komu to má říct. Teprve potom se řeší, jak to bude vypadat. Adresy stránek řeším před spuštěním, ne po něm.</p>
-                    <p>Kód píšu vlastní, bez hotových doplňků od cizích autorů. Právě ty bývají důvod, proč se web po čase rozpadne a předělává se znovu.</p>
+                    <p>Web programuju od základu, bez hotových doplňků od cizích autorů. Právě ty bývají důvod, proč se web po čase rozpadne a předělává se znovu.</p>
                     HTML,
             ],
 
@@ -458,7 +459,7 @@ class BlogContentSeeder extends Seeder
             // 5 — Co je SEO (slug co-je-seo-a-proc-je-tak-dulezite, beze změny)
             // ----------------------------------------------------------------
             5 => [
-                'title'       => 'Co je SEO a proč je důležité: vysvětlení bez žargonu',
+                'title'       => 'Co je SEO a proč je důležité',
                 'description' => 'Co je SEO, jak funguje a co z něj zvládnete sami. Technické SEO, obsah a zpětné odkazy vysvětlené pro majitele firmy, bez slibů prvního místa.',
                 'perex'       => <<<'HTML'
                     <blockquote><p>SEO je zkratka pro optimalizaci pro vyhledávače. Jde o to, aby vás lidé našli na Googlu a na Seznamu ve chvíli, kdy hledají to, co nabízíte. Sepsal jsem, z čeho se SEO skládá, co z toho zvládnete sami a kdy nevěřit tomu, kdo vám ho prodává.</p></blockquote>
@@ -513,7 +514,7 @@ class BlogContentSeeder extends Seeder
                     <li><strong>Odkazy konkurence.</strong> Podívejte se, kdo odkazuje na vaše konkurenty. Často najdete katalog nebo svaz, kde chybíte jen vy. Jak se na konkurenci dívat, rozepisuju v článku o <a href="/zapisky/zakladni-krok-pro-uspesny-webdesign-analyza-konkurence">analýze konkurence</a>.</li>
                     </ul>
                     <p>Balíčky typu „100 odkazů za tisícovku“ vám nepomůžou. Vyhledávače takové odkazy poznají a v horším případě za ně web potrestají. Google to má výslovně ve svých <a href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener">zásadách proti spamu</a>.</p>
-                    <h2>SEO v praxi: kde začít</h2>
+                    <h2>Kde začít</h2>
                     <ol>
                     <li><strong>Přihlaste web do Search Console a Seznam Webmaster.</strong> Zjistíte, na co se zobrazujete a jestli vyhledávač nehlásí chyby.</li>
                     <li><strong>Zjistěte, co lidé hledají.</strong> Sepište dotazy, jejich hledanost a jak těžké bude se na ně dostat.</li>
@@ -539,7 +540,7 @@ class BlogContentSeeder extends Seeder
                 'title'       => 'Design, nebo obsah? Co je na webu důležitější',
                 'description' => 'Co je na webu důležitější, design, nebo obsah? Proč začínám obsahem, co dělá design a co z toho plyne pro váš nový web.',
                 'perex'       => <<<'HTML'
-                    <blockquote><p>Na tuhle otázku se obvykle odpovídá „obojí je důležité“. Je to pravda, ale nic vám to neřekne. Moje odpověď je konkrétnější: obsah je první a design mu slouží. Píšu proč a co to znamená, když chystáte nový web.</p></blockquote>
+                    <blockquote><p>Na tuhle otázku se obvykle odpovídá „obojí je důležité“. Je to pravda, ale nic vám to neřekne. Moje odpověď je konkrétnější. Obsah je první a design mu slouží. Píšu proč a co to znamená, když chystáte nový web.</p></blockquote>
                     HTML,
                 'content_1'   => <<<'HTML'
                     <h2>Krátká odpověď: obsah</h2>
@@ -615,7 +616,7 @@ class BlogContentSeeder extends Seeder
                     <h2>2. Rozšiřte seznam v nástrojích a doplňte hledanost</h2>
                     <p>Teď seznam rozšíříte o fráze, na které jste sami nepřišli, a ke každé doplníte <strong>hledanost</strong>. Tedy kolikrát za měsíc ji lidé zhruba hledají.</p>
                     <p><strong>Plánovač klíčových slov od Googlu.</strong> Je součástí <a href="https://ads.google.com/intl/cs_cz/home/tools/keyword-planner/" target="_blank" rel="noopener">Google Ads</a> a je zdarma, jen potřebujete účet. Z vašich frází navrhne další a ukáže hledanost na Googlu. Když v Google Ads zrovna neplatíte reklamu, uvidíte hledanost jen v rozpětí, třeba 100 až 1 000. Na první orientaci to stačí.</p>
-                    <p><strong>Návrh klíčových slov v Skliku.</strong> Totéž pro Seznam. <a href="https://napoveda.sklik.cz/cileni/klicova-slova/navrh-klicovych-slov/" target="_blank" rel="noopener">Nástroj</a> je zdarma s účtem na Seznamu. U každé fráze ukáže i vývoj hledanosti po měsících. To se hodí u sezónních věcí. Hledají lidé letní dovolenou nejvíc v dubnu, nebo už v lednu? Podle toho víte, kdy má být článek hotový.</p>
+                    <p><strong>Návrh klíčových slov ve Skliku.</strong> Totéž pro Seznam. <a href="https://napoveda.sklik.cz/cileni/klicova-slova/navrh-klicovych-slov/" target="_blank" rel="noopener">Nástroj</a> je zdarma s účtem na Seznamu. U každé fráze ukáže i vývoj hledanosti po měsících. To se hodí u sezónních věcí. Hledají lidé letní dovolenou nejvíc v dubnu, nebo už v lednu? Podle toho víte, kdy má být článek hotový.</p>
                     <p><strong>Našeptávač.</strong> Začněte psát do vyhledávače a on sám nabídne, jak lidé větu dokončují. Napíšete „kuchyně na míru“ a uvidíte, co k tomu lidé přidávají. Ručně je to pomalé, ale hned při tom vyřazujete, co k vám nepatří. Stovky návrhů najednou umí vytáhnout nástroje jako <a href="https://www.semor.cz/administrace/nastroje/nks" target="_blank" rel="noopener">SEMOR</a>.</p>
                     <p>V tabulce si udělejte zvlášť sloupec pro hledanost na Googlu, zvlášť pro Seznam a třetí pro jejich součet. U některých frází hledanost nenajdete. Když vám dávají smysl, nechte si je, jen si je označte.</p>
                     HTML,
@@ -666,14 +667,14 @@ class BlogContentSeeder extends Seeder
             // 11 — Jak vytvořit úspěšnou webovou stránku (slug jak-vytvorit-uspesnou-webovou-stranku, beze změny; sloučený článek 8)
             // ----------------------------------------------------------------
             11 => [
-                'title'       => 'Jak vytvořit úspěšnou webovou stránku: co opravdu rozhoduje',
+                'title'       => 'Jak vytvořit úspěšnou webovou stránku',
                 'description' => 'Jak vytvořit úspěšný web: jasné sdělení, důvěra, jedna výzva k akci, telefon, vyhledávače i údržba. Deset věcí, které rozhodují, jestli web funguje.',
                 'perex'       => <<<'HTML'
                     <blockquote><p>Úspěšný web není ten nejhezčí. Je to web, na kterém člověk rychle pochopí, co děláte, uvěří vám a ví, jak se ozvat. Neslíbím vám, kolik zakázek web přinese. Sepsal jsem ale deset věcí, které na webu musí fungovat, aby vůbec měl šanci.</p></blockquote>
                     HTML,
                 'content_1'   => <<<'HTML'
                     <h2>Nejdřív si řekněte, co má web dělat</h2>
-                    <p>Úspěch webu se nedá měřit, dokud nevíte, co od něj chcete. Má přivádět poptávky? Prodávat? Ušetřit vám telefonování, protože si lidé odpovědi přečtou sami? Nebo stačí, aby vás při výběru dodavatele nikdo nevyřadil? Každý z těch cílů vede k jinému webu. Společné mají jedno: web má převádět návštěvníky na zákazníky.</p>
+                    <p>Úspěch webu se nedá měřit, dokud nevíte, co od něj chcete. Má přivádět poptávky? Prodávat? Ušetřit vám telefonování, protože si lidé odpovědi přečtou sami? Nebo stačí, aby vás při výběru dodavatele nikdo nevyřadil? Každý z těch cílů vede k jinému webu. Společné mají jen to, že web má převádět návštěvníky na zákazníky.</p>
                     <p>Stejně důležité je, pro koho web je. Na obě otázky se ptám každého klienta jako první.</p>
                     <h2>1. Do deseti vteřin musí být jasné, co děláte</h2>
                     <p>Když někdo přijde na váš web poprvé, během pár vteřin se rozhodne, jestli zůstane. Nadpis „Vítejte na stránkách firmy XY“ mu neřekne nic. Nadpis „Stavíme dřevostavby na Vysočině, na klíč do osmi měsíců“ mu řekne, jestli je na správném místě.</p>
@@ -738,7 +739,7 @@ class BlogContentSeeder extends Seeder
             // 12 — Analýza konkurence (slug zakladni-krok-pro-uspesny-webdesign-analyza-konkurence, beze změny)
             // ----------------------------------------------------------------
             12 => [
-                'title'       => 'Analýza konkurence webu: jak na ni před novým webem',
+                'title'       => 'Jak udělat analýzu konkurence před novým webem',
                 'description' => 'Jak udělat analýzu konkurence webu: koho sledovat, co si na jejich webech zapsat a jak z toho poznat, čím se váš nový web má odlišit.',
                 'perex'       => <<<'HTML'
                     <blockquote><p>Zákazník vás na internetu nevidí samotné. Vidí vás vedle tří dalších firem, které dělají totéž, a vybírá mezi vámi. Analýza konkurence je pořádný pohled na ty tři firmy dřív, než začnete stavět nový web. Píšu, na co se dívat, jak si to zapsat a co s tím potom udělat.</p></blockquote>

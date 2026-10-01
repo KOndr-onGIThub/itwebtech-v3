@@ -161,20 +161,29 @@ class Ond397ReviewsPageTest extends TestCase
         }
     }
 
+    /**
+     * OND-490 (bod 5): všude „5,0 z 5“ bez počtu hodnocení — počet je malé
+     * číslo a s každým novým hodnocením by se musel ručně přepisovat.
+     */
     public function test_one_number_everywhere(): void
     {
-        $total = array_sum(array_column(config('reviews.profiles'), 'count'));
-        $this->assertSame(26, $total);
+        $outOfFive = ['cs' => 'z 5', 'en' => 'out of 5', 'de' => 'von 5'];
 
         foreach (array_keys(self::PAGES) as $locale) {
             foreach (['reviews.heading_html', 'reviews.meta.description', 'home.social_proof.reviews', 'home.meta.description'] as $key) {
-                $this->assertStringContainsString((string) $total, trans($key, [], $locale), "{$locale}: {$key}");
+                $text = trans($key, [], $locale);
+                $this->assertStringContainsString($outOfFive[$locale], $text, "{$locale}: {$key}");
+                $this->assertDoesNotMatchRegularExpression('/\b(21|26)\b/', $text, "{$locale}: {$key} pořád nese počet.");
+            }
+            foreach (['google', 'firmy_cz'] as $profile) {
+                $this->assertDoesNotMatchRegularExpression('/\d/', trans("reviews.profiles.{$profile}", ['count' => 99], $locale),
+                    "{$locale}: profil {$profile} pořád nese počet.");
             }
         }
 
-        foreach (['/', '/en/', '/de/', '/cenik', '/en/price', '/de/preisliste', '/'.config('landing.preview_path')] as $url) {
+        foreach (['/', '/en/', '/de/', '/cenik', '/en/price', '/de/preisliste', '/recenze', '/en/reviews', '/de/bewertungen', '/'.config('landing.preview_path')] as $url) {
             $html = $this->get($url)->assertOk()->getContent();
-            $this->assertDoesNotMatchRegularExpression('/\b21\s+(recenz|review|Bewert|hodnoc)/iu', $html, "{$url} pořád tvrdí 21.");
+            $this->assertDoesNotMatchRegularExpression('/\b\d+\s+(recenz|review|rating|Bewert|hodnoc)/iu', $html, "{$url} pořád tvrdí počet hodnocení.");
         }
     }
 
@@ -281,7 +290,7 @@ class Ond397ReviewsPageTest extends TestCase
     {
         $gone = ['cs' => 'Všechny recenze', 'en' => 'Every review in one place', 'de' => 'Alle Bewertungen an einem Ort'];
         $heading = [
-            'cs' => '5,0 z <em>26 hodnocení</em> na Googlu a Firmy.cz',
+            'cs' => '<em>5,0 z 5</em> na Googlu a Firmy.cz',
             'en' => trans('reviews.heading_html', [], 'en'),
             'de' => trans('reviews.heading_html', [], 'de'),
         ];

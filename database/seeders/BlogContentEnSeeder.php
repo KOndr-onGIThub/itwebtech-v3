@@ -193,10 +193,10 @@ class BlogContentEnSeeder extends Seeder
                     <p>Here is how I do it. First we go through what you need. Then I write you a specification that says in black and white what I will build and for how much. That price holds. The invoice at the end matches the specification from the start. If you decide along the way that you want something extra, I tell you the price first and you decide.</p>
                     <h2>What you are actually paying for</h2>
                     <p>You are paying for my time and for what I know how to do with it. You are not buying a template licence, and you are not buying the hours of a salesperson who sold you the site and then disappeared. I work alone, so there is no agency overhead in the price and no coordinator forwarding me your emails.</p>
-                    <p>I write websites in my own code. I do not assemble them from page builders and third-party plugins that need constant updating and eventually break. That costs more at the start and less over time, because there is nothing for you to repair.</p>
+                    <p>I build websites from scratch. I do not assemble them from page builders and third-party plugins that need constant updating and eventually break. That costs more at the start and less over time, because there is nothing for you to repair.</p>
                     <h2>What it comes to with me</h2>
-                    <p>Most projects land between €3,500 and €8,000. The smallest thing I build is a simple presentation site, from €1,900. What yours will cost depends mainly on how much work it takes for the site to do its job.</p>
-                    <p><strong>Presentation site — so customers can check you out.</strong> Who you are, what you do and how to reach you. For sole traders and small businesses for whom a bigger scope makes no sense. It will be fast, it will work properly on a phone, and no link to your enquiry form will be broken. Do not expect it to start bringing in work on its own — that takes more work than the smallest scope allows. But it will be done properly.</p>
+                    <p>Most projects land between €3,500 and €8,000. The smallest thing I build is a presentation site, from €1,900. What yours will cost depends mainly on how much work it takes for the site to do its job.</p>
+                    <p><strong>Presentation site — so customers can check you out.</strong> Who you are, what you do and how to reach you. For sole traders and small businesses for whom a bigger scope makes no sense. It will be fast and it will work properly on a phone. Do not expect it to start bringing in work on its own — that takes more work than the smallest scope allows. But it will be done properly.</p>
                     <p><strong>Business site — so customers see why it should be you.</strong> More services, more languages, references and a blog. A custom website with simple content management, so you change texts, photos or references yourself. This is what most companies order.</p>
                     <p><strong>E-shops and applications — so the system does the work for you.</strong> An online shop, a booking system or a custom application. The scope is not fixed in advance; the price follows from what the system has to do and which systems it connects to.</p>
                     <p>The number of pages does not decide the price. What matters is how many different kinds of page the site needs. A blog is one kind: I build it once, and it makes no difference whether it ends up with one article or a hundred. Coming up with and writing those articles is separate work, though. The same goes for a product catalogue or references. So a one-page site can cost more than a five-page one if it has more to explain and do.</p>
@@ -216,11 +216,12 @@ class BlogContentEnSeeder extends Seeder
                     </ul>
                     <h2>What brings the price down</h2>
                     <ul>
-                    <li><strong>Photos you already have in good quality.</strong> Nothing needs to be shot or bought.</li>
                     <li><strong>One person on your side who makes the decisions.</strong> We do not wait for five people to sign off.</li>
-                    <li><strong>Complete, quick answers to my questions.</strong> I write the copy from them, and the sooner I have them in full, the less time goes on follow-up questions.</li>
+                    <li><strong>Quick back-and-forth on materials.</strong> I write the copy from your answers. The faster we sort things out, the less time goes on waiting and follow-up questions.</li>
+                    <li><strong>Only what your customers really need on the site.</strong> The website does not have to describe everything you do down to the last detail. What customers base their decision on is enough. It costs less and reads better.</li>
+                    <li><strong>Photos you already have in good quality.</strong> Nothing needs to be shot or bought.</li>
+                    <li><strong>A logo and brand colours you already have.</strong> The look of the site does not have to be designed from zero.</li>
                     <li><strong>One language.</strong> One version of the website to build and maintain.</li>
-                    <li><strong>You fill in the content yourself.</strong> I show you how, and you put the texts and photos on the site instead of me.</li>
                     </ul>
                     <h2>Why I am not the cheapest</h2>
                     <p>Because I do not want to be. A template site for a few hundred euros makes sense if all you need is a business card on the internet. At that price, go ahead and have one — I will tell you so straight and I will not try to change your mind.</p>
@@ -349,7 +350,7 @@ class BlogContentEnSeeder extends Seeder
                     HTML,
                 'content_2'   => <<<'HTML'
                     <h2>What a website cannot do</h2>
-                    <p>I will not promise you how many enquiries it will bring. I have no influence over what the demand in your field looks like, what your prices are, or how fast you answer. Anyone who promises you that number is guessing.</p>
+                    <p>I will not promise you how many enquiries it will bring. It depends on the demand in your field, your prices and how fast you answer. Anyone who promises you that number is guessing.</p>
                     <p>What I can influence is the work I deliver. That the website is fast and understandable, that it looks good on a phone, and that nothing falls apart on it in two years.</p>
                     <h2>Before you decide</h2>
                     <p>Try to answer one question. If someone who had never heard of you landed on your website tomorrow, would they understand within ten seconds what you do and whether it is for them? If not, that is where the problem is, and it makes no difference whether you have a website or not. I write about what else a website has to get right to work in the article <a href="/en/blog/how-to-create-a-successful-website">How to create a successful website</a>.</p>
@@ -371,7 +372,7 @@ class BlogContentEnSeeder extends Seeder
                 'content_1'   => <<<'HTML'
                     <h2>Five reasons a redesign makes sense</h2>
                     <p><strong>1. The website cannot be maintained.</strong> Changing a phone number means writing to somebody who gets back to you in a week. That on its own is worth a redesign.</p>
-                    <p><strong>2. It is unusable on a phone.</strong> Most people look at websites on a phone these days. If they have to zoom in and scroll sideways, they leave.</p>
+                    <p><strong>2. It is unusable on a phone.</strong> About half of people look at websites on a phone these days. If they have to zoom in and scroll sideways, they leave.</p>
                     <p><strong>3. The website is falling apart or going down.</strong> Typically with page builders assembled from plugins by different authors. One update and the order form stops working.</p>
                     <p><strong>4. The company has changed.</strong> You do something different, you want to sell something different, you are in a different price bracket. The website stayed where you were five years ago.</p>
                     <p><strong>5. The websites of the people you compete with look a class better.</strong> The customer compares you side by side whether you like it or not. I describe how to take a proper look at them in the article on <a href="/en/blog/website-competitor-analysis">competitor analysis</a>.</p>
@@ -391,7 +392,7 @@ class BlogContentEnSeeder extends Seeder
                     <p><strong>Nobody carries the content over.</strong> References, photos of finished jobs, documents to download. There is usually more of it than anyone expects.</p>
                     <h2>How I approach a redesign</h2>
                     <p>First I look at what works on the old website and I keep that. Then we go through what the website is supposed to do and who it is supposed to say it to. Only after that do we deal with how it will look. I sort the page addresses out before launch, not after.</p>
-                    <p>I write my own code, without ready-made plugins by other authors. Those are usually the reason a website falls apart after a while and has to be redone.</p>
+                    <p>I build every site from scratch, without ready-made plugins by other authors. Those are usually the reason a website falls apart after a while and has to be redone.</p>
                     HTML,
             ],
 

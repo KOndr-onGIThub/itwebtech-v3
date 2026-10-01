@@ -45,7 +45,7 @@ return [
         'author' => [
             'eyebrow'  => 'O autorovi',
             'name'     => 'Ondřej Kriška',
-            'role'     => 'Stavím weby a aplikace na míru. Sám, na vlastním kódu.',
+            'role'     => 'Stavím weby a aplikace na míru. Sám a od základu.',
             'bio'      => 'Osmnáct let jsem pracoval v logistice Toyoty. Dnes stavím weby, e-shopy a aplikace na míru pro menší a střední firmy. Cenu říkám předem a jednáte přímo se mnou.',
             'linkedin_label' => 'LinkedIn',
             'linkedin_url'   => 'https://www.linkedin.com/in/ondrejkriska/',

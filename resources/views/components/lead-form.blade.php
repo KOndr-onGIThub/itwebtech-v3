@@ -121,7 +121,9 @@
         </button>
 
         @if ($note)
-        <p class="pd-form__note">{{ __('home.inline_form.note') }}</p>
+        {{-- OND-490 (bod 15): e-mail ve větě je klikací `mailto:` odkaz. Text se
+             nejdřív escapuje, pak se v něm adresa obalí odkazem. --}}
+        <p class="pd-form__note">{!! str_replace('ok@ondraweb.cz', '<a href="mailto:ok@ondraweb.cz">ok@ondraweb.cz</a>', e(__('home.inline_form.note'))) !!}</p>
         @endif
 
         {{-- B-01: místo zaškrtávacího souhlasu jen informace s odkazem —

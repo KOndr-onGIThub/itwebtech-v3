@@ -26,7 +26,7 @@ return [
         'page_mark_label' => 'REALIZACE',
         'upline'          => 'Vybraná práce pro skutečné firmy.',
         'heading_html'    => 'Co by šlo<br><em>udělat i u vás</em>.',
-        'subline'         => 'Weby a aplikace, které jsem postavil pro pokrývače, zubní ordinaci, kemp i automobilku. Vyberte obor, který je tomu vašemu nejblíž, proklikejte si živé weby a napište mi, co řešíte.',
+        'subline'         => 'Weby a aplikace, které jsem postavil pro realitní makléřky, zubní ordinaci, automobilku a další. Vyberte obor, který je tomu vašemu nejblíž, proklikejte si živé weby a napište mi, co řešíte.',
     ],
 
     'info_client'      => 'Klient',
@@ -38,8 +38,8 @@ return [
         'subheading' => 'Takhle to dělám já',
         'heading'    => 'Do projektů vkládám následující',
         'items'      => [
-            ['title' => 'Expertiza a praxe',      'description' => 'Díky 18leté zkušenosti v Toyotě mám unikátní praxi v optimalizaci procesů a vývoji webových aplikací.'],
-            ['title' => 'Stabilita a robustnost', 'description' => 'Nestavím web z cizích doplňků, které se rozbijí při první aktualizaci. Píšu vlastní kód, který drží.'],
+            ['title' => 'Odbornost a praxe',      'description' => 'Díky 18leté zkušenosti v Toyotě mám unikátní praxi v optimalizaci procesů a vývoji webových aplikací.'],
+            ['title' => 'Stabilita a robustnost', 'description' => 'Nestavím web z cizích doplňků, které se rozbijí při první aktualizaci. Web programuju od základu, aby vydržel.'],
             ['title' => 'Důkladné testování',     'description' => 'Nenechávám nic náhodě. Aplikace i webové stránky testuji v průběhu vývoje i po jeho dokončení.'],
             ['title' => 'Rychlost a design',      'description' => 'Prioritou je rychlé načítání a moderní design, což zajišťuje pozitivní první dojem a příjemnou uživatelskou zkušenost.'],
             ['title' => 'Řešení na míru',         'description' => 'Každý projekt je pro mě unikátní a vždy hledám nejlepší řešení přizpůsobené potřebám a cílům každého klienta.'],
@@ -123,9 +123,11 @@ return [
         'subheading'    => 'Rychlá kvalifikace',
         'heading'       => 'Má to smysl řešit teď?',
         'items'         => [
-            'Váš web má návštěvnost, ale poptávky nepřicházejí konzistentně.',
-            'Nabídka služeb je nejasná nebo se ztrácí v textu.',
-            'Chybí jasný postup, co se stane po odeslání poptávky.',
+            'Web má návštěvnost, ale poptávky z něj chodí jen občas.',
+            'Zákazníci se vás ptají na věci, které by měli najít na webu.',
+            'Na mobilu se váš web špatně čte nebo ovládá.',
+            'Web už neodpovídá tomu, co dnes nabízíte a za kolik.',
+            'Každou drobnou změnu na webu musíte objednat a čekat na ni.',
             // OND-201 (nález 5.1): „nástroj, který vydělává" byl slib výsledku
             // za klienta — výdělek neovlivním sám.
             'Nechcete další „hezký web“, ale nástroj postavený na tom, jak vaše firma funguje.',

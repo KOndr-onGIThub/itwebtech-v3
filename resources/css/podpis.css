@@ -1360,6 +1360,13 @@
     text-underline-offset: 3px;
 }
 .pd-form__privacy a:hover { color: var(--pd-accent); }
+.pd-form__note a {
+    color: var(--color-fg-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--pd-accent);
+    text-underline-offset: 3px;
+}
+.pd-form__note a:hover { color: var(--pd-accent); }
 
 @media (prefers-reduced-motion: reduce) {
     .pd-hero__photo,

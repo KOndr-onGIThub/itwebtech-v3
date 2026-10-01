@@ -12,7 +12,7 @@ return [
     // der nicht weiß, was WordPress ist (Prinzip 0).
     'meta' => [
         'title'       => 'Websites nach Maß, die tragen, was gut läuft | ONDRAWEB',
-        'description' => 'Websites, Onlineshops und Webanwendungen nach Maß. Ich baue alles selbst mit eigenem Code, den Preis nenne ich vorab. 5,0 aus 26 Bewertungen.',
+        'description' => 'Websites, Onlineshops und Webanwendungen nach Maß. Ich programmiere alles selbst und von Grund auf, den Preis nenne ich vorab. Bewertung 5,0 von 5.',
     ],
 
     'hero' => [
@@ -31,7 +31,8 @@ return [
         // nicht, er rutscht in die Subline und in „Was ich baue".
         'upline'          => 'Für Unternehmen, die wachsen.',
         'heading_html'    => 'Eine Website, die <em>trägt</em>, was bei Ihnen gut läuft.',
-        'subline'         => 'Ich bin Ondřej Kriška. Websites und Anwendungen baue ich mit eigenem Code, und ich mache die Arbeit selbst — vom ersten Gespräch bis zum Start sprechen Sie nur mit mir.',
+        'subline'         => 'Ich bin Ondřej Kriška. Websites und Anwendungen programmiere ich von Grund auf, und ich mache die Arbeit selbst — vom ersten Gespräch bis zum Start sprechen Sie nur mit mir.',
+        'signature'       => 'Ondřej Kriška',
         // OND-437 (Vorschlag 1 aus OND-429): ein konkreter Tag statt „am
         // nächsten Arbeitstag“. `:date` setzt App\Support\ReplyDate ein.
         'note'            => 'Schreiben Sie mir heute, dann melde ich mich spätestens am :date. Unverbindlich besprechen wir, was sinnvoll ist.',
@@ -54,12 +55,11 @@ return [
         // OND-315: `rating_aria` beschreibt nur die Bewertung und steht darum
         // an dieser einen Zahl — im Streifen stehen auch Projekte, Jahre
         // und Auszeichnung (Antwortzeit entfernt in OND-437). Landmark-Label: `strip_aria`.
-        'rating_aria'  => 'Bewertung 5 von 5',
+        'rating_aria'  => 'Bewertung 5,0',
         'strip_aria'   => 'Zahlen zu meiner Arbeit',
         'clients_aria' => 'Kunden',
         'rating_value' => '5,0',
-        'reviews'      => '(26 Bewertungen auf Google und Firmy.cz)',
-        'projects'     => '23+ realisierte Projekte',
+        'reviews'      => 'von 5 auf Google und Firmy.cz',
         'experience'   => '18 Jahre Erfahrung',
         // OND-201 (Befund 5.11): Auszeichnung TOP firma 2025 von Firmy.cz —
         // überprüfbarer Nachweis Dritter, der auf Staging fehlte.
@@ -107,12 +107,12 @@ return [
     'situation' => [
         'text'  => 'Meist schreiben mir Leute, denen es gut läuft — nur die Website nicht.',
         'cases' => [
-            ['slug' => 'cyklocentrum', 'name' => 'Cyklocentrum Březí', 'field' => 'Fahrradverleih und Service', 'text' => 'Offline hatten sie einen guten Ruf, die alte Website schadete ihm.'],
-            ['slug' => 'vp-industry',  'name' => 'VP Industry',        'field' => 'Industriekennzeichnung',     'text' => 'Sie wollten langfristig wachsen, die alte Website reichte dafür nicht.'],
+            ['slug' => 'cyklocentrum', 'name' => 'Cyklocentrum Březí', 'field' => 'Fahrradverleih und Service', 'text' => 'Der vorherige Entwickler arbeitete ein Jahr an der Website und wurde nie fertig.'],
+            ['slug' => 'zubni-provazek', 'name' => 'Zubní Provázek',  'field' => 'Zahnarztpraxis',             'text' => 'Patienten mussten nach Preisen telefonisch fragen, die alte Website nannte sie nicht.'],
             ['slug' => 'kemp-veselka', 'name' => 'Autokemp Veselka',   'field' => 'Familien-Campingplatz',      'text' => 'Gäste entscheiden am Handy, die alte Website war nicht mobiltauglich.'],
         ],
-        'cases_link'      => 'Wie es ausging und was der Kunde sagt →',
-        'cases_link_aria' => 'Wie es ausging und was der Kunde sagt: Case Study :name',
+        'cases_link'      => 'Wie es ausging →',
+        'cases_link_aria' => 'Wie es ausging — Case Study :name',
     ],
 
     'how_i_work' => [
@@ -141,7 +141,7 @@ return [
             [
                 'heading' => 'Umsetzung',
                 'time'    => '3–10 Wochen',
-                'text'    => 'Ich schreibe eigenen Code, deshalb richtet sich die Website nach Ihrem Unternehmen und nicht nach einem fertigen Layout. Zwischendurch schicke ich Ansichten und frage bei den Entscheidungen nach, die sich lohnen, gemeinsam zu treffen. Am Ende erfahren Sie nicht erst, ob es passt — Sie wissen es die ganze Zeit.',
+                'text'    => 'Ich programmiere jede Website von Grund auf, deshalb richtet sie sich nach Ihrem Unternehmen und nicht nach einem fertigen Layout. Zwischendurch schicke ich Ansichten und frage bei den Entscheidungen nach, die sich lohnen, gemeinsam zu treffen. Am Ende erfahren Sie nicht erst, ob es passt — Sie wissen es die ganze Zeit.',
             ],
             [
                 'heading' => 'Launch und Support',
@@ -217,7 +217,7 @@ return [
     'services' => [
         'heading_primary'  => 'Was ich baue',
         // OND-310: der Hinweis auf eigenen Code wandert aus dem Hero hierher.
-        'subheading'       => 'Ich schreibe eigenen Code. Ich verwende keine Vorlage, die Ihre Konkurrenz schon hat.',
+        'subheading'       => 'Ich programmiere jede Website von Grund auf. Ich verwende keine Vorlage, die Ihre Konkurrenz schon hat.',
         'heading_other'    => 'Weitere Services',
         'secondary_inline' => 'Ich biete auch SEO, Grafikdesign und Social-Media-Betreuung — :pricing_link oder :contact_link.',
         'secondary_inline_pricing' => 'mehr in der Preisliste',
@@ -233,7 +233,7 @@ return [
                 // Paar — zuerst der Satz des Kunden, darunter der technische
                 // Zusatz.
                 'bullets'     => [
-                    ['Die gleiche Website finden Sie nicht eine Straße weiter.', 'Ich schreibe eigenen Code und verwende keine Vorlagen.'],
+                    ['Die gleiche Website finden Sie nicht eine Straße weiter.', 'Ich programmiere von Grund auf, ohne Vorlagen.'],
                     ['Die Seiten kommen in der Reihenfolge, in der Ihr Kunde wirklich entscheidet.', 'Die Struktur entwerfe ich danach, wie Anfragen bei Ihnen entstehen.'],
                     ['In zwei Jahren kommt keine Rechnung für die Reparatur von etwas, das von selbst kaputtgegangen ist.', 'Die Website läuft nicht auf Zusatzmodulen, die monatliche Updates erzwingen.'],
                 ],
@@ -280,7 +280,7 @@ return [
         // ist damit weg. Die CZK-Untergrenze von 20.000 wird hier ABSICHTLICH
         // nicht umgerechnet: 800 € kaufen im deutschsprachigen Markt eine
         // Landingpage, keine Website — EN/DE tragen nur die Spanne.
-        'intro'   => 'Die meisten Projekte, die ich baue, liegen zwischen 3.500 und 8.000 €. Das Kleinste ist eine einfache Präsentationswebsite ab 1.900 € — weniger Umfang, nicht weniger Qualität. Den genauen Preis erhalten Sie schriftlich in der Spezifikation.',
+        'intro'   => 'Die meisten Projekte, die ich baue, liegen zwischen 3.500 und 8.000 €. Das Kleinste ist eine Präsentationswebsite ab 1.900 € — weniger Umfang, nicht weniger Qualität. Den genauen Preis erhalten Sie schriftlich in der Spezifikation.',
         // OND-354: Die Karten tragen den UMFANG, nicht den Preis, und heißen
         // nach dem, was entsteht. Reihenfolge nach wachsendem Umfang, die
         // mittlere ist hervorgehoben.
@@ -358,7 +358,7 @@ return [
             [
                 'key'      => 'single-person',
                 'question' => 'Sie sind eine Person. Was, wenn Sie krank werden oder aufhören?',
-                'answer'   => 'Ein berechtigtes Bedenken — bei einem Projekt dieser Größe ist das die wichtigste Frage. Die Website läuft auf keiner Plattform, die Sie nicht verlassen könnten: Es ist eigener Code auf einem normalen Webhosting. Die Zugänge zur Hosting-Verwaltung und zum FTP können Sie die ganze Zeit haben, sagen Sie einfach Bescheid. Nach der vollständigen Bezahlung gehört der Code Ihnen — ich übergebe ihn, wann immer Sie darum bitten, und jeder Entwickler kann daran weiterarbeiten; wenn eine Dokumentation zur Übergabe nötig ist, schreibe ich sie. Eine Rund-um-die-Uhr-Bereitschaft halte ich nicht und werde das auch nicht behaupten. Wofür ich einstehe: Bei mir bleibt nichts eingeschlossen.',
+                'answer'   => 'Ein berechtigtes Bedenken, ob das Projekt groß ist oder klein. Die Website läuft auf keiner Plattform, die Sie nicht verlassen könnten: Sie ist individuell programmiert und läuft auf einem normalen Webhosting. Die Zugänge zur Hosting-Verwaltung und zum FTP können Sie die ganze Zeit haben, sagen Sie einfach Bescheid. Nach der vollständigen Bezahlung gehört der Code Ihnen — ich übergebe ihn, wann immer Sie darum bitten, und jeder Entwickler kann daran weiterarbeiten; wenn eine Dokumentation zur Übergabe nötig ist, schreibe ich sie. Eine Rund-um-die-Uhr-Bereitschaft halte ich nicht und werde das auch nicht behaupten. Wofür ich einstehe: Bei mir bleibt nichts eingeschlossen.',
             ],
             // OND-269 (Audit OND-254, Befund 7): Die Frage „Was kostet es?"
             // ist hier raus — dieselbe Überschrift und dieselben Zahlen
@@ -424,6 +424,7 @@ return [
         // Absenden. `:received` = Zeitpunkt der Speicherung, `:date` = ReplyDate,
         // `:email` aus dem Formular. /kontakt liest `reply`, `more`, `more_article` mit.
         'confirmation' => [
+            'signature'    => 'Ondřej Kriška',
             'stamp'        => 'Anfrage eingegangen · :received',
             'heading'      => 'Danke. Ihre Anfrage ist bei mir.',
             'reply'        => 'Ich antworte spätestens am :date persönlich an :email. Mehr müssen Sie jetzt nicht tun.',

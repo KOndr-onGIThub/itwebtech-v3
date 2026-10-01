@@ -59,7 +59,7 @@ return [
     'hero' => [
         'page_mark_label' => 'KONTAKT',
         'upline'          => 'Sie schreiben mir direkt.',
-        'heading_html'    => 'Kein CRM,<br>kein Callcenter — <em>nur Ondřej</em>.',
+        'heading_html'    => 'Kein Callcenter,<br>kein Bot — <em>nur Ondřej</em>.',
         'eyebrow'         => 'Sie schreiben mir direkt',
         'heading'         => 'Sie schreiben direkt an mich, Ondřej.',
         'subline'         => 'Ich lese Ihre Nachricht persönlich. Schreiben Sie mir heute, dann melde ich mich spätestens am :date.',
