@@ -31,7 +31,8 @@ class PortfolioTest extends TestCase
         // animace-delejme) zůstávají v datasetu, ale nejsou publikované.
         // OND-470: další čtyři (yolk, elektro-srnak, clanek-motorkari-cz,
         // pitarena-cedule) taky. OND-501: 25. projekt `vinarstvi-antos`.
-        $this->assertSame(18, $expectedCount, 'Seeder by měl vytvořit 18 publikovaných projektů z 25 v datasetu.');
+        // OND-503: +zoomorava, makoplast, exhot.
+        $this->assertSame(21, $expectedCount, 'Seeder by měl vytvořit 21 publikovaných projektů z 28 v datasetu.');
 
         $response = $this->get('/projekty');
 

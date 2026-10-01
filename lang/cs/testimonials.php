@@ -29,6 +29,7 @@ return [
             'initials' => 'RL',
             'source'   => 'firmy_cz',
             'url'      => 'https://www.firmy.cz/detail/13470851-profesionalni-webove-stranky-a-aplikace-ondrej-kriska-brezi.html#hodnoceni',
+            'project'  => 'makoplast',
             'text'     => 'Skvělá spolupráce, profesionální přístup, web hotový včas a podle představ. Doporučuji pana Krišku všem, kdo chtějí kvalitní webové stránky.',
         ],
         [
@@ -40,6 +41,7 @@ return [
             'initials' => 'AH',
             'source'   => 'google',
             'url'      => 'https://www.google.com/maps/contrib/106421265514180487960/reviews',
+            'project'  => 'exhot',
             'text'     => 'Ondřeje Krišku bych rozhodně doporučil pro jeho vynalézavý a neotřelý styl práce, jdoucí ruku v ruce s flexibilním a profesionálním přístupem k zákazníkovi.',
             'also'     => [
                 ['source' => 'firmy_cz', 'url' => 'https://www.firmy.cz/detail/13470851-profesionalni-webove-stranky-a-aplikace-ondrej-kriska-brezi.html#hodnoceni'],
@@ -235,6 +237,7 @@ return [
             'initials' => 'MM',
             'source'   => 'google',
             'url'      => 'https://www.google.com/maps/contrib/113233375389599450412/reviews',
+            'project'  => 'zoomorava',
             'text'     => 'Zadali jsme si vytvoření firemních webových stránek. Se službami jsme velice spokojeni, komunikace byla příjemná a vstřícná. Jsme spokojeni s webovými stránkami, vše je přehledné, splňuje to všechny naše požadavky.',
         ],
         [

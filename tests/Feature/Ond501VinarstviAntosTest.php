@@ -61,9 +61,9 @@ class Ond501VinarstviAntosTest extends TestCase
         $this->seed(PortfolioSeeder::class);
         $fromYaml = $this->snapshot();
 
-        // Stav produkce před nasazením: 24 projektů, Antoš chybí.
+        // Stav produkce před nasazením: Antoš chybí (OND-503: dataset má 28).
         PortfolioProject::where('slug', self::SLUG)->delete();
-        $this->assertSame(24, PortfolioProject::count());
+        $this->assertSame(27, PortfolioProject::count());
 
         $this->migration()->up();
 
@@ -88,7 +88,7 @@ class Ond501VinarstviAntosTest extends TestCase
 
         $this->migration()->up();
 
-        $this->assertSame(25, PortfolioProject::count());
+        $this->assertSame(28, PortfolioProject::count());
         $this->assertDatabaseHas('portfolio_project_translations', ['subtitle' => 'Ručně upravený podtitulek']);
     }
 
@@ -100,7 +100,7 @@ class Ond501VinarstviAntosTest extends TestCase
         $this->seed(PortfolioSeeder::class);
         $this->migration()->down();
 
-        $this->assertSame(24, PortfolioProject::count());
+        $this->assertSame(27, PortfolioProject::count());
         $this->assertSame(0, DB::table('portfolio_project_screenshots')
             ->whereNotIn('project_id', DB::table('portfolio_projects')->pluck('id'))->count());
     }

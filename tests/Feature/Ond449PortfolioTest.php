@@ -122,8 +122,8 @@ class Ond449PortfolioTest extends TestCase
         }
 
         // 13 publikovaných projektů s živým webem má vlastní větu ve všech jazycích,
-        // OND-501 přidal 14. (vinarstvi-antos).
-        $this->assertSame(42, DB::table('portfolio_project_translations')->whereNotNull('live_hint')->count());
+        // OND-501 přidal 14. (vinarstvi-antos), OND-503 další tři.
+        $this->assertSame(51, DB::table('portfolio_project_translations')->whereNotNull('live_hint')->count());
     }
 
     public function test_homepage_cards_have_no_live_site_link(): void

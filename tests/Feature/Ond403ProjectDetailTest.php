@@ -98,7 +98,8 @@ class Ond403ProjectDetailTest extends TestCase
         // Předloha OND-402 §4a: recenzi svého klienta mělo 10 případovek.
         // OND-470 odpublikoval YOLK a Elektro Srnák — veřejných zbývá 8.
         // OND-501 přidal Vinařství Antoš s recenzí Romana Antoše — 9.
-        $this->assertSame(9 * count(self::LOCALES), $withReview);
+        // OND-503: ExHot, ZOOMORAVA a MAKOplast s recenzemi klientů — 12.
+        $this->assertSame(12 * count(self::LOCALES), $withReview);
     }
 
     public function test_review_order_picks_owner_over_second_voice(): void
