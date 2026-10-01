@@ -213,6 +213,43 @@
         </div>
     </section>
 
+    {{-- OND-496: balíčky z /cenik. Všechno kromě nadpisu je `price.*`,
+         stejný zdroj jako ceník — reklamní stránka nemá vlastní ceny. --}}
+    <section id="ceny" class="landing-section" data-reveal>
+        <div class="container-site">
+            <header class="section-header section-header--left">
+                <p class="section-subheading">{{ __('landing.pricing.eyebrow') }}</p>
+                <h2>{{ __('landing.pricing.title') }}</h2>
+                <p class="section-header__desc">{{ __('price.intro') }}</p>
+            </header>
+
+            <div class="landing-results-grid" data-reveal-group>
+                @foreach (__('price.tiers') as $tier)
+                    <article class="landing-card {{ $tier['popular'] ? 'landing-panel--accent' : '' }}" data-tier="{{ $tier['key'] }}">
+                        <span class="landing-card__eyebrow">{{ $tier['name'] }}@if ($tier['popular']) · {{ __('price.popular') }}@endif</span>
+                        <h3>{{ $tier['scope'] }}</h3>
+                        <p>{{ $tier['desc'] }}</p>
+                        <ul class="landing-checklist">
+                            @foreach ($tier['features'] as $feature)
+                                <li>
+                                    <x-icon.circle-check-big class="w-5 h-5 shrink-0" />
+                                    <span>{{ $feature }}</span>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </article>
+                @endforeach
+            </div>
+
+            <p class="landing-microcopy">{{ __('price.note') }}</p>
+
+            <a href="{{ lroute('price') }}" class="landing-text-link">
+                {{ __('landing.pricing.cta') }}
+                <x-icon.arrow-right class="w-4 h-4 shrink-0" />
+            </a>
+        </div>
+    </section>
+
     <section class="landing-section landing-section--faq" data-reveal>
         <div class="container-site">
             <header class="section-header">
@@ -224,7 +261,7 @@
                 @foreach (__('landing.faq.items') as $item)
                     <details class="faq-item">
                         <summary>{{ $item['question'] }}</summary>
-                        <p class="faq-answer">{{ $item['answer'] }}</p>
+                        <p class="faq-answer">{{ isset($item['answer_key']) ? __($item['answer_key']) : $item['answer'] }}</p>
                     </details>
                 @endforeach
             </div>

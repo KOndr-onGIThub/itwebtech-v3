@@ -175,15 +175,26 @@ return [
         ],
     ],
 
+    // OND-496: sekce s balíčky. Názvy, rozsah, popis, co obsahují, cenová věta
+    // i poznámka o DPH se čtou z lang/cs/price.php (`price.*`), tady je jen
+    // nadpis sekce.
+    'pricing' => [
+        'eyebrow' => 'Orientační ceny',
+        'title'   => 'Kolik u mě stojí web na míru',
+        'cta'     => 'Zobrazit celý ceník',
+    ],
+
     'faq' => [
         'eyebrow' => 'FAQ',
         'title' => 'Odpovědi na nejčastější otázky',
         'items' => [
             [
-                // OND-201 (nález 5.4): očekávací věta padne dřív než první
-                // číslo, nejlevnější pásmo je poslední a rámované jako výjimka.
-                'question' => 'Kolik stojí web na míru?',
-                'answer' => 'Většina projektů, které stavím, vychází mezi 55 a 150 tisíci korunami. Vícejazyčný Standard začíná na 55 000 Kč, Custom (e-shop, aplikace, rezervace) od 95 000 Kč. Startovní web za 25 000 Kč beru jako výjimku pro živnostníky, ne jako standardní vstup. Přesnější cenu dává až krátká konzultace, kde si ujasníme rozsah, cíle a potřebné funkce.',
+                // OND-496: odpověď je `price.intro` z ceníku (blade čte
+                // `answer_key`), ať se reklamní stránka a /cenik nerozejdou.
+                // Dřív tu byly staré balíčky Standard/Custom a startovní web
+                // za 25 000 Kč.
+                'question'   => 'Kolik stojí web na míru?',
+                'answer_key' => 'price.intro',
             ],
             [
                 'question' => 'Jak dlouho trvá realizace?',
@@ -228,11 +239,11 @@ return [
             'message' => 'Například: potřebujeme nový firemní web, který jasně představí služby a přivede více poptávek.',
         ],
         'budget_options' => [
-            // OND-136: budget pásma sjednocená s cenovou taxonomií 25/55/95.
-            'Do 25 000 Kč',
-            '25 000 až 55 000 Kč',
-            '55 000 až 95 000 Kč',
-            '95 000 Kč a více',
+            // OND-496: pásma podle ceníku (`price.intro`): od 20 000 Kč,
+            // většina projektů 55–150 tisíc. Staré 25/55/95 odešlo s balíčky.
+            '20 000 až 55 000 Kč',
+            '55 000 až 150 000 Kč',
+            'Více než 150 000 Kč',
             'Potřebuji doporučit vhodný rozsah',
         ],
         'trust_title' => 'Nezávazná konzultace',
