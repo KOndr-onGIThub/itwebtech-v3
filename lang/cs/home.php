@@ -63,7 +63,7 @@ return [
 
     'social_proof' => [
         // OND-315: `rating_aria` popisuje jen hodnocení, proto sedí u toho
-        // jednoho údaje, ne na celé sekci — v pruhu jsou i realizace, praxe
+        // jednoho údaje, ne na celé sekci — v pruhu je i rozsah práce, Toyota
         // a ocenění (doba odpovědi z pruhu odešla v OND-437). Landmark pruhu popisuje `strip_aria`.
         'rating_aria'  => 'Hodnocení 5,0',
         'strip_aria'   => 'Čísla o mojí práci',
@@ -72,6 +72,9 @@ return [
         'clients_aria' => 'Klienti',
         'rating_value' => '5,0',
         'reviews'      => 'z 5 na Googlu a Firmy.cz',
+        // OND-506: údaj schválený na OND-495 (soupis rev. 4, sekce 2a). Záměrně
+        // bez čísla — žádné „23+“ ani počet realizací. Čte ho HP i /cenik.
+        'scope'        => 'Desítky webů, aplikací i menších zakázek',
         // OND-496: „18 let praxe“ → „18 let v Toyotě“ (Ondřej 1. 10. na OND-490).
         // Klíč čte i pruh na /cenik, změna platí na obou stránkách.
         'experience'   => '18 let v Toyotě',

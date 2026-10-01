@@ -53,13 +53,15 @@ return [
 
     'social_proof' => [
         // OND-315: `rating_aria` beschreibt nur die Bewertung und steht darum
-        // an dieser einen Zahl — im Streifen stehen auch Projekte, Jahre
+        // an dieser einen Zahl — im Streifen stehen auch Arbeitsumfang, Toyota
         // und Auszeichnung (Antwortzeit entfernt in OND-437). Landmark-Label: `strip_aria`.
         'rating_aria'  => 'Bewertung 5,0',
         'strip_aria'   => 'Zahlen zu meiner Arbeit',
         'clients_aria' => 'Kunden',
         'rating_value' => '5,0',
         'reviews'      => 'von 5 auf Google und Firmy.cz',
+        // OND-506: bewusst ohne Zahl (kein „23+“).
+        'scope'        => 'Dutzende Websites, Apps und kleinere Aufträge',
         'experience'   => '18 Jahre bei Toyota',
         // OND-201 (Befund 5.11): Auszeichnung TOP firma 2025 von Firmy.cz —
         // überprüfbarer Nachweis Dritter, der auf Staging fehlte.
