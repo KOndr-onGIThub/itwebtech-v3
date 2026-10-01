@@ -133,7 +133,8 @@ class Ond352HomepagePortfolioSectionTest extends TestCase
 
         $this->seed(EnsurePortfolioSeededSeeder::class);
 
-        $this->assertSame(24, DB::table('portfolio_projects')->count());
+        // OND-501: 25. projekt `vinarstvi-antos`.
+        $this->assertSame(25, DB::table('portfolio_projects')->count());
         $this->assertStringContainsString('id="section-projects"', $this->get('/')->getContent());
     }
 
@@ -154,6 +155,7 @@ class Ond352HomepagePortfolioSectionTest extends TestCase
         $this->assertDatabaseHas('portfolio_project_translations', [
             'title' => 'Ručně přepsaný titulek',
         ]);
-        $this->assertSame(24, DB::table('portfolio_projects')->count());
+        // OND-501: 25. projekt `vinarstvi-antos`.
+        $this->assertSame(25, DB::table('portfolio_projects')->count());
     }
 }

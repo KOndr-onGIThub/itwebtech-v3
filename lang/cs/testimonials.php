@@ -273,6 +273,7 @@ return [
             'initials' => 'RA',
             'source'   => 'google',
             'url'      => 'https://www.google.com/maps/contrib/110948210586387826476/reviews',
+            'project'  => 'vinarstvi-antos',
             'text'     => 'Velmi vstřícný a profesionální přístup. Mohu jen doporučit.',
             'also'     => [
                 [
