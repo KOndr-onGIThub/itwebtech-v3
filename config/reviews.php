@@ -15,10 +15,9 @@
 | Každé `id` z `testimonials.php` musí být v `groups` právě jednou, jinak
 | nově přidaná recenze na stránce tiše chybí. Hlídá Ond397ReviewsPageTest.
 |
-| `profiles`: počty hodnocení na platformách (inventura OND-395, 27. 9. 2026).
-| Součet je číslo v pruhu na homepage a v H1 stránky (26). Na profilech
-| poroste, tady je natvrdo — při změně upravit i `home.social_proof.reviews`
-| a `reviews.heading` ve třech jazycích.
+| `profiles`: odkazy na platformy. `count` je inventura OND-395 (27. 9. 2026);
+| od OND-490 (bod 5) se počet na webu nepíše („5,0 z 5“), texty profilů
+| parametr :count nepoužívají.
 */
 
 return [

@@ -27,7 +27,8 @@ class Ond457SituationCasesTest extends TestCase
         'de' => ['home' => '/de/', 'project' => '/de/projekte'],
     ];
 
-    private const SLUGS = ['cyklocentrum', 'vp-industry', 'kemp-veselka'];
+    // OND-490 (bod 8): VP Industry z pruhu pryč, místo něj Zubní Provázek.
+    private const SLUGS = ['cyklocentrum', 'zubni-provazek', 'kemp-veselka'];
 
     /** Vykreslená sekce 02 (od `pd-situation` po konec sekce). */
     private function situationSection(string $body): string
@@ -75,6 +76,9 @@ class Ond457SituationCasesTest extends TestCase
             }
 
             $this->assertSame(3, substr_count($section, e(trans('home.situation.cases_link', [], $locale))));
+            // OND-490 (bod 8): VP Industry na homepage zmínit nechce.
+            $this->assertStringNotContainsString('VP Industry', $body);
+            $this->assertStringNotContainsString('vp-industry', $body);
             // Pravidla OND-438: related odkazy bez jména přechodu.
             $this->assertStringNotContainsString('view-transition-name', $section);
         }
@@ -95,14 +99,14 @@ class Ond457SituationCasesTest extends TestCase
     public function test_unpublished_project_is_left_out(): void
     {
         $this->seed(PortfolioSeeder::class);
-        $this->unpublish('vp-industry');
+        $this->unpublish('zubni-provazek');
 
         foreach (self::PATHS as $locale => $paths) {
             $section = $this->situationSection($this->get($paths['home'])->assertOk()->getContent());
 
             $this->assertSame(2, substr_count($section, 'data-analytics="situation_case_click"'));
-            $this->assertStringNotContainsString($paths['project'] . '/vp-industry', $section);
-            $this->assertStringNotContainsString('VP Industry', $section);
+            $this->assertStringNotContainsString($paths['project'] . '/zubni-provazek', $section);
+            $this->assertStringNotContainsString('Zubní Provázek', $section);
             $this->assertStringContainsString(url($paths['project'] . '/cyklocentrum'), $section);
             $this->assertStringContainsString(url($paths['project'] . '/kemp-veselka'), $section);
         }
@@ -112,7 +116,7 @@ class Ond457SituationCasesTest extends TestCase
     public function test_list_is_omitted_below_two_published_cases(): void
     {
         $this->seed(PortfolioSeeder::class);
-        $this->unpublish('vp-industry', 'kemp-veselka');
+        $this->unpublish('zubni-provazek', 'kemp-veselka');
 
         foreach (self::PATHS as $locale => $paths) {
             $section = $this->situationSection($this->get($paths['home'])->assertOk()->getContent());

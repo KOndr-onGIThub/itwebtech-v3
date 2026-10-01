@@ -44,7 +44,7 @@ return [
         'author' => [
             'eyebrow'  => 'About the author',
             'name'     => 'Ondřej Kriška',
-            'role'     => 'I build custom websites and applications. On my own, on my own code.',
+            'role'     => 'I build custom websites and applications. On my own, from scratch.',
             'bio'      => 'I spent eighteen years in Toyota logistics. Today I build websites, e-shops and custom applications for small and mid-sized companies. I quote the price up front and you deal with me directly.',
             'linkedin_label' => 'LinkedIn',
             'linkedin_url'   => 'https://www.linkedin.com/in/ondrejkriska/',

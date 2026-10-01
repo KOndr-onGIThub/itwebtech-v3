@@ -6,16 +6,16 @@ return [
 
     'meta' => [
         'title'       => 'Bewertungen — Ondřej Kriška, ONDRAWEB',
-        'description' => '5,0 aus 26 Bewertungen auf Google und Firmy.cz. Was Kunden über die Zusammenarbeit schreiben, jede Bewertung mit Link zum Original.',
+        'description' => 'Bewertung 5,0 von 5 auf Google und Firmy.cz. Was Kunden über die Zusammenarbeit schreiben, jede Bewertung mit Link zum Original.',
     ],
 
     'eyebrow'      => 'Bewertungen',
-    'heading_html' => '5,0 aus <em>26 Bewertungen</em> auf Google und Firmy.cz',
+    'heading_html' => '<em>5,0 von 5</em> auf Google und Firmy.cz',
     'intro'        => 'Was Kunden über die Zusammenarbeit schreiben. Jede Bewertung ist mit dem Original verlinkt.',
 
     'profiles' => [
-        'google'   => 'Google · :count Bewertungen',
-        'firmy_cz' => 'Firmy.cz · :count Bewertungen',
+        'google'   => 'Bewertungen auf Google',
+        'firmy_cz' => 'Bewertungen auf Firmy.cz',
     ],
 
     'groups' => [

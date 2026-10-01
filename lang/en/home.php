@@ -12,7 +12,7 @@ return [
     // does not know what WordPress is (principle 0).
     'meta' => [
         'title'       => 'Custom websites: I quote, not estimate | ONDRAWEB',
-        'description' => 'Custom websites, online shops and web applications. I quote the price up front and build everything myself on my own code. Rated 5.0 from 26 ratings.',
+        'description' => 'Custom websites, online shops and web applications. I quote the price up front and build everything myself, from scratch. Rated 5.0 out of 5.',
     ],
 
     'hero' => [
@@ -39,7 +39,8 @@ return [
         // geometry was fixed the CTA clears the bottom bar by 61 px even with
         // the extra line, so the rule against semicolons inside a sentence
         // (spec rule 5) wins. Re-measure before growing this sentence again.
-        'subline'         => 'I am Ondřej Kriška. I build websites and applications on my own code and work on them alone. I price the job before we start, and I\'m rated 5.0 from 26 ratings on Google and Firmy.cz.',
+        'subline'         => 'I am Ondřej Kriška. I build websites and applications from scratch and work on them alone. I price the job before we start, and I\'m rated 5.0 out of 5 on Google and Firmy.cz.',
+        'signature'       => 'Ondřej Kriška',
         // OND-437 (proposal 1 of OND-429): a concrete day replaces "the next
         // business day". `:date` is filled in by App\Support\ReplyDate.
         'note'            => 'Write to me today and I\'ll get back to you by :date. No commitment, we just go through what makes sense.',
@@ -62,12 +63,11 @@ return [
         // OND-315: `rating_aria` describes the rating alone, so it sits on that
         // one figure — the strip also holds projects, years and an award
         // (reply time left the strip in OND-437). The landmark label for the whole strip is `strip_aria`.
-        'rating_aria'  => '5 out of 5 rating',
+        'rating_aria'  => 'Rated 5.0',
         'strip_aria'   => 'Numbers about my work',
         'clients_aria' => 'Clients',
         'rating_value' => '5.0',
-        'reviews'      => '(26 ratings on Google and Firmy.cz)',
-        'projects'     => '23+ delivered projects',
+        'reviews'      => 'out of 5 on Google and Firmy.cz',
         'experience'   => '18 years of experience',
         // OND-201 (finding 5.11): TOP firma 2025 award from Firmy.cz —
         // verifiable third-party proof that was missing on staging.
@@ -114,12 +114,12 @@ return [
     'situation' => [
         'text'  => 'Most who write to me are doing well — the website stopped keeping up.',
         'cases' => [
-            ['slug' => 'cyklocentrum', 'name' => 'Cyklocentrum Březí', 'field' => 'bike rental and service',         'text' => 'They were well regarded offline, and the old site hurt that.'],
-            ['slug' => 'vp-industry',  'name' => 'VP Industry',        'field' => 'industrial marking manufacturer', 'text' => 'They wanted long-term growth, and the old site wasn\'t up to it.'],
+            ['slug' => 'cyklocentrum', 'name' => 'Cyklocentrum Březí', 'field' => 'bike rental and service',         'text' => 'Their previous developer spent a year on the site and never finished it.'],
+            ['slug' => 'zubni-provazek', 'name' => 'Zubní Provázek',  'field' => 'dental practice',                 'text' => 'Patients had to phone to ask about prices; the old site didn\'t list them.'],
             ['slug' => 'kemp-veselka', 'name' => 'Autokemp Veselka',   'field' => 'family campsite',                 'text' => 'Guests decide on the go, and the old site wasn\'t mobile-ready.'],
         ],
-        'cases_link'      => 'How it turned out and what the client says →',
-        'cases_link_aria' => 'How it turned out and what the client says: :name case study',
+        'cases_link'      => 'How it turned out →',
+        'cases_link_aria' => 'How it turned out — :name case study',
     ],
 
     'how_i_work' => [
@@ -148,7 +148,7 @@ return [
             [
                 'heading' => 'Build',
                 'time'    => '3–10 weeks',
-                'text'    => 'I write my own code, so the website follows your company and not a ready-made layout. I send previews as I go and ask you about the decisions worth making together. You are not finding out at the end whether it fits — you know all along.',
+                'text'    => 'I build every site from scratch, so it follows your company and not a ready-made layout. I send previews as I go and ask you about the decisions worth making together. You are not finding out at the end whether it fits — you know all along.',
             ],
             [
                 'heading' => 'Launch and support',
@@ -220,7 +220,7 @@ return [
     'services' => [
         'heading_primary'  => 'What I build',
         // OND-310: the mention of custom code moved here out of the hero.
-        'subheading'       => 'I write my own code. I do not use a template your competitors already have.',
+        'subheading'       => 'I build every site from scratch. I do not use a template your competitors already have.',
         'heading_other'    => 'Additional services',
         'secondary_inline' => 'I also handle SEO, graphic design and social media management — :pricing_link or :contact_link.',
         'secondary_inline_pricing' => 'see the pricing',
@@ -235,7 +235,7 @@ return [
                 // OND-310 (spec task 3.9): a bullet is now a pair — the client's
                 // sentence first, the technical note under it.
                 'bullets'     => [
-                    ['You will not find the same website one street away.', 'I write my own code and I do not use templates.'],
+                    ['You will not find the same website one street away.', 'I build from scratch, without templates.'],
                     ['The pages follow the order in which your customer actually decides.', 'I design the structure around how enquiries reach you.'],
                     ['In two years no invoice arrives for repairing something that broke on its own.', 'The site does not run on add-ons that force monthly updates.'],
                 ],
@@ -282,7 +282,7 @@ return [
         // gone with it. The CZK floor of 20,000 is DELIBERATELY not converted
         // here: €800 buys a landing page in the German-speaking market, not a
         // website, so EN/DE carry the range and "smaller scopes welcome" only.
-        'intro'   => 'Most projects I build land between €3,500 and €8,000. The smallest thing I take on is a simple presentation site, from €1,900 — a smaller scope, not a lower standard. You get the exact price in writing in the specification.',
+        'intro'   => 'Most projects I build land between €3,500 and €8,000. The smallest thing I take on is a presentation site, from €1,900 — a smaller scope, not a lower standard. You get the exact price in writing in the specification.',
         // OND-354: cards carry SCOPE, not price, and are named after what gets
         // built. Order is by growing scope, the middle one is highlighted.
         'featured_label' => 'Most common choice',
@@ -358,7 +358,7 @@ return [
             [
                 'key'      => 'single-person',
                 'question' => 'You are one person. What if you get ill or quit?',
-                'answer'   => 'A fair concern — on a project this size it is the most important question. The site does not run on a platform you could not leave: it is custom code on ordinary web hosting. You can hold the hosting admin and FTP credentials the whole time — just ask for them. Once the project is paid in full the code is yours; I hand it over whenever you ask, and any developer can carry on with it — if documentation is needed for the handover, I will write it. I do not keep round-the-clock availability and I will not claim otherwise. What I do guarantee is that nothing stays locked up with me.',
+                'answer'   => 'A fair question, whether the project is big or small. The site does not run on a platform you could not leave: it is custom-built and runs on ordinary web hosting. You can hold the hosting admin and FTP credentials the whole time — just ask for them. Once the project is paid in full the code is yours; I hand it over whenever you ask, and any developer can carry on with it — if documentation is needed for the handover, I will write it. I do not keep round-the-clock availability and I will not claim otherwise. What I do guarantee is that nothing stays locked up with me.',
             ],
             // OND-269 (audit OND-254, finding 7): the "What will it cost?"
             // question is gone from here — the same heading and the same
@@ -423,6 +423,7 @@ return [
         // submit. `:received` = time the enquiry was stored, `:date` = ReplyDate,
         // `:email` from the form. /contact reads `reply`, `more` and `more_article` too.
         'confirmation' => [
+            'signature'    => 'Ondřej Kriška',
             'stamp'        => 'Enquiry received · :received',
             'heading'      => 'Thank you. Your enquiry is with me.',
             'reply'        => 'I\'ll get back to you personally at :email by :date. There is nothing else you need to do now.',

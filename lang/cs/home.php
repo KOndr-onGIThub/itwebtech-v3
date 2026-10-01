@@ -12,8 +12,8 @@ return [
     // kdo nadává na konkurenci, a „WordPress" navíc neříká nic člověku,
     // který netuší, co to je (princip 0).
     'meta' => [
-        'title'       => 'Weby na míru: cenu počítám, ne odhaduju | ONDRAWEB',
-        'description' => 'Weby, e-shopy a webové aplikace na míru. Cenu spočítám předem, stavím sám na vlastním kódu. 5,0 z 26 hodnocení, odpověď nejpozději následující pracovní den.',
+        'title'       => 'Weby na míru s cenou spočítanou předem | ONDRAWEB',
+        'description' => 'Weby, e-shopy a webové aplikace na míru. Cenu spočítám předem, programuju sám a od základu. Hodnocení 5,0 z 5, odpověď nejpozději následující pracovní den.',
     ],
 
     'hero' => [
@@ -38,11 +38,12 @@ return [
         // slovo a na nafocené variantě žádné podtržení nebylo.
         'upline'          => 'Pro firmy, které rostou.',
         'heading_html'    => 'Ptám se, ne hádám.<br>Počítám, ne odhaduju.<br>Ručím, ne slibuju.',
-        'subline'         => 'Jsem Ondřej Kriška. Weby a aplikace stavím na vlastním kódu a pracuju na nich sám. Cenu spočítám před začátkem, na Googlu a Firmy.cz mám 5,0 z 26 hodnocení.',
+        'subline'         => 'Jsem Ondra Kriška. Weby a aplikace programuju od základu a pracuju na nich sám. Cenu spočítám před začátkem, na Googlu a Firmy.cz mám hodnocení 5,0 z 5.',
+        'signature'       => 'Ondra Kriška',
         // OND-437 (návrh 1 z OND-429): „následující pracovní den“ nahrazuje
         // konkrétní den. `:date` dosadí App\Support\ReplyDate a obalí ho
         // do <strong>; nezlomitelné mezery (U+00A0) jsou přímo ve `reply_date`.
-        'note'            => 'Když mi napíšete dnes, ozvu se nejpozději :date. Nezávazně proberu, co dává smysl.',
+        'note'            => 'Když mi napíšete dnes, ozvu se nejpozději :date. Nezávazně probereme, co dává smysl.',
 
         // Backwards compat — staré klíče zachované pro non-hero spotřebitele
         // (fallback render). Musí souhlasit s vybranou variantou titulku.
@@ -64,14 +65,13 @@ return [
         // OND-315: `rating_aria` popisuje jen hodnocení, proto sedí u toho
         // jednoho údaje, ne na celé sekci — v pruhu jsou i realizace, praxe
         // a ocenění (doba odpovědi z pruhu odešla v OND-437). Landmark pruhu popisuje `strip_aria`.
-        'rating_aria'  => 'Hodnocení 5 z 5',
+        'rating_aria'  => 'Hodnocení 5,0',
         'strip_aria'   => 'Čísla o mojí práci',
         // OND-231: řada log klientů má vlastní landmark label, aby čtečka
         // nečetla druhý blok pod stejným „Hodnocení 5 z 5".
         'clients_aria' => 'Klienti',
         'rating_value' => '5,0',
-        'reviews'      => '(26 hodnocení na Googlu a Firmy.cz)',
-        'projects'     => '23+ realizací',
+        'reviews'      => 'z 5 na Googlu a Firmy.cz',
         'experience'   => '18 let praxe',
         // OND-201 (nález 5.11): ocenění TOP firma 2025 z Firmy.cz je ověřitelný
         // důkaz třetí strany, byl na obou starých webech a na stagingu chyběl.
@@ -118,12 +118,12 @@ return [
     'situation' => [
         'text'  => 'Nejčastěji mi píšou lidi, kterým se daří a web jim přestal stačit.',
         'cases' => [
-            ['slug' => 'cyklocentrum', 'name' => 'Cyklocentrum Březí', 'field' => 'půjčovna a servis kol',        'text' => 'Dobrou pověst měli mezi lidmi, starý web jim ji kazil.'],
-            ['slug' => 'vp-industry',  'name' => 'VP Industry',        'field' => 'výrobce průmyslového značení', 'text' => 'Chtěli dlouhodobě růst a starý web na to nestačil.'],
+            ['slug' => 'cyklocentrum', 'name' => 'Cyklocentrum Březí', 'field' => 'půjčovna a servis kol',        'text' => 'Předchozí vývojář na jejich webu rok pracoval a nedokončil ho.'],
+            ['slug' => 'zubni-provazek', 'name' => 'Zubní Provázek',  'field' => 'zubní ordinace',               'text' => 'Pacienti se na ceny ptali po telefonu, starý web je neuváděl.'],
             ['slug' => 'kemp-veselka', 'name' => 'Autokemp Veselka',   'field' => 'rodinný kemp',                 'text' => 'Hosté se rozhodují v mobilu, starý web se na něj nehodil.'],
         ],
-        'cases_link'      => 'Jak to dopadlo a co říká klient →',
-        'cases_link_aria' => 'Jak to dopadlo a co říká klient: případovka :name',
+        'cases_link'      => 'Jak to dopadlo →',
+        'cases_link_aria' => 'Jak to dopadlo — případovka :name',
     ],
 
     // OND-308: `cta_label` („Domluvit konzultaci") zrušený — vedl na
@@ -156,7 +156,7 @@ return [
             [
                 'heading' => 'Tvorba',
                 'time'    => '3–10 týdnů',
-                'text'    => 'Píšu vlastní kód, takže web vychází z vaší firmy a ne z hotového rozvržení. Průběžně posílám náhledy a ptám se na rozhodnutí, která má smysl udělat s vámi. Na konci nezjišťujete, jestli to sedí — víte to celou dobu.',
+                'text'    => 'Web programuju od základu, takže vychází z vaší firmy, a ne z hotového rozvržení. Průběžně posílám náhledy a ptám se na rozhodnutí, která má smysl udělat s vámi. Na konci nezjišťujete, jestli to sedí — víte to celou dobu.',
             ],
             [
                 'heading' => 'Spuštění a podpora',
@@ -220,7 +220,7 @@ return [
                 'client'  => 'BARANA',
                 // OND-198 (nález 5.5): „landing page" / „Meta Ads / Google Ads"
                 // přepsáno do řeči klienta.
-                'outcome' => 'Web, který drahou pergolu vysvětlí bez dlouhého textu: návštěvník si sám natočí lamely a projde terasu od rána do zimy.',
+                'outcome' => 'Web, který drahou pergolu vysvětlí bez dlouhého textu. Návštěvník si sám natočí lamely a projde terasu od rána do zimy.',
             ],
             'nove-interiery' => [
                 'client'  => 'Nové interiéry',
@@ -233,7 +233,7 @@ return [
         'heading_primary'  => 'Co stavím',
         // OND-308: závazné znění ze zadání. Zmínka o vlastním kódu se sem
         // stěhuje z hero podtitulku a z bloku `problems`.
-        'subheading'       => 'Píšu vlastní kód. Nepoužívám šablonu, kterou už má vaše konkurence.',
+        'subheading'       => 'Každý web programuju od základu. Nepoužívám šablonu, kterou už má vaše konkurence.',
         'heading_other'    => 'Další služby k webu',
         'secondary_inline' => 'Také zajišťuji SEO, grafický design a správu sociálních sítí — :pricing_link nebo :contact_link.',
         'secondary_inline_pricing' => 'více v ceníku',
@@ -252,7 +252,7 @@ return [
                 'title'       => 'Webové stránky na míru',
                 'description' => 'Web, který vysvětlí, co děláte a proč si vybrat vás. Vzniká podle vaší firmy, ne podle hotového rozvržení.',
                 'bullets'     => [
-                    ['Stejný web nenajdete o ulici dál.', 'Píšu vlastní kód, nepoužívám šablony.'],
+                    ['Stejný web nenajdete o ulici dál.', 'Programuju od základu, bez šablon.'],
                     ['Stránky jdou za sebou v pořadí, v jakém se váš zákazník rozhoduje.', 'Strukturu navrhuju podle toho, jak u vás vzniká poptávka.'],
                     ['Za dva roky vám nepřijde faktura za opravu něčeho, co se samo rozbilo.', 'Web neběží na doplňcích, které si vynucují měsíční aktualizace.'],
                 ],
@@ -278,7 +278,7 @@ return [
         ],
         'seo' => [
             'title'       => 'Zákazníci z Googlu — bez platby za klik',
-            'description' => 'Placená reklama funguje jen dokud platíte. SEO pracuje pro vás dlouhodobě. Pomůžu vám tak, aby vás zákazníci našli v Googlu zdarma — i když zrovna nemáte rozpočet na reklamu.',
+            'description' => 'Placená reklama funguje, jen dokud platíte. SEO pracuje pro vás dlouhodobě. Pomůžu vám tak, aby vás zákazníci našli v Googlu zdarma — i když zrovna nemáte rozpočet na reklamu.',
         ],
         'design' => [
             'title'       => 'Vizuální identita, kterou zákazníci zaznamenají',
@@ -299,7 +299,7 @@ return [
         // (Ondřej 26. 9. 2026 na OND-347, znění varianta 1). Tím zmizela
         // odmítací věta „pokud hledáte web do dvaceti tisíc…" — spodní hranice
         // 20 000 Kč ji nahradila a říká totéž bez odmítnutí.
-        'intro'   => 'Většina projektů, které stavím, vychází mezi 55 a 150 tisíci korunami. Nejmenší věc, kterou beru, je jednoduchý prezentační web od 20 000 Kč — je to menší rozsah, ne odbytá práce. Přesnou cenu dostanete písemně ve specifikaci.',
+        'intro'   => 'Většina projektů, které stavím, vychází mezi 55 a 150 tisíci korunami. Nejmenší věc, kterou beru, je prezentační web od 20 000 Kč — je to menší rozsah, ne odbytá práce. Přesnou cenu dostanete písemně ve specifikaci.',
         // OND-354: karty nesou ROZSAH, ne cenu, a jmenují se podle toho, co
         // vzniká. „Standard / Custom / Startovní" byla jména políček v cenovém
         // menu, které tahle karta ruší; bez čísel by neznamenala nic.
@@ -388,7 +388,7 @@ return [
             [
                 'key'      => 'single-person',
                 'question' => 'Jste jeden člověk. Co když onemocníte nebo skončíte?',
-                'answer'   => 'Rozumím — u zakázky za víc než sto tisíc je to ta nejdůležitější otázka. Web neběží na platformě, ze které byste nemohli odejít: je to vlastní kód na běžném webhostingu. Přístupy do administrace hostingu a na FTP můžete mít po celou dobu, stačí si o ně říct. Po doplacení projektu je kód váš — předám vám ho, kdykoli si o něj řeknete, a pokračovat na něm může kterýkoli vývojář; když bude potřeba, sepíšu k tomu i dokumentaci. Nepřetržitou pohotovost nedržím a nebudu tvrdit, že ano. Ručím za to, že u mě nic nezůstane zamčené.',
+                'answer'   => 'Rozumím. Ať je zakázka velká, nebo malá, tahle otázka je na místě. Web neběží na platformě, ze které byste nemohli odejít. Je naprogramovaný na míru a běží na běžném webhostingu. Přístupy do administrace hostingu a na FTP můžete mít po celou dobu, stačí si o ně říct. Po doplacení projektu je kód váš — předám vám ho, kdykoli si o něj řeknete, a pokračovat na něm může kterýkoli vývojář; když bude potřeba, sepíšu k tomu i dokumentaci. Nepřetržitou pohotovost nedržím a nebudu tvrdit, že ano. Ručím za to, že u mě nic nezůstane zamčené.',
             ],
             // OND-269 (audit OND-254, nález 7): otázka „Kolik to bude stát?“
             // odsud vypadla — stejný titulek i stejná čísla stojí o čtyři
@@ -400,7 +400,7 @@ return [
                 'key'      => 'duration',
                 'question' => 'Jak dlouho to trvá?',
                 // OND-308: „Detailní timing" → „Přesný časový plán".
-                'answer'   => 'Od první zprávy ke spuštěnému webu typicky 4 až 12 týdnů. Úvodní hovor do pár dní, zhruba týden na podrobnou schůzku a specifikaci, tři až deset týdnů na tvorbu a spuštění do druhého dne po schválení. Přesný časový plán pro váš projekt sepíšu do specifikace.',
+                'answer'   => 'Od první zprávy ke spuštěnému webu typicky 4 až 12 týdnů. Úvodní hovor proběhne do pár dní. Specifikace i se schůzkou nad detaily zabere zhruba týden, tvorba tři až deset týdnů a spuštění je do druhého dne po schválení. Přesný časový plán pro váš projekt sepíšu do specifikace.',
             ],
             [
                 'key'      => 'satisfaction',
@@ -435,7 +435,7 @@ return [
     'inline_form' => [
         'eyebrow'         => 'Poptávka',
         'heading'         => 'Napište mi, co potřebujete',
-        'description'     => 'Napište ve zkratce, co řešíte. Když to odešlete dnes, ozvu se nejpozději :date a nezávazně probereme, co dává smysl. Pokud zjistím, že na sebe nepasujeme, řeknu vám to rovnou.',
+        'description'     => 'Napište ve zkratce, co řešíte. Když to odešlete dnes, ozvu se nejpozději :date a nezávazně probereme, co dává smysl. Když uvidím, že vám pomoct neumím, řeknu vám to rovnou.',
         'quote_text'      => 'Jedná rychle a efektivně. Byl to pro mě velký rozdíl mezi předchozím IT dodavatelem.',
         'quote_ref'       => 'ivo-stepanek',
         'name'            => 'Jméno a příjmení',
@@ -461,6 +461,7 @@ return [
         // `:received` = čas uložení poptávky, `:date` = ReplyDate, `:email`
         // z formuláře. `reply`, `more` a `more_article` čte i /kontakt.
         'confirmation' => [
+            'signature'    => 'Ondra Kriška',
             'stamp'        => 'Poptávka dorazila · :received',
             'heading'      => 'Děkuju. Poptávka je u mě.',
             'reply'        => 'Ozvu se nejpozději :date, osobně na :email. Nic dalšího teď dělat nemusíte.',

@@ -44,7 +44,7 @@ return [
         'author' => [
             'eyebrow'  => 'Über den Autor',
             'name'     => 'Ondřej Kriška',
-            'role'     => 'Ich baue Websites und Anwendungen nach Maß. Allein, mit eigenem Code.',
+            'role'     => 'Ich baue Websites und Anwendungen nach Maß. Allein und von Grund auf.',
             'bio'      => 'Achtzehn Jahre habe ich in der Logistik von Toyota gearbeitet. Heute baue ich Websites, Onlineshops und Anwendungen nach Maß für kleine und mittlere Firmen. Den Preis nenne ich vorab und Sie sprechen direkt mit mir.',
             'linkedin_label' => 'LinkedIn',
             'linkedin_url'   => 'https://www.linkedin.com/in/ondrejkriska/',

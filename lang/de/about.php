@@ -4,12 +4,12 @@ return [
 
     'meta' => [
         'title'       => 'Über mich — Ondřej Kriška, ONDRAWEB',
-        'description' => 'Mein Name ist Ondřej Kriška. Ich entwickle Websites und Webanwendungen in eigenem Code. Ich arbeite allein und kommuniziere direkt mit dem Kunden.',
+        'description' => 'Mein Name ist Ondřej Kriška. Ich programmiere Websites und Webanwendungen von Grund auf. Ich arbeite allein und kommuniziere direkt mit dem Kunden.',
     ],
 
     'subheading' => 'Über mich',
     'heading'    => 'Wer Ihre Website baut',
-    'intro'      => 'Mein Name ist Ondřej Kriška. Ich entwickle Websites und Webanwendungen in eigenem Code. Ich arbeite allein und kommuniziere direkt mit dem Kunden. Kein Vertrieb, kein Koordinator zwischen uns.',
+    'intro'      => 'Mein Name ist Ondřej Kriška. Ich programmiere Websites und Webanwendungen von Grund auf. Ich arbeite allein und kommuniziere direkt mit dem Kunden. Kein Vertrieb, kein Koordinator zwischen uns.',
 
     'portrait_alt' => 'Porträt von Ondřej Kriška',
     'video_aria' => 'Video: Ondřej Kriška — wer ich bin und wie ich Websites baue',
@@ -25,11 +25,11 @@ return [
         ],
         [
             'heading' => 'Wie ich arbeite',
-            'text'    => 'Ich bin ein erfahrener Webentwickler. Ich schreibe eigenen Code von Grund auf. Ich baue keine Websites mit Baukästen wie WordPress, die aus fertigen Komponenten verschiedener Autoren zusammengesetzt werden und mit der Zeit kaputt gehen. Die Websites, die ich liefere, sind wartungsfrei. Ich verwende keine fertigen Add-ons von Drittanbieter-Unternehmen, die ständig aktualisiert und gepatcht werden müssen. Das ist die häufigste Quelle von Problemen und Ausfallzeiten. Ich arbeite allein. Das bedeutet, Sie sprechen von der ersten Nachricht bis zur Veröffentlichung direkt mit mir. Der Code, den ich schreibe, gehört Ihnen. Ich kann auch für internationale Kunden arbeiten. Ich spreche und schreibe Tschechisch. Auf Englisch kommuniziere ich schriftlich. Auf Deutsch nur schriftlich, mit Hilfe von Übersetzung.',
+            'text'    => 'Ich bin ein erfahrener Webentwickler. Ich programmiere jede Website von Grund auf. Ich baue keine Websites mit Baukästen wie WordPress, die aus fertigen Komponenten verschiedener Autoren zusammengesetzt werden und mit der Zeit kaputt gehen. Die Websites, die ich liefere, sind wartungsfrei. Ich verwende keine fertigen Add-ons von Drittanbieter-Unternehmen, die ständig aktualisiert und gepatcht werden müssen. Das ist die häufigste Quelle von Problemen und Ausfallzeiten. Ich arbeite allein. Das bedeutet, Sie sprechen von der ersten Nachricht bis zur Veröffentlichung direkt mit mir. Der Code, den ich schreibe, gehört Ihnen, und auch ein anderer Entwickler kann daran weiterarbeiten. Ich kann auch für internationale Kunden arbeiten. Ich spreche Tschechisch, schriftlich verständigen wir uns in jeder Sprache.',
         ],
         [
             'heading' => 'Was ich nicht mache',
-            'text'    => 'Ich baue nicht die billigsten Websites auf dem Markt. Ich verspreche nicht, wie viel Ihre Website verdienen wird — das kann ich nicht beeinflussen. Ich nehme nur Aufträge an, die ich ordentlich ausführen kann. Wenn ich weiß, dass ich Ihnen zu einem vernünftigen Preis nicht helfen kann, sage ich das direkt.',
+            'text'    => 'Ich baue nicht die billigsten Websites auf dem Markt. Ich verspreche nicht, wie viel Ihre Website verdienen wird — das hängt von mehr ab als nur von der Website. Ich nehme nur Aufträge an, die ich ordentlich ausführen kann. Wenn ich weiß, dass ich Ihnen zu einem vernünftigen Preis nicht helfen kann, sage ich das direkt.',
         ],
     ],
 

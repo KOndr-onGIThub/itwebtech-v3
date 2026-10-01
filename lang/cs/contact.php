@@ -77,9 +77,9 @@ return [
         // portfolio artefakt per CEO PR #78 precedent (home).
         'page_mark_label' => 'KONTAKT',
         'upline'          => 'Píšete přímo mně.',
-        'heading_html'    => 'Žádné CRM,<br>žádné call centrum — <em>jen Ondřej</em>.',
+        'heading_html'    => 'Žádné call centrum,<br>žádný robot — <em>jen Ondra</em>.',
         'eyebrow'      => 'Píšete přímo mně',
-        'heading'      => 'Píšete přímo mně, Ondřejovi.',
+        'heading'      => 'Píšete přímo mně, Ondrovi.',
         'subline'      => 'Vaši zprávu si přečtu osobně. Když mi napíšete dnes, ozvu se nejpozději :date.',
         'photo_alt'    => 'Ondřej Kriška — autor a kontaktní osoba',
         'role_label'   => 'Vývojář, autor webu, jediný kontakt',
