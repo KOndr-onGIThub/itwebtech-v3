@@ -1,0 +1,478 @@
+{
+ "browser": "webkit",
+ "pages": {
+  "hp": {
+   "ctaBottom": 695.375,
+   "ctaH": 56,
+   "shots": [
+    {
+     "name": "hp-01-nacteni-s-cookie-listou",
+     "expect": "hidden",
+     "ok": true,
+     "rendered": true,
+     "cls": false,
+     "inert": true,
+     "visibility": "hidden",
+     "opacity": "0",
+     "top": 844,
+     "inner": 844,
+     "y": 0,
+     "bodyPad": "0px"
+    },
+    {
+     "name": "hp-02-nacteni",
+     "expect": "hidden",
+     "ok": true,
+     "rendered": true,
+     "cls": false,
+     "inert": true,
+     "visibility": "hidden",
+     "opacity": "0",
+     "top": 844,
+     "inner": 844,
+     "y": 0,
+     "bodyPad": "0px"
+    },
+    {
+     "name": "hp-03-tlacitko-hera-jeste-castecne",
+     "expect": "hidden",
+     "ok": true,
+     "rendered": true,
+     "cls": false,
+     "inert": true,
+     "visibility": "hidden",
+     "opacity": "0",
+     "top": 844,
+     "inner": 844,
+     "y": 685,
+     "bodyPad": "0px"
+    },
+    {
+     "name": "hp-04-tesne-pod-herem",
+     "expect": "shown",
+     "ok": true,
+     "rendered": true,
+     "cls": true,
+     "inert": false,
+     "visibility": "visible",
+     "opacity": "1",
+     "top": 775,
+     "inner": 844,
+     "y": 735,
+     "bodyPad": "0px"
+    },
+    {
+     "name": "hp-05-cenik",
+     "expect": "shown",
+     "ok": true,
+     "rendered": true,
+     "cls": true,
+     "inert": false,
+     "visibility": "visible",
+     "opacity": "1",
+     "top": 775,
+     "inner": 844,
+     "y": 9268,
+     "bodyPad": "0px"
+    },
+    {
+     "name": "hp-06-recenze",
+     "expect": "shown",
+     "ok": true,
+     "rendered": true,
+     "cls": true,
+     "inert": false,
+     "visibility": "visible",
+     "opacity": "1",
+     "top": 775,
+     "inner": 844,
+     "y": 10136,
+     "bodyPad": "0px"
+    },
+    {
+     "name": "hp-07-formular-10procent",
+     "expect": "shown",
+     "ok": true,
+     "rendered": true,
+     "cls": true,
+     "inert": false,
+     "visibility": "visible",
+     "opacity": "1",
+     "top": 775,
+     "inner": 844,
+     "y": 11042,
+     "bodyPad": "0px"
+    },
+    {
+     "name": "hp-08-formular",
+     "expect": "hidden",
+     "ok": true,
+     "rendered": true,
+     "cls": false,
+     "inert": true,
+     "visibility": "hidden",
+     "opacity": "0",
+     "top": 844,
+     "inner": 844,
+     "y": 11210,
+     "bodyPad": "0px"
+    },
+    {
+     "name": "hp-09-paticka",
+     "expect": "hidden",
+     "ok": true,
+     "rendered": true,
+     "cls": false,
+     "inert": true,
+     "visibility": "hidden",
+     "opacity": "0",
+     "top": 844,
+     "inner": 844,
+     "y": 12620,
+     "bodyPad": "0px"
+    },
+    {
+     "name": "hp-10-zpet-pod-hero",
+     "expect": "shown",
+     "ok": true,
+     "rendered": true,
+     "cls": true,
+     "inert": false,
+     "visibility": "visible",
+     "opacity": "1",
+     "top": 775,
+     "inner": 844,
+     "y": 735,
+     "bodyPad": "0px"
+    },
+    {
+     "name": "hp-11-zpet-nahoru-hero",
+     "expect": "hidden",
+     "ok": true,
+     "rendered": true,
+     "cls": false,
+     "inert": true,
+     "visibility": "hidden",
+     "opacity": "0",
+     "top": 844,
+     "inner": 844,
+     "y": 0,
+     "bodyPad": "0px"
+    },
+    {
+     "name": "hp-12-otevrene-menu",
+     "expect": "hidden",
+     "ok": true,
+     "rendered": true,
+     "cls": false,
+     "inert": true,
+     "visibility": "hidden",
+     "opacity": "0",
+     "top": 844,
+     "inner": 844,
+     "y": 9268,
+     "bodyPad": "0px"
+    },
+    {
+     "name": "hp-13-menu-zavrene",
+     "expect": "shown",
+     "ok": true,
+     "rendered": true,
+     "cls": true,
+     "inert": false,
+     "visibility": "visible",
+     "opacity": "1",
+     "top": 775,
+     "inner": 844,
+     "y": 9268,
+     "bodyPad": "0px"
+    }
+   ],
+   "seq": {
+    "smoothDown": [
+     {
+      "t": 25068,
+      "on": true,
+      "y": 780
+     },
+     {
+      "t": 43576,
+      "on": false,
+      "y": 11172
+     }
+    ],
+    "smoothDownFast": [
+     {
+      "t": 49290,
+      "on": true,
+      "y": 1040
+     },
+     {
+      "t": 54962,
+      "on": false,
+      "y": 11400
+     }
+    ],
+    "smoothUp": [
+     {
+      "t": 60289,
+      "on": true,
+      "y": 10976
+     },
+     {
+      "t": 79898,
+      "on": false,
+      "y": 548
+     }
+    ],
+    "edgeDither": [
+     {
+      "t": 83928,
+      "on": true,
+      "y": 713
+     }
+    ],
+    "flickThroughForm": []
+   },
+   "drawerHiddenAfter40ms": true,
+   "drawerFlips": [
+    {
+     "t": 96062,
+     "on": false,
+     "y": 9268
+    },
+    {
+     "t": 97229,
+     "on": true,
+     "y": 9268
+    }
+   ],
+   "transition": "transform 0.26s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.26s cubic-bezier(0.2, 0.8, 0.2, 1), visibility linear"
+  },
+  "about": {
+   "headBottom": 1087.328125,
+   "shots": [
+    {
+     "name": "o-mne-01-nacteni",
+     "expect": "hidden",
+     "ok": true,
+     "rendered": true,
+     "cls": false,
+     "inert": true,
+     "visibility": "hidden",
+     "opacity": "0",
+     "top": 844,
+     "inner": 844,
+     "y": 0,
+     "bodyPad": "0px"
+    },
+    {
+     "name": "o-mne-02-pod-hlavou",
+     "expect": "shown",
+     "ok": true,
+     "rendered": true,
+     "cls": true,
+     "inert": false,
+     "visibility": "visible",
+     "opacity": "1",
+     "top": 775,
+     "inner": 844,
+     "y": 1127,
+     "bodyPad": "0px"
+    },
+    {
+     "name": "o-mne-03-uprostred",
+     "expect": "shown",
+     "ok": true,
+     "rendered": true,
+     "cls": true,
+     "inert": false,
+     "visibility": "visible",
+     "opacity": "1",
+     "top": 775,
+     "inner": 844,
+     "y": 1684,
+     "bodyPad": "0px"
+    },
+    {
+     "name": "o-mne-04-zaverecna-vyzva",
+     "expect": "hidden",
+     "ok": true,
+     "rendered": true,
+     "cls": false,
+     "inert": true,
+     "visibility": "hidden",
+     "opacity": "0",
+     "top": 844,
+     "inner": 844,
+     "y": 2618,
+     "bodyPad": "0px"
+    },
+    {
+     "name": "o-mne-05-paticka",
+     "expect": "hidden",
+     "ok": true,
+     "rendered": true,
+     "cls": false,
+     "inert": true,
+     "visibility": "hidden",
+     "opacity": "0",
+     "top": 844,
+     "inner": 844,
+     "y": 2890,
+     "bodyPad": "0px"
+    },
+    {
+     "name": "o-mne-06-zpet-nahoru",
+     "expect": "hidden",
+     "ok": true,
+     "rendered": true,
+     "cls": false,
+     "inert": true,
+     "visibility": "hidden",
+     "opacity": "0",
+     "top": 844,
+     "inner": 844,
+     "y": 0,
+     "bodyPad": "0px"
+    }
+   ],
+   "smoothDown": [
+    {
+     "t": 11032,
+     "on": true,
+     "y": 1188
+    },
+    {
+     "t": 13350,
+     "on": false,
+     "y": 2496
+    }
+   ]
+  },
+  "detail": {
+   "url": "/projekty/pitarena",
+   "headBottom": 350.0625,
+   "shots": [
+    {
+     "name": "detail-01-nacteni",
+     "expect": "hidden",
+     "ok": true,
+     "rendered": true,
+     "cls": false,
+     "inert": true,
+     "visibility": "hidden",
+     "opacity": "0",
+     "top": 844,
+     "inner": 844,
+     "y": 0,
+     "bodyPad": "0px"
+    },
+    {
+     "name": "detail-02-pod-hlavou",
+     "expect": "shown",
+     "ok": true,
+     "rendered": true,
+     "cls": true,
+     "inert": false,
+     "visibility": "visible",
+     "opacity": "1",
+     "top": 775,
+     "inner": 844,
+     "y": 390,
+     "bodyPad": "0px"
+    },
+    {
+     "name": "detail-03-uprostred",
+     "expect": "shown",
+     "ok": true,
+     "rendered": true,
+     "cls": true,
+     "inert": false,
+     "visibility": "visible",
+     "opacity": "1",
+     "top": 775,
+     "inner": 844,
+     "y": 2275,
+     "bodyPad": "0px"
+    },
+    {
+     "name": "detail-04-zaverecna-vyzva",
+     "expect": "hidden",
+     "ok": true,
+     "rendered": true,
+     "cls": false,
+     "inert": true,
+     "visibility": "hidden",
+     "opacity": "0",
+     "top": 844,
+     "inner": 844,
+     "y": 4537,
+     "bodyPad": "0px"
+    },
+    {
+     "name": "detail-05-paticka",
+     "expect": "hidden",
+     "ok": true,
+     "rendered": true,
+     "cls": false,
+     "inert": true,
+     "visibility": "hidden",
+     "opacity": "0",
+     "top": 844,
+     "inner": 844,
+     "y": 4980,
+     "bodyPad": "0px"
+    },
+    {
+     "name": "detail-06-zpet-nahoru",
+     "expect": "hidden",
+     "ok": true,
+     "rendered": true,
+     "cls": false,
+     "inert": true,
+     "visibility": "hidden",
+     "opacity": "0",
+     "top": 844,
+     "inner": 844,
+     "y": 0,
+     "bodyPad": "0px"
+    }
+   ],
+   "smoothDown": [
+    {
+     "t": 9756,
+     "on": true,
+     "y": 456
+    },
+    {
+     "t": 18115,
+     "on": false,
+     "y": 4620
+    }
+   ]
+  },
+  "contact": {
+   "rendered": false
+  },
+  "projekty": {
+   "hidden": {
+    "top": 844.125,
+    "height": 69.375,
+    "inner": 844,
+    "fitsBottom": 844.125
+   },
+   "shown": {
+    "top": 774.625,
+    "height": 69.375,
+    "inner": 844,
+    "fitsBottom": 774.625
+   }
+  }
+ },
+ "reducedMotion": {
+  "transform": "none",
+  "transition": "opacity 0.12s linear, visibility 0s linear 0.12s"
+ },
+ "errors": []
+}
