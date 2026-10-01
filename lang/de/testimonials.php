@@ -32,6 +32,7 @@ return [
             'initials' => 'RL',
             'source'   => 'firmy_cz',
             'url'      => 'https://www.firmy.cz/detail/13470851-profesionalni-webove-stranky-a-aplikace-ondrej-kriska-brezi.html#hodnoceni',
+            'project'  => 'makoplast',
             'text'     => 'Hervorragende Zusammenarbeit, professionelles Vorgehen, die Website war pünktlich fertig und genau so, wie wir sie uns vorgestellt hatten. Ich empfehle Herrn Kriška allen, die eine ordentliche Website wollen.',
         ],
         [
@@ -43,6 +44,7 @@ return [
             'initials' => 'AH',
             'source'   => 'google',
             'url'      => 'https://www.google.com/maps/contrib/106421265514180487960/reviews',
+            'project'  => 'exhot',
             'text'     => 'Ondřej Kriška ist klar zu empfehlen — für seine erfinderische, unverbrauchte Arbeitsweise, die mit einem flexiblen und professionellen Umgang mit dem Kunden Hand in Hand geht.',
             'also'     => [
                 ['source' => 'firmy_cz', 'url' => 'https://www.firmy.cz/detail/13470851-profesionalni-webove-stranky-a-aplikace-ondrej-kriska-brezi.html#hodnoceni'],
@@ -238,6 +240,7 @@ return [
             'initials' => 'MM',
             'source'   => 'google',
             'url'      => 'https://www.google.com/maps/contrib/113233375389599450412/reviews',
+            'project'  => 'zoomorava',
             'text'     => 'Wir haben eine neue Firmenwebsite in Auftrag gegeben. Mit der Leistung sind wir sehr zufrieden, die Kommunikation war angenehm und entgegenkommend. Auch mit der Website sind wir zufrieden: Alles ist übersichtlich und erfüllt alle unsere Anforderungen.',
         ],
         [

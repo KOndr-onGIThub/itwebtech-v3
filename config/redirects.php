@@ -49,7 +49,10 @@ return [
         'pitarena-akademie-202308' => ['video-pitbike-akademie', 'pitarena'],
         'logo-realitacky'          => 'logo-realitacky',
         'delejme-animace'          => 'animace-delejme',
-        // ondraweb.cz/projekty/{slug} — případovka zatím na novém webu není.
+        // ondraweb.cz/projekty/{slug} — od OND-503 je případovka publikovaná
+        // pod stejným slugem, takže /projekty/zoomorava vrací 200 bez
+        // přesměrování (mapu PageController čte jen pro nenalezený slug).
+        // Řádek zůstává jako pojistka: po odpublikování 302 na výpis, ne 404.
         'zoomorava'                => 'zoomorava',
         // OND-470 (29. 9.): odpublikované — itwebtech.cz/projects/{slug}
         // i dnešní /projekty/{slug} (a EN/DE slugy) do publikace 302 na

@@ -133,8 +133,8 @@ class Ond352HomepagePortfolioSectionTest extends TestCase
 
         $this->seed(EnsurePortfolioSeededSeeder::class);
 
-        // OND-501: 25. projekt `vinarstvi-antos`.
-        $this->assertSame(25, DB::table('portfolio_projects')->count());
+        // OND-501: 25. projekt `vinarstvi-antos`; OND-503: +zoomorava, makoplast, exhot.
+        $this->assertSame(28, DB::table('portfolio_projects')->count());
         $this->assertStringContainsString('id="section-projects"', $this->get('/')->getContent());
     }
 
@@ -155,7 +155,7 @@ class Ond352HomepagePortfolioSectionTest extends TestCase
         $this->assertDatabaseHas('portfolio_project_translations', [
             'title' => 'Ručně přepsaný titulek',
         ]);
-        // OND-501: 25. projekt `vinarstvi-antos`.
-        $this->assertSame(25, DB::table('portfolio_projects')->count());
+        // OND-501: 25. projekt `vinarstvi-antos`; OND-503: +zoomorava, makoplast, exhot.
+        $this->assertSame(28, DB::table('portfolio_projects')->count());
     }
 }
