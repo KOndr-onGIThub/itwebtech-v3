@@ -141,15 +141,16 @@ class Ond437LeadConfirmationTest extends TestCase
 
     /**
      * OND-448 (B-01): lišta vede k formuláři, který je nejblíž — homepage na
-     * sekci „Poptávka“, /kontakt na formulář na téže stránce, jinde na /kontakt.
-     * Po odeslání ji schová `contactForm` (třída `is-lead-sent`), server nic.
+     * sekci „Poptávka“, jinde na /kontakt. Po odeslání ji schová `contactForm`
+     * (třída `is-lead-sent`), server nic. OND-511: na /kontakt se lišta
+     * nevykresluje — formulář je obsahem stránky.
      */
     public function test_mobile_bar_points_to_the_nearest_form(): void
     {
         $bar = fn (string $url) => $this->between($this->get($url)->assertOk()->getContent(), '<div class="mobile-bottom-bar"', '</div>');
 
         $this->assertStringContainsString('href="#'.__('home.anchors.poptavka').'"', $bar('/'));
-        $this->assertStringContainsString('href="#kontaktni-formular"', $bar('/kontakt'));
+        $this->assertStringNotContainsString('mobile-bottom-bar', $this->get('/kontakt')->assertOk()->getContent());
         $this->assertStringContainsString('href="'.lroute('contact').'"', $bar('/cenik'));
         $this->assertStringContainsString('href="'.route('en.contact').'"', $bar('/en/price'));
     }

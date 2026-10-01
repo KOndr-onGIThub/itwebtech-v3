@@ -95,7 +95,7 @@
 {{-- Závěr — `.pd-about-cta` z /o-mne a /recenze: věta a JEDINÉ acidové
      tlačítko stránky. Dřív tu vedle stálo „← Zpět na projekty" jako druhé
      tlačítko; cestu do katalogu nese „Všechny projekty →" o sekci výš. --}}
-<section class="pd-section pd-about-cta" data-pdd="project-cta">
+<section class="pd-section pd-about-cta" data-pdd="project-cta" data-sticky-cta="hide">
     <div class="container-site">
         <h2 class="pd-lead">{{ __('projects.cta.heading') }}</h2>
         <a href="{{ lroute('contact') }}" class="pd-cta">

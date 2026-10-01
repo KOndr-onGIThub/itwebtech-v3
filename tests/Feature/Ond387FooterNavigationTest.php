@@ -80,7 +80,7 @@ class Ond387FooterNavigationTest extends TestCase
     {
         $this->assertSame(
             1,
-            preg_match('~<footer class="footer-bar">(.*?)</footer>~s', $body, $m),
+            preg_match('~<footer class="footer-bar"[^>]*>(.*?)</footer>~s', $body, $m),
             "Na {$where} chybí patička.",
         );
 

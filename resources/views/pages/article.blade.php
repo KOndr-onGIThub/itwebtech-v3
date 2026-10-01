@@ -62,7 +62,7 @@
      je to souhrn pro výsledky vyhledávání a perex pod titulkem říká totéž
      Ondřejovým hlasem (u článku o ceně skoro stejnou větou). Zůstává
      v `meta description` a v JSON-LD. --}}
-<section class="pd-section pd-page-head pd-page-head--article">
+<section class="pd-section pd-page-head pd-page-head--article" data-sticky-cta="start">
     <div class="container-site">
         <p class="pd-eyebrow"><a href="{{ lroute('blog') }}" class="pd-eyebrow__back">{{ __('blog.back_to_blog') }}</a></p>
         @php

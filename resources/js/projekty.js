@@ -479,13 +479,15 @@ function initHint(form, sentence, selects, openFirst) {
     // nad oknem, i když je věta celá vidět. Ukáže se, jen když je celá
     // v okně pod navbarem a nad lištou „Poptávka“. Navbar se
     // vysouvá 0,3 s: platí přísnější z jeho aktuální a cílové spodní hrany.
+    // OND-511: skrytá lišta je posunutá pod okno (`translateY(100%)`), její
+    // horní hrana je pak spodek okna (WebKit o zlomek pixelu níž) — `min`.
     const nav = document.querySelector('.navbar');
     const bar = document.querySelector('.mobile-bottom-bar');
     function fits() {
         const r = hint.getBoundingClientRect();
         const top = nav ? Math.max(nav.getBoundingClientRect().bottom, nav.classList.contains('is-hidden') ? 0 : nav.offsetHeight) : 0;
         const b = bar ? bar.getBoundingClientRect() : null;
-        const bottom = b && b.height ? b.top : innerHeight;
+        const bottom = b && b.height ? Math.min(b.top, innerHeight) : innerHeight;
         return r.height > 0 && r.top >= Math.max(top, 0) && r.bottom <= bottom
             && r.left >= 0 && r.right <= document.documentElement.clientWidth;
     }

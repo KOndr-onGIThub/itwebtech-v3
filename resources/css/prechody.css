@@ -27,9 +27,13 @@
 }
 
 /* Lišty dostanou vlastní vrstvu, takže se neprolínají s obsahem a stojí.
-   Bez jména spodní lišta „Poptávka" na telefonu během přechodu ztmavla. */
+   Bez jména spodní lišta „Poptávka" na telefonu během přechodu ztmavla.
+   OND-511: nová stránka startuje se spodní lištou vždy skrytou, takže
+   vrstva existuje jen na odcházející stránce, a to jen když je lišta
+   vidět (skrytá by se snímala jako průhledný obdélník). Při přechodu se
+   zasune stejně jako při scrollu — nezůstane viset ani nebliká. */
 .navbar { view-transition-name: site-nav; }
-.mobile-bottom-bar { view-transition-name: site-bottom-bar; }
+.mobile-bottom-bar.is-visible { view-transition-name: site-bottom-bar; }
 
 /* Dvojice projekt → detail. Jméno je v `style`, tady třída a sazba. */
 .pd-case__visual,
@@ -70,6 +74,15 @@
 ::view-transition-old(*):only-child,
 ::view-transition-new(*):only-child {
     animation-duration: 0.3s;
+}
+/* OND-511: spodní lišta odchází jako při scrollu (zasunutí 180 ms).
+   Musí přebít délku 0,3 s z pravidla výš (pojmenovaný selektor je
+   specifičtější než `(*)` a stojí i až za ním). */
+::view-transition-old(site-bottom-bar):only-child {
+    animation: 180ms cubic-bezier(0.4, 0, 1, 1) both site-bottom-bar-out;
+}
+@keyframes site-bottom-bar-out {
+    to { opacity: 0; transform: translateY(100%); }
 }
 /* Náhled na /projekty je 16:10, hlavní vizuál detailu je širší — bez
    ořezu by se obrázek při přechodu deformoval. */

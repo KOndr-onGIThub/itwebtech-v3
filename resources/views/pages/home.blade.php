@@ -131,7 +131,7 @@
                  telefon pod ní tříštil rozhodnutí hned pod hlavní výzvou —
                  v liště i ve spodní mobilní liště je pořád. --}}
             <div class="pd-actions">
-                <a href="#{{ __('home.anchors.poptavka') }}" class="pd-cta" data-analytics="hero_cta_primary_click">
+                <a href="#{{ __('home.anchors.poptavka') }}" class="pd-cta" data-analytics="hero_cta_primary_click" data-sticky-cta="start">
                     {{ __('home.hero.cta_primary') }}
                     <x-icon.arrow-right class="w-4 h-4 shrink-0 pd-cta__arrow" />
                 </a>
@@ -642,7 +642,7 @@
      Dřívější `POST /poptavka` (session, přesměrování) je pryč. Potvrzení
      na homepage nese i tři kroky „co bude dál“ (`source="home"`).
      =================================================== --}}
-<section class="pd-section" id="{{ __('home.anchors.poptavka') }}">
+<section class="pd-section" id="{{ __('home.anchors.poptavka') }}" data-sticky-cta="hide">
     <div class="container-site">
         <header class="pd-head">
             <h2 class="pd-head__title">{{ __('home.inline_form.heading') }}</h2>
