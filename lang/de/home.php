@@ -60,7 +60,7 @@ return [
         'clients_aria' => 'Kunden',
         'rating_value' => '5,0',
         'reviews'      => 'von 5 auf Google und Firmy.cz',
-        'experience'   => '18 Jahre Erfahrung',
+        'experience'   => '18 Jahre bei Toyota',
         // OND-201 (Befund 5.11): Auszeichnung TOP firma 2025 von Firmy.cz —
         // überprüfbarer Nachweis Dritter, der auf Staging fehlte.
         'award'        => 'TOP firma 2025 auf Firmy.cz',

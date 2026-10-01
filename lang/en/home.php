@@ -68,7 +68,7 @@ return [
         'clients_aria' => 'Clients',
         'rating_value' => '5.0',
         'reviews'      => 'out of 5 on Google and Firmy.cz',
-        'experience'   => '18 years of experience',
+        'experience'   => '18 years at Toyota',
         // OND-201 (finding 5.11): TOP firma 2025 award from Firmy.cz —
         // verifiable third-party proof that was missing on staging.
         'award'        => 'TOP firma 2025 on Firmy.cz',
