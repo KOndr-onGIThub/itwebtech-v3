@@ -1,5 +1,5 @@
 {{--
-    Cookie consent — lišta (OND-125, přepsáno v OND-231 F3)
+    Cookie consent — lišta (OND-125, přepsáno v OND-231 F3, vzhled OND-508)
     ───────────────────────────────────────────────────────
     Do F3 to byl centrovaný modal s tmavým backdropem: na desktopu
     i mobilu překryl celý hero a prvních deset vteřin návštěvy patřilo
@@ -37,14 +37,21 @@
          role="region"
          aria-labelledby="cookie-title"
          aria-describedby="cookie-text">
-        {{-- Titulek je inline uvnitř odstavce, ne na vlastním řádku —
-             na mobilu je každý ušetřený řádek kus hero, který lišta
-             nepřekryje. --}}
-        <p id="cookie-text" class="cookie-bar__text">
-            <strong id="cookie-title" class="cookie-bar__title">{{ __('layout.cookies.title') }}</strong>
-            {{ __('layout.cookies.body') }}
-            <a href="{{ lroute('cookies') }}" class="cookie-bar__policy-link">{{ __('layout.cookies.policy_link') }}</a>.
-        </p>
+        {{-- OND-508: nadpis na vlastním řádku s ikonou — na první pohled
+             systémové oznámení, ne další odstavec webu. --}}
+        <div class="cookie-bar__content">
+            <p class="cookie-bar__head">
+                <svg class="cookie-bar__icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/>
+                    <path d="M8.5 8.5v.01"/><path d="M16 15.5v.01"/><path d="M12 12v.01"/><path d="M11 17v.01"/><path d="M7 14v.01"/>
+                </svg>
+                <strong id="cookie-title" class="cookie-bar__title">{{ __('layout.cookies.title') }}</strong>
+            </p>
+            <p id="cookie-text" class="cookie-bar__text">
+                {{ __('layout.cookies.body') }}
+                <a href="{{ lroute('cookies') }}" class="cookie-bar__policy-link">{{ __('layout.cookies.policy_link') }}</a>.
+            </p>
+        </div>
         <div class="cookie-bar__actions">
             <button id="cookie-reject" class="cookie-bar__reject" type="button">{{ __('layout.cookies.reject') }}</button>
             <button id="cookie-accept" class="cookie-bar__accept" type="button">{{ __('layout.cookies.accept') }}</button>
@@ -52,7 +59,11 @@
         <button id="cookie-close"
                 class="cookie-bar__close"
                 aria-label="{{ __('layout.cookies.close') }}"
-                type="button">✕</button>
+                type="button">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+                <path d="M3.5 3.5l9 9M12.5 3.5l-9 9"/>
+            </svg>
+        </button>
     </div>
 </div>
 @endif

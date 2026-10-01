@@ -1,10 +1,17 @@
 /* ============================================================
-   COOKIE CONSENT — LIŠTA (OND-125, přepsáno v OND-231 F3)
+   COOKIE CONSENT — LIŠTA (OND-125, přepsáno v OND-231 F3 a OND-508)
    ────────────────────────────────────────────────────────────
    Do F3 to byl centrovaný modal s backdrop blurem přes celou
    plochu: na desktopu i mobilu překryl hero a první dojem patřil
-   jemu. Nově nenápadná lišta u spodní hrany — nic nepřekrývá,
+   jemu. Od F3 je to lišta u spodní hrany — nic nepřekrývá,
    nekrade focus a jde ji odbýt jedním klikem.
+
+   OND-508: tmavá lišta (#131316 na #0C0E14) se žlutým „Přijmout vše"
+   splývala s webem — na mobilu vypadala jako další blok hera se
+   dvěma stejnými výzvami nad sebou. Nově je to světlá plovoucí karta
+   s vlastní hlavičkou a tmavými tlačítky: obrácený povrch a odlišný
+   jazyk ovládacích prvků říkají „systémové oznámení", ne „obsah webu".
+   Žlutá zůstává výzvám webu.
 
    Viditelnost řídí `cookies.js` třídou `.cookie-overlay--visible`
    (id a třídy overlaye zůstaly kvůli kontraktu s JS).
@@ -18,24 +25,27 @@
     display: flex;
     justify-content: center;
     padding: var(--space-4);
+    padding-bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px));
     /* Wrapper je průchozí pro kliky — obsah stránky pod lištou
        zůstává ovladatelný, dokud se návštěvník nerozhodne. */
     pointer-events: none;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(12px);
+    transform: translateY(20px);
     transition:
-        opacity 260ms var(--ease-out, ease),
-        transform 260ms var(--ease-out, ease),
-        visibility 0s linear 260ms;
+        opacity 280ms var(--ease-out, ease),
+        transform 280ms var(--ease-out, ease),
+        visibility 0s linear 280ms;
 }
 
 @media (max-width: 767px) {
     /* Nad mobilní CTA lištou (68 px, z-index 45) — ani jedna
-       z nich nesmí překrýt tu druhou. */
+       z nich nesmí překrýt tu druhou. Karta plave 12 px od všech
+       okrajů obrazovky. */
     .cookie-overlay {
         bottom: 68px;
         padding: var(--space-3);
+        padding-bottom: calc(var(--space-3) + env(safe-area-inset-bottom, 0px));
     }
 }
 
@@ -44,139 +54,220 @@
     visibility: visible;
     transform: none;
     transition:
-        opacity 260ms var(--ease-out, ease),
-        transform 260ms var(--ease-out, ease),
+        opacity 280ms var(--ease-out, ease),
+        transform 280ms var(--ease-out, ease),
         visibility 0s linear 0s;
 }
 
 .cookie-overlay--hiding {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(20px);
     transition: opacity 240ms ease, transform 240ms ease;
 }
 
+/* — Karta ————————————————————————————————————————————————— */
+
 .cookie-bar {
+    --cookie-ink:       #0A0A0B;
+    --cookie-ink-muted: #3D3C42;   /* 9,6:1 na krémové */
+    --cookie-ink-hover: #2A2A30;
+
     pointer-events: auto;
     position: relative;
     width: 100%;
-    max-width: var(--container-max, 1320px);
-    display: flex;
-    flex-wrap: wrap;
+    max-width: 60rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
-    gap: var(--space-3) var(--space-5);
-    padding: var(--space-3) var(--space-7) var(--space-3) var(--space-5);
-    background: var(--color-bg-elev-1, #131316);
-    border: 1px solid var(--color-border-soft, #26262B);
-    /* Vlasová acid linka nahoře — jediné místo, kde lišta bere barvu. */
-    border-top: 2px solid var(--color-accent, #D8FF3A);
-    box-shadow: 0 -12px 40px -20px rgba(0, 0, 0, 0.8);
+    gap: var(--space-4) var(--space-6);
+    /* Vpravo nahoře sedí křížek 44 px — obsah mu uhýbá. */
+    padding: var(--space-5) 3.5rem var(--space-5) var(--space-5);
+    background: var(--color-bg-inverse, #F4EFE6);
+    color: var(--cookie-ink);
+    border-radius: 14px;
+    /* Dva stíny: tvrdší kontaktní a měkký velký — karta se od tmavé
+       stránky odlepí i tam, kde pod ní je tmavá fotka. */
+    box-shadow:
+        0 2px 6px rgba(0, 0, 0, 0.35),
+        0 24px 56px -12px rgba(0, 0, 0, 0.75);
+}
+
+.cookie-bar__content {
+    min-width: 0;
+}
+
+.cookie-bar__head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin: 0 0 0.375rem;
+}
+
+.cookie-bar__icon {
+    flex: 0 0 auto;
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--cookie-ink);
 }
 
 .cookie-bar__title {
-    font-weight: 600;
-    color: var(--color-fg-primary, #F2F0EA);
-    margin-right: 0.25rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--cookie-ink);
 }
 
 .cookie-bar__text {
-    flex: 1 1 22rem;
-    min-width: 0;
     margin: 0;
     font-family: var(--font-body);
-    font-size: 0.8125rem;
-    line-height: 1.45;
-    color: var(--color-fg-muted, #9B9AA0);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--cookie-ink-muted);
 }
 
+/* OND-266 (2): odkaz má dotykový cíl 44 px. Dřív to dělal svislý
+   padding se zápornou marží — focus ring pak byl obdélník přes sousední
+   řádky. Teď cíl rozšiřuje průhledný pseudoprvek a ring obtáhne jen text. */
 .cookie-bar__policy-link {
-    color: var(--color-fg-primary, #F2F0EA);
+    position: relative;
+    /* Zalomený odkaz by pseudoprvek roztáhl jen na první řádek. */
+    white-space: nowrap;
+    color: var(--cookie-ink);
+    font-weight: 500;
     text-decoration: underline;
-    text-decoration-color: var(--color-accent, #D8FF3A);
+    text-decoration-thickness: 1px;
     text-underline-offset: 3px;
 }
 
-.cookie-bar__policy-link:hover,
-.cookie-bar__policy-link:focus-visible {
-    color: var(--color-accent, #D8FF3A);
+.cookie-bar__policy-link::after {
+    content: '';
+    position: absolute;
+    inset: -0.8125rem -0.25rem;
 }
+
+.cookie-bar__policy-link:hover {
+    text-decoration-thickness: 2px;
+}
+
+.cookie-bar__policy-link:focus-visible {
+    outline: 2px solid var(--cookie-ink);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* — Tlačítka: stejná výška, šířka i snadnost — souhlas i odmítnutí
+     (doporučení ÚOOÚ / EDPB). Mřížka s `1fr` sloupci srovná šířku
+     podle delšího popisku. ———————————————————————————— */
 
 .cookie-bar__actions {
-    display: flex;
-    align-items: center;
-    gap: var(--space-4);
-    flex: 0 0 auto;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: var(--space-2);
 }
 
-.cookie-bar__accept {
-    padding: 0.5rem 1.125rem;
-    border: 0;
-    border-radius: 0;
-    background: var(--color-accent, #D8FF3A);
-    color: var(--color-accent-on, #0A0A0B);
+.cookie-bar__accept,
+.cookie-bar__reject {
+    min-height: 2.75rem;
+    padding: 0.5rem 1.25rem;
+    border: 1.5px solid var(--cookie-ink);
+    border-radius: 8px;
     font-family: var(--font-body);
-    font-size: var(--text-body-sm);
+    font-size: var(--text-body-sm, 14px);
     font-weight: 600;
-    letter-spacing: 0.01em;
+    line-height: 1.2;
+    white-space: nowrap;
     cursor: pointer;
-    transition: background-color var(--duration-micro, 120ms) ease;
-}
-
-.cookie-bar__accept:hover,
-.cookie-bar__accept:focus-visible {
-    background: var(--color-accent-hover, #E6FF70);
+    transition:
+        background-color var(--duration-micro, 120ms) ease,
+        border-color var(--duration-micro, 120ms) ease;
 }
 
 .cookie-bar__reject {
-    padding: 0.5rem 0;
-    border: 0;
     background: transparent;
-    color: var(--color-fg-muted, #9B9AA0);
-    font-family: var(--font-body);
-    font-size: var(--text-body-sm);
-    cursor: pointer;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    transition: color var(--duration-micro, 120ms) ease;
+    color: var(--cookie-ink);
 }
 
-.cookie-bar__reject:hover,
-.cookie-bar__reject:focus-visible {
-    color: var(--color-fg-primary, #F2F0EA);
+.cookie-bar__reject:hover {
+    background: rgba(10, 10, 11, 0.08);
+}
+
+.cookie-bar__accept {
+    background: var(--cookie-ink);
+    color: var(--color-bg-inverse, #F4EFE6);
+}
+
+.cookie-bar__accept:hover {
+    background: var(--cookie-ink-hover);
+    border-color: var(--cookie-ink-hover);
+}
+
+.cookie-bar__accept:focus-visible,
+.cookie-bar__reject:focus-visible,
+.cookie-bar__close:focus-visible {
+    outline: 2px solid var(--cookie-ink);
+    outline-offset: 2px;
 }
 
 .cookie-bar__close {
     position: absolute;
     top: 0.25rem;
-    right: 0.375rem;
-    width: 1.75rem;
-    height: 1.75rem;
+    right: 0.25rem;
+    width: 2.75rem;
+    height: 2.75rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    padding: 0;
     border: 0;
+    border-radius: 8px;
     background: transparent;
-    color: var(--color-fg-muted, #9B9AA0);
-    font-size: 0.8125rem;
-    line-height: 1;
+    color: var(--cookie-ink);
     cursor: pointer;
-    transition: color var(--duration-micro, 120ms) ease;
+    transition: background-color var(--duration-micro, 120ms) ease;
 }
 
-.cookie-bar__close:hover,
+.cookie-bar__close svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+.cookie-bar__close:hover {
+    background: rgba(10, 10, 11, 0.08);
+}
+
 .cookie-bar__close:focus-visible {
-    color: var(--color-fg-primary, #F2F0EA);
+    outline-offset: -4px;
 }
 
+/* — Mobil: tlačítka pod textem, 50/50 přes celou šířku karty.
+     Cíl výšky ≤ 190 px na 360–414 px (OND-508). ——————————— */
 @media (max-width: 639px) {
     .cookie-bar {
-        padding: var(--space-3) var(--space-5) var(--space-3) var(--space-4);
+        grid-template-columns: minmax(0, 1fr);
         gap: var(--space-3);
+        /* Svisle o 2 px méně: de na 360 px jinak vyjde přesně na 190 px. */
+        padding: 0.875rem var(--space-4);
+        border-radius: 12px;
     }
-    .cookie-bar__actions {
-        width: 100%;
-        justify-content: space-between;
+    .cookie-bar__head {
+        /* Křížek zabírá pravý horní roh; nadpis se mu vyhne. */
+        padding-right: 2rem;
+        margin-bottom: var(--space-1);
     }
-    .cookie-bar__accept { flex: 1 1 auto; text-align: center; }
+    .cookie-bar__text {
+        font-size: 0.8125rem;
+        line-height: 1.45;
+    }
+    .cookie-bar__close {
+        top: 0.125rem;
+        right: 0.125rem;
+    }
+    .cookie-bar__accept,
+    .cookie-bar__reject {
+        padding-inline: var(--space-2);
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -205,52 +296,4 @@
     html.cookie-pending .mobile-bottom-bar { display: none; }
     html.cookie-pending body { padding-bottom: 0; }
     html.cookie-pending .cookie-overlay { bottom: 0; }
-}
-
-/* ============================================================
-   OND-266 (2) — dotykové cíle v cookie liště
-
-   Změřeno: „Detail v zásadách“ 107×16, ✕ 28×28, „Odmítnout“ 69×39,
-   „Přijmout vše“ 239×39. Všechno pod 44 px.
-   ============================================================ */
-.cookie-bar__policy-link {
-    display: inline-block;
-    padding-block: 0.8125rem;
-    /* Odsazení nesmí roztáhnout řádkování odstavce, ve kterém odkaz
-       sedí — proto záporná svislá marže o stejnou hodnotu. */
-    margin-block: -0.8125rem;
-}
-
-.cookie-bar__close {
-    top: 0;
-    right: 0;
-    width: 2.75rem;
-    height: 2.75rem;
-    font-size: 0.9375rem;
-}
-
-.cookie-bar__accept,
-.cookie-bar__reject {
-    min-height: 2.75rem;
-}
-
-/* ============================================================
-   OND-266 (6) — kompaktnější cookie lišta na mobilu
-   ============================================================ */
-@media (max-width: 639px) {
-    .cookie-bar {
-        /* Vpravo nahoře sedí křížek 44 px — text mu musí uhnout. */
-        padding: var(--space-3) var(--space-4);
-        gap: var(--space-2);
-    }
-    /* Obal lišty si na mobilu bere menší rám. */
-    .cookie-overlay { padding: var(--space-2); }
-    .cookie-bar__title { margin-bottom: 0; }
-    .cookie-bar__text {
-        flex-basis: 100%;
-        /* Křížek zabírá pravý horní roh; první řádek textu se mu vyhne. */
-        padding-right: 2.5rem;
-        line-height: 1.4;
-    }
-    .cookie-bar__actions { gap: var(--space-2); }
 }
