@@ -293,7 +293,12 @@
    lišta vrátí.
    ============================================================ */
 @media (max-width: 767px) {
-    html.cookie-pending .mobile-bottom-bar { display: none; }
-    html.cookie-pending body { padding-bottom: 0; }
+    /* OND-511: lišta je skrytá stejně jako mimo „střed" stránky, takže
+       po rozhodnutí o cookies vyjede svou animací, ne skokem. */
+    html.cookie-pending .mobile-bottom-bar {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(100%);
+    }
     html.cookie-pending .cookie-overlay { bottom: 0; }
 }

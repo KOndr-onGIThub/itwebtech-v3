@@ -70,7 +70,7 @@
 {{-- Hlava — `.pd-page-head`, ne `.pd-hero` (základ §1c: jinak se zapne
      náboj podtržení i přejezd po tlačítku). Dva řádky nad titulkem jsou jeden
      `.pd-eyebrow`, oddělené vlasovou čárkou — stejně jako /kontakt. --}}
-<section class="pd-section pd-page-head">
+<section class="pd-section pd-page-head" data-sticky-cta="start">
     <div class="container-site">
         <p class="pd-eyebrow">{{ __('price.hero.page_mark_label') }} <span class="pd-eyebrow__sep" aria-hidden="true"></span> {{ __('price.hero.upline') }}</p>
         <h1 class="pd-heading pd-heading--sub">{!! __('price.hero.heading_html') !!}</h1>
@@ -283,7 +283,7 @@
      se nerozhodl mezi úrovněmi; tlačítko `.pd-cta` z hera homepage.
      Plovoucí `.price-sticky-cta` odešla: na mobilu ležela přes spodní lištu
      (i přes telefon) a na desktopu opakovala tlačítko v navigaci. --}}
-<section class="pd-section pd-close" data-pdd="price-cta">
+<section class="pd-section pd-close" data-pdd="price-cta" data-sticky-cta="hide">
     <div class="container-site">
         <div class="pd-split">
             <header>

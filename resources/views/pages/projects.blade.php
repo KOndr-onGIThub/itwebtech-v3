@@ -59,7 +59,7 @@
 
 {{-- Hlava — `.pd-page-head` (základ OND-379 §2a). Dva řádky nad titulkem
      jsou jeden `.pd-eyebrow` s vlasovou čárkou, stejně jako /kontakt a /cenik. --}}
-<section class="pd-section pd-page-head">
+<section class="pd-section pd-page-head" data-sticky-cta="start">
     <div class="container-site">
         <p class="pd-eyebrow">{{ __('projects.hero.page_mark_label') }} <span class="pd-eyebrow__sep" aria-hidden="true"></span> {{ __('projects.hero.upline') }}</p>
         <h1 class="pd-heading pd-heading--sub pd-heading--plain">{!! __('projects.hero.heading_html') !!}</h1>
@@ -158,7 +158,7 @@
      sama končí výzvou, takže je to jedna sekce a JEDINÉ acidové tlačítko.
      „Nejdřív ceník" zůstává jako tichý odkaz. `projects.cta.heading`
      tu odpadá — dál ho používá detail projektu. --}}
-<section class="pd-section pd-close" data-pdd="projects-cta">
+<section class="pd-section pd-close" data-pdd="projects-cta" data-sticky-cta="hide">
     <div class="container-site">
         <div class="pd-split">
             <header>

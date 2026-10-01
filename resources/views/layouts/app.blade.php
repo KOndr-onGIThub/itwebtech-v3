@@ -154,15 +154,21 @@
          OND-448 (B-01): lišta vede k formuláři, který je nejblíž — na homepage
          na sekci „Poptávka", na /kontakt na formulář na téže stránce, jinde na
          /kontakt (stejně jako tlačítko v menu). Dřív vedla z podstránek na
-         homepage, i z /kontakt pryč od formuláře. --}}
+         homepage, i z /kontakt pryč od formuláře.
+         OND-511: lišta žije jen uprostřed stránky — ukáže ji
+         `resources/js/sticky-cta.js`, až z obrazovky odjede tlačítko hera
+         nebo hlava podstránky (`data-sticky-cta="start"`), a schová ji
+         u formuláře, závěrečné výzvy a patičky (`data-sticky-cta="hide"`).
+         Server ji vykreslí skrytou (`inert`, bez `is-visible`), takže při
+         načtení nebliká. Na /kontakt je formulář obsahem stránky a právní
+         stránky výzvu nepotřebují — tam se nevykresluje vůbec. --}}
+    @unless (in_array(current_page(), ['contact', 'privacy', 'cookies'], true))
     @php
-        $stickyPoptavkaHref = match (current_page()) {
-            'home'    => '#' . __('home.anchors.poptavka'),
-            'contact' => '#kontaktni-formular',
-            default   => lroute('contact'),
-        };
+        $stickyPoptavkaHref = current_page() === 'home'
+            ? '#' . __('home.anchors.poptavka')
+            : lroute('contact');
     @endphp
-    <div class="mobile-bottom-bar" role="region" aria-label="{{ __('home.sticky.cta') }}">
+    <div class="mobile-bottom-bar" role="region" aria-label="{{ __('home.sticky.cta') }}" inert>
         <a
             href="{{ $stickyPoptavkaHref }}"
             class="mobile-bottom-bar__primary"
@@ -172,6 +178,7 @@
         </a>
         <x-phone-cta class="mobile-bottom-bar__phone" />
     </div>
+    @endunless
 
     <main class="site-main">
         @yield('content')
@@ -185,7 +192,7 @@
          navigace a claim — ty jsou teď tady. Právní stránky (OND-266) tím
          o cestu ven nepřicházejí: navigace je v patičce na každé stránce.
          Žádné tlačítko sem nepatří (§3b). --}}
-    <footer class="footer-bar">
+    <footer class="footer-bar" data-sticky-cta="hide">
         <div class="container-site footer-bar__inner">
 
             <nav class="footer-bar__nav" aria-label="{{ __('layout.footer.nav_label') }}">

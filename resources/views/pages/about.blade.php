@@ -29,7 +29,7 @@
      věta o tom, kdo to je, a tvář vedle sebe: přesně ta otázka,
      kvůli které sem člověk přišel, zodpovězená nad ohybem.
      =================================================== --}}
-<section class="pd-section pd-page-head" data-pdd="about-intro">
+<section class="pd-section pd-page-head" data-sticky-cta="start" data-pdd="about-intro">
     <div class="container-site">
         <div class="pd-page-head__grid">
             <div class="pd-page-head__text">
@@ -93,7 +93,7 @@
      Věta a tlačítko, vlevo, na základu. Bez pruhu #161A24,
      bez zlaté elipsy, bez zaobleného tlačítka se svitem.
      =================================================== --}}
-<section class="pd-section pd-about-cta" data-pdd="about-cta">
+<section class="pd-section pd-about-cta" data-pdd="about-cta" data-sticky-cta="hide">
     <div class="container-site">
         <p class="pd-lead">{{ __('about.cta_text') }}</p>
         <a href="{{ lroute('contact') }}" class="pd-cta">

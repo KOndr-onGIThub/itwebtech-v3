@@ -256,7 +256,11 @@
    Na obrazovkách nižších než ~820 px se tlačítko nad lištu nevejde ani
    po téhle změně (360×800: de +1,9 px; 375×667: de −99 px). Text hera
    sám o sobě má při 360 px 477 px a s hlavičkou 68 px a lištou 69 px
-   na fotku nezbývá; to je rozhodnutí o layoutu, ne o pixelech. */
+   na fotku nezbývá; to je rozhodnutí o layoutu, ne o pixelech.
+
+   OND-511: lišta už přes hero nejede — ukáže se, až tlačítko hera odjede
+   z obrazovky (resources/js/sticky-cta.js). Úpravy níž zůstávají beze
+   změny; měření výše popisují stav do OND-511. */
 @media (max-width: 767px) {
     .pd-hero--hp .pd-hero__photo,
     .pd-hero--hp .pd-eyebrow,
@@ -1330,10 +1334,9 @@
     .pd-done__steps li { grid-template-columns: 1fr; gap: var(--space-1); }
 }
 /* Spodní mobilní lišta po odeslání: schová ji `contactForm` (třída
-   `is-lead-sent` na <body>). Odsazení pro ni už není potřeba. */
+   `is-lead-sent` na <body>). Odsazení `body` pro lištu od OND-511 není. */
 @media (max-width: 767px) {
     .is-lead-sent .mobile-bottom-bar { display: none; }
-    body.is-lead-sent { padding-bottom: 0; }
 }
 
 .pd-form__submit {
