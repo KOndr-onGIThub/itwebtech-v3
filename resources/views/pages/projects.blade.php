@@ -23,6 +23,25 @@
 </script>
 @endpush
 
+{{-- OND-488 — písma nad ohybem přednačíst, jinak stránka při načtení poskočí.
+     Bez preloadu se písma začnou stahovat až po rozparsování CSS a první
+     layout proběhne s náhradním písmem: podtitulek hlavy (Inter) má pak
+     3 řádky místo 4 a s příchodem Interu odsune větu i mřížku o 29 px
+     (CLS 0,018). Když IBM Plex latin-ext dorazí dřív než latin, věta
+     (IBM Plex) se na chvíli zalomí na 3 řádky místo 2 (CLS 0,11).
+     Všechny čtyři soubory stránka stahuje v cs, en i de i bez preloadu,
+     nic navíc se tedy nestahuje, jen dřív. --}}
+@push('preloads')
+    @foreach ([
+        'ibm-plex-sans/files/ibm-plex-sans-latin-wght-normal.woff2',
+        'ibm-plex-sans/files/ibm-plex-sans-latin-ext-wght-normal.woff2',
+        'inter/files/inter-latin-wght-normal.woff2',
+        'inter/files/inter-latin-ext-wght-normal.woff2',
+    ] as $font)
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="{{ Vite::asset('node_modules/@fontsource-variable/' . $font) }}">
+    @endforeach
+@endpush
+
 @section('content')
 {{-- ============================================================
      OND-399 — /projekty ve slovníku nové homepage (4. z 9).
