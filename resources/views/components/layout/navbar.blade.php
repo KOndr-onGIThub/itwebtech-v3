@@ -24,7 +24,8 @@
         : lroute('contact');
 @endphp
 
-<div x-data="{ open: false }">
+{{-- OND-511: `nav-drawer` schová spodní lištu „Poptávka“, dokud je menu otevřené. --}}
+<div x-data="{ open: false }" x-effect="$dispatch('nav-drawer', open)">
 
     {{-- Navbar --}}
     <header class="navbar">

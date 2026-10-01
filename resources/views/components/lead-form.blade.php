@@ -26,7 +26,8 @@
 ])
 
 <div{!! $id ? ' id="'.e($id).'"' : '' !!} class="pd-form__panel"
-     x-data="contactForm({ genericError: @js(__('contact.message_error')), source: @js($source) })">
+     x-data="contactForm({ genericError: @js(__('contact.message_error')), source: @js($source) })"
+     data-sticky-cta="hide">
 
     <div class="pd-form__thanks" x-show="submitted" x-cloak x-html="confirmation"></div>
 

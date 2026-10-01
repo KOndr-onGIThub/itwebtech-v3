@@ -40,7 +40,7 @@
 <div class="pd pd--depth pd--depth-sub">
 
 {{-- Hlava — `.pd-page-head` (základ OND-379 §2a), vlevo jako všude. --}}
-<section class="pd-section pd-page-head">
+<section class="pd-section pd-page-head" data-sticky-cta="start">
     <div class="container-site">
         <p class="pd-eyebrow">{{ __('blog.hero.page_mark_label') }} <span class="pd-eyebrow__sep" aria-hidden="true"></span> {{ __('blog.hero.upline') }}</p>
         <h1 class="pd-heading pd-heading--sub">{!! __('blog.hero.heading_html') !!}</h1>

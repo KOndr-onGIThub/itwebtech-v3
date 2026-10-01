@@ -22,7 +22,7 @@
     $sub = $translation?->subtitle ?: $translation?->summary;
 @endphp
 
-<section class="pd-section pd-page-head" data-pdd="project-head"
+<section class="pd-section pd-page-head" data-pdd="project-head" data-sticky-cta="start"
          data-analytics-view="case_study_view"
          data-analytics-props='{"slug":"{{ $project->slug }}"}'>
     <div class="container-site">

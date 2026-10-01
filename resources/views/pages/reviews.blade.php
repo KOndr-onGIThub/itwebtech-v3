@@ -35,7 +35,7 @@
      ============================================================ --}}
 <div class="pd pd--depth pd--depth-sub">
 
-<section class="pd-section pd-page-head" data-pdd="reviews-head">
+<section class="pd-section pd-page-head" data-sticky-cta="start" data-pdd="reviews-head">
     <div class="container-site">
         <p class="pd-eyebrow">{{ __('reviews.eyebrow') }}</p>
         <h1 class="pd-heading pd-heading--sub">{!! __('reviews.heading_html') !!}</h1>
@@ -101,7 +101,7 @@
     </div>
 </section>
 
-<section class="pd-section pd-about-cta" data-pdd="reviews-cta">
+<section class="pd-section pd-about-cta" data-pdd="reviews-cta" data-sticky-cta="hide">
     <div class="container-site">
         <p class="pd-lead">{{ __('about.cta_text') }}</p>
         <a href="{{ lroute('contact') }}" class="pd-cta">

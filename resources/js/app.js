@@ -9,6 +9,8 @@ import './live-recordings';
 import './demo-videos';
 // OND-470 — věta nad přehledem /projekty. Sám se vypne mimo ni.
 import './projekty';
+// OND-511 — spodní mobilní lišta „Poptávka“ jen uprostřed stránky.
+import './sticky-cta';
 import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;
