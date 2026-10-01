@@ -72,7 +72,9 @@ return [
         'clients_aria' => 'Klienti',
         'rating_value' => '5,0',
         'reviews'      => 'z 5 na Googlu a Firmy.cz',
-        'experience'   => '18 let praxe',
+        // OND-496: „18 let praxe“ → „18 let v Toyotě“ (Ondřej 1. 10. na OND-490).
+        // Klíč čte i pruh na /cenik, změna platí na obou stránkách.
+        'experience'   => '18 let v Toyotě',
         // OND-201 (nález 5.11): ocenění TOP firma 2025 z Firmy.cz je ověřitelný
         // důkaz třetí strany, byl na obou starých webech a na stagingu chyběl.
         // Formulace podle sekce 2 dokumentu homepage-texty (OND-186).
