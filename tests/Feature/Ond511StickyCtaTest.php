@@ -117,6 +117,46 @@ class Ond511StickyCtaTest extends TestCase
         $this->assertSame(1, $this->zones($html, 'hide'), '[/zapisky] patička');
     }
 
+    /**
+     * OND-514: při kliku na kotvu poptávky JS lištu schová hned, protože cíl
+     * kotvy leží v zóně `hide`. Platí jen, dokud cíl zónu nese a odkazy na
+     * HP (hero, text služeb, navbar, menu, lišta) míří kotvou na tutéž stránku.
+     */
+    public function test_homepage_inquiry_anchors_target_a_hide_zone(): void
+    {
+        foreach (['/', '/en', '/de'] as $url) {
+            $html = $this->html($url);
+
+            $this->assertSame(
+                1,
+                preg_match('~<section class="pd-section" id="([^"]+)" data-sticky-cta="hide">~', $html, $m),
+                "[$url] sekce s formulářem je zóna hide",
+            );
+            $anchor = '#' . $m[1];
+
+            $this->assertMatchesRegularExpression(
+                '~<a href="' . preg_quote($anchor, '~') . '" class="pd-cta"[^>]*data-sticky-cta="start"~',
+                $html,
+                "[$url] tlačítko hera",
+            );
+            $this->assertStringContainsString(
+                '<a href="' . $anchor . '">',
+                $this->between($html, 'class="pd-services__secondary"', '</p>'),
+                "[$url] odkaz v textu služeb",
+            );
+            $this->assertStringContainsString(
+                'href="' . $anchor . '"',
+                $this->between($html, 'class="mobile-bottom-bar"', '</div>'),
+                "[$url] lišta",
+            );
+            $this->assertGreaterThanOrEqual(
+                2,
+                substr_count($this->between($html, 'class="navbar', 'class="mobile-bottom-bar"'), 'href="' . $anchor . '"'),
+                "[$url] navbar + menu",
+            );
+        }
+    }
+
     public function test_drawer_reports_its_state_for_the_bar(): void
     {
         $this->assertStringContainsString(
